@@ -1,6 +1,6 @@
 ## Install and build 
 
-You will need a total of approx. 15GB of free disk space for installing (N)ERD. Running the service requires at least 4GB. 
+You will need a total of approx. 15GB of free disk space for installing (N)ERD. Running the service requires at least 4GB of RAM. 
 
 First install _grobid_ and _grobid-ner_, see http://github.com/kermitt2/grobid and http://github.com/kermitt2/grobid-ner
 

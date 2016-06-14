@@ -118,7 +118,7 @@ public class WikipediaDomainMap {
         try {
             // open MapDB
             db = DBMaker
-                    .fileDB(NerdProperties.getInstance().getMapDBPath() + "/" + database_name + "-" + lang + ".db")
+                    .fileDB("data/wikipedia/" + database_name + "-" + lang + ".db")
                     .fileMmapEnable()            // always enable mmap
                     .readOnly()
                     .make();

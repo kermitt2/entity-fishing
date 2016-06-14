@@ -11,5 +11,5 @@ target
 data/wikipedia/db-en
 data/wikipedia/db-fr
 data/wikipedia/db-de
-data/mapdb/domains-en.db
+data/wikipedia/domains-en.db
 
