@@ -1,0 +1,19 @@
+10	33	China	China
+10	95	Shanghai	Shanghai
+10	108	Nanjing	Nanjing
+10	175	Guide_book	guidebook
+10	187	Web_search_engine	Web searches
+10	206	Review_site	review sites
+10	297	Chinese	Chinese
+10	308	Southeast_Asia	Southeast Asia
+10	324	China	China
+10	450	Google_Translate	Google Translate
+10	526	roaming	international roaming
+10	563	Phrase_book	phrase book
+10	626	Chinese_characters	Chinese characters
+10	668	Mandarin_Chinese	Mandarin pronunciation
+10	760	Chinese	Chinese
+10	813	video_hosting_service	Online videos
+10	892	Elong		Elong.com
+10	906	Ctrip	Ctrip.com
+10	929	travel_website	online travel agencies

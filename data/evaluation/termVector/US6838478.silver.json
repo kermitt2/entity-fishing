@@ -1,0 +1,221 @@
+{
+	"_id" : "559518c29c597f75f378b999",
+	"publication_id" : "US6838478",
+	"invention_title" : "Amino acid derivatives and their use as thrombin inhibitors",
+	"keywords" : [
+		{
+			"keyword" : "mmol",
+			"status" : "weak",
+			"weight" : 642.7327727238683,
+			"entities" : [ 
+{ "rawName" : "mmol", "preferredTerm" : "Mole (unit)", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "37400", "freeBaseExternalRef" : "/m/09b4v", "definitions" : [ { "definition" : "The '''mole''' is a [[units of measurement|unit of measurement]] used in [[chemistry]] to express [[amount of substance|amounts]] of a [[chemical substance]], equal to about molecules of that substance. It is one of the [[SI base unit|base units]] in the [[International System of Units]], and has the unit symbol '''mol'''.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "SI base units", "page_id" : 696183}, {"source" : "wikipedia-en", "category" : "Units of amount of substance", "page_id" : 753484} ]  }
+			]
+		},
+		{
+			"keyword" : "-nmr odd",
+			"weight" : 577.7463197185596,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "compound",
+			"weight" : 462.4986732155129,
+			"entities" : [ 
+{ "rawName" : "compound", "preferredTerm" : "Chemical compound", "nerd_score" : "0.9218553618012741", "prob" : "1.0", "wikipediaExternalRef" : "21347411", "freeBaseExternalRef" : "/m/0129f4", "definitions" : [ { "definition" : "A '''chemical compound''' is a pure [[chemical substance]] consisting of two or more different [[chemical element]]s that can be separated into simpler substances by [[chemical reaction]]s. Chemical compounds have a unique and defined [[chemical structure]]; they consist of a fixed ratio of atoms that are held together in a defined spatial arrangement by [[chemical bond]]s. Chemical compounds can be [[molecule|molecular]] compounds held together by [[covalent bond]]s, [[salt (chemistry)|salt]]s held together by [[ionic bond]]s, [[intermetallic compounds]] held together by [[metallic bond]]s, or [[complex (chemistry)|complexes]] held together by [[coordinate covalent bond]]s. Pure [[chemical element]]s are not considered chemical compounds, even if they consist of molecules which contain only multiple atoms of a single element (such as H2, S8, etc.), which are called [[diatomic molecule]]s or [[polyatomic molecule]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemistry", "page_id" : 691185}, {"source" : "wikipedia-en", "category" : "Chemical compounds", "page_id" : 695235} ]  }
+			]
+		},
+		{
+			"keyword" : "lc-ms",
+			"weight" : 364.2633490882109,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sub-title",
+			"weight" : 348.0624794967112,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "nmr mhz",
+			"weight" : 339.0010882293164,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "yielding sub-title",
+			"status" : "weak",
+			"weight" : 315.77792781369834,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "mixture",
+			"weight" : 314.25488527199514,
+			"entities" : [ 
+{ "rawName" : "mixture", "preferredTerm" : "Mixture", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "286069", "freeBaseExternalRef" : "/m/01q0j8", "definitions" : [ { "definition" : "In [[chemistry]], a ''mixture'' is a material system made up by two or more different substances which are mixed together but are not combined chemically. Mixture refers to the physical combination of two or more substances the identities of which are retained and are mixed in the form of [[alloy]]s, [[solutions]], [[suspensions]], and [[colloids]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Physical chemistry", "page_id" : 784394}, {"source" : "wikipedia-en", "category" : "Chemical mixtures", "page_id" : 1975221} ]  }
+			]
+		},
+		{
+			"keyword" : "evaporate",
+			"weight" : 293.4416529837477,
+			"entities" : [ 
+{ "rawName" : "evaporate", "preferredTerm" : "Evaporation", "nerd_score" : "0.08906170135085797", "prob" : "1.0", "wikipediaExternalRef" : "10303", "freeBaseExternalRef" : "/m/02sr9", "definitions" : [ { "definition" : "'''Evaporation''' is a type of [[vaporization]] of a [[liquid]] that occurs only on the [[Interface (chemistry)|surface]] of a liquid. The other type of vaporization is [[boiling]], which, instead, occurs on the entire mass of the liquid. Evaporation is also part of the [[water cycle]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Materials science", "page_id" : 709184}, {"source" : "wikipedia-en", "category" : "Phase changes", "page_id" : 1491187}, {"source" : "wikipedia-en", "category" : "Thin film deposition", "page_id" : 3189443}, {"source" : "wikipedia-en", "category" : "Basic meteorological concepts and phenomena", "page_id" : 4165760}, {"source" : "wikipedia-en", "category" : "Atmospheric thermodynamics", "page_id" : 5135753} ]  }
+			]
+		},
+		{
+			"keyword" : "pro-pab",
+			"weight" : 282.61370940038046,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "base n-dimethylamino pyridine",
+			"weight" : 269.8546177793908,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "propionic acid",
+			"weight" : 266.4612638147335,
+			"entities" : [ 
+{ "rawName" : "propionic acid", "preferredTerm" : "Propanoic acid", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "316076", "freeBaseExternalRef" : "/m/01tvsl", "definitions" : [ { "definition" : "'''Propanoic acid''' (from '[[propane]]', and also known as '''propionic acid''') is a naturally occurring [[carboxylic acid]] with [[chemical formula]] [[carbon|C]][[hydrogen|H]]3CH2C[[oxygen|O]]OH. It is a clear liquid with a pungent odor. The [[anion]] CH3CH2COO− as well as the [[salt (chemistry)|salt]]s and [[ester]]s of propanoic acid are known as [[propanoate]]s (or propionates).", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Carboxylic acids", "page_id" : 695889}, {"source" : "wikipedia-en", "category" : "Propionates", "page_id" : 2033754} ]  }
+			]
+		},
+		{
+			"keyword" : "stir room",
+			"weight" : 230.39266557008793,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "tbtu mmol dipea mmol",
+			"weight" : 216.37476712234286,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "eroz",
+			"status" : "absent",
+			"weight" : 216.11552928377674,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "diastereomer",
+			"weight" : 212.10077987787716,
+			"entities" : [ 
+{ "rawName" : "diastereomer", "preferredTerm" : "Diastereomer", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "522519", "freeBaseExternalRef" : "/m/02l6b1", "definitions" : [ { "definition" : "'''Diastereomers''' (sometimes called '''diastereoisomers''') are [[stereoisomer]]s that are not [[enantiomer]]s. Diastereomerism occurs when two or more stereoisomers of a compound have different configurations at one or more (but not all) of the equivalent (related) [[stereocenter]]s '''and''' are not mirror images of each other. When two diastereoisomers differ from each other at only one stereocenter they are [[epimer]]s. Each stereocenter gives rise to two different configurations and thus to two different stereoisomers.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Stereochemistry", "page_id" : 1924221}, {"source" : "wikipedia-en", "category" : "Isomerism", "page_id" : 19555606} ]  }
+			]
+		},
+		{
+			"keyword" : "dmf",
+			"weight" : 207.91088024574037,
+			"entities" : [ 
+{ "rawName" : "dmf", "preferredTerm" : "Dimethylformamide", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "1415135", "freeBaseExternalRef" : "/m/04_p0n", "definitions" : [ { "definition" : "'''Dimethylformamide''' is the [[organic compound]] with the [[chemical formula|formula]] ([[Methyl|CH3]])2NC(O)H. Commonly abbreviated DMF (though this acronym is sometimes used for [[2,5-dimethylfuran|dimethylfuran]]), this colourless liquid is miscible with [[Water (molecule)|water]] and the majority of organic liquids. DMF is a common [[solvent]] for [[chemical reaction]]s. Pure dimethylformamide is odorless whereas technical grade or degraded dimethylformamide often has a fishy smell due to impurity of [[dimethylamine]]. Its name is derived from the fact that it is a derivative of [[formamide]], the [[amide]] of [[formic acid]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Amides", "page_id" : 695831}, {"source" : "wikipedia-en", "category" : "Amide solvents", "page_id" : 14183450} ]  }
+			]
+		},
+		{
+			"keyword" : "concentrate",
+			"weight" : 192.1737040814475,
+			"entities" : [ 
+{ "rawName" : "concentrate", "preferredTerm" : "Concentrate", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "711996", "freeBaseExternalRef" : "/m/034x_z", "definitions" : [ { "definition" : "A '''concentrate''' is a form of [[Chemical substance|substance]] which has had the majority of its base component (in the case of a liquid: the [[solvent]]) removed. Typically this will be the removal of [[water]] from a [[solution]] or [[suspension (chemistry)|suspension]] such as the removal of water from [[fruit juice]]. One benefit of producing a concentrate is that of a reduction in weight and volume for transportation as the concentrate can be re-constituted at the time of usage by the addition of the solvent.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical compounds", "page_id" : 695235}, {"source" : "wikipedia-en", "category" : "Solutions", "page_id" : 3022025} ]  }, 
+{ "rawName" : "concentrate", "preferredTerm" : "Ore concentrate", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "25688678", "freeBaseExternalRef" : "/m/09v3fdf", "definitions" : [  ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mining", "page_id" : 843521} ]  }
+			]
+		},
+		{
+			"keyword" : "phch",
+			"weight" : 183.47564121294423,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "filter hyflo",
+			"weight" : 181.3636168999688,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "formula",
+			"weight" : 177.59294556180132,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "7043" }
+			]
+		},
+		{
+			"keyword" : "thrombin",
+			"weight" : 163.7540330647335,
+			"entities" : [ 
+{ "rawName" : "thrombin", "preferredTerm" : "Thrombin", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "238864", "freeBaseExternalRef" : "/m/01jn6k", "definitions" : [ { "definition" : "'''Thrombin''' is a \"[[trypsin]]-like\" [[serine protease]] protein that in humans is encoded by the ''F2'' [[gene]]. Prothrombin (coagulation factor II) is proteolytically cleaved to form thrombin in the first step of the [[coagulation#The_coagulation_cascade|coagulation cascade]], which ultimately results in the stemming of blood loss. Thrombin in turn acts as a [[serine protease]] that converts soluble [[fibrinogen]] into insoluble strands of [[fibrin]], as well as catalyzing many other coagulation-related reactions.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine", "Biology", "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Peripheral membrane proteins", "page_id" : 719588}, {"source" : "wikipedia-en", "category" : "EC 3.4.21", "page_id" : 737658}, {"source" : "wikipedia-en", "category" : "Coagulation system", "page_id" : 968318}, {"source" : "wikipedia-en", "category" : "Acute phase proteins", "page_id" : 1266621} ]  }
+			]
+		},
+		{
+			"keyword" : "crude",
+			"weight" : 163.51078788894583,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "volume nbutanol isopropanol",
+			"weight" : 160.7796369410896,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "preparation depen",
+			"weight" : 160.24604866459882,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "organic",
+			"weight" : 155.14101921158579,
+			"entities" : [ 
+{ "rawName" : "organic", "preferredTerm" : "Organic compound", "nerd_score" : "0.7953370565143024", "prob" : "1.0", "wikipediaExternalRef" : "22203", "freeBaseExternalRef" : "/m/05klb", "definitions" : [ { "definition" : "An '''organic compound''' is any member of a large class of [[gas]]eous, [[liquid]], or [[solid]] [[chemical compounds]] whose [[molecules]] contain [[carbon]]. For historical reasons discussed below, a few types of carbon-containing compounds such as [[carbide]]s, [[carbonates]], simple [[oxides]] of carbon, and [[cyanides]], as well as the [[allotropes of carbon]] such as [[diamond]] and [[graphite]], are considered [[Inorganic compound|inorganic]]. The distinction between \"[[organic]]\" and \"[[inorganic]]\" carbon compounds, while \"useful in organizing the vast subject of chemistry... is somewhat arbitrary\".", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Organic chemistry", "page_id" : 693273}, {"source" : "wikipedia-en", "category" : "Organic compounds", "page_id" : 12962665} ]  }, 
+{ "rawName" : "organic", "preferredTerm" : "Organic chemistry", "nerd_score" : "0.7570610191278082", "prob" : "1.0", "wikipediaExternalRef" : "22208", "freeBaseExternalRef" : "/m/05kn8", "definitions" : [ { "definition" : "'''Organic chemistry''' is a subdiscipline within [[chemistry]] involving the [[science|scientific]] study of the structure, properties, composition, [[chemical reaction|reactions]], and preparation (by [[organic synthesis|synthesis]] or by other means) of [[carbon]]-based compounds, [[hydrocarbon]]s, and their derivatives. These compounds may contain any number of other elements, including [[hydrogen]], [[nitrogen]], [[oxygen]], the [[halogens]] as well as [[phosphorus]], [[silicon]] and [[sulfur]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemistry", "page_id" : 691185}, {"source" : "wikipedia-en", "category" : "Organic chemistry", "page_id" : 693273} ]  }
+			]
+		},
+		{
+			"keyword" : "pro-pab hcl",
+			"weight" : 154.19152621034607,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "boc-amino",
+			"weight" : 153.45682859693503,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "adjustments egr",
+			"weight" : 152.4758968627704,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pro-pab mmol",
+			"weight" : 149.73141002115625,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

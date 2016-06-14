@@ -1,0 +1,927 @@
+yahoo-0	0	/m/04jl2zl	dancing with the stars	1.0
+yahoo-1	0	/m/05fh2	nurses	1.0
+yahoo-3	0	/m/026wfg	skype	1.0
+yahoo-4	0	/m/03qyz_	louisville courier journal	1.0
+yahoo-5	0	/m/01zff	ncaa football	1.0
+yahoo-6	0	/m/03364q	rochester democrat and chronicle	1.0
+yahoo-7	0	/m/02wc3d	onondaga community college	1.0
+yahoo-8	0	/m/01ddbl	american hockey league	1.0
+yahoo-9	0	/m/082rlw	albany times union	1.0
+yahoo-10	0	/m/01nf4f	minneapolis star tribune	1.0
+yahoo-11	0	/m/0kdtf	atlantic coast conference	1.0
+yahoo-12	0	/m/01_dw7	presidents day	1.0
+yahoo-14	0	/m/02_7q2	yahoo mail	1.0
+yahoo-15	0	/m/02_7q2	yahoo mail plus	1.0
+yahoo-16	0	/m/02y1vz	facebook	1.0
+yahoo-20	0	/m/01mwfcz	esther phillips	1.0
+yahoo-21	0	/m/0z106	free	1.0
+yahoo-22	0	/m/0z106	free	1.0
+yahoo-23	0	/m/07b_l	texas	1.0
+yahoo-24	0	/m/02r5qtm	the big bang theory	1.0
+yahoo-25	0	/m/01rfdq	ditka	1.0
+yahoo-26	0	/m/026h1w	jc penney	1.0
+yahoo-27	0	/m/0c01qx	canvas	1.0
+yahoo-28	0	/m/03g992	town	1.0
+yahoo-30	0	/m/01jkpp	karl rove's	1.0
+yahoo-32	0	/m/02jwcn	toys r us	1.0
+yahoo-33	0	/m/059rby	new york	1.0
+yahoo-35	0	/m/04vrhz	bbt	1.0
+yahoo-40	0	/m/02zs4	ford	1.0
+yahoo-41	0	/m/05b7q	north korea	1.0
+yahoo-42	0	/m/03d1v8	amc	1.0
+yahoo-43	0	/m/0343h	george lucas	1.0
+yahoo-44	0	/m/0djz0rc	twilight	1.0
+yahoo-45	0	/m/04vvlw	zig ziglar	1.0
+yahoo-46	0	/m/018c71	craigslist	1.0
+yahoo-47	0	/m/0h6m_0	jim durham	1.0
+yahoo-49	0	/m/039gfz	orbitz	1.0
+yahoo-50	0	/m/023_22	aarp	1.0
+yahoo-51	0	/m/010146	la grange tx	1.0
+yahoo-52	0	/m/010146	la grange tx	1.0
+yahoo-53	0	/m/02vnqh8	amlodipine besylate	1.0
+yahoo-55	0	/m/01pllx	sheen	1.0
+yahoo-56	0	/m/0mgkg	amazon	1.0
+yahoo-57	0	/m/018c71	craigslist	1.0
+yahoo-58	0	/m/02ph3kq	lolo jones	1.0
+yahoo-59	0	/m/01wf86y	cyndi lauper	1.0
+yahoo-60	0	/m/01wf86y	cyndi lauper	1.0
+yahoo-61	0	/m/01pkxd	macy	1.0
+yahoo-64	0	/m/02896	cowboys	1.0
+yahoo-66	0	/m/02f1c	dolly parton	1.0
+yahoo-67	0	/m/02f1c	Dolly Parton	1.0
+yahoo-72	0	/m/02d4tc	genting	1.0
+yahoo-74	0	/m/0vlf	adobe	1.0
+yahoo-75	0	/m/0vlf	adobe	1.0
+yahoo-76	0	/m/0vlf	adobe	1.0
+yahoo-77	0	/m/0z106	free	1.0
+yahoo-78	0	/m/0z106	free	1.0
+yahoo-79	0	/m/0vlf	adobe	1.0
+yahoo-80	0	/m/0vlf	adobe	1.0
+yahoo-81	0	/m/0vlf	adobe	1.0
+yahoo-87	0	/m/097hft	jay cutler	1.0
+yahoo-88	0	/m/0gky44_	rover's	1.0
+yahoo-90	0	/m/0116s6	how to	1.0
+yahoo-91	0	/m/02vpgy5	deals and steals	1.0
+yahoo-92	0	/m/0g7km1	tim tebow	1.0
+yahoo-93	0	/m/07rd7	tim burton	1.0
+yahoo-94	0	/m/07rd7	tim burton	1.0
+yahoo-95	0	/m/07rd7	tim burton	1.0
+yahoo-96	0	/m/05jvlk	earthquake	1.0
+yahoo-101	0	/m/025sndk	google interpreter	1.0
+yahoo-102	0	/m/025sndk	google translation	1.0
+yahoo-103	0	/m/0jmk7	lakers	1.0
+yahoo-105	0	/m/01dfb6	citicards	1.0
+yahoo-106	0	/m/01dfb6	citicards	1.0
+yahoo-107	0	/m/01dfb6	citicards	1.0
+yahoo-108	0	/m/01dfb6	citicards	1.0
+yahoo-109	0	/m/01dfb6	citicards	1.0
+yahoo-110	0	/m/01dfb6	citicards	1.0
+yahoo-111	0	/m/01dfb6	citicards	1.0
+yahoo-112	0	/m/01dfb6	citicards	1.0
+yahoo-115	0	/m/09jcvs	youtube	1.0
+yahoo-116	0	/m/07zkjq	word 2007	1.0
+yahoo-117	0	/m/0m0mdcm	nokia lumia 920	1.0
+yahoo-118	0	/m/04grkv	honda pilot	1.0
+yahoo-119	0	/m/03c5tnz	future	1.0
+yahoo-120	0	/m/03c5tnz	future	1.0
+yahoo-122	0	/m/07swvb	kristen stewart	1.0
+yahoo-126	0	/m/03d2pv3	candy	1.0
+yahoo-128	0	/m/044nz5	jon gruden	1.0
+yahoo-129	0	/m/04nnqc	dog	1.0
+yahoo-133	0	/m/043rcw4	jenner	1.0
+yahoo-134	0	/m/043rcw4	Jenner	1.0
+yahoo-135	0	/m/0k0tnvj	microsoft tablet	1.0
+yahoo-137	0	/m/03n6y8	new york times square church	1.0
+yahoo-138	0	/m/02_7q2	yahoo mail	1.0
+yahoo-140	0	/m/019rl6	yahoo	1.0
+yahoo-141	0	/m/0v9r7	city of grandville,	1.0
+yahoo-144	0	/m/07tg4	cambridge	1.0
+yahoo-145	0	/m/0606hp	dollar	1.0
+yahoo-146	0	/m/02dtg	detroit	1.0
+yahoo-147	0	/m/0ggcxv	laurel park mall	1.0
+yahoo-148	0	/m/021vdd	cebu pacific airlines	1.0
+yahoo-149	0	/m/021vdd	cebu pacific airlines	1.0
+yahoo-151	0	/m/026_dd6	solo's	1.0
+yahoo-152	0	/m/02q27b6	2013	1.0
+yahoo-153	0	/m/02q27b6	2013	1.0
+yahoo-154	0	/m/03kr0	honda	1.0
+yahoo-155	0	/m/02q27b6	2013	1.0
+yahoo-156	0	/m/02q27b6	2013	1.0
+yahoo-157	0	/m/02q27b6	2013	1.0
+yahoo-158	0	/m/02q27b6	2013	1.0
+yahoo-159	0	/m/02q27b6	2013	1.0
+yahoo-160	0	/m/02q27b6	2013	1.0
+yahoo-161	0	/m/02q27b6	2013	1.0
+yahoo-162	0	/m/02q27b6	2013	1.0
+yahoo-163	0	/m/02q27b6	2013	1.0
+yahoo-166	0	/m/03l295	dewayne wade	1.0
+yahoo-167	0	/m/0716t2	elizabeth banks	1.0
+yahoo-168	0	/m/0fhkx	bob dole	1.0
+yahoo-169	0	/m/0fhkx	Bob Dole	1.0
+yahoo-170	0	/m/044mfr	adam levine	1.0
+yahoo-171	0	/m/06hwzy	dancing with the stars	1.0
+yahoo-174	0	/m/03_0ph	jack pardee	1.0
+yahoo-175	0	/m/03_0ph	Jack Pardee	1.0
+yahoo-176	0	/m/04w391	shia labeouf	1.0
+yahoo-177	0	/m/013gwb	springfield	1.0
+yahoo-178	0	/m/02y1vz	facebook	1.0
+yahoo-179	0	/m/02y1vz	Facebook	1.0
+yahoo-180	0	/m/054ml0	lee macphail	1.0
+yahoo-181	0	/m/05pdgbz	tumblr	1.0
+yahoo-182	0	/m/020h9t	man	1.0
+yahoo-184	0	/m/0b90_r	mexican	1.0
+yahoo-185	0	/m/0263rxq	anchors	1.0
+yahoo-186	0	/m/0263rxq	Anchors	1.0
+yahoo-187	0	/m/07ky1d	dirty jobs	1.0
+yahoo-188	0	/m/05852p	oklahoma school of science and mathematics	1.0
+yahoo-189	0	/m/085_2	windows 2000	1.0
+yahoo-190	0	/m/05tbn	pa	1.0
+yahoo-191	0	/m/081sq	white house	1.0
+yahoo-192	0	/m/05x5w1	valerie eliot	1.0
+yahoo-195	0	/m/07gv72	samsung	1.0
+yahoo-196	0	/m/0mgkg	amazon	1.0
+yahoo-198	0	/m/063rjh	danica patrick	1.0
+yahoo-199	0	/m/063rjh	Danica Patrick	1.0
+yahoo-200	0	/m/0h5y6r	girl	1.0
+yahoo-202	0	/m/0dtvb4	casa de campo	1.0
+yahoo-204	0	/m/04gg8k4	universal sports	1.0
+yahoo-207	0	/m/03xzw_	icbc	1.0
+yahoo-208	0	/m/01wq0g	penticton	1.0
+yahoo-209	0	/m/01wq0g	penticton	1.0
+yahoo-210	0	/m/01wq0g	penticton	1.0
+yahoo-211	0	/m/01wq0g	penticton	1.0
+yahoo-212	0	/m/03shp	iran	1.0
+yahoo-213	0	/m/06w2sn5	bieber	1.0
+yahoo-214	0	/m/015076	river phoenix	1.0
+yahoo-215	0	/m/03byqnn	one child policy	1.0
+yahoo-216	0	/m/03f0jvh	billy scott	1.0
+yahoo-219	0	/m/0808zz	sale	1.0
+yahoo-221	0	/m/0841v	walmart	1.0
+yahoo-222	0	/m/0200gn	black friday	1.0
+yahoo-223	0	/m/0z106	free	1.0
+yahoo-224	0	/m/04d1d1	bass pro shoppe	1.0
+yahoo-225	0	/m/0289n8t	twitter	1.0
+yahoo-226	0	/m/0h_cn_1	samsung galaxy siii	1.0
+yahoo-227	0	/m/0gztl	southwest	1.0
+yahoo-228	0	/m/0dlgdy	deborah raffin	1.0
+yahoo-229	0	/m/0dlgdy	Deborah Raffin	1.0
+yahoo-230	0	/m/08_hns	david petraeus	1.0
+yahoo-231	0	/m/02658n	life of pi	1.0
+yahoo-233	0	/m/075wx89	twilight	1.0
+yahoo-234	0	/m/03y82t6	katy perry	1.0
+yahoo-235	0	/m/0hhs8zn	oprah life class	1.0
+yahoo-243	0	/m/0360zl	bath and body works	1.0
+yahoo-248	0	/m/093d_8	buffalo wild wing	1.0
+yahoo-251	0	/m/045xx	juventus	1.0
+yahoo-257	0	/m/05b7q	north korean assassination weapons	1.0
+yahoo-258	0	/m/0gg0sv	jaco	1.0
+yahoo-259	0	/m/012329	map	1.0
+yahoo-260	0	/m/01xt0w	four seasons	1.0
+yahoo-262	0	/m/014kjh	death of a salesman	1.0
+yahoo-264	0	/m/05cr59	death	1.0
+yahoo-265	0	/m/05cr59	death	1.0
+yahoo-266	0	/m/012329	map	1.0
+yahoo-268	0	/m/030qb3t	city of los angeles	1.0
+yahoo-269	0	/m/030qb3t	city of los angeles	1.0
+yahoo-270	0	/m/030qb3t	city of los angeles	1.0
+yahoo-271	0	/m/07k4bzz	banco santander	1.0
+yahoo-272	0	/m/0svwd	twinkies	1.0
+yahoo-273	0	/m/051vhp8	internet	1.0
+yahoo-274	0	/m/01pllx	charlie sheen	1.0
+yahoo-275	0	/m/0k8z	apple	1.0
+yahoo-276	0	/m/02xry	florida	1.0
+yahoo-281	0	/m/03kmxc	aqueduct race track	1.0
+yahoo-284	0	/m/0kvg4w	the great gatsby	1.0
+yahoo-286	0	/m/0jmfb	rockets	1.0
+yahoo-287	0	/m/02z2sld	womens	1.0
+yahoo-288	0	/m/0mvsg	lexington county sc	1.0
+yahoo-289	0	/m/02y1vz	facebook	1.0
+yahoo-290	0	/m/024t0y	cuban	1.0
+yahoo-291	0	/m/03f0jvh	billy scott	1.0
+yahoo-292	0	/m/03f0jvh	Billy Scott	1.0
+yahoo-293	0	/m/02p0v89	four	1.0
+yahoo-294	0	/m/01l1ls	carol burnett	1.0
+yahoo-297	0	/m/05jvlk	earthquake	1.0
+yahoo-299	0	/m/0841v	walmart	1.0
+yahoo-300	0	/m/07ldhs	taylor lautner	1.0
+yahoo-304	0	/m/02_tc	english premier league	1.0
+yahoo-305	0	/m/02p0v89	one	1.0
+yahoo-306	0	/m/02q7ksx	brick	1.0
+yahoo-308	0	/m/0cd8kr	first source bank	1.0
+yahoo-309	0	/m/02p0v89	145	1.0
+yahoo-311	0	/m/02y1vz	facebook	1.0
+yahoo-313	0	/m/0ggbcny	ipad 2	1.0
+yahoo-316	0	/m/075sdt	hamilton beach	1.0
+yahoo-317	0	/m/027m38y	the vermont country store	1.0
+yahoo-318	0	/m/0280hsm	adventure time	1.0
+yahoo-319	0	/m/054c1	michael jordan	1.0
+yahoo-320	0	/m/02l840	kanye west	1.0
+yahoo-321	0	/m/03gspv6	w l weller	1.0
+yahoo-322	0	/m/013my_	hu jintao	1.0
+yahoo-323	0	/m/0116s6	how to	1.0
+yahoo-324	0	/m/0116s6	how to	1.0
+yahoo-326	0	/m/04r_8	windows	1.0
+yahoo-327	0	/m/0h5y6r	girl	1.0
+yahoo-328	0	/m/0lxcw	macho camacho	1.0
+yahoo-329	0	/m/0fd2ds	price is right	1.0
+yahoo-330	0	/m/0kvdy60	honey boo boo	1.0
+yahoo-336	0	/m/0263rxq	anchors	1.0
+yahoo-338	0	/m/066sw3	clayton state university	1.0
+yahoo-339	0	/m/0crzn_	guy fieri	1.0
+yahoo-340	0	/m/03wq22	marilyn and sarah	1.0
+yahoo-341	0	/m/0jj5r	hernando county	1.0
+yahoo-342	0	/m/01_13nl	spring hill	1.0
+yahoo-346	0	/m/03_vx9	evan rachel wood	1.0
+yahoo-347	0	/m/07kqd0	pascual perez	1.0
+yahoo-348	0	/m/02mjmr	bronco bama	1.0
+yahoo-349	0	/m/036vk5	cinque terre	1.0
+yahoo-350	0	/m/01pllx	sheen	1.0
+yahoo-351	0	/m/01pllx	Sheen	1.0
+yahoo-352	0	/m/0lxcw	camacho	1.0
+yahoo-353	0	/m/02y1vz	facebook	1.0
+yahoo-354	0	/m/02hr3s	sikkens	1.0
+yahoo-355	0	/m/01pgzn_	lindsay lohan	1.0
+yahoo-356	0	/m/0154qm	cate blanchett	1.0
+yahoo-357	0	/m/0154qm	Cate Blanchett	1.0
+yahoo-358	0	/m/0k8z	apple's	1.0
+yahoo-359	0	/m/0h5y6r	girl	1.0
+yahoo-362	0	/m/02bhj4	st joseph university	1.0
+yahoo-363	0	/m/02jwcn	toys r us	1.0
+yahoo-365	0	/m/05fh2	nurse	1.0
+yahoo-366	0	/m/0116s6	how to	1.0
+yahoo-367	0	/m/052399z	climax mine	1.0
+yahoo-368	0	/m/05hhyw	philippine daily inquirer	1.0
+yahoo-369	0	/m/020tvm	papa joe's restaurant	1.0
+yahoo-370	0	/m/020tvm	papa johns	1.0
+yahoo-371	0	/m/020tvm	papa johns	1.0
+yahoo-372	0	/m/020tvm	papa johns	1.0
+yahoo-373	0	/m/020tvm	papa johns	1.0
+yahoo-374	0	/m/020tvm	papa johns	1.0
+yahoo-375	0	/m/020tvm	papa johns	1.0
+yahoo-376	0	/m/020tvm	papa johns	1.0
+yahoo-377	0	/m/020tvm	papa johns	1.0
+yahoo-378	0	/m/05nm24	candidate	1.0
+yahoo-381	0	/m/02v0hy	darrell royal	1.0
+yahoo-382	0	/m/02dh86	diane sawyer	1.0
+yahoo-383	0	/m/02dh86	Diane Sawyer	1.0
+yahoo-384	0	/m/03lt8g	eva longoria	1.0
+yahoo-385	0	/m/0h5y6r	girl	1.0
+yahoo-386	0	/m/0h5y6r	Girl	1.0
+yahoo-387	0	/m/0d06m5	clinton	1.0
+yahoo-388	0	/m/035grg	mayim bialik	1.0
+yahoo-392	0	/m/05_5q04	downtown san antonio	1.0
+yahoo-393	0	/m/07vw6l	bobby hebert	1.0
+yahoo-394	0	/m/0mbzf	loretta swit	1.0
+yahoo-395	0	/m/01y5kh	mariano rivera	1.0
+yahoo-398	0	/m/01pllx	charlie sheen	1.0
+yahoo-400	0	/m/0hfwb	lance armstrong	1.0
+yahoo-403	0	/m/0bdxs5	miley cyrus	1.0
+yahoo-404	0	/m/0bdxs5	Miley Cyrus	1.0
+yahoo-406	0	/m/013w8h	ted nugent	1.0
+yahoo-407	0	/m/018js4	top gun	1.0
+yahoo-408	0	/m/0gh652j	ellen douglas	1.0
+yahoo-409	0	/m/03shp	iran	1.0
+yahoo-410	0	/m/04gpb_t	best cameras	1.0
+yahoo-411	0	/m/04gpb_t	best cameras	1.0
+yahoo-412	0	/m/065zbw4	cavenders boot town	1.0
+yahoo-413	0	/m/0d4zbk	fat head	1.0
+yahoo-414	0	/m/07bp97	aol mail login	1.0
+yahoo-415	0	/m/07kqd0	pascual perez	1.0
+yahoo-416	0	/m/0h3blw3	proposition 30 california	1.0
+yahoo-417	0	/m/08trcl	langham creek high school	1.0
+yahoo-418	0	/m/02qyv3h	iron sky	1.0
+yahoo-419	0	/m/0h5y6r	girl	1.0
+yahoo-420	0	/m/0gs6vr	selena	1.0
+yahoo-422	0	/m/0288nsm	hotmail log in email	1.0
+yahoo-423	0	/m/02z9wk7	million	1.0
+yahoo-424	0	/m/04nnqc	vicious dog	1.0
+yahoo-425	0	/m/04nnqc	Vicious dog	1.0
+yahoo-426	0	/m/01zrdx	best but	1.0
+yahoo-427	0	/m/01zrdx	best but	1.0
+yahoo-428	0	/m/07w13h	stores	1.0
+yahoo-429	0	/m/02m0vh	home depot center	1.0
+yahoo-430	0	/m/0887n	42 years	1.0
+yahoo-431	0	/m/02yc5b	christchurch	1.0
+yahoo-432	0	/m/04ltf	liverpool	1.0
+yahoo-433	0	/m/0d06m5	clinton	1.0
+yahoo-435	0	/m/0h5y6r	girl	1.0
+yahoo-436	0	/m/05gnf	nbc	1.0
+yahoo-437	0	/m/09jcvs	you tube	1.0
+yahoo-438	0	/m/0z106	free	1.0
+yahoo-439	0	/m/0z106	free	1.0
+yahoo-440	0	/m/02y1vz	facebook log in	1.0
+yahoo-441	0	/m/02zxgs	grand forks herald	1.0
+yahoo-442	0	/m/05h6y4	lawrence guyot	1.0
+yahoo-443	0	/m/05c8jg	billings gazette	1.0
+yahoo-445	0	/m/02p7629	liz claiborne	1.0
+yahoo-446	0	/m/02kpnw	bed bath and beyond	1.0
+yahoo-447	0	/m/04f5785	second reformed church	1.0
+yahoo-448	0	/m/03nqzzc	spa	1.0
+yahoo-450	0	/m/02188gd	south padre island	1.0
+yahoo-451	0	/m/0887n	years	1.0
+yahoo-452	0	/m/06mt91	rihanna	1.0
+yahoo-453	0	/m/0252np	trans siberian orchestra	1.0
+yahoo-454	0	/m/0gm258	auctions	1.0
+yahoo-455	0	/m/04d1d1	bass pro shop	1.0
+yahoo-457	0	/m/03jt93	buckhead	1.0
+yahoo-458	0	/m/017gh8	gift	1.0
+yahoo-459	0	/m/01kb4x	merrill lynch	1.0
+yahoo-460	0	/m/0k3kg	norfolk county	1.0
+yahoo-461	0	/m/01t7l5	mapquest	1.0
+yahoo-462	0	/m/019rl6	yahoo	1.0
+yahoo-463	0	/m/019rl6	yahoo	1.0
+yahoo-466	0	/m/04jc8mr	emily squires	1.0
+yahoo-468	0	/m/07ldhs	taylor lautner	1.0
+yahoo-473	0	/m/03cx1t7	movie theaters	1.0
+yahoo-475	0	/m/0bs5_29	jw marriott grand rapids	1.0
+yahoo-477	0	/m/0bs1g5r	bruno mars	1.0
+yahoo-478	0	/m/0h7qm2l	all recipes	1.0
+yahoo-479	0	/m/0jt6vts	lumineers	1.0
+yahoo-480	0	/m/03flsn	king of new york	1.0
+yahoo-481	0	/m/0524b41	game of thrones	1.0
+yahoo-482	0	/m/0524b41	game of thrones	1.0
+yahoo-484	0	/m/03c29tn	lake hope state park	1.0
+yahoo-485	0	/m/02x0j3z	flipping out	1.0
+yahoo-486	0	/m/0hr02cl	moonshiners	1.0
+yahoo-487	0	/m/0hr02cl	moonshiners	1.0
+yahoo-488	0	/m/01n073	ea	1.0
+yahoo-489	0	/m/0gmp26	superman	1.0
+yahoo-490	0	/m/0ctxdn	mark sanchez	1.0
+yahoo-491	0	/m/06lvlf	channing tatum	1.0
+yahoo-492	0	/m/03m6_z	ryan gosling	1.0
+yahoo-493	0	/m/036hf4	ryan reynolds	1.0
+yahoo-494	0	/m/036hf4	ryan reynolds	1.0
+yahoo-495	0	/m/03cl0jw	2014	1.0
+yahoo-496	0	/m/05krk	ohio state	1.0
+yahoo-497	0	/m/0m66w	sarah jessica parker	1.0
+yahoo-498	0	/m/02qnp8b	milan lucic	1.0
+yahoo-499	0	/m/01y3c	carolina panthers	1.0
+yahoo-500	0	/m/0hgl3t6	concerts	1.0
+yahoo-502	0	/m/02frhbc	portland	1.0
+yahoo-503	0	/m/06mcv7	crate and barrel	1.0
+yahoo-505	0	/m/05jbn	nashville	1.0
+yahoo-511	0	/m/0bdxs5	miley cyrus	1.0
+yahoo-513	0	/m/05jbn	nashville	1.0
+yahoo-514	0	/m/04t8s2	century theaters	1.0
+yahoo-516	0	/m/0524b41	game of thrones	1.0
+yahoo-517	0	/m/025t0k	caddo lake	1.0
+yahoo-519	0	/m/0n4blqr	white house down	1.0
+yahoo-520	0	/m/01zrgc	loews theater	1.0
+yahoo-521	0	/m/0tz1j	lawrence	1.0
+yahoo-525	0	/m/0808n_	actress	1.0
+yahoo-526	0	/m/047cqf3	rooney mara	1.0
+yahoo-527	0	/m/0_sg4	winner	1.0
+yahoo-528	0	/m/0vptg4c	danielle bradberry	1.0
+yahoo-529	0	/m/0kbj11v	the bling ring	1.0
+yahoo-531	0	/m/050zm3	met rx	1.0
+yahoo-532	0	/m/060ccp	gnc	1.0
+yahoo-533	0	/m/05ztg98	clearview cinema	1.0
+yahoo-535	0	/m/019lxm	santos	1.0
+yahoo-536	0	/m/047kk6	fernando torres	1.0
+yahoo-537	0	/m/01j_h3	subaru	1.0
+yahoo-538	0	/m/019rl6	yahoo	1.0
+yahoo-539	0	/m/0h1z21s	inside out	1.0
+yahoo-540	0	/m/03n52j	ed begley jr	1.0
+yahoo-541	0	/m/04hjd4	little rascals	1.0
+yahoo-542	0	/m/030qb3t	los angeles	1.0
+yahoo-545	0	/m/02j4pn	metro blue line	1.0
+yahoo-547	0	/m/02j4pn	los angeles blue line	1.0
+yahoo-548	0	/m/0289_17	happy b day	1.0
+yahoo-551	0	/m/02q_bk	gmail	1.0
+yahoo-553	0	/m/0p8zl9g	under the dome	1.0
+yahoo-554	0	/m/03ytw	into the woods	1.0
+yahoo-555	0	/m/04zdgh	775 area code	1.0
+yahoo-556	0	/m/064kyqh	wet n wild	1.0
+yahoo-562	0	/m/04nfwb	pnc	1.0
+yahoo-563	0	/m/02pvjn	victoria s secret	1.0
+yahoo-566	0	/m/0360zl	bath and body works	1.0
+yahoo-567	0	/m/0r0jv	lancaster	1.0
+yahoo-568	0	/m/02rp8l7	homes for sale	1.0
+yahoo-569	0	/m/084s0s	roku	1.0
+yahoo-570	0	/m/02qffj	amc	1.0
+yahoo-571	0	/m/0gjc4d3	man of steel 2013	1.0
+yahoo-572	0	/m/0gjc4d3	man of steel shirtless	1.0
+yahoo-573	0	/m/09g71pl	la criada bien criada	1.0
+yahoo-576	0	/m/01kdws	wells fargo	1.0
+yahoo-577	0	/m/087rmw	longs	1.0
+yahoo-578	0	/m/0s03l	waimanalo	1.0
+yahoo-579	0	/m/02slcx	fandango	1.0
+yahoo-581	0	/m/0gwlfnb	gi joe retaliation	1.0
+yahoo-583	0	/m/09cv4d	gymboree	1.0
+yahoo-584	0	/m/09cv4d	gymboree	1.0
+yahoo-585	0	/m/02s6k	exxon	1.0
+yahoo-586	0	/m/02q_bk	gmail	1.0
+yahoo-588	0	/m/03znkl	dr. ben carson	1.0
+yahoo-589	0	/m/084s0s	roku	1.0
+yahoo-593	0	/m/0ch2l5_	the glades	1.0
+yahoo-594	0	/m/0jm2v	heat	1.0
+yahoo-597	0	/m/08gfjk	half price books	1.0
+yahoo-600	0	/m/04mxh0p	christine o donnell	1.0
+yahoo-602	0	/m/059rby	new york	1.0
+yahoo-605	0	/m/07p706	taboo	1.0
+yahoo-609	0	/m/0ydxr	concord nc	1.0
+yahoo-610	0	/m/01f2w0	bbc	1.0
+yahoo-611	0	/m/0fvzg	oklahoma city,	1.0
+yahoo-612	0	/m/01cwkq	amanda bynes	1.0
+yahoo-615	0	/m/0h8860l	now you see me	1.0
+yahoo-616	0	/m/0gyvj60	world war z	1.0
+yahoo-617	0	/m/0h8860l	now you see me	1.0
+yahoo-618	0	/m/0gyvj60	world war z	1.0
+yahoo-621	0	/m/0m2l9	neil young	1.0
+yahoo-622	0	/m/0m2l9	neil young	1.0
+yahoo-623	0	/m/03d16kn	low carb high fat	1.0
+yahoo-625	0	/m/027118l	euclid trucks	1.0
+yahoo-627	0	/m/02k4l6	defender game	1.0
+yahoo-628	0	/m/0j7jzhc	chain link fence	1.0
+yahoo-629	0	/m/019574	peace corp	1.0
+yahoo-630	0	/m/019574	peace corp	1.0
+yahoo-635	0	/m/0fzh9	medicare	1.0
+yahoo-637	0	/m/0d07ph	wikipedia	1.0
+yahoo-642	0	/m/04q6f9	define/	1.0
+yahoo-652	0	/m/05q9dzx	403(b) retirement plan	1.0
+yahoo-658	0	/m/04f0jl	pocono mountains	1.0
+yahoo-659	0	/m/04f0jl	pocono mountains	1.0
+yahoo-660	0	/m/04f0jl	pocono mountains	1.0
+yahoo-661	0	/m/04f0jl	pocono mountains	1.0
+yahoo-662	0	/m/04f0jl	pocono mountains	1.0
+yahoo-663	0	/m/04f0jl	pocono mountains	1.0
+yahoo-664	0	/m/04f0jl	pocono mountains	1.0
+yahoo-665	0	/m/04f0jl	pocono mountains	1.0
+yahoo-666	0	/m/04f0jl	pocono mountains	1.0
+yahoo-667	0	/m/04f0jl	pocono mountains	1.0
+yahoo-668	0	/m/04f0jl	pocono mountains	1.0
+yahoo-669	0	/m/04f0jl	pocono mountains	1.0
+yahoo-670	0	/m/04f0jl	pocono mountains	1.0
+yahoo-671	0	/m/04f0jl	pocono mountains	1.0
+yahoo-673	0	/m/04f0jl	pocono mountains	1.0
+yahoo-675	0	/m/0dclg	Philidelphia	1.0
+yahoo-678	0	/m/02qs_r4	US civil war	1.0
+yahoo-679	0	/m/02qs_r4	US civil war	1.0
+yahoo-680	0	/m/0gvrfxx	scooter	1.0
+yahoo-689	0	/m/0407zlb	long term care insurance	1.0
+yahoo-690	0	/m/0407zlb	long term care insurance	1.0
+yahoo-691	0	/m/0407zlb	long term care insurance	1.0
+yahoo-692	0	/m/0407zlb	long term care insurance	1.0
+yahoo-693	0	/m/0407zlb	long term care insurance	1.0
+yahoo-695	0	/m/0407zlb	long-term care insurance	1.0
+yahoo-696	0	/m/04q6f9	define/	1.0
+yahoo-697	0	/m/04q6f9	define/	1.0
+yahoo-698	0	/m/0407zlb	long-term care insurance	1.0
+yahoo-699	0	/m/0407zlb	long-term care insurance	1.0
+yahoo-700	0	/m/0407zlb	long-term care	1.0
+yahoo-701	0	/m/0407zlb	long-term care	1.0
+yahoo-704	0	/m/05c018g	old	1.0
+yahoo-713	0	/m/0j7jzhc	chain link wood fence	1.0
+yahoo-714	0	/m/02761b3	french lick resort and casino	1.0
+yahoo-715	0	/m/02761b3	french lick resort and casino	1.0
+yahoo-720	0	/m/02w01xj	fantasy football leagues	1.0
+yahoo-722	0	/m/04gdn3	walking with dinosaurs	1.0
+yahoo-723	0	/m/066kp	ps 2	1.0
+yahoo-727	0	/m/0gdjj	bart	1.0
+yahoo-728	0	/m/036_ws	volvo	1.0
+yahoo-732	0	/m/05f709j	history	1.0
+yahoo-733	0	/m/06y9cv	balance	1.0
+yahoo-734	0	/m/018c_r	starbucks	1.0
+yahoo-735	0	/m/0kc6x	espn	1.0
+yahoo-737	0	/m/0b6hk5f	the sun	1.0
+yahoo-738	0	/m/03w9nv	sun spot	1.0
+yahoo-739	0	/m/03w9nv	sun spot	1.0
+yahoo-741	0	/m/0180mw	er	1.0
+yahoo-742	0	/m/01sbv9	madagascar	1.0
+yahoo-743	0	/m/04p76wv	animated	1.0
+yahoo-744	0	/m/01wv9xn	pink floyd	1.0
+yahoo-745	0	/m/058ymm	pink floyd the wall movie	1.0
+yahoo-746	0	/m/04wz_d	facial flushing	1.0
+yahoo-747	0	/m/07y12t	buy	1.0
+yahoo-749	0	/m/03sd2z	purpose driven life	1.0
+yahoo-750	0	/m/02mjmr	obama	1.0
+yahoo-753	0	/m/0172m8	bobcat	1.0
+yahoo-754	0	/m/0116s6	how to	1.0
+yahoo-755	0	/m/0116s6	how to	1.0
+yahoo-760	0	/m/09lfkn	poker	1.0
+yahoo-762	0	/m/0251j3	the secret garden	1.0
+yahoo-763	0	/m/02q0gj3	difference	1.0
+yahoo-766	0	/m/02j07k	mitchell college athletics	1.0
+yahoo-767	0	/m/02j07k	mitchell college	1.0
+yahoo-770	0	/m/022f6y	wedding	1.0
+yahoo-774	0	/m/081k8	shakespeare	1.0
+yahoo-775	0	/m/04xd0g	windows defender	1.0
+yahoo-776	0	/m/04xd0g	windows defender	1.0
+yahoo-777	0	/m/04q8z3r	courses	1.0
+yahoo-779	0	/m/05f709j	history	1.0
+yahoo-780	0	/m/0kc8y	discovery channel	1.0
+yahoo-781	0	/m/06cbzt	science	1.0
+yahoo-782	0	/m/04nnqc	dog	1.0
+yahoo-783	0	/m/0glqgtp	student	1.0
+yahoo-786	0	/m/036vk_	rick warren debate	1.0
+yahoo-788	0	/m/045nc5	satellite	1.0
+yahoo-789	0	/m/09c7w0	us	1.0
+yahoo-790	0	/m/09c7w0	us	1.0
+yahoo-791	0	/m/061vdb	hunting	1.0
+yahoo-792	0	/m/061vdb	hunting	1.0
+yahoo-793	0	/m/02fzs	disneyland	1.0
+yahoo-796	0	/m/04127bj	american standard	1.0
+yahoo-798	0	/m/06r4f	star trek voyager	1.0
+yahoo-799	0	/m/07y12t	buy	1.0
+yahoo-803	0	/m/03gh4	hawaii	1.0
+yahoo-804	0	/m/03gh4	hawaii	1.0
+yahoo-805	0	/m/03gh4	hawaii	1.0
+yahoo-806	0	/m/03gh4	hawaii	1.0
+yahoo-808	0	/m/012329	map	1.0
+yahoo-810	0	/m/0ch3rhp	employ	1.0
+yahoo-811	0	/m/0ch3rhp	employ	1.0
+yahoo-813	0	/m/0g8ln	job	1.0
+yahoo-814	0	/m/0532x8	training	1.0
+yahoo-815	0	/m/0532x8	training	1.0
+yahoo-816	0	/m/0532x8	training	1.0
+yahoo-817	0	/m/085qhx	why	1.0
+yahoo-818	0	/m/085qhx	why	1.0
+yahoo-819	0	/m/085qhx	why	1.0
+yahoo-820	0	/m/03cd_0z	qualifications	1.0
+yahoo-822	0	/m/01k3k_	hardees	1.0
+yahoo-823	0	/m/0cp9sx	berkley	1.0
+yahoo-824	0	/m/0cp9sx	berkley	1.0
+yahoo-825	0	/m/05jvlk	earthquake	1.0
+yahoo-826	0	/m/017twv	Iwo Jima	1.0
+yahoo-827	0	/m/017twv	Iwo Jima island	1.0
+yahoo-828	0	/m/017twv	Iwo Jima	1.0
+yahoo-829	0	/m/097rdz	dooney bourke	1.0
+yahoo-830	0	/m/0ghhs1	pictures	1.0
+yahoo-831	0	/m/097rdz	dooney bourke	1.0
+yahoo-832	0	/m/097rdz	dooney and bourke	1.0
+yahoo-833	0	/m/097rdz	dooney and bourke	1.0
+yahoo-834	0	/m/097rdz	dooney and bourke	1.0
+yahoo-837	0	/m/05f709j	History	1.0
+yahoo-838	0	/m/05f709j	History	1.0
+yahoo-839	0	/m/01cp5q	DuPont	1.0
+yahoo-840	0	/m/01cp5q	DuPont	1.0
+yahoo-841	0	/m/0984pp	What	1.0
+yahoo-842	0	/m/0bbj6l	When	1.0
+yahoo-846	0	/m/08wmdv	lake murray	1.0
+yahoo-847	0	/m/08wmdv	lake murray	1.0
+yahoo-849	0	/m/05kkh	Nicknames	1.0
+yahoo-850	0	/m/02v_9ms	derivation	1.0
+yahoo-854	0	/m/0xjvt	Greenland	1.0
+yahoo-855	0	/m/0xjvt	Greenland	1.0
+yahoo-856	0	/m/0xjvt	greenland	1.0
+yahoo-857	0	/m/0xjvt	greenland	1.0
+yahoo-858	0	/m/0xjvt	greenland	1.0
+yahoo-861	0	/m/03gxdr	fee	1.0
+yahoo-863	0	/m/06cvv4	skagit valley	1.0
+yahoo-864	0	/m/06cvv4	skagit valley	1.0
+yahoo-865	0	/m/06cvv4	skagit valley	1.0
+yahoo-866	0	/m/06cvv4	skagit valley	1.0
+yahoo-867	0	/m/06cvv4	skagit valley	1.0
+yahoo-868	0	/m/06cvv4	skagit valley	1.0
+yahoo-869	0	/m/06cvv4	skagit valley	1.0
+yahoo-870	0	/m/0tvwc	black powder	1.0
+yahoo-872	0	/m/0tvwc	black powder	1.0
+yahoo-873	0	/m/0tvwc	black powder	1.0
+yahoo-874	0	/m/0tvwc	gun powder	1.0
+yahoo-877	0	/m/05f709j	history	1.0
+yahoo-886	0	/m/01vw20h	Jay-Z	1.0
+yahoo-888	0	/m/055g9p	international management group	1.0
+yahoo-889	0	/m/02739p	vijay singh	1.0
+yahoo-890	0	/m/01kb4x	Merrill lynch	1.0
+yahoo-891	0	/m/01kb4x	Merrill lynch	1.0
+yahoo-892	0	/m/01kb4x	merrill lynch	1.0
+yahoo-893	0	/m/01kb4x	merrill lynch	1.0
+yahoo-894	0	/m/01kb4x	merrill lynch	1.0
+yahoo-895	0	/m/01kb4x	merrill lynch	1.0
+yahoo-896	0	/m/01kb4x	merrill lynch	1.0
+yahoo-898	0	/m/0980jl	isabelle dinoire	1.0
+yahoo-899	0	/m/0980jl	isabelle dinoire	1.0
+yahoo-902	0	/m/0cyhq	Irving Berlin	1.0
+yahoo-903	0	/m/0cyhq	Irving Berlin	1.0
+yahoo-904	0	/m/0cyhq	Irving Berlin	1.0
+yahoo-906	0	/m/0nlb2	cunard cruise lines	1.0
+yahoo-907	0	/m/0nlb2	cunard cruise lines	1.0
+yahoo-908	0	/m/0nlb2	cunard cruise lines	1.0
+yahoo-909	0	/m/01m5g_	harry potter and the goblet of fire	1.0
+yahoo-910	0	/m/01m5g_	harry potter and the goblet of fire book	1.0
+yahoo-911	0	/m/01m5g_	harry potter and the goblet of fire	1.0
+yahoo-912	0	/m/01m5g_	harry potter and the goblet of fire	1.0
+yahoo-913	0	/m/01b5sg	jasper fforde	1.0
+yahoo-914	0	/m/01b5sg	jasper fforde	1.0
+yahoo-915	0	/m/01b5sg	jasper fforde	1.0
+yahoo-916	0	/m/04lg027	founder	1.0
+yahoo-917	0	/m/0f2nzn	Guinnes	1.0
+yahoo-918	0	/m/0f2nzn	Guinness	1.0
+yahoo-920	0	/m/0f2nzn	Guinness	1.0
+yahoo-921	0	/m/0f2nzn	Guinness	1.0
+yahoo-922	0	/m/0f2nzn	Guinness	1.0
+yahoo-923	0	/m/0f2nzn	Guinness	1.0
+yahoo-924	0	/m/0f2nzn	Guinness	1.0
+yahoo-926	0	/m/0szty	stout	1.0
+yahoo-931	0	/m/077v16	American girl dolls	1.0
+yahoo-934	0	/m/077v16	American Girl	1.0
+yahoo-935	0	/m/077v16	American Girl	1.0
+yahoo-936	0	/m/077v16	American Girl	1.0
+yahoo-937	0	/m/077v16	American Girl	1.0
+yahoo-938	0	/m/036rkh	chanel	1.0
+yahoo-939	0	/m/036rkh	chanel	1.0
+yahoo-940	0	/m/036rkh	chanel	1.0
+yahoo-941	0	/m/036rkh	chanel	1.0
+yahoo-942	0	/m/05vjw2	2005 presidential election in Egypt	1.0
+yahoo-943	0	/m/05vjw2	2005 presidential election in Egypt	1.0
+yahoo-944	0	/m/05vjw2	2005 presidential election	1.0
+yahoo-948	0	/m/09nm_	world	1.0
+yahoo-949	0	/m/09nm_	world	1.0
+yahoo-950	0	/m/09nm_	world	1.0
+yahoo-951	0	/m/033rkt	snooker	1.0
+yahoo-956	0	/m/01cgv4	marsupial cartoon character	1.0
+yahoo-958	0	/m/05f709j	History	1.0
+yahoo-961	0	/m/05h6ty	judges	1.0
+yahoo-962	0	/m/04g0zvz	1990	1.0
+yahoo-963	0	/m/05h6ty	judges	1.0
+yahoo-964	0	/m/05h6ty	judges	1.0
+yahoo-970	0	/m/02r7w0c	female	1.0
+yahoo-974	0	/m/09k07j	Yellowtail wine	1.0
+yahoo-975	0	/m/02r7w0c	female	1.0
+yahoo-977	0	/m/01bw1c	joseph steffen wikipedia	1.0
+yahoo-978	0	/m/09fb5	jack nicholson	1.0
+yahoo-979	0	/m/09fb5	jack nicholson	1.0
+yahoo-980	0	/m/09fb5	jack nicholson	1.0
+yahoo-981	0	/m/0888qj	co stars	1.0
+yahoo-982	0	/m/0ftr33	space	1.0
+yahoo-983	0	/m/0ftr33	space	1.0
+yahoo-984	0	/m/02rf0l	frequency	1.0
+yahoo-985	0	/m/02rf0l	frequency	1.0
+yahoo-991	0	/m/05f709j	history	1.0
+yahoo-995	0	/m/04gllz	introduction	1.0
+yahoo-996	0	/m/0p8v5cp	wiki	1.0
+yahoo-1013	0	/m/03jmb8	Kursk	1.0
+yahoo-1014	0	/m/03jmb8	Kursk	1.0
+yahoo-1016	0	/m/02pbmw	india government	1.0
+yahoo-1017	0	/m/02pbmw	indian government	1.0
+yahoo-1021	0	/m/0dlgqp	port arthur massacre	1.0
+yahoo-1022	0	/m/0dlgqp	port arthur massacre	1.0
+yahoo-1023	0	/m/0dlgqp	port arthur massacre	1.0
+yahoo-1024	0	/m/0dlgqp	Port Arther Massacre	1.0
+yahoo-1025	0	/m/0dlgqp	Port Arther Massacre Australia	1.0
+yahoo-1026	0	/m/0dlgqp	Port Arther Massacre Australia	1.0
+yahoo-1027	0	/m/0dlgqp	Port Arther Massacre Australia	1.0
+yahoo-1028	0	/m/02pncxx	gun	1.0
+yahoo-1029	0	/m/02xwkl	martin bryant	1.0
+yahoo-1030	0	/m/0dlgqp	port arthur massacre	1.0
+yahoo-1031	0	/m/0dlgqp	port arthur massacre australia	1.0
+yahoo-1033	0	/m/01nbg8	port arthur	1.0
+yahoo-1034	0	/m/02xwkl	martin bryant	1.0
+yahoo-1035	0	/m/01l3vx	france	1.0
+yahoo-1036	0	/m/01l3vx	france	1.0
+yahoo-1040	0	/m/01l3vx	france	1.0
+yahoo-1041	0	/m/01l3vx	france	1.0
+yahoo-1042	0	/m/05kkh	nickname	1.0
+yahoo-1043	0	/m/038xg3	stadium	1.0
+yahoo-1044	0	/m/08ljdc	coach	1.0
+yahoo-1045	0	/m/01l3vx	france	1.0
+yahoo-1046	0	/m/01l3vx	france	1.0
+yahoo-1047	0	/m/01l3vx	france	1.0
+yahoo-1050	0	/m/01l3vx	french	1.0
+yahoo-1051	0	/m/01l3vx	france	1.0
+yahoo-1052	0	/m/01l3vx	france	1.0
+yahoo-1053	0	/m/01l3vx	france	1.0
+yahoo-1054	0	/m/07x_bc	bollywood	1.0
+yahoo-1056	0	/m/07x_bc	bollywood	1.0
+yahoo-1057	0	/m/07x_bc	bollywood	1.0
+yahoo-1058	0	/m/07x_bc	bollywood	1.0
+yahoo-1059	0	/m/07x_bc	bollywood	1.0
+yahoo-1061	0	/m/04f0xq	merck &amp; co. lobbying	1.0
+yahoo-1062	0	/m/04f0xq	merck and co.	1.0
+yahoo-1063	0	/m/04f0xq	merck and co	1.0
+yahoo-1064	0	/m/04f0xq	merck and co	1.0
+yahoo-1065	0	/m/04f0xq	Merck	1.0
+yahoo-1066	0	/m/04f0xq	Merck	1.0
+yahoo-1067	0	/m/04f0xq	Merck	1.0
+yahoo-1068	0	/m/0kft	Akira Kurosawa	1.0
+yahoo-1069	0	/m/0kft	Akira Kurosawa	1.0
+yahoo-1070	0	/m/0kft	Akira Kurosawa	1.0
+yahoo-1071	0	/m/0kft	Akira Kurosawa	1.0
+yahoo-1095	0	/m/0xylw	servering	1.0
+yahoo-1096	0	/m/0xylw	servering	1.0
+yahoo-1117	0	/m/022f6y	wedding	1.0
+yahoo-1121	0	/m/022f6y	wedding	1.0
+yahoo-1122	0	/m/09wsbd	buddhist	1.0
+yahoo-1123	0	/m/03jqcz	shinto	1.0
+yahoo-1124	0	/m/03w9nv	Sunspots	1.0
+yahoo-1125	0	/m/03w9nv	Sunspot	1.0
+yahoo-1128	0	/m/03w9nv	sunspots	1.0
+yahoo-1129	0	/m/03w9nv	sunspots	1.0
+yahoo-1130	0	/m/042q1n	Depression	1.0
+yahoo-1131	0	/m/042q1n	depression	1.0
+yahoo-1132	0	/m/042q1n	depression	1.0
+yahoo-1148	0	/m/09w0lc	traditional	1.0
+yahoo-1149	0	/m/09w0lc	traditional	1.0
+yahoo-1152	0	/m/09w0lc	Traditional	1.0
+yahoo-1153	0	/m/019rg5	kenya	1.0
+yahoo-1154	0	/m/019rg5	kenya	1.0
+yahoo-1155	0	/m/09w0lc	traditional	1.0
+yahoo-1157	0	/m/019rg5	kenya	1.0
+yahoo-1161	0	/m/05f709j	history	1.0
+yahoo-1183	0	/m/01x73	connecticut	1.0
+yahoo-1200	0	/m/0116s6	how to	1.0
+yahoo-1205	0	/m/0d07ph	wiki	1.0
+yahoo-1206	0	/m/02rbcm	kansas city	1.0
+yahoo-1207	0	/m/0487_	kansas city chiefs	1.0
+yahoo-1208	0	/m/04f_d	kansas city	1.0
+yahoo-1209	0	/m/04f_d	kansas city	1.0
+yahoo-1210	0	/m/04f_d	kansas city	1.0
+yahoo-1211	0	/m/04f_d	kansas city	1.0
+yahoo-1212	0	/m/04f_d	kansas city	1.0
+yahoo-1213	0	/m/04f_d	kansas city	1.0
+yahoo-1214	0	/m/04f_d	kansas city	1.0
+yahoo-1215	0	/m/04f_d	kansas city	1.0
+yahoo-1216	0	/m/07ssc	uk	1.0
+yahoo-1217	0	/m/07ssc	uk	1.0
+yahoo-1220	0	/m/0fst0q	road trip	1.0
+yahoo-1223	0	/m/0532x8	training	1.0
+yahoo-1224	0	/m/01hlwv	jp morgan	1.0
+yahoo-1225	0	/m/01hlwv	jp morgan	1.0
+yahoo-1226	0	/m/01hlwv	jp morgan	1.0
+yahoo-1227	0	/m/01hlwv	jp morgan	1.0
+yahoo-1228	0	/m/02kfx_	data center	1.0
+yahoo-1229	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1230	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1231	0	/m/09tgmp	location	1.0
+yahoo-1232	0	/m/09tgmp	location	1.0
+yahoo-1233	0	/m/09tgmp	location	1.0
+yahoo-1234	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1235	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1236	0	/m/05p0fm4	financial	1.0
+yahoo-1237	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1238	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1239	0	/m/01hlwv	JP Morgan Chase	1.0
+yahoo-1240	0	/m/01hlwv	JP Morgan	1.0
+yahoo-1241	0	/m/01hlwv	JP Morgan	1.0
+yahoo-1242	0	/m/0g5prbd	march madness 2012 winning tean	1.0
+yahoo-1243	0	/m/0g5prbd	march madness 2012 winning team	1.0
+yahoo-1244	0	/m/0g5prbd	march madness 2012 runner up	1.0
+yahoo-1245	0	/m/0f2tj	march madness 2012 host city	1.0
+yahoo-1246	0	/m/02y3xn	march madness 2012 host stadium	1.0
+yahoo-1249	0	/m/02jp2w	march madness	1.0
+yahoo-1250	0	/m/02jp2w	march madness	1.0
+yahoo-1251	0	/m/02jp2w	march madness	1.0
+yahoo-1252	0	/m/02jp2w	march madness	1.0
+yahoo-1253	0	/m/02jp2w	NCAA tournament "march madness"	1.0
+yahoo-1254	0	/m/02jp2w	NCAA tournament "march madness"	1.0
+yahoo-1255	0	/m/0g5prbd	NCAA tournament "march madness" 2012 championship runner-up	1.0
+yahoo-1256	0	/m/0fwgxq	won	1.0
+yahoo-1261	0	/m/05zjc0_	Connie Culp	1.0
+yahoo-1262	0	/m/06_qtv	First	1.0
+yahoo-1263	0	/m/0980jl	Isabelle	1.0
+yahoo-1264	0	/m/06_qtv	first	1.0
+yahoo-1265	0	/m/06_qtv	first	1.0
+yahoo-1266	0	/m/06_qtv	first	1.0
+yahoo-1267	0	/m/0842b	dulles airport	1.0
+yahoo-1268	0	/m/0842b	dulles	1.0
+yahoo-1270	0	/m/0842b	dulles airport	1.0
+yahoo-1271	0	/m/0842b	dulles airport	1.0
+yahoo-1272	0	/m/01cgmx	Boston pops	1.0
+yahoo-1273	0	/m/04q6f9	Define/	1.0
+yahoo-1276	0	/m/05q50p	Information	1.0
+yahoo-1277	0	/m/05q50p	Information	1.0
+yahoo-1278	0	/m/014l6l	jeopardy	1.0
+yahoo-1279	0	/m/014l6l	jeopardy	1.0
+yahoo-1280	0	/m/014l6l	jeopardy	1.0
+yahoo-1281	0	/m/014l6l	jeopardy	1.0
+yahoo-1282	0	/m/03t3lq	churchill downs	1.0
+yahoo-1283	0	/m/03t3lq	churchill downs	1.0
+yahoo-1284	0	/m/03t3lq	churchill downs horse racing park	1.0
+yahoo-1285	0	/m/03t3lq	churchill downs horse racing park	1.0
+yahoo-1286	0	/m/03t3lq	churchill downs	1.0
+yahoo-1287	0	/m/02782h8	kentucky derby museum	1.0
+yahoo-1288	0	/m/03t3lq	churchilldowns	1.0
+yahoo-1289	0	/m/03t3lq	churchill downs racing seating chart	1.0
+yahoo-1290	0	/m/03t3lq	Churchill downs	1.0
+yahoo-1291	0	/m/03t3lq	Churchill downs race	1.0
+yahoo-1292	0	/m/03t3lq	Churchill downs	1.0
+yahoo-1293	0	/m/03t3lq	Churchill downs	1.0
+yahoo-1308	0	/m/0p0hd	State university of new york	1.0
+yahoo-1309	0	/m/0p0hd	State university of new york	1.0
+yahoo-1310	0	/m/02dq8f	SUNY albany	1.0
+yahoo-1311	0	/m/02dq8f	SUNY albany	1.0
+yahoo-1312	0	/m/02dq8f	albany university	1.0
+yahoo-1313	0	/m/02m6__	SUNY plattsburgh athletics	1.0
+yahoo-1314	0	/m/0p0hd	suny colleges	1.0
+yahoo-1315	0	/m/0p0hd	number of suny colleges	1.0
+yahoo-1316	0	/m/0p0hd	suny college	1.0
+yahoo-1317	0	/m/012329	map	1.0
+yahoo-1318	0	/m/012329	map	1.0
+yahoo-1323	0	/m/0b76j1g	law center to prevent gun violence	1.0
+yahoo-1324	0	/m/02mjmr	obama	1.0
+yahoo-1334	0	/m/0gl8r	red bull drink	1.0
+yahoo-1335	0	/m/0gl8r	red bull drink	1.0
+yahoo-1336	0	/m/0gl8r	red bull	1.0
+yahoo-1337	0	/m/0gl8r	Red Bull AND health	1.0
+yahoo-1338	0	/m/0gl8r	red bull	1.0
+yahoo-1339	0	/m/0gl8r	red bull drink	1.0
+yahoo-1340	0	/m/0gl8r	red bull	1.0
+yahoo-1341	0	/m/0gl8r	red bull	1.0
+yahoo-1342	0	/m/0gl8r	red bull	1.0
+yahoo-1348	0	/m/0116s6	how to	1.0
+yahoo-1350	0	/m/064mj6b	loans	1.0
+yahoo-1351	0	/m/064mj6b	loans	1.0
+yahoo-1352	0	/m/064mj6b	loans	1.0
+yahoo-1353	0	/m/064mj6b	loans	1.0
+yahoo-1357	0	/m/02rnc0g	tips	1.0
+yahoo-1360	0	/m/0ch3rhp	employee	1.0
+yahoo-1361	0	/m/0ch3rhp	employee	1.0
+yahoo-1362	0	/m/02wwlxt	events	1.0
+yahoo-1363	0	/m/02wwlxt	events	1.0
+yahoo-1391	0	/m/06mkj	spain	1.0
+yahoo-1392	0	/m/012wgb	ireland	1.0
+yahoo-1393	0	/m/012wgb	ireland	1.0
+yahoo-1394	0	/m/03y0g2q	piigs	1.0
+yahoo-1395	0	/m/01ppq	cyprus	1.0
+yahoo-1400	0	/m/03ypgv	best	1.0
+yahoo-1401	0	/m/03ypgv	best	1.0
+yahoo-1402	0	/m/09g82kg	romantic	1.0
+yahoo-1424	0	/m/098wk0	AIDS	1.0
+yahoo-1426	0	/m/02759nl	teachers	1.0
+yahoo-1427	0	/m/02759nl	teachers	1.0
+yahoo-1428	0	/m/02759nl	teachers	1.0
+yahoo-1429	0	/m/02759nl	teachers	1.0
+yahoo-1430	0	/m/02759nl	teachers	1.0
+yahoo-1431	0	/m/02759nl	teache	1.0
+yahoo-1435	0	/m/0c4jmh	infant OR child development milestones	1.0
+yahoo-1436	0	/m/0c4jmh	infant OR child development milestones	1.0
+yahoo-1437	0	/m/0c4jmh	infant OR child "development milestones" +	1.0
+yahoo-1438	0	/m/0c4jmh	infant OR child "development milestones"	1.0
+yahoo-1440	0	/m/027p3s8	culture	1.0
+yahoo-1441	0	/m/02rbmfl	research	1.0
+yahoo-1447	0	/m/0c4jmh	developmental milestones infants	1.0
+yahoo-1450	0	/m/0c4jmh	infant development milestone	1.0
+yahoo-1451	0	/m/0c4jmh	infant development milestone	1.0
+yahoo-1452	0	/m/0c4jmh	infant development milestone	1.0
+yahoo-1453	0	/m/0c4jmh	infant development milestone	1.0
+yahoo-1454	0	/m/0cf_n6	legality	1.0
+yahoo-1455	0	/m/0cf_n6	legality	1.0
+yahoo-1456	0	/m/0cf_n6	legality	1.0
+yahoo-1457	0	/m/0cf_n6	legality	1.0
+yahoo-1458	0	/m/0cf_n6	legality	1.0
+yahoo-1461	0	/m/03qj56g	cell phone	1.0
+yahoo-1462	0	/m/03qj56g	cell phone	1.0
+yahoo-1463	0	/m/0bmh2tp	tax	1.0
+yahoo-1464	0	/m/0bmh2tp	tax	1.0
+yahoo-1465	0	/m/0bmh2tp	tax	1.0
+yahoo-1470	0	/m/0bmh2tp	tax	1.0
+yahoo-1473	0	/m/02z2sld	women	1.0
+yahoo-1475	0	/m/027b46l	jobs	1.0
+yahoo-1485	0	/m/08xh1j	Travel	1.0
+yahoo-1487	0	/m/02_286	New York City	1.0
+yahoo-1490	0	/m/0f1sm	hartford	1.0
+yahoo-1491	0	/m/0f1sm	hartford	1.0
+yahoo-1492	0	/m/0dclg	philadelphia	1.0
+yahoo-1493	0	/m/0dclg	philadelphia	1.0
+yahoo-1494	0	/m/0rh6k	washington dc	1.0
+yahoo-1495	0	/m/0dclg	philadelphia	1.0
+yahoo-1496	0	/m/0dclg	philadelphia	1.0
+yahoo-1497	0	/m/0dclg	philadelphia	1.0
+yahoo-1498	0	/m/0g2lq	ron howard	1.0
+yahoo-1499	0	/m/03_t_4	+(Black OR african-american) history month events	1.0
+yahoo-1500	0	/m/03_t_4	Black history month	1.0
+yahoo-1502	0	/m/0c3bks	methods and programs for quitting smoking	1.0
+yahoo-1505	0	/m/0p4s9	the music man	1.0
+yahoo-1507	0	/m/02mjmr	obama	1.0
+yahoo-1510	0	/m/0gyytc	orange county convention center	1.0
+yahoo-1511	0	/m/0h0nb	different types	1.0
+yahoo-1513	0	/m/0p4s9	the music man	1.0
+yahoo-1514	0	/m/0p4s9	the music man	1.0
+yahoo-1517	0	/m/036vk_	rick warren	1.0
+yahoo-1518	0	/m/036vk_	rick warren	1.0
+yahoo-1519	0	/m/08pmy5	surf	1.0
+yahoo-1520	0	/m/080kdxk	hotels	1.0
+yahoo-1524	0	/m/0gyytc	orange county convention center	1.0
+yahoo-1525	0	/m/0gyytc	orange county convention center	1.0
+yahoo-1526	0	/m/02mjmr	obama	1.0
+yahoo-1527	0	/m/0xwj	atari	1.0
+yahoo-1528	0	/m/01qvbt7	flame	1.0
+yahoo-1529	0	/m/0p4s9	music man	1.0
+yahoo-1530	0	/m/0p4s9	music man	1.0
+yahoo-1531	0	/m/03d16kn	low carb diet	1.0
+yahoo-1532	0	/m/07z1_0	patriots point museum	1.0
+yahoo-1533	0	/m/0gmfzkx	liquids	1.0
+yahoo-1539	0	/m/02fzs	disneyland	1.0
+yahoo-1540	0	/m/04nnqc	dog	1.0
+yahoo-1541	0	/m/04nnqc	dog	1.0
+yahoo-1542	0	/m/02q5qpv	texas hold em	1.0
+yahoo-1545	0	/m/011d_6	wood	1.0
+yahoo-1547	0	/m/0gyytc	orange county convention center	1.0
+yahoo-1548	0	/m/0gyytc	orange county convention center	1.0
+yahoo-1550	0	/m/02mjmr	obama	1.0
+yahoo-1551	0	/m/03hfxq_	obama mother	1.0
+yahoo-1556	0	/m/0vmt	arizona	1.0
+yahoo-1563	0	/m/01hlwv	jp morgan chase	1.0
+yahoo-1564	0	/m/05f709j	history	1.0
+yahoo-1566	0	/m/01c8ll	uss abraham lincoln	1.0
+yahoo-1567	0	/m/027ntn7	guide	1.0
+yahoo-1568	0	/m/01cgmx	Boston pops	1.0
+yahoo-1571	0	/m/0116s6	how to	1.0
+yahoo-1573	0	/m/0dclg	Philadelphia	1.0
+yahoo-1575	0	/m/0d05l6	god	1.0
+yahoo-1577	0	/m/098wk0	hiv aids	1.0
+yahoo-1578	0	/m/02759nl	teacher	1.0
+yahoo-1579	0	/m/02jxk	EU	1.0
+yahoo-1581	0	/m/01hlwv	Jp Morgan Chase	1.0
+yahoo-1582	0	/m/09c7w0	us	1.0
+

@@ -1,0 +1,78 @@
+Applied_Science	/base/appliedscience
+Agriculture	"select tag from freebase_type where tag LIKE '%agriculture%' OR tag LIKE '%farm%'"
+Animal_Husbandry	/base/veterinarymedicine
+Food	/food
+Home
+Architecture	/architecture
+Town_Planning
+Buildings	/base/greenbuilding
+Furniture
+Computer_Science	/computer /internet /base/informationtechnology
+Engineering	/engineering /base/engineeringdraft /base/technologyofdoing /base/engineering
+Mechanics
+Astronautics	/spaceflight /base/satelites
+Electrotechnology
+Hydraulics
+Materials	/base/materials /engineering/material /base/engineering /base/engineering /engineering/material_composition /base/engineering/building_material /base/minerals
+Energy	/base/nuclearenergy /base/windenergy /engineering/engine_energy_source /base/energymanagement
+Telecommunication	/internet /radio /base/bluetooth /base/electromagneticspectrum /base/internettechnology
+Post
+Telegraphy
+Telephony	/base/phones /base/pdaphones /base/iphonedeveloper /base/phones1
+Medicine	/medicine /base/virology /base/consumermedical /base/plants/medicinal_plant
+Dentistry	"select tag from freebase_type where tag LIKE '%dentist%'"
+Pharmacy	"select tag from freebase_type where tag LIKE '%pharmac%'" "select tag from freebase_type where tag LIKE '%drug%'"
+Psychiatry	/base/brainanatomy /medicine/brain /base/psychoanalysis
+Radiology
+Surgery
+Pure_Science	/base/science
+Astronomy	/astronomy /base/exoplanetology
+Biology	/biology /base/bioventurist /base/biotechnology /biology/organism_classification
+Biochemistry
+Anatomy	/medicine/anatomical_structure
+Physiology
+Genetics	"select tag from freebase_type where tag LIKE '/biology/gene%'" /base/virology/genetic_sequence
+Animals	/biology/animal /biology/animal_breed /base/animalpathology /base/animals /base/pethealth /base/veterinarymedicine
+Plants	/base/plants /base/horticulture /base/plantpathology /biology/plant_disease
+Environment	/base/environmentalism /base/ecology "select tag from freebase_type where tag LIKE '%environmental_model%'"
+Chemistry	/chemistry
+Earth	/base/geoscience
+Geology	/geology /base/geologicalprocesses
+Meteorology	/meteorology
+Oceanography	/base/oceanography
+Paleontology
+Geography	/geography /base/giscience
+Mathematics	"select tag from freebase_type where tag LIKE '%mathem%' OR tag LIKE '%maths%'"
+Geometry
+Statistics	/base/statistics
+Physics	/physics
+Acoustics
+Atomic_Physic
+Electricity	/base/electric /base/materials/electrical_material /base/infrastructure/electric_utility "select tag from freebase_type where tag LIKE '/measurement_unit/electric%'"
+Electronics	/digicams /base/electronic
+Gas
+Optics	/digicams "select tag from freebase_type where tag LIKE '%optic%'"
+Social_Science	/base/socialscience%
+Health	/base/patienthealthrecord /base/healthmatter /base/healthcare
+Body_Care
+Military	/military
+Pedagogy	/base/educationaltechnology
+School
+University
+Publishing
+Sociology
+Artisanship
+Commerce
+Industry
+Transport	/transportation
+Aviation	/aviation
+Vehicles	/automotive /bicycles /base/greencars /base/electricalcars
+Nautical	/boats
+Railway	/rail /base/train		
+Economy	/base/economy
+Enterprise
+Finance
+Insurance
+Tax
+Administration
+Politics

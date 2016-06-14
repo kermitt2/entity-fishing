@@ -1,0 +1,472 @@
+trec-web-0	0	/m/0jgf9	Blackberry	0.5265
+trec-web-1	0	/m/0msj	Athena	0.674126
+trec-web-1	0	/m/02wz94r	ACM	0.833333
+trec-web-1	0	/m/06s52n	Winners	0.123573
+trec-web-2	0	/m/06xt2p	Claire	0.270771
+trec-web-2	0	/m/0glqgtp	Students	0.657212
+trec-web-3	0	/m/0ttw_	Professional sports teams	0.4
+trec-web-3	0	/m/0dclg	Philadelphia	0.702657
+trec-web-4	0	/m/070nyb	Medimmune Inc	0.875
+trec-web-4	0	/m/0dd8_42	Products	0.520596
+trec-web-5	0	/m/059x1	Nobel prizes	0.926531
+trec-web-6	0	/m/01gt7	747 planes	1.0
+trec-web-6	0	/m/01gt7	Boeing 747	0.987262
+trec-web-8	0	/m/01j277	The Beaux Arts Trio	1.0
+trec-web-9	0	/m/08qnnv	Indiana University	0.57806
+trec-web-10	0	/m/0gcbw	Foundation	0.227832
+trec-web-10	0	/m/01zj1t	Home Depot	0.995157
+trec-web-11	0	/m/012j50	Air Canada	0.997278
+trec-web-12	0	/m/03lsnr	AVMA	0.724771
+trec-web-13	0	/m/08kv8h	Anthony Award	1.0
+trec-web-13	0	/m/03_xld	Bouchercon	1.0
+trec-web-13	0	/m/0d_qz1	Authors	0.214612
+trec-web-14	0	/m/0kml_	SEC conference	1.0
+trec-web-14	0	/m/0gdcw1	Universities	0.195652
+trec-web-15	0	/m/02rt05z	Mancuso	0.439446
+trec-web-15	0	/m/0dh89q	Sponsors	0.143478
+trec-web-16	0	/m/02x0gx	the Food Network	0.900857
+trec-web-16	0	/m/039cz7	Chefs	0.819383
+trec-web-17	0	/m/0jltp	Jefferson Airplane	0.985191
+trec-web-17	0	/m/07jf9m	Members of the band	0.5
+trec-web-18	0	/m/02h5hkk	John Hennessy	0.677333
+trec-web-18	0	/m/02qp785	Companies	0.102036
+trec-web-20	0	/m/0bxbr	Bethesda Maryland	1.0
+trec-web-21	0	/m/0165_d	Organization of Petroleum Exporting Countries	1.0
+trec-web-22	0	/m/02mb0n	the Kingston Trio	1.0
+trec-web-22	0	/m/01j6vxp	Trio's	0.333333
+trec-web-23	0	/m/04590w	Jazz at Lincoln Center Orchestra	0.6
+trec-web-25	0	/m/03mgx6z	taken	0.471691
+trec-web-27	0	/m/0fpjj	the IEEE	0.964964
+trec-web-29	0	/m/049d51	Ocean Spray	0.604131
+trec-web-30	0	/m/02hvqs	the American Institute of Architects	1.0
+trec-web-31	0	/m/036mh3	National Endowment for the Humanities	1.0
+trec-web-31	0	/m/0150cn	collaborative research	0.428571
+trec-web-32	0	/m/01qf2g	DARPA Grand Challenge	1.0
+trec-web-33	0	/m/0587z	Access	0.415878
+trec-web-34	0	/m/01t5tl	Which	0.487085
+trec-web-34	0	/m/01jq34	the University of Maryland	1.0
+trec-web-36	0	/m/0240zx	the Tavis Smiley show	0.967742
+trec-web-37	0	/m/06_763	Richard Petty Motorsports	0.990971
+trec-web-38	0	/m/022x5s	Farm Bureau	0.984848
+trec-web-39	0	/m/029f32	Costco	0.997956
+trec-web-40	0	/m/07k2d	the New York Times	0.97783
+trec-web-41	0	/m/03bnb	General Electric	0.952782
+trec-web-42	0	/m/02lmn5	Association	0.291453
+trec-web-44	0	/m/01gcr_	National Zoo	0.976953
+trec-web-45	0	/m/0xdvc	Freedom	0.154812
+trec-web-46	0	/m/03phl8	Albuquerque International Balloon Fiesta	0.969388
+trec-web-47	0	/m/018czw	AFL-CIO	1.0
+trec-web-49	0	/m/0gxj	Abu Dhabi	0.829843
+trec-web-50	0	/m/0chvn	the National Institutes of Health	1.0
+trec-web-51	0	/m/0hfyj	Smithsonian Institution	0.998404
+trec-web-52	0	/m/0gcbw	Foundation	0.227832
+trec-web-53	0	/m/0156dy	Project	0.303306
+trec-web-54	0	/m/01w213	Edgars	0.953271
+trec-web-55	0	/m/02hkr7	the Nature Conservancy	1.0
+trec-web-56	0	/m/025j12	Kennedy Center honorees	1.0
+trec-web-57	0	/m/02wwfz7	spin-off companies	1.0
+trec-web-57	0	/m/07szy	the University of Michigan	0.959753
+trec-web-59	0	/m/04m20_	Peabody Essex Museum	1.0
+trec-web-59	0	/m/0462yz9	the Peabody	0.2105
+trec-web-60	0	/m/09_25w	Association for Symbolic Logic	1.0
+trec-web-60	0	/m/02tb57	the Association	0.0209402
+trec-web-61	0	/m/03w9s30	Baltimore	0.787424
+trec-web-62	0	/m/027qj05	Drew Gilpin Faust	1.0
+trec-web-63	0	/m/01z1dl	won the Pulitzer Prize	1.0
+trec-web-64	0	/m/016yk0	Patricia Cornwell	1.0
+trec-web-65	0	/m/027yxkk	Cleveland	0.539581
+trec-web-65	0	/m/0gztl	Southwest Airlines	0.998978
+trec-web-65	0	/m/06_str	places to see	1.0
+trec-web-66	0	/m/0264ktc	Vacations	0.672316
+trec-web-68	0	/m/01_0bd	Newseum	0.996933
+trec-web-69	0	/m/0278p4_	Investors	0.884413
+trec-web-69	0	/m/04cfg3	Teach For America	1.0
+trec-web-69	0	/m/09bhnh	Growth Fund	0.666667
+trec-web-69	0	/m/05hqv	National	0.120401
+trec-web-70	0	/m/02x9g_	Montana State University	0.725084
+trec-web-70	0	/m/0g14gx	University departments	1.0
+trec-web-72	0	/m/023jwr	referencing	0.8
+trec-web-72	0	/m/02t135	the National Spelling Bee	0.878924
+trec-web-73	0	/m/01l8slj	Placido Domingo	0.999306
+trec-web-74	0	/m/0prr3	the Prince	0.00157198
+trec-web-74	0	/m/0l_wj	Prince of Wales	0.566357
+trec-web-75	0	/m/028zbs	Astra Zeneca	1.0
+trec-web-76	0	/m/02xp9	Chopin	0.979615
+trec-web-76	0	/m/04vf8	Manuscript	0.928771
+trec-web-76	0	/m/04mqcw	Lee Child	0.981378
+trec-web-77	0	/m/029f32	Costco	0.997956
+trec-web-78	0	/m/014jcv	Icelandair	0.999481
+trec-web-80	0	/m/0g12mg	Supply	0.309653
+trec-web-82	0	/m/03wgnb7	Division I men's lacrosse	1.0
+trec-web-82	0	/m/02488f	NCAA Division I	0.606862
+trec-web-84	0	/m/0bx9y	Montgomery County MD	0.240298
+trec-web-86	0	/m/01jftgk	Warrant	0.604285
+trec-web-87	0	/m/0d060g	Canada	0.755844
+trec-web-88	0	/m/01_c4	the City of London	0.911196
+trec-web-89	0	/m/0gkvww	the Tiger Woods Foundation	0.763636
+trec-web-90	0	/m/0n8m6	Monsanto	0.918149
+trec-web-91	0	/m/0f335	TV show	1.0
+trec-web-91	0	/m/0h95b81	the Top Chef	0.901355
+trec-web-92	0	/m/0158tn	intent to sue	1.0
+trec-web-92	0	/m/027slny	Center for Biological Diversity	1.0
+trec-web-94	0	/m/01m6jb5	Boys and Girls	0.571429
+trec-web-95	0	/m/04p5cr	TV series House	1.0
+trec-web-96	0	/m/05y28w	Quality	0.30792
+trec-web-96	0	/m/030l0j	PQS	0.693878
+trec-web-96	0	/m/03s7h	Intel	0.890905
+trec-web-96	0	/m/0bvjxr	Award	0.560174
+trec-web-97	0	/m/0fkt6q	Jo-Ann Fabrics and Crafts	1.0
+trec-web-98	0	/m/016y_f	Cape Fear	0.343424
+trec-web-98	0	/m/0rgxp	Wilmington	0.304058
+trec-web-98	0	/m/0gcbw	Foundation	0.227832
+trec-web-98	0	/m/04lfrg0	Landfall	0.309524
+trec-web-99	0	/m/026mj	Delaware	0.592207
+trec-web-99	0	/m/02xry	Florida	0.812999
+trec-web-100	0	/m/0x1y7	Bozeman Montana	1.0
+trec-web-101	0	/m/0cfp7l	Olney	0.239381
+trec-web-101	0	/m/0gnr8f	Toys	0.455282
+trec-web-102	0	/m/059rby	New York state	0.968354
+trec-web-103	0	/m/05hfj3	Woodrow Wilson Center	1.0
+trec-web-104	0	/m/0bx9y	Montgomery County	0.240298
+trec-web-105	0	/m/02rkkt6	Solar	0.175346
+trec-web-106	0	/m/03yd_32	League of American Orchestras	1.0
+trec-web-106	0	/m/04rrd	Maryland	0.746118
+trec-web-107	0	/m/04g0lqc	Museum	0.563384
+trec-web-107	0	/m/0499s9q	Sandy Spring	0.981752
+trec-web-108	0	/m/015z8s	Airbus 320	0.997222
+trec-web-109	0	/m/02xwzh	New Trier High School	1.0
+trec-web-109	0	/m/0808n_	actors and actresses	0.960784
+trec-web-110	0	/m/05dbcl	Ted	0.0782156
+trec-web-110	0	/m/03cz_7k	Naos	0.390977
+trec-web-113	0	/m/0g4pt61	the Woods	0.132088
+trec-web-113	0	/m/09cm6	Wine	0.712179
+trec-web-114	0	/m/01n7q	California	0.866311
+trec-web-114	0	/m/02tb57	the Association	0.0209402
+trec-web-115	0	/m/01gb54	Dream Works	0.55814
+trec-web-117	0	/m/0g_71	National Book Award	1.0
+trec-web-118	0	/m/01pkvx	Sears	0.79459
+trec-web-119	0	/m/02lmn5	Association	0.291453
+trec-web-119	0	/m/08l_59	Summer	0.666097
+trec-web-119	0	/m/05hqv	National	0.120401
+trec-web-120	0	/m/0h960tr	Electoral College	0.832406
+trec-web-120	0	/m/04gsms_	Electoral College	0.00413636
+trec-web-120	0	/m/0clctm	Electoral College	0.00313793
+trec-web-120	0	/m/03bxbl6	Electoral College	0.0012837
+trec-web-120	0	/m/0gw74c	Electoral College	8.55798E-4
+trec-web-120	0	/m/08gvyv	Electoral College	5.70532E-4
+trec-web-121	0	/m/06_vwqb	consular	0.929412
+trec-web-121	0	/m/012wgb	Ireland	0.472109
+trec-web-122	0	/m/06y74g	Citizen	0.291979
+trec-web-123	0	/m/0467p	JPL	1.0
+trec-web-124	0	/m/024rg2	American music	0.343537
+trec-web-124	0	/m/0b9q20	American music	0.243197
+trec-web-124	0	/m/026th0t	American music	0.0255102
+trec-web-124	0	/m/0125l2	American music	0.0187075
+trec-web-124	0	/m/01kk2q	American music	0.015894
+trec-web-124	0	/m/03h_fk5	American music	0.00264901
+trec-web-124	0	/m/026qgrj	American music	0.00170068
+trec-web-125	0	/m/0dclg	Philadelphia	0.702657
+trec-web-126	0	/m/07f5x	Togo	0.682125
+trec-web-130	0	/m/04zzlrs	Eruption of Mount St. Helens	1.0
+trec-web-132	0	/m/01sl06	welfare reform	0.00699301
+trec-web-132	0	/m/03k47l	welfare reform	0.00165426
+trec-web-133	0	/m/01nlrj	Platte river	1.0
+trec-web-134	0	/m/03h2s35	linux	0.936926
+trec-web-134	0	/m/046nqp	Secure	0.491453
+trec-web-135	0	/m/0cnx_r_	Copyright	0.958904
+trec-web-136	0	/m/01vx7vg	toxic waste	0.712418
+trec-web-136	0	/m/02rzvcv	toxic waste	0.150327
+trec-web-136	0	/m/0220ls	toxic waste	0.070279
+trec-web-136	0	/m/011l8z	toxic waste	0.00697425
+trec-web-136	0	/m/0kqjfm	toxic waste	0.00107296
+trec-web-136	0	/m/0d05fv	toxic waste	5.36481E-4
+trec-web-137	0	/m/0jfjp	Tuskegee airmen	1.0
+trec-web-138	0	/m/0j3dm4s	substance abuse	0.985573
+trec-web-138	0	/m/03c14q4	substance abuse	0.012624
+trec-web-138	0	/m/01pgzn_	substance abuse	0.00647726
+trec-web-138	0	/m/01pq5j7	substance abuse	2.94421E-4
+trec-web-138	0	/m/01hb9p	substance abuse	2.94421E-4
+trec-web-138	0	/m/0133gf	substance abuse	1.4721E-4
+trec-web-140	0	/m/047yc	Kuwait	0.691445
+trec-web-140	0	/m/0d05q4	Iraq	0.712028
+trec-web-142	0	/m/05f709j	History	0.00935763
+trec-web-142	0	/m/07241	Symbol	0.479422
+trec-web-142	0	/m/0d35y	Phoenix	0.387764
+trec-web-143	0	/m/09b6zr	President Bush's	0.968284
+trec-web-143	0	/m/081sq	The White House	0.917661
+trec-web-144	0	/m/047m7bl	OPM	0.97561
+trec-web-144	0	/m/04cvz83	New	0.0899353
+trec-web-145	0	/m/032mx	FDA	0.974351
+trec-web-146	0	/m/0cns5	Grand canyon	0.823739
+trec-web-147	0	/m/04cy5lg	origin of the universe	0.330275
+trec-web-147	0	/m/064rb8z	origin of the universe	0.0550459
+trec-web-149	0	/m/01v661n	teen pregnancy	0.0015674
+trec-web-149	0	/m/02rv_dz	teen pregnancy	0.0015674
+trec-web-150	0	/m/0rq5v	factsheet	0.8
+trec-web-153	0	/m/05kkh	Ohio	0.793656
+trec-web-154	0	/m/07k54rs	cost/benefit	1.0
+trec-web-156	0	/m/0tvg8	historic preservation	0.00965517
+trec-web-156	0	/m/029634	historic preservation	0.00965517
+trec-web-156	0	/m/0tz41	historic preservation	0.00413793
+trec-web-156	0	/m/0h6mq	historic preservation	0.00232288
+trec-web-156	0	/m/06y4ht	historic preservation	0.00232288
+trec-web-156	0	/m/05k79c	historic preservation	0.00174216
+trec-web-157	0	/m/07bfd	Sibir	0.526627
+trec-web-157	0	/m/0dq3cp	Air	0.245175
+trec-web-158	0	/m/01n7q	California	0.866311
+trec-web-160	0	/m/034ls	faith-based initiatives	0.0117647
+trec-web-162	0	/m/03g697	medical residency	1.0
+trec-web-164	0	/m/0fjdq	FCC	0.916206
+trec-web-165	0	/m/05br2	money laundering	0.0063903
+trec-web-165	0	/m/020574	money laundering	0.005386
+trec-web-165	0	/m/06vjnr	money laundering	0.00359066
+trec-web-165	0	/m/01fnd0	money laundering	0.00245781
+trec-web-165	0	/m/04k4jv	money laundering	0.00147468
+trec-web-165	0	/m/0bn8wq	money laundering	0.00131083
+trec-web-165	0	/m/0bppvl	money laundering	9.83123E-4
+trec-web-166	0	/m/02plm_k	Consumer	0.623392
+trec-web-167	0	/m/06cgv6	Monterey Bay national marine sanctuary	0.019084
+trec-web-168	0	/m/032mx	Food and Drug Administration	1.0
+trec-web-168	0	/m/03hzc1	Food and Drug Administration	2.43398E-4
+trec-web-169	0	/m/0jbl2	the U.S. department of education	0.047619
+trec-web-171	0	/m/0cx5gp	religious belief	0.0814273
+trec-web-173	0	/m/043t_fc	Health	0.373757
+trec-web-175	0	/m/022ym3	peebles	0.626478
+trec-web-176	0	/m/0fjq7x	FirstGov	1.0
+trec-web-177	0	/m/07x01q	art museums	0.110535
+trec-web-177	0	/m/02fk08	art museums	0.0172712
+trec-web-179	0	/m/01n7q	California	0.866311
+trec-web-183	0	/m/05yht2	lake	0.541118
+trec-web-183	0	/m/09p3gx	Mono basin	1.0
+trec-web-184	0	/m/08gnd0	locator	0.393258
+trec-web-184	0	/m/01g4lh	Social security office	0.833333
+trec-web-185	0	/m/0c4wtd	Duck	0.620639
+trec-web-186	0	/m/06yzct	Edy's Ice cream	0.8
+trec-web-188	0	/m/02rrwm8	skin cancer	0.00149835
+trec-web-188	0	/m/0bkf4	skin cancer	5.99341E-4
+trec-web-189	0	/m/05pvzs	NOAA Fisheries	0.636364
+trec-web-189	0	/m/05gb98	Northwest Region	0.424403
+trec-web-193	0	/m/0cpgg2	international trade	0.174194
+trec-web-193	0	/m/0910qz	international trade	0.0258065
+trec-web-193	0	/m/02x7wz	international trade	0.0129032
+trec-web-193	0	/m/03cw8h2	international trade	0.00322581
+trec-web-193	0	/m/07y12t	international trade	0.00213929
+trec-web-193	0	/m/02jxk	international trade	7.13097E-4
+trec-web-193	0	/m/059g4	international trade	4.75398E-4
+trec-web-193	0	/m/0224xp	international trade	4.75398E-4
+trec-web-193	0	/m/085h1	international trade	4.75398E-4
+trec-web-193	0	/m/0fpz8	international trade	4.75398E-4
+trec-web-193	0	/m/03gt5yz	international trade	2.37699E-4
+trec-web-194	0	/m/0c21g	Department of Labor's	1.0
+trec-web-197	0	/m/05htt	NSA	0.901469
+trec-web-197	0	/m/09vwlf	Home	0.0893683
+trec-web-198	0	/m/0f18ld	National Institute	0.945559
+trec-web-199	0	/m/0h1fy61	International	0.27522
+trec-web-200	0	/m/01n7q	California state	0.866311
+trec-web-202	0	/m/02wlk	Frank Lloyd Wright	0.993111
+trec-web-202	0	/m/01zh2s	Frank Lloyd Wright	0.00250504
+trec-web-202	0	/m/04k8w4	Frank Lloyd Wright	0.00160045
+trec-web-202	0	/m/02pqb95	Frank Lloyd Wright	4.87092E-4
+trec-web-202	0	/m/02mqck	Frank Lloyd Wright	2.08754E-4
+trec-web-202	0	/m/02rbj_4	Frank Lloyd Wright	2.08754E-4
+trec-web-202	0	/m/08ggk2	Frank Lloyd Wright	1.39169E-4
+trec-web-202	0	/m/0frn2d	Frank Lloyd Wright	1.39169E-4
+trec-web-202	0	/m/0q9h2	Frank Lloyd Wright	1.39169E-4
+trec-web-202	0	/m/04w4lb	Frank Lloyd Wright	1.39169E-4
+trec-web-202	0	/m/02x498j	Frank Lloyd Wright	1.39169E-4
+trec-web-202	0	/m/0c1k4m	Frank Lloyd Wright	1.04377E-4
+trec-web-203	0	/m/053s2bf	CDC	0.742857
+trec-web-204	0	/m/043t_fc	Healthy	0.779772
+trec-web-205	0	/m/041cts	Dual	0.298214
+trec-web-205	0	/m/047m7bl	OPM	0.97561
+trec-web-206	0	/m/0gy_l	DOE	0.448965
+trec-web-208	0	/m/01qgv7	Florida Keys	0.974573
+trec-web-209	0	/m/09c7w0	the United States	0.836336
+trec-web-211	0	/m/05pvmq	Mine Safety and Health Administration	0.5
+trec-web-216	0	/m/03zwkz	space exploration	0.0205279
+trec-web-216	0	/m/0dn87h	space exploration	0.00184843
+trec-web-218	0	/m/05hqv	National	0.120401
+trec-web-219	0	/m/0dlgqp	small business	0.0125945
+trec-web-219	0	/m/04lxx4	small business	6.29723E-4
+trec-web-219	0	/m/08_ykc	small business	6.19003E-4
+trec-web-219	0	/m/0dd8_42	small business	3.09502E-4
+trec-web-220	0	/m/02bnhg	NIMH	0.556075
+trec-web-221	0	/m/01jp2c	Mojave Desert	0.961285
+trec-web-222	0	/m/0js8z	FEMA	1.0
+trec-web-224	0	/m/0gy_l	DOE	0.448965
+trec-web-224	0	/m/013l83	Oak Ridge Tennessee	1.0
+trec-web-225	0	/m/0czbzd	Flora	0.3127
+trec-web-225	0	/m/0d_14	Fermilab	0.996603
+trec-web-226	0	/m/04jkg5s	Laguna Canyon	0.993464
+trec-web-227	0	/m/05zqlvv	information security	0.962543
+trec-web-227	0	/m/094yr_	information security	0.0354906
+trec-web-227	0	/m/0x4wh	information security	0.00313152
+trec-web-227	0	/m/0b6h3c9	information security	0.00104384
+trec-web-228	0	/m/0gyfm5	San Diego	0.791886
+trec-web-229	0	/m/01n7q	California	0.866311
+trec-web-230	0	/m/011x96	Groundhog day	0.527965
+trec-web-230	0	/m/020v134	Punxsutawney	0.914453
+trec-web-231	0	/m/0b2lw	St. Paul	0.425038
+trec-web-232	0	/m/03m9ngg	identity theft	0.00145773
+trec-web-232	0	/m/0x4wh	identity theft	6.13999E-4
+trec-web-232	0	/m/08t0w8	identity theft	2.04666E-4
+trec-web-232	0	/m/01gtsh	identity theft	2.04666E-4
+trec-web-233	0	/m/081sq	White House	0.917661
+trec-web-237	0	/m/0635r9	Trademark	0.738626
+trec-web-237	0	/m/04s9n	FAQ	1.0
+trec-web-238	0	/m/025syww	Planetary	0.904972
+trec-web-240	0	/m/0h30d2	Terrorism	0.645244
+trec-web-240	0	/m/06pvr	Bay Area	0.88812
+trec-web-242	0	/m/06cnz9	Food	0.560748
+trec-web-243	0	/m/06wk2n	genome research	1.0
+trec-web-244	0	/m/0gtvdf6	national parks	0.603151
+trec-web-244	0	/m/015dvh	national parks	0.139891
+trec-web-244	0	/m/0740qk	national parks	0.00900225
+trec-web-244	0	/m/02sndv	national parks	0.00782845
+trec-web-245	0	/m/04g8d	Laura Welch Bush	1.0
+trec-web-246	0	/m/0dnxc1	career information	0.111111
+trec-web-246	0	/m/0f1xt3	career information	0.111111
+trec-web-246	0	/m/0dq9xy	career information	0.0740741
+trec-web-246	0	/m/06b1x0	career information	0.0740741
+trec-web-246	0	/m/0fz53t	career information	0.037037
+trec-web-246	0	/m/0fc07y	career information	0.037037
+trec-web-246	0	/m/0dnz5z	career information	0.037037
+trec-web-246	0	/m/0drnjp	career information	0.037037
+trec-web-249	0	/m/099c4w	poems online	1.0
+trec-web-250	0	/m/037s09	Natural Resources Conservation Service	1.0
+trec-web-251	0	/m/03y48	international monetary fund	1.0
+trec-web-251	0	/m/0c414z7	international monetary fund	4.18206E-4
+trec-web-251	0	/m/026133b	international monetary fund	2.78804E-4
+trec-web-251	0	/m/07lwcy	international monetary fund	1.39402E-4
+trec-web-253	0	/m/0js8z	FEMA	1.0
+trec-web-254	0	/m/01n7q	California	0.866311
+trec-web-254	0	/m/011ll4	Tahoe	0.421627
+trec-web-254	0	/m/05564h	conservancy	0.6
+trec-web-255	0	/m/01dcxd	Fallen	0.321107
+trec-web-255	0	/m/0261bbx	firefighters	0.910404
+trec-web-255	0	/m/05hqv	National	0.120401
+trec-web-256	0	/m/0116s6	How	0.442623
+trec-web-256	0	/m/04gtx_j	Hearing	0.432873
+trec-web-256	0	/m/01mhj4	Balance	0.315164
+trec-web-262	0	/m/025rv7p	technology transfer	6.85401E-4
+trec-web-263	0	/m/02ww1t	Kids	0.395721
+trec-web-263	0	/m/09gldf6	Now	0.233777
+trec-web-265	0	/m/0bqnlm	Recalls	0.209677
+trec-web-267	0	/m/01fpjb	Ethics,	1.0
+trec-web-269	0	/m/02rfytk	scholarship programs	0.333333
+trec-web-269	0	/m/02vpvdg	scholarship programs	0.166667
+trec-web-269	0	/m/026bc8j	scholarship programs	0.166667
+trec-web-269	0	/m/03nw6v8	scholarship programs	0.166667
+trec-web-269	0	/m/04lcjp	scholarship programs	0.166667
+trec-web-270	0	/m/03hnb5p	Worst	0.239171
+trec-web-271	0	/m/032mx	FDA	0.974351
+trec-web-273	0	/m/0cpgg2	national laboratories	0.148148
+trec-web-273	0	/m/02p_h8h	national laboratories	0.0740741
+trec-web-274	0	/m/0267sqy	Art	0.194989
+trec-web-274	0	/m/081sq	white house	0.917661
+trec-web-275	0	/m/027y1b6	after-school programs	1.0
+trec-web-276	0	/m/04rrd	Maryland	0.746118
+trec-web-279	0	/m/01lcw_	Agricultural research service	1.0
+trec-web-280	0	/m/0h960tr	Freedom of Information act	0.762411
+trec-web-280	0	/m/0fjdq	FCC	0.916206
+trec-web-283	0	/m/0h960tr	Social security benefits	1.0
+trec-web-286	0	/m/0nqv1	Greenwich Mean Time	0.00593556
+trec-web-286	0	/m/01m6jb5	Greenwich Mean Time	1.41323E-4
+trec-web-288	0	/m/01q1hl	consumer information center	1.0
+trec-web-288	0	/m/01bqks	Federal	0.180373
+trec-web-289	0	/m/02fc4t	Near earth asteroids	1.0
+trec-web-292	0	/m/03pxxz	anti-inflammatory	0.973684
+trec-web-292	0	/m/0m5w8	Piglet,	0.666667
+trec-web-293	0	/m/0h968x9	Backyard	0.528571
+trec-web-294	0	/m/085qhx	Why	0.160012
+trec-web-295	0	/m/0416ts4	homeopathic medicine	0.902098
+trec-web-295	0	/m/028c2zj	homeopathic medicine	0.027972
+trec-web-296	0	/m/02dm18	Children's	0.280335
+trec-web-298	0	/m/0fq00gq	drunk driving	0.229391
+trec-web-298	0	/m/0c1pj	drunk driving	0.00856735
+trec-web-298	0	/m/02kdlf	drunk driving	0.00333175
+trec-web-298	0	/m/0byw7m	drunk driving	9.51928E-4
+trec-web-299	0	/m/01r60f	Dinosaurs	0.456926
+trec-web-301	0	/m/0fjq7x	FirstGov	1.0
+trec-web-302	0	/m/02_286	New York City	0.97111
+trec-web-303	0	/m/01hgnn	Vietnam War	0.00100435
+trec-web-303	0	/m/01crd5	Vietnam War	6.19118E-4
+trec-web-303	0	/m/07lmbg	Vietnam War	2.88922E-4
+trec-web-303	0	/m/05p7921	Vietnam War	1.78856E-4
+trec-web-303	0	/m/04ldxbx	Vietnam War	1.5134E-4
+trec-web-303	0	/m/01hd31	Vietnam War	1.37582E-4
+trec-web-303	0	/m/0hh56	Vietnam War	1.37582E-4
+trec-web-303	0	/m/026g3gp	Vietnam War	1.23824E-4
+trec-web-303	0	/m/0g1qcp	Vietnam War	1.10065E-4
+trec-web-306	0	/m/07y12t	maritime trade	0.961538
+trec-web-308	0	/m/02j4hd	Farm service agency	1.0
+trec-web-309	0	/m/0267sqy	Art	0.194989
+trec-web-310	0	/m/0gntgk	endangered species	0.186251
+trec-web-310	0	/m/0bbb1q	endangered species	0.122797
+trec-web-310	0	/m/0g5zw2	endangered species	0.0217391
+trec-web-310	0	/m/04j1z_5	endangered species	0.00998825
+trec-web-310	0	/m/02x7_1v	endangered species	0.0094007
+trec-web-310	0	/m/02t4wl	endangered species	0.00470035
+trec-web-311	0	/m/07vsl	State department	1.0
+trec-web-312	0	/m/059g4	North America	0.892634
+trec-web-312	0	/m/04y6p5g	Bird	0.438605
+trec-web-314	0	/m/01lvjl	The Bill	0.963058
+trec-web-315	0	/m/06y3r	s jobs	0.759992
+trec-web-317	0	/m/07hy_c	National mediation board	1.0
+trec-web-321	0	/m/0ftr33	Astronaut	0.789878
+trec-web-321	0	/m/0glrffw	biographies	0.853026
+trec-web-322	0	/m/02qqm2r	manatee information	1.0
+trec-web-323	0	/m/0b76rzg	Wildfires	0.610345
+trec-web-323	0	/m/0b76rzg	Wildland fire	1.0
+trec-web-323	0	/m/01b69s	USGS	1.0
+trec-web-324	0	/m/0fytk	homeland security	0.989474
+trec-web-324	0	/m/0grx21	homeland security	0.0173658
+trec-web-324	0	/m/038r8p	homeland security	0.00526316
+trec-web-324	0	/m/03cqs	homeland security	0.00180424
+trec-web-324	0	/m/05631	homeland security	0.00135318
+trec-web-324	0	/m/01cm3	homeland security	0.00112765
+trec-web-324	0	/m/07tbvj	homeland security	6.7659E-4
+trec-web-324	0	/m/027h8_	homeland security	6.7659E-4
+trec-web-324	0	/m/01kf06	homeland security	4.5106E-4
+trec-web-324	0	/m/0551d0v	homeland security	4.5106E-4
+trec-web-324	0	/m/07q8zd	homeland security	2.2553E-4
+trec-web-326	0	/m/0fzv_	Wright Brothers	0.980736
+trec-web-327	0	/m/0nm3n	York county	0.138519
+trec-web-327	0	/m/0mw7h	York county	0.420494
+trec-web-327	0	/m/0mvls	York county	0.0671605
+trec-web-327	0	/m/0mmxg	York county	0.75
+trec-web-327	0	/m/017yry	York county	0.0496296
+trec-web-327	0	/m/044zk6	York county	0.0533333
+trec-web-327	0	/m/0n6s7	York county	0.0417284
+trec-web-327	0	/m/02660wm	York county	0.00222222
+trec-web-327	0	/m/094vy	York county	0.00197531
+trec-web-327	0	/m/01krh7	York county	0.0017284
+trec-web-327	0	/m/0crclv3	York county	4.93827E-4
+trec-web-330	0	/m/0b4zyp	american military university	1.0
+trec-web-331	0	/m/0qs34	arkadelphia	0.911732
+trec-web-332	0	/m/073p5	sherwood	0.466667
+trec-web-333	0	/m/023zxl	idaho state	0.741546
+trec-web-334	0	/m/0r4nh	ontario california	1.0
+trec-web-335	0	/m/01fmw0	uss	0.833333
+trec-web-335	0	/m/02mhwx	carl vinson	0.789679
+trec-web-336	0	/m/0gnfq	les miserables	0.584282
+trec-web-337	0	/m/0f_5t5	rules of golf	0.0230769
+trec-web-339	0	/m/04sj3	madagascar	0.983645
+trec-web-341	0	/m/01m6jb5	carpal tunnel syndrome	0.0161917
+trec-web-343	0	/m/03cbfcj	maryland department of natural resources	0.0593487
+trec-web-344	0	/m/01vvb4m	nicolas cage movies	1.0
+trec-web-345	0	/m/014xqm	earth day	0.99816
+trec-web-347	0	/m/02jq1	elvis presley's	1.0
+trec-web-351	0	/m/01dcxd	black and gold	1.0
+trec-web-355	0	/m/035r8l	world's biggest	0.227273
+trec-web-357	0	/m/09yvct	hurricane Irene	0.832192
+trec-web-357	0	/m/0xsf4	manville nj	1.0
+trec-web-361	0	/m/02q7t8g	bio	0.0133764
+trec-web-361	0	/m/034ls	george bush sr	0.965517
+trec-web-362	0	/m/02wlk	frank lloyd wright	1.0
+trec-web-365	0	/m/0qpqn	scottsdale	1.0
+trec-web-366	0	/m/06yxd	South Carolina	0.692516
+trec-web-368	0	/m/08knth	ford edge	1.0
+trec-web-370	0	/m/0vmt	arizona	0.895753
+trec-web-371	0	/m/0d7dx3	alexian brothers	1.0
+

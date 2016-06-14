@@ -1,0 +1,102 @@
+Micro-level -----------------------
+Precision: 56.9
+Recall: 55.93
+f1: 56.41
+
+Precision: 64.91
+Recall: 62.71
+f1: 63.79
+
+---
+
+Global values -----------------------
+nbRelevant: 40
+nbRetrieved: 60
+nbExpected: 59
+
+Micro-level -----------------------
+Precision: 66.67
+Recall: 67.8
+f1: 67.23
+
+Macro-level -----------------------
+f1: 53.07
+
+---
+
+Global values -----------------------
+nbRelevant: 35
+nbRetrieved: 52
+nbExpected: 59
+
+Micro-level -----------------------
+Precision: 67.31
+Recall: 59.32
+f1: 63.06
+
+Macro-level -----------------------
+f1: 53.4
+
+---
+
+Global values -----------------------
+nbRelevant: 42
+nbRetrieved: 61
+nbExpected: 59
+
+Micro-level -----------------------
+Precision: 68.85
+Recall: 71.19
+f1: 70
+
+Macro-level -----------------------
+f1: 54.55
+
+---
+
+Global values -----------------------
+nbRelevant: 43
+nbRetrieved: 61
+nbExpected: 61
+
+Micro-level -----------------------
+Precision: 70.49
+Recall: 70.49
+f1: 70.49
+
+Macro-level -----------------------
+f1: 56.76
+
+----
+
+Global values -----------------------
+nbRelevant: 48
+nbRetrieved: 81
+nbExpected: 61
+
+Micro-level -----------------------
+Precision: 59.26
+Recall: 78.69
+f1: 67.61
+
+Macro-level -----------------------
+f1: 57.16
+
+---
+
+Global values -----------------------
+nbRelevant: 47
+nbRetrieved: 58
+nbExpected: 61
+
+Micro-level -----------------------
+Precision: 81.03
+Recall: 77.05
+f1: 78.99
+
+Macro-level -----------------------
+f1: 71.85
+
+
+
+

@@ -1,0 +1,218 @@
+{
+	"_id" : "5595173f9c597f75f376322c",
+	"publication_id" : "US6672106",
+	"invention_title" : "Method and apparatus for forming soot for the manufacture of glass",
+	"keywords" : [
+		{
+			"keyword" : "soot",
+			"weight" : 318.22462936223826,
+			"entities" : [ 
+{ "rawName" : "soot", "preferredTerm" : "Soot", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "518740", "freeBaseExternalRef" : "/m/02ktw2", "definitions" : [ { "definition" : "'''Soot''' is a general term that refers to impure [[carbon]] particles resulting from the incomplete combustion of a [[hydrocarbon]]. It is more properly restricted to the product of the gas-phase combustion process but is commonly extended to include the residual [[Pyrolysis|pyrolyzed]] fuel particles such as [[cenosphere]]s, charred wood, petroleum coke, etc. that may become airborne during [[pyrolysis]] and which are more properly identified as cokes or chars. The gas-phase soots contain [[polycyclic aromatic hydrocarbons]] (PAHs). The PAHs in soot are known [[mutagens]] and are classified as a \"known human carcinogen\" by the International Agency for Research on Cancer (IARC).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Pigments", "page_id" : 862553}, {"source" : "wikipedia-en", "category" : "Climate forcing agents", "page_id" : 1487610}, {"source" : "wikipedia-en", "category" : "Carbon forms", "page_id" : 2494636}, {"source" : "wikipedia-en", "category" : "IARC Group 1 carcinogens", "page_id" : 2555034} ]  }
+			]
+		},
+		{
+			"keyword" : "burner",
+			"weight" : 256.4834428702175,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "atomizing",
+			"weight" : 215.3408076671003,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "orifice",
+			"weight" : 203.83193316658733,
+			"entities" : [ 
+{ "rawName" : "orifice", "preferredTerm" : "Orifice", "nerd_score" : "0.027754083746694913", "prob" : "1.0", "wikipediaExternalRef" : "362250", "definitions" : [ { "definition" : "An '''orifice''' is any opening, [[mouth]], hole or vent, as of a pipe, plate, or a body. * [[Body orifice]] * [[Orifice plate]] * [[Calibrated orifice]] * [[Nozzle]] * [[Back Orifice]]", "source" : "wikipedia-en", "lang" : "en" } ]  }
+			]
+		},
+		{
+			"keyword" : "atomization",
+			"status" : "redundant",
+			"weight" : 200.19518237149745,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "injector",
+			"weight" : 140.8704158276575,
+			"entities" : [
+{ "wikipediaExternalRef" : "1164724" }
+			]
+		},
+		{
+			"keyword" : "flame",
+			"weight" : 134.2162673661418,
+			"entities" : [ 
+{ "rawName" : "flame", "preferredTerm" : "Flame", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "212427", "freeBaseExternalRef" : "/m/01f415", "definitions" : [ { "definition" : "A '''flame''' (from Latin '''') is the visible (light-emitting), gaseous part of a [[fire]]. It is caused by a highly [[exothermic]] reaction (for example, [[combustion]], a self-sustaining [[redox|oxidation]] [[chemical reaction|reaction]]) taking place in a thin zone. If a fire is hot enough to [[ionize]] the gaseous components, it can become a [[Plasma (physics)|plasma]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fire", "page_id" : 3734304} ]  }
+			]
+		},
+		{
+			"keyword" : "precursor",
+			"weight" : 113.93974797607319,
+			"entities" : [ 
+{ "rawName" : "precursor", "preferredTerm" : "Precursor (chemistry)", "nerd_score" : "0.40890611034175944", "prob" : "1.0", "wikipediaExternalRef" : "10940802", "freeBaseExternalRef" : "/m/02qvnj3", "definitions" : [ { "definition" : "In [[chemistry]], a '''precursor''' is a [[chemical compound|compound]] that participates in the [[chemical reaction]] that produces another compound. In [[biochemistry]], the term \"precursor\" is used more specifically to refer to a chemical compound preceding another in a [[metabolic pathway]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Metabolism", "page_id" : 1135134}, {"source" : "wikipedia-en", "category" : "Chemical synthesis", "page_id" : 3204295} ]  }
+			]
+		},
+		{
+			"keyword" : "liquid",
+			"weight" : 102.80638422864764,
+			"entities" : [ 
+{ "rawName" : "liquid", "preferredTerm" : "Liquid", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "18993825", "freeBaseExternalRef" : "/m/04k94", "definitions" : [ { "definition" : "'''Liquid''' is one of the three classical [[State of matter|states of matter]] (the others being [[gas]] and [[solid]]). Like a gas, a liquid is [[fluid|able to flow]] and take the shape of a container. Some liquids resist compression, while others can be compressed. Unlike a gas, a liquid does not disperse to fill every space of a container, and maintains a fairly constant density. A distinctive property of the liquid state is [[surface tension]], leading to [[wetting]] phenomena.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry", "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Volume", "page_id" : 1777296}, {"source" : "wikipedia-en", "category" : "Phases of matter", "page_id" : 1914140}, {"source" : "wikipedia-en", "category" : "Viscosity", "page_id" : 3596932}, {"source" : "wikipedia-en", "category" : "Liquids", "page_id" : 15445506} ]  } 
+			]
+		},
+		{
+			"keyword" : "gas",
+			"weight" : 100.21646491838803,
+			"entities" : [ 
+{ "rawName" : "gas", "preferredTerm" : "Gas", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "18993869", "freeBaseExternalRef" : "/m/037xy", "definitions" : [ { "definition" : "'''Gas''' is one of [[State of matter#The three classical states|the three classical states of matter]] (the others being [[liquid]] and [[solid]]). Near [[absolute zero]], a substance exists as a [[solid]]. As heat is added to this substance it melts into a [[liquid]] at its [[melting point]] (see [[phase change]]), boils into a gas at its [[boiling point]], and if heated high enough would enter a [[plasma (physics)|plasma]] state in which the [[electrons]] are so energized that they leave their parent atoms from within the gas. A pure gas may be made up of individual atoms (e.g. a [[noble gas]] or atomic gas like [[neon]]), [[chemical element|elemental]] molecules made from one type of atom (e.g. [[oxygen]]), or [[chemical compound|compound]] molecules made from a variety of atoms (e.g. [[carbon dioxide]]). A gas [[mixture]] would contain a variety of pure gases much like the [[Earth's Atmosphere|air]]. What distinguishes a gas from liquids and solids is the vast separation of the individual gas particles. This separation usually makes a colorless gas invisible to the human observer. The interaction of gas particles in the presence of electric and [[gravitational fields]] are considered negligible as indicated by the constant velocity vectors in the image.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine", "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Gases", "page_id" : 1645013}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Atmospheric sciences", "page_id" : 3407606}, {"source" : "wikipedia-en", "category" : "Dutch loanwords", "page_id" : 3577907} ]  }
+			]
+		},
+		{
+			"keyword" : "orifices",
+			"status" : "redundant",
+			"weight" : 77.18899154897655,
+			"entities" : [ 
+{ "rawName" : "orifices", "preferredTerm" : "Body orifice", "nerd_score" : "0.7032914993306559", "prob" : "1.0", "wikipediaExternalRef" : "314028", "freeBaseExternalRef" : "/m/01tlkf", "definitions" : [ { "definition" : "A '''body orifice''' is any opening in the body of an animal. In a typical [[mammal]]ian body such as the [[human body]], the external body orifices are:", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Anatomy", "page_id" : 692380} ]  }
+			]
+		},
+		{
+			"keyword" : "waveguide",
+			"weight" : 60.73798881128001,
+			"entities" : [ 
+{ "rawName" : "waveguide", "preferredTerm" : "Waveguide (optics)", "nerd_score" : "0.08326915335541318", "prob" : "1.0", "wikipediaExternalRef" : "3854313", "freeBaseExternalRef" : "/m/0b3g89", "definitions" : [ { "definition" : "An '''optical waveguide''' is a physical structure that guides electromagnetic waves in the optical spectrum. Common types of [[optical]] waveguides include [[optical fiber]] and rectangular waveguides.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Optics", "page_id" : 692743} ]  }
+			]
+		},
+		{
+			"keyword" : "defect",
+			"weight" : 51.70841047556566,
+			"entities" : [ 
+{ "rawName" : "defect", "preferredTerm" : "Crystallographic defect", "nerd_score" : "0.7570610191278082", "prob" : "1.0", "wikipediaExternalRef" : "7849", "freeBaseExternalRef" : "/m/02696", "definitions" : [ { "definition" : "Crystalline solids exhibit a periodic [[crystal structure]]. The positions of atoms or molecules occur on repeating fixed distances, determined by the [[unit cell]] parameters. However, the arrangement of atom or molecules in most crystalline materials is not perfect. The regular patterns are interrupted by '''crystallographic defects'''.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Crystallographic defects", "page_id" : 21353705} ]  } 
+			]
+		},
+		{
+			"keyword" : "atomizers",
+			"status" : "redundant",
+			"weight" : 44.81945375983382,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "pressurization",
+			"weight" : 44.24519612798004,
+			"entities" : [ 
+{ "rawName" : "pressurization", "preferredTerm" : "Pressurization", "nerd_score" : "0.24899199477184003", "prob" : "1.0", "wikipediaExternalRef" : "1413453", "freeBaseExternalRef" : "/m/04_hz8", "definitions" : [ { "definition" : "'''Pressurization''' is the application of [[pressure]] in a given situation or environment; and more specifically refers to the process by which [[atmospheric pressure]] is maintained in an isolated or semi-isolated atmospheric environment (for instance, in an [[aircraft]], or whilst [[scuba diving]]).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Pressure", "page_id" : 8398609} ]  }
+			]
+		},
+		{
+			"keyword" : "optimumly match",
+			"weight" : 44.11196989169204,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "burner flame",
+			"weight" : 43.514234981323696,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "assembly",
+			"status" : "weak",
+			"weight" : 41.54878203807439,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "waveguides",
+			"status" : "redundant",
+			"weight" : 39.64155320724548,
+			"entities" : [ 
+{ "rawName" : "waveguides", "preferredTerm" : "Waveguide (optics)", "nerd_score" : "0.4019129585312865", "prob" : "1.0", "wikipediaExternalRef" : "3854313", "freeBaseExternalRef" : "/m/0b3g89", "definitions" : [ { "definition" : "An '''optical waveguide''' is a physical structure that guides electromagnetic waves in the optical spectrum. Common types of [[optical]] waveguides include [[optical fiber]] and rectangular waveguides.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Optics", "page_id" : 692743} ]  }
+			]
+		},
+		{
+			"keyword" : "pain aesthetic",
+			"status" : "absent",
+			"weight" : 36.779125085008594,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "polymethylcyclosiloxane",
+			"weight" : 36.4368278902987,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "turbulence",
+			"weight" : 35.39026750822545,
+			"entities" : [ 
+{ "rawName" : "turbulence", "preferredTerm" : "Turbulence", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "154664", "freeBaseExternalRef" : "/m/014748", "definitions" : [ { "definition" : "In [[fluid dynamics]], '''turbulence''' or '''turbulent flow''' is a flow regime characterized by chaotic and [[stochastic]] property changes. This includes low [[momentum diffusion]], high momentum [[convection]], and rapid variation of [[pressure]] and [[velocity]] in space and time. [[Nobel Laureate]] [[Richard Feynman]] described turbulence as \"the most important unsolved problem of classical physics.\" Flow in which the [[kinetic energy]] dies out due to the action of fluid molecular [[viscosity]] is called [[laminar flow]]. While there is no theorem relating [[Reynolds number]] (Re) to turbulence, flows with high Reynolds numbers usually become turbulent, while those with low Reynolds numbers usually remain laminar. For pipe flow, a Reynolds number above about 4000 will most likely correspond to turbulent flow, while a Reynolds number below 2100 indicates laminar flow. The region in between (2100 Still, a complete description of turbulence remains one of the [[unsolved problems in physics]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Chaos theory", "page_id" : 976386}, {"source" : "wikipedia-en", "category" : "Aerodynamics", "page_id" : 1303037}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Transport phenomena", "page_id" : 2325722}, {"source" : "wikipedia-en", "category" : "Turbulence", "page_id" : 8113170} ]  }
+			]
+		},
+		{
+			"keyword" : "vapor",
+			"weight" : 35.31975273682331,
+			"entities" : [ 
+{ "rawName" : "vapor", "preferredTerm" : "Vapor", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "32505", "freeBaseExternalRef" : "/m/07zqg", "definitions" : [ { "definition" : "A '''vapor''' (American spelling) or '''vapour''' (see [[spelling differences]]) is a substance in the [[gas]] phase at a [[temperature]] lower than its [[critical temperature|critical point]]. This means that the vapor can be [[condensation|condensed]] to a [[liquid]] or to a [[solid]] by increasing its [[pressure]] without reducing the temperature.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical properties", "page_id" : 743292}, {"source" : "wikipedia-en", "category" : "Gases", "page_id" : 1645013}, {"source" : "wikipedia-en", "category" : "Pressure", "page_id" : 8398609} ]  }
+			]
+		},
+		{
+			"keyword" : "cluster",
+			"weight" : 35.30145277627116,
+			"entities" : [ 
+{ "rawName" : "cluster", "preferredTerm" : "Cluster", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "55431", "definitions" : [ { "definition" : "A '''cluster''' is a small group or bunch of something. * [[Cluster (physics)]], a small group of atoms or molecules * [[Cluster chemistry]], an array of bound atoms intermediate in character between a molecule and a solid * [[Cluster sampling]], a sampling technique used when \"natural\" groupings are evident in a statistical population * [[Cluster analysis]], a technique for statistical data analysis * [[Consonant cluster]], in linguistics", "source" : "wikipedia-en", "lang" : "en" } ]  }
+			]
+		},
+		{
+			"keyword" : "feedstock",
+			"weight" : 35.1440164317842,
+			"entities" : [ 
+{ "rawName" : "feedstock", "preferredTerm" : "Raw material", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "216167", "freeBaseExternalRef" : "/m/02vk5h5", "definitions" : [ { "definition" : "A '''raw material''' or '''feedstock''' is the basic material from which a product is manufactured or made, frequently used with an extended meaning. For example, the term is used to denote material that came from [[nature]] and is in an unprocessed or minimally processed state. [[Latex]], [[iron ore]], [[Lumber|logs]], and [[crude oil]], would be examples. The use of raw material by non-human species includes [[twig]]s and [[found object]]s as used by birds to make [[nest]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Minerals", "page_id" : 708104}, {"source" : "wikipedia-en", "category" : "Materials", "page_id" : 722279}, {"source" : "wikipedia-en", "category" : "Supply chain management terms", "page_id" : 14102902} ]  }
+			]
+		},
+		{
+			"keyword" : "optical",
+			"weight" : 34.34618660422798,
+			"entities" : [ 
+{ "rawName" : "optical", "preferredTerm" : "Optics", "nerd_score" : "0.9379211967912309", "prob" : "1.0", "wikipediaExternalRef" : "22483", "freeBaseExternalRef" : "/m/05mn2", "definitions" : [ { "definition" : "'''Optics''' is the branch of [[physics]] which involves the behavior and properties of [[light]], including its interactions with [[matter]] and the construction of [[optical instruments|instruments]] that use or [[Photodetector|detect]] it. Optics usually describes the behavior of [[visible light|visible]], [[ultraviolet]], and [[infrared]] light. Because light is an [[electromagnetic wave]], other forms of [[electromagnetic radiation]] such as [[X-ray]]s, [[microwave]]s, and [[radio wave]]s exhibit similar properties.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Astronautics" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Optics", "page_id" : 692743}, {"source" : "wikipedia-en", "category" : "Electromagnetic radiation", "page_id" : 697318}, {"source" : "wikipedia-en", "category" : "Applied and interdisciplinary physics", "page_id" : 1913676}, {"source" : "wikipedia-en", "category" : "Greek loanwords", "page_id" : 6516060} ]  }
+			]
+		},
+		{
+			"keyword" : "reaction",
+			"weight" : 32.633081559964,
+			"entities" : [ 
+{ "rawName" : "reaction", "preferredTerm" : "Chemical reaction", "nerd_score" : "0.799354098733425", "prob" : "1.0", "wikipediaExternalRef" : "6271", "freeBaseExternalRef" : "/m/01vx5", "definitions" : [ { "definition" : "A '''chemical reaction''' is a process that leads to the transformation of one set of [[chemical substance]]s to another. Chemical reactions can be either [[Spontaneous process|spontaneous]], requiring no input of energy, or non-spontaneous, typically following the input of some type of energy, viz. heat, light or electricity. Classically, chemical reactions encompass changes that strictly involve the motion of [[electrons]] in the forming and breaking of [[chemical bond]]s, although the general concept of a chemical reaction, in particular the notion of a [[chemical equation]], is applicable to [[Feynman diagram|transformations of elementary particles]], as well as [[nuclear reaction]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemistry", "page_id" : 691185}, {"source" : "wikipedia-en", "category" : "Chemical reactions", "page_id" : 995738} ]  }
+			]
+		},
+		{
+			"keyword" : "rim",
+			"weight" : 31.85376237250398,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "atomize",
+			"status" : "redundant",
+			"weight" : 31.720326647935096,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "preheater",
+			"weight" : 31.683870230534446,
+			"entities" : [ 
+{ "rawName" : "preheater", "preferredTerm" : "Air preheater", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "2704841", "freeBaseExternalRef" : "/m/07z2n_", "definitions" : [ { "definition" : "An '''air preheater''' (APH) is a general term to describe any device designed to heat [[air]] before another process (for example, [[combustion]] in a [[boiler]]) with the primary objective of increasing the thermal efficiency of the process. They may be used alone or to replace a [[recuperator|recuperative]] heat system or to replace a steam coil.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Thermodynamics", "page_id" : 693006}, {"source" : "wikipedia-en", "category" : "Mechanical engineering", "page_id" : 717561}, {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083}, {"source" : "wikipedia-en", "category" : "Power station technology", "page_id" : 17146317} ]  }
+			]
+		}
+	]
+}

@@ -1,0 +1,97 @@
+<!-- This configuration file specifies properties for a single wikipedia dump -->
+
+
+<wikipediaConfiguration>
+
+	<!-- MANDATORY: The language code of this wikipedia version (e.g. en, de, simple). -->
+	<langCode>fr</langCode>
+
+	<!-- MANDATORY: A directory containing a complete berkeley database. -->
+	<databaseDirectory>data/wikipedia/db-fr</databaseDirectory>
+
+    <!-- A directory containing csv files extracted from a wikipedia dump. Caching will be faster if these are available. -->
+    <!--dataDirectory>data/wikipedia/frwiki-20111214-csv</dataDirectory-->
+
+	<!--
+		The full path to a text processor (a class that implements org.wikipedia.miner.util.text.TextProcessor)
+		responsible for resolving minor variations in labels, such as capitalization, punctuation and pluralism.
+		All labels will be created using this text processor unless otherwise specified. If the 'label' database
+		is cached to memory, it will be indexed using labels that have been prepared with this text processor.
+	-->
+	<defaultTextProcessor></defaultTextProcessor>
+
+
+	<!--
+		The minimum number of links a page or label must receive before it will be cached to memory.
+		This can be used to exclude obscure or unpopular pages and labels.
+		This param is ignored unless the 'page' or 'label' database is cached to memory.
+	-->
+	<minLinksIn>3</minLinksIn>
+
+
+	<!--
+		The probability of a sense is the number of links that use a particular label as an anchor, and 
+		point to the sense concept, over the number of links made with the label as an anchor.
+        	This param specifies the minimum proportion of links each sense must have before it will be cached 
+		to memory and can be used to exclude unlikely senses. 
+		This param is ignored unless the 'label' database is cached to memory.
+	-->
+	<minSenseProbability>0.01</minSenseProbability>
+
+	
+	<!--
+		The link probability of a label is the number of documents in which it is used as a link, over the
+		number of documents it is mentioned in at all.
+		This param specifies the minimum link probability a label must have before it will be cached to memory,
+ 		and can be used to exclude labels that are unlikely to refer to useful concepts. 
+		This param is ignored unless the 'label' database is cached to memory.
+	-->
+	<minLinkProbability>0.005</minLinkProbability>
+
+
+	<!--
+		A file containing words (one per line) that should be ignored when detecting concepts within documents
+		and queries.
+	-->
+	<stopwordFile>data/stopwords/fr.txt</stopwordFile>
+
+
+	<!--
+		A list of databases that should be cached to memory, to make access to them much more efficient. 
+		The value must correspond to an org.wikipedia.miner.db.WDatabase.DatabaseType. 
+		The priority attribute can be either 'space' (default) or 'speed'. 
+	-->
+	<!--databaseToCache priority="space">pageLinksIn</databaseToCache-->
+	<!--databaseToCache priority="space">label</databaseToCache-->
+
+
+	<!--
+		A list of data dependencies that will be involved in generating relatedness measures between articles.
+		The more you add, the more accurate your measures will be, but the longer they will take to calculate. 
+		
+		The value must correspond to an org.wikipedia.miner.comparison.ArticleComparer.DataDependency 
+	-->
+	<articleComparisonDependency>pageLinksIn</articleComparisonDependency>
+
+	<!-- 
+		A file containing a Weka classifier for generating relatedness measures between articles
+		This must be trained using the same dependencies listed above.If you do not supply one, 
+		then article comparisons will be made without machine learning.
+	 -->
+	<!--articleComparisonModel>/Users/lopez/nerd/data/wikipedia/models-fr/artCompare_fr_In.model</articleComparisonModel-->
+	
+	<!-- A file containing a Weka classifier for disambiguating pairs of labels -->
+	<labelDisambiguationModel></labelDisambiguationModel>
+	
+	<!-- A file containing a Weka classifier for generating relatedness measures between labels -->
+	<labelComparisonModel></labelComparisonModel>
+
+
+	<!-- A file containing a Weka classifier for performing automatic disambiguation of topics in documents -->
+	<topicDisambiguationModel>data/wikipedia/models-fr/disambig_fr_In.model</topicDisambiguationModel>
+
+
+	<!-- A file containing a Weka classifier for performing automatic link detection -->
+	<linkDetectionModel>data/wikipedia/models-fr/detect_fr_In.model</linkDetectionModel>
+
+</wikipediaConfiguration>

@@ -1,0 +1,224 @@
+{
+	"_id" : "559524299c597f75f3883a08",
+	"publication_id" : "US7861559",
+	"invention_title" : "Yarn feeding device for knitting machines, particularly for circular knitting machines",
+	"keywords" : [
+		{
+			"keyword" : "yarn",
+			"weight" : 730.854398750612,
+			"entities" : [ 
+{ "rawName" : "yarn", "preferredTerm" : "Yarn", "nerd_score" : "0.9673599296861521", "prob" : "1.0", "wikipediaExternalRef" : "51971", "freeBaseExternalRef" : "/m/02kvytt", "definitions" : [ { "definition" : "'''Yarn''' is a long continuous length of interlocked [[fibre]]s, suitable for use in the production of [[textile]]s, [[sewing]], [[crochet]]ing, [[knitting]], [[weaving]], [[embroidery]] and [[rope]]making. [[Thread (yarn)|Thread]] is a type of yarn intended for sewing by hand or [[sewing machine|machine]]. Modern manufactured sewing threads may be finished with [[wax]] or other lubricants to withstand the stresses involved in sewing. [[Embroidery thread]]s are yarns specifically designed for hand or [[machine embroidery]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Textiles", "page_id" : 918950}, {"source" : "wikipedia-en", "category" : "Crochet", "page_id" : 945045}, {"source" : "wikipedia-en", "category" : "Weaving", "page_id" : 945071}, {"source" : "wikipedia-en", "category" : "Sewing", "page_id" : 945132}, {"source" : "wikipedia-en", "category" : "Fibers", "page_id" : 1436866}, {"source" : "wikipedia-en", "category" : "Animal hair products", "page_id" : 3135689}, {"source" : "wikipedia-en", "category" : "Knitting tools and materials", "page_id" : 12743352}, {"source" : "wikipedia-en", "category" : "Yarn", "page_id" : 14771328} ]  }
+			]
+		},
+		{
+			"keyword" : "bed",
+			"weight" : 236.2936345505633,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "clamping",
+			"weight" : 231.32142646396662,
+			"entities" : [ 
+{ "rawName" : "clamping", "preferredTerm" : "Clamp (tool)", "nerd_score" : "0.03848551581108614", "prob" : "1.0", "wikipediaExternalRef" : "221198", "freeBaseExternalRef" : "/m/01g8xg", "definitions" : [ { "definition" : "A '''clamp''' is a [[fastener|fastening device]] to hold or secure objects tightly together to prevent movement or separation through the application of inward [[pressure]]. In the [[United Kingdom]] and [[Australia]], the term '''cramp''' is often used instead when the tool is for temporary use for positioning components during [[construction]] and [[woodworking]]; thus a [[C clamp|G cramp]] or a sash cramp but a wheel clamp or a surgical clamp.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Metalworking hand tools", "page_id" : 2647718}, {"source" : "wikipedia-en", "category" : "Woodworking hand tools", "page_id" : 2743233} ]  }, 
+{ "rawName" : "clamping", "preferredTerm" : "Wheel clamp", "nerd_score" : "0.027754083746694913", "prob" : "1.0", "wikipediaExternalRef" : "888686", "freeBaseExternalRef" : "/m/03l_w4", "definitions" : [ { "definition" : "A '''wheel clamp''' also known as '''wheel boot''' or '''Denver boot''' is a device that is designed to prevent vehicles from moving. In its most common form, it consists of a clamp that surrounds a vehicle wheel, designed to prevent removal of both itself and the wheel.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Clamps", "page_id" : 12385831}, {"source" : "wikipedia-en", "category" : "Parking law", "page_id" : 26154634} ]  }
+			]
+		},
+		{
+			"keyword" : "guide",
+			"weight" : 171.46962245897257,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cutting",
+			"weight" : 158.2567728841401,
+			"entities" : [ 
+{ "rawName" : "cutting", "preferredTerm" : "Cutting", "nerd_score" : "0.6851700594243677", "prob" : "1.0", "wikipediaExternalRef" : "387961", "freeBaseExternalRef" : "/m/022fy2", "definitions" : [ { "definition" : "'''Cutting''' is the separation of a physical object, or a portion of a physical object, into two portions, through the application of an acutely directed force. An implement commonly used for cutting is the [[knife]] or in medical cases the [[scalpel]]. However, any sufficiently sharp object is capable of cutting if it has a [[hardness]] sufficiently larger than the object being cut, and if it is applied with sufficient force. Cutting also describes the action of a [[saw]] which removes material in the process of cutting.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cutting tools", "page_id" : 2302038} ]  }
+			]
+		},
+		{
+			"keyword" : "inactive",
+			"weight" : 104.19591372776998,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "passage",
+			"weight" : 101.50502356888877,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "element",
+			"status" : "weak",
+			"weight" : 97.66818985864862,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "actuation",
+			"weight" : 81.55072412003788,
+			"entities" : [ 
+{ "rawName" : "actuation", "preferredTerm" : "Actuator", "nerd_score" : "0.8956416544376837", "prob" : "1.0", "wikipediaExternalRef" : "293079", "freeBaseExternalRef" : "/m/01qvm2", "definitions" : [ { "definition" : "An '''actuator''' is a mechanical device for moving or controlling a mechanism or system. It is operated by a source of energy, usually in the form of an electric current, [[hydraulic fluid]] pressure or [[pneumatic]] pressure, and converts that energy into some kind of motion.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Actuators", "page_id" : 13799989} ]  }
+			]
+		},
+		{
+			"keyword" : "knitting machine",
+			"weight" : 79.47573750816717,
+			"entities" : [ 
+{ "rawName" : "knitting machine", "preferredTerm" : "Knitting machine", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "3532369", "freeBaseExternalRef" : "/m/09jwpl", "definitions" : [ { "definition" : "A '''knitting machine''' is a device used to create [[knitting|knitted]] [[fabric]]s in a semi- or fully automated fashion. There are numerous types of knitting machines, ranging from the simple, non-mechanical, to the highly complex and electronic. All, however, produce various types of knitted fabrics, usually either flat or tubular, and of varying degrees of complexity. Pattern [[stitch (textile arts)|stitch]]es can be selected by hand manipulation of the [[knitting needle|needles]], or with push-buttons and dials, mechanical [[punched card|punch card]]s, or electronic pattern reading devices and computers.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Knitting tools and materials", "page_id" : 12743352} ]  }
+			]
+		},
+		{
+			"keyword" : "active",
+			"weight" : 69.55309620320885,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "needle",
+			"weight" : 69.00264926839301,
+			"entities" : [ 
+{ "rawName" : "needle", "preferredTerm" : "Sewing needle", "nerd_score" : "0.648900927124789", "prob" : "1.0", "wikipediaExternalRef" : "989359", "freeBaseExternalRef" : "/m/03x3bw", "definitions" : [ { "definition" : "A '''sewing needle''' is a long slender tool with a pointed tip. The first needles were made of bone or wood; modern ones are manufactured from high carbon steel wire, nickel- or gold plated for corrosion resistance. The highest quality embroidery needles are plated with two-thirds [[platinum]] and one-thirds [[titanium alloy]]. Traditionally, needles have been kept in needle books or [[needle case]]s which have become an object of adornment.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Sewing equipment", "page_id" : 9967450}, {"source" : "wikipedia-en", "category" : "Embroidery equipment", "page_id" : 9967541} ]  }
+			]
+		},
+		{
+			"keyword" : "supporting",
+			"weight" : 66.19647468459657,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "knitting",
+			"weight" : 58.42958303746041,
+			"entities" : [ 
+{ "rawName" : "knitting", "preferredTerm" : "Knitting", "nerd_score" : "0.9569503411621808", "prob" : "1.0", "wikipediaExternalRef" : "16622", "freeBaseExternalRef" : "/m/047fr", "definitions" : [ { "definition" : "'''Knitting''' is a method by which [[yarn|thread or yarn]] may be turned into [[cloth]] or other fine crafts. Knitted fabric consists of consecutive loops, called stitches. As each row progresses, a new loop is pulled through an existing loop. The active stitches are held on a needle until another loop can be passed through them. This process eventually results in a final product, often a garment.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Knitting", "page_id" : 945065}, {"source" : "wikipedia-en", "category" : "Arts and crafts", "page_id" : 1211280}, {"source" : "wikipedia-en", "category" : "Crafts", "page_id" : 3061643}, {"source" : "wikipedia-en", "category" : "Sheep wool", "page_id" : 3135730}, {"source" : "wikipedia-en", "category" : "Woolen clothing", "page_id" : 31401295} ]  }
+			]
+		},
+		{
+			"keyword" : "lamina",
+			"weight" : 57.03512249908111,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "osteoclasts rankl composition",
+			"status" : "absent",
+			"weight" : 55.36866306881459,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "slider",
+			"weight" : 55.3640918715453,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "piston",
+			"weight" : 54.901283595216924,
+			"entities" : [ 
+{ "rawName" : "piston", "preferredTerm" : "Piston", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "24776", "freeBaseExternalRef" : "/m/0665t", "definitions" : [ { "definition" : "A '''piston''' is a component of [[reciprocating engine]]s, reciprocating [[pump]]s, [[gas compressor]]s and [[pneumatic cylinder]]s, among other similar mechanisms. It is the moving component that is contained by a [[Cylinder (engine)|cylinder]] and is made gas-tight by [[piston ring]]s. In an engine, its purpose is to transfer force from expanding gas in the cylinder to the [[crankshaft]] via a [[piston rod]] and/or [[connecting rod]]. In a pump, the function is reversed and force is transferred from the crankshaft to the piston for the purpose of compressing or ejecting the [[fluid]] in the cylinder. In some engines, the piston also acts as a [[valve]] by covering and uncovering [[Porting_%28engine%29#Two-stroke porting|port]]s in the cylinder wall.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Engine technology", "page_id" : 1124196} ]  }
+			]
+		},
+		{
+			"keyword" : "circular knitting",
+			"weight" : 54.69705025823541,
+			"entities" : [ 
+{ "rawName" : "circular knitting", "preferredTerm" : "Circular knitting", "nerd_score" : "0.9673599296861521", "prob" : "1.0", "wikipediaExternalRef" : "885814", "freeBaseExternalRef" : "/m/03lrpb", "definitions" : [ { "definition" : "'''Circular knitting''' or '''knitting in the round''' is a form of [[knitting]] that creates a seamless tube. When knitting circularly, the knitting is cast on and the circle of stitches is joined. Knitting is worked in rounds (the equivalent of rows in [[flat knitting]]) in a spiral. Originally, circular knitting was done using a set of four or five double-pointed [[Knitting needle|needles]]. Later, circular needles were invented, which can also be used to knit in the round: the circular needle looks like two short knitting needles connected by a cable between them. Longer circular needles can be used to produce narrow tubes of knitting for socks, mittens, and other items using the Magic Loop technique. [[Knitting machine|Machines]] also produce circular knitting; double bed machines can be set up to knit on the front bed in one direction then the back bed on the return, creating a knitted tube. Specialized knitting machines for sock-knitting use individual latch-hook needles to make each stitch in a round frame.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Knitting", "page_id" : 945065} ]  }
+			]
+		},
+		{
+			"keyword" : "content java-ap software",
+			"status" : "absent",
+			"weight" : 47.86981914561662,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pain aesthetic",
+			"status" : "absent",
+			"weight" : 46.45784221264243,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "actuator",
+			"status" : "redundant",
+			"weight" : 46.187352903723266,
+			"entities" : [ 
+{ "rawName" : "actuator", "preferredTerm" : "Actuator", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "293079", "freeBaseExternalRef" : "/m/01qvm2", "definitions" : [ { "definition" : "An '''actuator''' is a mechanical device for moving or controlling a mechanism or system. It is operated by a source of energy, usually in the form of an electric current, [[hydraulic fluid]] pressure or [[pneumatic]] pressure, and converts that energy into some kind of motion.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Actuators", "page_id" : 13799989} ]  }
+			]
+		},
+		{
+			"keyword" : "menus sub-menus mobile",
+			"status" : "absent",
+			"weight" : 45.79234710710812,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "actuate",
+			"status" : "redundant",
+			"weight" : 38.388014095297954,
+			"entities" : [ 
+{ "rawName" : "actuator", "preferredTerm" : "Actuator", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "293079", "freeBaseExternalRef" : "/m/01qvm2", "definitions" : [ { "definition" : "An '''actuator''' is a mechanical device for moving or controlling a mechanism or system. It is operated by a source of energy, usually in the form of an electric current, [[hydraulic fluid]] pressure or [[pneumatic]] pressure, and converts that energy into some kind of motion.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Actuators", "page_id" : 13799989} ]  }
+			]
+		},
+		{
+			"keyword" : "waiting",
+			"status" : "weak",
+			"weight" : 37.12930292500272,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "machine",
+			"weight" : 37.05075218531972,
+			"entities" : [ 
+{ "rawName" : "machine", "preferredTerm" : "Sewing machine", "nerd_score" : "0.1316737590727593", "prob" : "1.0", "wikipediaExternalRef" : "85012", "freeBaseExternalRef" : "/m/0llzx", "definitions" : [ { "definition" : "A '''sewing machine''' is a [[textile]] machine used to stitch [[fabric]], cards and other material together with [[yarn|thread]]. Sewing machines were invented during the first [[Industrial Revolution]] to decrease the amount of manual [[sewing]] work performed in clothing companies. Since the invention of the first working sewing machine, generally considered to have been the work of Englishman Thomas Saint in 1790, the sewing machine has vastly improved the efficiency and productivity of fabric, clothing industries,needle industries.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Sewing", "page_id" : 945132}, {"source" : "wikipedia-en", "category" : "Home appliances", "page_id" : 1392560}, {"source" : "wikipedia-en", "category" : "English inventions", "page_id" : 4204144}, {"source" : "wikipedia-en", "category" : "1836 introductions", "page_id" : 6992727}, {"source" : "wikipedia-en", "category" : "Sewing equipment", "page_id" : 9967450} ]  }
+			]
+		},
+		{
+			"keyword" : "laminas",
+			"weight" : 36.11472405983847,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "fngsv",
+			"status" : "absent",
+			"weight" : 33.37030500998599,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "flash-flow apparatus",
+			"status" : "absent",
+			"weight" : 32.30631700521117,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "feeding",
+			"weight" : 29.98565284478691,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

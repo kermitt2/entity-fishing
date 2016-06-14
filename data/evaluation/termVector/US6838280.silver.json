@@ -1,0 +1,229 @@
+{
+	"_id" : "559518c29c597f75f378b8d2",
+	"publication_id" : "US6838280",
+	"invention_title" : "Construction of high efficiency retroviral vector for gene therapy of hunter syndrome",
+	"keywords" : [
+		{
+			"keyword" : "mt-ids",
+			"weight" : 470.7378769352886,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "ids",
+			"weight" : 202.32461811725508,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "6709854" }
+			]
+		},
+		{
+			"keyword" : "viral titer",
+			"weight" : 192.66776847774486,
+			"entities" : [ 
+{ "rawName" : "viral titer", "preferredTerm" : "Titer", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "1447583", "freeBaseExternalRef" : "/m/052bb8", "definitions" : [ { "definition" : "A '''titer''' (or '''titre''') is a way of expressing of concentration. Titer testing employs [[serial dilution]] to obtain approximate quantitative information from an analytical procedure that inherently only evaluates as positive or negative. The titer corresponds to the highest dilution factor that still yields a positive reading. For example, positive readings in the first 8 serial twofold dilutions translate into a titer of (i.e, 2−8). A specific example is a '''viral titer''', which is the lowest concentration of [[virus]] that still infects cells. To determine the titer, several dilutions are prepared, such as 10−1, 10−2, 10−3,...,10−8.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical pathology", "page_id" : 728578}, {"source" : "wikipedia-en", "category" : "Immunology", "page_id" : 804899}, {"source" : "wikipedia-en", "category" : "Titration", "page_id" : 3970040} ]  }
+			]
+		},
+		{
+			"keyword" : "roundness roundness area",
+			"status" : "absent",
+			"weight" : 186.20137609714996,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "transduce",
+			"weight" : 163.22595169656225,
+			"entities" : [ 
+{ "rawName" : "transduce", "preferredTerm" : "Transduction", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "483175", "definitions" : [ { "definition" : "Transduction is a mechanism whereby genetic material may be transferred from the genes of a bacterium to another bacterium. This may include the actual covalent-bonding of new genetic markers. Other meanings of transduction apply to physics, physiology, machine learning and psychology.", "source" : "wikipedia-en", "lang" : "en" } ]  } 
+			]
+		},
+		{
+			"keyword" : "cenpe",
+			"status" : "absent",
+			"weight" : 146.14777133505524,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "l-ids-sn",
+			"weight" : 132.39502788804992,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "retroviral vector",
+			"weight" : 130.78766224552555,
+			"entities" : [ 
+{ "rawName" : "retroviral vector", "preferredTerm" : "Viral vector", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "5398413", "freeBaseExternalRef" : "/m/0dk182", "definitions" : [ { "definition" : "'''Viral vectors''' are a tool commonly used by molecular [[biologist]]s to deliver [[genetic material]] into [[cell (biology)|cell]]s. This process can be performed inside a living organism (''[[in vivo]]'') or in [[cell culture]] (''[[in vitro]]''). [[Virus]]es have evolved specialized molecular mechanisms to efficiently transport their [[genome]]s inside the cells they infect. Delivery of [[gene]]s by a virus is termed [[transduction (genetics)|transduction]] and the infected cells are described as transduced. [[Molecular biologist]]s first harnessed this machinery in the 1970s. [[Paul Berg]] used a modified [[SV40]] virus containing DNA from the [[bacteriophage]] [[lambda phage|lambda]] to infect monkey [[kidney]] cells maintained in culture.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular genetics", "page_id" : 987161}, {"source" : "wikipedia-en", "category" : "Gene delivery", "page_id" : 25706682} ]  }
+			]
+		},
+		{
+			"keyword" : "mim-ids",
+			"weight" : 117.68446923382216,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "characterize under-drive",
+			"status" : "absent",
+			"weight" : 101.95185670595,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "transduction",
+			"weight" : 95.03225486476795,
+			"entities" : [ 
+{ "rawName" : "transduction", "preferredTerm" : "Transduction (genetics)", "nerd_score" : "0.8720261343388659", "prob" : "1.0", "wikipediaExternalRef" : "714053", "freeBaseExternalRef" : "/m/0352ps", "definitions" : [ { "definition" : "'''Transduction''' is the process by which [[DNA]] is transferred from one [[bacterium]] to another by a [[virus]]. It also refers to the process whereby foreign DNA is introduced into another cell via a [[viral vector]]. This is a common tool used by molecular biologists to stably introduce a foreign gene into a host cell's [[genome]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular biology", "page_id" : 714665}, {"source" : "wikipedia-en", "category" : "Virology", "page_id" : 715146}, {"source" : "wikipedia-en", "category" : "Microbiology", "page_id" : 726300}, {"source" : "wikipedia-en", "category" : "Bacteriophages", "page_id" : 15358444} ]  }
+			]
+		},
+		{
+			"keyword" : "frictional electricity atomizable",
+			"status" : "absent",
+			"weight" : 85.83056127671763,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "min-ids",
+			"weight" : 73.55279327113885,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cells transduce mt-ids",
+			"weight" : 73.55279327113885,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "hunter",
+			"weight" : 67.26619861330342,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "5650081" }
+			]
+		},
+		{
+			"keyword" : "splv-encapsulated gentamicin",
+			"status" : "absent",
+			"weight" : 65.50560370896835,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "rna",
+			"weight" : 64.95323745853713,
+			"entities" : [ 
+{ "rawName" : "rna", "preferredTerm" : "RNA", "nerd_score" : "0.9218553618012741", "prob" : "1.0", "wikipediaExternalRef" : "25758", "freeBaseExternalRef" : "/m/06fbf", "definitions" : [ { "definition" : "'''Ribonucleic acid''', or '''RNA''', is one of the three major [[macromolecule]]s (along with [[DNA]] and [[protein]]s) that are essential for all known forms of life.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "RNA", "page_id" : 726353}, {"source" : "wikipedia-en", "category" : "RNA splicing", "page_id" : 22912595} ]  }
+			]
+		},
+		{
+			"keyword" : "sris",
+			"status" : "absent",
+			"weight" : 62.702702155557915,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "rapidly constantcurrent",
+			"status" : "absent",
+			"weight" : 62.65922618176264,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "retroviral vectors",
+			"weight" : 57.089326971475344,
+			"entities" : [ 
+{ "rawName" : "retroviral vectors", "preferredTerm" : "Viral vector", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "5398413", "freeBaseExternalRef" : "/m/0dk182", "definitions" : [ { "definition" : "'''Viral vectors''' are a tool commonly used by molecular [[biologist]]s to deliver [[genetic material]] into [[cell (biology)|cell]]s. This process can be performed inside a living organism (''[[in vivo]]'') or in [[cell culture]] (''[[in vitro]]''). [[Virus]]es have evolved specialized molecular mechanisms to efficiently transport their [[genome]]s inside the cells they infect. Delivery of [[gene]]s by a virus is termed [[transduction (genetics)|transduction]] and the infected cells are described as transduced. [[Molecular biologist]]s first harnessed this machinery in the 1970s. [[Paul Berg]] used a modified [[SV40]] virus containing DNA from the [[bacteriophage]] [[lambda phage|lambda]] to infect monkey [[kidney]] cells maintained in culture.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular genetics", "page_id" : 987161}, {"source" : "wikipedia-en", "category" : "Gene delivery", "page_id" : 25706682} ]  }
+			]
+		},
+		{
+			"keyword" : "iduronate- -sulfatase ids",
+			"status" : "redundant",
+			"weight" : 52.40448296717468,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "6709854" }
+			]
+		},
+		{
+			"keyword" : "vectors",
+			"weight" : 51.84105368340633,
+			"entities" : [ 
+{ "rawName" : "vectors", "preferredTerm" : "Vector (molecular biology)", "nerd_score" : "0.4865313011313062", "prob" : "1.0", "wikipediaExternalRef" : "15386743", "freeBaseExternalRef" : "/m/03m6tb8", "definitions" : [ { "definition" : "In [[molecular biology]], a '''vector''' is a DNA molecule used as a vehicle to transfer foreign genetic material into another cell. The four major types of vectors are [[plasmid]]s, [[virus]]es, [[cosmid]]s, and [[Bacterial artificial chromosome|artificial chromosome]]s. Common to all engineered vectors are an [[origin of replication]], a [[multiple cloning site|multicloning site]], and a [[selectable marker]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular biology", "page_id" : 714665}, {"source" : "wikipedia-en", "category" : "Gene delivery", "page_id" : 25706682} ]  }
+			]
+		},
+		{
+			"keyword" : "syndrome",
+			"weight" : 50.51133517086371,
+			"entities" : [ 
+{ "rawName" : "syndrome", "preferredTerm" : "Syndrome", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "277102", "freeBaseExternalRef" : "/m/01pgj4", "definitions" : [ { "definition" : "In [[medicine]] and [[psychology]], a '''syndrome''' is the association of several clinically recognizable features, [[sign (medicine)|signs]] (observed by a physician), [[symptom]]s (reported by the patient), [[phenomenon|phenomena]] or characteristics that often occur together, so that the presence of one or more features alerts the [[physician]] to the possible presence of the others. Specific syndromes tend to have a range of possible etiologies or diseases that could create such a set of circumstances. I.e. there is an important distinction between [[Parkinson's disease]] and a Parkinsonian syndrome, whereby the latter could be caused by the former, but also by other conditions such as a [[progressive supranuclear palsy]] or [[multiple system atrophy]]. In other words, in a medical setting, a syndrome might narrow down the possible diseases a patient may possess, just as speaking English might focus a guess as to the country in which that person originates.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Syndromes", "page_id" : 4678438}, {"source" : "wikipedia-en", "category" : "Greek loanwords", "page_id" : 6516060} ]  }
+			]
+		},
+		{
+			"keyword" : "supernatant",
+			"weight" : 46.05097072019892,
+			"entities" : [ 
+{ "rawName" : "supernatant", "preferredTerm" : "Precipitation (chemistry)", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "286262", "freeBaseExternalRef" : "/m/01q193", "definitions" : [ { "definition" : "'''Precipitation''' is the formation of a [[solid]] in a [[solution]] or inside another solid during a [[chemical reaction]] or by [[diffusion]] in a solid. When the reaction occurs in a liquid, the solid formed is called the '''precipitate''', or when compacted by a [[Laboratory centrifuge|centrifuge]], a '''pellet'''. The liquid remaining above the solid is in either case called the '''supernate''' or '''supernatant'''. Powders derived from precipitation have also [[History of chemistry|historically]] been known as '''flowers'''.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical processes", "page_id" : 698322}, {"source" : "wikipedia-en", "category" : "Separation processes", "page_id" : 12567378} ]  }
+			]
+		},
+		{
+			"keyword" : "tradeoffs media",
+			"status" : "absent",
+			"weight" : 45.30139371394473,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "asumg",
+			"status" : "absent",
+			"weight" : 43.57181276429639,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "take atm",
+			"status" : "absent",
+			"weight" : 42.98710736900703,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "aberration cheep",
+			"status" : "absent",
+			"weight" : 42.915280638358816,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "expression",
+			"weight" : 41.58254931000862,
+			"entities" : [ 
+{ "rawName" : "expression", "preferredTerm" : "Gene expression", "nerd_score" : "0.8720261343388659", "prob" : "1.0", "wikipediaExternalRef" : "159266", "freeBaseExternalRef" : "/m/01506s", "definitions" : [ { "definition" : "'''Gene expression''' is the process by which information from a [[gene]] is used in the synthesis of a functional [[gene product]]. These products are often [[protein]]s, but in non-protein coding genes such as [[rRNA|ribosomal RNA (rRNA)]], [[tRNA|transfer RNA (tRNA)]] or [[snRNA|Small nuclear RNA (snRNA)]] genes, the product is a functional [[RNA]]. The process of gene expression is used by all known life - [[eukaryotes]] (including [[multicellular organisms]]), [[prokaryotes]] ([[bacteria]] and [[archaea]]), possibly induced by [[virus]]es - to generate the [[macromolecule|macromolecular]] machinery for life. Several steps in the gene expression process may be modulated, including the [[transcription (genetics)|transcription]], [[RNA splicing]], [[Translation (biology)|translation]], and [[post-translational modification]] of a protein. [[Regulation of gene expression|Gene regulation]] gives the [[cell (biology)|cell]] control over structure and function, and is the basis for [[cellular differentiation]], [[morphogenesis]] and the versatility and [[adaptability]] of any [[organism]]. Gene regulation may also serve as a substrate for evolutionary change, since control of the timing, location, and amount of gene expression can have a profound effect on the functions (actions) of the gene in a cell or in a multicellular organism.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular biology", "page_id" : 714665}, {"source" : "wikipedia-en", "category" : "Gene expression", "page_id" : 746340} ]  }
+			]
+		},
+		{
+			"keyword" : "selectable marker",
+			"weight" : 38.18805297635786,
+			"entities" : [ 
+{ "rawName" : "selectable marker", "preferredTerm" : "Selectable marker", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "3172558", "freeBaseExternalRef" : "/m/08w_7y", "definitions" : [ { "definition" : "A '''selectable marker''' is a [[gene]] introduced into a [[cell (biology)|cell]], especially a [[bacterium]] or to cells in [[cell culture|culture]], that confers a trait suitable for [[artificial selection]]. They are a type of [[reporter gene]] used in laboratory [[microbiology]], [[molecular biology]], and [[genetic engineering]] to indicate the success of a [[transfection]] or other procedure meant to introduce foreign [[DNA]] into a cell. Selectable markers are often [[antibiotic resistance]] genes; bacteria that have been subjected to a procedure to introduce foreign DNA are grown on a medium containing an antibiotic, and those bacterial [[colony (biology)|colonies]] that can grow have successfully taken up and [[gene expression|expressed]] the introduced genetic material.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular biology", "page_id" : 714665}, {"source" : "wikipedia-en", "category" : "Microbiology", "page_id" : 726300} ]  }
+			]
+		}
+	]
+}

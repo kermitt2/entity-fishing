@@ -1,0 +1,225 @@
+{
+	"_id" : "5595173f9c597f75f3763209",
+	"publication_id" : "US6672070",
+	"invention_title" : "Gas turbine with a compressor for air",
+	"keywords" : [
+		{
+			"keyword" : "duct",
+			"weight" : 180.53595469744207,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "23977696" }
+			]
+		},
+		{
+			"keyword" : "combustion",
+			"weight" : 112.38049338465194,
+			"entities" : [ 
+{ "rawName" : "combustion", "preferredTerm" : "Combustion", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "5638", "freeBaseExternalRef" : "/m/01pyc", "definitions" : [ { "definition" : "'''Combustion''' or '''burning''' is the sequence of [[exothermic]] chemical reactions between a [[fuel]] and an [[oxidant]] accompanied by the production of [[heat]] and conversion of chemical species. The release of heat can result in the production of [[light]] in the form of either [[smouldering|glowing]] or a [[flame]]. Fuels of interest often include organic compounds (especially [[hydrocarbon]]s) in the gas, [[liquid]] or solid phase.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Combustion", "page_id" : 3022121} ]  }
+			]
+		},
+		{
+			"keyword" : "turbine",
+			"weight" : 67.47247238950897,
+			"entities" : [ 
+{ "rawName" : "turbine", "preferredTerm" : "Turbine", "nerd_score" : "0.01876181019745934", "prob" : "1.0", "wikipediaExternalRef" : "30848", "freeBaseExternalRef" : "/m/07l5g", "definitions" : [ { "definition" : "A '''turbine''' is a rotary [[engine]] that extracts [[energy]] from a [[fluid]] flow and converts it into useful [[Work (physics)|work]]. The simplest turbines have one moving part, a rotor assembly, which is a shaft or drum with blades attached. Moving fluid acts on the blades, or the blades react to the flow, so that they move and impart rotational energy to the rotor. Early turbine examples are [[windmill]]s and [[water wheel]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Jet engines", "page_id" : 723337}, {"source" : "wikipedia-en", "category" : "Turbines", "page_id" : 966100}, {"source" : "wikipedia-en", "category" : "Power engineering", "page_id" : 3924363} ]  }
+			]
+		},
+		{
+			"keyword" : "pain aesthetic",
+			"status" : "absent",
+			"weight" : 63.87953304238334,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "air",
+			"weight" : 61.90805600965941,
+			"entities" : [ 
+{ "rawName" : "air", "preferredTerm" : "Atmosphere of Earth", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "202898", "freeBaseExternalRef" : "/m/01ctry", "definitions" : [ { "definition" : "The '''atmosphere of Earth''' is a layer of [[gases]] surrounding the planet [[Earth]] that is retained by Earth's [[gravity]]. The [[atmosphere]] protects [[organism|life on Earth]] by absorbing [[ultraviolet]] [[solar radiation]], warming the surface through heat retention ([[greenhouse effect]]), and reducing [[temperature]] extremes between [[Daytime (astronomy)|day]] and [[night]] (the [[diurnal temperature variation]]).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Atmosphere", "page_id" : 1136015}, {"source" : "wikipedia-en", "category" : "Environments", "page_id" : 2690886}, {"source" : "wikipedia-en", "category" : "Coolants", "page_id" : 3670551}, {"source" : "wikipedia-en", "category" : "Planetary atmospheres", "page_id" : 4991406}, {"source" : "wikipedia-en", "category" : "Atmospheric thermodynamics", "page_id" : 5135753}, {"source" : "wikipedia-en", "category" : "Breathing gases", "page_id" : 7256780}, {"source" : "wikipedia-en", "category" : "Dielectric gases", "page_id" : 27690545} ]  }
+			]
+		},
+		{
+			"keyword" : "limit -butanediol -butanone",
+			"status" : "absent",
+			"weight" : 59.29889274036145,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "compress",
+			"weight" : 42.12584546116319,
+			"entities" : [ 
+{ "rawName" : "compress", "preferredTerm" : "Compressibility", "nerd_score" : "0.2934827367494178", "prob" : "1.0", "wikipediaExternalRef" : "166084", "freeBaseExternalRef" : "/m/0164jn", "definitions" : [ { "definition" : "In [[thermodynamics]] and [[fluid mechanics]], '''compressibility''' is a [[Measure (mathematics)|measure]] of the relative volume change of a [[fluid]] or [[solid]] as a response to a [[pressure]] (or mean [[stress (physics)|stress]]) change.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Thermodynamics", "page_id" : 693006}, {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273} ]  }
+			]
+		},
+		{
+			"keyword" : "compressor",
+			"weight" : 40.82048947963433,
+			"entities" : [ 
+{ "rawName" : "compressor", "preferredTerm" : "Gas compressor", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "508504", "freeBaseExternalRef" : "/m/02jsng", "definitions" : [ { "definition" : "A '''gas compressor''' is a mechanical device that increases the [[pressure]] of a [[gas]] by reducing its [[volume]]. Compressors are similar to [[pump]]s: both increase the pressure on a [[fluid]] and both can transport the fluid through a [[pipe (material)|pipe]]. As gases are compressible, the compressor also reduces the volume of a gas. Liquids are relatively incompressible, while some can be compressed, the main action of a pump is to pressurize and transport liquids.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083}, {"source" : "wikipedia-en", "category" : "Compressors", "page_id" : 1652038}, {"source" : "wikipedia-en", "category" : "Underwater work", "page_id" : 6868360}, {"source" : "wikipedia-en", "category" : "Underwater diving", "page_id" : 13972292}, {"source" : "wikipedia-en", "category" : "Heating, ventilating, and air conditioning", "page_id" : 18540201}, {"source" : "wikipedia-en", "category" : "Gas technologies", "page_id" : 19500591} ]  }
+			]
+		},
+		{
+			"keyword" : "gas",
+			"weight" : 33.91941889545441,
+			"entities" : [ 
+{ "rawName" : "gas", "preferredTerm" : "Gas", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "18993869", "freeBaseExternalRef" : "/m/037xy", "definitions" : [ { "definition" : "'''Gas''' is one of [[State of matter#The three classical states|the three classical states of matter]] (the others being [[liquid]] and [[solid]]). Near [[absolute zero]], a substance exists as a [[solid]]. As heat is added to this substance it melts into a [[liquid]] at its [[melting point]] (see [[phase change]]), boils into a gas at its [[boiling point]], and if heated high enough would enter a [[plasma (physics)|plasma]] state in which the [[electrons]] are so energized that they leave their parent atoms from within the gas. A pure gas may be made up of individual atoms (e.g. a [[noble gas]] or atomic gas like [[neon]]), [[chemical element|elemental]] molecules made from one type of atom (e.g. [[oxygen]]), or [[chemical compound|compound]] molecules made from a variety of atoms (e.g. [[carbon dioxide]]). A gas [[mixture]] would contain a variety of pure gases much like the [[Earth's Atmosphere|air]]. What distinguishes a gas from liquids and solids is the vast separation of the individual gas particles. This separation usually makes a colorless gas invisible to the human observer. The interaction of gas particles in the presence of electric and [[gravitational fields]] are considered negligible as indicated by the constant velocity vectors in the image.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine", "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Gases", "page_id" : 1645013}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Atmospheric sciences", "page_id" : 3407606}, {"source" : "wikipedia-en", "category" : "Dutch loanwords", "page_id" : 3577907} ]  }
+			]
+		},
+		{
+			"keyword" : "section",
+			"status" : "weak",
+			"weight" : 29.602160760164278,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "guidance",
+			"weight" : 26.159088343091156,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cross",
+			"status" : "weak",
+			"weight" : 25.75733128897453,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "strut",
+			"weight" : 23.14023320508491,
+			"entities" : [ 
+{ "rawName" : "strut", "preferredTerm" : "Strut", "nerd_score" : "0.08906170135085797", "prob" : "1.0", "wikipediaExternalRef" : "361933", "freeBaseExternalRef" : "/m/01_jdw", "definitions" : [ { "definition" : "A '''strut''' is a structural component designed to resist longitudinal [[compression (physical)|compression]]. Struts provide outwards-facing support in their lengthwise direction, which can be used to keep two other components separate, performing the opposite function of a ''[[tie (engineering)|tie]]''. They are commonly used in [[architecture]] and [[engineering]], for instance as components of an automobile [[chassis]], where they can be passive braces to reinforce the chassis and/or body, or active components of the suspension.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Automotive suspension technologies", "page_id" : 1154682} ]  }
+			]
+		},
+		{
+			"keyword" : "rotor",
+			"weight" : 20.817517679573285,
+			"entities" : [ 
+{ "rawName" : "rotor", "preferredTerm" : "Turbine", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "30848", "freeBaseExternalRef" : "/m/07l5g", "definitions" : [ { "definition" : "A '''turbine''' is a rotary [[engine]] that extracts [[energy]] from a [[fluid]] flow and converts it into useful [[Work (physics)|work]]. The simplest turbines have one moving part, a rotor assembly, which is a shaft or drum with blades attached. Moving fluid acts on the blades, or the blades react to the flow, so that they move and impart rotational energy to the rotor. Early turbine examples are [[windmill]]s and [[water wheel]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Jet engines", "page_id" : 723337}, {"source" : "wikipedia-en", "category" : "Turbines", "page_id" : 966100}, {"source" : "wikipedia-en", "category" : "Power engineering", "page_id" : 3924363} ]  }
+			]
+		},
+		{
+			"keyword" : "vanes",
+			"weight" : 18.87422675264361,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "velocity",
+			"weight" : 18.63563789062772,
+			"entities" : [ 
+{ "rawName" : "velocity", "preferredTerm" : "Velocity", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "20491903", "freeBaseExternalRef" : "/m/07ygz", "definitions" : [ { "definition" : "In [[physics]], '''velocity''' is the measurement of the rate and direction of change in the [[Position vector|position]] of an object. It is a [[vector (geometry)|vector]] [[physical quantity]]; both magnitude and direction are required to define it. The [[scalar (physics)|scalar]] [[absolute value]] ([[Magnitude (mathematics)|magnitude]]) of velocity is [[speed]], a quantity that is measured in [[meter per second|metres per second]] (m/s or ms−1) when using the [[International System of Units|SI]] (metric) system.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Kinematics", "page_id" : 1074082}, {"source" : "wikipedia-en", "category" : "Motion", "page_id" : 19135550}, {"source" : "wikipedia-en", "category" : "Velocity", "page_id" : 22663785} ]  }
+			]
+		},
+		{
+			"keyword" : "hot",
+			"weight" : 18.1044376193385,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "19593167" }
+			]
+		},
+		{
+			"keyword" : "ducts",
+			"status" : "redundant",
+			"weight" : 18.087418264718615,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "23977696" }
+			]
+		},
+		{
+			"keyword" : "guide",
+			"weight" : 15.747210225824011,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "blowhead remove",
+			"status" : "absent",
+			"weight" : 15.38704461930707,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "displacedby",
+			"status" : "absent",
+			"weight" : 14.71055865422777,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "wave-shaped",
+			"weight" : 14.433926095348394,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "c-shaped",
+			"weight" : 14.161304385096287,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "outer",
+			"status" : "weak",
+			"weight" : 13.962310070763094,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "airflow",
+			"weight" : 13.015095567348187,
+			"entities" : [ 
+{ "rawName" : "airflow", "preferredTerm" : "Aerodynamics", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "2819", "freeBaseExternalRef" : "/m/011f6", "definitions" : [ { "definition" : "'''Aerodynamics''' is a branch of [[Dynamics (physics)|dynamics]] concerned with studying the motion of air, particularly when it interacts with a moving object. Aerodynamics is a subfield of [[fluid dynamics]] and [[gas dynamics]], with much theory shared between them. Aerodynamics is often used synonymously with gas dynamics, with the difference being that gas dynamics applies to all gases. Understanding the motion of air (often called a flow field) around an object enables the calculation of forces and moments acting on the object. Typical properties calculated for a flow field include [[velocity]], [[pressure]], [[density]] and [[temperature]] as a function of position and time. By defining a [[control volume]] around the flow field, equations for the conservation of mass, momentum, and energy can be defined and used to solve for the properties. The use of aerodynamics through [[mathematical]] analysis, empirical approximations, [[wind tunnel]] experimentation, and [[computer simulation]]s form the scientific basis for [[heavier than air flight|heavier-than-air flight]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Aerospace engineering", "page_id" : 717565}, {"source" : "wikipedia-en", "category" : "Automotive styling features", "page_id" : 2985739} ]  }
+			]
+		},
+		{
+			"keyword" : "flow",
+			"weight" : 13.00742347912262,
+			"entities" : [ 
+{ "rawName" : "flow", "preferredTerm" : "Fluid dynamics", "nerd_score" : "0.7570610191278082", "prob" : "1.0", "wikipediaExternalRef" : "11034", "freeBaseExternalRef" : "/m/02zgh", "definitions" : [ { "definition" : "In [[physics]], '''fluid dynamics''' is a sub-discipline of [[fluid mechanics]] that deals with '''fluid flow'''—the [[natural science]] of [[fluid]]s ([[liquid]]s and [[gas]]es) in motion. It has several subdisciplines itself, including [[aerodynamics]] (the study of air and other gases in motion) and '''hydrodynamics''' (the study of liquids in motion). Fluid dynamics has a wide range of applications, including calculating [[force]]s and [[moment (physics)|moment]]s on [[aircraft]], determining the [[mass flow rate]] of [[petroleum]] through pipelines, predicting [[weather]] patterns, understanding [[nebula]]e in [[interstellar]] space and reportedly modeling fission weapon detonation. Some of its principles are even used in [[traffic engineering (transportation)|traffic engineering]], where traffic is treated as a continuous fluid.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Continuum mechanics", "page_id" : 698033}, {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083}, {"source" : "wikipedia-en", "category" : "Fluid mechanics", "page_id" : 1162560}, {"source" : "wikipedia-en", "category" : "Aerodynamics", "page_id" : 1303037}, {"source" : "wikipedia-en", "category" : "Piping", "page_id" : 5458024} ]  }
+			]
+		},
+		{
+			"keyword" : "casing",
+			"weight" : 12.607982433232731,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "lemongrass extract",
+			"status" : "absent",
+			"weight" : 12.341594382355458,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "arrangement",
+			"status" : "weak",
+			"weight" : 12.040893267771896,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "differential percutaneous",
+			"status" : "absent",
+			"weight" : 11.818188500551084,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

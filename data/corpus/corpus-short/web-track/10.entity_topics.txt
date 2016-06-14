@@ -1,0 +1,400 @@
+<query>
+<num>21</num>
+<entity_name>Bethesda, Maryland</entity_name>
+<entity_URL>clueweb09-en0004-43-35557</entity_URL>
+<target_entity>location</target_entity>
+<narrative>What art galleries are located in Bethesda, Maryland?</narrative>
+</query>
+
+<query>
+<num>22</num>
+<entity_name>Organization of Petroleum Exporting Countries (OPEC)</entity_name>
+<entity_URL>clueweb09-en0010-21-28880</entity_URL>
+<target_entity>location</target_entity>
+<narrative>Find countries that are members of OPEC (the Organization of Petroleum Exporting Countries).</narrative>
+</query>
+
+<query>
+<num>23</num>
+<entity_name>The Kingston Trio</entity_name>
+<entity_URL>clueweb09-en0009-81-29533</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What recording companies now sell the Kingston Trio's songs? </narrative>
+</query>
+
+<query>
+<num>24</num>
+<entity_name>Jazz at Lincoln Center Orchestra</entity_name>
+<entity_URL>clueweb09-en0008-04-03983</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of the members of the Jazz at Lincoln Center Orchestra.</narrative>
+</query>
+
+<query>
+<num>25</num>
+<entity_name>U.S. Supreme Court</entity_name>
+<entity_URL>clueweb09-en0012-87-19363</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>From what schools did the Supreme Court justices receive their undergraduate degrees?</narrative>
+</query>
+
+<query>
+<num>26</num>
+<entity_name>Cray XT computer</entity_name>
+<entity_URL>clueweb09-en0021-77-27493</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who has installed (taken delivery of) a Cray XT computer?</narrative>
+</query>
+
+<query>
+<num>27</num>
+<entity_name>Department of Mathematics, Montgomery College, Rockville Campus</entity_name>
+<entity_URL>clueweb09-en0024-21-25742</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the publishers of the text books used in this department?</narrative>
+</query>
+
+<query>
+<num>28</num>
+<entity_name>IEEE Engineering in Medicine and Biology Society</entity_name>
+<entity_URL>clueweb09-en0007-95-06573</entity_URL>
+<target_entity>product</target_entity>
+<narrative>Find journals published by the IEEE Engineering in Medicine and Biology society.</narrative>
+</query>
+
+<query>
+<num>29</num>
+<entity_name>Dow Jones</entity_name>
+<entity_URL>clueweb09-en0006-73-08332</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find companies that are included in the Dow Jones industrial average.</narrative>
+</query>
+
+<query>
+<num>30</num>
+<entity_name>Ocean Spray Cranberries, Inc.</entity_name>
+<entity_URL>clueweb09-en0132-45-30062</entity_URL>
+<target_entity>location</target_entity>
+<narrative>Find U.S. states and Canadian provinces where Ocean Spray growers are located.</narrative>
+</query>
+
+<query>
+<num>31</num>
+<entity_name>American Institute of Architects</entity_name>
+<entity_URL>clueweb09-en0004-38-10748</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find chapters of the American Institute of Architects.</narrative>
+</query>
+
+<query>
+<num>32</num>
+<entity_name>National Endowment for the Humanities</entity_name>
+<entity_URL>clueweb09-en0010-48-02248</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What schools received collaborative research awards from the National Endowment for the Humanities (NEH) in 2008?</narrative>
+</query>
+
+<query>
+<num>33</num>
+<entity_name>DARPA Grand Challenge</entity_name>
+<entity_URL>clueweb09-en0021-49-06565</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What organizations were able to complete the DARPA Grand Challenge in the 2007 contest?</narrative>
+</query>
+
+<query>
+<num>34</num>
+<entity_name>Access America Travel Insurance</entity_name>
+<entity_URL>clueweb09-en0004-42-13808</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What airlines have financial default coverage with Access America Travel Insurance and Assistance?</narrative>
+</query>
+
+<query>
+<num>35</num>
+<entity_name>University of Maryland</entity_name>
+<entity_URL>clueweb09-en0008-34-21132</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Which companies have representation on the board of directors of the University of Maryland?</narrative>
+</query>
+
+<query>
+<num>36</num>
+<entity_name>Ford Motor Company</entity_name>
+<entity_URL>clueweb09-en0120-17-13549</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What companies build parts used in production of Ford vehicles?</narrative>
+</query>
+
+<query>
+<num>37</num>
+<entity_name>Tavis Smiley Show</entity_name>
+<entity_URL>clueweb09-en0009-57-35033</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of people that appeared on the Tavis Smiley show in December 2008.</narrative>
+</query>
+
+<query>
+<num>38</num>
+<entity_name>Richard Petty Motorsports</entity_name>
+<entity_URL>clueweb09-en0133-45-25168</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Who are the drivers and crew chiefs for Richard Petty Motorsports?</narrative>
+</query>
+
+<query>
+<num>39</num>
+<entity_name>Maryland Farm Bureau</entity_name>
+<entity_URL>clueweb09-en0008-95-39976</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find companies that offer benefits to members of the Maryland Farm Bureau.</narrative>
+</query>
+
+<query>
+<num>40</num>
+<entity_name>Costco</entity_name>
+<entity_URL>clueweb09-en0006-60-20817</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find homepages of manufacturers of LCD televisions sold by Costco.</narrative>
+</query>
+
+<query>
+<num>41</num>
+<entity_name>New York Times</entity_name>
+<entity_URL>clueweb09-en0012-63-17728</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of the regular opinion columnists of the New York Times.</narrative>
+</query>
+
+<query>
+<num>42</num>
+<entity_name>General Electric</entity_name>
+<entity_URL>clueweb09-en0007-76-25787</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find homepages of subsidiaries of General Electric.</narrative>
+</query>
+
+<query>
+<num>43</num>
+<entity_name>Mystery Writers of America</entity_name>
+<entity_URL>clueweb09-en0002-73-25630</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of presidents of the Mystery Writers Association (MWA).</narrative>
+</query>
+
+<query>
+<num>44</num>
+<entity_name>Museum of Art and Design</entity_name>
+<entity_URL>clueweb09-en0127-01-43076</entity_URL>
+<target_entity>location</target_entity>
+<narrative>I want to see the homepages of places visited during the June 2008 MADtrip to Seattle, Washington.</narrative>
+</query>
+
+<query>
+<num>45</num>
+<entity_name>National Zoo</entity_name>
+<entity_URL>clueweb09-en0003-82-03073</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the corporate partners of the National Zoo?</narrative>
+</query>
+
+<query>
+<num>46</num>
+<entity_name>Fidos for Freedom</entity_name>
+<entity_URL>clueweb09-en0006-65-25191</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What facilities are visited by the therapy dogs of Fidos for Freedom?</narrative>
+</query>
+
+<query>
+<num>47</num>
+<entity_name>Albuquerque International Balloon Fiesta</entity_name>
+<entity_URL>clueweb09-en0004-73-28331</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the balloon manufacturers associated with the Albuquerque International Balloon Fiesta?</narrative>
+</query>
+
+<query>
+<num>48</num>
+<entity_name>AFL-CIO</entity_name>
+<entity_URL>clueweb09-en0004-59-11324</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find unions that are members of the AFL-CIO.</narrative>
+</query>
+
+<query>
+<num>49</num>
+<entity_name>Eurail</entity_name>
+<entity_URL>clueweb09-en0006-86-35399</entity_URL>
+<target_entity>location</target_entity>
+<narrative>What countries does Eurail operate in?</narrative>
+</query>
+
+<query>
+<num>50</num>
+<entity_name>Abu Dhabi</entity_name>
+<entity_URL>clueweb09-en0004-39-08867 </entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find companies owned or controlled by Abu Dhabi.</narrative>
+</query>
+
+<query>
+<num>51</num>
+<entity_name>National Institutes of Health (NIH)</entity_name>
+<entity_URL>clueweb09-en0009-58-39495</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What organizations comprise the National Institutes of Health (NIH)?</narrative>
+</query>
+
+<query>
+<num>52</num>
+<entity_name>Smithsonian Institution</entity_name>
+<entity_URL>clueweb09-en0011-99-06195</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find the members of the Board of Regents of the Smithsonian Institution.</narrative>
+</query>
+
+<query>
+<num>53</num>
+<entity_name>Foundation Morgan horses</entity_name>
+<entity_URL>clueweb09-en0007-32-10466</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are breeders of Foundation Morgan horses? </narrative>
+</query>
+
+<query>
+<num>54</num>
+<entity_name>Knockout Mouse Project (KOMP)</entity_name>
+<entity_URL>clueweb09-en0009-58-40020</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What organizations are the participants in the NIH sponsored Knockout Mouse Project?</narrative>
+</query>
+
+<query>
+<num>55</num>
+<entity_name>Edgars Awards</entity_name>
+<entity_URL>clueweb09-en0019-86-23998</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Who are the 2008 Edgars Awards nominees?</narrative>
+</query>
+
+<query>
+<num>56</num>
+<entity_name>Nature Conservancy</entity_name>
+<entity_URL>clueweb09-en0010-64-18232</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What companies or organizations have officers that sit on the Nature Conservancy's board of directors?</narrative>
+</query>
+
+<query>
+<num>57</num>
+<entity_name>Kennedy Center</entity_name>
+<entity_URL>clueweb09-en0002-36-00572</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find the homepages of the Kennedy Center honorees.</narrative>
+</query>
+
+<query>
+<num>58</num>
+<entity_name>University of Michigan</entity_name>
+<entity_URL>clueweb09-en0003-16-28592</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What are some of the spin-off companies from the University of Michigan?</narrative>
+</query>
+
+<query>
+<num>59</num>
+<entity_name>Fulbright Scholars Program</entity_name>
+<entity_URL>clueweb09-en0005-77-19875</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Who are the Fulbright scholars in computer sciences?</narrative>
+</query>
+
+<query>
+<num>60</num>
+<entity_name>Peabody Essex Museum</entity_name>
+<entity_URL>clueweb09-en0009-48-18543</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>I would like to see the homepages of the corporate partners of the Peabody Essex Museum.</narrative>
+</query>
+
+<query>
+<num>61</num>
+<entity_name>The Association for Symbolic Logic</entity_name>
+<entity_URL>clueweb09-en0004-85-27331</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are institutional members of the Association for Symbolic Logic (ASL)?</narrative>
+</query>
+
+<query>
+<num>62</num>
+<entity_name>Baltimore</entity_name>
+<entity_URL>clueweb09-en0004-40-10287</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What cruise lines have cruises originating in Baltimore?</narrative>
+</query>
+
+<query>
+<num>63</num>
+<entity_name>Drew Gilpin Faust</entity_name>
+<entity_URL>clueweb09-en0010-43-02957</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What institutions Drew Gilpin Faust been affiliated with, for example as a trustee, board member, president, etc?</narrative>
+</query>
+
+<query>
+<num>64</num>
+<entity_name>Pulitzer Prize</entity_name>
+<entity_URL>clueweb09-en0011-51-07177</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What newspapers won the Pulitzer Prize for journalism in 2007?</narrative>
+</query>
+
+<query>
+<num>65</num>
+<entity_name>Patricia Cornwell</entity_name>
+<entity_URL>clueweb09-en0010-97-31272</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What institutions is Patricia Cornwell a member of?</narrative>
+</query>
+
+<query>
+<num>66</num>
+<entity_name>Southwest Airlines</entity_name>
+<entity_URL>clueweb09-en0010-03-33074</entity_URL>
+<target_entity>location</target_entity>
+<narrative>I want to see the homepages of places to see in Cleveland listed by Southwest Airlines.</narrative>
+</query>
+
+<query>
+<num>67</num>
+<entity_name>Vacations By Rail</entity_name>
+<entity_URL>clueweb09-en0013-76-14954</entity_URL>
+<target_entity>location</target_entity>
+<narrative>Find national parks visited on the Vacations by Rail tours.</narrative>
+</query>
+
+<query>
+<num>68</num>
+<entity_name>Association of American Medical Colleges</entity_name>
+<entity_URL>clueweb09-en0004-91-09128</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find medical schools that are members of the AAMC.</narrative>
+</query>
+
+<query>
+<num>69</num>
+<entity_name>Newseum</entity_name>
+<entity_URL>clueweb09-en0010-82-23701</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the founding partners of the Newseum?</narrative>
+</query>
+
+<query>
+<num>70</num>
+<entity_name>Teach For America</entity_name>
+<entity_URL>clueweb09-en0011-19-31196</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find the Teach For America National Growth Fund Investors for 2006-2010</narrative>
+</query>
+

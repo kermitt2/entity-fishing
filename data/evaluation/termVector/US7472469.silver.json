@@ -1,0 +1,220 @@
+{
+	"_id" : "55951faa9c597f75f3825b97",
+	"publication_id" : "US7472469",
+	"invention_title" : "Method for fabricating a magnetic head having a sensor stack and two lateral stack",
+	"keywords" : [
+		{
+			"keyword" : "stack",
+			"weight" : 130.91043725101412,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "layer",
+			"weight" : 114.78756754581866,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "19902632" }
+			]
+		},
+		{
+			"keyword" : "sensor",
+			"weight" : 105.47892073521703,
+			"entities" : [ 
+{ "rawName" : "sensor", "preferredTerm" : "Sensor", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "235757", "freeBaseExternalRef" : "/m/01j7cq", "definitions" : [ { "definition" : "A '''sensor''' is a device that measures a physical quantity and converts it into a signal which can be read by an observer or by an instrument. For example, a [[mercury-in-glass thermometer]] converts the measured temperature into expansion and contraction of a liquid which can be read on a calibrated glass tube. A [[thermocouple]] converts temperature to an output voltage which can be read by a [[voltmeter]]. For accuracy, most sensors are [[calibration|calibrated]] against known [[Standard (metrology)|standards]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Measuring instruments", "page_id" : 889248}, {"source" : "wikipedia-en", "category" : "Transducers", "page_id" : 969840}, {"source" : "wikipedia-en", "category" : "Sensors", "page_id" : 5400296} ]  }
+			]
+		},
+		{
+			"keyword" : "cip",
+			"weight" : 92.9507615996107,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "rgmv",
+			"status" : "absent",
+			"weight" : 81.3579224295639,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "liftoff",
+			"weight" : 77.4877040142155,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "16793276" }
+			]
+		},
+		{
+			"keyword" : "milling",
+			"weight" : 68.55043444812522,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "hcmr",
+			"status" : "absent",
+			"weight" : 55.13249426758154,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "gmr",
+			"weight" : 52.26209576759994,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "lateral",
+			"weight" : 49.12759342613853,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "bkua",
+			"status" : "absent",
+			"weight" : 37.26563335777627,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "magnetic",
+			"weight" : 37.09327318659527,
+			"entities" : [ 
+{ "rawName" : "magnetic", "preferredTerm" : "Magnetism", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "19716", "freeBaseExternalRef" : "/m/04zqq", "definitions" : [ { "definition" : "'''Magnetism''' is a property of materials that respond at an atomic or subatomic level to an applied [[magnetic field]]. [[Ferromagnetism]] is the strongest and most familiar type of magnetism. It is responsible for the behavior of [[magnet|permanent magnets]], which produce their own persistent magnetic fields, as well as the materials that are attracted to them. However, all materials are influenced to a greater or lesser degree by the presence of a magnetic field. Some are attracted to a magnetic field ([[paramagnetism]]); others are repulsed by a magnetic field ([[diamagnetism]]); others have a much more complex relationship with an applied magnetic field. Substances that are negligibly affected by magnetic fields are known as '''non-magnetic''' substances. They include [[copper]], [[aluminium]], [[gases]], and [[plastic]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Magnetism", "page_id" : 982364} ]  }, 
+{ "rawName" : "magnetic", "preferredTerm" : "Magnetic field", "nerd_score" : "0.7323021349771331", "prob" : "1.0", "wikipediaExternalRef" : "36563", "freeBaseExternalRef" : "/m/094f8", "definitions" : [ { "definition" : "A '''magnetic field''' is a field produced by moving [[electric charge]]s, by [[electric field]]s that vary in [[time]], and by the 'intrinsic' magnetic field of [[elementary particle]]s associated with the [[spin (physics)|spin]] of the particle. There are two separate but closely related fields to which the name 'magnetic field' can refer: a magnetic field and a magnetic field. The magnetic field at any given point is specified by both a ''direction'' and a ''magnitude'' (or strength); as such it is a [[vector field]]. The magnetic field is most commonly defined in terms of the [[Lorentz force]] it exerts on moving electric charges.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electromagnetism", "page_id" : 696048}, {"source" : "wikipedia-en", "category" : "Magnetism", "page_id" : 982364}, {"source" : "wikipedia-en", "category" : "Introductory physics", "page_id" : 1826242}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Magnetostatics", "page_id" : 9184280}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608} ]  }
+			]
+		},
+		{
+			"keyword" : "consisting epl epl",
+			"status" : "absent",
+			"weight" : 36.98080460342423,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "hard",
+			"weight" : 32.336461597837015,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "lead",
+			"weight" : 28.60429411689499,
+			"entities" : [ 
+{ "rawName" : "lead", "preferredTerm" : "Lead", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "17747", "freeBaseExternalRef" : "/m/025r_0t", "definitions" : [ { "definition" : "'''Lead''' is a main-group [[Chemical element|element]] with the symbol '''Pb''' (from ) and [[atomic number]] 82. Lead is a soft, [[malleable]] [[poor metal]]. It is also counted as one of the [[heavy metal (chemistry)|heavy metal]]s. Metallic lead has a bluish-white color after being freshly cut, but it soon tarnishes to a dull grayish color when exposed to air. Lead has a shiny chrome-silver luster when it is melted into a liquid.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Materials", "Engineering", "Medicine", "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical elements", "page_id" : 691255}, {"source" : "wikipedia-en", "category" : "Superconductors", "page_id" : 747592}, {"source" : "wikipedia-en", "category" : "Toxicology", "page_id" : 1043816}, {"source" : "wikipedia-en", "category" : "Occupational safety and health", "page_id" : 1215289}, {"source" : "wikipedia-en", "category" : "Poor metals", "page_id" : 1572598}, {"source" : "wikipedia-en", "category" : "IARC Group 2B carcinogens", "page_id" : 2555032}, {"source" : "wikipedia-en", "category" : "Coolants", "page_id" : 3670551}, {"source" : "wikipedia-en", "category" : "Soil contamination", "page_id" : 4255318}, {"source" : "wikipedia-en", "category" : "Lead", "page_id" : 6648993}, {"source" : "wikipedia-en", "category" : "Nuclear reactor coolants", "page_id" : 24376718}, {"source" : "wikipedia-en", "category" : "Endocrine disruptors", "page_id" : 27161323} ]  }
+			]
+		},
+		{
+			"keyword" : "fabrication",
+			"weight" : 28.47126763424793,
+			"entities" : [ 
+{ "rawName" : "fabrication", "preferredTerm" : "Fabrication (metal)", "nerd_score" : "0.8956416544376837", "prob" : "1.0", "wikipediaExternalRef" : "1145328", "freeBaseExternalRef" : "/m/04b61v", "definitions" : [ { "definition" : "'''Fabrication''' as an industrial term refers to building metal structures by cutting, bending, and assembling. The cutting part of fabrication is via [[saw]]ing, [[shear (sheet metal)|shearing]], or [[chisel]]ing (all with [[hand tool|manual]] and [[power tool|powered]] variants); torching with handheld torches (such as [[oxy-fuel welding and cutting|oxy-fuel torches]] or [[plasma torch]]es); and via [[numerical control|CNC]] cutters (using a [[laser]], torch, or [[water jet cutter|water jet]]). The bending is via [[hammer]]ing (manual or powered) or via [[press brake]]s and similar tools. The assembling (joining of the pieces) is via [[welding]], binding with [[adhesive]]s, [[rivet]]ing, [[screw|threaded fasteners]], or even yet more bending in the form of a crimped seam. [[Structural steel]] and [[sheet metal]] are the usual starting materials for fabrication, along with the welding wire, flux, and fasteners that will join the cut pieces. As with other manufacturing processes, both human labor and [[automation]] are commonly used. The product resulting from (the process of) fabrication may be called a fabrication. Shops that specialize in this type of metal work are called ''fab shops''. The end products of other common types of metalworking, such as [[machining]], [[metal stamping]], [[forging]], and [[casting]], may be similar in shape and function, but those processes are not classified as fabrication.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Materials", "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fabrication (metal)", "page_id" : 26833422} ]  }, 
+{ "rawName" : "fabrication", "preferredTerm" : "Semiconductor device fabrication", "nerd_score" : "0.7570610191278082", "prob" : "1.0", "wikipediaExternalRef" : "27696", "freeBaseExternalRef" : "/m/06w_s", "definitions" : [ { "definition" : "'''Semiconductor device fabrication''' is the process used to create the [[integrated circuit]]s that are present in everyday [[electrical]] and [[electronics|electronic]] devices. It is a multiple-step sequence of photographic and chemical processing steps during which electronic circuits are gradually created on a [[wafer (electronics)|wafer]] made of pure [[semiconductor|semiconducting]] material. [[Silicon]] is almost always used, but various [[compound semiconductor]]s are used for specialized applications.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Semiconductor device fabrication", "page_id" : 1274670} ]  }
+			]
+		},
+		{
+			"keyword" : "spacer",
+			"weight" : 28.421170162060427,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "giant magneto-resistive gmr",
+			"weight" : 28.126281943671053,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "csem surveying feasible",
+			"status" : "absent",
+			"weight" : 27.652491632661665,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sheet self-level",
+			"weight" : 26.45904874576833,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "ion",
+			"weight" : 26.401740108479096,
+			"entities" : [ 
+{ "rawName" : "ion", "preferredTerm" : "Ion", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "18963787", "freeBaseExternalRef" : "/m/03t8k", "definitions" : [ { "definition" : "An '''ion''' is an [[atom]] or [[molecule]] in which the total number of [[electron]]s is not equal to the total number of [[proton]]s, giving it a net positive or negative [[electric charge|electrical charge]]. The name was given by physicist [[Michael Faraday]] for the substances that allow a current to pass (\"go\") between electrodes in a solution, when an [[electric field]] is applied. It is from Greek ''ιον'', meaning \"going.\"", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Ions", "page_id" : 697669}, {"source" : "wikipedia-en", "category" : "Physical chemistry", "page_id" : 784394}, {"source" : "wikipedia-en", "category" : "Charge carriers", "page_id" : 26726557} ]  }
+			]
+		},
+		{
+			"keyword" : "gap",
+			"weight" : 25.78819852484169,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "esd",
+			"weight" : 23.4799138629559,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "75049" }
+			]
+		},
+		{
+			"keyword" : "sensors",
+			"status" : "redundant",
+			"weight" : 23.40326301012857,
+			"entities" : [ 
+{ "rawName" : "sensors", "preferredTerm" : "Sensor", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "235757", "freeBaseExternalRef" : "/m/01j7cq", "definitions" : [ { "definition" : "A '''sensor''' is a device that measures a physical quantity and converts it into a signal which can be read by an observer or by an instrument. For example, a [[mercury-in-glass thermometer]] converts the measured temperature into expansion and contraction of a liquid which can be read on a calibrated glass tube. A [[thermocouple]] converts temperature to an output voltage which can be read by a [[voltmeter]]. For accuracy, most sensors are [[calibration|calibrated]] against known [[Standard (metrology)|standards]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Measuring instruments", "page_id" : 889248}, {"source" : "wikipedia-en", "category" : "Transducers", "page_id" : 969840}, {"source" : "wikipedia-en", "category" : "Sensors", "page_id" : 5400296} ]  }
+			]
+		},
+		{
+			"keyword" : "mill",
+			"weight" : 21.33537063634534,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "anti-ferromagnetic afm",
+			"weight" : 20.524084556570113,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "148550" }
+			]
+		},
+		{
+			"keyword" : "bombardment energetic",
+			"weight" : 20.220802020126445,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "340284" }
+			]
+		},
+		{
+			"keyword" : "loading teq",
+			"status" : "absent",
+			"weight" : 19.77465727912227,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "damage",
+			"weight" : 19.426418860557362,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "ion bombardment",
+			"weight" : 19.092105500595117,
+			"entities" : [ 
+{ "rawName" : "ion bombardment", "preferredTerm" : "Reactive-ion etching", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "751638", "freeBaseExternalRef" : "/m/03895x", "definitions" : [ { "definition" : "'''Reactive-ion etching''' ('''RIE''') is an [[etching (microfabrication)|etching]] technology used in [[microfabrication]]. It uses [[chemical reaction|chemically reactive]] [[plasma (physics)|plasma]] to remove material deposited on [[wafer (electronics)|wafer]]s. The plasma is generated under low [[pressure]] ([[vacuum]]) by an [[electromagnetic field]]. High-energy [[ion]]s from the plasma attack the wafer surface and react with it.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Semiconductor device fabrication", "page_id" : 1274670}, {"source" : "wikipedia-en", "category" : "Plasma processing", "page_id" : 1844833}, {"source" : "wikipedia-en", "category" : "Etching (microfabrication)", "page_id" : 14641299} ]  }
+			]
+		}
+	]
+}

@@ -1,0 +1,134 @@
+trec-test-1	0	/m/047sxrj	nicki minaj	0.06582968253552077
+trec-test-1	0	/m/07hqpk	chris brown	0.026609317820373735
+trec-test-2	0	/m/057fh6	abc	0.026609317820373735
+trec-test-3	0	/m/09g6y_j	mesa	0.026609317820373735
+trec-test-3	0	/m/03kwwj	mesa community college	0.06582968253552077
+trec-test-4	0	/m/04jpk2	tommy	0.010051214560596886
+trec-test-4	0	/m/01fwh3	tommy morrison	0.03939906197082202
+trec-test-5	0	/m/03hh4vd	business day south africa	0.06582968253552077
+trec-test-5	0	/m/0hzlz	south africa	0.03939906197082202
+trec-test-6	0	/m/0fqlrt8	montclair elementary school	0.06582968253552077
+trec-test-9	0	/m/04nkdk	jo ann	0.06582968253552077
+trec-test-9	0	/m/0sjqm	rockford il	0.010051214560596886
+trec-test-10	0	/m/0246k6	berkeley square	0.06582968253552077
+trec-test-10	0	/m/056b2f	mini series	0.04681884806707871
+trec-test-10	0	/m/0hf2p	mini	0.019818294985833974
+trec-test-10	0	/m/01jr6	berkeley	0.010051214560596886
+trec-test-11	0	/m/05zjd0w	samsung galaxy	0.06582968253552077
+trec-test-11	0	/m/07gv72	samsung	0.10934319604903431
+trec-test-12	0	/m/04f_d	kansas city	0.026609317820373735
+trec-test-12	0	/m/018c71	craigslist	0.03939906197082202
+trec-test-12	0	/m/0488g	kansas	0.026609317820373735
+trec-test-13	0	/m/0261m	west indies islands	0.06582968253552077
+trec-test-14	0	/m/0158xh	mayo clinic	0.06582968253552077
+trec-test-15	0	/m/05mt7ny	kesha	0.03939906197082202
+trec-test-15	0	/m/09c7w0	american	0.026609317820373735
+trec-test-15	0	/m/024rg2	american music awards	0.10704612079435141
+trec-test-16	0	/m/03bw_bg	natwest	0.06582968253552077
+trec-test-18	0	/m/05ncwl	kerry fox	0.06582968253552077
+trec-test-20	0	/m/04jct53	demandware	0.06582968253552077
+trec-test-20	0	/m/05h2kts	andrew freeman	0.026609317820373735
+trec-test-21	0	/m/0_jtn	little compton	0.026609317820373735
+trec-test-21	0	/m/0r03f	compton	0.010051214560596886
+trec-test-21	0	/m/0v_zd	kenyon	0.06582968253552077
+trec-test-25	0	/m/01x_2h	carolinas	0.026609317820373735
+trec-test-25	0	/m/06_xhbb	resturant	0.06582968253552077
+trec-test-25	0	/m/0rq1q	delray beach	0.019818294985833974
+trec-test-26	0	/m/06y3r	s jobs	0.026609317820373735
+trec-test-26	0	/m/09c7w0	american	0.026609317820373735
+trec-test-26	0	/m/0z07	american airlines	0.06582968253552077
+trec-test-27	0	/m/01x73	connecticut	0.026609317820373735
+trec-test-29	0	/m/049rl0	bbc news	0.026609317820373735
+trec-test-29	0	/m/0czcxyw	leymah gbowee	0.03939906197082202
+trec-test-31	0	/m/09cnzp	frank pembleton	0.06582968253552077
+trec-test-32	0	/m/0sr9y	carbon 14	0.06582968253552077
+trec-test-33	0	/m/0f5db4	xbox	0.03939906197082202
+trec-test-34	0	/m/09yrh	jennifer aniston	0.06582968253552077
+trec-test-35	0	/m/037nnt	robin roberts	0.019818294985833974
+trec-test-36	0	/m/03cx1t7	nickelodeon	0.026609317820373735
+trec-test-36	0	/m/07c5l	america	0.010051214560596886
+trec-test-36	0	/m/0pv1y	mall of america	0.06582968253552077
+trec-test-40	0	/m/064293	huffington post	0.06582968253552077
+trec-test-41	0	/m/02rgp8f	cassandra clare	0.03939906197082202
+trec-test-41	0	/m/01xh7	cassandra	0.026609317820373735
+trec-test-42	0	/m/027v2xl	christopher banks	0.03939906197082202
+trec-test-42	0	/m/013gv7	lees summit	0.026609317820373735
+trec-test-43	0	/m/0cpv3c	kool	0.010051214560596886
+trec-test-43	0	/m/0mnwd	fredericksburg va	0.06582968253552077
+trec-test-45	0	/m/0vmt	arizona	0.026609317820373735
+trec-test-46	0	/m/029f32	costco	0.06582968253552077
+trec-test-46	0	/m/0h3lt	huntington beach	0.06582968253552077
+trec-test-48	0	/m/03zr5	red cross	0.026609317820373735
+trec-test-49	0	/m/0cqt90	donald trump	0.10934319604903431
+trec-test-51	0	/m/0jxkf	sarasota county	0.06582968253552077
+trec-test-53	0	/m/09c7w0	american	0.026609317820373735
+trec-test-53	0	/m/0by8vb	american red cross	0.10934319604903431
+trec-test-54	0	/m/02pv1g9	dvd	0.026609317820373735
+trec-test-54	0	/m/063zzv8	tai chi	0.026609317820373735
+trec-test-55	0	/m/09qt5g	soaps	0.026609317820373735
+trec-test-56	0	/m/064vr0	juliet	0.026609317820373735
+trec-test-56	0	/m/04__9b	regal cinemas	0.06582968253552077
+trec-test-57	0	/m/0f__1	louisville ky	0.06582968253552077
+trec-test-57	0	/m/018c71	craiglist	0.06582968253552077
+trec-test-58	0	/m/0ndfq	sullivan co	0.010051214560596886
+trec-test-60	0	/m/0j7jzhc	chain link fence	0.06582968253552077
+trec-test-61	0	/m/08pvcx	carlo rossi	0.010051214560596886
+trec-test-61	0	/m/0b77094	sangria	0.10704612079435141
+trec-test-62	0	/m/01hlwv	chase online banking	0.06582968253552077
+trec-test-62	0	/m/0b__1z_	chase	0.010051214560596886
+trec-test-63	0	/m/0273mb3	jewish	0.019818294985833974
+trec-test-65	0	/m/0gyh	alabama	0.026609317820373735
+trec-test-65	0	/m/026bt_h	university of alabama football	0.06582968253552077
+trec-test-67	0	/m/0641mlc	griffin	0.026609317820373735
+trec-test-67	0	/m/051wcwn	robert griffin	0.019818294985833974
+trec-test-68	0	/m/09c7w0	american	0.026609317820373735
+trec-test-69	0	/m/0mmnn	ryder cup	0.06582968253552077
+trec-test-70	0	/m/0c3xpwy	the walking dead	0.010051214560596886
+trec-test-70	0	/m/0fr7z4	episode 7	0.010051214560596886
+trec-test-71	0	/m/036rlq	delaware memorial bridge	0.06582968253552077
+trec-test-71	0	/m/026mj	delaware	0.026609317820373735
+trec-test-72	0	/m/03k7sl	friday the 13th	0.026609317820373735
+trec-test-72	0	/m/0g8mt	friday	0.026609317820373735
+trec-test-73	0	/m/05sprc	deana carter	0.06582968253552077
+trec-test-74	0	/m/0gl0hx	nate silver	0.06582968253552077
+trec-test-74	0	/m/047lhgv	538	0.010051214560596886
+trec-test-75	0	/m/07s52	time	0.026609317820373735
+trec-test-75	0	/m/03h_fqv	tom waits	0.03939906197082202
+trec-test-76	0	/m/07j8kh	showtimes	0.06582968253552077
+trec-test-76	0	/m/0ky8q	fandango	0.026609317820373735
+trec-test-77	0	/m/0hf2p	mini	0.019818294985833974
+trec-test-78	0	/m/052xnz	san antonio texas	0.06582968253552077
+trec-test-78	0	/m/04fv0k	marriott	0.026609317820373735
+trec-test-78	0	/m/07b_l	texas	0.026609317820373735
+trec-test-78	0	/m/0cmtqb	san antonio	0.026609317820373735
+trec-test-78	0	/m/09v0xd	residence inn	0.06582968253552077
+trec-test-80	0	/m/0cmtqb	san antonio tx	0.06582968253552077
+trec-test-80	0	/m/0cmtqb	san antonio	0.026609317820373735
+trec-test-81	0	/m/017xch	microsoft outlook	0.06582968253552077
+trec-test-81	0	/m/04sv4	microsoft	0.04681884806707871
+trec-test-83	0	/m/04szqg	bros	0.026609317820373735
+trec-test-83	0	/m/0584s6	ricky	0.010051214560596886
+trec-test-84	0	/m/040c1n	cat dog	0.06582968253552077
+trec-test-85	0	/m/0hzpndx	soldier	0.026609317820373735
+trec-test-85	0	/m/016ppr	destinys child	0.06582968253552077
+trec-test-85	0	/m/09jcvs	youtube	0.10704612079435141
+trec-test-86	0	/m/0268pg0	webkinz world	0.06582968253552077
+trec-test-87	0	/m/0d3nr	george westinghouse	0.06582968253552077
+trec-test-88	0	/m/0plw	america online	0.03939906197082202
+trec-test-88	0	/m/09c7w0	america	0.010051214560596886
+trec-test-88	0	/m/01yx7f	bank of america online banking	0.06582968253552077
+trec-test-89	0	/m/0fk2nh	caputo	0.010051214560596886
+trec-test-89	0	/m/01yv6p	theresa	0.06582968253552077
+trec-test-90	0	/m/01l5hm	newark airport	0.06582968253552077
+trec-test-90	0	/m/0846v	wyoming	0.026609317820373735
+trec-test-90	0	/m/0_4kr	wyoming pa	0.010051214560596886
+trec-test-90	0	/m/0hptm	newark	0.019818294985833974
+trec-test-91	0	/m/0ftd1	yakima valley	0.026609317820373735
+trec-test-93	0	/m/07bcn	sacramento ca	0.06582968253552077
+trec-test-94	0	/m/0109l5	white settlement tx	0.03939906197082202
+trec-test-96	0	/m/0cfjv5	dawn mo	0.026609317820373735
+trec-test-96	0	/m/01n910	red dawn	0.06582968253552077
+trec-test-97	0	/m/0838qg	coldwell banker	0.06582968253552077
+trec-test-99	0	/m/01dcxd	no worries	0.026609317820373735
+trec-test-99	0	/m/016kjs	lil wayne	0.10934319604903431
+

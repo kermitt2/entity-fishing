@@ -1,0 +1,221 @@
+{
+	"_id" : "559514489c597f75f3710f10",
+	"publication_id" : "US6334250",
+	"invention_title" : "Method of fixing a flexible flat cable to a cable holder",
+	"keywords" : [
+		{
+			"keyword" : "holder",
+			"weight" : 616.1213250913994,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "ffc",
+			"weight" : 387.28273539794407,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "4268559" }
+			]
+		},
+		{
+			"keyword" : "cable",
+			"weight" : 350.56115348441386,
+			"entities" : [ 
+{ "rawName" : "cable", "preferredTerm" : "Cable", "nerd_score" : "0.8950246669722249", "prob" : "1.0", "wikipediaExternalRef" : "42418", "freeBaseExternalRef" : "/m/0bmz2", "definitions" : [ { "definition" : "A '''cable''' is two or more [[wire]]s running side by side and bonded, twisted or braided together to form a single assembly. In [[mechanics]] cables, otherwise known as [[wire rope]]s, are used for lifting, hauling and towing or conveying force through tension. In [[electrical engineering]] cables are used to carry [[electric current]]s. An optical cable contains one or more [[optical fiber]]s in a protective jacket that supports the fibers.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cables", "page_id" : 1720873} ]  }, 
+{ "rawName" : "cable", "preferredTerm" : "Cable television", "nerd_score" : "0.03069059168320285", "prob" : "1.0", "wikipediaExternalRef" : "7587", "freeBaseExternalRef" : "/m/024bm", "definitions" : [ { "definition" : "'''Cable television''' is a system of providing [[television program]]s to consumers via [[radio frequency]] (RF) signals transmitted to televisions through [[coaxial cable]]s or digital light pulses through fixed [[optical fiber]]s located on the subscriber's property, much like the over-the-air method used in [[Terrestrial television|traditional television broadcasting]] (via [[radio waves]]) in which a [[television antenna]] is required. [[FM radio]] programming, [[high-speed Internet]], [[telephony]], and similar non-television services may also be provided. The major difference is the change of radio frequency signals used and optical connections to the subscriber property.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cable television", "page_id" : 1378605} ]  }
+			]
+		},
+		{
+			"keyword" : "holding",
+			"weight" : 132.16351154261656,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "reinforcement",
+			"weight" : 113.74286744871446,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "12352234" }				
+			]
+		},
+		{
+			"keyword" : "portion",
+			"status" : "weak",
+			"weight" : 112.60608970480867,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "connector",
+			"weight" : 97.6180684450058,
+			"entities" : [ 
+{ "rawName" : "connector", "preferredTerm" : "Electrical connector", "nerd_score" : "0.0293413853339965", "prob" : "1.0", "wikipediaExternalRef" : "152654", "freeBaseExternalRef" : "/m/013xbf", "definitions" : [ { "definition" : "An '''electrical connector''' is an [[electro-mechanical]] device for joining [[electrical circuit]]s as an [[interface]] using a mechanical assembly. The connection may be temporary, as for portable equipment, require a tool for assembly and removal, or serve as a permanent electrical joint between two wires or devices.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Electricity" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electrical connectors", "page_id" : 893681} ]  }
+			]
+		},
+		{
+			"keyword" : "distal",
+			"weight" : 96.21110640173995,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "pawls",
+			"weight" : 90.12197226855815,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "body",
+			"status" : "weak",
+			"weight" : 86.72974629949087,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "auxiliary",
+			"status" : "weak",
+			"weight" : 85.21953877300999,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "adaptor",
+			"weight" : 76.22265330204343,
+			"entities" : [ 
+{ "rawName" : "adaptor", "preferredTerm" : "Adapter", "nerd_score" : "0.0293413853339965", "prob" : "1.0", "wikipediaExternalRef" : "642387", "freeBaseExternalRef" : "/m/02ztj6", "definitions" : [ { "definition" : "An '''adapter''' or '''adaptor''' is a person that adapts or a [[tool|device]] that converts attributes of one device or system to those of an otherwise incompatible device or system.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electronics terms", "page_id" : 1331383} ]  }
+			]
+		},
+		{
+			"keyword" : "guide",
+			"weight" : 75.23667107893694,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "notch",
+			"weight" : 74.09477152844411,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "lead-out",
+			"weight" : 70.50759862713947,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "slit",
+			"weight" : 68.98238554203547,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pouring",
+			"weight" : 67.2300439598326,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "member",
+			"status" : "weak",
+			"weight" : 62.8747378568328,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "nhcodconh",
+			"status" : "absent",
+			"weight" : 62.8253509623859,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "plate",
+			"weight" : 61.767238274216474,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "fixing",
+			"status" : "weak",
+			"weight" : 60.87187204053201,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "flat",
+			"status" : "weak",
+			"weight" : 60.01986210766789,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "positioning",
+			"status" : "weak",
+			"weight" : 56.801487959095624,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "protuberances",
+			"weight" : 56.168082798609625,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "main",
+			"status" : "weak",
+			"weight" : 52.28877758496366,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "recess",
+			"weight" : 52.17383256773729,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "yield amplification-ready droplet",
+			"weight" : 47.335606215590005,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "niax ucc",
+			"status" : "absent",
+			"weight" : 41.36959628634724,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "flange",
+			"weight" : 36.32021838227944,
+			"entities" : [ 
+{ "rawName" : "flange", "preferredTerm" : "Flange", "nerd_score" : "0.08906170135085797", "prob" : "1.0", "wikipediaExternalRef" : "45317", "freeBaseExternalRef" : "/m/0cb1x", "definitions" : [ { "definition" : "A '''flange''' is an external or internal [[Ridge (disambiguation)|ridge]], or [[Rim (wheel)|rim]] (lip), for [[Shear strength|strength]], as the flange of an [[iron]] [[Beam (structure)|beam]] such as an [[I-beam]] or a [[T-beam]]; or for attachment to another object, as the flange on the end of a pipe, steam cylinder, etc., or on the [[lens mount]] of a [[camera]]; or for a flange of a [[rail car]] or [[tram]] [[wheel]]. Thus flanged wheels are wheels with a flange on one side to keep the wheels, from running off the [[Rail profile|rails]]. The term \"flange\" is also used for a kind of tool used to form flanges. [[Pipe (fluid conveyance)|Pipes]] with flanges can be assembled and disassembled easily.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanical engineering", "page_id" : 717561}, {"source" : "wikipedia-en", "category" : "Plumbing", "page_id" : 765224}, {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083}, {"source" : "wikipedia-en", "category" : "Structural engineering", "page_id" : 1600827}, {"source" : "wikipedia-en", "category" : "Piping", "page_id" : 5458024} ]  }
+			]
+		},
+		{
+			"keyword" : "shape",
+			"status" : "weak",
+			"weight" : 31.803146808620856,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

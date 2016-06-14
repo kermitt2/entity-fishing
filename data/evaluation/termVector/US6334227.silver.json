@@ -1,0 +1,226 @@
+{
+	"_id" : "559514489c597f75f3710ef8",
+	"publication_id" : "US6334227",
+	"invention_title" : "Seat",
+	"keywords" : [
+		{
+			"keyword" : "tungstens intrinsic absorption",
+			"weight" : 66.53558711758379,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pouf",
+			"weight" : 45.887520808253555,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "10114218" }
+			]
+		},
+		{
+			"keyword" : "wall",
+			"weight" : 43.18403502358354,
+			"entities" : [ 
+{ "rawName" : "wall", "preferredTerm" : "Wall", "nerd_score" : "0.023956615392264534", "prob" : "1.0", "wikipediaExternalRef" : "39007", "freeBaseExternalRef" : "/m/09qqq", "definitions" : [ { "definition" : "A '''wall''' is a usually solid structure that defines and sometimes protects an area. Most commonly, a wall delineates a building and supports its [[superstructure]], separates space in buildings into [[Room (architecture)|room]]s, or protects or delineates a space in the open [[air]]. There are three principal types of structural walls: building walls, exterior boundary walls, and retaining walls.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Materials", "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Home", "page_id" : 803231}, {"source" : "wikipedia-en", "category" : "Walls", "page_id" : 900102}, {"source" : "wikipedia-en", "category" : "Property law", "page_id" : 1090277}, {"source" : "wikipedia-en", "category" : "Archaeological features", "page_id" : 1878209}, {"source" : "wikipedia-en", "category" : "Structural system", "page_id" : 3647767} ]  }
+			]
+		},
+		{
+			"keyword" : "filling",
+			"weight" : 37.412466462267965,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "ball",
+			"weight" : 30.052639116966965,
+			"entities" : [ 
+{ "rawName" : "ball", "preferredTerm" : "Ball", "nerd_score" : "0.034631796284709845", "prob" : "1.0", "wikipediaExternalRef" : "3928", "freeBaseExternalRef" : "/m/018xm", "definitions" : [ { "definition" : "A '''ball''' is a round, usually [[sphere|spherical]] but sometimes [[ovoid]], object with various uses. It is used in [[ball game]]s, where the play of the game follows the state of the ball as it is hit, kicked or thrown by players. Balls can also be used for simpler activities, such as catch, [[marbles]] and [[juggling]]. Balls made from hard-wearing materials are used in [[engineering]] applications to provide very low friction bearings, known as [[ball bearings]]. [[Black powder]] weapons use stone and metal balls as [[projectile]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Balls", "page_id" : 5773898}, {"source" : "wikipedia-en", "category" : "National Toy Hall of Fame inductees", "page_id" : 24977385} ]  }
+			]
+		},
+		{
+			"keyword" : "rigid semirigid impermeable",
+			"weight" : 29.42111730845554,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "permeable",
+			"weight" : 28.42259914152838,
+			"entities" : [ 
+{ "rawName" : "impermeable", "preferredTerm" : "Permeation", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "4904656", "freeBaseExternalRef" : "/m/0ctfvs", "definitions" : [ { "definition" : "'''Permeation''', in [[physics]] and [[engineering]], is the penetration of a permeate (such as a [[liquid]], [[gas]], or [[vapor]]) through a solid, and is related to a material's [[intrinsic permeability]]. Permeability is tested by permeation measurement, for example by a [[minipermeameter]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Packaging", "page_id" : 1948437}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608} ]  }
+			]
+		},
+		{
+			"keyword" : "bag",
+			"weight" : 27.769037502005368,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "37263123" }
+			]
+		},
+		{
+			"keyword" : "sc-sbe circuit",
+			"status" : "absent",
+			"weight" : 25.011988521092377,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "upper",
+			"status" : "weak",
+			"weight" : 19.974848806472437,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "envelope",
+			"weight" : 18.196140960117294,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "incompressible",
+			"weight" : 18.035382562224846,
+			"entities" : [ 
+{ "rawName" : "incompressible", "preferredTerm" : "Compressibility", "nerd_score" : "0.027754083746694913", "prob" : "1.0", "wikipediaExternalRef" : "166084", "freeBaseExternalRef" : "/m/0164jn", "definitions" : [ { "definition" : "In [[thermodynamics]] and [[fluid mechanics]], '''compressibility''' is a [[Measure (mathematics)|measure]] of the relative volume change of a [[fluid]] or [[solid]] as a response to a [[pressure]] (or mean [[stress (physics)|stress]]) change.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Thermodynamics", "page_id" : 693006}, {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273} ]  }
+			]
+		},
+		{
+			"keyword" : "polystyrene",
+			"weight" : 17.66986717294994,
+			"entities" : [ 
+{ "rawName" : "polystyrene", "preferredTerm" : "Polystyrene", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "168393", "freeBaseExternalRef" : "/m/016jr1", "definitions" : [ { "definition" : "'''Polystyrene''' (; [[IUPAC]] '''Poly(1-phenylethene-1,2-diyl)'''), abbreviated following ISO Standard '''PS''', is an [[Aromaticity|aromatic]] [[polymer]] made from the [[monomer]] [[styrene]], a liquid [[hydrocarbon]] that is manufactured from [[petroleum]] by the [[chemical industry]]. Polystyrene is one of the most widely used [[plastic|plastics]], the scale being several billion kilograms per year.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Packaging materials", "page_id" : 900472}, {"source" : "wikipedia-en", "category" : "Organic polymers", "page_id" : 987522}, {"source" : "wikipedia-en", "category" : "Insulators", "page_id" : 1889463}, {"source" : "wikipedia-en", "category" : "Thermoplastics", "page_id" : 14828624}, {"source" : "wikipedia-en", "category" : "Building insulation materials", "page_id" : 20551465} ]  }
+			]
+		},
+		{
+			"keyword" : "elastic",
+			"weight" : 16.744474558768747,
+			"entities" : [ 
+{ "rawName" : "elastic", "preferredTerm" : "Elasticity (physics)", "nerd_score" : "0.0336153223975735", "prob" : "1.0", "wikipediaExternalRef" : "268923", "freeBaseExternalRef" : "/m/01npkt", "definitions" : [ { "definition" : "In [[physics]], '''elasticity''' is the [[physical property]] of a material that returns to its original shape after the [[stress (mechanics)|stress]] (e.g. external [[force]]s) that made it deform or distort is removed. The relative amount of [[deformation (engineering)|deformation]] is called the [[Deformation (mechanics)|strain]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Elasticity (physics)", "page_id" : 15717766} ]  } 
+			]
+		},
+		{
+			"keyword" : "inextensible",
+			"weight" : 14.838486205051037,
+			"entities" : [ 
+{ "rawName" : "inextensible", "preferredTerm" : "Kinematics", "nerd_score" : "0.18906170135085798", "prob" : "1.0", "wikipediaExternalRef" : "65914", "freeBaseExternalRef" : "/m/0hggs", "definitions" : [ { "definition" : "'''Kinematics''' (from [[Ancient Greek language|Greek]] , ''kinein'', to move) is the branch of [[classical mechanics]] that describes the [[motion (physics)|motion]] of bodies (objects) and systems (groups of objects) without consideration of the forces that cause the motion.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Classical mechanics", "page_id" : 735875}, {"source" : "wikipedia-en", "category" : "Kinematics", "page_id" : 1074082} ]  }
+			]
+		},
+		{
+			"keyword" : "user",
+			"weight" : 13.388842985533785,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "127759" }
+			]
+		},
+		{
+			"keyword" : "attractive appearance",
+			"weight" : 13.21988415134883,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "material",
+			"weight" : 11.903433016814233,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "totality",
+			"status" : "weak",
+			"weight" : 11.864157403438567,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "exert",
+			"weight" : 9.956734754756615,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sitting",
+			"weight" : 9.485518337446463,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "161267" }
+			]
+		},
+		{
+			"keyword" : "impermeable",
+			"weight" : 9.09179971256155,
+			"entities" : [ 
+{ "rawName" : "impermeable", "preferredTerm" : "Permeation", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "4904656", "freeBaseExternalRef" : "/m/0ctfvs", "definitions" : [ { "definition" : "'''Permeation''', in [[physics]] and [[engineering]], is the penetration of a permeate (such as a [[liquid]], [[gas]], or [[vapor]]) through a solid, and is related to a material's [[intrinsic permeability]]. Permeability is tested by permeation measurement, for example by a [[minipermeameter]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Packaging", "page_id" : 1948437}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608} ]  }
+ 			]
+		},
+		{
+			"keyword" : "fix extractable",
+			"weight" : 8.800979899850562,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "volume",
+			"weight" : 8.758205542859809,
+			"entities" : [ 
+{ "rawName" : "volume", "preferredTerm" : "Volume", "nerd_score" : "0.01876181019745934", "prob" : "1.0", "wikipediaExternalRef" : "32498", "freeBaseExternalRef" : "/m/07zn0", "definitions" : [ { "definition" : "'''Volume''' is the [[quantity]] of three-dimensional [[space]] enclosed by some closed boundary, for example, the space that a substance (solid, liquid, gas, or plasma) or shape occupies or contains. Volume is often quantified numerically using the [[SI derived unit]], the [[cubic metre]]. The volume of a container is generally understood to be the capacity of the container, i. e. the amount of fluid (gas or liquid) that the container could hold, rather than the amount of space the container itself displaces.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Volume", "page_id" : 1777296}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107} ]  }
+			]
+		},
+		{
+			"keyword" : "belt",
+			"weight" : 8.629356813615862,
+			"entities" : [ 
+{ "rawName" : "belt", "preferredTerm" : "Belt (mechanical)", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "1364502", "freeBaseExternalRef" : "/m/04wyxv", "definitions" : [ { "definition" : "A '''belt''' is a loop of flexible material used to link two or more rotating [[Drive shaft|shafts]] mechanically. Belts may be used as a source of motion, to [[Transmission (mechanics)|transmit power]] efficiently, or to track relative movement. Belts are looped over [[pulley]]s. In a two pulley system, the belt can either drive the pulleys in the same direction, or the belt may be crossed, so that the direction of the shafts is opposite. As a source of motion, a [[conveyor belt]] is one application where the belt is adapted to continually carry a load between two points.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanical power transmission", "page_id" : 22781840}, {"source" : "wikipedia-en", "category" : "Belt drives", "page_id" : 28319299} ]  }
+			]
+		},
+		{
+			"keyword" : "bottom",
+			"status" : "weak",
+			"weight" : 8.609285647622666,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "lounge",
+			"weight" : 8.461549129088246,
+			"entities" : [ 
+{ "rawName" : "lounge", "preferredTerm" : "Living room", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "825977", "freeBaseExternalRef" : "/m/03f6tq", "definitions" : [ { "definition" : "A '''living room''', also known as '''sitting room''', '''lounge room''' or '''lounge''' (in the [[United Kingdom]], [[Australia]] and [[New Zealand]]), is a [[room]] for entertaining adult guests, reading, or other activities. The term '''front room''' can also be used to describe a living room, because in many homes the living room is at the very front.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Rooms", "page_id" : 965836} ]  }
+			]
+		},
+		{
+			"keyword" : "pleasing eye",
+			"weight" : 8.330436117328006,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "elasticity",
+			"weight" : 7.547808824197204,
+			"entities" : [ 
+{ "rawName" : "elastic", "preferredTerm" : "Elasticity (physics)", "nerd_score" : "0.0336153223975735", "prob" : "1.0", "wikipediaExternalRef" : "268923", "freeBaseExternalRef" : "/m/01npkt", "definitions" : [ { "definition" : "In [[physics]], '''elasticity''' is the [[physical property]] of a material that returns to its original shape after the [[stress (mechanics)|stress]] (e.g. external [[force]]s) that made it deform or distort is removed. The relative amount of [[deformation (engineering)|deformation]] is called the [[Deformation (mechanics)|strain]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Elasticity (physics)", "page_id" : 15717766} ]  } 
+			]
+		},
+		{
+			"keyword" : "sheet",
+			"weight" : 7.42074491167171,
+			"entities" : [ 
+
+			]
+		}
+	],
+	"ipc" : ["A47C3/16", "A47C27/14"],
+	"cpc" : ["A47C27/086", "A47C3/16", "A47C4/54", "Y10S5/911"],
+	"abstract" : "Seat that comprises an envelope containing incompressible filling pieces, such as polystyrene balls. In addition, this seat comprises a bottom wall and side walls made of a rigid, semirigid and/or impermeable material, and an upper wall of which at least a part is made of an elastic and permeable material, the filling pieces occupying the totality of the volume defined by the bottom, side and upper walls.",
+	"claims" : "1. A seat of an envelope type, comprising: an upper wall; a bottom wall; a side wall; and incompressible filling pieces occupying a space defined by the bottom, side, and upper walls; and wherein the bottom wall and the side wall are impermeable and are made of a rigid or semirigid material and at least a portion of the upper wall is made of an elastic and permeable material.\n\n 2. The seat as set forth in claim 1, wherein the incompressible filling pieces comprise polystyrene balls.\n\n 3. The seat as set forth in claim 1, wherein the side wall includes an inward rim made of a same material as the side wall, the inward rim being located where the side wall meets the upper wall.\n\n 4. The seat as set forth in claim 1, wherein the bottom wall is a sheet of inextensible material.\n\n 5. The seat as set forth in claim 1, wherein the side wall is a sheet of inextensible material.\n\n 6. The seat as set forth in claim 1, wherein the bottom, side, and upper walls are joined together and form an envelope containing the incompressible filling pieces.\n\n 7. The seat as set forth in claim 6, wherein the bottom, side, and upper walls are joined together by a sewing process.\n\n 8. A seat comprising:at least one envelope including an upper wall, a bottom wall, a side wall, and incompressible filling pieces occupying a space defined by the bottom, side, and upper walls, wherein the bottom wall and the side wall are impermeable, and are made of rigid or semirigid material, and at least a portion of the upper wall is made of an elastic and permeable material; and at least one belt removably attached to the side wall.\n\n 9. The seat as set forth in claim 8, wherein the belt comprises:a rigid panel.\n\n 10. The seat as set forth in claim 8, wherein the belt comprises:a ring of homogenous material.\n\n 11. The seat as set forth in claim 10, wherein the homogenous material is selected from the group consisting of a rubber and a synthetic foam.\n\n 12. The seat as set forth in claim 8, wherein the belt comprises:an inflatable ring.",
+	"description" : "BACKGROUND OF THE INVENTION\n\n The present invention relates to a seat, and more especially a lounge seat that comprises an envelope containing incompressible filling pieces, such as polystyrene balls.\n\n ESCRIPTION OF THE PRIOR ART\n\n Seats of this type, in which the envelope, which is made, for example, of a textile material or an impervious synthetic substance, possesses an internal volume greater than the volume of balls forming the filling pieces. It is thus possible to displace the balls inside the bag to allow different configurations of the seat, and in particular to adapt the seat to the shape of the body of the user, in the sitting position. However, this type of seat does not have a very attractive appearance because there is a surplus of envelope to permit the displacement of the polystyrene balls, and, when the user leaves the seat, it remains in the position it had before the user got up.\n\n The object of the invention is to provide a seat of this type, which adapts itself to the shape of the body of one or more users, and which returns automatically to an original position when the user gets up, in order to give the seat an attractive appearance when not in use.\n\n SUMMARY OF THE INVENTION\n\n To this end the seat to which it relates, of the aforementioned type, which comprises an envelope containing incompressible filling pieces, such as polystyrene balls, comprises a bottom wall and side walls made of a rigid, semirigid and/or impermeable material, and an upper wall of which at least a part is made of an elastic and permeable material, the filling pieces occupying the totality of the volume defined by the bottom, side and upper walls.\n\n When the user sits down on the upper face of the seat, the upper face deforms to form a hollow in the sitting area, the balls moving away to form a seat back in an area where there is less pressure. This movement is made possible, even though the filling pieces occupy all the available volume, by the fact that air can pass through the material of the upper wall. Furthermore this deformation of the upper part is also made possible by reason of the lateral restriction of the side walls, owing to the nature of the material of which they are made. When the user gets up again, the permeability of the material of the upper wall, combined with the elasticity of this material, brings about another movement of the filling pieces until the upper wall forms a continuous surface.\n\n In order to assist the lateral restriction of the filling pieces, the side walls comprise an inward rim made of the same material, where it meets the upper wall.\n\n According to one feature of the invention, the bottom wall and/or the side walls are made from a sheet of flexible, impermeable and inextensible material.\n\n According to one possibility in this case the bottom, side and upper walls are joined together, for example by sewing, and form a bag containing the filling pieces.\n\n In another embodiment of this seat, the side walls consist of a belt, inside which is at least one bag containing the filling pieces, the upper wall of which is made of an elastic and permeable material.\n\n According to a first possibility in this case, the belt consists of a rigid panel.\n\n According to another possibility, the belt consists of a ring of homogeneous material, such as rubber or a synthetic foam, or consists of an inflatable ring.\n\n BRIEF DESCRIPTION OF THE DRAWINGS\n\n The invention will however be made clear in the following description, which refers to the accompanying diagrammatic drawing showing, by way of non-restrictive example, several embodiments of this seat:\n\n FIG. 1 is a perspective view of a first seat having the general form of a pouf;\n\n FIGS. 2 and 3 are two sectional views thereof in a non-use position and a use position, respectively; and\n\n FIGS. 4 and 5 are two sectional views of two other seats, in a non-use position.\n\n DESCRIPTION OF THE PREFERRED EMBODIMENTS\n\n FIG. 1 shows a pouf of cylindrical overall shape comprising a bottom wall 2 consisting of a sheet of impermeable and inextensible material, continued by a side wall 3 consisting of the same material, this side wall comprising a peripheral inward rim 4 where it meets the upper wall. The center of the upper wall is made from a sheet of elastic and permeable material 5. These various walls 2, 3 and 5 define a volume which is entirely filled with filling pieces 6 of small dimensions, such as polystyrene balls.\n\n When the pouf is in the position of non-use it possesses the shape illustrated in FIG. 2. When a user sits on the pouf he or she exerts, on the seat, a downward pressure F having a tendency to form a hollow by the displacement of the balls into areas where less pressure is exerted. The balls are restricted laterally by the side wall owing to the nature of the material of the wall. Because the upper wall 5 is permeable, air can escape into areas where there is less pressure, as shown by arrows in FIG. 3, into which area the balls can move and form a seat back for the user.\n\n When the user gets up again the reverse phenomenon occurs under the action of the elasticity of the upper wall 5, and the pouf returns to the position shown in FIG. 2, in which it is pleasing to the eye.\n\n FIG. 4 shows a second embodiment of a seat according to the invention in which the outer wall 7 is formed by a ring independent of a bag 8 containing filling pieces 9. The ring 7 may be made of rubber or foam or be filled with air, the essential point being that it restricts the filling pieces and so prevents any outward movement thereof when pressure is exerted on the bag 8. As in the previous embodiment, at least the upper wall 10 of the bag 8 is made of a sheet of an elastic and permeable material.\n\n FIG. 5 shows a seat which represents an alternative embodiment of the seat shown in FIG. 4, in which identical elements are denoted by the same references as before. In this case the central part of the seat consists not of one bag 8 but of three bags 8.\n\n As is clear from the foregoing, the invention greatly improves upon the existing art by providing a seat of simple structure which adapts itself to the shape of the body of the user or users and returns to its original position as soon as all pressure ceases to be exerted upon it.\n\n As is self-evident, the invention is not limited to only those embodiments of the seat that are described above as examples, but on the contrary includes all variants. As an example, the side walls could be rigid panels, or the upper wall of the seat could comprise several areas made of an elastic and permeable material, without thereby departing from the scope of the invention. " 
+}

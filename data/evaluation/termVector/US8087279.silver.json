@@ -1,0 +1,220 @@
+{
+	"_id" : "559526c69c597f75f38ba835",
+	"publication_id" : "US8087279",
+	"invention_title" : "Method and apparatus for manufacturing a legged annular member",
+	"keywords" : [
+		{
+			"keyword" : "legged",
+			"weight" : 815.805076719318,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "insects mosquitos fruit fly",
+			"status" : "absent",
+			"weight" : 385.2865900398195,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "small antigen-specific lymphocyte",
+			"status" : "absent",
+			"weight" : 304.84705589490335,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "diameter-expanding punch",
+			"weight" : 235.3689384676443,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "diameter-expanding burr removal",
+			"weight" : 235.3689384676443,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "burr",
+			"weight" : 226.10364170663325,
+			"entities" : [ 
+{ "rawName" : "burr", "preferredTerm" : "Burr (edge)", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "3856722", "freeBaseExternalRef" : "/m/0b3kgl", "definitions" : [ { "definition" : "A '''burr''' is a raised edge or small pieces of material remaining attached to a workpiece after a modification process. It is usually an unwanted piece of material and when removed the process is called '''deburring'''. Burrs are most commonly created after [[machining]] operations, such as [[grinding]], [[drilling]], [[Milling machine|milling]], [[engraving]] or [[turning]]. It may be present in the form of a fine wire on the edge of a freshly sharpened tool or as a raised portion of a surface; this type of burr is commonly formed when a [[hammer]] strikes a surface. Deburring accounts for a significant portion of manufacturing costs.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cryogenics", "page_id" : 1421069}, {"source" : "wikipedia-en", "category" : "Printmaking", "page_id" : 2063714}, {"source" : "wikipedia-en", "category" : "Metalworking terminology", "page_id" : 2657579}, {"source" : "wikipedia-en", "category" : "Plastics industry", "page_id" : 5236000} ]  }
+			]
+		},
+		{
+			"keyword" : "member",
+			"status" : "weak",
+			"weight" : 194.09158207978822,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "die",
+			"weight" : 129.50828772363272,
+			"entities" : [ 
+{ "rawName" : "die", "preferredTerm" : "Die (manufacturing)", "nerd_score" : "0.39713096505441764", "prob" : "1.0", "wikipediaExternalRef" : "648007", "freeBaseExternalRef" : "/m/02_c4n", "definitions" : [ { "definition" : "A '''die''' is a specialized [[tool]] used in [[manufacturing industries]] to [[cut]] or shape [[material]] using a [[machine press|press]]. Like [[Molding (process)|molds]], dies are generally customized to the item they are used to create. Products made with dies range from simple [[paper clip]]s to complex pieces used in advanced technology.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cutting tools", "page_id" : 2302038}, {"source" : "wikipedia-en", "category" : "Metalworking cutting tools", "page_id" : 2651557}, {"source" : "wikipedia-en", "category" : "Metal forming", "page_id" : 2682768}, {"source" : "wikipedia-en", "category" : "Machine tools", "page_id" : 8475272}, {"source" : "wikipedia-en", "category" : "Metalworking tools", "page_id" : 11786655} ]  }
+			]
+		},
+		{
+			"keyword" : "intermediate",
+			"weight" : 111.26329047298924,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "part",
+			"status" : "weak",
+			"weight" : 86.01709557470542,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "ring-like",
+			"weight" : 83.91051867683808,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "peripheral",
+			"weight" : 80.6945320683452,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "diameter",
+			"weight" : 66.98499551663629,
+			"entities" : [ 
+{ "rawName" : "diameter", "preferredTerm" : "Diameter", "nerd_score" : "0.08906170135085797", "prob" : "1.0", "wikipediaExternalRef" : "8007", "freeBaseExternalRef" : "/m/0277z", "definitions" : [ { "definition" : "In [[geometry]], a '''diameter''' of a [[circle]] is any straight [[line segment]] that passes through the center of the circle and whose endpoints are on the circle. The diameters are the longest [[chord (geometry)|chords]] of the circle. The word \"diameter\" derives from [[Greek language|Greek]] ''διάμετρος'' (''diametros''), \"diagonal of a circle\", from ''δια-'' (''dia-''), \"across, through\" + ''μέτρον'' (''metron''), \"a measure\").", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Length", "page_id" : 923167}, {"source" : "wikipedia-en", "category" : "Elementary geometry", "page_id" : 1677614}, {"source" : "wikipedia-en", "category" : "Greek loanwords", "page_id" : 6516060} ]  }
+			]
+		},
+		{
+			"keyword" : "manufacturing",
+			"weight" : 66.81740585962216,
+			"entities" : [ 
+{ "rawName" : "manufacturing", "preferredTerm" : "Manufacturing", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "39388", "freeBaseExternalRef" : "/m/09t4t", "definitions" : [ { "definition" : "'''Manufacturing''' is the use of [[machine]]s, [[tool]]s and labor to produce goods for use or sale. The term may refer to a range of human activity, from [[handicraft]] to [[High tech manufacturing|high tech]], but is most commonly applied to [[Industry|industrial]] production, in which [[raw material]]s are transformed into [[finished good]]s on a large scale. Such finished goods may be used for manufacturing other, more complex products, such as [[aircraft]], [[Major appliance|household appliances]] or [[automobile]]s, or sold to [[wholesale]]rs, who in turn sell them to [[retailer]]s, who then sell them to end users&nbsp;– the \"[[consumers]]\".", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Manufacturing", "page_id" : 867519}, {"source" : "wikipedia-en", "category" : "Industry", "page_id" : 871525} ]  }
+			]
+		},
+		{
+			"keyword" : "mounting",
+			"weight" : 63.05140931559593,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "outer",
+			"weight" : 58.38784211410021,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "diameter-expanding",
+			"weight" : 56.22411375714022,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "portion",
+			"status" : "weak",
+			"weight" : 47.94556163212557,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "counter criminals",
+			"status" : "absent",
+			"weight" : 45.96735996454991,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "carrier",
+			"weight" : 43.6219686337387,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "hollow",
+			"weight" : 43.47991170745588,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "chamfer",
+			"weight" : 41.20133038363618,
+			"entities" : [ 
+{ "rawName" : "chamfer", "preferredTerm" : "Chamfer", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "1552466", "freeBaseExternalRef" : "/m/059t5_", "definitions" : [ { "definition" : "A '''chamfer''' is a [[bevel]]ed edge connecting two surfaces. If the surfaces are at right angles, the chamfer will typically be symmetrical at 45 degrees. A [[fillet (mechanics)|fillet]] is the rounding off of an interior corner. A rounding of an exterior corner is called a \"round\" or a \"radius\".", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Woodworking", "page_id" : 999563}, {"source" : "wikipedia-en", "category" : "Electronic design", "page_id" : 1050229}, {"source" : "wikipedia-en", "category" : "Metalworking terminology", "page_id" : 2657579}, {"source" : "wikipedia-en", "category" : "Electronic engineering", "page_id" : 2909311} ]  }
+			]
+		},
+		{
+			"keyword" : "raw",
+			"weight" : 40.450605614499494,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "air",
+			"weight" : 40.3748191367344,
+			"entities" : [ 
+{ "rawName" : "air", "preferredTerm" : "Atmosphere of Earth", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "202898", "freeBaseExternalRef" : "/m/01ctry", "definitions" : [ { "definition" : "The '''atmosphere of Earth''' is a layer of [[gases]] surrounding the planet [[Earth]] that is retained by Earth's [[gravity]]. The [[atmosphere]] protects [[organism|life on Earth]] by absorbing [[ultraviolet]] [[solar radiation]], warming the surface through heat retention ([[greenhouse effect]]), and reducing [[temperature]] extremes between [[Daytime (astronomy)|day]] and [[night]] (the [[diurnal temperature variation]]).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Atmosphere", "page_id" : 1136015}, {"source" : "wikipedia-en", "category" : "Environments", "page_id" : 2690886}, {"source" : "wikipedia-en", "category" : "Coolants", "page_id" : 3670551}, {"source" : "wikipedia-en", "category" : "Planetary atmospheres", "page_id" : 4991406}, {"source" : "wikipedia-en", "category" : "Atmospheric thermodynamics", "page_id" : 5135753}, {"source" : "wikipedia-en", "category" : "Breathing gases", "page_id" : 7256780}, {"source" : "wikipedia-en", "category" : "Dielectric gases", "page_id" : 27690545} ]  }
+			]
+		},
+		{
+			"keyword" : "upper",
+			"weight" : 38.898389781025266,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "mechanism",
+			"weight" : 38.56212934445525,
+			"entities" : [ 
+{ "rawName" : "mechanism", "preferredTerm" : "Mechanism (engineering)", "nerd_score" : "0.3916504615764965", "prob" : "1.0", "wikipediaExternalRef" : "21280576", "freeBaseExternalRef" : "/m/05f4qny", "definitions" : [ { "definition" : "A '''mechanism''' is a device designed to transform input forces and movement into a desired set of output forces and movement. Mechanisms generally consist of moving components such as [[gear]]s and [[gear train]]s, belt and chain drives, [[cam]] and [[cam follower|follower]] mechanisms, and [[linkage (mechanical)|linkage]]s as well as friction devices such as brakes and clutches, and structural components such as the frame, fasteners, bearings, springs, lubricants and seals, as well as a variety of specialized [[machine element]]s such as splines, pins and keys.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Kinematics", "page_id" : 1074082}, {"source" : "wikipedia-en", "category" : "Mechanisms", "page_id" : 5104628} ]  }
+			]
+		},
+		{
+			"keyword" : "boss",
+			"weight" : 36.615501447146436,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "20386031" }				
+			]
+		},
+		{
+			"keyword" : "tap axo",
+			"status" : "absent",
+			"weight" : 32.088589405144525,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "end",
+			"weight" : 32.07736043434399,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "work",
+			"weight" : 31.624680754515797,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

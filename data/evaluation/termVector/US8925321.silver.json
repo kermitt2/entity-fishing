@@ -1,0 +1,225 @@
+{
+	"_id" : "5595345a9c597f75f39ba0fe",
+	"publication_id" : "US8925321",
+	"invention_title" : "Steam power plant for generating electrical energy",
+	"keywords" : [
+		{
+			"keyword" : "steam",
+			"weight" : 362.3912826128829,
+			"entities" : [ 
+{ "rawName" : "steam", "preferredTerm" : "Steam", "nerd_score" : "0.9218553618012741", "prob" : "1.0", "wikipediaExternalRef" : "21304461", "freeBaseExternalRef" : "/m/06wzb", "definitions" : [ { "definition" : "'''Steam''' is the technical term for the invisible [[water vapor]], the [[gaseous phase]] of [[water]], which is formed when water [[boiling|boils]]. In common language it is often used to refer to the visible [[mist]] of water droplets formed as this water vapor [[condenses]] in the presence of cooler [[air]]. At lower pressures, such as in the [[upper atmosphere]] or at the top of high mountains water boils at a lower temperature than the nominal at [[standard temperature and pressure]]. If heated further it becomes [[Superheated steam]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Forms of water", "page_id" : 846987}, {"source" : "wikipedia-en", "category" : "Water in gas", "page_id" : 3184845}, {"source" : "wikipedia-en", "category" : "Steam power", "page_id" : 15894282} ]  }
+			]
+		},
+		{
+			"keyword" : "bypass-steam cooler",
+			"weight" : 235.3689384676443,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pipeline",
+			"weight" : 222.0031844350005,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "bypass",
+			"weight" : 151.18091164180893,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "intermediate-pressure",
+			"weight" : 112.44743535586697,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "turbine",
+			"weight" : 91.28628617404154,
+			"entities" : [ 
+{ "rawName" : "turbine", "preferredTerm" : "Steam turbine", "nerd_score" : "0.6903504920351693", "prob" : "1.0", "wikipediaExternalRef" : "29374", "freeBaseExternalRef" : "/m/078l2", "definitions" : [ { "definition" : "A '''steam turbine''' is a mechanical device that extracts [[thermal energy]] from pressurized [[steam]], and converts it into rotary motion. Its modern manifestation was invented by [[Charles Algernon Parsons|Sir Charles Parsons]] in 1884.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering", "Nautical" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Turbines", "page_id" : 966100}, {"source" : "wikipedia-en", "category" : "English inventions", "page_id" : 4204144}, {"source" : "wikipedia-en", "category" : "Steam engines", "page_id" : 4270833}, {"source" : "wikipedia-en", "category" : "History of the steam engine", "page_id" : 27679874}, {"source" : "wikipedia-en", "category" : "Steam turbines", "page_id" : 27794402} ]  }
+			]
+		},
+		{
+			"keyword" : "intermediate-pressure bypass-steam cooler",
+			"weight" : 73.55279327113885,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "-bromomethylphenyl -cyanopyridine",
+			"status" : "absent",
+			"weight" : 69.85063530499332,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "histones residues",
+			"status" : "absent",
+			"weight" : 65.59802183952219,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "reheater",
+			"weight" : 57.3450437103174,
+			"entities" : [ 
+{ "rawName" : "reheater", "preferredTerm" : "Glossary of boiler terminology", "nerd_score" : "0.6287983878113188", "prob" : "1.0", "wikipediaExternalRef" : "24541786", "definitions" : [ { "definition" : "[[Boiler]]s for generating [[steam]] or hot water have been designed in countless different shapes, sizes and configurations. An extensive terminology has evolved to describe their common features. This glossary provides definitions for these terms.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Glossaries", "page_id" : 935487}, {"source" : "wikipedia-en", "category" : "Boilers", "page_id" : 3684059}, {"source" : "wikipedia-en", "category" : "Steam power", "page_id" : 15894282}, {"source" : "wikipedia-en", "category" : "Water-tube boilers", "page_id" : 19717391}, {"source" : "wikipedia-en", "category" : "Steam boilers", "page_id" : 26060050}, {"source" : "wikipedia-en", "category" : "Steam boiler components", "page_id" : 30283338} ]  }
+			]
+		},
+		{
+			"keyword" : "compute sunspot",
+			"status" : "absent",
+			"weight" : 55.20216928758277,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "condenser",
+			"weight" : 53.369768454636144,
+			"entities" : [ 
+{ "rawName" : "condenser", "preferredTerm" : "Condenser (heat transfer)", "nerd_score" : "0.9035114467679168", "prob" : "1.0", "wikipediaExternalRef" : "13903462", "freeBaseExternalRef" : "/m/03cmspn", "definitions" : [ { "definition" : "In systems involving [[heat transfer]], a '''condenser''' is a device or unit used to [[Condensation|condense]] a substance from its [[gas]]eous to its [[liquid]] state, typically by cooling it. In so doing, the [[latent heat]] is given up by the substance, and will transfer to the condenser coolant. Condensers are typically [[heat exchanger]]s which have various designs and come in many sizes ranging from rather small (hand-held) to very large industrial-scale units used in plant processes. For example, a [[refrigerator]] uses a condenser to get rid of [[heat]] extracted from the interior of the unit to the outside air. Condensers are used in [[air conditioning]], industrial [[chemical process]]es such as [[distillation]], steam [[power plant]]s and other heat-exchange systems. Use of cooling water or surrounding air as the coolant is common in many condensers.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Laboratory glassware", "page_id" : 4173908}, {"source" : "wikipedia-en", "category" : "Heating, ventilating, and air conditioning", "page_id" : 18540201}, {"source" : "wikipedia-en", "category" : "Heat transfer", "page_id" : 23011909} ]  }, 
+{ "rawName" : "condenser", "preferredTerm" : "Surface condenser", "nerd_score" : "0.25480778153723443", "prob" : "1.0", "wikipediaExternalRef" : "3178732", "freeBaseExternalRef" : "/m/08xf7v", "definitions" : [ { "definition" : "'''Surface condenser''' is the commonly used term for a water-cooled [[shell and tube heat exchanger]] installed on the exhaust [[steam]] from a [[steam turbine]] in [[thermal power station]]s. These [[Condenser (heat transfer)|condensers]] are [[heat exchangers]] which convert steam from its gaseous to its liquid state at a pressure below [[atmospheric pressure]]. Where cooling water is in short supply, an air-cooled condenser is often used. An air-cooled condenser is however significantly more expensive and cannot achieve as low a steam turbine exhaust pressure as a water cooled surface condenser.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083}, {"source" : "wikipedia-en", "category" : "Energy conversion", "page_id" : 1947340}, {"source" : "wikipedia-en", "category" : "Steam power", "page_id" : 15894282}, {"source" : "wikipedia-en", "category" : "Power station technology", "page_id" : 17146317} ]  }
+			]
+		},
+		{
+			"keyword" : "live",
+			"weight" : 52.597777040406385,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "plant",
+			"weight" : 38.55810019546599,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "2213560" }
+			]
+		},
+		{
+			"keyword" : "gradiated templates",
+			"status" : "absent",
+			"weight" : 36.65843802342536,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "vetb-",
+			"status" : "absent",
+			"weight" : 36.034038456591055,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "exhaust",
+			"weight" : 31.684101870047055,
+			"entities" : [ 
+{ "rawName" : "exhaust", "preferredTerm" : "Exhaust gas", "nerd_score" : "0.9254362530096243", "prob" : "1.0", "wikipediaExternalRef" : "840147", "freeBaseExternalRef" : "/m/03fzsl", "definitions" : [ { "definition" : "'''Exhaust gas''' or [[flue gas]] is emitted as a result of the [[combustion]] of fuels such as [[natural gas]], [[gasoline]]/petrol, [[diesel fuel]], [[fuel oil]] or [[coal]]. According to the type of engine, it is discharged into the atmosphere through an [[exhaust pipe]], [[flue gas stack]] or [[propelling nozzle]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Engines", "page_id" : 743017}, {"source" : "wikipedia-en", "category" : "Gases", "page_id" : 1645013}, {"source" : "wikipedia-en", "category" : "Air pollution", "page_id" : 4565514} ]  }, 
+{ "rawName" : "exhaust", "preferredTerm" : "Exhaust system", "nerd_score" : "0.8872573943069678", "prob" : "1.0", "wikipediaExternalRef" : "1688648", "freeBaseExternalRef" : "/m/05nj_s", "definitions" : [ { "definition" : "An '''exhaust system''' is usually [[Tubing (material)|tubing]] used to guide reaction [[exhaust gas]]es away from a controlled [[combustion]] inside an [[engine]] or [[stove]]. The entire system conveys burnt gases from the engine and includes one or more '''exhaust pipes'''. Depending on the overall system design, the exhaust gas may flow through one or more of: *[[Cylinder head]] and [[exhaust manifold]] *A [[turbocharger]] to increase engine power. *A [[catalytic converter]] to reduce [[air pollution]]. *A [[muffler]] (North America) / [[Muffler|silencer]] (Europe), to reduce [[Noise (environmental)|noise]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Exhaust systems", "page_id" : 17959001}, {"source" : "wikipedia-en", "category" : "Engine components", "page_id" : 21627526} ]  }
+			]
+		},
+		{
+			"keyword" : "intermediate-pressure turbine",
+			"weight" : 31.49529316904786,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pipelines",
+			"status" : "redundant",
+			"weight" : 31.242158499757252,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "high-pressure",
+			"weight" : 26.435190303023166,
+			"entities" : [ 
+{ "rawName" : "high-pressure", "preferredTerm" : "High pressure", "nerd_score" : "0.6547216167799614", "prob" : "1.0", "wikipediaExternalRef" : "85331", "freeBaseExternalRef" : "/m/0ln_z", "definitions" : [ { "definition" : "'''High pressure''' in [[science]] and [[engineering]] is studying the effects of high pressure on materials and the design and construction of devices, such as a [[diamond anvil cell]], which can create high [[pressure]]. By high pressure it is usually meant pressures of thousands (kilo[[Bar (unit)|bar]]s) or millions (megabars) of times atmospheric pressure (about 1 bar).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Materials science", "page_id" : 709184} ]  }
+			]
+		},
+		{
+			"keyword" : "shut-off",
+			"weight" : 21.020783316875743,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "generator",
+			"weight" : 20.655595787428773,
+			"entities" : [ 
+{ "rawName" : "generator", "preferredTerm" : "Electric generator", "nerd_score" : "0.9430014565080673", "prob" : "1.0", "wikipediaExternalRef" : "82330", "freeBaseExternalRef" : "/m/0l4dz", "definitions" : [ { "definition" : "In [[electricity generation]], an '''electric generator''' is a device that converts [[mechanical energy]] to [[electrical energy]]. A generator forces [[electrons]] in the windings to flow through the external [[electrical circuit]]. It is somewhat analogous to a water pump, which creates a flow of water but does not create the water inside. The may be a reciprocating or turbine [[steam engine]], water falling through a [[hydropower|turbine or waterwheel]], an [[internal combustion engine]], a [[wind turbine]], a hand [[crank (mechanism)|crank]], [[compressed air]] or any other source of mechanical energy.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electrical generators", "page_id" : 1859846}, {"source" : "wikipedia-en", "category" : "English inventions", "page_id" : 4204144} ]  }
+			]
+		},
+		{
+			"keyword" : "interconnect",
+			"weight" : 19.802740974974505,
+			"entities" : [ 
+{ "rawName" : "interconnect", "preferredTerm" : "Interconnectivity", "nerd_score" : "0.8222471373388135", "prob" : "1.0", "wikipediaExternalRef" : "11825508", "freeBaseExternalRef" : "/m/0wr31d6", "definitions" : [ { "definition" : "'''Interconnectivity''' is a concept that is used in numerous fields such as [[cybernetics]], [[biology]], [[ecology]], [[network theory]], and [[non-linear dynamics]]. The concept can be summarized as that all parts of a system [[interaction|interact with]] and rely on one another simply by the fact that they occupy the same system, and that a system is difficult or sometimes impossible to analyze through its individual parts considered alone. The concept is closely linked to the [[Observer effect]] and the [[butterfly effect]]. It is often linked to the concepts of [[interconnectedness]] which is used to refer to the spiritual, and [[interdependence]] which refers to the moral, rather than physical or scientific.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Philosophy of science", "page_id" : 772270}, {"source" : "wikipedia-en", "category" : "Chaos theory", "page_id" : 976386} ]  }
+			]
+		},
+		{
+			"keyword" : "emergency",
+			"weight" : 19.41748479185614,
+			"entities" : [ 
+{ "rawName" : "emergency", "preferredTerm" : "Emergency", "nerd_score" : "0.8720261343388659", "prob" : "1.0", "wikipediaExternalRef" : "146334", "freeBaseExternalRef" : "/m/025rvy6", "definitions" : [ { "definition" : "An '''emergency''' is a situation that poses an ''immediate risk'' to [[health]], [[life]], [[property]] or [[Natural environment|environment]]. Most emergencies require urgent intervention to prevent a worsening of the situation, although in some situations, mitigation may not be possible and agencies may only be able to offer palliative care for the aftermath.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Safety", "page_id" : 902977}, {"source" : "wikipedia-en", "category" : "Risk", "page_id" : 1257366}, {"source" : "wikipedia-en", "category" : "Emergency management", "page_id" : 5047412}, {"source" : "wikipedia-en", "category" : "Legal doctrines and principles", "page_id" : 27170295} ]  }
+			]
+		},
+		{
+			"keyword" : "prepare disulphochloride",
+			"status" : "absent",
+			"weight" : 17.734088352071122,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "comparatively",
+			"status" : "weak",
+			"weight" : 17.16728396864563,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "emergency shutdown",
+			"weight" : 16.552024270880633,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "5844089" },
+{ "wikipediaExternalRef" : "11568343" }
+			]
+		},
+		{
+			"keyword" : "cold",
+			"weight" : 15.903160479110674,
+			"entities" : [ 
+{ "rawName" : "cold", "preferredTerm" : "Cold", "nerd_score" : "0.4507426442607218", "prob" : "1.0", "wikipediaExternalRef" : "19725090", "freeBaseExternalRef" : "/m/04mwwgd", "definitions" : [ { "definition" : "'''Cold''' (having less [[heat]]) refers to the condition or [[subjectivity|subjective perception]] of having low [[temperature]]. The coldest theoretically possible temperature is [[absolute zero]], also called absolute temperature, which is 0 K on the [[Kelvin scale]], a [[thermodynamic temperature]] scale, and −273.15 °C on the [[Celsius]] scale. Absolute zero is also 0 °R on the [[Rankine scale]], another thermodynamic temperature scale, and −459.67 degrees on the [[Fahrenheit scale]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cold", "page_id" : 27262150} ]  }
+			]
+		},
+		{
+			"keyword" : "branch bypass-steam cooler",
+			"weight" : 14.71055865422777,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "condensate",
+			"weight" : 14.226800972478436,
+			"entities" : [ 
+{ "rawName" : "condensate", "preferredTerm" : "Condensation", "nerd_score" : "0.7248556198421852", "prob" : "1.0", "wikipediaExternalRef" : "47521", "freeBaseExternalRef" : "/m/0csdj", "definitions" : [ { "definition" : "'''Condensation''' is the change of the physical [[state of matter]] from gaseous phase into liquid phase, and is the reverse of [[evaporation]]. When the transition happens from the gaseous phase into the solid phase directly, the change is called [[Deposition (physics)|deposition]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Phase changes", "page_id" : 1491187}, {"source" : "wikipedia-en", "category" : "Building engineering", "page_id" : 3642629}, {"source" : "wikipedia-en", "category" : "Moisture protection", "page_id" : 3976127}, {"source" : "wikipedia-en", "category" : "Basic meteorological concepts and phenomena", "page_id" : 4165760}, {"source" : "wikipedia-en", "category" : "Atmospheric thermodynamics", "page_id" : 5135753}, {"source" : "wikipedia-en", "category" : "Building defects", "page_id" : 7409405}, {"source" : "wikipedia-en", "category" : "Construction terminology", "page_id" : 19934185}, {"source" : "wikipedia-en", "category" : "Heat transfer", "page_id" : 23011909} ]  }
+			]
+		}
+	]
+}

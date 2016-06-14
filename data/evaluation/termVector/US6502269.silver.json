@@ -1,0 +1,223 @@
+{
+	"_id" : "559515b29c597f75f3739cf4",
+	"publication_id" : "US6502269",
+	"invention_title" : "Electric powered portable pool cleaner",
+	"keywords" : [
+		{
+			"keyword" : "pool",
+			"weight" : 237.36028692495353,
+			"entities" : [ 
+{ "rawName" : "pool", "preferredTerm" : "Swimming pool", "nerd_score" : "0.7570610191278082", "prob" : "1.0", "wikipediaExternalRef" : "19824126", "freeBaseExternalRef" : "/m/0b_rs", "definitions" : [ { "definition" : "A '''swimming pool''', '''swimming bath''', '''wading pool''', or simply a '''pool''', is a container filled with water intended for [[human swimming|swimming]] or water-based [[recreation]]. There are many standard sizes; the largest and deepest is the [[Olympic-size swimming pool]]. A pool can be built either above or in the ground, and from materials such as concrete (also known as gunite), [[metal]], [[plastic]] or [[fiberglass]]. The innovation of a composite construction of fibreglass, with an epoxy coating and porcelain ceramic tiles has led to the Pre-form, Composite-type with significant advantages over older methods; however, it also has increased sensitivity to metal staining.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Architecture" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Bodies of water", "page_id" : 2699217}, {"source" : "wikipedia-en", "category" : "Swimming pools", "page_id" : 16713703}, {"source" : "wikipedia-en", "category" : "Garden features", "page_id" : 25138706}, {"source" : "wikipedia-en", "category" : "Backyards", "page_id" : 25830325} ]  }
+			]
+		},
+		{
+			"keyword" : "suction",
+			"weight" : 206.15638835625992,
+			"entities" : [ 
+{ "rawName" : "suction", "preferredTerm" : "Suction", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "235576", "freeBaseExternalRef" : "/m/01j6v6", "definitions" : [ { "definition" : "'''Suction''' is the flow of a fluid into a partial [[vacuum]], or region of low pressure. The [[pressure gradient force|pressure gradient]] between this region and the ambient pressure will propel matter toward the low pressure area. Suction is popularly thought of as an attractive effect, which is incorrect since vacuums do not innately attract matter. Dust being \"sucked\" into a [[vacuum cleaner]] is actually being pushed in by the higher pressure air on the outside of the cleaner.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Units of pressure", "page_id" : 753117}, {"source" : "wikipedia-en", "category" : "Vacuum", "page_id" : 2634715}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608} ]  }
+			]
+		},
+		{
+			"keyword" : "cleaners",
+			"weight" : 138.63755628095095,
+			"entities" : [ 
+{ "rawName" : "cleaners", "preferredTerm" : "Cleanliness", "nerd_score" : "0.7236681619849512", "prob" : "1.0", "wikipediaExternalRef" : "373677", "freeBaseExternalRef" : "/m/020s4p", "definitions" : [ { "definition" : "'''Cleanliness''' is the absence of dirt, including [[dust]], [[stain]]s, bad [[odour|smells]] and [[waste|garbage]]. Cleanliness includes criteria such as [[health]] and [[beauty]]. § The term Cleanliness derives from the meaning absence of odour, avoidance of and to avoid the spreading of dirt and contaminants to oneself and others. In the case of glass objects such as windows or windshields, the purpose can also be [[transparency (optics)|transparency]]. [[Washing]] is one way of achieving cleanliness, usually with [[water]] and often some kind of [[soap]] or [[detergent]]. In more recent times, since the [[germ theory of disease]], it has also come to mean an absence of germs and other [[hazardous waste|hazardous materials]]. However, dirt may play a useful role in our immune systems. This shift in thinking can be traced back to 1989, when David Strachan put forth the \"[[hygiene hypothesis]]\" in the ''[[BMJ|British Medical Journal]]''. Strachan looked at the records of 17,000 British children and found that the greater number of older siblings they had, the less likely they were to come down with [[hay fever]]—a disease which, despite its name, is far more common in the city than the country. Strachan wondered if the older children were bringing home more viral infections to their younger siblings, priming their immune systems so they could better tolerate pollen. The \"hygiene hypothesis\" has now been linked with [[asthma]], [[allergies]], intestinal diseases including [[Crohn's disease]], [[childhood leukemia]] and atopic [[dermatitis]]. There is increasing evidence that the less germs people are exposed to as a child, the more likely they are to get sick as adults.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Hygiene", "page_id" : 1056532}, {"source" : "wikipedia-en", "category" : "Cleaning", "page_id" : 1820394} ]  }
+			]
+		},
+		{
+			"keyword" : "cleaner",
+			"status" : "redundant", 
+			"weight" : 107.8837961916347,
+			"entities" : [ 
+{ "rawName" : "cleaners", "preferredTerm" : "Cleanliness", "nerd_score" : "0.7236681619849512", "prob" : "1.0", "wikipediaExternalRef" : "373677", "freeBaseExternalRef" : "/m/020s4p", "definitions" : [ { "definition" : "'''Cleanliness''' is the absence of dirt, including [[dust]], [[stain]]s, bad [[odour|smells]] and [[waste|garbage]]. Cleanliness includes criteria such as [[health]] and [[beauty]]. § The term Cleanliness derives from the meaning absence of odour, avoidance of and to avoid the spreading of dirt and contaminants to oneself and others. In the case of glass objects such as windows or windshields, the purpose can also be [[transparency (optics)|transparency]]. [[Washing]] is one way of achieving cleanliness, usually with [[water]] and often some kind of [[soap]] or [[detergent]]. In more recent times, since the [[germ theory of disease]], it has also come to mean an absence of germs and other [[hazardous waste|hazardous materials]]. However, dirt may play a useful role in our immune systems. This shift in thinking can be traced back to 1989, when David Strachan put forth the \"[[hygiene hypothesis]]\" in the ''[[BMJ|British Medical Journal]]''. Strachan looked at the records of 17,000 British children and found that the greater number of older siblings they had, the less likely they were to come down with [[hay fever]]—a disease which, despite its name, is far more common in the city than the country. Strachan wondered if the older children were bringing home more viral infections to their younger siblings, priming their immune systems so they could better tolerate pollen. The \"hygiene hypothesis\" has now been linked with [[asthma]], [[allergies]], intestinal diseases including [[Crohn's disease]], [[childhood leukemia]] and atopic [[dermatitis]]. There is increasing evidence that the less germs people are exposed to as a child, the more likely they are to get sick as adults.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Hygiene", "page_id" : 1056532}, {"source" : "wikipedia-en", "category" : "Cleaning", "page_id" : 1820394} ]  }				
+			]
+		},
+		{
+			"keyword" : "pump",
+			"weight" : 99.90373170455925,
+			"entities" : [ 
+{ "rawName" : "pump", "preferredTerm" : "Pump", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "23617", "freeBaseExternalRef" : "/m/05wn0", "definitions" : [ { "definition" : "A '''pump''' is a device used to move fluids, such as [[liquid]]s, [[gas]]es or [[Slurry|slurries]]. A pump displaces a volume by physical or mechanical action. Pumps fall into three major groups: '''direct lift''', '''displacement''', and '''gravity''' pumps. Their names describe the method for moving a fluid.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Pumps", "page_id" : 853902}, {"source" : "wikipedia-en", "category" : "Dutch loanwords", "page_id" : 3577907} ]  }
+			]
+		},
+		{
+			"keyword" : "pain aesthetic",
+			"status" : "absent", 
+			"weight" : 89.04419757423133,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "debris",
+			"weight" : 83.29332129903585,
+			"entities" : [ 
+{ "rawName" : "debris", "preferredTerm" : "Debris", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "1045142", "freeBaseExternalRef" : "/m/0415f6", "definitions" : [ { "definition" : "'''Debris''' is [[rubble]], [[wreckage]], [[ruins]], [[litter]] and discarded [[waste|garbage/refuse/trash]], scattered remains of something destroyed, or, in geology, large rock [[fragment]]s left by a melting glacier etc. The singular form of debris is debris. Depending on context, ''debris'' can refer to a number of different things.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Matter", "page_id" : 1926287}, {"source" : "wikipedia-en", "category" : "French loanwords", "page_id" : 2017279}, {"source" : "wikipedia-en", "category" : "Destruction", "page_id" : 11537719} ]  }
+			]
+		},
+		{
+			"keyword" : "nozzle",
+			"weight" : 74.72911983051738,
+			"entities" : [ 
+{ "rawName" : "nozzle", "preferredTerm" : "Nozzle", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "316824", "freeBaseExternalRef" : "/m/01tywg", "definitions" : [ { "definition" : "A '''nozzle''' is a device designed to control the direction or characteristics of a [[fluid]] flow (especially to increase velocity) as it exits (or enters) an enclosed chamber or [[pipe (material)|pipe]] via an [[orifice]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fluid mechanics", "page_id" : 1162560}, {"source" : "wikipedia-en", "category" : "Nozzles", "page_id" : 26684600} ]  }
+			]
+		},
+		{
+			"keyword" : "conduit",
+			"weight" : 74.63895880542609,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "3704228" }
+			]
+		},
+		{
+			"keyword" : "telescoping",
+			"weight" : 72.59313962757908,
+			"entities" : [ 
+{ "rawName" : "telescoping", "preferredTerm" : "Telescoping (mechanics)", "nerd_score" : "0.5956294340957362", "prob" : "1.0", "wikipediaExternalRef" : "11727322", "freeBaseExternalRef" : "/m/02rq7p2", "definitions" : [ { "definition" : "'''Telescoping''' in mechanics describes the movement of one part sliding out from another, lengthening an object (such as a [[telescope]] or the lift arm of an [[aerial work platform]]) from its rest state. In modern equipment, this is often done by [[Hydraulic drive system|hydraulics]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanics", "page_id" : 1028577}, {"source" : "wikipedia-en", "category" : "Simple machines", "page_id" : 5170504} ]  }
+			]
+		},
+		{
+			"keyword" : "filter",
+			"weight" : 49.04383239884503,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "757269" }				
+			]
+		},
+		{
+			"keyword" : "adjustments egr",
+			"weight" : 47.81023884680089,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cleaning",
+			"weight" : 43.50045158274122,
+			"entities" : [ 
+{ "rawName" : "cleaning", "preferredTerm" : "Cleanliness", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "373677", "freeBaseExternalRef" : "/m/020s4p", "definitions" : [ { "definition" : "'''Cleanliness''' is the absence of dirt, including [[dust]], [[stain]]s, bad [[odour|smells]] and [[waste|garbage]]. Cleanliness includes criteria such as [[health]] and [[beauty]]. § The term Cleanliness derives from the meaning absence of odour, avoidance of and to avoid the spreading of dirt and contaminants to oneself and others. In the case of glass objects such as windows or windshields, the purpose can also be [[transparency (optics)|transparency]]. [[Washing]] is one way of achieving cleanliness, usually with [[water]] and often some kind of [[soap]] or [[detergent]]. In more recent times, since the [[germ theory of disease]], it has also come to mean an absence of germs and other [[hazardous waste|hazardous materials]]. However, dirt may play a useful role in our immune systems. This shift in thinking can be traced back to 1989, when David Strachan put forth the \"[[hygiene hypothesis]]\" in the ''[[BMJ|British Medical Journal]]''. Strachan looked at the records of 17,000 British children and found that the greater number of older siblings they had, the less likely they were to come down with [[hay fever]]—a disease which, despite its name, is far more common in the city than the country. Strachan wondered if the older children were bringing home more viral infections to their younger siblings, priming their immune systems so they could better tolerate pollen. The \"hygiene hypothesis\" has now been linked with [[asthma]], [[allergies]], intestinal diseases including [[Crohn's disease]], [[childhood leukemia]] and atopic [[dermatitis]]. There is increasing evidence that the less germs people are exposed to as a child, the more likely they are to get sick as adults.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Hygiene", "page_id" : 1056532}, {"source" : "wikipedia-en", "category" : "Cleaning", "page_id" : 1820394} ]  }
+			]
+		},
+		{
+			"keyword" : "jigsaw footplate",
+			"status" : "absent", 
+			"weight" : 40.22188342748283,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "swimming pool spa",
+			"weight" : 36.97844178518313,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "1636042" }
+			]
+		},
+		{
+			"keyword" : "egg downstream",
+			"status" : "absent", 
+			"weight" : 29.675939089596234,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "submersible",
+			"weight" : 27.573343474878413,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "counterparts ovine",
+			"status" : "absent", 
+			"weight" : 27.020014056723436,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "submerge",
+			"weight" : 26.914492570175433,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "bottom",
+			"weight" : 25.827856942867996,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pressure",
+			"weight" : 25.61303620425096,
+			"entities" : [ 
+{ "rawName" : "pressure", "preferredTerm" : "Pressure", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "23619", "freeBaseExternalRef" : "/m/05wnx", "definitions" : [ { "definition" : "'''Pressure ''' (the symbol: ''P'') is the [[force (physics)|force]] per unit [[area]] applied in a direction [[perpendicular]] to the surface of an object. [[Pressure measurement|Gauge pressure]] is the pressure relative to the local atmospheric or ambient pressure.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Thermodynamics", "page_id" : 693006}, {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Fluid mechanics", "page_id" : 1162560}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Hydraulics", "page_id" : 2373132}, {"source" : "wikipedia-en", "category" : "Atmospheric thermodynamics", "page_id" : 5135753}, {"source" : "wikipedia-en", "category" : "Pressure", "page_id" : 8398609}, {"source" : "wikipedia-en", "category" : "Underwater diving", "page_id" : 13972292}, {"source" : "wikipedia-en", "category" : "State functions", "page_id" : 19908698} ]  }
+			]
+		},
+		{
+			"keyword" : "entrain",
+			"weight" : 24.952507934566448,
+			"entities" : [ 
+{ "rawName" : "entrain", "preferredTerm" : "Entrainment (engineering)", "nerd_score" : "0.8032961472509452", "prob" : "1.0", "wikipediaExternalRef" : "6981516", "freeBaseExternalRef" : "/m/0gzt13", "definitions" : [ { "definition" : "'''Entrainment''' as commonly used in various branches of [[engineering]] may be defined as the entrapment of one substance by another substance. For example:", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083} ]  }
+			]
+		},
+		{
+			"keyword" : "impeller",
+			"weight" : 24.438830526986592,
+			"entities" : [ 
+{ "rawName" : "impeller", "preferredTerm" : "Impeller", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "1579816", "freeBaseExternalRef" : "/m/05c_xl", "definitions" : [ { "definition" : "An '''impeller''' ''(or impellar)'' is a rotor inside a tube or conduit used to increase the pressure and flow of a fluid. An impeller is a rotating component of a [[centrifugal pump]], usually made of iron, steel, bronze, brass, aluminum or plastic, which transfers [[energy]] from the [[Engine|motor]] that drives the pump to the [[fluid]] being pumped by accelerating the fluid outwards from the center of rotation. The velocity achieved by the impeller transfers into pressure when the outward movement of the fluid is confined by the pump casing. Impellers are usually short cylinders with an open inlet (called an eye) to accept incoming fluid, vanes to push the [[fluid]] radially, and a splined, keyed or threaded bore to accept a drive-shaft.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Pumps", "page_id" : 853902}, {"source" : "wikipedia-en", "category" : "Marine propulsion", "page_id" : 1111743} ]  }
+			]
+		},
+		{
+			"keyword" : "stream",
+			"weight" : 23.16074185624971,
+			"entities" : [ 
+{ "rawName" : "stream", "preferredTerm" : "Stream", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "18842308", "freeBaseExternalRef" : "/m/0j6m2", "definitions" : [ { "definition" : "A '''stream''' is a body of [[water]] with a [[Current (stream)|current]], confined within a [[stream bed|bed]] and [[Bank (geography)|stream bank]]s. Depending on its locale or certain characteristics, a stream may be referred to as a ''branch'', ''brook'', ''beck'', ''[[Burn (topography)|burn]]'', ''[[creek]]'', \"crick\", ''gill'' (occasionally ''ghyll''), ''[[Kill (body of water)|kill]]'', ''[[lick (stream)|lick]]'', ''[[rill]]'', ''[[river]]'', ''syke'', ''[[bayou]]'', ''rivulet'', ''streamage'', ''wash'', ''run'' or ''runnel''.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Geography" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Rivers", "page_id" : 695393}, {"source" : "wikipedia-en", "category" : "Water streams", "page_id" : 1092107}, {"source" : "wikipedia-en", "category" : "Hydrology", "page_id" : 1101997}, {"source" : "wikipedia-en", "category" : "Geomorphology", "page_id" : 1106721}, {"source" : "wikipedia-en", "category" : "Fluvial landforms", "page_id" : 11062666} ]  }
+			]
+		},
+		{
+			"keyword" : "vacv strain strain",
+			"status" : "absent", 
+			"weight" : 22.192014801412405,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pebbles sand",
+			"weight" : 21.898717077068415,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "314610" }
+			]
+		},
+		{
+			"keyword" : "electric",
+			"weight" : 21.739546140190495,
+			"entities" : [ 
+{ "rawName" : "electric", "preferredTerm" : "Electricity", "nerd_score" : "0.913985569471041", "prob" : "1.0", "wikipediaExternalRef" : "9550", "freeBaseExternalRef" : "/m/02lts", "definitions" : [ { "definition" : "'''Electricity''' is a general term encompassing a variety of phenomena resulting from the presence and flow of [[electric charge]]. These include many easily recognizable phenomena, such as [[lightning]], [[static electricity]], and the flow of [[electrical current]] in an electrical wire. In addition, electricity encompasses less familiar concepts such as the [[electromagnetic field]] and [[electromagnetic induction]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Vehicles" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electricity", "page_id" : 959298} ]  }
+			]
+		},
+		{
+			"keyword" : "gal oil-based",
+			"status" : "absent", 
+			"weight" : 19.43156497481278,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "harness",
+			"weight" : 19.364994213972913,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "flaming door",
+			"status" : "absent", 
+			"weight" : 19.135085745738337,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

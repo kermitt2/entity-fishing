@@ -1,0 +1,219 @@
+{
+	"_id" : "559521a29c597f75f384ea24",
+	"publication_id" : "US7640742",
+	"invention_title" : "Device for monitoring the level of a container",
+	"keywords" : [
+		{
+			"keyword" : "float",
+			"weight" : 382.66367995478896,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "30250063" }
+			]
+		},
+		{
+			"keyword" : "magnet",
+			"weight" : 81.76831652837464,
+			"entities" : [ 
+{ "rawName" : "magnet", "preferredTerm" : "Magnet", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "51079", "freeBaseExternalRef" : "/m/0dgr9", "definitions" : [ { "definition" : "A '''magnet''' (from Greek '''', \"[[Magnesia ad Sipylum|Magnesia]]n stone\") is a material or object that produces a [[magnetic field]]. This magnetic field is invisible but is responsible for the most notable property of a magnet: a force that pulls on other [[ferromagnetic]] materials, such as [[iron]], and attracts or repels other magnets.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Greek loanwords", "page_id" : 6516060}, {"source" : "wikipedia-en", "category" : "Types of magnets", "page_id" : 11027990} ]  }
+			]
+		},
+		{
+			"keyword" : "reservoir",
+			"weight" : 69.78141719860533,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "recess",
+			"weight" : 47.82601318709252,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "sidewalls",
+			"weight" : 35.673427154667344,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "diisostearate microcrystalline",
+			"status" : "absent",
+			"weight" : 35.37868988241114,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "insects mosquitos fruit fly",
+			"status" : "absent",
+			"weight" : 34.139318104794135,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "brake",
+			"weight" : 32.53246241329349,
+			"entities" : [ 
+{ "rawName" : "brake", "preferredTerm" : "Brake", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "65423", "freeBaseExternalRef" : "/m/0hcjm", "definitions" : [ { "definition" : "A '''brake''' is a [[mechanical device]] which inhibits motion. Its opposite component is a [[clutch]]. The rest of this article is dedicated to various types of vehicular brakes.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Vehicle braking technologies", "page_id" : 8511632}, {"source" : "wikipedia-en", "category" : "Brakes", "page_id" : 10966205} ]  }
+			]
+		},
+		{
+			"keyword" : "part",
+			"status" : "weak",
+			"weight" : 29.68731617180099,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "fngsv",
+			"status" : "absent",
+			"weight" : 29.662493342209768,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "guide",
+			"weight" : 24.495660351281796,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "slip",
+			"weight" : 22.935333401318918,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "projections",
+			"weight" : 22.601447392027584,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "rcir",
+			"status" : "absent",
+			"weight" : 21.390847242147274,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "immunoassay quantification amitriptyline",
+			"status" : "absent",
+			"weight" : 17.896702956669365,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cutout",
+			"weight" : 17.733694045881485,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "radial",
+			"weight" : 17.022309172164498,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "32533" }
+			]
+		},
+		{
+			"keyword" : "supply",
+			"weight" : 17.002272045357152,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "monitoring",
+			"weight" : 15.576481777462416,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "multipart",
+			"weight" : 14.576967724450773,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "plug",
+			"weight" : 13.249683632579242,
+			"entities" : [ 
+{ "rawName" : "plug", "preferredTerm" : "AC power plugs and sockets", "nerd_score" : "0.05693487217176253", "prob" : "1.0", "wikipediaExternalRef" : "773271", "freeBaseExternalRef" : "/m/03bbps", "definitions" : [ { "definition" : "'''AC power plugs''' and '''sockets''' are devices for removably connecting electrically operated devices to the [[mains electricity|power supply]]. A plug connects to a matching socket. Plugs are mostly or completely [[Gender of connectors and fasteners|male]], while sockets are mostly or completely female; the plug has protruding prongs or pins that fit into matching slots or holes in the socket. Generally the plug is the movable connector attached to an electrically-operated device's [[power cord]], and the socket is a fixture on equipment or a building structure. Wall-mounted sockets are also called receptacles, outlets, or power points.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mains power connectors", "page_id" : 2919689}, {"source" : "wikipedia-en", "category" : "Electrical wiring", "page_id" : 8386771}, {"source" : "wikipedia-en", "category" : "Electrical standards", "page_id" : 15444632} ]  }
+			]
+		},
+		{
+			"keyword" : "encase",
+			"weight" : 13.051218110655263,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "connector",
+			"weight" : 12.844482690132342,
+			"entities" : [ 
+{ "rawName" : "connector", "preferredTerm" : "Electrical connector", "nerd_score" : "0.7929398941006738", "prob" : "1.0", "wikipediaExternalRef" : "152654", "freeBaseExternalRef" : "/m/013xbf", "definitions" : [ { "definition" : "An '''electrical connector''' is an [[electro-mechanical]] device for joining [[electrical circuit]]s as an [[interface]] using a mechanical assembly. The connection may be temporary, as for portable equipment, require a tool for assembly and removal, or serve as a permanent electrical joint between two wires or devices.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Electricity" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electrical connectors", "page_id" : 893681} ]  }
+			]
+		},
+		{
+			"keyword" : "greater ndclo",
+			"status" : "absent",
+			"weight" : 12.557307212355122,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "vacancy-free wustite feo",
+			"status" : "absent",
+			"weight" : 12.546869702770925,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "paart",
+			"status" : "weak",
+			"weight" : 12.513334076891551,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "lug",
+			"weight" : 12.305986050799268,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "automatiacally",
+			"status" : "weak",
+			"weight" : 11.744800509821893,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "gas-tight fluid-tight",
+			"weight" : 11.491682829359569,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "level",
+			"weight" : 10.973327299502056,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

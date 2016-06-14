@@ -1,0 +1,219 @@
+{
+	"_id" : "55951faa9c597f75f3825b8d",
+	"publication_id" : "US7472459",
+	"invention_title" : "Hinge structure for flat visual display device",
+	"keywords" : [
+		{
+			"keyword" : "frictional",
+			"weight" : 250.5848923501942,
+			"entities" : [ 
+{ "rawName" : "frictional", "preferredTerm" : "Friction", "nerd_score" : "0.9254362530096243", "prob" : "1.0", "wikipediaExternalRef" : "11062", "freeBaseExternalRef" : "/m/02zp2", "definitions" : [ { "definition" : "'''Friction''' is the [[force]] resisting the relative motion of solid surfaces, fluid layers, and/or material elements sliding against each other. There are several types of friction:", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Classical mechanics", "page_id" : 735875}, {"source" : "wikipedia-en", "category" : "Force", "page_id" : 1770374}, {"source" : "wikipedia-en", "category" : "Introductory physics", "page_id" : 1826242}, {"source" : "wikipedia-en", "category" : "Tribology", "page_id" : 27187160} ]  }
+			]
+		},
+		{
+			"keyword" : "tightening",
+			"weight" : 207.40636212365976,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pivotal",
+			"weight" : 158.0853853102911,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "member",
+			"status" : "weak",
+			"weight" : 136.68421273224521,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "prevalent responders",
+			"weight" : 129.16733132462713,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "hinge",
+			"weight" : 118.27279751027484,
+			"entities" : [ 
+{ "rawName" : "hinge", "preferredTerm" : "Hinge", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "254945", "freeBaseExternalRef" : "/m/01lsn3", "definitions" : [ { "definition" : "A '''hinge''' is a type of [[Bearing (mechanical)|bearing]] that connects two solid objects, typically allowing only a limited [[angle of rotation]] between them. Two objects connected by an ideal hinge rotate relative to each other about a fixed [[axis of rotation]]. Hinges may be made of [[Flexure bearing|flexible material]] or of moving components. In [[biology]], many [[joint]]s function as hinges.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanical engineering", "page_id" : 717561}, {"source" : "wikipedia-en", "category" : "Hardware (mechanical)", "page_id" : 921931}, {"source" : "wikipedia-en", "category" : "Door furniture", "page_id" : 1200110}, {"source" : "wikipedia-en", "category" : "Linkages", "page_id" : 8129567} ]  }
+			]
+		},
+		{
+			"keyword" : "visual",
+			"weight" : 117.4363829313715,
+			"entities" : [ 
+{ "rawName" : "visual", "preferredTerm" : "Visual system", "nerd_score" : "0.9218553618012741", "prob" : "1.0", "wikipediaExternalRef" : "305136", "freeBaseExternalRef" : "/m/01sdq0", "definitions" : [ { "definition" : "The '''visual system''' is the part of the [[central nervous system]] which enables organisms to [[visual perception|process visual detail]], as well as enabling several non-image forming photoresponse functions. It interprets information from [[visible light]] to build a representation of the surrounding world. The visual system accomplishes a number of complex tasks, including the reception of light and the formation of monocular representations; the construction of a binocular perception from a pair of two dimensional projections; the identification and categorization of visual objects; assessing distances to and between objects; and guiding body movements in relation to visual objects. The psychological manifestation of visual information is known as [[visual perception]], a lack of which is called [[blindness]]. Non-image forming visual functions, independent of visual perception, include the [[pupillary light reflex]] (PLR) and circadian [[Entrainment (chronobiology)|photoentrainment]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Sensory system", "page_id" : 749749}, {"source" : "wikipedia-en", "category" : "Visual system", "page_id" : 749769}, {"source" : "wikipedia-en", "category" : "Brain", "page_id" : 5239453} ]  }
+			]
+		},
+		{
+			"keyword" : "shaft",
+			"weight" : 112.81397538464152,
+			"entities" : [ 
+{ "rawName" : "shaft", "preferredTerm" : "Drive shaft", "nerd_score" : "0.9148232261897009", "prob" : "1.0", "wikipediaExternalRef" : "1022803", "freeBaseExternalRef" : "/m/03_3kb", "definitions" : [ { "definition" : "A '''drive shaft''', '''driveshaft''', '''driving shaft''', '''propeller shaft''', or '''[[Universal joint#History|Cardan]] shaft''' is a mechanical component for transmitting [[torque]] and rotation, usually used to connect other components of a [[drive train]] that cannot be connected directly because of distance or the need to allow for relative movement between them.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Automotive technologies", "page_id" : 859604}, {"source" : "wikipedia-en", "category" : "Mechanical power control", "page_id" : 16305147}, {"source" : "wikipedia-en", "category" : "Mechanical power transmission", "page_id" : 22781840}, {"source" : "wikipedia-en", "category" : "Vehicle parts", "page_id" : 23450032} ]  }
+			]
+		},
+		{
+			"keyword" : "fixing",
+			"weight" : 110.67613098278548,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "plate",
+			"weight" : 96.86226002093038,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "elastic",
+			"weight" : 80.93162703404894,
+			"entities" : [ 
+{ "rawName" : "elastic", "preferredTerm" : "Elasticity (physics)", "nerd_score" : "0.9218553618012741", "prob" : "1.0", "wikipediaExternalRef" : "268923", "freeBaseExternalRef" : "/m/01npkt", "definitions" : [ { "definition" : "In [[physics]], '''elasticity''' is the [[physical property]] of a material that returns to its original shape after the [[stress (mechanics)|stress]] (e.g. external [[force]]s) that made it deform or distort is removed. The relative amount of [[deformation (engineering)|deformation]] is called the [[Deformation (mechanics)|strain]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Elasticity (physics)", "page_id" : 15717766} ]  }
+			]
+		},
+		{
+			"keyword" : "flat",
+			"weight" : 80.59810054458259,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "force",
+			"weight" : 69.80004960149707,
+			"entities" : [ 
+{ "rawName" : "force", "preferredTerm" : "Force", "nerd_score" : "0.08906170135085797", "prob" : "1.0", "wikipediaExternalRef" : "10902", "freeBaseExternalRef" : "/m/02yc2", "definitions" : [ { "definition" : "In [[physics]], a '''force''' is any influence that causes a [[free body]] to undergo a change in speed, a change in direction, or a change in shape. Force can also be described by intuitive concepts such as a push or pull that can cause an object with [[mass]] to change its [[velocity]] (which includes to begin moving from a [[Newton's laws of motion#Newton.27s first law|state of rest]]), i.e., to [[accelerate]], or which can cause a flexible object to [[Deformation (engineering)|deform]]. A force has both [[Euclidean vector#Length|magnitude]] and [[Direction (geometry, geography)|direction]], making it a [[Vector (geometric)|vector]] quantity. [[Newton's second law]], F=ma, was originally formulated in slightly different, but equivalent terms: the original version states that the net force acting upon an object is equal to the [[time derivative|rate]] at which its [[momentum]] changes.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Classical mechanics", "page_id" : 735875}, {"source" : "wikipedia-en", "category" : "Force", "page_id" : 1770374}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608} ]  }
+			]
+		},
+		{
+			"keyword" : "breaking",
+			"weight" : 68.98112528883877,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "plane",
+			"weight" : 66.04451612862033,
+			"entities" : [ 
+{ "rawName" : "plane", "preferredTerm" : "Plane (geometry)", "nerd_score" : "0.9218553618012741", "prob" : "1.0", "wikipediaExternalRef" : "84029", "freeBaseExternalRef" : "/m/0lf8p", "definitions" : [ { "definition" : "In [[mathematics]], a '''plane''' is any flat, two-[[dimensional]] [[surface]]. A plane is the two dimensional analogue of a [[point (geometry)|point]] (zero-dimensions), a [[line (geometry)|line]] (one-dimension) and a [[space]] (three-dimensions). Planes can arise as subspaces of some higher dimensional space, as with the walls of a room, or they may enjoy an independent existence in their own right, as in the setting of [[Euclidean geometry]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Euclidean geometry", "page_id" : 694421}, {"source" : "wikipedia-en", "category" : "Surfaces", "page_id" : 695994}, {"source" : "wikipedia-en", "category" : "Mathematical concepts", "page_id" : 27248985} ]  }
+			]
+		},
+		{
+			"keyword" : "display",
+			"weight" : 64.14690055262268,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "18760119" }
+			]
+		},
+		{
+			"keyword" : "current pixel tpx",
+			"weight" : 61.698094690924215,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "restoring",
+			"weight" : 52.157164998255574,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "7953419" }
+			]
+		},
+		{
+			"keyword" : "-methylpentanol methylene chloride",
+			"status" : "absent",
+			"weight" : 51.49698923719594,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "guiding",
+			"weight" : 43.082542397593954,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "meantime",
+			"weight" : 41.34780119833355,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "exert",
+			"weight" : 39.82693901902646,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "spacer",
+			"weight" : 37.8948935494139,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "treatment alza",
+			"status" : "absent",
+			"weight" : 34.737269502671666,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "niax ucc",
+			"status" : "absent",
+			"weight" : 32.176352667158966,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "break",
+			"status" : "redundant",
+			"weight" : 32.07410112486639,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pivoting",
+			"status" : "redundant",
+			"weight" : 27.337216541142787,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "controlling",
+			"weight" : 25.944907280311018,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "device",
+			"weight" : 25.799522221032547,
+			"entities" : [ 
+{ "rawName" : "device", "preferredTerm" : "Tool", "nerd_score" : "0.6971662228615083", "prob" : "1.0", "wikipediaExternalRef" : "30677", "freeBaseExternalRef" : "/m/07k1x", "definitions" : [ { "definition" : "A '''tool''' is a device that can be used to produce an item or achieve a task, but that is not consumed in the process. Informally the word is also used to describe a procedure or process with a specific purpose. Tools that are used in particular fields or activities may have different designations such as ''Instrument'', ''Utensil'', ''Implement'', ''Machine'', or ''Apparatus''.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Tools", "page_id" : 846098}, {"source" : "wikipedia-en", "category" : "Manufacturing", "page_id" : 867519} ]  }
+			]
+		},
+		{
+			"keyword" : "insert",
+			"weight" : 23.33638182159527,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

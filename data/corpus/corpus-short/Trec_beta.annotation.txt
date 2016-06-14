@@ -1,0 +1,162 @@
+TREC-7	0	/m/04cnvy	bowflex	1
+TREC-8	0	/m/03d452	brooks brothers	1
+TREC-10	0	/m/01n7q	california	1
+TREC-11	0	/m/0nfgq	cass county missouri	1
+TREC-13	0	/m/020ys5	condo	1
+TREC-13	0	/m/02xry	florida	1
+TREC-14	0	/m/0c4tkd	culpeper national cemetery	1
+TREC-17	0	/m/02st88	discovery channel	1
+TREC-17	1	/m/0kc8y	discovery channel	1
+TREC-20	0	/m/0dc3_	dutchess county	1
+TREC-22	0	/m/03ck4lv	east ridge high school	1
+TREC-22	1	/m/027311j	east ridge high school	1
+TREC-22	2	/m/0bs8gsb	east ridge high school	1
+TREC-25	0	/m/0180mw	er	1
+TREC-28	0	/m/02761b3	french lick resort and casino	1
+TREC-34	0	/m/03v0t	illinois state	1
+TREC-36	0	/m/03v1s	indiana	1
+TREC-37	0	/m/03v1s	indiana state	1
+TREC-40	0	/m/03s0w	iowa	1
+TREC-42	0	/m/04f_d	kansas city mo	1
+TREC-43	0	/m/02qvp5f	kenmore	1
+TREC-45	0	/m/03rk0	india	1
+TREC-48	0	/m/02dp7g	madam cj walker	1
+TREC-49	0	/m/015fr	brazil	1
+TREC-50	0	/m/09c7w0	united states	1
+TREC-51	0	/m/01b370	martha stewart	1
+TREC-51	0	/m/0j6rg	imclone	1
+TREC-52	0	/m/0158xh	mayo clinic	1
+TREC-52	0	/m/0ggh3	jacksonville fl	1
+TREC-53	0	/m/04p2zc	milwaukee journal sentinel	1
+TREC-54	0	/m/0cjjt	mothers day	1
+TREC-55	0	/m/02mjmr	obama	1
+TREC-56	0	/m/0gyytc	orange county convention center	1
+TREC-57	0	/m/0k1jw	pacific northwest laboratory	1
+TREC-59	0	/m/09c7w0	united states	1
+TREC-60	0	/m/066kp	ps 2	1
+TREC-61	0	/m/04r3s1	ralph owen brewster	1
+TREC-62	0	/m/02_zt7	rincon	1
+TREC-63	0	/m/0288kpv	ritz carlto	1
+TREC-63	0	/m/06y9l6	lake las vegas	1
+TREC-65	0	/m/064m90	rocky mountain news	1
+TREC-69	0	/m/0l35f	sonoma county	1
+TREC-70	0	/m/05b5w	nile	1
+TREC-72	0	/m/07b_l	texas	1
+TREC-72	0	/m/02qtlv	border patrol	1
+TREC-73	0	/m/07c0j	the beatles	1
+TREC-74	0	/m/0p4s9	the music man	1
+TREC-74	1	/m/0cqnss	the music man	1
+TREC-74	2	/m/0gwypk	the music man	1
+TREC-75	0	/m/0251j3	the secret garden	1
+TREC-75	1	/m/064xfg	the secret garden	1
+TREC-75	2	/m/049cgk	the secret garden	1
+TREC-75	3	/m/03cn0k6	the secret garden	1
+TREC-75	4	/m/0dj9x08	the secret garden	1
+TREC-76	0	/m/07h34	tn	1
+TREC-76	0	/m/024ckj	highway partol	1
+TREC-81	0	/m/02gnrt	university of phoenix	1
+TREC-82	0	/m/08874	yellowstone national park	1
+TREC-83	0	/m/07vth	us capitol	1
+TREC-85	0	/m/01fmw0	uss yorktown	1
+TREC-85	0	/m/0gkgp	charleston sc	1
+TREC-86	0	/m/05q4wt8	va dmv	1
+TREC-92	0	/m/0czcxyw	leymah gbowee	1
+TREC-92	0	/m/01gw2	bbc news	1
+TREC-93	0	/m/01n910	red dawn	1
+TREC-93	1	/m/07sbq6c	red dawn	1
+trec-web-1	0	/m/047sxrj	nicki minaj	0.3111111111111111
+trec-web-1	0	/m/07ss8_	chris brown	1
+trec-web-1	0	/m/0j655w7	right by my side	1
+trec-web-2	0	/m/0gsg7	abc	1
+trec-web-3	0	/m/01zff	college football	0.3
+trec-web-3	0	/m/03kwwj	mesa community college	1
+trec-web-4	0	/m/01fwh3	tommy morrison	0.3111111111111111
+trec-web-5	0	/m/0hzlz	south africa	0.3
+trec-web-6	0	/m/0fqlrt8	montclair elementary school	0.3
+trec-web-9	0	/m/0fkt6q	jo ann fabrics	1
+trec-web-9	0	/m/0sjqm	rockford il	0.3
+trec-web-10	0	/m/012dn_	berkeley square	0.3
+trec-web-11	0	/m/0hnbsn3	samsung galaxy	0.3
+trec-web-12	0	/m/0tcj6	kansas city	0.3
+trec-web-12	0	/m/018c71	craigslist	0.2
+trec-web-13	0	/m/0261m	west indies islands	0.2
+trec-web-14	0	/m/0158xh	mayo clinic	0.3
+trec-web-15	0	/m/05mt7ny	kesha	0.2111111111111111
+trec-web-15	0	/m/0k3k70f	american music awards 2012	1
+trec-web-16	0	/m/03bw_bg	natwest	0.2
+trec-web-17	0	/m/0cwrr	sesame street	1
+trec-web-18	0	/m/05ncwl	kerry fox	0.2111111111111111
+trec-web-20	0	/m/04jct53	demandware	0.4
+trec-web-21	0	/m/0_jtn	little compton	0.4
+trec-web-23	0	/m/02v1vq	bob weir	0.4111111111111111
+trec-web-25	0	/m/01x_2h	carolinas	0.3
+trec-web-25	0	/m/0rq1q	delray beach	0.4
+trec-web-26	0	/m/0z07	american airlines	0.3
+trec-web-27	0	/m/01x73	connecticut	0.2
+trec-web-29	0	/m/049rl0	bbc news	0.2
+trec-web-29	0	/m/0czcxyw	leymah gbowee	0.3111111111111111
+trec-web-30	0	/m/01x38r	go transit	1
+trec-web-31	0	/m/09cnzp	frank pembleton	0.3111111111111111
+trec-web-34	0	/m/09yrh	jennifer aniston	0.3111111111111111
+trec-web-35	0	/m/037nnt	robin roberts	0.2111111111111111
+trec-web-36	0	/m/0146mv	nickelodeon	0.1
+trec-web-36	0	/m/0pv1y	mall of america	0.3
+trec-web-38	0	/m/0fqqnpw	one direction	1
+trec-web-40	0	/m/064293	huffington post	0.3111111111111111
+trec-web-41	0	/m/02rgp8f	cassandra clare	0.3111111111111111
+trec-web-42	0	/m/027v2xl	christopher banks	0.2111111111111111
+trec-web-42	0	/m/013gv7	lees summit	0.4
+trec-web-43	0	/m/0h7mj__	kool smiles	1
+trec-web-43	0	/m/0mnwd	fredericksburg	0.2
+trec-web-44	0	/m/02qxh1y	billy scott	1
+trec-web-45	0	/m/0vmt	arizona	0.3
+trec-web-46	0	/m/029f32	costco	0.2
+trec-web-46	0	/m/0h3lt	huntington beach	0.3
+trec-web-47	0	/m/0dxd72	lillian vernon	1
+trec-web-48	0	/m/0c_bfw	red cross	0.3
+trec-web-49	0	/m/0cqt90	donald trump	0.3111111111111111
+trec-web-51	0	/m/0jxkf	sarasota county	0.4
+trec-web-53	0	/m/0by8vb	american red cross	1
+trec-web-56	0	/m/0_xg3	mt juliet	1
+trec-web-56	0	/m/04__9b	regal cinemas	1
+trec-web-57	0	/m/0f__1	louisville ky	0.3
+trec-web-57	0	/m/018c71	craiglist	0.3
+trec-web-58	0	/m/0fplv	sullivan co ny	1
+trec-web-62	0	/m/01hlwv	chase online banking	1
+trec-web-63	0	/m/04ly1	loisiana	1
+trec-web-65	0	/m/026bt_h	university of alabama football	0.3
+trec-web-66	0	/m/08z129	att	1
+trec-web-67	0	/m/051wcwn	robert griffin	1
+trec-web-67	1	/m/0jkvqz2	robert griffin	1
+trec-web-68	0	/m/09c7w0	american	0.01111111111111111
+trec-web-69	0	/m/0mmnn	ryder cup	0.5
+trec-web-70	0	/m/0j3zw6w	the walking dead season 3	1
+trec-web-71	0	/m/036rlq	delaware memorial bridge	1
+trec-web-72	0	/m/016mng	friday the 13th	1
+trec-web-73	0	/m/05sprc	deana carter	0.2111111111111111
+trec-web-74	0	/m/047lhgv	538	0.2
+trec-web-74	0	/m/0gl0hx	nate silver	1
+trec-web-75	0	/m/03h_fqv	tom waits	1
+trec-web-76	0	/m/02slcx	fandango	1
+trec-web-77	0	/m/046d80l	mini	0.1
+trec-web-78	0	/m/0f2w0	san antonio texas	0.4
+trec-web-78	0	/m/09v0xd	marriott residence inn	0.3
+trec-web-80	0	/m/02rhj4	staples	0.3
+trec-web-80	0	/m/0f2w0	san antonio tx	0.4
+trec-web-81	0	/m/017xch	microsoft outlook	0.3
+trec-web-84	0	/m/040c1n	cat dog	0.3
+trec-web-85	0	/m/016ppr	destinys child	0.3
+trec-web-85	0	/m/09jcvs	youtube	1
+trec-web-86	0	/m/0268pg0	webkinz world	1
+trec-web-87	0	/m/0d3nr	george westinghouse	1
+trec-web-88	0	/m/01yx7f	bank of america	0.3
+trec-web-90	0	/m/01l5hm	newark airport	1
+trec-web-90	0	/m/0_4kr	wyoming pa	0.3
+trec-web-92	0	/m/05zzbt0	park n fly	1
+trec-web-93	0	/m/07bcn	sacramento ca	0.3
+trec-web-94	0	/m/0109l5	white settlement tx	0.4
+trec-web-96	0	/m/01n910	red dawn	1
+trec-web-96	1	/m/07sbq6c	red dawn	1
+trec-web-97	0	/m/0838qg	coldwell banker	0.6
+trec-web-99	0	/m/016kjs	lil wayne	0.5
+trec-web-100	0	/m/0tyql	new bedford	0.4

@@ -1,0 +1,16 @@
+Applied_Science Agriculture Animal_Husbandry Food Home Architecture Town_Plannin Buildings Furniture Computer_Science Engineering Mechanics Astronautics Electrotechnology Hydraulics Materials Energy Telecommunication Post Telegraphy Telephony Medicine Dentistry Pharmacy Psychiatry Radiology Surgery
+Agriculture Animal_Husbandry
+Architecture Town_Planning Buildings Furniture
+Engineering Mechanics Astronautics Electrotechnology Hydraulics Materials Energy
+Telecommunication Post
+Medicine Dentistry Pharmacy Psychiatry Radiology Surgery
+Pure_Science Astronomy Biology Biochemistry Anatomy Physiology Genetics Animals Plants Environment Chemistry Earth Geology Meteorology Oceanography Paleontology Geography Mathematics Geometry Statistics Physics Acoustics Atomic_Physic Electricity Electronics Gas Optics
+Biology Biochemistry Anatomy Physiology Genetics
+Earth Geology Meteorology Oceanography Paleontology Geography
+Mathematics Geometry Statistics
+Electricity Electronics
+Social_Science Health Body_Care Military Pedagogy School University Publishing Sociology Artisanship Commerce Industry Transport Aviation Vehicles Nautical Railway Economy Enterprise Finance Insurance Tax Administration Politics
+Health Body_Care
+Pedagogy School University
+Transport Aviation Vehicles Nautical Railway
+Economy Enterprise Finance Insurance Tax

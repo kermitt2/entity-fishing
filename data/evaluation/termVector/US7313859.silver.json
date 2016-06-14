@@ -1,0 +1,227 @@
+{
+	"_id" : "55951de19c597f75f37ff336",
+	"publication_id" : "US7313859",
+	"invention_title" : "Method for optimizing placement order by placement apparatuses that place electronic components on circuit board",
+	"keywords" : [
+		{
+			"keyword" : "placement",
+			"weight" : 2331.916042757452,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "3473557" }
+			]
+		},
+		{
+			"keyword" : "optimization",
+			"weight" : 1111.6653306922913,
+			"entities" : [ 
+{ "rawName" : "optimization", "preferredTerm" : "Mathematical optimization", "nerd_score" : "0.9306881568676397", "prob" : "1.0", "wikipediaExternalRef" : "52033", "freeBaseExternalRef" : "/m/0dpl_", "definitions" : [ { "definition" : "In [[mathematics]] and [[computational science]], '''mathematical optimization''' (alternatively, '''optimization''' or '''mathematical programming''') refers to the selection of a best element from some set of available alternatives.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Operations research", "page_id" : 1008581}, {"source" : "wikipedia-en", "category" : "Mathematical optimization", "page_id" : 18956829} ]  }
+			]
+		},
+		{
+			"keyword" : "solenoid proportioning",
+			"status" : "absent",
+			"weight" : 1061.9599366845716,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "electronic",
+			"weight" : 887.7949180832209,
+			"entities" : [ 
+{ "rawName" : "electronic", "preferredTerm" : "Electronics", "nerd_score" : "0.7419061981352255", "prob" : "1.0", "wikipediaExternalRef" : "9663", "freeBaseExternalRef" : "/m/02mrp", "definitions" : [ { "definition" : "'''Electronics''' is the branch of [[science]] and [[technology]] that deals with [[electrical circuit]]s involving [[active component|active electrical component]]s such as [[vacuum tube]]s, [[transistor]]s, [[diode]]s and [[integrated circuit]]s. The [[nonlinear]] behaviour of these components and their ability to control electron flows makes amplification of weak signals possible and is usually applied to [[information processing|information]] and [[signal processing]]. Similarly, the ability of electronic devices to act as switches makes digital information processing possible.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electronics", "page_id" : 707661} ]  }
+			]
+		},
+		{
+			"keyword" : "task",
+			"weight" : 706.657085906943,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "feeder",
+			"weight" : 591.3357155406802,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sub-unit",
+			"weight" : 497.4747795012644,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "unit",
+			"weight" : 465.32537712636696,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "operable",
+			"weight" : 451.4256762534557,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "5393194" }
+			]
+		},
+		{
+			"keyword" : "board",
+			"weight" : 419.32604290385586,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "65910" }
+			]
+		},
+		{
+			"keyword" : "vinyl thiophenes thiazoles",
+			"status" : "absent",
+			"weight" : 385.7831317252881,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "apparatus",
+			"status" : "weak",
+			"weight" : 359.4071645674717,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "5969588" }					
+			]
+		},
+		{
+			"keyword" : "calculation",
+			"weight" : 355.2325348484861,
+			"entities" : [ 
+{ "rawName" : "calculation", "preferredTerm" : "Calculation", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "239121", "freeBaseExternalRef" : "/m/01jpbw", "definitions" : [ { "definition" : "A '''calculation''' is a deliberate process for transforming one or more inputs into one or more results, with variable change. The term is used in a variety of senses, from the very definite [[arithmetic]]al calculation of using an [[algorithm]] to the vague [[heuristics]] of calculating a strategy in a competition or calculating the chance of a successful relationship between two people.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mathematics", "page_id" : 690747} ]  }
+			]
+		},
+		{
+			"keyword" : "cytochrome phenolphthalein ascorbic",
+			"status" : "absent",
+			"weight" : 341.48601581531807,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "servicing awss",
+			"status" : "absent",
+			"weight" : 338.0528295755043,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "hcmr",
+			"status" : "absent",
+			"weight" : 323.6810953774142,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "coordinate",
+			"weight" : 301.44110848172426,
+			"entities" : [ 
+{ "rawName" : "coordinate", "preferredTerm" : "Coordinate system", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "81931", "freeBaseExternalRef" : "/m/0l1sh", "definitions" : [ { "definition" : "In [[geometry]], a '''coordinate system''' is a system which uses one or more [[number]]s, or '''coordinates''', to uniquely determine the position of a [[Point (geometry)|point]] or other geometric element. The order of the coordinates is significant and they are sometimes identified by their position in an ordered [[tuple]] and sometimes by a letter, as in 'the ''x''-coordinate'. In elementary mathematics the coordinates are taken to be [[real number]]s, but in more advanced applications coordinates can be taken to be [[complex number]]s or elements of a more abstract system such as a [[commutative ring]]. The use of a coordinate system allows problems in geometry to be translated into problems about numbers and ''vice versa''; this is the basis of [[analytic geometry]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Coordinate systems", "page_id" : 956479}, {"source" : "wikipedia-en", "category" : "Analytic geometry", "page_id" : 23968676} ]  }
+			]
+		},
+		{
+			"keyword" : "plane",
+			"weight" : 286.1929032240214,
+			"entities" : [ 
+{ "rawName" : "plane", "preferredTerm" : "Plane (geometry)", "nerd_score" : "0.8259205118366466", "prob" : "1.0", "wikipediaExternalRef" : "84029", "freeBaseExternalRef" : "/m/0lf8p", "definitions" : [ { "definition" : "In [[mathematics]], a '''plane''' is any flat, two-[[dimensional]] [[surface]]. A plane is the two dimensional analogue of a [[point (geometry)|point]] (zero-dimensions), a [[line (geometry)|line]] (one-dimension) and a [[space]] (three-dimensions). Planes can arise as subspaces of some higher dimensional space, as with the walls of a room, or they may enjoy an independent existence in their own right, as in the setting of [[Euclidean geometry]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Euclidean geometry", "page_id" : 694421}, {"source" : "wikipedia-en", "category" : "Surfaces", "page_id" : 695994}, {"source" : "wikipedia-en", "category" : "Mathematical concepts", "page_id" : 27248985} ]  }
+			]
+		},
+		{
+			"keyword" : "substrate single-walled nanotube",
+			"status" : "absent",
+			"weight" : 283.0857095096369,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "slowest",
+			"weight" : 261.14040566862957,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "shock falling-down",
+			"status" : "absent",
+			"weight" : 251.62711451614732,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "count",
+			"weight" : 249.77735215795164,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "275768" }
+			]
+		},
+		{
+			"keyword" : "make nanolase france",
+			"status" : "absent",
+			"weight" : 244.73611877920283,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "calculate",
+			"status" : "redundant",
+			"weight" : 231.8507830693108,
+			"entities" : [ 
+{ "rawName" : "calculation", "preferredTerm" : "Calculation", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "239121", "freeBaseExternalRef" : "/m/01jpbw", "definitions" : [ { "definition" : "A '''calculation''' is a deliberate process for transforming one or more inputs into one or more results, with variable change. The term is used in a variety of senses, from the very definite [[arithmetic]]al calculation of using an [[algorithm]] to the vague [[heuristics]] of calculating a strategy in a competition or calculating the chance of a successful relationship between two people.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mathematics", "page_id" : 690747} ]  }
+			]
+		},
+		{
+			"keyword" : "ned overcome",
+			"status" : "absent",
+			"weight" : 223.53154577143258,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "circuit",
+			"weight" : 194.45923972318892,
+			"entities" : [ 
+{ "rawName" : "circuit", "preferredTerm" : "Electronic circuit", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "8707643", "freeBaseExternalRef" : "/m/027fq_5", "definitions" : [ { "definition" : "An '''electronic circuit''' is composed of individual electronic components, such as [[resistors]], [[transistors]], [[capacitors]], [[inductors]] and [[diodes]], connected by conductive wires or traces through which [[electric current]] can flow. The combination of components and wires allows various simple and complex operations to be performed: signals can be amplified, computations can be performed, and data can be moved from one place to another. Circuits can be constructed of discrete components connected by individual pieces of wire, but today it is much more common to create interconnections by photolithographic techniques on a laminated [[Substrate (semiconductor)|substrate]] (a [[printed circuit board]] or PCB) and solder the components to these interconnections to create a finished circuit. In an [[Integrated Circuit]] or IC, the components and interconnections are formed on the same substrate, typically a semiconductor such as [[silicon]] or (less commonly) [[gallium arsenide]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electronic circuits", "page_id" : 1331227}, {"source" : "wikipedia-en", "category" : "Electronics terms", "page_id" : 1331383}, {"source" : "wikipedia-en", "category" : "Electronic engineering", "page_id" : 2909311} ]  }
+			]
+		},
+		{
+			"keyword" : "hour desulphurised",
+			"status" : "absent",
+			"weight" : 170.0521251899995,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "speed",
+			"weight" : 164.83170625083076,
+			"entities" : [ 
+{ "rawName" : "speed", "preferredTerm" : "Speed", "nerd_score" : "0.9067564771169945", "prob" : "1.0", "wikipediaExternalRef" : "28748", "freeBaseExternalRef" : "/m/073s_", "definitions" : [ { "definition" : "In [[kinematics]], the '''speed''' of an object is the [[magnitude (mathematics)|magnitude]] of its [[velocity]] (the [[time derivative|rate of change]] of its position); it is thus a [[Scalar (physics)|scalar]] quantity. The '''average speed''' of an object in an interval of time is the [[distance]] traveled by the object divided by the [[Time|duration]] of the interval; the instantaneous speed is the [[limit (mathematics)|limit]] of the average speed as the duration of the time interval approaches zero .", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Introductory physics", "page_id" : 1826242}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608}, {"source" : "wikipedia-en", "category" : "Velocity", "page_id" : 22663785} ]  }
+			]
+		},
+		{
+			"keyword" : "suction",
+			"weight" : 164.28087197139462,
+			"entities" : [ 
+{ "rawName" : "suction", "preferredTerm" : "Suction", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "235576", "freeBaseExternalRef" : "/m/01j6v6", "definitions" : [ { "definition" : "'''Suction''' is the flow of a fluid into a partial [[vacuum]], or region of low pressure. The [[pressure gradient force|pressure gradient]] between this region and the ambient pressure will propel matter toward the low pressure area. Suction is popularly thought of as an attractive effect, which is incorrect since vacuums do not innately attract matter. Dust being \"sucked\" into a [[vacuum cleaner]] is actually being pushed in by the higher pressure air on the outside of the cleaner.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Units of pressure", "page_id" : 753117}, {"source" : "wikipedia-en", "category" : "Vacuum", "page_id" : 2634715}, {"source" : "wikipedia-en", "category" : "Physical quantities", "page_id" : 18726608} ]  }
+			]
+		},
+		{
+			"keyword" : "candidate",
+			"weight" : 150.2210857953101,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "1556808" }
+			]
+		}
+	]
+}

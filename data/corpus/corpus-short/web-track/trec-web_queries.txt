@@ -1,0 +1,372 @@
+trec-web-0	Carriers that Blackberry makes phones for
+trec-web-1	Winners of the ACM Athena award
+trec-web-2	Students of Claire Cardie
+trec-web-3	Professional sports teams in Philadelphia
+trec-web-4	Products of Medimmune Inc
+trec-web-5	Organizations that award Nobel prizes
+trec-web-6	Airlines that currently use Boeing 747 planes
+trec-web-7	CDs released by the King's Singers
+trec-web-8	Members of The Beaux Arts Trio
+trec-web-9	Campuses of Indiana University
+trec-web-10	Donors to the Home Depot Foundation
+trec-web-11	Airlines that Air Canada has code share flights with
+trec-web-12	Journals published by the AVMA
+trec-web-13	Authors awarded an Anthony Award at Bouchercon in 2007
+trec-web-14	Universities that are members of the SEC conference for football
+trec-web-15	Sponsors of the Mancuso quilt festivals
+trec-web-16	Chefs with a show on the Food Network
+trec-web-17	Members of the band Jefferson Airplane
+trec-web-18	Companies that John Hennessy serves on the board of
+trec-web-19	Scotch whisky distilleries on the island of Islay
+trec-web-20	art galleries are located in Bethesda Maryland
+trec-web-21	countries that are members of OPEC the Organization of Petroleum Exporting Countries
+trec-web-22	recording companies now sell the Kingston Trio's songs
+trec-web-23	the members of the Jazz at Lincoln Center Orchestra
+trec-web-24	From what schools did the Supreme Court justices receive their undergraduate degrees
+trec-web-25	installed taken delivery of a Cray XT computer
+trec-web-26	publishers of text books used in this department
+trec-web-27	journals published by the IEEE Engineering in Medicine and Biology society
+trec-web-28	companies that are included in the Dow Jones industrial average
+trec-web-29	US states and Canadian provinces where Ocean Spray growers are located
+trec-web-30	chapters of the American Institute of Architects
+trec-web-31	schools received collaborative research awards from the National Endowment for the Humanities NEH in 2008
+trec-web-32	organizations were able to complete the DARPA Grand Challenge in the 2007 contest
+trec-web-33	airlines have financial default coverage with Access America Travel Insurance and Assistance
+trec-web-34	Which companies have representation on the board of directors of the University of Maryland
+trec-web-35	companies build parts used in production of Ford vehicles
+trec-web-36	people that appeared on the Tavis Smiley show in December 2008
+trec-web-37	drivers and crew chiefs for Richard Petty Motorsports
+trec-web-38	companies that offer benefits to members of the Maryland Farm Bureau
+trec-web-39	manufacturers of LCD televisions sold by Costco
+trec-web-40	the regular opinion columnists of the New York Times
+trec-web-41	subsidiaries of General Electric
+trec-web-42	presidents of the Mystery Writers Association MWA
+trec-web-43	places visited during the June 2008 MADtrip to Seattle Washington
+trec-web-44	corporate partners of National Zoo
+trec-web-45	facilities are visited by the therapy dogs of Fidos for Freedom
+trec-web-46	balloon manufacturers associated with Albuquerque International Balloon Fiesta
+trec-web-47	unions that are members of the AFL-CIO
+trec-web-48	countries does Eurail operate in
+trec-web-49	companies owned or controlled by Abu Dhabi
+trec-web-50	organizations comprise the National Institutes of Health NIH
+trec-web-51	members of Board of Regents of Smithsonian Institution
+trec-web-52	breeders of Foundation Morgan horses
+trec-web-53	organizations are the participants in the NIH sponsored Knockout Mouse Project
+trec-web-54	2008 Edgars Awards nominees
+trec-web-55	companies or organizations have officers that sit on the Nature Conservancy's board of directors
+trec-web-56	homepages of Kennedy Center honorees
+trec-web-57	are some of the spin-off companies from the University of Michigan
+trec-web-58	Fulbright scholars in computer sciences
+trec-web-59	corporate partners of the Peabody Essex Museum
+trec-web-60	institutional members of the Association for Symbolic Logic ASL
+trec-web-61	cruise lines have cruises originating in Baltimore
+trec-web-62	institutions Drew Gilpin Faust been affiliated with for example as a trustee board member president etc
+trec-web-63	newspapers won the Pulitzer Prize for journalism in 2007
+trec-web-64	institutions is Patricia Cornwell a member of
+trec-web-65	places to see in Cleveland listed by Southwest Airlines
+trec-web-66	national parks visited on the Vacations by Rail tours
+trec-web-67	medical schools that are members of the AAMC
+trec-web-68	founding partners of Newseum
+trec-web-69	Teach For America National Growth Fund Investors for 2006-2010
+trec-web-70	Montana State University departments that offer a PhD program
+trec-web-71	publications in which Verghese's writing has appeared
+trec-web-72	television programs with an episode referencing the National Spelling Bee
+trec-web-73	educational institutions that have given an honorary degree to Placido Domingo
+trec-web-74	schools that the Prince of Wales attended
+trec-web-75	organizations that are research partners of Astra Zeneca
+trec-web-76	authors that collaborated with Lee Child on The Chopin Manuscript
+trec-web-77	brands of printers and all-in-ones carried by Costco
+trec-web-78	countries other than Iceland to which Icelandair flies
+trec-web-79	manufacturers of vehicles used by UPS
+trec-web-80	manufacturers of BIPAP and CPAP machines sold by CPAP Supply USA
+trec-web-81	organ or tissue recovery programs associated with IIAM
+trec-web-82	universities with an NCAA Division I men's lacrosse team
+trec-web-83	locations geo-political divisions containing BART police facilities
+trec-web-84	yarn shops located in Montgomery County MD
+trec-web-85	corporate software contributors to the OpenOffice project
+trec-web-86	companies that produce consumables granted the British Royal Family Warrant
+trec-web-87	organizations in Canada that are accredited to perform assistance dog activities
+trec-web-88	beer breweries located in the City of London England
+trec-web-89	philanthropic supporters of the Tiger Woods Foundation
+trec-web-90	food seed brands belonging to Monsanto
+trec-web-91	companies that have advertised on the Top Chef Bravo TV show
+trec-web-92	organizations not individuals against which the Center for Biological Diversity has filed a formal notice of intent to sue
+trec-web-93	musicians whose music was used in 2007 or 2008 Apple commercials
+trec-web-94	corporate sponsors of the equestrian center at the Yellowstone Boys and Girls Ranch
+trec-web-95	products featured in an episode of the TV series House
+trec-web-96	organizations that received the Intel Preferred Quality Supplier PQS Award in 2008
+trec-web-97	brands of knitting yarn carried by Jo-Ann Fabrics and Crafts stores
+trec-web-98	Wilmington or Cape Fear charities supported by the Landfall Foundation
+trec-web-99	stores in Florida or Delaware that sell SERRV merchandise
+trec-web-100	banks or credit unions that have branch offices in Bozeman Montana
+trec-web-101	companies whose infant and toddler items are carried by Olney Toys
+trec-web-102	bone marrow transplant centers in New York state that are members of the foundation
+trec-web-103	academic institutions with a staff member enrolled as a fellow or scholar at the Woodrow Wilson Center
+trec-web-104	cities in Montgomery County Maryland that are designated as a tree city by the Arbor Day Foundation
+trec-web-105	manufacturers of residential solar panels sold through Affordable Solar
+trec-web-106	Maryland orchestras that are not youth orchestras that are members of the League of American Orchestras
+trec-web-107	organizations that are sponsors of the Sandy Spring Museum
+trec-web-108	airlines that fly the Airbus 320 plane
+trec-web-109	actors and actresses who graduated from New Trier High School
+trec-web-110	institutions for which Ted Naos has designed paper-cut graphics
+trec-web-111	2008 films containing Apple product placement
+trec-web-112	organizations and corporations that support the Textile Museum
+trec-web-113	performers at Wine in the Woods in 2008
+trec-web-114	schools in California that have degree programs in architecture accredited by the Association
+trec-web-115	films distributed produced or co-produced by Dream Works Studios
+trec-web-116	institutions that have a cooperative program with the National Arboretum
+trec-web-117	authors that have won the National Book Award for young people's literature
+trec-web-118	manufacturers of French-door refrigerators sold at Sears
+trec-web-119	foundations that support the National Summer Learning Association
+trec-web-120	Electoral College
+trec-web-121	Ireland consular information sheet
+trec-web-122	Citizen attitudes toward prairie dogs
+trec-web-123	JPL stardust comet wild
+trec-web-124	American music
+trec-web-125	Philadelphia streets
+trec-web-126	Togo embassy
+trec-web-127	well water contamination
+trec-web-128	Pileated woodpecker
+trec-web-129	oil petroleum resources
+trec-web-130	Eruption of Mount St. Helens
+trec-web-131	Club drugs
+trec-web-132	welfare reform
+trec-web-133	Sandhill cranes and the Platte river
+trec-web-134	Secure linux
+trec-web-135	Copyright basics
+trec-web-136	toxic waste
+trec-web-137	Tuskegee airmen observance
+trec-web-138	substance abuse
+trec-web-139	National atlas maps
+trec-web-140	Iraq Kuwait threat history
+trec-web-141	child care
+trec-web-142	History of Phoenix Symbol
+trec-web-143	The White House President Bush's cabinet
+trec-web-144	OPM New Retirees
+trec-web-145	FDA 2002 press releases
+trec-web-146	Grand canyon monitoring and research center
+trec-web-147	origin of the universe
+trec-web-148	A history of American agriculture
+trec-web-149	teen pregnancy
+trec-web-150	NTP Herbal medicine factsheet
+trec-web-151	Religious Freedom amendment
+trec-web-152	the arts in education
+trec-web-153	Ohio dams and locks
+trec-web-154	Child support enforcement cost/benefit
+trec-web-155	public school standards of performance
+trec-web-156	historic preservation
+trec-web-157	Sibir Air anatomy of a disaster
+trec-web-158	Vehicle registration California
+trec-web-159	Dash combination diet
+trec-web-160	faith-based initiatives
+trec-web-161	Local drinking water
+trec-web-162	medical residency
+trec-web-163	federal and state statistics
+trec-web-164	FCC consumer bureau
+trec-web-165	money laundering
+trec-web-166	Consumer food advice
+trec-web-167	Monterey Bay national marine sanctuary
+trec-web-168	Food and Drug Administration
+trec-web-169	Budget process in the U.S. department of education
+trec-web-170	Kudzu invasive species
+trec-web-171	religious belief
+trec-web-172	automobile emissions vehicle pollution
+trec-web-173	Health resources and services administration
+trec-web-174	Plant hardiness zones
+trec-web-175	Cosmology peebles turner
+trec-web-176	FirstGov for Kids computers
+trec-web-177	art museums
+trec-web-178	Cell phone radiation
+trec-web-179	California art council
+trec-web-180	intelligence analysis
+trec-web-181	State local gateway
+trec-web-182	women's health binge eating disorders
+trec-web-183	Mono basin national forest, lake 
+trec-web-184	Social security office locator
+trec-web-185	Duck identification guide
+trec-web-186	Edy's Ice cream recall
+trec-web-187	solar flares
+trec-web-188	skin cancer
+trec-web-189	NOAA Fisheries Northwest Region
+trec-web-190	Streamline your FHA mortgage
+trec-web-191	HCFA Manuals
+trec-web-192	US Antarctic program Antarctic sciences section
+trec-web-193	international trade
+trec-web-194	Department of Labor's wage and hour division
+trec-web-195	mosquito control
+trec-web-196	1000 most popular given names births 2000
+trec-web-197	NSA Home for kids
+trec-web-198	National Institute on Alcohol Abuse and Alcoholism homepage
+trec-web-199	International parental child abduction
+trec-web-200	California state auditor
+trec-web-201	chronic pain
+trec-web-202	Frank Lloyd Wright
+trec-web-203	CDC Rabies homepage
+trec-web-204	Healthy homes and lead hazard control
+trec-web-205	OPM Dual employment
+trec-web-206	DOE illness compensation
+trec-web-207	Head start home
+trec-web-208	Florida Keys Marine sanctuary
+trec-web-209	Flu in the United States
+trec-web-210	the planet mars
+trec-web-211	Mine Safety and Health Administration
+trec-web-212	Stable isotopes and bird migration
+trec-web-213	migrant farm workers
+trec-web-214	diet and nutrition and weight management
+trec-web-215	vanity license plates
+trec-web-216	space exploration
+trec-web-217	Presidential rank merit awards for federal employees
+trec-web-218	National gambling impact study commission
+trec-web-219	small business
+trec-web-220	Panic disorder NIMH
+trec-web-221	Mojave Desert Ecology
+trec-web-222	FEMA victims disaster information
+trec-web-223	species identification
+trec-web-224	Oak Ridge Tennessee DOE
+trec-web-225	Fermilab Flora Fauna
+trec-web-226	Laguna Canyon landslide
+trec-web-227	information security
+trec-web-228	San Diego water supply
+trec-web-229	California board of corrections
+trec-web-230	Groundhog day Punxsutawney
+trec-web-231	St. Paul sidewalk snow shoveling ordnance
+trec-web-232	identity theft
+trec-web-233	White House fellowships
+trec-web-234	Cave exploring lesson plan
+trec-web-235	Detailed information on humpback whale
+trec-web-236	english as a second language
+trec-web-237	Trademark FAQ
+trec-web-238	Planetary balloon program
+trec-web-239	NODC coastal water temp
+trec-web-240	Bay Area Terrorism hazards
+trec-web-241	Persian gulf war veterans and Lou Gehrig's disease
+trec-web-242	Food illness reporting
+trec-web-243	human genome research
+trec-web-244	national parks
+trec-web-245	Laura Welch Bush
+trec-web-246	career information
+trec-web-247	maps, mapping, cartography
+trec-web-248	Risks of tattoos and permanent makeup
+trec-web-249	poetry readings and poems online
+trec-web-250	Natural Resources Conservation Service
+trec-web-251	international monetary fund
+trec-web-252	HEV program homepage
+trec-web-253	FEMA for kids hurricane facts
+trec-web-254	California Tahoe conservancy
+trec-web-255	National Fallen firefighters memorial
+trec-web-256	Hearing and Balance How loud is too loud?
+trec-web-257	low-income housing
+trec-web-258	National science bowl
+trec-web-259	Snake bite first aid
+trec-web-260	Institutions and universities in fuel cell research
+trec-web-261	bioengineered foods crops
+trec-web-262	technology transfer
+trec-web-263	Kids Now by state
+trec-web-264	federal government outsourcing
+trec-web-265	CPSC Recalls
+trec-web-266	federal grant programs
+trec-web-267	Ethics, congress representatives
+trec-web-268	Tax-cut deja-voo-doo
+trec-web-269	scholarship programs
+trec-web-270	Worst tornado outbreak on record
+trec-web-271	FDA cleared medical devices
+trec-web-272	winter weather safety
+trec-web-273	national laboratories
+trec-web-274	Art in white house
+trec-web-275	after-school programs
+trec-web-276	Maryland Rural development
+trec-web-277	how to save energy
+trec-web-278	science fairs and competitions
+trec-web-279	Agricultural research service
+trec-web-280	FCC Freedom of Information act
+trec-web-281	Internet business cards
+trec-web-282	Keeping cholesterol under control
+trec-web-283	Social security benefits application
+trec-web-284	minority business
+trec-web-285	GPO subscriptions catalog
+trec-web-286	Greenwich Mean Time
+trec-web-287	AHRQ clinical practice guidelines
+trec-web-288	Federal consumer information center scams
+trec-web-289	Near earth asteroids
+trec-web-290	No child left behind
+trec-web-291	estuary conservation
+trec-web-292	Piglet, anti-inflammatory
+trec-web-293	Backyard bird habitat
+trec-web-294	Why study comets?
+trec-web-295	homeopathic medicine
+trec-web-296	Children's butterfly site life cycle page
+trec-web-297	coral reef systems
+trec-web-298	drunk driving
+trec-web-299	Dinosaurs fact and fiction
+trec-web-300	cigarettes, nicotine, health
+trec-web-301	FirstGov workers
+trec-web-302	New York City employee pension
+trec-web-303	Vietnam War
+trec-web-304	Acupuncture effectiveness
+trec-web-305	ADHD clinical trials
+trec-web-306	maritime trade
+trec-web-307	Social security inspector general
+trec-web-308	Farm service agency online
+trec-web-309	Art in embassies exhibitions
+trec-web-310	endangered species
+trec-web-311	State department bureau intelligence research
+trec-web-312	Bird monitoring in North America
+trec-web-313	annual parades
+trec-web-314	The Bill of Rights, Amendments I-X
+trec-web-315	California state parks jobs
+trec-web-316	National conference on advances in cholesterol management
+trec-web-317	National mediation board
+trec-web-318	School bus recalls
+trec-web-319	Local area unemployment statistics home
+trec-web-320	NIH video cast
+trec-web-321	Astronaut biographies
+trec-web-322	West Indian manatee information
+trec-web-323	Wildfires USGS Wildland fire research
+trec-web-324	homeland security
+trec-web-325	Home equity credit lines
+trec-web-326	Wright Brothers history
+trec-web-327	York county
+trec-web-328	Japanese surrender document
+trec-web-329	all men are created equal
+trec-web-330	american military university
+trec-web-331	arkadelphia health club
+trec-web-332	sherwood regional library
+trec-web-333	idaho state flower
+trec-web-334	ontario california airport
+trec-web-335	uss carl vinson
+trec-web-336	reviews of les miserables
+trec-web-337	rules of golf
+trec-web-338	average charitable donation
+trec-web-339	what is madagascar known for
+trec-web-340	home theater systems
+trec-web-341	carpal tunnel syndrome
+trec-web-342	capital gains tax rate
+trec-web-343	maryland department of natural resources
+trec-web-344	nicolas cage movies
+trec-web-345	kids earth day activities
+trec-web-346	solar water fountains
+trec-web-347	what was the name of elvis presley's home
+trec-web-348	electoral college 2008 results
+trec-web-349	usda food pyramid
+trec-web-350	making chicken soup from scratch
+trec-web-351	black and gold
+trec-web-352	i will survive lyrics
+trec-web-353	hawaiian volcano observatories
+trec-web-354	beef stroganoff recipe
+trec-web-355	world's biggest dog 
+trec-web-356	what are the seven deadly sins
+trec-web-357	hurricane Irene flooding in manville nj
+trec-web-358	dark chocolate health benefits
+trec-web-359	symptoms of mad cow disease in humans
+trec-web-360	lump in throat
+trec-web-361	george bush sr bio
+trec-web-362	frank lloyd wright biography
+trec-web-363	presidential middle names
+trec-web-364	what is a wiki 
+trec-web-365	old town scottsdale
+trec-web-366	civil war battles in South Carolina
+trec-web-367	eggs shelf life
+trec-web-368	ford edge problems 
+trec-web-369	air travel information
+trec-web-370	arizona game and fish
+trec-web-371	alexian brothers hospital

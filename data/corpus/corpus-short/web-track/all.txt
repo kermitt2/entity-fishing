@@ -1,0 +1,2339 @@
+<query>
+<num>1</num>
+<entity_name>Blackberry</entity_name>
+<entity_URL>clueweb09-en0004-50-39593</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Carriers that Blackberry makes phones for.</narrative>
+</query>
+
+<query>
+<num>2</num>
+<entity_name>ACM Athena award</entity_name>
+<entity_URL>clueweb09-en0004-21-12770</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Winners of the ACM Athena award.</narrative>
+</query>
+
+<query>
+<num>3</num>
+<entity_name>Claire Cardie</entity_name>
+<entity_URL>clueweb09-en0009-89-01791</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Students of Claire Cardie.</narrative>
+</query>
+
+<query>
+<num>4</num>
+<entity_name>Philadelphia, PA</entity_name>
+<entity_URL>clueweb09-en0011-13-07330</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Professional sports teams in Philadelphia.</narrative>
+</query>
+
+<query>
+<num>5</num>
+<entity_name>Medimmune, Inc.</entity_name>
+<entity_URL>clueweb09-en0008-26-39300</entity_URL>
+<target_entity>product</target_entity>
+<narrative>Products of Medimmune, Inc.</narrative>
+</query>
+
+<query>
+<num>6</num>
+<entity_name>Nobel Prize</entity_name>
+<entity_URL>clueweb09-en0002-23-19459</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Organizations that award Nobel prizes.</narrative>
+</query>
+
+<query>
+<num>7</num>
+<entity_name>Boeing 747</entity_name>
+<entity_URL>clueweb09-en0005-75-02292</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Airlines that currently use Boeing 747 planes.</narrative>
+</query>
+
+<query>
+<num>8</num>
+<entity_name>The King's Singers</entity_name>
+<entity_URL>clueweb09-en0002-63-29621</entity_URL>
+<target_entity>product</target_entity>
+<narrative>CDs released by the King's Singers.</narrative>
+</query>
+
+<query>
+<num>9</num>
+<entity_name>The Beaux Arts Trio</entity_name>
+<entity_URL>clueweb09-en0005-08-02741</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Members of The Beaux Arts Trio.</narrative>
+</query>
+
+<query>
+<num>10</num>
+<entity_name>Indiana University</entity_name>
+<entity_URL>clueweb09-en0007-37-37513</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Campuses of Indiana University.</narrative>
+</query>
+
+<query>
+<num>11</num>
+<entity_name>Home Depot Foundation</entity_name>
+<entity_URL>clueweb09-en0009-23-04855</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Donors to the Home Depot Foundation.</narrative>
+</query>
+
+<query>
+<num>12</num>
+<entity_name>Air Canada</entity_name>
+<entity_URL>clueweb09-en0004-24-03450</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Airlines that Air Canada has code share flights with.</narrative>
+</query>
+
+<query>
+<num>13</num>
+<entity_name>American Veterinary Medical Association (AVMA)</entity_name>
+<entity_URL>clueweb09-en0004-39-32528</entity_URL>
+<target_entity>product</target_entity>
+<narrative>Journals published by the AVMA.</narrative>
+</query>
+
+<query>
+<num>14</num>
+<entity_name>Bouchercon 2007</entity_name>
+<entity_URL>clueweb09-en0005-48-25203</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Authors awarded an Anthony Award at Bouchercon in 2007.</narrative>
+</query>
+
+<query>
+<num>15</num>
+<entity_name>SEC conference</entity_name>
+<entity_URL>clueweb09-en0010-56-11826</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Universities that are members of the SEC conference for football.</narrative>
+</query>
+
+<query>
+<num>16</num>
+<entity_name>Mancuso Quilt Festivals</entity_name>
+<entity_URL>clueweb09-en0011-22-08631</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Sponsors of the Mancuso quilt festivals.</narrative>
+</query>
+
+<query>
+<num>17</num>
+<entity_name>The Food Network</entity_name>
+<entity_URL>clueweb09-en0006-55-17239</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Chefs with a show on the Food Network.</narrative>
+</query>
+
+<query>
+<num>18</num>
+<entity_name>Jefferson Airplane</entity_name>
+<entity_URL>clueweb09-en0009-25-04698</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Members of the band Jefferson Airplane.</narrative>
+</query>
+
+
+<query>
+<num>19</num>
+<entity_name>John L. Hennessy</entity_name>
+<entity_URL>clueweb09-en0011-14-04774</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Companies that John Hennessy serves on the board of.</narrative>
+</query>
+
+
+<query>
+<num>20</num>
+<entity_name>Isle of Islay</entity_name>
+<entity_URL>clueweb09-en0008-96-25389</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Scotch whisky distilleries on the island of Islay.</narrative>
+</query>
+
+
+
+<query>
+<num>21</num>
+<entity_name>Bethesda, Maryland</entity_name>
+<entity_URL>clueweb09-en0004-43-35557</entity_URL>
+<target_entity>location</target_entity>
+<narrative>What art galleries are located in Bethesda, Maryland?</narrative>
+</query>
+
+<query>
+<num>22</num>
+<entity_name>Organization of Petroleum Exporting Countries (OPEC)</entity_name>
+<entity_URL>clueweb09-en0010-21-28880</entity_URL>
+<target_entity>location</target_entity>
+<narrative>Find countries that are members of OPEC (the Organization of Petroleum Exporting Countries).</narrative>
+</query>
+
+<query>
+<num>23</num>
+<entity_name>The Kingston Trio</entity_name>
+<entity_URL>clueweb09-en0009-81-29533</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What recording companies now sell the Kingston Trio's songs? </narrative>
+</query>
+
+<query>
+<num>24</num>
+<entity_name>Jazz at Lincoln Center Orchestra</entity_name>
+<entity_URL>clueweb09-en0008-04-03983</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of the members of the Jazz at Lincoln Center Orchestra.</narrative>
+</query>
+
+<query>
+<num>25</num>
+<entity_name>U.S. Supreme Court</entity_name>
+<entity_URL>clueweb09-en0012-87-19363</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>From what schools did the Supreme Court justices receive their undergraduate degrees?</narrative>
+</query>
+
+<query>
+<num>26</num>
+<entity_name>Cray XT computer</entity_name>
+<entity_URL>clueweb09-en0021-77-27493</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who has installed (taken delivery of) a Cray XT computer?</narrative>
+</query>
+
+<query>
+<num>27</num>
+<entity_name>Department of Mathematics, Montgomery College, Rockville Campus</entity_name>
+<entity_URL>clueweb09-en0024-21-25742</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the publishers of the text books used in this department?</narrative>
+</query>
+
+<query>
+<num>28</num>
+<entity_name>IEEE Engineering in Medicine and Biology Society</entity_name>
+<entity_URL>clueweb09-en0007-95-06573</entity_URL>
+<target_entity>product</target_entity>
+<narrative>Find journals published by the IEEE Engineering in Medicine and Biology society.</narrative>
+</query>
+
+<query>
+<num>29</num>
+<entity_name>Dow Jones</entity_name>
+<entity_URL>clueweb09-en0006-73-08332</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find companies that are included in the Dow Jones industrial average.</narrative>
+</query>
+
+<query>
+<num>30</num>
+<entity_name>Ocean Spray Cranberries, Inc.</entity_name>
+<entity_URL>clueweb09-en0132-45-30062</entity_URL>
+<target_entity>location</target_entity>
+<narrative>Find U.S. states and Canadian provinces where Ocean Spray growers are located.</narrative>
+</query>
+
+<query>
+<num>31</num>
+<entity_name>American Institute of Architects</entity_name>
+<entity_URL>clueweb09-en0004-38-10748</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find chapters of the American Institute of Architects.</narrative>
+</query>
+
+<query>
+<num>32</num>
+<entity_name>National Endowment for the Humanities</entity_name>
+<entity_URL>clueweb09-en0010-48-02248</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What schools received collaborative research awards from the National Endowment for the Humanities (NEH) in 2008?</narrative>
+</query>
+
+<query>
+<num>33</num>
+<entity_name>DARPA Grand Challenge</entity_name>
+<entity_URL>clueweb09-en0021-49-06565</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What organizations were able to complete the DARPA Grand Challenge in the 2007 contest?</narrative>
+</query>
+
+<query>
+<num>34</num>
+<entity_name>Access America Travel Insurance</entity_name>
+<entity_URL>clueweb09-en0004-42-13808</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What airlines have financial default coverage with Access America Travel Insurance and Assistance?</narrative>
+</query>
+
+<query>
+<num>35</num>
+<entity_name>University of Maryland</entity_name>
+<entity_URL>clueweb09-en0008-34-21132</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Which companies have representation on the board of directors of the University of Maryland?</narrative>
+</query>
+
+<query>
+<num>36</num>
+<entity_name>Ford Motor Company</entity_name>
+<entity_URL>clueweb09-en0120-17-13549</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What companies build parts used in production of Ford vehicles?</narrative>
+</query>
+
+<query>
+<num>37</num>
+<entity_name>Tavis Smiley Show</entity_name>
+<entity_URL>clueweb09-en0009-57-35033</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of people that appeared on the Tavis Smiley show in December 2008.</narrative>
+</query>
+
+<query>
+<num>38</num>
+<entity_name>Richard Petty Motorsports</entity_name>
+<entity_URL>clueweb09-en0133-45-25168</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Who are the drivers and crew chiefs for Richard Petty Motorsports?</narrative>
+</query>
+
+<query>
+<num>39</num>
+<entity_name>Maryland Farm Bureau</entity_name>
+<entity_URL>clueweb09-en0008-95-39976</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find companies that offer benefits to members of the Maryland Farm Bureau.</narrative>
+</query>
+
+<query>
+<num>40</num>
+<entity_name>Costco</entity_name>
+<entity_URL>clueweb09-en0006-60-20817</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find homepages of manufacturers of LCD televisions sold by Costco.</narrative>
+</query>
+
+<query>
+<num>41</num>
+<entity_name>New York Times</entity_name>
+<entity_URL>clueweb09-en0012-63-17728</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of the regular opinion columnists of the New York Times.</narrative>
+</query>
+
+<query>
+<num>42</num>
+<entity_name>General Electric</entity_name>
+<entity_URL>clueweb09-en0007-76-25787</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find homepages of subsidiaries of General Electric.</narrative>
+</query>
+
+<query>
+<num>43</num>
+<entity_name>Mystery Writers of America</entity_name>
+<entity_URL>clueweb09-en0002-73-25630</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find homepages of presidents of the Mystery Writers Association (MWA).</narrative>
+</query>
+
+<query>
+<num>44</num>
+<entity_name>Museum of Art and Design</entity_name>
+<entity_URL>clueweb09-en0127-01-43076</entity_URL>
+<target_entity>location</target_entity>
+<narrative>I want to see the homepages of places visited during the June 2008 MADtrip to Seattle, Washington.</narrative>
+</query>
+
+<query>
+<num>45</num>
+<entity_name>National Zoo</entity_name>
+<entity_URL>clueweb09-en0003-82-03073</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the corporate partners of the National Zoo?</narrative>
+</query>
+
+<query>
+<num>46</num>
+<entity_name>Fidos for Freedom</entity_name>
+<entity_URL>clueweb09-en0006-65-25191</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What facilities are visited by the therapy dogs of Fidos for Freedom?</narrative>
+</query>
+
+<query>
+<num>47</num>
+<entity_name>Albuquerque International Balloon Fiesta</entity_name>
+<entity_URL>clueweb09-en0004-73-28331</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the balloon manufacturers associated with the Albuquerque International Balloon Fiesta?</narrative>
+</query>
+
+<query>
+<num>48</num>
+<entity_name>AFL-CIO</entity_name>
+<entity_URL>clueweb09-en0004-59-11324</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find unions that are members of the AFL-CIO.</narrative>
+</query>
+
+<query>
+<num>49</num>
+<entity_name>Eurail</entity_name>
+<entity_URL>clueweb09-en0006-86-35399</entity_URL>
+<target_entity>location</target_entity>
+<narrative>What countries does Eurail operate in?</narrative>
+</query>
+
+<query>
+<num>50</num>
+<entity_name>Abu Dhabi</entity_name>
+<entity_URL>clueweb09-en0004-39-08867 </entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find companies owned or controlled by Abu Dhabi.</narrative>
+</query>
+
+<query>
+<num>51</num>
+<entity_name>National Institutes of Health (NIH)</entity_name>
+<entity_URL>clueweb09-en0009-58-39495</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What organizations comprise the National Institutes of Health (NIH)?</narrative>
+</query>
+
+<query>
+<num>52</num>
+<entity_name>Smithsonian Institution</entity_name>
+<entity_URL>clueweb09-en0011-99-06195</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find the members of the Board of Regents of the Smithsonian Institution.</narrative>
+</query>
+
+<query>
+<num>53</num>
+<entity_name>Foundation Morgan horses</entity_name>
+<entity_URL>clueweb09-en0007-32-10466</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are breeders of Foundation Morgan horses? </narrative>
+</query>
+
+<query>
+<num>54</num>
+<entity_name>Knockout Mouse Project (KOMP)</entity_name>
+<entity_URL>clueweb09-en0009-58-40020</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What organizations are the participants in the NIH sponsored Knockout Mouse Project?</narrative>
+</query>
+
+<query>
+<num>55</num>
+<entity_name>Edgars Awards</entity_name>
+<entity_URL>clueweb09-en0019-86-23998</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Who are the 2008 Edgars Awards nominees?</narrative>
+</query>
+
+<query>
+<num>56</num>
+<entity_name>Nature Conservancy</entity_name>
+<entity_URL>clueweb09-en0010-64-18232</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What companies or organizations have officers that sit on the Nature Conservancy's board of directors?</narrative>
+</query>
+
+<query>
+<num>57</num>
+<entity_name>Kennedy Center</entity_name>
+<entity_URL>clueweb09-en0002-36-00572</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Find the homepages of the Kennedy Center honorees.</narrative>
+</query>
+
+<query>
+<num>58</num>
+<entity_name>University of Michigan</entity_name>
+<entity_URL>clueweb09-en0003-16-28592</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What are some of the spin-off companies from the University of Michigan?</narrative>
+</query>
+
+<query>
+<num>59</num>
+<entity_name>Fulbright Scholars Program</entity_name>
+<entity_URL>clueweb09-en0005-77-19875</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Who are the Fulbright scholars in computer sciences?</narrative>
+</query>
+
+<query>
+<num>60</num>
+<entity_name>Peabody Essex Museum</entity_name>
+<entity_URL>clueweb09-en0009-48-18543</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>I would like to see the homepages of the corporate partners of the Peabody Essex Museum.</narrative>
+</query>
+
+<query>
+<num>61</num>
+<entity_name>The Association for Symbolic Logic</entity_name>
+<entity_URL>clueweb09-en0004-85-27331</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are institutional members of the Association for Symbolic Logic (ASL)?</narrative>
+</query>
+
+<query>
+<num>62</num>
+<entity_name>Baltimore</entity_name>
+<entity_URL>clueweb09-en0004-40-10287</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What cruise lines have cruises originating in Baltimore?</narrative>
+</query>
+
+<query>
+<num>63</num>
+<entity_name>Drew Gilpin Faust</entity_name>
+<entity_URL>clueweb09-en0010-43-02957</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What institutions Drew Gilpin Faust been affiliated with, for example as a trustee, board member, president, etc?</narrative>
+</query>
+
+<query>
+<num>64</num>
+<entity_name>Pulitzer Prize</entity_name>
+<entity_URL>clueweb09-en0011-51-07177</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What newspapers won the Pulitzer Prize for journalism in 2007?</narrative>
+</query>
+
+<query>
+<num>65</num>
+<entity_name>Patricia Cornwell</entity_name>
+<entity_URL>clueweb09-en0010-97-31272</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>What institutions is Patricia Cornwell a member of?</narrative>
+</query>
+
+<query>
+<num>66</num>
+<entity_name>Southwest Airlines</entity_name>
+<entity_URL>clueweb09-en0010-03-33074</entity_URL>
+<target_entity>location</target_entity>
+<narrative>I want to see the homepages of places to see in Cleveland listed by Southwest Airlines.</narrative>
+</query>
+
+<query>
+<num>67</num>
+<entity_name>Vacations By Rail</entity_name>
+<entity_URL>clueweb09-en0013-76-14954</entity_URL>
+<target_entity>location</target_entity>
+<narrative>Find national parks visited on the Vacations by Rail tours.</narrative>
+</query>
+
+<query>
+<num>68</num>
+<entity_name>Association of American Medical Colleges</entity_name>
+<entity_URL>clueweb09-en0004-91-09128</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find medical schools that are members of the AAMC.</narrative>
+</query>
+
+<query>
+<num>69</num>
+<entity_name>Newseum</entity_name>
+<entity_URL>clueweb09-en0010-82-23701</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Who are the founding partners of the Newseum?</narrative>
+</query>
+
+<query>
+<num>70</num>
+<entity_name>Teach For America</entity_name>
+<entity_URL>clueweb09-en0011-19-31196</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Find the Teach For America National Growth Fund Investors for 2006-2010</narrative>
+</query>
+
+<query>
+<num>71</num>
+<entity_name>Montana State University</entity_name>
+<entity_URL>clueweb09-en0009-75-04753</entity_URL>
+<target_entity>university department</target_entity>
+<narrative>Montana State University departments that offer a PhD program</narrative>
+</query>
+
+<query>
+<num>72</num>
+<entity_name>Abraham Verghese</entity_name>
+<entity_URL>clueweb09-en0033-79-30130</entity_URL>
+<target_entity>publication</target_entity>
+<narrative>publications in which Verghese's writing has appeared</narrative>
+</query>
+
+<query>
+<num>73</num>
+<entity_name>National Spelling Bee</entity_name>
+<entity_URL>clueweb09-en0012-05-10759</entity_URL>
+<target_entity>television program</target_entity>
+<narrative>television programs with an episode referencing the National Spelling Bee</narrative>
+</query>
+
+<query>
+<num>74</num>
+<entity_name>Placido Domingo</entity_name>
+<entity_URL>clueweb09-en0133-67-17415</entity_URL>
+<target_entity>educational institution</target_entity>
+<narrative>educational institutions that have given an honorary degree to Placido Domingo</narrative>
+</query>
+
+<query>
+<num>75</num>
+<entity_name>Prince of Wales</entity_name>
+<entity_URL>clueweb09-en0010-62-04433</entity_URL>
+<target_entity>school</target_entity>
+<narrative>schools that the Prince of Wales attended</narrative>
+</query>
+
+<query>
+<num>76</num>
+<entity_name>Astra Zeneca</entity_name>
+<entity_URL>clueweb09-en0103-90-35254</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations that are research partners of Astra Zeneca</narrative>
+</query>
+
+<query>
+<num>77</num>
+<entity_name>Lee Child</entity_name>
+<entity_URL>clueweb09-en0132-63-07961</entity_URL>
+<target_entity>author</target_entity>
+<narrative>authors that collaborated with Lee Child on The Chopin Manuscript</narrative>
+</query>
+
+<query>
+<num>78</num>
+<entity_name>Costco</entity_name>
+<entity_URL>clueweb09-en0006-60-20817</entity_URL>
+<target_entity>printer brand</target_entity>
+<narrative>brands of printers and all-in-ones carried by Costco</narrative>
+</query>
+
+<query>
+<num>79</num>
+<entity_name>Icelandair</entity_name>
+<entity_URL>clueweb09-en0007-89-26776</entity_URL>
+<target_entity>country</target_entity>
+<narrative>countries other than Iceland to which Icelandair flies</narrative>
+</query>
+
+<query>
+<num>80</num>
+<entity_name>United Parcel Service (UPS)</entity_name>
+<entity_URL>clueweb09-en0014-05-00600</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of vehicles used by UPS</narrative>
+</query>
+
+<query>
+<num>81</num>
+<entity_name>CPAP Supply USA</entity_name>
+<entity_URL>clueweb09-en0021-88-08221</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of BIPAP and CPAP machines sold by CPAP Supply USA</narrative>
+</query>
+
+<query>
+<num>82</num>
+<entity_name>International Institute for the Advancement of Medicine (IIAM)</entity_name>
+<entity_URL>clueweb09-en0008-72-07203</entity_URL>
+<target_entity>organ recovery program</target_entity>
+<narrative>organ or tissue recovery programs associated with IIAM</narrative>
+</query>
+
+<query>
+<num>83</num>
+<entity_name>NCAA</entity_name>
+<entity_URL>clueweb09-en0010-08-06981</entity_URL>
+<target_entity>university</target_entity>
+<narrative>universities with an NCAA Division I men's lacrosse team</narrative>
+</query>
+
+<query>
+<num>84</num>
+<entity_name>Bay Area Rapid Transportation (BART) System</entity_name>
+<entity_URL>clueweb09-en0006-06-14882</entity_URL>
+<target_entity>location (geo-political division)</target_entity>
+<narrative>locations (geo-political divisions) containing BART police facilities</narrative>
+</query>
+
+<query>
+<num>85</num>
+<entity_name>Montgomery County, MD</entity_name>
+<entity_URL>clueweb09-en0009-78-34812</entity_URL>
+<target_entity>yarn shop</target_entity>
+<narrative>yarn shops located in Montgomery County, MD</narrative>
+</query>
+
+<query>
+<num>86</num>
+<entity_name>OpenOffice</entity_name>
+<entity_URL>clueweb09-en0010-24-17612</entity_URL>
+<target_entity>corporation</target_entity>
+<narrative>corporate software contributors to the OpenOffice project</narrative>
+</query>
+
+<query>
+<num>87</num>
+<entity_name>British Royal Monarchy</entity_name>
+<entity_URL>clueweb09-en0123-88-35428</entity_URL>
+<target_entity>company</target_entity>
+<narrative>companies that produce consumables granted the British Royal Family Warrant</narrative>
+</query>
+
+<query>
+<num>88</num>
+<entity_name>Assistance Dogs International</entity_name>
+<entity_URL>clueweb09-en0005-90-25709</entity_URL>
+<target_entity>organization</target_entity>
+<narrative> organizations in Canada that are accredited to perform assistance dog activities</narrative>
+</query>
+
+<query>
+<num>89</num>
+<entity_name>City of London, England</entity_name>
+<entity_URL>clueweb09-en0005-86-33547</entity_URL>
+<target_entity>brewery</target_entity>
+<narrative>beer breweries located in the City of London, England</narrative>
+</query>
+
+<query>
+<num>90</num>
+<entity_name>Tiger Woods Foundation</entity_name>
+<entity_URL>clueweb09-en0012-28-25267</entity_URL>
+<target_entity>supporter</target_entity>
+<narrative>philanthropic supporters of the Tiger Woods Foundation</narrative>
+</query>
+
+<query>
+<num>91</num>
+<entity_name>Monsanto</entity_name>
+<entity_URL>clueweb09-en0009-15-25328</entity_URL>
+<target_entity>seed brand</target_entity>
+<narrative>food seed brands belonging to Monsanto</narrative>
+</query>
+
+<query>
+<num>92</num>
+<entity_name>Top Chef Bravo TV show</entity_name>
+<entity_URL>clueweb09-en0077-78-18461</entity_URL>
+<target_entity>company</target_entity>
+<narrative>companies that have advertised on the Top Chef Bravo TV show</narrative>
+</query>
+
+<query>
+<num>93</num>
+<entity_name>Center for Biological Diversity</entity_name>
+<entity_URL>clueweb09-en0005-72-03192</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations (not individuals) against which the Center for Biological Diversity has filed a formal notice of intent to sue</narrative>
+</query>
+
+<query>
+<num>94</num>
+<entity_name>Apple, Inc.</entity_name>
+<entity_URL>clueweb09-en0004-07-35613</entity_URL>
+<target_entity>musician</target_entity>
+<narrative>musicians whose music was used in 2007 or 2008 Apple commercials</narrative>
+</query>
+
+<query>
+<num>95</num>
+<entity_name>Yellowstone Boys and Girls Ranch</entity_name>
+<entity_URL>clueweb09-en0013-74-22519</entity_URL>
+<target_entity>corporation</target_entity>
+<narrative>corporate sponsors of the equestrian center at the Yellowstone Boys and Girls Ranch</narrative>
+</query>
+
+<query>
+<num>96</num>
+<entity_name>House TV series </entity_name>
+<entity_URL>clueweb09-en0007-67-17573</entity_URL>
+<target_entity>product</target_entity>
+<narrative>products featured in an episode of the TV series, House</narrative>
+</query>
+
+<query>
+<num>97</num>
+<entity_name>Intel Corporation</entity_name>
+<entity_URL>clueweb09-en0007-15-34854</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations that received the Intel Preferred Quality Supplier (PQS) Award in 2008</narrative>
+</query>
+
+<query>
+<num>98</num>
+<entity_name>Jo-Ann Fabrics and Crafts</entity_name>
+<entity_URL>clueweb09-en0065-93-15398</entity_URL>
+<target_entity>yarn brand</target_entity>
+<narrative>brands of knitting yarn carried by Jo-Ann Fabrics and Crafts stores</narrative>
+</query>
+
+<query>
+<num>99</num>
+<entity_name>Landfall Foundation</entity_name>
+<entity_URL>clueweb09-en0024-44-16793</entity_URL>
+<target_entity>charity</target_entity>
+<narrative>Wilmington or Cape Fear charities supported by the Landfall Foundation</narrative>
+</query>
+
+<query>
+<num>100</num>
+<entity_name>SERRV</entity_name>
+<entity_URL>clueweb09-en0010-50-24092</entity_URL>
+<target_entity>store</target_entity>
+<narrative>stores in Florida or Delaware that sell SERRV merchandise</narrative>
+</query>
+
+<query>
+<num>101</num>
+<entity_name>Bozeman, Montana</entity_name>
+<entity_URL>clueweb09-en0005-83-08620</entity_URL>
+<target_entity>bank</target_entity>
+<narrative>banks or credit unions that have branch offices in Bozeman, Montana</narrative>
+</query>
+
+<query>
+<num>102</num>
+<entity_name>Olney Toys</entity_name>
+<entity_URL>clueweb09-en0038-28-40690</entity_URL>
+<target_entity>company</target_entity>
+<narrative>companies whose infant and toddler items are carried by Olney Toys</narrative>
+</query>
+
+<query>
+<num>103</num>
+<entity_name>The Bone Marrow Foundation</entity_name>
+<entity_URL>clueweb09-en0130-77-07951</entity_URL>
+<target_entity>bone marrow transplant center</target_entity>
+<narrative>bone marrow transplant centers in New York state that are members of the foundation</narrative>
+</query>
+
+<query>
+<num>104</num>
+<entity_name>Woodrow Wilson Center</entity_name>
+<entity_URL>clueweb09-en0012-00-10891</entity_URL>
+<target_entity>academic institution</target_entity>
+<narrative>academic institutions with a staff member enrolled as a fellow or scholar at the Woodrow Wilson Center</narrative>
+</query>
+
+<query>
+<num>105</num>
+<entity_name>Arbor Day Foundation</entity_name>
+<entity_URL>clueweb09-en0000-42-09893</entity_URL>
+<target_entity>city</target_entity>
+<narrative>cities in Montgomery County, Maryland that are designated as a tree city by the Arbor Day Foundation</narrative>
+</query>
+
+<query>
+<num>106</num>
+<entity_name>Affordable Solar</entity_name>
+<entity_URL>clueweb09-en0004-11-19762</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of residential solar panels sold through Affordable Solar</narrative>
+</query>
+
+<query>
+<num>107</num>
+<entity_name>League of American Orchestras</entity_name>
+<entity_URL>clueweb09-en0004-70-02921</entity_URL>
+<target_entity>orchestra</target_entity>
+<narrative>Maryland orchestras that are not youth orchestras that are members of the League of American Orchestras</narrative>
+</query>
+
+<query>
+<num>108</num>
+<entity_name>Sandy Spring Museum</entity_name>
+<entity_URL>clueweb09-en0132-62-47946</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations that are sponsors of the Sandy Spring Museum</narrative>
+</query>
+
+<query>
+<num>109</num>
+<entity_name>Airbus</entity_name>
+<entity_URL>clueweb09-en0004-69-31337</entity_URL>
+<target_entity>airline</target_entity>
+<narrative>airlines that fly the Airbus 320 plane</narrative>
+</query>
+
+<query>
+<num>110</num>
+<entity_name>New Trier High School</entity_name>
+<entity_URL>clueweb09-en0010-18-28535</entity_URL>
+<target_entity>actor</target_entity>
+<narrative>actors and actresses who graduated from New Trier High School? </narrative>
+</query>
+
+<query>
+<num>111</num>
+<entity_name>Naos Graphics</entity_name>
+<entity_URL>clueweb09-en0132-73-38983</entity_URL>
+<target_entity>institution</target_entity>
+<narrative>institutions for which Ted Naos has designed paper-cut graphics</narrative>
+</query>
+
+<query>
+<num>112</num>
+<entity_name>Apple Inc.</entity_name>
+<entity_URL>clueweb09-en0004-07-35613</entity_URL>
+<target_entity>film</target_entity>
+<narrative>2008 films containing Apple product placement</narrative>
+</query>
+
+<query>
+<num>113</num>
+<entity_name>Textile Museum</entity_name>
+<entity_URL>clueweb09-en0012-30-00209</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations and corporations that support the Textile Museum</narrative>
+</query>
+
+<query>
+<num>114</num>
+<entity_name>Wine in the Woods, 2008</entity_name>
+<entity_URL>clueweb09-en0013-19-01805</entity_URL>
+<target_entity>performer</target_entity>
+<narrative>performers at Wine in the Woods in 2008</narrative>
+</query>
+
+<query>
+<num>115</num>
+<entity_name>Association of Collegiate Schools of Architecture</entity_name>
+<entity_URL>clueweb09-en0077-45-08398</entity_URL>
+<target_entity>school</target_entity>
+<narrative>schools in California that have degree programs in architecture accredited by the Association</narrative>
+</query>
+
+<query>
+<num>116</num>
+<entity_name>Dream Works Studios</entity_name>
+<entity_URL>clueweb09-en0130-59-38165</entity_URL>
+<target_entity>film</target_entity>
+<narrative>films distributed, produced or co-produced by Dream Works Studios</narrative>
+</query>
+
+<query>
+<num>117</num>
+<entity_name>The United States National Arboretum</entity_name>
+<entity_URL>clueweb09-en0013-35-28439</entity_URL>
+<target_entity>institution</target_entity>
+<narrative>institutions that have a cooperative program with the National Arboretum</narrative>
+</query>
+
+<query>
+<num>118</num>
+<entity_name>National Book Foundation</entity_name>
+<entity_URL>clueweb09-en0074-54-21097</entity_URL>
+<target_entity>author</target_entity>
+<narrative>authors that have won the National Book Award for young people's literature</narrative>
+</query>
+
+<query>
+<num>119</num>
+<entity_name>Sears</entity_name>
+<entity_URL>clueweb09-en0011-07-17556</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of French-door refrigerators sold at Sears.</narrative>
+</query>
+
+<query>
+<num>120</num>
+<entity_name>National Summer Learning Association</entity_name>
+<entity_URL>clueweb09-en0011-35-27923</entity_URL>
+<target_entity>foundation</target_entity>
+<narrative>foundations that support the National Summer Learning Association</narrative>
+</query>
+
+<top>
+<num> Number: WT04-1
+<title> Electoral College
+</top>
+
+<top>
+<num> Number: WT04-2
+<title> Ireland consular information sheet
+</top>
+
+<top>
+<num> Number: WT04-3
+<title> Citizen attitudes toward prairie dogs
+</top>
+
+<top>
+<num> Number: WT04-4
+<title> JPL stardust comet wild
+</top>
+
+<top>
+<num> Number: WT04-5
+<title> American music
+</top>
+
+<top>
+<num> Number: WT04-6
+<title> Philadelphia streets
+</top>
+
+<top>
+<num> Number: WT04-7
+<title> Togo embassy
+</top>
+
+<top>
+<num> Number: WT04-8
+<title> Philippines
+</top>
+
+<top>
+<num> Number: WT04-9
+<title> Baltimore
+</top>
+
+<top>
+<num> Number: WT04-10
+<title> well water contamination
+</top>
+
+<top>
+<num> Number: WT04-11
+<title> Pileated woodpecker
+</top>
+
+<top>
+<num> Number: WT04-12
+<title> oil petroleum resources
+</top>
+
+<top>
+<num> Number: WT04-13
+<title> Eruption of Mount St. Helens
+</top>
+
+<top>
+<num> Number: WT04-14
+<title> Club drugs
+</top>
+
+<top>
+<num> Number: WT04-15
+<title> welfare reform
+</top>
+
+<top>
+<num> Number: WT04-16
+<title> Sandhill cranes and the Platte river
+</top>
+
+<top>
+<num> Number: WT04-17
+<title> Secure linux
+</top>
+
+<top>
+<num> Number: WT04-18
+<title> Copyright basics
+</top>
+
+<top>
+<num> Number: WT04-19
+<title> toxic waste
+</top>
+
+<top>
+<num> Number: WT04-20
+<title> Tuskegee airmen observance
+</top>
+
+<top>
+<num> Number: WT04-21
+<title> substance abuse
+</top>
+
+<top>
+<num> Number: WT04-22
+<title> National atlas maps
+</top>
+
+<top>
+<num> Number: WT04-23
+<title> Iraq Kuwait threat history
+</top>
+
+<top>
+<num> Number: WT04-24
+<title> child care
+</top>
+
+<top>
+<num> Number: WT04-25
+<title> History of Phoenix Symbol
+</top>
+
+<top>
+<num> Number: WT04-26
+<title> The White House President Bush's cabinet
+</top>
+
+<top>
+<num> Number: WT04-27
+<title> OPM New Retirees
+</top>
+
+<top>
+<num> Number: WT04-28
+<title> FDA 2002 press releases
+</top>
+
+<top>
+<num> Number: WT04-29
+<title> Grand canyon monitoring and research center
+</top>
+
+<top>
+<num> Number: WT04-30
+<title> HIV/AIDS
+</top>
+
+<top>
+<num> Number: WT04-31
+<title> origin of the universe
+</top>
+
+<top>
+<num> Number: WT04-32
+<title> A history of American agriculture
+</top>
+
+<top>
+<num> Number: WT04-33
+<title> teen pregnancy
+</top>
+
+<top>
+<num> Number: WT04-34
+<title> NTP Herbal medicine factsheet
+</top>
+
+<top>
+<num> Number: WT04-35
+<title> Religious Freedom amendment
+</top>
+
+<top>
+<num> Number: WT04-36
+<title> the arts in education
+</top>
+
+<top>
+<num> Number: WT04-37
+<title> magnetism
+</top>
+
+<top>
+<num> Number: WT04-38
+<title> Ohio dams and locks
+</top>
+
+<top>
+<num> Number: WT04-39
+<title> Child support enforcement cost/benefit
+</top>
+
+<top>
+<num> Number: WT04-40
+<title> public school standards of performance
+</top>
+
+<top>
+<num> Number: WT04-41
+<title> historic preservation
+</top>
+
+<top>
+<num> Number: WT04-42
+<title> Sibir Air anatomy of a disaster
+</top>
+
+<top>
+<num> Number: WT04-43
+<title> Vehicle registration California
+</top>
+
+<top>
+<num> Number: WT04-44
+<title> Dash combination diet
+</top>
+
+<top>
+<num> Number: WT04-45
+<title> faith-based initiatives
+</top>
+
+<top>
+<num> Number: WT04-46
+<title> Local drinking water
+</top>
+
+<top>
+<num> Number: WT04-47
+<title> medical residency
+</top>
+
+<top>
+<num> Number: WT04-48
+<title> federal and state statistics
+</top>
+
+<top>
+<num> Number: WT04-49
+<title> FCC consumer bureau
+</top>
+
+<top>
+<num> Number: WT04-50
+<title> money laundering
+</top>
+
+<top>
+<num> Number: WT04-51
+<title> Consumer food advice
+</top>
+
+<top>
+<num> Number: WT04-52
+<title> Monterey Bay national marine sanctuary
+</top>
+
+<top>
+<num> Number: WT04-53
+<title> telecommuting
+</top>
+
+<top>
+<num> Number: WT04-54
+<title> Food and Drug Administration
+</top>
+
+<top>
+<num> Number: WT04-55
+<title> Budget process in the U.S. department of education
+</top>
+
+<top>
+<num> Number: WT04-56
+<title> Kudzu invasive species
+</top>
+
+<top>
+<num> Number: WT04-57
+<title> religious belief
+</top>
+
+<top>
+<num> Number: WT04-58
+<title> automobile emissions vehicle pollution
+</top>
+
+<top>
+<num> Number: WT04-59
+<title> Health resources and services administration
+</top>
+
+<top>
+<num> Number: WT04-60
+<title> Plant hardiness zones
+</top>
+
+<top>
+<num> Number: WT04-61
+<title> Cosmology peebles turner
+</top>
+
+<top>
+<num> Number: WT04-62
+<title> FirstGov for Kids computers
+</top>
+
+<top>
+<num> Number: WT04-63
+<title> art museums
+</top>
+
+<top>
+<num> Number: WT04-64
+<title> Cell phone radiation
+</top>
+
+<top>
+<num> Number: WT04-65
+<title> California art council
+</top>
+
+<top>
+<num> Number: WT04-66
+<title> intelligence analysis
+</top>
+
+<top>
+<num> Number: WT04-67
+<title> State local gateway
+</top>
+
+<top>
+<num> Number: WT04-68
+<title> women's health binge eating disorders
+</top>
+
+<top>
+<num> Number: WT04-69
+<title> Mono basin national forest, lake 
+</top>
+
+<top>
+<num> Number: WT04-70
+<title> Social security office locator
+</top>
+
+<top>
+<num> Number: WT04-71
+<title> Duck identification guide
+</top>
+
+<top>
+<num> Number: WT04-72
+<title> Edy's Ice cream recall
+</top>
+
+<top>
+<num> Number: WT04-73
+<title> solar flares
+</top>
+
+<top>
+<num> Number: WT04-74
+<title> skin cancer
+</top>
+
+<top>
+<num> Number: WT04-75
+<title> NOAA Fisheries Northwest Region
+</top>
+
+<top>
+<num> Number: WT04-76
+<title> Streamline your FHA mortgage
+</top>
+
+<top>
+<num> Number: WT04-77
+<title> HCFA Manuals
+</top>
+
+<top>
+<num> Number: WT04-78
+<title> US Antarctic program Antarctic sciences section
+</top>
+
+<top>
+<num> Number: WT04-79
+<title> international trade
+</top>
+
+<top>
+<num> Number: WT04-80
+<title> Department of Labor's wage and hour division
+</top>
+
+<top>
+<num> Number: WT04-81
+<title> mosquito control
+</top>
+
+<top>
+<num> Number: WT04-82
+<title> 1000 most popular given names births 2000
+</top>
+
+<top>
+<num> Number: WT04-83
+<title> NSA Home for kids
+</top>
+
+<top>
+<num> Number: WT04-84
+<title> National Institute on Alcohol Abuse and Alcoholism homepage
+</top>
+
+<top>
+<num> Number: WT04-85
+<title> International parental child abduction
+</top>
+
+<top>
+<num> Number: WT04-86
+<title> California state auditor
+</top>
+
+<top>
+<num> Number: WT04-87
+<title> chronic pain
+</top>
+
+<top>
+<num> Number: WT04-88
+<title> Frank Lloyd Wright
+</top>
+
+<top>
+<num> Number: WT04-89
+<title> CDC Rabies homepage
+</top>
+
+<top>
+<num> Number: WT04-90
+<title> Healthy homes and lead hazard control
+</top>
+
+<top>
+<num> Number: WT04-91
+<title> OPM Dual employment
+</top>
+
+<top>
+<num> Number: WT04-92
+<title> DOE illness compensation
+</top>
+
+<top>
+<num> Number: WT04-93
+<title> Head start home
+</top>
+
+<top>
+<num> Number: WT04-94
+<title> Florida Keys Marine sanctuary
+</top>
+
+<top>
+<num> Number: WT04-95
+<title> Flu in the United States
+</top>
+
+<top>
+<num> Number: WT04-96
+<title> the planet mars
+</top>
+
+<top>
+<num> Number: WT04-97
+<title> UFOs
+</top>
+
+<top>
+<num> Number: WT04-98
+<title> Mine Safety and Health Administration
+</top>
+
+<top>
+<num> Number: WT04-99
+<title> salmon
+</top>
+
+<top>
+<num> Number: WT04-100
+<title> Stable isotopes and bird migration
+</top>
+
+<top>
+<num> Number: WT04-101
+<title> migrant farm workers
+</top>
+
+<top>
+<num> Number: WT04-102
+<title> diet and nutrition and weight management
+</top>
+
+<top>
+<num> Number: WT04-103
+<title> vanity license plates
+</top>
+
+<top>
+<num> Number: WT04-104
+<title> space exploration
+</top>
+
+<top>
+<num> Number: WT04-105
+<title> Presidential rank merit awards for federal employees
+</top>
+
+<top>
+<num> Number: WT04-106
+<title> National gambling impact study commission
+</top>
+
+<top>
+<num> Number: WT04-107
+<title> small business
+</top>
+
+<top>
+<num> Number: WT04-108
+<title> Panic disorder NIMH
+</top>
+
+<top>
+<num> Number: WT04-109
+<title> Mojave Desert Ecology
+</top>
+
+<top>
+<num> Number: WT04-110
+<title> FEMA victims disaster information
+</top>
+
+<top>
+<num> Number: WT04-111
+<title> species identification
+</top>
+
+<top>
+<num> Number: WT04-112
+<title> Oak Ridge Tennessee DOE
+</top>
+
+<top>
+<num> Number: WT04-113
+<title> Fermilab Flora Fauna
+</top>
+
+<top>
+<num> Number: WT04-114
+<title> Laguna Canyon landslide
+</top>
+
+<top>
+<num> Number: WT04-115
+<title> information security
+</top>
+
+<top>
+<num> Number: WT04-116
+<title> FAFSA
+</top>
+
+<top>
+<num> Number: WT04-117
+<title> San Diego water supply
+</top>
+
+<top>
+<num> Number: WT04-118
+<title> California board of corrections
+</top>
+
+<top>
+<num> Number: WT04-119
+<title> Groundhog day Punxsutawney
+</top>
+
+<top>
+<num> Number: WT04-120
+<title> St. Paul sidewalk snow shoveling ordnance
+</top>
+
+<top>
+<num> Number: WT04-121
+<title> identity theft
+</top>
+
+<top>
+<num> Number: WT04-122
+<title> White House fellowships
+</top>
+
+<top>
+<num> Number: WT04-123
+<title> Cave exploring lesson plan
+</top>
+
+<top>
+<num> Number: WT04-124
+<title> Detailed information on humpback whale
+</top>
+
+<top>
+<num> Number: WT04-125
+<title> english as a second language
+</top>
+
+<top>
+<num> Number: WT04-126
+<title> Trademark FAQ
+</top>
+
+<top>
+<num> Number: WT04-127
+<title> GPS
+</top>
+
+<top>
+<num> Number: WT04-128
+<title> Planetary balloon program
+</top>
+
+<top>
+<num> Number: WT04-129
+<title> NODC coastal water temp
+</top>
+
+<top>
+<num> Number: WT04-130
+<title> Bay Area Terrorism hazards
+</top>
+
+<top>
+<num> Number: WT04-131
+<title> Persian gulf war veterans and Lou Gehrig's disease
+</top>
+
+<top>
+<num> Number: WT04-132
+<title> Food illness reporting
+</top>
+
+<top>
+<num> Number: WT04-133
+<title> human genome research
+</top>
+
+<top>
+<num> Number: WT04-134
+<title> national parks
+</top>
+
+<top>
+<num> Number: WT04-135
+<title> Laura Welch Bush
+</top>
+
+<top>
+<num> Number: WT04-136
+<title> career information
+</top>
+
+<top>
+<num> Number: WT04-137
+<title> maps, mapping, cartography
+</top>
+
+<top>
+<num> Number: WT04-138
+<title> Risks of tattoos and permanent makeup
+</top>
+
+<top>
+<num> Number: WT04-139
+<title> poetry readings and poems online
+</top>
+
+<top>
+<num> Number: WT04-140
+<title> Natural Resources Conservation Service
+</top>
+
+<top>
+<num> Number: WT04-141
+<title> international monetary fund
+</top>
+
+<top>
+<num> Number: WT04-142
+<title> HEV program homepage
+</top>
+
+<top>
+<num> Number: WT04-143
+<title> FEMA for kids hurricane facts
+</top>
+
+<top>
+<num> Number: WT04-144
+<title> California Tahoe conservancy
+</top>
+
+<top>
+<num> Number: WT04-145
+<title> National Fallen firefighters memorial
+</top>
+
+<top>
+<num> Number: WT04-146
+<title> astrobiology
+</top>
+
+<top>
+<num> Number: WT04-147
+<title> Hearing and Balance How loud is too loud?
+</top>
+
+<top>
+<num> Number: WT04-148
+<title> low-income housing
+</top>
+
+<top>
+<num> Number: WT04-149
+<title> National science bowl
+</top>
+
+<top>
+<num> Number: WT04-150
+<title> Snake bite first aid
+</top>
+
+<top>
+<num> Number: WT04-151
+<title> Institutions and universities in fuel cell research
+</top>
+
+<top>
+<num> Number: WT04-152
+<title> bioengineered foods crops
+</top>
+
+<top>
+<num> Number: WT04-153
+<title> technology transfer
+</top>
+
+<top>
+<num> Number: WT04-154
+<title> Kids Now by state
+</top>
+
+<top>
+<num> Number: WT04-155
+<title> federal government outsourcing
+</top>
+
+<top>
+<num> Number: WT04-156
+<title> CPSC Recalls
+</top>
+
+<top>
+<num> Number: WT04-157
+<title> federal grant programs
+</top>
+
+<top>
+<num> Number: WT04-158
+<title> Ethics, congress representatives
+</top>
+
+<top>
+<num> Number: WT04-159
+<title> Tax-cut deja-voo-doo
+</top>
+
+<top>
+<num> Number: WT04-160
+<title> scholarship programs
+</top>
+
+<top>
+<num> Number: WT04-161
+<title> Worst tornado outbreak on record
+</top>
+
+<top>
+<num> Number: WT04-162
+<title> FDA cleared medical devices
+</top>
+
+<top>
+<num> Number: WT04-163
+<title> bioterrorism
+</top>
+
+<top>
+<num> Number: WT04-164
+<title> winter weather safety
+</top>
+
+<top>
+<num> Number: WT04-165
+<title> national laboratories
+</top>
+
+<top>
+<num> Number: WT04-166
+<title> Art in white house
+</top>
+
+<top>
+<num> Number: WT04-167
+<title> after-school programs
+</top>
+
+<top>
+<num> Number: WT04-168
+<title> Maryland Rural development
+</top>
+
+<top>
+<num> Number: WT04-169
+<title> how to save energy
+</top>
+
+<top>
+<num> Number: WT04-170
+<title> science fairs and competitions
+</top>
+
+<top>
+<num> Number: WT04-171
+<title> Agricultural research service
+</top>
+
+<top>
+<num> Number: WT04-172
+<title> FCC Freedom of Information act
+</top>
+
+<top>
+<num> Number: WT04-173
+<title> Internet business cards
+</top>
+
+<top>
+<num> Number: WT04-174
+<title> Keeping cholesterol under control
+</top>
+
+<top>
+<num> Number: WT04-175
+<title> Social security benefits application
+</top>
+
+<top>
+<num> Number: WT04-176
+<title> hurricanes
+</top>
+
+<top>
+<num> Number: WT04-177
+<title> minority business
+</top>
+
+<top>
+<num> Number: WT04-178
+<title> recycling
+</top>
+
+<top>
+<num> Number: WT04-179
+<title> GPO subscriptions catalog
+</top>
+
+<top>
+<num> Number: WT04-180
+<title> Greenwich Mean Time
+</top>
+
+<top>
+<num> Number: WT04-181
+<title> AHRQ clinical practice guidelines
+</top>
+
+<top>
+<num> Number: WT04-182
+<title> Federal consumer information center scams
+</top>
+
+<top>
+<num> Number: WT04-183
+<title> Near earth asteroids
+</top>
+
+<top>
+<num> Number: WT04-184
+<title> No child left behind
+</top>
+
+<top>
+<num> Number: WT04-185
+<title> estuary conservation
+</top>
+
+<top>
+<num> Number: WT04-186
+<title> Piglet, anti-inflammatory
+</top>
+
+<top>
+<num> Number: WT04-187
+<title> Backyard bird habitat
+</top>
+
+<top>
+<num> Number: WT04-188
+<title> Why study comets?
+</top>
+
+<top>
+<num> Number: WT04-189
+<title> homeopathic medicine
+</top>
+
+<top>
+<num> Number: WT04-190
+<title> Children's butterfly site life cycle page
+</top>
+
+<top>
+<num> Number: WT04-191
+<title> coral reef systems
+</top>
+
+<top>
+<num> Number: WT04-192
+<title> drunk driving
+</top>
+
+<top>
+<num> Number: WT04-193
+<title> Dinosaurs fact and fiction
+</top>
+
+<top>
+<num> Number: WT04-194
+<title> cigarettes, nicotine, health
+</top>
+
+<top>
+<num> Number: WT04-195
+<title> FirstGov workers
+</top>
+
+<top>
+<num> Number: WT04-196
+<title> New York City employee pension
+</top>
+
+<top>
+<num> Number: WT04-197
+<title> Vietnam War
+</top>
+
+<top>
+<num> Number: WT04-198
+<title> Acupuncture effectiveness
+</top>
+
+<top>
+<num> Number: WT04-199
+<title> ADHD clinical trials
+</top>
+
+<top>
+<num> Number: WT04-200
+<title> maritime trade
+</top>
+
+<top>
+<num> Number: WT04-201
+<title> Social security inspector general
+</top>
+
+<top>
+<num> Number: WT04-202
+<title> Farm service agency online
+</top>
+
+<top>
+<num> Number: WT04-203
+<title> Art in embassies exhibitions
+</top>
+
+<top>
+<num> Number: WT04-204
+<title> endangered species
+</top>
+
+<top>
+<num> Number: WT04-205
+<title> State department bureau intelligence research
+</top>
+
+<top>
+<num> Number: WT04-206
+<title> Bird monitoring in North America
+</top>
+
+<top>
+<num> Number: WT04-207
+<title> annual parades
+</top>
+
+<top>
+<num> Number: WT04-208
+<title> The Bill of Rights, Amendments I-X
+</top>
+
+<top>
+<num> Number: WT04-209
+<title> radon
+</top>
+
+<top>
+<num> Number: WT04-210
+<title> California state parks jobs
+</top>
+
+<top>
+<num> Number: WT04-211
+<title> National conference on advances in cholesterol management
+</top>
+
+<top>
+<num> Number: WT04-212
+<title> National mediation board
+</top>
+
+<top>
+<num> Number: WT04-213
+<title> School bus recalls
+</top>
+
+<top>
+<num> Number: WT04-214
+<title> Local area unemployment statistics home
+</top>
+
+<top>
+<num> Number: WT04-215
+<title> NIH video cast
+</top>
+
+<top>
+<num> Number: WT04-216
+<title> WINDandSEA
+</top>
+
+<top>
+<num> Number: WT04-217
+<title> Astronaut biographies
+</top>
+
+<top>
+<num> Number: WT04-218
+<title> MedWatch
+</top>
+
+<top>
+<num> Number: WT04-219
+<title> West Indian manatee information
+</top>
+
+<top>
+<num> Number: WT04-220
+<title> Wildfires USGS Wildland fire research
+</top>
+
+<top>
+<num> Number: WT04-221
+<title> homeland security
+</top>
+
+<top>
+<num> Number: WT04-222
+<title> Home equity credit lines
+</top>
+
+<top>
+<num> Number: WT04-223
+<title> Wright Brothers history
+</top>
+
+<top>
+<num> Number: WT04-224
+<title> York county
+</top>
+
+<top>
+<num> Number: WT04-225
+<title> Japanese surrender document
+</top>
+
+101:ritz carlton lake las vegas
+102:fickle creek farm
+103:madam cj walker
+104:indiana child support
+105:sonoma county medical services
+106:universal animal cuts reviews
+107:cass county missouri
+108:ralph owen brewster
+109:mayo clinic jacksonville fl
+110:map of brazil
+111:lymphoma in dogs
+112:kenmore gas water heater
+113:hp mini 2140
+114:adobe indian houses
+115:pacific northwest laboratory
+116:california franchise tax board
+117:dangers of asbestos
+118:poem in your pocket day
+119:interview thank you
+120:tv on computer
+121:sit and reach test
+122:culpeper national cemetery
+123:von willebrand disease
+124:bowflex power pro
+125:butter and margarine
+126:us capitol map
+127:dutchess county tourism
+128:atypical squamous cells
+129:iowa food stamp program
+130:fact on uranus
+131:equal opportunity employer
+132:mothers day songs
+133:all men are created equal
+134:electronic skeet shoot
+135:source of the nile
+136:american military university
+137:rock and gem shows
+138:jax chemical company
+139:rocky mountain news
+140:east ridge high school
+141:va dmv registration
+142:illinois state tax
+143:arkadelphia health club
+144:trombone for sale
+145:vines for shade
+146:sherwood regional library
+147:tangible personal property tax
+148:martha stewart and imclone
+149:uplift at yellowstone national park
+150:tn highway patrol
+151:403b
+152:angular cheilitis
+153:pocono
+154:figs
+155:last supper painting
+156:university of phoenix
+157:the beatles rock band
+158:septic system design
+159:porterville
+160:grilling
+161:furniture for small spaces
+162:dnr
+163:arkansas
+164:hobby stores
+165:blue throated hummingbird
+166:computer programming
+167:barbados
+168:lipoma
+169:battles in the civil war
+170:scooters
+171:ron howard
+172:becoming a paralegal
+173:hip fractures
+174:rock art
+175:signs of a heartattack
+176:weather strip
+177:best long term care insurance
+178:pork tenderloin
+179:black history
+180:newyork hotels
+181:old coins
+182:quit smoking
+183:kansas city mo
+184:civil right movement
+185:credit report
+186:unc
+187:vanuatu
+188:internet phone service
+189:gs pay rate
+190:brooks brothers clearance
+191:churchill downs
+192:condos in florida
+193:dog clean up bags
+194:designer dog breeds
+195:pressure washers
+196:sore throat
+197:idaho state flower
+198:indiana state fairgrounds
+199:fybromyalgia
+200:ontario california airport
+201:raspberry pi
+202:uss carl vinson
+203:reviews of les miserables
+204:rules of golf
+205:average charitable donation
+206:wind power
+207:bph treatment
+208:doctor zhivago
+209:land surveyor
+210:golf gps
+211:what is madagascar known for
+212:home theater systems
+213:carpal tunnel syndrome
+214:capital gains tax rate
+215:maryland department of natural resources
+216:nicolas cage movies
+217:kids earth day activities
+218:solar water fountains
+219:what was the name of elvis presley's home
+220:nba records 
+221:electoral college 2008 results
+222:male menopause
+223:usda food pyramid
+224:making chicken soup from scratch
+225:black and gold
+226:traverse city
+227:i will survive lyrics
+228:hawaiian volcano observatories
+229:beef stroganoff recipe
+230:world's biggest dog 
+231:what are the seven deadly sins
+232:hurricane Irene flooding in manville nj
+233:hair dye
+234:dark chocolate health benefits
+235:ham radio
+236:symptoms of mad cow disease in humans
+237:lump in throat
+238:george bush sr bio
+239:frank lloyd wright biography
+240:presidential middle names
+241:what is a wiki 
+242:cannellini beans
+243:afghanistan flag 
+244:old town scottsdale
+245:roosevelt island
+246:civil war battles in South Carolina
+247:rain man
+248:eggs shelf life
+249:occupational therapist
+250:ford edge problems 
+wt09-1:obama family tree
+wt09-2:french lick resort and casino
+wt09-3:getting organized
+wt09-4:toilet
+wt09-5:mitchell college
+wt09-6:kcs
+wt09-7:air travel information
+wt09-8:appraisals
+wt09-9:used car parts
+wt09-10:cheap internet
+wt09-11:gmat prep classes
+wt09-12:djs
+wt09-13:map
+wt09-14:dinosaurs
+wt09-15:espn sports
+wt09-16:arizona game and fish
+wt09-17:poker tournaments
+wt09-18:wedding budget calculator
+wt09-19:the current
+wt09-20:defender
+wt09-21:volvo
+wt09-22:rick warren
+wt09-23:yahoo
+wt09-24:diversity
+wt09-25:euclid
+wt09-26:lower heart rate
+wt09-27:starbucks
+wt09-28:inuyasha
+wt09-29:ps 2 games
+wt09-30:diabetes education
+wt09-31:atari
+wt09-32:website design hosting
+wt09-33:elliptical trainer
+wt09-34:cell phones
+wt09-35:hoboken
+wt09-36:gps
+wt09-37:pampered chef
+wt09-38:dogs for adoption
+wt09-39:disneyland hotel
+wt09-40:michworks
+wt09-41:orange county convention center
+wt09-42:the music man
+wt09-43:the secret garden
+wt09-44:map of the united states
+wt09-45:solar panels
+wt09-46:alexian brothers hospital
+wt09-47:indexed annuity
+wt09-48:wilson antenna
+wt09-49:flame designs
+wt09-50:dog heat
+51:horse hooves
+52:avp
+53:discovery channel store
+54:president of the united states
+55:iron
+56:uss yorktown charleston sc
+57:ct jobs
+58:penguins
+59:how to build a fence
+60:bellevue
+61:worm
+62:texas border patrol
+63:flushing
+64:moths
+65:korean language
+66:income tax return online
+67:vldl levels
+68:pvc
+69:sewing instructions
+70:to be or not to be that is the question
+71:living in india
+72:the sun
+73:neil young
+74:kiwi
+75:tornadoes
+76:raised gardens
+77:bobcat
+78:dieting
+79:voyager
+80:keyboard reviews
+81:afghanistan
+82:joints
+83:memory
+84:continental plates
+85:milwaukee journal sentinel
+86:bart sf
+87:who invented music
+88:forearm pain
+89:ocd
+90:mgb
+91:er tv show
+92:the wall
+93:raffles
+94:titan
+95:earn money at home
+96:rice
+97:south africa
+98:sat
+99:satellite
+100:rincon puerto rico

@@ -1,0 +1,15 @@
+target
+.DS_Store
+.project
+.settings
+.classpath
+.idea
+*.iml
+*.log
+*.log.*
+*.old
+data/wikipedia/db-en
+data/wikipedia/db-fr
+data/wikipedia/db-de
+data/mapdb/domains-en.db
+

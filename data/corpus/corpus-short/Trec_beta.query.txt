@@ -1,0 +1,195 @@
+TREC-1	adobe indian houses
+TREC-2	atypical squamous cells
+TREC-3	battles in the civil war
+TREC-4	becoming a paralegal
+TREC-5	best long term care insurance
+TREC-6	blue throated hummingbird
+TREC-7	bowflex power pro
+TREC-8	brooks brothers clearance
+TREC-9	butter and margarine
+TREC-10	california franchise tax board
+TREC-11	cass county missouri
+TREC-12	civil right movement
+TREC-13	condos in florida
+TREC-14	culpeper national cemetery
+TREC-15	dangers of asbestos
+TREC-16	designer dog breeds
+TREC-17	discovery channel store
+TREC-18	dog clean up bags
+TREC-19	dogs for adoption
+TREC-20	dutchess county tourism
+TREC-21	earn money at home
+TREC-22	east ridge high school
+TREC-23	electronic skeet shoot
+TREC-24	equal opportunity employer
+TREC-25	er tv show
+TREC-26	fact on uranus
+TREC-27	fickle creek farm
+TREC-28	french lick resort and casino
+TREC-29	furniture for small spaces
+TREC-30	gmat prep classes
+TREC-31	gs pay rate
+TREC-32	how to build a fence
+TREC-33	hp mini 2140
+TREC-34	illinois state tax
+TREC-35	income tax return online
+TREC-36	indiana child support
+TREC-37	indiana state fairgrounds
+TREC-38	internet phone service
+TREC-39	interview thank you
+TREC-40	iowa food stamp program
+TREC-41	jax chemical company
+TREC-42	kansas city mo
+TREC-43	kenmore gas water heater
+TREC-44	last supper painting
+TREC-45	living in india
+TREC-46	lower heart rate
+TREC-47	lymphoma in dogs
+TREC-48	madam cj walker
+TREC-49	map of brazil
+TREC-50	map of the united states
+TREC-51	martha stewart and imclone
+TREC-52	mayo clinic jacksonville fl
+TREC-53	milwaukee journal sentinel
+TREC-54	mothers day songs
+TREC-55	obama family tree
+TREC-56	orange county convention center
+TREC-57	pacific northwest laboratory
+TREC-58	poem in your pocket day
+TREC-59	president of the united states
+TREC-60	ps 2 games
+TREC-61	ralph owen brewster
+TREC-62	rincon puerto rico
+TREC-63	ritz carlton lake las vegas
+TREC-64	rock and gem shows
+TREC-65	rocky mountain news
+TREC-66	septic system design
+TREC-67	signs of a heartattack
+TREC-68	sit and reach test
+TREC-69	sonoma county medical services
+TREC-70	source of the nile
+TREC-71	tangible personal property tax
+TREC-72	texas border patrol
+TREC-73	the beatles rock band
+TREC-74	the music man
+TREC-75	the secret garden
+TREC-76	tn highway patrol
+TREC-77	to be or not to be that is the question
+TREC-78	trombone for sale
+TREC-79	tv on computer
+TREC-80	universal animal cuts reviews
+TREC-81	university of phoenix
+TREC-82	uplift at yellowstone national park
+TREC-83	us capitol map
+TREC-84	used car parts
+TREC-85	uss yorktown charleston sc
+TREC-86	va dmv registration
+TREC-87	vines for shade
+TREC-88	von willebrand disease
+TREC-89	website design hosting
+TREC-90	wedding budget calculator
+TREC-91	who invented music
+TREC-92	leymah gbowee bbc news
+TREC-93	red dawn movie
+trec-web-0	entire process to obtain your real estate license
+trec-web-1	chris brown nicki minaj right by my side download
+trec-web-2	abc tv full episodes
+trec-web-3	mesa community college football
+trec-web-4	tommy morrison meth
+trec-web-5	business day south africa
+trec-web-6	montclair elementary school
+trec-web-7	hat is gold used for and why
+trec-web-8	lengths of triangle sides
+trec-web-9	jo ann fabrics rockford il
+trec-web-10	berkeley square mini series
+trec-web-11	samsung galaxy exhilarate
+trec-web-12	craigslist kansas city
+trec-web-13	west indies islands map
+trec-web-14	mayo clinic topamax and hair loss
+trec-web-15	kesha american music awards 2012
+trec-web-16	natwest online banking login
+trec-web-17	sesame street episode 3806
+trec-web-18	kerry fox actress
+trec-web-19	boys osirus shoes
+trec-web-20	andrew freeman demandware
+trec-web-21	jeff kenyon little compton
+trec-web-22	harbor freight store locator
+trec-web-23	bob weir wiki government
+trec-web-24	the third term
+trec-web-25	carolinas resturant and downtown delray beach
+trec-web-26	american airlines jobs
+trec-web-27	connecticut and eminent domain
+trec-web-28	throat cancer symptoms
+trec-web-29	leymah gbowee bbc news
+trec-web-30	go transit bus schedule
+trec-web-31	frank pembleton homicide speech on religion
+trec-web-32	carbon 14 labeled glucose
+trec-web-33	sign up for xbox live
+trec-web-34	jennifer aniston hair
+trec-web-35	robin roberts sexual orientation
+trec-web-36	mall of america nickelodeon
+trec-web-37	developmental theories of diversity consciousness
+trec-web-38	one direction songs
+trec-web-39	high blood pressure symptoms
+trec-web-40	gavin smith huffington post
+trec-web-41	lady midnight cassandra clare
+trec-web-42	christopher banks in lees summit
+trec-web-43	kool smiles in fredericksburg va
+trec-web-44	billy scott dies
+trec-web-45	copper mining companies in arizona
+trec-web-46	huntington beach costco
+trec-web-47	lillian vernon kids
+trec-web-48	red cross employee portal
+trec-web-49	donald trump announcement
+trec-web-50	benzoyl peroxide gel and clindamycin phosphate
+trec-web-50	benzoyl peroxide gel and clindamycin phosphate
+trec-web-51	sarasota county property appraiser
+trec-web-52	christian stories of life after death
+trec-web-53	american red cross blood pressure
+trec-web-54	tai chi dvd
+trec-web-55	soaps she knows
+trec-web-56	regal cinemas mt juliet
+trec-web-57	craiglist louisville ky
+trec-web-58	voice lessons sullivan co ny
+trec-web-59	masslottery numbers game
+trec-web-60	chain link fence
+trec-web-61	carlo rossi sangria
+trec-web-62	chase online banking
+trec-web-63	jewish population of loisiana cities
+trec-web-64	pyramid with a star on top
+trec-web-65	university of alabama football players
+trec-web-66	att mail sign in
+trec-web-67	robert griffin hurt
+trec-web-68	african american emancipation thesis
+trec-web-69	ryder cup 2012
+trec-web-70	the walking dead season 3 episode 7 online
+trec-web-71	traffic for delaware memorial bridge
+trec-web-72	friday the 13th film location 1980
+trec-web-73	deana carter separation
+trec-web-74	538 nate silver
+trec-web-75	tom waits time
+trec-web-76	fandango movie theater showtimes
+trec-web-77	mini wax stains
+trec-web-78	residence inn marriott san antonio texas
+trec-web-79	white bean recipes
+trec-web-80	staples san antonio tx
+trec-web-81	microsoft outlook web app
+trec-web-82	ou medical center jobs
+trec-web-83	ricky bros auto sales
+trec-web-84	cat dog episodes
+trec-web-85	youtube destinys child soldier
+trec-web-86	webkinz world log in page
+trec-web-87	george westinghouse the civil war
+trec-web-88	bank of america online banking sign in
+trec-web-89	theresa caputo appointment
+trec-web-90	car service to newark airport from w wyoming pa
+trec-web-91	yakima valley memorial hospital
+trec-web-92	park n fly coupon
+trec-web-93	girl scout store in sacramento ca
+trec-web-94	white settlement tx
+trec-web-95	if i would know right and wrongs lyrics
+trec-web-96	red dawn movie
+trec-web-97	jeff bell coldwell banker
+trec-web-98	pain of the spinal cord
+trec-web-99	no worries lil wayne download
+trec-web-100	new bedford deeds

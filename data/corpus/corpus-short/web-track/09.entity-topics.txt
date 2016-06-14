@@ -1,0 +1,164 @@
+<query>
+<num>1</num>
+<entity_name>Blackberry</entity_name>
+<entity_URL>clueweb09-en0004-50-39593</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Carriers that Blackberry makes phones for.</narrative>
+</query>
+
+<query>
+<num>2</num>
+<entity_name>ACM Athena award</entity_name>
+<entity_URL>clueweb09-en0004-21-12770</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Winners of the ACM Athena award.</narrative>
+</query>
+
+<query>
+<num>3</num>
+<entity_name>Claire Cardie</entity_name>
+<entity_URL>clueweb09-en0009-89-01791</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Students of Claire Cardie.</narrative>
+</query>
+
+<query>
+<num>4</num>
+<entity_name>Philadelphia, PA</entity_name>
+<entity_URL>clueweb09-en0011-13-07330</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Professional sports teams in Philadelphia.</narrative>
+</query>
+
+<query>
+<num>5</num>
+<entity_name>Medimmune, Inc.</entity_name>
+<entity_URL>clueweb09-en0008-26-39300</entity_URL>
+<target_entity>product</target_entity>
+<narrative>Products of Medimmune, Inc.</narrative>
+</query>
+
+<query>
+<num>6</num>
+<entity_name>Nobel Prize</entity_name>
+<entity_URL>clueweb09-en0002-23-19459</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Organizations that award Nobel prizes.</narrative>
+</query>
+
+<query>
+<num>7</num>
+<entity_name>Boeing 747</entity_name>
+<entity_URL>clueweb09-en0005-75-02292</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Airlines that currently use Boeing 747 planes.</narrative>
+</query>
+
+<query>
+<num>8</num>
+<entity_name>The King's Singers</entity_name>
+<entity_URL>clueweb09-en0002-63-29621</entity_URL>
+<target_entity>product</target_entity>
+<narrative>CDs released by the King's Singers.</narrative>
+</query>
+
+<query>
+<num>9</num>
+<entity_name>The Beaux Arts Trio</entity_name>
+<entity_URL>clueweb09-en0005-08-02741</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Members of The Beaux Arts Trio.</narrative>
+</query>
+
+<query>
+<num>10</num>
+<entity_name>Indiana University</entity_name>
+<entity_URL>clueweb09-en0007-37-37513</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Campuses of Indiana University.</narrative>
+</query>
+
+<query>
+<num>11</num>
+<entity_name>Home Depot Foundation</entity_name>
+<entity_URL>clueweb09-en0009-23-04855</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Donors to the Home Depot Foundation.</narrative>
+</query>
+
+<query>
+<num>12</num>
+<entity_name>Air Canada</entity_name>
+<entity_URL>clueweb09-en0004-24-03450</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Airlines that Air Canada has code share flights with.</narrative>
+</query>
+
+<query>
+<num>13</num>
+<entity_name>American Veterinary Medical Association (AVMA)</entity_name>
+<entity_URL>clueweb09-en0004-39-32528</entity_URL>
+<target_entity>product</target_entity>
+<narrative>Journals published by the AVMA.</narrative>
+</query>
+
+<query>
+<num>14</num>
+<entity_name>Bouchercon 2007</entity_name>
+<entity_URL>clueweb09-en0005-48-25203</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Authors awarded an Anthony Award at Bouchercon in 2007.</narrative>
+</query>
+
+<query>
+<num>15</num>
+<entity_name>SEC conference</entity_name>
+<entity_URL>clueweb09-en0010-56-11826</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Universities that are members of the SEC conference for football.</narrative>
+</query>
+
+<query>
+<num>16</num>
+<entity_name>Mancuso Quilt Festivals</entity_name>
+<entity_URL>clueweb09-en0011-22-08631</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Sponsors of the Mancuso quilt festivals.</narrative>
+</query>
+
+<query>
+<num>17</num>
+<entity_name>The Food Network</entity_name>
+<entity_URL>clueweb09-en0006-55-17239</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Chefs with a show on the Food Network.</narrative>
+</query>
+
+<query>
+<num>18</num>
+<entity_name>Jefferson Airplane</entity_name>
+<entity_URL>clueweb09-en0009-25-04698</entity_URL>
+<target_entity>person</target_entity>
+<narrative>Members of the band Jefferson Airplane.</narrative>
+</query>
+
+
+<query>
+<num>19</num>
+<entity_name>John L. Hennessy</entity_name>
+<entity_URL>clueweb09-en0011-14-04774</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Companies that John Hennessy serves on the board of.</narrative>
+</query>
+
+
+<query>
+<num>20</num>
+<entity_name>Isle of Islay</entity_name>
+<entity_URL>clueweb09-en0008-96-25389</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>Scotch whisky distilleries on the island of Islay.</narrative>
+</query>
+
+
+

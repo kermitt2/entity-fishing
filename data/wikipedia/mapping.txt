@@ -1,0 +1,158 @@
+Crafts	Artisanship
+Design	Artisanship
+Geography	Geography
+Landforms	Geology
+Oceans	Oceanography
+Health	Health
+Healthcare occupations	Health
+Self-care	Health
+Nutrition	Health
+Nutrients	Food
+Amino acids	Biochemistry	Biology
+Minerals	Biochemistry	Biology
+Nootropics	Biochemistry	Biology
+Phytochemicals	Biochemistry	Biology
+Vitamins	Biochemistry	Biology
+Hygiene	Body_Care
+Positive psychology	Psychiatry
+Public health	Health
+Health sciences	Health
+Clinical research	Medicine	Health
+Diseases	Medicine	Health
+Epidemiology	Medicine	Health
+Pharmacy	Pharmacy
+Medicine	Medicine
+Veterinary medicine	Animal_Husbandry
+Dentistry	Dentistry
+Pharmaceuticals policy	Pharmacy
+Alternative medicine	Medicine
+Cardiology	Medicine
+Endocrinology	Medicine
+Forensics	Medicine
+Gastroenterology	Medicine
+Human genetics	Genetics
+Geriatrics	Medicine
+Gerontology	Medicine
+Gynecology	Medicine
+Hematology	Medicine
+Nephrology	Medicine
+Neurology	Medicine	Psychiatry
+Obstetrics	Medicine
+Oncology	Medicine
+Ophthalmology	Medicine
+Orthopedic surgery	Medicine	Surgery
+Pathology	Medicine
+Pediatrics	Medicine
+Psychiatry	Psychiatry
+Rheumatology	Medicine
+Sleep	Medicine
+Surgery	Surgery
+Urology	Medicine
+Mathematics	Mathematics
+Geometry	Geometry
+Statistics	Statistics
+Biology	Biology
+Ecology	Environment
+Neuroscience	Medicine	
+Astronomy	Astronomy
+Chemistry	Chemistry
+Climate	Meteorology
+Earth sciences	Geology	Oceanography	Earth
+Geology	Geology	Chemistry
+Physics	Physics
+Space	Astronomy
+Animals	Animals
+Environment	Environment
+Humans	Biology
+Life	Biology
+Natural resources	Environment	Gas
+Plants	Plants
+Pollution	Environment
+Anthropology	Sociology
+Cultural studies	Sociology
+Demographics	Sociology
+Economics	Economy
+International relations
+Psychology	Psychiatry	Health
+Sociology	Sociology
+Sexology	Sociology	Medicine	Health
+Business	Commerce	Enterprise
+Education	Pedagogy
+Finance	Finance
+Government	Administration
+Home	Home
+Industries	Enterprise
+Labor	Sociology
+Military	Military
+Money	Finance
+Organizations	Administration
+Agriculture	Agriculture
+Agronomy	Agriculture
+Architecture	Architecture
+Automation	Engineering
+Biotechnology	Engineering	Biology
+Telecommunications	Telecommunication
+Energy	Energy
+Ergonomics	Furniture
+Forestry	Plants	Environment
+Industry	Applied_Science
+Information science	Computer_Science
+Information technology	Computer_Science
+Internet	Computer_Science	Telecommunication
+Management	Enterprise
+Manufacturing	Enterprise	Engineering
+Marketing	Economy
+Metalworking	Engineering
+Microtechnology	Electronics
+Military science	Military
+Mining	Engineering	Geology
+Nanotechnology	Engineering
+Nuclear technology	Atomic_Physic	Engineering
+Optics	Optics
+Robotics	Engineering
+Sound technology	Acoustics
+Tools	Mechanics
+Computing	Computer_Science
+Networks	Computer_Science	Telecommunication
+Electronics	Electronics	Electrotechnology
+Avionics	Aviation
+Electronic circuits	Electronics
+Electrical connectors	Electronics	Electricity
+Consumer electronics	Electronics
+Digital electronics	Electronics
+Digital media	Electronics	Computer_Science
+Electrical components	Electricity	Electronics
+Electronic design	Electronics
+Electronics manufacturing	Electronics
+Embedded systems	Electronics	Computer_Science
+Integrated circuits	Electronics	Computer_Science
+Microwave technology	Electronics	Computer_Science
+Molecular electronics	Electronics
+Water technology	Hydraulics
+Optoelectronics	Electronics	Optics
+Quantum electronics	Electronics	Physics
+Radio electronics	Electronics
+Semiconductors	Electronics	Electricity
+Signal cables	Electricity	Electronics
+Surveillance	Electronics
+Engineering	Engineering
+Aerospace engineering	Astronautics
+Bioengineering	Engineering	Biology
+Chemical engineering	Engineering	Chemistry
+Civil engineering	Engineering
+Electrical engineering	Electrotechnology
+Environmental engineering	Hydraulics	Environment
+Materials science	Materials
+Mechanical engineering	Mechanics
+Software engineering	Computer_Science
+Structural engineering	Mechanics	Engineering
+Systems engineering	Engineering
+Transportation	Transport
+Automobiles	Vehicles	Transport
+Aviation	Aviation	Transport
+Public transport	Vehicles	Transport
+Rail transport	Railway	Transport
+Road transport	Vehicles	Transport
+Spaceflight	Aviation	Transport
+Vehicles	Vehicles	Transport
+Water transport	Nautical	Transport

@@ -1,0 +1,27 @@
+Global values -----------------------
+nbRelevant: 471
+nbRetrieved: 1299
+nbExpected: 1060
+
+Micro-level -----------------------
+Precision: 36.26
+Recall: 44.43
+f1: 39.93
+
+Macro-level -----------------------
+f1: 34.11
+
+---
+
+Global values -----------------------
+nbRelevant: 458
+nbRetrieved: 1299
+nbExpected: 926
+
+Micro-level -----------------------
+Precision: 35.26
+Recall: 49.46
+f1: 41.17
+
+Macro-level -----------------------
+f1: 34.94

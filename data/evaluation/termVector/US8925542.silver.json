@@ -1,0 +1,222 @@
+{
+	"_id" : "5595345a9c597f75f39ba1db",
+	"publication_id" : "US8925542",
+	"invention_title" : "Slow open and/or slow close hinge assembly and hinge system",
+	"keywords" : [
+		{
+			"keyword" : "hinge",
+			"weight" : 303.26358335967905,
+			"entities" : [ 
+{ "rawName" : "hinge", "preferredTerm" : "Hinge", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "254945", "freeBaseExternalRef" : "/m/01lsn3", "definitions" : [ { "definition" : "A '''hinge''' is a type of [[Bearing (mechanical)|bearing]] that connects two solid objects, typically allowing only a limited [[angle of rotation]] between them. Two objects connected by an ideal hinge rotate relative to each other about a fixed [[axis of rotation]]. Hinges may be made of [[Flexure bearing|flexible material]] or of moving components. In [[biology]], many [[joint]]s function as hinges.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanical engineering", "page_id" : 717561}, {"source" : "wikipedia-en", "category" : "Hardware (mechanical)", "page_id" : 921931}, {"source" : "wikipedia-en", "category" : "Door furniture", "page_id" : 1200110}, {"source" : "wikipedia-en", "category" : "Linkages", "page_id" : 8129567} ]  }
+			]
+		},
+		{
+			"keyword" : "damper",
+			"weight" : 188.6462773536405,
+			"entities" : [ 
+{ "rawName" : "damper", "preferredTerm" : "Shock absorber", "nerd_score" : "0.9254362530096243", "prob" : "1.0", "wikipediaExternalRef" : "170829", "freeBaseExternalRef" : "/m/016xr_", "definitions" : [ { "definition" : "[[Image:Gas damper mov frame 0002.jpg|thumb|Shock absorber with internal reservoir. The components are: A - rod, B - the piston with seals, C - the cylinder, D - oil reservoir, E - floating piston, F - air chamber. [[File:Gas damper mov.gif|Animated version]]]] A '''shock absorber''' is a mechanical device designed to smooth out or [[damping|damp]] [[shock (mechanics)|shock]] impulse, and dissipate [[kinetic energy]]. It is a type of [[dashpot]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Automotive suspension technologies", "page_id" : 1154682}, {"source" : "wikipedia-en", "category" : "Motorcycle technology", "page_id" : 2881562} ]  }
+			]
+		},
+		{
+			"keyword" : "piston",
+			"weight" : 173.85406471818692,
+			"entities" : [ 
+{ "rawName" : "piston", "preferredTerm" : "Piston", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "24776", "freeBaseExternalRef" : "/m/0665t", "definitions" : [ { "definition" : "A '''piston''' is a component of [[reciprocating engine]]s, reciprocating [[pump]]s, [[gas compressor]]s and [[pneumatic cylinder]]s, among other similar mechanisms. It is the moving component that is contained by a [[Cylinder (engine)|cylinder]] and is made gas-tight by [[piston ring]]s. In an engine, its purpose is to transfer force from expanding gas in the cylinder to the [[crankshaft]] via a [[piston rod]] and/or [[connecting rod]]. In a pump, the function is reversed and force is transferred from the crankshaft to the piston for the purpose of compressing or ejecting the [[fluid]] in the cylinder. In some engines, the piston also acts as a [[valve]] by covering and uncovering [[Porting_%28engine%29#Two-stroke porting|port]]s in the cylinder wall.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Engineering" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Engine technology", "page_id" : 1124196} ]  }
+			]
+		},
+		{
+			"keyword" : "door",
+			"weight" : 172.06703015717417,
+			"entities" : [ 
+{ "rawName" : "door", "preferredTerm" : "Door", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "8637", "freeBaseExternalRef" : "/m/02dgv", "definitions" : [ { "definition" : "A '''door''' is a movable structure used to close off an entrance, typically consisting of a panel that swings on hinges or that slides or rotates inside of a space.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Doors", "page_id" : 2867563}, {"source" : "wikipedia-en", "category" : "Types of gates", "page_id" : 28055120}, {"source" : "wikipedia-en", "category" : "Article Feedback Pilot", "page_id" : 28823705} ]  } 
+			]
+		},
+		{
+			"keyword" : "oven",
+			"weight" : 123.67987870850433,
+			"entities" : [ 
+{ "rawName" : "oven", "preferredTerm" : "Oven", "nerd_score" : "0.9673599296861521", "prob" : "1.0", "wikipediaExternalRef" : "445536", "freeBaseExternalRef" : "/m/029bxz", "definitions" : [ { "definition" : "An '''oven''' is a thermally insulated chamber used for the [[heating]], [[baking]] or [[drying]] of a substance. It is most commonly used for [[cooking]]. [[Kiln]]s, and [[furnace]]s are special-purpose ovens. The first being used mainly for the fabrication of [[pottery]] and the second being used for [[forging]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Food" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cooking appliances", "page_id" : 2235539}, {"source" : "wikipedia-en", "category" : "Fireplaces", "page_id" : 6554383} ]  }
+			]
+		},
+		{
+			"keyword" : "system in-vitro fertilization",
+			"status" : "absent",
+			"weight" : 114.39457570644704,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "dampen",
+			"weight" : 87.06214265940831,
+			"entities" : [ 
+{ "rawName" : "dampen", "preferredTerm" : "Damping", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "495563", "freeBaseExternalRef" : "/m/02hbnr", "definitions" : [ { "definition" : "In [[physics]], '''damping''' is any effect that tends to reduce the [[amplitude]] of [[oscillation]]s in an oscillatory system, particularly the [[harmonic oscillator]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Ordinary differential equations", "page_id" : 696344}, {"source" : "wikipedia-en", "category" : "Control theory", "page_id" : 1028771}, {"source" : "wikipedia-en", "category" : "Electronics terms", "page_id" : 1331383}, {"source" : "wikipedia-en", "category" : "Mechanical vibrations", "page_id" : 13532645} ]  }
+			]
+		},
+		{
+			"keyword" : "llllk llllk",
+			"status" : "absent",
+			"weight" : 78.35380125330241,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "link",
+			"status" : "weak",
+			"weight" : 77.38895574217234,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "rod",
+			"weight" : 73.22829887137274,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "arm",
+			"weight" : 72.23431677159722,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "channel",
+			"weight" : 67.00212558749037,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "damp",
+			"status" : "redundant",
+			"weight" : 65.10602933429996,
+			"entities" : [ 
+{ "rawName" : "damp", "preferredTerm" : "Damping", "nerd_score" : "0.8641563420086327", "prob" : "1.0", "wikipediaExternalRef" : "495563", "freeBaseExternalRef" : "/m/02hbnr", "definitions" : [ { "definition" : "In [[physics]], '''damping''' is any effect that tends to reduce the [[amplitude]] of [[oscillation]]s in an oscillatory system, particularly the [[harmonic oscillator]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Ordinary differential equations", "page_id" : 696344}, {"source" : "wikipedia-en", "category" : "Control theory", "page_id" : 1028771}, {"source" : "wikipedia-en", "category" : "Electronics terms", "page_id" : 1331383}, {"source" : "wikipedia-en", "category" : "Mechanical vibrations", "page_id" : 13532645} ]  }
+			]
+		},
+		{
+			"keyword" : "servicing awss",
+			"status" : "absent",
+			"weight" : 47.902222814342714,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "damping",
+			"status" : "redundant",
+			"weight" : 45.74669596718984,
+			"entities" : [ 
+{ "rawName" : "damping", "preferredTerm" : "Damping", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "495563", "freeBaseExternalRef" : "/m/02hbnr", "definitions" : [ { "definition" : "In [[physics]], '''damping''' is any effect that tends to reduce the [[amplitude]] of [[oscillation]]s in an oscillatory system, particularly the [[harmonic oscillator]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Ordinary differential equations", "page_id" : 696344}, {"source" : "wikipedia-en", "category" : "Control theory", "page_id" : 1028771}, {"source" : "wikipedia-en", "category" : "Electronics terms", "page_id" : 1331383}, {"source" : "wikipedia-en", "category" : "Mechanical vibrations", "page_id" : 13532645} ]  }
+			]
+		},
+		{
+			"keyword" : "cause imt",
+			"status" : "absent",
+			"weight" : 44.205386902237905,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pivotally",
+			"weight" : 42.86386540846617,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "pivoting",
+			"status" : "redundant",
+			"weight" : 41.00582481171418,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "appliance",
+			"weight" : 40.94709702207893,
+			"entities" : [ 
+{ "rawName" : "appliance", "preferredTerm" : "Home appliance", "nerd_score" : "0.6287983878113188", "prob" : "1.0", "wikipediaExternalRef" : "185982", "freeBaseExternalRef" : "/m/019dx1", "definitions" : [ { "definition" : "'''Home appliances''' are electrical/mechanical [[machine|machines]] which accomplish some [[household]] functions, such as [[cooking]] or [[cleanliness|cleaning]]. Home appliances can be classified into: *[[Major appliance]]s, or White goods *[[Small appliance]]s, or Brown goods", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Telecommunication", "Computer_Science" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Home appliances", "page_id" : 1392560} ]  }, 
+{ "rawName" : "appliance", "preferredTerm" : "Major appliance", "nerd_score" : "0.007100539285264544", "prob" : "1.0", "wikipediaExternalRef" : "176883", "freeBaseExternalRef" : "/m/017_cz", "definitions" : [ { "definition" : "A '''major appliance''', or '''domestic appliance''', is usually defined as a large [[machine]] which accomplishes some routine housekeeping task, which includes purposes such as [[cooking]], or [[food preservation]], whether in a household, institutional, commercial or industrial setting. An appliance is differentiated from a [[plumbing fixture]] because it uses an energy input for its operation other than [[water]], generally using [[electricity]] or [[natural gas]]/[[propane]]. An object run by a [[watermill]] would also be considered an appliance. The term '''white goods''' or '''whiteware''' is also used for these items, primarily where [[British English]] is spoken, although definitions for the term \"white goods\" can differ. In the [[United States]], the term ''white goods'' more commonly refers to [[linens]] rather than appliances.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Electro mechanical engineering", "page_id" : 854051}, {"source" : "wikipedia-en", "category" : "Consumer goods", "page_id" : 916951}, {"source" : "wikipedia-en", "category" : "Home appliances", "page_id" : 1392560} ]  }
+			]
+		},
+		{
+			"keyword" : "assembly",
+			"weight" : 40.11606541607183,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "spring",
+			"weight" : 34.663094550098656,
+			"entities" : [ 
+{ "rawName" : "spring", "preferredTerm" : "Spring (device)", "nerd_score" : "0.8088026371552323", "prob" : "1.0", "wikipediaExternalRef" : "316617", "freeBaseExternalRef" : "/m/01ty24", "definitions" : [ { "definition" : "A '''spring''' is an [[Elasticity (physics)|elastic]] object used to store mechanical [[energy]]. Springs are usually made out of [[hardened steel]]. Small springs can be wound from pre-hardened stock, while larger ones are made from [[annealing (metallurgy)|annealed]] steel and hardened after fabrication. Some [[ferrous|non-ferrous metals]] are also used including [[phosphor bronze]] and [[titanium]] for parts requiring corrosion resistance and [[beryllium copper]] for springs carrying electrical current (because of its low electrical resistance).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Springs (mechanical)", "page_id" : 1385947} ]  }
+			]
+		},
+		{
+			"keyword" : "fastener",
+			"weight" : 32.12322972291512,
+			"entities" : [ 
+{ "rawName" : "fastener", "preferredTerm" : "Fastener", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "877127", "freeBaseExternalRef" : "/m/03kyfs", "definitions" : [ { "definition" : "A '''fastener''' is a [[hardware]] device that mechanically joins or affixes two or more objects together. Fasteners can also be used to close a container such as a bag, a box, or an envelope; or they may involve keeping together the sides of an opening of flexible material, attaching a [[Lid (container)|lid]] to a container, etc. There are also special-purpose closing devices, e.g. a [[bread clip]]. Fasteners used in these manners are often temporary, in that they may be fastened and unfastened repeatedly.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Fasteners", "page_id" : 1402148} ]  }
+			]
+		},
+		{
+			"keyword" : "osteoclasts rankl composition",
+			"status" : "absent",
+			"weight" : 30.29606092444572,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "keeper",
+			"weight" : 29.801753958510297,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "extension retraction",
+			"weight" : 29.68432253921663,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "body",
+			"status" : "weak",
+			"weight" : 28.909915433163626,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "broil",
+			"weight" : 27.420922716588272,
+			"entities" : [ 
+{ "rawName" : "broil", "preferredTerm" : "Grilling", "nerd_score" : "0.6310692771084337", "prob" : "1.0", "wikipediaExternalRef" : "52987", "freeBaseExternalRef" : "/m/0dxlf", "definitions" : [ { "definition" : "'''Grilling''' is a form of cooking that involves dry heat applied to the surface of food, commonly from above or below. Grilling usually involves quite a lot of direct, radiant heat, and tends to be used for cooking meat quickly and meat that has already been cut into slices (or other pieces). Food to be grilled is cooked on a [[grill (cooking)|grill]] (an open wire grid with a heat source above or below), a grill pan (similar to a [[frying pan]], but with raised ridges to mimic the wires of an open grill), or [[griddle]] (a flat plate heated from below). Heat transfer to the food when using a grill is primarily via [[thermal radiation]]. Heat transfer when using a grill pan or griddle is by direct conduction. In the United States and Canada, when the heat source for grilling comes from above, grilling is termed '''broiling'''. In this case, the pan that holds the food is called a broiler pan, and heat transfer is by thermal convection.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Food" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cooking techniques", "page_id" : 757512}, {"source" : "wikipedia-en", "category" : "Barbecue", "page_id" : 4675538} ]  }
+			]
+		},
+		{
+			"keyword" : "operative",
+			"status" : "weak",
+			"weight" : 27.039975817716005,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "recess",
+			"weight" : 26.086916283868646,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "fngsv",
+			"status" : "absent",
+			"weight" : 25.954681674433548,
+			"entities" : [ 
+
+			]
+		}
+	]
+}

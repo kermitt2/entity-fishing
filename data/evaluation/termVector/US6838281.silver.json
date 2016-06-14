@@ -1,0 +1,224 @@
+{
+	"_id" : "559518c29c597f75f378b8cd",
+	"publication_id" : "US6838281",
+	"invention_title" : "Cells expressing fusion proteins of immunoglobulins",
+	"keywords" : [
+		{
+			"keyword" : "immunoglobulin",
+			"weight" : 736.3660363694619,
+			"entities" : [ 
+{ "rawName" : "immunoglobulin", "preferredTerm" : "Antibody", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "2362", "freeBaseExternalRef" : "/m/0ytw", "definitions" : [ { "definition" : "An '''antibody''', also known as an '''immunoglobulin''', is a large Y-shaped [[protein]] used by the [[immune system]] to identify and neutralize foreign objects such as [[bacterium|bacteria]] and [[virus]]es. The antibody recognizes a unique part of the foreign target, termed an [[antigen]]. Each tip of the \"Y\" of an antibody contains a (a structure analogous to a lock) that is specific for one particular [[epitope]] (similarly analogous to a key) on an antigen, allowing these two structures to bind together with precision. Using this binding mechanism, an antibody can ''tag'' a [[microbe]] or an infected cell for attack by other parts of the immune system, or can neutralize its target directly (for example, by blocking a part of a microbe that is essential for its invasion and survival). The production of antibodies is the main function of the [[humoral immune system]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Biology" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Immune system", "page_id" : 729294}, {"source" : "wikipedia-en", "category" : "Glycoproteins", "page_id" : 993004} ]  }
+			]
+		},
+		{
+			"keyword" : "epitope",
+			"weight" : 623.9898235399959,
+			"entities" : [ 
+{ "rawName" : "epitope", "preferredTerm" : "Epitope", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "495045", "freeBaseExternalRef" : "/m/02h8t5", "definitions" : [ { "definition" : "An '''epitope''', also known as ''antigenic determinant'', is the part of an [[antigen]] that is recognized by the [[immune system]], specifically by [[antibody|antibodies]], [[B cell]]s, or [[T cell]]s. The part of an antibody that recognizes the epitope is called a [[paratope]]. Although epitopes are usually thought to be derived from non-self proteins, sequences derived from the host that can be recognized are also classified as epitopes.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Immune system", "page_id" : 729294} ]  }
+			]
+		},
+		{
+			"keyword" : "fusion",
+			"weight" : 479.6720505426146,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "1822243" }
+			]
+		},
+		{
+			"keyword" : "tolerogenic epitope",
+			"weight" : 343.3222451068705,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "tolerance",
+			"weight" : 338.2650980575007,
+			"entities" : [ 
+{ "rawName" : "tolerance", "preferredTerm" : "Drug tolerance", "nerd_score" : "0.8850286276177604", "prob" : "1.0", "wikipediaExternalRef" : "662395", "freeBaseExternalRef" : "/m/030rr2", "definitions" : [ { "definition" : "'''Physiological tolerance''' or '''drug tolerance''' is commonly encountered in [[pharmacology]], when a subject's reaction to a drug (such as an [[opiate]] painkiller, [[benzodiazepine]] or other psychotropic drug) is reduced at a later time even though the dose or concentration at the effect site is the same. This means that larger doses are required to achieve the same effect. Drug tolerance can involve both [[psychological drug tolerance]] and [[Physiological tolerance|physiological]] factors. Characteristics of drug tolerance: it is reversible, the rate depends on the particular drug, dosage and frequency of use, differential development occurs for different effects of the same drug. Physiological tolerance also occurs when an organism builds up a resistance to the effects of a substance after repeated exposure. This can occur with environmental substances, such as salt or pesticides.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Pharmacodynamics", "page_id" : 726051}, {"source" : "wikipedia-en", "category" : "Drug addiction", "page_id" : 10924071} ]  }, 
+{ "rawName" : "tolerance", "preferredTerm" : "Tachyphylaxis", "nerd_score" : "0.01178889585031335", "prob" : "1.0", "wikipediaExternalRef" : "1685587", "freeBaseExternalRef" : "/m/05n8yn", "definitions" : [ { "definition" : "'''Tachyphylaxis''' is a medical term describing a decrease in the response to a drug due to previous exposure to that drug. Increasing the dose of the drug may be able to restore the original response. In this context tachyphylaxis is a synonym for [[drug tolerance]]. This can sometimes be caused by depletion or marked reduction of the amount of neurotransmitter responsible for creating the drug's effect, or by the depletion of receptors available for the drug or neurotransmitter to bind to. This depletion is caused by the cell's reducing the number of receptors in response to their saturation. Examples: [[Amphetamine]], [[ephedrine]], [[MDMA]] (indirectly acting drugs)", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Pharmacodynamics", "page_id" : 726051} ]  }
+			]
+		},
+		{
+			"keyword" : "dna",
+			"weight" : 315.98411809183204,
+			"entities" : [ 
+{ "rawName" : "dna", "preferredTerm" : "DNA", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "7955", "freeBaseExternalRef" : "/m/026w5", "definitions" : [ { "definition" : "'''Deoxyribonucleic acid''' — '''DNA''' — is a [[nucleic acid]] that contains the [[genetics|genetic]] instructions used in the development and functioning of all known living [[organism]]s (with the exception of [[RNA virus]]es). The main role of DNA [[molecule]]s is the long-term storage of [[information]]. DNA is often compared to a set of [[blueprint]]s, like a recipe or a code, since it contains the instructions needed to construct other components of [[cell (biology)|cells]], such as [[protein]]s and [[RNA]] molecules. The DNA segments that carry this genetic information are called [[gene]]s, but other DNA sequences have structural purposes, or are involved in regulating the use of this genetic information. Along with [[RNA]] and [[proteins]], DNA is one of the three major [[macromolecules]] that are essential for all known forms of life.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Genetics", "page_id" : 696008}, {"source" : "wikipedia-en", "category" : "DNA", "page_id" : 745820}, {"source" : "wikipedia-en", "category" : "Scattering", "page_id" : 1020950}, {"source" : "wikipedia-en", "category" : "Helices", "page_id" : 4164053} ]  }
+			]
+		},
+		{
+			"keyword" : "antigen",
+			"weight" : 279.49605553327103,
+			"entities" : [ 
+{ "rawName" : "antigen", "preferredTerm" : "Antigen", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "1915", "freeBaseExternalRef" : "/m/0v5r", "definitions" : [ { "definition" : "An '''antigen''' is a substance or molecule that, when introduced into the body, triggers the production of an [[antibody]] by the [[immune system]], which will then kill or neutralize the antigen that is recognized as a foreign and potentially harmful invader. These invaders can be [[molecules]] such as pollen or cells such as bacteria. The term originally came from '''anti'''body '''gen'''erator and was a molecule that binds specifically to an antibody, but the term now also refers to any molecule or molecular fragment that can be bound by a [[major histocompatibility complex]] (MHC) and presented to a T-cell receptor. \"Self\" antigens are usually tolerated by the immune system; whereas \"Non-self\" antigens are identified as intruders and attacked by the immune system. [[Autoimmune]] disorders arise from the immune system reacting to its own antigens.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Immune system", "page_id" : 729294} ]  }
+			]
+		},
+		{
+			"keyword" : "sequence",
+			"weight" : 259.3516623304536,
+			"entities" : [ 
+{ "rawName" : "sequence", "preferredTerm" : "Nucleic acid sequence", "nerd_score" : "0.03848551581108614", "prob" : "1.0", "wikipediaExternalRef" : "331535", "freeBaseExternalRef" : "/m/01wzqd", "definitions" : [ { "definition" : "The '''sequence''' or '''primary structure of a nucleic acid''' is the composition of atoms that make up the [[nucleic acid]] and the [[chemical bond]]s that those atoms. Because nucleic acids, such as [[DNA]] and [[RNA]], are unbranched polymers, this specification is equivalent to specifying the sequence of [[nucleotide]]s that comprise the molecule. This sequence is written as a succession of letters representing a real or hypothetical nucleic acid molecule or strand. By convention, the primary structure of a DNA or RNA molecule is reported from the 5' end to the 3' end.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "DNA", "page_id" : 745820} ]  }
+			]
+		},
+		{
+			"keyword" : "coding",
+			"weight" : 250.5740226277484,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "509959" }
+			]
+		},
+		{
+			"keyword" : "cenpe",
+			"status" : "absent",
+			"weight" : 242.24493604851622,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "epitopes",
+			"status" : "redundant",
+			"weight" : 222.83865960764376,
+			"entities" : [ 
+{ "rawName" : "epitopes", "preferredTerm" : "Epitope", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "495045", "freeBaseExternalRef" : "/m/02h8t5", "definitions" : [ { "definition" : "An '''epitope''', also known as ''antigenic determinant'', is the part of an [[antigen]] that is recognized by the [[immune system]], specifically by [[antibody|antibodies]], [[B cell]]s, or [[T cell]]s. The part of an antibody that recognizes the epitope is called a [[paratope]]. Although epitopes are usually thought to be derived from non-self proteins, sequences derived from the host that can be recognized are also classified as epitopes.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Immune system", "page_id" : 729294} ]  }
+			]
+		},
+		{
+			"keyword" : "hemopoietic lymphoid",
+			"weight" : 206.91401883530423,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "tolerogenic",
+			"weight" : 203.05823407948714,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "44521333" }
+			]
+		},
+		{
+			"keyword" : "heterologous",
+			"weight" : 152.40224604735914,
+			"entities" : [ 
+{ "rawName" : "heterologous", "preferredTerm" : "Heterologous", "nerd_score" : "0.9352710308173533", "prob" : "1.0", "wikipediaExternalRef" : "6141502", "freeBaseExternalRef" : "/m/0fs9cb", "definitions" : [ { "definition" : "In [[medicine]] a '''heterologous transplant''' means 'between species' or 'from one species to another'. In [[cell biology]] and [[Protein methods|protein biochemistry]], '''heterologous expression''' means that a protein is experimentally put into a cell that does not normally make (i.e., [[Gene expression|express]]) that protein. '''Heterologous''' (meaning 'derived from a different organism') refers to the fact that often the transferred protein was initially cloned from or derived from a different cell type or a different species from the recipient. Typically the protein itself is not transferred, but instead the 'correctly edited' genetic material coding for the protein (the complementary DNA or [[cDNA]]) is added to the recipient cell. The genetic material that is transferred typically must be within a format that encourages the recipient cell to express the cDNA as a protein (i.e., it is put in an [[expression vector]]). Methods for transferring foreign genetic material into a recipient cell include [[transfection]] and [[transduction]]. The choice of recipient cell type is often based on an experimental need to examine the protein's function in detail, and the most prevalent recipients, known as '''heterologous expression systems''', are chosen usually because they are easy to transfer DNA into or because they allow for a simpler assessment of the protein's function.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Protein structure", "page_id" : 740536}, {"source" : "wikipedia-en", "category" : "Transplantation medicine", "page_id" : 1282332} ]  }
+			]
+		},
+		{
+			"keyword" : "allergic autoimmune",
+			"weight" : 151.46233698564,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "heavy chain",
+			"weight" : 149.80851706174872,
+			"entities" : [ 
+{ "rawName" : "heavy chain", "preferredTerm" : "Heavy chain", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "21444840", "freeBaseExternalRef" : "/m/05_5_4z", "definitions" : [ { "definition" : "A '''heavy chain''' is the large [[polypeptide]] subunit of a [[protein complex]], such as a [[motor protein]] (e.g. [[myosin]], [[kinesin]], or [[dynein]]) or [[antibody]] (or immunoglobulin).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Protein complexes", "page_id" : 12675023} ]  }, 
+{ "rawName" : "heavy chain", "preferredTerm" : "Immunoglobulin heavy chain", "nerd_score" : "0.64493185705174", "prob" : "1.0", "wikipediaExternalRef" : "2980361", "freeBaseExternalRef" : "/m/02p724_", "definitions" : [ { "definition" : "The '''immunoglobulin heavy chain''' (IgH) is the large polypeptide subunit of an [[antibody]] (immunoglobulin). A typical antibody is composed of two immunoglobulin (Ig) heavy chains and two Ig [[immunoglobulin light chain|light chains]]. Several different types of heavy chain exist that define the class or [[Isotype (immunology)|isotype]] of an antibody. These heavy chain types vary between different animals. All heavy chains contain a series of [[immunoglobulin domain]]s, usually with one variable [[Structural domain|domain]] (VH) that is important for binding [[antigen]] and several constant domains (CH1, CH2, etc).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Immune system", "page_id" : 729294} ]  }
+			]
+		},
+		{
+			"keyword" : "electrodeformable variants",
+			"status" : "absent",
+			"weight" : 138.6582547792651,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "vector",
+			"weight" : 126.07783292070039,
+			"entities" : [ 
+{ "rawName" : "vector", "preferredTerm" : "Vector (epidemiology)", "nerd_score" : "0.03848551581108614", "prob" : "1.0", "wikipediaExternalRef" : "13865571", "freeBaseExternalRef" : "/m/03cln52", "definitions" : [ { "definition" : "In [[epidemiology]], a '''vector''' is any agent (person, animal or [[microorganism]]) that carries and transmits an [[Pathogen|infectious agent]]. Vectors are vehicles by which infections are transmitted from one host to another. Most commonly known vectors consist of [[arthropods]], domestic animals or mammals that assist in transmitting [[parasite|parasitic]] organisms to humans or other mammals. A vector is not only required for part of the parasite's developmental cycle, but it also transmits the parasite directly to subsequent [[Host (biology)|hosts]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Epidemiology", "page_id" : 903647}, {"source" : "wikipedia-en", "category" : "Parasitology", "page_id" : 1106661} ]  }
+			]
+		},
+		{
+			"keyword" : "epitopes antigens",
+			"weight" : 122.01491569177335,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "mbae",
+			"weight" : 119.9183786379709,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cell",
+			"weight" : 115.72300082784244,
+			"entities" : [ 
+{ "rawName" : "cell", "preferredTerm" : "Cell (biology)", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "4230", "freeBaseExternalRef" : "/m/01cbd", "definitions" : [ { "definition" : "The '''cell''' is the functional basic unit of [[life]]. It was discovered by [[Robert Hooke]] and is the functional unit of all known living [[organism]]s. It is the smallest unit of life that is classified as a living thing, and is often called the building block of life. Some organisms, such as most [[bacteria]], are [[unicellular]] (consist of a single cell). Other organisms, such as [[human]]s, are [[multicellular]]. Humans have about 100 trillion or 1014 cells; a typical cell size is 10&nbsp;[[micrometre|µm]] and a typical cell mass is 1&nbsp;[[nanogram]]. The longest human cells are about 135&nbsp;µm in the [[Anterior horn of spinal cord|anterior horn in the spinal cord]] while [[granule cells]] in the [[cerebellum]], the smallest, can be some 4&nbsp;µm and the longest cell can reach from the toe to the lower [[brain stem]] ([[Pseudounipolar neuron|Pseudounipolar cells]]). The largest known cells are unfertilised [[ostrich]] [[Ovum|egg cells]], which weigh 3.3 pounds.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Anatomy", "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Cell biology", "page_id" : 714693} ]  }
+			]
+		},
+		{
+			"keyword" : "expression",
+			"weight" : 109.15419193877264,
+			"entities" : [ 
+{ "rawName" : "expression", "preferredTerm" : "Gene expression", "nerd_score" : "0.8032961472509452", "prob" : "1.0", "wikipediaExternalRef" : "159266", "freeBaseExternalRef" : "/m/01506s", "definitions" : [ { "definition" : "'''Gene expression''' is the process by which information from a [[gene]] is used in the synthesis of a functional [[gene product]]. These products are often [[protein]]s, but in non-protein coding genes such as [[rRNA|ribosomal RNA (rRNA)]], [[tRNA|transfer RNA (tRNA)]] or [[snRNA|Small nuclear RNA (snRNA)]] genes, the product is a functional [[RNA]]. The process of gene expression is used by all known life - [[eukaryotes]] (including [[multicellular organisms]]), [[prokaryotes]] ([[bacteria]] and [[archaea]]), possibly induced by [[virus]]es - to generate the [[macromolecule|macromolecular]] machinery for life. Several steps in the gene expression process may be modulated, including the [[transcription (genetics)|transcription]], [[RNA splicing]], [[Translation (biology)|translation]], and [[post-translational modification]] of a protein. [[Regulation of gene expression|Gene regulation]] gives the [[cell (biology)|cell]] control over structure and function, and is the basis for [[cellular differentiation]], [[morphogenesis]] and the versatility and [[adaptability]] of any [[organism]]. Gene regulation may also serve as a substrate for evolutionary change, since control of the timing, location, and amount of gene expression can have a profound effect on the functions (actions) of the gene in a cell or in a multicellular organism.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Molecular biology", "page_id" : 714665}, {"source" : "wikipedia-en", "category" : "Gene expression", "page_id" : 746340} ]  }
+			]
+		},
+		{
+			"keyword" : "tolerogenic epitopes",
+			"status" : "redundant",
+			"weight" : 107.66236548585921,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "shaft autofocus",
+			"status" : "absent",
+			"weight" : 107.29478968017771,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "transform hemopoietic lymphoid",
+			"weight" : 100.13565482283724,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "induce",			
+			"weight" : 98.12007410535428,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "36315057" }
+			]
+		},
+		{
+			"keyword" : "radical-polymerizable monomer cumene hydroperoxide",
+			"weight" : 95.03204629801903,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "peptide",
+			"weight" : 89.0049216593213,
+			"entities" : [ 
+{ "rawName" : "peptide", "preferredTerm" : "Peptide", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "24029", "freeBaseExternalRef" : "/m/05_kr", "definitions" : [ { "definition" : "'''Peptides''' (from the [[Greek language|Greek]] πεπτός, \"digested\" from πέσσειν \"to digest\") are short [[polymer]]s of [[amino acid]]s linked by [[peptide bond]]s. They have the same peptide bonds as those in [[protein]]s, but are commonly shorter in length. The shortest peptides are [[dipeptide]]s, consisting of two amino acids joined by a single peptide bond. There can also be [[tripeptide]]s, [[tetrapeptide]]s, pentapeptides, etc. Peptides have an [[N-terminus|amino end]] and a [[C-terminus|carboxyl end]], unless they are [[cyclic peptide]]s. A '''polypeptide''' is a single linear chain of amino acids bonded together by peptide bonds. Protein molecules consist of one or more polypeptides put together typically in a biologically functional way and sometimes have non-peptide groups attached, which can be called [[prosthetic group]]s or [[Cofactor (biochemistry)|cofactor]]s.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Chemistry" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Peptides", "page_id" : 3791010} ]  }
+			]
+		},
+		{
+			"keyword" : "n-terminus",
+			"weight" : 82.42456301187852,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "576704" }
+			]
+		},
+		{
+			"keyword" : "lymphoid",
+			"weight" : 81.68419461170167,
+			"entities" : [ 
+{ "rawName" : "lymphoid", "preferredTerm" : "Lymphoid", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "2954338", "freeBaseExternalRef" : "/m/0tph2bg", "definitions" : [ { "definition" : "'''Lymphoid''' is a term used to describe [[lymph]] or the [[lymphatic system]]. In the context of [[lymphoid leukemia]], it refers specifically to [[lymphocyte]]s (which are the primary cellular component of [[lymph]].) Lymphoid leukemias and [[lymphoma]]s are now considered to be tumors of the same type of cell lineage. They are called \"leukemia\" when in the blood or marrow and \"lymphoma\" when in [[lymphatic tissue]]. They are grouped together under the name \"lymphoid malignancy\".", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Lymphatic system", "page_id" : 726233} ]  }
+			]
+		}
+	]
+}

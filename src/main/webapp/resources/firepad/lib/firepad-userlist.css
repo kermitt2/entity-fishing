@@ -1,0 +1,100 @@
+.firepad-userlist {
+  /* default height */
+  /*height: 400px;*/
+  /*min-width: 175px;*/
+
+  background: #ebebeb; /* Old browsers */
+/*  background: -moz-linear-gradient(left, #ebebeb 0%, #eaeaea 93%, #d9d9d9 100%); */ /* FF3.6+ */
+/*   background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ebebeb), color-stop(93%,#eaeaea), color-stop(100%,#d9d9d9)); */ /* Chrome,Safari4+ */
+/*   background: -webkit-linear-gradient(left, #ebebeb 0%,#eaeaea 93%,#d9d9d9 100%); */ /* Chrome10+,Safari5.1+ */
+/*   background: -o-linear-gradient(left, #ebebeb 0%,#eaeaea 93%,#d9d9d9 100%); */ /* Opera 11.10+ */
+/*   background: -ms-linear-gradient(left, #ebebeb 0%,#eaeaea 93%,#d9d9d9 100%); */ /* IE10+ */
+/*   background: linear-gradient(to right, #ebebeb 0%,#eaeaea 93%,#d9d9d9 100%); */ /* W3C */
+  color: #404040;
+}
+
+.firepad-userlist {
+  text-align: left;
+  font-family: 'Helvetica Neue', sans-serif;
+  line-height: normal;
+}
+
+.firepad-userlist-heading {
+  margin: 82px 15px 0;
+  font-size: 12px;
+  font-weight: bold;
+  border-bottom: 2px solid #c9c9c9;
+}
+
+/*.firepad-userlist-users {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 38px;
+  bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}*/
+
+.firepad-userlist-users {
+  position: relative;
+  left: 2px;
+  right: 2px;
+  top: 2px;
+  bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.firepad-userlist-user {
+  position: relative;
+  margin: 3px 0;
+  height: 32px;
+  border-bottom: 1px solid #c9c9c9;
+  padding-bottom: 5px;
+}
+
+.firepad-userlist-color-indicator {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+input.firepad-userlist-name-input {
+  position: absolute;
+  left: 38px;
+  top: 0;
+  width: 60px;
+  /*width: 90%;*/
+  height: 20px;
+  border: 0;
+  border-bottom: 1px solid #d6d6d6;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 1px; 
+}
+
+.firepad-userlist-name-hint {
+  position: absolute;
+  left: 38px;
+  top: 23px;
+  width: 300px; /* I'd rather it clip than wrap. */
+  font-size: 9px;
+  line-height: 11px;
+}
+
+.firepad-userlist-name {
+  position: absolute;
+  top: 2px;
+  left: 38px;
+  /*width: 95px;*/
+   /*width: 105px;*/
+  font-size: 13px;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE XHTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>NERD - Named Entity Recognition and Disambiguation</title>
+		<link rel="icon" type="image/x-icon" href="resources/img/favicon.ico"/> 
+		<link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico"/>
+
+        <script src="resources/js/jquery-1.8.1.min.js"></script> 
+        <script src="resources/js/jquery.form.js"></script>
+		
+        <script src="resources/bootstrap/js/bootstrap.min.js"></script>  
+		  
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" media="screen"/>
+		<link rel="stylesheet" href="resources/bower_components/Font-Awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="resources/css/style.css"/>     
+		<link rel="stylesheet" href="resources/css/awesome-bootstrap-checkbox.css"/>
+		
+		<!-- Firebase -->
+		<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+
+		<!-- CodeMirror -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.css" />
+
+		<!-- Firepad -->
+		<link rel="stylesheet" href="resources/firepad/lib/firepad.css" />
+		<!--link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.0.0/firepad.css" /-->
+		<script src="https://cdn.firebase.com/libs/firepad/1.0.0/firepad.js"></script>
+	    <script src="resources/firepad/lib/firepad-userlist.js"></script>
+	    <link rel="stylesheet" href="resources/firepad/lib/firepad-userlist.css" />
+		
+		<style>
+		    .CodeMirror { line-height: 2.0; }
+		    #userlist {
+		      height: auto; 
+		      width: auto;
+		    }
+		    /*#firepad {
+		      position: absolute; left: 175px; top: 0; bottom: 0; right: 0; height: auto;
+		    }*/
+		  </style>
+
+    </head>
+    
+    <body>  
+		<div class="container">  
+			
+		  <div class="content">  
+			
+		    <div class="page-header">
+				 <h1><span style="color:#333;">NERD Test Editor<!--img src="resources/img/nerd_header_logo.png" /--> 
+	            	<span style="padding-left:40px;color:#AE0C0C;">		
+		<h2><small>
+		<a class="section-not-active" id="about" href="#">About</a> <span style="padding-left:20px;">&nbsp;</span> 
+		<a class="section-active" id="editor" href="#">Editor</a> <span style="padding-left:20px;">&nbsp;</span> 
+		</span></small></span></h1>
+	        </div>
+	       
+			<table border="0">
+				<tr>
+				<td style="width:100px;align:left;vertical-align: top;"><!--h3><span id="subTitle"></span></h3--></td> 
+	            <td style="align:left;vertical-align: top;">
+					<div id="divAbout"> 
+						<p><large><b>NERD</b> Named Entity Recognition and Disambiguation Test Editor</p>
+						<p>Contact: <a style="color:#BC0E0E;" href="mailto:patrice.lopez@inria.fr?subject=NERD">Patrice Lopez</a>.</p> 
+					</div>   
+					<!--div id="divDoc"> 
+						<p>This text analysis test/demo is based on a set of JSON REST services.</p>  
+						<p>See the service description: <a style="color:#BC0E0E;" href="doc/nerd-service-manual.pdf">PDF</a></p>  
+					</div-->
+				</td> 
+			    </tr>
+			</table>
+			
+			<div id="divEditor">   
+				<table style="width:100%;table-layout:fixed;" class="table">
+				<tr style="background-color:#FFF;padding:0px;">
+					<td style="font-size:small;width:70%;height:500px;border:1px solid #CCC;padding:0px;"> 
+						<table style="width:100%;table-layout:fixed;padding:0px;" class="table">
+							<tr style="background-color:#FFF;padding:0px;">
+								<td style="width:13%;height:500px;border-right:1px solid #CCC;border-top:0px;padding:0px;">	
+									<div  style="width:100%;height:500px;border:0px;padding:0px;">
+										<div id="userlist"></div>
+									</div>
+								</td>
+								<td style="font-size:small;width:87%;height:500px;border:0px;padding:0px;">	
+									<div  style="width:100%;height:500px;">
+										<div id="firepad"></div>
+									</div>
+								</td>
+							</tr>
+						</table>
+						<!--div id="userlist"></div>
+						<div id="firepad"></div-->
+					</td>
+					<td style="font-size:small;width:30%;padding:0 0 0 5px; border:1px solid #CCC;">
+						<span id="nerdToolBar"></span>
+						<span>
+							<span id="detailed_annot-0" />
+						</span>	
+					</td>
+				</tr>	
+				</table> 
+				<div id="requestResult"></div>
+			</div>
+	
+	    </div>  
+		
+		<footer>
+		  <p><!--span style="color:#848484;">&copy; Inria - 2014 </span--></p>
+		  </footer>
+		</div>
+		
+		<script>
+		  var firepadRef = new Firebase('https://amber-fire-3066.firebaseio.com');
+		  var codeMirror = CodeMirror(document.getElementById('firepad'), { lineWrapping: true });
+	      
+		  // test if we can get the user id as a parameter passed via the url
+		  var userId = null;
+		  var query = window.location.search.substring(1);
+		  var vars = query.split("&");
+		  for (var i=0;i<vars.length;i++) {
+			  var pair = vars[i].split("=");
+			  if ( pair[0] == 'userid' ) {
+				  userId = pair[1];
+				  break;
+			  }
+		  }
+		  
+		  // Otherwise create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+		  var displayName = null;
+		  if (userId == null) {
+		  	  userId = Math.floor(Math.random() * 9999999999).toString();
+		  }
+		  else 
+		  	  displayName = userId;
+	      // Create FirepadUserList (with our desired userId).
+	      var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+	          document.getElementById('userlist'), userId, displayName);
+		  
+		  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+		      { richTextShortcuts: false, richTextToolbar: true,  userId: userId, defaultText: '' });
+		  //codeMirror.setSize(500,600);
+		</script>
+		<script src="nerd/editor.js"></script>
+		
+    </body> 
+</html>

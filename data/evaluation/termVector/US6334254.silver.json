@@ -1,0 +1,224 @@
+{
+	"_id" : "559514489c597f75f3710f14",
+	"publication_id" : "US6334254",
+	"invention_title" : "Wide blade scraper",
+	"keywords" : [
+		{
+			"keyword" : "n-hydroxy- -morpholinylsulfonyl",
+			"weight" : 102.40672292651463,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cam",
+			"weight" : 90.20718369937674,
+			"entities" : [ 
+{ "rawName" : "cam", "preferredTerm" : "Cam", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "40284", "freeBaseExternalRef" : "/m/0b169", "definitions" : [ { "definition" : "A '''cam''' is a rotating or sliding piece in a mechanical [[linkage]] used especially in transforming rotary motion into linear motion or vice-versa. It is often a part of a rotating [[wheel]] (e.g. an eccentric wheel) or shaft (e.g. a cylinder with an irregular shape) that strikes a [[lever]] at one or more points on its circular path. The cam can be a simple tooth, as is used to deliver pulses of power to a [[steam hammer]], for example, or an [[Eccentric (mechanism)|eccentric]] disc or other shape that produces a smooth reciprocating (back and forth) motion in the ''[[Cam follower|follower]]'', which is a lever making contact with the cam.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanical engineering", "page_id" : 717561} ]  }
+			]
+		},
+		{
+			"keyword" : "duration software-controlled",
+			"weight" : 71.02964177095942,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cam follower",
+			"weight" : 52.65343808061679,
+			"entities" : [ 
+{ "rawName" : "cam follower", "preferredTerm" : "Cam follower", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "23682291", "freeBaseExternalRef" : "/m/06zmkqw", "definitions" : [ { "definition" : "A '''cam follower''', also known as a '''track follower''', is a specialized type of [[roller bearing|roller]] or [[needle bearing]] designed to follow [[cam]]s. Cam followers come in a vast array of different configurations, however the most defining characteristic is how the cam follower mounts to its mating part; ''stud'' style cam followers use a [[Threaded rod|stud]] while the ''yoke'' style has a hole through the middle.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Mechanical engineering", "page_id" : 717561}, {"source" : "wikipedia-en", "category" : "Bearings", "page_id" : 1130456} ]  }
+			]
+		},
+		{
+			"keyword" : "wheel",
+			"weight" : 48.714383848365536,
+			"entities" : [ 
+{ "rawName" : "wheel", "preferredTerm" : "Wheel", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "33555", "freeBaseExternalRef" : "/m/083wq", "definitions" : [ { "definition" : "A '''wheel''' is a device that allows heavy objects to be moved easily through rotating on an axle through its center, facilitating movement or transportation while supporting a load ([[mass]]), or performing labor in machines. Common examples found in [[transport]] applications. A wheel, together with an [[axle]], overcomes [[friction]] by facilitating motion by [[rolling]]. In order for wheels to rotate, a [[Moment (physics)|moment]] needs to be applied to the wheel about its axis, either by way of gravity, or by application of another external force. More generally the term is also used for other circular objects that rotate or turn, such as a [[ship's wheel]], [[steering wheel]] and [[flywheel]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Wheels", "page_id" : 8982003} ]  }
+			]
+		},
+		{
+			"keyword" : "cover",
+			"weight" : 41.844888247813714,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "egg downstream",
+			"weight" : 29.675939089596234,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "halve",
+			"weight" : 29.616832379084197,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "engagement",
+			"weight" : 22.764086486592113,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "leading",
+			"status" : "weak",
+			"weight" : 20.363325274205778,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "flanges",
+			"weight" : 20.18159537815158,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "45317" }
+			]
+		},
+		{
+			"keyword" : "manufacture electrolytes",
+			"status" : "absent",
+			"weight" : 19.1140654991799,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "wide",
+			"status" : "weak",
+			"weight" : 18.908644950190308,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "hot bonders",
+			"status" : "absent",
+			"weight" : 18.276120071295086,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cap",
+			"weight" : 17.74918243505937,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "2332073" }
+			]
+		},
+		{
+			"keyword" : "barb-like",
+			"weight" : 17.691016063950894,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "endpoint-of",
+			"status" : "absent",
+			"weight" : 17.256679487702648,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "tool",
+			"weight" : 16.355933446350033,
+			"entities" : [ 
+{ "rawName" : "tool", "preferredTerm" : "Tool", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "30677", "freeBaseExternalRef" : "/m/07k1x", "definitions" : [ { "definition" : "A '''tool''' is a device that can be used to produce an item or achieve a task, but that is not consumed in the process. Informally the word is also used to describe a procedure or process with a specific purpose. Tools that are used in particular fields or activities may have different designations such as ''Instrument'', ''Utensil'', ''Implement'', ''Machine'', or ''Apparatus''.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Tools", "page_id" : 846098}, {"source" : "wikipedia-en", "category" : "Manufacturing", "page_id" : 867519} ]  }
+			]
+		},
+		{
+			"keyword" : "portion",
+			"status" : "weak",
+			"weight" : 16.27509890264813,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "cut wound-on",
+			"status" : "absent",
+			"weight" : 15.784635584871479,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "operatively",
+			"status" : "weak",
+			"weight" : 15.636992112875454,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "base",
+			"status" : "weak",
+			"weight" : 15.591599219143049,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "engage",
+			"weight" : 15.184853956642662,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "slide",
+			"weight" : 15.16194821212588,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "tau glantz",
+			"status" : "absent",
+			"weight" : 15.057173107494846,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "rib-rail",
+			"weight" : 14.71055865422777,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "rib-rails",
+			"status" : "redundant",
+			"weight" : 14.71055865422777,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "notchy feel",
+			"weight" : 13.794267922353615,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "vacancy-free wustite feo",
+			"status" : "absent",
+			"weight" : 13.687494221204645,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "scrapers",
+			"weight" : 13.6629128752468,
+			"entities" : [ 
+			]
+		}
+	]
+}

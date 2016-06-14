@@ -1,0 +1,400 @@
+<query>
+<num>71</num>
+<entity_name>Montana State University</entity_name>
+<entity_URL>clueweb09-en0009-75-04753</entity_URL>
+<target_entity>university department</target_entity>
+<narrative>Montana State University departments that offer a PhD program</narrative>
+</query>
+
+<query>
+<num>72</num>
+<entity_name>Abraham Verghese</entity_name>
+<entity_URL>clueweb09-en0033-79-30130</entity_URL>
+<target_entity>publication</target_entity>
+<narrative>publications in which Verghese's writing has appeared</narrative>
+</query>
+
+<query>
+<num>73</num>
+<entity_name>National Spelling Bee</entity_name>
+<entity_URL>clueweb09-en0012-05-10759</entity_URL>
+<target_entity>television program</target_entity>
+<narrative>television programs with an episode referencing the National Spelling Bee</narrative>
+</query>
+
+<query>
+<num>74</num>
+<entity_name>Placido Domingo</entity_name>
+<entity_URL>clueweb09-en0133-67-17415</entity_URL>
+<target_entity>educational institution</target_entity>
+<narrative>educational institutions that have given an honorary degree to Placido Domingo</narrative>
+</query>
+
+<query>
+<num>75</num>
+<entity_name>Prince of Wales</entity_name>
+<entity_URL>clueweb09-en0010-62-04433</entity_URL>
+<target_entity>school</target_entity>
+<narrative>schools that the Prince of Wales attended</narrative>
+</query>
+
+<query>
+<num>76</num>
+<entity_name>Astra Zeneca</entity_name>
+<entity_URL>clueweb09-en0103-90-35254</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations that are research partners of Astra Zeneca</narrative>
+</query>
+
+<query>
+<num>77</num>
+<entity_name>Lee Child</entity_name>
+<entity_URL>clueweb09-en0132-63-07961</entity_URL>
+<target_entity>author</target_entity>
+<narrative>authors that collaborated with Lee Child on The Chopin Manuscript</narrative>
+</query>
+
+<query>
+<num>78</num>
+<entity_name>Costco</entity_name>
+<entity_URL>clueweb09-en0006-60-20817</entity_URL>
+<target_entity>printer brand</target_entity>
+<narrative>brands of printers and all-in-ones carried by Costco</narrative>
+</query>
+
+<query>
+<num>79</num>
+<entity_name>Icelandair</entity_name>
+<entity_URL>clueweb09-en0007-89-26776</entity_URL>
+<target_entity>country</target_entity>
+<narrative>countries other than Iceland to which Icelandair flies</narrative>
+</query>
+
+<query>
+<num>80</num>
+<entity_name>United Parcel Service (UPS)</entity_name>
+<entity_URL>clueweb09-en0014-05-00600</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of vehicles used by UPS</narrative>
+</query>
+
+<query>
+<num>81</num>
+<entity_name>CPAP Supply USA</entity_name>
+<entity_URL>clueweb09-en0021-88-08221</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of BIPAP and CPAP machines sold by CPAP Supply USA</narrative>
+</query>
+
+<query>
+<num>82</num>
+<entity_name>International Institute for the Advancement of Medicine (IIAM)</entity_name>
+<entity_URL>clueweb09-en0008-72-07203</entity_URL>
+<target_entity>organ recovery program</target_entity>
+<narrative>organ or tissue recovery programs associated with IIAM</narrative>
+</query>
+
+<query>
+<num>83</num>
+<entity_name>NCAA</entity_name>
+<entity_URL>clueweb09-en0010-08-06981</entity_URL>
+<target_entity>university</target_entity>
+<narrative>universities with an NCAA Division I men's lacrosse team</narrative>
+</query>
+
+<query>
+<num>84</num>
+<entity_name>Bay Area Rapid Transportation (BART) System</entity_name>
+<entity_URL>clueweb09-en0006-06-14882</entity_URL>
+<target_entity>location (geo-political division)</target_entity>
+<narrative>locations (geo-political divisions) containing BART police facilities</narrative>
+</query>
+
+<query>
+<num>85</num>
+<entity_name>Montgomery County, MD</entity_name>
+<entity_URL>clueweb09-en0009-78-34812</entity_URL>
+<target_entity>yarn shop</target_entity>
+<narrative>yarn shops located in Montgomery County, MD</narrative>
+</query>
+
+<query>
+<num>86</num>
+<entity_name>OpenOffice</entity_name>
+<entity_URL>clueweb09-en0010-24-17612</entity_URL>
+<target_entity>corporation</target_entity>
+<narrative>corporate software contributors to the OpenOffice project</narrative>
+</query>
+
+<query>
+<num>87</num>
+<entity_name>British Royal Monarchy</entity_name>
+<entity_URL>clueweb09-en0123-88-35428</entity_URL>
+<target_entity>company</target_entity>
+<narrative>companies that produce consumables granted the British Royal Family Warrant</narrative>
+</query>
+
+<query>
+<num>88</num>
+<entity_name>Assistance Dogs International</entity_name>
+<entity_URL>clueweb09-en0005-90-25709</entity_URL>
+<target_entity>organization</target_entity>
+<narrative> organizations in Canada that are accredited to perform assistance dog activities</narrative>
+</query>
+
+<query>
+<num>89</num>
+<entity_name>City of London, England</entity_name>
+<entity_URL>clueweb09-en0005-86-33547</entity_URL>
+<target_entity>brewery</target_entity>
+<narrative>beer breweries located in the City of London, England</narrative>
+</query>
+
+<query>
+<num>90</num>
+<entity_name>Tiger Woods Foundation</entity_name>
+<entity_URL>clueweb09-en0012-28-25267</entity_URL>
+<target_entity>supporter</target_entity>
+<narrative>philanthropic supporters of the Tiger Woods Foundation</narrative>
+</query>
+
+<query>
+<num>91</num>
+<entity_name>Monsanto</entity_name>
+<entity_URL>clueweb09-en0009-15-25328</entity_URL>
+<target_entity>seed brand</target_entity>
+<narrative>food seed brands belonging to Monsanto</narrative>
+</query>
+
+<query>
+<num>92</num>
+<entity_name>Top Chef Bravo TV show</entity_name>
+<entity_URL>clueweb09-en0077-78-18461</entity_URL>
+<target_entity>company</target_entity>
+<narrative>companies that have advertised on the Top Chef Bravo TV show</narrative>
+</query>
+
+<query>
+<num>93</num>
+<entity_name>Center for Biological Diversity</entity_name>
+<entity_URL>clueweb09-en0005-72-03192</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations (not individuals) against which the Center for Biological Diversity has filed a formal notice of intent to sue</narrative>
+</query>
+
+<query>
+<num>94</num>
+<entity_name>Apple, Inc.</entity_name>
+<entity_URL>clueweb09-en0004-07-35613</entity_URL>
+<target_entity>musician</target_entity>
+<narrative>musicians whose music was used in 2007 or 2008 Apple commercials</narrative>
+</query>
+
+<query>
+<num>95</num>
+<entity_name>Yellowstone Boys and Girls Ranch</entity_name>
+<entity_URL>clueweb09-en0013-74-22519</entity_URL>
+<target_entity>corporation</target_entity>
+<narrative>corporate sponsors of the equestrian center at the Yellowstone Boys and Girls Ranch</narrative>
+</query>
+
+<query>
+<num>96</num>
+<entity_name>House TV series </entity_name>
+<entity_URL>clueweb09-en0007-67-17573</entity_URL>
+<target_entity>product</target_entity>
+<narrative>products featured in an episode of the TV series, House</narrative>
+</query>
+
+<query>
+<num>97</num>
+<entity_name>Intel Corporation</entity_name>
+<entity_URL>clueweb09-en0007-15-34854</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations that received the Intel Preferred Quality Supplier (PQS) Award in 2008</narrative>
+</query>
+
+<query>
+<num>98</num>
+<entity_name>Jo-Ann Fabrics and Crafts</entity_name>
+<entity_URL>clueweb09-en0065-93-15398</entity_URL>
+<target_entity>yarn brand</target_entity>
+<narrative>brands of knitting yarn carried by Jo-Ann Fabrics and Crafts stores</narrative>
+</query>
+
+<query>
+<num>99</num>
+<entity_name>Landfall Foundation</entity_name>
+<entity_URL>clueweb09-en0024-44-16793</entity_URL>
+<target_entity>charity</target_entity>
+<narrative>Wilmington or Cape Fear charities supported by the Landfall Foundation</narrative>
+</query>
+
+<query>
+<num>100</num>
+<entity_name>SERRV</entity_name>
+<entity_URL>clueweb09-en0010-50-24092</entity_URL>
+<target_entity>store</target_entity>
+<narrative>stores in Florida or Delaware that sell SERRV merchandise</narrative>
+</query>
+
+<query>
+<num>101</num>
+<entity_name>Bozeman, Montana</entity_name>
+<entity_URL>clueweb09-en0005-83-08620</entity_URL>
+<target_entity>bank</target_entity>
+<narrative>banks or credit unions that have branch offices in Bozeman, Montana</narrative>
+</query>
+
+<query>
+<num>102</num>
+<entity_name>Olney Toys</entity_name>
+<entity_URL>clueweb09-en0038-28-40690</entity_URL>
+<target_entity>company</target_entity>
+<narrative>companies whose infant and toddler items are carried by Olney Toys</narrative>
+</query>
+
+<query>
+<num>103</num>
+<entity_name>The Bone Marrow Foundation</entity_name>
+<entity_URL>clueweb09-en0130-77-07951</entity_URL>
+<target_entity>bone marrow transplant center</target_entity>
+<narrative>bone marrow transplant centers in New York state that are members of the foundation</narrative>
+</query>
+
+<query>
+<num>104</num>
+<entity_name>Woodrow Wilson Center</entity_name>
+<entity_URL>clueweb09-en0012-00-10891</entity_URL>
+<target_entity>academic institution</target_entity>
+<narrative>academic institutions with a staff member enrolled as a fellow or scholar at the Woodrow Wilson Center</narrative>
+</query>
+
+<query>
+<num>105</num>
+<entity_name>Arbor Day Foundation</entity_name>
+<entity_URL>clueweb09-en0000-42-09893</entity_URL>
+<target_entity>city</target_entity>
+<narrative>cities in Montgomery County, Maryland that are designated as a tree city by the Arbor Day Foundation</narrative>
+</query>
+
+<query>
+<num>106</num>
+<entity_name>Affordable Solar</entity_name>
+<entity_URL>clueweb09-en0004-11-19762</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of residential solar panels sold through Affordable Solar</narrative>
+</query>
+
+<query>
+<num>107</num>
+<entity_name>League of American Orchestras</entity_name>
+<entity_URL>clueweb09-en0004-70-02921</entity_URL>
+<target_entity>orchestra</target_entity>
+<narrative>Maryland orchestras that are not youth orchestras that are members of the League of American Orchestras</narrative>
+</query>
+
+<query>
+<num>108</num>
+<entity_name>Sandy Spring Museum</entity_name>
+<entity_URL>clueweb09-en0132-62-47946</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations that are sponsors of the Sandy Spring Museum</narrative>
+</query>
+
+<query>
+<num>109</num>
+<entity_name>Airbus</entity_name>
+<entity_URL>clueweb09-en0004-69-31337</entity_URL>
+<target_entity>airline</target_entity>
+<narrative>airlines that fly the Airbus 320 plane</narrative>
+</query>
+
+<query>
+<num>110</num>
+<entity_name>New Trier High School</entity_name>
+<entity_URL>clueweb09-en0010-18-28535</entity_URL>
+<target_entity>actor</target_entity>
+<narrative>actors and actresses who graduated from New Trier High School? </narrative>
+</query>
+
+<query>
+<num>111</num>
+<entity_name>Naos Graphics</entity_name>
+<entity_URL>clueweb09-en0132-73-38983</entity_URL>
+<target_entity>institution</target_entity>
+<narrative>institutions for which Ted Naos has designed paper-cut graphics</narrative>
+</query>
+
+<query>
+<num>112</num>
+<entity_name>Apple Inc.</entity_name>
+<entity_URL>clueweb09-en0004-07-35613</entity_URL>
+<target_entity>film</target_entity>
+<narrative>2008 films containing Apple product placement</narrative>
+</query>
+
+<query>
+<num>113</num>
+<entity_name>Textile Museum</entity_name>
+<entity_URL>clueweb09-en0012-30-00209</entity_URL>
+<target_entity>organization</target_entity>
+<narrative>organizations and corporations that support the Textile Museum</narrative>
+</query>
+
+<query>
+<num>114</num>
+<entity_name>Wine in the Woods, 2008</entity_name>
+<entity_URL>clueweb09-en0013-19-01805</entity_URL>
+<target_entity>performer</target_entity>
+<narrative>performers at Wine in the Woods in 2008</narrative>
+</query>
+
+<query>
+<num>115</num>
+<entity_name>Association of Collegiate Schools of Architecture</entity_name>
+<entity_URL>clueweb09-en0077-45-08398</entity_URL>
+<target_entity>school</target_entity>
+<narrative>schools in California that have degree programs in architecture accredited by the Association</narrative>
+</query>
+
+<query>
+<num>116</num>
+<entity_name>Dream Works Studios</entity_name>
+<entity_URL>clueweb09-en0130-59-38165</entity_URL>
+<target_entity>film</target_entity>
+<narrative>films distributed, produced or co-produced by Dream Works Studios</narrative>
+</query>
+
+<query>
+<num>117</num>
+<entity_name>The United States National Arboretum</entity_name>
+<entity_URL>clueweb09-en0013-35-28439</entity_URL>
+<target_entity>institution</target_entity>
+<narrative>institutions that have a cooperative program with the National Arboretum</narrative>
+</query>
+
+<query>
+<num>118</num>
+<entity_name>National Book Foundation</entity_name>
+<entity_URL>clueweb09-en0074-54-21097</entity_URL>
+<target_entity>author</target_entity>
+<narrative>authors that have won the National Book Award for young people's literature</narrative>
+</query>
+
+<query>
+<num>119</num>
+<entity_name>Sears</entity_name>
+<entity_URL>clueweb09-en0011-07-17556</entity_URL>
+<target_entity>manufacturer</target_entity>
+<narrative>manufacturers of French-door refrigerators sold at Sears.</narrative>
+</query>
+
+<query>
+<num>120</num>
+<entity_name>National Summer Learning Association</entity_name>
+<entity_URL>clueweb09-en0011-35-27923</entity_URL>
+<target_entity>foundation</target_entity>
+<narrative>foundations that support the National Summer Learning Association</narrative>
+</query>
+

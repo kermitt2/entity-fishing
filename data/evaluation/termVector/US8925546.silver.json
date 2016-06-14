@@ -1,0 +1,227 @@
+{
+	"_id" : "5595345a9c597f75f39ba1df",
+	"publication_id" : "US8925546",
+	"invention_title" : "Positive airway pressure system with head position control",
+	"keywords" : [
+		{
+			"keyword" : "amount re-probes",
+			"status" : "absent",
+			"weight" : 360.44776044062905,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "pap",
+			"weight" : 320.10794205592646,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "464347" }
+			]
+		},
+		{
+			"keyword" : "supine",
+			"weight" : 298.08299623845903,
+			"entities" : [ 
+{ "rawName" : "supine", "preferredTerm" : "Supine position", "nerd_score" : "0.9035114467679168", "prob" : "1.0", "wikipediaExternalRef" : "5157506", "freeBaseExternalRef" : "/m/0d5g6c", "definitions" : [ { "definition" : "The '''supine position''' is a position of the [[human body|body]]: lying down with the [[face]] up, as opposed to the [[prone position]], which is face down, sometimes with the hands behind the head or neck. When used in surgical procedures, it allows access to the [[peritoneal]], [[thoracic]] and [[pericardium|pericardial]] regions; as well as the head, neck and extremities.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Anatomy", "page_id" : 692380}, {"source" : "wikipedia-en", "category" : "Human body positions", "page_id" : 1989639} ]  }
+			]
+		},
+		{
+			"keyword" : "hcmr",
+			"status" : "absent",
+			"weight" : 248.98545798262631,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "airway",
+			"weight" : 220.19949604195673,
+			"entities" : [ 
+{ "rawName" : "airway", "preferredTerm" : "Airway", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "166827", "freeBaseExternalRef" : "/m/0168p3", "definitions" : [ { "definition" : "The pulmonary '''airway''' comprises those parts of the [[respiratory system]] through which air flows, conceptually beginning (on inhalation from the external environment) at the nose and mouth, and terminating in the [[alveoli]]. It is generally used synonymously with [[respiratory tract]], to avoid sounding overly scientific.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Anatomy", "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Respiratory system", "page_id" : 800593} ]  }
+			]
+		},
+		{
+			"keyword" : "pressure",
+			"weight" : 197.73263949681743,
+			"entities" : [ 
+{ "rawName" : "pressure", "preferredTerm" : "Pressure", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "23619", "freeBaseExternalRef" : "/m/05wnx", "definitions" : [ { "definition" : "'''Pressure ''' (the symbol: ''P'') is the [[force (physics)|force]] per unit [[area]] applied in a direction [[perpendicular]] to the surface of an object. [[Pressure measurement|Gauge pressure]] is the pressure relative to the local atmospheric or ambient pressure.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Thermodynamics", "page_id" : 693006}, {"source" : "wikipedia-en", "category" : "Fluid dynamics", "page_id" : 758273}, {"source" : "wikipedia-en", "category" : "Fluid mechanics", "page_id" : 1162560}, {"source" : "wikipedia-en", "category" : "Fundamental physics concepts", "page_id" : 2129107}, {"source" : "wikipedia-en", "category" : "Hydraulics", "page_id" : 2373132}, {"source" : "wikipedia-en", "category" : "Atmospheric thermodynamics", "page_id" : 5135753}, {"source" : "wikipedia-en", "category" : "Pressure", "page_id" : 8398609}, {"source" : "wikipedia-en", "category" : "Underwater diving", "page_id" : 13972292}, {"source" : "wikipedia-en", "category" : "State functions", "page_id" : 19908698} ]  }
+			]
+		},
+		{
+			"keyword" : "compressor",
+			"weight" : 159.57100432947965,
+			"entities" : [ 
+{ "rawName" : "compressor", "preferredTerm" : "Gas compressor", "nerd_score" : "0.9346990758503102", "prob" : "1.0", "wikipediaExternalRef" : "508504", "freeBaseExternalRef" : "/m/02jsng", "definitions" : [ { "definition" : "A '''gas compressor''' is a mechanical device that increases the [[pressure]] of a [[gas]] by reducing its [[volume]]. Compressors are similar to [[pump]]s: both increase the pressure on a [[fluid]] and both can transport the fluid through a [[pipe (material)|pipe]]. As gases are compressible, the compressor also reduces the volume of a gas. Liquids are relatively incompressible, while some can be compressed, the main action of a pump is to pressurize and transport liquids.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Chemical engineering", "page_id" : 1147083}, {"source" : "wikipedia-en", "category" : "Compressors", "page_id" : 1652038}, {"source" : "wikipedia-en", "category" : "Underwater work", "page_id" : 6868360}, {"source" : "wikipedia-en", "category" : "Underwater diving", "page_id" : 13972292}, {"source" : "wikipedia-en", "category" : "Heating, ventilating, and air conditioning", "page_id" : 18540201}, {"source" : "wikipedia-en", "category" : "Gas technologies", "page_id" : 19500591} ]  }
+			]
+		},
+		{
+			"keyword" : "crub",
+			"status" : "absent",
+			"weight" : 147.0924572418306,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sleep",
+			"weight" : 105.22380371472768,
+			"entities" : [ 
+{ "rawName" : "sleep", "preferredTerm" : "Sleep", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "27834", "freeBaseExternalRef" : "/m/06xzh", "definitions" : [ { "definition" : "'''Sleep''' is a naturally recurring state characterized by reduced or absent [[consciousness]], relatively suspended sensory activity, and inactivity of nearly all [[voluntary muscle]]s. It is distinguished from quiet [[wakefulness]] by a decreased ability to react to [[stimulus (physiology)|stimuli]], and is more easily reversible than being in [[hibernation]] or a [[coma]]. Sleep is also a heightened [[anabolic]] state, accentuating the growth and rejuvenation of the immune, nervous, skeletal and muscular systems. It is observed in all mammals, all birds, and many reptiles, amphibians, and fish.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Neuroscience", "page_id" : 714648}, {"source" : "wikipedia-en", "category" : "Sleep", "page_id" : 910767}, {"source" : "wikipedia-en", "category" : "Unsolved problems in neuroscience", "page_id" : 1955389} ]  }
+			]
+		},
+		{
+			"keyword" : "osteoclasts rankl composition",
+			"status" : "absent",
+			"weight" : 100.81275445548317,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sleeping",
+			"status" : "redundant",
+			"weight" : 79.72939252684883,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "harness",
+			"weight" : 77.45997685589165,
+			"entities" : [ 
+{ "rawName" : "harness", "preferredTerm" : "Safety harness", "nerd_score" : "0.1237672059519312", "prob" : "1.0", "wikipediaExternalRef" : "6051606", "freeBaseExternalRef" : "/m/0fmmjy", "definitions" : [ { "definition" : "A '''safety harness''' is a form of [[Personal protective equipment#Other personal protective equipment|protective equipment]] designed to protect a person, animal, or object from [[injury]] or damage. The harness is an attachment between a stationary and non-stationary object and is usually fabricated from [[rope]], [[cable]] or [[Webbing]] and locking hardware. Some safety harnesses are used in combination with a [[shock absorber]], which is used to regulate [[deceleration]] when the end of the rope is reached. One example would be [[bungee jumping]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Safety equipment", "page_id" : 1206445} ]  }
+			]
+		},
+		{
+			"keyword" : "osa",
+			"weight" : 73.56516272617213,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "1976353" }
+			]
+		},
+		{
+			"keyword" : "controller",
+			"weight" : 71.92486249219397,
+			"entities" : [ 
+{ "rawName" : "controller", "preferredTerm" : "Controller (control theory)", "nerd_score" : "0.5657175621928414", "prob" : "1.0", "wikipediaExternalRef" : "1714183", "freeBaseExternalRef" : "/m/05qjqm", "definitions" : [ { "definition" : "In [[control theory]], a '''controller''' is a device which monitors and affects the operational conditions of a given [[dynamical system]]. The operational conditions are typically referred to as output variables of the system which can be affected by adjusting certain input variables. For example, the heating system of a house can be equipped with a thermostat (controller) for sensing air temperature (output variable) which can turn on or off a furnace or heater when the air temperature becomes too low or too high.", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Automation", "page_id" : 885076}, {"source" : "wikipedia-en", "category" : "Control theory", "page_id" : 1028771}, {"source" : "wikipedia-en", "category" : "Cybernetics", "page_id" : 1754736} ]  }
+			]
+		},
+		{
+			"keyword" : "housing",
+			"weight" : 71.44524526439274,
+			"entities" : [ 
+			]
+		},
+		{
+			"keyword" : "longer households",
+			"status" : "absent",
+			"weight" : 60.59772721841895,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "embodying",
+			"status" : "weak",
+			"weight" : 58.81328469650888,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "lateral",
+			"weight" : 55.826810711521055,
+			"entities" : [ 
+{ "rawName" : "lateral", "preferredTerm" : "Human anatomical terms", "nerd_score" : "0.04348551581108614", "prob" : "1.0", "wikipediaExternalRef" : "6354675", "freeBaseExternalRef" : "/m/0z8jxlh", "definitions" : [ { "definition" : "'''Human anatomical terms''' make up a distinct [[Scientific classification|nomenclature]] to describe areas of the body, to provide orientation when describing parts of [[human anatomy]], and to distinguish different movements of the body. An understanding of these terms is necessary to study the human body in depth. Many of these terms are also applicable in animal anatomy ([[zootomy]]).", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Human anatomy", "page_id" : 2294735} ]  }
+			]
+		},
+		{
+			"keyword" : "sensor",
+			"weight" : 53.69835964701958,
+			"entities" : [ 
+{ "rawName" : "sensor", "preferredTerm" : "Sensor", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "235757", "freeBaseExternalRef" : "/m/01j7cq", "definitions" : [ { "definition" : "A '''sensor''' is a device that measures a physical quantity and converts it into a signal which can be read by an observer or by an instrument. For example, a [[mercury-in-glass thermometer]] converts the measured temperature into expansion and contraction of a liquid which can be read on a calibrated glass tube. A [[thermocouple]] converts temperature to an output voltage which can be read by a [[voltmeter]]. For accuracy, most sensors are [[calibration|calibrated]] against known [[Standard (metrology)|standards]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Measuring instruments", "page_id" : 889248}, {"source" : "wikipedia-en", "category" : "Transducers", "page_id" : 969840}, {"source" : "wikipedia-en", "category" : "Sensors", "page_id" : 5400296} ]  }
+			]
+		},
+		{
+			"keyword" : "source",
+			"status" : "weak",
+			"weight" : 52.23657973891453,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "sense",
+			"status" : "redundant",
+			"weight" : 51.759634027878334,
+			"entities" : [ 
+{ "rawName" : "sensor", "preferredTerm" : "Sensor", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "235757", "freeBaseExternalRef" : "/m/01j7cq", "definitions" : [ { "definition" : "A '''sensor''' is a device that measures a physical quantity and converts it into a signal which can be read by an observer or by an instrument. For example, a [[mercury-in-glass thermometer]] converts the measured temperature into expansion and contraction of a liquid which can be read on a calibrated glass tube. A [[thermocouple]] converts temperature to an output voltage which can be read by a [[voltmeter]]. For accuracy, most sensors are [[calibration|calibrated]] against known [[Standard (metrology)|standards]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Measuring instruments", "page_id" : 889248}, {"source" : "wikipedia-en", "category" : "Transducers", "page_id" : 969840}, {"source" : "wikipedia-en", "category" : "Sensors", "page_id" : 5400296} ]  }
+			]
+		},
+		{
+			"keyword" : "health professional",
+			"weight" : 49.0824609313524,
+			"entities" : [ 
+{ "rawName" : "health professional", "preferredTerm" : "Health care provider", "nerd_score" : "0.9596931169061016", "prob" : "1.0", "wikipediaExternalRef" : "6142110", "freeBaseExternalRef" : "/m/0fsbk0", "definitions" : [ { "definition" : "A '''health care provider''' is an individual or an institution that provides preventive, curative, promotional or rehabilitative [[health care]] services in a systematic way to individuals, families or communities.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Healthcare", "page_id" : 999831} ]  }
+			]
+		},
+		{
+			"keyword" : "system",
+			"status" : "weak",
+			"weight" : 44.58450097731646,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "8286675" }
+			]
+		},
+		{
+			"keyword" : "mask",
+			"weight" : 42.64951976485681,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "1156703" }
+			]
+		},
+		{
+			"keyword" : "accelerometer",
+			"weight" : 40.95400644595058,
+			"entities" : [ 
+{ "rawName" : "accelerometer", "preferredTerm" : "Accelerometer", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "324949", "freeBaseExternalRef" : "/m/01w0lx", "definitions" : [ { "definition" : "An '''accelerometer''' is a device that measures the [[proper acceleration]] of the device. This is ''not necessarily'' the same as the coordinate acceleration (change of velocity of the device in space), but is rather the type of acceleration associated with the phenomenon of [[weight]] experienced by a test mass that resides in the [[frame of reference]] of the accelerometer device. For an example of where these types of acceleration differ, an accelerometer will measure a value when sitting on the ground, because masses there have weights, even though they do not change velocity. However, an accelerometer in gravitational [[free fall]] toward the center of the Earth will measure a value of zero because, even though its speed is increasing, it is in an inertial [[frame of reference]], in which it is [[weightless]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Computer_Science" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Accelerometers", "page_id" : 23209651} ]  }
+			]
+		},
+		{
+			"keyword" : "critical",
+			"weight" : 38.52495770078324,
+			"entities" : [ 
+
+			]
+		},
+		{
+			"keyword" : "torso",
+			"weight" : 38.40489800892633,
+			"entities" : [ 
+{ "rawName" : "torso", "preferredTerm" : "Trunk (anatomy)", "nerd_score" : "0.9624298599545696", "prob" : "1.0", "wikipediaExternalRef" : "674207", "freeBaseExternalRef" : "/m/031vtq", "definitions" : [ { "definition" : "'''Trunk''' or '''torso''' is an anatomical term for the central part of the many animal bodies (including that of the human) from which extend the neck and limbs. The trunk includes the [[thorax]] and [[abdomen]].", "source" : "wikipedia-en", "lang" : "en" } ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Torso", "page_id" : 21971225} ]  }
+			]
+		},
+		{
+			"keyword" : "secure",
+			"weight" : 38.193596161859276,
+			"entities" : [ 
+{ "wikipediaExternalRef" : "41684" }
+			]
+		},
+		{
+			"keyword" : "blockages",
+			"weight" : 37.966869356186734,
+			"entities" : [ 
+{ "rawName" : "blockages", "preferredTerm" : "Stenosis", "nerd_score" : "0.8032961472509452", "prob" : "1.0", "wikipediaExternalRef" : "682498", "freeBaseExternalRef" : "/m/032llx", "definitions" : [ { "definition" : "A '''stenosis''' (''[[plural]]'': '''stenoses'''; from [[Ancient Greek]] στένωσις, \"narrowing\") is an abnormal narrowing in a [[blood vessel]] or other tubular [[Organ (anatomy)|organ]] or structure.", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Medical terms", "page_id" : 1123643}, {"source" : "wikipedia-en", "category" : "Gross pathology", "page_id" : 10807861} ]  }
+			]
+		},
+		{
+			"keyword" : "nose",
+			"weight" : 37.84239537679999,
+			"entities" : [ 
+{ "rawName" : "nose", "preferredTerm" : "Human nose", "nerd_score" : "0.9499303358184121", "prob" : "1.0", "wikipediaExternalRef" : "9387918", "freeBaseExternalRef" : "/m/0286wbf", "definitions" : [ { "definition" : "The visible part of the '''human [[nose]]''' is the protruding part of the [[face]] that bears the [[nostril]]s. The shape of the nose is determined by the [[ethmoid bone]] and the [[nasal septum]], which consists mostly of [[cartilage]] and which separates the nostrils. On average the nose of a [[male]] is larger than that of a [[female]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Anatomy", "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Respiratory system", "page_id" : 800593}, {"source" : "wikipedia-en", "category" : "Human anatomy", "page_id" : 2294735}, {"source" : "wikipedia-en", "category" : "Sensory organs", "page_id" : 3534569}, {"source" : "wikipedia-en", "category" : "Nose", "page_id" : 20693944} ]  }, 
+{ "rawName" : "nose", "preferredTerm" : "Nose", "nerd_score" : "0.026398784899299633", "prob" : "1.0", "wikipediaExternalRef" : "11669530", "freeBaseExternalRef" : "/m/0k0pj", "definitions" : [ { "definition" : "Anatomically, a '''nose''' is a protuberance in [[vertebrate]]s that houses the [[nostril]]s, or nares, which admit and expel air for [[Respiration (physiology)|respiration]] in conjunction with the [[mouth]]. Behind the nose are the [[olfactory mucosa]] and the [[Paranasal sinus|sinuses]]. Behind the [[nasal cavity]], air next passes through the [[pharynx]], shared with the digestive system, and then into the rest of the [[respiratory system]]. In humans, the nose is located centrally on the face; on most other [[mammal]]s, it is on the upper tip of the [[snout]].", "source" : "wikipedia-en", "lang" : "en" } ] , "domains" : [ "Anatomy", "Medicine" ] , "categories" : [ {"source" : "wikipedia-en", "category" : "Nose", "page_id" : 20693944} ]  }
+			]
+		}
+	]
+}

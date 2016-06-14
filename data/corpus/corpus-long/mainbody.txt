@@ -1,0 +1,1166 @@
+﻿mainbody-00003	18	23	/m/03_3d	https://www.freebase.com//m/03_3d	JAPAN	3	0.07
+mainbody-00003	183	188	/m/03_3d	https://www.freebase.com//m/03_3d	JAPAN	3	0.07
+mainbody-00003	391	396	/m/03_3d	https://www.freebase.com//m/03_3d	JAPAN	3	0.07
+mainbody-00003	1823	1827	/m/0z90c	https://www.freebase.com//m/0z90c	eBay	3	0.995759
+mainbody-00003	2121	2127	/m/01btsf	https://www.freebase.com//m/01btsf	PayPal	3	1.000000
+mainbody-00003	2655	2674	/m/0dcms	https://www.freebase.com//m/0dcms	U.S. Postal Service	3	0
+mainbody-00003	3302	3306	/m/0z90c	https://www.freebase.com//m/0z90c	eBay	3	0.995759
+mainbody-00003	4351	4356	/m/03_3d	https://www.freebase.com//m/03_3d	Japan	3	0.959260
+mainbody-00003	4454	4459	/m/03_3d	https://www.freebase.com//m/03_3d	Japan	3	0.0
+mainbody-00003	4567	4572	/m/03_3d	https://www.freebase.com//m/03_3d	JAPAN	3	0.959260
+mainbody-00007	20	31	/m/0d35y	https://www.freebase.com//m/0d35y	Phoenix, AZ	3	1.000000
+mainbody-00008	16	26	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	358	367	/m/0hk_v	https://www.freebase.com//m/0hk_v	Nutrients	3	0.05
+mainbody-00008	584	591	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis	3	0.553403
+mainbody-00008	1792	1799	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexican	3	0.0
+mainbody-00008	4294	4310	/m/0wpzc	https://www.freebase.com//m/0wpzc	Olive Branch, MS	3	0.0
+mainbody-00008	4391	4407	/m/0wpzc	https://www.freebase.com//m/0wpzc	Olive Branch, MS	3	0.0
+mainbody-00008	4807	4821	/m/0_wt4	https://www.freebase.com//m/0_wt4	Germantown, TN	3	0.777778
+mainbody-00008	4911	4925	/m/0_wt4	https://www.freebase.com//m/0_wt4	Germantown, TN	3	0.777778
+mainbody-00008	5523	5533	/m/03m1r0	https://www.freebase.com//m/03m1r0	Highway 70	3	0
+mainbody-00008	5535	5548	/m/0_ws3	https://www.freebase.com//m/0_ws3	Arlington, TN	3	1.000000
+mainbody-00008	5620	5630	/m/03m1r0	https://www.freebase.com//m/03m1r0	Highway 70	3	0
+mainbody-00008	5632	5645	/m/0_ws3	https://www.freebase.com//m/0_ws3	Arlington, TN	3	1.000000
+mainbody-00008	5957	5968	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	6052	6063	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	6550	6560	/m/03m1nj	https://www.freebase.com//m/03m1nj	Highway 64	3	0
+mainbody-00008	6562	6575	/m/0_ws3	https://www.freebase.com//m/0_ws3	Arlington, TN	3	1.000000
+mainbody-00008	6602	6606	/m/0py9b	https://www.freebase.com//m/0py9b	dell	3	0.557247
+mainbody-00008	6636	6646	/m/03m1nj	https://www.freebase.com//m/03m1nj	Highway 64	3	0
+mainbody-00008	6648	6661	/m/0_ws3	https://www.freebase.com//m/0_ws3	Arlington, TN	3	1.000000
+mainbody-00008	6764	6778	/m/0_wt4	https://www.freebase.com//m/0_wt4	Germantown, TN	3	0.777778
+mainbody-00008	6869	6883	/m/0_wt4	https://www.freebase.com//m/0_wt4	Germantown, TN	3	0.777778
+mainbody-00008	7421	7432	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	7510	7521	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	7900	7914	/m/0_wtv	https://www.freebase.com//m/0_wtv	Millington, TN	3	1.000000
+mainbody-00008	7985	7999	/m/0_wtv	https://www.freebase.com//m/0_wtv	Millington, TN	3	1.000000
+mainbody-00008	8123	8134	/m/07j5_n	https://www.freebase.com//m/07j5_n	Cordova, TN	3	1.000000
+mainbody-00008	8209	8220	/m/07j5_n	https://www.freebase.com//m/07j5_n	Cordova, TN	3	1.000000
+mainbody-00008	8362	8373	/m/07j5_n	https://www.freebase.com//m/07j5_n	Cordova, TN	3	1.000000
+mainbody-00008	8473	8484	/m/07j5_n	https://www.freebase.com//m/07j5_n	Cordova, TN	3	1.000000
+mainbody-00008	8626	8637	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	8652	8662	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	8716	8718	/m/04tgp	https://www.freebase.com//m/04tgp	MS	3	0.19
+mainbody-00008	8736	8750	/m/01zj1t	https://www.freebase.com//m/01zj1t	The Home Depot	3	0.03
+mainbody-00008	8861	8871	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	8905	8921	/m/0_wst	https://www.freebase.com//m/0_wst	Collierville, TN	3	1.000000
+mainbody-00008	8943	8953	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	8975	8991	/m/0_wst	https://www.freebase.com//m/0_wst	Collierville, TN	3	1.000000
+mainbody-00008	9058	9068	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9105	9116	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9138	9148	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9173	9184	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9251	9261	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9297	9308	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9330	9340	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9364	9375	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9442	9452	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9491	9504	/m/0200hxk	https://www.freebase.com//m/0200hxk	Horn Lake, MS	3	1.000000
+mainbody-00008	9526	9536	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9563	9576	/m/0200hxk	https://www.freebase.com//m/0200hxk	Horn Lake, MS	3	1.000000
+mainbody-00008	9643	9653	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9687	9698	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9720	9730	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9752	9763	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9830	9840	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9877	9888	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	9910	9920	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	9945	9956	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	10022	10032	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	10065	10076	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	10098	10108	/m/01zj1t	https://www.freebase.com//m/01zj1t	Home Depot	3	1.000000
+mainbody-00008	10129	10140	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	10267	10279	/m/06q10t	https://www.freebase.com//m/06q10t	Cooper-Young	3	0.0
+mainbody-00008	10376	10387	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	10458	10469	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis, TN	3	1.000000
+mainbody-00008	10637	10647	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10761	10771	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10786	10796	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10811	10821	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10843	10853	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10882	10892	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10916	10926	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10952	10962	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	10977	10987	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	11000	11010	/m/0c_m3	https://www.freebase.com//m/0c_m3	Memphis TN	3	1.000000
+mainbody-00008	11222	11235	/m/09c7w0	https://www.freebase.com//m/09c7w0	United States	3	0
+mainbody-00009	105	110	/m/0716b6	https://www.freebase.com//m/0716b6	Vista	3	0.15
+mainbody-00009	112	115	/m/055yr	https://www.freebase.com//m/055yr	Mac	3	0.19
+mainbody-00009	117	124	/m/02wxtgw	https://www.freebase.com//m/02wxtgw	Android	3	0.871364
+mainbody-00009	134	140	/m/027lnzs	https://www.freebase.com//m/027lnzs	iPhone	3	0.986148
+mainbody-00009	668	675	/m/0289n8t	https://www.freebase.com//m/0289n8t	Twitter	3	1.000000
+mainbody-00013	21	28	/m/0d9jr	https://www.freebase.com//m/0d9jr	Seattle	3	0.929004
+mainbody-00013	70	99	/m/02qm9l7	https://www.freebase.com//m/02qm9l7	First Citizens BancShares Inc	3	1.000000
+mainbody-00013	104	116	/m/0fvyg	https://www.freebase.com//m/0fvyg	Raleigh, N.C	3	0.0
+mainbody-00013	143	150	/m/0d9jr	https://www.freebase.com//m/0d9jr	Seattle	3	0.929004
+mainbody-00013	284	289	/m/07b_l	https://www.freebase.com//m/07b_l	Texas	3	0.927394
+mainbody-00013	291	298	/m/0vmt	https://www.freebase.com//m/0vmt	Arizona	3	0.914484
+mainbody-00013	303	313	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00013	375	383	/m/01n4w	https://www.freebase.com//m/01n4w	Colorado	3	0.908976
+mainbody-00013	385	395	/m/05fjy	https://www.freebase.com//m/05fjy	New Mexico	3	0.950737
+mainbody-00013	400	406	/m/05kj_	https://www.freebase.com//m/05kj_	Oregon	3	0.907519
+mainbody-00013	540	547	/m/0d9jr	https://www.freebase.com//m/0d9jr	Seattle	3	0.929004
+mainbody-00013	862	869	/m/02xry	https://www.freebase.com//m/02xry	Florida	3	0.929752
+mainbody-00013	874	881	/m/0d0x8	https://www.freebase.com//m/0d0x8	Georgia	3	0.630699
+mainbody-00014	118	125	/m/0gk2h	https://www.freebase.com//m/0gk2h	Tribune	3	0.18
+mainbody-00014	163	170	/m/0mdv8	https://www.freebase.com//m/0mdv8	Borders	3	0.28
+mainbody-00014	221	237	/m/01b7dt	https://www.freebase.com//m/01b7dt	Barnes and Noble	3	1.000000
+mainbody-00014	275	285	/m/0mgkg	https://www.freebase.com//m/0mgkg	amazon.com	3	0
+mainbody-00014	373	383	/m/0s6dd	https://www.freebase.com//m/0s6dd	Glen Ellyn	3	0.954545
+mainbody-00014	971	983	/m/01w65s	https://www.freebase.com//m/01w65s	Chicago area	3	0.21
+mainbody-00014	1067	1071	/m/09c7w0	https://www.freebase.com//m/09c7w0	U.S.	3	0
+mainbody-00014	1484	1505	/m/07bnqt	https://www.freebase.com//m/07bnqt	independent bookstore	3	1.000000
+mainbody-00014	1805	1830	/m/0gm84s	https://www.freebase.com//m/0gm84s	Book Industry Study Group	3	1.000000
+mainbody-00014	1861	1874	/m/02_286	https://www.freebase.com//m/02_286	New York City	3	0.993961
+mainbody-00014	2870	2877	/m/0mdv8	https://www.freebase.com//m/0mdv8	Borders	3	0.28
+mainbody-00014	2883	2899	/m/01b7dt	https://www.freebase.com//m/01b7dt	Barnes and Noble	3	1.000000
+mainbody-00014	3233	3244	/m/0hr6dv1	https://www.freebase.com//m/0hr6dv1	Swamplandia	3	1.000000
+mainbody-00014	3250	3263	/m/026rs3_	https://www.freebase.com//m/026rs3_	Karen Russell	3	1.000000
+mainbody-00014	3382	3390	/m/0s5t_	https://www.freebase.com//m/0s5t_	Winnetka	3	0.720339
+mainbody-00014	3791	3803	/m/042kg	https://www.freebase.com//m/042kg	Jimmy Carter	3	0.989223
+mainbody-00014	3808	3823	/m/02ddb	https://www.freebase.com//m/02ddb	Donald Rumsfeld	3	1.000000
+mainbody-00014	3827	3839	/m/042xh	https://www.freebase.com//m/042xh	J.K. Rowling	3	0.04
+mainbody-00014	3844	3858	/m/01b370	https://www.freebase.com//m/01b370	Martha Stewart	3	0.953162
+mainbody-00014	3954	3964	/m/0s6g4	https://www.freebase.com//m/0s6g4	Naperville	3	0.958974
+mainbody-00014	4068	4078	/m/0s6dd	https://www.freebase.com//m/0s6dd	Glen Ellyn	3	0.954545
+mainbody-00014	4160	4192	/m/03y7bl	https://www.freebase.com//m/03y7bl	American Booksellers Association	3	1.000000
+mainbody-00014	4287	4293	/m/045c7b	https://www.freebase.com//m/045c7b	Google	3	0.927932
+mainbody-00014	4317	4323	/m/045c7b	https://www.freebase.com//m/045c7b	Google	3	0.0
+mainbody-00014	4343	4346	/m/03y7bl	https://www.freebase.com//m/03y7bl	ABA	3	0.006219
+mainbody-00014	4368	4378	/m/04ks_0	https://www.freebase.com//m/04ks_0	IndieBound	3	1.000000
+mainbody-00014	4648	4655	/m/01_d4	https://www.freebase.com//m/01_d4	Chicago	3	0.872145
+mainbody-00014	4658	4672	/m/02y379	https://www.freebase.com//m/02y379	Lincoln Square	3	0.379747
+mainbody-00014	4817	4824	/m/01_d4	https://www.freebase.com//m/01_d4	Chicago	3	0.872145
+mainbody-00014	4876	4886	/m/0s6g4	https://www.freebase.com//m/0s6g4	Naperville	3	0.958974
+mainbody-00014	4928	4945	/m/01wj0gb	https://www.freebase.com//m/01wj0gb	Weird Al Yankovic	3	0.08
+mainbody-00014	5005	5017	/m/025fgf	https://www.freebase.com//m/025fgf	Blood Center	3	0
+mainbody-00014	5099	5108	/m/0mb0	https://www.freebase.com//m/0mb0	Anne Rice	3	1.000000
+mainbody-00014	5112	5138	/m/0kl59	https://www.freebase.com//m/0kl59	Interview With the Vampire	3	0.12
+mainbody-00014	5513	5520	/m/01_d4	https://www.freebase.com//m/01_d4	Chicago	3	0.872145
+mainbody-00014	5523	5534	/m/02y390	https://www.freebase.com//m/02y390	Albany Park	3	0.724138
+mainbody-00014	5569	5576	/m/01_d4	https://www.freebase.com//m/01_d4	Chicago	3	0.872145
+mainbody-00014	5838	5845	/m/0mdv8	https://www.freebase.com//m/0mdv8	Borders	3	0.28
+mainbody-00015	0	9	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	14	23	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	61	70	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	75	78	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	139	143	/m/09c7w0	https://www.freebase.com//m/09c7w0	U.S.	3	0.06
+mainbody-00015	409	412	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0.35
+mainbody-00015	443	451	/m/013rs0	https://www.freebase.com//m/013rs0	T-Mobile	3	1.000000
+mainbody-00015	457	460	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	476	480	/m/09c7w0	https://www.freebase.com//m/09c7w0	U.S.	3	0.06
+mainbody-00015	783	792	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	800	805	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	848	857	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	925	928	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	1006	1009	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	1039	1042	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0.35
+mainbody-00015	1206	1209	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0.35
+mainbody-00015	1360	1363	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	1527	1530	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0.35
+mainbody-00015	1701	1704	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	1844	1847	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0
+mainbody-00015	1976	1985	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	2185	2194	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	2456	2459	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	2521	2528	/m/0bbv_rf	https://www.freebase.com//m/0bbv_rf	Symbian	3	0.978102
+mainbody-00015	2533	2542	/m/01pq99	https://www.freebase.com//m/01pq99	Series 60	3	0.716981
+mainbody-00015	2570	2579	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	2627	2636	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	2669	2680	/m/01pq99	https://www.freebase.com//m/01pq99	Symbian S60	3	1.000000
+mainbody-00015	2839	2844	/m/0h4d9	https://www.freebase.com//m/0h4d9	Wi-Fi	3	0.982833
+mainbody-00015	2861	2864	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0.35
+mainbody-00015	2918	2921	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	E75	3	0
+mainbody-00015	3125	3134	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3146	3155	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3184	3187	/m/065yyw6	https://www.freebase.com//m/065yyw6	E72	3	0
+mainbody-00015	3204	3213	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	3225	3234	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	3248	3257	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	3291	3300	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3346	3355	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3482	3491	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3539	3544	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	3570	3575	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	3597	3602	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.0
+mainbody-00015	3625	3630	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	3658	3663	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	3688	3693	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	3722	3727	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.0
+mainbody-00015	3752	3756	/m/06s07l	https://www.freebase.com//m/06s07l	eHow	3	0.904762
+mainbody-00015	3811	3819	/m/01sgwn	https://www.freebase.com//m/01sgwn	Logitech	3	1.000000
+mainbody-00015	3931	3940	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3973	3982	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	3999	4008	/m/05p7fx7	https://www.freebase.com//m/05p7fx7	Nokia E75	3	1.000000
+mainbody-00015	4016	4021	/m/05b5c	https://www.freebase.com//m/05b5c	Nokia	3	0.951161
+mainbody-00015	4062	4071	/m/065yyw6	https://www.freebase.com//m/065yyw6	Nokia E72	3	1.000000
+mainbody-00015	4073	4081	/m/06s07l	https://www.freebase.com//m/06s07l	ehow.com	3	0
+mainbody-00015	4089	4093	/m/06s07l	https://www.freebase.com//m/06s07l	eHow	3	0.904762
+mainbody-00015	4094	4098	/m/06s07l	https://www.freebase.com//m/06s07l	eHow	3	0.904762
+mainbody-00015	4156	4173	/m/02z1x1q	https://www.freebase.com//m/02z1x1q	Demand Media, Inc	3	0
+mainbody-00015	4296	4298	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0
+mainbody-00016	78	90	/m/027qtzz	https://www.freebase.com//m/027qtzz	Thanksgiving	3	0.0
+mainbody-00016	349	361	/m/027qtzz	https://www.freebase.com//m/027qtzz	Thanksgiving	3	0.0
+mainbody-00016	407	419	/m/027qtzz	https://www.freebase.com//m/027qtzz	Thanksgiving	3	0.0
+mainbody-00017	787	826	/m/0fyyq	https://www.freebase.com//m/0fyyq	Department of Health and Human Services	3	0.984576
+mainbody-00017	828	831	/m/0fyyq	https://www.freebase.com//m/0fyyq	HHS	3	0.0
+mainbody-00017	917	959	/m/01fl8x	https://www.freebase.com//m/01fl8x	Centers for Medicare and Medicaid Services	3	0.56
+mainbody-00017	961	964	/m/01fl8x	https://www.freebase.com//m/01fl8x	CMS	3	0.56
+mainbody-00017	1238	1241	/m/01fl8x	https://www.freebase.com//m/01fl8x	CMS	3	0.56
+mainbody-00017	1702	1705	/m/0fyyq	https://www.freebase.com//m/0fyyq	HHS	3	0.0
+mainbody-00017	2402	2410	/m/02_286	https://www.freebase.com//m/02_286	New York	3	0.18
+mainbody-00017	2417	2424	/m/013yq	https://www.freebase.com//m/013yq	Atlanta	3	0.830462
+mainbody-00017	2432	2439	/m/01_d4	https://www.freebase.com//m/01_d4	Chicago	3	0.872145
+mainbody-00017	2446	2452	/m/0f2rq	https://www.freebase.com//m/0f2rq	Dallas	3	0.685753
+mainbody-00017	2462	2475	/m/0d6lp	https://www.freebase.com//m/0d6lp	San Francisco	3	0.953634
+mainbody-00017	2623	2630	/m/02xry	https://www.freebase.com//m/02xry	Florida	3	0.929752
+mainbody-00017	2632	2643	/m/04tgp	https://www.freebase.com//m/04tgp	Mississippi	3	0.867164
+mainbody-00017	2645	2650	/m/07b_l	https://www.freebase.com//m/07b_l	Texas	3	0.927394
+mainbody-00017	2655	2665	/m/081yw	https://www.freebase.com//m/081yw	Washington	3	0.0
+mainbody-00017	2786	2813	/m/02p3xf5	https://www.freebase.com//m/02p3xf5	Office of Inspector General	3	0.863158
+mainbody-00017	2839	2842	/m/01fl8x	https://www.freebase.com//m/01fl8x	CMS	3	0.56
+mainbody-00017	3413	3417	/m/01bqks	https://www.freebase.com//m/01bqks	U.S.	3	0
+mainbody-00017	3514	3517	/m/01fl8x	https://www.freebase.com//m/01fl8x	CMS	3	0.56
+mainbody-00017	3765	3773	/m/059rby	https://www.freebase.com//m/059rby	New York	3	0.0
+mainbody-00017	3791	3794	/m/01fl8x	https://www.freebase.com//m/01fl8x	CMS	3	0.56
+mainbody-00017	3806	3820	/m/059rby	https://www.freebase.com//m/059rby	New York state	3	0.28
+mainbody-00017	3898	3906	/m/059rby	https://www.freebase.com//m/059rby	New York	3	0.0
+mainbody-00017	4394	4402	/m/059rby	https://www.freebase.com//m/059rby	New York	3	0.0
+mainbody-00017	4482	4495	/m/02_286	https://www.freebase.com//m/02_286	New York City	3	0.993961
+mainbody-00017	4675	4689	/m/059rby	https://www.freebase.com//m/059rby	New York State	3	0.0
+mainbody-00017	5140	5152	/m/05tbn	https://www.freebase.com//m/05tbn	Pennsylvania	3	0.981582
+mainbody-00017	5323	5335	/m/05tbn	https://www.freebase.com//m/05tbn	Pennsylvania	3	0.981582
+mainbody-00017	5398	5410	/m/05tbn	https://www.freebase.com//m/05tbn	Pennsylvania	3	0.981582
+mainbody-00017	6094	6141	/m/0g0b5k	https://www.freebase.com//m/0g0b5k	National Council for Prescription Drug Programs	3	1.000000
+mainbody-00018	10	15	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	34	39	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	459	464	/m/033j5y	https://www.freebase.com//m/033j5y	prada	3	0.947269
+mainbody-00018	573	578	/m/033j5y	https://www.freebase.com//m/033j5y	prada	3	0.947269
+mainbody-00018	657	662	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	983	988	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	1136	1141	/m/03rjj	https://www.freebase.com//m/03rjj	Italy	3	0.906751
+mainbody-00018	1173	1178	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	1307	1312	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	2734	2739	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	2771	2776	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	2854	2859	/m/033j5y	https://www.freebase.com//m/033j5y	Prada	3	0.947269
+mainbody-00018	3128	3138	/m/06bkdx	https://www.freebase.com//m/06bkdx	Kate Spade	3	0.957747
+mainbody-00018	3259	3270	/m/03p1tw4	https://www.freebase.com//m/03p1tw4	Coach Purse	3	1.000000
+mainbody-00018	3271	3276	/m/03gc5x	https://www.freebase.com//m/03gc5x	Gucci	3	1.000000
+mainbody-00018	3303	3308	/m/03gc5x	https://www.freebase.com//m/03gc5x	Gucci	3	1.000000
+mainbody-00018	3323	3335	/m/03h90x	https://www.freebase.com//m/03h90x	Louis Vitton	3	1.000000
+mainbody-00019	0	9	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	21	28	/m/02wxtgw	https://www.freebase.com//m/02wxtgw	Android	3	0.871364
+mainbody-00019	54	59	/m/0fpgbgd	https://www.freebase.com//m/0fpgbgd	Notch	3	0
+mainbody-00019	65	71	/m/0g9wp4x	https://www.freebase.com//m/0g9wp4x	Mojang	3	1.000000
+mainbody-00019	89	98	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	122	124	/m/04r_8	https://www.freebase.com//m/04r_8	PC	3	0.017089
+mainbody-00019	143	152	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	189	203	/m/05n02d2	https://www.freebase.com//m/05n02d2	Android Market	3	1.000000
+mainbody-00019	254	268	/m/05n02d2	https://www.freebase.com//m/05n02d2	Android Market	3	1.000000
+mainbody-00019	278	287	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	minecraft	3	0.959091
+mainbody-00019	325	334	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	438	447	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	459	465	/m/0g9wp4x	https://www.freebase.com//m/0g9wp4x	Mojang	3	1.000000
+mainbody-00019	848	857	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	901	906	/m/0h4d9	https://www.freebase.com//m/0h4d9	Wi-Fi	3	0.982833
+mainbody-00019	1081	1090	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	1197	1206	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	1667	1676	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	1748	1755	/m/02wxtgw	https://www.freebase.com//m/02wxtgw	Android	3	0.871364
+mainbody-00019	1836	1845	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	2161	2170	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	2770	2779	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	2812	2818	/m/0g9wp4x	https://www.freebase.com//m/0g9wp4x	Mojang	3	1.000000
+mainbody-00019	2863	2872	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	3001	3007	/m/0g9wp4x	https://www.freebase.com//m/0g9wp4x	Mojang	3	1.000000
+mainbody-00019	3136	3145	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	3167	3191	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft Pocket Edition	3	1.000000
+mainbody-00019	3200	3209	/m/09v6kpg	https://www.freebase.com//m/09v6kpg	Minecraft	3	0.959091
+mainbody-00019	3216	3218	/m/04r_8	https://www.freebase.com//m/04r_8	PC	3	0.017089
+mainbody-00019	3313	3318	/m/0h4d9	https://www.freebase.com//m/0h4d9	Wi-Fi	3	0.13
+mainbody-00019	3528	3542	/m/0kyzf	https://www.freebase.com//m/0kyzf	Cross-platform	3	0
+mainbody-00020	661	672	/m/01grqr	https://www.freebase.com//m/01grqr	Law Society	3	0
+mainbody-00020	992	1003	/m/01grqr	https://www.freebase.com//m/01grqr	Law Society	3	0
+mainbody-00020	1007	1014	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	1091	1098	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	1398	1409	/m/01grqr	https://www.freebase.com//m/01grqr	Law Society	3	0
+mainbody-00020	1413	1420	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	1702	1709	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	3089	3100	/m/01grqr	https://www.freebase.com//m/01grqr	Law Society	3	0
+mainbody-00020	3490	3497	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0
+mainbody-00020	3690	3697	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	3839	3846	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	3916	3918	/m/04wgh	https://www.freebase.com//m/04wgh	Mr	3	0.11
+mainbody-00020	4107	4118	/m/01grqr	https://www.freebase.com//m/01grqr	Law Society	3	0
+mainbody-00020	4285	4296	/m/01grqr	https://www.freebase.com//m/01grqr	Law Society	3	0
+mainbody-00020	4300	4307	/m/05bmq	https://www.freebase.com//m/05bmq	Namibia	3	0.933942
+mainbody-00020	4336	4344	/m/0ftq7	https://www.freebase.com//m/0ftq7	Windhoek	3	0.972081
+mainbody-00025	48	56	/m/0537b	https://www.freebase.com//m/0537b	Motorola	3	0.981254
+mainbody-00025	2137	2151	/m/059g4	https://www.freebase.com//m/059g4	North American	3	0.0
+mainbody-00025	2153	2161	/m/02j9z	https://www.freebase.com//m/02j9z	European	3	0.0
+mainbody-00025	2166	2179	/m/055yrc	https://www.freebase.com//m/055yrc	Asia- Pacific	3	0.0
+mainbody-00027	0	10	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	40	48	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	75	85	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	115	123	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	168	178	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	208	216	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	321	325	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert	3	0.0
+mainbody-00027	452	457	/m/0bq9j4	https://www.freebase.com//m/0bq9j4	Davis	3	0
+mainbody-00027	589	592	/m/0fht9f	https://www.freebase.com//m/0fht9f	LSU	3	0.259695
+mainbody-00027	775	779	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert	3	0.0
+mainbody-00027	866	869	/m/059yj	https://www.freebase.com//m/059yj	NFL	3	0.0
+mainbody-00027	963	971	/m/05tfm	https://www.freebase.com//m/05tfm	Steelers	3	0
+mainbody-00027	976	983	/m/05l71	https://www.freebase.com//m/05l71	Raiders	3	0.31
+mainbody-00027	998	1008	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	1038	1046	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	1088	1098	/m/01snm	https://www.freebase.com//m/01snm	Cincinnati	3	0.0
+mainbody-00027	1128	1132	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert	3	0.0
+mainbody-00027	1168	1180	/m/0fht9f	https://www.freebase.com//m/0fht9f	LSU football	3	0.0
+mainbody-00027	1468	1472	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert	3	0.0
+mainbody-00027	1751	1761	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	1947	1955	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	1970	1973	/m/0fht9f	https://www.freebase.com//m/0fht9f	Lsu	3	0.259695
+mainbody-00027	2035	2040	/m/06d5rj	https://www.freebase.com//m/06d5rj	Jones	3	0.20
+mainbody-00027	2135	2145	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	2313	2323	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	2353	2361	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	2487	2494	/m/0cjcdj	https://www.freebase.com//m/0cjcdj	Russell	3	0.19
+mainbody-00027	2499	2504	/m/06d5rj	https://www.freebase.com//m/06d5rj	Jones	3	0.20
+mainbody-00027	2542	2545	/m/059yj	https://www.freebase.com//m/059yj	NFL	3	0.0
+mainbody-00027	2604	2610	/m/05zpk4r	https://www.freebase.com//m/05zpk4r	Hodson	3	0
+mainbody-00027	2635	2642	/m/0cjcdj	https://www.freebase.com//m/0cjcdj	Russell	3	0.19
+mainbody-00027	2647	2652	/m/06d5rj	https://www.freebase.com//m/06d5rj	Jones	3	0.20
+mainbody-00027	2782	2787	/m/06d5rj	https://www.freebase.com//m/06d5rj	Jones	3	0.20
+mainbody-00027	2854	2864	/m/06d5rj	https://www.freebase.com//m/06d5rj	Bert Jones	3	0.914894
+mainbody-00027	2894	2902	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	3018	3025	/m/02qh24_	https://www.freebase.com//m/02qh24_	Jackson	3	0
+mainbody-00027	3034	3037	/m/0cym1x	https://www.freebase.com//m/0cym1x	PAT	3	0
+mainbody-00027	3058	3070	/m/0cyg8x	https://www.freebase.com//m/0cyg8x	Skyler Green	3	1.000000
+mainbody-00027	3102	3105	/m/02183k	https://www.freebase.com//m/02183k	UGA	3	0.14
+mainbody-00027	3232	3240	/m/03gqb0k	https://www.freebase.com//m/03gqb0k	Ole Miss	3	0.08
+mainbody-00027	3345	3358	/m/0g6l7d	https://www.freebase.com//m/0g6l7d	John Ferguson	3	0
+mainbody-00027	3406	3412	/m/0fht9f	https://www.freebase.com//m/0fht9f	Tigers	3	0
+mainbody-00027	3458	3471	/m/01w_rb	https://www.freebase.com//m/01w_rb	Howard Cosell	3	1.000000
+mainbody-00032	56	61	/m/010h9y	https://www.freebase.com//m/010h9y	OGDEN	3	0.17
+mainbody-00032	242	246	/m/07srw	https://www.freebase.com//m/07srw	Utah	3	0.828995
+mainbody-00032	250	264	/m/0f2r6	https://www.freebase.com//m/0f2r6	Salt Lake City	3	0.975537
+mainbody-00032	584	590	/m/07kg3	https://www.freebase.com//m/07kg3	Tuscan	3	0.505068
+mainbody-00032	592	600	/m/07_pf	https://www.freebase.com//m/07_pf	Venetian	3	0.351482
+mainbody-00032	614	619	/m/0j0k	https://www.freebase.com//m/0j0k	Asian	3	0
+mainbody-00032	1457	1462	/m/010h9y	https://www.freebase.com//m/010h9y	Ogden	3	0.0
+mainbody-00032	2046	2053	/m/09b9m	https://www.freebase.com//m/09b9m	Dresden	3	0.935255
+mainbody-00033	39	49	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	62	72	/m/07bcn	https://www.freebase.com//m/07bcn	Sacramento	3	0.667943
+mainbody-00033	627	645	/m/0qydb	https://www.freebase.com//m/0qydb	Mountain Ranch, CA	3	1.000000
+mainbody-00033	659	675	/m/0kq0q	https://www.freebase.com//m/0kq0q	Calaveras County	3	1.000000
+mainbody-00033	1024	1034	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	1177	1183	/m/0mzy7	https://www.freebase.com//m/0mzy7	Fresno	3	0.778462
+mainbody-00033	1187	1196	/m/0r0jv	https://www.freebase.com//m/0r0jv	Lancaster	3	0.09
+mainbody-00033	1210	1216	/m/0l3dx	https://www.freebase.com//m/0l3dx	Valley	3	0
+mainbody-00033	1227	1237	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	1619	1629	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	1819	1829	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	1836	1852	/m/03c9c2s	https://www.freebase.com//m/03c9c2s	Sierra Foothills	3	0.0
+mainbody-00033	2022	2025	/m/07bcn	https://www.freebase.com//m/07bcn	Sac	3	0
+mainbody-00033	2171	2174	/m/07bcn	https://www.freebase.com//m/07bcn	Sac	3	0
+mainbody-00033	2418	2421	/m/07bcn	https://www.freebase.com//m/07bcn	Sac	3	0
+mainbody-00033	2653	2655	/m/01n7q	https://www.freebase.com//m/01n7q	CA	3	0.0
+mainbody-00033	2829	2839	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	2998	3008	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	3157	3165	/m/01n4w	https://www.freebase.com//m/01n4w	Colorado	3	0.908976
+mainbody-00033	3379	3384	/m/01n7q	https://www.freebase.com//m/01n7q	Calif	3	0.0
+mainbody-00033	3407	3423	/m/03c9c2s	https://www.freebase.com//m/03c9c2s	Sierra Foothills	3	0.0
+mainbody-00033	3427	3439	/m/0r27g	https://www.freebase.com//m/0r27g	Grass Valley	3	0.551136
+mainbody-00033	3465	3475	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00033	3484	3492	/m/0q76g	https://www.freebase.com//m/0q76g	Mid West	3	0
+mainbody-00033	3494	3501	/m/0d35y	https://www.freebase.com//m/0d35y	Phoenix	3	0.0
+mainbody-00033	3556	3561	/m/017l04	https://www.freebase.com//m/017l04	Coast	3	0
+mainbody-00033	4133	4141	/m/01n4w	https://www.freebase.com//m/01n4w	Colorado	3	0.908976
+mainbody-00033	4229	4232	/m/0kfb0	https://www.freebase.com//m/0kfb0	PNW	3	0
+mainbody-00033	4434	4442	/m/01n4w	https://www.freebase.com//m/01n4w	Colorado	3	0.908976
+mainbody-00033	4473	4482	/m/02rn6nn	https://www.freebase.com//m/02rn6nn	snow days	3	0
+mainbody-00033	4622	4628	/m/0vzm	https://www.freebase.com//m/0vzm	Austin	3	0.0
+mainbody-00033	4630	4632	/m/05fkf	https://www.freebase.com//m/05fkf	NC	3	0.0
+mainbody-00033	4634	4640	/m/02cl1	https://www.freebase.com//m/02cl1	Denver	3	0.772858
+mainbody-00033	4642	4650	/m/02frhbc	https://www.freebase.com//m/02frhbc	Portland	3	0.538619
+mainbody-00033	5025	5027	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+mainbody-00033	5249	5251	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+mainbody-00033	6031	6037	/m/0vzm	https://www.freebase.com//m/0vzm	Austin	3	0.0
+mainbody-00033	6039	6041	/m/05fkf	https://www.freebase.com//m/05fkf	NC	3	0.0
+mainbody-00033	6043	6049	/m/02cl1	https://www.freebase.com//m/02cl1	Denver	3	0.772858
+mainbody-00033	6051	6059	/m/02frhbc	https://www.freebase.com//m/02frhbc	Portland	3	0.538619
+mainbody-00033	7118	7124	/m/05kj_	https://www.freebase.com//m/05kj_	Oregon	3	0.907519
+mainbody-00033	7257	7262	/m/01n7q	https://www.freebase.com//m/01n7q	Calif	3	0.0
+mainbody-00033	7640	7645	/m/01n7q	https://www.freebase.com//m/01n7q	Calif	3	0.0
+mainbody-00033	7881	7883	/m/01n4w	https://www.freebase.com//m/01n4w	CO	3	0
+mainbody-00033	7911	7917	/m/05kj_	https://www.freebase.com//m/05kj_	Oregon	3	0.907519
+mainbody-00033	8013	8015	/m/01n7q	https://www.freebase.com//m/01n7q	CA	3	0.0
+mainbody-00033	8382	8385	/m/09c7w0	https://www.freebase.com//m/09c7w0	U.S	3	0.28
+mainbody-00033	8432	8445	/m/076ysnc	https://www.freebase.com//m/076ysnc	City-data.com	3	0.04
+mainbody-00033	8461	8469	/m/02y1vz	https://www.freebase.com//m/02y1vz	Facebook	3	0.997308
+mainbody-00033	8607	8616	/m/076ysnc	https://www.freebase.com//m/076ysnc	City-Data	3	1.000000
+mainbody-00033	8631	8635	/m/09c7w0	https://www.freebase.com//m/09c7w0	U.S.	3	0.10
+mainbody-00033	8641	8651	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0
+mainbody-00033	8686	8688	/m/01n7q	https://www.freebase.com//m/01n7q	CA	3	0
+mainbody-00033	8707	8717	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0
+mainbody-00033	8781	8791	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0
+mainbody-00033	8794	8804	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0
+mainbody-00033	8860	8869	/m/0l2q3	https://www.freebase.com//m/0l2q3	Riverside	3	0
+mainbody-00033	9019	9029	/m/01n7q	https://www.freebase.com//m/01n7q	California	3	0.971181
+mainbody-00035	0	4	/m/0jbhs	https://www.freebase.com//m/0jbhs	USDA	3	0.977121
+mainbody-00035	70	79	/m/03lq2	https://www.freebase.com//m/03lq2	Halloween	3	0.719332
+mainbody-00035	104	106	/m/0rh6k	https://www.freebase.com//m/0rh6k	DC	3	0.11
+mainbody-00035	198	202	/m/0jbhs	https://www.freebase.com//m/0jbhs	USDA	3	0.977121
+mainbody-00035	289	293	/m/0jbhs	https://www.freebase.com//m/0jbhs	USDA	3	0.977121
+mainbody-00035	684	688	/m/0jbhs	https://www.freebase.com//m/0jbhs	USDA	3	0.977121
+mainbody-00035	1101	1108	/m/09c7w0	https://www.freebase.com//m/09c7w0	America	3	0.0
+mainbody-00035	1175	1179	/m/0jbhs	https://www.freebase.com//m/0jbhs	USDA	3	0.977121
+mainbody-00035	1269	1273	/m/0jbhs	https://www.freebase.com//m/0jbhs	USDA	3	0.977121
+mainbody-00035	1509	1540	/m/026vq4	https://www.freebase.com//m/026vq4	General Services Administration	3	1.000000
+mainbody-00035	2049	2058	/m/014xqm	https://www.freebase.com//m/014xqm	Earth Day	3	0.995215
+mainbody-00035	2147	2165	/m/02816bw	https://www.freebase.com//m/02816bw	DC Central Kitchen	3	1.000000
+mainbody-00036	18	36	/m/07dxq9	https://www.freebase.com//m/07dxq9	My Sister's Keeper	3	0.210526
+mainbody-00036	38	56	/m/07dxq9	https://www.freebase.com//m/07dxq9	My Sister's Keeper	3	0.210526
+mainbody-00036	74	87	/m/07dxny	https://www.freebase.com//m/07dxny	Jodi  Picoult	3	1.000000
+mainbody-00036	938	956	/m/07dxq9	https://www.freebase.com//m/07dxq9	My Sister's Keeper	3	0.210526
+mainbody-00036	1014	1022	/m/059rby	https://www.freebase.com//m/059rby	New York	3	0.0
+mainbody-00036	1034	1057	/m/03y7jc	https://www.freebase.com//m/03y7jc	Washington Square Press	3	1.000000
+mainbody-00042	1770	1785	/m/03x8l5	https://www.freebase.com//m/03x8l5	alendronic acid	3	1.000000
+mainbody-00045	126	147	/m/010lf_	https://www.freebase.com//m/010lf_	Weyers Cave, Virginia	3	1.000000
+mainbody-00045	967	984	/m/017x8n	https://www.freebase.com//m/017x8n	Shenandoah Valley	3	0.956743
+mainbody-00045	1777	1780	/m/02_hj	https://www.freebase.com//m/02_hj	FAA	3	0.938058
+mainbody-00045	1847	1857	/m/017x8n	https://www.freebase.com//m/017x8n	Shenandoah	3	0.16
+mainbody-00052	8	14	/m/02z026r	https://www.freebase.com//m/02z026r	Hooper	3	0.24
+mainbody-00052	18	32	/m/0h51_mt	https://www.freebase.com//m/0h51_mt	Les Miserables	3	0.50
+mainbody-00052	52	66	/m/03nxm5h	https://www.freebase.com//m/03nxm5h	CHRISTY LEMIRE	3	1.000000
+mainbody-00052	67	69	/m/0cv_2	https://www.freebase.com//m/0cv_2	AP	3	0.64
+mainbody-00052	84	92	/m/0cv_2	https://www.freebase.com//m/0cv_2	AP Photo	3	0.76
+mainbody-00052	128	136	/m/0cv_2	https://www.freebase.com//m/0cv_2	AP Photo	3	0.76
+mainbody-00052	162	174	/m/02676m4	https://www.freebase.com//m/02676m4	Harry Potter	3	0.16
+mainbody-00052	182	192	/m/02z026r	https://www.freebase.com//m/02z026r	Tom Hooper	3	0.766129
+mainbody-00052	252	266	/m/0h51_mt	https://www.freebase.com//m/0h51_mt	Les Miserables	3	0.53
+mainbody-00052	310	326	/m/02p6rmt	https://www.freebase.com//m/02p6rmt	Inspector Javert	3	1.000000
+mainbody-00052	673	679	/m/02z026r	https://www.freebase.com//m/02z026r	Hooper	3	0.24
+mainbody-00052	896	907	/m/01vh096	https://www.freebase.com//m/01vh096	Victor Hugo	3	0.978840
+mainbody-00052	923	929	/m/0f8l9c	https://www.freebase.com//m/0f8l9c	France	3	0.932296
+mainbody-00052	994	1011	/m/09gq0x5	https://www.freebase.com//m/09gq0x5	The King's Speech	3	0.32
+mainbody-00052	1029	1043	/m/0g_w	https://www.freebase.com//m/0g_w	Academy Awards	3	0.915883
+mainbody-00052	1068	1074	/m/02z026r	https://www.freebase.com//m/02z026r	Hooper	3	0.24
+mainbody-00052	1631	1638	/m/02vkb9p	https://www.freebase.com//m/02vkb9p	Fantine	3	0.879518
+mainbody-00052	1673	1684	/m/05szrhx	https://www.freebase.com//m/05szrhx	Susan Boyle	3	0.991266
+mainbody-00052	1752	1765	/m/02vntj	https://www.freebase.com//m/02vntj	Anne Hathaway	3	0.874755
+mainbody-00052	1941	1955	/m/0h51_mt	https://www.freebase.com//m/0h51_mt	Les Miserables	3	0.53
+mainbody-00052	2033	2045	/m/03h_9lg	https://www.freebase.com//m/03h_9lg	Hugh Jackman	3	1.000000
+mainbody-00052	2079	2091	/m/02p0v89	https://www.freebase.com//m/02p0v89	Jean Valjean	3	1.000000
+mainbody-00052	2225	2240	/m/03zz8b	https://www.freebase.com//m/03zz8b	Amanda Seyfried	3	1.000000
+mainbody-00052	2245	2252	/m/02vkb9p	https://www.freebase.com//m/02vkb9p	Fantine	3	0.879518
+mainbody-00052	2265	2272	/m/025sdnf	https://www.freebase.com//m/025sdnf	Cosette	3	0.883721
+mainbody-00052	2279	2291	/m/02p0v89	https://www.freebase.com//m/02p0v89	Jean Valjean	3	1.000000
+mainbody-00052	2336	2346	/m/01lggg	https://www.freebase.com//m/01lggg	Mamma Mia!	3	0.11
+mainbody-00052	2424	2438	/m/0h10vt	https://www.freebase.com//m/0h10vt	Eddie Redmayne	3	1.000000
+mainbody-00052	2493	2499	/m/025sdnt	https://www.freebase.com//m/025sdnt	Marius	3	0.66
+mainbody-00052	2516	2530	/m/043sh0n	https://www.freebase.com//m/043sh0n	Samantha Barks	3	1.000000
+mainbody-00052	2588	2595	/m/025ry9p	https://www.freebase.com//m/025ry9p	Eponine	3	1.000000
+mainbody-00052	2629	2643	/m/0h51_mt	https://www.freebase.com//m/0h51_mt	Les Miserables	3	0.53
+mainbody-00052	2677	2683	/m/04jpl	https://www.freebase.com//m/04jpl	London	3	0.962401
+mainbody-00052	2709	2722	/m/06dv3	https://www.freebase.com//m/06dv3	Russell Crowe	3	1.000000
+mainbody-00052	2746	2752	/m/02p6rmt	https://www.freebase.com//m/02p6rmt	Javert	3	1.000000
+mainbody-00052	2770	2782	/m/02p0v89	https://www.freebase.com//m/02p0v89	Jean Valjean	3	1.000000
+mainbody-00052	2897	2904	/m/02p0v89	https://www.freebase.com//m/02p0v89	Valjean	3	0.67
+mainbody-00052	2926	2931	/m/06dv3	https://www.freebase.com//m/06dv3	Crowe	3	0.0
+mainbody-00052	3081	3088	/m/03h_9lg	https://www.freebase.com//m/03h_9lg	Jackman	3	0.18
+mainbody-00052	3311	3317	/m/02p6rmt	https://www.freebase.com//m/02p6rmt	Javert	3	1.000000
+mainbody-00052	3328	3335	/m/02p0v89	https://www.freebase.com//m/02p0v89	Valjean	3	0.67
+mainbody-00052	3364	3369	/m/05qtj	https://www.freebase.com//m/05qtj	Paris	3	0.0
+mainbody-00052	3547	3560	/m/0f8l9c	https://www.freebase.com//m/0f8l9c	French troops	3	0
+mainbody-00052	3583	3590	/m/025sdnf	https://www.freebase.com//m/025sdnf	Cosette	3	0.883721
+mainbody-00052	3595	3601	/m/025sdnt	https://www.freebase.com//m/025sdnt	Marius	3	0.66
+mainbody-00052	3704	3721	/m/0c9c0	https://www.freebase.com//m/0c9c0	Sacha Baron Cohen	3	1.000000
+mainbody-00052	3726	3746	/m/0kszw	https://www.freebase.com//m/0kszw	Helena Bonham Carter	3	1.000000
+mainbody-00052	3869	3881	/m/02p0v89	https://www.freebase.com//m/02p0v89	Jean Valjean	3	1.000000
+mainbody-00052	4234	4242	/m/02_286	https://www.freebase.com//m/02_286	New York	3	0.09
+mainbody-00052	4281	4295	/m/03c377	https://www.freebase.com//m/03c377	Colm Wilkinson	3	1.000000
+mainbody-00052	4310	4322	/m/02p0v89	https://www.freebase.com//m/02p0v89	Jean Valjean	3	1.000000
+mainbody-00052	4332	4338	/m/04jpl	https://www.freebase.com//m/04jpl	London	3	0.962401
+mainbody-00052	4343	4351	/m/035y8z	https://www.freebase.com//m/035y8z	Broadway	3	0.832750
+mainbody-00052	4593	4607	/m/0h51_mt	https://www.freebase.com//m/0h51_mt	Les Miserables	3	0.53
+mainbody-00052	4612	4630	/m/016tw3	https://www.freebase.com//m/016tw3	Universal Pictures	3	1.000000
+mainbody-00052	4790	4827	/m/04z3v	https://www.freebase.com//m/04z3v	Motion Picture Association of America	3	0.990025
+mainbody-00052	4921	4941	/m/0cv_2	https://www.freebase.com//m/0cv_2	The Associated Press	3	0
+mainbody-00053	40	46	/m/0l6_6	https://www.freebase.com//m/0l6_6	PELOPS	3	0.940000
+mainbody-00053	88	90	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+mainbody-00053	364	368	/m/0z90c	https://www.freebase.com//m/0z90c	eBay	3	0.995759
+mainbody-00053	441	448	/m/08f2dq	https://www.freebase.com//m/08f2dq	Realism	3	0.02
+mainbody-00053	1380	1385	/m/0641k	https://www.freebase.com//m/0641k	paper	3	0.0
+mainbody-00053	1982	1989	/m/03rjj	https://www.freebase.com//m/03rjj	Italian	3	0.618996
+mainbody-00053	2614	2619	/m/09c7w0	https://www.freebase.com//m/09c7w0	U.S.A	3	0.65
+mainbody-00053	2634	2640	/m/02j9z	https://www.freebase.com//m/02j9z	Europe	3	0.07
+mainbody-00053	2652	2659	/m/07ssc	https://www.freebase.com//m/07ssc	Britain	3	0.03
+mainbody-00053	2673	2678	/m/03rjj	https://www.freebase.com//m/03rjj	Italy	3	0.07
+mainbody-00053	2770	2776	/m/01btsf	https://www.freebase.com//m/01btsf	Paypal	3	0.19
+mainbody-00053	2797	2803	/m/01btsf	https://www.freebase.com//m/01btsf	Paypal	3	0.19
+mainbody-00061	1584	1618	/m/02xw0n	https://www.freebase.com//m/02xw0n	Minnesota State University-Mankato	3	0.15
+mainbody-00061	1722	1731	/m/0zgfm	https://www.freebase.com//m/0zgfm	Hillsboro	3	0.403670
+mainbody-00061	1733	1735	/m/05kj_	https://www.freebase.com//m/05kj_	OR	3	0
+mainbody-00061	1788	1794	/m/05kj_	https://www.freebase.com//m/05kj_	Oregon	3	0.907519
+mainbody-00061	1799	1815	/m/081yw	https://www.freebase.com//m/081yw	Washington State	3	0.05
+mainbody-00061	2707	2716	/m/0zgfm	https://www.freebase.com//m/0zgfm	Hillsboro	3	0.403670
+mainbody-00061	2755	2766	/m/014_d3	https://www.freebase.com//m/014_d3	Ford Taurus	3	0.843333
+mainbody-00061	8886	8889	/m/02xw0n	https://www.freebase.com//m/02xw0n	MSU	3	0
+mainbody-00061	9731	9740	/m/0zgfm	https://www.freebase.com//m/0zgfm	Hillsboro	3	0.403670
+mainbody-00061	10572	10585	/m/01yqvd	https://www.freebase.com//m/01yqvd	The Oregonian	3	0.53
+mainbody-00061	10670	10680	/m/04csldy	https://www.freebase.com//m/04csldy	oregonlive	3	1.000000
+mainbody-00061	10827	10843	/m/03cb8rk	https://www.freebase.com//m/03cb8rk	Hillsboro Police	3	0
+mainbody-00061	10927	10936	/m/0zgfm	https://www.freebase.com//m/0zgfm	Hillsboro	3	0.403670
+mainbody-00088	44	57	/m/04vv3d	https://www.freebase.com//m/04vv3d	Rudy Schenker	3	0.0
+mainbody-00088	159	168	/m/0ycfj	https://www.freebase.com//m/0ycfj	Van Halen	3	0.955870
+mainbody-00088	204	215	/m/0851ty	https://www.freebase.com//m/0851ty	Mike Turner	3	0.400000
+mainbody-00088	222	236	/m/02k__v	https://www.freebase.com//m/02k__v	Our Lady Peace	3	1.000000
+mainbody-00088	259	267	/m/01nvxrn	https://www.freebase.com//m/01nvxrn	The Wolf	3	0
+mainbody-00088	297	305	/m/01nvxrn	https://www.freebase.com//m/01nvxrn	The Wolf	3	0
+mainbody-00088	322	334	/m/05zhg	https://www.freebase.com//m/05zhg	Peterborough	3	0.547205
+mainbody-00088	394	398	/m/01k9v6j	https://www.freebase.com//m/01k9v6j	Fear	3	0.05
+mainbody-00088	564	572	/m/01t2d1n	https://www.freebase.com//m/01t2d1n	BlackOut	3	0.143956
+mainbody-00088	795	810	/m/082ks4	https://www.freebase.com//m/082ks4	Herman Rarebell	3	1.000000
+mainbody-00088	826	830	/m/011xhx	https://www.freebase.com//m/011xhx	Kiss	3	0.0
+mainbody-00088	1068	1081	/m/01czx	https://www.freebase.com//m/01czx	Black Sabbath	3	0.939636
+mainbody-00088	1086	1098	/m/04k05	https://www.freebase.com//m/04k05	Led Zeppelin	3	0.979685
+mainbody-00088	1176	1183	/m/0h7h6	https://www.freebase.com//m/0h7h6	Toronto	3	0.927365
+mainbody-00088	1311	1318	/m/0h7h6	https://www.freebase.com//m/0h7h6	Toronto	3	0.927365
+mainbody-00088	1490	1498	/m/02t5l1	https://www.freebase.com//m/02t5l1	Nazareth	3	0.235816
+mainbody-00088	1500	1511	/m/03cfnr	https://www.freebase.com//m/03cfnr	Jeff Healey	3	1.000000
+mainbody-00088	1513	1523	/m/013w8h	https://www.freebase.com//m/013w8h	Ted Nugent	3	0.978626
+mainbody-00088	1525	1535	/m/020vns	https://www.freebase.com//m/020vns	April Wine	3	0.975610
+mainbody-00088	1626	1635	/m/0ycfj	https://www.freebase.com//m/0ycfj	Van Halen	3	0.955870
+mainbody-00088	1637	1650	/m/01czx	https://www.freebase.com//m/01czx	Black Sabbath	3	0.939636
+mainbody-00088	1655	1667	/m/011hdn	https://www.freebase.com//m/011hdn	Alice Cooper	3	0.995109
+mainbody-00088	1822	1827	/m/01jx6c1	https://www.freebase.com//m/01jx6c1	Anvil	3	0.26
+mainbody-00088	2115	2127	/m/01wh7v1	https://www.freebase.com//m/01wh7v1	Jason Bonham	3	1.000000
+mainbody-00088	2132	2142	/m/05j7_	https://www.freebase.com//m/05j7_	Neil Peart	3	1.000000
+mainbody-00088	2175	2188	/m/011_vz	https://www.freebase.com//m/011_vz	Faith No More	3	1.000000
+mainbody-00088	2190	2203	/m/01vtqml	https://www.freebase.com//m/01vtqml	Ozzy Osbourne	3	1.000000
+mainbody-00088	2212	2223	/m/051gyk	https://www.freebase.com//m/051gyk	Mike Bordin	3	1.000000
+mainbody-00088	2362	2371	/m/0knhk	https://www.freebase.com//m/0knhk	Scorpions	3	0.928652
+mainbody-00088	2471	2485	/m/04hj_s	https://www.freebase.com//m/04hj_s	Paiste cymbals	3	0.53
+mainbody-00088	2526	2542	/m/07bglv	https://www.freebase.com//m/07bglv	Francis Buchholz	3	1.000000
+mainbody-00088	2748	2760	/m/0130sy	https://www.freebase.com//m/0130sy	Jon Anderson	3	0.947991
+mainbody-00088	2764	2767	/m/0b_xm	https://www.freebase.com//m/0b_xm	Yes	3	0
+mainbody-00088	2815	2818	/m/011k1h	https://www.freebase.com//m/011k1h	EMI	3	0.920048
+mainbody-00088	3059	3068	/m/0d193h	https://www.freebase.com//m/0d193h	Pearl Jam	3	0.978375
+mainbody-00088	3094	3105	/m/04yyyh	https://www.freebase.com//m/04yyyh	Full Circle	3	0.008357
+mainbody-00088	3120	3129	/m/0knhk	https://www.freebase.com//m/0knhk	Scorpions	3	0.928652
+mainbody-00088	3283	3297	/m/0132k4	https://www.freebase.com//m/0132k4	Jaco Pastorius	3	0.957096
+mainbody-00088	3299	3314	/m/01hlj51	https://www.freebase.com//m/01hlj51	Michael Manring	3	1.000000
+mainbody-00088	3316	3326	/m/0c6hc0	https://www.freebase.com//m/0c6hc0	Dave LaRue	3	1.000000
+mainbody-00088	3328	3338	/m/023slg	https://www.freebase.com//m/023slg	Tony Levin	3	0.960334
+mainbody-00088	3357	3366	/m/03d8y	https://www.freebase.com//m/03d8y	Geddy Lee	3	1.000000
+mainbody-00088	3593	3597	/m/07f1x	https://www.freebase.com//m/07f1x	Thai	3	0
+mainbody-00088	3656	3668	/m/088yz_	https://www.freebase.com//m/088yz_	Mattias Jabs	3	0
+mainbody-00088	3786	3795	/m/0knhk	https://www.freebase.com//m/0knhk	Scorpions	3	0.928652
+mainbody-00088	3832	3844	/m/088yz_	https://www.freebase.com//m/088yz_	Mattias Jabs	3	0
+mainbody-00092	0	3	/m/023xjs	https://www.freebase.com//m/023xjs	MOL	3	0.25
+mainbody-00092	29	35	/m/02j9z	https://www.freebase.com//m/02j9z	Europe	3	0.979362
+mainbody-00092	56	72	/m/023xjs	https://www.freebase.com//m/023xjs	Mitsui OSK Lines	3	1.000000
+mainbody-00092	74	77	/m/023xjs	https://www.freebase.com//m/023xjs	MOL	3	0.25
+mainbody-00092	83	100	/m/04q83f9	https://www.freebase.com//m/04q83f9	Höegh Autoliners	3	0.41
+mainbody-00092	179	185	/m/02j9z	https://www.freebase.com//m/02j9z	Europe	3	0
+mainbody-00092	363	382	/m/04jb01q	https://www.freebase.com//m/04jb01q	Euro Marine Carrier	3	0
+mainbody-00092	384	387	/m/04jb01q	https://www.freebase.com//m/04jb01q	EMC	3	0.29
+mainbody-00092	393	418	/m/04jbkj_	https://www.freebase.com//m/04jbkj_	Nissan Motor Car Carriers	3	0.18
+mainbody-00092	589	597	/m/02j9z	https://www.freebase.com//m/02j9z	European	3	0
+mainbody-00092	1141	1147	/m/02j9z	https://www.freebase.com//m/02j9z	Europe	3	0.15
+mainbody-00092	1453	1469	/m/04q83f9	https://www.freebase.com//m/04q83f9	Hoëgh Autoliners	3	0.0
+mainbody-00092	1679	1682	/m/023xjs	https://www.freebase.com//m/023xjs	MOL	3	0.25
+mainbody-00092	1687	1693	/m/04q83f9	https://www.freebase.com//m/04q83f9	Höegh	3	0.07
+mainbody-00092	1830	1833	/m/04jb01q	https://www.freebase.com//m/04jb01q	EMC	3	0.29
+mainbody-00092	1901	1918	/m/04q83f9	https://www.freebase.com//m/04q83f9	Höegh Autoliners	3	0.41
+mainbody-00092	3232	3242	/m/01522	https://www.freebase.com//m/01522	the Baltic	3	0.69
+mainbody-00092	3247	3256	/m/059qw	https://www.freebase.com//m/059qw	North Sea	3	0.16
+mainbody-00101	297	301	/m/025wpfn	https://www.freebase.com//m/025wpfn	NCEA	3	0.028571
+mainbody-00101	2039	2047	/m/0g0lh	https://www.freebase.com//m/0g0lh	U.S. EPA	3	0.56
+mainbody-00101	2098	2134	/m/0g0lh	https://www.freebase.com//m/0g0lh	U.S. Environmental Protection Agency	3	0.56
+mainbody-00101	2136	2151	/m/0rh6k	https://www.freebase.com//m/0rh6k	Washington, D.C	3	0.0
+mainbody-00101	2154	2157	/m/0g0lh	https://www.freebase.com//m/0g0lh	EPA	3	0.61
+mainbody-00101	2480	2483	/m/0g0lh	https://www.freebase.com//m/0g0lh	EPA	3	0.61
+mainbody-00101	2523	2526	/m/0g0lh	https://www.freebase.com//m/0g0lh	EPA	3	0.62
+msn-2014-03-28-00063	2919	2924	/m/052tr	https://www.freebase.com//m/052tr	Excel	3	0.24
+msn-2014-03-28-00076	0	10	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.24
+msn-2014-03-28-00076	63	73	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.24
+msn-2014-03-28-00076	223	233	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.31
+msn-2014-03-28-00076	569	579	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.31
+msn-2014-03-28-00076	650	656	/m/05b4c	https://www.freebase.com//m/05b4c	Nissan	3	0.960707
+msn-2014-03-28-00076	700	707	/m/0cbnxm	https://www.freebase.com//m/0cbnxm	Qashqai	3	0.166667
+msn-2014-03-28-00076	777	787	/m/027qpg5	https://www.freebase.com//m/027qpg5	Ford Focus	3	0.912329
+msn-2014-03-28-00076	867	877	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0
+msn-2014-03-28-00076	951	965	/m/040m82	https://www.freebase.com//m/040m82	Kia's Sportage	3	0
+msn-2014-03-28-00076	971	983	/m/04n7g5z	https://www.freebase.com//m/04n7g5z	Peugeot 3008	3	1.000000
+msn-2014-03-28-00076	989	999	/m/05_5ppm	https://www.freebase.com//m/05_5ppm	Skoda Yeti	3	1.000000
+msn-2014-03-28-00076	1011	1017	/m/040m7b	https://www.freebase.com//m/040m7b	Tucson	3	0.36
+msn-2014-03-28-00076	1050	1056	/m/05b4c	https://www.freebase.com//m/05b4c	Nissan	3	0.960707
+msn-2014-03-28-00076	1065	1075	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.31
+msn-2014-03-28-00076	1136	1140	/m/047px2	https://www.freebase.com//m/047px2	Colt	3	0.29
+msn-2014-03-28-00076	1157	1163	/m/047ptj	https://www.freebase.com//m/047ptj	Lancer	3	0.34
+msn-2014-03-28-00076	1165	1175	/m/02m6x0	https://www.freebase.com//m/02m6x0	Lancer Evo	3	0.0
+msn-2014-03-28-00076	1177	1186	/m/04pj2g	https://www.freebase.com//m/04pj2g	Outlander	3	0.115385
+msn-2014-03-28-00076	1255	1265	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.31
+msn-2014-03-28-00076	1723	1727	/m/018wwb	https://www.freebase.com//m/018wwb	Golf	3	0.25
+msn-2014-03-28-00076	1731	1736	/m/01j3dc	https://www.freebase.com//m/01j3dc	Astra	3	0
+msn-2014-03-28-00076	1970	1979	/m/04pj2g	https://www.freebase.com//m/04pj2g	Outlander	3	0.115385
+msn-2014-03-28-00076	2170	2179	/m/04pj2g	https://www.freebase.com//m/04pj2g	Outlander	3	0.115385
+msn-2014-03-28-00076	2218	2223	/m/027qpg5	https://www.freebase.com//m/027qpg5	Focus	3	0.05
+msn-2014-03-28-00076	2411	2418	/m/095l0	https://www.freebase.com//m/095l0	Bristol	3	0.0
+msn-2014-03-28-00076	2423	2427	/m/0bdg5	https://www.freebase.com//m/0bdg5	Bath	3	0.0
+msn-2014-03-28-00076	2941	2953	/m/03y5_6	https://www.freebase.com//m/03y5_6	Peter Crouch	3	1.000000
+msn-2014-03-28-00076	4122	4126	/m/0mcx2	https://www.freebase.com//m/0mcx2	iPod	3	0.975449
+msn-2014-03-28-00076	4402	4409	/m/0cbnxm	https://www.freebase.com//m/0cbnxm	Qashqai	3	0.166667
+msn-2014-03-28-00076	4902	4912	/m/01cylx	https://www.freebase.com//m/01cylx	Mitsubishi	3	0.152749
+msn-2014-03-28-00076	5031	5038	/m/0cbnxm	https://www.freebase.com//m/0cbnxm	Qashqai	3	0.166667
+msn-2014-03-28-00076	5278	5285	/m/0cbnxm	https://www.freebase.com//m/0cbnxm	Qashqai	3	0.166667
+msn-2014-03-28-00093	0	7	/m/046zh	https://www.freebase.com//m/046zh	Roberts	3	0.0
+msn-2014-03-28-00093	36	45	/m/0f2wj	https://www.freebase.com//m/0f2wj	Hollywood	3	0.0
+msn-2014-03-28-00093	56	69	/m/046zh	https://www.freebase.com//m/046zh	Julia Roberts	3	0.991429
+msn-2014-03-28-00093	77	83	/m/04jpl	https://www.freebase.com//m/04jpl	London	3	0.962401
+msn-2014-03-28-00093	145	158	/m/07kdkfj	https://www.freebase.com//m/07kdkfj	Eat Pray Love	3	0.679487
+msn-2014-03-28-00093	187	203	/m/03j437	https://www.freebase.com//m/03j437	Stella McCartney	3	1.000000
+msn-2014-03-28-00093	221	233	/m/014l6_	https://www.freebase.com//m/014l6_	Pretty Woman	3	0.957529
+msn-2014-03-28-00093	346	363	/m/0gn8m8	https://www.freebase.com//m/0gn8m8	Elizabeth Gilbert	3	1.000000
+msn-2014-03-28-00093	754	767	/m/07kdkfj	https://www.freebase.com//m/07kdkfj	Eat Pray Love	3	0.679487
+msn-2014-03-28-00093	786	799	/m/01713c	https://www.freebase.com//m/01713c	Javier Bardem	3	1.000000
+msn-2014-03-28-00093	801	813	/m/05bnp0	https://www.freebase.com//m/05bnp0	James Franco	3	1.000000
+msn-2014-03-28-00093	818	833	/m/06lht1	https://www.freebase.com//m/06lht1	Richard Jenkins	3	0.944751
+msn-2014-03-28-00093	943	948	/m/03rjj	https://www.freebase.com//m/03rjj	Italy	3	0.906751
+msn-2014-03-28-00093	981	986	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00093	1029	1033	/m/01bkb	https://www.freebase.com//m/01bkb	Bali	3	0.919566
+msn-2014-03-28-00093	1136	1143	/m/046zh	https://www.freebase.com//m/046zh	Roberts	3	0.0
+msn-2014-03-28-00093	1245	1252	/m/0gn8m8	https://www.freebase.com//m/0gn8m8	Gilbert	3	0.22
+msn-2014-03-28-00093	1294	1305	/m/07g7h2	https://www.freebase.com//m/07g7h2	Ryan Murphy	3	0.845481
+msn-2014-03-28-00093	1354	1361	/m/0gn8m8	https://www.freebase.com//m/0gn8m8	Gilbert	3	0.22
+msn-2014-03-28-00093	1446	1453	/m/046zh	https://www.freebase.com//m/046zh	Roberts	3	0.0
+msn-2014-03-28-00093	1495	1510	/m/04lhc4	https://www.freebase.com//m/04lhc4	Erin Brockovich	3	0.722449
+msn-2014-03-28-00093	1512	1524	/m/01cz7r	https://www.freebase.com//m/01cz7r	Notting Hill	3	0.22
+msn-2014-03-28-00093	1529	1553	/m/01pgnr	https://www.freebase.com//m/01pgnr	My Best Friend's Wedding	3	1.000000
+msn-2014-03-28-00093	1555	1571	/m/03xmy1	https://www.freebase.com//m/03xmy1	Brigitte Nielsen	3	1.000000
+msn-2014-03-28-00093	1576	1587	/m/06hr0x	https://www.freebase.com//m/06hr0x	Ali Bastian	3	1.000000
+msn-2014-03-28-00098	0	6	/m/050gdt	https://www.freebase.com//m/050gdt	Dermot	3	0.0
+msn-2014-03-28-00098	34	48	/m/050gdt	https://www.freebase.com//m/050gdt	Dermot O'Leary	3	1.000000
+msn-2014-03-28-00098	84	96	/m/01pfkw	https://www.freebase.com//m/01pfkw	Simon Cowell	3	0.986842
+msn-2014-03-28-00098	135	147	/m/06wcg5g	https://www.freebase.com//m/06wcg5g	The X Factor	3	0.11
+msn-2014-03-28-00098	215	218	/m/0687w9	https://www.freebase.com//m/0687w9	OK!	3	0
+msn-2014-03-28-00098	268	274	/m/050gdt	https://www.freebase.com//m/050gdt	Dermot	3	0.0
+msn-2014-03-28-00098	320	325	/m/01pfkw	https://www.freebase.com//m/01pfkw	Simon	3	0.58
+msn-2014-03-28-00098	617	623	/m/050gdt	https://www.freebase.com//m/050gdt	Dermot	3	0.0
+msn-2014-03-28-00098	656	668	/m/05z3ht	https://www.freebase.com//m/05z3ht	This Morning	3	0.958631
+msn-2014-03-28-00098	674	690	/m/07fsj1	https://www.freebase.com//m/07fsj1	Holly Willoughby	3	1.000000
+msn-2014-03-28-00129	0	5	/m/01vt5c_	https://www.freebase.com//m/01vt5c_	M.I.A	3	0.24
+msn-2014-03-28-00129	102	113	/m/0289n8t	https://www.freebase.com//m/0289n8t	Twitter.com	3	0.0
+msn-2014-03-28-00129	148	153	/m/01vt5c_	https://www.freebase.com//m/01vt5c_	M.I.A	3	0.24
+msn-2014-03-28-00129	188	198	/m/06x5s	https://www.freebase.com//m/06x5s	Super Bowl	3	0.893008
+msn-2014-03-28-00129	440	445	/m/01vt5c_	https://www.freebase.com//m/01vt5c_	M.I.A	3	0.24
+msn-2014-03-28-00129	597	600	/m/01vt5c_	https://www.freebase.com//m/01vt5c_	MIA	3	0.21
+msn-2014-03-28-00129	642	647	/m/01vt5c_	https://www.freebase.com//m/01vt5c_	M.I.A	3	0.24
+msn-2014-03-28-00156	0	7	/m/07929f	https://www.freebase.com//m/07929f	Maxwell	3	0.05
+msn-2014-03-28-00156	36	43	/m/07929f	https://www.freebase.com//m/07929f	Maxwell	3	0.05
+msn-2014-03-28-00156	118	125	/m/07929f	https://www.freebase.com//m/07929f	Maxwell	3	0.05
+msn-2014-03-28-00156	228	238	/m/044gyq	https://www.freebase.com//m/044gyq	Jill Scott	3	0.963068
+msn-2014-03-28-00156	240	251	/m/01w7nww	https://www.freebase.com//m/01w7nww	Erykah Badu	3	1.000000
+msn-2014-03-28-00156	256	269	/m/05nztdt	https://www.freebase.com//m/05nztdt	Melanie Fiona	3	1.000000
+msn-2014-03-28-00156	535	542	/m/07929f	https://www.freebase.com//m/07929f	Maxwell	3	0.05
+msn-2014-03-28-00156	547	551	/m/044gyq	https://www.freebase.com//m/044gyq	Jill	3	0.0
+msn-2014-03-28-00156	820	838	/m/0959rd	https://www.freebase.com//m/0959rd	Renaissance Hotels	3	1.000000
+msn-2014-03-28-00156	928	935	/m/01_d4	https://www.freebase.com//m/01_d4	Chicago	3	0.872145
+msn-2014-03-28-00162	48	54	/m/0198jf	https://www.freebase.com//m/0198jf	MSN CA	3	1.000000
+msn-2014-03-28-00162	75	93	/m/02mchr	https://www.freebase.com//m/02mchr	The Canadian Press	3	0.18
+msn-2014-03-28-00162	826	860	/m/0ghh4d	https://www.freebase.com//m/0ghh4d	Winnipeg Regional Health Authority	3	1.000000
+msn-2014-03-28-00162	1540	1558	/m/05qh6g	https://www.freebase.com//m/05qh6g	Adobe Flash Player	3	1.000000
+msn-2014-03-28-00162	1607	1619	/m/05qh6g	https://www.freebase.com//m/05qh6g	Flash Player	3	0.974359
+msn-2014-03-28-00168	38	48	/m/0rh6k	https://www.freebase.com//m/0rh6k	WASHINGTON	3	0
+msn-2014-03-28-00168	121	132	/m/0g3c2f	https://www.freebase.com//m/0g3c2f	Gary Leeman	3	1.000000
+msn-2014-03-28-00168	438	448	/m/0rh6k	https://www.freebase.com//m/0rh6k	Washington	3	0.22
+msn-2014-03-28-00168	596	620	/m/059yj	https://www.freebase.com//m/059yj	National Football League	3	0.963361
+msn-2014-03-28-00168	1847	1856	/m/0h727p	https://www.freebase.com//m/0h727p	Bill Daly	3	1.000000
+msn-2014-03-28-00168	1980	1993	/m/09c7w0	https://www.freebase.com//m/09c7w0	United States	3	0.0
+msn-2014-03-28-00168	2017	2037	/m/0rh6k	https://www.freebase.com//m/0rh6k	District of Columbia	3	0.0
+msn-2014-03-28-00168	2522	2534	/m/02d2q4	https://www.freebase.com//m/02d2q4	Gary Bettman	3	1.000000
+msn-2014-03-28-00168	2540	2558	/m/02mchr	https://www.freebase.com//m/02mchr	The Canadian Press	3	0.15
+msn-2014-03-28-00168	2839	2859	/m/02w4mr	https://www.freebase.com//m/02w4mr	Players' Association	3	0.39
+msn-2014-03-28-00168	3520	3526	/m/0g3c2f	https://www.freebase.com//m/0g3c2f	Leeman	3	0.0
+msn-2014-03-28-00168	3547	3566	/m/0j6tr	https://www.freebase.com//m/0j6tr	Toronto Maple Leafs	3	0.935423
+msn-2014-03-28-00168	3568	3582	/m/0jnm_	https://www.freebase.com//m/0jnm_	Calgary Flames	3	0.992383
+msn-2014-03-28-00168	3584	3602	/m/0bszz	https://www.freebase.com//m/0bszz	Montreal Canadians	3	1.000000
+msn-2014-03-28-00168	3604	3621	/m/0jnnx	https://www.freebase.com//m/0jnnx	Vancouver Canucks	3	0.952064
+msn-2014-03-28-00168	3626	3641	/m/06x6s	https://www.freebase.com//m/06x6s	St. Louis Blues	3	0.0
+msn-2014-03-28-00168	3902	3908	/m/0g3c2f	https://www.freebase.com//m/0g3c2f	Leeman	3	0.0
+msn-2014-03-28-00168	3951	3965	/m/08pk3t	https://www.freebase.com//m/08pk3t	Bradley Aitken	3	0
+msn-2014-03-28-00168	3967	3986	/m/0hn6d	https://www.freebase.com//m/0hn6d	Pittsburgh Penguins	3	0.977848
+msn-2014-03-28-00168	3988	4003	/m/0jnmj	https://www.freebase.com//m/0jnmj	Edmonton Oilers	3	0.995455
+msn-2014-03-28-00168	4006	4018	/m/02vz6xt	https://www.freebase.com//m/02vz6xt	Darren Banks	3	1.000000
+msn-2014-03-28-00168	4020	4033	/m/0j2zj	https://www.freebase.com//m/0j2zj	Boston Bruins	3	0.979840
+msn-2014-03-28-00168	4036	4048	/m/0267nwn	https://www.freebase.com//m/0267nwn	Curt Bennett	3	1.000000
+msn-2014-03-28-00168	4050	4055	/m/06x6s	https://www.freebase.com//m/06x6s	Blues	3	0.60
+msn-2014-03-28-00168	4057	4073	/m/0hmtk	https://www.freebase.com//m/0hmtk	New York Rangers	3	0.986745
+msn-2014-03-28-00168	4078	4092	/m/01nvk_	https://www.freebase.com//m/01nvk_	Atlanta Flames	3	0.0
+msn-2014-03-28-00168	4095	4107	/m/02p_sth	https://www.freebase.com//m/02p_sth	Richard Dunn	3	0
+msn-2014-03-28-00168	4109	4123	/m/0j5m6	https://www.freebase.com//m/0j5m6	Buffalo Sabres	3	0.984163
+msn-2014-03-28-00168	4128	4142	/m/0jnm_	https://www.freebase.com//m/0jnm_	Calgary Flames	3	0.992383
+msn-2014-03-28-00168	4145	4158	/m/04y7ymd	https://www.freebase.com//m/04y7ymd	Warren Holmes	3	1.000000
+msn-2014-03-28-00168	4161	4178	/m/0jnq8	https://www.freebase.com//m/0jnq8	Los Angeles Kings	3	0.984674
+msn-2014-03-28-00168	4181	4193	/m/02ql9d5	https://www.freebase.com//m/02ql9d5	Robert Manno	3	0.400000
+msn-2014-03-28-00168	4196	4203	/m/0jnnx	https://www.freebase.com//m/0jnnx	Canucks	3	0.0
+msn-2014-03-28-00168	4205	4216	/m/0j6tr	https://www.freebase.com//m/0j6tr	Maple Leafs	3	0.0
+msn-2014-03-28-00168	4221	4238	/m/02fp3	https://www.freebase.com//m/02fp3	Detroit Red Wings	3	0.972381
+msn-2014-03-28-00168	4262	4271	/m/02fp3	https://www.freebase.com//m/02fp3	Red Wings	3	0.72
+msn-2014-03-28-00168	4273	4292	/m/0jnl5	https://www.freebase.com//m/0jnl5	Washington Capitals	3	0.980078
+msn-2014-03-28-00168	4297	4313	/m/043b_5	https://www.freebase.com//m/043b_5	Quebec Nordiques	3	0.996198
+msn-2014-03-28-00168	4316	4330	/m/027b_p2	https://www.freebase.com//m/027b_p2	Morris Titanic	3	1.000000
+msn-2014-03-28-00168	4333	4339	/m/0j5m6	https://www.freebase.com//m/0j5m6	Sabres	3	0.0
+msn-2014-03-28-00168	4346	4356	/m/02ygmm	https://www.freebase.com//m/02ygmm	Rick Vaive	3	1.000000
+msn-2014-03-28-00168	4358	4365	/m/0jnnx	https://www.freebase.com//m/0jnnx	Canucks	3	0.0
+msn-2014-03-28-00168	4367	4378	/m/0j6tr	https://www.freebase.com//m/0j6tr	Maple Leafs	3	0.0
+msn-2014-03-28-00168	4380	4386	/m/0j5m6	https://www.freebase.com//m/0j5m6	Sabres	3	0.0
+msn-2014-03-28-00168	4392	4410	/m/0jnlm	https://www.freebase.com//m/0jnlm	Chicago Blackhawks	3	0.969975
+msn-2014-03-28-00168	4429	4434	/m/02ygmm	https://www.freebase.com//m/02ygmm	Vaive	3	0.500000
+msn-2014-03-28-00178	47	53	/m/05ksh	https://www.freebase.com//m/05ksh	OTTAWA	3	0.904189
+msn-2014-03-28-00178	82	98	/m/02v9ns	https://www.freebase.com//m/02v9ns	National Defence	3	0.0
+msn-2014-03-28-00178	404	410	/m/01k165	https://www.freebase.com//m/01k165	Harper	3	0.0
+msn-2014-03-28-00178	476	483	/m/02v9ns	https://www.freebase.com//m/02v9ns	Defence	3	0.28
+msn-2014-03-28-00178	642	654	/m/07wpm	https://www.freebase.com//m/07wpm	Conservative	3	0.0
+msn-2014-03-28-00178	704	711	/m/02v9ns	https://www.freebase.com//m/02v9ns	Defence	3	0.28
+msn-2014-03-28-00178	760	774	/m/01k165	https://www.freebase.com//m/01k165	Stephen Harper	3	0.993879
+msn-2014-03-28-00178	799	811	/m/01jjnl	https://www.freebase.com//m/01jjnl	Peter MacKay	3	1.000000
+msn-2014-03-28-00178	847	865	/m/02mchr	https://www.freebase.com//m/02mchr	The Canadian Press	3	0.47
+msn-2014-03-28-00178	950	963	/m/07b3wx	https://www.freebase.com//m/07b3wx	Andrew Leslie	3	0.518519
+msn-2014-03-28-00178	1096	1102	/m/0jdd	https://www.freebase.com//m/0jdd	Afghan	3	0.0
+msn-2014-03-28-00178	1175	1181	/m/07b3wx	https://www.freebase.com//m/07b3wx	Leslie	3	0.14
+msn-2014-03-28-00178	1462	1468	/m/07b3wx	https://www.freebase.com//m/07b3wx	Leslie	3	0.14
+msn-2014-03-28-00178	1495	1513	/m/02mchr	https://www.freebase.com//m/02mchr	The Canadian Press	3	0.47
+msn-2014-03-28-00178	1530	1536	/m/07b3wx	https://www.freebase.com//m/07b3wx	Leslie	3	0.14
+msn-2014-03-28-00178	1616	1623	/m/02v9ns	https://www.freebase.com//m/02v9ns	Defence	3	0.28
+msn-2014-03-28-00178	2057	2068	/m/0jdd	https://www.freebase.com//m/0jdd	Afghanistan	3	0.937086
+msn-2014-03-28-00178	2256	2262	/m/07b3wx	https://www.freebase.com//m/07b3wx	Leslie	3	0.14
+msn-2014-03-28-00178	2741	2744	/m/02v9ns	https://www.freebase.com//m/02v9ns	DND	3	0.0
+msn-2014-03-28-00178	3151	3167	/m/02v9ns	https://www.freebase.com//m/02v9ns	National Defence	3	0.0
+msn-2014-03-28-00178	3236	3242	/m/05ksh	https://www.freebase.com//m/05ksh	Ottawa	3	0.0
+msn-2014-03-28-00178	3598	3621	/m/09sj2p	https://www.freebase.com//m/09sj2p	Prime Minister's Office	3	0.0
+msn-2014-03-28-00178	3689	3696	/m/02v9ns	https://www.freebase.com//m/02v9ns	Defence	3	0.28
+msn-2014-03-28-00178	3768	3774	/m/07b3wx	https://www.freebase.com//m/07b3wx	Leslie	3	0.14
+msn-2014-03-28-00178	4012	4019	/m/02v9ns	https://www.freebase.com//m/02v9ns	Defence	3	0.28
+msn-2014-03-28-00178	4043	4057	/m/0bhqw6	https://www.freebase.com//m/0bhqw6	Treasury Board	3	0.07
+msn-2014-03-28-00178	4149	4165	/m/02v9ns	https://www.freebase.com//m/02v9ns	National Defence	3	0.0
+msn-2014-03-28-00178	4342	4350	/m/0k0y0	https://www.freebase.com//m/0k0y0	Chretien	3	0.0
+msn-2014-03-28-00178	4351	4359	/m/0136kr	https://www.freebase.com//m/0136kr	Liberals	3	0
+msn-2014-03-28-00369	43	46	/m/0f9b7	https://www.freebase.com//m/0f9b7	NDP	3	0.113636
+msn-2014-03-28-00369	164	167	/m/0f9b7	https://www.freebase.com//m/0f9b7	NDP	3	0.113636
+msn-2014-03-28-00369	187	197	/m/04p_z7g	https://www.freebase.com//m/04p_z7g	Don Davies	3	1.000000
+msn-2014-03-28-00369	259	271	/m/028nv5	https://www.freebase.com//m/028nv5	Jason Kenney	3	1.000000
+msn-2014-03-28-00369	370	382	/m/07wpm	https://www.freebase.com//m/07wpm	Conservative	3	0.0
+msn-2014-03-28-00369	499	505	/m/028nv5	https://www.freebase.com//m/028nv5	Kenney	3	0.0
+msn-2014-03-28-00369	589	595	/m/04p_z7g	https://www.freebase.com//m/04p_z7g	Davies	3	0.09
+msn-2014-03-28-00369	673	679	/m/028nv5	https://www.freebase.com//m/028nv5	Kenney	3	0.0
+msn-2014-03-28-00369	1646	1655	/m/0d060g	https://www.freebase.com//m/0d060g	Canadians	3	0
+msn-2014-03-28-00369	1734	1748	/m/02jxk	https://www.freebase.com//m/02jxk	European Union	3	0.0
+msn-2014-03-28-00369	1762	1768	/m/028nv5	https://www.freebase.com//m/028nv5	Kenney	3	0.0
+msn-2014-03-28-00369	2893	2907	/m/09b69	https://www.freebase.com//m/09b69	eastern Europe	3	0.992362
+msn-2014-03-28-00369	2960	2967	/m/03gj2	https://www.freebase.com//m/03gj2	Hungary	3	0.882544
+msn-2014-03-28-00369	3061	3068	/m/03gj2	https://www.freebase.com//m/03gj2	Hungary	3	0.882544
+msn-2014-03-28-00369	3096	3110	/m/01mjq	https://www.freebase.com//m/01mjq	Czech Republic	3	0.925519
+msn-2014-03-28-00369	3195	3201	/m/05qhw	https://www.freebase.com//m/05qhw	Poland	3	0.921774
+msn-2014-03-28-00369	3206	3213	/m/06c1y	https://www.freebase.com//m/06c1y	Romania	3	0.945271
+msn-2014-03-28-00369	3342	3346	/m/01bqks	https://www.freebase.com//m/01bqks	U.S.	3	0
+msn-2014-03-28-00369	3384	3390	/m/0d060g	https://www.freebase.com//m/0d060g	Canada	3	0.952458
+msn-2014-03-28-00369	3434	3436	/m/02j9z	https://www.freebase.com//m/02j9z	EU	3	0.0
+msn-2014-03-28-00369	3486	3492	/m/028nv5	https://www.freebase.com//m/028nv5	Kenney	3	0.0
+msn-2014-03-28-00369	3564	3566	/m/02jxk	https://www.freebase.com//m/02jxk	EU	3	0
+msn-2014-03-28-00369	3599	3605	/m/0d060g	https://www.freebase.com//m/0d060g	Canada	3	0.952458
+msn-2014-03-28-00369	3676	3690	/m/02jxk	https://www.freebase.com//m/02jxk	European Union	3	0.0
+msn-2014-03-28-00369	3701	3707	/m/0dg3n1	https://www.freebase.com//m/0dg3n1	Africa	3	0.0
+msn-2014-03-28-00369	3711	3715	/m/0j0k	https://www.freebase.com//m/0j0k	Asia	3	0.0
+msn-2014-03-28-00369	3958	3966	/m/0d060g	https://www.freebase.com//m/0d060g	Canadian	3	0.731571
+msn-2014-03-28-00369	4114	4122	/m/03pzf	https://www.freebase.com//m/03pzf	Hamilton	3	0.0
+msn-2014-03-28-00369	4124	4127	/m/05kr_	https://www.freebase.com//m/05kr_	Ont	3	0.27
+msn-2014-03-28-00369	4179	4185	/m/0d060g	https://www.freebase.com//m/0d060g	Canada	3	0.952458
+msn-2014-03-28-00369	4520	4540	/m/011kn2	https://www.freebase.com//m/011kn2	University of Ottawa	3	1.000000
+msn-2014-03-28-00369	4547	4555	/m/02vk77f	https://www.freebase.com//m/02vk77f	CBC News	3	0.970499
+msn-2014-03-28-00369	5536	5542	/m/0d060g	https://www.freebase.com//m/0d060g	Canada	3	0.952458
+msn-2014-03-28-00369	5652	5681	/m/01k165	https://www.freebase.com//m/01k165	Prime Minister Stephen Harper	3	0.0
+msn-2014-03-28-00369	5695	5701	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexico	3	0.937897
+msn-2014-03-28-00369	6045	6052	/m/03gj2	https://www.freebase.com//m/03gj2	Hungary	3	0.882544
+msn-2014-03-28-00369	6059	6061	/m/02jxk	https://www.freebase.com//m/02jxk	EU	3	0.14
+msn-2014-03-28-00369	6135	6149	/m/01mjq	https://www.freebase.com//m/01mjq	Czech Republic	3	0.925519
+msn-2014-03-28-00369	6171	6177	/m/028nv5	https://www.freebase.com//m/028nv5	Kenney	3	0.0
+msn-2014-03-28-00369	6339	6346	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexican	3	0.647752
+msn-2014-03-28-00369	6377	6383	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexico	3	0.937897
+msn-2014-03-28-00369	6519	6525	/m/0d060g	https://www.freebase.com//m/0d060g	Canada	3	0.952458
+msn-2014-03-28-00369	6627	6633	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexico	3	0.937897
+msn-2014-03-28-00369	6774	6780	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexico	3	0.937897
+msn-2014-03-28-00369	6908	6914	/m/0b90_r	https://www.freebase.com//m/0b90_r	Mexico	3	0.937897
+msn-2014-03-28-00420	0	6	/m/05pdgbz	https://www.freebase.com//m/05pdgbz	Tumblr	3	1.000000
+msn-2014-03-28-00420	53	59	/m/06w2sn5	https://www.freebase.com//m/06w2sn5	Justin	3	0
+msn-2014-03-28-00420	136	151	/m/0524b41	https://www.freebase.com//m/0524b41	Game of Thrones	3	0.835756
+msn-2014-03-28-00420	170	177	/m/05pdgbz	https://www.freebase.com//m/05pdgbz	Tumblrs	3	0.01
+msn-2014-03-28-00420	292	298	/m/05pdgbz	https://www.freebase.com//m/05pdgbz	tumblr	3	1.000000
+msn-2014-03-28-00420	363	376	/m/06w2sn5	https://www.freebase.com//m/06w2sn5	Justin Bieber	3	1.000000
+msn-2014-03-28-00420	510	515	/m/06w2sn5	https://www.freebase.com//m/06w2sn5	Biebs	3	1.000000
+msn-2014-03-28-00420	620	635	/m/0524b41	https://www.freebase.com//m/0524b41	Game of Thrones	3	0.835756
+msn-2014-03-28-00420	636	642	/m/05pdgbz	https://www.freebase.com//m/05pdgbz	tumblr	3	1.000000
+msn-2014-03-28-00420	803	810	/m/027lnzs	https://www.freebase.com//m/027lnzs	iPhones	3	0.21
+msn-2014-03-28-00420	844	848	/m/08z129	https://www.freebase.com//m/08z129	AT&T	3	0.772768
+msn-2014-03-28-00420	940	955	/m/0524b41	https://www.freebase.com//m/0524b41	Game of Thrones	3	0.835756
+msn-2014-03-28-00420	1103	1118	/m/0524b41	https://www.freebase.com//m/0524b41	Game of Thrones	3	0.835756
+msn-2014-03-28-00420	1142	1157	/m/0524b41	https://www.freebase.com//m/0524b41	Game of Thrones	3	0.835756
+msn-2014-03-28-00422	22	28	/m/021w8j	https://www.freebase.com//m/021w8j	garda�	3	1.000000
+msn-2014-03-28-00422	43	50	/m/0ccvd	https://www.freebase.com//m/0ccvd	Donegal	3	0
+msn-2014-03-28-00422	131	139	/m/03x9rv	https://www.freebase.com//m/03x9rv	Bundoran	3	0.21
+msn-2014-03-28-00422	143	153	/m/0ccvd	https://www.freebase.com//m/0ccvd	Co Donegal	3	0.68
+msn-2014-03-28-00422	173	179	/m/021w8j	https://www.freebase.com//m/021w8j	GARDA�	3	1.000000
+msn-2014-03-28-00422	255	263	/m/03x9rv	https://www.freebase.com//m/03x9rv	Bundoran	3	0.21
+msn-2014-03-28-00422	265	275	/m/0ccvd	https://www.freebase.com//m/0ccvd	Co Donegal	3	0.68
+msn-2014-03-28-00422	388	396	/m/03x9rv	https://www.freebase.com//m/03x9rv	Bundoran	3	0.21
+msn-2014-03-28-00422	551	559	/m/03x9rv	https://www.freebase.com//m/03x9rv	Bundoran	3	0.21
+msn-2014-03-28-00422	634	642	/m/03x9rv	https://www.freebase.com//m/03x9rv	Bundoran	3	0.21
+msn-2014-03-28-00422	671	681	/m/0dwdg	https://www.freebase.com//m/0dwdg	Co Leitrim	3	0.00
+msn-2014-03-28-00422	873	880	/m/021w8j	https://www.freebase.com//m/021w8j	Garda�	3	0.59
+msn-2014-03-28-00422	938	946	/m/03x9rv	https://www.freebase.com//m/03x9rv	Bundoran	3	0.21
+msn-2014-03-28-00422	1003	1015	/m/03x9pq	https://www.freebase.com//m/03x9pq	Ballyshannon	3	0.11
+msn-2014-03-28-00422	1016	1029	/m/021w8j	https://www.freebase.com//m/021w8j	Garda Station	3	0
+msn-2014-03-28-00432	7	13	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	85	91	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	127	139	/m/016rwt	https://www.freebase.com//m/016rwt	Sonia Gandhi	3	1.000000
+msn-2014-03-28-00432	146	158	/m/02qs3y	https://www.freebase.com//m/02qs3y	J.J hospital	3	1.000000
+msn-2014-03-28-00432	162	168	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	340	346	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	513	524	/m/055vr	https://www.freebase.com//m/055vr	Maharashtra	3	0.981905
+msn-2014-03-28-00432	525	539	/m/01n84j	https://www.freebase.com//m/01n84j	Chief Minister	3	0.0
+msn-2014-03-28-00432	540	546	/m/02w3085	https://www.freebase.com//m/02w3085	Chavan	3	0
+msn-2014-03-28-00432	557	571	/m/0gtb4r	https://www.freebase.com//m/0gtb4r	Manmohan Singh	3	0.975703
+msn-2014-03-28-00432	576	584	/m/0135dr	https://www.freebase.com//m/0135dr	Congress	3	0.48
+msn-2014-03-28-00432	591	603	/m/016rwt	https://www.freebase.com//m/016rwt	Sonia Gandhi	3	1.000000
+msn-2014-03-28-00432	610	616	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	621	639	/m/0gnk3s	https://www.freebase.com//m/0gnk3s	Shiv Shankar Menon	3	1.000000
+msn-2014-03-28-00432	660	665	/m/016rwt	https://www.freebase.com//m/016rwt	Sonia	3	0.0
+msn-2014-03-28-00432	735	747	/m/051x08s	https://www.freebase.com//m/051x08s	Rakesh Maria	3	1.000000
+msn-2014-03-28-00432	848	856	/m/05sb1	https://www.freebase.com//m/05sb1	Pakistan	3	0.939727
+msn-2014-03-28-00432	1080	1093	/m/02rd0f1	https://www.freebase.com//m/02rd0f1	Zaveri Bazaar	3	1.000000
+msn-2014-03-28-00432	1199	1211	/m/051x08s	https://www.freebase.com//m/051x08s	Rakesh Maria	3	1.000000
+msn-2014-03-28-00432	1219	1230	/m/055vr	https://www.freebase.com//m/055vr	Maharashtra	3	0.981905
+msn-2014-03-28-00432	1246	1252	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	1304	1310	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	1336	1348	/m/051x08s	https://www.freebase.com//m/051x08s	Rakesh Maria	3	1.000000
+msn-2014-03-28-00432	1376	1381	/m/02r41j	https://www.freebase.com//m/02r41j	Dadar	3	0.871622
+msn-2014-03-28-00432	1449	1455	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.0
+msn-2014-03-28-00432	1568	1574	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	1703	1709	/m/01rsdq	https://www.freebase.com//m/01rsdq	Advani	3	0.0
+msn-2014-03-28-00432	1717	1733	/m/0tj9	https://www.freebase.com//m/0tj9	Amitabh Bachchan	3	1.000000
+msn-2014-03-28-00432	1834	1840	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	1862	1879	/m/04gkq_m	https://www.freebase.com//m/04gkq_m	Indian Mujahideen	3	1.000000
+msn-2014-03-28-00432	1943	1949	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	1993	1999	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.0
+msn-2014-03-28-00432	2131	2133	/m/07ssc	https://www.freebase.com//m/07ssc	UK	3	0.0
+msn-2014-03-28-00432	2134	2140	/m/0h06p_	https://www.freebase.com//m/0h06p_	Bansal	3	0
+msn-2014-03-28-00432	2394	2400	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	2514	2520	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	2536	2550	/m/02pbls4	https://www.freebase.com//m/02pbls4	Home Secretary	3	0
+msn-2014-03-28-00432	2573	2595	/m/07d5g8	https://www.freebase.com//m/07d5g8	Maharashtra government	3	0.0
+msn-2014-03-28-00432	2704	2712	/m/0135dr	https://www.freebase.com//m/0135dr	Congress	3	0.48
+msn-2014-03-28-00432	2719	2731	/m/016rwt	https://www.freebase.com//m/016rwt	Sonia Gandhi	3	1.000000
+msn-2014-03-28-00432	2748	2762	/m/0gtb4r	https://www.freebase.com//m/0gtb4r	Manmohan Singh	3	0.975703
+msn-2014-03-28-00432	2779	2785	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	2863	2869	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	3000	3029	/m/0gtb4r	https://www.freebase.com//m/0gtb4r	Prime Minister Manmohan Singh	3	0.0
+msn-2014-03-28-00432	3105	3111	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	3127	3133	/m/01rsdq	https://www.freebase.com//m/01rsdq	Advani	3	0.0
+msn-2014-03-28-00432	3142	3145	/m/06r5sl	https://www.freebase.com//m/06r5sl	ISI	3	0.566910
+msn-2014-03-28-00432	3226	3234	/m/05sb1	https://www.freebase.com//m/05sb1	Pakistan	3	0.939727
+msn-2014-03-28-00432	3253	3262	/m/01rsdq	https://www.freebase.com//m/01rsdq	LK Advani	3	1.000000
+msn-2014-03-28-00432	3286	3294	/m/05sb1	https://www.freebase.com//m/05sb1	Pakistan	3	0.939727
+msn-2014-03-28-00432	3373	3379	/m/01rsdq	https://www.freebase.com//m/01rsdq	Advani	3	0.0
+msn-2014-03-28-00432	3386	3392	/m/04vmp	https://www.freebase.com//m/04vmp	Mumbai	3	0.970611
+msn-2014-03-28-00432	3421	3429	/m/0pstz	https://www.freebase.com//m/0pstz	Vajpayee	3	0.36
+msn-2014-03-28-00432	3466	3474	/m/05sb1	https://www.freebase.com//m/05sb1	Pakistan	3	0.939727
+msn-2014-03-28-00432	3482	3488	/m/01rsdq	https://www.freebase.com//m/01rsdq	Advani	3	0.0
+msn-2014-03-28-00458	0	2	/m/07ssc	https://www.freebase.com//m/07ssc	UK	3	0.0
+msn-2014-03-28-00458	3	8	/m/0d1_f	https://www.freebase.com//m/0d1_f	Queen	3	0
+msn-2014-03-28-00458	83	89	/m/04jpl	https://www.freebase.com//m/04jpl	London	3	0.962401
+msn-2014-03-28-00458	103	121	/m/0d1_f	https://www.freebase.com//m/0d1_f	Queen Elizabeth II	3	0.995765
+msn-2014-03-28-00458	262	274	/m/05vz3zq	https://www.freebase.com//m/05vz3zq	Soviet Union	3	0.972897
+msn-2014-03-28-00458	310	312	/m/07ssc	https://www.freebase.com//m/07ssc	UK	3	0.0
+msn-2014-03-28-00458	420	427	/m/07ssc	https://www.freebase.com//m/07ssc	Britain	3	0.0
+msn-2014-03-28-00458	665	672	/m/07ssc	https://www.freebase.com//m/07ssc	Britain	3	0.0
+msn-2014-03-28-00458	1094	1108	/m/0cm83	https://www.freebase.com//m/0cm83	King George VI	3	0.998004
+msn-2014-03-28-00458	1533	1549	/m/05vz3zq	https://www.freebase.com//m/05vz3zq	the Soviet Union	3	0.46
+msn-2014-03-28-00458	1558	1569	/m/084b2	https://www.freebase.com//m/084b2	Warsaw Pact	3	1.000000
+msn-2014-03-28-00458	1612	1618	/m/07ssc	https://www.freebase.com//m/07ssc	the UK	3	0.48
+msn-2014-03-28-00458	1645	1649	/m/059dn	https://www.freebase.com//m/059dn	NATO	3	0.992040
+msn-2014-03-28-00458	1778	1780	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+msn-2014-03-28-00458	1781	1804	/m/06c0j	https://www.freebase.com//m/06c0j	President Ronald Reagan	3	0.0
+msn-2014-03-28-00458	1815	1831	/m/05vz3zq	https://www.freebase.com//m/05vz3zq	the Soviet Union	3	0.46
+msn-2014-03-28-00458	1866	1868	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+msn-2014-03-28-00458	1896	1902	/m/02j9z	https://www.freebase.com//m/02j9z	Europe	3	0.979362
+msn-2014-03-28-00458	1930	1939	/m/0d1_f	https://www.freebase.com//m/0d1_f	the Queen	3	0.22
+msn-2014-03-28-00458	2556	2572	/m/05vz3zq	https://www.freebase.com//m/05vz3zq	The Soviet Union	3	0.46
+msn-2014-03-28-00458	2581	2583	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+msn-2014-03-28-00458	2735	2744	/m/011_9x	https://www.freebase.com//m/011_9x	World War	3	0
+msn-2014-03-28-00490	0	2	/m/01hpnh	https://www.freebase.com//m/01hpnh	UP	3	0
+msn-2014-03-28-00490	97	102	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00490	359	372	/m/01hpnh	https://www.freebase.com//m/01hpnh	Uttar Pradesh	3	0.991224
+msn-2014-03-28-00490	836	849	/m/01hpnh	https://www.freebase.com//m/01hpnh	Uttar Pradesh	3	0.991224
+msn-2014-03-28-00490	878	883	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00490	930	938	/m/0135dr	https://www.freebase.com//m/0135dr	Congress	3	0.48
+msn-2014-03-28-00490	1234	1242	/m/0135dr	https://www.freebase.com//m/0135dr	Congress	3	0
+msn-2014-03-28-00490	1385	1390	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00490	1468	1481	/m/01hpnh	https://www.freebase.com//m/01hpnh	Uttar Pradesh	3	0.991224
+msn-2014-03-28-00490	1600	1608	/m/0135dr	https://www.freebase.com//m/0135dr	Congress	3	0.48
+msn-2014-03-28-00490	1661	1669	/m/0135dr	https://www.freebase.com//m/0135dr	Congress	3	0.48
+msn-2014-03-28-00490	1692	1694	/m/01hpnh	https://www.freebase.com//m/01hpnh	UP	3	0
+msn-2014-03-28-00490	1698	1710	/m/01sd6z	https://www.freebase.com//m/01sd6z	Rahul Gandhi	3	1.000000
+msn-2014-03-28-00490	1755	1761	/m/01sd6z	https://www.freebase.com//m/01sd6z	Gandhi	3	0.24
+msn-2014-03-28-00490	1782	1784	/m/01hpnh	https://www.freebase.com//m/01hpnh	UP	3	0
+msn-2014-03-28-00498	22	36	/m/05c66b	https://www.freebase.com//m/05c66b	Sin Chew Daily	3	1.000000
+msn-2014-03-28-00498	143	151	/m/01qb_x	https://www.freebase.com//m/01qb_x	Kelantan	3	0.881313
+msn-2014-03-28-00498	153	163	/m/0211jc	https://www.freebase.com//m/0211jc	Terengganu	3	0.910426
+msn-2014-03-28-00498	168	174	/m/0m1zt	https://www.freebase.com//m/0m1zt	Pahang	3	0.957780
+msn-2014-03-28-00498	364	369	/m/01jng9	https://www.freebase.com//m/01jng9	Johor	3	0.970370
+msn-2014-03-28-00498	374	380	/m/0g6xq	https://www.freebase.com//m/0g6xq	Penang	3	0.975474
+msn-2014-03-28-00498	490	498	/m/01qb_x	https://www.freebase.com//m/01qb_x	Kelantan	3	0.881313
+msn-2014-03-28-00498	500	510	/m/0211jc	https://www.freebase.com//m/0211jc	Terengganu	3	0.910426
+msn-2014-03-28-00498	515	521	/m/0m1zt	https://www.freebase.com//m/0m1zt	Pahang	3	0.957780
+msn-2014-03-28-00498	711	716	/m/01jng9	https://www.freebase.com//m/01jng9	Johor	3	0.970370
+msn-2014-03-28-00498	721	727	/m/0g6xq	https://www.freebase.com//m/0g6xq	Penang	3	0.975474
+msn-2014-03-28-00498	890	898	/m/01qb_x	https://www.freebase.com//m/01qb_x	Kelantan	3	0.881313
+msn-2014-03-28-00498	900	910	/m/0211jc	https://www.freebase.com//m/0211jc	Terengganu	3	0.910426
+msn-2014-03-28-00498	915	921	/m/0m1zt	https://www.freebase.com//m/0m1zt	Pahang	3	0.957780
+msn-2014-03-28-00498	1002	1010	/m/01qb_x	https://www.freebase.com//m/01qb_x	Kelantan	3	0.881313
+msn-2014-03-28-00498	1695	1698	/m/0d05l6	https://www.freebase.com//m/0d05l6	God	3	0.0
+msn-2014-03-28-00498	1864	1871	/m/03721b	https://www.freebase.com//m/03721b	Kuantan	3	1.000000
+msn-2014-03-28-00498	2030	2036	/m/0m1zt	https://www.freebase.com//m/0m1zt	Pahang	3	0.957780
+msn-2014-03-28-00498	2062	2074	/m/0glrz6q	https://www.freebase.com//m/0glrz6q	Adnan Yaakob	3	1.000000
+msn-2014-03-28-00498	2141	2156	/m/05v8c	https://www.freebase.com//m/05v8c	the Philippines	3	0.23
+msn-2014-03-28-00498	2161	2168	/m/01crd5	https://www.freebase.com//m/01crd5	Vietnam	3	0.915999
+msn-2014-03-28-00498	3627	3634	/m/03721b	https://www.freebase.com//m/03721b	Kuantan	3	1.000000
+msn-2014-03-28-00498	3795	3802	/m/03721b	https://www.freebase.com//m/03721b	Kuantan	3	1.000000
+msn-2014-03-28-00498	4225	4234	/m/09pmkv	https://www.freebase.com//m/09pmkv	Malaysian	3	0.0
+msn-2014-03-28-00534	0	2	/m/0ctw_b	https://www.freebase.com//m/0ctw_b	NZ	3	0
+msn-2014-03-28-00534	5	11	/m/0jdd	https://www.freebase.com//m/0jdd	Afghan	3	0
+msn-2014-03-28-00534	48	61	/m/05c6g	https://www.freebase.com//m/05c6g	Defence Force	3	0.23
+msn-2014-03-28-00534	101	112	/m/0jdd	https://www.freebase.com//m/0jdd	Afghanistan	3	0.937086
+msn-2014-03-28-00534	528	535	/m/0403l6g	https://www.freebase.com//m/0403l6g	Bamiyan	3	0.03
+msn-2014-03-28-00534	660	682	/m/03p4f_	https://www.freebase.com//m/03p4f_	The New Zealand Herald	3	0.14
+msn-2014-03-28-00534	737	744	/m/0403l6g	https://www.freebase.com//m/0403l6g	Bamiyan	3	0.03
+msn-2014-03-28-00534	824	830	/m/0jdd	https://www.freebase.com//m/0jdd	Afghan	3	0.0
+msn-2014-03-28-00534	1027	1040	/m/05c6g	https://www.freebase.com//m/05c6g	Defence Force	3	0.23
+msn-2014-03-28-00534	1143	1154	/m/0jdd	https://www.freebase.com//m/0jdd	Afghanistan	3	0.937086
+msn-2014-03-28-00534	1246	1253	/m/0403l6g	https://www.freebase.com//m/0403l6g	Bamiyan	3	0.03
+msn-2014-03-28-00534	1563	1576	/m/05c6g	https://www.freebase.com//m/05c6g	Defence Force	3	0.23
+msn-2014-03-28-00534	1605	1617	/m/013_5c	https://www.freebase.com//m/013_5c	Labour Party	3	0.081130
+msn-2014-03-28-00534	1636	1654	/m/04yh94s	https://www.freebase.com//m/04yh94s	Iain Lees-Galloway	3	0.0
+msn-2014-03-28-00534	1763	1779	/m/07zw39	https://www.freebase.com//m/07zw39	Jonathan Coleman	3	0.409836
+msn-2014-03-28-00534	1812	1825	/m/05c6g	https://www.freebase.com//m/05c6g	Defence Force	3	0.23
+msn-2014-03-28-00534	2002	2008	/m/013_5c	https://www.freebase.com//m/013_5c	Labour	3	0
+msn-2014-03-28-00534	2091	2097	/m/013_5c	https://www.freebase.com//m/013_5c	Labour	3	0
+msn-2014-03-28-00534	2145	2156	/m/0jdd	https://www.freebase.com//m/0jdd	Afghanistan	3	0.937086
+msn-2014-03-28-00534	2158	2169	/m/0ctw_b	https://www.freebase.com//m/0ctw_b	New Zealand	3	0.867972
+msn-2014-03-28-00534	2181	2192	/m/0jdd	https://www.freebase.com//m/0jdd	Afghanistan	3	0.937086
+msn-2014-03-28-00581	0	10	/m/0czkbt	https://www.freebase.com//m/0czkbt	Lily Allen	3	1.000000
+msn-2014-03-28-00581	46	56	/m/0czkbt	https://www.freebase.com//m/0czkbt	Lily Allen	3	1.000000
+msn-2014-03-28-00581	217	227	/m/0czkbt	https://www.freebase.com//m/0czkbt	Lily Allen	3	1.000000
+msn-2014-03-28-00581	277	282	/m/07jmsb	https://www.freebase.com//m/07jmsb	Smile	3	0
+msn-2014-03-28-00581	542	546	/m/0czkbt	https://www.freebase.com//m/0czkbt	Lily	3	0.0
+msn-2014-03-28-00581	690	692	/m/07ssc	https://www.freebase.com//m/07ssc	UK	3	0.0
+msn-2014-03-28-00581	702	715	/m/011hc2	https://www.freebase.com//m/011hc2	ELLE magazine	3	1.000000
+msn-2014-03-28-00581	1177	1181	/m/0czkbt	https://www.freebase.com//m/0czkbt	Lily	3	0.0
+msn-2014-03-28-00581	1786	1794	/m/01mpq7s	https://www.freebase.com//m/01mpq7s	Beyonc�	3	0.10
+msn-2014-03-28-00581	1815	1827	/m/0glrzzq	https://www.freebase.com//m/0glrzzq	Pretty Hurts	3	0
+msn-2014-03-28-00594	0	10	/m/0chghy	https://www.freebase.com//m/0chghy	Australian	3	0.0
+msn-2014-03-28-00594	25	32	/m/06hrk	https://www.freebase.com//m/06hrk	Murdoch	3	0.0
+msn-2014-03-28-00594	47	54	/m/0d05w3	https://www.freebase.com//m/0d05w3	Chinese	3	0.317503
+msn-2014-03-28-00594	72	82	/m/0chghy	https://www.freebase.com//m/0chghy	Australian	3	0.0
+msn-2014-03-28-00594	95	107	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Clive Palmer	3	0.16
+msn-2014-03-28-00594	141	155	/m/06hrk	https://www.freebase.com//m/06hrk	Rupert Murdoch	3	1.000000
+msn-2014-03-28-00594	236	243	/m/0d05w3	https://www.freebase.com//m/0d05w3	Chinese	3	0.317503
+msn-2014-03-28-00594	250	256	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Palmer	3	0.23
+msn-2014-03-28-00594	342	351	/m/0chghy	https://www.freebase.com//m/0chghy	Australia	3	0.910150
+msn-2014-03-28-00594	502	509	/m/06hrk	https://www.freebase.com//m/06hrk	Murdoch	3	0.37
+msn-2014-03-28-00594	525	535	/m/0chghy	https://www.freebase.com//m/0chghy	Australian	3	0.0
+msn-2014-03-28-00594	785	804	/m/0t_djzg	https://www.freebase.com//m/0t_djzg	Palmer United Party	3	1.000000
+msn-2014-03-28-00594	859	869	/m/0g39h	https://www.freebase.com//m/0g39h	Queensland	3	0.917870
+msn-2014-03-28-00594	944	952	/m/0dp90	https://www.freebase.com//m/0dp90	Canberra	3	0.922558
+msn-2014-03-28-00594	992	1014	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Clive Frederick Palmer	3	0.47
+msn-2014-03-28-00594	1057	1060	/m/06vxc9	https://www.freebase.com//m/06vxc9	G20	3	0.03
+msn-2014-03-28-00594	1255	1266	/m/02pr80	https://www.freebase.com//m/02pr80	Tony Abbott	3	0.924528
+msn-2014-03-28-00594	1326	1332	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Palmer	3	0.23
+msn-2014-03-28-00594	1349	1355	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Palmer	3	0.23
+msn-2014-03-28-00594	1492	1498	/m/02pr80	https://www.freebase.com//m/02pr80	Abbott	3	0.20
+msn-2014-03-28-00594	1501	1527	/m/04p4r	https://www.freebase.com//m/04p4r	Liberal-National coalition	3	0
+msn-2014-03-28-00594	1633	1643	/m/0chghy	https://www.freebase.com//m/0chghy	Australian	3	0.0
+msn-2014-03-28-00594	1649	1656	/m/06hrk	https://www.freebase.com//m/06hrk	Murdoch	3	0.0
+msn-2014-03-28-00594	1664	1666	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+msn-2014-03-28-00594	1761	1768	/m/06hrk	https://www.freebase.com//m/06hrk	Murdoch	3	0.0
+msn-2014-03-28-00594	1817	1826	/m/0chghy	https://www.freebase.com//m/0chghy	Australia	3	0.910150
+msn-2014-03-28-00594	1860	1873	/m/01tm9w	https://www.freebase.com//m/01tm9w	Supreme Court	3	0
+msn-2014-03-28-00594	1884	1901	/m/02h758	https://www.freebase.com//m/02h758	the Seven Network	3	0.66
+msn-2014-03-28-00594	2028	2044	/m/017vb_	https://www.freebase.com//m/017vb_	the Nine Network	3	0.65
+msn-2014-03-28-00594	2046	2052	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Palmer	3	0.23
+msn-2014-03-28-00594	2085	2092	/m/06hrk	https://www.freebase.com//m/06hrk	Murdoch	3	0.37
+msn-2014-03-28-00594	2110	2120	/m/04qdky	https://www.freebase.com//m/04qdky	Wendi Deng	3	1.000000
+msn-2014-03-28-00594	2134	2148	/m/06hrk	https://www.freebase.com//m/06hrk	Rupert Murdoch	3	1.000000
+msn-2014-03-28-00594	2156	2166	/m/04qdky	https://www.freebase.com//m/04qdky	Wendi Deng	3	1.000000
+msn-2014-03-28-00594	2172	2179	/m/0d05w3	https://www.freebase.com//m/0d05w3	Chinese	3	0.317503
+msn-2014-03-28-00594	2227	2233	/m/07kdvrf	https://www.freebase.com//m/07kdvrf	Palmer	3	0.23
+msn-2014-03-28-00594	2331	2337	/m/06hrk	https://www.freebase.com//m/06hrk	Rupert	3	0.0
+msn-2014-03-28-00594	2370	2377	/m/0d05w3	https://www.freebase.com//m/0d05w3	Chinese	3	0.317503
+msn-2014-03-28-00594	2411	2425	/m/03q96t	https://www.freebase.com//m/03q96t	southern China	3	0.05
+msn-2014-03-28-00594	2469	2479	/m/04qdky	https://www.freebase.com//m/04qdky	Wendi Deng	3	1.000000
+msn-2014-03-28-00594	2485	2492	/m/0d05w3	https://www.freebase.com//m/0d05w3	Chinese	3	0.317503
+msn-2014-03-28-00594	2512	2518	/m/06hrk	https://www.freebase.com//m/06hrk	Rupert	3	0.0
+msn-2014-03-28-00594	2565	2572	/m/06hrk	https://www.freebase.com//m/06hrk	Murdoch	3	0.0
+msn-2014-03-28-00594	2591	2601	/m/0chghy	https://www.freebase.com//m/0chghy	Australian	3	0.0
+msn-2014-03-28-00594	2653	2672	/m/0t_djzg	https://www.freebase.com//m/0t_djzg	Palmer United Party	3	1.000000
+msn-2014-03-28-00617	0	9	/m/0chghy	https://www.freebase.com//m/0chghy	Australia	3	0.910150
+msn-2014-03-28-00617	40	49	/m/0chghy	https://www.freebase.com//m/0chghy	Australia	3	0.910150
+msn-2014-03-28-00617	117	127	/m/0m9m	https://www.freebase.com//m/0m9m	Ashes Test	3	0.18
+msn-2014-03-28-00617	136	143	/m/02jx1	https://www.freebase.com//m/02jx1	England	3	0.844164
+msn-2014-03-28-00617	147	155	/m/0mgp	https://www.freebase.com//m/0mgp	Adelaide	3	0.854916
+msn-2014-03-28-00617	168	182	/m/03mrdf	https://www.freebase.com//m/03mrdf	Michael Clarke	3	0.720867
+msn-2014-03-28-00617	207	218	/m/08brfg	https://www.freebase.com//m/08brfg	Brad Haddin	3	1.000000
+msn-2014-03-28-00617	296	307	/m/04134b2	https://www.freebase.com//m/04134b2	Ryan Harris	3	0.707317
+msn-2014-03-28-00617	331	342	/m/0gy1ghm	https://www.freebase.com//m/0gy1ghm	Nathan Lyon	3	0.857143
+msn-2014-03-28-00617	351	366	/m/020wyp	https://www.freebase.com//m/020wyp	The Australians	3	0.52
+msn-2014-03-28-00617	403	415	/m/0b7p20	https://www.freebase.com//m/0b7p20	Stuart Broad	3	1.000000
+msn-2014-03-28-00617	484	491	/m/038zh6	https://www.freebase.com//m/038zh6	England	3	0.22
+msn-2014-03-28-00618	0	6	/m/03n07_	https://www.freebase.com//m/03n07_	Tikolo	3	0.0
+msn-2014-03-28-00618	23	28	/m/0cy767	https://www.freebase.com//m/0cy767	Brown	3	0.22
+msn-2014-03-28-00618	32	37	/m/041q38	https://www.freebase.com//m/041q38	Kenya	3	0.38
+msn-2014-03-28-00618	52	59	/m/03mq1b	https://www.freebase.com//m/03mq1b	skipper	3	0
+msn-2014-03-28-00618	60	72	/m/03n07_	https://www.freebase.com//m/03n07_	Steve Tikolo	3	1.000000
+msn-2014-03-28-00618	91	96	/m/041q38	https://www.freebase.com//m/041q38	Kenya	3	0.38
+msn-2014-03-28-00618	132	143	/m/0cy767	https://www.freebase.com//m/0cy767	Robin Brown	3	0.416667
+msn-2014-03-28-00618	212	215	/m/021q23	https://www.freebase.com//m/021q23	ICC	3	0.0
+msn-2014-03-28-00618	248	258	/m/0162b	https://www.freebase.com//m/0162b	Bangladesh	3	0.918958
+msn-2014-03-28-00618	412	419	/m/03mq1b	https://www.freebase.com//m/03mq1b	skipper	3	0
+msn-2014-03-28-00618	420	433	/m/08p8mg	https://www.freebase.com//m/08p8mg	Collins Obuya	3	1.000000
+msn-2014-03-28-00618	438	444	/m/03n07_	https://www.freebase.com//m/03n07_	Tikolo	3	0.0
+msn-2014-03-28-00618	477	483	/m/03n07_	https://www.freebase.com//m/03n07_	Tikolo	3	0.0
+msn-2014-03-28-00618	578	583	/m/08p8mg	https://www.freebase.com//m/08p8mg	Obuya	3	0.0
+msn-2014-03-28-00618	681	694	/m/0271jcb	https://www.freebase.com//m/0271jcb	Cricket Kenya	3	0.909091
+msn-2014-03-28-00618	755	766	/m/04n3zfq	https://www.freebase.com//m/04n3zfq	Rakep Patel	3	1.000000
+msn-2014-03-28-00618	790	797	/m/03mq1b	https://www.freebase.com//m/03mq1b	captain	3	0
+msn-2014-03-28-00618	802	807	/m/041q38	https://www.freebase.com//m/041q38	Kenya	3	0.38
+msn-2014-03-28-00618	851	856	/m/041q38	https://www.freebase.com//m/041q38	Kenya	3	0.38
+msn-2014-03-28-00618	918	923	/m/01f08r	https://www.freebase.com//m/01f08r	Dubai	3	0.949248
+msn-2014-03-28-00618	968	979	/m/076tnc	https://www.freebase.com//m/076tnc	Afghanistan	3	0.32
+msn-2014-03-28-00618	987	1007	/m/0fsn09	https://www.freebase.com//m/0fsn09	World Cricket League	3	0.941176
+msn-2014-03-28-00618	1046	1055	/m/021vk	https://www.freebase.com//m/021vk	World Cup	3	0
+msn-2014-03-28-00618	1066	1075	/m/0chghy	https://www.freebase.com//m/0chghy	Australia	3	0.910150
+msn-2014-03-28-00618	1080	1091	/m/0ctw_b	https://www.freebase.com//m/0ctw_b	New Zealand	3	0.867972
+msn-2014-03-28-00618	1101	1106	/m/041q38	https://www.freebase.com//m/041q38	Kenya	3	0.38
+msn-2014-03-28-00618	1149	1158	/m/021vk	https://www.freebase.com//m/021vk	World Cup	3	0
+msn-2014-03-28-00618	1193	1204	/m/0ctw_b	https://www.freebase.com//m/0ctw_b	New Zealand	3	0.867972
+msn-2014-03-28-00618	1257	1268	/m/076tnc	https://www.freebase.com//m/076tnc	Afghanistan	3	0.32
+msn-2014-03-28-00618	1270	1277	/m/06wrz5	https://www.freebase.com//m/06wrz5	Ireland	3	0.15
+msn-2014-03-28-00619	0	5	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00619	14	21	/m/052nc4	https://www.freebase.com//m/052nc4	Olympic	3	0.32
+msn-2014-03-28-00619	58	84	/m/052nc4	https://www.freebase.com//m/052nc4	Indian Olympic Association	3	1.000000
+msn-2014-03-28-00619	266	269	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	281	290	/m/0dlv0	https://www.freebase.com//m/0dlv0	New Delhi	3	0.960486
+msn-2014-03-28-00619	630	648	/m/09rt3	https://www.freebase.com//m/09rt3	Commonwealth Games	3	0.756770
+msn-2014-03-28-00619	652	657	/m/0dlv0	https://www.freebase.com//m/0dlv0	Delhi	3	0.28
+msn-2014-03-28-00619	666	669	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	736	767	/m/03xcc	https://www.freebase.com//m/03xcc	International Olympic Committee	3	1.000000
+msn-2014-03-28-00619	769	772	/m/03xcc	https://www.freebase.com//m/03xcc	IOC	3	0.935849
+msn-2014-03-28-00619	814	820	/m/03rk0	https://www.freebase.com//m/03rk0	Indian	3	0.0
+msn-2014-03-28-00619	927	930	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	1222	1225	/m/03xcc	https://www.freebase.com//m/03xcc	IOC	3	0.935849
+msn-2014-03-28-00619	1244	1247	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	1394	1397	/m/03xcc	https://www.freebase.com//m/03xcc	IOC	3	0.935849
+msn-2014-03-28-00619	1412	1418	/m/03rk0	https://www.freebase.com//m/03rk0	Indian	3	0.0
+msn-2014-03-28-00619	1595	1601	/m/03rk0	https://www.freebase.com//m/03rk0	Indian	3	0.0
+msn-2014-03-28-00619	1618	1632	/m/05mvxqc	https://www.freebase.com//m/05mvxqc	Jitendra Singh	3	0.571429
+msn-2014-03-28-00619	1646	1649	/m/03xcc	https://www.freebase.com//m/03xcc	IOC	3	0.935849
+msn-2014-03-28-00619	1715	1718	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	1768	1771	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	1851	1854	/m/03xcc	https://www.freebase.com//m/03xcc	IOC	3	0.935849
+msn-2014-03-28-00619	2019	2024	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00619	2136	2139	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	2162	2167	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00619	2269	2275	/m/04swd	https://www.freebase.com//m/04swd	Moscow	3	0.967187
+msn-2014-03-28-00619	2338	2352	/m/0gftpr	https://www.freebase.com//m/0gftpr	Abhinav Bindra	3	1.000000
+msn-2014-03-28-00619	2362	2368	/m/0gftpr	https://www.freebase.com//m/0gftpr	Bindra	3	0.0
+msn-2014-03-28-00619	2416	2422	/m/03rk0	https://www.freebase.com//m/03rk0	Indian	3	0.0
+msn-2014-03-28-00619	2452	2467	/m/031mcp	https://www.freebase.com//m/031mcp	Mahesh Bhupathi	3	1.000000
+msn-2014-03-28-00619	2476	2486	/m/0dt7lz	https://www.freebase.com//m/0dt7lz	Shiv Kapur	3	1.000000
+msn-2014-03-28-00619	2499	2511	/m/0dlkm7l	https://www.freebase.com//m/0dlkm7l	Ronjan Sodhi	3	1.000000
+msn-2014-03-28-00619	2527	2530	/m/052nc4	https://www.freebase.com//m/052nc4	IOA	3	0.130435
+msn-2014-03-28-00619	2532	2538	/m/0gftpr	https://www.freebase.com//m/0gftpr	Bindra	3	0.0
+msn-2014-03-28-00619	2556	2560	/m/0f2yw	https://www.freebase.com//m/0f2yw	Doha	3	0.910875
+msn-2014-03-28-00619	2627	2632	/m/03rk0	https://www.freebase.com//m/03rk0	India	3	0.961774
+msn-2014-03-28-00629	0	2	/m/09c7w0	https://www.freebase.com//m/09c7w0	US	3	0.0
+msn-2014-03-28-00629	27	32	/m/06vbd	https://www.freebase.com//m/06vbd	Syria	3	0.918459
+msn-2014-03-28-00629	56	61	/m/06vbd	https://www.freebase.com//m/06vbd	Syria	3	0.918459
+msn-2014-03-28-00629	186	190	/m/0k9qf	https://www.freebase.com//m/0k9qf	Homs	3	0.979814
+msn-2014-03-28-00629	200	210	/m/0rh6k	https://www.freebase.com//m/0rh6k	Washington	3	0
+msn-2014-03-28-00629	245	256	/m/06mzp	https://www.freebase.com//m/06mzp	Switzerland	3	0.940143
+msn-2014-03-28-00629	281	296	/m/02l9kb	https://www.freebase.com//m/02l9kb	Lakhdar Brahimi	3	1.000000
+msn-2014-03-28-00629	365	371	/m/03902	https://www.freebase.com//m/03902	Geneva	3	0.0
+msn-2014-03-28-00629	410	416	/m/06bnz	https://www.freebase.com//m/06bnz	Russia	3	0.946375
+msn-2014-03-28-00629	558	562	/m/0k9qf	https://www.freebase.com//m/0k9qf	Homs	3	0.979814
+msn-2014-03-28-00629	674	678	/m/0k9qf	https://www.freebase.com//m/0k9qf	Homs	3	0.979814
+msn-2014-03-28-00629	687	689	/m/07t65	https://www.freebase.com//m/07t65	UN	3	0.0
+msn-2014-03-28-00629	1081	1083	/m/07t65	https://www.freebase.com//m/07t65	UN	3	0.0
+msn-2014-03-28-00629	1211	1231	/m/07vsl	https://www.freebase.com//m/07vsl	The State Department	3	0.53
+msn-2014-03-28-00629	1237	1247	/m/0rh6k	https://www.freebase.com//m/0rh6k	Washington	3	0
+msn-2014-03-28-00629	1257	1262	/m/06vbd	https://www.freebase.com//m/06vbd	Syria	3	0.918459
+msn-2014-03-28-00629	1748	1752	/m/0k9qf	https://www.freebase.com//m/0k9qf	Homs	3	0.979814
+msn-2014-03-28-00629	1793	1800	/m/07ssc	https://www.freebase.com//m/07ssc	British	3	0.0
+msn-2014-03-28-00629	1819	1832	/m/0159wm	https://www.freebase.com//m/0159wm	William Hague	3	0.972868
+msn-2014-03-28-00629	1923	1934	/m/0k9qf	https://www.freebase.com//m/0k9qf	Homs, Syria	3	0.47
+msn-2014-03-28-00629	2189	2207	/m/07t65	https://www.freebase.com//m/07t65	The United Nations	3	0.83
+msn-2014-03-28-00629	2302	2304	/m/07t65	https://www.freebase.com//m/07t65	UN	3	0.0
+msn-2014-03-28-00629	2459	2463	/m/0k9qf	https://www.freebase.com//m/0k9qf	Homs	3	0.979814
+msn-2014-03-28-00629	2814	2821	/m/02l9kb	https://www.freebase.com//m/02l9kb	Brahimi	3	0.230769
+msn-2014-03-28-00629	2847	2853	/m/03902	https://www.freebase.com//m/03902	Geneva	3	0.898654
+msn-2014-03-28-00629	2881	2887	/m/06vbd	https://www.freebase.com//m/06vbd	Syrian	3	0.0
+msn-2014-03-28-00629	2968	2974	/m/01505k	https://www.freebase.com//m/01505k	Aleppo	3	0.950297
+msn-2014-03-28-00629	3017	3024	/m/07ssc	https://www.freebase.com//m/07ssc	Britain	3	0.0
+msn-2014-03-28-00629	3101	3107	/m/03902	https://www.freebase.com//m/03902	Geneva	3	0.0
+msn-2014-03-28-00629	3219	3225	/m/01505k	https://www.freebase.com//m/01505k	Aleppo	3	0.950297
+msn-2014-03-28-00629	3324	3329	/m/06vbd	https://www.freebase.com//m/06vbd	Syria	3	0.918459
+msn-2014-03-28-00629	3466	3471	/m/01x38c	https://www.freebase.com//m/01x38c	Daraa	3	0.968992
+msn-2014-03-28-00629	3636	3642	/m/02qfsd4	https://www.freebase.com//m/02qfsd4	Yabrud	3	1.000000
+msn-2014-03-28-00629	3699	3704	/m/0n4bhdh	https://www.freebase.com//m/0n4bhdh	Arsal	3	1.000000
+msn-2014-03-28-00629	3721	3728	/m/04hqz	https://www.freebase.com//m/04hqz	Lebanon	3	0.871141
+msn-2014-03-28-00629	3730	3751	/m/07vqq	https://www.freebase.com//m/07vqq	the UN refugee agency	3	0.29
+msn-2014-03-28-00629	3776	3783	/m/0289n8t	https://www.freebase.com//m/0289n8t	Twitter	3	1.000000
+msn-2014-03-28-00629	3817	3822	/m/06vbd	https://www.freebase.com//m/06vbd	Syria	3	0.918459
+msn-2014-03-28-00629	3966	3972	/m/03902	https://www.freebase.com//m/03902	Geneva	3	0.898654
+msn-2014-03-28-00629	4093	4104	/m/0d6qhc	https://www.freebase.com//m/0d6qhc	The monitor	3	0
+msn-2014-03-28-00629	4207	4213	/m/03902	https://www.freebase.com//m/03902	Geneva	3	0.898654
+msn-2014-03-28-00636	25	32	/m/07ssc	https://www.freebase.com//m/07ssc	British	3	0.0
+msn-2014-03-28-00636	145	152	/m/07ssc	https://www.freebase.com//m/07ssc	Britain	3	0.11
+msn-2014-03-28-00636	244	249	/m/09rvlp4	https://www.freebase.com//m/09rvlp4	iPads	3	0.04
+msn-2014-03-28-00636	534	559	/m/060yf	https://www.freebase.com//m/060yf	The Palace of Westminster	3	0.71
+msn-2014-03-28-00636	563	577	/m/026v7z	https://www.freebase.com//m/026v7z	central London	3	0.05
+msn-2014-03-28-00636	842	851	/m/01zn3n	https://www.freebase.com//m/01zn3n	Keith Vaz	3	1.000000
+msn-2014-03-28-00636	892	904	/m/01gx10	https://www.freebase.com//m/01gx10	Home Affairs	3	0.09
+msn-2014-03-28-00636	937	940	/m/01zn3n	https://www.freebase.com//m/01zn3n	Vaz	3	0.0
+msn-2014-03-28-00636	958	962	/m/09rvlp4	https://www.freebase.com//m/09rvlp4	iPad	3	0.958999
+msn-2014-03-28-00636	979	990	/m/060yf	https://www.freebase.com//m/060yf	Westminster	3	0.25
+msn-2014-03-28-00636	1110	1117	/m/07ssc	https://www.freebase.com//m/07ssc	Britain	3	0.0
+msn-2014-03-28-00636	1426	1433	/m/0pxkg	https://www.freebase.com//m/0pxkg	Hansard	3	0.963554
+msn-2014-03-28-00636	1545	1556	/m/04qdjv	https://www.freebase.com//m/04qdjv	Ed Miliband	3	1.000000
+msn-2014-03-28-00638	0	5	/m/03cnht8	https://www.freebase.com//m/03cnht8	Evans	3	0.38
+msn-2014-03-28-00638	37	53	/m/01tqfs	https://www.freebase.com//m/01tqfs	Sheffield United	3	0.994837
+msn-2014-03-28-00638	75	85	/m/03cnht8	https://www.freebase.com//m/03cnht8	Ched Evans	3	1.000000
+msn-2014-03-28-00638	433	438	/m/03cnht8	https://www.freebase.com//m/03cnht8	Evans	3	0
+msn-2014-03-28-00638	517	522	/m/03cnht8	https://www.freebase.com//m/03cnht8	Evans	3	0
+msn-2014-03-28-00638	611	616	/m/03cnht8	https://www.freebase.com//m/03cnht8	Evans	3	0.38
+msn-2014-03-28-00638	631	641	/m/0ct24	https://www.freebase.com//m/0ct24	Caernarfon	3	0.852459
+msn-2014-03-28-00638	725	736	/m/032y0n	https://www.freebase.com//m/032y0n	North Wales	3	0.0
+msn-2014-03-28-00638	937	946	/m/01cwq9	https://www.freebase.com//m/01cwq9	Port Vale	3	1.000000
+msn-2014-03-28-00638	956	972	/m/04jh_gs	https://www.freebase.com//m/04jh_gs	Clayton McDonald	3	1.000000
+msn-2014-03-28-00638	1065	1081	/m/01tqfs	https://www.freebase.com//m/01tqfs	Sheffield United	3	0.994837
+msn-2014-03-28-00638	1091	1103	/m/0ll2x7f	https://www.freebase.com//m/0ll2x7f	Connor Brown	3	1.000000
+msn-2014-03-28-00638	1159	1166	/m/0289n8t	https://www.freebase.com//m/0289n8t	Twitter	3	1.000000
+msn-2014-03-28-00638	1233	1238	/m/03cnht8	https://www.freebase.com//m/03cnht8	Evans	3	0.38
+msn-2014-03-28-00638	1365	1376	/m/032y0n	https://www.freebase.com//m/032y0n	North Wales	3	0.0
+msn-2014-03-28-00638	1481	1488	/m/0289n8t	https://www.freebase.com//m/0289n8t	Twitter	3	1.000000
