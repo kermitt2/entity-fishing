@@ -15,6 +15,7 @@ import java.util.List;
 //import org.wikipedia.miner.model.Category;
 
 import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * Representation of a category (here an uncontrolled typing, as in Wikipedia) for a concept or similar 
@@ -28,26 +29,32 @@ public class Category {
 	protected static final Logger LOGGER = LoggerFactory.getLogger(Category.class);
 	
 	private String name = null;
-	private org.wikipedia.miner.model.Category category = null;
+	private org.wikipedia.miner.model.Category wikiCategory = null;
 	private int wikiPageID = -1;
 	
 	// an optional weight to be associated to the category
 	private double weight = 0.0;
 	
-    public Category(String name, org.wikipedia.miner.model.Category category, int wikiPageID) {
-		this.category = category;
+	public Category() {}
+
+	public Category(String name) {
+		this.name= name;
+	}
+
+    public Category(String name, org.wikipedia.miner.model.Category wikiCategory, int wikiPageID) {
+		this.wikiCategory = wikiCategory;
 		this.name = name;
 		this.wikiPageID = wikiPageID;
     }
 	
-	public Category(org.wikipedia.miner.model.Category category) {
-		this.category = category;
-		name = category.getTitle();
-		wikiPageID = category.getId();
+	public Category(org.wikipedia.miner.model.Category wikiCategory) {
+		this.wikiCategory = wikiCategory;
+		name = wikiCategory.getTitle();
+		wikiPageID = wikiCategory.getId();
     }
 
 	public String toString() {
-		return category.toString();
+		return wikiCategory.toString();
 	}
 	
 	public String getName() {
@@ -58,8 +65,8 @@ public class Category {
 		return wikiPageID;
 	}
 	
-	public org.wikipedia.miner.model.Category getCategory() {
-		return category;
+	public org.wikipedia.miner.model.Category getWikiCategory() {
+		return wikiCategory;
 	}
 	
 	public double getWeight() {

@@ -14,9 +14,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.codehaus.jackson.*;
+/*import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper;*/
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
 
 import org.mapdb.*;
 

@@ -49,7 +49,7 @@ public class NerdCategories {
 			if (entities != null) {
 				Double weight = term.getScore();
 				for(NerdEntity entity : entities) {
-					List<com.scienceminer.nerd.kb.Category> categories = entity.getWikipediaCategories();
+					List<com.scienceminer.nerd.kb.Category> categories = entity.getCategories();
 					if (categories != null) {				
 						Double nerd_score = entity.getNerd_score();
 						for(Category category : categories) {
@@ -58,7 +58,7 @@ public class NerdCategories {
 
 							if (categoryMap.get(wikipediaInteger) == null) {
 								Category categoryBis = new Category(category.getName(), 
-									category.getCategory(), 
+									category.getWikiCategory(), 
 									category.getWikiPageID());
 								categoryBis.setWeight(nerd_score*weight);
 								categoryMap.put(wikipediaInteger, categoryBis);
@@ -113,7 +113,7 @@ public class NerdCategories {
 		List<NerdEntity> entities = query.getEntities();
 		if (entities != null) {
 			for(NerdEntity entity : entities) {
-				List<com.scienceminer.nerd.kb.Category> categories = entity.getWikipediaCategories();
+				List<com.scienceminer.nerd.kb.Category> categories = entity.getCategories();
 				if (categories != null) {				
 					Double nerd_score = entity.getNerd_score();
 					for(Category category : categories) {
@@ -122,7 +122,7 @@ public class NerdCategories {
 
 						if (categoryMap.get(wikipediaInteger) == null) {
 							Category categoryBis = new Category(category.getName(), 
-								category.getCategory(), 
+								category.getWikiCategory(), 
 								category.getWikiPageID());
 							categoryBis.setWeight(nerd_score);
 							categoryMap.put(wikipediaInteger, categoryBis);

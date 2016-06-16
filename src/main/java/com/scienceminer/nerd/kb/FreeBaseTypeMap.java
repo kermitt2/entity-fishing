@@ -21,9 +21,15 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.util.*;
 
-import org.codehaus.jackson.*;
+/*import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper;*/
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -241,10 +247,10 @@ public class FreeBaseTypeMap {
 
             JsonNode subjectNode = resJsonStruct.path("subjectField");
             if (!subjectNode.isMissingNode()) {
-                java.util.Iterator<JsonNode> elements = ((ArrayNode) subjectNode).getElements();
+                java.util.Iterator<JsonNode> elements = ((ArrayNode) subjectNode).elements();
                 while (elements.hasNext()) {
                     JsonNode element = elements.next();
-                    String type = element.getTextValue();
+                    String type = element.textValue();
                     if (result == null)
                         result = type;
                     else 

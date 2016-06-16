@@ -17,7 +17,8 @@ import java.util.*;
 
 import org.wikipedia.miner.model.*;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+//import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * This class represents disambiguated entity, including conceptual and 
@@ -86,7 +87,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	private int origin = 0;
 	
 	// list of wikipedia categories corresponding to the disambiguated term
-	private List<com.scienceminer.nerd.kb.Category> wikipediaCategories = null;
+	private List<com.scienceminer.nerd.kb.Category> categories = null;
 	
 	public boolean isSubTerm = false;
 	
@@ -260,12 +261,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			freebaseTypes.add(type);
 	}*/
 	
-	public List<com.scienceminer.nerd.kb.Category> getWikipediaCategories() {
-		return wikipediaCategories;
+	public List<com.scienceminer.nerd.kb.Category> getCategories() {
+		return categories;
 	}
 	
-	public void setWikipediaCategories(List<com.scienceminer.nerd.kb.Category> categories) {
-		wikipediaCategories = categories;
+	public void setCategories(List<com.scienceminer.nerd.kb.Category> categories) {
+		categories = categories;
 	}
 	
 	public List<Variant> getVariants() {
@@ -536,7 +537,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		prob_c = candidate.getProb_c();
 		nerd_score = candidate.getNerd_score();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
-		wikipediaCategories = candidate.getWikipediaCategories();
+		categories = candidate.getWikipediaCategories();
 		
 		preferredTerm = candidate.getPreferredTerm();
 		this.lang = lang;
@@ -690,10 +691,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] ");
 		}
 
-		if (wikipediaCategories != null) {
+		if (categories != null) {
 			buffer.append(", \"categories\" : [ ");
 			boolean first = true;
-			for(com.scienceminer.nerd.kb.Category category : wikipediaCategories) {				
+			for(com.scienceminer.nerd.kb.Category category : categories) {				
 				byte[] encoded = encoder.quoteAsUTF8(category.getName());
 				String output = new String(encoded);
 				if (first) {

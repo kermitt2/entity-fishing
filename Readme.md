@@ -3,12 +3,16 @@
 (N)ERD performs the following tasks:
 
 * entity recognition and disambiguation against Wikipedia in raw text and partially-annotated text,
+![(N)ERD](doc/images/screen2.png)
 
 * search query disambiguation (the _short text_ mode),
+![Search query disambiguation](doc/images/screen3.png)
 
 * weighted term vector disambiguation (a term being a phrase),
+![Search query disambiguation](doc/images/screen4.png)
 
 * interactive disambiguation in text editing mode.  
+![Editor with real time disambiguation](doc/images/screen6.png)
 
 Supervised machine learning is used for the disambiguation, currently a Bagged Decision Tree, exploiting various features.  
 

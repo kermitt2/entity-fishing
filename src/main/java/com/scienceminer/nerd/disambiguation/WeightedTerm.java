@@ -10,7 +10,8 @@ import com.scienceminer.nerd.kb.*;
 import java.util.List;    
 import java.util.ArrayList;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+//import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * This class represents a weighted term, i.e. a phrase associated to a probabilistic score and the

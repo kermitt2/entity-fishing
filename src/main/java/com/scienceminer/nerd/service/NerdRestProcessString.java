@@ -28,10 +28,16 @@ import org.slf4j.LoggerFactory;
 import org.json.JSONException;
 import org.json.JSONStringer;
 
-import org.codehaus.jackson.map.*;
+/*import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.io.*;
-import org.codehaus.jackson.node.*;
+import org.codehaus.jackson.node.*;*/
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * 
@@ -454,12 +460,12 @@ System.out.println("runtime: " + (end - start));
 					
                     JsonNode idNode2 = termNode.findPath("term");
 					if ((idNode2 != null) && (!idNode2.isMissingNode())) {
-            			term = idNode2.getTextValue();
+            			term = idNode2.textValue();
 					}
 					
                     idNode2 = termNode.findPath("score");
 					if ((idNode2 != null) && (!idNode2.isMissingNode())) {
-            			score = idNode2.getDoubleValue();
+            			score = idNode2.doubleValue();
 					}
 					
 					if ( (term != null) && (score != 0.0) ) {

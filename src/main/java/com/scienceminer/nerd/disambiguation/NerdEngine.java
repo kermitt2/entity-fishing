@@ -192,7 +192,8 @@ for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
 	nbEntities += 1;
-	nbCandidates += cands.size();
+	if (cands != null)
+		nbCandidates += cands.size();
 	//System.out.println(entity.toString());
 /*for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());

@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 import org.wikipedia.miner.model.*;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+//import org.codehaus.jackson.io.JsonStringEncoder;
+
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * This class represents a candidate for disambiguated entity, including conceptual and 

@@ -27,9 +27,16 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.codehaus.jackson.JsonGenerationException;
+/*import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper;*/
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * 
@@ -64,6 +71,7 @@ public class NerdRestProcessQuery {
 
 			try {
 				ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
 			}
 			catch(JsonGenerationException e) {

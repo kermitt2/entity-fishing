@@ -15,7 +15,8 @@ import java.text.*;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.util.*;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+//import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
 
 /**
  * This class represents a context to be exploited for performing a disambiguation. 
