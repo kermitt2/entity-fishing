@@ -16,9 +16,9 @@
 
 Supervised machine learning is used for the disambiguation, currently a Bagged Decision Tree, exploiting various features.  
 
-The tool currently supports English, German and French languages. For English, a Name Entity Recognition (grobid-ner, developed by the same author) can be used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
+The tool currently supports English, German and French languages. For English, our Name Entity Recognition ([grobid-ner](https://github.com/kermitt2/grobid-ner)) can be used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
 
-The tool has been designed for fast processing (at least for a NERD, 400-500 words per seconds on11 a low end linux server), with limited memory (at least for a NERD, 4GB of RAM) and to offer close to state-of-the-art accuracy. 
+The tool has been designed for fast processing (at least for a NERD, 400-500 words per seconds on11 an average linux server), with limited memory (at least for a NERD, 4GB of RAM) and to offer close to state-of-the-art accuracy. 
 
 (N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Windows has not been tested, but apart the optional NER, (N)ERD should theoretically work. 
 
