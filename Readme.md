@@ -39,9 +39,9 @@ Then install the wikipedia index:
 
 * download the zipped index files (warning: around 6GB!) at the following address: 
 
-https://grobid.s3.amazonaws.com/nerd/wikidb1.zip
+https://grobid.s3.amazonaws.com/nerd/nerddb1.zip
 
-https://grobid.s3.amazonaws.com/nerd/wikidb2.zip
+https://grobid.s3.amazonaws.com/nerd/nerddb2.zip
 
 * unzip the two archives files under ```data/wikipedia/```. This will install three sub-directories ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/```, ```data/wikipedia/db-fr/``` and one file ```domains-en.db```. 
 
