@@ -1108,7 +1108,10 @@ System.out.println("Merging...");
 				}
 				else */
 				{
-					for(NerdCandidate candidate : candidateList) {						
+					for(NerdCandidate candidate : candidateList) {
+						if (candidate.getNerd_score() < 0.10)
+							continue;
+
 						NerdEntity nerdEntity = new NerdEntity();
 						nerdEntity.setRawName(term.getTerm());
 						nerdEntity.populateFromCandidate(candidate, lang);
