@@ -1,8 +1,8 @@
 package com.scienceminer.nerd.evaluation;
 
 import com.scienceminer.nerd.exceptions.*;
-import com.scienceminer.nerd.lang.Language;
-import com.scienceminer.nerd.lang.LanguageDetectorFactory;
+import org.grobid.core.lang.Language;
+import org.grobid.core.lang.LanguageDetectorFactory;
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.service.*;
 

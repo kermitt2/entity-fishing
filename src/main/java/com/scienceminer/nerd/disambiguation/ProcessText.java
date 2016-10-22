@@ -5,8 +5,9 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.TextUtilities;
-import com.scienceminer.nerd.lang.Language;
-import com.scienceminer.nerd.utilities.LanguageUtilities;
+import com.scienceminer.nerd.utilities.Utilities;
+import org.grobid.core.lang.Language;
+import org.grobid.core.utilities.LanguageUtilities;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -25,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
-import org.grobid.core.engines.NERParser;
+import org.grobid.core.engines.NERParsers;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.*;
 import org.grobid.core.mock.*;
@@ -61,7 +62,7 @@ public class ProcessText {
 	// GROBID tokenizer
 	//private GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance(); 
 
-	private NERParser nerParser = null;
+	private NERParsers nerParsers = null;
 
 	private Stopwords stopwords = Stopwords.getInstance();
 	
@@ -99,21 +100,6 @@ public class ProcessText {
 			EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));	
 	}
 	
-	private void initGrobid() {
-		String pGrobidHome = NerdProperties.getInstance().getGrobidHome();
-		String pGrobidProperties = NerdProperties.getInstance().getGrobidProperties();
-		try {
-			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);      
-			GrobidProperties.getInstance();
-			LibraryLoader.load();
-	
-			System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
-		}
-		catch(Exception e) {
-			throw new NerdException("Fail to initalise the grobid-ner component.", e);
-		}
-	}
-	
 	/**
 	 * NER processing of some raw text. Generate list of named entities.
 	 *
@@ -122,7 +108,7 @@ public class ProcessText {
 	 * @return 
 	 * 		the list of identified entities.
 	 */
-	public List<Entity> process(String text) throws NerdException { 
+	public List<Entity> process(String text, Language lang) throws NerdException { 
 		if (text == null) {
 			throw new NerdException("Cannot parse the sentence, because it is null.");
 		}
@@ -134,11 +120,11 @@ public class ProcessText {
 		
 		List<Entity> results = null;
 		try {
-			if (nerParser == null) {
-				initGrobid();
-				nerParser = new NERParser();	
+			if (nerParsers == null) {
+				//Utilities.initGrobid();
+				nerParsers = new NERParsers();	
 			}
-			results = nerParser.extractNE(text);
+			results = nerParsers.extractNE(text, lang);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -159,6 +145,10 @@ public class ProcessText {
 	 */
 	public List<Entity> process(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
+		Language language = nerdQuery.getLanguage();
+		String lang = null;
+		if (language != null)
+			lang = language.getLangId();
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 		if (text == null) {
@@ -188,11 +178,11 @@ public class ProcessText {
 				Sentence sentence = sentences.get(index.intValue());
 				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
 				try {
-					if (nerParser == null) {
-						initGrobid();			
-						nerParser = new NERParser();	
+					if (nerParsers == null) {
+						//Utilities.initGrobid();			
+						nerParsers = new NERParsers();	
 					}
-					List<Entity> localResults = nerParser.extractNE(text2tag);
+					List<Entity> localResults = nerParsers.extractNE(text2tag, language);
 
 					// we "shift" the entities offset in case only specific sentences are processed
 					if ( (localResults != null) && (localResults.size() > 0) ) {
@@ -216,11 +206,11 @@ public class ProcessText {
 		else {
 			// we process the whole text
 			try {
-				if (nerParser == null) {
-					initGrobid();
-					nerParser = new NERParser();	
+				if (nerParsers == null) {
+					//Utilities.initGrobid();
+					nerParsers = new NERParsers();	
 				}
-				results = nerParser.extractNE(text);
+				results = nerParsers.extractNE(text, language);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -414,16 +404,16 @@ public class ProcessText {
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
 		if (language != null) 
-			lang = language.getLang();
+			lang = language.getLangId();
 		
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
 			// let's do it
 			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 			try {
-				language = languageUtilities.runLanguageIdRestricted(text);
+				language = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(language);
-				lang = language.getLang();
+				lang = language.getLangId();
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {

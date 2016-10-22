@@ -16,6 +16,11 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.grobid.core.factory.*;
+import org.grobid.core.mock.*;
+import org.grobid.core.main.*;
+import org.grobid.core.utilities.GrobidProperties;
+
 import org.apache.commons.lang3.StringUtils;
 import com.scienceminer.nerd.exceptions.NerdException;
 
@@ -261,6 +266,21 @@ public class Utilities {
 	public static String dateToString(Date pDate, String pFormat){
 		SimpleDateFormat dateFormat = new SimpleDateFormat(pFormat);
 		return dateFormat.format(pDate);
+	}
+
+	public static void initGrobid() {
+		String pGrobidHome = NerdProperties.getInstance().getGrobidHome();
+		String pGrobidProperties = NerdProperties.getInstance().getGrobidProperties();
+		try {
+			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);      
+			GrobidProperties.getInstance();
+			LibraryLoader.load();
+	
+			System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
+		}
+		catch(Exception e) {
+			throw new NerdException("Fail to initalise the grobid-ner component.", e);
+		}
 	}
 
 }

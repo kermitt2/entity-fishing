@@ -688,6 +688,15 @@ public class NerdProperties {
 	}
 
 	/**
+	 * Returns the map path
+	 * 
+	 * @return a directory for map files
+	 */
+	public static String getMapsPath() {
+		return getPropertyValue(NerdPropertyKeys.PROP_MAPS_PATH);
+	}
+
+	/**
 	 * Returns the test path
 	 * 
 	 * @return a directory for test files

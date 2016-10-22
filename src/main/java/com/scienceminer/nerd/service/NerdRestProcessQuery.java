@@ -13,12 +13,15 @@ import javax.ws.rs.core.HttpHeaders;
 
 import com.scienceminer.nerd.utilities.NerdRestUtils;
 import com.scienceminer.nerd.utilities.NerdServiceProperties;
-import com.scienceminer.nerd.utilities.LanguageUtilities;
 import com.scienceminer.nerd.utilities.NerdProperties;
-import com.scienceminer.nerd.lang.Language;
+
+import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.lang.Language;
+import org.grobid.core.data.Entity;
+
 import com.scienceminer.nerd.disambiguation.ProcessText;
 import com.scienceminer.nerd.disambiguation.Sentence;
-import org.grobid.core.data.Entity;
+
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.disambiguation.NerdCategories;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
@@ -99,24 +102,24 @@ public class NerdRestProcessQuery {
 			//if (!shortText) 
 			{
 				Language lang = nerdQuery.getLanguage();
-				if ( (nerdQuery.getLanguage() == null) || (nerdQuery.getLanguage().getLang() == null) ) {
+				if ( (nerdQuery.getLanguage() == null) || (nerdQuery.getLanguage().getLangId() == null) ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-					lang = languageUtilities.runLanguageIdRestricted(nerdQuery.getText());
+					lang = languageUtilities.runLanguageId(nerdQuery.getText());
 					nerdQuery.setLanguage(lang);
 					LOGGER.debug(">> identified language: " + lang.toString());
 				}
 				else {
 					System.out.println("lang is already defined");
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
+					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
 				}
 				
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLang();
+					String theLang = lang.getLangId();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -133,7 +136,7 @@ public class NerdRestProcessQuery {
 					
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
-						entity.setOrigin(Entity.USER);
+						entity.setOrigin(NerdEntity.Origin.USER);
 						entity.setNerd_score(1.0);
 					}
 				}
@@ -315,32 +318,32 @@ public class NerdRestProcessQuery {
 			//if (!shortText) 
 			{
 				Language lang = nerdQuery.getLanguage();
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 					try {
-						lang = languageUtilities.runLanguageIdRestricted(nerdQuery.getText());
+						lang = languageUtilities.runLanguageId(nerdQuery.getText());
 					}
 					catch(Exception e) {
 						LOGGER.debug("exception language identifier for: " + nerdQuery.getText());
 						//e.printStackTrace();
 					}
-					if ( (lang != null) && (lang.getLang() != null) ) {
+					if ( (lang != null) && (lang.getLangId() != null) ) {
 						nerdQuery.setLanguage(lang);
 						LOGGER.debug(">> identified language: " + lang.toString());
 					}
 				}
 				else {
 					System.out.println("lang is already defined");
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
+					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
 				}
 			
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLang();
+					String theLang = lang.getLangId();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -357,7 +360,7 @@ public class NerdRestProcessQuery {
 					
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
-						entity.setOrigin(Entity.USER);
+						entity.setOrigin(NerdEntity.Origin.USER);
 						entity.setNerd_score(1.0);
 					}
 				}
@@ -537,33 +540,33 @@ public class NerdRestProcessQuery {
 			//if (!shortText) 
 			{
 				Language lang = nerdQuery.getLanguage();
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 					try {
-						lang = languageUtilities.runLanguageIdRestricted(text);
+						lang = languageUtilities.runLanguageId(text);
 					}
 					catch(Exception e) {
 						LOGGER.debug("exception language identifier for: " + text);
 						//e.printStackTrace();
 					}
-					if ( (lang != null) && (lang.getLang() != null) ) {
+					if ( (lang != null) && (lang.getLangId() != null) ) {
 						nerdQuery.setLanguage(lang);
 						LOGGER.debug(">> identified language: " + lang.toString());
 					}
 				}
 				else {
 					System.out.println("lang is already defined");
-					lang.setConf(1.0);
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
+					//lang.setConfidence(1.0);
+					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
 				}
 			
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLang();
+					String theLang = lang.getLangId();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -654,32 +657,32 @@ public class NerdRestProcessQuery {
 			// language identification
 			// test first if the language is already indicated in the query structure
 			Language lang = nerdQuery.getLanguage();
-			if ( (lang == null) || (lang.getLang() == null) ) {
+			if ( (lang == null) || (lang.getLangId() == null) ) {
 				LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 				try {
-					lang = languageUtilities.runLanguageIdRestricted(nerdQuery.getText());
+					lang = languageUtilities.runLanguageId(nerdQuery.getText());
 				}
 				catch(Exception e) {
 					LOGGER.debug("exception language identifier for: " + nerdQuery.getText());
 					//e.printStackTrace();
 				}
-				if ( (lang != null) && (lang.getLang() != null) ) {
+				if ( (lang != null) && (lang.getLangId() != null) ) {
 					nerdQuery.setLanguage(lang);
 					LOGGER.debug(">> identified language: " + lang.toString());
 				}
 			}
 			else {
 				System.out.println("lang is already defined");
-				LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
+				LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
 			}
 
-			if ( (lang == null) || (lang.getLang() == null) ) {
+			if ( (lang == null) || (lang.getLangId() == null) ) {
 				response = Response.status(Status.NOT_ACCEPTABLE).build();
 				LOGGER.debug(methodLogOut());  
 				return response;
 			}
 			else {
-				String theLang = lang.getLang();
+				String theLang = lang.getLangId();
 				if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
@@ -695,7 +698,7 @@ public class NerdRestProcessQuery {
 					
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
-						entity.setOrigin(Entity.USER);
+						entity.setOrigin(NerdEntity.Origin.USER);
 						entity.setNerd_score(1.0);
 					}
 				}

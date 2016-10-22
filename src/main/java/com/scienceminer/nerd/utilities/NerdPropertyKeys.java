@@ -43,6 +43,7 @@ public interface NerdPropertyKeys {
 	public static final String PROP_WIKIPEDIA_MINER_CONFIG = "com.scienceminer.nerd.WikipediaMinerConfigPath";
 
 	public static final String PROP_MAPDB_PATH = "com.scienceminer.nerd.mapdb.path";
+	public static final String PROP_MAPS_PATH = "com.scienceminer.nerd.maps.path";
 	
 	/**
 	 * Path to wordnet domain file.

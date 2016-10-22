@@ -4,8 +4,6 @@ import java.util.*;
 import java.io.*;
 import java.util.regex.*;
 
-import org.grobid.core.data.Entity;
-
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdProperties;
@@ -36,8 +34,8 @@ import weka.classifiers.*;
 import weka.classifiers.meta.Bagging;
 import weka.core.* ;
 
-import com.scienceminer.nerd.lang.Language;
-import com.scienceminer.nerd.utilities.LanguageUtilities;
+import org.grobid.core.lang.Language;
+import org.grobid.core.utilities.LanguageUtilities;
 
 /**
  * @author Patrice Lopez

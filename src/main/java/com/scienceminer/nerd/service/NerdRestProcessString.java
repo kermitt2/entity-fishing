@@ -13,8 +13,10 @@ import javax.ws.rs.core.HttpHeaders;
 
 import com.scienceminer.nerd.utilities.NerdRestUtils;
 import com.scienceminer.nerd.utilities.NerdServiceProperties;
-import com.scienceminer.nerd.utilities.LanguageUtilities;
-import com.scienceminer.nerd.lang.Language;
+
+import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.lang.Language;
+
 import com.scienceminer.nerd.disambiguation.ProcessText;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
@@ -27,11 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import org.json.JSONException;
 import org.json.JSONStringer;
-
-/*import org.codehaus.jackson.map.*;
-import org.codehaus.jackson.*;
-import org.codehaus.jackson.io.*;
-import org.codehaus.jackson.node.*;*/
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
@@ -77,8 +74,8 @@ System.out.println("lang id:" + text);
 				JSONStringer stringer = new JSONStringer();     
 			
 				stringer.object();  
-				stringer.key("lang").value(result.getLang());  			
-				stringer.key("conf").value(result.getConf());  		   	
+				stringer.key("lang").value(result.getLangId());  			
+				stringer.key("conf").value(result.getConfidence());  		   	
 				stringer.endObject();
 			
 				retVal = stringer.toString(); 
@@ -211,18 +208,18 @@ System.out.println("lang id:" + text);
 			// language identification
 			{
 				LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-				Language lang = languageUtilities.runLanguageIdRestricted(text);
+				Language lang = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(lang);
 				LOGGER.debug(">> identified language: " + lang.toString());
 			
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLang();
-					double theScore	= lang.getConf();
+					String theLang = lang.getLangId();
+					double theScore	= lang.getConfidence();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -243,7 +240,7 @@ System.out.println("lang id:" + text);
 				nerdQuery.setSentences(sentences);
 			}
 			List<Entity> entities = new ArrayList<Entity>();
-			if (nerdQuery.getLanguage().getLang().equals("en")) {
+			if (nerdQuery.getLanguage().getLangId().equals("en") || nerdQuery.getLanguage().getLangId().equals("fr")) {
 				entities = processText.process(nerdQuery);
 			}
 			if (!onlyNER) {
@@ -349,17 +346,17 @@ System.out.println("runtime: " + (end - start));
 			{
 				// language identification
 				LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-				Language lang = languageUtilities.runLanguageIdRestricted(text);
+				Language lang = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(lang);
 				LOGGER.debug(">> identified language: " + lang.toString());
 			
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if ( (lang == null) || (lang.getLangId() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLang();
+					String theLang = lang.getLangId();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -493,17 +490,17 @@ System.out.println("runtime: " + (end - start));
 			
 			// language identification
 			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-			Language lang = languageUtilities.runLanguageIdRestricted(text);
+			Language lang = languageUtilities.runLanguageId(text);
 			nerdQuery.setLanguage(lang);
 			LOGGER.debug(">> identified language: " + lang.toString());
 		
-			if ( (lang == null) || (lang.getLang() == null) ) {
+			if ( (lang == null) || (lang.getLangId() == null) ) {
 				response = Response.status(Status.NOT_ACCEPTABLE).build();
 				LOGGER.debug(methodLogOut());  
 				return response;
 			}
 			else {
-				String theLang = lang.getLang();
+				String theLang = lang.getLangId();
 				if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  

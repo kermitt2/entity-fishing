@@ -19,7 +19,10 @@ import org.junit.Ignore;
 
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdPropertyKeys;
+import com.scienceminer.nerd.utilities.Utilities;
+
 import org.grobid.core.data.Entity;
+import org.grobid.core.lang.Language;
 
 import org.xml.sax.SAXException;
 import javax.xml.parsers.SAXParser;
@@ -41,6 +44,7 @@ public class TestProcessText {
 		NerdProperties.getInstance();
 		testPath = NerdProperties.getTestPath();
 		try {
+			Utilities.initGrobid();
 			processText = ProcessText.getInstance();
 		}
 		catch(Exception e) {
@@ -54,7 +58,7 @@ public class TestProcessText {
 			System.err.println("text processor was not properly initialised!");
 		}
 		try {
-			List<Entity> entities = processText.process(testText);
+			List<Entity> entities = processText.process(testText, new Language("en", 1.0));
 			
 			System.out.println("\n" + testText);
 			if (entities != null) {

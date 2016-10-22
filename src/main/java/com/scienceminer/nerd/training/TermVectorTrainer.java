@@ -1,8 +1,8 @@
 package com.scienceminer.nerd.training;
 
 import com.scienceminer.nerd.exceptions.*;
-import com.scienceminer.nerd.lang.Language;
-import com.scienceminer.nerd.lang.LanguageDetectorFactory;
+import org.grobid.core.lang.Language;
+import org.grobid.core.lang.LanguageDetectorFactory;
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.service.*;
 import com.scienceminer.nerd.kb.Category;
@@ -175,7 +175,7 @@ public class TermVectorTrainer {
 						else
 							builder.append(", \n");
 						builder.append("\t\t{\n\t\t\t\"weight\" : " + category.getWeight() + ", \n\t\t\t\"source\" : \"wikipedia-" 
-							+ lang.getLang()
+							+ lang.getLangId()
 							+ "\", \n\t\t\t\"category\" : \"" + output + "\", ");
 						builder.append("\n\t\t\t\"page_id\" : " + category.getWikiPageID() + " }");
 					}

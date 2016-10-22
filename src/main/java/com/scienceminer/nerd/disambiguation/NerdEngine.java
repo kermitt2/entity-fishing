@@ -22,8 +22,8 @@ import org.wikipedia.miner.model.*;
 import weka.core.*;
 import weka.classifiers.*;
 
-import com.scienceminer.nerd.lang.Language;
-import com.scienceminer.nerd.utilities.LanguageUtilities;
+import org.grobid.core.lang.Language;
+import org.grobid.core.utilities.LanguageUtilities;
 
 /**
  * @author Patrice Lopez
@@ -155,16 +155,16 @@ public class NerdEngine {
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
 		if (language != null) 
-			lang = language.getLang();
+			lang = language.getLangId();
 		
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
 			// let's do it now
 			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 			try {
-				language = languageUtilities.runLanguageIdRestricted(text);
+				language = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(language);
-				lang = language.getLang();
+				lang = language.getLangId();
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {
@@ -222,7 +222,7 @@ for(NerdCandidate cand : cands) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
 			
-			if (entity.getOrigin() == NerdEntity.USER) {
+			if (entity.getOrigin() == NerdEntity.Origin.USER) {
 				result.add(entity);
 			}
 			else if ( (cands == null) || (cands.size() == 0) ) {
@@ -280,7 +280,7 @@ for(NerdCandidate cand : cands) {
 			for(NerdEntity entity : entities) {
 				// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
 				// for it if they are disambiguated
-				if (entity.getOrigin() == Entity.USER) {
+				if (entity.getOrigin() == NerdEntity.Origin.USER) {
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
 						result.put(entity, null);
@@ -373,7 +373,7 @@ for(NerdCandidate cand : cands) {
 		List<NerdEntity> userEntities = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			NerdEntity entity = entry.getKey();
-			if (entity.getOrigin() == Entity.USER) {
+			if (entity.getOrigin() == NerdEntity.Origin.USER) {
 				userEntities.add(entity);
 			}
 		}
@@ -1024,7 +1024,7 @@ System.out.println("Merging...");
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
 		if (language != null) 
-			lang = language.getLang();
+			lang = language.getLangId();
 		
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
@@ -1039,9 +1039,9 @@ System.out.println("Merging...");
 			
 			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 			try {
-				language = languageUtilities.runLanguageIdRestricted(text);
+				language = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(language);
-				lang = language.getLang();
+				lang = language.getLangId();
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {
@@ -1077,7 +1077,7 @@ System.out.println("Merging...");
 			List<NerdEntity> entities = term.getNerdEntities();
 			if (entities != null) {
 				for(NerdEntity entity : entities) {
-					if (entity.getOrigin() == Entity.USER) {
+					if (entity.getOrigin() == NerdEntity.Origin.USER) {
 						userEntities.add(entity);
 					}
 				}
@@ -1099,7 +1099,7 @@ System.out.println("Merging...");
 				List<NerdCandidate> candidateList = candidates.get(n);
 
 				rank(candidateList, term.getTerm().toLowerCase(), text, lang, stableContext, userEntities);
-				prune(candidateList, nerdQuery.getNbest(), 0.10);
+				prune(candidateList, nerdQuery.getNbest(), 0.1);
 
 				List<NerdEntity> result = new ArrayList<NerdEntity>();
 
@@ -1109,7 +1109,7 @@ System.out.println("Merging...");
 				else */
 				{
 					for(NerdCandidate candidate : candidateList) {
-						if (candidate.getNerd_score() < 0.10)
+						if (candidate.getNerd_score() < 0.1)
 							continue;
 
 						NerdEntity nerdEntity = new NerdEntity();

@@ -30,6 +30,23 @@ import com.fasterxml.jackson.core.io.*;
 public class NerdEntity implements Comparable<NerdEntity> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdEntity.class);
 	
+	// Orign of the entity definition
+	public enum Origin {
+		GROBID	("grobid"),
+		USER	("user"),
+		NERD	("nerd");
+		
+		private String name;
+
+		private Origin(String name) {
+          	this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+	};
+
 	// name of the entity = entity type                   
 	private String rawName = null;
 	
@@ -84,7 +101,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public static final int USER = 1;
 	public static final int NERD = 2;
 	// orign of the entity 
-	private int origin = 0;
+	private Origin origin = null;
 	
 	// list of wikipedia categories corresponding to the disambiguated term
 	private List<com.scienceminer.nerd.kb.Category> categories = null;
@@ -128,7 +145,13 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		prob = entity.getProb();
 		ner_conf = entity.getConf();
 		sense = entity.getSense();
-		origin = entity.getOrigin();
+		switch(entity.getOrigin()) {
+			case GROBID : origin = Origin.GROBID;
+						break;
+			case USER : origin = Origin.USER;
+						break;
+			default: origin = Origin.NERD;
+		}
 	}
 	
 	public NerdEntity(NerdEntity entity) {
@@ -238,11 +261,11 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		this.lang = lang;
 	}
 	
-	public int getOrigin() {
+	public Origin getOrigin() {
 		return origin;
 	}
 	
-	public void setOrigin(int origin) {
+	public void setOrigin(Origin origin) {
 		this.origin = origin;
 	}
 

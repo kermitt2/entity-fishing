@@ -300,12 +300,22 @@
 	</repositories>
 	
 	<dependencies>	
-				
-		<!--dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.8.5</version>
-		</dependency-->
+
+		<dependency>
+			<groupId>org.grobid</groupId>
+			<artifactId>grobid-core</artifactId>
+			<version>0.4.2-SNAPSHOT</version>
+			<scope>system</scope>
+		    <systemPath>${project.basedir}/lib/grobid-core-0.4.2-SNAPSHOT.jar</systemPath>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.grobid.ner</groupId>
+		    <artifactId>grobid-ner</artifactId>
+		    <version>0.4.2-SNAPSHOT</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
+		</dependency>
 		
 		<dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -378,7 +388,13 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.0.1</version>
+			<version>3.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
 		</dependency>
 		
 		<dependency>
@@ -414,22 +430,6 @@
 			<artifactId>jersey-multipart</artifactId>
 			<version>1.8</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.grobid</groupId>
-			<artifactId>grobid-core</artifactId>
-			<version>0.4.1-SNAPSHOT</version>
-			<scope>system</scope>
-		    <systemPath>${project.basedir}/lib/grobid-core-0.4.1-SNAPSHOT.jar</systemPath>
-		</dependency>
-
-		<dependency>
-		    <groupId>org.grobid.ner</groupId>
-		    <artifactId>grobid-ner</artifactId>
-		    <version>0.4.1-SNAPSHOT</version>
-		    <scope>system</scope>
-		    <systemPath>${project.basedir}/lib/grobid-ner-0.4.1-SNAPSHOT.jar</systemPath>
 		</dependency>
 
 		<dependency>

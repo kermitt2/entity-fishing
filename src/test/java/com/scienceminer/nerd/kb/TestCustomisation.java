@@ -95,10 +95,10 @@ public class TestCustomisation {
 	}
 	
 	@After
-	public void close() {
+	public void save() {
 		try {
 			Customisation customisation = Customisation.getInstance();
-			customisation.close();
+			customisation.save();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

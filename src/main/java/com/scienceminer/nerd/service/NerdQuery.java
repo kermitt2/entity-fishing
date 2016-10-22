@@ -1,6 +1,6 @@
 package com.scienceminer.nerd.service;
 
-import com.scienceminer.nerd.lang.Language;
+import org.grobid.core.lang.Language;
 
 import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.KeyGen;
@@ -334,7 +334,7 @@ public class NerdQuery {
 		String lang = "en"; // default language
 		if (language != null) {
 			buffer.append(", \"language\": " + language.toJSON());
-			lang = language.getLang();
+			lang = language.getLangId();
 		}
 		
 		// if available, document level distribution of categories

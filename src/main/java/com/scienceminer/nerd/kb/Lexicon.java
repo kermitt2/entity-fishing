@@ -22,6 +22,7 @@ import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.lang.Language;
 import com.scienceminer.nerd.utilities.NerdProperties;
+import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.utilities.OffsetPosition;
 
 import org.wikipedia.miner.model.Wikipedia;
@@ -140,6 +141,8 @@ public class Lexicon {
             freeBaseTypeMaps.put(Language.FR, freeBaseTypeMaps_fr);*/
 			
 			LOGGER.info("End of Initialization of Wikipedia DBs");
+
+            Utilities.initGrobid();
 		}
 		catch(Exception e) {
 			LOGGER.debug(e.getMessage());
