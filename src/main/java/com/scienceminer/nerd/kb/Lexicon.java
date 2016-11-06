@@ -20,7 +20,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
-import com.scienceminer.nerd.lang.Language;
+import org.grobid.core.lang.Language;
+import org.grobid.core.utilities.LanguageUtilities;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.utilities.OffsetPosition;
