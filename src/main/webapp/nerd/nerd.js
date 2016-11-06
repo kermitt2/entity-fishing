@@ -554,7 +554,7 @@ var nerd = (function($) {
 					   		 <div class="row-fluid"><div class="span12" style="width:100%;">';
 //							 <div class="row-fluid"><div class="span11" style="width:95%;">';
  		var lang = 'en'; //default
- 		var language = responseJson.language;
+ 		var language = jsonObject.language;
  		if (language)
  			lang = language.lang;
 	    if (jsonObject['entities']) {
@@ -615,7 +615,10 @@ var nerd = (function($) {
 	                piece += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
 	            }*/
 	            // image via WikiMedia
-				piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'")</script></span>';
+//console.log(wikipedia);
+//console.log(lang);
+//console.log('lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")');
+				piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
 
 	            piece += '</td><td>';
 
@@ -661,9 +664,9 @@ var nerd = (function($) {
 		} else { 
 			// otherwise call the wikipedia API
 			var theUrl = null;
-			if (lang == 'fr')
+			if (lang === 'fr')
 				theUrl = wikimediaURL_FR + wikipedia;
-			else if (lang == 'de')
+			else if (lang === 'de')
 				theUrl = wikimediaURL_DE + wikipedia;
 			else
 				theUrl = wikimediaURL_EN + wikipedia;
@@ -894,7 +897,9 @@ var nerd = (function($) {
 				string += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
 			}*/		
 
-			string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'")</script></span>';
+			//string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'")</script></span>';
+			string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
+
 
 			string += "</td></tr></table>";
 
