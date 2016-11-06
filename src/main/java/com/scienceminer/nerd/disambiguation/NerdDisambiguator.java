@@ -38,7 +38,6 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 
 /**
- * @author Patrice Lopez
  * 
  */
 public class NerdDisambiguator {

@@ -122,7 +122,7 @@ public class Main {
     }
 
     /**
-     * Starts Grobid from command line using the following parameters:
+     * Starts nerd from command line using the following parameters:
      *
      * @param args The arguments
      */

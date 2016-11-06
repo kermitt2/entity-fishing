@@ -84,7 +84,7 @@ public abstract class IntObjectDatabase<V> extends WDatabase<Integer,V> {
 	protected void initializeCache() {
 		
 		//System.out.println("Warming cache for " + this.getName());
-		System.out.println("Warming cache... (it can take a couple of minutes, but it worths the waiting ;)");
+		System.out.println("Warming cache... (it can take a couple of minutes, but it worths the wait ;)");
 		
 		/*if (getCachePriority() == CachePriority.speed)
 			fastCache = new TIntObjectHashMap<V>();

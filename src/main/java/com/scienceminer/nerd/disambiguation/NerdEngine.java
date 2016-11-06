@@ -209,7 +209,7 @@ for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
 }*/
-		prune(candidates, nerdQuery.getNbest(), shortText, minEntityScore);
+		prune(candidates, nerdQuery.getNbest(), shortText, minEntityScore, nerdQuery.getLanguage());
 		//impactOverlap(candidates);
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
@@ -558,7 +558,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 		return localContexts;
 	}
 
-	public void prune(Map<NerdEntity, List<NerdCandidate>> candidates, boolean nbest, boolean shortText, double threshold) {
+	public void prune(Map<NerdEntity, List<NerdCandidate>> candidates, boolean nbest, boolean shortText, double threshold, Language lang) {
 		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
 		
 		// we prune candidates for each entity mention

@@ -295,7 +295,9 @@ public class ProcessText {
 				pos.start = candidate.pos;
 				pos.end = pos.start + candidate.string.length();
 				entity.setOffsets(pos);
-				results.add(entity);
+				// we have an additional check of validy based on language
+				if (validEntity(entity, lang))
+					results.add(entity);
 			}
 		}
 		catch(Exception e) {
@@ -457,9 +459,11 @@ public class ProcessText {
 							entity.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
 						}
 						for(Entity entity : localResults) {
-							if (results == null)
-								results = new ArrayList<Entity>();
-							results.add(entity);
+							if (validEntity(entity, lang)) {
+								if (results == null)
+									results = new ArrayList<Entity>();
+								results.add(entity);
+							}
 						}
 					}
 				}
@@ -549,4 +553,23 @@ public class ProcessText {
         return sb.toString();
     }
     
+    /**
+     * Validity criteria for a raw entity. The entity raw string must not be
+     * null, with additional requirements depending on language
+     */
+    private static boolean validEntity(Entity entity, String lang) {
+    	if ( (entity == null) || (entity.getRawName() == null) )
+    		return false;
+    	if (lang.equals("fr")) {
+    		// given the French Wikipedia, we need to remove 
+    		// * one letter tokens
+    		// * numerical tokens
+    		if ( (entity.getRawName().length() <= 1) || TextUtilities.test_digit(entity.getRawName()) )
+    			return false;
+    		else 
+    			return true;
+    	}
+
+    	return true;
+    }
 }

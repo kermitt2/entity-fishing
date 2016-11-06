@@ -1,4 +1,6 @@
 <image>
+afin
+ainsi
 alors
 au
 aucuns
@@ -8,12 +10,18 @@ autre
 avant
 avec
 avoir
+beaucoup
 bon
 car
 ce
 cela
+celle
+celles
+celui
 ces
 ceux
+cet
+cette
 chaque
 ci
 comme
@@ -28,6 +36,7 @@ deux
 devrait
 doit
 donc
+dont
 dos
 elle
 elles
@@ -53,6 +62,8 @@ le
 les
 leur
 là
+lors
+lorsque
 ma
 maintenant
 mais
@@ -77,12 +88,16 @@ peu
 plupart
 pour
 pourquoi
+puisqu
+puisque
 quand
 que
 quel
 quelle
 quelles
 quels
+quelque
+quelques
 qui
 sa
 sans
@@ -104,6 +119,7 @@ tes
 ton
 tous
 tout
+toujours
 trop
 très
 tu
@@ -123,9 +139,6 @@ vu
 au
 aux
 avec
-ce
-ces
-dans
 de
 des
 du

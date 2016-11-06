@@ -1,0 +1,42 @@
+training/evaluation ratio 0.8
+
+Model path: /home/lopez/grobid/grobid-home/models/nerfr/model.wapiti
+Labeling took: 4344 ms - 34.657 tokens per s
+
+===== Token-level results =====
+
+
+label			accuracy	precision	recall		f1
+
+PERSON			99.98		98.83		99.49		99.16
+ORGANISATION	99.91		95.9		95.06		95.48
+LOCATION		99.98		99.15		99.33		99.24
+BUSINESS		99.92		97.8		97.15		97.47
+INSTITUTION		99.99		97.85		85.05		91
+ARTIFACT		100			100			100			100
+
+all fields		99.96		98.03		97.64 		97.83	(micro average)
+				99.96		98.26		96.01		97.06	(macro average)
+
+===== Field-level results =====
+
+label			accuracy	precision	recall		f1
+
+PERSON			99.9		98.86		99.86		99.35
+ORGANISATION	99.36		96.37		95.13		95.75
+LOCATION		99.7		99.06		99.18		99.12
+BUSINESS		99.16		98.29		96.51		97.39
+INSTITUTION		99.9		97.37		91.36		94.27
+ARTIFACT		100			100			100			100
+
+all fields		99.67		98.35		97.66 		98		(micro average)
+				99.67		98.32		97			97.65	(macro average)
+
+===== Instance-level results =====
+
+Total expected instances: 		270
+Correct instances: 		219
+Instance-level recall:	81.11
+
+
+Split, training and evaluation for nerfr model is realized in 7268344 ms
