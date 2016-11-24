@@ -102,7 +102,7 @@ public class NerdRestProcessQuery {
 			//if (!shortText) 
 			{
 				Language lang = nerdQuery.getLanguage();
-				if ( (nerdQuery.getLanguage() == null) || (nerdQuery.getLanguage().getLangId() == null) ) {
+				if ( (nerdQuery.getLanguage() == null) || (nerdQuery.getLanguage().getLang() == null) ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 					lang = languageUtilities.runLanguageId(nerdQuery.getText());
 					nerdQuery.setLanguage(lang);
@@ -110,16 +110,16 @@ public class NerdRestProcessQuery {
 				}
 				else {
 					System.out.println("lang is already defined");
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
+					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
 				}
 				
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLangId();
+					String theLang = lang.getLang();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -318,7 +318,7 @@ public class NerdRestProcessQuery {
 			//if (!shortText) 
 			{
 				Language lang = nerdQuery.getLanguage();
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 					try {
 						lang = languageUtilities.runLanguageId(nerdQuery.getText());
@@ -327,23 +327,23 @@ public class NerdRestProcessQuery {
 						LOGGER.debug("exception language identifier for: " + nerdQuery.getText());
 						//e.printStackTrace();
 					}
-					if ( (lang != null) && (lang.getLangId() != null) ) {
+					if ( (lang != null) && (lang.getLang() != null) ) {
 						nerdQuery.setLanguage(lang);
 						LOGGER.debug(">> identified language: " + lang.toString());
 					}
 				}
 				else {
 					System.out.println("lang is already defined");
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
+					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
 				}
 			
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLangId();
+					String theLang = lang.getLang();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -540,7 +540,7 @@ public class NerdRestProcessQuery {
 			//if (!shortText) 
 			{
 				Language lang = nerdQuery.getLanguage();
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 					try {
 						lang = languageUtilities.runLanguageId(text);
@@ -549,7 +549,7 @@ public class NerdRestProcessQuery {
 						LOGGER.debug("exception language identifier for: " + text);
 						//e.printStackTrace();
 					}
-					if ( (lang != null) && (lang.getLangId() != null) ) {
+					if ( (lang != null) && (lang.getLang() != null) ) {
 						nerdQuery.setLanguage(lang);
 						LOGGER.debug(">> identified language: " + lang.toString());
 					}
@@ -557,16 +557,16 @@ public class NerdRestProcessQuery {
 				else {
 					System.out.println("lang is already defined");
 					//lang.setConfidence(1.0);
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
+					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
 				}
 			
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLangId();
+					String theLang = lang.getLang();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -657,7 +657,7 @@ public class NerdRestProcessQuery {
 			// language identification
 			// test first if the language is already indicated in the query structure
 			Language lang = nerdQuery.getLanguage();
-			if ( (lang == null) || (lang.getLangId() == null) ) {
+			if ( (lang == null) || (lang.getLang() == null) ) {
 				LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 				try {
 					lang = languageUtilities.runLanguageId(nerdQuery.getText());
@@ -666,23 +666,23 @@ public class NerdRestProcessQuery {
 					LOGGER.debug("exception language identifier for: " + nerdQuery.getText());
 					//e.printStackTrace();
 				}
-				if ( (lang != null) && (lang.getLangId() != null) ) {
+				if ( (lang != null) && (lang.getLang() != null) ) {
 					nerdQuery.setLanguage(lang);
 					LOGGER.debug(">> identified language: " + lang.toString());
 				}
 			}
 			else {
 				System.out.println("lang is already defined");
-				LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLangId().toString());
+				LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
 			}
 
-			if ( (lang == null) || (lang.getLangId() == null) ) {
+			if ( (lang == null) || (lang.getLang() == null) ) {
 				response = Response.status(Status.NOT_ACCEPTABLE).build();
 				LOGGER.debug(methodLogOut());  
 				return response;
 			}
 			else {
-				String theLang = lang.getLangId();
+				String theLang = lang.getLang();
 				if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  

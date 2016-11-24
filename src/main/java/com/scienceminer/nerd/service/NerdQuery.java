@@ -334,7 +334,7 @@ public class NerdQuery {
 		String lang = "en"; // default language
 		if (language != null) {
 			buffer.append(", \"language\": " + language.toJSON());
-			lang = language.getLangId();
+			lang = language.getLang();
 		}
 		
 		// if available, document level distribution of categories

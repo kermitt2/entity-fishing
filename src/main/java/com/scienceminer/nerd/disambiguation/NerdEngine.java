@@ -155,7 +155,7 @@ public class NerdEngine {
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
 		if (language != null) 
-			lang = language.getLangId();
+			lang = language.getLang();
 		
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
@@ -164,7 +164,7 @@ public class NerdEngine {
 			try {
 				language = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(language);
-				lang = language.getLangId();
+				lang = language.getLang();
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {
@@ -1024,7 +1024,7 @@ System.out.println("Merging...");
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
 		if (language != null) 
-			lang = language.getLangId();
+			lang = language.getLang();
 		
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
@@ -1041,7 +1041,7 @@ System.out.println("Merging...");
 			try {
 				language = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(language);
-				lang = language.getLangId();
+				lang = language.getLang();
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {

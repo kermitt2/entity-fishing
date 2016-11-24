@@ -74,8 +74,8 @@ System.out.println("lang id:" + text);
 				JSONStringer stringer = new JSONStringer();     
 			
 				stringer.object();  
-				stringer.key("lang").value(result.getLangId());  			
-				stringer.key("conf").value(result.getConfidence());  		   	
+				stringer.key("lang").value(result.getLang());  			
+				stringer.key("conf").value(result.getConf());  		   	
 				stringer.endObject();
 			
 				retVal = stringer.toString(); 
@@ -212,14 +212,14 @@ System.out.println("lang id:" + text);
 				nerdQuery.setLanguage(lang);
 				LOGGER.debug(">> identified language: " + lang.toString());
 			
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLangId();
-					double theScore	= lang.getConfidence();
+					String theLang = lang.getLang();
+					double theScore	= lang.getConf();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -240,7 +240,7 @@ System.out.println("lang id:" + text);
 				nerdQuery.setSentences(sentences);
 			}
 			List<Entity> entities = new ArrayList<Entity>();
-			if (nerdQuery.getLanguage().getLangId().equals("en") || nerdQuery.getLanguage().getLangId().equals("fr")) {
+			if (nerdQuery.getLanguage().getLang().equals("en") || nerdQuery.getLanguage().getLang().equals("fr")) {
 				entities = processText.process(nerdQuery);
 			}
 			if (!onlyNER) {
@@ -350,13 +350,13 @@ System.out.println("runtime: " + (end - start));
 				nerdQuery.setLanguage(lang);
 				LOGGER.debug(">> identified language: " + lang.toString());
 			
-				if ( (lang == null) || (lang.getLangId() == null) ) {
+				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
 				}
 				else {
-					String theLang = lang.getLangId();
+					String theLang = lang.getLang();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 						response = Response.status(Status.NOT_ACCEPTABLE).build();
 						LOGGER.debug(methodLogOut());  
@@ -494,13 +494,13 @@ System.out.println("runtime: " + (end - start));
 			nerdQuery.setLanguage(lang);
 			LOGGER.debug(">> identified language: " + lang.toString());
 		
-			if ( (lang == null) || (lang.getLangId() == null) ) {
+			if ( (lang == null) || (lang.getLang() == null) ) {
 				response = Response.status(Status.NOT_ACCEPTABLE).build();
 				LOGGER.debug(methodLogOut());  
 				return response;
 			}
 			else {
-				String theLang = lang.getLangId();
+				String theLang = lang.getLang();
 				if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  

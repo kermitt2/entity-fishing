@@ -148,7 +148,7 @@ public class ProcessText {
 		Language language = nerdQuery.getLanguage();
 		String lang = null;
 		if (language != null)
-			lang = language.getLangId();
+			lang = language.getLang();
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 		if (text == null) {
@@ -406,7 +406,7 @@ public class ProcessText {
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
 		if (language != null) 
-			lang = language.getLangId();
+			lang = language.getLang();
 		
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
@@ -415,7 +415,7 @@ public class ProcessText {
 			try {
 				language = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(language);
-				lang = language.getLangId();
+				lang = language.getLang();
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {

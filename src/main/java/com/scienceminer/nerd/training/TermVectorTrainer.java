@@ -175,7 +175,7 @@ public class TermVectorTrainer {
 						else
 							builder.append(", \n");
 						builder.append("\t\t{\n\t\t\t\"weight\" : " + category.getWeight() + ", \n\t\t\t\"source\" : \"wikipedia-" 
-							+ lang.getLangId()
+							+ lang.getLang()
 							+ "\", \n\t\t\t\"category\" : \"" + output + "\", ");
 						builder.append("\n\t\t\t\"page_id\" : " + category.getWikiPageID() + " }");
 					}
