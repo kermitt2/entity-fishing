@@ -1,0 +1,165 @@
+[
+  {
+      "type": "record",
+      "name": "PageSummary",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+        {"name": "id", "type": "int"},
+        {"name": "title", "type": "string"},
+        {"name": "namespace", "type": "int"},
+        {"name": "forwarded", "type": "boolean"}
+      ]
+    },
+   {
+      "type": "record",
+      "name": "LinkSummary",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+        {"name": "id", "type": "int"},
+        {"name": "title", "type": "string"},
+        {"name": "namespace", "type": "int"},
+        {"name": "forwarded", "type": "boolean"},
+        {
+          "name": "sentenceIndexes", 
+          "type": {
+            "type": "array",
+            "items": "int"
+          }
+        }
+      ]
+    },   
+    {
+      "type": "record",
+      "name": "PageKey",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+         {"name": "namespace", "type": "int"},
+         {"name": "title", "type": "string"}
+      ]
+    },
+    {
+    	"type": "record",
+    	"name": "LabelSummary",
+    	"namespace": "org.wikipedia.miner.extract.model.struct",
+    	"fields": [
+         	{"name": "docCount", "type": "int"},
+         	{"name": "occCount", "type": "int"}
+      	]   
+    },
+    {
+      "type": "record",
+      "name": "PageDetail",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+         {"name": "id", "type": ["int", "null"]},
+         {"name": "title", "type": ["string", "null"]},
+         {"name": "namespace", "type": ["int", "null"]},
+         {"name": "lastEdited", "type": ["long","null"]},
+         {
+          "name": "sentenceSplits", 
+          "type": {
+            "type": "array",
+            "items": "int"
+          }
+         },
+         {"name": "redirectsTo", "type": ["PageSummary","null"]},
+         {
+          "name": "redirects", 
+          "type": {
+            "type": "array",
+            "items": "PageSummary"
+          }
+         },
+         {
+          "name": "linksOut", 
+          "type": {
+            "type": "array",
+            "items": "LinkSummary"
+          }
+         },
+         {
+          "name": "linksIn", 
+          "type": {
+            "type": "array",
+            "items": "LinkSummary"
+          }
+         },
+         {
+          "name": "parentCategories", 
+          "type": {
+            "type": "array",
+            "items": "PageSummary"
+          }
+         },
+         {
+          "name": "childCategories", 
+          "type": {
+            "type": "array",
+            "items": "PageSummary"
+          }
+         },
+         {
+          "name": "childArticles", 
+          "type": {
+            "type": "array",
+            "items": "PageSummary"
+          }
+         },
+         {
+          "name": "labels", 
+          "type": {
+            "type": "map",
+            "values": "LabelSummary"
+          }
+         }
+      ]
+    },
+    
+    {
+      "type": "record",
+      "name": "PageDepthSummary",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+      	{"name": "depth", "type": ["int","null"]},
+        {"name": "depthForwarded", "type": "boolean"},
+        {
+          "name": "childIds", 
+          "type": {
+            "type": "array",
+            "items": "int"
+          }
+         }
+      ]
+    },
+    
+    {
+      "type": "record",
+      "name": "LabelSense",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+      	{"name": "id", "type": "int"},
+      	{"name": "docCount", "type": "int"},
+      	{"name": "occCount", "type": "int"},
+        {"name": "fromTitle", "type": "boolean"},
+        {"name": "fromRedirect", "type": "boolean"}
+      ]
+    },
+    
+    {
+      "type": "record",
+      "name": "LabelSenseList",
+      "namespace": "org.wikipedia.miner.extract.model.struct",
+      "fields": [
+      	{
+          "name": "senses", 
+          "type": {
+            "type": "array",
+            "items": "LabelSense"
+          }
+        }
+      ]
+    }
+    
+    
+    
+  ]

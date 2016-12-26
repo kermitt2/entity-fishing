@@ -13,8 +13,6 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;  
 
-import org.mapdb.*;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang.ArrayUtils;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -35,7 +33,8 @@ public class WikipediaDomainMap {
     private static final Logger LOGGER = LoggerFactory.getLogger(WikipediaDomainMap.class);
 
     // mapdb
-    private DB db = null;
+    //private DB db = null;
+
     private String database_path = null;
     private String database_name = "domains";
 
@@ -76,70 +75,73 @@ public class WikipediaDomainMap {
         this.lang = lang;
     }
 
+
     /**
-     * Open index for wikipedia domain map creation
+     * Open index for domains
      */
-    public void openCreate() {
-        File home = null;      
+    public void open() {
+        File home = null;
+        ObjectInputStream in = null;
         try {
-            home = new File(NerdProperties.getInstance().getMapDBPath());
+            home = new File(NerdProperties.getInstance().getMapsPath() + "/" + database_name + ".obj");
         } catch (Exception e) {
             throw new NerdException(e);
         }
         try {
-			// for the moment we use only English categories - for non-English languages we use
-			// transligual correspondences
-            // open MapDB
-            db = DBMaker
-                    .fileDB(NerdProperties.getInstance().getMapDBPath() + "/" + database_name + "-" + "en" + ".db")
-                    .fileMmapEnable()            // always enable mmap
-                    .make();
-
-            domains = db.hashMap(database_name)
-                    .keySerializer(Serializer.INTEGER)
-                    .valueSerializer(Serializer.INT_ARRAY)
-                    .make();
+            if (home.exists()) {
+                FileInputStream fileIn = new FileInputStream(home);
+                in = new ObjectInputStream(fileIn);
+                domains = (ConcurrentMap<Integer, int[]>)in.readObject();
+            } else if (domains == null) {
+                domains = new ConcurrentHashMap<Integer, int[]>();
+            }
         } catch (Exception dbe) {
-            LOGGER.debug("Error when opening MapDB.");
+            LOGGER.debug("Error when opening the domain map.");
             throw new NerdException(dbe);
+        } finally {
+            try {
+                if (in != null)
+                    in.close();
+            } catch(IOException e) {
+                LOGGER.debug("Error when closing the domain map.");
+                throw new NerdException(e);
+            }
         }
     }
-
+    
     /**
-     * Open index for wikipedia domain map usage, non transactional
+     * Close index for domains
      */
-    public void openUse() {
-        File home = null;      
+    public void save() {
+        if (domains == null)
+            return;
+        File home = null;
+        ObjectOutputStream out = null;
         try {
-            home = new File(NerdProperties.getInstance().getMapDBPath());
+            home = new File(NerdProperties.getInstance().getMapsPath() + "/" + database_name + ".obj");
         } catch (Exception e) {
             throw new NerdException(e);
         }
         try {
-            // open MapDB
-            db = DBMaker
-                    .fileDB("data/wikipedia/" + database_name + "-" + lang + ".db")
-                    .fileMmapEnable()            // always enable mmap
-                    .readOnly()
-                    .make();
-
-            domains = db.hashMap(database_name)
-                    .keySerializer(Serializer.INTEGER)
-                    .valueSerializer(Serializer.INT_ARRAY)
-                    .makeOrGet();
-        } catch (Exception dbe) {
-            LOGGER.debug("Error when opening MapDB.");
-            throw new NerdException(dbe);
+            if (home != null) {
+                FileOutputStream fileOut = new FileOutputStream(home);
+                out = new ObjectOutputStream(fileOut);
+                out.writeObject(domains);
+            }
+        } catch(IOException e) {
+            LOGGER.debug("Error when saving the domain map.");
+            throw new NerdException(e);
+        } finally {
+            try {
+                if (out != null)
+                    out.close();
+            } catch(IOException e) {
+                LOGGER.debug("Error when closing the domain map.");
+                throw new NerdException(e);
+            }
         }
     }
-
-    /**
-     * Close index wikipedia domain map
-     */
-    public void close() {
-        db.close();
-    }
-
+    
     private void loadGrispMapping() throws Exception {
         importDomains();
         wikiCat2domains = readMapping(wikiGrispMapping);

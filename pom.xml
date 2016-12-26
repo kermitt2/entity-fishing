@@ -15,6 +15,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<avro.version>1.7.5</avro.version>
+		<lmdbjni.version>0.4.6</lmdbjni.version>
 	</properties>
 	
 	<licenses>
@@ -205,14 +207,57 @@
 				</configuration>
 			</plugin>
 
+			<!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/hadoop-job.xml</descriptor>
+                    </descriptors>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.wikipedia.miner.extract.DumpExtractor</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
+
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
 		</plugins>	
 	</build>
 	
 	<profiles>
 		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapDBWikiEN -->	
-		  <id>buildMapDBWikiEN</id>
-		  <activation><property><name>buildMapDBWikiEN</name></property></activation>
+		  <!-- mvn compile exec:exec -PbuildMapWikiEN -->	
+		  <id>buildMapWikiEN</id>
+		  <activation><property><name>buildMapWikiEN</name></property></activation>
 		  <build>
 			<plugins><plugin>
 		    <groupId>org.codehaus.mojo</groupId>
@@ -231,9 +276,9 @@
 		</build>
 		</profile>
 		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapDBWikiFR -->	
-		  <id>buildMapDBWikiFR</id>
-		  <activation><property><name>buildMapDBWikiFR</name></property></activation>
+		  <!-- mvn compile exec:exec -PbuildMapWikiFR -->	
+		  <id>buildMapWikiFR</id>
+		  <activation><property><name>buildMapWikiFR</name></property></activation>
 		  <build>
 			<plugins><plugin>
 		    <groupId>org.codehaus.mojo</groupId>
@@ -252,9 +297,9 @@
 		</build>
 		</profile>
 		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapDBWikiDE -->	
-		  <id>buildMapDBWikiDE</id>
-		  <activation><property><name>buildMapDBWikiDE</name></property></activation>
+		  <!-- mvn compile exec:exec -PbuildMapWikiDE -->	
+		  <id>buildMapWikiDE</id>
+		  <activation><property><name>buildMapWikiDE</name></property></activation>
 		  <build>
 			<plugins><plugin>
 		    <groupId>org.codehaus.mojo</groupId>
@@ -452,17 +497,17 @@
 		    <systemPath>${project.basedir}/lib/je-6.4.25.jar</systemPath-->
 		</dependency>
 
-        <dependency>
+        <!--dependency>
 		    <groupId>org.elasticsearch</groupId>
 		    <artifactId>elasticsearch</artifactId>
 		    <version>1.1.1</version>
-		</dependency>
+		</dependency-->
 
-		<dependency>
+		<!--dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>2.11.1</version>
-	    </dependency>
+	    </dependency-->
 
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
@@ -498,12 +543,6 @@
 			<artifactId>weka-wrapper</artifactId>
 			<version>1.0</version>
 		</dependency>
-
-		<!--dependency>
-		    <groupId>org.elasticsearch</groupId>
-		    <artifactId>elasticsearch</artifactId>
-		    <version>1.1.1</version>
-		</dependency-->
 		
         <dependency>
 			<groupId>com.cybozu</groupId>
@@ -516,12 +555,63 @@
 			<artifactId>jsonic</artifactId>
 			<version>1.3.5</version>
 		</dependency>
-		
+
+		<!--dependency>
+            <groupId>org.mapdb</groupId>
+            <artifactId>mapdb</artifactId>
+            <version>0.9.7</version>
+		</dependency-->
+
 		<dependency>
-		   <groupId>org.mapdb</groupId>
-		   <artifactId>mapdb</artifactId>
-		   <version>3.0.0-beta5</version>
-		</dependency>
+            <groupId>net.sf.trove4j</groupId>
+            <artifactId>trove4j</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
+		<dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-core</artifactId>
+            <version>1.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-maven-plugin</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-compiler</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-mapred</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+
+        <!-- required java classes -->
+        <dependency>
+          <groupId>org.deephacks.lmdbjni</groupId>
+          <artifactId>lmdbjni</artifactId>
+          <version>${lmdbjni.version}</version>
+        </dependency>
+
+        <!-- prebuilt liblmdb platform packages -->
+        <dependency>
+          <groupId>org.deephacks.lmdbjni</groupId>
+          <artifactId>lmdbjni-linux64</artifactId>
+          <version>${lmdbjni.version}</version>
+        </dependency>
 
 	</dependencies>
 		

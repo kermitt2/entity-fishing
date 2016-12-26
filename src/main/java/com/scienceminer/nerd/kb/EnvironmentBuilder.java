@@ -55,23 +55,11 @@ public class EnvironmentBuilder {
         try {
             wikipediaDomainMap.setWikipedia(wikipedia);
             wikipediaDomainMap.setLang(lang);
-            wikipediaDomainMap.openCreate();
+            wikipediaDomainMap.open();
             wikipediaDomainMap.createAllMappings();
         } finally {
-            wikipediaDomainMap.close();
+            wikipediaDomainMap.save();
         }
-
-        // mapping FreeBase types / domains for all pageid
-        /*System.out.println("Generating types for all Wikipedia articles...");
-        FreeBaseTypeMap freeBaseTypeMap = new FreeBaseTypeMap();
-        try {
-            freeBaseTypeMap.setWikipedia(wikipedia);
-            freeBaseTypeMap.setLang(lang);
-            freeBaseTypeMap.openCreate();
-            freeBaseTypeMap.createAllMappings();
-        } finally {
-            freeBaseTypeMap.close();
-        }*/
     }
     
 }

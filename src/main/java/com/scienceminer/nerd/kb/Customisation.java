@@ -190,37 +190,6 @@ public final class Customisation {
 		try {
 			if (cDB == null)
 				open();
-		/*connectMongoDB();
-		String message = null;
-		if (collectionCustomisation == null) {
-			collectionCustomisation = db.getCollection("nerd-customisation");	
-			collectionCustomisation.ensureIndex(new BasicDBObject("name", 1)); 
-		}
-		try {
-			DBObject dbObject = (DBObject)JSON.parse(profile);
-			cleanJsonDoc(dbObject);
-			// test if the customisation exists
-			BasicDBObject where = new BasicDBObject();
-			where.put("name", name);
-			DBObject doc = collectionCustomisation.findOne(where);
-			if (doc == null) {		   
-				 message = "Resource was not found";
-			}
-			else {
-				// merge the fields of doc and dbObject, 
-				// converted into JSON jackson objects for merging
-				//JsonNode resJsonStruct1 = mapper.readTree(doc.toString());
-				//JsonNode resJsonStruct2 = mapper.readTree(dbObject.toString());
-				//JsonNode mergedJson = merge(resJsonStruct1, resJsonStruct2);
-				merge(doc, dbObject);
-				BasicDBObject searchQuery = new BasicDBObject().append("name", name);
-				collectionCustomisation.update(searchQuery, doc);
-				
-				//collectionCustomisation.remove(doc);
-				//DBObject newDoc = (DBObject)JSON.parse(mergedJson.toString());
-				//collectionCustomisation.insert(newDoc);
-				message = "OK";
-			}*/
 		}
 		catch(Exception e) {
 			LOGGER.debug("Cannot extend customisation.");

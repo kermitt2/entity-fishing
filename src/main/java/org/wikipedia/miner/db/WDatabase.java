@@ -30,7 +30,6 @@ import com.sleepycat.je.DatabaseNotFoundException;
 import com.sleepycat.je.LockMode;
 import com.sleepycat.je.OperationStatus;
 
-import org.mapdb.*;
 import java.util.concurrent.*;
 
 /**
@@ -178,9 +177,6 @@ public abstract class WDatabase<K,V> {
 
 	protected WEnvironment env ;
 	private Database database ;
-
-	// PL: mapdb
-	//private DB db = null;
 
 	protected EntryBinding<K> keyBinding ;
 	protected EntryBinding<V> valueBinding ;

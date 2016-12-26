@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.model.*;
-//import org.wikipedia.miner.annotation.Disambiguator;
 import weka.core.*;
 import weka.classifiers.*;
 
@@ -58,7 +57,7 @@ public class NerdEngine {
 	private Map<String, NerdDisambiguator> disambiguators = null;
 	private Relatedness relatedness = null;
 	private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
-	private Map<String, FreeBaseTypeMap> freeBaseTypeMaps = null;
+	//private Map<String, FreeBaseTypeMap> freeBaseTypeMaps = null;
 	
 	static public int maxContextSize = 15;	
 	static public int maxLabelLength = 50;

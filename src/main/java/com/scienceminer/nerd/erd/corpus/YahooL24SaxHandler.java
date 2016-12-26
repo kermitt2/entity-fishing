@@ -7,7 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import static org.elasticsearch.common.xcontent.XContentFactory.*;
+/*import static org.elasticsearch.common.xcontent.XContentFactory.*;
 import static org.elasticsearch.node.NodeBuilder.*;
 import org.elasticsearch.common.settings.*;
 import org.elasticsearch.client.*;
@@ -23,7 +23,7 @@ import org.elasticsearch.index.query.FilterBuilders.*;
 import org.elasticsearch.index.query.QueryBuilders.*;
 import org.elasticsearch.search.*;
 import org.elasticsearch.index.query.*;
-import org.elasticsearch.search.sort.*;
+import org.elasticsearch.search.sort.*;*/
 
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
@@ -53,7 +53,7 @@ public class YahooL24SaxHandler extends DefaultHandler {
 	private String currentWiki = null;
 	
 	private ObjectMapper mapper = new ObjectMapper();
-	private String elasticSearch_ERD_KB = null;//NerdProperties.getInstance().getElasticSearchERDKBName();
+	//private String elasticSearch_ERD_KB = null;//NerdProperties.getInstance().getElasticSearchERDKBName();
 	
     public YahooL24SaxHandler() {
 		queries = new ArrayList<String>();
@@ -101,7 +101,7 @@ public class YahooL24SaxHandler extends DefaultHandler {
   			// - at least 3 tokens
 			if ( (currentQuery != null) && (currentMention != null) && (currentWiki != null) ) {
 				String freeBaseID = null;
-				Settings settings = ImmutableSettings.settingsBuilder()
+				/*Settings settings = ImmutableSettings.settingsBuilder()
 				        .put("client.transport.sniff", true).build();
 				Client client = new TransportClient(settings)
 				        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
@@ -136,7 +136,7 @@ public class YahooL24SaxHandler extends DefaultHandler {
 						e.printStackTrace();
 					}
 				}
-				
+				*/
 				if (freeBaseID != null) {
 					ErdAnnotationShort a = new ErdAnnotationShort();
 					a.setQid("yahoo-"+(queries.size()-1));
@@ -147,7 +147,7 @@ public class YahooL24SaxHandler extends DefaultHandler {
 					annotations.add(a);
 				}
 				
-				client.close();
+				//client.close();
 			}
 			currentQuery = null;
 			currentMention = null;

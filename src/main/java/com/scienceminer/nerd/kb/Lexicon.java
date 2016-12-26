@@ -47,7 +47,7 @@ public class Lexicon {
     private Map<String, Set<String>> dictionaries = null;
 	private Map<String, Wikipedia> wikipedias = null;
     private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
-    private Map<String, FreeBaseTypeMap> freeBaseTypeMaps = null;
+    //private Map<String, FreeBaseTypeMap> freeBaseTypeMaps = null;
 
     public static Lexicon getInstance() {
         if (instance == null) {
@@ -81,7 +81,7 @@ public class Lexicon {
 			LOGGER.info("Initiating Wikipedia DBs");
 			wikipedias = new HashMap<String, Wikipedia>(); 
             wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
-            freeBaseTypeMaps = new HashMap<String,FreeBaseTypeMap>();
+            //freeBaseTypeMaps = new HashMap<String,FreeBaseTypeMap>();
 			
 			WikipediaConfiguration conf = 
 				new WikipediaConfiguration(new File("data/wikipedia/wikipedia-en.xml"));
@@ -94,7 +94,7 @@ public class Lexicon {
             WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap();
             wikipediaDomainMaps_en.setLang(Language.EN);
             wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
-            wikipediaDomainMaps_en.openUse();
+            wikipediaDomainMaps_en.open();
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
             
             /*FreeBaseTypeMap freeBaseTypeMaps_en = new FreeBaseTypeMap();
@@ -328,7 +328,7 @@ public class Lexicon {
         return wikipediaDomainMaps;
     }
 
-    public Map<String, FreeBaseTypeMap> getFreeBaseTypeMaps () {
+    /*public Map<String, FreeBaseTypeMap> getFreeBaseTypeMaps () {
         return freeBaseTypeMaps;
-    }
+    }*/
 }

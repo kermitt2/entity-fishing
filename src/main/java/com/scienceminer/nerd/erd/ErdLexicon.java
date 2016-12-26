@@ -26,7 +26,7 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 
-import static org.elasticsearch.common.xcontent.XContentFactory.*;
+/*import static org.elasticsearch.common.xcontent.XContentFactory.*;
 import static org.elasticsearch.node.NodeBuilder.*;
 import org.elasticsearch.client.*;
 import org.elasticsearch.common.settings.*;
@@ -41,7 +41,7 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.FilterBuilders.*;
 import org.elasticsearch.index.query.QueryBuilders.*;
 import org.elasticsearch.search.*;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.*;*/
 
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
@@ -57,13 +57,13 @@ public class ErdLexicon {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ErdLexicon.class);
 
-	private String elasticSearch_host = NerdProperties.getInstance().getElasticSearchHost();
+	/*private String elasticSearch_host = NerdProperties.getInstance().getElasticSearchHost();
 	private String elasticSearch_port = NerdProperties.getInstance().getElasticSearchPort();
 	private String elasticSearch_KB = null; //NerdProperties.getInstance().getElasticSearchLexiconERDName();
-	private String elasticSearch_ERD_KB = null; //NerdProperties.getInstance().getElasticSearchERDKBName();
+	private String elasticSearch_ERD_KB = null; //NerdProperties.getInstance().getElasticSearchERDKBName();*/
 
-	private Client client = null;
-	private Node node = null;
+	//private Client client = null;
+	//private Node node = null;
 
 	private static volatile ErdLexicon instance = null;
 
@@ -83,19 +83,19 @@ public class ErdLexicon {
 	}
 	
 	public ErdLexicon() throws Exception {
-		Settings settings = ImmutableSettings.settingsBuilder()
+		/*Settings settings = ImmutableSettings.settingsBuilder()
 		        .put("cluster.name", NerdProperties.getInstance().getElasticSearchClusterName()).build();
 		Client client = new TransportClient(settings)
 		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
 		if (!client.admin().indices().prepareExists(elasticSearch_KB).execute().actionGet().isExists()) 
 			createIndex(elasticSearch_KB);
-		client.close();
+		client.close();*/
 	} 
 
 	/**
 	 * @param db name of the index to be deleted.
 	 */
-	private boolean deleteIndex(String db) throws Exception {
+	/*private boolean deleteIndex(String db) throws Exception {
 		boolean val = false;
 		try {
 			String urlStr = "http://"+elasticSearch_host+":"+elasticSearch_port+"/"+db;
@@ -117,12 +117,12 @@ public class ErdLexicon {
 			throw new NerdException("Cannot delete the index for " + db);
 		}
 		return val;
-	}
+	}*/
 
 	/**
 	 * @param db name of the index to be created and loaded.
 	 */
-	private boolean createIndex(String db) throws Exception {
+	/*private boolean createIndex(String db) throws Exception {
 		boolean val = false;
 System.out.println(db);
 		String urlStr = "http://"+elasticSearch_host+":"+elasticSearch_port+"/"+db;
@@ -169,13 +169,13 @@ System.out.println(db);
 		System.out.println("\n" + total + " entries have been intialised in the index " + db);
 		
 		return val;
-	}
+	}*/
 
 	/**
 	 *  @param db name of the CouchDB database to be loaded.
 	 *  @param type if type is 0, the patent mappings are used. if type is 1, NPL mappings are used.
 	 */
-	private boolean loadMapping(String db) throws Exception {
+	/*private boolean loadMapping(String db) throws Exception {
 		boolean val = false;
 
 		String urlStr = "http://"+elasticSearch_host+":"+elasticSearch_port+"/"+db;
@@ -211,12 +211,12 @@ System.out.println(db);
 			val = true;
 		}
 		return val;
-	}
+	}*/
 	
 	/**
 	 *  Add conditional prob for a string to realise a given concept, using Google crosswiki dataset
 	 */
-	public int importKB(String db) throws Exception {
+	/*public int importKB(String db) throws Exception {
 		//int modifications = 0;
 		int modifications = 30000000;
 		Settings settings = ImmutableSettings.settingsBuilder()
@@ -240,14 +240,6 @@ System.out.println(db);
                 if (l.length() == 0) continue;
 				total++;
 				
-				/*if (l.startsWith("Bowflex") || l.startsWith("bowflex")) {
-					System.out.println(l);
-					continue;
-				}
-				else if (true) {
-					continue;
-				}*/
-				
 				if ((((float)(total))/300000000) < 0.88126665) {
 					if (total % 100000 == 0) {
 						System.out.println(((float)(total))/300000000);
@@ -256,10 +248,6 @@ System.out.println(db);
 					continue;
 				}
 				
-				/*if (true) {
-					System.out.println(l);				
-					continue;
-				}*/
 				String[] tokens = l.split("\t");			
 				if (tokens.length != 2) 
 					continue;
@@ -303,9 +291,6 @@ System.out.println(db);
 					//System.out.println("rejecting... " + surface);
 					continue;
 				}
-				/*else {
-					System.out.println("keeping... " + surface);
-				}*/
 				
 				// wikipedia url / e.g. concept	
 				String wikiconcept = tokens2[1];
@@ -378,7 +363,7 @@ System.out.println(db);
 		}
 		client.close();
 		return modifications;
-	}
+	}*/
 	
 	static private Pattern pattern_words = 
 		Pattern.compile("(wiki|article about|http|see also|bibliography|external link|disambiguation|biography|references|artikel|link|here|source|more)");
@@ -442,7 +427,7 @@ System.out.println(db);
 		return res;
 	}
 	
-	private boolean updateIndex(String surface, 
+	/*private boolean updateIndex(String surface, 
 							Double prob_c, 
 							String wikiconcept, 
 							int num,
@@ -453,7 +438,7 @@ System.out.println(db);
 	   	boolean res = false;
 	   	try {	
 			// we can update only if the wikipedia concept is present in the ERD KB.
-			/*SearchResponse response = client.prepareSearch(elasticSearch_ERD_KB)
+			SearchResponse response = client.prepareSearch(elasticSearch_ERD_KB)
 					.setQuery(QueryBuilders.termQuery("originalIDs.Wikipedia", wikiconcept))    
 			        .setFrom(0)
 					.setSize(1)
@@ -461,7 +446,7 @@ System.out.println(db);
 			        .actionGet();
 						
 			java.util.Iterator<SearchHit> hit_it = response.getHits().iterator();
-			if (hit_it.hasNext()) */
+			if (hit_it.hasNext()) 
 			{
 				XContentBuilder builder = jsonBuilder();
 			
@@ -483,12 +468,12 @@ System.out.println(db);
 			e.printStackTrace();
 		}
 		return res;										
-	}
+	}*/
 	
 	/**
      *	Launch the ElasticSearch indexing from the MySQL content.
      */
-    public static void main(String[] args)
+    /*public static void main(String[] args)
         throws IOException, ClassNotFoundException, 
                InstantiationException, IllegalAccessException {
 		ErdLexicon lex = null;
@@ -502,6 +487,6 @@ System.out.println(db);
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }

@@ -75,7 +75,6 @@ public class MarkupStripper {
 		regions = gatherMisformattedStarts(clearedMarkup);
 		clearedMarkup = stripRegions(clearedMarkup, regions, replacement);
 		
-		
 		return clearedMarkup;
 	}
 
@@ -354,18 +353,23 @@ public class MarkupStripper {
 
 			int[] region = regions.elementAt(i);
 
-
 			//only deal with this region is not within a region we have already delt with. 
 			if (region[0] < lastPos) {
 
 				//print (" - - dealing with it\n");
 
 				//copy markup after this region and before beginning of the last region we delt with
-				if (region[1] < lastPos) 
+				if (region[1] < lastPos) {
 					clearedMarkup.insert(0, markup.substring(region[1], lastPos));
+				}
 
 				if (replacement != null) {
-					String fill = markup.substring(region[0],region[1]).replaceAll(".", replacement.toString());
+					// PL: this should be investigated - in some cases the region end position goes beyond
+					// the markup limit 
+					int region1pos = region[1];
+					if (region1pos > markup.length())
+						region1pos = markup.length();
+					String fill = markup.substring(region[0],region1pos).replaceAll(".", replacement.toString());
 					clearedMarkup.insert(0, fill);
 				}
 
