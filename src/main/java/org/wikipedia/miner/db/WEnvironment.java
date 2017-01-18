@@ -1,20 +1,18 @@
 package org.wikipedia.miner.db;
 
+import com.scienceminer.nerd.utilities.*;
 
-//import gnu.trove.set.hash.TIntHashSet;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.concurrent.*;
+import java.math.BigInteger;
 
 import javax.xml.stream.XMLStreamException;
 
-import com.sleepycat.je.*;
 import org.apache.commons.compress.compressors.CompressorException;
 
 import org.apache.log4j.Logger;
+
 import org.wikipedia.miner.db.WDatabase.DatabaseType;
 import org.wikipedia.miner.db.struct.*; 
 import org.wikipedia.miner.model.Wikipedia;
@@ -22,10 +20,14 @@ import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.util.text.TextProcessor;
 
+import org.apache.hadoop.record.*;
+
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
+
 /**
  * A wrapper for {@link Environment}, that keeps track of all of the databases required for a single dump of Wikipedia.
  * 
- *  It is unlikely that you will want to work with this class directly: use {@link Wikipedia} instead.
  */
 public class WEnvironment  {
 	
@@ -72,9 +74,7 @@ public class WEnvironment  {
 	
 
 	private WikipediaConfiguration conf ;
-	private Environment env ;
 	private PreparationThread prepThread ;
-	
 	
 	private WDatabase<Integer, DbPage> dbPage ;
 	private LabelDatabase dbLabel ;
@@ -327,52 +327,60 @@ public class WEnvironment  {
 	 * @param threaded true if this should be prepared (e.g. cached to memory) in a separate thread, otherwise false
 	 * @throws EnvironmentLockedException if the underlying {@link Environment} is unavailable
 	 */
-	public WEnvironment(WikipediaConfiguration conf, boolean threaded) throws EnvironmentLockedException {
+	//public WEnvironment(WikipediaConfiguration conf, boolean threaded) {
 
-		this.conf = conf ;
+		//this.conf = conf ;
 		
-		
-		EnvironmentConfig envConf = new EnvironmentConfig() ;
+		/*EnvironmentConfig envConf = new EnvironmentConfig() ;
 		envConf.setAllowCreate(false) ;
 		envConf.setReadOnly(true) ;
 		envConf.setCachePercent(10) ;
-		env = new Environment(conf.getDatabaseDirectory(), envConf) ;
+		env = new Environment(conf.getDatabaseDirectory(), envConf) ;*/
 		
-		initDatabases() ;
-				
-		prepThread = new PreparationThread(conf) ;
+		//initDatabases();
+		
+		/*prepThread = new PreparationThread(conf) ;
 		if (threaded)
 			prepThread.start() ;
 		else
-			prepThread.doPreparation() ;
-	}
+			prepThread.doPreparation() ;*/
+		/*try {
+			buildEnvironment(this.conf, this.conf.getDataDirectory(), true);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}*/
+	//}
 	
-	
-	
-	private WEnvironment(WikipediaConfiguration conf) {
+	public WEnvironment(WikipediaConfiguration conf) {
 		
 		this.conf = conf ;
 		
 		initDatabases() ;
+		//conf.setArticlesOfInterest(getValidArticleIds(conf.getMinLinksIn(), null)) ;
 		
-		EnvironmentConfig envConf = new EnvironmentConfig() ;
+		/*EnvironmentConfig envConf = new EnvironmentConfig() ;
 		envConf.setCachePercent(10) ;
 		
 		envConf.setAllowCreate(true) ;
 		envConf.setReadOnly(false) ;
 		
-		env = new Environment(conf.getDatabaseDirectory(), envConf) ;
-		
+		env = new Environment(conf.getDatabaseDirectory(), envConf) ;*/
+		/*try {
+			buildEnvironment(this.conf, this.conf.getDataDirectory(), true);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}*/
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void initDatabases() {
+		System.out.println("init Environment for language " + conf.getLangCode());
 		
 		WDatabaseFactory dbFactory = new WDatabaseFactory(this) ;
 		
 		databasesByType = new HashMap<DatabaseType, WDatabase>() ;
 		
-		dbPage = dbFactory.buildPageDatabase() ;
+		dbPage = dbFactory.buildPageDatabase();
 		databasesByType.put(DatabaseType.page, dbPage) ;
 		
 		dbLabel = dbFactory.buildLabelDatabase() ;
@@ -467,9 +475,11 @@ public class WEnvironment  {
 	 * @return true if the environment is ready to be searched for labels using the given text processor, otherwise false 
 	 */
 	public boolean isPreparedFor(TextProcessor tp) {
-		
-		LabelDatabase db = getDbLabel(tp) ;
-		return db.exists() ;	
+		//LabelDatabase db = getDbLabel(tp) ;
+		if (dbLabel == null)
+			return false;
+		else
+			return dbLabel.isLoaded() ;	
 	}
 	
 	
@@ -518,28 +528,33 @@ public class WEnvironment  {
 		if (tracker == null) tracker = new ProgressTracker(1, WEnvironment.class) ;
 		tracker.startTask(dbPageLinkIn.getDatabaseSize(), "gathering valid page ids") ;
 
-		WIterator<Integer, DbLinkLocationList> iter = dbPageLinkIn.getIterator() ;
+		//WIterator<Integer, DbLinkLocationList> iter = dbPageLinkIn.getIterator();
+		WIterator iter = dbPageLinkIn.getIterator();
 		
 		while (iter.hasNext()) {
-			
-			WEntry<Integer, DbLinkLocationList> e = iter.next() ;
-						
-			if (e.getValue().getLinkLocations().size() > minLinkCount) 
-				pageIds.put(e.getKey(), e.getKey()) ;
-			
+			//WEntry<Integer, DbLinkLocationList> e = iter.next() ;
+			Entry entry = iter.next() ;
+			byte[] keyData = entry.getKey();
+			byte[] valueData = entry.getValue();
+			try {
+				WEntry<Integer, DbLinkLocationList> e = 
+					new WEntry<Integer, DbLinkLocationList>(new BigInteger(keyData).intValue(), 
+															(DbLinkLocationList)Utilities.deserialize(valueData));
+				if (e.getValue().getLinkLocations().size() > minLinkCount) 
+					pageIds.put(e.getKey(), e.getKey()); // PL: why a map ??
+			} catch(Exception e) {
+				Logger.getLogger(WEnvironment.class).error("Failed deserialize");
+			}
+
 			tracker.update();
 		}
 		
 		iter.close() ;
-					
 		return pageIds ;
 	}
 
-
-
-
 	
-	protected void cleanAndCheckpoint() throws DatabaseException{
+	/*protected void cleanAndCheckpoint() throws DatabaseException{
 		
 		Logger.getLogger(WEnvironment.class).info("Starting cleaning") ;
 		boolean anyCleaned = false;
@@ -558,7 +573,7 @@ public class WEnvironment  {
 			
 			Logger.getLogger(WEnvironment.class).info("Finished checkpoint") ;
 		}
-	}
+	}*/
 
 
 
@@ -611,40 +626,39 @@ public class WEnvironment  {
 
 		public void doPreparation() {
 			
-			boolean mustGatherIds = (conf.getMinLinksIn() > 0 && !conf.getDatabasesToCache().isEmpty()) && conf.getArticlesOfInterest() == null ;
+			boolean mustGatherIds = conf.getMinLinksIn() > 0 && //!conf.getDatabasesToCache().isEmpty()) && 
+				conf.getArticlesOfInterest() == null ;
 			
-			int taskCount = conf.getDatabasesToCache().size() + 1;
-			if (mustGatherIds)
-				taskCount++ ;
+			//int taskCount = conf.getDatabasesToCache().size() + 1;
+			//if (mustGatherIds)
+			//	taskCount++ ;
 			
-			tracker = new ProgressTracker(taskCount, WEnvironment.class) ;
+			//tracker = new ProgressTracker(taskCount, WEnvironment.class) ;
 			
 			try {
-				tracker.startTask(1, "Connecting to database") ;
+				//tracker.startTask(1, "Connecting to database") ;
 				
+				//dbStatistics.cache(conf, null) ;
 				
-				dbStatistics.cache(conf, null) ;
-				
-				tracker.update();
+				//tracker.update();
 				
 				if (mustGatherIds)
-					conf.setArticlesOfInterest(getValidArticleIds(conf.getMinLinksIn(), tracker)) ;
+					conf.setArticlesOfInterest(getValidArticleIds(conf.getMinLinksIn(), null)) ;
 				
-				for(DatabaseType dbName:conf.getDatabasesToCache()) {
-					
+				/*for(DatabaseType dbName : conf.getDatabasesToCache()) {
 					if (dbName == DatabaseType.label)
 						getDbLabel(conf.getDefaultTextProcessor()).cache(conf, tracker) ;
 					else
 						getDatabase(dbName).cache(conf, tracker) ;
-				}
+				}*/
 				
-				conf.setArticlesOfInterest(null) ;
+				//conf.setArticlesOfInterest(null) ;
 				
-				System.gc() ;
+				//System.gc() ;
 				
 			} catch (Exception e) {
 				failureCause = e ;
-			} ;
+			}
 
 			completed = true ;
 		}
@@ -673,12 +687,12 @@ public class WEnvironment  {
 		}
 	}
 	
-	@Override
+	/*@Override
 	public void finalize() {
 		if (env != null) {
 			Logger.getLogger(WIterator.class).warn("Unclosed enviroment. You may be causing a memory leak.") ;
 		}
-	}
+	}*/
 	
 	
 	
@@ -696,8 +710,8 @@ public class WEnvironment  {
 	 * @throws IOException if any of the required files cannot be read
 	 * @throws XMLStreamException if the XML dump of wikipedia cannot be parsed
 	 */
-	public static void buildEnvironment(WikipediaConfiguration conf, File dataDirectory, boolean overwrite) throws IOException, XMLStreamException, CompressorException {
-		
+	public void buildEnvironment(WikipediaConfiguration conf, File dataDirectory, boolean overwrite) throws IOException, XMLStreamException, CompressorException {
+System.out.println("building Environment for language " + conf.getLangCode());	
 		//check all files exist and are readable before doing anything
 		
 		File statistics = getDataFile(dataDirectory, "stats.csv") ;
@@ -722,45 +736,88 @@ public class WEnvironment  {
 		
 		File markup = getMarkupDataFile(dataDirectory) ;
 		
-		
-		
 		//now load databases
 		
 		if (!conf.getDatabaseDirectory().exists())
 			conf.getDatabaseDirectory().mkdirs() ;
 		
-		WEnvironment env = new WEnvironment(conf) ;
+		//WEnvironment env = new WEnvironment(conf) ;
+		/*boolean mustGatherIds = conf.getMinLinksIn() > 0 && conf.getArticlesOfInterest() == null ;			
+		try {
+			if (mustGatherIds)
+				conf.setArticlesOfInterest(env.getValidArticleIds(conf.getMinLinksIn(), null)) ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+
+		//System.out.println("Building statistics db");
+		dbStatistics.loadFromCsvFile(statistics, overwrite, null) ;
+
+		//System.out.println("Building Page db");
+		dbPage.loadFromCsvFile(page, overwrite, null) ;
+
+		//System.out.println("Building Label db");
+		dbLabel.loadFromCsvFile(label, overwrite, null) ;
+
+		//System.out.println("Building LabelsForPage db");
+		dbLabelsForPage.loadFromCsvFile(pageLabel, overwrite, null) ;
 		
-		env.dbStatistics.loadFromCsvFile(statistics, overwrite, null) ;
-		env.dbPage.loadFromCsvFile(page, overwrite, null) ;
-		env.dbLabel.loadFromCsvFile(label, overwrite, null) ;
-		env.dbLabelsForPage.loadFromCsvFile(pageLabel, overwrite, null) ;
+		//System.out.println("Building ArticlesByTitle db");
+		dbArticlesByTitle.loadFromCsvFile(page, overwrite, null) ;
+
+		//System.out.println("Building CategoriesByTitle db");
+		dbCategoriesByTitle.loadFromCsvFile(page, overwrite, null) ;
+
+		//System.out.println("Building TemplatesByTitle db");
+		dbTemplatesByTitle.loadFromCsvFile(page, overwrite, null) ;
 		
-		env.dbArticlesByTitle.loadFromCsvFile(page, overwrite, null) ;
-		env.dbCategoriesByTitle.loadFromCsvFile(page, overwrite, null) ;
-		env.dbTemplatesByTitle.loadFromCsvFile(page, overwrite, null) ;
+		//System.out.println("Building RedirectTargetBySource db");
+		dbRedirectTargetBySource.loadFromCsvFile(redirectTargetBySource, overwrite, null) ;
+
+		//System.out.println("Building RedirectSourcesByTarget db");
+		dbRedirectSourcesByTarget.loadFromCsvFile(redirectSourcesByTarget, overwrite, null) ;
 		
-		env.dbRedirectTargetBySource.loadFromCsvFile(redirectTargetBySource, overwrite, null) ;
-		env.dbRedirectSourcesByTarget.loadFromCsvFile(redirectSourcesByTarget, overwrite, null) ;
+		//System.out.println("Building PageLinkIn db");
+		dbPageLinkIn.loadFromCsvFile(pageLinksIn, overwrite, null) ;
+
+		//System.out.println("Building PageLinkInNoSentences db");
+		dbPageLinkInNoSentences.loadFromCsvFile(pageLinksIn, overwrite, null) ;
+
+		//System.out.println("Building PageLinkOut db");
+		dbPageLinkOut.loadFromCsvFile(pageLinksOut, overwrite, null) ;
 		
-		env.dbPageLinkIn.loadFromCsvFile(pageLinksIn, overwrite, null) ;
-		env.dbPageLinkInNoSentences.loadFromCsvFile(pageLinksIn, overwrite, null) ;
-		env.dbPageLinkOut.loadFromCsvFile(pageLinksOut, overwrite, null) ;
-		env.dbPageLinkOutNoSentences.loadFromCsvFile(pageLinksOut, overwrite, null) ;
-		env.dbPageLinkCounts.loadFromCsvFiles(pageLinksIn, pageLinksOut, overwrite, null) ;
+		//System.out.println("Building PageLinkOutNoSentences db");
+		dbPageLinkOutNoSentences.loadFromCsvFile(pageLinksOut, overwrite, null) ;
 		
-		env.dbCategoryParents.loadFromCsvFile(categoryParents, overwrite, null) ;
-		env.dbArticleParents.loadFromCsvFile(articleParents, overwrite, null) ;
-		env.dbChildCategories.loadFromCsvFile(childCategories, overwrite, null) ;
-		env.dbChildArticles.loadFromCsvFile(childArticles, overwrite, null) ;
+		//System.out.println("Building PageLinkCounts db");
+		dbPageLinkCounts.loadFromCsvFiles(pageLinksIn, pageLinksOut, overwrite, null) ;
 		
-		env.dbSentenceSplits.loadFromCsvFile(sentenceSplits, overwrite, null) ;
+		//System.out.println("Building CategoryParents db");
+		dbCategoryParents.loadFromCsvFile(categoryParents, overwrite, null) ;
 		
-		env.dbTranslations.loadFromCsvFile(translations, overwrite, null) ;
+		//System.out.println("Building ArticleParents db");
+		dbArticleParents.loadFromCsvFile(articleParents, overwrite, null) ;
 		
-		env.dbMarkup.loadFromXmlFile(markup, overwrite, null) ;
+		//System.out.println("Building ChildCategories db");
+		dbChildCategories.loadFromCsvFile(childCategories, overwrite, null) ;
 		
-		env.close();
+		//System.out.println("Building ChildArticles db");
+		dbChildArticles.loadFromCsvFile(childArticles, overwrite, null) ;
+		
+		//System.out.println("Building SentenceSplits db");
+		dbSentenceSplits.loadFromCsvFile(sentenceSplits, overwrite, null) ;
+		
+		//System.out.println("Building Translations db");
+		dbTranslations.loadFromCsvFile(translations, overwrite, null) ;
+		
+		//System.out.println("Building Markup db");
+		dbMarkup.loadFromXmlFile(markup, overwrite, null) ;
+		
+		// create cache
+		//if (!dbPage.isCached())
+		//	dbPage.caching(conf);
+
+		//env.close();
 		
 //		TextProcessor tp = conf.getDefaultTextProcessor() ;
 //		if (tp != null) {
@@ -770,6 +827,8 @@ public class WEnvironment  {
 //			
 //			prepareTextProcessor(tp, conf, tmpDir, overwrite, 5) ;
 //		}
+		System.out.println("Environment built - " + dbPage.getDatabaseSize() + " pages.");
+
 	}
 	
 	/**
@@ -799,13 +858,13 @@ public class WEnvironment  {
 		LabelDatabase db = env.getDbLabel(tp) ;
 		db.prepare(tempDirectory, passes) ;
 		
-		env.cleanAndCheckpoint() ;
+		//env.cleanAndCheckpoint() ;
 		env.close();
 	}
 	
-	protected Environment getEnvironment() {
+	/*protected Environment getEnvironment() {
 		return env ;
-	}
+	}*/
 	
 	
 	private static File getDataFile(File dataDirectory, String fileName) throws IOException {

@@ -1,41 +1,31 @@
 package org.wikipedia.miner.db;
 
-
-//import gnu.trove.set.hash.TIntHashSet;
-
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.TreeMap;
+import java.io.*;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.hadoop.record.CsvRecordInput;
+import java.math.BigInteger;
+
+import com.scienceminer.nerd.utilities.*;
+
 import org.wikipedia.miner.db.WDatabase.DatabaseType;
 import org.wikipedia.miner.db.struct.DbPage;
 import org.wikipedia.miner.model.Page.PageType;
 import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 
-import com.sleepycat.bind.EntryBinding;
-import com.sleepycat.bind.tuple.IntegerBinding;
-import com.sleepycat.bind.tuple.StringBinding;
-import com.sleepycat.je.Database;
-import com.sleepycat.je.DatabaseEntry;
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
 
-public class TitleDatabase extends WDatabase<String,Integer>{
+public class TitleDatabase extends StringIntDatabase {
 
 	public TitleDatabase(WEnvironment env, DatabaseType type) {
-		super(env, type, new StringBinding(), new IntegerBinding());
+		super(env, type);
 
 		if (type != DatabaseType.articlesByTitle && type != DatabaseType.categoriesByTitle && type != DatabaseType.templatesByTitle) 
 			throw new IllegalArgumentException("type must be either DatabaseType.articlesByTitle, DatabaseType.categoriesByTitle or DatabaseType.templatesByTitle") ;
-
 	}
 
 	@Override
@@ -63,44 +53,22 @@ public class TitleDatabase extends WDatabase<String,Integer>{
 	}
 
 	@Override
-	public Integer filterCacheEntry(WEntry<String, Integer> e,
-			WikipediaConfiguration conf) {
-
-		//TIntHashSet validIds = conf.getArticlesOfInterest() ;
-		ConcurrentMap validIds = conf.getArticlesOfInterest();
-
-		if (getType() == DatabaseType.articlesByTitle) {
-			//if (validIds != null && !validIds.contains(e.getValue()))
-			if (validIds != null && (validIds.get(e.getValue()) == null) )
-				return null ;
-
-
-		}
-
-		return e.getValue();
-	}
-
-	@Override
 	public void loadFromCsvFile(File dataFile, boolean overwrite, ProgressTracker tracker) throws IOException  {
-
-		if (exists() && !overwrite)
+		if (isLoaded && !overwrite)
 			return ;
 
 		if (tracker == null) tracker = new ProgressTracker(1, WDatabase.class) ;
 		tracker.startTask(dataFile.length(), "Loading " + getName()) ;
 
-
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8")) ;
 
 		long bytesRead = 0 ;
-		int lineNum = 0 ;
 
 		TreeMap<String, Integer> tmp = new TreeMap<String, Integer>() ;
 
-		String line ;
+		String line = null;
 		while ((line=input.readLine()) != null) {
 			bytesRead = bytesRead + line.length() + 1 ;
-			lineNum++ ;
 
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8"))) ;
 
@@ -113,26 +81,29 @@ public class TitleDatabase extends WDatabase<String,Integer>{
 		}
 		input.close();
 
-
-
-		Database db = getDatabase(false) ;
-
+		//Database db = getDatabase(false) ;
+		int nbToAdd = 0;
+		Transaction tx = environment.createWriteTransaction();
 		for (Map.Entry<String, Integer> entry: tmp.entrySet()) {
-
-			DatabaseEntry k = new DatabaseEntry() ;
-			keyBinding.objectToEntry(entry.getKey(), k) ;
-
-			DatabaseEntry v = new DatabaseEntry() ;
-			valueBinding.objectToEntry(entry.getValue(), v) ;
-
-			db.put(null, k, v) ;
-			//TODO: progress update
+			if (nbToAdd == 10000) {
+				tx.commit();
+				tx.close();
+				nbToAdd = 0;
+				tx = environment.createWriteTransaction();
+			}
+			if (entry != null) {
+				try {
+					db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
+					nbToAdd++;
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
-		input.close();
-
-		env.cleanAndCheckpoint() ;
-		getDatabase(true) ;
+		tx.commit();
+		tx.close();
+		isLoaded = true;
 	}
 
 }

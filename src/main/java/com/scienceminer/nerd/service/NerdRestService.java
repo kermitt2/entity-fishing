@@ -21,8 +21,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
-import com.scienceminer.nerd.utilities.NerdServiceProperties;
-import com.scienceminer.nerd.utilities.NerdRestUtils;
+import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.Lexicon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +62,7 @@ public class NerdRestService implements NerdPaths {
 	public NerdRestService() {
 		LOGGER.info("Init Servlet NerdRestService.");
 		NerdServiceProperties.getInstance();
+		//Utilities.initGrobid();
 		LOGGER.info("Init of Servlet NerdRestService finished.");
 		LOGGER.info("Init lexicon and KB resources.");
 		Lexicon.getInstance();

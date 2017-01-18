@@ -359,15 +359,14 @@ public class Page implements Comparable<Page> {
 	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
 	public static Page createPage(WEnvironment env, int id)  {
-
-		DbPage pd = env.getDbPage().retrieve(id) ; 
+		DbPage pd = env.getDbPage().retrieve(id); 
 
 		if (pd != null)
-			return createPage(env, id, pd) ;
+			return createPage(env, id, pd);
 		else {
-			pd = new DbPage("Invalid id or excluded via caching", PageType.invalid.ordinal(), -1) ;
+			pd = new DbPage("Invalid id or excluded via caching", PageType.invalid.ordinal(), -1);
 
-			return new Page(env, id, pd) ;
+			return new Page(env, id, pd);
 		}
 	}
 
@@ -386,23 +385,23 @@ public class Page implements Comparable<Page> {
 		PageType type = PageType.values()[pd.getType()] ;
 
 		switch (type) {
-		case article:
-			p = new Article(env, id, pd) ;
-			break ;
-		case redirect:
-			p = new Redirect(env, id, pd) ;
-			break ;
-		case disambiguation:
-			p = new Disambiguation(env, id, pd) ;
-			break ;
-		case category:
-			p = new Category(env, id, pd) ;
-			break ;
-		case template:
-			p = new Template(env, id, pd) ;
-			break ;
-		default:
-			p = new Page(env, id, pd) ;
+			case article:
+				p = new Article(env, id, pd) ;
+				break ;
+			case redirect:
+				p = new Redirect(env, id, pd) ;
+				break ;
+			case disambiguation:
+				p = new Disambiguation(env, id, pd) ;
+				break ;
+			case category:
+				p = new Category(env, id, pd) ;
+				break ;
+			case template:
+				p = new Template(env, id, pd) ;
+				break ;
+			default:
+				p = new Page(env, id, pd) ;
 		}
 
 		return p ;

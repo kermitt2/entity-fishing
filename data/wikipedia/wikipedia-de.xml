@@ -10,7 +10,7 @@
 	<databaseDirectory>data/wikipedia/db-de</databaseDirectory>
 
     <!-- A directory containing csv files extracted from a wikipedia dump. Caching will be faster if these are available. -->
-    <!--dataDirectory>data/wikipedia/dewiki-20111212-csv</dataDirectory-->
+    <dataDirectory>/mnt/data/wikipedia/latest/de/</dataDirectory>
 
 	<!--
 		The full path to a text processor (a class that implements org.wikipedia.miner.util.text.TextProcessor)

@@ -1,40 +1,29 @@
 package org.wikipedia.miner.db;
 
-//import gnu.trove.set.hash.TIntHashSet;
-
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.math.BigInteger;
 
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.hadoop.record.CsvRecordInput;
+
 import org.wikipedia.miner.db.struct.DbLinkLocation;
 import org.wikipedia.miner.db.struct.DbLinkLocationList;
 import org.wikipedia.miner.db.struct.DbPageLinkCounts;
 import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 
-import com.sleepycat.je.Database;
-import com.sleepycat.je.DatabaseEntry;
+import com.scienceminer.nerd.utilities.*;
 
-public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
+
+public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
 	public PageLinkCountDatabase(WEnvironment env) {
-		super(env, 
-				DatabaseType.pageLinkCounts, 
-				new RecordBinding<DbPageLinkCounts>(){
-			@Override
-			public DbPageLinkCounts createRecordInstance() {
-				return new DbPageLinkCounts() ;
-			}
-		}
-		);
+		super(env, DatabaseType.pageLinkCounts);
 	}
 
 	@Override
@@ -75,9 +64,9 @@ public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
 			int total = 0 ;
 			int distinct = 0 ;
 
-			for (DbLinkLocation ll:inLinkEntry.getValue().getLinkLocations()) {
+			for (DbLinkLocation ll : inLinkEntry.getValue().getLinkLocations()) {
 				distinct++ ;
-				total+=ll.getSentenceIndexes().size();
+				total += ll.getSentenceIndexes().size();
 			}
 			linkCounts.setTotalLinksIn(total) ;
 			linkCounts.setDistinctLinksIn(distinct) ;
@@ -98,23 +87,7 @@ public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
 			linkCounts.setDistinctLinksOut(distinct) ;
 		}
 
-
 		return new WEntry<Integer, DbPageLinkCounts>(id, linkCounts) ;
-	}
-
-	@Override
-	public DbPageLinkCounts filterCacheEntry(
-			WEntry<Integer, DbPageLinkCounts> e,
-			WikipediaConfiguration conf) {
-
-		//TIntHashSet validIds = conf.getArticlesOfInterest() ;
-		ConcurrentMap validIds = conf.getArticlesOfInterest();
-
-		//if (validIds != null && !validIds.contains(e.getKey()))
-		if (validIds != null && (validIds.get(e.getKey()) == null) )
-			return null ; 
-
-		return e.getValue();
 	}
 
 	@Override 
@@ -123,20 +96,18 @@ public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
 	}
 
 	public void loadFromCsvFiles(File linksInFile, File linksOutFile, boolean overwrite, ProgressTracker tracker) throws IOException  {
-
-		if (exists() && !overwrite)
+		if (isLoaded && !overwrite)
 			return ;
 		
 		if (tracker == null) tracker = new ProgressTracker(1, WDatabase.class) ;
 		tracker.startTask(linksInFile.length()+linksOutFile.length(), "Loading " + getName() + " database") ;
 
-		Database db = getDatabase(false) ;
+		//Database db = getDatabase(false) ;
 
 		BufferedReader linksInInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksInFile), "UTF-8")) ;
 		BufferedReader linksOutInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksOutFile), "UTF-8")) ;
 
 		long bytesRead = 0 ;
-
 
 		String inLinkLine = linksInInput.readLine() ;
 		bytesRead += (inLinkLine.length() + 1) ;
@@ -148,9 +119,15 @@ public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
 		CsvRecordInput linksOutRecord = new CsvRecordInput(new ByteArrayInputStream((outLinkLine + "\n").getBytes("UTF-8"))) ;
 		WEntry<Integer, DbLinkLocationList> outLinkEntry = deserializePageLinkCsvRecord(linksOutRecord) ;
 
-
+		int nbToAdd = 0;
+		Transaction tx = environment.createWriteTransaction();
 		while (inLinkEntry != null && outLinkEntry != null) {
-
+			if (nbToAdd == 10000) {
+				tx.commit();
+				tx.close();
+				nbToAdd = 0;
+				tx = environment.createWriteTransaction();
+			}
 			WEntry<Integer, DbPageLinkCounts> linkCountEntry = null;
 			boolean advanceInLinks = false;
 			boolean advanceOutLinks = false ;
@@ -173,13 +150,12 @@ public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
 			}
 
 			if (linkCountEntry != null) {
-				DatabaseEntry k = new DatabaseEntry() ;
-				keyBinding.objectToEntry(linkCountEntry.getKey(), k) ;
-
-				DatabaseEntry v = new DatabaseEntry() ;
-				valueBinding.objectToEntry(linkCountEntry.getValue(), v) ;
-
-				db.put(null, k, v) ;
+				try {
+					db.put(tx, BigInteger.valueOf(linkCountEntry.getKey()).toByteArray(), Utilities.serialize(linkCountEntry.getValue()));
+					nbToAdd++;
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 
 			if (advanceInLinks) {
@@ -206,12 +182,11 @@ public class PageLinkCountDatabase extends IntObjectDatabase<DbPageLinkCounts>{
 
 			tracker.update(bytesRead) ;
 		}
-
+		tx.commit();
+		tx.close();
 		linksInInput.close();
-		linksOutInput.close() ;
-
-		env.cleanAndCheckpoint() ;
-		getDatabase(true) ;
+		linksOutInput.close();
+		isLoaded = true;
 	}
 
 }

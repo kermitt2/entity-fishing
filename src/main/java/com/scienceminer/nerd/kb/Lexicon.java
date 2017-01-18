@@ -25,6 +25,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.utilities.OffsetPosition;
+import com.scienceminer.nerd.kb.db.*;
 
 import org.wikipedia.miner.model.Wikipedia;
 import org.wikipedia.miner.util.WikipediaConfiguration;
@@ -85,68 +86,34 @@ public class Lexicon {
 			
 			WikipediaConfiguration conf = 
 				new WikipediaConfiguration(new File("data/wikipedia/wikipedia-en.xml"));
-			Wikipedia wikipedia_en = new Wikipedia(conf, true); // with distinct thread for accessing data
-			while(!wikipedia_en.isReady()) {
-				Thread.sleep(1000);
-			}
+System.out.println("\nloading English environment...");
+			Wikipedia wikipedia_en = new Wikipedia(conf);
+
 			wikipedias.put(Language.EN, wikipedia_en);
-            
-            WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap();
-            wikipediaDomainMaps_en.setLang(Language.EN);
+            WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDatabaseDirectory().getPath());
             wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
-            wikipediaDomainMaps_en.open();
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
-            
-            /*FreeBaseTypeMap freeBaseTypeMaps_en = new FreeBaseTypeMap();
-            freeBaseTypeMaps_en.setLang(Language.EN);
-            freeBaseTypeMaps_en.setWikipedia(wikipedia_en);
-            freeBaseTypeMaps_en.openUse();
-            freeBaseTypeMaps.put(Language.EN, freeBaseTypeMaps_en);*/
 			
 			conf = new WikipediaConfiguration(new File("data/wikipedia/wikipedia-de.xml"));
-			Wikipedia wikipedia_de = new Wikipedia(conf, true); // with distinct thread for accessing data
-			while(!wikipedia_de.isReady()) {
-				Thread.sleep(1000);
-			}
+System.out.println("\nloading German environment...");
+			Wikipedia wikipedia_de = new Wikipedia(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
-            
-            /*WikipediaDomainMap wikipediaDomainMaps_de = new WikipediaDomainMap();
-            wikipediaDomainMaps_de.setLang(Language.DE);
-            wikipediaDomainMaps_de.setWikipedia(wikipedia_de);
-            wikipediaDomainMaps_de.openUse();*/
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
-            /*FreeBaseTypeMap freeBaseTypeMaps_de = new FreeBaseTypeMap();
-            freeBaseTypeMaps_de.setLang(Language.DE);
-            freeBaseTypeMaps_de.setWikipedia(wikipedia_de);
-            freeBaseTypeMaps_de.openUse();
-            freeBaseTypeMaps.put(Language.DE, freeBaseTypeMaps_de);*/
-			
 			conf = new WikipediaConfiguration(new File("data/wikipedia/wikipedia-fr.xml"));
-			Wikipedia wikipedia_fr = new Wikipedia(conf, true); // with distinct thread for accessing data
-			while(!wikipedia_fr.isReady()) {
-				Thread.sleep(1000);
-			}
+System.out.println("\nloading French environment...");
+			Wikipedia wikipedia_fr = new Wikipedia(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
-
-            /*WikipediaDomainMap wikipediaDomainMaps_fr = new WikipediaDomainMap();
-            wikipediaDomainMaps_fr.setLang(Language.FR);
-            wikipediaDomainMaps_fr.setWikipedia(wikipedia_fr);
-            wikipediaDomainMaps_fr.openUse();*/
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
 
-            /*FreeBaseTypeMap freeBaseTypeMaps_fr = new FreeBaseTypeMap();
-            freeBaseTypeMaps_fr.setLang(Language.FR);
-            freeBaseTypeMaps_fr.setWikipedia(wikipedia_fr);
-            freeBaseTypeMaps_fr.openUse();
-            freeBaseTypeMaps.put(Language.FR, freeBaseTypeMaps_fr);*/
-			
-			LOGGER.info("End of Initialization of Wikipedia DBs");
+System.out.println("\nEnd of Initialization of Wikipedia environments\n");			
+			LOGGER.info("End of Initialization of Wikipedia environments");
 
             Utilities.initGrobid();
 		}
 		catch(Exception e) {
 			LOGGER.debug(e.getMessage());
+            e.printStackTrace();
 		}
         //initNames();
 		// the loading of the journal and conference names is lazy

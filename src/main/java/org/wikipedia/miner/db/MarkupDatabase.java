@@ -1,9 +1,7 @@
 package org.wikipedia.miner.db;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.math.BigInteger;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -15,10 +13,11 @@ import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.model.Page;
 
-import com.sleepycat.bind.tuple.IntegerBinding;
+/*import com.sleepycat.bind.tuple.IntegerBinding;
 import com.sleepycat.bind.tuple.StringBinding;
 import com.sleepycat.je.Database;
-import com.sleepycat.je.DatabaseEntry;
+import com.sleepycat.je.DatabaseEntry;*/
+
 import java.io.BufferedInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -29,6 +28,11 @@ import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 
 import org.apache.tools.bzip2.* ;
+
+import com.scienceminer.nerd.utilities.*;
+
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
 
 /**
  * A {@link WDatabase} for associating page ids with page markup. 
@@ -46,15 +50,8 @@ public class MarkupDatabase extends WDatabase<Integer, String> {
 	 */
 	public MarkupDatabase(WEnvironment env) {
 
-		super (env, DatabaseType.markup, new IntegerBinding(), new StringBinding()) ;
+		super (env, DatabaseType.markup); //, new IntegerBinding(), new StringBinding()) ;
 	}
-
-	@Override
-	public String filterCacheEntry(WEntry<Integer, String> e,
-			WikipediaConfiguration conf) {
-		throw new UnsupportedOperationException() ;
-	}
-
 
 	@Override
 	public WEntry<Integer,String> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
@@ -65,8 +62,6 @@ public class MarkupDatabase extends WDatabase<Integer, String> {
 	public void loadFromCsvFile(File dataFile, boolean overwrite, ProgressTracker tracker) throws IOException  {
 		throw new UnsupportedOperationException() ;
 	}
-
-	
 
 	/**
 	 * Builds the persistent markup database from an XML dump
@@ -79,14 +74,11 @@ public class MarkupDatabase extends WDatabase<Integer, String> {
      * @throws org.apache.commons.compress.compressors.CompressorException
 	 */
 	public void loadFromXmlFile(File dataFile, boolean overwrite, ProgressTracker tracker) throws IOException, XMLStreamException, CompressorException  {
-//            overwrite=true;
-		if (exists() && !overwrite)
+		if (isLoaded && !overwrite)
 			return ;
 		
 		if (tracker == null) tracker = new ProgressTracker(1, MarkupDatabase.class) ;
 		tracker.startTask(dataFile.length(), "Loading " + getName() + " database") ;
-
-		Database db = getDatabase(false) ;
 
 		Integer currId = null ;
 		String currMarkup = null ;
@@ -113,64 +105,74 @@ public class MarkupDatabase extends WDatabase<Integer, String> {
                 System.out.println("Parser class: " + xmlStreamReader.getClass().toString());
 
 		int pageTotal = 0 ;
-		long charTotal = 0 ;
-		long maxChar = 0 ;
-
+		//long charTotal = 0 ;
+		//long maxChar = 0 ;
+		int nbToAdd = 0;
+		Transaction tx = environment.createWriteTransaction();
 		while (xmlStreamReader.hasNext()) {
-
+			
 			int eventCode = xmlStreamReader.next();
 
 			switch (eventCode) {
-			case XMLStreamReader.START_ELEMENT :
-				switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
-				case page:
-					//System.out.println(" - " + countingReader.getByteCount()) ;
-				}
+				case XMLStreamReader.START_ELEMENT :
+					switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
+					case page:
+					}
 
-				break;
-			case XMLStreamReader.END_ELEMENT :
+					break;
+				case XMLStreamReader.END_ELEMENT :
 
-				switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
+					switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
 
-				case id:
-					//only take the first id (there is a 2nd one for the revision) 
-					if (currId == null) 
-						currId = Integer.parseInt(characters.toString().trim()) ;
-					break ;
-				case text:
-					currMarkup = characters.toString().trim() ;
-					break ;
-				case page:
-					currMarkup = Page.formatFirstParagraphMarkup(currMarkup);
-					DatabaseEntry key = new DatabaseEntry() ;
-					keyBinding.objectToEntry(currId, key) ;
+						case id:
+							//only take the first id (there is a 2nd one for the revision) 
+							if (currId == null) 
+								currId = Integer.parseInt(characters.toString().trim()) ;
+							break ;
+						case text:
+							currMarkup = characters.toString().trim() ;
+							break ;
+						case page:
+							if (nbToAdd == 1000) {
+								tx.commit();
+								tx.close();
+								nbToAdd = 0;
+								tx = environment.createWriteTransaction();
+							}
+							currMarkup = Page.formatFirstParagraphMarkup(currMarkup);
+							
+							pageTotal++ ;
 
-					DatabaseEntry value = new DatabaseEntry() ;
-					valueBinding.objectToEntry(currMarkup, value) ;
+							if (currMarkup.trim().length() > 5) {
+								try {
+									db.put(tx, BigInteger.valueOf(currId).toByteArray(), bytes(currMarkup));
+									nbToAdd++;
+								} catch(Exception e) {
+									System.out.println("Markup addition failed: " + currId + " / " + currMarkup);
+									e.printStackTrace();
+								}
+							}
 
-					pageTotal++ ;
-					charTotal = charTotal + currMarkup.length();
+							currId = null ;
+							currMarkup = null ;
 
-					maxChar = Math.max(maxChar, currMarkup.length()) ;
-					db.put(null, key, value) ;
+							tracker.update(countingReader.getByteCount()) ;
+						default:
+							break;
+					}
 
-					currId = null ;
-					currMarkup = null ;
+					characters = new StringBuffer() ;
 
-					tracker.update(countingReader.getByteCount()) ;
-				}
-
-				characters = new StringBuffer() ;
-
-				break;
-			case XMLStreamReader.CHARACTERS :
-				characters.append(xmlStreamReader.getText()) ;
+					break;
+				case XMLStreamReader.CHARACTERS :
+					characters.append(xmlStreamReader.getText()) ;
 			}
 		}
+		tx.commit();
+		tx.close();
 		xmlStreamReader.close();
 
-		env.cleanAndCheckpoint() ;
-		getDatabase(true) ;
+		isLoaded = true;
 	}
 
 	private DumpTag resolveDumpTag(String tagName) {
@@ -180,5 +182,35 @@ public class MarkupDatabase extends WDatabase<Integer, String> {
 		} catch (IllegalArgumentException e) {
 			return DumpTag.ignorable ;
 		}
+	}
+
+	// using standard LMDB copy mode
+	//@Override
+	public String retrieve2(Integer key) {
+		byte[] cachedData = null;
+		String theString = null;
+		try (Transaction tx = environment.createReadTransaction()) {
+			theString = string(db.get(tx, BigInteger.valueOf(key).toByteArray()));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return theString;
+	}
+
+	// using LMDB zero copy mode
+	@Override
+	public String retrieve(Integer key) {
+		byte[] cachedData = null;
+		String theString = null;
+		try (Transaction tx = environment.createReadTransaction();
+			 BufferCursor cursor = db.bufferCursor(tx)) {
+			cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			if (cursor.seekKey()) {
+				theString = string(cursor.valBytes());
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return theString;
 	}
 }

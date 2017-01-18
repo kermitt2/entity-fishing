@@ -35,7 +35,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.wikipedia.miner.comparison.ArticleComparer;
 import org.wikipedia.miner.comparison.ArticleComparer.DataDependency;
-import org.wikipedia.miner.db.WDatabase.CachePriority;
+//import org.wikipedia.miner.db.WDatabase.CachePriority;
 import org.wikipedia.miner.db.WDatabase.DatabaseType;
 import org.wikipedia.miner.util.text.TextProcessor;
 import org.xml.sax.SAXException;
@@ -50,7 +50,7 @@ public class WikipediaConfiguration {
 	private File dataDirectory;
 	private TextProcessor defaultTextProcessor = null;
 
-	private final HashMap<DatabaseType, CachePriority> databasesToCache = new HashMap<DatabaseType, CachePriority>();
+	//private final HashMap<DatabaseType, CachePriority> databasesToCache = new HashMap<DatabaseType, CachePriority>();
 
 	private HashSet<String> stopwords = new HashSet<String>();
 	
@@ -93,10 +93,6 @@ public class WikipediaConfiguration {
 		this.langCode = langCode;
 		this.dbDirectory = dbDirectory;
 	}
-	
-	
-	
-	
 
 	public String getLangCode() {
 		return langCode;
@@ -122,7 +118,7 @@ public class WikipediaConfiguration {
 		return defaultTextProcessor;
 	}
 
-	public void addDatabaseToCache(DatabaseType type) {
+	/*public void addDatabaseToCache(DatabaseType type) {
 		databasesToCache.put(type, CachePriority.space);
 	}
 	
@@ -142,7 +138,7 @@ public class WikipediaConfiguration {
 	
 	public CachePriority getCachePriority(DatabaseType databaseType) {
 		return databasesToCache.get(databaseType);
-	}
+	}*/
 
 	public int getMinLinksIn() {
 		return minLinksIn;
@@ -305,22 +301,25 @@ public class WikipediaConfiguration {
 		
 		boolean valid = false;
 		
-		if (this.databasesToCache.containsKey(DatabaseType.pageLinksIn)) {
+		//if (this.databasesToCache.containsKey(DatabaseType.pageLinksIn)) 
+		{
 			dependancies.add(DataDependency.pageLinksIn);
 			valid = true;
 		}
 		
-		if (this.databasesToCache.containsKey(DatabaseType.pageLinksOut)) {
+		//if (this.databasesToCache.containsKey(DatabaseType.pageLinksOut)) 
+		{
 			dependancies.add(DataDependency.pageLinksOut);
 			valid = true;
 		}
 		
-		if (this.databasesToCache.containsKey(DatabaseType.pageLinkCounts)) {
+		//if (this.databasesToCache.containsKey(DatabaseType.pageLinkCounts)) 
+		{
 			dependancies.add(DataDependency.linkCounts);	
 		}
 		
-		if (!valid)
-			dependancies.add(DataDependency.pageLinksIn);
+		//if (!valid)
+		//	dependancies.add(DataDependency.pageLinksIn);
 		
 		return EnumSet.copyOf(dependancies);
 	}
@@ -374,10 +373,10 @@ public class WikipediaConfiguration {
 					this.articlesOfInterest = gatherArticles(new File(paramValue));
 					break;
 				case databaseToCache: 
-					if (xmlParam.hasAttribute("priority"))
+					/*if (xmlParam.hasAttribute("priority"))
 						addDatabaseToCache(DatabaseType.valueOf(paramValue), CachePriority.valueOf(xmlParam.getAttribute("priority")));
 					else
-						addDatabaseToCache(DatabaseType.valueOf(paramValue));
+						addDatabaseToCache(DatabaseType.valueOf(paramValue));*/
 					break;
 				case stopwordFile:
 					this.setStopwords(new File(paramValue));

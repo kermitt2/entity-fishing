@@ -6,6 +6,7 @@ import java.io.*;
 import org.grobid.core.data.Entity;
 
 import com.scienceminer.nerd.kb.*;
+import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import org.grobid.core.utilities.OffsetPosition;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.model.*;
+import org.wikipedia.miner.model.Page.PageType;
 import weka.core.*;
 import weka.classifiers.*;
 
@@ -239,8 +241,12 @@ for(NerdCandidate cand : cands) {
 						candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
 					//nerdEntity.setDomains(freeBaseTypeMap.getTypes(nerdEntity.getWikipediaExternalRef()));
 					// note: for the moment we use English categories via translingual informations
-					if (lang.equals("en"))
-						nerdEntity.setDomains(wikipediaDomainMap.getDomains(nerdEntity.getWikipediaExternalRef()));
+					if (lang.equals("en")) {
+						if (wikipediaDomainMap == null)
+							System.out.println("wikipediaDomainMap is null for en");
+						else
+							nerdEntity.setDomains(wikipediaDomainMap.getDomains(nerdEntity.getWikipediaExternalRef()));
+					}
 					else {
 						// we get the English page id if available
 						int pageId = nerdEntity.getWikipediaExternalRef();
@@ -307,6 +313,11 @@ for(NerdCandidate cand : cands) {
 						int s = 0;
 						for(int i=0; i<senses.length; i++) {
 							Label.Sense sense = senses[i];
+							//PageType pageType = PageType.values()[sense.getType()];
+							PageType pageType = sense.getType();
+							if (pageType != PageType.article)
+								continue;
+
 							if (sense.getPriorProbability() < minSenseProbability)
 								continue;
 							// not a valid sense if title is a list of ...
@@ -320,13 +331,24 @@ for(NerdCandidate cand : cands) {
 							candidate.setPreferredTerm(sense.getTitle());
 							candidate.setLang(lang);
 							boolean invalid = false;
-							for(org.wikipedia.miner.model.Category theCategory : sense.getParentCategories()) {
-								// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
-								if (theCategory.getTitle().indexOf("disambiguation") == -1)
-									candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
-								else {
-									invalid = true;
-									break;
+							org.wikipedia.miner.model.Category[] parentCategories = sense.getParentCategories();
+							if ( (parentCategories != null) && (parentCategories.length > 0) ) {
+								for(org.wikipedia.miner.model.Category theCategory : parentCategories) {
+									// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
+									if (theCategory == null) {
+										LOGGER.warn("Inavlid category page for sense: " + title);
+										continue;
+									}
+									if (theCategory.getTitle() == null) {
+										LOGGER.warn("Inavlid category content for sense: " + title);
+										continue;
+									}
+									if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") == -1)
+										candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
+									else {
+										invalid = true;
+										break;
+									}
 								}
 							}
 							if (invalid)

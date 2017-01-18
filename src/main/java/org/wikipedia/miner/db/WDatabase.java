@@ -1,6 +1,6 @@
 package org.wikipedia.miner.db;
 
-//import gnu.trove.map.hash.THashMap;
+import com.scienceminer.nerd.utilities.*;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -17,25 +17,15 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.log4j.Logger;
 import org.wikipedia.miner.db.struct.*;
-import org.wikipedia.miner.util.ProgressTracker;
-import org.wikipedia.miner.util.WikipediaConfiguration;
-
-
-import com.sleepycat.bind.EntryBinding;
-import com.sleepycat.je.Database;
-import com.sleepycat.je.DatabaseConfig;
-import com.sleepycat.je.DatabaseEntry;
-import com.sleepycat.je.DatabaseException;
-import com.sleepycat.je.DatabaseNotFoundException;
-import com.sleepycat.je.LockMode;
-import com.sleepycat.je.OperationStatus;
+import org.wikipedia.miner.util.*;
 
 import java.util.concurrent.*;
+import org.apache.hadoop.record.*;
+
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
 
 /**
- * A wrapper for {@link Database} that adds the ability to load itself from data files and selectively caching itself to memory.
- *
- * It is unlikely that you will want to use this class directly.
  * 
  * @param <K> the key type
  * @param <V> the value type
@@ -77,7 +67,6 @@ public abstract class WDatabase<K,V> {
 		 */
 		templatesByTitle,
 
-
 		/**
 		 * Associates integer ids with the ids of articles that link to it, and the sentence indexes where these links are found
 		 */
@@ -87,7 +76,6 @@ public abstract class WDatabase<K,V> {
 		 * Associates integer ids with the ids of articles that link to it
 		 */
 		pageLinksInNoSentences,
-
 
 		/**
 		 * Associates integer ids with the ids of articles that it links to, and the sentence indexes where these links are found
@@ -152,42 +140,31 @@ public abstract class WDatabase<K,V> {
 		/**
 		 * Associates integer {@link WEnvironment.StatisticName#ordinal()} with the value relevant to this statistic.
 		 */
-		statistics
-	}
-
-
-	/**
-	 * Options for caching data to memory
-	 */
-	public enum CachePriority {
+		statistics,
 
 		/**
-		 * Focus on speed, by storing values directly
+		 * Associates two integer id of articles via a relation type
 		 */
-		speed,
+		relations,
 
 		/**
-		 * Focus on memory, by compressing values before storing them.
+		 * Associates an integer id of article to a property (which is an attribute/value pair)
 		 */
-		space
+		properties
 	}
 
-	private String name ;
-	private DatabaseType type ;
+	protected Env environment;
+  	protected Database db;
+  	protected String envFilePath = null;
+  	protected boolean isLoaded = false;
 
+	protected String name ;
+	protected DatabaseType type ;
 	protected WEnvironment env ;
-	private Database database ;
 
-	protected EntryBinding<K> keyBinding ;
-	protected EntryBinding<V> valueBinding ;
+	protected boolean isCached = false ;
 
-	private boolean isCached = false ;
-	private CachePriority cachePriority = CachePriority.space ;
-
-	//private THashMap<K,byte[]> compactCache = null ;
-	//private THashMap<K,V> fastCache = null ;
-	private ConcurrentMap<K,byte[]> compactCache = null ;
-	private ConcurrentMap<K,V> fastCache = null ;
+	protected ConcurrentMap<K,V> cache = null ;
 
 	/**
 	 * Creates or connects to a database, whose name will match the given {@link WDatabase.DatabaseType}
@@ -197,16 +174,28 @@ public abstract class WDatabase<K,V> {
 	 * @param keyBinding a binding for serialising and deserialising keys
 	 * @param valueBinding a binding for serialising and deserialising values
 	 */
-	public WDatabase(WEnvironment env, DatabaseType type, EntryBinding<K> keyBinding, EntryBinding<V> valueBinding) {
+	public WDatabase(WEnvironment env, DatabaseType type) {
 
 		this.env = env ;
 		this.type = type ;
 		this.name = type.name() ;
 
-		this.keyBinding = keyBinding ;
-		this.valueBinding = valueBinding ;
+		this.envFilePath = env.getConfiguration().getDatabaseDirectory() + "/" + type.toString();
+		//System.out.println("db path: " + this.envFilePath);
 
-		this.database = null ;
+		this.environment = new Env();
+    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	File thePath = new File(this.envFilePath);
+    	if (!thePath.exists()) {
+    		thePath.mkdirs();
+    		isLoaded = false;
+    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
+    	} else {
+    		// we assume that if the DB files exist, it has been already loaded
+    		isLoaded = true;
+    	}
+    	this.environment.open(envFilePath, Constants.NOTLS);
+		db = this.environment.openDatabase();
 	}
 
 	/**
@@ -218,16 +207,34 @@ public abstract class WDatabase<K,V> {
 	 * @param keyBinding a binding for serialising and deserialising keys
 	 * @param valueBinding a binding for serialising and deserialising values 
 	 */
-	public WDatabase(WEnvironment env, DatabaseType type, String name, EntryBinding<K> keyBinding, EntryBinding<V> valueBinding) {
-
+	public WDatabase(WEnvironment env, DatabaseType type, String name) {
 		this.env = env ;
 		this.type = type ;
 		this.name = name ;
 
-		this.keyBinding = keyBinding ;
-		this.valueBinding = valueBinding ;
+		this.envFilePath = env.getConfiguration().getDatabaseDirectory() + "/" + name;
+		this.environment = new Env();
+    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	File thePath = new File(this.envFilePath);
+    	if (!thePath.exists()) {
+    		thePath.mkdirs();
+    		isLoaded = false;
+    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
+    	} else {
+    		// we assume that if the DB files exist, it has been already loaded
+    		isLoaded = true;
+    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
+    	}
+    	this.environment.open(envFilePath);
+		db = this.environment.openDatabase();
+	}
 
-		this.database = null ;
+	public Database getDatabase() {
+		return db;
+	}
+
+	public Env getEnvironment() {
+		return environment;
 	}
 
 	/**
@@ -254,7 +261,10 @@ public abstract class WDatabase<K,V> {
 	 * @return the number of entries in the database
 	 */
 	public long getDatabaseSize() {
-		return getDatabase(true).count();
+		//return getDatabase(true).count();
+
+		Stat statistics = db.stat();
+		return statistics.ms_entries;
 	}
 
 	/**
@@ -265,11 +275,7 @@ public abstract class WDatabase<K,V> {
 	public long getCacheSize() {
 		if (!isCached)
 			return 0 ;
-
-		if (cachePriority == CachePriority.space)
-			return fastCache.size();
-		else
-			return compactCache.size();
+		return cache.size();
 	}
 
 	/**
@@ -282,57 +288,13 @@ public abstract class WDatabase<K,V> {
 	}
 
 	/**
-	 * Returns whether this has been cached for speed or memory efficiency
-	 * 
-	 * @return whether this has been cached for speed or memory efficiency
-	 */
-	public CachePriority getCachePriority() {
-		return cachePriority ;
-	}
-
-	/**
-	 * true if there is a persistent database underlying this, otherwise false
-	 * 
-	 * @return true if there is a persistent database underlying this, otherwise false
-	 */
-	public boolean exists() {
-		try {
-			getDatabase(true) ;
-		} catch(DatabaseNotFoundException e) {
-			return false ;
-		}
-		return true ;
-	}
-
-	/**
 	 * Retrieves the value associated with the given key, either from the persistent database, or from memory if
 	 * the database has been cached. This will return null if the key is not found, or has been excluded from the cache.
 	 * 
 	 * @param key the key to search for
 	 * @return the value associated with the given key, or null if none exists.
 	 */
-	public V retrieve(K key) {
-
-		if (isCached) {
-			//System.out.println("c") ;
-			return retrieveFromCache(key) ;
-		} else {
-			//System.out.println("d") ;
-			Database db = getDatabase(true) ;
-
-			DatabaseEntry dbKey = new DatabaseEntry() ;
-			keyBinding.objectToEntry(key, dbKey) ;
-
-			DatabaseEntry dbValue = new DatabaseEntry() ;
-
-			OperationStatus os = db.get(null, dbKey, dbValue, LockMode.READ_COMMITTED) ; 
-
-			if (!os.equals(OperationStatus.SUCCESS)) 
-				return null ;
-			else
-				return valueBinding.entryToObject(dbValue) ;
-		}
-	}
+	public abstract V retrieve(K key);
 
 	/**
 	 * Deserialises a CSV record.
@@ -341,18 +303,33 @@ public abstract class WDatabase<K,V> {
 	 * @return the key,value pair encoded within the record
 	 * @throws IOException if there is a problem decoding the record
 	 */
-	public abstract WEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException ;
+	public abstract WEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException;
 
 	/**
 	 * Decides whether an entry should be cached to memory or not, and optionally alters values before they are cached.
 	 * 
 	 * @param e the key,value pair to be filtered
 	 * @param conf a configuration containing options for how the database is to be cached
-	 * @param validIds the set of article ids that are valid and should be cached
 	 * @return the value that should be cached along with the given key, or null if it should be excluded
 	 */
-	public abstract V filterCacheEntry(WEntry<K,V> e, WikipediaConfiguration conf) ;
+	//public abstract V filterCacheEntry(WEntry<K,V> e, WikipediaConfiguration conf);
+	public V filterCacheEntry(WEntry<K,V> e, WikipediaConfiguration conf) {
+		// default, no filter
+		return e.getValue();
+	}
 
+	/**
+	 * Decides whether an entry should be indexed or not.
+	 * 
+	 * @param e the key,value pair to be filtered
+	 * @param conf a configuration containing options for controling the indexing
+	 * @return the value that should be cached along with the given key, or null if it should be excluded
+	 */
+	//public abstract V filterCacheEntry(WEntry<K,V> e, WikipediaConfiguration conf);
+	public V filterEntry(WEntry<K,V> e) {
+		// default, no filter
+		return e.getValue();
+	}
 
 	/**
 	 * Builds the persistent database from a file.
@@ -362,49 +339,24 @@ public abstract class WDatabase<K,V> {
 	 * @param tracker an optional progress tracker (may be null)
 	 * @throws IOException if there is a problem reading or deserialising the given data file.
 	 */
-	public void loadFromCsvFile(File dataFile, boolean overwrite, ProgressTracker tracker) throws IOException  {
+	public abstract void loadFromCsvFile(File dataFile, boolean overwrite, ProgressTracker tracker) throws IOException;
 
-		if (exists() && !overwrite)
-			return ;
-
-		if (tracker == null) tracker = new ProgressTracker(1, WDatabase.class) ;
-		tracker.startTask(dataFile.length(), "Loading " + name + " database") ;
-
-		Database db = getDatabase(false) ;
-
-		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8")) ;
-
-		long bytesRead = 0 ;
-		int lineNum = 0 ;
-
-		String line ;
-		while ((line=input.readLine()) != null) {
-			bytesRead = bytesRead + line.length() + 1 ;
-			lineNum++ ;
-
-			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8"))) ;
-
-			WEntry<K,V> entry = deserialiseCsvRecord(cri) ;
-
-			if (entry != null) {
-				DatabaseEntry k = new DatabaseEntry() ;
-				keyBinding.objectToEntry(entry.getKey(), k) ;
-
-				DatabaseEntry v = new DatabaseEntry() ;
-				valueBinding.objectToEntry(entry.getValue(), v) ;
-
-				db.put(null, k, v) ;
-			}
-
-			tracker.update(bytesRead) ;
-		}
-
-		input.close();
-
-		env.cleanAndCheckpoint() ;
-		getDatabase(true) ;
+	/**
+	 * @return an iterator for the entries in this database, in ascending key order.
+	 */
+	public WIterator getIterator() {
+		return new WIterator(this);
 	}
 
+	/**
+	 * Closes the underlying database
+	 */
+	public void close() {
+		if (db != null)
+			db.close();
+    	if (environment != null)
+	    	environment.close();
+	}
 
 	/**
 	 * Selectively caches records from the database to memory, for much faster lookup.
@@ -415,176 +367,34 @@ public abstract class WDatabase<K,V> {
 	 * @throws IOException 
 	 * @throws DatabaseException 
 	 */
-	public void cache(WikipediaConfiguration conf, ProgressTracker tracker) throws DatabaseException, IOException {
+	public void caching(WikipediaConfiguration conf) {
+		cache = new ConcurrentHashMap<K,V>();
 
-		Database db = getDatabase(true) ;
-
-		this.cachePriority = conf.getCachePriority(type) ;
-
-		initializeCache() ;
-
-		if (tracker == null) 
-			tracker = new ProgressTracker(1, WDatabase.class) ;
-
-		tracker.startTask(db.count(), "caching " + name + " database") ;
-
-		//first, try caching from file
-		if (conf.getDatabaseDirectory() != null) {
-			File dataFile = new File(conf.getDatabaseDirectory() + File.separator + name + ".csv") ; 
-
-			if (dataFile.canRead()) {
-
-				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8")) ;
-
-				long lineNum = 0 ;
-
-				String line ;
-				while ((line=input.readLine()) != null) {
-					lineNum++ ;
-
-					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8"))) ;
-
-					WEntry<K,V> entry = deserialiseCsvRecord(cri) ;
-
-					if (entry != null) {
-						V filteredValue = filterCacheEntry(entry, conf) ;
-
-						if (filteredValue != null) {
-							WEntry<K,V> filteredEntry = new WEntry<K,V>(entry.getKey(), filteredValue) ;
-							addToCache(filteredEntry) ;
-						}
-					}
-
-					tracker.update(lineNum) ;
-				}
-
-				input.close();	
-				finalizeCache() ;
-
-				return;
-			}
-		}
-
-
-
-		//we haven't managed to cache from file, so let's do it from db
-		WIterator<K,V> iter = getIterator() ;
-
-
+		WIterator iter = getIterator();
 		while (iter.hasNext()) {
-			WEntry<K,V> entry = iter.next();
+			Entry entry = iter.next();
+			byte[] keyData = entry.getKey();
+			byte[] valueData = entry.getValue();
+			try {
+				V pa = (V)Utilities.deserialize(valueData);
+				K keyId = (K)Utilities.deserialize(keyData);
 
-			V filteredValue = filterCacheEntry(entry, conf) ;
+				WEntry<K,V> wEntry = new WEntry<K,V>(keyId, pa);
+				V filteredValue = filterCacheEntry(wEntry, conf);
 
-			if (filteredValue != null) {
-				WEntry<K,V> filteredEntry = new WEntry<K,V>(entry.getKey(), filteredValue) ;
-				addToCache(filteredEntry) ;
+				if (filteredValue != null) {
+					cache.put(keyId, filteredValue);
+				}
+			} catch(Exception exp) {
+				Logger.getLogger(WDatabase.class).error("Failed caching deserialize");
 			}
-
-			tracker.update() ;
 		}
 
 		iter.close();
-		finalizeCache() ;
+		isCached = true;
 	}
 
-	/**
-	 * @return an iterator for the entries in this database, in ascending key order.
-	 */
-	public WIterator<K,V> getIterator() {
-		return new WIterator<K,V>(this) ;
-	}
-
-	/**
-	 * Closes the underlying database
-	 */
-	public void close() {
-
-		if (database != null) {
-			database.close() ;
-			database = null ;
-		}
-
-		fastCache = null ;
-		compactCache = null ;
-	}
-
-	@Override
-	public void finalize() {
-		if (database != null) {
-			Logger.getLogger(WIterator.class).warn("Unclosed database '" + name + "'. You may be causing a memory leak.") ;
-		}
-	}
-
-
-	protected V retrieveFromCache(K key) {
-
-		if (cachePriority == CachePriority.speed) {
-			return fastCache.get(key) ;
-		} else {
-			byte[] cachedData = compactCache.get(key) ;
-
-			if (cachedData == null)
-				return null ;
-
-			DatabaseEntry dbValue = new DatabaseEntry(cachedData) ;
-			return valueBinding.entryToObject(dbValue) ;
-		}
-	}
-
-
-	protected void initializeCache() {
-
-		if (cachePriority == CachePriority.speed) {
-			fastCache = new ConcurrentHashMap<K,V>();
-			//fastCache = new THashMap<K,V>() ;
-		}
-		else {
-			compactCache = new ConcurrentHashMap<K,byte[]>();
-			//compactCache = new THashMap<K,byte[]>() ;
-		}
-	}
-
-	protected void addToCache(WEntry<K,V> entry) {
-
-		if (cachePriority == CachePriority.speed) {
-			fastCache.put(entry.getKey(), entry.getValue()) ;
-		} else {
-			DatabaseEntry cacheValue = new DatabaseEntry() ;
-			valueBinding.objectToEntry(entry.getValue(), cacheValue) ;
-			compactCache.put(entry.getKey(), cacheValue.getData()) ;
-		}
-	}
-
-	protected void finalizeCache() {
-		this.isCached = true ;
-	}
-
-	protected Database getDatabase(boolean readOnly) throws DatabaseException {
-
-		DatabaseConfig conf = new DatabaseConfig() ;
-
-		conf.setReadOnly(readOnly) ;
-		conf.setAllowCreate(!readOnly) ;
-		conf.setExclusiveCreate(!readOnly) ;
-
-		if (database != null) {
-			if (database.getConfig().getReadOnly() == readOnly) {
-				//the database is already open as it should be.
-				return database ;
-			} else {
-				//the database needs to be closed and re-opened.
-				database.close();
-			}
-		}
-
-		if (!readOnly) {
-			try {
-				env.getEnvironment().removeDatabase(null, name) ;
-			} catch (DatabaseNotFoundException e) {} ;
-		}
-
-		database = env.getEnvironment().openDatabase(null, name, conf);
-		return database ;
+	public boolean isLoaded() {
+		return isLoaded;
 	}
 }

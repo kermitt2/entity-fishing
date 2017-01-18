@@ -1,26 +1,7 @@
-/*
- *    PageIterator.java
- *    Copyright (C) 2007 David Milne, d.n.milne@gmail.com
- *
- *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation; either version 2 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this program; if not, write to the Free Software
- *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
 package org.wikipedia.miner.util;
 
 import java.util.*;
-
+import java.math.BigInteger;
 
 import org.wikipedia.miner.db.WEntry;
 import org.wikipedia.miner.db.WIterator;
@@ -29,16 +10,15 @@ import org.wikipedia.miner.db.struct.DbPage;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.model.Page.PageType;
 
+import com.scienceminer.nerd.utilities.*;
 
-/**
- * @author David Milne
- * 
- * Provides efficient iteration over the pages in Wikipedia
- */
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
+
 public class PageIterator implements Iterator<Page> {
 
 	WEnvironment env;
-	WIterator<Integer,DbPage> iter;
+	WIterator iter;
 
 	Page nextPage = null;
 	PageType type = null;
@@ -52,7 +32,7 @@ public class PageIterator implements Iterator<Page> {
 
 		this.env = env;
 		iter = env.getDbPage().getIterator(); 
-		
+System.out.println(env.getDbPage().getDatabaseSize());		
 		queueNext();
 	}
 
@@ -68,7 +48,7 @@ public class PageIterator implements Iterator<Page> {
 		this.env = env;
 		iter = env.getDbPage().getIterator(); 
 		this.type = type;
-		
+System.out.println(env.getDbPage().getDatabaseSize());	
 		queueNext();
 	}
 
@@ -89,24 +69,62 @@ public class PageIterator implements Iterator<Page> {
 		queueNext();
 		
 		return p;
+
+		/*Entry entry = iter.next();
+		byte[] keyData = entry.getKey();
+		byte[] valueData = entry.getValue();
+		Page p = null;
+		try {
+			DbPage pa = (DbPage)Utilities.deserialize(valueData);
+			Integer keyId = new BigInteger(keyData).intValue();
+			p = toPage(new WEntry<Integer,DbPage>(keyId, pa));
+		} catch(Exception e) {
+			//Logger.getLogger(PageIterator.class).error("Failed deserialize");
+			e.printStackTrace();
+		}
+		return p;*/
 	}
 
 	private void queueNext() {
-
 		try {
-			nextPage=toPage(iter.next());
+			nextPage = null;
+			while(iter.hasNext()) {
+				Entry entry = iter.next();
+				byte[] keyData = entry.getKey();
+				byte[] valueData = entry.getValue();
+				//Page p = null;
+				try {
+					DbPage pa = (DbPage)Utilities.deserialize(valueData);
+					
+					Integer keyId = new BigInteger(keyData).intValue();
+					nextPage = toPage(new WEntry<Integer,DbPage>(keyId, pa));
+					//PageType localType = PageType.values()[nextPage.getType()];
+//System.out.println("Comparing : " + type + " / " + nextPage.getType());
+					if ((type == null) || (nextPage.getType() == type)) {
+//System.out.println("kept");
+						break;
+					} 
+					/*else 
+						System.out.println("skipped");*/
+				} catch(Exception e) {
+					//Logger.getLogger(PageIterator.class).error("Failed deserialize");
+					e.printStackTrace();
+				}
+			}
 
-			if (type != null) {
+			//nextPage = toPage(iter.next());
+
+			/*if (type != null) {
 				while (nextPage.getType() != type)
 					nextPage = toPage(iter.next());
-			}
+			}*/
 		} catch (NoSuchElementException e) {
 			nextPage = null;
 		}
 	}
 
 	private Page toPage(WEntry<Integer,DbPage> e) {
-		if (e== null)
+		if (e == null)
 			return null;
 		else
 			return Page.createPage(env, e.getKey(), e.getValue());

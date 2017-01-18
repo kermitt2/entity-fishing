@@ -1,46 +1,32 @@
 package org.wikipedia.miner.db;
 
-//import gnu.trove.map.hash.THashMap;
-//import gnu.trove.set.hash.TIntHashSet;
-
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.hadoop.record.CsvRecordOutput;
+
 import org.apache.log4j.Logger;
+
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.db.struct.DbSenseForLabel;
 import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.util.text.TextProcessor;
 
-import com.sleepycat.bind.tuple.StringBinding;
-import com.sleepycat.je.Database;
-import com.sleepycat.je.DatabaseEntry;
+import com.scienceminer.nerd.utilities.*;
+
+import org.fusesource.lmdbjni.*;
+import static org.fusesource.lmdbjni.Constants.*;
 
 /**
  * A {@link WDatabase} for associating Strings with statistics about the articles (senses) this string could refer to. 
  */
-public class LabelDatabase extends WDatabase<String, DbLabel> {
+public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 
-	//TODO: Labels cached as patricia trie
-	// It would be extremely cool to cache labels in a Patricia Trie rather than a HashMap. 
-	// This would give us:
-	// - iteration in lexicographical order
-	// - prefix-based search (i.e. autocomplete queries)
-	// - fast generation of labels within edit distance (i.e spelling correction)
-	// - faster detection of labels within texts, because we wouldn't need to check every single n-gram.
-	
-	
 	private TextProcessor textProcessor ;
 
 	/**
@@ -50,18 +36,7 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 	 * @param env the WEnvironment surrounding this database
 	 */
 	public LabelDatabase(WEnvironment env) {
-
-		super(
-				env, 
-				DatabaseType.label, 
-				new StringBinding(), 
-				new RecordBinding<DbLabel>() {
-					public DbLabel createRecordInstance() {
-						return new DbLabel() ;
-					}
-				}
-		) ;
-
+		super(env, DatabaseType.label) ;
 		textProcessor = null ;
 	}
 
@@ -74,20 +49,8 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 	 * @param tp a text processor to apply to texts before indexing
 	 */
 	public LabelDatabase(WEnvironment env, TextProcessor tp) {
-
-		super(
-				env, 
-				DatabaseType.label, 
-				"label" + tp.getName(), 
-				new StringBinding(), 
-				new RecordBinding<DbLabel>() {
-					public DbLabel createRecordInstance() {
-						return new DbLabel() ;
-					}
-				}
-		) ;
-
-		textProcessor = tp ; 
+		super(env, DatabaseType.label, "label" + tp.getName());
+		textProcessor = tp;
 	}
 
 	/**
@@ -99,16 +62,6 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 	}
 
 	/**
-	 * If this database uses a text processor, you must prepare it (by calling {@link #prepare(File,int)} before use. 
-	 * This returns true if that call has been made.
-	 * 
-	 * @return true if the database has been prepared for use, otherwise false
-	 */
-	public boolean isPrepared() {
-		return getDatabase(true) != null ;
-	}
-
-	/**
 	 * Retrieves the label statistics associated with the given text key. 
 	 * 
 	 * <p>Note:<b> you should NOT apply text processors to the key; that will be done internally within this method.
@@ -117,14 +70,13 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 	 */
 	@Override
 	public DbLabel retrieve(String key) {
-
 		if (textProcessor == null)
 			return super.retrieve(key) ;
 		else
 			return super.retrieve(textProcessor.processText(key)) ;
 	}
 
-	@Override
+	/*@Override
 	public DbLabel filterCacheEntry(WEntry<String,DbLabel> e, WikipediaConfiguration conf) {
 
 		//TIntHashSet validIds = conf.getArticlesOfInterest();
@@ -156,7 +108,7 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 		label.setSenses(newSenses) ;
 
 		return label ;
-	}
+	}*/
 
 	@Override
 	public WEntry<String,DbLabel> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
@@ -196,23 +148,28 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 			tracker.startTask(labelCount, "Gathering and processing labels (pass " + (pass+1) + " of " + passes + ")") ;
 
 			TreeMap<String, DbLabel> tmpProcessedLabels = new TreeMap<String, DbLabel>() ;
-
-			WIterator<String,DbLabel> dbIter = originalLabels.getIterator() ;
+			WIterator dbIter = originalLabels.getIterator();
 			while (dbIter.hasNext()) {
+				Entry entry = dbIter.next();
+				byte[] keyData = entry.getKey();
+				byte[] valueData = entry.getValue();
+				try {
+					WEntry<String,DbLabel> e = new WEntry<String,DbLabel>(string(keyData), (DbLabel)Utilities.deserialize(valueData));
 
-				WEntry<String,DbLabel> e = dbIter.next();
+					String processedText = textProcessor.processText(e.getKey()) ;
 
-				String processedText = textProcessor.processText(e.getKey()) ;
+					if (Math.abs(processedText.hashCode()) % passes == pass) {
 
-				if (Math.abs(processedText.hashCode()) % passes == pass) {
+						DbLabel storedLabel = tmpProcessedLabels.get(processedText) ; 
 
-					DbLabel storedLabel = tmpProcessedLabels.get(processedText) ; 
-
-					if (storedLabel == null) {
-						tmpProcessedLabels.put(processedText, e.getValue()) ;
-					} else {
-						tmpProcessedLabels.put(processedText, mergeLabels(storedLabel, e.getValue())) ;
+						if (storedLabel == null) {
+							tmpProcessedLabels.put(processedText, e.getValue()) ;
+						} else {
+							tmpProcessedLabels.put(processedText, mergeLabels(storedLabel, e.getValue())) ;
+						}
 					}
+				} catch(Exception e) {
+					Logger.getLogger(LabelDatabase.class).error("Failed deserialize");
 				}
 				tracker.update();
 			}
@@ -241,12 +198,11 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 				e.getValue().serialize(cro) ;
 
 				writer.write(outStream.toString("UTF-8")) ;
-
 			}
 		}
 
 
-		Database db = getDatabase(false) ;
+		//Database db = getDatabase(false) ;
 
 		long bytesToRead = 0 ;
 		long bytesRead = 0 ;
@@ -291,9 +247,15 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 
 		tracker.startTask(bytesToRead, "Storing processed labels") ;
 
+		int nbToAdd = 0;
+		Transaction tx = environment.createWriteTransaction();
 		while (true) {
-
-
+			if (nbToAdd == 10000) {
+				tx.commit();
+				tx.close();
+				nbToAdd = 0;
+				tx = environment.createWriteTransaction();
+			}
 			String lowestKey = null ;
 			int pass = -1 ;
 
@@ -309,17 +271,12 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 				//all readers are finished
 				break ;
 			} else {
-				//save lowestKey and associated value
-				DatabaseEntry k = new DatabaseEntry() ;
-				keyBinding.objectToEntry(lowestKey, k) ;
-
-				DatabaseEntry v = new DatabaseEntry() ;
-				valueBinding.objectToEntry(currValues[pass], v) ;
-
-				db.put(null, k, v) ;
-
-
-				//advance reader
+				try {
+					db.put(tx, bytes(lowestKey), Utilities.serialize(currValues[pass]));
+					nbToAdd++;
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 
 				if ((line=readers[pass].readLine()) != null) {
 					bytesRead = bytesRead + line.length() + 1 ;
@@ -343,17 +300,16 @@ public class LabelDatabase extends WDatabase<String, DbLabel> {
 				}
 			}
 		}
+		tx.commit();
+		tx.close();
 
 		for (BufferedReader r:readers) 
 			r.close();
 		
-		
 		for (File tempFile:tempFiles)
 			tempFile.delete() ;
 
-		env.cleanAndCheckpoint() ;
-		getDatabase(true) ;
-
+		isLoaded = true;
 	}
 
 	private DbLabel mergeLabels(DbLabel lblA, DbLabel lblB) {

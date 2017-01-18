@@ -8,7 +8,7 @@
 	<groupId>com.scienceminer.nerd</groupId>
 	<artifactId>com.scienceminer.nerd</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	
 	<name>NERD</name>
 	<description>Named Entity Recognition and Disambiguation.</description>
@@ -268,6 +268,7 @@
 				<argument>-Xms7g</argument>
             	<argument>-Xmx13g</argument>
 		        <argument>-classpath</argument><classpath />
+	     		<argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
 		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
 		        <argument>data/wikipedia/wikipedia-en.xml</argument>
 		      </arguments>
@@ -289,6 +290,7 @@
 				<argument>-Xms7g</argument>
             	<argument>-Xmx13g</argument>
 		        <argument>-classpath</argument><classpath />
+		        <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
 		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
 		        <argument>data/wikipedia/wikipedia-fr.xml</argument>
 		      </arguments>
@@ -310,6 +312,7 @@
 				<argument>-Xms7g</argument>
             	<argument>-Xmx13g</argument>
 		        <argument>-classpath</argument><classpath />
+		        <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
 		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
 		        <argument>data/wikipedia/wikipedia-de.xml</argument>
 		      </arguments>
@@ -509,7 +512,7 @@
             <version>2.11.1</version>
 	    </dependency-->
 
-		<dependency>
+		<!--dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>1.2.1</version>
@@ -523,8 +526,14 @@
 			      <artifactId>jasper-compiler</artifactId>
 			    </exclusion>
 			  </exclusions>
-		</dependency>
+		</dependency-->
 		<!-- hadoop-0.20.2-core.jar -->
+
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-core</artifactId>
+			<version>1.2.1</version>
+		</dependency>	
 
 		<dependency>
 			<groupId>org.apache.opennlp</groupId>
@@ -562,18 +571,11 @@
             <version>0.9.7</version>
 		</dependency-->
 
-		<dependency>
+		<!--dependency>
             <groupId>net.sf.trove4j</groupId>
             <artifactId>trove4j</artifactId>
             <version>3.0.3</version>
-        </dependency>
-
-		<dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>1.2.0</version>
-            <scope>provided</scope>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>org.apache.avro</groupId>

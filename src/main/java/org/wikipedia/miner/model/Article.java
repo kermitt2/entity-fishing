@@ -36,8 +36,6 @@ import org.wikipedia.miner.db.struct.DbTranslations;
  */
 public class Article extends Page {
 
-
-
 	/**
 	 * Initialises a newly created Article so that it represents the article given by <em>id</em>.
 	 * 
@@ -86,7 +84,7 @@ public class Article extends Page {
 		Category[] parentCategories = new Category[tmpParents.getValues().size()] ;
 
 		int index = 0 ;
-		for (int id:tmpParents.getValues()) {
+		for (int id : tmpParents.getValues()) {
 			parentCategories[index] = new Category(env, id) ;
 			index++ ;
 		}
@@ -134,7 +132,7 @@ public class Article extends Page {
 	 */
 	public Article[] getLinksIn() {
 
-		if (env.getDbPageLinkIn().isCached() && !env.getDbPageLinkInNoSentences().isCached()) {
+		//if (env.getDbPageLinkIn().isCached() && !env.getDbPageLinkInNoSentences().isCached()) {
 			
 			DbLinkLocationList tmpLinks = env.getDbPageLinkIn().retrieve(id) ;
 			if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
@@ -149,7 +147,7 @@ public class Article extends Page {
 			}
 	
 			return links ;	
-		} else {
+		/*} else {
 			
 			DbIntList tmpLinks = env.getDbPageLinkInNoSentences().retrieve(id) ;
 			if (tmpLinks == null || tmpLinks.getValues() == null) 
@@ -164,7 +162,7 @@ public class Article extends Page {
 			}
 			
 			return links ;
-		}
+		}*/
 	}
 
 	/**
@@ -176,7 +174,7 @@ public class Article extends Page {
 	 */
 	public Article[] getLinksOut()  {
 
-		if (env.getDbPageLinkOut().isCached() && !env.getDbPageLinkOutNoSentences().isCached()) {
+		//if (env.getDbPageLinkOut().isCached() && !env.getDbPageLinkOutNoSentences().isCached()) {
 			
 			DbLinkLocationList tmpLinks = env.getDbPageLinkOut().retrieve(id) ;
 			if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
@@ -191,7 +189,7 @@ public class Article extends Page {
 			}
 	
 			return links ;	
-		} else {
+		/*} else {
 			
 			DbIntList tmpLinks = env.getDbPageLinkOutNoSentences().retrieve(id) ;
 			if (tmpLinks == null || tmpLinks.getValues() == null) 
@@ -206,7 +204,7 @@ public class Article extends Page {
 			}
 			
 			return links ;
-		}
+		}*/
 	}
 
 	/**

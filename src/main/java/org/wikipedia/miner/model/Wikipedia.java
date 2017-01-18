@@ -27,7 +27,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.Logger;
 import org.wikipedia.miner.db.WEnvironment;
-import org.wikipedia.miner.db.WIterator;
+//import org.wikipedia.miner.db.WIterator;
 import org.wikipedia.miner.db.WEnvironment.StatisticName;
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.model.Page.PageType;
@@ -61,8 +61,21 @@ public class Wikipedia {
 	 * @param threadedPreparation true if preparation (connecting to databases, caching data to memory) should be done in a separate thread, otherwise false
 	 * @throws EnvironmentLockedException if the underlying database environment is unavailable.
 	 */
+	public Wikipedia(WikipediaConfiguration conf) throws EnvironmentLockedException{
+		this.env = new WEnvironment(conf);
+		try {
+			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
+	}
 	public Wikipedia(WikipediaConfiguration conf, boolean threadedPreparation) throws EnvironmentLockedException{
-		this.env = new WEnvironment(conf, threadedPreparation) ; 
+		this.env = new WEnvironment(conf);
+		try {
+			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
 	}
 
 	/**
@@ -76,11 +89,25 @@ public class Wikipedia {
 	 * @param threadedPreparation true if preparation (connecting to databases, caching data to memory) should be done in a separate thread, otherwise false
 	 * @throws EnvironmentLockedException if the underlying database environment is unavailable.
 	 */
-	public Wikipedia(File confFile, boolean threadedPreparation) throws EnvironmentLockedException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-		WikipediaConfiguration conf = new WikipediaConfiguration(confFile) ;
-		this.env = new WEnvironment(conf, threadedPreparation) ; 
+	public Wikipedia(File confFile) throws EnvironmentLockedException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+		WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
+		this.env = new WEnvironment(conf);
+		try {
+			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}  
 	}
-
+	public Wikipedia(File confFile, boolean threadedPreparation) throws EnvironmentLockedException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+		WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
+		//this.env = new WEnvironment(conf, threadedPreparation);
+		this.env = new WEnvironment(conf);
+		try {
+			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}  
+	}
 
 	/**
 	 * Returns the environment that this is connected to
@@ -146,7 +173,7 @@ public class Wikipedia {
 	 * @return the Page referenced by the given id, or null if one does not exist. 
 	 */
 	public Page getPageById(int id) {
-		return Page.createPage(env, id) ;
+		return Page.createPage(env, id);
 	}
 
 	/**
@@ -356,7 +383,7 @@ public class Wikipedia {
 	 * @return an iterator for all pages in the database, in order of ascending ids.
 	 */
 	public PageIterator getPageIterator() {
-		return new PageIterator(env) ;
+		return new PageIterator(env);
 	}
 
 	/**
@@ -392,12 +419,12 @@ public class Wikipedia {
 	public void finalize() {
             try {
                 if (this.env != null)
-                    Logger.getLogger(WIterator.class).warn("Unclosed wikipedia. You may be causing a memory leak.") ;
+                    Logger.getLogger(Wikipedia.class).warn("Unclosed wikipedia. You may be causing a memory leak.") ;
             } finally {
                 try {
                     super.finalize();
                 } catch (Throwable ex) {
-                    Logger.getLogger(WIterator.class).warn("Unclosed wikipedia. You may be causing a memory leak.") ;
+                    Logger.getLogger(Wikipedia.class).warn("Unclosed wikipedia. You may be causing a memory leak.") ;
                 }
             }
 	}

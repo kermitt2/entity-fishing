@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Definition {
 	
-	// id of the concept                
+	// definition string                
 	private String definition = null;
 	
 	// domain information

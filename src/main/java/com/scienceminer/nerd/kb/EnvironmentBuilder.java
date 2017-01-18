@@ -1,6 +1,8 @@
-package com.scienceminer.nerd.kb;;
+package com.scienceminer.nerd.kb;
 
 import java.io.File;
+
+import com.scienceminer.nerd.kb.db.*;
 
 import org.wikipedia.miner.db.*;
 import org.wikipedia.miner.model.*;
@@ -32,8 +34,8 @@ public class EnvironmentBuilder {
         System.out.println("Language is " + lang);
         
         WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-        conf.addDatabaseToCache(DatabaseType.categoryParents);
-        conf.addDatabaseToCache(DatabaseType.articleParents);
+        //conf.addDatabaseToCache(DatabaseType.categoryParents);
+        //conf.addDatabaseToCache(DatabaseType.articleParents);
         
         /*if (conf.getDataDirectory() == null || !conf.getDataDirectory().isDirectory()) {
             System.out.println(conf.getDataDirectory());
@@ -44,22 +46,26 @@ public class EnvironmentBuilder {
         //WEnvironment.buildEnvironment(conf, conf.getDataDirectory(), false);
 
         // note: are we loading two times the full environment?
-        Wikipedia wikipedia = new Wikipedia(conf, true); // with distinct thread for accessing data
-        while(!wikipedia.isReady()) {
+        Wikipedia wikipedia = new Wikipedia(conf, false); // no distinct thread for accessing data
+        /*while(!wikipedia.isReady()) {
             Thread.sleep(1000);
-        }
+        }*/
 
         // mapping wikipedia categories / domains and domain assigments for all pageid
-        System.out.println("Generating domain for all Wikipedia articles...");
-        WikipediaDomainMap wikipediaDomainMap = new WikipediaDomainMap();
-        try {
-            wikipediaDomainMap.setWikipedia(wikipedia);
-            wikipediaDomainMap.setLang(lang);
-            wikipediaDomainMap.open();
-            wikipediaDomainMap.createAllMappings();
-        } finally {
-            wikipediaDomainMap.save();
+        if (lang.equals("en")) {
+            System.out.println("Generating domain for all Wikipedia articles...");
+            WikipediaDomainMap wikipediaDomainMap = new WikipediaDomainMap("en", conf.getDatabaseDirectory().getPath());
+            try {
+                wikipediaDomainMap.setWikipedia(wikipedia);
+                wikipediaDomainMap.setLang(lang);
+                //wikipediaDomainMap.openCache();
+                wikipediaDomainMap.createAllMappings();
+            } finally {
+                //wikipediaDomainMap.saveCache();
+                wikipediaDomainMap.close();
+            }
         }
+        wikipedia.close();
     }
     
 }

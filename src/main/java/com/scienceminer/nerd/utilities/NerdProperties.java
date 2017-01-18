@@ -18,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.scienceminer.nerd.exceptions.NerdPropertyException;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 
+//import org.grobid.core.utilities.GrobidProperties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -426,6 +428,7 @@ public class NerdProperties {
 	 */
 	public static void setGrobidHome(String home) {
 		setPropertyValue(NerdPropertyKeys.PROP_GROBID_HOME, home);
+		//GrobidProperties.set_GROBID_HOME_PATH(home);
 	}
      
 	/**
@@ -445,6 +448,8 @@ public class NerdProperties {
 	 */
 	public static void setGrobidProperties(String properties) {
 		setPropertyValue(NerdPropertyKeys.PROP_GROBID_PROPERTIES, properties);
+		//GrobidProperties.setGrobidPropertiesPath(properties);
+            
 	}
 
 	/**
