@@ -46,7 +46,7 @@ public class WikipediaDomainMap {
     private String database_name = "domains";
 
     // an in-memory cache - map a Wikipedia page id to a list of domain IDs
-    //private ConcurrentMap<Integer, int[]> domainsCache = null;
+    private ConcurrentMap<Integer, int[]> domainsCache = null;
 
     // domain id map
     private Map<Integer,String> id2domain = null;
@@ -63,9 +63,9 @@ public class WikipediaDomainMap {
     private static String grispDomains = "data/grisp/domains.txt";
     private static String wikiGrispMapping = "data/wikipedia/mapping.txt";
 
-    public WikipediaDomainMap(String lang, String envFilePath) {
+    public WikipediaDomainMap(String lang, String envPath) {
         this.lang = lang;
-        this.envFilePath = envFilePath + "/" + database_name;
+        this.envFilePath = envPath + "/" + database_name;
 
         this.environment = new Env();
         this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
@@ -79,7 +79,7 @@ public class WikipediaDomainMap {
             isLoaded = true;
             System.out.println("domains "+ lang + " / isLoaded: " + isLoaded);
         }
-        this.environment.open(envFilePath, Constants.NOTLS);
+        this.environment.open(this.envFilePath, Constants.NOTLS);
         db = this.environment.openDatabase();
         //openCache();
     }
@@ -104,7 +104,7 @@ public class WikipediaDomainMap {
     /**
      * Open cache for domains
      */
-    /*public void openCache() {
+    public void openCache() {
         File homeCache = null;
         ObjectInputStream in = null;
         try {
@@ -133,12 +133,12 @@ public class WikipediaDomainMap {
                 throw new NerdException(e);
             }
         }
-    }*/
+    }
     
     /**
      * Close index for domains
      */
-    /*public void saveCache() {
+    public void saveCache() {
         if (domainsCache == null)
             return;
         File home = null;
@@ -166,7 +166,7 @@ public class WikipediaDomainMap {
                 throw new NerdException(e);
             }
         }
-    }*/
+    }
     
     private void loadGrispMapping() throws Exception {
         importDomains();
@@ -272,7 +272,7 @@ System.out.print("\n");*/
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
-                //domainsCache.put(new Integer(pageId), theDomains);
+                domainsCache.put(new Integer(pageId), theDomains);
             }
             p++;
         }
@@ -345,18 +345,20 @@ System.out.print("\n");*/
         LineIterator.closeQuietly(domainIterator);
     }
 
-
     public List<String> getDomains(int pageId) {
-        //int[] list = domainsCache.get(new Integer(pageId));
         int[] list = null;
-        try (Transaction tx = environment.createReadTransaction();
-             BufferCursor cursor = db.bufferCursor(tx)) {
-            cursor.keyWriteBytes(BigInteger.valueOf(pageId).toByteArray());
-            if (cursor.seekKey()) {
-                list = (int[])Utilities.deserialize(cursor.valBytes());
+        if (domainsCache != null)
+            domainsCache.get(new Integer(pageId));
+        else {
+            try (Transaction tx = environment.createReadTransaction();
+                 BufferCursor cursor = db.bufferCursor(tx)) {
+                cursor.keyWriteBytes(BigInteger.valueOf(pageId).toByteArray());
+                if (cursor.seekKey()) {
+                    list = (int[])Utilities.deserialize(cursor.valBytes());
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
             }
-        } catch(Exception e) {
-            e.printStackTrace();
         }
 
         List<String> result = null;

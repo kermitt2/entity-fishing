@@ -58,10 +58,10 @@ public class EnvironmentBuilder {
             try {
                 wikipediaDomainMap.setWikipedia(wikipedia);
                 wikipediaDomainMap.setLang(lang);
-                //wikipediaDomainMap.openCache();
+                wikipediaDomainMap.openCache();
                 wikipediaDomainMap.createAllMappings();
             } finally {
-                //wikipediaDomainMap.saveCache();
+                wikipediaDomainMap.saveCache();
                 wikipediaDomainMap.close();
             }
         }

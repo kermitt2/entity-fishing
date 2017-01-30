@@ -8,6 +8,7 @@ target
 *.log
 *.log.*
 *.old
+*.obj
 data/maps/customisations.obj
 data/wikipedia/db-en
 data/wikipedia/db-fr

@@ -29,14 +29,15 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
 
     private RelationType type = RelationType.RELATED; // default
     private String relationName = null;
-    private Integer templateID = null;
+    private String templateName = null;
     private Integer concept1ID = -1;
     private Integer concept2ID = -1;
 
     public Relation() {}
 
-    public Relation(RelationType relationType, String relationName, Integer concept2ID) {
+    public Relation(RelationType relationType, String relationName, Integer concept1ID, Integer concept2ID, String templateName) {
         this.type = relationType;
+        this.concept1ID = concept1ID;
         this.concept2ID = concept2ID;
         this.relationName = relationName;
     }
@@ -47,6 +48,14 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
 
     public void setRelationName(String relationName) {
         this.relationName = relationName;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
     }
 
     public RelationType getRelationType() {
