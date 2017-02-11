@@ -18,7 +18,7 @@ import org.junit.Ignore;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdPropertyKeys;
 
-import org.wikipedia.miner.db.*;
+import com.scienceminer.nerd.kb.db.*;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.util.*;
 

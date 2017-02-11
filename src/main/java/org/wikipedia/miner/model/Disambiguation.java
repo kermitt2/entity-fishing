@@ -1,6 +1,7 @@
 package org.wikipedia.miner.model;
 
-import org.wikipedia.miner.db.WEnvironment;
+import com.scienceminer.nerd.kb.db.KBEnvironment;
+
 import org.wikipedia.miner.db.struct.DbPage;
 
 /**
@@ -15,11 +16,11 @@ public class Disambiguation extends Article {
 	 * @param env	an active WikipediaEnvironment
 	 * @param id	the unique identifier of the article
 	 */
-	public Disambiguation(WEnvironment env, int id) {
+	public Disambiguation(KBEnvironment env, int id) {
 		super(env, id) ;
 	}
 	
-	protected Disambiguation(WEnvironment env, int id, DbPage pd) {
+	protected Disambiguation(KBEnvironment env, int id, DbPage pd) {
 		super(env, id, pd) ;
 	}
 	

@@ -244,7 +244,7 @@ public class NerdRestProcessQuery {
 			nerdQuery.setRuntime(end - start);
 
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONClean();
+			String json = nerdQuery.toJSONCompactClean();
 			
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
@@ -455,7 +455,7 @@ public class NerdRestProcessQuery {
 			nerdQuery.setRuntime(end - start);
 
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONClean();
+			String json = nerdQuery.toJSONCompactClean();
 			
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
@@ -586,7 +586,7 @@ public class NerdRestProcessQuery {
 			nerdQuery.setRuntime(end - start);
 
 			//Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONClean();
+			String json = nerdQuery.toJSONCompactClean();
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -793,7 +793,7 @@ public class NerdRestProcessQuery {
 			nerdQuery.setRuntime(end - start);
 
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONClean();
+			String json = nerdQuery.toJSONCompactClean();
 			
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();

@@ -9,8 +9,9 @@ import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.util.Span;
 
 /**
- * A utility class for gathering n-grams from text. Uses an openNLP tokenizer to identify word boundaries, and optionally uses an openNLP sentence splitter to ensure that ngrams do not span sentence boundaries. Also ensures that ngrams do not span line breaks. 
- * 
+ * A utility class for gathering n-grams from text. Uses an openNLP tokenizer to identify word 
+ * boundaries, and optionally uses an openNLP sentence splitter to ensure that ngrams do not span 
+ * sentence boundaries. Also ensures that ngrams do not span line breaks. 
  * 
  */
 public class NGrammer {

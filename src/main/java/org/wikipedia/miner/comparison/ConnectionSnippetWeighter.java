@@ -1,6 +1,5 @@
 package org.wikipedia.miner.comparison;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.Vector;
 
 import org.wikipedia.miner.model.Wikipedia;
 import org.wikipedia.miner.util.CorrelationCalculator;
-import org.wikipedia.miner.util.ProgressTracker;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.GaussianProcesses;
@@ -22,8 +20,6 @@ import org.dmilne.weka.wrapper.DeciderBuilder;
 import org.dmilne.weka.wrapper.InstanceBuilder;
 
 public class ConnectionSnippetWeighter {
-
-	
 	
 	enum Attributes {
 		generality,
@@ -40,14 +36,11 @@ public class ConnectionSnippetWeighter {
 		isAfterHeading
 	}
 	
-	
 	private final Wikipedia wikipedia ;
 	private final ArticleComparer cmp ;
 	
 	private final Decider<Attributes,Double> snippetWeighter ;
 	private Dataset<Attributes,Double> trainingDataset ;
-	
-	
 	
 	@SuppressWarnings("unchecked")
 	public ConnectionSnippetWeighter(Wikipedia wikipedia, ArticleComparer cmp) throws Exception {
@@ -89,27 +82,21 @@ public class ConnectionSnippetWeighter {
 	}
 	
 	public void train(List<ConnectionSnippet> weightedSnippets) throws Exception {
-
 		trainingDataset = snippetWeighter.createNewDataset() ;
 
-		ProgressTracker pn = new ProgressTracker(weightedSnippets.size(), "training", ConnectionSnippetWeighter.class) ;
 		for (ConnectionSnippet snippet: weightedSnippets) {
 
 			if (snippet.getWeight() == null)
 				throw new Exception("Training snippet is not weighted") ;
 			
 			trainingDataset.add(getInstance(snippet)) ;
-			
-			pn.update() ;
 		}
 	}
 	
 	public double test(List<ConnectionSnippet> weightedSnippets) throws Exception {
-
 		List<Double> manualWeights = new ArrayList<Double>() ;
 		List<Double> autoWeights = new ArrayList<Double>() ;
 
-		ProgressTracker pn = new ProgressTracker(weightedSnippets.size(), "testing", ArticleComparer.class) ;
 		for (ConnectionSnippet snippet: weightedSnippets) {
 			
 			if (snippet.getWeight() == null)
@@ -117,8 +104,6 @@ public class ConnectionSnippetWeighter {
 
 			manualWeights.add(snippet.getWeight()) ;
 			autoWeights.add(this.getWeight(snippet)) ;
-
-			pn.update() ;
 		}
 
 		return CorrelationCalculator.getCorrelation(manualWeights, autoWeights) ;

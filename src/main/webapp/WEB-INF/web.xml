@@ -112,7 +112,11 @@
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/extendNERDCustomisation</url-pattern>
     </servlet-mapping>
-	
+	<servlet-mapping>
+        <servlet-name>nerd-service</servlet-name>
+        <url-pattern>/KBConcept</url-pattern>
+    </servlet-mapping>
+
 	<!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/NERDCustomisation/*</url-pattern>

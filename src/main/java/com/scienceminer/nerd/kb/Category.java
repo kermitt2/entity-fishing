@@ -12,8 +12,6 @@ import java.util.*;
 import java.io.BufferedReader;
 import java.util.List;    
 
-//import org.wikipedia.miner.model.Category;
-
 import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.io.*;
 

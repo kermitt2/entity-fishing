@@ -274,7 +274,7 @@ public class NerdQuery {
 		return json;
 	}
 
-	public String toJSONClean() {
+	public String toJSONFullClean() {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{");
@@ -364,7 +364,106 @@ public class NerdQuery {
 					first = false;
 				else 
 					buffer.append(", ");
-				buffer.append(entity.toJson()); 
+				buffer.append(entity.toJsonFull()); 
+			}
+			buffer.append("]");
+		}
+		buffer.append("}");
+
+		return buffer.toString();
+	}
+
+	public String toJSONCompactClean() {
+		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("{");
+
+		// server runtime is always present (even at 0.0)
+		buffer.append("\"runtime\": " + runtime);
+
+		// parameters
+		buffer.append(", \"onlyNER\": " + onlyNER);
+		buffer.append(", \"nbest\": " + nbest);
+
+		// parameters
+		if ( (processSentence != null) && (processSentence.length > 0) ) {
+			buffer.append(", \"processSentence\": [");
+			for(int i=0; i<processSentence.length; i++) {
+				if (i != 0) {
+					buffer.append(", ");
+				}
+				buffer.append(processSentence[i].intValue());
+			}
+			buffer.append("]");
+		}
+
+		// surface form
+		if (text != null) {
+			byte[] encoded = encoder.quoteAsUTF8(text);
+			String output = new String(encoded); 
+			buffer.append(", \"text\": \"" + output + "\"");
+			if ( (sentences != null) && (sentences.size() > 0) ) {
+				buffer.append(", \"sentences\": [ " );
+				boolean theStart = true;
+				for(Sentence sentence : sentences) {
+					if (theStart) {
+						buffer.append(sentence.toJSON());
+						theStart = false;
+					}
+					else
+						buffer.append(", " + sentence.toJSON());
+				}
+				buffer.append(" ]");
+			}
+		}
+		
+		if ( (termVector != null) && (termVector.size() > 0) ) {
+			buffer.append(", \"termVector\": [ ");
+			boolean begin = true;
+			for(WeightedTerm term : termVector) {
+				if (!begin)
+					buffer.append(", ");
+				else
+					begin = false;
+				buffer.append(term.toJson());
+			}
+			buffer.append(" ]");
+		}
+
+		String lang = "en"; // default language
+		if (language != null) {
+			buffer.append(", \"language\": " + language.toJSON());
+			lang = language.getLang();
+		}
+		
+		// if available, document level distribution of categories
+		if ( (globalCategories != null) && (globalCategories.size() > 0) ) {
+			buffer.append(", \"global_categories\": [");
+			boolean first = true;
+			for(com.scienceminer.nerd.kb.Category category : globalCategories) {				
+				byte[] encoded = encoder.quoteAsUTF8(category.getName());
+				String output = new String(encoded);
+				if (first) {
+					first = false;
+				}
+				else
+					buffer.append(", ");
+				buffer.append("{\"weight\" : " + category.getWeight() + ", \"source\" : \"wikipedia-" + lang
+					+ "\", \"category\" : \"" + output + "\", ");
+				buffer.append("\"page_id\" : " + category.getWikiPageID() + "}");
+			}
+			buffer.append("]");
+		}
+
+		if ( (entities != null) && (entities.size() > 0) ) {
+			buffer.append(", \"entities\": [");
+			boolean first = true;
+			for(NerdEntity entity : entities) {
+				if (first) 
+					first = false;
+				else 
+					buffer.append(", ");
+				buffer.append(entity.toJsonCompact()); 
 			}
 			buffer.append("]");
 		}

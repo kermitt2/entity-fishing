@@ -1,35 +1,10 @@
-/*
- *    Article.java
- *    Copyright (C) 2007 David Milne, d.n.milne@gmail.com
- *
- *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation; either version 2 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this program; if not, write to the Free Software
- *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
 package org.wikipedia.miner.model;
 
 import java.util.* ; 
 
-import org.wikipedia.miner.db.WEnvironment;
-import org.wikipedia.miner.db.struct.DbIntList;
-import org.wikipedia.miner.db.struct.DbLabelForPage;
-import org.wikipedia.miner.db.struct.DbLabelForPageList;
-import org.wikipedia.miner.db.struct.DbLinkLocation;
-import org.wikipedia.miner.db.struct.DbLinkLocationList;
-import org.wikipedia.miner.db.struct.DbPage;
-import org.wikipedia.miner.db.struct.DbPageLinkCounts;
-import org.wikipedia.miner.db.struct.DbTranslations;
+import com.scienceminer.nerd.kb.db.KBEnvironment;
+
+import org.wikipedia.miner.db.struct.*;
 
 /**
  * Represents articles in Wikipedia; the pages that contain descriptive text regarding a particular topic. 
@@ -39,14 +14,14 @@ public class Article extends Page {
 	/**
 	 * Initialises a newly created Article so that it represents the article given by <em>id</em>.
 	 * 
-	 * @param env	an active WEnvironment
+	 * @param env	an active KBEnvironment
 	 * @param id	the unique identifier of the article
 	 */
-	public Article(WEnvironment env, int id) {
+	public Article(KBEnvironment env, int id) {
 		super(env, id) ;
 	}
 
-	protected Article(WEnvironment env, int id, DbPage pd) {
+	protected Article(KBEnvironment env, int id, DbPage pd) {
 		super(env, id, pd) ;
 	}
 
@@ -316,9 +291,6 @@ public class Article extends Page {
 		return labels ;	
 	}
 
-
-
-
 	/**
 	 * This efficiently identifies sentences within this article that contain links to the given target article. 
 	 * The actual text of these sentences can be obtained using {@link Page#getSentenceMarkup(int)}
@@ -418,7 +390,6 @@ public class Article extends Page {
 			this.fromRedirect = l.getFromRedirect() ;
 			this.isPrimary = l.getIsPrimary() ;
 		}
-
 
 		/**
 		 * @return the text of this label (the title of the article or redirect, or the anchor of the link

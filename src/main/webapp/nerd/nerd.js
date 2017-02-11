@@ -11,6 +11,9 @@ var nerd = (function($) {
 	// for associating several entities to an annotation position (to support nbest mode visualisation)
 	var entityMap = new Object();
 
+	// for complete concept information, resulting of additional calls to the knowledge base service
+	var conceptMap = new Object();
+
 	// for detailed view
 	var responseJsonLId = null;
 	var responseJsonNERDText = null;
@@ -177,6 +180,7 @@ var nerd = (function($) {
 	function submitQuery() {
 		// reinit the entity map
 		entityMap = new Object();
+		conceptMap = new Object();
 		var urlLocal = $('#gbdForm').attr('action');
 		//console.log(JSON.stringify($('#textInputArea').val()));
 		if ( (urlLocal.indexOf('LId') != -1) || (urlLocal.indexOf('SentenceSegmentation') != -1) ) { 
@@ -330,10 +334,25 @@ var nerd = (function($) {
 			var string = responseJson.text;
 			if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
 				display += '<tr style="background-color:#FFF;">';     
+				var lang = 'en'; //default
+		 		var language = responseJson.language;
+		 		if (language)
+		 			lang = language.lang;
 				if (responseJson.entities) {
 					var currentAnnotationIndex = responseJson.entities.length-1;
 					for(var m=responseJson.entities.length-1; m>=0; m--) {
 						var entity = responseJson.entities[m];
+						var identifier = entity.wikipediaExternalRef;
+						//var language = entity.lang;
+						if (identifier && (conceptMap[identifier] == null)) {
+							$.ajax({
+							  	type: 'GET',
+							  	url: 'service/KBConcept',
+							  	data: { id : identifier, lang : lang },
+							  	success: function(result) { conceptMap[result.wikipediaExternalRef] = result; },
+							  	dataType: 'json'  
+							});
+						}
 						var domains = entity.domains;
 						var label = null;
 						if (entity.type)
@@ -585,7 +604,6 @@ var nerd = (function($) {
 	                conf = conf.substring(0, 4);
 	            var definitions = entity.definitions;
 	            var wikipedia = entity.wikipediaExternalRef;
-	            //var freebase = entity.freeBaseExternalRef;
 	            var content = entity.rawName; //$(this).text();
 	            var preferredTerm = entity.preferredTerm;
 
@@ -606,22 +624,8 @@ var nerd = (function($) {
 	                piece += '<p>' + localHtml + '</p>';
 				}
 				piece += '</td><td width="25%">';
-
-	            /*if (freebase != null) {
-	                var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
-	                urlImage += '?maxwidth=250';
-	                urlImage += '&maxheight=250';
-	                urlImage += '&key=' + api_key;
-	                piece += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
-	            }*/
-	            // image via WikiMedia
-//console.log(wikipedia);
-//console.log(lang);
-//console.log('lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")');
 				piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
-
 	            piece += '</td><td>';
-
 	            piece += '<table><tr><td>';
 
 	            if (wikipedia) {
@@ -630,13 +634,6 @@ var nerd = (function($) {
 	                        '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
 	            }
 	            piece += '</td></tr><tr><td>';
-
-	            /*if (freebase != null) {
-	                piece += '<a href="http://www.freebase.com' +
-	                        freebase +
-	                        '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="resources/img/freebase_icon.png"/></a>';
-
-	            }*/
 	            piece += '</td></tr></table>';
 
 	            piece += '</td></tr>';
@@ -751,7 +748,6 @@ var nerd = (function($) {
 					}	
 				}					
 		    } 
-//console.log(entityMap);
 			currentSentence = "<p>" + currentSentence.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
 			string = string.replace("<p></p>", "");
 		
@@ -759,25 +755,6 @@ var nerd = (function($) {
 			display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';	
 		}
 								 
-		/*if (responseJson.entities) {
-			for(var m=responseJson.entities.length-1; m>=0; m--) {
-				if ( (responseJson.entities[m].offsetStart>=responseJson.sentences[sentence].offsetStart) &&
-					 (responseJson.entities[m].offsetEnd<=responseJson.sentences[sentence].offsetEnd) ) {
-					var entity = responseJson.entities[m];
-					var label = entity.type;	
-					if (!label)
-						label = entity.rawName;
-			    	var start = parseInt(entity.offsetStart,10) - responseJson.sentences[sentence].offsetStart;
-				    var end = parseInt(entity.offsetEnd,10) - responseJson.sentences[sentence].offsetStart;                    
-					currentSentence = currentSentence.substring(0,start) 
-						+ '<span id="annot-'+m+'" rel="popover" data-color="'+label+'">'
-						+ '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-						+ currentSentence.substring(start,end) + '</span></span>' 
-						+ currentSentence.substring(end,currentSentence.length+1); 
-				}
-			}
-		}*/
-		
 		$('#sentence_ner').html(currentSentence); 
 	
 		for (var key in entityMap) {
@@ -787,15 +764,38 @@ var nerd = (function($) {
 		  	}
 		}
 		$('#detailed_annot-0').hide();	
-	
-		/*if (responseJson.entities) {
-		    for(var m=responseJson.entities.length-1; m>=0; m--) {
-				$('#annot-'+m).bind('hover', viewEntity);  
-				$('#annot-'+m).bind('click', viewEntity);  	
-				$('#detailed_annot-0').hide();	 
-			}
-		}*/
-			
+	}
+
+	function getDefinitions(identifier) {
+		var localEntity = conceptMap[identifier];
+		if (localEntity != null) {
+			return localEntity.definitions;
+		} else
+			return null;	
+	}
+
+	function getCategories(identifier) {
+		var localEntity = conceptMap[identifier];
+		if (localEntity != null) {
+			return localEntity.categories;
+		} else
+			return null;	
+	}
+
+	function getMultilingual(identifier) {
+		var localEntity = conceptMap[identifier];
+		if (localEntity != null) {
+			return localEntity.multilingual;
+		} else
+			return null;
+	}
+
+	function getPreferredTerm(identifier) {
+		var localEntity = conceptMap[identifier];
+		if (localEntity != null) {
+			return localEntity.preferredTerm;
+		} else
+			return null;
 	}
 
 	function viewEntity() {
@@ -822,10 +822,11 @@ var nerd = (function($) {
 		for(var entityListIndex=entityMap[localEntityNumber].length-1; 
 				entityListIndex>=0; 
 				entityListIndex--) {
-
 			//var entity = responseJson.entities[localEntityNumber];
 			var entity = entityMap[localEntityNumber][entityListIndex];
+			var wikipedia = entity.wikipediaExternalRef;
 			var domains = entity.domains;
+			
 			var type = entity.type;
 
 			var colorLabel = null;
@@ -839,11 +840,12 @@ var nerd = (function($) {
 
 			var subType = entity.subtype;
 			var conf = entity.nerd_score;
-			var definitions = entity.definitions;
-			var wikipedia = entity.wikipediaExternalRef;
-			//var freebase = entity.freeBaseExternalRef;
+			//var definitions = entity.definitions;
+			var definitions = getDefinitions(wikipedia);
+			
 			var content = entity.rawName; 
-			var normalized = entity.preferredTerm; 
+			//var normalized = entity.preferredTerm; 
+			var normalized = getPreferredTerm(wikipedia);
 			
 			var sense = null;
 			if (entity.sense)
@@ -884,28 +886,14 @@ var nerd = (function($) {
 				}
 				string += "</b></p>";
 			}
-			
+
 			string += "<p>conf: <i>"+conf+ "</i></p>";
-
 			string += "</td><td style='align:right;bgcolor:#fff'>";
-
-			/*if (freebase != null) {
-				var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
-				    urlImage += '?maxwidth=150';
-				    urlImage += '&maxheight=150';
-				    urlImage += '&key=' + api_key;
-				string += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
-			}*/		
-
-			//string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'")</script></span>';
 			string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
-
 
 			string += "</td></tr></table>";
 
 			if ((definitions != null) && (definitions.length > 0)) {
-				//console.log(definitions[0].definition);
-				//var localHtml = (definitions[0]['definition']).wiki2html(lang);
 				var localHtml = wiki2html(definitions[0]['definition'], lang);
 				string += "<p><div class='wiky_preview_area2'>"+localHtml+"</div></p>";
 			}
@@ -917,13 +905,6 @@ var nerd = (function($) {
 					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
 					' src="resources/img/wikipedia.png"/></a>';
 				}
-				/*if (freebase != null) {
-					string += '<a href="http://www.freebase.com' + 
-					freebase + 
-					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
-					' src="resources/img/freebase_icon.png"/></a>';
-				
-				}*/
 				string += '</p>';
 			}
 		
@@ -958,7 +939,6 @@ var nerd = (function($) {
 					  "response is empty.</font>");   
 			return;
 		}
-		//var display = '<pre style="background-color:#FFF;width:95%;" id="displaySentenceSegmentation">'; 
 		
 		var display = '<div class=\"note-tabs\"> \
 			<ul id=\"resultTab\" class=\"nav nav-tabs\"> \

@@ -1,9 +1,6 @@
 package com.scienceminer.nerd.service;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Collections;
+import java.util.*;
 import java.io.*;
 
 import javax.ws.rs.core.MediaType;
@@ -17,12 +14,9 @@ import com.scienceminer.nerd.utilities.NerdServiceProperties;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.lang.Language;
 
-import com.scienceminer.nerd.disambiguation.ProcessText;
-import com.scienceminer.nerd.disambiguation.NerdEngine;
-import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.disambiguation.Sentence;
-import com.scienceminer.nerd.disambiguation.WeightedTerm;
-import org.grobid.core.data.Entity;
+import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.kb.*;
+import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +29,9 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
+
+import org.wikipedia.miner.model.*;
+import org.wikipedia.miner.model.Page.PageType;
 
 /**
  * 
@@ -53,25 +50,99 @@ public class NerdRestKB {
 	/**
 	 *  Get the information for a concept.
 	 * 
-	 *  @param id of the concept      
+	 *  @param id identifier of the concept      
 	 *
 	 *  @return a response object containing the information related to the identified concept.
 	 */
-	public static Response getConceptInfo(String text) {
+	public static Response getConceptInfo(String id, String lang, NerdRestUtils.Format format) {
 		LOGGER.debug(methodLogIn());       
+
 		Response response = null;
 		String retVal = null;
 		try {
 			LOGGER.debug(">> set raw text for stateless service'...");
 			
-			String json = null;
-			if (json == null) {
-				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			Integer identifier = null;
+			try {
+				identifier = Integer.parseInt(id);
+			} catch(Exception e) {
+				LOGGER.error("Could not parse the concept identifier. Bad request.");
+				response = Response.status(Status.BAD_REQUEST).build();
 			}
-			else {
-				response = Response.status(Status.OK).entity(json)
-					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
-					.build();
+
+			if (identifier != null) {
+				NerdEntity entity = new NerdEntity();
+				entity.setLang(lang);
+				Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
+
+				if (wikipedia == null) {
+					LOGGER.error("Language is not supported. Bad request.");
+					response = Response.status(Status.BAD_REQUEST).build();
+				} else {
+					Page page = wikipedia.getPageById(identifier.intValue());
+
+					// check the type of the page - it must be an article
+					PageType type = page.getType();
+					if (type != PageType.article) {
+						LOGGER.error("Not a valid concept identifier. Bad request.");
+						response = Response.status(Status.BAD_REQUEST).build();
+					} else {
+						Article article = (Article)page;
+						entity.setPreferredTerm(article.getTitle());
+						entity.setRawName(article.getTitle());
+						
+						// definition
+						Definition definition = new Definition();
+						try {
+							definition.setDefinition(article.getFirstParagraphMarkup());
+						}
+						catch(Exception e) {
+							LOGGER.debug("Error when getFirstParagraphMarkup for PageID "+ identifier);
+						}
+						definition.setSource("wikipedia-" + lang);
+						definition.setLang(lang);
+						entity.addDefinition(definition);
+
+						entity.setWikipediaExternalRef(identifier);
+
+						// categories
+						org.wikipedia.miner.model.Category[] parentCategories = article.getParentCategories();
+						if ( (parentCategories != null) && (parentCategories.length > 0) ) {
+							for(org.wikipedia.miner.model.Category theCategory : parentCategories) {
+								// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
+								if (theCategory == null) {
+									LOGGER.warn("Invalid category page for article: " + identifier);
+									continue;
+								}
+								if (theCategory.getTitle() == null) {
+									LOGGER.warn("Invalid category content for article: " + identifier);
+									continue;
+								}
+								if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") == -1)
+									entity.addCategory(new com.scienceminer.nerd.kb.Category(theCategory));
+								else {
+									break;
+								}
+							}
+						}
+
+						// translations
+						Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
+						Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+
+						entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
+
+						String json = entity.toJsonFull();
+						if (json == null) {
+							response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+						}
+						else {
+							response = Response.status(Status.OK).entity(json)
+								.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+								.build();
+						}
+					}
+				}
 			}
 		}
 		catch(NoSuchElementException nseExp) {
@@ -91,6 +162,8 @@ public class NerdRestKB {
 		
 		return response;
 	}
+
+	private static List<String> targetLanguages = Arrays.asList("en", "de", "fr");
 
 	/**
 	 * @return

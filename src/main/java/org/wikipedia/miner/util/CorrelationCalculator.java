@@ -6,7 +6,6 @@ import org.apache.commons.math.stat.correlation.SpearmansCorrelation;
 
 public class CorrelationCalculator {
 
-	
 	public static double getCorrelation(List<Double> colA, List<Double> colB) {
 		
 		SpearmansCorrelation sc = new SpearmansCorrelation();

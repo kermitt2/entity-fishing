@@ -1,76 +1,50 @@
-/*
- *    Wikipedia.java
- *    Copyright (C) 2007 David Milne, d.n.milne@gmail.com
- *
- *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation; either version 2 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this program; if not, write to the Free Software
- *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
 package org.wikipedia.miner.model;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
-
-
 import org.apache.log4j.Logger;
-import org.wikipedia.miner.db.WEnvironment;
-//import org.wikipedia.miner.db.WIterator;
-import org.wikipedia.miner.db.WEnvironment.StatisticName;
+
+import com.scienceminer.nerd.kb.db.*;
+import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
+
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.model.Page.PageType;
-import org.wikipedia.miner.util.LabelIterator;
 import org.wikipedia.miner.util.NGrammer.CaseContext;
 import org.wikipedia.miner.util.NGrammer.NGramSpan;
-import org.wikipedia.miner.util.PageIterator;
-import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.util.text.TextProcessor;
 import org.xml.sax.SAXException;
-
-import com.sleepycat.je.EnvironmentLockedException;
-
 
 /**
  * Represents a single dump or instance of Wikipedia
  */
 public class Wikipedia {
 
-	private WEnvironment env ;
+	private KBEnvironment env ;
 
 	/**
 	 * Initialises a newly created Wikipedia according to the given configuration. 
 	 * 
 	 * This can be a time consuming process if the given configuration specifies databases that need to be cached to memory.
 	 * 
-	 * This preparation can be done in a separate thread if required, in which case progress can be tracked using {@link #getProgress()}, {@link #getPreparationTracker()} and {@link #isReady()}.
+	 * This preparation can be done in a separate thread if required, in which case progress can be tracked using {@link #getProgress()} and {@link #isReady()}.
 	 *  
 	 * @param conf a configuration that describes where the databases are located, etc. 
 	 * @param threadedPreparation true if preparation (connecting to databases, caching data to memory) should be done in a separate thread, otherwise false
 	 * @throws EnvironmentLockedException if the underlying database environment is unavailable.
 	 */
-	public Wikipedia(WikipediaConfiguration conf) throws EnvironmentLockedException{
-		this.env = new WEnvironment(conf);
+	public Wikipedia(WikipediaConfiguration conf) {
+		this.env = new KBEnvironment(conf);
 		try {
 			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} 
 	}
-	public Wikipedia(WikipediaConfiguration conf, boolean threadedPreparation) throws EnvironmentLockedException{
-		this.env = new WEnvironment(conf);
+	public Wikipedia(WikipediaConfiguration conf, boolean threadedPreparation) {
+		this.env = new KBEnvironment(conf);
 		try {
 			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
 		} catch(Exception e) {
@@ -83,25 +57,25 @@ public class Wikipedia {
 	 * 
 	 * This can be a time consuming process if the given configuration specifies databases that need to be cached to memory.
 	 * 
-	 * This preparation can be done in a separate thread if required, in which case progress can be tracked using {@link #getProgress()}, {@link #getPreparationTracker()} and {@link #isReady()}.
+	 * This preparation can be done in a separate thread if required, in which case progress can be tracked using {@link #getProgress()} and {@link #isReady()}.
 	 *  
 	 * @param confFile an xml file that describes where the databases are located, etc. 
 	 * @param threadedPreparation true if preparation (connecting to databases, caching data to memory) should be done in a separate thread, otherwise false
 	 * @throws EnvironmentLockedException if the underlying database environment is unavailable.
 	 */
-	public Wikipedia(File confFile) throws EnvironmentLockedException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+	public Wikipedia(File confFile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-		this.env = new WEnvironment(conf);
+		this.env = new KBEnvironment(conf);
 		try {
 			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}  
 	}
-	public Wikipedia(File confFile, boolean threadedPreparation) throws EnvironmentLockedException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+	public Wikipedia(File confFile, boolean threadedPreparation) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-		//this.env = new WEnvironment(conf, threadedPreparation);
-		this.env = new WEnvironment(conf);
+		//this.env = new KBEnvironment(conf, threadedPreparation);
+		this.env = new KBEnvironment(conf);
 		try {
 			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
 		} catch(Exception e) {
@@ -114,7 +88,7 @@ public class Wikipedia {
 	 * 
 	 * @return the environment that this is connected to
 	 */
-	public WEnvironment getEnvironment() {
+	public KBEnvironment getEnvironment() {
 		return env ;
 	}
 
@@ -142,18 +116,18 @@ public class Wikipedia {
 	 * 
 	 * @return a number between 0 (just started) and 1 (completed) indicating progress of the preparation work. 
 	 */
-	public double getProgress() {
+	/*public double getProgress() {
 		return env.getProgress() ;
-	}
+	}*/
 
 	/**
 	 * Returns a tracker for progress of the preparation work. 
 	 * 
 	 * @return a tracker for progress of the preparation work. 
 	 */
-	public ProgressTracker getPreparationTracker() {
+	/*public ProgressTracker getPreparationTracker() {
 		return env.getPreparationTracker() ;
-	}
+	}*/
 
 	/**
 	 * Returns the root Category from which all other categories can be browsed.

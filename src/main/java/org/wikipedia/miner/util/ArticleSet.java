@@ -1,22 +1,3 @@
-/*
- *    ArticleSet.java
- *    Copyright (C) 2007 David Milne, d.n.milne@gmail.com
- *
- *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation; either version 2 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this program; if not, write to the Free Software
- *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
 package org.wikipedia.miner.util;
 
 import java.io.*;
@@ -25,21 +6,21 @@ import java.util.*;
 import java.util.regex.*;
 
 import org.apache.log4j.Logger;
-import org.wikipedia.miner.db.WEnvironment.StatisticName;
+
+import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
+import com.scienceminer.nerd.kb.db.*;
+
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.model.Page.PageType;
+
 
 /**
  * @author David Milne
  *
  *	A set of Wikipedia articles that can be used to train and test disambiguators, linkDetectors, etc. 
- * Can either be generated randomly from Wikipedia, or loaded from file.
+ *  Can either be generated randomly from Wikipedia, or loaded from file.
  */
 public class ArticleSet extends ArrayList<Article> {
-	
-	//TODO: This screams out for the builder design pattern
-	
-	private static final long serialVersionUID = 6142971965290887331L;
 	
 	//private TreeSet<Integer> articleIds = new TreeSet<Integer>();
 	private MarkupStripper stripper = new MarkupStripper();
@@ -72,12 +53,15 @@ public class ArticleSet extends ArrayList<Article> {
 	}
 	
 	/**
-	 * Generates a set of articles randomly from Wikipedia, given some constraints on what is an acceptable article.
+	 * Generates a set of articles randomly from Wikipedia, given some constraints on what is an 
+	 * acceptable article.
 	 * <p>
-	 * This first gathers all articles that satisfy the minInLink and minOutLink constraints, and then randomly samples from
+	 * This first gathers all articles that satisfy the minInLink and minOutLink constraints, and then 
+	 * randomly samples from
 	 * these to produce the final set of articles which satisfy all constraints.
 	 * <p>
-	 * The length of time this takes is very variable. It will work fastest if the minInLink and minOutLink constraints are strict, and 
+	 * The length of time this takes is very variable. It will work fastest if the minInLink 
+	 * and minOutLink constraints are strict, and 
 	 * the other constraints are loose.
 	 * <p>
 	 * You can ignore any of the constraints by setting them to -1;
@@ -92,16 +76,20 @@ public class ArticleSet extends ArrayList<Article> {
 	 * @param maxWordCount the maximum number of words allowed in an article
 	 * @param maxListProportion the maximum proportion of list items (over total line count) that an article may contain. 
 	 */
-	public ArticleSet(Wikipedia wikipedia, int size, Integer minInLinks, Integer minOutLinks, Double minLinkProportion, Double maxLinkProportion, Integer minWordCount, Integer maxWordCount, Double maxListProportion, Pattern mustMatch, Pattern mustNotMatch, Vector<Article> candidates , ArticleSet exclude) {
+	public ArticleSet(Wikipedia wikipedia, int size, Integer minInLinks, Integer minOutLinks, 
+			Double minLinkProportion, Double maxLinkProportion, Integer minWordCount, 
+			Integer maxWordCount, Double maxListProportion, Pattern mustMatch, Pattern mustNotMatch, 
+			Vector<Article> candidates , ArticleSet exclude) {
+		//if (candidates == null)
+		//	candidates = getRoughCandidates(wikipedia, minInLinks, minOutLinks);
 		
-		if (candidates == null)
-			candidates = getRoughCandidates(wikipedia, minInLinks, minOutLinks);
-		
-		buildFromCandidates(wikipedia, candidates, size, minInLinks, minOutLinks, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, exclude);
+		//buildFromCandidates(wikipedia, candidates, size, minInLinks, minOutLinks, minLinkProportion, 
+		//	maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, exclude);
+		buildFromCandidatesVariant(wikipedia, size, minInLinks, minOutLinks, minLinkProportion, 
+			maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, exclude);
 	}
 	
 	public ArticleSet getRandomSubset(int size) {
-		
 		if (size > this.size())
 			throw new IllegalArgumentException("requested size " + size + " is larger than " + size());
 		
@@ -110,7 +98,6 @@ public class ArticleSet extends ArrayList<Article> {
 		
 		ArticleSet subset = new ArticleSet();
 		while (subset.size() < size) {
-			
 			int index = r.nextInt(size());
 			
 			Article art = get(index);
@@ -126,22 +113,79 @@ public class ArticleSet extends ArrayList<Article> {
 		return subset;
 	}
 	
-	private void buildFromCandidates(Wikipedia wikipedia, Vector<Article> roughCandidates, int size, Integer minInLinks, Integer minOutLinks, Double minLinkProportion, Double maxLinkProportion, Integer minWordCount, Integer maxWordCount, Double maxListProportion, Pattern mustMatch, Pattern mustNotMatch, ArticleSet exclude) {
+	private void buildFromCandidatesVariant(Wikipedia wikipedia, 
+			int size, 
+			Integer minInLinks, 
+			Integer minOutLinks, 
+			Double minLinkProportion, 
+			Double maxLinkProportion, 
+			Integer minWordCount, 
+			Integer maxWordCount, 
+			Double maxListProportion, 
+			Pattern mustMatch, 
+			Pattern mustNotMatch, 
+			ArticleSet exclude) {
+		DecimalFormat df = new DecimalFormat("#0.00 %");
+		
+		//int totalRoughCandidates = roughCandidates.size();
+		double lastWarningProgress = 0;
+		
+		PageIterator i = wikipedia.getPageIterator(PageType.article);
+		while (i.hasNext()) {
+			if (size() >= size)
+				break; //we have enough ids
+
+			Article art = (Article)i.next();
+			if (minOutLinks != null && (art.getLinksOut().length < minOutLinks))
+				continue;
+			
+			if (minInLinks != null && (art.getLinksIn().length < minInLinks))
+				continue;
+		//while (roughCandidates.size() > 0) {
+			
+			//pop a random id
+			//Integer index = (int)Math.floor(Math.random() * roughCandidates.size());
+			//Article art = roughCandidates.elementAt(index);
+			//roughCandidates.removeElementAt(index);
+									
+			if (isArticleValid(art, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, 
+				maxListProportion, mustMatch, mustNotMatch, exclude)) 
+				add(art);
+			
+			// warn user if it looks like we wont find enough valid articles
+			/*double roughProgress = 1-((double) roughCandidates.size()/totalRoughCandidates);
+			if (roughProgress >= lastWarningProgress + 0.01) {
+				double fineProgress = (double)size()/size;
+			
+				if (roughProgress > fineProgress) {
+					System.err.println("ArticleSet | Warning : we have exhausted " + df.format(roughProgress) + 
+						" of the available pages and only gathered " + df.format(fineProgress*100) + 
+						" of the articles needed.");
+					lastWarningProgress = roughProgress;
+				}
+			}*/
+		}
+		
+		if (size() < size)
+			System.out.println("ArticleSet | Warning: we could only find " + size() + 
+				" suitable articles, the set contains " + size + " articles.");
+		
+		
+		Collections.sort(this);
+	}
+
+	private void buildFromCandidates(Wikipedia wikipedia, Vector<Article> roughCandidates, int size, 
+		Integer minInLinks, Integer minOutLinks, Double minLinkProportion, Double maxLinkProportion, 
+		Integer minWordCount, Integer maxWordCount, Double maxListProportion, Pattern mustMatch, 
+		Pattern mustNotMatch, ArticleSet exclude) {
 		
 		DecimalFormat df = new DecimalFormat("#0.00 %");
 		
 		int totalRoughCandidates = roughCandidates.size();
-		
-		ProgressTracker pn = new ProgressTracker(totalRoughCandidates, "Refining candidates (ETA is worst case)", ArticleSet.class);
-		
-		
-		
+
 		double lastWarningProgress = 0;
 		
 		while (roughCandidates.size() > 0) {
-			
-			pn.update();
-			
 			if (size() == size)
 				break; //we have enough ids
 			
@@ -150,7 +194,8 @@ public class ArticleSet extends ArrayList<Article> {
 			Article art = roughCandidates.elementAt(index);
 			roughCandidates.removeElementAt(index);
 									
-			if (isArticleValid(art, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, exclude)) 
+			if (isArticleValid(art, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, 
+				maxListProportion, mustMatch, mustNotMatch, exclude)) 
 				add(art);
 			
 			
@@ -160,7 +205,9 @@ public class ArticleSet extends ArrayList<Article> {
 				double fineProgress = (double)size()/size;
 			
 				if (roughProgress > fineProgress) {
-					System.err.println("ArticleSet | Warning : we have exhausted " + df.format(roughProgress) + " of the available pages and only gathered " + df.format(fineProgress*100) + " of the articles needed.");
+					System.err.println("ArticleSet | Warning : we have exhausted " + df.format(roughProgress) + 
+						" of the available pages and only gathered " + df.format(fineProgress*100) 
+						+ " of the articles needed.");
 					lastWarningProgress = roughProgress;
 				}
 			}
@@ -196,19 +243,13 @@ public class ArticleSet extends ArrayList<Article> {
 		writer.close();
 	}
 		
-	protected static Vector<Article> getRoughCandidates(Wikipedia wikipedia, Integer minInLinks, Integer minOutLinks)  {
-		
+	protected static Vector<Article> getRoughCandidates(Wikipedia wikipedia, Integer minInLinks, 
+		Integer minOutLinks)  {
 		Vector<Article> articles = new Vector<Article>();
-		int totalArticles = wikipedia.getEnvironment().retrieveStatistic(StatisticName.articleCount).intValue();
-		
-		ProgressTracker pn = new ProgressTracker(totalArticles, "Gathering rough candidates", ArticleSet.class);
-		
+		//int totalArticles = wikipedia.getEnvironment().retrieveStatistic(StatisticName.articleCount).intValue();
 		PageIterator i = wikipedia.getPageIterator(PageType.article);
-		
 		while (i.hasNext()) {
 			Article art = (Article)i.next();
-			pn.update();
-			
 			if (minOutLinks != null && art.getLinksOut().length < minOutLinks)
 				continue;
 			
@@ -224,26 +265,23 @@ public class ArticleSet extends ArrayList<Article> {
 	
 	@Override
 	public boolean contains(Object obj) {
-		
 		Article art = (Article)obj;
-		
 		int index = Collections.binarySearch(this, art);
 		
-		return (index >= 0 );
-		
+		return (index >= 0);
 	}
 	
 		
-	private boolean isArticleValid(Article art, Double minLinkProportion, Double maxLinkProportion, Integer minWordCount, Integer maxWordCount, Double maxListProportion, Pattern mustMatch, Pattern mustNotMatch, ArticleSet exclude) {
-			
+	private boolean isArticleValid(Article art, Double minLinkProportion, Double maxLinkProportion, 
+		Integer minWordCount, Integer maxWordCount, Double maxListProportion, Pattern mustMatch, 
+		Pattern mustNotMatch, ArticleSet exclude) {	
 		Logger.getLogger(ArticleSet.class).debug("Evaluating " + art);
-		
+
 		
 		//we don't want any disambiguations
 		if (art.getType() == PageType.disambiguation) {
 			Logger.getLogger(ArticleSet.class).debug(" - rejected due to disambiguation");
 			return false;	
-			
 		}
 		
 		if (exclude != null && exclude.contains(art)) {
@@ -256,7 +294,8 @@ public class ArticleSet extends ArrayList<Article> {
 		//	return false;	
 	
 		//check if there are any other constraints
-		if (minLinkProportion == null && maxLinkProportion == null && minWordCount == null && maxWordCount == null && maxListProportion == null)
+		if (minLinkProportion == null && maxLinkProportion == null && minWordCount == null && 
+			maxWordCount == null && maxListProportion == null)
 			return true;
 		
 		// get and prepare markup

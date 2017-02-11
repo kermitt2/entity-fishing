@@ -199,7 +199,7 @@ public class TermVectorTrainer {
 									first = false;
 								else 
 									builder.append(", \n");
-								builder.append(entity.toJson()); 
+								builder.append(entity.toJsonFull()); 
 							}
 						}
 						if (start) {

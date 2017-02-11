@@ -13,12 +13,9 @@ import com.scienceminer.nerd.kb.Lexicon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.wikipedia.miner.model.Wikipedia;
-import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.util.*;
 import org.wikipedia.miner.comparison.ArticleComparer;
-//import org.wikipedia.miner.annotation.weighting.*;
 import org.wikipedia.miner.annotation.*;
 import org.wikipedia.miner.util.text.*;
 import org.grobid.core.utilities.OffsetPosition;
@@ -341,7 +338,7 @@ public class Relatedness {
 	 */	
 	public NerdContext getContext(Map<NerdEntity, List<NerdCandidate>> candidates, 
 							List<NerdEntity> userEntities, 
-							String lang) throws Exception{
+							String lang) throws Exception {
 		List<Label.Sense> unambig = new ArrayList<Label.Sense>() ;
 		List<Integer> unambigIds = new ArrayList<Integer>();
 		
@@ -353,20 +350,21 @@ public class Relatedness {
 		// we add the "certain" senses
 		List<Article> certainPages = new ArrayList<Article>();
 		List<Integer> certainPagesIds = new ArrayList<Integer>();
-		
-		for(NerdEntity ent : userEntities) {
-			if (ent.getWikipediaExternalRef() != -1) {
-				//resultContext.addPage(wikipedia.getPageById(ent.getWikipediaExternalRef()));
-				Page thePage = wikipedia.getPageById(ent.getWikipediaExternalRef());
-				if (thePage.getType() == Page.PageType.article) {
-					if (!certainPagesIds.contains(new Integer(thePage.getId()))) {
-						certainPages.add((Article)thePage);
-						certainPagesIds.add(new Integer(thePage.getId()));
+
+		if ( (userEntities != null) && (userEntities.size() > 0) ){
+			for(NerdEntity ent : userEntities) {
+				if (ent.getWikipediaExternalRef() != -1) {
+					//resultContext.addPage(wikipedia.getPageById(ent.getWikipediaExternalRef()));
+					Page thePage = wikipedia.getPageById(ent.getWikipediaExternalRef());
+					if (thePage.getType() == Page.PageType.article) {
+						if (!certainPagesIds.contains(new Integer(thePage.getId()))) {
+							certainPages.add((Article)thePage);
+							certainPagesIds.add(new Integer(thePage.getId()));
+						}
 					}
 				}
 			}
 		}
-
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
@@ -420,8 +418,7 @@ public class Relatedness {
 	}
 
 	/**
-     *  Get a Wikipedia-miner context from a text based on the unambiguous labels and the 
-	 *  certain disambiguated entities. 
+     *  Get a context from a text based on the unambiguous labels and the  certain disambiguated entities. 
 	 *  	 
 	 */	
 	public NerdContext getContextFromText(String content, 
@@ -507,7 +504,7 @@ public class Relatedness {
 	}
 	
 	/**
-     *  Get a Wikipedia-miner context from a vector of terms based on the unambiguous labels and the 
+     *  Get a context from a vector of terms based on the unambiguous labels and the 
 	 *  certain disambiguated entities. 
 	 *  	 
 	 */	

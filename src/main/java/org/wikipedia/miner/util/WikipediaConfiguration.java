@@ -1,19 +1,7 @@
 package org.wikipedia.miner.util;
 
-
-//import gnu.trove.set.hash.TIntHashSet;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 import java.util.concurrent.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -29,28 +17,34 @@ import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 
 import org.apache.log4j.Logger;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import org.wikipedia.miner.comparison.ArticleComparer;
 import org.wikipedia.miner.comparison.ArticleComparer.DataDependency;
-//import org.wikipedia.miner.db.WDatabase.CachePriority;
-import org.wikipedia.miner.db.WDatabase.DatabaseType;
+
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+
 import org.wikipedia.miner.util.text.TextProcessor;
+
 import org.xml.sax.SAXException;
 
 public class WikipediaConfiguration {
 	
-	private enum ParamName{langCode,databaseDirectory,dataDirectory,defaultTextProcessor,minLinksIn,minSenseProbability,minLinkProbability, articlesOfInterest, databaseToCache,stopwordFile,articleComparisonDependency,articleComparisonModel, labelDisambiguationModel, labelComparisonModel, comparisonSnippetModel, topicDisambiguationModel, linkDetectionModel, tokenModel, sentenceModel, unknown};
+	private enum ParamName{langCode, databaseDirectory, dataDirectory, defaultTextProcessor,
+		minLinksIn, minSenseProbability, minLinkProbability, articlesOfInterest, 
+		databaseToCache, stopwordFile, articleComparisonDependency, articleComparisonModel, 
+		labelDisambiguationModel, labelComparisonModel, comparisonSnippetModel, 
+		topicDisambiguationModel, linkDetectionModel, tokenModel, sentenceModel, unknown};
 	
 	private String langCode;
 
 	private File dbDirectory;
 	private File dataDirectory;
 	private TextProcessor defaultTextProcessor = null;
-
-	//private final HashMap<DatabaseType, CachePriority> databasesToCache = new HashMap<DatabaseType, CachePriority>();
 
 	private HashSet<String> stopwords = new HashSet<String>();
 	
@@ -71,15 +65,14 @@ public class WikipediaConfiguration {
 	private float minLinkProbability = 0;
 	private float minSenseProbability = 0;
 	
-	//private TIntHashSet articlesOfInterest;
 	private ConcurrentMap articlesOfInterest;
-	
 	
 	public WikipediaConfiguration(Element xml) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		initFromXml(xml);
 	}
 
-	public WikipediaConfiguration(File configFile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public WikipediaConfiguration(File configFile) 
+		throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();

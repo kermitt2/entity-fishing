@@ -1,13 +1,12 @@
 package org.wikipedia.miner.model;
 
+import com.scienceminer.nerd.kb.db.KBEnvironment;
 
-import org.wikipedia.miner.db.WEnvironment;
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.db.struct.DbSenseForLabel;
+
 import org.wikipedia.miner.util.WikipediaConfiguration;
 import org.wikipedia.miner.util.text.TextProcessor;
-
-
 
 /**
  * A term or phrase that has been used to refer to one or more {@link Article Articles} in Wikipedia. 
@@ -29,7 +28,7 @@ public class Label {
 	
 	private Sense[] senses = null ;
 	
-	protected WEnvironment env ;
+	protected KBEnvironment env ;
 	private boolean detailsSet ;
 	
 	
@@ -40,10 +39,10 @@ public class Label {
 	/**
 	 * Initialises a Label using the default {@link TextProcessor} specified in your {@link WikipediaConfiguration}
 	 * 
-	 * @param env an active WEnvironment
+	 * @param env an active KBEnvironment
 	 * @param text the term or phrase of interest
 	 */
-	public Label(WEnvironment env, String text) {
+	public Label(KBEnvironment env, String text) {
 		this.env = env ;
 		this.text = text ;
 		this.textProcessor = env.getConfiguration().getDefaultTextProcessor() ;
@@ -54,11 +53,11 @@ public class Label {
 	/**
 	 * Initialises a Label using the given {@link TextProcessor}.
 	 * 
-	 * @param env an active WEnvironment
+	 * @param env an active KBEnvironment
 	 * @param text the term or phrase of interest
 	 * @param tp a text processor to alter how the given text is matched. If this is null, then texts will be matched directly, without processing. 
 	 */
-	public Label(WEnvironment env, String text, TextProcessor tp) {
+	public Label(KBEnvironment env, String text, TextProcessor tp) {
 		this.env = env ;
 		this.text = text ;
 		this.textProcessor = tp ;
@@ -158,7 +157,7 @@ public class Label {
 
 		//constructor =============================================================
 		
-		protected Sense(WEnvironment env,  DbSenseForLabel s) {
+		protected Sense(KBEnvironment env,  DbSenseForLabel s) {
 			
 			super(env, s.getId()) ;
 
@@ -280,7 +279,7 @@ public class Label {
 	}	
 	
 	
-	public static Label createLabel(WEnvironment env, String text, DbLabel dbLabel, TextProcessor tp) {
+	public static Label createLabel(KBEnvironment env, String text, DbLabel dbLabel, TextProcessor tp) {
 		Label l = new Label(env, text, tp) ;
 		l.setDetails(dbLabel) ;
 		

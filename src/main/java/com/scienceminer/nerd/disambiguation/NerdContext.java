@@ -45,8 +45,8 @@ public class NerdContext {
 			//if below sp threshold, skip
 			if (sp < NerdEngine.minSenseProbability) continue; 
 			
-			//if this is a date, skip
-			if (isDate(sense)) continue;
+			//if this is a date or a number, skip
+			if (isDateOrNumeric(sense)) continue;
 			
 			//sense.setWeight((lp + sp)/2);	
 			sense.setWeight(sp);	
@@ -56,11 +56,13 @@ public class NerdContext {
 			}
 		}
 		// add the certain pages
-		for(Article page : certainPages) {
-			page.setWeight(new Double(1.0));
-			articles.add(page);
+		if (certainPages != null) {
+			for(Article page : certainPages) {
+				page.setWeight(new Double(1.0));
+				articles.add(page);
+			}
 		}
-		
+
 		//now weight candidates by their relatedness to each other
 		/*for (Article art : articles) {
 			double avgRelatedness = 0;
@@ -103,8 +105,8 @@ public class NerdContext {
 		//if below sp threshold, skip
 		if (sp < NerdEngine.minSenseProbability) return; 
 		
-		//if this is a date, skip
-		if (isDate(sense)) return;
+		//if this is a date or number, skip
+		if (isDateOrNumeric(sense)) return;
 
 		sense.setWeight(sp);	
 		if (!contextArticlesIds.contains(new Integer(sense.getId()))) {
@@ -186,16 +188,44 @@ public class NerdContext {
 		return relatednessScore / totalWeight;
 	}
 	
-	private boolean isDate(Article art) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d") ;
-		Date date = null;
-		try {
-			date = sdf.parse(art.getTitle());
-		} catch (ParseException e) {
-			return false;
+	private boolean isDateOrNumeric(Article art) {
+		String title = art.getTitle();
+		// is it a number?
+		boolean isNumber = false;
+		Integer number = null;
+		try { 	
+			number = Integer.parseInt(title);
+		} catch (Exception e) {
+			isNumber = false;
 		}
 
-		return (date != null);		
+		if (number != null)
+			return true;
+
+		Double doub = null;
+		try { 	
+			doub = Double.parseDouble(title);
+		} catch (Exception e) {
+			isNumber = false;
+		}
+
+		if (doub != null)
+			return true;
+
+		// is it a date ? this is to be reviewed !
+		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d") ;
+		Date date = null;
+		boolean isDate = false;
+		try {
+			date = sdf.parse(title);
+		} catch (ParseException e) {
+			isDate = false;
+		}
+
+		if (date != null)
+			return true;	
+		else 
+			return false;		
 	}
 	
 	@Override

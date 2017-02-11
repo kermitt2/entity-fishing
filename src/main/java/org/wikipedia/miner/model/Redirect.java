@@ -1,12 +1,10 @@
 package org.wikipedia.miner.model;
 
-
-//import gnu.trove.set.hash.TIntHashSet;
-
 import java.util.concurrent.*;
 
 import org.wikipedia.miner.db.struct.DbPage;
-import org.wikipedia.miner.db.WEnvironment;
+
+import com.scienceminer.nerd.kb.db.KBEnvironment;
 
 /**
  * Represents redirects in Wikipedia; the links that have been defined to connect synonyms to the correct article
@@ -20,11 +18,11 @@ public class Redirect extends Page {
 	 * @param env	an active WikipediaEnvironment
 	 * @param id	the unique identifier of the article
 	 */
-	public Redirect(WEnvironment env, int id) {
+	public Redirect(KBEnvironment env, int id) {
 		super(env, id) ;
 	}
 	
-	protected Redirect(WEnvironment env, int id, DbPage pd) {
+	protected Redirect(KBEnvironment env, int id, DbPage pd) {
 		super(env, id, pd) ;
 	}
 	

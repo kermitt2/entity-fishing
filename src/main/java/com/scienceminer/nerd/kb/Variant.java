@@ -9,8 +9,7 @@ import java.util.*;
 /**
  *  Class for representing and exchanging a terminological variant.
  */
-public class Variant
-{
+public class Variant {
 	private String term = null;
 	private String source = null;
 	private String language = null;

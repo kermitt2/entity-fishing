@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import org.wikipedia.miner.model.Label;
 import org.wikipedia.miner.model.Wikipedia;
+
 import org.wikipedia.miner.util.CorrelationCalculator;
-import org.wikipedia.miner.util.ProgressTracker;
 
 import org.dmilne.weka.wrapper.*;
 
@@ -86,18 +87,14 @@ public class LabelComparer {
 		ComparisonDetails cmp = compare(labelA, labelB) ;
 		return cmp.getLabelRelatedness() ;
 	}
-	
-	
+		
 	public void train(ComparisonDataSet dataset, String datasetName) throws Exception {
 
 		senseDataset = senseSelector.createNewDataset() ;
 		relatednessDataset = relatednessMeasurer.createNewDataset() ;
 		
-		ProgressTracker pn = new ProgressTracker(dataset.getItems().size(), "training", LabelComparer.class) ;
 		for (ComparisonDataSet.Item item: dataset.getItems()) {
-
 			train(item) ;
-			pn.update() ;
 		}
 		
 		//TODO: filter to resolve skewness?
@@ -118,9 +115,7 @@ public class LabelComparer {
 		ArrayList<Double> manualMeasures = new ArrayList<Double>() ;
 		ArrayList<Double> autoMeasures = new ArrayList<Double>() ;
 
-		ProgressTracker pt = new ProgressTracker(dataset.getItems().size(), "testing relatedness prediction", LabelComparer.class) ;
 		for (ComparisonDataSet.Item item: dataset.getItems()) {
-
 			Label labelA = new Label(wikipedia.getEnvironment(), item.getTermA()) ;
 			Label labelB = new Label(wikipedia.getEnvironment(), item.getTermB()) ;
 			
@@ -137,8 +132,6 @@ public class LabelComparer {
 				manualMeasures.add(manual) ;
 				autoMeasures.add(auto) ;
 			}
-			
-			pt.update()  ;
 		}
 
 		return CorrelationCalculator.getCorrelation(manualMeasures, autoMeasures) ;
@@ -149,7 +142,6 @@ public class LabelComparer {
 		int totalInterpretations = 0 ;
 		int correctInterpretations = 0 ;
 		
-		ProgressTracker pt = new ProgressTracker(dataset.getItems().size(), "testing disambiguation accuracy", LabelComparer.class) ;
 		for (ComparisonDataSet.Item item: dataset.getItems()) {
 		
 			if (item.getIdA() < 0 || item.getIdB() < 0)
@@ -160,7 +152,6 @@ public class LabelComparer {
 			Label labelA = new Label(wikipedia.getEnvironment(), item.getTermA()) ;
 			Label labelB = new Label(wikipedia.getEnvironment(), item.getTermB()) ;
 			
-			
 			ComparisonDetails details = this.compare(labelA, labelB) ;
 			
 			SensePair sp = details.getBestInterpretation() ;
@@ -169,7 +160,6 @@ public class LabelComparer {
 				if (sp.getSenseA().getId() == item.getIdA() && sp.getSenseB().getId() == item.getIdB())
 					correctInterpretations ++ ;
 			}
-			pt.update();
 		}
 		
 		if (totalInterpretations > 0)

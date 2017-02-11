@@ -1,19 +1,21 @@
 package org.wikipedia.miner.comparison;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
 import org.apache.log4j.Logger;
-import org.wikipedia.miner.db.WDatabase.DatabaseType;
-import org.wikipedia.miner.db.WEnvironment.StatisticName;
+
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
+
 import org.wikipedia.miner.db.struct.DbIntList;
+
 import org.wikipedia.miner.model.Article;
 import org.wikipedia.miner.model.Wikipedia;
+
 import org.wikipedia.miner.util.CorrelationCalculator;
-import org.wikipedia.miner.util.ProgressTracker;
 import org.wikipedia.miner.util.WikipediaConfiguration;
 
 import org.dmilne.weka.wrapper.*;
@@ -165,12 +167,8 @@ public class ArticleComparer {
 	}
 
 	public void train(ComparisonDataSet dataset) throws Exception {
-
 		trainingDataset = relatednessMeasurer.createNewDataset() ;
-
-		ProgressTracker pn = new ProgressTracker(dataset.getItems().size(), "training", ArticleComparer.class) ;
 		for (ComparisonDataSet.Item item: dataset.getItems()) {
-
 			if (item.getIdA() < 0 || item.getIdB() < 0)
 				continue ;
 
@@ -190,8 +188,6 @@ public class ArticleComparer {
 
 			if (artA != null && artB != null) 
 				train(artA, artB, item.getRelatedness()) ;
-
-			pn.update() ;
 		}
 	}
 
@@ -269,9 +265,7 @@ public class ArticleComparer {
 		ArrayList<Double> manualMeasures = new ArrayList<Double>() ;
 		ArrayList<Double> autoMeasures = new ArrayList<Double>() ;
 
-		ProgressTracker pn = new ProgressTracker(dataset.getItems().size(), "testing", ArticleComparer.class) ;
 		for (ComparisonDataSet.Item item: dataset.getItems()) {
-
 			if (item.getIdA() < 0 || item.getIdB() < 0) {
 				Logger.getLogger(ArticleComparer.class).info("- ignoring " + item.getIdA() + ":" + item.getTermA() + " vs. " + item.getIdB() + ":" + item.getTermB()) ;
 				continue ;
@@ -294,9 +288,7 @@ public class ArticleComparer {
 			if (artA != null && artB != null) {
 				manualMeasures.add(item.getRelatedness()) ;
 				autoMeasures.add(this.getRelatedness(artA, artB)) ;
-			} 
-
-			pn.update() ;
+			}
 		}
 
 		return CorrelationCalculator.getCorrelation(manualMeasures, autoMeasures) ;

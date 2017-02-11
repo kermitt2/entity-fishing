@@ -276,6 +276,7 @@
 		  </plugin></plugins>
 		</build>
 		</profile>
+
 		<profile>
 		  <!-- mvn compile exec:exec -PbuildMapWikiFR -->	
 		  <id>buildMapWikiFR</id>
@@ -298,6 +299,7 @@
 		  </plugin></plugins>
 		</build>
 		</profile>
+
 		<profile>
 		  <!-- mvn compile exec:exec -PbuildMapWikiDE -->	
 		  <id>buildMapWikiDE</id>
@@ -320,6 +322,187 @@
 		  </plugin></plugins>
 		</build>
 		</profile>
+
+        <profile>
+        	<!-- mvn compile exec:exec -Ptrain_annotate_en -->
+            <id>train_annotate_en</id>
+            <activation>
+                <property>
+                    <name>train_annotate_en</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+								<argument>-Xms4098m</argument>
+                                <argument>com.scienceminer.nerd.training.WikipediaDisambiguatorTrainer</argument>
+								<argument>data/wikipedia/test/</argument>
+								<argument>en</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		
+        <profile>
+            <!-- mvn compile exec:exec -Ptrain_annotate_de -->
+            <id>train_annotate_de</id>
+            <activation>
+                <property>
+                    <name>train_annotate_de</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>com.scienceminer.nerd.training.WikipediaDisambiguatorTrainer</argument>
+								<argument>data/wikipedia/test/</argument>
+								<argument>de</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		
+        <profile>
+        	<!-- mvn compile exec:exec -Ptrain_annotate_fr -->
+            <id>train_annotate_fr</id>
+            <activation>
+                <property>
+                    <name>train_annotate_fr</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>com.scienceminer.nerd.training.WikipediaDisambiguatorTrainer</argument>
+								<argument>data/wikipedia/test/</argument>
+								<argument>fr</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		
+        <profile>
+            <!-- mvn compile exec:exec -Ptrain_compare_en -->
+            <id>train_compare_en</id>
+            <activation>
+                <property>
+                    <name>train_compare_en</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>com.scienceminer.nerd.training.WikipediaComparerTrainer</argument>
+								<argument>data/wikipedia/test/</argument>
+								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.old/compare/wikipediaSimilarity353.csv</argument>
+								<argument>10</argument>
+								<argument>data/wikipedia/wikipedia-en.xml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		
+        <profile>
+        	<!-- mvn compile exec:exec -Ptrain_compare_de -->
+            <id>train_compare_de</id>
+            <activation>
+                <property>
+                    <name>train_compare_de</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>com.scienceminer.nerd.training.WikipediaComparerTrainer</argument>
+								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.de</argument>
+								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.old/compare/gur350.csv</argument>
+								<argument>4</argument>
+								<argument>/home/lopez/tools/wikipediaminer.neuw84/data/wikipedia/wikipedia-de.xml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		
+        <profile>
+        	<!-- mvn compile exec:exec -Ptrain_compare_fr -->
+            <id>train_compare_fr</id>
+            <activation>
+                <property>
+                    <name>train_compare_fr</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>com.scienceminer.nerd.training.WikipediaComparerTrainer</argument>
+								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.fr</argument>
+								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.old/compare/wikipediaSimilarity353.csv</argument>
+								<argument>10</argument>
+								<argument>//home/lopez/tools/wikipediaminer.neuw84/data/wikipedia/wikipedia-fr.xml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
 	
 	<repositories>
@@ -421,12 +604,14 @@
 		   <version>4.2</version>
 		</dependency>
 		
+		<!-- TBD: remove this dependency! -->
 		<dependency>
 		   <groupId>org.json</groupId>
 		   <artifactId>json</artifactId>
 		   <version>20080701</version>
 		</dependency>
 		
+		<!-- TBD: update to the latest NLP4J! -->
 		<dependency>
 		    <groupId>com.googlecode.clearnlp</groupId>
 		    <artifactId>clearnlp</artifactId>
@@ -493,43 +678,6 @@
         </dependency>
 
 		<dependency>
-			<groupId>com.sleepycat</groupId>
-			<artifactId>je</artifactId>
-			<version>6.4.25</version>
-			<!--scope>system</scope>
-		    <systemPath>${project.basedir}/lib/je-6.4.25.jar</systemPath-->
-		</dependency>
-
-        <!--dependency>
-		    <groupId>org.elasticsearch</groupId>
-		    <artifactId>elasticsearch</artifactId>
-		    <version>1.1.1</version>
-		</dependency-->
-
-		<!--dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>2.11.1</version>
-	    </dependency-->
-
-		<!--dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-core</artifactId>
-			<version>1.2.1</version>
-			<exclusions>
-			    <exclusion>
-			      <groupId>tomcat</groupId>
-			      <artifactId>jasper-runtime</artifactId>
-			    </exclusion>
-			    <exclusion>
-			      <groupId>tomcat</groupId>
-			      <artifactId>jasper-compiler</artifactId>
-			    </exclusion>
-			  </exclusions>
-		</dependency-->
-		<!-- hadoop-0.20.2-core.jar -->
-
-		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>1.2.1</version>
@@ -565,18 +713,6 @@
 			<version>1.3.5</version>
 		</dependency>
 
-		<!--dependency>
-            <groupId>org.mapdb</groupId>
-            <artifactId>mapdb</artifactId>
-            <version>0.9.7</version>
-		</dependency-->
-
-		<!--dependency>
-            <groupId>net.sf.trove4j</groupId>
-            <artifactId>trove4j</artifactId>
-            <version>3.0.3</version>
-        </dependency-->
-
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
@@ -601,20 +737,29 @@
             <version>${avro.version}</version>
         </dependency>
 
-        <!-- required java classes -->
         <dependency>
           <groupId>org.deephacks.lmdbjni</groupId>
           <artifactId>lmdbjni</artifactId>
           <version>${lmdbjni.version}</version>
         </dependency>
 
-        <!-- prebuilt liblmdb platform packages -->
         <dependency>
           <groupId>org.deephacks.lmdbjni</groupId>
           <artifactId>lmdbjni-linux64</artifactId>
           <version>${lmdbjni.version}</version>
         </dependency>
 
+        <dependency>
+      		<groupId>com.github.haifengl</groupId>
+      		<artifactId>smile-core</artifactId>
+      		<version>1.2.2</version>
+    	</dependency>
+    	
+    	<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+		</dependency>
 	</dependencies>
 		
 </project>

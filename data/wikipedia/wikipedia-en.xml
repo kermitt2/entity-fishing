@@ -9,7 +9,7 @@
 	<!-- MANDATORY: A directory containing a complete berkeley database. -->
 	<databaseDirectory>data/wikipedia/db-en</databaseDirectory>
 
-    <!-- A directory containing csv files extracted from a wikipedia dump. Caching will be faster if these are available. -->
+    <!-- A directory containing csv files extracted from a wikipedia dump. -->
     <dataDirectory>/mnt/data/wikipedia/latest/en/</dataDirectory>
 
 	<!--
@@ -61,9 +61,9 @@
 		The value must correspond to an org.wikipedia.miner.db.WDatabase.DatabaseType. 
 		The priority attribute can be either 'space' (default) or 'speed'. 
 	-->
-	<databaseToCache priority="space">pageLinksIn</databaseToCache>
+	<!--databaseToCache priority="space">pageLinksIn</databaseToCache>
 	<databaseToCache priority="space">pageLinksInNoSentences</databaseToCache>
-	<databaseToCache priority="space">label</databaseToCache>
+	<databaseToCache priority="space">label</databaseToCache-->
 	<!--databaseToCache priority="space">page</databaseToCache>
 	<databaseToCache priority="space">articleParents</databaseToCache-->
 	<!--
@@ -81,20 +81,19 @@
 		This must be trained using the same dependencies listed above.If you do not supply one, 
 		then article comparisons will be made without machine learning.
 	 -->
-	<articleComparisonModel>data/wikipedia/models-en/artCompare_en_In.model</articleComparisonModel>
+	<!--articleComparisonModel>data/wikipedia/models-en/artCompare_en_In.model</articleComparisonModel-->
 	
 	<!-- A file containing a Weka classifier for disambiguating pairs of labels -->
-	<labelDisambiguationModel>data/wikipedia/models-en/labelDisambig_en_In.model</labelDisambiguationModel>
+	<!--labelDisambiguationModel>data/wikipedia/models-en/labelDisambig_en_In.model</labelDisambiguationModel-->
 	
 	<!-- A file containing a Weka classifier for generating relatedness measures between labels -->
-	<labelComparisonModel>data/wikipedia/models-en/labelCompare_en_In.model</labelComparisonModel>
-
+	<!--labelComparisonModel>data/wikipedia/models-en/labelCompare_en_In.model</labelComparisonModel-->
 
 	<!-- A file containing a Weka classifier for performing automatic disambiguation of topics in documents -->
-	<topicDisambiguationModel>data/wikipedia/models-en/disambig_en_In.model</topicDisambiguationModel>
-
-
+	<!--topicDisambiguationModel>data/wikipedia/models-en/disambig_en_In.model</topicDisambiguationModel-->
+	<!--topicDisambiguationModel>data/wikipedia/models-en/disambig.model</topicDisambiguationModel-->
+	<topicDisambiguationModel>data/wikipedia/test/en/disambig.model</topicDisambiguationModel>
 	<!-- A file containing a Weka classifier for performing automatic link detection -->
-	<linkDetectionModel>data/wikipedia/models-en/detect_en_In.model</linkDetectionModel>
+	<!--linkDetectionModel>data/wikipedia/models-en/detect_en_In.model</linkDetectionModel-->
 
 </wikipediaConfiguration>

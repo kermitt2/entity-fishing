@@ -4,10 +4,10 @@ import java.io.File;
 
 import com.scienceminer.nerd.kb.db.*;
 
-import org.wikipedia.miner.db.*;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.util.*;
-import org.wikipedia.miner.db.WDatabase.DatabaseType;
+
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 
 public class EnvironmentBuilder {
 
@@ -34,8 +34,6 @@ public class EnvironmentBuilder {
         System.out.println("Language is " + lang);
         
         WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-        //conf.addDatabaseToCache(DatabaseType.categoryParents);
-        //conf.addDatabaseToCache(DatabaseType.articleParents);
         
         /*if (conf.getDataDirectory() == null || !conf.getDataDirectory().isDirectory()) {
             System.out.println(conf.getDataDirectory());
@@ -43,13 +41,9 @@ public class EnvironmentBuilder {
             System.exit(1);
         }*/
 
-        //WEnvironment.buildEnvironment(conf, conf.getDataDirectory(), false);
+        //KBEnvironment.buildEnvironment(conf, conf.getDataDirectory(), false);
 
-        // note: are we loading two times the full environment?
-        Wikipedia wikipedia = new Wikipedia(conf, false); // no distinct thread for accessing data
-        /*while(!wikipedia.isReady()) {
-            Thread.sleep(1000);
-        }*/
+        Wikipedia wikipedia = new Wikipedia(conf, false);
 
         // mapping wikipedia categories / domains and domain assigments for all pageid
         if (lang.equals("en")) {

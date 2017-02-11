@@ -64,7 +64,7 @@ public class WeightedTerm {
 					buffer.append(", ");
 				else
 					begin = false;
-				buffer.append(entity.toJson());
+				buffer.append(entity.toJsonFull());
 			}
 			buffer.append("]");
 		}

@@ -1,11 +1,13 @@
 package org.wikipedia.miner.model;
 
-import org.wikipedia.miner.db.WEnvironment.StatisticName;
+import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
+
 import org.wikipedia.miner.db.struct.DbIntList;
 import org.wikipedia.miner.db.struct.DbPage;
-import org.wikipedia.miner.db.WEnvironment;
-import org.wikipedia.miner.util.MarkupStripper;
 
+import com.scienceminer.nerd.kb.db.KBEnvironment;
+
+import org.wikipedia.miner.util.MarkupStripper;
 
 /**
  * Represents pages of any type in Wikipedia
@@ -54,7 +56,7 @@ public class Page implements Comparable<Page> {
 	protected int depth ;
 	protected Double weight = null ;
 
-	protected WEnvironment env ;
+	protected KBEnvironment env ;
 	protected boolean detailsSet ;
 
 	//constructor =============================================================
@@ -68,7 +70,7 @@ public class Page implements Comparable<Page> {
 	 * @param	id	the unique identifier of the page
 	 * @param	pd  details (title, type, etc) of the page	 
 	 */
-	protected Page(WEnvironment env, int id, DbPage pd)  {
+	protected Page(KBEnvironment env, int id, DbPage pd)  {
 		this.env = env ;
 		this.id = id ;
 		setDetails(pd) ;
@@ -82,7 +84,7 @@ public class Page implements Comparable<Page> {
 	 * @param	env	an active WikipediaEnvironment
 	 * @param	id	the unique identifier of the Wikipedia page
 	 */
-	public Page(WEnvironment env, int id) {
+	public Page(KBEnvironment env, int id) {
 		this.env = env ;
 		this.id = id ;
 		this.detailsSet = false ;
@@ -94,7 +96,7 @@ public class Page implements Comparable<Page> {
 	/**
 	 * @return the database environment
 	 */
-	public WEnvironment getEnvironment() {
+	public KBEnvironment getEnvironment() {
 		return env;
 	}
 
@@ -358,7 +360,7 @@ public class Page implements Comparable<Page> {
 	 * @param id the id of the page
 	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
-	public static Page createPage(WEnvironment env, int id)  {
+	public static Page createPage(KBEnvironment env, int id)  {
 		DbPage pd = env.getDbPage().retrieve(id); 
 
 		if (pd != null)
@@ -378,7 +380,7 @@ public class Page implements Comparable<Page> {
 	 * @param pd the details of the page
 	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
-	public static Page createPage(WEnvironment env, int id, DbPage pd) {
+	public static Page createPage(KBEnvironment env, int id, DbPage pd) {
 
 		Page p = null ;
 

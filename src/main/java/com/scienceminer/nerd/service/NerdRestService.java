@@ -50,7 +50,9 @@ public class NerdRestService implements NerdPaths {
 	private static final String QUERY = "query";
 	private static final String XML = "xml";
 	private static final String NERD = "nerd";
-	private static final String TEXT = "text";  
+	private static final String TEXT = "text"; 
+	private static final String ID = "id"; 
+	private static final String LANG = "lang"; 
 	//private static final String MODE = "mode";
 //	private static final String SHORT = "shortText";
 	private static final String ONLY_NER = "onlyNER";
@@ -484,4 +486,17 @@ public class NerdRestService implements NerdPaths {
 	}
 	*/
 
+	@GET
+	@Path(PATH_KB_CONCEPT)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response getConceptInformation(@QueryParam(ID) String identifier, 
+									@DefaultValue("en") @QueryParam(LANG) String lang, 
+									@DefaultValue("json") @QueryParam(FORMAT) String format) {
+		NerdRestUtils.Format form = null;
+		if ( (format != null) && (format.length() > 0) ) {
+			format = format.toUpperCase();
+			form = NerdRestUtils.Format.valueOf(format);
+		}
+		return NerdRestKB.getConceptInfo(identifier, lang, form); 	// field customisation
+	}
 }

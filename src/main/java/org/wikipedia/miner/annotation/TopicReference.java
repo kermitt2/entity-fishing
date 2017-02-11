@@ -109,6 +109,18 @@ public class TopicReference implements Comparable<TopicReference>{
 		return position ;
 	}
 	
+	public int getOffsetStart() {
+		if (position == null)
+			return -1;
+		return position.start;
+	}
+
+	public int getOffsetEnd() {
+		if (position == null)
+			return -1;
+		return position.end;
+	}	
+
 	//public double getDisambigConfidence() {
 	//	return disambigConfidence ;
 	//}

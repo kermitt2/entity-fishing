@@ -81,15 +81,15 @@
 	<articleComparisonModel>data/wikipedia/models-de/artCompare_de_In.model</articleComparisonModel>
 	
 	<!-- A file containing a Weka classifier for disambiguating pairs of labels -->
-	<labelDisambiguationModel>data/wikipedia/models-de/labelDisambig_de_In.model</labelDisambiguationModel>
+	<!--labelDisambiguationModel>data/wikipedia/models-de/labelDisambig_de_In.model</labelDisambiguationModel-->
 	
 	<!-- A file containing a Weka classifier for generating relatedness measures between labels -->
-	<labelComparisonModel>data/wikipedia/models-de/labelCompare_de_In.model</labelComparisonModel>
+	<!--labelComparisonModel>data/wikipedia/models-de/labelCompare_de_In.model</labelComparisonModel-->
 
 	<!-- A file containing a Weka classifier for performing automatic disambiguation of topics in documents -->
 	<topicDisambiguationModel>data/wikipedia/models-de/disambig_de_In.model</topicDisambiguationModel>
 
 	<!-- A file containing a Weka classifier for performing automatic link detection -->
-	<linkDetectionModel>data/wikipedia/models-de/detect_de_In.model</linkDetectionModel>
+	<!--linkDetectionModel>data/wikipedia/models-de/detect_de_In.model</linkDetectionModel-->
 
 </wikipediaConfiguration>

@@ -86,12 +86,10 @@
 	<!-- A file containing a Weka classifier for generating relatedness measures between labels -->
 	<labelComparisonModel></labelComparisonModel>
 
-
 	<!-- A file containing a Weka classifier for performing automatic disambiguation of topics in documents -->
 	<topicDisambiguationModel>data/wikipedia/models-fr/disambig_fr_In.model</topicDisambiguationModel>
 
-
 	<!-- A file containing a Weka classifier for performing automatic link detection -->
-	<linkDetectionModel>data/wikipedia/models-fr/detect_fr_In.model</linkDetectionModel>
+	<!--linkDetectionModel>data/wikipedia/models-fr/detect_fr_In.model</linkDetectionModel-->
 
 </wikipediaConfiguration>

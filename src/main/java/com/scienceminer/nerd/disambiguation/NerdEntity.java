@@ -291,6 +291,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setCategories(List<com.scienceminer.nerd.kb.Category> categories) {
 		categories = categories;
 	}
+
+	public void addCategory(com.scienceminer.nerd.kb.Category categ) {
+		if (categories == null)
+			categories = new ArrayList<com.scienceminer.nerd.kb.Category>();
+		categories.add(categ);
+	}
 	
 	public List<Variant> getVariants() {
 		return variants;
@@ -622,7 +628,11 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		return buffer.toString();	
 	}
 	
-	public String toJson() {
+	/**
+	 * Serialize in JSON the largest possible set of information, including
+	 * KB data related to the disambiguated sense. 
+	 */
+	public String toJsonFull() {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{ ");
@@ -660,14 +670,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		buffer.append(", \"nerd_score\" : \"" + nerd_score + "\"");
 		if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");
-		buffer.append(", \"prob\" : \"" + prob + "\"");
+		//buffer.append(", \"prob\" : \"" + prob + "\"");
 		
 		sense = correctSense(sense);
 		if (sense != null) {
 			buffer.append(", \"sense\" : { "); 
 			if (sense.getFineSense() != null) {
 				buffer.append("\"fineSense\" : \"" + sense.getFineSense() + "\"");
-				buffer.append(", \"fineSenseConfidence\" : \"" + sense.getFineSenseConfidence() + "\"");
+				//buffer.append(", \"fineSenseConfidence\" : \"" + sense.getFineSenseConfidence() + "\"");
 			}
 		
 			if (sense.getCoarseSense() != null) {
@@ -755,6 +765,148 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	       }
 			buffer.append(" ] ");
 		}
+
+		buffer.append(" }");
+		return buffer.toString();
+	}
+
+	/**
+	 * Only serialize in JSON the minimal information which will need to be completed
+	 * by an additional call to the KB concept information.
+	 */
+	public String toJsonCompact() {
+		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{ ");
+		byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
+		String outputRawName = new String(encodedRawName); 
+		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
+		/*if (preferredTerm != null) {
+			byte[] encodedPreferredTerm = encoder.quoteAsUTF8(preferredTerm);
+			String outputPreferredTerm  = new String(encodedPreferredTerm); 
+			buffer.append(", \"preferredTerm\" : \"" + outputPreferredTerm + "\"");
+		}*/
+		if (type != null)
+			buffer.append(", \"type\" : \"" + type.getName() + "\"");	
+		
+		if (subTypes != null) {
+			buffer.append(", \"subtype\" : [ ");
+			boolean begin = true;
+			for(String subtype : subTypes) {
+				if (begin) {
+					buffer.append("\"" + subtype + "\"");
+					begin = false;
+				}
+				else {
+					buffer.append(", \"" + subtype + "\"");
+				}
+			}
+			buffer.append(" ] \"");
+		}
+
+		if (getOffsetStart() != -1)	
+			buffer.append(", \"offsetStart\" : " + getOffsetStart());
+		if (getOffsetEnd() != -1)	
+			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
+
+		buffer.append(", \"nerd_score\" : \"" + nerd_score + "\"");
+		if (ner_conf != -1.0)
+			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");
+		//buffer.append(", \"prob\" : \"" + prob + "\"");
+		
+		sense = correctSense(sense);
+		if (sense != null) {
+			buffer.append(", \"sense\" : { "); 
+			if (sense.getFineSense() != null) {
+				buffer.append("\"fineSense\" : \"" + sense.getFineSense() + "\"");
+				//buffer.append(", \"fineSenseConfidence\" : \"" + sense.getFineSenseConfidence() + "\"");
+			}
+		
+			if (sense.getCoarseSense() != null) {
+				if ( (sense.getFineSense() == null) ||
+				     ( (sense.getFineSense() != null) && !sense.getCoarseSense().equals(sense.getFineSense())) ) {
+					buffer.append(", \"coarseSense\" : \"" + sense.getCoarseSense() + "\"");
+				}
+			}
+			buffer.append(" }");
+		}
+
+		if (wikipediaExternalRef != -1)
+			buffer.append(", \"wikipediaExternalRef\" : \"" + wikipediaExternalRef + "\"");
+
+		/*if (freeBaseExternalRef != null)
+			buffer.append(", \"freeBaseExternalRef\" : \"" + freeBaseExternalRef + "\"" );*/
+
+		/*if ( (definitions != null) && (definitions.size() > 0) ) {
+			buffer.append(", \"definitions\" : [ ");
+			for(Definition definition : definitions) {
+				if ((definition.getDefinition() == null) || (definition.getDefinition().length() == 0) )
+					continue;
+				byte[] encoded = encoder.quoteAsUTF8(definition.getDefinition());
+				String output = new String(encoded); 
+				buffer.append("{ \"definition\" : \"" + output + "\", \"source\" : \"" + 
+					definition.getSource() + "\", \"lang\" : \"" + definition.getLang() + "\" }");
+			}
+			buffer.append(" ] ");
+		}*/
+
+		if (domains != null) {
+			buffer.append(", \"domains\" : [ ");
+			boolean first = true;
+			for(String domain : domains) {
+				byte[] encoded = encoder.quoteAsUTF8(domain);
+				String output = new String(encoded);
+				if (first) {
+					buffer.append("\"" + output + "\"");
+					first = false;
+				}
+				else
+					buffer.append(", \"" + output + "\"");
+			}
+			buffer.append(" ] ");
+		}
+
+		/*if (categories != null) {
+			buffer.append(", \"categories\" : [ ");
+			boolean first = true;
+			for(com.scienceminer.nerd.kb.Category category : categories) {				
+				byte[] encoded = encoder.quoteAsUTF8(category.getName());
+				String output = new String(encoded);
+				if (first) {
+					first = false;
+				}
+				else
+					buffer.append(", ");
+				buffer.append("{\"source\" : \"wikipedia-"+lang+"\", \"category\" : \"" + output + "\", ");
+				buffer.append("\"page_id\" : " + category.getWikiPageID() + "}");
+			}
+			buffer.append(" ] ");
+		}*/
+		
+		/*if ( (wikipediaMultilingualRef != null) && (wikipediaMultilingualRef.size() != 0) ) {
+			buffer.append(", \"multilingual\" : [ ");
+			boolean first = true;
+		    Iterator it = wikipediaMultilingualRef.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry pair = (Map.Entry)it.next();
+				String l = (String)pair.getKey();
+				String t = (String)pair.getValue();
+				//if (t != null)
+				//	t = t.replace("#", " ");
+				// with #, this is an anchor to the first element page, however the page_id seems then not available	
+   				if (first) {
+   					first = false;
+   				}
+   				else
+   					buffer.append(", ");
+				buffer.append("{\"lang\" : \"" + l + "\", \"term\" : \"" + t + "\"");
+				if (wikipediaMultilingualArticle.get(l) != null)
+					buffer.append(", \"page_id\" : " + wikipediaMultilingualArticle.get(l));
+				buffer.append("}");
+				it.remove(); // avoids a ConcurrentModificationException
+	       }
+			buffer.append(" ] ");
+		}*/
 
 		buffer.append(" }");
 		return buffer.toString();

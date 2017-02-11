@@ -106,4 +106,9 @@ public interface NerdPaths {
 	 * path extension for deleting an existing customisation.
 	 */
 	public static final String PATH_NER_DELETE_CUSTOMISATION = "NERDCustomisation";
+
+	/**
+	 * path extension for getting information about a concept.
+	 */
+	public static final String PATH_KB_CONCEPT = "KBConcept";
 }

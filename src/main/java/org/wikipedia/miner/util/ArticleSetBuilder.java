@@ -75,12 +75,12 @@ public class ArticleSetBuilder {
 	}
 		
 	public ArticleSet build(int size, Wikipedia wikipedia) {
-		return new ArticleSet(wikipedia, size, minInLinks, minOutLinks, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, null, exclude);
+		return new ArticleSet(wikipedia, size, minInLinks, minOutLinks, minLinkProportion, 
+			maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, 
+			mustNotMatch, null, exclude);
 	}
 	
 	public ArticleSet[] buildExclusiveSets(int[] sizes, Wikipedia wikipedia) {
-		
-		
 		ArticleSet sets[] = new ArticleSet[sizes.length];
 		
 		ArticleSet exclude = new ArticleSet();
@@ -88,10 +88,12 @@ public class ArticleSetBuilder {
 		if (this.exclude != null)
 			exclude.addAll(this.exclude);
 		
-		Vector<Article> candidates = ArticleSet.getRoughCandidates(wikipedia, minInLinks, minOutLinks);
+		Vector<Article> candidates = null;//ArticleSet.getRoughCandidates(wikipedia, minInLinks, minOutLinks);
 
 		for (int i=0; i<sizes.length; i++) {
-			sets[i] = new ArticleSet(wikipedia, sizes[i], minInLinks, minOutLinks, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, candidates, exclude);			
+			sets[i] = new ArticleSet(wikipedia, sizes[i], minInLinks, minOutLinks, minLinkProportion, 
+				maxLinkProportion, minWordCount, maxWordCount, maxListProportion, mustMatch, mustNotMatch, 
+				candidates, exclude);			
 			exclude.addAll(sets[i]);
 		}
 		

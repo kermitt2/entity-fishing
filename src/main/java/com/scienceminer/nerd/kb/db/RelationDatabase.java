@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.apache.hadoop.record.CsvRecordInput;
 
 import org.wikipedia.miner.util.WikipediaConfiguration;
-import org.wikipedia.miner.db.*;
-import org.wikipedia.miner.db.WDatabase.DatabaseType;
+
+import com.scienceminer.nerd.kb.db.*;
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+
 import org.wikipedia.miner.util.*;
 
 import com.scienceminer.nerd.utilities.*;
@@ -27,31 +29,28 @@ import static org.fusesource.lmdbjni.Constants.*;
 public class RelationDatabase extends IntRecordDatabase<Relation> {
 	private static final Logger logger = LoggerFactory.getLogger(RelationDatabase.class);	
 
-	public RelationDatabase(WEnvironment env) {
+	public RelationDatabase(KBEnvironment env) {
 		super(env, DatabaseType.relations);
 	}
 
 	@Override
-	public WEntry<Integer, Relation> deserialiseCsvRecord(
+	public KBEntry<Integer, Relation> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
-	private WEntry<Integer, Relation> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
+	private KBEntry<Integer, Relation> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override 
-	public void loadFromCsvFile(File dataFile, boolean overwrite, ProgressTracker tracker) throws IOException  {
+	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
 		if (isLoaded && !overwrite)
-			return ;
+			return;
+		System.out.println("Loading " + name + " database");
 
-		if (tracker == null) tracker = new ProgressTracker(1, WDatabase.class) ;
-		tracker.startTask(dataFile.length(), "Loading " + name + " database") ;
-
-		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8")) ;
-
-		long bytesRead = 0 ;
+		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+		long bytesRead = 0;
 
 		String line = null;
 		int nbToAdd = 0;
@@ -64,7 +63,7 @@ public class RelationDatabase extends IntRecordDatabase<Relation> {
 				tx = environment.createWriteTransaction();
 			}
 
-			bytesRead = bytesRead + line.length() + 1 ;
+			bytesRead = bytesRead + line.length() + 1;
 
 			String[] pieces = line.split("|");
 			int pageId = -1;
@@ -115,7 +114,6 @@ public class RelationDatabase extends IntRecordDatabase<Relation> {
 					}
 				}
 			}
-			tracker.update(bytesRead) ;
 		}
 		tx.commit();
 		tx.close();
