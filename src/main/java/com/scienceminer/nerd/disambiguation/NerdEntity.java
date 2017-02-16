@@ -566,6 +566,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		prob_c = candidate.getProb_c();
 		nerdScore = candidate.getNerdScore();
+		selectionScore = candidate.getSelectionScore();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
 		

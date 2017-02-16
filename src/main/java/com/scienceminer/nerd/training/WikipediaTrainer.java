@@ -73,7 +73,7 @@ public class WikipediaTrainer {
 	}
 
 	private void gatherArticleSets() throws IOException{
-		int[] sizes = {50,10};
+		int[] sizes = {5000,200};
 		 //int[] sizes = {500,100,100};
 		 //int[] sizes = {5000,1000,1000};
 	    articleSets = new ArticleSetBuilder()

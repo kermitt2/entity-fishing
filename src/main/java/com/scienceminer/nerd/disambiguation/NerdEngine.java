@@ -162,7 +162,7 @@ for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
 }*/
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortText, minEntityScore);
+		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortText, 0.5);
 		prune(candidates, nerdQuery.getNbest(), shortText, minEntityScore, lang);
 		//impactOverlap(candidates);
 		//if (!shortText && !nerdQuery.getNbest())
@@ -998,7 +998,6 @@ System.out.println("Merging...");
 			boolean nbest, 
 			boolean shortText, 
 			double threshold) {	
-System.out.println("pruneWithSelector - " + lang);
 		NerdSelector selector = selectors.get(lang);
 		if (selector == null) {
 			Wikipedia wikipedia = wikipedias.get(lang);
@@ -1026,7 +1025,7 @@ System.out.println("pruneWithSelector - " + lang);
 						double prob = selector.getProbability(candidate.getNerdScore(), 
 							candidate.getLabel().getLinkProbability(), 
 							candidate.getWikiSense().getPriorProbability());				
-System.out.println("selector score: " + prob);
+//System.out.println("selector score: " + prob);
 						candidate.setSelectionScore(prob);
 					} catch(Exception e) {
 						e.printStackTrace();
@@ -1034,7 +1033,7 @@ System.out.println("selector score: " + prob);
 				}
 			}
 
-			/*List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
+			List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
 			for(NerdCandidate candidate : candidates) {
 				if (candidate.getSelectionScore() < threshold) {
 					continue;
@@ -1050,7 +1049,7 @@ System.out.println("selector score: " + prob);
 					toRemove.add(entity);
 				else
 					cands.replace(entity, new ArrayList<NerdCandidate>());
-			}*/
+			}
 		}
 		
 		for(NerdEntity entity : toRemove) {
