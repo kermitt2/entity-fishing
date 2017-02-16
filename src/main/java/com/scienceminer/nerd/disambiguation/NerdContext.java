@@ -15,7 +15,6 @@ import java.text.*;
 import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.util.*;
 
-//import org.codehaus.jackson.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.io.*;
 
 /**
@@ -139,10 +138,6 @@ public class NerdContext {
 	/**
 	 * @return the quality (size and homogeneity) of the available context. 
 	 */
-	/*public float getQuality() {
-		return totalWeight ;		
-	}*/
-
 	public double getQuality() {
 		if ((contextArticles == null) || (contextArticles.size() == 0)) 
 			return 0.0;

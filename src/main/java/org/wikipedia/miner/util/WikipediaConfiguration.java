@@ -38,7 +38,7 @@ public class WikipediaConfiguration {
 		minLinksIn, minSenseProbability, minLinkProbability, articlesOfInterest, 
 		databaseToCache, stopwordFile, articleComparisonDependency, articleComparisonModel, 
 		labelDisambiguationModel, labelComparisonModel, comparisonSnippetModel, 
-		topicDisambiguationModel, linkDetectionModel, tokenModel, sentenceModel, unknown};
+		rankerModel, selectorModel, tokenModel, sentenceModel, unknown};
 	
 	private String langCode;
 
@@ -55,8 +55,8 @@ public class WikipediaConfiguration {
 	
 	private File comparisonSnippetModel;
 	
-	private File topicDisambiguationModel;
-	private File linkDetectionModel;
+	private File rankerModel;
+	private File selectorModel;
 	
 	private Tokenizer tokenizer;
 	private SentenceDetector sentenceDetector;
@@ -232,20 +232,20 @@ public class WikipediaConfiguration {
 		comparisonSnippetModel = model;
 	}
 	
-	public File getLinkDetectionModel() {
-		return linkDetectionModel;
+	public File getSelectorModel() {
+		return selectorModel;
 	}
 
-	public void setLinkDetectionModel(File model) {
-		linkDetectionModel = model;
+	public void setSelectorModel(File model) {
+		selectorModel = model;
 	}
 
-	public File getTopicDisambiguationModel() {
-		return topicDisambiguationModel;
+	public File getRankerModel() {
+		return rankerModel;
 	}
 
-	public void setTopicDisambiguationModel(File model) {
-		topicDisambiguationModel = model;
+	public void setRankerModel(File model) {
+		rankerModel = model;
 	}
 	
 	public Tokenizer getTokenizer() {
@@ -365,12 +365,6 @@ public class WikipediaConfiguration {
 				case articlesOfInterest:
 					this.articlesOfInterest = gatherArticles(new File(paramValue));
 					break;
-				case databaseToCache: 
-					/*if (xmlParam.hasAttribute("priority"))
-						addDatabaseToCache(DatabaseType.valueOf(paramValue), CachePriority.valueOf(xmlParam.getAttribute("priority")));
-					else
-						addDatabaseToCache(DatabaseType.valueOf(paramValue));*/
-					break;
 				case stopwordFile:
 					this.setStopwords(new File(paramValue));
 					break;
@@ -378,22 +372,22 @@ public class WikipediaConfiguration {
 					artCompDependencies.add(ArticleComparer.DataDependency.valueOf(paramValue));
 					break;
 				case articleComparisonModel:
-					articleComparisonModel = new File(paramValue);
+					this.articleComparisonModel = new File(paramValue);
 					break;
 				case labelDisambiguationModel:
-					labelDisambiguationModel = new File(paramValue);
+					this.labelDisambiguationModel = new File(paramValue);
 					break;
 				case labelComparisonModel:
-					labelComparisonModel = new File(paramValue);
+					this.labelComparisonModel = new File(paramValue);
 					break;
 				case comparisonSnippetModel:
-					comparisonSnippetModel = new File(paramValue);
+					this.comparisonSnippetModel = new File(paramValue);
 					break;
-				case topicDisambiguationModel:
-					topicDisambiguationModel = new File(paramValue);
+				case rankerModel:
+					this.rankerModel = new File(paramValue);
 					break;
-				case linkDetectionModel:
-					this.linkDetectionModel = new File(paramValue);
+				case selectorModel:
+					this.selectorModel = new File(paramValue);
 					break;
 				case tokenModel:
 					this.setTokenizer(new File(paramValue));

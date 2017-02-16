@@ -47,9 +47,11 @@ public class ArticleCleaner {
 	 * @return the content (or snippet) of the given article, with all markup removed except links to other articles.  
 	 * @throws Exception
 	 */
+	public String getMarkupLinksOnly(Article article) throws Exception {
+		return getMarkupLinksOnly(article, SnippetLength.full);
+	}
 	public String getMarkupLinksOnly(Article article, SnippetLength length) throws Exception {
-		
-		String markup ;
+		String markup = null;
 		
 		switch (length) {
 		
@@ -67,11 +69,7 @@ public class ArticleCleaner {
 		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null) ;
 		markup = stripper.stripNonArticleInternalLinks(markup, null) ;
 		
-				
-		return markup ;
-		
-		
-		
+		return markup ;	
 	}
 	
 	/**
@@ -80,9 +78,10 @@ public class ArticleCleaner {
 	 * @return the content of the given article, with all markup removed.  
 	 * @throws Exception
 	 */
-	public String getCleanedContent(Article article, SnippetLength length) throws Exception{
-		
-		
+	public String getCleanedContent(Article article) throws Exception { 
+		return getCleanedContent(article, SnippetLength.full);
+	}
+	public String getCleanedContent(Article article, SnippetLength length) throws Exception {
 		String markup ;
 		
 		switch (length) {

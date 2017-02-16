@@ -92,8 +92,9 @@
 	<!-- A file containing a Weka classifier for performing automatic disambiguation of topics in documents -->
 	<!--topicDisambiguationModel>data/wikipedia/models-en/disambig_en_In.model</topicDisambiguationModel-->
 	<!--topicDisambiguationModel>data/wikipedia/models-en/disambig.model</topicDisambiguationModel-->
-	<topicDisambiguationModel>data/wikipedia/test/en/disambig.model</topicDisambiguationModel>
-	<!-- A file containing a Weka classifier for performing automatic link detection -->
-	<!--linkDetectionModel>data/wikipedia/models-en/detect_en_In.model</linkDetectionModel-->
+	
+	<rankerModel>data/wikipedia/test/en/ranker.model</rankerModel>
+
+	<selectorModel>data/wikipedia/test/en/selector.model</selectorModel>
 
 </wikipediaConfiguration>

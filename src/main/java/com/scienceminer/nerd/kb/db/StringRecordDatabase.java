@@ -37,12 +37,8 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		super(envi, type, name);
 	}
 		
-	//@Override
-	public Record retrieve2(String key) {
-		/*if (isCached) {
-			return cache.get(key);
-		}*/
-
+	@Override
+	public Record retrieve(String key) {
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
@@ -56,8 +52,8 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 	}
 
 	// using LMDB zero copy mode
-	@Override
-	public Record retrieve(String key) {
+	//@Override
+	public Record retrieve2(String key) {
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();

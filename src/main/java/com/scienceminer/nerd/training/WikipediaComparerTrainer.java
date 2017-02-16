@@ -73,12 +73,7 @@ public class WikipediaComparerTrainer {
 	    if (!_arffArtCompare.canRead())
 	        throw new Exception("Arff files have not yet been created");
 		
-	    if (confArtCompare == null || confArtCompare.trim().length() == 0) {	
-	    	artComparer.buildDefaultClassifier();
-	    } else {
-	        Classifier classifier = buildClassifierFromOptString(confArtCompare);
-	        artComparer.buildClassifier(classifier);
-	    }
+    	artComparer.buildDefaultClassifier();
 	    artComparer.saveClassifier(_modelArtCompare);
 		  
 	    /*if (confLabelDisambig == null || confLabelDisambig.trim().length() == 0) {
@@ -94,13 +89,6 @@ public class WikipediaComparerTrainer {
 	    labelComparer.saveDisambiguationClassifier(_modelLabelDisambig);
 	    labelComparer.saveComparisonClassifier(_modelLabelCompare);*/
 	}
-	
-	 private Classifier buildClassifierFromOptString(String optString) throws Exception {
-	    String[] options = Utils.splitOptions(optString);
-	    String classname = options[0];
-	    options[0] = "";
-	    return (Classifier) Utils.forName(Classifier.class, classname, options);
-	  }
 
 	private void evaluate() throws Exception {
 		ComparisonDataSet[][] folds = dataset.getFolds();

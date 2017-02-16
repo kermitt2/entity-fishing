@@ -137,7 +137,7 @@ public class NerdRestProcessQuery {
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
 						entity.setOrigin(NerdEntity.Origin.USER);
-						entity.setNerd_score(1.0);
+						entity.setNerdScore(1.0);
 					}
 				}
 				originalEntities = nerdQuery.getEntities();
@@ -231,7 +231,7 @@ public class NerdRestProcessQuery {
 				}
 				else {
 					for (NerdEntity entity : nerdQuery.getEntities()) {
-						entity.setNerd_score(entity.getNer_conf());
+						entity.setNerdScore(entity.getNer_conf());
 					}
 				}
 			}
@@ -361,7 +361,7 @@ public class NerdRestProcessQuery {
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
 						entity.setOrigin(NerdEntity.Origin.USER);
-						entity.setNerd_score(1.0);
+						entity.setNerdScore(1.0);
 					}
 				}
 				originalEntities = nerdQuery.getEntities();
@@ -699,7 +699,7 @@ public class NerdRestProcessQuery {
 					// do we have disambiguated entity information for the entity?
 					if (entity.getWikipediaExternalRef() != -1) {
 						entity.setOrigin(NerdEntity.Origin.USER);
-						entity.setNerd_score(1.0);
+						entity.setNerdScore(1.0);
 					}
 				}
 				originalEntities = nerdQuery.getEntities();

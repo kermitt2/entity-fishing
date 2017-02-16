@@ -110,7 +110,7 @@ public class ArticleComparer {
 	}
 
 	public Double getRelatedness(Article artA, Article artB) throws Exception {
-
+//System.out.println("ArticleComparer.getRelatedness");
 		if (artA.getId() == artB.getId()) 
 			return 1.0 ;
 
@@ -127,12 +127,13 @@ public class ArticleComparer {
 		
 		
 		//System.out.println("gi " + cmp.getInLinkGoogleMeasure()) ;
-		///System.out.println("go " + cmp.getOutLinkGoogleMeasure()) ;
+		//System.out.println("go " + cmp.getOutLinkGoogleMeasure()) ;
 		//System.out.println("ti " + cmp.getInLinkVectorMeasure()) ;
 		//System.out.println("to " + cmp.getOutLinkVectorMeasure()) ;
 
 		if (!relatednessMeasurer.isReady()) {
-			//Logger.getLogger(ArticleComparer.class).debug("Article comparison without ml") ;
+//Logger.getLogger(ArticleComparer.class).debug("Article comparison without ml") ;
+//System.out.println("Article comparison without ml");
 			//no classifier available, so just return mean of gathered measurements ;
 			
 			int count = 0 ;

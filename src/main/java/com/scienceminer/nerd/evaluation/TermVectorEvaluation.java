@@ -252,7 +252,7 @@ public class TermVectorEvaluation {
 						if ( (entities != null) && (entities.size() > 0) ) {
 							nbActualResults++;
 							NerdEntity entity = entities.get(0);
-							if (entity.getNerd_score() > threshold) {
+							if (entity.getNerdScore() > threshold) {
 								String actualPage = "" + entity.getWikipediaExternalRef();
 								if (localExpected == null) {
 									// no result expected for this keyword

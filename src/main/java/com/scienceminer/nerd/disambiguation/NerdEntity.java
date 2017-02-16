@@ -17,7 +17,6 @@ import java.util.*;
 
 import org.wikipedia.miner.model.*;
 
-//import org.codehaus.jackson.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.io.*;
 
 /**
@@ -87,9 +86,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	private Map<String,String> wikipediaMultilingualRef = null;
 	private Map<String,Integer> wikipediaMultilingualArticle = null;
 
-	// link to FreeBase topic ID
-	//private String freeBaseExternalRef = null;
-
 	// domain information
 	private List<String> domains = null;
 
@@ -120,7 +116,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// among all the strings which can realise this particular concept
 	private int freq_i = 0;
 	// represent named entity disambiguation score in a NERD scenario
-	private double nerd_score = 0.0;
+	private double nerdScore = 0.0;
 	// represent named entity selection score in a NERD scenario
 	private double selectionScore = 0.0;
 	// relatedness score of the term with the context
@@ -354,7 +350,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			Map<String,Integer> subArticleCorrespondance = new TreeMap<String,Integer>();
 			for(String targetLanguage : targetLanguages) {
 				String translation = translations.get(targetLanguage);
-				if (translation != null) {				
+				if (translation != null) {
+					int ind = translation.indexOf("#");
+					if (ind != -1) {
+						translation = translation.substring(0,ind);
+					}
+					translation = translation.replace("\\'", "'");
 					subTranslations.put(targetLanguage, translation);
 					if (wikipedias.get(targetLanguage) != null) {
 						Article article = wikipedias.get(targetLanguage).getArticleByTitle(translation);
@@ -468,12 +469,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		freq_i = f;
 	}
 	
-	public double getNerd_score() {
-		return nerd_score;
+	public double getNerdScore() {
+		return nerdScore;
 	}
 	
-	public void setNerd_score(double n) {
-		nerd_score = n;
+	public void setNerdScore(double n) {
+		nerdScore = n;
 	}
 	
 	public double getLinkProbability() {
@@ -525,9 +526,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public int compareTo(NerdEntity theEntity) {
 		int start = theEntity.getOffsetStart();
 		int end = theEntity.getOffsetEnd();
-		Double score = new Double(theEntity.getNerd_score());
+		Double score = new Double(theEntity.getNerdScore());
 		if ( (offsets.start == start) && (offsets.end == end) ) {
-			Double thisScore = new Double(nerd_score);
+			Double thisScore = new Double(nerdScore);
 			if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
 				return thisScore.compareTo(score);
 			else {
@@ -564,7 +565,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		domains = candidate.getDomains();
 
 		prob_c = candidate.getProb_c();
-		nerd_score = candidate.getNerd_score();
+		nerdScore = candidate.getNerdScore();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
 		
@@ -602,9 +603,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (isSubTerm)
 			buffer.append("isSubTerm\t");
 		
-		//if (nerd_score > 0.0) 
+		//if (nerdScore > 0.0) 
 		{
-			buffer.append(nerd_score + "(nerd)\t");
+			buffer.append(nerdScore + "(nerd)\t");
 		}
 		
 		//if (selectionScore > 0.0) 
@@ -667,9 +668,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (getOffsetEnd() != -1)	
 			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
 		
-		buffer.append(", \"nerd_score\" : \"" + nerd_score + "\"");
-		if (ner_conf != -1.0)
-			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");
+		buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
+		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");
+		/*if (ner_conf != -1.0)
+			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");
 		
 		sense = correctSense(sense);
@@ -809,9 +811,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (getOffsetEnd() != -1)	
 			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
 
-		buffer.append(", \"nerd_score\" : \"" + nerd_score + "\"");
-		if (ner_conf != -1.0)
-			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");
+		buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
+		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");
+		/*if (ner_conf != -1.0)
+			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");
 		
 		sense = correctSense(sense);

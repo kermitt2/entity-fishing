@@ -269,7 +269,7 @@ System.out.println("lang id:" + text);
 				}
 				else {
 					for (NerdEntity entity : disambiguatedEntities) {
-						entity.setNerd_score(entity.getNer_conf());
+						entity.setNerdScore(entity.getNer_conf());
 					}
 				}
 				nerdQuery.setEntities(disambiguatedEntities);

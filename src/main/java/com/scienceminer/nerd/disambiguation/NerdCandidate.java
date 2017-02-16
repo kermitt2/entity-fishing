@@ -59,6 +59,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// Sense from Wikipedia Miner database corresponding to this disambiguation candidate 
 	private Label.Sense wikiSense = null;
 	
+	// The Wikipedia label corresponding to the candidate
+	private Label label = null;
+
 	// link to Wikipedia page ID
 	private int wikipediaExternalRef = -1;
 	
@@ -105,7 +108,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// among all the strings which can realise this particular concept
 	private int freq_i = 0;
 	// represent named entity disambiguation score in a NERD scenario
-	private double nerd_score = 0.0;
+	private double nerdScore = 0.0;
 	// represent named entity selection score in a NERD scenario
 	private double selectionScore = 0.0;
 	// relatedness score of the term with the context
@@ -180,6 +183,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	
 	public void setWikiSense(Label.Sense sense) {
 		this.wikiSense = sense;
+	}
+
+	public void setLabel(Label label) {
+		this.label = label;
+	}
+
+	public Label getLabel() {
+		return label;
 	}
 	
 	public List<String> getDomains() {
@@ -329,12 +340,12 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		freq_i = f;
 	}
 	
-	public double getNerd_score() {
-		return nerd_score;
+	public double getNerdScore() {
+		return nerdScore;
 	}
 	
-	public void setNerd_score(double n) {
-		nerd_score = n;
+	public void setNerdScore(double n) {
+		nerdScore = n;
 	}
 	
 	public double getSelectionScore() {
@@ -387,9 +398,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		if (isSubTerm)
 			buffer.append("isSubTerm\t");
 		
-		//if (nerd_score > 0.0) 
+		//if (nerdScore > 0.0) 
 		{
-			buffer.append(nerd_score + "(nerd)\t");
+			buffer.append(nerdScore + "(nerd)\t");
 		}
 		
 		//if (selectionScore > 0.0) 
@@ -609,18 +620,18 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	}
 	
 	/**
-	 *  Comparable implementation. We sort against the nerd_score
+	 *  Comparable implementation. We sort against the nerdScore
 	 */
 	public int compareTo(NerdCandidate compareNerdCandidate) {
 
-		double compareQuantity = compareNerdCandidate.getNerd_score(); 
+		double compareQuantity = compareNerdCandidate.getNerdScore(); 
 		//double compareQuantity = compareNerdCandidate.getSelectionScore(); 
 		//ascending order
-		//return this.nerd_score - compareQuantity;
+		//return this.nerdScore - compareQuantity;
 		//return this.selectionScore - compareQuantity;
 
 		//descending order
-		return ((int)((compareQuantity - this.nerd_score) * 1000));
+		return ((int)((compareQuantity - this.nerdScore) * 1000));
 		//return ((int)((compareQuantity - this.selectionScore) * 1000));
 	}
 	

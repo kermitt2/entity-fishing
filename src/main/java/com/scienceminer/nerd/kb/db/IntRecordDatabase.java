@@ -38,8 +38,8 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 	}
 
 	// using standard LMDB copy mode
-	//@Override
-	public Record retrieve2(Integer key) {
+	@Override
+	public Record retrieve(Integer key) {
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
@@ -53,8 +53,8 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 	}
 	
 	// using LMDB zero copy mode
-	@Override
-	public Record retrieve(Integer key) {
+	//@Override
+	public Record retrieve2(Integer key) {
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();

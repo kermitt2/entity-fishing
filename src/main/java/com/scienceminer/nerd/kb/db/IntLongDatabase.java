@@ -37,12 +37,8 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 	}
 	
 	// using standard LMDB copy mode
-	//@Override
-	public Long retrieve2(Integer key) {
-		/*if (isCached) {
-			return cache.get(key);
-		}*/
-
+	@Override
+	public Long retrieve(Integer key) {
 		byte[] cachedData = null;
 		Long record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
@@ -56,8 +52,8 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 	}
 
 	// using LMDB zero copy mode
-	@Override
-	public Long retrieve(Integer key) {
+	//@Override
+	public Long retrieve2(Integer key) {
 		byte[] cachedData = null;
 		Long record = null;
 		try (Transaction tx = environment.createReadTransaction();

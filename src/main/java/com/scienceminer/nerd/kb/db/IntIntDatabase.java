@@ -38,12 +38,8 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 	}
 		
 	// using standard LMDB copy mode
-	//@Override
-	public Integer retrieve2(Integer key) {
-		/*if (isCached) {
-			return cache.get(key);
-		}*/
-
+	@Override
+	public Integer retrieve(Integer key) {
 		byte[] cachedData = null;
 		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
@@ -57,8 +53,8 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 	}
 
 	// using LMDB zero copy mode
-	@Override
-	public Integer retrieve(Integer key) {
+	//@Override
+	public Integer retrieve2(Integer key) {
 		byte[] cachedData = null;
 		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction();

@@ -343,7 +343,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
 								<argument>-Xms4098m</argument>
-                                <argument>com.scienceminer.nerd.training.WikipediaDisambiguatorTrainer</argument>
+                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
 								<argument>data/wikipedia/test/</argument>
 								<argument>en</argument>
                             </arguments>
@@ -677,28 +677,18 @@
             <version>1.5.0</version>
         </dependency>
 
+        <!-- to be removed !-->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>1.2.1</version>
 		</dependency>	
 
+		<!-- to be removed for NLP4J -->
 		<dependency>
 			<groupId>org.apache.opennlp</groupId>
 			<artifactId>opennlp-tools</artifactId>
 			<version>1.5.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.dmilne</groupId>
-			<artifactId>weka-wrapper</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>weka.wrapper</groupId>
-			<artifactId>weka-wrapper</artifactId>
-			<version>1.0</version>
 		</dependency>
 		
         <dependency>
@@ -759,6 +749,18 @@
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.4.8</version>
+		</dependency>
+
+		<!-- to be finished: remove entirely weka -->
+		<dependency>
+			<groupId>org.dmilne</groupId>
+			<artifactId>weka-wrapper</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>weka.wrapper</groupId>
+			<artifactId>weka-wrapper</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 		

@@ -238,14 +238,8 @@ public class Label {
 	
 	
 	//protected and private ====================================================
-	
-	
-
-
-
 
 	private void setDetails() {
-		
 		try {
 			DbLabel lbl = env.getDbLabel(textProcessor).retrieve(text) ;
 		

@@ -24,7 +24,7 @@ public class NerdCategories {
 	/**
 	 * The class Logger.
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(NerdDisambiguator.class);	
+	private static final Logger logger = LoggerFactory.getLogger(NerdCategories.class);	
 	
 	// this is the threshold to keep a category at document level
 	static private double DOC_CATEGORY_THRESHOLD = 0.05;
@@ -51,7 +51,7 @@ public class NerdCategories {
 				for(NerdEntity entity : entities) {
 					List<com.scienceminer.nerd.kb.Category> categories = entity.getCategories();
 					if (categories != null) {				
-						Double nerd_score = entity.getNerd_score();
+						Double nerd_score = entity.getNerdScore();
 						for(Category category : categories) {
 							int wikipediaID = category.getWikiPageID();
 							Integer wikipediaInteger = new Integer(wikipediaID);
@@ -115,7 +115,7 @@ public class NerdCategories {
 			for(NerdEntity entity : entities) {
 				List<com.scienceminer.nerd.kb.Category> categories = entity.getCategories();
 				if (categories != null) {				
-					Double nerd_score = entity.getNerd_score();
+					Double nerd_score = entity.getNerdScore();
 					for(Category category : categories) {
 						int wikipediaID = category.getWikiPageID();
 						Integer wikipediaInteger = new Integer(wikipediaID);

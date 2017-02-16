@@ -26,7 +26,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  */
 public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 
-	private TextProcessor textProcessor;
+	private TextProcessor textProcessor = null;
 
 	/**
 	 * Creates or connects to a database, whose name and type will be {@link KBDatabase.DatabaseType#label}. 

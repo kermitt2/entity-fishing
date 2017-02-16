@@ -56,9 +56,9 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	}
 
 	// using standard LMDB copy mode
-	//@Override
-	public String retrieve2(Integer key) {
-		byte[] cachedData = null;
+	@Override
+	public String retrieve(Integer key) {
+		//byte[] cachedData = null;
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction()) {
 			theString = string(db.get(tx, BigInteger.valueOf(key).toByteArray()));
@@ -69,8 +69,8 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	}
 
 	// using LMDB zero copy mode
-	@Override
-	public String retrieve(Integer key) {
+	//@Override
+	public String retrieve2(Integer key) {
 		byte[] cachedData = null;
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction();

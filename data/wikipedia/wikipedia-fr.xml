@@ -87,9 +87,9 @@
 	<labelComparisonModel></labelComparisonModel>
 
 	<!-- A file containing a Weka classifier for performing automatic disambiguation of topics in documents -->
-	<topicDisambiguationModel>data/wikipedia/models-fr/disambig_fr_In.model</topicDisambiguationModel>
+	<rankerModel>data/wikipedia/models-fr/disambig_fr_In.model</rankerModel>
 
 	<!-- A file containing a Weka classifier for performing automatic link detection -->
-	<!--linkDetectionModel>data/wikipedia/models-fr/detect_fr_In.model</linkDetectionModel-->
+	<!--selectorModel>data/wikipedia/models-fr/detect_fr_In.model</selectorModel-->
 
 </wikipediaConfiguration>
