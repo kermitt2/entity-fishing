@@ -18,7 +18,7 @@ import com.scienceminer.nerd.utilities.NerdProperty;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
 import com.scienceminer.nerd.utilities.NerdServiceProperties;
-import com.scienceminer.nerd.kb.Customisation;
+import com.scienceminer.nerd.kb.Customisations;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,8 +42,8 @@ public class NerdRestCustomisation {
 		LOGGER.debug(">> processNerdCustomisations");
 		Response response = null;
 		try {
-			Customisation customisation = Customisation.getInstance();
-			List<String> names = customisation.getCustomisations();
+			Customisations customisations = Customisations.getInstance();
+			List<String> names = customisations.getCustomisations();
 			StringBuffer res = new StringBuffer();
 			res.append("[");
 			boolean begin = true;
@@ -72,8 +72,8 @@ public class NerdRestCustomisation {
 		LOGGER.debug(">> processNerdCustomisation");
 		Response response = null;
 		try {
-			Customisation customisation = Customisation.getInstance();
-			String info = customisation.getCustomisation(name);
+			Customisations customisations = Customisations.getInstance();
+			String info = customisations.getCustomisation(name);
 			if (info.startsWith("Resource was not found")) 
 				response = Response.status(Status.NOT_FOUND).build();
 			else if (info.startsWith("Server error")) 
@@ -96,8 +96,8 @@ public class NerdRestCustomisation {
 		LOGGER.debug(">> processCreateNerdCustomisation");
 		Response response = null;
 		try {
-			Customisation customisation = Customisation.getInstance();
-			String message = customisation.createCustomisation(name, profile);
+			Customisations customisations = Customisations.getInstance();
+			String message = customisations.createCustomisation(name, profile);
 			if (message.equals("OK"))
 				response = Response.status(Status.OK).build();
 			else if (message.startsWith("Invalid request")) 
@@ -118,7 +118,7 @@ public class NerdRestCustomisation {
 	}
 
 	/**
-     * Return the list of existing customisations.
+     * ...
 	 */
 	public static Response processExtendNerdCustomisation(String name, String profile) {
 		LOGGER.debug(">> processExtendNerdCustomisation");
@@ -135,8 +135,8 @@ public class NerdRestCustomisation {
 		LOGGER.debug(">> processDeleteNerdCustomisation");
 		Response response = null;
 		try {
-			Customisation customisation = Customisation.getInstance();
-			String message = customisation.deleteCustomisation(name);
+			Customisations customisations = Customisations.getInstance();
+			String message = customisations.deleteCustomisation(name);
 			if (message.equals("OK"))
 				response = Response.status(Status.OK).build();
 			else if (message.startsWith("Resource was not found"))

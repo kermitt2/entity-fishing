@@ -41,8 +41,8 @@ public class PageIterator implements Iterator<Page> {
 	 */
 	public PageIterator(KBEnvironment env, PageType type)  {
 		this.env = env;
-		iter = env.getDbPage().getIterator(); 
 		this.type = type;
+		this.iter = this.env.getDbPage().getIterator(); 
 //System.out.println(env.getDbPage().getDatabaseSize());	
 		queueNext();
 	}

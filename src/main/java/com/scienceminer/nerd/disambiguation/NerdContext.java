@@ -32,6 +32,8 @@ public class NerdContext {
 	private Relatedness relatedness = Relatedness.getInstance();
 	private String lang = null;
 	
+	public NerdContext() {}
+
 	public NerdContext(List<Label.Sense> unambig, 
 					List<Article> certainPages,
 					String lang) throws Exception {
@@ -54,7 +56,7 @@ public class NerdContext {
 				articles.add(sense);
 			}
 		}
-		// add the certain pages
+		// add the "certain" pages
 		if (certainPages != null) {
 			for(Article page : certainPages) {
 				page.setWeight(new Double(1.0));

@@ -17,11 +17,6 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONStringer;
 
-/*import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.io.JsonStringEncoder;*/
-
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;

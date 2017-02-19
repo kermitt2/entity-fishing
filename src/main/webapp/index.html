@@ -100,15 +100,16 @@
 								<select id="selectedService">
 				                    <option value="processLIdText">Language identification</option>	
 									<option value="processSentenceSegmentation">Sentence segmentation</option>	
-									<option value="processERDText" selected>ERD text</option>					
-									<option value="processERDQuery">ERD query</option>
+									<!--option value="processERDText" selected>ERD text</option>					
+									<option value="processERDQuery">ERD query</option-->
 									<option value="processNERDText">NERD text</option>					
 									<option value="processNERDQuery">NERD query</option>
 									<option value="processERDSearchQuery">ERD search query</option>
+									<option value="kbTermLookup">Term look-up</option>
 								</select>
 										</td>
 										<td>
-								<span id ="nerd-text">  
+								<span id ="nerd-text">
 										<table>
 											<tr>
 												<td style="width:10px;"></td>
@@ -176,41 +177,6 @@
 				<br>
 				<div id="requestResult"></div>
 			</div>
-			
-			<!--div id="divDemo">  
-				
-				<div class="span9" id="gbdForm2" style="position:relative; left:0px;">
-              		
-					<table>						
-						<tr>
-							<td>	
-								<select id="selectedService2">
-				                    <option value="processNERDText2">NERD text</option>					
-									<option value="processNERDQuery2">NERD query</option>
-								</select>
-							</td>
-							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-							<td>
-								<div id="field2">
-									<div id="demo_searchbar" class="input-append">			               		
-					                 	<input class="span4" id="demo_freetext" style="height:28px;" name="q" value="" placeholder="search term" autofocus />
-										<span id="search_button" class="add-on icon-search btn"></span>
-					              	</div>
-								</div>
-							</td>
-						</tr>
-					</table>
-					
-				</div>	
-				
-				<br>
-				<br>
-				<br>
-					<div id="requestResult2"></div>
-				<br>
-				<br>
-				<br>
-			</div-->
 
 			<div id="divAdmin">
 				<form method="post" class="form-horizontal" id="adminForm">

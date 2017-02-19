@@ -44,7 +44,7 @@ public class Relatedness {
 	private long comparisonsRequested = 0;
 	private long comparisonsCalculated = 0;
 		
-	public static Relatedness getInstance() throws Exception {
+	public static Relatedness getInstance() {
 	    if (instance == null) {
 			getNewInstance();	        
 	    }
@@ -54,7 +54,7 @@ public class Relatedness {
 	/**
 	 * Creates a new instance.
 	 */
-	private static synchronized void getNewInstance() throws Exception {
+	private static synchronized void getNewInstance() {
 		LOGGER.debug("Get new instance of Relatedness");		
 		instance = new Relatedness();
 	}
@@ -62,7 +62,7 @@ public class Relatedness {
 	/**
 	 * Hidden constructor
 	 */
-	private Relatedness() throws Exception {	
+	private Relatedness() {	
 		wikipedias = Lexicon.getInstance().getWikipediaConfs();
 		caches = new HashMap<String, ConcurrentMap<Long,Double>>();
 		//disambiguators = new HashMap<String, NerdRanker>();

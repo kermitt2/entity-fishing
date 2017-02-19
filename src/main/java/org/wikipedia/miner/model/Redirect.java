@@ -56,7 +56,7 @@ public class Redirect extends Page {
 			
 			if (target.getType() == PageType.redirect)
 				currId = targetId ;
-			else
+			else if (target.getType() == PageType.article)
 				return (Article)target ;
 		}
 

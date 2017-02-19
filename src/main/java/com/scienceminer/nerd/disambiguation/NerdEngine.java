@@ -42,12 +42,12 @@ public class NerdEngine {
 	private Relatedness relatedness = null;
 	private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
 	
-	static public int maxContextSize = 15;	
+	static public int maxContextSize = 30;	
 	static public int maxLabelLength = 50;
 	static public double minLinkProbability = 0.005;
 	static public double minSenseProbability = 0.01;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
-	static public double minEntityScore = 0.15; // threshold for final entity pruning
+	static public double minEntityScore = 0.2; // threshold for final entity pruning
 	
 	public static NerdEngine getInstance() throws Exception {
 	    if (instance == null) {
@@ -153,6 +153,7 @@ for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 }
 		System.out.println("total number of entities: " + nbEntities);
 		System.out.println("total number of candidates: " + nbCandidates);
+
 		rank(candidates, lang);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -162,7 +163,7 @@ for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
 }*/
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortText, 0.5);
+		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortText, 0.3);
 		prune(candidates, nerdQuery.getNbest(), shortText, minEntityScore, lang);
 		//impactOverlap(candidates);
 		//if (!shortText && !nerdQuery.getNbest())
@@ -335,6 +336,7 @@ for(NerdCandidate cand : cands) {
 	private void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang) {
 		// we rank candidates for each entity mention
 //relatedness.resetCache(lang);
+
 		// first pass to get the "certain" entities 
 		List<NerdEntity> userEntities = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {

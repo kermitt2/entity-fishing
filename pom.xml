@@ -372,7 +372,7 @@
                             <arguments>
                                 <argument>-classpath</argument>
                                 <classpath/>
-                                <argument>com.scienceminer.nerd.training.WikipediaDisambiguatorTrainer</argument>
+                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
 								<argument>data/wikipedia/test/</argument>
 								<argument>de</argument>
                             </arguments>
@@ -401,7 +401,7 @@
                             <arguments>
                                 <argument>-classpath</argument>
                                 <classpath/>
-                                <argument>com.scienceminer.nerd.training.WikipediaDisambiguatorTrainer</argument>
+                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
 								<argument>data/wikipedia/test/</argument>
 								<argument>fr</argument>
                             </arguments>

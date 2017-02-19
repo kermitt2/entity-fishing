@@ -72,14 +72,14 @@
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processNERDQuery</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDText</url-pattern>
-    </servlet-mapping>
-	<servlet-mapping>
+    </servlet-mapping-->
+	<!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDQuery</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping-->
 	<servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDQueryTerms</url-pattern>
@@ -115,6 +115,10 @@
 	<servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/KBConcept</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>nerd-service</servlet-name>
+        <url-pattern>/KBTermLookup</url-pattern>
     </servlet-mapping>
 
 	<!--servlet-mapping>

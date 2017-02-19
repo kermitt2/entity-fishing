@@ -60,7 +60,7 @@ public interface NerdPaths {
 	/**
 	 * path extension for extracting named entities from a text.
 	 */
-	public static final String PATH_ERD_TEXT = "processERDText";
+	//public static final String PATH_ERD_TEXT = "processERDText";
 	
 	/**
 	 * path extension for extracting named entities from a text query.
@@ -111,4 +111,9 @@ public interface NerdPaths {
 	 * path extension for getting information about a concept.
 	 */
 	public static final String PATH_KB_CONCEPT = "KBConcept";
+
+	/**
+	 * path extension for getting all ambiguous concepts associated to a single term.
+	 */
+	public static final String PATH_KB_TERM_LOOKUP = "KBTermLookup";
 }

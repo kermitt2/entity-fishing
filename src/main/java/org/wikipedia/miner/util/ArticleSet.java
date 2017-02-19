@@ -131,39 +131,45 @@ public class ArticleSet extends ArrayList<Article> {
 		double lastWarningProgress = 0;
 		
 		PageIterator i = wikipedia.getPageIterator(PageType.article);
-		while (i.hasNext()) {
-			if (size() >= size)
-				break; //we have enough ids
-
-			Article art = (Article)i.next();
-			if (minOutLinks != null && (art.getLinksOut().length < minOutLinks))
-				continue;
-			
-			if (minInLinks != null && (art.getLinksIn().length < minInLinks))
-				continue;
-		//while (roughCandidates.size() > 0) {
-			
-			//pop a random id
-			//Integer index = (int)Math.floor(Math.random() * roughCandidates.size());
-			//Article art = roughCandidates.elementAt(index);
-			//roughCandidates.removeElementAt(index);
-									
-			if (isArticleValid(art, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, 
-				maxListProportion, mustMatch, mustNotMatch, exclude)) 
-				add(art);
-			
-			// warn user if it looks like we wont find enough valid articles
-			/*double roughProgress = 1-((double) roughCandidates.size()/totalRoughCandidates);
-			if (roughProgress >= lastWarningProgress + 0.01) {
-				double fineProgress = (double)size()/size;
-			
-				if (roughProgress > fineProgress) {
-					System.err.println("ArticleSet | Warning : we have exhausted " + df.format(roughProgress) + 
-						" of the available pages and only gathered " + df.format(fineProgress*100) + 
-						" of the articles needed.");
-					lastWarningProgress = roughProgress;
-				}
-			}*/
+		try {
+			while (i.hasNext()) {
+				if (size() >= size)
+					break; //we have enough ids
+				Page page = i.next();
+				if (page.getType() != PageType.article)
+					continue;
+				Article art = (Article)page;
+				if (minOutLinks != null && (art.getLinksOut().length < minOutLinks))
+					continue;
+				
+				if (minInLinks != null && (art.getLinksIn().length < minInLinks))
+					continue;
+			//while (roughCandidates.size() > 0) {
+				
+				//pop a random id
+				//Integer index = (int)Math.floor(Math.random() * roughCandidates.size());
+				//Article art = roughCandidates.elementAt(index);
+				//roughCandidates.removeElementAt(index);
+										
+				if (isArticleValid(art, minLinkProportion, maxLinkProportion, minWordCount, maxWordCount, 
+					maxListProportion, mustMatch, mustNotMatch, exclude)) 
+					add(art);
+				
+				// warn user if it looks like we wont find enough valid articles
+				/*double roughProgress = 1-((double) roughCandidates.size()/totalRoughCandidates);
+				if (roughProgress >= lastWarningProgress + 0.01) {
+					double fineProgress = (double)size()/size;
+				
+					if (roughProgress > fineProgress) {
+						System.err.println("ArticleSet | Warning : we have exhausted " + df.format(roughProgress) + 
+							" of the available pages and only gathered " + df.format(fineProgress*100) + 
+							" of the articles needed.");
+						lastWarningProgress = roughProgress;
+					}
+				}*/
+			}
+		} finally {
+			i.close();
 		}
 		
 		if (size() < size)

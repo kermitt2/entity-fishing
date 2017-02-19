@@ -232,11 +232,6 @@ var nerd = (function($) {
 		$('#requestResult').html("<font color='red'>Error encountered while requesting the server.</font>");      
 		responseJson = null;
 	}
-    
-	/*function AjaxError2() {
-		$('#requestResult2').html("<font color='red'>Error encountered while requesting the server.</font>");      
-		responseJsonParse = null;
-	}*/
 
 	function SubmitSuccesful(responseText, statusText) { 
 		var selected = $('#selectedService').attr('value');
@@ -247,12 +242,12 @@ var nerd = (function($) {
 		else if (selected == 'processNERDQuery') {
 			SubmitSuccesfulNERD(responseText, statusText);          
 		}
-		else if (selected == 'processERDText') {
+		/*else if (selected == 'processERDText') {
 			SubmitSuccesfulNERD(responseText, statusText);
 		}
 		else if (selected == 'processERDQuery') {
 			SubmitSuccesfulNERD(responseText, statusText);          
-		}
+		}*/
 		else if (selected == 'processLIdText') {
 			SubmitSuccesfulLId(responseText, statusText);          
 		}
@@ -261,6 +256,9 @@ var nerd = (function($) {
 		}
 		else if (selected == 'processERDSearchQuery') {
 			SubmitSuccesfulERDSearch(responseText, statusText);           
+		}
+		else if (selected == 'KBTermLookup') {
+			SubmitSuccesfulKBTermLookup(responseText, statusText);           
 		}
 		
 	}
@@ -280,7 +278,7 @@ var nerd = (function($) {
 		}
 
 		if ( ($('#selectedService').attr('value') == 'processNERDQuery') || 
-			($('#selectedService').attr('value') == 'processERDQuery') ||
+			//($('#selectedService').attr('value') == 'processERDQuery') ||
 			($('#selectedService').attr('value') == 'processERDSearchQuery') ) {
 			responseJson = jQuery.parseJSON(responseJson);
 		}
@@ -506,7 +504,8 @@ var nerd = (function($) {
 		$('#detailed_annot-0').hide();	
 	}
 	
-	function SubmitSuccesfulERDSearch(responseText, statusText) {          					             
+	function SubmitSuccesfulERDSearch(responseText, statusText) {
+		//console.log("SubmitSuccesfulERDSearch");					             
 		//console.log(responseText);
 		responseJson = JSON.parse(responseText);
 		
@@ -515,7 +514,12 @@ var nerd = (function($) {
 				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
 			return;
 		}
-		
+
+		var lang = 'en'; //default
+ 		var language = responseJson.language;
+ 		if (language)
+ 			lang = language.lang;
+
 		var display = '<div class=\"note-tabs\"> \
 		<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
 	   		<li class="active"><a href=\"#navbar-fixed-annotation\" data-toggle=\"tab\">Annotations</a></li> \
@@ -528,12 +532,8 @@ var nerd = (function($) {
 		
 		display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">'; 
 		display += '<tr style="background-color:#FFF;"><td>';     
-		
-        /*for (var surf in jsonObject['paraphrases']) {
-         piece += '<p>' + jsonObject['paraphrases'][surf] + '</p>';
-         }*/
-
-        display += getPieceShowexpandNERD(responseJson);
+			
+        display += getPieceShowexpandNERD(responseJson, lang);
 		display += '</td></tr>';
 		display += '</table>';
 		
@@ -549,7 +549,7 @@ var nerd = (function($) {
 		
 		display += "<pre class='prettyprint lang-json' id='xmlCode'>";  
 		var testStr = vkbeautify.json(responseJson);
-		
+	
 		display += htmll(testStr);
 
 		display += "</pre>"; 		
@@ -562,24 +562,71 @@ var nerd = (function($) {
         /*for (var sens in jsonObject['entities']) {
             $('input#selectEntity' + sens).bind('change', clickfilterchoice);
         }*/
-
         //$('#disambiguation_panel').show();
 		$('#requestResult').html(display);     
 		window.prettyPrint && prettyPrint();
+
+		for (var sens in responseJson['entities']) {
+	        var entity = responseJson['entities'][sens];
+	        var identifier = entity.wikipediaExternalRef;
+	        if (identifier && (conceptMap[identifier] == null)) {
+				$.ajax({
+				  	type: 'GET',
+				  	url: 'service/KBConcept',
+				  	data: { id : identifier, lang : lang },
+				  	success: function(result) { 
+				  		var localIdentifier = result.wikipediaExternalRef;
+				  		conceptMap[localIdentifier] = result; 
+				  		var definitions = result.definitions;
+				  		var preferredTerm = result.preferredTerm;
+				  		var localHtml = "";
+				  		if (definitions && (definitions.length > 0)) {
+							localHtml = wiki2html(definitions[0]['definition'], lang);
+							$("#def-"+localIdentifier).html(localHtml);
+				  		}
+				  		if (preferredTerm)
+					  		$("#pref-"+localIdentifier).html(preferredTerm);
+				  	},
+				  	dataType: 'json'  
+				});
+			}
+		}
 	}
 
-	var getPieceShowexpandNERD = function (jsonObject){
+	var getPieceShowexpandNERD = function (jsonObject, lang){
 	    var piece = '<div class="mini-layout fluid" style="background-color:#F7EDDC;"> \
 					   		 <div class="row-fluid"><div class="span12" style="width:100%;">';
 //							 <div class="row-fluid"><div class="span11" style="width:95%;">';
- 		var lang = 'en'; //default
+ 		/*var lang = 'en'; //default
  		var language = jsonObject.language;
  		if (language)
- 			lang = language.lang;
+ 			lang = language.lang;*/
 	    if (jsonObject['entities']) {
 	        piece += '<table class="table" style="width:100%;border:1px solid white;">';
 	        for (var sens in jsonObject['entities']) {
 	            var entity = jsonObject['entities'][sens];
+	            /*var identifier = entity.wikipediaExternalRef;
+	            if (identifier && (conceptMap[identifier] == null)) {
+					$.ajax({
+					  	type: 'GET',
+					  	url: 'service/KBConcept',
+					  	data: { id : identifier, lang : lang },
+					  	success: function(result) { 
+					  		conceptMap[result.wikipediaExternalRef] = result; 
+					  		var definitions = result.definitions;
+					  		var preferredTerm = result.preferredTerm;
+					  		var localHtml = "";
+					  		if (definitions && (definitions.length > 0)) {
+								localHtml = wiki2html(definitions[0]['definition'], lang);
+								$("#def-"+identifier).html(localHtml);
+					  		}
+					  		if (preferredTerm)
+						  		$("#pref-"+identifier).html(preferredTerm);
+					  	},
+					  	dataType: 'json'  
+					});
+				}*/
+
 	            var domains = entity.domains;
 	            if (domains && domains.length > 0) {
 	                domain = domains[0].toLowerCase();
@@ -602,10 +649,12 @@ var nerd = (function($) {
 	            var conf = entity.nerd_score;
 	            if (conf && conf.length > 4)
 	                conf = conf.substring(0, 4);
-	            var definitions = entity.definitions;
+
+	            //var definitions = getDefinitions(identifier);
+
 	            var wikipedia = entity.wikipediaExternalRef;
 	            var content = entity.rawName; //$(this).text();
-	            var preferredTerm = entity.preferredTerm;
+	            //var preferredTerm = getPreferredTerm(identifier);
 
 	            piece += '<tr id="selectLine' + sens + '" href="'
 	                    + wikipedia + '" >' 
@@ -613,16 +662,23 @@ var nerd = (function($) {
 	                    + wikipedia + '" width="15%">';
 				piece += '<p><b>' + entity.rawName + '</b></p></td>';
 	            //piece += '<td><strong>' + entity.rawName + '&nbsp;</strong></td><td>'+ 
-				var localHtml = wiki2html(definitions[0]['definition'], lang);
+				var localHtml1 = "";
+				/*if (definitions && (definitions.length > 0))
+					localHtml = wiki2html(definitions[0]['definition'], lang);
+				else*/
+					localHtml1 = "<span id=\"def-"+wikipedia+"\"></span>";
                 piece += '<td>';
 				if (conf)
 					 piece += '<p><b>Conf</b>: ' + conf + '</p>';
-	            if ( preferredTerm && (entity.rawName.toLowerCase() != preferredTerm.toLowerCase()) ) {	                
+	            /*if ( preferredTerm && (entity.rawName.toLowerCase() != preferredTerm.toLowerCase()) ) {	                
 					piece += '<p><b>' + preferredTerm + ': </b>' + localHtml + '</p>';
 	            }
 	            else {
 	                piece += '<p>' + localHtml + '</p>';
-				}
+				}*/
+				//var localHtml2 = "<span id=\"pref-"+wikipedia+"\"></span>";
+				//piece += '<p><b>' + localHtml2 + ': </b>' + localHtml1 + '</p>';
+				piece += localHtml1;
 				piece += '</td><td width="25%">';
 				piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
 	            piece += '</td><td>';

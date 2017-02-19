@@ -288,7 +288,7 @@ public class NerdRestService implements NerdPaths {
 												customisation); 	// field customisation
 	}
 
-	@POST
+	/*@POST
 	@Path(PATH_ERD_TEXT)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processERDTextPost(@QueryParam(TEXT) String text, 
@@ -334,7 +334,7 @@ public class NerdRestService implements NerdPaths {
 												sentence, 	// sentence segmentation
 												form, // output format
 												customisation); 	// field customisation
-	}
+	}*/
 
 	/**
 	 * @see com.scienceminer.nerd.service.NerdRestProcessString#processLIdText(String)
