@@ -970,8 +970,9 @@ var nerd = (function($) {
 		$('#detailed_annot-0').show();
 	}
 
-	function SubmitSuccesfulLId(responseText, statusText) {          					             
-		responseJson = jQuery.parseJSON(responseText);
+	function SubmitSuccesfulLId(responseText, statusText) {
+console.log(responseText);
+		responseJson = responseText;//jQuery.parseJSON(responseText);
 		
 		var display = '<pre style="background-color:#FFF;width:95%;" id="displayLanguageIdentification">'; 
 		display += '<p id="languageId">';  

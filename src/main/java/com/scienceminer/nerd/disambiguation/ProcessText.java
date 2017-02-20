@@ -210,7 +210,10 @@ public class ProcessText {
 					//Utilities.initGrobid();
 					nerParsers = new NERParsers();	
 				}
+System.out.println(language.toString());
+System.out.println(text);
 				results = nerParsers.extractNE(text, language);
+System.out.println(results.size() + " NER entities found...");				
 			}
 			catch(Exception e) {
 				e.printStackTrace();

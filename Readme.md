@@ -14,17 +14,17 @@
 * interactive disambiguation in text editing mode.  
 ![Editor with real time disambiguation](doc/images/screen6.png)
 
-Supervised machine learning is used for the disambiguation, currently a Bagged Decision Tree, exploiting various features.  
+Supervised machine learning is used for the disambiguation, based on a Random Tree Forest, exploiting various features. Training is realized using Wikipedia data.  
 
-The tool currently supports English, German and French languages. For English, our Name Entity Recognition ([grobid-ner](https://github.com/kermitt2/grobid-ner)) can be used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
+The tool currently supports English, German and French languages. For English and French, our Name Entity Recognition ([grobid-ner](https://github.com/kermitt2/grobid-ner)) is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
 
-The tool has been designed for fast processing (at least for a NERD, 400-500 words per seconds on11 an average linux server), with limited memory (at least for a NERD, 4GB of RAM) and to offer close to state-of-the-art accuracy. 
+The tool has been designed for fast processing (at least for a NERD system, 400-500 words per seconds on an medium-profile linux server), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy. (N)ERD uses the very fast SMILE ML library for machine learning and a JNI integration of LMDB as embedded database. 
 
-(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Windows has not been tested, but apart the optional NER, (N)ERD should theoretically work. 
+(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Windows environment has not been tested. 
 
 ## Install and build 
 
-You will need a total of approx. 14GB of free disk space for installing (N)ERD. Running the service requires at least 4GB of RAM. 
+You will need a total of approx. 50GB of free disk space for installing (N)ERD. Running the service requires at least 2GB of RAM. 
 
 First install _grobid_ and _grobid-ner_, see http://github.com/kermitt2/grobid and http://github.com/kermitt2/grobid-ner
 
