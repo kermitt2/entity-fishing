@@ -212,6 +212,20 @@ var nerd = (function($) {
 			//contentType: "multipart/form-data"
 			});
 		}
+		else if ( urlLocal.indexOf('KBTermLookup') != -1 ) { 
+			$.ajax({
+			  type: 'GET',
+			  url: urlLocal,
+			  data: { term : $('#input2').val(), 
+					  format : $('#format').val(),
+					  lang : $('#lang').val() },
+//			  processData: false,
+			  success: SubmitSuccesful,
+			  error: AjaxError,
+			  contentType:false  
+			//contentType: "multipart/form-data"
+			});
+		}
 		else {
 			$.ajax({
 			  type: 'POST',
@@ -522,7 +536,7 @@ var nerd = (function($) {
 
 		var display = '<div class=\"note-tabs\"> \
 		<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
-	   		<li class="active"><a href=\"#navbar-fixed-annotation\" data-toggle=\"tab\">Annotations</a></li> \
+	   		<li class="active"><a href=\"#navbar-fixed-annotation\" data-toggle=\"tab\">Entities</a></li> \
 			<li><a href=\"#navbar-fixed-json\" data-toggle=\"tab\">Response</a></li> \
 		</ul> \
 		<div class="tab-content"> \
@@ -593,6 +607,92 @@ var nerd = (function($) {
 		}
 	}
 
+	var SubmitSuccesfulKBTermLookup = function(responseText, statusText) {
+		//responseJson = JSON.parse(responseText);
+		responseJson = responseText;
+		if ( (responseJson == null) || (responseJson.length == 0) ) {
+			$('#requestResult')
+				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
+			return;
+		}
+
+		var lang = 'en'; //default
+ 		var language = responseJson.language;
+ 		if (language)
+ 			lang = language.lang;
+
+ 		var display = '<div class=\"note-tabs\"> \
+		<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
+	   		<li class="active"><a href=\"#navbar-fixed-annotation\" data-toggle=\"tab\">Entities</a></li> \
+			<li><a href=\"#navbar-fixed-json\" data-toggle=\"tab\">Response</a></li> \
+		</ul> \
+		<div class="tab-content"> \
+		<div>Number of ambiguous concepts: '+responseJson.senses.length+'</div> \
+		<div class="tab-pane active" id="navbar-fixed-annotation">\n';   	
+		
+		display += '<pre style="background-color:#FFF;width:95%;" id="displayAnnotatedText">'; 
+		
+		display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">'; 
+		display += '<tr style="background-color:#FFF;"><td>';     
+			
+        display += getPieceShowSenses(responseJson, lang);
+		display += '</td></tr>';
+		display += '</table>';
+		
+		display += '</pre>\n';
+		
+		//$('#requestResult').html(display);  
+		
+		display += '</div> \
+					<div class="tab-pane " id="navbar-fixed-json">\n';
+		// JSON visualisation component 	
+		// with pretty print
+		display += "<pre class='prettyprint' id='jsonCode'>";  
+		
+		display += "<pre class='prettyprint lang-json' id='xmlCode'>";  
+		var testStr = vkbeautify.json(responseJson);
+	
+		display += htmll(testStr);
+
+		display += "</pre>"; 		
+		display += '</div></div></div>';	
+		
+		
+        //$('#requestResult').append(piece);
+
+        // we need to bind the checkbox...
+        /*for (var sens in jsonObject['entities']) {
+            $('input#selectEntity' + sens).bind('change', clickfilterchoice);
+        }*/
+        //$('#disambiguation_panel').show();
+		$('#requestResult').html(display);     
+		window.prettyPrint && prettyPrint();
+
+		for (var sens in responseJson['senses']) {
+	        var entity = responseJson['senses'][sens];
+	        var identifier = entity.pageid;
+	        if (identifier && (conceptMap[identifier] == null)) {
+				$.ajax({
+				  	type: 'GET',
+				  	url: 'service/KBConcept',
+				  	data: { id : identifier, lang : lang },
+				  	success: function(result) { 
+				  		var localIdentifier = result.wikipediaExternalRef;
+				  		conceptMap[localIdentifier] = result; 
+				  		var definitions = result.definitions;
+				  		var localHtml = "";
+				  		if (definitions && (definitions.length > 0)) {
+							localHtml = wiki2html(definitions[0]['definition'], lang);
+							$("#def-"+localIdentifier).html(localHtml);
+				  		}
+				  	},
+				  	dataType: 'json'  
+				});
+			}
+		}
+
+	}
+
 	var getPieceShowexpandNERD = function (jsonObject, lang){
 	    var piece = '<div class="mini-layout fluid" style="background-color:#F7EDDC;"> \
 					   		 <div class="row-fluid"><div class="span12" style="width:100%;">';
@@ -605,27 +705,6 @@ var nerd = (function($) {
 	        piece += '<table class="table" style="width:100%;border:1px solid white;">';
 	        for (var sens in jsonObject['entities']) {
 	            var entity = jsonObject['entities'][sens];
-	            /*var identifier = entity.wikipediaExternalRef;
-	            if (identifier && (conceptMap[identifier] == null)) {
-					$.ajax({
-					  	type: 'GET',
-					  	url: 'service/KBConcept',
-					  	data: { id : identifier, lang : lang },
-					  	success: function(result) { 
-					  		conceptMap[result.wikipediaExternalRef] = result; 
-					  		var definitions = result.definitions;
-					  		var preferredTerm = result.preferredTerm;
-					  		var localHtml = "";
-					  		if (definitions && (definitions.length > 0)) {
-								localHtml = wiki2html(definitions[0]['definition'], lang);
-								$("#def-"+identifier).html(localHtml);
-					  		}
-					  		if (preferredTerm)
-						  		$("#pref-"+identifier).html(preferredTerm);
-					  	},
-					  	dataType: 'json'  
-					});
-				}*/
 
 	            var domains = entity.domains;
 	            if (domains && domains.length > 0) {
@@ -678,6 +757,66 @@ var nerd = (function($) {
 				}*/
 				//var localHtml2 = "<span id=\"pref-"+wikipedia+"\"></span>";
 				//piece += '<p><b>' + localHtml2 + ': </b>' + localHtml1 + '</p>';
+				piece += localHtml1;
+				piece += '</td><td width="25%">';
+				piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
+	            piece += '</td><td>';
+	            piece += '<table><tr><td>';
+
+	            if (wikipedia) {
+	                piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
+	                        wikipedia +
+	                        '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
+	            }
+	            piece += '</td></tr><tr><td>';
+	            piece += '</td></tr></table>';
+
+	            piece += '</td></tr>';
+	        }
+	        piece += '</table>';
+	    }
+
+		piece += '</div></div>';
+	    return piece;
+	}
+
+	var getPieceShowSenses = function (jsonObject, lang){
+	    var piece = '<div class="mini-layout fluid" style="background-color:#F7EDDC;"> \
+					   		 <div class="row-fluid"><div class="span12" style="width:100%;">';
+	    if (jsonObject['senses']) {
+	        piece += '<table class="table" style="width:100%;border:1px solid white;">';
+	        for (var sens in jsonObject['senses']) {
+	            var entity = jsonObject['senses'][sens];
+
+	            var domains = entity.domains;
+	            if (domains && domains.length > 0) {
+	                domain = domains[0].toLowerCase();
+	            }
+
+	            var colorLabel = null;
+	            if (domains && domains.length > 0) {
+	                colorLabel = domain;
+	            }
+	            else
+	                colorLabel = entity.rawName;
+
+	            var prob_c = entity.prob_c;
+	            /*if (prob_c && prob_c.length > 6)
+	                prob_c = prob_c.substring(0, 6);*/
+
+	            var wikipedia = entity.pageid;
+	            var content = entity.preferred; 
+
+	            piece += '<tr id="selectLine' + sens + '" href="'
+	                    + wikipedia + '" >' 
+						+ '<td id="selectArea' + sens + '" href="'
+	                    + wikipedia + '" width="15%">';
+				piece += '<p><b>' + content + '</b></p></td>';
+				var localHtml1 = "<span id=\"def-"+wikipedia+"\"></span>";
+                piece += '<td>';
+				if (prob_c)
+					 piece += '<p><b>Cond. prob.</b>: ' + prob_c + '</p>';
+
 				piece += localHtml1;
 				piece += '</td><td width="25%">';
 				piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
@@ -1054,25 +1193,29 @@ console.log(responseText);
 						  "nbest" : false, "format" : "JSON",
  						  "customisation" : "generic" };
 
+ 	var queryTemplate3 = { "term" : "", "language" : { "lang" : "en" } };
+
 	function processChange() {
 		var selected = $('#selectedService').attr('value');
 
 		if (selected == 'processNERDQuery') {
+			createInputTextArea('query');
 			setBaseUrl('processNERDQuery');
-			$("#nerd-text").hide();     
+			$("#nerd-text").hide();
 			//$("#default_nerd_query").attr('checked', 'checked');
 			//$("#nerd-query").show();
 			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
 		} 
 		else if (selected == 'processNERDText') {
+			createInputTextArea('query');
 			setBaseUrl('processNERDText');   
 			//$("#nerd-query").hide();     
 			//$("#default_nerd_text").attr('checked', 'checked');
 			$("#nerd-text").show();
 			//$("#lid").hide();   
 		}
-		else if (selected == 'processERDQuery') {
+		/*else if (selected == 'processERDQuery') {
 			setBaseUrl('processERDQuery');
 			$("#nerd-text").hide();     
 			//$("#default_nerd_query").attr('checked', 'checked');
@@ -1086,8 +1229,9 @@ console.log(responseText);
 			//$("#default_nerd_text").attr('checked', 'checked');
 			$("#nerd-text").show();
 			//$("#lid").hide();   
-		}
+		}*/
 		else if (selected == 'processLIdText') {
+			createInputTextArea('query');
 			setBaseUrl('processLIdText');  
 			//$("#lid").show();   
 			//$("#nerd-query").hide();  
@@ -1095,6 +1239,7 @@ console.log(responseText);
 			//$("#default_lid").attr('checked', 'checked');
 		}
 		else if (selected == 'processSentenceSegmentation') {
+			createInputTextArea('query');
 			setBaseUrl('processSentenceSegmentation');  
 			//$("#lid").show(); 
 			//$("#nerd-query").hide();  
@@ -1102,6 +1247,7 @@ console.log(responseText);
 			//$("#default_lid").attr('checked', 'checked');
 		}
 		else if (selected == 'processERDSearchQuery') {
+			createInputTextArea('query');
 			setBaseUrl('processERDSearchQuery');
 			$("#nerd-text").hide();     
 			//$("#default_nerd_query").attr('checked', 'checked');
@@ -1109,6 +1255,15 @@ console.log(responseText);
 			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate2)));
 		} 
+		else if (selected == 'KBTermLookup') {
+			createSimpleTextFieldArea('query');
+			setBaseUrl('KBTermLookup');
+			$("#nerd-text").hide();  
+			//$("#default_nerd_query").attr('checked', 'checked');
+			//$("#nerd-query").show();
+			//$("#lid").hide();
+			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate3)));
+		}
 	}
 
 	function createInputFile() {
@@ -1176,12 +1331,30 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 		$('#reuters4').removeClass('section-active').addClass('section-non-active');
 	}
 
+	function createSimpleTextFieldArea(nameInput) {
+		$('#label').html('&nbsp;'); 					                   
+		$('#input').remove();
+		$('#examples').remove();
+		$('#field').html("");
+ 
+		var piece = '<table><tr>' + 
+					'<td><textarea style="height:28px;" rows="1" id="input2" name="'+nameInput+'" placeholder="Enter a term..."/></td>' +
+					'<td style="width:10px;"></td>' +
+					'<td><select style="height:auto;width:auto;top:-10px;right:10px;" name="lang" id="lang">' +
+					'<option value="en" selected>en</option>' + 
+					'<option value="de">de</option>' +
+					'<option value="fr">fr</option></select></td>' +
+					'</tr></table>';
+		$('#field').append(piece);
+	}
+
 	function createInputTextArea(nameInput) {
 		//$('#label').html('Enter ' + nameInput);             
 		$('#label').html('&nbsp;'); 					                   
 		$('#input').remove();
+		$('#field').html("");
  
-		$('#field').append('<table><tr><td><textarea class="span7" rows="5" id="input" name="'+nameInput+'" /></td>'+
+		$('#field').append('<table id="examples"><tr><td><textarea class="span7" rows="5" id="input" name="'+nameInput+'" /></td>'+
 			"<td><span style='padding-left:20px;'>&nbsp;</span></td>"+
 		"<td><table><tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>Cendari</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example2' style='font-size:90%;'>PubMed_1</span></td></tr>"+

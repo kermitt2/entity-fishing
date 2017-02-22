@@ -51,6 +51,7 @@ public class NerdRestService implements NerdPaths {
 	private static final String XML = "xml";
 	private static final String NERD = "nerd";
 	private static final String TEXT = "text"; 
+	private static final String TERM = "term"; 
 	private static final String ID = "id"; 
 	private static final String LANG = "lang"; 
 	//private static final String MODE = "mode";
@@ -499,4 +500,19 @@ public class NerdRestService implements NerdPaths {
 		}
 		return NerdRestKB.getConceptInfo(identifier, lang, form); 	// field customisation
 	}
+	
+	@GET
+	@Path(PATH_KB_TERM_LOOKUP)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response getTermLookup(@QueryParam(TERM) String term, 
+									@DefaultValue("en") @QueryParam(LANG) String lang, 
+									@DefaultValue("json") @QueryParam(FORMAT) String format) {
+		NerdRestUtils.Format form = null;
+		if ( (format != null) && (format.length() > 0) ) {
+			format = format.toUpperCase();
+			form = NerdRestUtils.Format.valueOf(format);
+		}
+		return NerdRestKB.getTermLookup(term, lang, form); 	// field customisation
+	}
+
 }

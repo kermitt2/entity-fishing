@@ -16,7 +16,9 @@ public class GenericSelectionFeatureVector {
 	// mask of features
 	public boolean Add_nerd_score = false;  // NERd score produced by the disambiguator
 	public boolean Add_prob_anchor_string = false; // probability of the string to be an anchor in Wikipedia
-	public boolean Add_prob_c = false;
+	public boolean Add_prob_c = false; // conditional probability of the concept given the surface string
+	public boolean Add_dice = false; // Dice coefficient for lexical cohesion
+	public boolean Add_tf_idf = false; // term frequency inverse document frequency, tf-idf
 
 	// decision types
 	public boolean target_numeric = false;
@@ -26,6 +28,8 @@ public class GenericSelectionFeatureVector {
 	public double nerd_score = 0.0;
 	public double prob_anchor_string = 0.0;
 	public double prob_c = 0.0;
+	public double dice = 0.0; // Dice coefficient
+	public double tf_idf = 0.0; // tf-idf
 
 	/**
 	 *  Write header of ARFF files.
@@ -46,10 +50,14 @@ public class GenericSelectionFeatureVector {
 		
 		if (Add_nerd_score)
 			header.append("@attribute nerd_score REAL\n");
-		if (Add_prob_anchor_string)		
+		if (Add_prob_anchor_string)	
 			header.append("@attribute prob_anchor_string REAL\n");
-		if (Add_prob_c)		
+		if (Add_prob_c)	
 			header.append("@attribute prob_c REAL\n");
+		if (Add_dice)	
+			header.append("@attribute dice REAL\n");
+		if (Add_tf_idf)	
+			header.append("@attribute tf_idf REAL\n");
 
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -66,6 +74,10 @@ public class GenericSelectionFeatureVector {
 		if (Add_prob_anchor_string)
 			num++;
 		if (Add_prob_c)
+			num++;
+		if (Add_dice)
+			num++;
+		if (Add_tf_idf)
 			num++;
 		// class
 		num++;	
@@ -108,6 +120,26 @@ public class GenericSelectionFeatureVector {
 			}
 		}
 
+		// Dice coefficient for lexical cohesion
+		if (Add_dice) {
+			if (first) {
+				res.append(dice);
+				first = false;	
+			} else {
+				res.append(", " + dice);
+			}
+		}
+
+		// term frequency inverse document frequency, tf-idf
+		if (Add_tf_idf) {
+			if (first) {
+				res.append(tf_idf);
+				first = false;	
+			} else {
+				res.append(", " + tf_idf);
+			}
+		}
+
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
 			res.append("," + label);
@@ -130,6 +162,14 @@ public class GenericSelectionFeatureVector {
 		}
 		if (Add_prob_c) {
 			result[i] = prob_c;
+			i++;
+		}
+		if (Add_dice) {
+			result[i] = dice;
+			i++;
+		}
+		if (Add_tf_idf) {
+			result[i] = tf_idf;
 			i++;
 		}
 		return result;

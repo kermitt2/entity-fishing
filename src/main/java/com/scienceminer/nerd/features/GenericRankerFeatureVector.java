@@ -8,7 +8,7 @@ import java.util.regex.*;
 public class GenericRankerFeatureVector {
 	public String title = "Generic";
 
-	public String string = null; // lexical feature, here the FreeBase ID of the entity candidate
+	public String string = null; // lexical feature
 	public double label = 0.0; // numerical label if known
 	public String classes = "N"; // class label if known
 	
@@ -42,11 +42,13 @@ public class GenericRankerFeatureVector {
 	// - with all other candidates (average)
 	// - between NER subtype and context
 	// - between NER subtype and context WSD
+
 	// quality of the context:
 	// - minimum depth of concept in wikipedia category tree
 	// - general term frequency
 	// - tf/idf
 	// - lexical cohesion (e.g. dice coefficient)
+
 	// quality of the NE property:
 	// - mention marked by NER
 	
@@ -135,79 +137,6 @@ public class GenericRankerFeatureVector {
 		header.append("@data\n");
 		return header.toString();
 	}
-	
-	/**
-	 *  Set the instance profile in the weka data instance format
-	 */
-	/*public FastVector setHeaderInstance() {
-		FastVector atts = new FastVector();
-		if (Add_prob_c)
-			atts.addElement(new Attribute("prob_c"));
-		if (Add_prob_i)
-			atts.addElement(new Attribute("prob_i"));
-		if (Add_frequencyStrict)	
-			atts.addElement(new Attribute("frequencyStrict"));
-		if (Add_frequencyConcept)	
-			atts.addElement(new Attribute("frequencyConcept"));
-		if (Add_termLength)	
-			atts.addElement(new Attribute("termLength"));
-		if (Add_inDictionary) {
-			FastVector vals = new FastVector(2);
-			vals.addElement("true");
-			vals.addElement("false");
-			atts.addElement(new Attribute("inDictionary", vals));
-		}
-		if (Add_relatedness)	
-			atts.addElement(new Attribute("relatedness"));
-		if (Add_context_quality)	
-			atts.addElement(new Attribute("context_quality"));
-		if (Add_isSubTerm) {
-			FastVector vals = new FastVector(2);
-			vals.addElement("true");
-			vals.addElement("false");
-			atts.addElement(new Attribute("isSubTerm", vals));
-		}
-		if (Add_ner_st) {
-			FastVector vals = new FastVector(2);
-			vals.addElement("true");
-			vals.addElement("false");
-			atts.addElement(new Attribute("ner_st", vals));
-		}
-		if (Add_ner_id) {
-			FastVector vals = new FastVector(2);
-			vals.addElement("true");
-			vals.addElement("false");
-			atts.addElement(new Attribute("ner_id", vals));
-		}
-		if (Add_ner_type) {
-			FastVector vals = new FastVector(2);
-			vals.addElement("NotNER");
-			vals.addElement("PERSON");
-			vals.addElement("LOCATION");
-			vals.addElement("ORGANIZATION");
-			// to be completed with GROBID NER classes
-			atts.addElement(new Attribute("ner_type", vals));
-		}
-		if (Add_ner_subtype)	
-			atts.addElement(new Attribute("ner_subtype"));					
-		if (Add_NERType_relatedness)
-			atts.addElement(new Attribute("NERType_relatedness"));		
-		if (Add_NERSubType_relatedness)
-			atts.addElement(new Attribute("NERSubType_relatedness"));
-		if (Add_occ_term) 
-			atts.addElement(new Attribute("occ_term"));
-
-		if (target_numeric)	
-			atts.addElement(new Attribute("entity?"));
-		else {
-			FastVector vals = new FastVector(2);
-			vals.addElement("Y");
-			vals.addElement("N");
-			atts.addElement(new Attribute("entity?", vals));
-		} 
-			
-		return atts;
-	}*/
 	
 	public int getNumFeatures() {
 		int num = 0;

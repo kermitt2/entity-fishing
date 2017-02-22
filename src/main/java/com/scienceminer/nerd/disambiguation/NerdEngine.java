@@ -165,7 +165,7 @@ for(NerdCandidate cand : cands) {
 }*/
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortText, 0.3);
 		prune(candidates, nerdQuery.getNbest(), shortText, minEntityScore, lang);
-		//impactOverlap(candidates);
+		impactOverlap(candidates);
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
 			
@@ -226,6 +226,13 @@ for(NerdCandidate cand : cands) {
 		return result;
 	}
 
+
+	/**
+	 * Generate the global context for a document
+	 */
+	public NerdContext getGlobalContext(NerdQuery query) {
+		return null;
+	}
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidates(String text, 
 															List<NerdEntity> entities,
