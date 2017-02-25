@@ -9,6 +9,7 @@ target
 *.log.*
 *.old
 *.obj
+*.zip
 data/maps/customisations.obj
 data/wikipedia/db-en
 data/wikipedia/db-fr

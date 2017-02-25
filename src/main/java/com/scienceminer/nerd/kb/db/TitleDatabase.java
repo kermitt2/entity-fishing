@@ -59,32 +59,26 @@ public class TitleDatabase extends StringIntDatabase {
 		System.out.println("Loading " + getName());
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-		long bytesRead = 0;
 
-		TreeMap<String, Integer> tmp = new TreeMap<String, Integer>();
-
-		String line = null;
-		while ((line=input.readLine()) != null) {
-			bytesRead = bytesRead + line.length() + 1;
-			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
-			KBEntry<String,Integer> entry = deserialiseCsvRecord(cri);
-
-			if (entry != null) {				
-				tmp.put(entry.getKey(), entry.getValue());
-			}
-		}
-		input.close();
-
+		//TreeMap<String, Integer> tmp = new TreeMap<String, Integer>();
 		int nbToAdd = 0;
+		String line = null;
 		Transaction tx = environment.createWriteTransaction();
-		for (Map.Entry<String, Integer> entry: tmp.entrySet()) {
+		while ((line=input.readLine()) != null) {
 			if (nbToAdd == 10000) {
 				tx.commit();
 				tx.close();
 				nbToAdd = 0;
 				tx = environment.createWriteTransaction();
 			}
-			if (entry != null) {
+			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
+			KBEntry<String,Integer> entry = deserialiseCsvRecord(cri);
+
+			if (entry != null) {				
+				//tmp.put(entry.getKey(), entry.getValue());
+				//}
+			//for (Map.Entry<String, Integer> entry: tmp.entrySet()) {
+			//if (entry != null) {
 				try {
 					db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
 					nbToAdd++;
@@ -97,6 +91,8 @@ public class TitleDatabase extends StringIntDatabase {
 		tx.commit();
 		tx.close();
 		isLoaded = true;
+
+		input.close();
 	}
 
 }

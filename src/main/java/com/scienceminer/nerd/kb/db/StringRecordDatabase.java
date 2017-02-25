@@ -112,6 +112,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 					db.put(tx, bytes(entry.getKey()), Utilities.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
+					//System.out.println("Invalid input line: " + line);
 					e.printStackTrace();
 				}
 			}
