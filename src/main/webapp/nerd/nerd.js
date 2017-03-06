@@ -1284,9 +1284,9 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
 "Methane is a powerful greenhouse gas and its concentration in the atmosphere has increased over the past decades. Methane produced by methanogenic Archae can be consumed through aerobic and anaerobic oxidation pathways. In anoxic conditions found in freshwater environments such as meromictic lakes, CH4 oxidation pathways involving different terminal electron acceptors such as NO 3 , SO2 4 , and oxides of Fe and Mn are thermodynamically possible. In this study, a reactive transport model was developed to assess the relative significance of the different pathways of CH4 consumption in the water column of Lake Pavin. In most cases, the model reproduced experimental data collected from the field from June 2006 to June 2007. Although the model and the field measurements suggest that anaerobic CH4 oxidation may contribute to CH4 consumption in the water column of Lake Pavin, aerobic oxidation remains the major sink of CH4 in this lake." ];
 // The German cruiser Bremen and destroyer V-191 go down on the Russian minefield on 17th December 1915 in the Baltic, 1948 (w/c on paper).
 	var reutersExamples = [
-"MEXICO: Recovery excitement brings Mexican markets to life.\n\
+"Mexico: Recovery excitement brings Mexican markets to life.\n\
 Henry Tricks\n\
-MEXICO CITY\n\
+Mexico City\n\
 Emerging evidence that Mexico's economy was back on the recovery track sent Mexican markets into a buzz of excitement Tuesday, with stocks closing at record highs and interest rates at 19-month lows.\n\
 \"Mexico has been trying to stage a recovery since the beginning of this year and it's always been getting ahead of itself in terms of fundamentals,\" said Matthew Hickman of Lehman Brothers in New York.\n\
 \"Now we're at the point where the fundamentals are with us. The history is now falling out of view.\"\n\
