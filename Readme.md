@@ -37,13 +37,17 @@ com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.prop
 
 Then install the wikipedia index:
 
-* download the zipped index files (warning: around 6GB!) at the following address: 
+* download the zipped index files (warning: total around 10 GB!) at the following address: 
 
-https://grobid.s3.amazonaws.com/nerd/nerddb1.zip
+https://grobid.s3.amazonaws.com/nerd/db-en1.zip
 
-https://grobid.s3.amazonaws.com/nerd/nerddb2.zip
+https://grobid.s3.amazonaws.com/nerd/db-en2.zip
 
-* unzip the two archives files under ```data/wikipedia/```. This will install three sub-directories ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/```, ```data/wikipedia/db-fr/``` and one file ```domains-en.db```. 
+https://grobid.s3.amazonaws.com/nerd/db-fr.zip
+
+https://grobid.s3.amazonaws.com/nerd/db-de.zip
+
+* unzip the two archives files under ```data/wikipedia/```. This will install three sub-directories ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/``` and ```data/wikipedia/db-fr/```. 
 
 Build the project, under the NERD projet repository:
 
