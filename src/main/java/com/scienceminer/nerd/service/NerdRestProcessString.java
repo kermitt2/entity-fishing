@@ -210,7 +210,6 @@ System.out.println("lang id:" + text);
 				LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 				Language lang = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(lang);
-				LOGGER.debug(">> identified language: " + lang.toString());
 			
 				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
@@ -218,6 +217,7 @@ System.out.println("lang id:" + text);
 					return response;
 				}
 				else {
+					LOGGER.debug(">> identified language: " + lang.toString());
 					String theLang = lang.getLang();
 					double theScore	= lang.getConf();
 					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
