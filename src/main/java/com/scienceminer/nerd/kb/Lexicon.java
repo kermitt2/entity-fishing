@@ -34,7 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Class for managing all the lexical resources.
+ * Class for managing all the lexical resources used by NERD.
  *
  * @author Patrice Lopez
  */

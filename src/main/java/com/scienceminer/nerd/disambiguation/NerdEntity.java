@@ -20,7 +20,7 @@ import org.wikipedia.miner.model.*;
 import com.fasterxml.jackson.core.io.*;
 
 /**
- * This class represents disambiguated entity, including conceptual and 
+ * This class represents disambiguated entity (the result), including conceptual and 
  * encyclopedic information, with the information necessary for a disambiguation. 
  * 
  * @author Patrice Lopez

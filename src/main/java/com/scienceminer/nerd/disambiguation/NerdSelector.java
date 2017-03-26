@@ -41,7 +41,9 @@ import smile.regression.*;
 import com.thoughtworks.xstream.*;
 
 /**
- * 
+ * A machine learning model for estimating if a candidate should be selected or not as the
+ * entity realized by a mention. This model is applied after the NerdRanker and make a 
+ * decision based on the ranked entities and the context. 
  */
 public class NerdSelector {
 	/**

@@ -9,6 +9,9 @@ import org.wikipedia.miner.util.*;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 
+/*
+ * Initialize LMDB and categories for a given pre-processed Wikipedia
+ */
 public class EnvironmentBuilder {
 
     public static void main(String args[]) throws Exception {
@@ -34,15 +37,6 @@ public class EnvironmentBuilder {
         System.out.println("Language is " + lang);
         
         WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-        
-        /*if (conf.getDataDirectory() == null || !conf.getDataDirectory().isDirectory()) {
-            System.out.println(conf.getDataDirectory());
-            System.out.println("'" + conf.getDataDirectory() + "' is not a valid data directory");
-            System.exit(1);
-        }*/
-
-        //KBEnvironment.buildEnvironment(conf, conf.getDataDirectory(), false);
-
         Wikipedia wikipedia = new Wikipedia(conf, false);
 
         // mapping wikipedia categories / domains and domain assigments for all pageid

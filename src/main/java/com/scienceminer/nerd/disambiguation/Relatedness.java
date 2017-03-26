@@ -22,7 +22,7 @@ import org.grobid.core.utilities.OffsetPosition;
 
 /**
  * Provide semantic relatedness measures, which is an adaptation of the original Relateness measure from 
- * Milne and Witten.
+ * Milne and Witten. 
  * 
  * @author Patrice Lopez
  * 

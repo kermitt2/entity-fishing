@@ -41,7 +41,7 @@ import smile.regression.*;
 import com.thoughtworks.xstream.*;
 
 /**
- * 
+ * A machine learning model for ranking a list of ambiguous candidates for a given mention.
  */
 public class NerdRanker {
 	/**

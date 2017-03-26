@@ -22,6 +22,11 @@ import org.wikipedia.miner.model.*;
 import org.wikipedia.miner.model.Page.PageType;
 
 /**
+ *
+ * Main class to use for applying a disambiguation on a NerdQuery, the NerdQuery containing
+ * all the input information (text, existing annotations, customization, languages) and the
+ * parameters for the disambiguation.
+ *
  * @author Patrice Lopez
  * 
  */
