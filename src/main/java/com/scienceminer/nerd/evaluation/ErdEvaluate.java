@@ -16,14 +16,14 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.ProcessText;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.utilities.NerdConfig;
 import org.grobid.core.data.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.wikipedia.miner.model.Wikipedia;
-import org.wikipedia.miner.util.WikipediaConfiguration;
-import org.wikipedia.miner.model.Article;
+import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.model.Article;
 
 /**
  * @author Patrice Lopez

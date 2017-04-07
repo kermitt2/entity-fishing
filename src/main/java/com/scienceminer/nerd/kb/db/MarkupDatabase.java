@@ -9,8 +9,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.apache.commons.io.input.CountingInputStream;
 import org.apache.hadoop.record.CsvRecordInput;
-import org.wikipedia.miner.util.WikipediaConfiguration;
-import org.wikipedia.miner.model.Page;
+import com.scienceminer.nerd.kb.model.Page;
 
 import java.io.BufferedInputStream;
 import java.io.InputStreamReader;

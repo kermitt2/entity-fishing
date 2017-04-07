@@ -17,14 +17,17 @@ import org.junit.Ignore;
 
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdPropertyKeys;
+import com.scienceminer.nerd.utilities.NerdConfig;
 
 import com.scienceminer.nerd.kb.db.*;
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.util.*;
+import com.scienceminer.nerd.kb.model.*;
 
 import org.xml.sax.SAXException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  *  @author Patrice Lopez
@@ -37,9 +40,11 @@ public class TestLookup {
 	public void setUp() {
 		try {
 			NerdProperties.getInstance();
-			WikipediaConfiguration conf = 
-					new WikipediaConfiguration(new File("data/wikipedia/wikipedia-en.xml"));
-        	wikipedia = new Wikipedia(conf, false); // no distinct thread for accessing data
+			//WikipediaConfiguration conf = 
+			//		new WikipediaConfiguration(new File("data/wikipedia/wikipedia-en.xml"));
+			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
+        	wikipedia = new Wikipedia(conf); 
         } catch(Exception e) {
         	e.printStackTrace();
         }

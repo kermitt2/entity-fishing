@@ -12,8 +12,7 @@ import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 
 import org.wikipedia.miner.db.struct.DbPage;
-import org.wikipedia.miner.model.Page.PageType;
-import org.wikipedia.miner.util.WikipediaConfiguration;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;

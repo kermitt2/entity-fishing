@@ -7,13 +7,13 @@ import java.util.regex.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdProperties;
+import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.exceptions.*;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
-
-import com.scienceminer.nerd.exceptions.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,11 @@ import org.slf4j.LoggerFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import org.wikipedia.miner.model.*;
+import com.scienceminer.nerd.kb.model.*;
 import org.wikipedia.miner.annotation.*;
-import org.wikipedia.miner.comparison.ArticleComparer;
 import org.wikipedia.miner.util.*;
 import org.wikipedia.miner.util.text.*;
-import org.wikipedia.miner.model.Label.Sense;
+import com.scienceminer.nerd.kb.model.Label.Sense;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.features.*;
@@ -54,8 +53,8 @@ public class NerdRanker {
 
 	private Wikipedia wikipedia = null;
 	private ArticleCleaner cleaner = null;
-	private TextProcessor tp = null;
-	private ArticleComparer comparer = null;
+	//private TextProcessor tp = null;
+	//private ArticleComparer comparer = null;
 
 	private double minSenseProbability = 0.0; 
 	private int maxLabelLength = 20; 
@@ -79,10 +78,11 @@ public class NerdRanker {
 		this.minLinkProbability = NerdEngine.minLinkProbability;
 		this.maxContextSize = NerdEngine.maxContextSize;
 		
-		WikipediaConfiguration conf = wikipedia.getConfig();
-		comparer = new ArticleComparer(wikipedia);
+		//WikipediaConfiguration conf = wikipedia.getConfig();
+		NerdConfig conf = wikipedia.getConfig();
+		//comparer = new ArticleComparer(wikipedia);
 		cleaner = new ArticleCleaner();
-		tp = conf.getDefaultTextProcessor();
+		//tp = conf.getDefaultTextProcessor();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -101,10 +101,11 @@ public class NerdRanker {
 		this.minLinkProbability = minLinkProbability;
 		this.maxContextSize = maxContextSize;
 		
-		WikipediaConfiguration conf = wikipedia.getConfig();
-		comparer = new ArticleComparer(wikipedia);
+		//WikipediaConfiguration conf = wikipedia.getConfig();
+		NerdConfig conf = wikipedia.getConfig();
+		//comparer = new ArticleComparer(wikipedia);
 		cleaner = new ArticleCleaner();
-		tp = conf.getDefaultTextProcessor();
+		//tp = conf.getDefaultTextProcessor();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -276,7 +277,7 @@ System.out.println(content);
 
 			head = linkMatcher.end();
 			
-			Label label = new Label(wikipedia.getEnvironment(), labelText, tp);
+			Label label = new Label(wikipedia.getEnvironment(), labelText);
 			Label.Sense[] senses = label.getSenses();
 			Article dest = wikipedia.getArticleByTitle(destText);
 			
@@ -506,7 +507,7 @@ System.out.println("get context for this content");
 
 			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);     // Get first char and capitalize
 
-			Label label = new Label(wikipedia.getEnvironment(), labelText, tp);
+			Label label = new Label(wikipedia.getEnvironment(), labelText);
 			Label.Sense[] senses = label.getSenses();
 			Article dest = wikipedia.getArticleByTitle(destText);
 

@@ -12,7 +12,6 @@ import org.apache.hadoop.record.CsvRecordInput;
 import org.wikipedia.miner.db.struct.DbLinkLocation;
 import org.wikipedia.miner.db.struct.DbLinkLocationList;
 import org.wikipedia.miner.db.struct.DbPageLinkCounts;
-import org.wikipedia.miner.util.WikipediaConfiguration;
 
 import com.scienceminer.nerd.utilities.*;
 

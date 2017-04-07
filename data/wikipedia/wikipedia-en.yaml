@@ -1,0 +1,35 @@
+# NERD configuration for the English Wikipedia
+
+# ISO 2-digit language code 
+langCode: en
+
+# path to the LMDB data
+dbDirectory: data/wikipedia/db-en
+
+# path to the compiled CSV wikipedia, infobox, wikidata files
+# note that these files are only used when creating the LMDB data,
+# if the LMDB data are already provided, these files will not be used
+dataDirectory: /mnt/data/wikipedia/latest/en/
+
+# path to the stopwords file to consider for the target language
+# the file is a text file with one stopword per line
+stopwords: data/stopwords/en.txt
+
+# path to the nerd ranker model  
+rankerModel: data/models/ranker-long-en.model
+
+# path to the nerd selector model
+selectorModel: data/models/selector-long-en.model
+
+# minimum of inverse probability (e.g. probability of a string to realize a given 
+# entity considering all the possible strings that can realize this entity)
+minLinkProbability: 0.005
+
+# minimum conditional probability of a sense for being an entity candidate 
+# (e.g. min probability of an entity to be realized by a given string, given all possible 
+# entities that can be realized by this string)
+minSenseProbability: 0.01
+
+# if true, use links out for computing relatedness between two entities in addition to
+# the links in (slower but more precise in principle)
+useLinkOut : true

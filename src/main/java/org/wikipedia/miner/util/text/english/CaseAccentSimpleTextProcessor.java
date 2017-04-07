@@ -33,7 +33,7 @@ import org.wikipedia.miner.util.text.TextProcessor;
   
     private final CaseFolder caseFolder=new CaseFolder();
     private final PlingStemmer stemmer= new PlingStemmer();
-    private final Pattern pattern =Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+    private final Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
     
     @Override
     public String processText(String string) {

@@ -19,9 +19,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang.ArrayUtils;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.util.*;
-import org.wikipedia.miner.db.*;
+import com.scienceminer.nerd.kb.model.*;
+//import org.wikipedia.miner.util.*;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -175,7 +174,7 @@ public class WikipediaDomainMap {
 
     private int[] createMapping(Article page) {
         List<Integer> theDomains = null;
-        org.wikipedia.miner.model.Category[] categories = page.getParentCategories();
+        com.scienceminer.nerd.kb.model.Category[] categories = page.getParentCategories();
 
 /*System.out.println("pageId:" + page.getId());
 for(int l=0; l<categories.length;l++){
@@ -210,7 +209,7 @@ System.out.print("\n");*/
                             theDomains.add(grispDomain);
                     }
                 }
-                org.wikipedia.miner.model.Category theCategory = (org.wikipedia.miner.model.Category)wikipedia.getPageById(category.intValue());
+                com.scienceminer.nerd.kb.model.Category theCategory = (com.scienceminer.nerd.kb.model.Category)wikipedia.getPageById(category.intValue());
                 categories = theCategory.getParentCategories();
                 for(int i=0;i<categories.length;i++) {
                     if (!nextCategories.contains(new Integer(categories[i].getId())))
@@ -297,7 +296,7 @@ System.out.print("\n");*/
             int categoryId = -1;
             if (st.hasMoreTokens()) {
                 category = st.nextToken();
-                org.wikipedia.miner.model.Category theCategory = wikipedia.getCategoryByTitle(category);
+                com.scienceminer.nerd.kb.model.Category theCategory = wikipedia.getCategoryByTitle(category);
                 if (theCategory == null)
                     System.out.println("Warning: " + category + " is not a category found in Wikipedia.");
                 else {

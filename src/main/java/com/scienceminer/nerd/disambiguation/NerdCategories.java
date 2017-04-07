@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*; 
 
-import org.wikipedia.miner.model.*;
+import com.scienceminer.nerd.kb.model.*;
 
 /**
  * Exploit disambiguation for processing categories, e.g. compute a category distribution 

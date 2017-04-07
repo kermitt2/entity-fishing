@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*; 
 
-import org.wikipedia.miner.model.*;
+import com.scienceminer.nerd.kb.model.*;
 
 import com.fasterxml.jackson.core.io.*;
 

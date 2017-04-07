@@ -11,11 +11,11 @@ import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 
-import org.wikipedia.miner.model.Wikipedia;
+import com.scienceminer.nerd.kb.model.Wikipedia;
 import org.wikipedia.miner.util.*;
 
-import weka.classifiers.Classifier;
-import weka.core.Utils;
+//import weka.classifiers.Classifier;
+//import weka.core.Utils;
 
 /**
  * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as 
@@ -66,16 +66,16 @@ public class WikipediaTrainer {
 		this.selector = new NerdSelector(this.wikipedia);
 
 		arffRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.arff");
-		arffSelector = new File(dataDir.getPath() + "/models-" + lang + "/selector.arff");
+		arffSelector = new File(dataDir.getPath() + "/" + lang + "/selector.arff");
 
 		modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
-		modelSelector = new File(dataDir.getPath() + "/models-" + lang + "/selector.model");
+		modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
 	}
 
 	private void gatherArticleSets() throws IOException{
-		int[] sizes = {5000,1000};
-		 //int[] sizes = {500,100,100};
-		 //int[] sizes = {5000,1000,1000};
+		//int[] sizes = {5000,1000};
+		int[] sizes = {500,100,100};
+		//int[] sizes = {5000,1000,1000};
 	    articleSets = new ArticleSetBuilder()
 	        .setMinOutLinks(20)
 	        .setMinInLinks(30)

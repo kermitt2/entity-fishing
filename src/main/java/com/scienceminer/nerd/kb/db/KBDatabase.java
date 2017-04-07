@@ -17,7 +17,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.log4j.Logger;
 import org.wikipedia.miner.db.struct.*;
-import org.wikipedia.miner.util.*;
+//import org.wikipedia.miner.util.*;
 
 import java.util.concurrent.*;
 import org.apache.hadoop.record.*;
@@ -175,7 +175,7 @@ public abstract class KBDatabase<K,V> {
 		this.type = type;
 		this.name = type.name();
 
-		this.envFilePath = env.getConfiguration().getDatabaseDirectory() + "/" + type.toString();
+		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + type.toString();
 		//System.out.println("db path: " + this.envFilePath);
 
 		this.environment = new Env();
@@ -205,7 +205,7 @@ public abstract class KBDatabase<K,V> {
 		this.type = type;
 		this.name = name;
 
-		this.envFilePath = env.getConfiguration().getDatabaseDirectory() + "/" + name;
+		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + name;
 		this.environment = new Env();
     	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
     	File thePath = new File(this.envFilePath);
@@ -305,10 +305,10 @@ public abstract class KBDatabase<K,V> {
 	 * @param conf a configuration containing options for how the database is to be cached
 	 * @return the value that should be cached along with the given key, or null if it should be excluded
 	 */
-	public V filterCacheEntry(KBEntry<K,V> e, WikipediaConfiguration conf) {
+	/*public V filterCacheEntry(KBEntry<K,V> e, NerdConf conf) {
 		// default, no filter
 		return e.getValue();
-	}
+	}*/
 
 	/**
 	 * Decides whether an entry should be indexed or not.
@@ -357,7 +357,7 @@ public abstract class KBDatabase<K,V> {
 	 * @throws IOException 
 	 * @throws DatabaseException 
 	 */
-	public void caching(WikipediaConfiguration conf) {
+	/*public void caching(NerdConf conf) {
 		cache = new ConcurrentHashMap<K,V>();
 
 		KBIterator iter = getIterator();
@@ -382,7 +382,7 @@ public abstract class KBDatabase<K,V> {
 
 		iter.close();
 		isCached = true;
-	}
+	}*/
 
 	public boolean isLoaded() {
 		return isLoaded;

@@ -108,6 +108,7 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 			try {
 				KBEntry<Integer,Record> entry = deserialiseCsvRecord(cri);
 				if ( (entry != null) && (filterEntry(entry) != null) ) {
+				//if (entry != null) {
 					try {
 						db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), Utilities.serialize(entry.getValue()));
 						nbToAdd++;

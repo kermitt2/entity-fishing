@@ -5,8 +5,8 @@ import java.math.BigInteger;
 
 import org.wikipedia.miner.db.struct.DbPage;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import com.scienceminer.nerd.utilities.*;
 

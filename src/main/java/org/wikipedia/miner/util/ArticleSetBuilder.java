@@ -3,8 +3,8 @@ package org.wikipedia.miner.util;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
-import org.wikipedia.miner.model.Article;
-import org.wikipedia.miner.model.Wikipedia;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Wikipedia;
 
 public class ArticleSetBuilder {
 	

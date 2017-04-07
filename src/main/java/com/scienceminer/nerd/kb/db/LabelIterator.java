@@ -5,8 +5,7 @@ import java.util.NoSuchElementException;
 import java.math.BigInteger;
 
 import org.wikipedia.miner.db.struct.DbLabel;
-import org.wikipedia.miner.model.Label;
-import org.wikipedia.miner.util.text.TextProcessor;
+import com.scienceminer.nerd.kb.model.Label;
 
 import com.scienceminer.nerd.utilities.*;
 
@@ -16,7 +15,6 @@ import static org.fusesource.lmdbjni.Constants.*;
 public class LabelIterator implements Iterator<Label> {
 
     private KBEnvironment env = null;
-    private TextProcessor tp = null;
     private KBIterator iter = null;
 
     /**
@@ -24,10 +22,9 @@ public class LabelIterator implements Iterator<Label> {
      *
      * @param database an active (connected) Wikipedia database.
      */
-    public LabelIterator(KBEnvironment env, TextProcessor tp) {
+    public LabelIterator(KBEnvironment env) {
         this.env = env;
-        this.tp = tp;
-        iter = env.getDbLabel(tp).getIterator();
+        iter = env.getDbLabel().getIterator();
     }
 
     public boolean hasNext() {
@@ -57,7 +54,7 @@ public class LabelIterator implements Iterator<Label> {
         if (e == null) {
             return null;
         } else {
-            return Label.createLabel(env, e.getKey(), e.getValue(), tp);
+            return Label.createLabel(env, e.getKey(), e.getValue());
         }
     }
 

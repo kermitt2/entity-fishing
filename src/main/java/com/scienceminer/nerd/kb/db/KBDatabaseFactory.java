@@ -13,10 +13,13 @@ import org.apache.log4j.Logger;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
+
 import org.wikipedia.miner.db.struct.*;
-import org.wikipedia.miner.model.Page.PageType;
-import org.wikipedia.miner.model.Page;
-import org.wikipedia.miner.util.*;
+
+import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.Page;
+
+//import org.wikipedia.miner.util.*;
 import org.wikipedia.miner.util.text.*;
 
 import org.fusesource.lmdbjni.*;
@@ -93,10 +96,10 @@ public class KBDatabaseFactory {
 					return null;
 			}
 
-			@Override
+			/*@Override
 			public DbPage filterCacheEntry(
 					KBEntry<Integer, DbPage> e, 
-					WikipediaConfiguration conf
+					NerdConf conf
 			) {
 				PageType pageType = PageType.values()[e.getValue().getType()];
 				//int conf.getMinLinksIn() = conf.getMinLinksIn();
@@ -107,10 +110,10 @@ public class KBDatabaseFactory {
 					//											(DbLinkLocationList)Utilities.deserialize(e.getValue()));
 					KBDatabase<Integer,DbLinkLocationList> dbLinkLocationList = env.getDbPageLinkIn();
 					DbLinkLocationList list = (DbLinkLocationList)dbLinkLocationList.retrieve(e.getKey());
-					/*if (list == null)
-						System.out.println("warning DbLinkLocationList null for id " + e.getKey());
-					if (list != null)
-						System.out.println("DbLinkLocationList null for id " + e.getKey() + " has " + list.getLinkLocations().size() + " links in");*/
+					//if (list == null)
+					//	System.out.println("warning DbLinkLocationList null for id " + e.getKey());
+					//if (list != null)
+					//	System.out.println("DbLinkLocationList null for id " + e.getKey() + " has " + list.getLinkLocations().size() + " links in");
 					if ((list != null) && (list.getLinkLocations().size() > conf.getMinLinksIn()))
 						valid = true;
 				} catch(Exception exp) {
@@ -124,9 +127,9 @@ public class KBDatabaseFactory {
 					return e.getValue();
 				else
 					return null;
-			}
+			}*/
 
-			@Override
+			/*@Override
 			public void caching(WikipediaConfiguration conf) {
 				System.out.println("Checking cache for page db");
 				// check if the cache is already present in the data files
@@ -214,7 +217,7 @@ public class KBDatabaseFactory {
 					isCached = true;
 				}
 				System.out.println("Cache for page db ready");
-			}
+			}*/
 		};
 	}
 
@@ -260,19 +263,6 @@ public class KBDatabaseFactory {
 	 */
 	public LabelDatabase buildLabelDatabase() {
 		return new LabelDatabase(env);
-	}
-
-	/**
-	 * Returns a database associating String labels with the statistics about the articles (senses) these labels could refer to.
-	 * 
-	 * @param tp a text processor that should be applied to string labels before indexing and searching
-	 * @return a database associating String labels with the statistics about the articles (senses) these labels could refer to 
-	 */
-	public LabelDatabase buildLabelDatabase(TextProcessor tp) {
-		if (tp == null) 
-			throw new IllegalArgumentException("text processor must not be null");
-
-		return new LabelDatabase(env, tp);
 	}
 
 	/**

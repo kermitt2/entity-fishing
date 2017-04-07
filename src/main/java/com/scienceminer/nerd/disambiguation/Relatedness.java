@@ -8,16 +8,19 @@ import java.util.regex.Pattern;
 
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.TextUtilities;
+import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.kb.Lexicon;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.util.*;
-import org.wikipedia.miner.comparison.ArticleComparer;
-import org.wikipedia.miner.annotation.*;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Wikipedia.LinkDirection;
+//import org.wikipedia.miner.util.*;
+//import org.wikipedia.miner.comparison.ArticleComparer;
+//import org.wikipedia.miner.annotation.*;
 import org.wikipedia.miner.util.text.*;
+
 import org.grobid.core.utilities.OffsetPosition;
 
 /**
@@ -38,12 +41,12 @@ public class Relatedness {
 	// all the maps use the language code as a key
 	private Map<String, Wikipedia> wikipedias = null;
 	//private Map<String, NerdRanker> disambiguators = null;
-	private Map<String, ArticleComparer> articleComparers = null;
+	//private Map<String, ArticleComparer> articleComparers = null;
 	private Map<String, ConcurrentMap<Long,Double>> caches = null;
 
 	private long comparisonsRequested = 0;
 	private long comparisonsCalculated = 0;
-		
+
 	public static Relatedness getInstance() {
 	    if (instance == null) {
 			getNewInstance();	        
@@ -66,7 +69,7 @@ public class Relatedness {
 		wikipedias = Lexicon.getInstance().getWikipediaConfs();
 		caches = new HashMap<String, ConcurrentMap<Long,Double>>();
 		//disambiguators = new HashMap<String, NerdRanker>();
-		articleComparers = new HashMap<String, ArticleComparer>();
+		//articleComparers = new HashMap<String, ArticleComparer>();
 	}
 
 	/*public Map<String, NerdRanker> getRankers() {
@@ -115,9 +118,8 @@ public class Relatedness {
 					currentRelatedness = getRelatedness(article, contextArticle, lang);
 				} 
 				catch (Exception e) {
-					System.out.println("Error computing semantic relatedness for "
-							+ article + " and " + contextArticle);
-					e.printStackTrace();
+					LOGGER.error("Error computing semantic relatedness for "
+							+ article + " and " + contextArticle, e);
 				}
 				totalRelatedness += currentRelatedness;
 				totalComparisons++;
@@ -146,13 +148,7 @@ public class Relatedness {
 			caches.put(lang, cache);
 		}
 		if (!cache.containsKey(new Long(key))) {
-			ArticleComparer articleComparer = articleComparers.get(lang);
-			if (articleComparer == null) {
-				Wikipedia wikipedia = wikipedias.get(lang);
-				articleComparer = new ArticleComparer(wikipedia);
-				articleComparers.put(lang, articleComparer);
-			}
-			relatedness = articleComparer.getRelatedness(art1, art2);		
+			relatedness = getRelatednessWithoutCache(art1, art2, lang);		
 			cache.put(new Long(key), new Double(relatedness));
 			
 			comparisonsCalculated++;
@@ -161,6 +157,185 @@ public class Relatedness {
 		}
 //System.out.println("obtained relatedness: " + relatedness);
 		return relatedness;
+	}
+
+	public double getRelatednessWithoutCache(Article artA, Article artB, String lang) throws Exception {
+		if (artA.getId() == artB.getId()) 
+			return 1.0;
+
+		Wikipedia wikipedia = wikipedias.get(lang);
+		NerdConfig conf = wikipedia.getConfig();
+
+		EntityPairRelatedness cmp = getComparison(artA, artB, wikipedia);
+		if (cmp == null)
+			return 0.0;
+		
+		if ( (cmp.getInLinkIntersectionProportion() == 0.0) && (cmp.getOutLinkIntersectionProportion() == 0.0) )
+			return 0.0;
+		
+		//System.out.println("gi " + cmp.getInLinkmilneWittenMeasure());
+		//System.out.println("go " + cmp.getOutLinkmilneWittenMeasure());
+		int count = 0;
+		double total = 0.0;
+		
+		count++;
+		total = total + cmp.getInLinkMilneWittenMeasure();
+
+		if (conf.getUseLinkOut()) {	
+			count++;
+			total = total + cmp.getOutLinkMilneWittenMeasure();
+		}
+
+		if (count == 0)
+			return 0.0;
+		else
+			return total/count;
+	}
+
+	public EntityPairRelatedness getComparison(Article artA, Article artB, Wikipedia wikipedia) {
+		EntityPairRelatedness cmp = new EntityPairRelatedness(artA, artB);
+		NerdConfig conf = wikipedia.getConfig();
+
+		cmp = setPageLinkFeatures(cmp, LinkDirection.In, wikipedia);
+
+		if (conf.getUseLinkOut()) 	
+			cmp = setPageLinkFeatures(cmp, LinkDirection.Out, wikipedia);
+
+		if (!cmp.inLinkFeaturesSet() && !cmp.outLinkFeaturesSet())
+			return null;
+
+		return cmp;
+	}
+
+	// following Milne & Witten relatedness measurement as implemented in WikipediaMiner
+	private EntityPairRelatedness setPageLinkFeatures(EntityPairRelatedness cmp, LinkDirection dir, Wikipedia wikipedia) {
+		if (cmp.getArticleA().getId() == cmp.getArticleB().getId()) {
+			// nothing to do
+			return cmp;
+		}
+
+		ArrayList<Integer> linksA = wikipedia.getLinks(cmp.getArticleA().getId(), dir);
+		ArrayList<Integer> linksB = wikipedia.getLinks(cmp.getArticleB().getId(), dir);
+
+		//we can't do anything if there are no links
+		if (linksA.isEmpty() || linksB.isEmpty()) 
+			return cmp;
+		
+		NerdConfig conf = wikipedia.getConfig();
+//System.out.println("#linksA: " + linksA.size() + " / " + "#linksB: " + linksB.size());
+
+		int intersection = 0;
+		//int sentenceIntersection = 0;
+		int union = 0;
+
+		int indexA = 0;
+		int indexB = 0;
+
+		List<Double> vectA = new ArrayList<Double>();
+		List<Double> vectB = new ArrayList<Double>();
+
+		//get denominators for link frequency
+		//Integer linksFromSourceA = 0;
+		//Integer linksFromSourceB = 0;
+		/*if (conf.getUseLinkCounts()) {
+			if (dir == LinkDirection.Out) {
+				linksFromSourceA = cmp.getArticleA().getTotalLinksOutCount();
+				linksFromSourceB = cmp.getArticleB().getTotalLinksOutCount();
+			} else {
+				linksFromSourceA = cmp.getArticleA().getTotalLinksInCount();
+				linksFromSourceB = cmp.getArticleB().getTotalLinksInCount();
+			}
+		}*/
+
+		/*int maxA = linksA.size();
+		if (maxA>10000)
+			maxA=10000;
+		int maxB = linksB.size();
+		if (maxB>10000)
+			maxB=10000;*/
+		
+		while (indexA < linksA.size() || indexB < linksB.size()) {
+		//while (indexA < maxA || indexB < maxB) {	
+
+			//identify which links to use (A, B, or both)
+
+			boolean useA = false;
+			boolean useB = false;
+			boolean mutual = false;
+
+			Integer linkA = null;
+			Integer linkB = null;
+			//Article linkArt;
+
+			if (indexA < linksA.size())
+				linkA = linksA.get(indexA);
+
+			if (indexB < linksB.size())
+				linkB = linksB.get(indexB);
+
+			if ( (linkA != null) && (linkB != null) && (linkA.equals(linkB)) ) {
+				useA = true;
+				useB = true;
+				intersection ++;
+			} else {
+				if (linkA != null && (linkB == null || linkA < linkB)) {
+					useA = true;
+					//linkArt = new Article(wikipedia.getEnvironment(), linkA);
+
+					if (linkA.equals(cmp.getArticleB().getId())) {
+						intersection++;
+						mutual = true;
+					}
+
+				} else {
+					useB = true;
+
+					if (linkB.equals(cmp.getArticleA().getId())) {
+						intersection++;
+						mutual = true;
+					}
+				}
+			}
+			union ++;
+
+			if (useA)
+				indexA++;
+			if (useB)
+				indexB++;
+		}
+
+		// this is the famous Milne & Witten relatedness measure
+		double milneWittenMeasure = 1.0;
+		if (intersection == 0) {
+			milneWittenMeasure = 1.0;
+		} else {
+			double a = Math.log(linksA.size());
+			double b = Math.log(linksB.size());
+			double ab = Math.log(intersection);
+
+			double m = Math.log(wikipedia.getArticleCount());
+
+			milneWittenMeasure = (Math.max(a, b) - ab) / (m - Math.min(a, b));
+		}
+		
+		milneWittenMeasure = EntityPairRelatedness.normalizeMilneWittenMeasure(milneWittenMeasure);
+
+		double intersectionProportion;
+		if (union == 0)
+			intersectionProportion = 0;
+		else
+			intersectionProportion = (double)intersection/union;
+
+		//System.out.println("Intersection: " + intersection + "\tUnion: " + union);
+		//System.out.println("Relatedness:" + df.format(milneWittenMeasure));
+		//System.out.println();
+
+		if (dir == LinkDirection.Out)
+			cmp.setOutLinkFeatures(milneWittenMeasure, union, intersectionProportion);
+		else
+			cmp.setInLinkFeatures(milneWittenMeasure, union, intersectionProportion);
+
+		return cmp;
 	}
 
 	/**
@@ -199,8 +374,8 @@ public class Relatedness {
 				if (bestSense == -1) {
 					bestArticle = wikipedia.getArticleByTitle(candidate.getEntity().getRawName());
 					if (bestArticle == null) {
-						TextProcessor tp = new org.wikipedia.miner.util.text.CaseFolder();
-						bestArticle = wikipedia.getMostLikelyArticle(candidate.getEntity().getRawName(), tp);
+						//TextProcessor tp = new org.wikipedia.miner.util.text.CaseFolder();
+						bestArticle = wikipedia.getMostLikelyArticle(candidate.getEntity().getRawName());
 					}
 						
 					if (bestArticle != null) {

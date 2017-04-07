@@ -30,8 +30,8 @@ import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 /**
  * 
@@ -106,9 +106,9 @@ public class NerdRestKB {
 						entity.setWikipediaExternalRef(identifier);
 
 						// categories
-						org.wikipedia.miner.model.Category[] parentCategories = article.getParentCategories();
+						com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
 						if ( (parentCategories != null) && (parentCategories.length > 0) ) {
-							for(org.wikipedia.miner.model.Category theCategory : parentCategories) {
+							for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
 								// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
 								if (theCategory == null) {
 									LOGGER.warn("Invalid category page for article: " + identifier);
@@ -192,7 +192,7 @@ public class NerdRestKB {
 				StringBuilder jsonBuilder = new StringBuilder();
 				jsonBuilder.append("{ \"term\": \"" + term + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
 				
-				Label lbl = new Label(wikipedia.getEnvironment(), term, null);
+				Label lbl = new Label(wikipedia.getEnvironment(), term);
 				if (lbl.exists()) {
 					Label.Sense[] senses = lbl.getSenses();
 					if ((senses != null) && (senses.length > 0)) {
@@ -215,9 +215,9 @@ public class NerdRestKB {
 							
 							boolean invalid = false;
 //System.out.println("check categories for " + sense.getId());							
-							org.wikipedia.miner.model.Category[] parentCategories = sense.getParentCategories();
+							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
 							if ( (parentCategories != null) && (parentCategories.length > 0) ) {
-								for(org.wikipedia.miner.model.Category theCategory : parentCategories) {
+								for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
 									// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
 									if (theCategory == null) {
 										LOGGER.warn("Invalid category page for sense: " + title);

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.regex.*;
 
 import org.wikipedia.miner.annotation.preprocessing.PreprocessedDocument.RegionTag;
-import org.wikipedia.miner.model.*;
+import com.scienceminer.nerd.kb.model.*;
 
 /**
  * This class prepares documents in MediaWiki markup format so that they can be tagged by a document tagger.

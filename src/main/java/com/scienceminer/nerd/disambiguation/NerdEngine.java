@@ -17,9 +17,8 @@ import com.scienceminer.nerd.service.NerdQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.wikipedia.miner.util.WikipediaConfiguration;
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 /**
  *
@@ -261,7 +260,7 @@ for(NerdCandidate cand : cands) {
 
 				// we go only with Wikipedia for the moment
 //System.out.println(entity.getRawName());
-				Label lbl = new Label(wikipedia.getEnvironment(), entity.getRawName(), null);
+				Label lbl = new Label(wikipedia.getEnvironment(), entity.getRawName());
 				List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
 
 				if (!lbl.exists()) {
@@ -302,9 +301,9 @@ for(NerdCandidate cand : cands) {
 							candidate.setLabel(lbl);
 							boolean invalid = false;
 //System.out.println("check categories for " + sense.getId());							
-							org.wikipedia.miner.model.Category[] parentCategories = sense.getParentCategories();
+							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
 							if ( (parentCategories != null) && (parentCategories.length > 0) ) {
-								for(org.wikipedia.miner.model.Category theCategory : parentCategories) {
+								for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
 									// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
 									if (theCategory == null) {
 										LOGGER.warn("Invalid category page for sense: " + title);
@@ -1206,7 +1205,7 @@ System.out.println("Merging...");
 			entity.setRawName(term.getTerm());
 			
 			// we go only with Wikipedia for the moment
-			Label lbl = new Label(wikipedia.getEnvironment(), term.getTerm(), null) ;
+			Label lbl = new Label(wikipedia.getEnvironment(), term.getTerm()) ;
 			if (!lbl.exists()) {
 				//System.out.println("No concepts found for '" + entity.getRawName() + "'");
 				//if (strict)
@@ -1227,7 +1226,7 @@ System.out.println("Merging...");
 					candidate.setPreferredTerm(sense.getTitle());
 					candidate.setLang(lang);
 					candidate.setLabel(lbl);
-					for(org.wikipedia.miner.model.Category theCategory : sense.getParentCategories()) {
+					for(com.scienceminer.nerd.kb.model.Category theCategory : sense.getParentCategories()) {
 						candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
 					}
 					

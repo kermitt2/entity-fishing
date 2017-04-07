@@ -12,8 +12,8 @@ import java.util.*;
 import java.text.*;
 import java.text.*;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.util.*;
+import com.scienceminer.nerd.kb.model.*;
+//import org.wikipedia.miner.util.*;
 
 import com.fasterxml.jackson.core.io.*;
 

@@ -12,12 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import org.apache.hadoop.record.CsvRecordInput;
 
-import org.wikipedia.miner.util.WikipediaConfiguration;
-
 import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 
-import org.wikipedia.miner.util.*;
+//import org.wikipedia.miner.util.*;
 
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.*;

@@ -15,9 +15,9 @@ import org.apache.log4j.Logger;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import org.wikipedia.miner.db.struct.*; 
-import org.wikipedia.miner.model.Wikipedia;
-import org.wikipedia.miner.util.WikipediaConfiguration;
-import org.wikipedia.miner.util.text.TextProcessor;
+import com.scienceminer.nerd.kb.model.Wikipedia;
+//import org.wikipedia.miner.util.WikipediaConfiguration;
+//import org.wikipedia.miner.util.text.TextProcessor;
 
 import org.apache.hadoop.record.*;
 
@@ -70,8 +70,8 @@ public class KBEnvironment  {
 		rootCategoryId 
 	}
 	
-	private WikipediaConfiguration conf = null;
-	private PreparationThread prepThread = null;
+	private NerdConfig conf = null;
+	//private PreparationThread prepThread = null;
 	private KBDatabase<Integer, DbPage> dbPage = null;
 	private LabelDatabase dbLabel = null;
 	private HashMap<String, LabelDatabase> processedLabelDbs = null;
@@ -103,7 +103,7 @@ public class KBEnvironment  {
 	 * 
 	 * @return the configuration of this environment
 	 */
-	public WikipediaConfiguration getConfiguration() {
+	public NerdConfig getConfiguration() {
 		return conf;
 	}
 	
@@ -119,13 +119,12 @@ public class KBEnvironment  {
 	/**
 	 * Returns the {@link DatabaseType#label} database for the given text processor
 	 * 
-	 * @param textProcessor the text processor that should be applied to labels before indexing or searching (or null if the original label database is required)
 	 * @return see {@link DatabaseType#label} 
 	 */
-	public LabelDatabase getDbLabel(TextProcessor textProcessor) {
-		if (textProcessor == null)
+	public LabelDatabase getDbLabel() {
+		//if (textProcessor == null)
 			return dbLabel;
-		else {
+		/*else {
 			LabelDatabase db = processedLabelDbs.get(textProcessor.getName());
 			
 			if (db == null) {
@@ -134,7 +133,7 @@ public class KBEnvironment  {
 				processedLabelDbs.put(textProcessor.getName(), db);
 			}
 			return db;
-		}
+		}*/
 	}
 	
 	/**
@@ -303,7 +302,7 @@ public class KBEnvironment  {
 		return dbTranslations;
 	}
 	
-	public KBEnvironment(WikipediaConfiguration conf) {
+	public KBEnvironment(NerdConfig conf) {
 		this.conf = conf;
 		initDatabases();
 	}
@@ -377,10 +376,10 @@ public class KBEnvironment  {
 	/**
 	 * @return true if the preparation work has been completed, otherwise false
 	 */
-	public boolean isReady() {
+	/*public boolean isReady() {
 		return prepThread.isCompleted();
 		
-	}
+	}*/
 
 	/**
 	 * @param sn the name of the desired statistic
@@ -394,13 +393,13 @@ public class KBEnvironment  {
 	 * @param tp a text processor
 	 * @return true if the environment is ready to be searched for labels using the given text processor, otherwise false 
 	 */
-	public boolean isPreparedFor(TextProcessor tp) {
+	/*public boolean isPreparedFor(TextProcessor tp) {
 		//LabelDatabase db = getDbLabel(tp);
 		if (dbLabel == null)
 			return false;
 		else
 			return dbLabel.isLoaded();	
-	}
+	}*/
 
 	public ConcurrentMap getValidArticleIds(int minLinkCount) {
 		ConcurrentMap pageIds = new ConcurrentHashMap();
@@ -432,13 +431,13 @@ public class KBEnvironment  {
 		return databasesByType.get(dbType);
 	}
 	
-	private class PreparationThread extends Thread {
-		WikipediaConfiguration conf = null;
+	/*private class PreparationThread extends Thread {
+		NerdConfig conf = null;
 		
 		private boolean completed = false;
 		private Exception failureCause = null;
 		
-		PreparationThread(WikipediaConfiguration conf) {
+		PreparationThread(NerdConfig conf) {
 			this.conf = conf;
 		}
 		
@@ -468,15 +467,15 @@ public class KBEnvironment  {
 
 			completed = true;
 		}
-	}
+	}*/
 	
-	public Exception getCachingFailureReason() {
+	/*public Exception getCachingFailureReason() {
 		
 		if (this.prepThread == null)
 			return null;
 	
 		return this.prepThread.failureCause;
-	}
+	}*/
 	
 	/**
 	 * Tidily closes the environment, and all databases within it. This should always be called once you are finished with the environment.
@@ -506,10 +505,12 @@ public class KBEnvironment  {
 	 * @throws IOException if any of the required files cannot be read
 	 * @throws XMLStreamException if the XML dump of wikipedia cannot be parsed
 	 */
-	public void buildEnvironment(WikipediaConfiguration conf, File dataDirectory, boolean overwrite) throws IOException, XMLStreamException, CompressorException {
+	public void buildEnvironment(NerdConfig conf, boolean overwrite) throws IOException, XMLStreamException, CompressorException {
 		System.out.println("building Environment for language " + conf.getLangCode());	
 		//check all files exist and are readable before doing anything
 		
+		File dataDirectory = new File(conf.getDataDirectory());
+
 		File statistics = getDataFile(dataDirectory, "stats.csv");
 		File page = getDataFile(dataDirectory, "page.csv");
 		File label = getDataFile(dataDirectory, "label.csv");
@@ -533,8 +534,9 @@ public class KBEnvironment  {
 		File markup = getMarkupDataFile(dataDirectory);
 		
 		//now load databases
-		if (!conf.getDatabaseDirectory().exists())
-			conf.getDatabaseDirectory().mkdirs();
+		File dbDirectory = new File(conf.getDbDirectory());
+		if (!dbDirectory.exists())
+			dbDirectory.mkdirs();
 		
 		//KBEnvironment env = new KBEnvironment(conf);
 		/*boolean mustGatherIds = conf.getMinLinksIn() > 0 && conf.getArticlesOfInterest() == null;			
@@ -640,7 +642,7 @@ public class KBEnvironment  {
 	 * @param passes the number of the number of passes to break the task into (more = slower, but less memory required)
 	 * @throws IOException if the temporary directory is not writable
 	 */
-	public static void prepareTextProcessor(TextProcessor tp, WikipediaConfiguration conf, File tempDirectory, boolean overwrite, int passes) throws IOException {
+	/*public static void prepareTextProcessor(TextProcessor tp, NerdConfig conf, File tempDirectory, boolean overwrite, int passes) throws IOException {
 		if (tp == null)
 			return;
 		
@@ -652,7 +654,7 @@ public class KBEnvironment  {
 		LabelDatabase db = env.getDbLabel(tp);
 		db.prepare(tempDirectory, passes);
 		env.close();
-	}
+	}*/
 	
 	private static File getDataFile(File dataDirectory, String fileName) throws IOException {
 		File file = new File(dataDirectory + File.separator + fileName);

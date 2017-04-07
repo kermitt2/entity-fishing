@@ -13,8 +13,7 @@ import org.apache.log4j.Logger;
 
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.db.struct.DbSenseForLabel;
-import org.wikipedia.miner.util.WikipediaConfiguration;
-import org.wikipedia.miner.util.text.TextProcessor;
+//import org.wikipedia.miner.util.text.TextProcessor;
 
 import com.scienceminer.nerd.utilities.*;
 
@@ -26,7 +25,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  */
 public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 
-	private TextProcessor textProcessor = null;
+	//private TextProcessor textProcessor = null;
 
 	/**
 	 * Creates or connects to a database, whose name and type will be {@link KBDatabase.DatabaseType#label}. 
@@ -36,29 +35,16 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 	 */
 	public LabelDatabase(KBEnvironment env) {
 		super(env, DatabaseType.label);
-		textProcessor = null;
-	}
-
-	/**
-	 * Creates or connects to a database, whose type will be {@link KBDatabase.DatabaseType#label} and name will be 
-	 * {@link KBDatabase.DatabaseType#label} concatenated with {@link TextProcessor#getName()}. 
-	 * This will index label statistics according to their texts, after processing with the given {@link TextProcessor}
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param tp a text processor to apply to texts before indexing
-	 */
-	public LabelDatabase(KBEnvironment env, TextProcessor tp) {
-		super(env, DatabaseType.label, "label" + tp.getName());
-		textProcessor = tp;
+		//textProcessor = null;
 	}
 
 	/**
 	 * Returns the text processor used to modify texts before they are used to index documents (may be null).
 	 * @return the text processor used to modify texts before they are used to index documents (may be null).
 	 */
-	public TextProcessor getTextProcessor() {
+	/*public TextProcessor getTextProcessor() {
 		return textProcessor;
-	}
+	}*/
 
 	/**
 	 * Retrieves the label statistics associated with the given text key. 
@@ -69,10 +55,10 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 	 */
 	@Override
 	public DbLabel retrieve(String key) {
-		if (textProcessor == null)
+		//if (textProcessor == null)
 			return super.retrieve(key);
-		else
-			return super.retrieve(textProcessor.processText(key));
+		//else
+			//return super.retrieve(textProcessor.processText(key));
 	}
 
 	@Override
@@ -96,7 +82,7 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 	 * @param passes the number of passes to break the task into (more = slower, but less memory required) 
 	 * @throws IOException if the temporary directory is not writable. 
 	 */
-	public void prepare(File tempDir, int passes) throws IOException {
+	/*public void prepare(File tempDir, int passes) throws IOException {
 		if (textProcessor == null) 
 			return;
 
@@ -256,9 +242,9 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 			tempFile.delete();
 
 		isLoaded = true;
-	}
+	}*/
 
-	private DbLabel mergeLabels(DbLabel lblA, DbLabel lblB) {
+	/*private DbLabel mergeLabels(DbLabel lblA, DbLabel lblB) {
 		ConcurrentMap<Integer,DbSenseForLabel> senseHash = new ConcurrentHashMap<Integer,DbSenseForLabel>();
 		if (lblA.getSenses() != null) {
 			for (DbSenseForLabel s:lblA.getSenses()) 
@@ -312,6 +298,6 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 		mergedLabel.setSenses(mergedSenses);
 
 		return mergedLabel;
-	}
+	}*/
 
 }

@@ -4,10 +4,17 @@ import java.io.File;
 
 import com.scienceminer.nerd.kb.db.*;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.util.*;
+import com.scienceminer.nerd.kb.model.*;
+//import org.wikipedia.miner.util.*;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+import com.scienceminer.nerd.utilities.NerdConfig;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /*
  * Initialize LMDB and categories for a given pre-processed Wikipedia
@@ -36,13 +43,15 @@ public class EnvironmentBuilder {
         String lang = args[0].substring(ind-2,ind);
         System.out.println("Language is " + lang);
         
-        WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-        Wikipedia wikipedia = new Wikipedia(conf, false);
+        //WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        NerdConfig conf = mapper.readValue(confFile, NerdConfig.class);
+        Wikipedia wikipedia = new Wikipedia(conf);
 
         // mapping wikipedia categories / domains and domain assigments for all pageid
         if (lang.equals("en")) {
             System.out.println("Generating domain for all Wikipedia articles...");
-            WikipediaDomainMap wikipediaDomainMap = new WikipediaDomainMap("en", conf.getDatabaseDirectory().getPath());
+            WikipediaDomainMap wikipediaDomainMap = new WikipediaDomainMap("en", conf.getDbDirectory());
             try {
                 wikipediaDomainMap.setWikipedia(wikipedia);
                 wikipediaDomainMap.setLang(lang);

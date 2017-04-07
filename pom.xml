@@ -372,8 +372,8 @@
             </build>
         </profile>
 		
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_compare_en -->
+		<!-- mvn compile exec:exec -Ptrain_compare_en -->
+        <!--profile>
             <id>train_compare_en</id>
             <activation>
                 <property>
@@ -401,10 +401,10 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile-->
 		
-        <profile>
-        	<!-- mvn compile exec:exec -Ptrain_compare_de -->
+		<!-- mvn compile exec:exec -Ptrain_compare_de -->
+        <!--profile>
             <id>train_compare_de</id>
             <activation>
                 <property>
@@ -432,10 +432,10 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile-->
 		
-        <profile>
-        	<!-- mvn compile exec:exec -Ptrain_compare_fr -->
+		<!-- mvn compile exec:exec -Ptrain_compare_fr -->
+        <!--profile>
             <id>train_compare_fr</id>
             <activation>
                 <property>
@@ -463,7 +463,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile-->
 	</profiles>
 	
 	<repositories>
@@ -524,6 +524,11 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.7.2</version>
         </dependency>
+        <dependency>
+        	<groupId>com.fasterxml.jackson.dataformat</groupId>
+        	<artifactId>jackson-dataformat-yaml</artifactId>
+        	<version>2.7.2</version>
+	    </dependency>
 
 		<dependency>
             <groupId>junit</groupId>
@@ -713,7 +718,7 @@
 		</dependency>
 
 		<!-- to be finished: remove entirely weka -->
-		<dependency>
+		<!--dependency>
 			<groupId>org.dmilne</groupId>
 			<artifactId>weka-wrapper</artifactId>
 			<version>0.0.1</version>
@@ -722,7 +727,7 @@
 			<groupId>weka.wrapper</groupId>
 			<artifactId>weka-wrapper</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency-->
 	</dependencies>
 		
 </project>

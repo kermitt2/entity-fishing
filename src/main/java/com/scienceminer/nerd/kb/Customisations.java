@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
-import org.wikipedia.miner.model.*;
+import com.scienceminer.nerd.kb.model.*;
 
 /**
  * Class for managing the NERD customisation which are contexts for particular domains.

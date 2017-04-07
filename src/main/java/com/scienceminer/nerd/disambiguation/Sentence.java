@@ -4,14 +4,6 @@ import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
-import org.grobid.core.data.Sense;
-import com.scienceminer.nerd.kb.*;
-
-import java.util.List;    
-import java.util.ArrayList;
-
-import org.wikipedia.miner.model.*;
 
 import com.fasterxml.jackson.core.io.*;
 

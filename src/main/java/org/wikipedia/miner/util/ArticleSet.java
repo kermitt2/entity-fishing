@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.kb.db.*;
 
-import org.wikipedia.miner.model.*;
-import org.wikipedia.miner.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 
 /**

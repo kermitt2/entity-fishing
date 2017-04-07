@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.wikipedia.miner.annotation.preprocessing.PreprocessedDocument;
-import org.wikipedia.miner.model.Article;
+import com.scienceminer.nerd.kb.model.Article;
 
 public class TopicIndexingSet extends ArrayList<TopicIndexingSet.Item> {
 	

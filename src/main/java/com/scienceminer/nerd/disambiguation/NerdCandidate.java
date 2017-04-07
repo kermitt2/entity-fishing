@@ -14,7 +14,7 @@ import com.scienceminer.nerd.kb.Category;
 import java.util.List;    
 import java.util.ArrayList;
 
-import org.wikipedia.miner.model.*;
+import com.scienceminer.nerd.kb.model.*;
 
 //import org.codehaus.jackson.io.JsonStringEncoder;
 

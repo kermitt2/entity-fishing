@@ -20,7 +20,7 @@
 
 package org.wikipedia.miner.annotation;
 
-import org.wikipedia.miner.model.* ;
+import com.scienceminer.nerd.kb.model.* ;
 import org.wikipedia.miner.util.*;
 
 import org.grobid.core.utilities.OffsetPosition;

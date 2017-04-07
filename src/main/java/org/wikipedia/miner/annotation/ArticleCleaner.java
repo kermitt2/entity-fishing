@@ -20,7 +20,7 @@
 package org.wikipedia.miner.annotation;
 
 import org.wikipedia.miner.util.MarkupStripper;
-import org.wikipedia.miner.model.Article;
+import com.scienceminer.nerd.kb.model.Article;
 
 /**
  *	A utility class for cleaning up Wikipedia articles so that they can be used to train and test disambiguation, link detection, etc.

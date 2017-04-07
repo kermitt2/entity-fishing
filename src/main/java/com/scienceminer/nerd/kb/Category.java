@@ -27,7 +27,7 @@ public class Category {
 	protected static final Logger LOGGER = LoggerFactory.getLogger(Category.class);
 	
 	private String name = null;
-	private org.wikipedia.miner.model.Category wikiCategory = null;
+	private com.scienceminer.nerd.kb.model.Category wikiCategory = null;
 	private int wikiPageID = -1;
 	
 	// an optional weight to be associated to the category
@@ -39,13 +39,13 @@ public class Category {
 		this.name= name;
 	}
 
-    public Category(String name, org.wikipedia.miner.model.Category wikiCategory, int wikiPageID) {
+    public Category(String name, com.scienceminer.nerd.kb.model.Category wikiCategory, int wikiPageID) {
 		this.wikiCategory = wikiCategory;
 		this.name = name;
 		this.wikiPageID = wikiPageID;
     }
 	
-	public Category(org.wikipedia.miner.model.Category wikiCategory) {
+	public Category(com.scienceminer.nerd.kb.model.Category wikiCategory) {
 		this.wikiCategory = wikiCategory;
 		name = wikiCategory.getTitle();
 		wikiPageID = wikiCategory.getId();
@@ -63,7 +63,7 @@ public class Category {
 		return wikiPageID;
 	}
 	
-	public org.wikipedia.miner.model.Category getWikiCategory() {
+	public com.scienceminer.nerd.kb.model.Category getWikiCategory() {
 		return wikiCategory;
 	}
 	
