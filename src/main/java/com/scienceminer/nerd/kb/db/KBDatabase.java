@@ -17,7 +17,6 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.log4j.Logger;
 import org.wikipedia.miner.db.struct.*;
-//import org.wikipedia.miner.util.*;
 
 import java.util.concurrent.*;
 import org.apache.hadoop.record.*;
@@ -299,18 +298,6 @@ public abstract class KBDatabase<K,V> {
 	public abstract KBEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException;
 
 	/**
-	 * Decides whether an entry should be cached to memory or not, and optionally alters values before they are cached.
-	 * 
-	 * @param e the key,value pair to be filtered
-	 * @param conf a configuration containing options for how the database is to be cached
-	 * @return the value that should be cached along with the given key, or null if it should be excluded
-	 */
-	/*public V filterCacheEntry(KBEntry<K,V> e, NerdConf conf) {
-		// default, no filter
-		return e.getValue();
-	}*/
-
-	/**
 	 * Decides whether an entry should be indexed or not.
 	 * 
 	 * @param e the key,value pair to be filtered
@@ -347,42 +334,6 @@ public abstract class KBDatabase<K,V> {
     	if (environment != null)
 	    	environment.close();
 	}
-
-	/**
-	 * Selectively caches records from the database to memory, for much faster lookup.
-	 * 
-	 * @param conf a configuration specifying how items should be cached.
-	 * @param validIds an optional set of article ids that should be cached. Any information about articles not in this list will be excluded from the cache. 
-	 * @param tracker an optional progress tracker
-	 * @throws IOException 
-	 * @throws DatabaseException 
-	 */
-	/*public void caching(NerdConf conf) {
-		cache = new ConcurrentHashMap<K,V>();
-
-		KBIterator iter = getIterator();
-		while (iter.hasNext()) {
-			Entry entry = iter.next();
-			byte[] keyData = entry.getKey();
-			byte[] valueData = entry.getValue();
-			try {
-				V pa = (V)Utilities.deserialize(valueData);
-				K keyId = (K)Utilities.deserialize(keyData);
-
-				KBEntry<K,V> kbEntry = new KBEntry<K,V>(keyId, pa);
-				V filteredValue = filterCacheEntry(kbEntry, conf);
-
-				if (filteredValue != null) {
-					cache.put(keyId, filteredValue);
-				}
-			} catch(Exception exp) {
-				Logger.getLogger(KBDatabase.class).error("Failed caching deserialize");
-			}
-		}
-
-		iter.close();
-		isCached = true;
-	}*/
 
 	public boolean isLoaded() {
 		return isLoaded;

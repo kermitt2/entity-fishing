@@ -11,7 +11,6 @@ import org.grobid.core.utilities.TextUtilities;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.erd.ErdAnnotationShort;
 import com.scienceminer.nerd.erd.ErdUtilities;
-import com.scienceminer.nerd.erd.ErdLexicon;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.ProcessText;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
@@ -323,7 +322,6 @@ public class ErdEvaluate {
     public static void main(String[] args)
         throws IOException, ClassNotFoundException, 
                InstantiationException, IllegalAccessException {
-		ErdLexicon lex = null;
 		try {
 			long start = System.currentTimeMillis();
         	ErdEvaluate eval = ErdEvaluate.getInstance();

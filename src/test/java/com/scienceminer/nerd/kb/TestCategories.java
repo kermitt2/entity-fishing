@@ -40,8 +40,6 @@ public class TestCategories {
 	public void setUp() {
 		try {
 			NerdProperties.getInstance();
-			//WikipediaConfiguration conf = 
-			//		new WikipediaConfiguration(new File("data/wikipedia/wikipedia-en.xml"));
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
         	wikipedia = new Wikipedia(conf); 

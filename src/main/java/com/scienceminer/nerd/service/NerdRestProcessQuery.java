@@ -30,11 +30,6 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectMapper;*/
-
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;

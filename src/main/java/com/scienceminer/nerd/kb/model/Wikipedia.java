@@ -18,8 +18,6 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.wikipedia.miner.util.NGrammer.CaseContext;
 import org.wikipedia.miner.util.NGrammer.NGramSpan;
-//import org.wikipedia.miner.util.WikipediaConfiguration;
-//import org.wikipedia.miner.util.text.TextProcessor;
 import org.xml.sax.SAXException;
 
 /**
@@ -56,47 +54,6 @@ public class Wikipedia {
 		return wikipediaArticleCount;
 	}
 
-	/*public Wikipedia(NerdConfig conf, boolean threadedPreparation) {
-		this.env = new KBEnvironment(conf);
-		try {
-			//this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
-			this.env.buildEnvironment(conf);
-		} catch(Exception e) {
-			e.printStackTrace();
-		} 
-	}*/
-
-	/**
-	 * Initialises a newly created Wikipedia according to the given configuration file. 
-	 * 
-	 * This can be a time consuming process if the given configuration specifies databases that need to be cached to memory.
-	 * 
-	 * This preparation can be done in a separate thread if required, in which case progress can be tracked using {@link #getProgress()} and {@link #isReady()}.
-	 *  
-	 * @param confFile an xml file that describes where the databases are located, etc. 
-	 * @param threadedPreparation true if preparation (connecting to databases, caching data to memory) should be done in a separate thread, otherwise false
-	 * @throws EnvironmentLockedException if the underlying database environment is unavailable.
-	 */
-	/*public Wikipedia(File confFile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-		WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-		this.env = new KBEnvironment(conf);
-		try {
-			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}  
-	}
-	public Wikipedia(File confFile, boolean threadedPreparation) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-		WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
-		//this.env = new KBEnvironment(conf, threadedPreparation);
-		this.env = new KBEnvironment(conf);
-		try {
-			this.env.buildEnvironment(conf, conf.getDataDirectory(), false);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}  
-	}*/
-
 	/**
 	 * Returns the environment that this is connected to
 	 * 
@@ -114,34 +71,6 @@ public class Wikipedia {
 	public NerdConfig getConfig() {
 		return env.getConfiguration();
 	}
-
-	/**
-	 * Returns true if the preparation work has been completed, otherwise false
-	 * 
-	 * @return true if the preparation work has been completed, otherwise false
-	 */
-	/*public boolean isReady() {
-		return env.isReady();
-
-	}*/
-
-	/**
-	 * Returns a number between 0 (just started) and 1 (completed) indicating progress of the preparation work.
-	 * 
-	 * @return a number between 0 (just started) and 1 (completed) indicating progress of the preparation work. 
-	 */
-	/*public double getProgress() {
-		return env.getProgress();
-	}*/
-
-	/**
-	 * Returns a tracker for progress of the preparation work. 
-	 * 
-	 * @return a tracker for progress of the preparation work. 
-	 */
-	/*public ProgressTracker getPreparationTracker() {
-		return env.getPreparationTracker();
-	}*/
 
 	/**
 	 * Returns the root Category from which all other categories can be browsed.

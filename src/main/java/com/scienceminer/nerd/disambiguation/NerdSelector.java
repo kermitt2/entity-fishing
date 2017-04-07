@@ -22,13 +22,12 @@ import org.slf4j.LoggerFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import com.scienceminer.nerd.kb.model.*;
 import org.wikipedia.miner.annotation.*;
-//import org.wikipedia.miner.comparison.ArticleComparer;
 import org.wikipedia.miner.util.*;
 import org.wikipedia.miner.util.text.*;
-import com.scienceminer.nerd.kb.model.Label.Sense;
 
+import com.scienceminer.nerd.kb.model.Label.Sense;
+import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.features.*;
 
@@ -57,8 +56,6 @@ public class NerdSelector {
 
 	private Wikipedia wikipedia = null;
 	private ArticleCleaner cleaner = null;
-	//private TextProcessor tp = null;
-	//private ArticleComparer comparer = null;
 
 	// regression model
 	private RandomForest forest = null;
@@ -73,11 +70,8 @@ public class NerdSelector {
 	public NerdSelector(Wikipedia wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
 		
-		//WikipediaConfiguration conf = wikipedia.getConfig();
 		NerdConfig conf = wikipedia.getConfig();
-		//comparer = new ArticleComparer(wikipedia);
 		cleaner = new ArticleCleaner();
-		//tp = conf.getDefaultTextProcessor();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();

@@ -32,12 +32,8 @@ import org.grobid.core.factory.*;
 import org.grobid.core.mock.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
-//import org.grobid.core.analyzers.GrobidAnalyzer;
 
 import com.scienceminer.nerd.utilities.Stopwords;
-
-// this is for version 1.3.0 of ClearNLP
-//import com.googlecode.clearnlp.nlp.NLPLib;
 
 /**
  * 

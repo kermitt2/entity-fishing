@@ -6,14 +6,13 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
-import com.scienceminer.nerd.kb.*;
 
 import java.util.*; 
 import java.text.*;
 import java.text.*;
 
+import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
-//import org.wikipedia.miner.util.*;
 
 import com.fasterxml.jackson.core.io.*;
 

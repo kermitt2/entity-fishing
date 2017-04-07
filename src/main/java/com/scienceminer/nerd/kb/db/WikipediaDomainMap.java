@@ -20,7 +20,6 @@ import org.apache.commons.lang.ArrayUtils;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import com.scienceminer.nerd.kb.model.*;
-//import org.wikipedia.miner.util.*;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;

@@ -18,8 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.scienceminer.nerd.exceptions.NerdPropertyException;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 
-//import org.grobid.core.utilities.GrobidProperties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

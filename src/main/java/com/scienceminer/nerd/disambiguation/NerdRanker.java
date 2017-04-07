@@ -25,8 +25,8 @@ import com.scienceminer.nerd.kb.model.*;
 import org.wikipedia.miner.annotation.*;
 import org.wikipedia.miner.util.*;
 import org.wikipedia.miner.util.text.*;
-import com.scienceminer.nerd.kb.model.Label.Sense;
 
+import com.scienceminer.nerd.kb.model.Label.Sense;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.features.*;
 
@@ -78,11 +78,8 @@ public class NerdRanker {
 		this.minLinkProbability = NerdEngine.minLinkProbability;
 		this.maxContextSize = NerdEngine.maxContextSize;
 		
-		//WikipediaConfiguration conf = wikipedia.getConfig();
 		NerdConfig conf = wikipedia.getConfig();
-		//comparer = new ArticleComparer(wikipedia);
 		cleaner = new ArticleCleaner();
-		//tp = conf.getDefaultTextProcessor();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -101,11 +98,8 @@ public class NerdRanker {
 		this.minLinkProbability = minLinkProbability;
 		this.maxContextSize = maxContextSize;
 		
-		//WikipediaConfiguration conf = wikipedia.getConfig();
 		NerdConfig conf = wikipedia.getConfig();
-		//comparer = new ArticleComparer(wikipedia);
 		cleaner = new ArticleCleaner();
-		//tp = conf.getDefaultTextProcessor();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -416,35 +410,6 @@ System.out.println("get context for this content");
 		}
 
 		System.out.println("Final Article: " + nbInstance + " training instances");
-
-		// use all terms as context
-		//Context context = getContext(article, snippetLength, rc);
-		
-		//only use links
-		//Context context = new Context(unambigLabels, rc, maxContextSize);
-
-		// use all terms as context
-		//NerdContext context = relatedness.getContext(article, snippetLength);
-		
-		//only use links
-		//NerdContext context = new NerdContext(unambigLabels, null, lang);
-		//NerdContext context = relatedness.getContext(unambigLabels, snippetLength);
-
-		//resolve ambiguous links
-		/*for (TopicReference ref : ambigRefs) {
-			for (Sense sense:ref.getLabel().getSenses()) {
-				if (sense.getPriorProbability() < minSenseProbability) break;
-
-				Instance i = decider.getInstanceBuilder()
-				.setAttribute(Attributes.commonness, sense.getPriorProbability())
-				.setAttribute(Attributes.relatedness, context.getRelatednessTo(sense))
-				.setAttribute(Attributes.contextQuality, (double)context.getQuality())
-				.setClassAttribute(sense.getId() == ref.getTopicId())
-				.build();
-				
-				dataset.add(i);
-			}
-		}*/
 		return arffBuilder;
 	}
 

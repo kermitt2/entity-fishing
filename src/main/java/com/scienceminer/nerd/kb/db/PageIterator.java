@@ -7,7 +7,6 @@ import org.wikipedia.miner.db.struct.DbPage;
 
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
-
 import com.scienceminer.nerd.utilities.*;
 
 import org.fusesource.lmdbjni.*;
@@ -63,20 +62,6 @@ public class PageIterator implements Iterator<Page> {
 		queueNext();
 		
 		return p;
-
-		/*Entry entry = iter.next();
-		byte[] keyData = entry.getKey();
-		byte[] valueData = entry.getValue();
-		Page p = null;
-		try {
-			DbPage pa = (DbPage)Utilities.deserialize(valueData);
-			Integer keyId = new BigInteger(keyData).intValue();
-			p = toPage(new KBEntry<Integer,DbPage>(keyId, pa));
-		} catch(Exception e) {
-			//Logger.getLogger(PageIterator.class).error("Failed deserialize");
-			e.printStackTrace();
-		}
-		return p;*/
 	}
 
 	private void queueNext() {
@@ -105,13 +90,6 @@ public class PageIterator implements Iterator<Page> {
 					e.printStackTrace();
 				}
 			}
-
-			//nextPage = toPage(iter.next());
-
-			/*if (type != null) {
-				while (nextPage.getType() != type)
-					nextPage = toPage(iter.next());
-			}*/
 		} catch (NoSuchElementException e) {
 			nextPage = null;
 		}

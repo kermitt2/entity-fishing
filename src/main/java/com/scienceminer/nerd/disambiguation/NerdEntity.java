@@ -7,15 +7,15 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
 import org.grobid.core.lexicon.NERLexicon;
+
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.utilities.TextUtilities;
+import com.scienceminer.nerd.kb.model.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*; 
-
-import com.scienceminer.nerd.kb.model.*;
 
 import com.fasterxml.jackson.core.io.*;
 

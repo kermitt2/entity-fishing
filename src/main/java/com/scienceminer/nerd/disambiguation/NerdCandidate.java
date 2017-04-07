@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 import com.scienceminer.nerd.kb.model.*;
 
-//import org.codehaus.jackson.io.JsonStringEncoder;
-
 import com.fasterxml.jackson.core.io.*;
 
 /**

@@ -18,18 +18,17 @@ import java.util.regex.PatternSyntaxException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
+
+import com.scienceminer.nerd.exceptions.NerdException;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import org.grobid.core.utilities.OffsetPosition;
 import com.scienceminer.nerd.kb.db.*;
-
 import com.scienceminer.nerd.kb.model.Wikipedia;
-//import org.wikipedia.miner.util.WikipediaConfiguration;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -90,9 +89,6 @@ public class Lexicon {
 			wikipedias = new HashMap<String, Wikipedia>(); 
             wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
             //freeBaseTypeMaps = new HashMap<String,FreeBaseTypeMap>();
-			
-			//WikipediaConfiguration conf = 
-			//	new WikipediaConfiguration(new File("data/wikipedia/wikipedia-en.xml"));
 
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
@@ -105,14 +101,12 @@ System.out.println("\nloading English environment...");
             wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
-			//conf = new WikipediaConfiguration(new File("data/wikipedia/wikipedia-de.xml"));
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-de.yaml"), NerdConfig.class);;
 System.out.println("\nloading German environment...");
 			Wikipedia wikipedia_de = new Wikipedia(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
-			//conf = new WikipediaConfiguration(new File("data/wikipedia/wikipedia-fr.xml"));
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-fr.yaml"), NerdConfig.class);;
 System.out.println("\nloading French environment...");
 			Wikipedia wikipedia_fr = new Wikipedia(conf);

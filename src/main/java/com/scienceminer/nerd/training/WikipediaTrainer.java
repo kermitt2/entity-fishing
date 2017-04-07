@@ -14,9 +14,6 @@ import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.model.Wikipedia;
 import org.wikipedia.miner.util.*;
 
-//import weka.classifiers.Classifier;
-//import weka.core.Utils;
-
 /**
  * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as 
  * traininig data.

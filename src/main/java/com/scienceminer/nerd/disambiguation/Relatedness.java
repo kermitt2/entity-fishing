@@ -16,10 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Wikipedia.LinkDirection;
-//import org.wikipedia.miner.util.*;
-//import org.wikipedia.miner.comparison.ArticleComparer;
-//import org.wikipedia.miner.annotation.*;
-import org.wikipedia.miner.util.text.*;
 
 import org.grobid.core.utilities.OffsetPosition;
 
@@ -40,8 +36,6 @@ public class Relatedness {
 		
 	// all the maps use the language code as a key
 	private Map<String, Wikipedia> wikipedias = null;
-	//private Map<String, NerdRanker> disambiguators = null;
-	//private Map<String, ArticleComparer> articleComparers = null;
 	private Map<String, ConcurrentMap<Long,Double>> caches = null;
 
 	private long comparisonsRequested = 0;
@@ -68,13 +62,8 @@ public class Relatedness {
 	private Relatedness() {	
 		wikipedias = Lexicon.getInstance().getWikipediaConfs();
 		caches = new HashMap<String, ConcurrentMap<Long,Double>>();
-		//disambiguators = new HashMap<String, NerdRanker>();
-		//articleComparers = new HashMap<String, ArticleComparer>();
 	}
 
-	/*public Map<String, NerdRanker> getRankers() {
-		return disambiguators;
-	}*/
 
 	/**
 	 * Given a Wikipedia article and a set of context article collected from the
@@ -265,7 +254,6 @@ public class Relatedness {
 
 			Integer linkA = null;
 			Integer linkB = null;
-			//Article linkArt;
 
 			if (indexA < linksA.size())
 				linkA = linksA.get(indexA);
@@ -280,8 +268,6 @@ public class Relatedness {
 			} else {
 				if (linkA != null && (linkB == null || linkA < linkB)) {
 					useA = true;
-					//linkArt = new Article(wikipedia.getEnvironment(), linkA);
-
 					if (linkA.equals(cmp.getArticleB().getId())) {
 						intersection++;
 						mutual = true;
@@ -289,7 +275,6 @@ public class Relatedness {
 
 				} else {
 					useB = true;
-
 					if (linkB.equals(cmp.getArticleA().getId())) {
 						intersection++;
 						mutual = true;

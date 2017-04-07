@@ -67,37 +67,6 @@ public class Article extends Page {
 		return parentCategories ;	
 	}
 
-	//TODO:equivalent categories
-	/**
-	 * Returns the {@link Category} that relates to the same concept as this article. For instance, calling 
-	 * this for "6678: Cat" returns the category "799717: Cats"
-	 * 
-	 * Note that many articles do not have equivalent categories; they are only used when the article 
-	 * describes a general topic for which there are other, more specific, articles. Consequently, 
-	 * this method will often return null. 
-	 * 
-	 * @return	the equivalent Category, or null
-	 *//*
-	public Category getEquivalentCategory() {
-
-		Category equivalentCategory = null ;
-
-		/*
-		Statement stmt = getWikipediaDatabase().createStatement() ;
-		ResultSet rs = stmt.executeQuery("SELECT page_id, page_title FROM equivalence, page WHERE page_id=eq_cat AND eq_art=" + id) ;
-
-		if (rs.first()) {
-			try {
-				equivalentCategory = new Category(database, rs.getInt(1), new String(rs.getBytes(2), "UTF-8")) ;
-			} catch (Exception e) {} ;
-		}
-
-		rs.close() ;
-		stmt.close() ;	
-
-		return equivalentCategory ;
-	}*/
-
 	/**
 	 * Returns an array of {@link Article Articles} that link to this article. These 
 	 * are defined by the internal hyperlinks within article text. If these hyperlinks came via 
@@ -105,39 +74,20 @@ public class Article extends Page {
 	 * 
 	 * @return	the array of Articles that link to this article, sorted by id.
 	 */
-	public Article[] getLinksIn() {
+	public Article[] getLinksIn() {			
+		DbLinkLocationList tmpLinks = env.getDbPageLinkIn().retrieve(id) ;
+		if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
+			return new Article[0] ;
 
-		//if (env.getDbPageLinkIn().isCached() && !env.getDbPageLinkInNoSentences().isCached()) {
-			
-			DbLinkLocationList tmpLinks = env.getDbPageLinkIn().retrieve(id) ;
-			if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
-				return new Article[0] ;
-	
-			Article[] links = new Article[tmpLinks.getLinkLocations().size()] ;
-	
-			int index = 0 ;
-			for (DbLinkLocation ll:tmpLinks.getLinkLocations()) {
-				links[index] = new Article(env, ll.getLinkId()) ;
-				index++ ;
-			}
-	
-			return links ;	
-		/*} else {
-			
-			DbIntList tmpLinks = env.getDbPageLinkInNoSentences().retrieve(id) ;
-			if (tmpLinks == null || tmpLinks.getValues() == null) 
-				return new Article[0] ;
-	
-			Article[] links = new Article[tmpLinks.getValues().size()] ;
-	
-			int index = 0 ;
-			for (Integer linkId:tmpLinks.getValues()) {
-				links[index] = new Article(env, linkId) ;
-				index++ ;
-			}
-			
-			return links ;
-		}*/
+		Article[] links = new Article[tmpLinks.getLinkLocations().size()] ;
+
+		int index = 0 ;
+		for (DbLinkLocation ll : tmpLinks.getLinkLocations()) {
+			links[index] = new Article(env, ll.getLinkId()) ;
+			index++ ;
+		}
+
+		return links ;	
 	}
 
 	/**
@@ -148,38 +98,19 @@ public class Article extends Page {
 	 * @return	an array of Articles that this article links to, sorted by id
 	 */
 	public Article[] getLinksOut()  {
+		DbLinkLocationList tmpLinks = env.getDbPageLinkOut().retrieve(id) ;
+		if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
+			return new Article[0] ;
 
-		//if (env.getDbPageLinkOut().isCached() && !env.getDbPageLinkOutNoSentences().isCached()) {
-			
-			DbLinkLocationList tmpLinks = env.getDbPageLinkOut().retrieve(id) ;
-			if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
-				return new Article[0] ;
-	
-			Article[] links = new Article[tmpLinks.getLinkLocations().size()] ;
-	
-			int index = 0 ;
-			for (DbLinkLocation ll:tmpLinks.getLinkLocations()) {
-				links[index] = new Article(env, ll.getLinkId()) ;
-				index++ ;
-			}
-	
-			return links ;	
-		/*} else {
-			
-			DbIntList tmpLinks = env.getDbPageLinkOutNoSentences().retrieve(id) ;
-			if (tmpLinks == null || tmpLinks.getValues() == null) 
-				return new Article[0] ;
-	
-			Article[] links = new Article[tmpLinks.getValues().size()] ;
-	
-			int index = 0 ;
-			for (Integer linkId:tmpLinks.getValues()) {
-				links[index] = new Article(env, linkId) ;
-				index++ ;
-			}
-			
-			return links ;
-		}*/
+		Article[] links = new Article[tmpLinks.getLinkLocations().size()] ;
+
+		int index = 0 ;
+		for (DbLinkLocation ll:tmpLinks.getLinkLocations()) {
+			links[index] = new Article(env, ll.getLinkId()) ;
+			index++ ;
+		}
+
+		return links ;	
 	}
 
 	/**

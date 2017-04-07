@@ -5,8 +5,6 @@ import com.scienceminer.nerd.kb.db.KBEnvironment;
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.db.struct.DbSenseForLabel;
 
-//import org.wikipedia.miner.util.text.TextProcessor;
-
 /**
  * A term or phrase that has been used to refer to one or more {@link Article Articles} in Wikipedia. 
  * 

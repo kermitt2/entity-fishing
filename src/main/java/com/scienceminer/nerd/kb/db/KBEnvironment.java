@@ -16,8 +16,6 @@ import org.apache.log4j.Logger;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import org.wikipedia.miner.db.struct.*; 
 import com.scienceminer.nerd.kb.model.Wikipedia;
-//import org.wikipedia.miner.util.WikipediaConfiguration;
-//import org.wikipedia.miner.util.text.TextProcessor;
 
 import org.apache.hadoop.record.*;
 
@@ -71,7 +69,6 @@ public class KBEnvironment  {
 	}
 	
 	private NerdConfig conf = null;
-	//private PreparationThread prepThread = null;
 	private KBDatabase<Integer, DbPage> dbPage = null;
 	private LabelDatabase dbLabel = null;
 	private HashMap<String, LabelDatabase> processedLabelDbs = null;
@@ -372,14 +369,6 @@ public class KBEnvironment  {
 		dbStatistics = dbFactory.buildStatisticsDatabase();
 		databasesByType.put(DatabaseType.statistics, dbStatistics);
 	}
-	
-	/**
-	 * @return true if the preparation work has been completed, otherwise false
-	 */
-	/*public boolean isReady() {
-		return prepThread.isCompleted();
-		
-	}*/
 
 	/**
 	 * @param sn the name of the desired statistic
@@ -388,18 +377,6 @@ public class KBEnvironment  {
 	public Long retrieveStatistic(StatisticName sn) {
 		return dbStatistics.retrieve(sn.ordinal());
 	}
-	
-	/**
-	 * @param tp a text processor
-	 * @return true if the environment is ready to be searched for labels using the given text processor, otherwise false 
-	 */
-	/*public boolean isPreparedFor(TextProcessor tp) {
-		//LabelDatabase db = getDbLabel(tp);
-		if (dbLabel == null)
-			return false;
-		else
-			return dbLabel.isLoaded();	
-	}*/
 
 	public ConcurrentMap getValidArticleIds(int minLinkCount) {
 		ConcurrentMap pageIds = new ConcurrentHashMap();
@@ -431,55 +408,6 @@ public class KBEnvironment  {
 		return databasesByType.get(dbType);
 	}
 	
-	/*private class PreparationThread extends Thread {
-		NerdConfig conf = null;
-		
-		private boolean completed = false;
-		private Exception failureCause = null;
-		
-		PreparationThread(NerdConfig conf) {
-			this.conf = conf;
-		}
-		
-		public boolean isCompleted() {
-			return completed;
-		}
-		
-		public boolean failed() {
-			return (failureCause != null);
-		}
-		
-		@Override
-		public void run() {
-			doPreparation();
-		}
-
-		public void doPreparation() {
-			boolean mustGatherIds = conf.getMinLinksIn() > 0 && //!conf.getDatabasesToCache().isEmpty()) && 
-				conf.getArticlesOfInterest() == null;
-			
-			try {
-				if (mustGatherIds)
-					conf.setArticlesOfInterest(getValidArticleIds(conf.getMinLinksIn()));
-			} catch (Exception e) {
-				failureCause = e;
-			}
-
-			completed = true;
-		}
-	}*/
-	
-	/*public Exception getCachingFailureReason() {
-		
-		if (this.prepThread == null)
-			return null;
-	
-		return this.prepThread.failureCause;
-	}*/
-	
-	/**
-	 * Tidily closes the environment, and all databases within it. This should always be called once you are finished with the environment.
-	 */
 	@SuppressWarnings("unchecked")
 	public void close() {
 		
@@ -500,7 +428,6 @@ public class KBEnvironment  {
 	 * It will not delete any existing databases, and will only overwrite them if explicitly specified (even if they are incomplete).
 	 * 
 	 * @param conf a configuration specifying where the databases are to be stored, etc.
-	 * @param dataDirectory a directory containing the a single XML dump of wikipedia, and all of the CSV files produced by {@link DumpExtractor}
 	 * @param overwrite true if existing databases should be overwritten, otherwise false
 	 * @throws IOException if any of the required files cannot be read
 	 * @throws XMLStreamException if the XML dump of wikipedia cannot be parsed
@@ -537,15 +464,6 @@ public class KBEnvironment  {
 		File dbDirectory = new File(conf.getDbDirectory());
 		if (!dbDirectory.exists())
 			dbDirectory.mkdirs();
-		
-		//KBEnvironment env = new KBEnvironment(conf);
-		/*boolean mustGatherIds = conf.getMinLinksIn() > 0 && conf.getArticlesOfInterest() == null;			
-		try {
-			if (mustGatherIds)
-				conf.setArticlesOfInterest(env.getValidArticleIds(conf.getMinLinksIn()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
 
 		//System.out.println("Building statistics db");
 		dbStatistics.loadFromCsvFile(statistics, overwrite);
@@ -610,51 +528,9 @@ public class KBEnvironment  {
 		//System.out.println("Building Markup db");
 		dbMarkup.loadFromXmlFile(markup, overwrite);
 		
-		// create cache
-		//if (!dbPage.isCached())
-		//	dbPage.caching(conf);
-
-		//env.close();
-		
-//		TextProcessor tp = conf.getDefaultTextProcessor();
-//		if (tp != null) {
-//			File tmpDir = new File(conf.getDataDirectory() + File.separator + "tmp" + tp.getName());
-//			tmpDir.mkdir();
-//			tmpDir.deleteOnExit();
-//			
-//			prepareTextProcessor(tp, conf, tmpDir, overwrite, 5);
-//		}
 		System.out.println("Environment built - " + dbPage.getDatabaseSize() + " pages.");
 
 	}
-	
-	/**
-	 * Prepares the environment, so it can be searched efficiently for labels using the given text processor.
-	 * 
-	 * Note: you can use as many different text processors as you like
-	 * 
-	 * @see LabelDatabase#prepare(File, int)
-	 * 
-	 * @param tp a text processor
-	 * @param conf a configuration specifying where the databases are to be stored, etc.
-	 * @param tempDirectory a directory for writing temporary files
-	 * @param overwrite true if the preparation should occur even if the environment has been prepared for this processor already
-	 * @param passes the number of the number of passes to break the task into (more = slower, but less memory required)
-	 * @throws IOException if the temporary directory is not writable
-	 */
-	/*public static void prepareTextProcessor(TextProcessor tp, NerdConfig conf, File tempDirectory, boolean overwrite, int passes) throws IOException {
-		if (tp == null)
-			return;
-		
-		KBEnvironment env = new KBEnvironment(conf);
-		
-		if (!overwrite && env.isPreparedFor(tp))
-			return;
-		
-		LabelDatabase db = env.getDbLabel(tp);
-		db.prepare(tempDirectory, passes);
-		env.close();
-	}*/
 	
 	private static File getDataFile(File dataDirectory, String fileName) throws IOException {
 		File file = new File(dataDirectory + File.separator + fileName);

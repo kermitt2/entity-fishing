@@ -19,7 +19,6 @@ import org.wikipedia.miner.db.struct.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;
 
-//import org.wikipedia.miner.util.*;
 import org.wikipedia.miner.util.text.*;
 
 import org.fusesource.lmdbjni.*;
@@ -38,7 +37,6 @@ public class KBDatabaseFactory {
 	 * @param env a KBEnvironment
 	 */
 	public KBDatabaseFactory(KBEnvironment env) {
-
 		this.env = env;
 	}
 
@@ -48,7 +46,6 @@ public class KBDatabaseFactory {
 	 * @return a database associating page ids with the title, type and generality of the page. 
 	 */
 	public KBDatabase<Integer, DbPage> buildPageDatabase() {
-
 		return new IntRecordDatabase<DbPage>(
 				env, 
 				DatabaseType.page
@@ -64,19 +61,30 @@ public class KBDatabaseFactory {
 			}
 
 			// using LMDB zero copy mode
-			@Override
-			public DbPage retrieve(Integer key) {
-				if (isCached)
-					return cache.get(key);
-
-				byte[] cachedData = null;
+			//@Override
+			public DbPage retrieve2(Integer key) {
 				DbPage record = null;
 				try (Transaction tx = environment.createReadTransaction();
-					 BufferCursor cursor = db.bufferCursor(tx)) {
+					BufferCursor cursor = db.bufferCursor(tx)) {
 					cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
 					if (cursor.seekKey()) {
 						record = (DbPage)Utilities.deserialize(cursor.valBytes());
 					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				return record;
+			}
+
+			// using standard LMDB copy mode
+			@Override
+			public DbPage retrieve(Integer key) {
+				byte[] cachedData = null;
+				DbPage record = null;
+				try (Transaction tx = environment.createReadTransaction()) {
+					cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
+					if (cachedData != null)
+						record = (DbPage)Utilities.deserialize(cachedData);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -95,129 +103,6 @@ public class KBDatabaseFactory {
 				else
 					return null;
 			}
-
-			/*@Override
-			public DbPage filterCacheEntry(
-					KBEntry<Integer, DbPage> e, 
-					NerdConf conf
-			) {
-				PageType pageType = PageType.values()[e.getValue().getType()];
-				//int conf.getMinLinksIn() = conf.getMinLinksIn();
-				boolean valid = false;
-				try {
-					//KBEntry<Integer, DbLinkLocationList> e2 = 
-					//	new KBEntry<Integer, DbLinkLocationList>(e.getKey(), 
-					//											(DbLinkLocationList)Utilities.deserialize(e.getValue()));
-					KBDatabase<Integer,DbLinkLocationList> dbLinkLocationList = env.getDbPageLinkIn();
-					DbLinkLocationList list = (DbLinkLocationList)dbLinkLocationList.retrieve(e.getKey());
-					//if (list == null)
-					//	System.out.println("warning DbLinkLocationList null for id " + e.getKey());
-					//if (list != null)
-					//	System.out.println("DbLinkLocationList null for id " + e.getKey() + " has " + list.getLinkLocations().size() + " links in");
-					if ((list != null) && (list.getLinkLocations().size() > conf.getMinLinksIn()))
-						valid = true;
-				} catch(Exception exp) {
-					Logger.getLogger(KBDatabaseFactory.class).error("filterCacheEntry: Failed deserialize");
-					exp.printStackTrace();
-				}
-
-				//if (validIds == null || validIds.contains(e.getKey()) || pageType == PageType.category || pageType==PageType.redirect) 
-				//if (validIds == null || (validIds.get(e.getKey()) != null) || pageType == PageType.category || pageType==PageType.redirect) 
-				if ((valid && (pageType == PageType.article)) || pageType == PageType.category || pageType == PageType.redirect) 	
-					return e.getValue();
-				else
-					return null;
-			}*/
-
-			/*@Override
-			public void caching(WikipediaConfiguration conf) {
-				System.out.println("Checking cache for page db");
-				// check if the cache is already present in the data files
-				String cachePath = env.getConfiguration().getDatabaseDirectory() + "/" + type.toString() + "/cache.obj";
-
-		    	File theCacheFile = new File(cachePath);
-    			if (theCacheFile.exists()) {
-    				ObjectInputStream in = null;
-    				try {
-	    				FileInputStream fileIn = new FileInputStream(theCacheFile);
-		                in = new ObjectInputStream(fileIn);
-    		            cache = (ConcurrentMap<Integer, DbPage>)in.readObject();
-    					isCached = true;
-    				} catch (Exception dbe) {
-    					isCached = false;
-			            Logger.getLogger(KBDatabaseFactory.class).debug("Error when opening the cache for page db.");
-			            //throw new NerdException(dbe);
-			        } finally {
-			            try {
-			                if (in != null)
-			                    in.close();
-			            } catch(IOException e) {
-			                Logger.getLogger(KBDatabaseFactory.class).debug("Error when closing the cache for page db.");
-			                //throw new NerdException(e);
-			            }
-			        }
-    			}
-    			if (!isCached) {
-					cache = new ConcurrentHashMap<Integer,DbPage>();
-					System.out.println("Creating in-memory cache for page db");
-					KBIterator iter = new KBIterator(this);//getIterator();
-					try {
-						while(iter.hasNext()) {
-							Entry entry = iter.next();
-							byte[] keyData = entry.getKey();
-							byte[] valueData = entry.getValue();
-							//Page p = null;
-							try {
-								Integer keyId = new BigInteger(keyData).intValue();
-								DbPage pa = (DbPage)Utilities.deserialize(valueData);
-
-								KBEntry<Integer,DbPage> KBEntry = new KBEntry<Integer,DbPage>(keyId, pa);
-
-								DbPage filteredValue = filterCacheEntry(KBEntry, conf);
-								if (filteredValue != null) {
-									cache.put(keyId, filteredValue);
-								}
-							} catch(Exception exp) {
-								Logger.getLogger(KBDatabaseFactory.class).error("Failed caching deserialize");
-								exp.printStackTrace();
-							}
-						}
-					} catch(Exception exp) {
-						Logger.getLogger(KBDatabaseFactory.class).error("Page iterator failure");
-						exp.printStackTrace();
-						isCached = false;
-					} finally {
-						System.out.println("Closing iterator for cache page db");
-						iter.close();
-						// save cache
-						if (cache != null) {
-							ObjectOutputStream out = null;
-							try {
-					            if (theCacheFile != null) {
-					                FileOutputStream fileOut = new FileOutputStream(theCacheFile);
-					                out = new ObjectOutputStream(fileOut);
-					                out.writeObject(cache);
-					            }
-					        } catch(IOException e) {
-					            Logger.getLogger(KBDatabaseFactory.class).debug("Error when saving the domain map.");
-					            e.printStackTrace();
-					            //throw new NerdException(e);
-					        } finally {
-					            try {
-					                if (out != null)
-					                    out.close();
-					            } catch(IOException e) {
-					                Logger.getLogger(KBDatabaseFactory.class).debug("Error when closing the domain map.");
-					                e.printStackTrace();
-					                //throw new NerdException(e);
-					            }
-					        }
-					    }
-					}
-					isCached = true;
-				}
-				System.out.println("Cache for page db ready");
-			}*/
 		};
 	}
 
@@ -388,7 +273,6 @@ public class KBDatabaseFactory {
 				tx.close();
 				input.close();
 			}
-
 		};
 	}
 

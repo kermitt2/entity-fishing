@@ -18,5 +18,4 @@ public class Template extends Page {
 		super(env, id, pd);
 	}
 
-	
 }
