@@ -371,99 +371,7 @@
                 </plugins>
             </build>
         </profile>
-		
-		<!-- mvn compile exec:exec -Ptrain_compare_en -->
-        <!--profile>
-            <id>train_compare_en</id>
-            <activation>
-                <property>
-                    <name>train_compare_en</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>com.scienceminer.nerd.training.WikipediaComparerTrainer</argument>
-								<argument>data/wikipedia/test/</argument>
-								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.old/compare/wikipediaSimilarity353.csv</argument>
-								<argument>10</argument>
-								<argument>data/wikipedia/wikipedia-en.xml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
-		
-		<!-- mvn compile exec:exec -Ptrain_compare_de -->
-        <!--profile>
-            <id>train_compare_de</id>
-            <activation>
-                <property>
-                    <name>train_compare_de</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>com.scienceminer.nerd.training.WikipediaComparerTrainer</argument>
-								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.de</argument>
-								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.old/compare/gur350.csv</argument>
-								<argument>4</argument>
-								<argument>/home/lopez/tools/wikipediaminer.neuw84/data/wikipedia/wikipedia-de.xml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
-		
-		<!-- mvn compile exec:exec -Ptrain_compare_fr -->
-        <!--profile>
-            <id>train_compare_fr</id>
-            <activation>
-                <property>
-                    <name>train_compare_fr</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>com.scienceminer.nerd.training.WikipediaComparerTrainer</argument>
-								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.fr</argument>
-								<argument>/home/lopez/tools/wikipediaminer.neuw84/data.old/compare/wikipediaSimilarity353.csv</argument>
-								<argument>10</argument>
-								<argument>//home/lopez/tools/wikipediaminer.neuw84/data/wikipedia/wikipedia-fr.xml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
+	
 	</profiles>
 	
 	<repositories>
@@ -717,17 +625,6 @@
 			<version>1.4.8</version>
 		</dependency>
 
-		<!-- to be finished: remove entirely weka -->
-		<!--dependency>
-			<groupId>org.dmilne</groupId>
-			<artifactId>weka-wrapper</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>weka.wrapper</groupId>
-			<artifactId>weka-wrapper</artifactId>
-			<version>1.0</version>
-		</dependency-->
 	</dependencies>
 		
 </project>
