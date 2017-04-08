@@ -85,7 +85,6 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
         sb.append(concept1ID).append("\t").append(" -> ").append(type.getName()).append(" -> ").append(concept2ID).append("\n");
 
         return sb.toString();

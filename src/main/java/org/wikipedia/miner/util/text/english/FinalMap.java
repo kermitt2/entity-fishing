@@ -1,4 +1,5 @@
-package org.wikipedia.miner.util.text.yagoUtils;
+package org.wikipedia.miner.util.text.english;
+
 import java.util.TreeMap;
 
 /** 
@@ -32,10 +33,4 @@ public class FinalMap<T1 extends Comparable,T2> extends TreeMap<T1,T2>{
       put((T1)a[i],(T2)a[i+1]);
     }
   }
-  
-//  /** Test routine */
-//  public static void main(String[] args) {
-//    FinalMap<String,Integer> f=new FinalMap<String,Integer>("a",1,"b",2);
-//    System.out.println(f.get("b"));
-//  }
 }

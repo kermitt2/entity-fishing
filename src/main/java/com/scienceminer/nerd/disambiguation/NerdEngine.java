@@ -7,18 +7,22 @@ import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.utilities.TextUtilities;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+
+import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -259,11 +263,44 @@ for(NerdCandidate cand : cands) {
 				}
 
 				// we go only with Wikipedia for the moment
-//System.out.println(entity.getRawName());
-				Label lbl = new Label(wikipedia.getEnvironment(), entity.getRawName());
-				List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
+//System.out.println("check mention: " + entity.getRawName());
+				Label label = null;
 
-				if (!lbl.exists()) {
+				// exact mention as it appears
+				Label bestLabel = new Label(wikipedia.getEnvironment(), entity.getRawName());
+
+				// try case variants
+				if (!bestLabel.exists() || 
+					ProcessText.isAllUpperCase(entity.getRawName()) ||
+					ProcessText.isAllLowerCase(entity.getRawName()) ) {
+					
+					// full upper or lower case
+					if (ProcessText.isAllUpperCase(entity.getRawName())) {
+						label = new Label(wikipedia.getEnvironment(), entity.getRawName().toLowerCase());
+					}
+					else if (ProcessText.isAllLowerCase(entity.getRawName())) {
+						label = new Label(wikipedia.getEnvironment(), entity.getRawName().toUpperCase());
+					}
+					else {
+						label = new Label(wikipedia.getEnvironment(), entity.getRawName().toLowerCase());
+						Label label2 = new Label(wikipedia.getEnvironment(), entity.getRawName().toUpperCase());
+						if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
+							label = label2;
+						}
+					}
+
+					// first letter upper case
+					Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(entity.getRawName().toLowerCase()));
+					if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
+						label = label2;
+					}
+					if (label.exists() && (!bestLabel.exists() || label.getLinkOccCount() > bestLabel.getLinkOccCount())) {
+						bestLabel = label;
+					}
+				}
+				
+				List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
+				if (!bestLabel.exists()) {
 //System.out.println("No concepts found for '" + entity.getRawName() + "'");
 					//if (strict)
 					if (entity.getType() != null) {
@@ -273,9 +310,9 @@ for(NerdCandidate cand : cands) {
 				}
 				else {
 //System.out.println("Concept(s) found for '" + entity.getRawName() + "'");
-					entity.setLinkProbability(lbl.getLinkProbability());
+					entity.setLinkProbability(bestLabel.getLinkProbability());
 //System.out.println("LinkProbability for the string '" + entity.getRawName() + "': " + entity.getLinkProbability());
-					Label.Sense[] senses = lbl.getSenses();
+					Label.Sense[] senses = bestLabel.getSenses();
 					if ((senses != null) && (senses.length > 0)) {
 //System.out.println(senses.length + " concept(s) found for '" + entity.getRawName() + "'");					
 						int s = 0;
@@ -298,7 +335,7 @@ for(NerdCandidate cand : cands) {
 							candidate.setProb_c(sense.getPriorProbability());
 							candidate.setPreferredTerm(sense.getTitle());
 							candidate.setLang(lang);
-							candidate.setLabel(lbl);
+							candidate.setLabel(bestLabel);
 							boolean invalid = false;
 //System.out.println("check categories for " + sense.getId());							
 							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();

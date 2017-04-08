@@ -97,6 +97,37 @@ public class ProcessText {
 	}
 	
 	/**
+	 *  Case context where a token appears 
+	 */
+	public enum CaseContext { 
+		/* token is found in lower cased text */
+		lower, 
+		
+		/* token is found in UPPER CASED TEXT */
+		upper, 
+		
+		/* token is found in Text Where Every Word Starts With A Capital Letter */
+		upperFirst, 
+		
+		/* token is found in text with a Healthy mixture of capitalization (probably normal text) */
+		mixed
+	}
+
+	public static boolean isAllUpperCase(String text) {
+        if (text.equals(text.toUpperCase()))
+	        return true;
+	    else
+	    	return false;
+    }
+
+    public static boolean isAllLowerCase(String text) {
+        if (text.equals(text.toLowerCase()))
+	        return true;
+        else
+        	return false;
+    }
+
+	/**
 	 * NER processing of some raw text. Generate list of named entities.
 	 *
 	 * @param text 

@@ -94,7 +94,8 @@ public class Relatedness {
 			return 0.0;
 
 		if ( (contextArticles == null) || (contextArticles.size() == 0) ) {
-			return 0.0;
+			// if there is no context, we can set an arbitrary score
+			return 0.5;
 		} 
 		
 		if (article == null) {
@@ -155,7 +156,7 @@ public class Relatedness {
 		Wikipedia wikipedia = wikipedias.get(lang);
 		NerdConfig conf = wikipedia.getConfig();
 
-		EntityPairRelatedness cmp = getComparison(artA, artB, wikipedia);
+		EntityPairRelatedness cmp = getEntityPairRelatedness(artA, artB, wikipedia);
 		if (cmp == null)
 			return 0.0;
 		
@@ -181,7 +182,7 @@ public class Relatedness {
 			return total/count;
 	}
 
-	public EntityPairRelatedness getComparison(Article artA, Article artB, Wikipedia wikipedia) {
+	public EntityPairRelatedness getEntityPairRelatedness(Article artA, Article artB, Wikipedia wikipedia) {
 		EntityPairRelatedness cmp = new EntityPairRelatedness(artA, artB);
 		NerdConfig conf = wikipedia.getConfig();
 

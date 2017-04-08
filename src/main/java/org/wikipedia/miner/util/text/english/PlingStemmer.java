@@ -2,8 +2,6 @@ package org.wikipedia.miner.util.text.english;
 
 import java.util.Map;
 import java.util.Set;
-import org.wikipedia.miner.util.text.yagoUtils.FinalMap;
-import org.wikipedia.miner.util.text.yagoUtils.FinalSet;
 
 /**
  * This class is part of the Java Tools (see
