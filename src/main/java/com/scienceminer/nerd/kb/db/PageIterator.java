@@ -73,9 +73,11 @@ public class PageIterator implements Iterator<Page> {
 				byte[] valueData = entry.getValue();
 				//Page p = null;
 				try {
-					DbPage pa = (DbPage)Utilities.deserialize(valueData);
+					DbPage pa = (DbPage)KBEnvironment.deserialize(valueData);
 					
-					Integer keyId = new BigInteger(keyData).intValue();
+					//Integer keyId = new BigInteger(keyData).intValue();
+					Integer keyId = (Integer)KBEnvironment.deserialize(keyData);
+					
 					nextPage = toPage(new KBEntry<Integer,DbPage>(keyId, pa));
 					//PageType localType = PageType.values()[nextPage.getType()];
 //System.out.println("Comparing : " + type + " / " + nextPage.getType());

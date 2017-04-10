@@ -19,13 +19,12 @@ public class Redirect extends Page {
 	 * @param id	the unique identifier of the article
 	 */
 	public Redirect(KBEnvironment env, int id) {
-		super(env, id) ;
+		super(env, id);
 	}
 	
 	protected Redirect(KBEnvironment env, int id, DbPage pd) {
-		super(env, id, pd) ;
+		super(env, id, pd);
 	}
-	
 	
 	/**
 	 * Returns the Article that this redirect points to. This will continue following redirects until it gets to an article 
@@ -35,32 +34,30 @@ public class Redirect extends Page {
 	 */	//TODO: should just resolve double redirects during extraction.
 	public Article getTarget() {
 
-		int currId = id ;
+		int currId = id;
 
-		//TIntHashSet redirectsFollowed = new TIntHashSet() ;
-		ConcurrentMap redirectsFollowed = new ConcurrentHashMap() ;
+		ConcurrentMap redirectsFollowed = new ConcurrentHashMap();
 
-		//while (!redirectsFollowed.contains(currId)) {
 		while (redirectsFollowed.get(currId) == null) {
-			redirectsFollowed.put(currId, currId) ;
+			redirectsFollowed.put(currId, currId);
 
-			Integer targetId = env.getDbRedirectTargetBySource().retrieve(currId) ;
+			Integer targetId = env.getDbRedirectTargetBySource().retrieve(currId);
 
 			if (targetId == null) 
-				return null ;
+				return null;
 			
-			Page target = Page.createPage(env, targetId) ;
+			Page target = Page.createPage(env, targetId);
 			
 			if (!target.exists())
-				return null ;
+				return null;
 			
 			if (target.getType() == PageType.redirect)
-				currId = targetId ;
+				currId = targetId;
 			else if (target.getType() == PageType.article)
-				return (Article)target ;
+				return (Article)target;
 		}
 
-		return null ;		
+		return null;		
 	}
 	
 }

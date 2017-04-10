@@ -43,9 +43,11 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
-			if (cachedData != null)
-				record = (Record)Utilities.deserialize(cachedData);
+			//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
+			cachedData = db.get(tx, KBEnvironment.serialize(key));
+			if (cachedData != null) {
+				record = (Record)KBEnvironment.deserialize(cachedData);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -59,9 +61,10 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();
 			 BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
-				record = (Record)Utilities.deserialize(cursor.valBytes());
+				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -71,7 +74,8 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 
 	protected void add(KBEntry<Integer,Record> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), Utilities.serialize(entry.getValue()));
+			//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), KBEnvironment.serialize(entry.getValue()));
+			db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -108,9 +112,9 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 			try {
 				KBEntry<Integer,Record> entry = deserialiseCsvRecord(cri);
 				if ( (entry != null) && (filterEntry(entry) != null) ) {
-				//if (entry != null) {
 					try {
-						db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), Utilities.serialize(entry.getValue()));
+						//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), KBEnvironment.serialize(entry.getValue()));
+						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 						nbToAdd++;
 					} catch(Exception e) {
 						e.printStackTrace();

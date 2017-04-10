@@ -53,8 +53,6 @@ public class NerdRanker {
 
 	private Wikipedia wikipedia = null;
 	private ArticleCleaner cleaner = null;
-	//private TextProcessor tp = null;
-	//private ArticleComparer comparer = null;
 
 	private double minSenseProbability = 0.0; 
 	private int maxLabelLength = 20; 
@@ -150,9 +148,11 @@ public class NerdRanker {
 		}
 
 		GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
+		//GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 		feature.prob_c = commonness;
 		feature.relatedness = relatedness;
 		feature.context_quality = quality;
+		//feature.dice_coef = dice_coef;
 		double[] features = feature.toVector();
 		return forest.predict(features);
 	}

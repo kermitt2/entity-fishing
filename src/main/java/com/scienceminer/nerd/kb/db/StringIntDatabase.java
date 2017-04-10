@@ -41,15 +41,17 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 	@Override
 	public Integer retrieve(String key) {
 		byte[] cachedData = null;
-		int record = -1;
+		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
 			cachedData = db.get(tx, bytes(key));
-			if (cachedData != null)
-				record = new BigInteger(cachedData).intValue();
+			if (cachedData != null) {
+				//record = new BigInteger(cachedData).intValue();
+				record = (Integer)KBEnvironment.deserialize(cachedData);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new Integer(record);
+		return record;
 	}
 
 	// using LMDB zero copy mode
@@ -58,10 +60,11 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		byte[] cachedData = null;
 		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction();
-			 BufferCursor cursor = db.bufferCursor(tx)) {
+			BufferCursor cursor = db.bufferCursor(tx)) {
 			cursor.keyWriteBytes(bytes(key));
 			if (cursor.seekKey()) {
-				record = new BigInteger(cursor.valBytes()).intValue();
+				//record = new BigInteger(cursor.valBytes()).intValue();
+				record = (Integer)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -71,7 +74,8 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 	
 	public void add(KBEntry<String,Integer> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, bytes(entry.getKey()), Utilities.serialize(entry.getValue()));
+			//db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -111,7 +115,8 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 
 			if (entry != null) {
 				try {
-					db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
+					//db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
+					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

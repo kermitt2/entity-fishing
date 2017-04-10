@@ -2,10 +2,14 @@ package com.scienceminer.nerd.kb;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.core.io.*;
+
 /**
  * Class for representing and exchanging a property associated to a concept.
  */
-public class Property extends org.apache.hadoop.record.Record implements Serializable { 
+//public class Property extends org.apache.hadoop.record.Record implements Serializable { 
+
+public class Property implements Serializable { 
 
     private String attribute = null;
     private String value = null;
@@ -70,7 +74,7 @@ public class Property extends org.apache.hadoop.record.Record implements Seriali
         return sb.toString();
     }
 
-    @Override
+    /*@Override
     public int compareTo(Object theProp) {
         Property theProperty = (Property)theProp;
         if ( (conceptId == theProperty.getConceptId()) &&
@@ -80,9 +84,9 @@ public class Property extends org.apache.hadoop.record.Record implements Seriali
         } else {
             return -1;
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void deserialize(final org.apache.hadoop.record.RecordInput _rio_a, final String _rio_tag) throws java.io.IOException {
         throw new UnsupportedOperationException();
     }
@@ -91,5 +95,34 @@ public class Property extends org.apache.hadoop.record.Record implements Seriali
      public void serialize(final org.apache.hadoop.record.RecordOutput _rio_a, final String _rio_tag)
         throws java.io.IOException {
         throw new UnsupportedOperationException();
+    }*/
+
+    public String toJSON() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\"properties\": [");
+
+        byte[] encodedAttribute = encoder.quoteAsUTF8(attribute);
+        String outputAttribute = new String(encodedAttribute); 
+        sb.append("{ \"attribute\" : \"" + outputAttribute + "\"");
+
+        byte[] encodedValue = encoder.quoteAsUTF8(value);
+        String outputValue = new String(encodedValue); 
+        sb.append("\"value\" : \"" + outputValue + "\"");
+
+        byte[] encodedTemplate = encoder.quoteAsUTF8(attribute);
+        String outputTemplate = new String(encodedTemplate); 
+        sb.append("\"template\" : \"" + outputTemplate + "\"");        
+
+        attribute = null;
+        value = null;
+        templateName = null;
+    //private Integer conceptId = -1;
+    //private Integer valueConcept
+
+        sb.append("]");
+
+        return sb.toString();
     }
 }

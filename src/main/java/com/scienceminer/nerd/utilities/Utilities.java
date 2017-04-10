@@ -276,6 +276,7 @@ public class Utilities {
 		}
 	}
 
+	// standard JDK serialization
 	public static byte[] serialize(Object obj) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectOutputStream os = new ObjectOutputStream(out);
@@ -283,6 +284,7 @@ public class Utilities {
 		return out.toByteArray();
 	}
 
+	// standard JDK deserialization
 	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
 		ByteArrayInputStream in = new ByteArrayInputStream(data);
 		ObjectInputStream is = new ObjectInputStream(in);

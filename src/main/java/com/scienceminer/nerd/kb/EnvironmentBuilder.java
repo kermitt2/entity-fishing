@@ -43,9 +43,9 @@ public class EnvironmentBuilder {
         String lang = args[0].substring(ind-2,ind);
         System.out.println("Language is " + lang);
         
-        //WikipediaConfiguration conf = new WikipediaConfiguration(confFile);
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         NerdConfig conf = mapper.readValue(confFile, NerdConfig.class);
+        // this will build the LMDB databases if not available (so the first time) form the CSV files
         Wikipedia wikipedia = new Wikipedia(conf);
 
         // mapping wikipedia categories / domains and domain assigments for all pageid
@@ -55,10 +55,10 @@ public class EnvironmentBuilder {
             try {
                 wikipediaDomainMap.setWikipedia(wikipedia);
                 wikipediaDomainMap.setLang(lang);
-                wikipediaDomainMap.openCache();
+                //wikipediaDomainMap.openCache();
                 wikipediaDomainMap.createAllMappings();
             } finally {
-                wikipediaDomainMap.saveCache();
+                //wikipediaDomainMap.saveCache();
                 wikipediaDomainMap.close();
             }
         }

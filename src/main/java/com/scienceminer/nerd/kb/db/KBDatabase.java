@@ -48,7 +48,7 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates Integer page ids with the labels used to refer to that page
 		 */
-		pageLabel,
+//		pageLabel,
 
 		/**
 		 * Associates String titles with the id of the page within the article namespace that this refers to
@@ -78,7 +78,7 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates integer ids with the ids of articles that it links to, and the sentence indexes where these links are found
 		 */
-		pageLinksOut, 
+//		pageLinksOut, 
 
 		/**
 		 * Associates integer ids with the ids of articles that it links to
@@ -123,7 +123,7 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates integer id of page with the character indexes of sentence breaks within it
 		 */
-		sentenceSplits,
+//		sentenceSplits,
 
 		/**
 		 * Associates integer id of page with a {@link DbTranslations}. 
@@ -131,9 +131,14 @@ public abstract class KBDatabase<K,V> {
 		translations,
 
 		/**
-		 * Associates integer id of page with its content, in mediawiki markup format
+		 * Associates integer id of page with its first paragraph/definition, in mediawiki markup format
 		 */
 		markup,
+
+		/**
+		 * Associates integer id of page with its full content/article, in mediawiki markup format
+		 */
+		markupFull,
 
 		/**
 		 * Associates integer {@link KBEnvironment.StatisticName#ordinal()} with the value relevant to this statistic.

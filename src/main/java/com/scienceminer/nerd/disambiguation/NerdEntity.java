@@ -636,7 +636,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	 */
 	public String toJsonFull() {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
 		byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
 		String outputRawName = new String(encodedRawName); 
@@ -779,7 +779,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	 */
 	public String toJsonCompact() {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
 		byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
 		String outputRawName = new String(encodedRawName); 

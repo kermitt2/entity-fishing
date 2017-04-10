@@ -33,15 +33,28 @@ import static org.fusesource.lmdbjni.Constants.*;
  */
 public class MarkupDatabase extends KBDatabase<Integer, String> {
 
+	private boolean full = false;
+
 	private enum DumpTag {page, id, text, ignorable};
 
 	/**
 	 * Creates or connects to a database, whose name and type will be {@link KBDatabase.DatabaseType#markup}.
+	 * If full, the complete text content will be indexed, otherwise only the first paragraph
 	 * 
 	 * @param env the KBEnvironment surrounding this database
 	 */
 	public MarkupDatabase(KBEnvironment env) {
-		super (env, DatabaseType.markup); //, new IntegerBinding(), new StringBinding());
+		super (env, DatabaseType.markup); 
+	}
+
+	public MarkupDatabase(KBEnvironment env, DatabaseType type) {
+		super (env, type);
+		if (type == DatabaseType.markupFull) {
+			full = true; 
+		}
+		else {
+			full = false;
+		}
 	}
 
 	@Override
@@ -60,7 +73,8 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		//byte[] cachedData = null;
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			theString = string(db.get(tx, BigInteger.valueOf(key).toByteArray()));
+			//theString = string(db.get(tx, BigInteger.valueOf(key).toByteArray()));
+			theString = string(db.get(tx, KBEnvironment.serialize(key)));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -73,8 +87,9 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		byte[] cachedData = null;
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction();
-			 BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			BufferCursor cursor = db.bufferCursor(tx)) {
+			//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
 				theString = string(cursor.valBytes());
 			}
@@ -103,14 +118,14 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		StringBuffer characters = new StringBuffer();
 		
 		InputStream reader;
-		 CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder()
+		CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder()
                 .onMalformedInput(CodingErrorAction.REPORT)
                 .onUnmappableCharacter(CodingErrorAction.REPORT);
                  
 		if (dataFile.getName().endsWith(".bz2")){
-            FileInputStream fin=new FileInputStream(dataFile);
-            BufferedInputStream bis=new BufferedInputStream(fin);
-            CompressorInputStream input=new CompressorStreamFactory().createCompressorInputStream(bis);
+            FileInputStream fis = new FileInputStream(dataFile);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            CompressorInputStream input = new CompressorStreamFactory().createCompressorInputStream(bis);
             reader = input;
         } else{
 			reader = new FileInputStream(dataFile);
@@ -118,21 +133,18 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 
 		XMLInputFactory xmlStreamFactory = XMLInputFactory.newInstance();
 		CountingInputStream countingReader = new CountingInputStream(reader);
-        // To work around a bug in XERCES (XERCESJ-1257), we assume the XML is always UTF8, so we simply provide reader.
 		XMLStreamReader xmlStreamReader = xmlStreamFactory.createXMLStreamReader(new InputStreamReader(countingReader,decoder));
-                System.out.println("Parser class: " + xmlStreamReader.getClass().toString());
+        //System.out.println("Parser class: " + xmlStreamReader.getClass().toString());
 
 		int pageTotal = 0;
 		int nbToAdd = 0;
 		Transaction tx = environment.createWriteTransaction();
 		while (xmlStreamReader.hasNext()) {
-			
 			int eventCode = xmlStreamReader.next();
-
 			switch (eventCode) {
 				case XMLStreamReader.START_ELEMENT :
 					switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
-					case page:
+						case page:
 					}
 
 					break;
@@ -155,13 +167,19 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								nbToAdd = 0;
 								tx = environment.createWriteTransaction();
 							}
-							currMarkup = Page.formatFirstParagraphMarkup(currMarkup);
-							
+							if (full) {
+								// we only store the first paragraph/summary
+								currMarkup = Page.formatAllMarkup(currMarkup);
+							} else {
+								// we only store the first paragraph/summary
+								currMarkup = Page.formatFirstParagraphMarkup(currMarkup);
+							}
 							pageTotal++;
 
 							if (currMarkup.trim().length() > 5) {
 								try {
-									db.put(tx, BigInteger.valueOf(currId).toByteArray(), bytes(currMarkup));
+									//db.put(tx, BigInteger.valueOf(currId).toByteArray(), bytes(currMarkup));
+									db.put(tx, KBEnvironment.serialize(currId), bytes(currMarkup));
 									nbToAdd++;
 								} catch(Exception e) {
 									System.out.println("Markup addition failed: " + currId + " / " + currMarkup);

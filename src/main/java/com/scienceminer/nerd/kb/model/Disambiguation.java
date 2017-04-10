@@ -17,11 +17,11 @@ public class Disambiguation extends Article {
 	 * @param id	the unique identifier of the article
 	 */
 	public Disambiguation(KBEnvironment env, int id) {
-		super(env, id) ;
+		super(env, id);
 	}
 	
 	protected Disambiguation(KBEnvironment env, int id, DbPage pd) {
-		super(env, id, pd) ;
+		super(env, id, pd);
 	}
 	
 }

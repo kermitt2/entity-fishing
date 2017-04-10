@@ -49,7 +49,6 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 	@Override
 	public KBEntry<String,DbLabel> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 		String text = record.readString(null);
-
 		DbLabel l = new DbLabel();
 		l.deserialize(record);
 		

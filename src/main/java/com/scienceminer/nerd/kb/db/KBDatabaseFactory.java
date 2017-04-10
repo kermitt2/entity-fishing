@@ -14,18 +14,18 @@ import org.apache.log4j.Logger;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 
-import org.wikipedia.miner.db.struct.*;
-
+import com.scienceminer.nerd.kb.Relation;
+import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;
 
-import org.wikipedia.miner.util.text.*;
+import org.wikipedia.miner.db.struct.*;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 /**
- * A factory for creating KBDatabases of various types
+ * A factory for creating the LMDB databases used in (N)ERD 
  */
 public class KBDatabaseFactory {
 	
@@ -41,19 +41,13 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating page ids with the title, type and generality of the page. 
-	 * 
-	 * @return a database associating page ids with the title, type and generality of the page. 
+	 * Create a database associating page ids with the title, type and generality of the page
 	 */
 	public KBDatabase<Integer, DbPage> buildPageDatabase() {
-		return new IntRecordDatabase<DbPage>(
-				env, 
-				DatabaseType.page
-		) {
+		return new IntRecordDatabase<DbPage>(env, DatabaseType.page) {
 			@Override
 			public KBEntry<Integer,DbPage> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				Integer id = record.readInt(null);
-
 				DbPage p = new DbPage();
 				p.deserialize(record);
 
@@ -66,9 +60,10 @@ public class KBDatabaseFactory {
 				DbPage record = null;
 				try (Transaction tx = environment.createReadTransaction();
 					BufferCursor cursor = db.bufferCursor(tx)) {
-					cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+					//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+					cursor.keyWriteBytes(KBEnvironment.serialize(key));
 					if (cursor.seekKey()) {
-						record = (DbPage)Utilities.deserialize(cursor.valBytes());
+						record = (DbPage)KBEnvironment.deserialize(cursor.valBytes());
 					}
 				} catch(Exception e) {
 					e.printStackTrace();
@@ -82,9 +77,10 @@ public class KBDatabaseFactory {
 				byte[] cachedData = null;
 				DbPage record = null;
 				try (Transaction tx = environment.createReadTransaction()) {
-					cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
+					//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
+					cachedData = db.get(tx, KBEnvironment.serialize(key));
 					if (cachedData != null)
-						record = (DbPage)Utilities.deserialize(cachedData);
+						record = (DbPage)KBEnvironment.deserialize(cachedData);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -92,8 +88,7 @@ public class KBDatabaseFactory {
 			}
 
 			@Override
-			public DbPage filterEntry(
-					KBEntry<Integer, DbPage> e) {
+			public DbPage filterEntry(KBEntry<Integer, DbPage> e) {
 				// we want to index only articles
 				PageType pageType = PageType.values()[e.getValue().getType()];
 				
@@ -107,16 +102,10 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating article, category or template titles with their ids.
-	 * 
-	 * @param {@link DatabaseType#articlesByTitle}, {@link DatabaseType#templatesByTitle} or {@link DatabaseType#categoriesByTitle}.
-	 * @return a database associating article, category or template titles with their ids.
+	 * Create a database associating article, category or template titles with their page ids
 	 */
 	public KBDatabase<String,Integer> buildTitleDatabase(DatabaseType type) {
-		return new StringIntDatabase(
-				env, 
-				type
-		) {
+		return new StringIntDatabase(env, type) {
 			@Override
 			public KBEntry<String,Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				Integer id = record.readInt(null);
@@ -127,7 +116,8 @@ public class KBDatabaseFactory {
 				PageType pageType = PageType.values()[p.getType()];
 				DatabaseType dbType = getType();
 
-				if (dbType == DatabaseType.articlesByTitle && (pageType != PageType.article && pageType != PageType.disambiguation && pageType != PageType.redirect))
+				if ((dbType == DatabaseType.articlesByTitle) && 
+					(pageType != PageType.article && pageType != PageType.disambiguation && pageType != PageType.redirect) )
 					return null;
 
 				if (dbType == DatabaseType.categoriesByTitle && pageType != PageType.category)
@@ -142,54 +132,38 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating String labels with the statistics about the articles (senses) these labels could refer to.
-	 * 
-	 * @return a database associating String labels with the statistics about the articles (senses) these labels could refer to. 
+	 * Create a database associating labels with the statistics about the articles these labels could realize
 	 */
 	public LabelDatabase buildLabelDatabase() {
 		return new LabelDatabase(env);
 	}
 
 	/**
-	 * Returns a database associating Integer page ids with the labels used to refer to that page
-	 * 
-	 * @return a database associating Integer page ids with the labels used to refer to that page
+	 * Create a database associating page ids with the labels used to refer to that page
 	 */
-	public KBDatabase<Integer,DbLabelForPageList> buildPageLabelDatabase() {
+	/*public KBDatabase<Integer,DbLabelForPageList> buildPageLabelDatabase() {
 
-		return new IntRecordDatabase<DbLabelForPageList>(
-				env, 
-				DatabaseType.pageLabel
-		) {
+		return new IntRecordDatabase<DbLabelForPageList>(env, DatabaseType.pageLabel) {
 
 			@Override
 			public KBEntry<Integer,DbLabelForPageList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-
 				Integer id = record.readInt(null);
-
 				DbLabelForPageList labels = new DbLabelForPageList();
 				labels.deserialize(record);
 
 				return new KBEntry<Integer,DbLabelForPageList>(id, labels);
 			}
 		};
-	}
+	}*/
 
 	/**
-	 * Returns a database associating Integer ids with the ids of articles it links to or that link to it, and the sentence indexes where these links are found.
-	 * 
-	 * @param type either {@link DatabaseType#pageLinksIn} or {@link DatabaseType#pageLinksOut}.
-	 * @return a database associating Integer ids with the ids of articles it links to or that link to it, and the sentence indexes where these links are found
+	 * Create a database associating ids with the ids of articles it links to or that link to it, and the sentence indexes where these links are found
 	 */
-	public KBDatabase<Integer, DbLinkLocationList> buildPageLinkDatabase(DatabaseType type) {
-
+	/*public KBDatabase<Integer, DbLinkLocationList> buildPageLinkDatabase(DatabaseType type) {
 		if (type != DatabaseType.pageLinksIn && type != DatabaseType.pageLinksOut)
 			throw new IllegalArgumentException("type must be either DatabaseType.pageLinksIn or DatabaseType.pageLinksOut");
 
-		return new IntRecordDatabase<DbLinkLocationList>(
-				env, 
-				type
-		) {
+		return new IntRecordDatabase<DbLinkLocationList>(env, type) {
 			@Override
 			public KBEntry<Integer, DbLinkLocationList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 
@@ -201,29 +175,19 @@ public class KBDatabaseFactory {
 				return new KBEntry<Integer, DbLinkLocationList>(id, l);
 			}
 		};
-	}
+	}*/
 
-	
 	/**
-	 * Returns a database associating Integer ids with the ids of articles it links to or that link to it.
-	 * 
-	 * @param type either {@link DatabaseType#pageLinksIn} or {@link DatabaseType#pageLinksOut}.
-	 * @return a database associating Integer ids with the ids of articles it links to or that link to it.
+	 * Create a database associating ids with the ids of articles it links to or that link to it
 	 */
 	public KBDatabase<Integer, DbIntList> buildPageLinkNoSentencesDatabase(DatabaseType type) {
-
 		if (type != DatabaseType.pageLinksInNoSentences && type != DatabaseType.pageLinksOutNoSentences)
 			throw new IllegalArgumentException("type must be either DatabaseType.pageLinksInNoSentences or DatabaseType.pageLinksOutNoSentences");
 
-		return new IntRecordDatabase<DbIntList>(
-				env, 
-				type
-		) {
-
+		return new IntRecordDatabase<DbIntList>(env, type) {
 			@Override
 			public KBEntry<Integer, DbIntList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				// this has to read from pagelinks file (with sentences
-				
+				// this has to read from pagelinks file (with sentences)
 				Integer id = record.readInt(null);
 
 				DbLinkLocationList l = new DbLinkLocationList();
@@ -231,8 +195,10 @@ public class KBDatabaseFactory {
 				
 				ArrayList<Integer> linkIds = new ArrayList<Integer>();
 				
-				for (DbLinkLocation ll:l.getLinkLocations()) 
-					linkIds.add(ll.getLinkId());
+				for (DbLinkLocation ll : l.getLinkLocations()) {
+					if (!linkIds.contains(ll.getLinkId()))
+						linkIds.add(ll.getLinkId());
+				}
 				
 				return new KBEntry<Integer, DbIntList>(id, new DbIntList(linkIds));
 			}
@@ -263,7 +229,8 @@ public class KBDatabaseFactory {
 					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 					KBEntry<Integer,DbIntList> entry = deserialiseCsvRecord(cri);
 					try {
-						db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), Utilities.serialize(entry.getValue()));
+						//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), KBEnvironment.serialize(entry.getValue()));
+						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 						nbToAdd++;
 					} catch(Exception e) {
 						e.printStackTrace();
@@ -277,34 +244,27 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database appropriate for the given {@link DatabaseType}
+	 * Create a database appropriate for the given {@link DatabaseType}
 	 * 
 	 * @param type {@link DatabaseType#categoryParents}, {@link DatabaseType#articleParents}, {@link DatabaseType#childCategories},{@link DatabaseType#childArticles}, {@link DatabaseType#redirectSourcesByTarget}, {@link DatabaseType#sentenceSplits}
-	 * @return see the description of the appropriate DatabaseType
 	 */
 	public KBDatabase<Integer,DbIntList> buildIntIntListDatabase(final DatabaseType type) {
-
 		switch (type) {
-		case categoryParents:
-		case articleParents:
-		case childCategories:
-		case childArticles:
-		case redirectSourcesByTarget:
-		case sentenceSplits:
-			break;
-		default: 
-			throw new IllegalArgumentException(type.name() + " is not a valid DatabaseType for IntIntListDatabase");
-		}
+			case categoryParents:
+			case articleParents:
+			case childCategories:
+			case childArticles:
+			case redirectSourcesByTarget:
+//			case sentenceSplits:
+				break;
+			default: 
+				throw new IllegalArgumentException(type.name() + " is not a valid DatabaseType for IntIntListDatabase");
+			}
 
-		return new IntRecordDatabase<DbIntList>(
-				env, 
-				type
-		) {
+		return new IntRecordDatabase<DbIntList>(env, type) {
 			@Override
 			public KBEntry<Integer, DbIntList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-
 				Integer k = record.readInt(null);
-
 				DbIntList v = new DbIntList();
 				v.deserialize(record);
 
@@ -314,20 +274,13 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating integer id of redirect with the id of its target
-	 * 
-	 * @return a database associating integer id of redirect with the id of its target
+	 * Create a database associating id of redirect with the id of its target
 	 */
 	public KBDatabase<Integer,Integer> buildRedirectTargetBySourceDatabase() {
 
-		return new IntIntDatabase(
-				env, 
-				DatabaseType.redirectTargetBySource
-		) {
-
+		return new IntIntDatabase(env, DatabaseType.redirectTargetBySource) {
 			@Override
-			public KBEntry<Integer, Integer> deserialiseCsvRecord(
-					CsvRecordInput record) throws IOException {
+			public KBEntry<Integer, Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				int k = record.readInt(null);
 				int v = record.readInt(null);
 
@@ -337,25 +290,16 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating integer {@link KBEnvironment.StatisticName#ordinal()} with the value relevant to this statistic.
-	 * 
-	 * @return a database associating integer {@link KBEnvironment.StatisticName#ordinal()} with the value relevant to this statistic.
+	 * Create a database storing KB statistics
 	 */
 	public IntLongDatabase buildStatisticsDatabase() {
 
-		return new IntLongDatabase(
-				env, 
-				DatabaseType.statistics
-		) {
+		return new IntLongDatabase(env, DatabaseType.statistics) {
 			@Override
-			public KBEntry<Integer, Long> deserialiseCsvRecord(
-					CsvRecordInput record) throws IOException {
-
+			public KBEntry<Integer, Long> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				String statName = record.readString(null);
 				Long v = record.readLong(null);
-
 				Integer k = null;
-
 				try {
 					k = StatisticName.valueOf(statName).ordinal();
 				} catch (Exception e) {
@@ -368,21 +312,13 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating integer id of page with DbTranslations (language links)
-	 * 
-	 * @return a database associating integer id of page with DbTranslations (language links)
+	 * Create a database associating the id of a page to its other wikipedia language mapping
 	 */
 	public KBDatabase<Integer,DbTranslations> buildTranslationsDatabase() {
-
-		return new IntRecordDatabase<DbTranslations>(
-				env, 
-				DatabaseType.translations
-		) {
+		return new IntRecordDatabase<DbTranslations>(env, DatabaseType.translations) {
 			@Override
-			public KBEntry<Integer, DbTranslations> deserialiseCsvRecord(
-					CsvRecordInput record) throws IOException {
+			public KBEntry<Integer, DbTranslations> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				int k = record.readInt(null);
-
 				DbTranslations v = new DbTranslations();
 				v.deserialize(record);
 
@@ -392,23 +328,37 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Returns a database associating integer ids with counts of how many pages it links to or that link to it
-	 * 
-	 * @return a database associating integer ids with counts of how many pages it links to or that link to it
+	 * Create a database associating integer id of page with an InfoBox relation (relation to other page)
+	 */
+	public RelationDatabase buildInfoBoxRelationDatabase() {
+		return new RelationDatabase(env);
+	}
+
+	/**
+	 * Create a database associating integer id of page with an InfoBox properties (attribute/value)
+	 */
+	public PropertyDatabase buildInfoBoxPropertyDatabase() {
+		return new PropertyDatabase(env);
+	}
+
+	/**
+	 * Create a database associating ids with counts of how many pages it links to or that link to it
 	 */
 	public PageLinkCountDatabase buildPageLinkCountDatabase() {
 		return new PageLinkCountDatabase(env);
 	}
 
 	/**
-	 * Returns a database associating integer id of page with its content, in mediawiki markup format
-	 * 
-	 * @return a database associating integer id of page with its content, in mediawiki markup format
+	 * Create a database associating id of page with its first paragraph/definition, in mediawiki markup format
 	 */
 	public KBDatabase<Integer,String> buildMarkupDatabase() {
-		return new MarkupDatabase(env);
+		return new MarkupDatabase(env, DatabaseType.markup);
+	}
+
+	/**
+	 * Create a database associating id of page with its full content/article, in original mediawiki markup format
+	 */
+	public KBDatabase<Integer,String> buildMarkupFullDatabase() {
+		return new MarkupDatabase(env, DatabaseType.markupFull);
 	}
 }
-
-
-

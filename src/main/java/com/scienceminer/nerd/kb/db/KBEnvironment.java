@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.concurrent.*;
 import java.math.BigInteger;
 
+import org.nustaq.serialization.*;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.compress.compressors.CompressorException;
@@ -23,64 +24,51 @@ import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 /**
- * A wrapper for {@link Environment}, that keeps track of all of the databases required for a single dump of Wikipedia.
+ * A KB corresponding to a Wikipedia instance, which is concretely stored as a set of LMDB databases.
  * 
  */
 public class KBEnvironment  {
 	
-	/**
-	 * Statistics available about a wikipedia dump
-	 */
-	public enum StatisticName {
-		/**
-		 * The number of articles (not disambiguations or redirects) available
-		 */
-		articleCount,
-		
-		/**
-		 * The number of categories available
-		 */
-		categoryCount,
-		
-		/**
-		 * The number of disambiguation pages available
-		 */
-		disambiguationCount,
-		
-		/**
-		 * The number of redirects available
-		 */
-		redirectCount,
-		
-		/**
-		 * A long value representation of the date and time this dump was last edited -- use new Date(long) to get to parse
-		 */
-		lastEdit,
-		
-		/**
-		 * The maximum path length between articles and the root category 
-		 */
-		maxCategoryDepth,
-		
-		/**
-		 * The id of root category, below which all articles should be organized 
-		 */
-		rootCategoryId 
-	}
+	// this is the singleton FST configuration for all serialization operations with the KB
+	private static FSTConfiguration singletonConf = FSTConfiguration.createDefaultConfiguration();
+    //private static FSTConfiguration singletonConf = FSTConfiguration.createUnsafeBinaryConfiguration(); 
+
+    public static FSTConfiguration getFSTConfigurationInstance() {
+        return singletonConf;
+    }
 	
+	/**
+	 * Serialization in the KBEnvironment with FST
+	 */
+    public static byte[] serialize(Object obj) throws IOException {
+    	byte data[] = getFSTConfigurationInstance().asByteArray(obj);
+		return data;
+	}
+
+	/**
+	 * Deserialization in the KBEnvironment with FST. The returned Object needs to be casted
+	 * in the expected actual object. 
+	 */
+	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
+		return getFSTConfigurationInstance().asObject(data);
+	}
+
+	// NERD configuration for the KB instance
 	private NerdConfig conf = null;
+
+	// the different databases of the KB
 	private KBDatabase<Integer, DbPage> dbPage = null;
 	private LabelDatabase dbLabel = null;
-	private HashMap<String, LabelDatabase> processedLabelDbs = null;
-	private KBDatabase<Integer, DbLabelForPageList> dbLabelsForPage = null; 
+	//private HashMap<String, LabelDatabase> processedLabelDbs = null;
+	//private KBDatabase<Integer, DbLabelForPageList> dbLabelsForPage = null; 
 	private KBDatabase<String,Integer> dbArticlesByTitle = null;
 	private KBDatabase<String,Integer> dbCategoriesByTitle = null;
 	private KBDatabase<String,Integer> dbTemplatesByTitle = null;
 	private KBDatabase<Integer,Integer> dbRedirectTargetBySource = null;
 	private KBDatabase<Integer,DbIntList> dbRedirectSourcesByTarget = null;
-	private KBDatabase<Integer, DbLinkLocationList> dbPageLinkIn = null;
+	//private KBDatabase<Integer, DbLinkLocationList> dbPageLinkIn = null;
 	private KBDatabase<Integer, DbIntList> dbPageLinkInNoSentences = null;
-	private KBDatabase<Integer, DbLinkLocationList> dbPageLinkOut = null;
+	//private KBDatabase<Integer, DbLinkLocationList> dbPageLinkOut = null;
 	private KBDatabase<Integer, DbIntList> dbPageLinkOutNoSentences = null;
 	private PageLinkCountDatabase dbPageLinkCounts = null;
 	private KBDatabase<Integer, DbIntList> dbCategoryParents = null;
@@ -88,17 +76,29 @@ public class KBEnvironment  {
 	private KBDatabase<Integer, DbIntList> dbChildCategories = null;
 	private KBDatabase<Integer, DbIntList> dbChildArticles = null;
 	private MarkupDatabase dbMarkup = null;
-	private KBDatabase<Integer, DbIntList> dbSentenceSplits = null;
+	private MarkupDatabase dbMarkupFull = null;
+	//private KBDatabase<Integer, DbIntList> dbSentenceSplits = null;
 	private KBDatabase<Integer, DbTranslations> dbTranslations = null;
 	private KBDatabase<Integer, Long> dbStatistics = null;
+	private RelationDatabase dbRelations = null;
+	private PropertyDatabase dbProperties = null;
 
-	@SuppressWarnings("unchecked")
-	private HashMap<DatabaseType, KBDatabase> databasesByType;
+	// database registry for the environment
+	//@SuppressWarnings("unchecked")
+	private HashMap<DatabaseType, KBDatabase> databasesByType = null;
 	
 	/**
+	 * Constructor
+	 */	
+	public KBEnvironment(NerdConfig conf) {
+		this.conf = conf;
+		// register classes to be serialized
+		singletonConf.registerClass(DbPage.class, DbIntList.class, DbTranslations.class);
+		initDatabases();
+	}
+
+	/**
 	 * Returns the configuration of this environment
-	 * 
-	 * @return the configuration of this environment
 	 */
 	public NerdConfig getConfiguration() {
 		return conf;
@@ -106,8 +106,6 @@ public class KBEnvironment  {
 	
 	/**
 	 * Returns the {@link DatabaseType#page} database
-	 * 
-	 * @return see {@link DatabaseType#page} 
 	 */
 	public KBDatabase<Integer, DbPage> getDbPage() {
 		return dbPage;
@@ -119,33 +117,18 @@ public class KBEnvironment  {
 	 * @return see {@link DatabaseType#label} 
 	 */
 	public LabelDatabase getDbLabel() {
-		//if (textProcessor == null)
-			return dbLabel;
-		/*else {
-			LabelDatabase db = processedLabelDbs.get(textProcessor.getName());
-			
-			if (db == null) {
-				db = new LabelDatabase(this, textProcessor);
-				
-				processedLabelDbs.put(textProcessor.getName(), db);
-			}
-			return db;
-		}*/
+		return dbLabel;
 	}
 	
 	/**
 	 * Returns the {@link DatabaseType#pageLabel} database
-	 * 
-	 * @return see {@link DatabaseType#pageLabel} 
 	 */
-	public KBDatabase<Integer, DbLabelForPageList> getDbLabelsForPage() {
+	/*public KBDatabase<Integer, DbLabelForPageList> getDbLabelsForPage() {
 		return dbLabelsForPage;
-	}
+	}*/
 	
 	/**
 	 * Returns the {@link DatabaseType#articlesByTitle} database
-	 * 
-	 * @return see {@link DatabaseType#articlesByTitle} 
 	 */
 	public KBDatabase<String, Integer> getDbArticlesByTitle() {
 		return dbArticlesByTitle;
@@ -153,8 +136,6 @@ public class KBEnvironment  {
 	
 	/**
 	 * Returns the {@link DatabaseType#categoriesByTitle} database
-	 * 
-	 * @return see {@link DatabaseType#categoriesByTitle} 
 	 */
 	public KBDatabase<String, Integer> getDbCategoriesByTitle() {
 		return dbCategoriesByTitle;
@@ -162,18 +143,13 @@ public class KBEnvironment  {
 	
 	/**
 	 * Returns the {@link DatabaseType#templatesByTitle} database
-	 * 
-	 * @return see {@link DatabaseType#templatesByTitle} 
 	 */
 	public KBDatabase<String, Integer> getDbTemplatesByTitle() {
 		return dbTemplatesByTitle;
 	}
-
 	
 	/**
 	 * Returns the {@link DatabaseType#redirectTargetBySource} database
-	 * 
-	 * @return see {@link DatabaseType#redirectTargetBySource} 
 	 */
 	public KBDatabase<Integer, Integer> getDbRedirectTargetBySource() {
 		return dbRedirectTargetBySource;
@@ -181,8 +157,6 @@ public class KBEnvironment  {
 	
 	/**
 	 * Returns the {@link DatabaseType#redirectSourcesByTarget} database
-	 * 
-	 * @return see {@link DatabaseType#redirectSourcesByTarget} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbRedirectSourcesByTarget() {
 		return dbRedirectSourcesByTarget;
@@ -190,17 +164,13 @@ public class KBEnvironment  {
 
 	/**
 	 * Returns the {@link DatabaseType#pageLinksIn} database
-	 * 
-	 * @return see {@link DatabaseType#pageLinksIn} 
 	 */
-	public KBDatabase<Integer, DbLinkLocationList> getDbPageLinkIn() {
+	/*public KBDatabase<Integer, DbLinkLocationList> getDbPageLinkIn() {
 		return dbPageLinkIn;
-	}
+	}*/
 	
 	/**
 	 * Returns the {@link DatabaseType#pageLinksInNoSentences} database
-	 * 
-	 * @return see {@link DatabaseType#pageLinksInNoSentences} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbPageLinkInNoSentences() {
 		return dbPageLinkInNoSentences;
@@ -209,18 +179,14 @@ public class KBEnvironment  {
 
 	/**
 	 * Returns the {@link DatabaseType#pageLinksOut} database
-	 * 
-	 * @return see {@link DatabaseType#pageLinksOut} 
 	 */
-	public KBDatabase<Integer, DbLinkLocationList> getDbPageLinkOut() {
+	/*public KBDatabase<Integer, DbLinkLocationList> getDbPageLinkOut() {
 		return dbPageLinkOut;
-	}
+	}*/
 	
 	
 	/**
 	 * Returns the {@link DatabaseType#pageLinksOutNoSentences} database
-	 * 
-	 * @return see {@link DatabaseType#pageLinksOutNoSentences} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbPageLinkOutNoSentences() {
 		return dbPageLinkOutNoSentences;
@@ -228,8 +194,6 @@ public class KBEnvironment  {
 	
 	/**
 	 * Returns the {@link DatabaseType#pageLinkCounts} database
-	 * 
-	 * @return see {@link DatabaseType#pageLinkCounts} 
 	 */
 	public KBDatabase<Integer, DbPageLinkCounts> getDbPageLinkCounts() {
 		return dbPageLinkCounts;
@@ -237,8 +201,6 @@ public class KBEnvironment  {
 	
 	/**
 	 * Returns the {@link DatabaseType#categoryParents} database
-	 * 
-	 * @return see {@link DatabaseType#categoryParents} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbCategoryParents() {
 		return dbCategoryParents;
@@ -246,8 +208,6 @@ public class KBEnvironment  {
 
 	/**
 	 * Returns the {@link DatabaseType#articleParents} database
-	 * 
-	 * @return see {@link DatabaseType#articleParents} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbArticleParents() {
 		return dbArticleParents;
@@ -255,8 +215,6 @@ public class KBEnvironment  {
 
 	/**
 	 * Returns the {@link DatabaseType#childCategories} database
-	 * 
-	 * @return see {@link DatabaseType#childCategories} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbChildCategories() {
 		return dbChildCategories;
@@ -264,8 +222,6 @@ public class KBEnvironment  {
 
 	/**
 	 * Returns the {@link DatabaseType#childArticles} database
-	 * 
-	 * @return see {@link DatabaseType#childArticles} 
 	 */
 	public KBDatabase<Integer, DbIntList> getDbChildArticles() {
 		return dbChildArticles;
@@ -273,38 +229,33 @@ public class KBEnvironment  {
 
 	/**
 	 * Returns the {@link DatabaseType#markup} database
-	 * 
-	 * @return see {@link DatabaseType#markup} 
 	 */
 	public MarkupDatabase getDbMarkup() {
 		return dbMarkup;
 	}
+
+	/**
+	 * Returns the {@link DatabaseType#markupFull} database
+	 */
+	public MarkupDatabase getDbMarkupFull() {
+		return dbMarkupFull;
+	}
 	
 	/**
 	 * Returns the {@link DatabaseType#sentenceSplits} database
-	 * 
-	 * @return see {@link DatabaseType#sentenceSplits} 
 	 */
-	public KBDatabase<Integer, DbIntList> getDbSentenceSplits() {
+	/*public KBDatabase<Integer, DbIntList> getDbSentenceSplits() {
 		return dbSentenceSplits;
-	}
+	}*/
 	
-
 	/**
 	 * Returns the {@link DatabaseType#translations} database
-	 * 
-	 * @return see {@link DatabaseType#translations} 
 	 */
 	public KBDatabase<Integer, DbTranslations> getDbTranslations() {
 		return dbTranslations;
 	}
 	
-	public KBEnvironment(NerdConfig conf) {
-		this.conf = conf;
-		initDatabases();
-	}
-	
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	private void initDatabases() {
 		System.out.println("init Environment for language " + conf.getLangCode());
 		
@@ -318,10 +269,10 @@ public class KBEnvironment  {
 		dbLabel = dbFactory.buildLabelDatabase();
 		databasesByType.put(DatabaseType.label, dbLabel);
 		
-		processedLabelDbs = new HashMap<String, LabelDatabase>();
+		//processedLabelDbs = new HashMap<String, LabelDatabase>();
 		
-		dbLabelsForPage = dbFactory.buildPageLabelDatabase();
-		databasesByType.put(DatabaseType.pageLabel, dbLabelsForPage);
+		//dbLabelsForPage = dbFactory.buildPageLabelDatabase();
+		//databasesByType.put(DatabaseType.pageLabel, dbLabelsForPage);
 		
 		dbArticlesByTitle = dbFactory.buildTitleDatabase(DatabaseType.articlesByTitle);
 		databasesByType.put(DatabaseType.articlesByTitle, dbArticlesByTitle);
@@ -330,13 +281,13 @@ public class KBEnvironment  {
 		dbTemplatesByTitle = dbFactory.buildTitleDatabase(DatabaseType.templatesByTitle);
 		databasesByType.put(DatabaseType.templatesByTitle, dbTemplatesByTitle);
 		
-		dbPageLinkIn = dbFactory.buildPageLinkDatabase(DatabaseType.pageLinksIn); 
-		databasesByType.put(DatabaseType.pageLinksIn, dbPageLinkIn);
+		//dbPageLinkIn = dbFactory.buildPageLinkDatabase(DatabaseType.pageLinksIn); 
+		//databasesByType.put(DatabaseType.pageLinksIn, dbPageLinkIn);
 		dbPageLinkInNoSentences = dbFactory.buildPageLinkNoSentencesDatabase(DatabaseType.pageLinksInNoSentences); 
 		databasesByType.put(DatabaseType.pageLinksInNoSentences, dbPageLinkInNoSentences);
 		
-		dbPageLinkOut = dbFactory.buildPageLinkDatabase(DatabaseType.pageLinksOut); 
-		databasesByType.put(DatabaseType.pageLinksOut, dbPageLinkOut);
+		//dbPageLinkOut = dbFactory.buildPageLinkDatabase(DatabaseType.pageLinksOut); 
+		//databasesByType.put(DatabaseType.pageLinksOut, dbPageLinkOut);
 		dbPageLinkOutNoSentences = dbFactory.buildPageLinkNoSentencesDatabase(DatabaseType.pageLinksOutNoSentences); 
 		databasesByType.put(DatabaseType.pageLinksOutNoSentences, dbPageLinkOutNoSentences);
 		
@@ -357,15 +308,21 @@ public class KBEnvironment  {
 		dbRedirectTargetBySource = dbFactory.buildRedirectTargetBySourceDatabase();
 		databasesByType.put(DatabaseType.redirectTargetBySource, dbRedirectTargetBySource);
 		
-		dbMarkup = new MarkupDatabase(this);
+		dbMarkup = new MarkupDatabase(this, DatabaseType.markup);
 		databasesByType.put(DatabaseType.markup, dbMarkup);
 		
-		dbSentenceSplits = dbFactory.buildIntIntListDatabase(DatabaseType.sentenceSplits);
-		databasesByType.put(DatabaseType.sentenceSplits, dbSentenceSplits);
+		//dbSentenceSplits = dbFactory.buildIntIntListDatabase(DatabaseType.sentenceSplits);
+		//databasesByType.put(DatabaseType.sentenceSplits, dbSentenceSplits);
 		
 		dbTranslations = dbFactory.buildTranslationsDatabase();
 		databasesByType.put(DatabaseType.translations, dbTranslations);
 		
+		dbRelations = dbFactory.buildInfoBoxRelationDatabase();
+		databasesByType.put(DatabaseType.relations, dbRelations);
+
+		dbProperties = dbFactory.buildInfoBoxPropertyDatabase();
+		databasesByType.put(DatabaseType.properties, dbProperties);
+
 		dbStatistics = dbFactory.buildStatisticsDatabase();
 		databasesByType.put(DatabaseType.statistics, dbStatistics);
 	}
@@ -378,11 +335,11 @@ public class KBEnvironment  {
 		return dbStatistics.retrieve(sn.ordinal());
 	}
 
-	public ConcurrentMap getValidArticleIds(int minLinkCount) {
+	/*public ConcurrentMap getValidArticleIds(int minLinkCount) {
 		ConcurrentMap pageIds = new ConcurrentHashMap();
 
 		System.out.println("gathering valid page ids");
-		KBIterator iter = dbPageLinkIn.getIterator();
+		KBIterator iter = dbPageLinkInNoSentences.getIterator();
 		
 		while (iter.hasNext()) {
 			Entry entry = iter.next();
@@ -401,19 +358,18 @@ public class KBEnvironment  {
 		
 		iter.close();
 		return pageIds;
-	}
+	}*/
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	private KBDatabase getDatabase(DatabaseType dbType) {
 		return databasesByType.get(dbType);
 	}
 	
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public void close() {
-		
-		for (KBDatabase<String, DbLabel> dbProcessedLabel: processedLabelDbs.values()) {
+		/*for (KBDatabase<String, DbLabel> dbProcessedLabel: processedLabelDbs.values()) {
 			dbProcessedLabel.close();
-		}
+		}*/
 		
 		for (KBDatabase db:this.databasesByType.values()) {
 			db.close();
@@ -454,10 +410,11 @@ public class KBEnvironment  {
 		File redirectTargetBySource = getDataFile(dataDirectory, "redirectTargetsBySource.csv");
 		File redirectSourcesByTarget = getDataFile(dataDirectory, "redirectSourcesByTarget.csv");
 
-		File sentenceSplits = getDataFile(dataDirectory, "sentenceSplits.csv");
+		//File sentenceSplits = getDataFile(dataDirectory, "sentenceSplits.csv");
 		
 		File translations = getDataFile(dataDirectory, "translations.csv");
-		
+		File infoboxes = getDataFile(dataDirectory, "infoboxes.csv");
+
 		File markup = getMarkupDataFile(dataDirectory);
 		
 		//now load databases
@@ -475,7 +432,7 @@ public class KBEnvironment  {
 		dbLabel.loadFromCsvFile(label, overwrite);
 
 		//System.out.println("Building LabelsForPage db");
-		dbLabelsForPage.loadFromCsvFile(pageLabel, overwrite);
+		//dbLabelsForPage.loadFromCsvFile(pageLabel, overwrite);
 		
 		//System.out.println("Building ArticlesByTitle db");
 		dbArticlesByTitle.loadFromCsvFile(page, overwrite);
@@ -493,13 +450,13 @@ public class KBEnvironment  {
 		dbRedirectSourcesByTarget.loadFromCsvFile(redirectSourcesByTarget, overwrite);
 		
 		//System.out.println("Building PageLinkIn db");
-		dbPageLinkIn.loadFromCsvFile(pageLinksIn, overwrite);
+		//dbPageLinkIn.loadFromCsvFile(pageLinksIn, overwrite);
 
 		//System.out.println("Building PageLinkInNoSentences db");
 		dbPageLinkInNoSentences.loadFromCsvFile(pageLinksIn, overwrite);
 
 		//System.out.println("Building PageLinkOut db");
-		dbPageLinkOut.loadFromCsvFile(pageLinksOut, overwrite);
+		//dbPageLinkOut.loadFromCsvFile(pageLinksOut, overwrite);
 		
 		//System.out.println("Building PageLinkOutNoSentences db");
 		dbPageLinkOutNoSentences.loadFromCsvFile(pageLinksOut, overwrite);
@@ -520,18 +477,44 @@ public class KBEnvironment  {
 		dbChildArticles.loadFromCsvFile(childArticles, overwrite);
 		
 		//System.out.println("Building SentenceSplits db");
-		dbSentenceSplits.loadFromCsvFile(sentenceSplits, overwrite);
+		//dbSentenceSplits.loadFromCsvFile(sentenceSplits, overwrite);
 		
 		//System.out.println("Building Translations db");
 		dbTranslations.loadFromCsvFile(translations, overwrite);
 		
+		//System.out.println("Building Relations db");
+		dbRelations.loadFromCsvFile(infoboxes, overwrite);
+
+		//System.out.println("Building Properties db");
+		dbProperties.loadFromCsvFile(infoboxes, overwrite);
+
 		//System.out.println("Building Markup db");
 		dbMarkup.loadFromXmlFile(markup, overwrite);
-		
-		System.out.println("Environment built - " + dbPage.getDatabaseSize() + " pages.");
 
+		System.out.println("Environment built - " + dbPage.getDatabaseSize() + " pages.");
 	}
 	
+	/**
+	 * The full markup database is built separately because it is only required for training
+	 * purposes. 
+	 */
+	public void buildFullMarkup(NerdConfig conf, boolean overwrite) throws IOException, XMLStreamException, CompressorException {
+		System.out.println("building full markup database for language " + conf.getLangCode());	
+
+		KBDatabaseFactory dbFactory = new KBDatabaseFactory(this);
+
+		dbMarkupFull = new MarkupDatabase(this, DatabaseType.markupFull);
+		databasesByType.put(DatabaseType.markupFull, dbMarkupFull);
+
+		File dataDirectory = new File(conf.getDataDirectory());
+
+		File markup = getMarkupDataFile(dataDirectory);
+		//System.out.println("Building MarkupFull db");
+		dbMarkupFull.loadFromXmlFile(markup, overwrite);
+
+		System.out.println("Full markup database built - " + dbPage.getDatabaseSize() + " pages.");
+	}
+
 	private static File getDataFile(File dataDirectory, String fileName) throws IOException {
 		File file = new File(dataDirectory + File.separator + fileName);
 		if (!file.canRead()) {
@@ -560,6 +543,46 @@ public class KBEnvironment  {
 				Logger.getLogger(KBEnvironment.class).info(files[0] + " is not readable");
 		}
 		return files[0];
+	}
+
+	/**
+	 * Statistics available about a wikipedia dump
+	 */
+	public enum StatisticName {
+		/**
+		 * The number of articles (not disambiguations or redirects) available
+		 */
+		articleCount,
+		
+		/**
+		 * The number of categories available
+		 */
+		categoryCount,
+		
+		/**
+		 * The number of disambiguation pages available
+		 */
+		disambiguationCount,
+		
+		/**
+		 * The number of redirects available
+		 */
+		redirectCount,
+		
+		/**
+		 * A long value representation of the date and time this dump was last edited -- use new Date(long) to get to parse
+		 */
+		lastEdit,
+		
+		/**
+		 * The maximum path length between articles and the root category 
+		 */
+		maxCategoryDepth,
+		
+		/**
+		 * The id of root category, below which all articles should be organized 
+		 */
+		rootCategoryId 
 	}
 
 }

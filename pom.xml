@@ -118,8 +118,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -231,7 +231,7 @@
 		        <argument>-classpath</argument><classpath />
 	     		<argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
 		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-		        <argument>data/wikipedia/wikipedia-en.xml</argument>
+		        <argument>data/wikipedia/wikipedia-en.yaml</argument>
 		      </arguments>
 		    </configuration>
 		  </plugin></plugins>
@@ -254,7 +254,7 @@
 		        <argument>-classpath</argument><classpath />
 		        <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
 		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-		        <argument>data/wikipedia/wikipedia-fr.xml</argument>
+		        <argument>data/wikipedia/wikipedia-fr.yaml</argument>
 		      </arguments>
 		    </configuration>
 		  </plugin></plugins>
@@ -277,7 +277,7 @@
 		        <argument>-classpath</argument><classpath />
 		        <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
 		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-		        <argument>data/wikipedia/wikipedia-de.xml</argument>
+		        <argument>data/wikipedia/wikipedia-de.yaml</argument>
 		      </arguments>
 		    </configuration>
 		  </plugin></plugins>
@@ -401,22 +401,123 @@
 	
 	<dependencies>	
 
+		<!--Apache commons -->
 		<dependency>
-			<groupId>org.grobid</groupId>
-			<artifactId>grobid-core</artifactId>
-			<version>0.4.2-SNAPSHOT</version>
-			<scope>system</scope>
-		    <systemPath>${project.basedir}/lib/grobid-core-0.4.2-SNAPSHOT.jar</systemPath>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
 		</dependency>
-
 		<dependency>
-		    <groupId>org.grobid.ner</groupId>
-		    <artifactId>grobid-ner</artifactId>
-		    <version>0.4.2-SNAPSHOT</version>
-		    <scope>system</scope>
-		    <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
 		</dependency>
 		
+		<!-- for web services - to be updated -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>1.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+		   <groupId>org.apache.httpcomponents</groupId>
+		   <artifactId>httpclient</artifactId>
+		   <version>4.2</version>
+		</dependency>
+		<dependency>
+		   <groupId>org.apache.httpcomponents</groupId>
+		   <artifactId>httpmime</artifactId>
+		   <version>4.2</version>
+		</dependency>
+
+        <!-- to be removed !-->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-core</artifactId>
+			<version>1.2.1</version>
+		</dependency>	
+
+		<!-- to be removed for NLP4J -->
+		<dependency>
+			<groupId>org.apache.opennlp</groupId>
+			<artifactId>opennlp-tools</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		
+		<!-- TBD: update to the latest NLP4J! -->
+		<dependency>
+		    <groupId>com.googlecode.clearnlp</groupId>
+		    <artifactId>clearnlp</artifactId>
+		    <version>1.3.1</version>
+		</dependency>
+
+		<!-- language identification - to be removed for using grobid's one -->
+        <dependency>
+			<groupId>com.cybozu</groupId>
+			<artifactId>language-detection</artifactId>
+			<version>09-13-2011</version>
+		</dependency>
+
+        <!-- LMDB -->
+        <dependency>
+          <groupId>org.deephacks.lmdbjni</groupId>
+          <artifactId>lmdbjni</artifactId>
+          <version>${lmdbjni.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.deephacks.lmdbjni</groupId>
+          <artifactId>lmdbjni-linux64</artifactId>
+          <version>${lmdbjni.version}</version>
+        </dependency>
+
+        <!-- machine learning library -->
+        <dependency>
+      		<groupId>com.github.haifengl</groupId>
+      		<artifactId>smile-core</artifactId>
+      		<version>1.3.0</version>
+    	</dependency>
+    	
+    	<!-- Serialization -->
+    	<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+		</dependency>
+		<dependency>
+    		<groupId>de.ruedigermoeller</groupId>
+		    <artifactId>fst</artifactId>
+		    <version>2.47</version>
+		</dependency>
 		<dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -438,191 +539,84 @@
         	<version>2.7.2</version>
 	    </dependency>
 
-		<dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.6</version>
-		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<!-- Should be runtime or at least optional -->
-            <!--optional>true</optional-->
-            <!--scope>runtime</scope-->
-		</dependency>
-		
-		<dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-        </dependency>
-		
-		<dependency>
-		   <groupId>org.apache.httpcomponents</groupId>
-		   <artifactId>httpclient</artifactId>
-		   <version>4.2</version>
-		</dependency>
-	
-		<dependency>
-		   <groupId>org.apache.httpcomponents</groupId>
-		   <artifactId>httpmime</artifactId>
-		   <version>4.2</version>
-		</dependency>
-		
-		<!-- TBD: remove this dependency! -->
+	    <!-- TBD: remove this dependency! -->
 		<dependency>
 		   <groupId>org.json</groupId>
 		   <artifactId>json</artifactId>
 		   <version>20080701</version>
 		</dependency>
-		
-		<!-- TBD: update to the latest NLP4J! -->
-		<dependency>
-		    <groupId>com.googlecode.clearnlp</groupId>
-		    <artifactId>clearnlp</artifactId>
-		    <version>1.3.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-			<version>4.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency>
 
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>1.8</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.8</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-multipart</artifactId>
-			<version>1.8</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>directory-naming</groupId>
-			<artifactId>naming-java</artifactId>
-			<version>0.8</version>
-		</dependency>
-
-		<dependency>
-            <groupId>fr.limsi.wapiti</groupId>
-            <artifactId>wapiti</artifactId>
-            <version>1.5.0</version>
-        </dependency>
-
-        <!-- to be removed !-->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-core</artifactId>
-			<version>1.2.1</version>
-		</dependency>	
-
-		<!-- to be removed for NLP4J -->
-		<dependency>
-			<groupId>org.apache.opennlp</groupId>
-			<artifactId>opennlp-tools</artifactId>
-			<version>1.5.3</version>
-		</dependency>
-		
-        <dependency>
-			<groupId>com.cybozu</groupId>
-			<artifactId>language-detection</artifactId>
-			<version>09-13-2011</version>
-		</dependency>
-
-        <dependency>
-			<groupId>net.arnx</groupId>
-			<artifactId>jsonic</artifactId>
-			<version>1.3.5</version>
-		</dependency>
-
+	    <!-- avro hadoop serialization - to be removed at some point! -->
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-maven-plugin</artifactId>
             <version>${avro.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-compiler</artifactId>
             <version>${avro.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-mapred</artifactId>
             <version>${avro.version}</version>
         </dependency>
 
+		<!-- for GROBID NER -->
+		<dependency>
+			<groupId>org.grobid</groupId>
+			<artifactId>grobid-core</artifactId>
+			<version>0.4.2-SNAPSHOT</version>
+			<scope>system</scope>
+		    <systemPath>${project.basedir}/lib/grobid-core-0.4.2-SNAPSHOT.jar</systemPath>
+		</dependency>
+		<dependency>
+		    <groupId>org.grobid.ner</groupId>
+		    <artifactId>grobid-ner</artifactId>
+		    <version>0.4.2-SNAPSHOT</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>directory-naming</groupId>
+			<artifactId>naming-java</artifactId>
+			<version>0.8</version>
+		</dependency>
+		<dependency>
+            <groupId>fr.limsi.wapiti</groupId>
+            <artifactId>wapiti</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+         <dependency>
+			<groupId>net.arnx</groupId>
+			<artifactId>jsonic</artifactId>
+			<version>1.3.5</version>
+		</dependency>
+
+        <!-- for test only -->
         <dependency>
-          <groupId>org.deephacks.lmdbjni</groupId>
-          <artifactId>lmdbjni</artifactId>
-          <version>${lmdbjni.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
         </dependency>
 
-        <dependency>
-          <groupId>org.deephacks.lmdbjni</groupId>
-          <artifactId>lmdbjni-linux64</artifactId>
-          <version>${lmdbjni.version}</version>
-        </dependency>
-
-        <dependency>
-      		<groupId>com.github.haifengl</groupId>
-      		<artifactId>smile-core</artifactId>
-      		<version>1.3.0</version>
-    	</dependency>
-    	
-    	<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.4.8</version>
+        <!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 
 	</dependencies>

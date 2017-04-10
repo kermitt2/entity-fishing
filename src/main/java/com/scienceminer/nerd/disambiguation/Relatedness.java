@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.model.Wikipedia.LinkDirection;
+import com.scienceminer.nerd.kb.model.Wikipedia.Direction;
 
 import org.grobid.core.utilities.OffsetPosition;
 
@@ -156,24 +156,24 @@ public class Relatedness {
 		Wikipedia wikipedia = wikipedias.get(lang);
 		NerdConfig conf = wikipedia.getConfig();
 
-		EntityPairRelatedness cmp = getEntityPairRelatedness(artA, artB, wikipedia);
-		if (cmp == null)
+		EntityPairRelatedness epr = getEntityPairRelatedness(artA, artB, wikipedia);
+		if (epr == null)
 			return 0.0;
 		
-		if ( (cmp.getInLinkIntersectionProportion() == 0.0) && (cmp.getOutLinkIntersectionProportion() == 0.0) )
+		if ( (epr.getInLinkIntersectionProportion() == 0.0) && (epr.getOutLinkIntersectionProportion() == 0.0) )
 			return 0.0;
 		
-		//System.out.println("gi " + cmp.getInLinkmilneWittenMeasure());
-		//System.out.println("go " + cmp.getOutLinkmilneWittenMeasure());
+		//System.out.println("gi " + epr.getInLinkmilneWittenMeasure());
+		//System.out.println("go " + epr.getOutLinkmilneWittenMeasure());
 		int count = 0;
 		double total = 0.0;
 		
 		count++;
-		total = total + cmp.getInLinkMilneWittenMeasure();
+		total = total + epr.getInLinkMilneWittenMeasure();
 
 		if (conf.getUseLinkOut()) {	
 			count++;
-			total = total + cmp.getOutLinkMilneWittenMeasure();
+			total = total + epr.getOutLinkMilneWittenMeasure();
 		}
 
 		if (count == 0)
@@ -183,33 +183,33 @@ public class Relatedness {
 	}
 
 	public EntityPairRelatedness getEntityPairRelatedness(Article artA, Article artB, Wikipedia wikipedia) {
-		EntityPairRelatedness cmp = new EntityPairRelatedness(artA, artB);
+		EntityPairRelatedness epr = new EntityPairRelatedness(artA, artB);
 		NerdConfig conf = wikipedia.getConfig();
 
-		cmp = setPageLinkFeatures(cmp, LinkDirection.In, wikipedia);
+		epr = setPageLinkFeatures(epr, Direction.In, wikipedia);
 
 		if (conf.getUseLinkOut()) 	
-			cmp = setPageLinkFeatures(cmp, LinkDirection.Out, wikipedia);
+			epr = setPageLinkFeatures(epr, Direction.Out, wikipedia);
 
-		if (!cmp.inLinkFeaturesSet() && !cmp.outLinkFeaturesSet())
+		if (!epr.inLinkFeaturesSet() && !epr.outLinkFeaturesSet())
 			return null;
 
-		return cmp;
+		return epr;
 	}
 
 	// following Milne & Witten relatedness measurement as implemented in WikipediaMiner
-	private EntityPairRelatedness setPageLinkFeatures(EntityPairRelatedness cmp, LinkDirection dir, Wikipedia wikipedia) {
-		if (cmp.getArticleA().getId() == cmp.getArticleB().getId()) {
+	private EntityPairRelatedness setPageLinkFeatures(EntityPairRelatedness epr, Direction dir, Wikipedia wikipedia) {
+		if (epr.getArticleA().getId() == epr.getArticleB().getId()) {
 			// nothing to do
-			return cmp;
+			return epr;
 		}
 
-		ArrayList<Integer> linksA = wikipedia.getLinks(cmp.getArticleA().getId(), dir);
-		ArrayList<Integer> linksB = wikipedia.getLinks(cmp.getArticleB().getId(), dir);
+		List<Integer> linksA = wikipedia.getLinks(epr.getArticleA().getId(), dir);
+		List<Integer> linksB = wikipedia.getLinks(epr.getArticleB().getId(), dir);
 
 		//we can't do anything if there are no links
 		if (linksA.isEmpty() || linksB.isEmpty()) 
-			return cmp;
+			return epr;
 		
 		NerdConfig conf = wikipedia.getConfig();
 //System.out.println("#linksA: " + linksA.size() + " / " + "#linksB: " + linksB.size());
@@ -223,32 +223,9 @@ public class Relatedness {
 
 		List<Double> vectA = new ArrayList<Double>();
 		List<Double> vectB = new ArrayList<Double>();
-
-		//get denominators for link frequency
-		//Integer linksFromSourceA = 0;
-		//Integer linksFromSourceB = 0;
-		/*if (conf.getUseLinkCounts()) {
-			if (dir == LinkDirection.Out) {
-				linksFromSourceA = cmp.getArticleA().getTotalLinksOutCount();
-				linksFromSourceB = cmp.getArticleB().getTotalLinksOutCount();
-			} else {
-				linksFromSourceA = cmp.getArticleA().getTotalLinksInCount();
-				linksFromSourceB = cmp.getArticleB().getTotalLinksInCount();
-			}
-		}*/
-
-		/*int maxA = linksA.size();
-		if (maxA>10000)
-			maxA=10000;
-		int maxB = linksB.size();
-		if (maxB>10000)
-			maxB=10000;*/
 		
 		while (indexA < linksA.size() || indexB < linksB.size()) {
-		//while (indexA < maxA || indexB < maxB) {	
-
 			//identify which links to use (A, B, or both)
-
 			boolean useA = false;
 			boolean useB = false;
 			boolean mutual = false;
@@ -269,20 +246,20 @@ public class Relatedness {
 			} else {
 				if (linkA != null && (linkB == null || linkA < linkB)) {
 					useA = true;
-					if (linkA.equals(cmp.getArticleB().getId())) {
+					if (linkA.equals(epr.getArticleB().getId())) {
 						intersection++;
 						mutual = true;
 					}
 
 				} else {
 					useB = true;
-					if (linkB.equals(cmp.getArticleA().getId())) {
+					if (linkB.equals(epr.getArticleA().getId())) {
 						intersection++;
 						mutual = true;
 					}
 				}
 			}
-			union ++;
+			union++;
 
 			if (useA)
 				indexA++;
@@ -304,7 +281,11 @@ public class Relatedness {
 			milneWittenMeasure = (Math.max(a, b) - ab) / (m - Math.min(a, b));
 		}
 		
-		milneWittenMeasure = EntityPairRelatedness.normalizeMilneWittenMeasure(milneWittenMeasure);
+		// normalization
+		if (milneWittenMeasure >= 1)
+				milneWittenMeasure = 0.0;
+		else 	
+			milneWittenMeasure = 1 - milneWittenMeasure;
 
 		double intersectionProportion;
 		if (union == 0)
@@ -312,16 +293,12 @@ public class Relatedness {
 		else
 			intersectionProportion = (double)intersection/union;
 
-		//System.out.println("Intersection: " + intersection + "\tUnion: " + union);
-		//System.out.println("Relatedness:" + df.format(milneWittenMeasure));
-		//System.out.println();
-
-		if (dir == LinkDirection.Out)
-			cmp.setOutLinkFeatures(milneWittenMeasure, union, intersectionProportion);
+		if (dir == Direction.Out)
+			epr.setOutLinkFeatures(milneWittenMeasure, intersectionProportion);
 		else
-			cmp.setInLinkFeatures(milneWittenMeasure, union, intersectionProportion);
+			epr.setInLinkFeatures(milneWittenMeasure, intersectionProportion);
 
-		return cmp;
+		return epr;
 	}
 
 	/**
@@ -769,5 +746,70 @@ public class Relatedness {
 	        it.remove(); // avoids a ConcurrentModificationException
 	   	}
 	}
+
+	/**
+	 * A POJO for calculation of relatedness between two articles, not so useful maybe
+	 */
+	public class EntityPairRelatedness {
+
+		private final Article articleA;
+		private final Article articleB;
+		
+		private boolean inLinkFeaturesSet = false;
+		private double inLinkMilneWittenMeasure = 0.0;
+		private double inLinkIntersectionProportion = 0.0;
+		
+		private boolean outLinkFeaturesSet = false;
+		private double outLinkMilneWittenMeasure = 0.0;
+		private double outLinkIntersectionProportion = 0.0;
+		
+		public EntityPairRelatedness(Article artA, Article artB) {
+			articleA = artA;
+			articleB = artB;
+		}
+		
+		public Article getArticleA() {
+			return articleA;
+		}
+
+		public Article getArticleB() {
+			return articleB;
+		}
+
+		public boolean inLinkFeaturesSet() {
+			return inLinkFeaturesSet;
+		}
+
+		public double getInLinkMilneWittenMeasure() {
+			return inLinkMilneWittenMeasure;
+		}
+		public double getInLinkIntersectionProportion() {
+			return inLinkIntersectionProportion;
+		}
+
+		public boolean outLinkFeaturesSet() {
+			return outLinkFeaturesSet;
+		}
+
+		public double getOutLinkMilneWittenMeasure() {
+			return outLinkMilneWittenMeasure;
+		}
+
+		public double getOutLinkIntersectionProportion() {
+			return outLinkIntersectionProportion;
+		}
+
+		public void setInLinkFeatures(double milneWittenMeasure, double intersectionProportion) {
+			inLinkFeaturesSet = true;
+			inLinkMilneWittenMeasure = milneWittenMeasure;
+			inLinkIntersectionProportion = intersectionProportion;
+		}
+		
+		public void setOutLinkFeatures(double milneWittenMeasure, double intersectionProportion) {
+			outLinkFeaturesSet = true;
+			outLinkMilneWittenMeasure = milneWittenMeasure;
+			outLinkIntersectionProportion = intersectionProportion;
+		}
+	};
 
 }

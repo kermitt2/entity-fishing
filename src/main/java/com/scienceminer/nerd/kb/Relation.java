@@ -5,7 +5,9 @@ import java.io.Serializable;
 /**
  * Class for representing and exchanging a semantic relation.
  */
-public class Relation extends org.apache.hadoop.record.Record implements Serializable { 
+//public class Relation extends org.apache.hadoop.record.Record implements Serializable { 
+
+public class Relation implements Serializable { 
 
     // Orign of the entity definition
     public enum RelationType {
@@ -40,6 +42,7 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
         this.concept1ID = concept1ID;
         this.concept2ID = concept2ID;
         this.relationName = relationName;
+        this.templateName = templateName;
     }
 
     public String getRelationName() {
@@ -85,12 +88,14 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(concept1ID).append("\t").append(" -> ").append(type.getName()).append(" -> ").append(concept2ID).append("\n");
-
+        sb.append(concept1ID).append("\t").append(" -> ")
+            .append(type.getName() + " / ").append(relationName)
+            .append(" -> ").append(concept2ID + " / ")
+            .append(templateName);
         return sb.toString();
     }
 
-    @Override
+    /*@Override
     public int compareTo(Object theRel) {
         Relation theRelation = (Relation)theRel;
         if ( (concept1ID == theRelation.getConcept1ID()) &&
@@ -108,9 +113,9 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
         } else {
             return -1;
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void deserialize(final org.apache.hadoop.record.RecordInput _rio_a, final String _rio_tag) throws java.io.IOException {
         throw new UnsupportedOperationException();
     }
@@ -119,5 +124,11 @@ public class Relation extends org.apache.hadoop.record.Record implements Seriali
      public void serialize(final org.apache.hadoop.record.RecordOutput _rio_a, final String _rio_tag)
         throws java.io.IOException {
         throw new UnsupportedOperationException();
+    }*/
+
+    public String toJSON() {
+        StringBuilder sb = new StringBuilder();
+
+        return sb.toString();
     }
 }

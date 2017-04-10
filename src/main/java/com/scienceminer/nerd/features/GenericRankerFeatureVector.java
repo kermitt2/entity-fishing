@@ -36,7 +36,9 @@ public class GenericRankerFeatureVector {
 	public boolean Add_NERSubType_relatedness = false; // relateness between the concept and the estimated NER subtype
 	
 	public boolean Add_occ_term = false; // term frequency 
-		
+	
+	public boolean Add_dice_coef = false; // lexical cohesion measure based on DICE coefficient
+
 	// relateness with the context:
 	// - with context terms
 	// - with all other candidates (average)
@@ -47,7 +49,7 @@ public class GenericRankerFeatureVector {
 	// - minimum depth of concept in wikipedia category tree
 	// - general term frequency
 	// - tf/idf
-	// - lexical cohesion (e.g. dice coefficient)
+	// - more lexical cohesion measures
 
 	// quality of the NE property:
 	// - mention marked by NER
@@ -79,6 +81,7 @@ public class GenericRankerFeatureVector {
 	public double NERSubType_relatedness = 0.0;
 
 	public long occ_term = 0;
+	public double dice_coef = 0.0;
 
 	/**
 	 *  Write header of ARFF files.
@@ -128,7 +131,9 @@ public class GenericRankerFeatureVector {
 		if (Add_NERSubType_relatedness)
 			header.append("@attribute NERSubType_relatedness REAL\n");
 		if (Add_occ_term) 
-			header.append("@attribute occ_term NUMERIC\n");			
+			header.append("@attribute occ_term NUMERIC\n");	
+		if (Add_dice_coef) 
+			header.append("@attribute dice_coef REAL\n");			
 		
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -171,6 +176,8 @@ public class GenericRankerFeatureVector {
 		if (Add_NERSubType_relatedness)	
 			num++;
 		if (Add_occ_term) 
+			num++;
+		if (Add_dice_coef) 
 			num++;
 		// class
 		num++;	
@@ -281,6 +288,9 @@ public class GenericRankerFeatureVector {
 		if (Add_occ_term) {
 			res.append("," + occ_term);
 		}
+		if (Add_dice_coef) {
+			res.append("," + dice_coef);
+		}
 		
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
@@ -379,6 +389,10 @@ public class GenericRankerFeatureVector {
 		}
 		if (Add_occ_term) {
 			result[i] = occ_term;
+			i++;
+		}
+		if (Add_dice_coef) {
+			result[i] = dice_coef;
 			i++;
 		}
 

@@ -48,18 +48,16 @@ public class Page implements Comparable<Page> {
 		 * A type of page that we don't currently deal with (e.g templates)
 		 */
 		invalid
-	} ;
+	};
 
-	protected int id ;
-	protected String title ;
-	protected PageType type ;
-	protected int depth ;
-	protected Double weight = null ;
+	protected int id;
+	protected String title;
+	protected PageType type;
+	protected int depth;
+	protected Double weight = null;
 
-	protected KBEnvironment env ;
-	protected boolean detailsSet ;
-
-	//constructor =============================================================
+	protected KBEnvironment env;
+	protected boolean detailsSet;
 
 	/**
 	 * Initialises a newly created Page so that it represents the page given by <em>id</em> and <em>DbPage</em>.
@@ -71,11 +69,10 @@ public class Page implements Comparable<Page> {
 	 * @param	pd  details (title, type, etc) of the page	 
 	 */
 	protected Page(KBEnvironment env, int id, DbPage pd)  {
-		this.env = env ;
-		this.id = id ;
-		setDetails(pd) ;
+		this.env = env;
+		this.id = id;
+		setDetails(pd);
 	}
-
 
 	/**
 	 * Initialises a newly created Page so that it represents the page given by <em>id</em>. This is also an efficient
@@ -85,13 +82,10 @@ public class Page implements Comparable<Page> {
 	 * @param	id	the unique identifier of the Wikipedia page
 	 */
 	public Page(KBEnvironment env, int id) {
-		this.env = env ;
-		this.id = id ;
-		this.detailsSet = false ;
+		this.env = env;
+		this.id = id;
+		this.detailsSet = false;
 	}
-
-
-	//public ==================================================================
 
 	/**
 	 * @return the database environment
@@ -106,9 +100,9 @@ public class Page implements Comparable<Page> {
 	 */
 	public boolean exists() {
 		if (!detailsSet) 
-			setDetails() ;
+			setDetails();
 
-		return (type != PageType.invalid) ;
+		return (type != PageType.invalid);
 	}
 
 	/**
@@ -117,14 +111,14 @@ public class Page implements Comparable<Page> {
 	 * @param weight  the weight by which this page will be compared to others.
 	 */
 	public void setWeight(Double weight) {
-		this.weight = weight ;
+		this.weight = weight;
 	}
 
 	/**
 	 * @return the weight by which this page is compared to others. (may be null, in which case the page is compared only via id)
 	 */	
 	public Double getWeight() {
-		return weight ;
+		return weight;
 	}
 
 
@@ -133,7 +127,7 @@ public class Page implements Comparable<Page> {
 	 * @return true if this page has the same id as the given one, otherwise false
 	 */
 	public boolean equals(Page p) {
-		return p.id == id ;
+		return p.id == id;
 	}
 
 	/**
@@ -147,17 +141,17 @@ public class Page implements Comparable<Page> {
 	public int compareTo(Page p) {
 
 		if (p.id == id)
-			return 0 ;
+			return 0;
 
-		int cmp = 0 ;
+		int cmp = 0;
 
 		if (p.weight != null && weight != null && p.weight != weight)
-			cmp =  p.weight.compareTo(weight) ; 
+			cmp =  p.weight.compareTo(weight); 
 
 		if (cmp == 0)
-			cmp = new Integer(id).compareTo(p.id) ;
+			cmp = new Integer(id).compareTo(p.id);
 
-		return cmp ;
+		return cmp;
 
 	}
 
@@ -168,11 +162,9 @@ public class Page implements Comparable<Page> {
 	 */
         @Override
 	public String toString()  {
-		String s = getId() + ": " + getTitle() ;
-		return s ;
+		String s = getId() + ": " + getTitle();
+		return s;
 	}
-
-
 
 	/**
 	 * @return the unique identifier
@@ -185,7 +177,7 @@ public class Page implements Comparable<Page> {
 	 * @return the title
 	 */
 	public String getTitle() {
-		if (!detailsSet) setDetails() ;
+		if (!detailsSet) setDetails();
 
 		return title;
 	}
@@ -194,7 +186,7 @@ public class Page implements Comparable<Page> {
 	 * @return	the type of the page
 	 */
 	public PageType getType() {
-		if (!detailsSet) setDetails() ;
+		if (!detailsSet) setDetails();
 
 		return type;
 	}
@@ -203,83 +195,76 @@ public class Page implements Comparable<Page> {
 	 * @return the length of the shortest path from this page to the root category, or null if no path exists.
 	 */
 	public Integer getDepth() {
-		if (!detailsSet) setDetails() ;
+		if (!detailsSet) setDetails();
 
 		if (depth < 0)
-			return null ;
+			return null;
 		else
-			return depth ;
+			return depth;
 	}
 
 	/**
 	 * @return a number representing the height of this page in the category hierarchy, between {@value 0} (as far from the root category as possible) and 1 {the root category}, or null if no path exists 
 	 */
 	public Float getGenerality() {
-
-		Integer d = getDepth() ;
+		Integer d = getDepth();
 
 		if (d == null)
-			return null ;
+			return null;
 
+		int maxDepth = env.retrieveStatistic(StatisticName.maxCategoryDepth).intValue();
 
-		int maxDepth = env.retrieveStatistic(StatisticName.maxCategoryDepth).intValue() ;
-
-		return 1-((float)d/maxDepth) ;
+		return 1-((float)d/maxDepth);
 	}
 
 	/**
 	 * @return the content of this page, in mediawiki markup format
 	 */
 	public String getMarkup() {
-
-		String markup = env.getDbMarkup().retrieve(id) ; 
-		return markup ;
-
+		String markup = env.getDbMarkup().retrieve(id); 
+		return markup;
 	}
 
 	/**
 	 * @return the character positions of sentence breaks within this page's content
 	 */
-	public Integer[] getSentenceSplits() {
-
-		DbIntList splits = env.getDbSentenceSplits().retrieve(id) ; 
-
+	/*public Integer[] getSentenceSplits() {
+		DbIntList splits = env.getDbSentenceSplits().retrieve(id); 
 		if (splits == null || splits.getValues() == null) 
-			return new Integer[0] ;
+			return new Integer[0];
 
-		return splits.getValues().toArray(new Integer[splits.getValues().size()]) ;
-	}
+		return splits.getValues().toArray(new Integer[splits.getValues().size()]);
+	}*/
 
 	/**
 	 * @param index the index of the desired sentence
 	 * @return the content of the desired sentence, in mediawiki markup format
 	 */
-	public String getSentenceMarkup(int index) {
+	/*public String getSentenceMarkup(int index) {
+		String markup = getMarkup();
+		Integer[] splits = getSentenceSplits();
 
-		String markup = getMarkup() ;
-		Integer[] splits = getSentenceSplits() ;
+		MarkupStripper s = new MarkupStripper();
+		markup = s.stripAllButInternalLinksAndEmphasis(markup, ' ');
+		markup = s.stripNonArticleInternalLinks(markup, ' ');
 
-		MarkupStripper s = new MarkupStripper() ;
-		markup = s.stripAllButInternalLinksAndEmphasis(markup, ' ') ;
-		markup = s.stripNonArticleInternalLinks(markup, ' ') ;
-
-		String sentence ;
+		String sentence;
 
 		if (splits.length == 0)
-			sentence = markup ;
+			sentence = markup;
 		else if (index == 0)
-			sentence = markup.substring(0, splits[0]) ;
+			sentence = markup.substring(0, splits[0]);
 		else if (index < splits.length) 
-			sentence = markup.substring(splits[index-1], splits[index]) ;
+			sentence = markup.substring(splits[index-1], splits[index]);
 		else if (index == splits.length)
-			sentence = markup.substring(splits[index-1]) ;
+			sentence = markup.substring(splits[index-1]);
 		else
-			sentence = "" ;
+			sentence = "";
 
-		sentence = sentence.replaceAll("\\s+", " ") ;
+		sentence = sentence.replaceAll("\\s+", " ");
 
 		return sentence.trim();
-	}
+	}*/
 
 	/**
 	 * Returns the first paragraph from the content of this page, cleaned of all markup except links and 
@@ -291,66 +276,79 @@ public class Page implements Comparable<Page> {
 	 */
 	public String getFirstParagraphMarkup() {
 
-		MarkupStripper stripper = new MarkupStripper() ;
+		MarkupStripper stripper = new MarkupStripper();
 
-		String markup = getMarkup() ;
+		String markup = getMarkup();
 
-		/*markup = markup.replaceAll("={2,}(.+)={2,}", "\n") ; //clear section headings completely - not just formating, but content as well.			
-		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null) ;
-		markup = stripper.stripNonArticleInternalLinks(markup, null) ;
-		markup = stripper.stripExcessNewlines(markup) ;
+		/*markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
+		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
+		markup = stripper.stripNonArticleInternalLinks(markup, null);
+		markup = stripper.stripExcessNewlines(markup);
 
 		String fp = "";
-		int pos = markup.indexOf("\n\n") ;
+		int pos = markup.indexOf("\n\n");
 
 		while (pos>=0) {
-			fp = markup.substring(0, pos) ;
+			fp = markup.substring(0, pos);
 
 			if (pos > 150) 
-				break ;
+				break;
 
-			pos = markup.indexOf("\n\n", pos+2) ;
+			pos = markup.indexOf("\n\n", pos+2);
 		}
 
-		//fp = stripper.stripAllButInternalLinksAndEmphasis(fp, null) ;
-		//fp = stripper.stripNonArticleInternalLinks(fp, null) ;
+		//fp = stripper.stripAllButInternalLinksAndEmphasis(fp, null);
+		//fp = stripper.stripNonArticleInternalLinks(fp, null);
 
-		fp = fp.replaceAll("\n", " ") ;
-		fp = fp.replaceAll("\\s+", " ") ;  //turn all whitespace into spaces, and collapse them.
+		fp = fp.replaceAll("\n", " ");
+		fp = fp.replaceAll("\\s+", " ");  //turn all whitespace into spaces, and collapse them.
 		fp = fp.trim();
 
-		return fp ;*/
+		return fp;*/
 		return markup;
 	}
 
 	public static String formatFirstParagraphMarkup(String markup) {
-		MarkupStripper stripper = new MarkupStripper() ;
+		MarkupStripper stripper = new MarkupStripper();
 
-		markup = markup.replaceAll("={2,}(.+)={2,}", "\n") ; //clear section headings completely - not just formating, but content as well.			
-		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null) ;
-		markup = stripper.stripNonArticleInternalLinks(markup, null) ;
-		markup = stripper.stripExcessNewlines(markup) ;
+		markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
+		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
+		markup = stripper.stripNonArticleInternalLinks(markup, null);
+		markup = stripper.stripExcessNewlines(markup);
 
 		String fp = "";
-		int pos = markup.indexOf("\n\n") ;
+		int pos = markup.indexOf("\n\n");
 
 		while (pos>=0) {
-			fp = markup.substring(0, pos) ;
+			fp = markup.substring(0, pos);
 
 			if (pos > 150) 
-				break ;
+				break;
 
-			pos = markup.indexOf("\n\n", pos+2) ;
+			pos = markup.indexOf("\n\n", pos+2);
 		}
 
-		fp = fp.replaceAll("\n", " ") ;
-		fp = fp.replaceAll("\\s+", " ") ;  //turn all whitespace into spaces, and collapse them.
+		fp = fp.replaceAll("\n", " ");
+		fp = fp.replaceAll("\\s+", " ");  //turn all whitespace into spaces, and collapse them.
 		fp = fp.trim();
 
-		return fp ;
+		return fp;
 	}
 
-	//public static ============================================================
+	public static String formatAllMarkup(String markup) {
+		MarkupStripper stripper = new MarkupStripper();
+
+		//markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
+		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
+		markup = stripper.stripNonArticleInternalLinks(markup, null);
+		markup = stripper.stripExcessNewlines(markup);
+
+		markup = markup.replaceAll("\n", " ");
+		markup = markup.replaceAll("\\s+", " ");  //turn all whitespace into spaces, and collapse them.
+		markup = markup.trim();
+
+		return markup;
+	}
 
 
 	/**
@@ -382,59 +380,56 @@ public class Page implements Comparable<Page> {
 	 */
 	public static Page createPage(KBEnvironment env, int id, DbPage pd) {
 
-		Page p = null ;
+		Page p = null;
 
-		PageType type = PageType.values()[pd.getType()] ;
+		PageType type = PageType.values()[pd.getType()];
 
 		switch (type) {
 			case article:
-				p = new Article(env, id, pd) ;
-				break ;
+				p = new Article(env, id, pd);
+				break;
 			case redirect:
-				p = new Redirect(env, id, pd) ;
-				break ;
+				p = new Redirect(env, id, pd);
+				break;
 			case disambiguation:
-				p = new Disambiguation(env, id, pd) ;
-				break ;
+				p = new Disambiguation(env, id, pd);
+				break;
 			case category:
-				p = new Category(env, id, pd) ;
-				break ;
+				p = new Category(env, id, pd);
+				break;
 			case template:
-				p = new Template(env, id, pd) ;
-				break ;
+				p = new Template(env, id, pd);
+				break;
 			default:
-				p = new Page(env, id, pd) ;
+				p = new Page(env, id, pd);
 		}
 
-		return p ;
+		return p;
 	}
-
-
-	//protected and private ====================================================
 
 	private void setDetails()  {
 
 		try {
-			DbPage pd = env.getDbPage().retrieve(id) ;
+			DbPage pd = env.getDbPage().retrieve(id);
 
 			if (pd == null) {
-				throw new Exception() ;
+				throw new Exception();
 			} else {
-				setDetails(pd) ;
+				setDetails(pd);
 			}
 		} catch (Exception e) {
-			title = null ;
-			type = PageType.invalid ;
+			title = null;
+			type = PageType.invalid;
 		}
 	}
 
 	private void setDetails(DbPage pd)  {
 
-		title = pd.getTitle() ;
-		type = PageType.values()[pd.getType()] ;
-		depth = pd.getDepth() ;
+		title = pd.getTitle();
+		type = PageType.values()[pd.getType()];
+		depth = pd.getDepth();
 
-		detailsSet = true ;
+		detailsSet = true;
 	}
 
 }

@@ -41,7 +41,7 @@ public class LabelIterator implements Iterator<Label> {
         byte[] valueData = entry.getValue();
         Label l = null;
         try {
-            DbLabel la = (DbLabel)Utilities.deserialize(valueData);
+            DbLabel la = (DbLabel)KBEnvironment.deserialize(valueData);
             String keyId = string(keyData);
             l = toLabel(new KBEntry<String, DbLabel>(keyId, la));
         } catch(Exception e) {

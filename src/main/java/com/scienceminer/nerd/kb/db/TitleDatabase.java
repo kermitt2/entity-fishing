@@ -79,7 +79,8 @@ public class TitleDatabase extends StringIntDatabase {
 			//for (Map.Entry<String, Integer> entry: tmp.entrySet()) {
 			//if (entry != null) {
 				try {
-					db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
+					//db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
+					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

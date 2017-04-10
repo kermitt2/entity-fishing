@@ -2,6 +2,7 @@ package com.scienceminer.nerd.kb.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,7 +32,7 @@ public class Wikipedia {
 	private KBEnvironment env = null;
 	private int wikipediaArticleCount = -1;
 
-	public enum LinkDirection {
+	public enum Direction {
 		In, 
 		Out
 	}
@@ -241,9 +242,9 @@ public class Wikipedia {
 	 * Returns the list of links in relation to artId with the specified direction (in or out).
 	 * 
 	 */
-	public ArrayList<Integer> getLinks(int artId, LinkDirection dir) {
+	public List<Integer> getLinks(int artId, Direction dir) {
 		DbIntList ids = null;
-		if (dir == LinkDirection.In)
+		if (dir == Direction.In)
 			ids = env.getDbPageLinkInNoSentences().retrieve(artId);
 		else
 			ids = env.getDbPageLinkOutNoSentences().retrieve(artId);

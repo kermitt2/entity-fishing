@@ -18,25 +18,25 @@ import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.Relation.RelationType;
+import com.scienceminer.nerd.kb.Property;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-public class RelationDatabase extends IntRecordDatabase<Relation> {
-	private static final Logger logger = LoggerFactory.getLogger(RelationDatabase.class);	
+public class PropertyDatabase extends IntRecordDatabase<Property> {
+	private static final Logger logger = LoggerFactory.getLogger(PropertyDatabase.class);	
 
-	public RelationDatabase(KBEnvironment env) {
-		super(env, DatabaseType.relations);
+	public PropertyDatabase(KBEnvironment env) {
+		super(env, DatabaseType.properties);
 	}
 
 	@Override
-	public KBEntry<Integer, Relation> deserialiseCsvRecord(
+	public KBEntry<Integer, Property> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
-	private KBEntry<Integer, Relation> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
+	private KBEntry<Integer, Property> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -53,18 +53,14 @@ public class RelationDatabase extends IntRecordDatabase<Relation> {
 		int nbToAdd = 0;
 		int nbTotalAdded = 0;
 		int currentPageId = -1;
-		List<Relation> relations = new ArrayList<Relation>();
+		List<Property> properties = new ArrayList<Property>();
 		Transaction tx = environment.createWriteTransaction();
 		while ((line=input.readLine()) != null) {
-			if (nbToAdd >= 10000) {
-				try {
-					tx.commit();
-					tx.close();
-					nbToAdd = 0;
-					tx = environment.createWriteTransaction();
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+			if (nbToAdd == 10000) {
+				tx.commit();
+				tx.close();
+				nbToAdd = 0;
+				tx = environment.createWriteTransaction();
 			}
 
 			String[] pieces = line.split("\\|");
@@ -81,19 +77,19 @@ public class RelationDatabase extends IntRecordDatabase<Relation> {
 					}
 					n++;
 				} 
-
+				
 				if (pageId != currentPageId) {
 					try {
-						db.put(tx, KBEnvironment.serialize(currentPageId), KBEnvironment.serialize(relations));
+						db.put(tx, KBEnvironment.serialize(currentPageId), KBEnvironment.serialize(properties));
 						nbToAdd++;
 					} catch(Exception e) {
 						e.printStackTrace();
 					}
 
 					currentPageId = pageId;
-					relations = new ArrayList<Relation>();
+					properties = new ArrayList<Property>();
 				}
-				
+
 				String rel = null;
 				if (n<pieces.length) {
 					rel = pieces[n];
@@ -117,31 +113,29 @@ public class RelationDatabase extends IntRecordDatabase<Relation> {
 					template = pieces[n];
 				}
 
-				if (valueId != -1) {
-					Relation relation = 
-						new Relation(RelationType.CUSTOM, rel, new Integer(pageId), new Integer(valueId), template);
-//System.out.println(relation.toString());
-					relations.add(relation);
+				if (valueId == -1) {
+					Property property = new Property(new Integer(pageId), rel, value, template, null);
+					properties.add(property);
 					nbTotalAdded++;
-				} 
+				}
 			}
 		}
 
 		// add last property list
 		try {
-			db.put(tx, KBEnvironment.serialize(currentPageId), KBEnvironment.serialize(relations));
+			db.put(tx, KBEnvironment.serialize(currentPageId), KBEnvironment.serialize(properties));
 			nbToAdd++;
 			nbTotalAdded++;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 
-		// last commit
+		// add last db commit
 		tx.commit();
 		tx.close();
 		input.close();
 		isLoaded = true;
-		System.out.println("Total of " + nbTotalAdded + " relations indexed");
+		System.out.println("Total of " + nbTotalAdded + " properties indexed");
 	}
 
 }

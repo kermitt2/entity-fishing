@@ -43,8 +43,9 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
 			cachedData = db.get(tx, bytes(key));
-			if (cachedData != null)
-				record = (Record)Utilities.deserialize(cachedData);
+			if (cachedData != null) {
+				record = (Record)KBEnvironment.deserialize(cachedData);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -57,10 +58,10 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();
-			 BufferCursor cursor = db.bufferCursor(tx)) {
+			BufferCursor cursor = db.bufferCursor(tx)) {
 			cursor.keyWriteBytes(bytes(key));
 			if (cursor.seekKey()) {
-				record = (Record)Utilities.deserialize(cursor.valBytes());
+				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 	
 	public void add(KBEntry<String,Record> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, bytes(entry.getKey()), Utilities.serialize(entry.getValue()));
+			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -109,11 +110,12 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 
 			if (entry != null) {
 				try {
-					db.put(tx, bytes(entry.getKey()), Utilities.serialize(entry.getValue()));
+					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					//System.out.println("Invalid input line: " + line);
 					e.printStackTrace();
+					System.out.println("We skip this particular invalid (and awful) entry and continue loading...");
 				}
 			}
 		}

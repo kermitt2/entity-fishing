@@ -40,7 +40,6 @@ public class ArticleCleaner {
 		stripper = new MarkupStripper() ;
 	}
 	
-	
 	/**
 	 * @param article the article to clean
 	 * @param length the portion of the article that is to be extracted and cleaned (ALL, FIRST_SENTENCE, or FIRST_PARAGRAPH)
@@ -50,14 +49,15 @@ public class ArticleCleaner {
 	public String getMarkupLinksOnly(Article article) throws Exception {
 		return getMarkupLinksOnly(article, SnippetLength.full);
 	}
+
 	public String getMarkupLinksOnly(Article article, SnippetLength length) throws Exception {
 		String markup = null;
 		
 		switch (length) {
 		
-		case firstSentence :
+		/*case firstSentence :
 			markup = article.getSentenceMarkup(0) ;
-			break ;
+			break ;*/
 		case firstParagraph :
 			markup = article.getFirstParagraphMarkup() ;
 			break ;
@@ -81,14 +81,15 @@ public class ArticleCleaner {
 	public String getCleanedContent(Article article) throws Exception { 
 		return getCleanedContent(article, SnippetLength.full);
 	}
+
 	public String getCleanedContent(Article article, SnippetLength length) throws Exception {
 		String markup ;
 		
 		switch (length) {
 		
-		case firstSentence :
+		/*case firstSentence :
 			markup = article.getSentenceMarkup(0) ;
-			break ;
+			break ;*/
 		case firstParagraph :
 			markup = article.getFirstParagraphMarkup() ;
 			break ;

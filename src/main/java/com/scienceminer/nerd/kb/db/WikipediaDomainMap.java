@@ -44,7 +44,7 @@ public class WikipediaDomainMap {
     private String database_name = "domains";
 
     // an in-memory cache - map a Wikipedia page id to a list of domain IDs
-    private ConcurrentMap<Integer, int[]> domainsCache = null;
+    //private ConcurrentMap<Integer, int[]> domainsCache = null;
 
     // domain id map
     private Map<Integer,String> id2domain = null;
@@ -102,7 +102,7 @@ public class WikipediaDomainMap {
     /**
      * Open cache for domains
      */
-    public void openCache() {
+    /*public void openCache() {
         File homeCache = null;
         ObjectInputStream in = null;
         try {
@@ -131,12 +131,12 @@ public class WikipediaDomainMap {
                 throw new NerdException(e);
             }
         }
-    }
+    }*/
     
     /**
      * Close index for domains
      */
-    public void saveCache() {
+    /*public void saveCache() {
         if (domainsCache == null)
             return;
         File home = null;
@@ -164,7 +164,7 @@ public class WikipediaDomainMap {
                 throw new NerdException(e);
             }
         }
-    }
+    }*/
     
     private void loadGrispMapping() throws Exception {
         importDomains();
@@ -262,15 +262,19 @@ System.out.print("\n");*/
             // add to the persistent map
             Page page = iterator.next();
             int pageId = page.getId();
-            int[] theDomains =  createMapping((Article) page);
-            if (theDomains != null) {
-                try {
-                    db.put(tx, BigInteger.valueOf(pageId).toByteArray(), Utilities.serialize(theDomains));
-                    nbToAdd++;
-                } catch(Exception e) {
-                    e.printStackTrace();
+            // conservative check 
+            if (page instanceof Article) {
+                int[] theDomains = createMapping((Article) page);
+                if (theDomains != null) {
+                    try {
+                        //db.put(tx, BigInteger.valueOf(pageId).toByteArray(), KBEnvironment.serialize(theDomains));
+                        db.put(tx, KBEnvironment.serialize(pageId), KBEnvironment.serialize(theDomains));
+                        nbToAdd++;
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    //domainsCache.put(new Integer(pageId), theDomains);
                 }
-                domainsCache.put(new Integer(pageId), theDomains);
             }
             p++;
         }
@@ -343,16 +347,48 @@ System.out.print("\n");*/
         LineIterator.closeQuietly(domainIterator);
     }
 
+    // standard LMDB retrieval
     public List<String> getDomains(int pageId) {
         int[] list = null;
-        if (domainsCache != null)
+        /*if (domainsCache != null)
             domainsCache.get(new Integer(pageId));
-        else {
+        else*/ 
+        {
+            byte[] cachedData = null;
+            try (Transaction tx = environment.createReadTransaction()) {
+                cachedData = db.get(tx, KBEnvironment.serialize(pageId));
+                if (cachedData != null) {
+                    list = (int[])KBEnvironment.deserialize(cachedData);
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<String> result = null;
+        if (list != null) {
+            result = new ArrayList<String>();
+            for(int i=0; i<list.length; i++) {
+                String domain = id2domain.get(new Integer(list[i]));
+                if (domain != null)
+                    result.add(domain);
+            }
+        }
+        return result;
+    }
+
+    // LMDB zero copy version
+    public List<String> getDomains2(int pageId) {
+        int[] list = null;
+        /*if (domainsCache != null)
+            domainsCache.get(new Integer(pageId));
+        else*/ 
+        {
             try (Transaction tx = environment.createReadTransaction();
-                 BufferCursor cursor = db.bufferCursor(tx)) {
+                BufferCursor cursor = db.bufferCursor(tx)) {
                 cursor.keyWriteBytes(BigInteger.valueOf(pageId).toByteArray());
                 if (cursor.seekKey()) {
-                    list = (int[])Utilities.deserialize(cursor.valBytes());
+                    list = (int[])KBEnvironment.deserialize(cursor.valBytes());
                 }
             } catch(Exception e) {
                 e.printStackTrace();

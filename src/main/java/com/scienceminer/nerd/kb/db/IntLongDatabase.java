@@ -42,9 +42,12 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 		byte[] cachedData = null;
 		Long record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
-			if (cachedData != null)
-				record = new BigInteger(cachedData).longValue();
+			//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
+			cachedData = db.get(tx, KBEnvironment.serialize(key));
+			if (cachedData != null) {
+				//record = new BigInteger(cachedData).longValue();
+				record = (Long)KBEnvironment.deserialize(cachedData);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -57,10 +60,12 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 		byte[] cachedData = null;
 		Long record = null;
 		try (Transaction tx = environment.createReadTransaction();
-			 BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			BufferCursor cursor = db.bufferCursor(tx)) {
+			//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
+			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
-				record = new BigInteger(cursor.valBytes()).longValue();
+				//record = new BigInteger(cursor.valBytes()).longValue();
+				record = (Long)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -70,7 +75,8 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 	
 	protected void add(KBEntry<Integer,Long> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
+			//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
+			db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -108,7 +114,8 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 			KBEntry<Integer,Long> entry = deserialiseCsvRecord(cri);
 			if (entry != null) {
 				try {
-					db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
+					//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
+					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

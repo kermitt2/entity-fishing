@@ -11,7 +11,7 @@ public class Template extends Page {
 	 * @param id	the unique identifier of the template
 	 */
 	public Template(KBEnvironment env, int id) {
-		super(env, id) ;
+		super(env, id);
 	}
 	
 	protected Template(KBEnvironment env, int id, DbPage pd) {

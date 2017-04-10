@@ -32,7 +32,6 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
 	private KBEntry<Integer, DbLinkLocationList> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		Integer id = record.readInt(null);
-
 		DbLinkLocationList l = new DbLinkLocationList();
 		l.deserialize(record);
 
@@ -44,19 +43,16 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 			KBEntry<Integer, DbLinkLocationList> outLinkEntry
 	) throws IOException {
 
-
 		if (inLinkEntry==null && outLinkEntry==null)
 			throw new IOException("both inlink and outlink entries are null");
 
 		if (inLinkEntry != null && outLinkEntry != null && !inLinkEntry.getKey().equals(outLinkEntry.getKey()))
 			throw new IOException("inlink and outlink records are not for the same page");
 
-
 		Integer id = null;
 		DbPageLinkCounts linkCounts = new DbPageLinkCounts(0,0,0,0);
 
 		if (inLinkEntry != null) {
-
 			id = inLinkEntry.getKey();
 
 			int total = 0;
@@ -71,7 +67,6 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 		}
 
 		if (outLinkEntry != null) {
-
 			id = outLinkEntry.getKey();
 
 			int total = 0;
@@ -79,7 +74,7 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
 			for (DbLinkLocation ll:outLinkEntry.getValue().getLinkLocations()) {
 				distinct++;
-				total+=ll.getSentenceIndexes().size();
+				total += ll.getSentenceIndexes().size();
 			}
 			linkCounts.setTotalLinksOut(total);
 			linkCounts.setDistinctLinksOut(distinct);
@@ -145,7 +140,8 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
 			if (linkCountEntry != null) {
 				try {
-					db.put(tx, BigInteger.valueOf(linkCountEntry.getKey()).toByteArray(), Utilities.serialize(linkCountEntry.getValue()));
+					//b.put(tx, BigInteger.valueOf(linkCountEntry.getKey()).toByteArray(), KBEnvironment.serialize(linkCountEntry.getValue()));
+					db.put(tx, KBEnvironment.serialize(linkCountEntry.getKey()), KBEnvironment.serialize(linkCountEntry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

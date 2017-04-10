@@ -235,8 +235,7 @@ public class Label {
 		}
 		
 		this.detailsSet = true;
-	}	
-	
+	}
 	
 	public static Label createLabel(KBEnvironment env, String text, DbLabel dbLabel) {
 		Label l = new Label(env, text);
