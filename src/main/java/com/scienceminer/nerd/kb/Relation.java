@@ -2,6 +2,8 @@ package com.scienceminer.nerd.kb;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.core.io.*;
+
 /**
  * Class for representing and exchanging a semantic relation.
  */
@@ -127,7 +129,26 @@ public class Relation implements Serializable {
     }*/
 
     public String toJSON() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder sb = new StringBuilder();
+        
+        sb.append("{ \"type\" : \"" + type.getName() + "\"");
+
+        if (relationName != null) {
+            byte[] encodedRelationName = encoder.quoteAsUTF8(relationName);
+            String outputRelationName = new String(encodedRelationName); 
+            sb.append("\"relationName\" : \"" + outputRelationName + "\"");
+        }
+
+        if (templateName != null) {
+            byte[] encodedTemplate = encoder.quoteAsUTF8(templateName);
+            String outputTemplate = new String(encodedTemplate); 
+            sb.append("\"template\" : \"" + outputTemplate + "\" }");        
+        }
+
+        sb.append("\"target\" : " + concept2ID + "}");   
+
+        //Integer valueConcept
 
         return sb.toString();
     }

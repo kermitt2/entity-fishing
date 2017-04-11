@@ -101,8 +101,6 @@ public class Property implements Serializable {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("\"properties\": [");
-
         byte[] encodedAttribute = encoder.quoteAsUTF8(attribute);
         String outputAttribute = new String(encodedAttribute); 
         sb.append("{ \"attribute\" : \"" + outputAttribute + "\"");
@@ -111,17 +109,13 @@ public class Property implements Serializable {
         String outputValue = new String(encodedValue); 
         sb.append("\"value\" : \"" + outputValue + "\"");
 
-        byte[] encodedTemplate = encoder.quoteAsUTF8(attribute);
-        String outputTemplate = new String(encodedTemplate); 
-        sb.append("\"template\" : \"" + outputTemplate + "\"");        
-
-        attribute = null;
-        value = null;
-        templateName = null;
-    //private Integer conceptId = -1;
-    //private Integer valueConcept
-
-        sb.append("]");
+        if (templateName != null) {
+            byte[] encodedTemplate = encoder.quoteAsUTF8(templateName);
+            String outputTemplate = new String(encodedTemplate); 
+            sb.append("\"template\" : \"" + outputTemplate + "\" }");        
+        }
+        
+        //Integer valueConcept
 
         return sb.toString();
     }

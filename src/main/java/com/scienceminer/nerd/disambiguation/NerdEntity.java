@@ -769,6 +769,17 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] ");
 		}
 
+		// properties
+		buffer.append(", \"properties\": [");
+
+		buffer.append("]");
+		
+		// relations
+		buffer.append(", \"relations\": [");
+
+		buffer.append("]");
+
+
 		buffer.append(" }");
 		return buffer.toString();
 	}

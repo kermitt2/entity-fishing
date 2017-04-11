@@ -24,7 +24,7 @@ The tool has been designed for fast processing (at least for a NERD system, 400-
 
 ## Install and build 
 
-Running the service requires at least 2GB of RAM, but more RAM will be exploited if available for speeding up access to compiled Wikipedia data. After decompressing all the index data, 50GB of disk space will be used - be sure to have enough free space. SSD is recommanded for best performance and experience. 
+Running the service requires at least 2GB of RAM, but more RAM will be exploited if available for speeding up access to compiled Wikipedia data (including information extracted from Infoboxes). After decompressing all the index data, 19GB of disk space will be used - be sure to have enough free space. SSD is recommanded for best performance and experience. 
 
 First install _grobid_ and _grobid-ner_, see http://github.com/kermitt2/grobid and http://github.com/kermitt2/grobid-ner
 
@@ -35,19 +35,19 @@ com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
 com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.properties
 ``` 
 
-Then install the wikipedia index:
+Then install the Wikipedia index:
 
-* download the zipped index files (warning: total around 10 GB!) at the following address: 
+* download the zipped index files (warning: total around 9 GB!) at the following address: 
 
-https://grobid.s3.amazonaws.com/nerd/db-en1.zip
+https://grobid.s3.amazonaws.com/nerd/db-en1.zip (2.7 GB)
 
-https://grobid.s3.amazonaws.com/nerd/db-en2.zip
+https://grobid.s3.amazonaws.com/nerd/db-en2.zip (2.6 GB)
 
-https://grobid.s3.amazonaws.com/nerd/db-fr.zip
+https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.6 GB)
 
-https://grobid.s3.amazonaws.com/nerd/db-de.zip
+https://grobid.s3.amazonaws.com/nerd/db-de.zip (1.8 GB)
 
-* unzip the two archives files under ```data/wikipedia/```. This will install three sub-directories ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/``` and ```data/wikipedia/db-fr/```. 
+* unzip the two archives files under ```data/wikipedia/```. This will install three sub-directories ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/``` and ```data/wikipedia/db-fr/```. Uncompressed data is about 19 GB. 
 
 Build the project, under the NERD projet repository:
 
