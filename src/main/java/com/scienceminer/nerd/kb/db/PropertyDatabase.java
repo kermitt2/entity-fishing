@@ -23,7 +23,7 @@ import com.scienceminer.nerd.kb.Property;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-public class PropertyDatabase extends IntRecordDatabase<Property> {
+public class PropertyDatabase extends IntRecordDatabase<List<Property>> {
 	private static final Logger logger = LoggerFactory.getLogger(PropertyDatabase.class);	
 
 	public PropertyDatabase(KBEnvironment env) {
@@ -31,12 +31,12 @@ public class PropertyDatabase extends IntRecordDatabase<Property> {
 	}
 
 	@Override
-	public KBEntry<Integer, Property> deserialiseCsvRecord(
+	public KBEntry<Integer, List<Property>> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
-	private KBEntry<Integer, Property> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
+	private KBEntry<Integer, List<Property>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 

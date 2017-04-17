@@ -126,6 +126,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	private String lang = null;
 
+	private List<Property> properties = null;
+	private List<Relation> relations = null;
+
 	public NerdEntity() {
 		offsets = new OffsetPosition();
 	}
@@ -508,6 +511,28 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setIsSubTerm(boolean sub) {
 		isSubTerm = sub;
 	}
+
+	public void setProperties(List<Property> properties) {
+		this.properties = properties;
+	}
+
+	public void setRelations(List<Relation> relations, Wikipedia wikipedia) {
+		this.relations = relations;
+		// due to DBPedia terrible quality and for consistency, we make relations also exposed as properties
+		for(Relation relation : relations) {
+			Page page = wikipedia.getPageById(relation.getConcept2ID().intValue());
+			if ( (page != null) && (page.exists()) ) {
+				if (page.getTitle() != null) {
+					Property property = new Property(new Integer(wikipediaExternalRef), 
+													relation.getRelationName(), 
+													page.getTitle(), 
+													relation.getTemplateName(), 
+													null);
+					properties.add(property);
+				}
+			}
+		}
+	}
 	
 	@Override
 	public boolean equals(Object object) {
@@ -553,8 +578,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		Definition definition = new Definition();
 		try {
 			definition.setDefinition(page.getFirstParagraphMarkup());
-		}
-		catch(Exception e) {
+		} catch(Exception e) {
 			LOGGER.debug("Error when getFirstParagraphMarkup for PageID "+ wikipediaExternalRef);
 			//e.printStackTrace();
 		}
@@ -569,7 +593,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		selectionScore = candidate.getSelectionScore();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
-		
+		//properties = wikipedia.getProperties(wikipediaExternalRef); 
+		//relations = wikipedia.getRelations(wikipediaExternalRef); 
+
 		preferredTerm = candidate.getPreferredTerm();
 		this.lang = lang;
 	}
@@ -770,15 +796,32 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 
 		// properties
-		buffer.append(", \"properties\": [");
-
-		buffer.append("]");
+		if (properties != null) {
+			buffer.append(", \"properties\": [");
+			boolean start = true;
+			for(Property property : properties) {
+				if (start)
+					start = false;
+				else 
+					buffer.append(", ");
+				buffer.append(property.toJson());
+			}
+			buffer.append("]");
+		}
 		
 		// relations
-		buffer.append(", \"relations\": [");
-
-		buffer.append("]");
-
+		if (relations != null) {
+			buffer.append(", \"relations\": [");
+			boolean start = true;
+			for(Relation relation : relations) {
+				if (start)
+					start = false;
+				else 
+					buffer.append(", ");
+				buffer.append(relation.toJson());
+			}
+			buffer.append("]");
+		}
 
 		buffer.append(" }");
 		return buffer.toString();

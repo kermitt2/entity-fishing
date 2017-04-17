@@ -74,8 +74,35 @@ public class TestLookup {
 			e.printStackTrace();
 		}
 	}
-	
 
+	@Test
+	public void testProperties() {
+		try {
+			List<Property> properties = wikipedia.getProperties(3966054);
+
+			System.out.println("properties for Mexico (" + 3966054 + ")");
+			for (Property property : properties)
+				System.out.println(property.toJson());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testRelations() {
+		try {
+			List<Relation> relations = wikipedia.getRelations(3966054);
+
+			System.out.println("relations for Mexico (" + 3966054 + ")");
+			for (Relation relation : relations)
+				System.out.println(relation.toJson());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@After
 	public void testClose() {
 		try {

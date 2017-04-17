@@ -23,6 +23,8 @@ import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
 
 import org.xml.sax.SAXException;
 
+import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.kb.Relation;
 
 /**
  * Represent a language speccific instance of Wikipedia
@@ -93,6 +95,20 @@ public class Wikipedia {
 	 */
 	public Page getPageById(int id) {
 		return Page.createPage(env, id);
+	}
+
+	/**
+	 * Return the list of properties associated to an article id
+	 */
+	public List<Property> getProperties(int id) {
+		return env.getDbProperties().retrieve(id);
+	}
+
+	/**
+	 * Return the list of relations associated to an article id
+	 */
+	public List<Relation> getRelations(int id) {
+		return env.getDbRelations().retrieve(id);
 	}
 
 	/**

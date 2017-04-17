@@ -823,6 +823,8 @@ var nerd = (function($) {
 	            piece += '</td><td>';
 	            piece += '<table><tr><td>';
 
+
+
 	            if (wikipedia) {
 	                piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
 	                        wikipedia +
@@ -993,6 +995,14 @@ var nerd = (function($) {
 			return null;
 	}
 
+	function getProperties(identifier) {
+		var localEntity = conceptMap[identifier];
+		if (localEntity != null) {
+			return localEntity.properties;
+		} else
+			return null;
+	}
+
 	function viewEntity() {
 		var localID = $(this).attr('id');
 
@@ -1017,11 +1027,9 @@ var nerd = (function($) {
 		for(var entityListIndex=entityMap[localEntityNumber].length-1; 
 				entityListIndex>=0; 
 				entityListIndex--) {
-			//var entity = responseJson.entities[localEntityNumber];
 			var entity = entityMap[localEntityNumber][entityListIndex];
 			var wikipedia = entity.wikipediaExternalRef;
 			var domains = entity.domains;
-			
 			var type = entity.type;
 
 			var colorLabel = null;
@@ -1092,6 +1100,22 @@ var nerd = (function($) {
 				var localHtml = wiki2html(definitions[0]['definition'], lang);
 				string += "<p><div class='wiky_preview_area2'>"+localHtml+"</div></p>";
 			}
+
+			// properties and relations if taxon
+			var properties = getProperties(wikipedia);
+			if ((properties != null) && (properties.length > 0)) {
+console.log(properties);
+				var localHtml = "";
+				for(var i in properties) {
+					var property = properties[i];
+console.log(property);
+					if (property.template && (property.template == 'Taxobox')) {
+						localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
+					}
+				}
+				string += "<p><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
+			}
+
 			if (wikipedia != null) {
 				string += '<p>Reference: '
 				if (wikipedia != null) {

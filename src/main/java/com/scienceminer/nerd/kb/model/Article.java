@@ -3,6 +3,8 @@ package com.scienceminer.nerd.kb.model;
 import java.util.*; 
 
 import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.kb.Relation;
 
 import org.wikipedia.miner.db.struct.*;
 
@@ -12,10 +14,10 @@ import org.wikipedia.miner.db.struct.*;
 public class Article extends Page {
 
 	/**
-	 * Initialises a newly created Article so that it represents the article given by <em>id</em>.
+	 * Initialises an article
 	 * 
-	 * @param env	an active KBEnvironment
-	 * @param id	the unique identifier of the article
+	 * @param env	KBEnvironment
+	 * @param id 	unique identifier of the article
 	 */
 	public Article(KBEnvironment env, int id) {
 		super(env, id);
@@ -23,6 +25,20 @@ public class Article extends Page {
 
 	protected Article(KBEnvironment env, int id, DbPage pd) {
 		super(env, id, pd);
+	}
+
+	/**
+	 * Return the list of properties associated to the article
+	 */
+	public List<Property> getProperties() {
+		return env.getDbProperties().retrieve(id);
+	}
+
+	/**
+	 * Return the list of relations associated to the article
+	 */
+	public List<Relation> getRelations() {
+		return env.getDbRelations().retrieve(id);
 	}
 
 	/**

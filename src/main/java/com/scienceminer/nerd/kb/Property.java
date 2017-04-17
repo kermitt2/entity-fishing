@@ -97,7 +97,7 @@ public class Property implements Serializable {
         throw new UnsupportedOperationException();
     }*/
 
-    public String toJSON() {
+    public String toJson() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder sb = new StringBuilder();
 
@@ -107,14 +107,14 @@ public class Property implements Serializable {
 
         byte[] encodedValue = encoder.quoteAsUTF8(value);
         String outputValue = new String(encodedValue); 
-        sb.append("\"value\" : \"" + outputValue + "\"");
+        sb.append(", \"value\" : \"" + outputValue + "\"");
 
         if (templateName != null) {
             byte[] encodedTemplate = encoder.quoteAsUTF8(templateName);
             String outputTemplate = new String(encodedTemplate); 
-            sb.append("\"template\" : \"" + outputTemplate + "\" }");        
+            sb.append(", \"template\" : \"" + outputTemplate + "\" }");        
         }
-        
+
         //Integer valueConcept
 
         return sb.toString();

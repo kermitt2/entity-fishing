@@ -254,6 +254,20 @@ public class KBEnvironment  {
 	public KBDatabase<Integer, DbTranslations> getDbTranslations() {
 		return dbTranslations;
 	}
+
+	/**
+	 * Returns the {@link DatabaseType#properties} database
+	 */
+	public PropertyDatabase getDbProperties() {
+		return dbProperties;
+	}
+
+	/**
+	 * Returns the {@link DatabaseType#relations} database
+	 */
+	public RelationDatabase getDbRelations() {
+		return dbRelations;
+	}
 	
 	//@SuppressWarnings("unchecked")
 	private void initDatabases() {

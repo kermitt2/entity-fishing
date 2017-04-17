@@ -128,25 +128,25 @@ public class Relation implements Serializable {
         throw new UnsupportedOperationException();
     }*/
 
-    public String toJSON() {
+    public String toJson() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append("{ \"type\" : \"" + type.getName() + "\"");
 
         if (relationName != null) {
             byte[] encodedRelationName = encoder.quoteAsUTF8(relationName);
             String outputRelationName = new String(encodedRelationName); 
-            sb.append("\"relationName\" : \"" + outputRelationName + "\"");
+            sb.append(", \"relationName\" : \"" + outputRelationName + "\"");
         }
 
         if (templateName != null) {
             byte[] encodedTemplate = encoder.quoteAsUTF8(templateName);
             String outputTemplate = new String(encodedTemplate); 
-            sb.append("\"template\" : \"" + outputTemplate + "\" }");        
+            sb.append(", \"template\" : \"" + outputTemplate + "\"");        
         }
 
-        sb.append("\"target\" : " + concept2ID + "}");   
+        sb.append(", \"target\" : " + concept2ID + "}");   
 
         //Integer valueConcept
 

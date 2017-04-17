@@ -202,10 +202,19 @@ a.section-active { color: #BC0E0E; }
 span.section-not-active { color: #70695C; }
 span.section-active { color: #BC0E0E; }
 
-.table th{background-color:#FCF8E3;} 
-.table tr{background-color:#FCF8E3;}       
-.table tbody tr.highlight td { background-color: #F2DEDE; word-break:normal; }
-  
+table.properties th{ } 
+table.properties tr{}
+table.properties tbody tr td { 
+  font-size: 12px;
+  background-color: #FCF8E3; 
+  word-break:normal; 
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*table th{background-color:#FCF8E3;}
+table tr{background-color:#FCF8E3;}
+table tbody tr.highlight td { background-color: #F2DEDE; word-break:normal; }*/
+
 p {word-break:normal;}
 span {word-break:normal;}
 

@@ -132,6 +132,9 @@ public class NerdRestKB {
 
 						entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
 
+						entity.setProperties(wikipedia.getProperties(identifier.intValue())); 
+						entity.setRelations(wikipedia.getRelations(identifier.intValue()), wikipedia); 
+
 						String json = entity.toJsonFull();
 						if (json == null) {
 							response = Response.status(Status.INTERNAL_SERVER_ERROR).build();

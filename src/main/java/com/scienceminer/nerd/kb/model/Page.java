@@ -177,7 +177,8 @@ public class Page implements Comparable<Page> {
 	 * @return the title
 	 */
 	public String getTitle() {
-		if (!detailsSet) setDetails();
+		if (!detailsSet) 
+			setDetails();
 
 		return title;
 	}
@@ -186,7 +187,8 @@ public class Page implements Comparable<Page> {
 	 * @return	the type of the page
 	 */
 	public PageType getType() {
-		if (!detailsSet) setDetails();
+		if (!detailsSet) 
+			setDetails();
 
 		return type;
 	}
@@ -195,7 +197,8 @@ public class Page implements Comparable<Page> {
 	 * @return the length of the shortest path from this page to the root category, or null if no path exists.
 	 */
 	public Integer getDepth() {
-		if (!detailsSet) setDetails();
+		if (!detailsSet) 
+			setDetails();
 
 		if (depth < 0)
 			return null;

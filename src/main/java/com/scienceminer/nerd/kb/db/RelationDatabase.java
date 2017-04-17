@@ -23,7 +23,7 @@ import com.scienceminer.nerd.kb.Relation.RelationType;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-public class RelationDatabase extends IntRecordDatabase<Relation> {
+public class RelationDatabase extends IntRecordDatabase<List<Relation>> {
 	private static final Logger logger = LoggerFactory.getLogger(RelationDatabase.class);	
 
 	public RelationDatabase(KBEnvironment env) {
@@ -31,12 +31,12 @@ public class RelationDatabase extends IntRecordDatabase<Relation> {
 	}
 
 	@Override
-	public KBEntry<Integer, Relation> deserialiseCsvRecord(
+	public KBEntry<Integer, List<Relation>> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
-	private KBEntry<Integer, Relation> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
+	private KBEntry<Integer, List<Relation>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
