@@ -519,16 +519,18 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setRelations(List<Relation> relations, Wikipedia wikipedia) {
 		this.relations = relations;
 		// due to DBPedia terrible quality and for consistency, we make relations also exposed as properties
-		for(Relation relation : relations) {
-			Page page = wikipedia.getPageById(relation.getConcept2ID().intValue());
-			if ( (page != null) && (page.exists()) ) {
-				if (page.getTitle() != null) {
-					Property property = new Property(new Integer(wikipediaExternalRef), 
-													relation.getRelationName(), 
-													page.getTitle(), 
-													relation.getTemplateName(), 
-													null);
-					properties.add(property);
+		if (relations != null) {
+			for(Relation relation : relations) {
+				Page page = wikipedia.getPageById(relation.getConcept2ID().intValue());
+				if ( (page != null) && (page.exists()) ) {
+					if (page.getTitle() != null) {
+						Property property = new Property(new Integer(wikipediaExternalRef), 
+														relation.getRelationName(), 
+														page.getTitle(), 
+														relation.getTemplateName(), 
+														null);
+						properties.add(property);
+					}
 				}
 			}
 		}

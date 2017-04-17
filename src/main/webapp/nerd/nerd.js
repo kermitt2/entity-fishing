@@ -1104,11 +1104,9 @@ var nerd = (function($) {
 			// properties and relations if taxon
 			var properties = getProperties(wikipedia);
 			if ((properties != null) && (properties.length > 0)) {
-console.log(properties);
 				var localHtml = "";
 				for(var i in properties) {
 					var property = properties[i];
-console.log(property);
 					if (property.template && (property.template == 'Taxobox')) {
 						localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
 					}
