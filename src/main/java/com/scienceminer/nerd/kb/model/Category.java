@@ -9,6 +9,8 @@ import org.wikipedia.miner.db.struct.DbPage;
 
 /**
  * Represents categories in Wikipedia; the pages that exist to hierarchically organise other pages
+ *
+ * -> to be replaced by com.scienceminer.nerd.kb.Category
  */
 public class Category extends Page {
 

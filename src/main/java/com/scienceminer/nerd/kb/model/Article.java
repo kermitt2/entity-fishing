@@ -10,6 +10,8 @@ import org.wikipedia.miner.db.struct.*;
 
 /**
  * Represents a page of type article in Wikipedia, e.g. en entity or a concept
+ * 
+ *  -> to be replaced by a Concept object
  */
 public class Article extends Page {
 
@@ -80,28 +82,6 @@ public class Article extends Page {
 		return parentCategories;	
 	}
 
-	/**
-	 * Returns an array of {@link Article Articles} that link to this article. These 
-	 * are defined by the internal hyperlinks within article text. If these hyperlinks came via 
-	 * redirects, then they are resolved.
-	 * 
-	 * @return	the array of Articles that link to this article, sorted by id.
-	 */
-	/*public Article[] getLinksIn() {			
-		DbLinkLocationList tmpLinks = env.getDbPageLinkIn().retrieve(id);
-		if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
-			return new Article[0];
-
-		Article[] links = new Article[tmpLinks.getLinkLocations().size()];
-
-		int index = 0;
-		for (DbLinkLocation ll : tmpLinks.getLinkLocations()) {
-			links[index] = new Article(env, ll.getLinkId());
-			index++;
-		}
-
-		return links;	
-	}*/
 	public Article[] getLinksIn() {			
 		DbIntList tmpLinks = env.getDbPageLinkInNoSentences().retrieve(id);
 		if (tmpLinks == null || tmpLinks.getValues() == null) 
@@ -118,28 +98,6 @@ public class Article extends Page {
 		return links;	
 	}
 
-	/**
-	 * Returns an array of {@link Article}s, sorted by article id, that this article 
-	 * links to. These are defined by the internal hyperlinks within article text. 
-	 * If these hyperlinks point to redirects, then these are resolved. 
-	 * 
-	 * @return	an array of Articles that this article links to, sorted by id
-	 */
-	/*public Article[] getLinksOut()  {
-		DbLinkList tmpLinks = env.getDbPageLinkOutNoSentence().retrieve(id);
-		if (tmpLinks == null || tmpLinks.getLinkLocations() == null) 
-			return new Article[0];
-
-		Article[] links = new Article[tmpLinks.getLinkLocations().size()];
-
-		int index = 0;
-		for (DbLinkLocation ll:tmpLinks.getLinkLocations()) {
-			links[index] = new Article(env, ll.getLinkId());
-			index++;
-		}
-
-		return links;	
-	}*/
 	public Article[] getLinksOut()  {
 		DbIntList tmpLinks = env.getDbPageLinkOutNoSentences().retrieve(id);
 		if (tmpLinks == null || tmpLinks.getValues() == null) 

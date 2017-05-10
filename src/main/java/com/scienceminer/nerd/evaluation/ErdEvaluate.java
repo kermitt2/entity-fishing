@@ -111,7 +111,7 @@ public class ErdEvaluate {
 					nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
-					nerdQuery.setShortText(true);
+					nerdQuery.setShortText(text);
 
 					ProcessText processText = ProcessText.getInstance();
 					List<Entity> entities = processText.processBrutal(nerdQuery);
@@ -125,7 +125,7 @@ public class ErdEvaluate {
 
 						NerdEngine engine = NerdEngine.getInstance();
 						nerdQuery.setEntities(disambiguatedEntities);
-						disambiguatedEntities = engine.disambiguate(nerdQuery, true);
+						disambiguatedEntities = engine.disambiguate(nerdQuery);
 
 
 						// NerdEntity need to be converted into ErdAnnotationShort

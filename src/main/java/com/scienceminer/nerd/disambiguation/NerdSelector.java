@@ -304,7 +304,7 @@ System.out.println("number of non-N entities found: " + entities2.size());
 System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			nerdEngine.generateCandidates(contentText.toString(), disambiguatedEntities, lang);
+			nerdEngine.generateCandidates(disambiguatedEntities, lang);
 System.out.println("total entities with candidates: " + candidates.size());
 		// set the expected concept to the NerdEntity
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -404,7 +404,7 @@ System.out.println("get context for this content");
 		int perfectRecall = 0;
 		int perfectPrecision = 0;
 
-		for (Article art: testSet) {			
+		for (Article art : testSet) {			
 			articlesTested++;
 			
 			Result<Integer> ir = testArticle(art, ranker);

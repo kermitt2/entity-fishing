@@ -261,7 +261,7 @@ System.out.println(results.size() + " NER entities found...");
 	 */
 	public List<Entity> processBrutal(String text, String lang) throws NerdException { 
 		if (text == null) {
-			throw new NerdException("Cannot parse the sentence, because it is null.");
+			throw new NerdException("Cannot parse the text, because it is null.");
 		}
 		else if (text.length() == 0) {
 			System.out.println("The length of the text to be processed is 0.");
@@ -423,10 +423,15 @@ System.out.println(results.size() + " NER entities found...");
 	 */
 	public List<Entity> processBrutal(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
-		if (text == null) {
-			throw new NerdException("Cannot parse the sentence, because it is null.");
+		String shortText = nerdQuery.getShortText();
+		if ((text == null) && (shortText == null)) {
+			throw new NerdException("Cannot parse the text, because it is null.");
 		}
-		else if (text.length() == 0) {
+		
+		if ( (text == null) || (text.length() == 0) ) 
+			text = shortText;
+
+		if ( (text == null) || (text.length() == 0) ) {
 			System.out.println("The length of the text to be processed is 0.");
 			LOGGER.error("The length of the text to be parsed is 0.");
 			return null;

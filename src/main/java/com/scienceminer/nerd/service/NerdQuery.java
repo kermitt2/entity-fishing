@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
 
 import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.KeyGen;
@@ -40,6 +41,9 @@ public class NerdQuery {
 	private String claims = null;
 	private String description = null;
 	
+	// search query
+	private String shortText = null;
+
 	// language of the query
 	private Language language = null;
 	
@@ -59,7 +63,6 @@ public class NerdQuery {
 	
 	// mode indicating if we disambiguate or not 
 	private boolean onlyNER = false; 
-	private boolean shortText = false;
 	private boolean nbest = false;
 	private boolean sentence = false;
 	private NerdRestUtils.Format format = NerdRestUtils.Format.valueOf("JSON");
@@ -75,6 +78,36 @@ public class NerdQuery {
 	// (text, term vector or search query)
 	private List<Category> globalCategories = null;
 	
+	// in case the input to be processed is a list of LayoutToken (text then ust be null)
+	private List<LayoutToken> tokens = null;
+
+	public NerdQuery() {
+	}
+
+	public NerdQuery(NerdQuery query) {
+		this.text = query.getText();
+	
+		this.abstract_ = query.getAbstract_();;
+		this.claims = query.getClaims();
+		this.description = query.getDescription();
+	
+		this.language = query.getLanguage();
+		this.entities = query.getEntities();
+		this.sentences = query.getSentences();
+		this.resultLanguages = query.getResultLanguages();
+	
+		this.onlyNER = query.getOnlyNER(); 
+		this.shortText = query.getShortText();
+		this.nbest = query.getNbest();
+		this.sentence = query.getSentence();
+		this.format = query.getFormat();
+		this.customisation = query.getCustomisation();
+		this.processSentence = query.getProcessSentence(); 
+	
+		this.termVector = query.getTermVector();
+		this.globalCategories = query.getGlobalCategories();
+	}
+
 	public String getText() {
 		return text;
 	}
@@ -170,11 +203,11 @@ public class NerdQuery {
 		this.onlyNER = onlyNER;
 	}
 	
-	public boolean getShortText() {
+	public String getShortText() {
 		return shortText;
 	}
 	
-	public void setShortText(boolean shortText) {
+	public void setShortText(String shortText) {
 		this.shortText = shortText;
 	}
 	
@@ -250,6 +283,14 @@ public class NerdQuery {
 			globalCategories = new ArrayList<Category>();
 		}
 		globalCategories.add(category);
+	}
+
+	public List<LayoutToken> getTokens() {
+		return tokens;
+	}
+
+	public void setTokens(List<LayoutToken> tokens) {
+		this.tokens = tokens;
 	}
 
 	public String toJSON() {
@@ -411,6 +452,12 @@ public class NerdQuery {
 				buffer.append(" ]");
 			}
 		}
+
+		if (shortText != null) {
+			byte[] encoded = encoder.quoteAsUTF8(shortText);
+			String output = new String(encoded); 
+			buffer.append(", \"shortText\": \"" + output + "\"");
+		}
 		
 		if ( (termVector != null) && (termVector.size() > 0) ) {
 			buffer.append(", \"termVector\": [ ");
@@ -469,7 +516,7 @@ public class NerdQuery {
 
 	@Override
 	public String toString() {
-		return "Query [text=" + text + ", terms=" + "]";
+		return "Query [text=" + text + ", shortText=" + shortText + ", terms=" + "]";
 	}
 	
 	/** 
@@ -488,9 +535,16 @@ public class NerdQuery {
 			n++;
 		}
 		buffer.append("</standoff>");
-		buffer.append("<text>");
-		buffer.append(text);
-		buffer.append("</text>");
+		if (text != null) {
+			buffer.append("<text>");
+			buffer.append(text);
+			buffer.append("</text>");
+		}
+		if (shortText != null) {
+			buffer.append("<text>");
+			buffer.append(shortText);
+			buffer.append("</text>");
+		}
 		buffer.append("</tei>");
 		
 		return buffer.toString();

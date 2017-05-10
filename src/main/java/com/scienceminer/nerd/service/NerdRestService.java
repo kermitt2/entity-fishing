@@ -54,8 +54,6 @@ public class NerdRestService implements NerdPaths {
 	private static final String TERM = "term"; 
 	private static final String ID = "id"; 
 	private static final String LANG = "lang"; 
-	//private static final String MODE = "mode";
-//	private static final String SHORT = "shortText";
 	private static final String ONLY_NER = "onlyNER";
 	private static final String NBEST = "nbest";
 	private static final String SENTENCE = "sentence";
@@ -181,7 +179,7 @@ public class NerdRestService implements NerdPaths {
 		return NerdRestProcessAdmin.changePropertyValue(xml);
 	}
 
-	@Path(PATH_NER_QUERY)
+	@Path(PATH_NERD_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@GET
 	public Response processQueryGet(String query) {
@@ -189,64 +187,66 @@ public class NerdRestService implements NerdPaths {
 	}
 
 	@POST
-	@Path(PATH_NER_QUERY)
+	@Path(PATH_NERD_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processQuery(String query) {
 		return NerdRestProcessQuery.processQuery(query);
 	}
 
-	@Path(PATH_ERD_QUERY)
+	// deprecated
+	/*@Path(PATH_ERD_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@GET
 	public Response processERDQueryGet(String query) {
 		return NerdRestProcessQuery.processERDQuery(query);
-	}
+	}*/
 
-	@POST
+	// deprecated
+	/*@POST
 	@Path(PATH_ERD_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processERDQuery(String query) {
 		return NerdRestProcessQuery.processERDQuery(query);
-	}
+	}*/
 
-	@POST
+	// deprecated
+	/*@POST
 	@Path(PATH_ERD_QUERY_TERMS)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processQueryTermVector(String query) {
 		return NerdRestProcessQuery.processQueryTermVector(query);
-	}
+	}*/
 
-	@Path(PATH_ERD_QUERY_TERMS)
+	// deprecated
+	/*@Path(PATH_ERD_QUERY_TERMS)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@GET
 	public Response processQueryTermVectorGet(String query) {
 		return NerdRestProcessQuery.processQueryTermVector(query);
-	}
+	}*/
 
-	/**
-	 */
-	@Path(PATH_ERD_SEARCH_QUERY)
+	// deprecateds
+	/*@Path(PATH_ERD_SEARCH_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@GET
 	public Response processERDSearchQueryGet(String query) {
 		return NerdRestProcessQuery.processSearchQuery(query);        
-	}
+	}*/
 
-	/**
-	 */
-	@POST
+	// deprecated
+	/*@POST
 	@Path(PATH_ERD_SEARCH_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processERDSearchQuery(String query) {
 		return NerdRestProcessQuery.processSearchQuery(query);        
-	}
+	}*/
 
-	@POST
+	// deprecated
+	/*@POST
 	@Path(PATH_NER_TEXT)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processNERDTextPost(@QueryParam(TEXT) String text, 
 									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-//									@DefaultValue("false") @QueryParam(SHORT) boolean shortText,
 									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
 									@DefaultValue("false") @QueryParam(SENTENCE) boolean sentence,
 									@DefaultValue("json") @QueryParam(FORMAT) String format,
@@ -258,19 +258,18 @@ public class NerdRestService implements NerdPaths {
 		}
 		return NerdRestProcessString.processNERDText(text, 
 												onlyNER, 	// onlyNER 
-//												shortText, 	// shortText 
 												nbest, 		// nbest
 												sentence, 	// sentence segmentation
 												form, // output format
 												customisation); 	// field customisation
-	}
+	}*/
 
-	@GET
+	// deprecated
+	/*@GET
 	@Path(PATH_NER_TEXT)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processNERDText(@QueryParam(TEXT) String text, 
 									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-////									@DefaultValue("false") @QueryParam(SHORT) boolean shortText,
 									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
 									@DefaultValue("false") @QueryParam(SENTENCE) boolean sentence,
 									@DefaultValue("JSON") @QueryParam(FORMAT) String format,
@@ -282,55 +281,6 @@ public class NerdRestService implements NerdPaths {
 		}
 		return NerdRestProcessString.processNERDText(text, 
 												onlyNER, 	// onlyNER 
-//												shortText, 	// shortText 
-												nbest, 		// nbest
-												sentence, 	// sentence segmentation
-												form, // output format
-												customisation); 	// field customisation
-	}
-
-	/*@POST
-	@Path(PATH_ERD_TEXT)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processERDTextPost(@QueryParam(TEXT) String text, 
-									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-//									@DefaultValue("false") @QueryParam(SHORT) boolean shortText,
-									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
-									@DefaultValue("false") @QueryParam(SENTENCE) boolean sentence,
-									@DefaultValue("json") @QueryParam(FORMAT) String format,
-									@DefaultValue("") @QueryParam(CUSTOMISATION) String customisation) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestProcessString.processERDText(text, 
-												onlyNER, 	// onlyNER 
-//												shortText, 	// shortText 
-												nbest, 		// nbest
-												sentence, 	// sentence segmentation
-												form, // output format
-												customisation); 	// field customisation
-	}
-
-	@GET
-	@Path(PATH_ERD_TEXT)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processERDText(@QueryParam(TEXT) String text, 
-									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-//									@DefaultValue("false") @QueryParam(SHORT) boolean shortText,
-									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
-									@DefaultValue("false") @QueryParam(SENTENCE) boolean sentence,
-									@DefaultValue("JSON") @QueryParam(FORMAT) String format,
-									@DefaultValue("") @QueryParam(CUSTOMISATION) String customisation) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestProcessString.processERDText(text, 
-												onlyNER, 	// onlyNER 
-//												shortText, 	// shortText 
 												nbest, 		// nbest
 												sentence, 	// sentence segmentation
 												form, // output format

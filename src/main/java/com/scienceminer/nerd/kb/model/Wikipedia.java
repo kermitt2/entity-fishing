@@ -28,6 +28,8 @@ import com.scienceminer.nerd.kb.Relation;
 
 /**
  * Represent a language speccific instance of Wikipedia
+ * 
+ * -> to be replaced by com.scienceminer.nerd.kb.KnowledgeBase
  */
 public class Wikipedia {
 

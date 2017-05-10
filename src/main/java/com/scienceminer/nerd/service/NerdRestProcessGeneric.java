@@ -62,7 +62,7 @@ public class NerdRestProcessGeneric {
 
 			htmlCode.append("<h4>nerd-service documentation</h4>");
 			htmlCode.append("This service provides a RESTful interface for using the query " + 
-				"enrichment and disambiguation system. ");
+				"enrichment and disambiguation system, also know as (N)ERD. ");
 			
 			response = Response.status(Status.OK).entity(htmlCode.toString())
 					.type(MediaType.TEXT_HTML).build();

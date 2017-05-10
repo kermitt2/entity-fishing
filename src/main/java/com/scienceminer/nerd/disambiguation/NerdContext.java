@@ -27,9 +27,9 @@ public class NerdContext {
 	protected List<Article> contextArticles = null;
 	protected List<Integer> contextArticlesIds = null;
 	
-	private double totalWeight = 0.0;
-	private Relatedness relatedness = Relatedness.getInstance();
-	private String lang = null;
+	protected double totalWeight = 0.0;
+	protected Relatedness relatedness = Relatedness.getInstance();
+	protected String lang = null;
 	
 	public NerdContext() {}
 

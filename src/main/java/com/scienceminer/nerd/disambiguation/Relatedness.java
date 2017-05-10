@@ -64,7 +64,6 @@ public class Relatedness {
 		caches = new HashMap<String, ConcurrentMap<Long,Double>>();
 	}
 
-
 	/**
 	 * Given a Wikipedia article and a set of context article collected from the
 	 * same text, this method computes the article's average semantic

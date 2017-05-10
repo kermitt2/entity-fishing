@@ -259,11 +259,10 @@ public class ErdCorpus {
 				nb++;
 				try {
 					NerdQuery nerdQuery = new NerdQuery();
-					//nerdQuery.setText(query);
+					nerdQuery.setShortText(query);
 					nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
-					nerdQuery.setShortText(true);
 					//nerdQuery.setFormat(output);
 					//nerdQuery.setCustomisation(customisation);
 
@@ -279,7 +278,7 @@ public class ErdCorpus {
 
 						engine = NerdEngine.getInstance();
 						nerdQuery.setEntities(disambiguatedEntities);
-						disambiguatedEntities = engine.disambiguate(nerdQuery, true);
+						disambiguatedEntities = engine.disambiguate(nerdQuery);
 
 						// TBD: with the new disambiguator, disambiguated NerdEntity need to be converted into ErdAnnotationShort
 						/*List<ErdAnnotationShort> newAnnotations = 

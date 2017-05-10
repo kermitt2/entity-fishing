@@ -9,7 +9,6 @@ import org.wikipedia.miner.db.struct.DbPage;
  */
 public class Disambiguation extends Article {
 
-	
 	/**
 	 * Initialises a newly created Disambiguation so that it represents the disambiguation page given by <em>id</em>.
 	 * 

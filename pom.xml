@@ -10,12 +10,11 @@
 	<packaging>war</packaging>
 	<version>0.0.2</version>
 	
-	<name>NERD</name>
-	<description>Named Entity Recognition and Disambiguation.</description>
+	<name>(N)ERD</name>
+	<description>(Named) Entity Recognition and Disambiguation</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<avro.version>1.7.5</avro.version>
 		<lmdbjni.version>0.4.6</lmdbjni.version>
 	</properties>
 	
@@ -193,24 +192,6 @@
 				</configuration>
 			</plugin>
 
-            <plugin>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro-maven-plugin</artifactId>
-                <version>${avro.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>schema</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
 		</plugins>	
 	</build>
 	
@@ -305,7 +286,7 @@
                                 <classpath/>
 								<argument>-Xms4098m</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-								<argument>data/wikipedia/test/</argument>
+								<argument>data/wikipedia/training/</argument>
 								<argument>en</argument>
                             </arguments>
                         </configuration>
@@ -334,7 +315,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-								<argument>data/wikipedia/test/</argument>
+								<argument>data/wikipedia/training/</argument>
 								<argument>de</argument>
                             </arguments>
                         </configuration>
@@ -363,7 +344,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-								<argument>data/wikipedia/test/</argument>
+								<argument>data/wikipedia/training/</argument>
 								<argument>fr</argument>
                             </arguments>
                         </configuration>
@@ -550,22 +531,22 @@
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
-            <version>${avro.version}</version>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-maven-plugin</artifactId>
-            <version>${avro.version}</version>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-compiler</artifactId>
-            <version>${avro.version}</version>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-mapred</artifactId>
-            <version>${avro.version}</version>
+            <version>1.7.5</version>
         </dependency>
 
 		<!-- for GROBID NER -->
@@ -598,6 +579,13 @@
 			<artifactId>jsonic</artifactId>
 			<version>1.3.5</version>
 		</dependency>
+
+		<!-- utilities -->
+		<dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
 
         <!-- for test only -->
         <dependency>

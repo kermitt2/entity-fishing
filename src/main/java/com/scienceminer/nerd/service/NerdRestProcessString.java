@@ -37,6 +37,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
 /**
+ *  DEPRECATED ! DEPRECATED ! DEPRECATED ! DEPRECATED ! DEPRECATED ! DEPRECATED ! DEPRECATED ! DEPRECATED ! 
  * 
  * @author Patrice
  * 
@@ -265,7 +266,7 @@ System.out.println("lang id:" + text);
 				if (!onlyNER) {
 					NerdEngine disambiguator = NerdEngine.getInstance();
 					nerdQuery.setEntities(disambiguatedEntities);
-					disambiguatedEntities = disambiguator.disambiguate(nerdQuery, false);
+					disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 				}
 				else {
 					for (NerdEntity entity : disambiguatedEntities) {
@@ -278,8 +279,6 @@ System.out.println("lang id:" + text);
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
 System.out.println("runtime: " + (end - start));
-			//ObjectMapper mapper2 = new ObjectMapper();
-			//String json = mapper2.writeValueAsString(nerdQuery);
 			
 			// sort the entities
 			Collections.sort(nerdQuery.getEntities());
@@ -384,16 +383,13 @@ System.out.println("runtime: " + (end - start));
 
 				NerdEngine disambiguator = NerdEngine.getInstance();
 				nerdQuery.setEntities(disambiguatedEntities);
-				disambiguatedEntities = disambiguator.disambiguate(nerdQuery, false);
+				disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 	
 				nerdQuery.setEntities(disambiguatedEntities);
 			}
 
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
-
-			//ObjectMapper mapper2 = new ObjectMapper();
-			//String json = mapper2.writeValueAsString(nerdQuery);
 			
 			// sort the entities
 			Collections.sort(nerdQuery.getEntities());
@@ -532,9 +528,6 @@ System.out.println("runtime: " + (end - start));
 
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
-
-			//ObjectMapper mapper2 = new ObjectMapper();
-			//String json = mapper2.writeValueAsString(nerdQuery);
 			
 			// sort the entities
 			//Collections.sort(nerdQuery.getEntities());

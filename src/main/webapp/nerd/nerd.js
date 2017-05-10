@@ -19,8 +19,6 @@ var nerd = (function($) {
 	var responseJsonNERDText = null;
 	var responseJsonNERDQuery = null;
 
-	//var api_key = "AIzaSyBLNMpXpWZxcR9rbjjFQHn_ULbU-w1EZ5U";
-
 	function defineBaseURL(ext) {
 		var baseUrl = null;
 		if ( $(location).attr('href').indexOf("index.html") != -1)
@@ -48,15 +46,13 @@ var nerd = (function($) {
 		$("#divServices").hide();
 		$("#divDoc").hide(); 
 		$("#divAdmin").hide(); 
-		//$("#lid").hide();
 		$("#nerd-text").show();
 		$("#nerd-query").hide();
 
 		createInputTextArea('query');
 		setBaseUrl('processNERDText');  
-		$("#selectedService").val('processNERDText');
-		//$("#default_lid").attr('checked', 'checked');             
-        //setBaseUrlDetailed('parseText');
+		$("#selectedService").val('processNERDQuery');
+		processChange();
 
 		$('#selectedService').change(function() {
 			processChange();
@@ -194,7 +190,7 @@ var nerd = (function($) {
 			  contentType:false  
 			});
 		}
-		else if ( urlLocal.indexOf('ERDText') != -1 ) { 
+		/*else if ( urlLocal.indexOf('ERDText') != -1 ) { 
 			$.ajax({
 			  type: 'GET',
 			  url: urlLocal,
@@ -211,7 +207,7 @@ var nerd = (function($) {
 			  contentType:false  
 			//contentType: "multipart/form-data"
 			});
-		}
+		}*/
 		else if ( urlLocal.indexOf('KBTermLookup') != -1 ) { 
 			$.ajax({
 			  type: 'GET',
@@ -247,14 +243,18 @@ var nerd = (function($) {
 		responseJson = null;
 	}
 
-	function SubmitSuccesful(responseText, statusText) { 
+	function SubmitSuccesful(responseJson, statusText) { 
 		var selected = $('#selectedService').attr('value');
-
-		if (selected == 'processNERDText') {
-			SubmitSuccesfulNERD(responseText, statusText);
+		if (selected == 'processNERDQuery') {
+			responseJson = jQuery.parseJSON(responseJson);
 		}
-		else if (selected == 'processNERDQuery') {
-			SubmitSuccesfulNERD(responseText, statusText);          
+
+		/*if (selected == 'processNERDText') {
+			SubmitSuccesfulNERD(responseJson, statusText);
+		}
+		else*/ 
+		if ( (selected == 'processNERDQuery') && (responseJson.text != null) && (responseJson.text.length > 0) ) {
+			SubmitSuccesfulNERD(responseJson, statusText);          
 		}
 		/*else if (selected == 'processERDText') {
 			SubmitSuccesfulNERD(responseText, statusText);
@@ -263,16 +263,19 @@ var nerd = (function($) {
 			SubmitSuccesfulNERD(responseText, statusText);          
 		}*/
 		else if (selected == 'processLIdText') {
-			SubmitSuccesfulLId(responseText, statusText);          
+			SubmitSuccesfulLId(responseJson, statusText);
 		}
 		else if (selected == 'processSentenceSegmentation') {
-			SubmitSuccesfulSentenceSegmentation(responseText, statusText);          
+			SubmitSuccesfulSentenceSegmentation(responseJson, statusText);
 		}
-		else if (selected == 'processERDSearchQuery') {
-			SubmitSuccesfulERDSearch(responseText, statusText);           
+		else if ( (selected == 'processNERDQuery') && (responseJson.shortText != null) && (responseJson.shortText.length > 0) ) {
+			SubmitSuccesfulERDSearch(responseJson, statusText);           
+		}
+		else if ( (selected == 'processNERDQuery') && (responseJson.termVector != null) && (responseJson.termVector.length > 0) ) {
+			console.log("front end for term vector disambiguation not implemented yet !");
 		}
 		else if (selected == 'KBTermLookup') {
-			SubmitSuccesfulKBTermLookup(responseText, statusText);           
+			SubmitSuccesfulKBTermLookup(responseJson, statusText);           
 		}
 		
 	}
@@ -291,11 +294,11 @@ var nerd = (function($) {
 			return;
 		}
 
-		if ( ($('#selectedService').attr('value') == 'processNERDQuery') || 
+		/*if ( ($('#selectedService').attr('value') == 'processNERDQuery') ) {//|| 
 			//($('#selectedService').attr('value') == 'processERDQuery') ||
-			($('#selectedService').attr('value') == 'processERDSearchQuery') ) {
+			//($('#selectedService').attr('value') == 'processERDSearchQuery') ) {
 			responseJson = jQuery.parseJSON(responseJson);
-		}
+		}*/
 
 		var display = '<div class=\"note-tabs\"> \
 			<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
@@ -518,10 +521,10 @@ var nerd = (function($) {
 		$('#detailed_annot-0').hide();	
 	}
 	
-	function SubmitSuccesfulERDSearch(responseText, statusText) {
+	function SubmitSuccesfulERDSearch(responseJson, statusText) {
 		//console.log("SubmitSuccesfulERDSearch");					             
 		//console.log(responseText);
-		responseJson = JSON.parse(responseText);
+		//responseJson = JSON.parse(responseText);
 		
 		if ( (responseJson == null) || (responseJson.length == 0) ) {
 			$('#requestResult')
@@ -609,7 +612,7 @@ var nerd = (function($) {
 
 	var SubmitSuccesfulKBTermLookup = function(responseText, statusText) {
 		//responseJson = JSON.parse(responseText);
-		responseJson = responseText;
+		//responseJson = responseText;
 		if ( (responseJson == null) || (responseJson.length == 0) ) {
 			$('#requestResult')
 				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
@@ -1131,9 +1134,9 @@ var nerd = (function($) {
 		$('#detailed_annot-0').show();
 	}
 
-	function SubmitSuccesfulLId(responseText, statusText) {
-console.log(responseText);
-		responseJson = responseText;//jQuery.parseJSON(responseText);
+	function SubmitSuccesfulLId(responseJson, statusText) {
+console.log(responseJson);
+		//responseJson = responseText;//jQuery.parseJSON(responseText);
 		
 		var display = '<pre style="background-color:#FFF;width:95%;" id="displayLanguageIdentification">'; 
 		display += '<p id="languageId">';  
@@ -1148,9 +1151,7 @@ console.log(responseText);
 		$('#requestResult').html(display);  
 	}
 	
-	function SubmitSuccesfulSentenceSegmentation(responseText, statusText) {     
-		//responseJson = jQuery.parseJSON(responseText);
-		responseJson = responseText;
+	function SubmitSuccesfulSentenceSegmentation(responseJson, statusText) {     
 		if ( (responseJson == null) || (responseJson.length == 0) ){
 			$('#requestResult')
 				.html("<font color='red'>Error encountered while receiving the server's answer: " + 
@@ -1207,7 +1208,7 @@ console.log(responseText);
 		$('#requestResult').html(display);  
 	}
 
-	var queryTemplate = { "text" : "", "language" : { "lang" : "en" }, "entities" : [], "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
+	var queryTemplate = { "text" : "", "shortText" : "", "termVector" : [], "language" : { "lang" : "en" }, "entities" : [], "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
 						  "nbest" : false, "sentence" : false, "format" : "JSON", 
  						  "customisation" : "generic" };
 
@@ -1229,14 +1230,14 @@ console.log(responseText);
 			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
 		} 
-		else if (selected == 'processNERDText') {
+		/*else if (selected == 'processNERDText') {
 			createInputTextArea('query');
 			setBaseUrl('processNERDText');   
 			//$("#nerd-query").hide();     
 			//$("#default_nerd_text").attr('checked', 'checked');
 			$("#nerd-text").show();
 			//$("#lid").hide();   
-		}
+		}*/
 		/*else if (selected == 'processERDQuery') {
 			setBaseUrl('processERDQuery');
 			$("#nerd-text").hide();     
@@ -1268,7 +1269,7 @@ console.log(responseText);
 			$("#nerd-text").hide();     
 			//$("#default_lid").attr('checked', 'checked');
 		}
-		else if (selected == 'processERDSearchQuery') {
+		/*else if (selected == 'processERDSearchQuery') {
 			createInputTextArea('query');
 			setBaseUrl('processERDSearchQuery');
 			$("#nerd-text").hide();     
@@ -1276,7 +1277,7 @@ console.log(responseText);
 			//$("#nerd-query").show();
 			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate2)));
-		} 
+		} */
 		else if (selected == 'KBTermLookup') {
 			createSimpleTextFieldArea('query');
 			setBaseUrl('KBTermLookup');

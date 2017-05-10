@@ -8,6 +8,16 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.TextUtilities;
+import org.grobid.core.document.*;
+import org.grobid.core.utilities.*;
+import org.grobid.core.data.*;
+import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.engines.EngineParsers;
+import org.grobid.core.engines.SegmentationLabel;
+import org.grobid.core.engines.label.TaggingLabel;
+import org.grobid.core.engines.label.TaggingLabels;
+import org.grobid.core.layout.LayoutToken;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
@@ -23,6 +33,9 @@ import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.apache.commons.lang3.text.WordUtils;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
  *
@@ -43,6 +56,7 @@ public class NerdEngine {
 	private static volatile NerdEngine instance = null;
 	
 	private Lexicon lexicon = null;
+	private EngineParsers parsers = null;
 	
 	private Map<String, Wikipedia> wikipedias = null;
 	private Map<String, NerdRanker> rankers = null;
@@ -79,6 +93,7 @@ public class NerdEngine {
 		// lexicon
 		try {
 			lexicon = Lexicon.getInstance();
+			parsers = new EngineParsers();
 		} catch(Exception e) {
 			throw new NerdResourceException("Error instanciating the (N)ERD lexicon. ", e);
 		}
@@ -100,16 +115,39 @@ public class NerdEngine {
 	 * 
 	 * @param nerdQuery the
 	 *            POJO query object
-	 * @param strict boolean indicating if the mentions not resolved should be kept
-	 * 			or not in the resulting entities. 
 	 * @param shortText boolean indicating if the text to be disambiguated is short,
 	 *  		e.g. a text query. 		 
 	 * @return a response query object containing the structured representation of
 	 *         the enriched and disambiguated query.
 	 */
-	public List<NerdEntity> disambiguate(NerdQuery nerdQuery, boolean shortText) {
+	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
 		String text = nerdQuery.getText();
+		String shortText = nerdQuery.getShortText();
+		boolean shortTextVal = false;
+
+		if ((text == null) && (shortText == null)) {
+			throw new NerdException("Cannot parse the text, because it is null.");
+		}
 		
+		if ( (text == null) || (text.length() == 0) ) {
+			shortTextVal = true;
+			text = shortText;
+		}
+
+		List<LayoutToken> tokens = null;
+		if ( (text == null) || (text.length() == 0) ) {
+			// we might have an input as a list of LayoutToken
+			tokens = nerdQuery.getTokens();
+			text = LayoutTokensUtil.toText(tokens);
+			shortTextVal = false;
+		}
+		
+		if ( (text == null) || (text.length() == 0) ) {
+			System.out.println("The length of the text to be processed is 0.");
+			LOGGER.error("The length of the text to be parsed is 0.");
+			return null;
+		}
+
 		// source language 
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
@@ -144,7 +182,7 @@ public class NerdEngine {
 		List<NerdEntity> entities = nerdQuery.getEntities();
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		
-		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(text, entities, lang);
+		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(entities, lang);
 
 int nbEntities = 0;
 int nbCandidates = 0;
@@ -159,8 +197,8 @@ for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 		System.out.println(cand.toString());
 		}*/
 }
-		System.out.println("total number of entities: " + nbEntities);
-		System.out.println("total number of candidates: " + nbCandidates);
+System.out.println("total number of entities: " + nbEntities);
+System.out.println("total number of candidates: " + nbCandidates);
 
 		rank(candidates, lang);
 
@@ -171,15 +209,13 @@ for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
 }*/
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortText, 0.3);
-		prune(candidates, nerdQuery.getNbest(), shortText, minEntityScore, lang);
+		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, 0.3);
+		prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
 		impactOverlap(candidates);
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
 			
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
-		//FreeBaseTypeMap freeBaseTypeMap = freeBaseTypeMaps.get(lang);
-
 		List<NerdEntity> result = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -187,15 +223,13 @@ for(NerdCandidate cand : cands) {
 			
 			if (entity.getOrigin() == NerdEntity.Origin.USER) {
 				result.add(entity);
-			}
-			else if ( (cands == null) || (cands.size() == 0) ) {
+			} else if ( (cands == null) || (cands.size() == 0) ) {
 				// default for class entity only
 				if (entity.getType() != null) {
 					entity.setNerdScore(entity.getNer_conf()); 
 					result.add(entity);
 				}
-			}
-			else {
+			} else {
 				for(NerdCandidate candidate : cands) {
 					NerdEntity nerdEntity = new NerdEntity(entity);
 					nerdEntity.populateFromCandidate(candidate, lang);
@@ -208,8 +242,7 @@ for(NerdCandidate cand : cands) {
 							System.out.println("wikipediaDomainMap is null for en");
 						else
 							nerdEntity.setDomains(wikipediaDomainMap.getDomains(nerdEntity.getWikipediaExternalRef()));
-					}
-					else {
+					} else {
 						// we get the English page id if available
 						int pageId = nerdEntity.getWikipediaExternalRef();
 						Map<String,String> translations = candidate.getWikiSense().getTranslations();
@@ -229,21 +262,13 @@ for(NerdCandidate cand : cands) {
 		Collections.sort(result);
 		//if (!shortText && !nerdQuery.getNbest())
 		if (!nerdQuery.getNbest())	
-			result = pruneOverlap(result, shortText);
+			result = pruneOverlap(result, shortTextVal);
 
 		return result;
 	}
 
 
-	/**
-	 * Generate the global context for a document
-	 */
-	public NerdContext getGlobalContext(NerdQuery query) {
-		return null;
-	}
-
-	public Map<NerdEntity, List<NerdCandidate>> generateCandidates(String text, 
-															List<NerdEntity> entities,
+	public Map<NerdEntity, List<NerdCandidate>> generateCandidates(List<NerdEntity> entities,
 															String lang) {
 		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<NerdEntity, List<NerdCandidate>>();
 		Wikipedia wikipedia = wikipedias.get(lang);
