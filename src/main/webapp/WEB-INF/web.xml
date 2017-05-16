@@ -1,50 +1,53 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>NERD service - a RESTful service for the Named Entity Recognition and Disambiguation</display-name>
+    <display-name>NERD service - a RESTful service for the Named Entity Recognition and Disambiguation</display-name>
     <servlet>
         <servlet-name>nerd-service</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <!--<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>-->
+
         <init-param>
-			<param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
-			<param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
+            <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
+            <param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
         </init-param>
         <init-param>
-          <param-name>com.sun.jersey.config.property.packages</param-name>
-          <param-value>com.scienceminer.nerd.service</param-value>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.scienceminer.nerd.service</param-value>
         </init-param>
-		<!--init-param>
-		  <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-		  <param-value>com.sun.jersey.api.container.filter.LoggingFilter</param-value>
-		</init-param>
-		<init-param>
-		  <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-		  <param-value>com.sun.jersey.api.container.filter.LoggingFilter</param-value>
-		</init-param-->
+
+<!--        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.scienceminer.nerd.service</param-value>
+        </init-param>-->
+<!--        <init-param>
+          <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+          <param-value>com.sun.jersey.api.container.filter.LoggingFilter</param-value>
+        </init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-	<servlet>
-	    <servlet-name>defaultStatic</servlet-name>
-	    <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
-	    <load-on-startup>1</load-on-startup>
-	</servlet> 
-	<servlet-mapping>
-	    <servlet-name>defaultStatic</servlet-name>
-	    <url-pattern>/index.html</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-	    <servlet-name>defaultStatic</servlet-name>
-	    <url-pattern>/resources/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-	    <servlet-name>defaultStatic</servlet-name>
-	    <url-pattern>/nerd/nerd.js</url-pattern>
-	</servlet-mapping>
+    <servlet>
+        <servlet-name>defaultStatic</servlet-name>
+        <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>defaultStatic</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>defaultStatic</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>defaultStatic</servlet-name>
+        <url-pattern>/nerd/nerd.js</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/sha1</url-pattern>
     </servlet-mapping>
@@ -52,7 +55,7 @@
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/allProperties</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/changePropertyValue</url-pattern>
     </servlet-mapping>
@@ -68,7 +71,7 @@
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processNERDText</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processNERDQuery</url-pattern>
     </servlet-mapping>
@@ -76,43 +79,39 @@
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDText</url-pattern>
     </servlet-mapping-->
-	<!--servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDQuery</url-pattern>
     </servlet-mapping-->
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDQueryTerms</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDTerms</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processERDSearchQuery</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processLIdText</url-pattern>
-    </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/processSentenceSegmentation</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/NERDCustomisations</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/createNERDCustomisation</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/extendNERDCustomisation</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/KBConcept</url-pattern>
     </servlet-mapping>
@@ -121,51 +120,51 @@
         <url-pattern>/KBTermLookup</url-pattern>
     </servlet-mapping>
 
-	<!--servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/NERDCustomisation/*</url-pattern>
     </servlet-mapping-->
-	<!--servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/createNERDCustomisation/*</url-pattern>
     </servlet-mapping-->
-	<!--servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/extendNERDCustomisation/*</url-pattern>
     </servlet-mapping-->
-	<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
-	<!--servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>nerd/*</url-pattern>
     </servlet-mapping-->
-	
-    <welcome-file-list>
-    	<welcome-file>nerd/index.html</welcome-file>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
 
-	<!--filter>
-	   <filter-name>cross-origin</filter-name>
-	   <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
-	   <init-param>
-	       <param-name>allowedOrigins</param-name>
-	       <param-value>*</param-value>
-	   </init-param>
-	   <init-param>
-	       <param-name>allowedMethods</param-name>
-	       <param-value>*</param-value>
-	   </init-param>
-	   <init-param>
-	       <param-name>allowedHeaders</param-name>
-	       <param-value>*</param-value>
-	   </init-param>
-	 </filter>
-	 <filter-mapping>
-	     <filter-name>cross-origin</filter-name>
-	     <url-pattern>/*</url-pattern>
-	 </filter-mapping-->
+    <welcome-file-list>
+        <welcome-file>nerd/index.html</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!--filter>
+       <filter-name>cross-origin</filter-name>
+       <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
+       <init-param>
+           <param-name>allowedOrigins</param-name>
+           <param-value>*</param-value>
+       </init-param>
+       <init-param>
+           <param-name>allowedMethods</param-name>
+           <param-value>*</param-value>
+       </init-param>
+       <init-param>
+           <param-name>allowedHeaders</param-name>
+           <param-value>*</param-value>
+       </init-param>
+     </filter>
+     <filter-mapping>
+         <filter-name>cross-origin</filter-name>
+         <url-pattern>/*</url-pattern>
+     </filter-mapping-->
 
 </web-app>
