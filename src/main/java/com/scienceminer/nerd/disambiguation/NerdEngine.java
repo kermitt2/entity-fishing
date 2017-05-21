@@ -397,10 +397,10 @@ for(NerdCandidate cand : cands) {
 										LOGGER.warn("Invalid category content for sense: " + title);
 										continue;
 									}
-//System.out.println("categ: " + theCategory.getTitle());
+
 									if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 										candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
-									else {
+									if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") != -1) {
 										invalid = true;
 										break;
 									}
@@ -1301,6 +1301,7 @@ System.out.println("Merging...");
 					continue;
 				
 				int s = 0;
+				boolean invalid = false;
 				for(int i=0; i<senses.length; i++) {
 					Label.Sense sense = senses[i];
 					NerdCandidate candidate = new NerdCandidate(entity);
@@ -1313,6 +1314,11 @@ System.out.println("Merging...");
 					for(com.scienceminer.nerd.kb.model.Category theCategory : sense.getParentCategories()) {
 						if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 							candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
+						if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") != -1) {
+							invalid = true;
+							break;
+						}
+
 					}
 					
 					// inject KB info (frequencies and FreeBase/Wiki mapping)
@@ -1323,6 +1329,8 @@ System.out.println("Merging...");
 					//else {
 						//kbAccessERD.accessKB(candidate);
 					//}
+					if (invalid)
+						continue;
 					candidates.add(candidate);
 					s++;
 					if (s == MAX_SENSES-1) {

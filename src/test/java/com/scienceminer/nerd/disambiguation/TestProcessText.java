@@ -73,15 +73,15 @@ public class TestProcessText {
 				System.out.println("No entity found.");
 			}
 
-			List<LayoutToken> tokens = new ArrayList<LayoutToken>();
+			/*List<LayoutToken> tokens = new ArrayList<LayoutToken>();
 			tokens.add(new LayoutToken("the"));
 			tokens.add(new LayoutToken(" "));
 			tokens.add(new LayoutToken("test"));
-			List<List<LayoutToken>> pool = processText.ngrams(tokens, 2);
+			List<List<LayoutToken>> pool = processText.ngrams(tokens, 2);*/
 			/*for(List<LayoutToken> cand : pool) {
 				System.out.println(LayoutTokensUtil.toText(cand));
 			}*/
-			assertEquals(pool.size(), 3);
+			//assertEquals(pool.size(), 3);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

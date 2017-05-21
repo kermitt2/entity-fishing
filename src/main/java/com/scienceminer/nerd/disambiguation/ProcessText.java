@@ -897,7 +897,7 @@ System.out.println("pool: " + pool.size());
         return sb.toString();
     }
     
-    public static List<List<LayoutToken>> ngrams(List<LayoutToken> tokens, int ngram) {
+    /*public static List<List<LayoutToken>> ngrams(List<LayoutToken> tokens, int ngram) {
     	int actualNgram = (ngram * 2) - 1; // for taking into account separators
 		List<List<LayoutToken>> ngrams = new ArrayList<List<LayoutToken>>();
 		if (tokens == null) {
@@ -920,22 +920,8 @@ System.out.println("pool: " + pool.size());
 					ngrams.add(piece);
 			}
 		}
-
-		/*String[] words = str.split(" ");
-		for (int n = 1; n <= ngram; n++) {
-			int currentPos = 1;
-	        for (int i = 0; i < words.length - n + 1; i++) {
-	        	if (words[i].length() == 0)
-	        		continue;
-				currentPos = str.indexOf(words[i], currentPos-1);
-				StringPos stringp = new StringPos();
-				stringp.string = concat(words, i, i+n);
-				stringp.pos = currentPos;
-	            ngrams.add(stringp);
-			}
-		}*/
         return ngrams;
-    }
+    }*/
 
     /**
      * Validity criteria for a raw entity. The entity raw string must not be

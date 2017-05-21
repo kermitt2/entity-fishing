@@ -189,8 +189,9 @@ public class NerdRestProcessQuery {
 				List<Entity> entities2 = processText.processBrutal(nerdQuery);
 				for(Entity entity : entities2) {
 					// we add entities only if the mention is not already present
-					if (!entities.contains(entity))
-						entities.add(entity);
+					if (!entities.contains(entity)) {
+						entities.add(entity);					
+					}
 				}
 			}
 
