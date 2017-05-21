@@ -261,6 +261,7 @@ public class NerdRestProcessQuery {
 					NerdEngine disambiguator = NerdEngine.getInstance();
 					List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 					nerdQuery.setEntities(disambiguatedEntities);
+					nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
 				}
 				else {
 					for (NerdEntity entity : nerdQuery.getEntities()) {
@@ -274,7 +275,7 @@ public class NerdRestProcessQuery {
 System.out.println("runtime: " + (end - start));
 			
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean();	
+			String json = nerdQuery.toJSONCompactClean(null);	
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -577,12 +578,13 @@ System.out.println("runtime: " + (end - start));
 			// add the NerdEntity objects to the WeightedTerm object if disambiguation 
 			// is successful
 			disambiguator.disambiguateWeightedTerms(nerdQuery);
-			
+			nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
 
 			//Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean();
+			String json = nerdQuery.toJSONCompactClean(null);
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -738,7 +740,7 @@ System.out.println("runtime: " + (end - start));
 				}
 			}
 			else {
-				nerdQuery.setEntities(originalEntities);
+				nerdQuery.setEntities(originalEntities);	
 			}
 			
 			// sort the entities
@@ -757,7 +759,7 @@ System.out.println("runtime: " + (end - start));
 			nerdQuery.setRuntime(end - start);
 
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean();
+			String json = nerdQuery.toJSONCompactClean(null);
 			
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();

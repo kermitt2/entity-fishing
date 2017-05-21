@@ -118,17 +118,22 @@ public class NerdRestKB {
 									LOGGER.warn("Invalid category content for article: " + identifier);
 									continue;
 								}
-								if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") == -1)
+								if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 									entity.addCategory(new com.scienceminer.nerd.kb.Category(theCategory));
-								else {
+								/*else {
 									break;
-								}
+								}*/
 							}
 						}
 
 						// translations
 						Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
 						Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+						WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
+						if (wikipediaDomainMap == null)
+							System.out.println("wikipediaDomainMap is null for " + lang);
+						else
+							entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
 						entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
 

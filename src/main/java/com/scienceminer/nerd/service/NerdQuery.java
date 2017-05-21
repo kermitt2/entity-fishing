@@ -2,8 +2,10 @@ package com.scienceminer.nerd.service;
 
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.layout.Page;
 
 import org.grobid.core.data.Entity;
+import org.grobid.core.document.Document;
 import org.grobid.core.utilities.KeyGen;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.disambiguation.Sentence;
@@ -86,7 +88,9 @@ public class NerdQuery {
 
 	public NerdQuery(NerdQuery query) {
 		this.text = query.getText();
-	
+		this.shortText = query.getShortText();
+		this.tokens = query.getTokens();
+
 		this.abstract_ = query.getAbstract_();;
 		this.claims = query.getClaims();
 		this.description = query.getDescription();
@@ -97,7 +101,6 @@ public class NerdQuery {
 		this.resultLanguages = query.getResultLanguages();
 	
 		this.onlyNER = query.getOnlyNER(); 
-		this.shortText = query.getShortText();
 		this.nbest = query.getNbest();
 		this.sentence = query.getSentence();
 		this.format = query.getFormat();
@@ -177,9 +180,11 @@ public class NerdQuery {
 	}
 	
 	public void setAllEntities(List<Entity> nerEntities) {
-		this.entities = new ArrayList<NerdEntity>();
-		for(Entity entity : nerEntities) {
-			this.entities.add(new NerdEntity(entity));
+		if (nerEntities != null) {
+			this.entities = new ArrayList<NerdEntity>();
+			for(Entity entity : nerEntities) {
+				this.entities.add(new NerdEntity(entity));
+			}
 		}
 	}
 	
@@ -187,6 +192,17 @@ public class NerdQuery {
 		this.entities = entities;
 	}
 	
+	public void addNerdEntities(List<NerdEntity> theEntities) {
+		if (theEntities != null) {
+	 		if (this.entities == null) {
+				this.entities = new ArrayList<NerdEntity>();
+			}
+			for(NerdEntity entity : theEntities) {
+				this.entities.add(entity);
+			}
+		}
+	}
+
 	public List<Sentence> getSentences() {
 		return sentences;
 	}
@@ -409,7 +425,7 @@ public class NerdQuery {
 		return buffer.toString();
 	}
 
-	public String toJSONCompactClean() {
+	public String toJSONCompactClean(Document doc) {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{");
@@ -509,6 +525,26 @@ public class NerdQuery {
 			}
 			buffer.append("]");
 		}
+
+		// possible page information
+		// page height and width
+		if (doc != null) {
+    	    List<Page> pages = doc.getPages();
+        	boolean first = true;
+        	if (pages != null) {
+        		buffer.append(", \"pages\":[");
+	        	for(Page page : pages) {
+	            	if (first) 
+	                	first = false;
+	            	else
+	                	buffer.append(", ");    
+	            	buffer.append("{\"page_height\":" + page.getHeight());
+	            	buffer.append(", \"page_width\":" + page.getWidth() + "}");
+	        	}
+	        	buffer.append("]");
+	        }
+        }
+
 		buffer.append("}");
 
 		return buffer.toString();

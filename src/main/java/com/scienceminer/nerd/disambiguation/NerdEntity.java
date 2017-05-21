@@ -7,6 +7,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
 import org.grobid.core.lexicon.NERLexicon;
+import org.grobid.core.layout.BoundingBox;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.utilities.TextUtilities;
@@ -61,6 +62,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// relative offset positions in context, if defined
 	private OffsetPosition offsets = null;
 	
+	// optional bounding box in the source document
+	private List<BoundingBox> boundingBoxes = null;
+
 	// probability of the entity in context, if defined
 	private double prob = 1.0;
 	
@@ -144,6 +148,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		prob = entity.getProb();
 		ner_conf = entity.getConf();
 		sense = entity.getSense();
+		boundingBoxes = entity.getBoundingBoxes();
 		switch(entity.getOrigin()) {
 			case GROBID : origin = Origin.GROBID;
 						break;
@@ -161,6 +166,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		offsets = new OffsetPosition();
 		offsets.start = entity.getOffsetStart();
 		offsets.end = entity.getOffsetEnd();
+		boundingBoxes = entity.getBoundingBoxes();
 		prob = entity.getProb();
 		ner_conf = entity.getNer_conf();
 		sense = entity.getSense();
@@ -340,6 +346,20 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setWikipediaExternalRef(int ref) {
         this.wikipediaExternalRef = ref;
     }
+
+    public void setBoundingBoxes(List<BoundingBox> boundingBoxes) {
+		this.boundingBoxes = boundingBoxes;
+	}
+
+	public List<BoundingBox> getBoundingBoxes() {
+		return boundingBoxes;
+	}
+
+	public void addBoundingBoxes(BoundingBox boundingBox) {
+		if (this.boundingBoxes == null)
+			this.boundingBoxes = new ArrayList<BoundingBox>();
+		this.boundingBoxes.add(boundingBox);
+	}
 
 	public Map<String,String> getWikipediaMultilingualRef() {
 		return wikipediaMultilingualRef;
@@ -697,6 +717,20 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (getOffsetEnd() != -1)	
 			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
 		
+		if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
+			buffer.append(", \"pos\" : [");
+			boolean start = true; 
+			for(BoundingBox box : boundingBoxes) {
+				if (start) {
+					buffer.append("{").append(box.toJson()).append("}");
+					start = false;
+				} else {
+					buffer.append(", {").append(box.toJson()).append("}");
+				}
+			}
+			buffer.append("]");
+		}
+
 		buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
 		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");
 		/*if (ner_conf != -1.0)
@@ -867,6 +901,20 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());
 		if (getOffsetEnd() != -1)	
 			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
+
+		if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
+			buffer.append(", \"pos\" : [");
+			boolean start = true; 
+			for(BoundingBox box : boundingBoxes) {
+				if (start) {
+					buffer.append("{").append(box.toJson()).append("}");
+					start = false;
+				} else {
+					buffer.append(", {").append(box.toJson()).append("}");
+				}
+			}
+			buffer.append("]");
+		}
 
 		buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
 		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");

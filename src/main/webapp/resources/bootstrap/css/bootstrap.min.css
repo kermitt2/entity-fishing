@@ -125,7 +125,7 @@ pre code{padding:0;color:inherit;background-color:transparent;border:0;}
 .label-info{background-color:#3a87ad;}
 .label-info:hover{background-color:#2d6987;}
 table{max-width:100%;border-collapse:collapse;border-spacing:0;}
-.table{width:100%;margin-bottom:18px;}.table th,.table td{padding:8px;line-height:18px;text-align:left;vertical-align:top;border-top:1px solid #ddd;}
+.table{width:100%;margin-bottom:18px;}.table th,.table td{padding:8px;line-height:18px;text-align:left;vertical-align:top;}
 .table th{font-weight:bold;}
 .table thead th{vertical-align:bottom;}
 .table thead:first-child tr th,.table thead:first-child tr td{border-top:0;}

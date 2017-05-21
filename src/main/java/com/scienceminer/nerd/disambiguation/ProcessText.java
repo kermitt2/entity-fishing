@@ -6,7 +6,9 @@ import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.Utilities;
+import org.grobid.core.utilities.BoundingBoxCalculator;
 import org.grobid.core.lang.Language;
+import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.utilities.LanguageUtilities;
 
 import org.slf4j.Logger;
@@ -14,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
-  
+
 import com.googlecode.clearnlp.component.AbstractComponent;
 import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
 import com.googlecode.clearnlp.engine.EngineGetter;
@@ -32,6 +34,8 @@ import org.grobid.core.factory.*;
 import org.grobid.core.mock.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.LayoutTokensUtil;
 
 import com.scienceminer.nerd.utilities.Stopwords;
 
@@ -172,23 +176,46 @@ public class ProcessText {
 	 */
 	public List<Entity> process(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
+		if (text == null)
+			text = nerdQuery.getShortText();
+
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+		
+		if ( (text == null) && (tokens == null)) {
+			throw new NerdException("Cannot parse the content, because it is null.");
+		} else if ((text != null) && (text.length() == 0)) {
+			System.out.println("The length of the text to be processed is 0.");
+			LOGGER.error("The length of the text to be parsed is 0.");
+			return null;
+		} else if ((tokens != null) && (tokens.size() == 0)) {
+			System.out.println("The number of tokens to be processed is 0.");
+			LOGGER.error("The number of tokens to be processed is 0.");
+			return null;
+		}
+
+		if (text != null) 
+			return processText(nerdQuery);
+		else
+			return processTokens(nerdQuery);
+	}
+
+	/**
+	 *  Precondition: text in the query object is not empty
+	 */
+	private List<Entity> processText(NerdQuery nerdQuery) throws NerdException { 
+		String text = nerdQuery.getText();
+		if (text == null)
+			text = nerdQuery.getShortText();
+
+		List<Entity> results = null;
+		
 		Language language = nerdQuery.getLanguage();
 		String lang = null;
 		if (language != null)
 			lang = language.getLang();
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
-		if (text == null) {
-			throw new NerdException("Cannot parse the sentence, because it is null.");
-		}
-		else if (text.length() == 0) {
-			System.out.println("The length of the text to be processed is 0.");
-			LOGGER.error("The length of the text to be parsed is 0.");
-			return null;
-		}
-		
-		List<Entity> results = null;
-		
+
 		// do we need to process the whole text only a sentence?
 		if ( (processSentence != null) && (processSentence.length > 0) &&
 			(sentences != null) && (sentences.size() > 0) ) {
@@ -247,6 +274,81 @@ System.out.println(results.size() + " NER entities found...");
 				throw new NerdException("NERD error when processing text.", e);
 			}
 		}
+		return results;
+	}
+
+	/**
+	 *  Precondition: list of LayoutToken in the query object is not empty
+	 */
+	private List<Entity> processTokens(NerdQuery nerdQuery) throws NerdException { 
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+
+		List<Entity> results = null;
+		
+		Language language = nerdQuery.getLanguage();
+		String lang = null;
+		if (language != null)
+			lang = language.getLang();
+		Integer[] processSentence = nerdQuery.getProcessSentence();
+		List<Sentence> sentences = nerdQuery.getSentences();
+
+		// do we need to process the whole text only a sentence?
+		/*if ( (processSentence != null) && (processSentence.length > 0) &&
+			(sentences != null) && (sentences.size() > 0) ) {
+			// we process only the indicated sentences
+			String text2tag = null;
+			for(int i=0; i<processSentence.length; i++) {
+				Integer index = processSentence[i];
+				
+				// for robustness, we have to consider index out of the current sentences range
+				// here we ignore it, but we might better raise an exception and return an error
+				// message to the client
+				if (index.intValue() >= sentences.size())
+					continue;
+				Sentence sentence = sentences.get(index.intValue());
+				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
+				try {
+					if (nerParsers == null) {
+						//Utilities.initGrobid();			
+						nerParsers = new NERParsers();	
+					}
+					List<Entity> localResults = nerParsers.extractNE(text2tag, language);
+
+					// we "shift" the entities offset in case only specific sentences are processed
+					if ( (localResults != null) && (localResults.size() > 0) ) {
+						for(Entity entity : localResults) {
+							entity.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
+							entity.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
+						}
+						for(Entity entity : localResults) {
+							if (results == null)
+								results = new ArrayList<Entity>();
+							results.add(entity);
+						}
+					}
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+					throw new NerdException("NERD error when processing text.", e);
+				}
+			}
+		}
+		else {*/
+			// we process the whole text
+			try {
+				if (nerParsers == null) {
+					//Utilities.initGrobid();
+					nerParsers = new NERParsers();	
+				}
+System.out.println(language.toString());
+				results = nerParsers.extractNE(tokens, language);
+System.out.println(results.size() + " NER entities found...");				
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				throw new NerdException("NERD error when processing text.", e);
+			}
+		//}
 		return results;
 	}
 	
@@ -339,6 +441,202 @@ System.out.println(results.size() + " NER entities found...");
 	}
 	
 	/**
+	 * Processing of some raw text by extracting all non-trivial ngrams. We do not
+	 * control here the textual mentions by a NER. Generate a list of entity mentions. 
+	 *
+	 * @param tokens 
+	 *		the sequence of tokens to be parsed
+	 * @return 
+	 * 		the list of identified entities.
+	 */
+	/*public List<Entity> processBrutal(List<LayoutToken> tokens, String lang) throws NerdException { 
+System.out.println("processBrutal");
+		List<Entity> results = new ArrayList<Entity>();
+		try {
+			List<List<LayoutToken>> pool = ngrams(tokens, NGRAM_LENGTH);
+System.out.println("pool: " + pool.size());			
+		
+			// candidates which start and end with a stop word are removed. 
+			// beware not to be too agressive. 
+			List<Integer> toRemove = new ArrayList<Integer>();
+			
+			for(int i=0; i<pool.size(); i++) {
+				List<LayoutToken> term1 = pool.get(i);
+				String term = org.grobid.core.utilities.TextUtilities.dehyphenize(term1);//LayoutTokensUtil.toText(term1);
+				term = term.replace("\n", " ");
+				String termLow = term.toLowerCase();
+
+				if (stopwords != null) {
+					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
+						 stopwords.startsWithStopword(termLow, lang) ||
+						 stopwords.endsWithStopword(termLow, lang) 
+					) {
+						toRemove.add(new Integer(i));
+						continue;
+					} 
+				}
+
+				while (delimiters.indexOf(termLow.charAt(termLow.length()-1)) != -1) {
+					term = term.substring(0, term.length()-1);
+					termLow = termLow.substring(0,termLow.length()-1);
+					if (termLow.length() == 0) {
+						toRemove.add(new Integer(i));
+						continue;
+					}
+				}
+			}
+
+			List<List<LayoutToken>> subPool = new ArrayList<List<LayoutToken>>();
+			for(int i=0; i<pool.size(); i++) {
+				if (toRemove.contains(new Integer(i))) {
+					continue;
+				}
+				else {
+					subPool.add(pool.get(i));
+				}
+			}
+		
+			for(List<LayoutToken> candidate : subPool) {
+				Entity entity = new Entity(LayoutTokensUtil.toText(candidate));
+				
+				List<BoundingBox> boxes = BoundingBoxCalculator.calculate(candidate);
+				entity.setBoundingBoxes(boxes);
+				// we have an additional check of validy based on language
+				if (validEntity(entity, lang))
+					results.add(entity);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new NerdException("NERD error when processing text.", e);
+		}
+		
+		return results;
+	}*/
+
+	/**
+	 * Processing of some raw text by extracting all non-trivial ngrams. We do not
+	 * control here the textual mentions by a NER. Generate a list of entity mentions. 
+	 *
+	 * @param tokens 
+	 *		the sequence of tokens to be parsed
+	 * @return 
+	 * 		the list of identified entities.
+	 */
+	public List<Entity> processBrutal(List<LayoutToken> tokens, String lang) throws NerdException { 
+		if ( (tokens == null) || (tokens.size() == 0) ) {
+			System.out.println("Content to be processed is empty.");
+			LOGGER.error("Content to be processed is empty.");
+			return null;
+		}
+		String text = LayoutTokensUtil.toText(tokens);
+		List<Entity> results = new ArrayList<Entity>();
+		try {
+			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
+		
+			// candidates which start and end with a stop word are removed. 
+			// beware not to be too agressive. 
+			List<Integer> toRemove = new ArrayList<Integer>();
+			
+			for(int i=0; i<pool.size(); i++) {
+				StringPos term1 = pool.get(i);
+				String term = term1.string;
+				term = term.replace("\n", " ");
+				String termLow = term.toLowerCase();
+
+				/*if (termLow.indexOf("\n") != -1) {
+					toRemove.add(new Integer(i));
+					continue;
+				} */
+
+				if (stopwords != null) {
+					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
+						 stopwords.startsWithStopword(termLow, lang) ||
+						 stopwords.endsWithStopword(termLow, lang) 
+					) {
+						toRemove.add(new Integer(i));
+						continue;
+					} 
+				}
+
+				while (delimiters.indexOf(termLow.charAt(termLow.length()-1)) != -1) {
+					term1.string = term1.string.substring(0,term1.string.length()-1);
+					termLow = termLow.substring(0,termLow.length()-1);
+					if (termLow.length() == 0) {
+						toRemove.add(new Integer(i));
+						continue;
+					}
+				}
+			}
+
+			List<StringPos> subPool = new ArrayList<StringPos>();
+			for(int i=0; i<pool.size(); i++) {
+				if (toRemove.contains(new Integer(i))) {
+					continue;
+				}
+				else {
+					subPool.add(pool.get(i));
+				}
+			}
+
+			int tokenPos = 0;
+			int lastTokenIndex = 0;
+			int lastTokenPos = 0;
+
+			Collections.sort(subPool);
+			for(StringPos candidate : subPool) {
+				Entity entity = new Entity(candidate.string);				
+				org.grobid.core.utilities.OffsetPosition pos = 
+					new org.grobid.core.utilities.OffsetPosition();
+				pos.start = candidate.pos;
+				pos.end = pos.start + candidate.string.length();
+				entity.setOffsets(pos);
+				// synchronize layout token with the selected ngrams
+				List<LayoutToken> entityTokens = null;
+				tokenPos = lastTokenPos;
+				for(int j=lastTokenIndex; j<tokens.size(); j++) {
+					if (tokenPos < pos.start) {
+						tokenPos += tokens.get(j).getText().length();
+						continue;
+					}
+					if (tokenPos + tokens.get(j).getText().length() > pos.end) {
+						break;
+					}
+
+					if (tokenPos == pos.start) {
+						entityTokens = new ArrayList<LayoutToken>();
+						entityTokens.add(tokens.get(j));
+						lastTokenIndex = j;
+						lastTokenPos = tokenPos;
+					} else if ( (tokenPos >= pos.start) && (tokenPos <= pos.end) ) {
+						if (entityTokens == null) {
+							entityTokens = new ArrayList<LayoutToken>();
+							lastTokenIndex = j;
+							lastTokenPos = tokenPos;
+						}
+						entityTokens.add(tokens.get(j));
+					} 
+
+					tokenPos += tokens.get(j).getText().length();
+				}
+				if (entityTokens != null)
+					entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
+				else 
+					LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
+				// we have an additional check of validy based on language
+				if (validEntity(entity, lang))
+					results.add(entity);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new NerdException("NERD error when processing text.", e);
+		}
+		
+		return results;
+	}
+
+	/**
 	 * Processing of a vector of weighted terms. We do not control here the textual 
 	 * mentions by a NER. 
 	 *
@@ -424,8 +722,11 @@ System.out.println(results.size() + " NER entities found...");
 	public List<Entity> processBrutal(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+
 		if ((text == null) && (shortText == null)) {
-			throw new NerdException("Cannot parse the text, because it is null.");
+			LOGGER.info("Cannot parse the text, because it is null.");
+			//return null;
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) 
@@ -433,8 +734,13 @@ System.out.println(results.size() + " NER entities found...");
 
 		if ( (text == null) || (text.length() == 0) ) {
 			System.out.println("The length of the text to be processed is 0.");
-			LOGGER.error("The length of the text to be parsed is 0.");
-			return null;
+			LOGGER.info("The length of the text to be parsed is 0.");
+			if ( (tokens != null) && (tokens.size() > 0) )
+				text = LayoutTokensUtil.toText(tokens);
+			else {
+				LOGGER.error("All possible content to process are empty - process stops.");
+				return null;
+			}
 		}
 		
 		// source language 
@@ -509,7 +815,10 @@ System.out.println(results.size() + " NER entities found...");
 			}
 		}
 		else {
-			return processBrutal(text, lang);
+			if ( (tokens != null) && (tokens.size() > 0) )
+				return processBrutal(tokens, lang);
+			else
+				return processBrutal(text, lang);
 		}
 		return results;
 	}
@@ -588,6 +897,46 @@ System.out.println(results.size() + " NER entities found...");
         return sb.toString();
     }
     
+    public static List<List<LayoutToken>> ngrams(List<LayoutToken> tokens, int ngram) {
+    	int actualNgram = (ngram * 2) - 1; // for taking into account separators
+		List<List<LayoutToken>> ngrams = new ArrayList<List<LayoutToken>>();
+		if (tokens == null) {
+			return ngrams;
+		}
+		for(int n = 1; n <= actualNgram; n++) {
+			for (int i = 0; i < tokens.size() - n + 1; i++) {
+				if (tokens.get(i).getText().trim().length() == 0)
+					continue;
+				List<LayoutToken> piece = new ArrayList<LayoutToken>();
+				boolean endWithSpace = false;
+				for (int j = i; j < i+n; j++) {
+					piece.add(tokens.get(j));
+					if (tokens.get(j).getText().trim().length() == 0)
+						endWithSpace = true;
+					else
+						endWithSpace = false;
+				}
+				if (!endWithSpace)
+					ngrams.add(piece);
+			}
+		}
+
+		/*String[] words = str.split(" ");
+		for (int n = 1; n <= ngram; n++) {
+			int currentPos = 1;
+	        for (int i = 0; i < words.length - n + 1; i++) {
+	        	if (words[i].length() == 0)
+	        		continue;
+				currentPos = str.indexOf(words[i], currentPos-1);
+				StringPos stringp = new StringPos();
+				stringp.string = concat(words, i, i+n);
+				stringp.pos = currentPos;
+	            ngrams.add(stringp);
+			}
+		}*/
+        return ngrams;
+    }
+
     /**
      * Validity criteria for a raw entity. The entity raw string must not be
      * null, with additional requirements depending on language

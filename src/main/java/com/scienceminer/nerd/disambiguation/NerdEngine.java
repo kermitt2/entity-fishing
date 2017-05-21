@@ -126,7 +126,7 @@ public class NerdEngine {
 		boolean shortTextVal = false;
 
 		if ((text == null) && (shortText == null)) {
-			throw new NerdException("Cannot parse the text, because it is null.");
+			LOGGER.info("Cannot parse the text, because it is null.");
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) {
@@ -144,7 +144,7 @@ public class NerdEngine {
 		
 		if ( (text == null) || (text.length() == 0) ) {
 			System.out.println("The length of the text to be processed is 0.");
-			LOGGER.error("The length of the text to be parsed is 0.");
+			LOGGER.info("The length of the text to be parsed is 0.");
 			return null;
 		}
 
@@ -210,8 +210,29 @@ for(NerdCandidate cand : cands) {
 }
 }*/
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, 0.3);
+for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+	List<NerdCandidate> cands = entry.getValue();
+	NerdEntity entity = entry.getKey();
+for(NerdCandidate cand : cands) {
+	System.out.println(cand.toString());
+}
+}
 		prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
+for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+	List<NerdCandidate> cands = entry.getValue();
+	NerdEntity entity = entry.getKey();
+for(NerdCandidate cand : cands) {
+	System.out.println(cand.toString());
+}
+}
 		impactOverlap(candidates);
+for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+	List<NerdCandidate> cands = entry.getValue();
+	NerdEntity entity = entry.getKey();
+for(NerdCandidate cand : cands) {
+	System.out.println(cand.toString());
+}
+}
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
 			
@@ -261,8 +282,9 @@ for(NerdCandidate cand : cands) {
 
 		Collections.sort(result);
 		//if (!shortText && !nerdQuery.getNbest())
-		if (!nerdQuery.getNbest())	
+		if (!nerdQuery.getNbest()) {
 			result = pruneOverlap(result, shortTextVal);
+		}
 
 		return result;
 	}
@@ -376,7 +398,7 @@ for(NerdCandidate cand : cands) {
 										continue;
 									}
 //System.out.println("categ: " + theCategory.getTitle());
-									if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") == -1)
+									if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 										candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
 									else {
 										invalid = true;
@@ -1289,7 +1311,8 @@ System.out.println("Merging...");
 					candidate.setLang(lang);
 					candidate.setLabel(lbl);
 					for(com.scienceminer.nerd.kb.model.Category theCategory : sense.getParentCategories()) {
-						candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
+						if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
+							candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
 					}
 					
 					// inject KB info (frequencies and FreeBase/Wiki mapping)

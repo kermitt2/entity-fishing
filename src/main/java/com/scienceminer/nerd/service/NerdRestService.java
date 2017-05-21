@@ -53,6 +53,7 @@ public class NerdRestService implements NerdPaths {
 	private static final String TEXT = "text"; 
 	private static final String TERM = "term"; 
 	private static final String ID = "id"; 
+	private static final String FILE = "file"; 
 	private static final String LANG = "lang"; 
 	private static final String ONLY_NER = "onlyNER";
 	private static final String NBEST = "nbest";
@@ -179,7 +180,7 @@ public class NerdRestService implements NerdPaths {
 		return NerdRestProcessAdmin.changePropertyValue(xml);
 	}
 
-	@Path(PATH_NERD_QUERY)
+	/*@Path(PATH_NERD_QUERY)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@GET
 	public Response processQueryGet(String query) {
@@ -191,6 +192,19 @@ public class NerdRestService implements NerdPaths {
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response processQuery(String query) {
 		return NerdRestProcessQuery.processQuery(query);
+	}*/
+
+	@POST
+	@Path(PATH_NERD_QUERY)
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response processQueryGet(@FormDataParam(QUERY) String query,
+									@FormDataParam(FILE) InputStream inputStream) {
+		if (inputStream != null) {
+			return NerdRestProcessFile.processQueryPDFFile(query, inputStream);
+		}
+		else
+			return NerdRestProcessQuery.processQuery(query);
 	}
 
 	// deprecated

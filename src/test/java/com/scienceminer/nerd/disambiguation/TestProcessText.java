@@ -23,6 +23,8 @@ import com.scienceminer.nerd.utilities.Utilities;
 
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.LayoutTokensUtil;
 
 import org.xml.sax.SAXException;
 import javax.xml.parsers.SAXParser;
@@ -70,10 +72,37 @@ public class TestProcessText {
 			else {
 				System.out.println("No entity found.");
 			}
-		}
-		catch(Exception e) {
+
+			List<LayoutToken> tokens = new ArrayList<LayoutToken>();
+			tokens.add(new LayoutToken("the"));
+			tokens.add(new LayoutToken(" "));
+			tokens.add(new LayoutToken("test"));
+			List<List<LayoutToken>> pool = processText.ngrams(tokens, 2);
+			/*for(List<LayoutToken> cand : pool) {
+				System.out.println(LayoutTokensUtil.toText(cand));
+			}*/
+			assertEquals(pool.size(), 3);
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	/*@Test
+	public void testNgram() {
+		if (processText == null) {
+			System.err.println("text processor was not properly initialised!");
+		}
+		try {
+			List<LayoutToken> tokens = new ArrayList<LayoutToken>();
+			tokens.add(new LayoutToken("the"));
+			tokens.add(new LayoutToken(" "));
+			tokens.add(new LayoutToken("test"));
+			List<List<LayoutToken>> pool = processText.ngrams(tokens, 2);
+
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}*/
 
 }

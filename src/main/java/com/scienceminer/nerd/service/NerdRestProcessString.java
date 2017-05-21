@@ -282,7 +282,7 @@ System.out.println("runtime: " + (end - start));
 			
 			// sort the entities
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean();
+			String json = nerdQuery.toJSONCompactClean(null);
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -393,7 +393,7 @@ System.out.println("runtime: " + (end - start));
 			
 			// sort the entities
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean();
+			String json = nerdQuery.toJSONCompactClean(null);
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -531,7 +531,7 @@ System.out.println("runtime: " + (end - start));
 			
 			// sort the entities
 			//Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean();
+			String json = nerdQuery.toJSONCompactClean(null);
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}

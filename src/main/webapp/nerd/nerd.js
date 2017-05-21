@@ -87,7 +87,6 @@ var nerd = (function($) {
 			$("#divDoc").hide();
 
 			$("#nerd-text").hide();
-			//$("#nerd-query").hide();
 
 			return false;
 		});
@@ -105,9 +104,6 @@ var nerd = (function($) {
 			$("#divAbout").hide();
 			$("#divDoc").hide();
 			$("#divAdmin").hide();
-
-			//$("#nerd-text").hide();
-			//$("#nerd-query").hide();
 
 			return false;
 		});
@@ -160,7 +156,7 @@ var nerd = (function($) {
 
 	function ShowRequest(formData, jqForm, options) {
 	    var queryString = $.param(formData);
-	    $('#requestResult').html('<font color="grey">Requesting server...</font>');
+	    $('#infoResult').html('<font color="grey">Requesting server...</font>');
 	    return true;
 	}
 
@@ -174,10 +170,15 @@ var nerd = (function($) {
 	}
 
 	function submitQuery() {
+		$('#infoResult').html('<font color="grey">Requesting server...</font>');
+        $('#requestResult').html('');
+
 		// reinit the entity map
 		entityMap = new Object();
 		conceptMap = new Object();
 		var urlLocal = $('#gbdForm').attr('action');
+		var selected = $('#selectedService').attr('value');
+
 		//console.log(JSON.stringify($('#textInputArea').val()));
 		if ( (urlLocal.indexOf('LId') != -1) || (urlLocal.indexOf('SentenceSegmentation') != -1) ) { 
 			$.ajax({
@@ -190,31 +191,12 @@ var nerd = (function($) {
 			  contentType:false  
 			});
 		}
-		/*else if ( urlLocal.indexOf('ERDText') != -1 ) { 
-			$.ajax({
-			  type: 'GET',
-			  url: urlLocal,
-			  data: { text : $('#input').val(), 
-			  		  onlyNER : $('#onlyNER').is(':checked'),
-//				  	  shortText : $('#shortText').is(':checked'),
-				  	  nbest : $('#nbest').is(':checked'),
-					  sentence : $('#sentence').is(':checked'),
-					  format : $('#format').val(),
-					  customisation : $('#customisation').val() },
-//			  processData: false,
-			  success: SubmitSuccesful,
-			  error: AjaxError,
-			  contentType:false  
-			//contentType: "multipart/form-data"
-			});
-		}*/
 		else if ( urlLocal.indexOf('KBTermLookup') != -1 ) { 
 			$.ajax({
 			  type: 'GET',
 			  url: urlLocal,
-			  data: { term : $('#input2').val(), 
-					  format : $('#format').val(),
-					  lang : $('#lang').val() },
+			  data: { term : $('#input2').val().trim(), 
+					  format : $('#format').val() },
 //			  processData: false,
 			  success: SubmitSuccesful,
 			  error: AjaxError,
@@ -222,46 +204,201 @@ var nerd = (function($) {
 			//contentType: "multipart/form-data"
 			});
 		}
+		else if ( urlLocal.indexOf('KBConcept') != -1 ) { 
+			$.ajax({
+			  type: 'GET',
+			  url: urlLocal,
+			  data: { id : $('#input2').val().trim(), 
+					  format : $('#format').val() },
+//			  processData: false,
+			  success: SubmitSuccesful,
+			  error: AjaxError,
+			  contentType:false  
+			//contentType: "multipart/form-data"
+			});
+		}
+		else if (selected.indexOf('PDF') != -1 ) {
+console.log(document.getElementById("inputFile").files[0].name);
+			if ((document.getElementById("inputFile").files[0].type == 'application/pdf') ||
+                (document.getElementById("inputFile").files[0].name.endsWith(".pdf")) ||
+                (document.getElementById("inputFile").files[0].name.endsWith(".PDF"))) {
+console.log("process pdf...");
+				var formData = new FormData();
+				formData.append("file", document.getElementById("inputFile").files[0]);
+				formData.append("query", $('#input').val());
+
+				// request for the annotation information
+	            var xhr = new XMLHttpRequest();
+	            var url = urlLocal;
+	            xhr.contentType = false;
+	            xhr.processData = false;
+	            xhr.open('POST', url, true);
+
+				// display the local PDF
+				var nbPages = -1;
+	            var reader = new FileReader();
+	            reader.onloadend = function () {
+	                // to avoid cross origin issue
+	                //PDFJS.disableWorker = true;
+	                var pdfAsArray = new Uint8Array(reader.result);
+	                // Use PDFJS to render a pdfDocument from pdf array
+	                PDFJS.getDocument(pdfAsArray).then(function (pdf) {
+	                    // Get div#container and cache it for later use
+	                    var container = document.getElementById("requestResult");
+	                    // enable hyperlinks within PDF files.
+	                    //var pdfLinkService = new PDFJS.PDFLinkService();
+	                    //pdfLinkService.setDocument(pdf, null);
+
+	                    //$('#requestResult').html('');
+	                    nbPages = pdf.numPages;
+
+	                    // Loop from 1 to total_number_of_pages in PDF document
+	                    for (var i = 1; i <= nbPages; i++) {
+
+	                        // Get desired page
+	                        pdf.getPage(i).then(function (page) {
+	                            var table = document.createElement("table");
+	                            table.setAttribute('style', 'table-layout: fixed; width: 100%;')
+	                            var tr = document.createElement("tr");
+	                            var td1 = document.createElement("td"); 
+	                            var td2 = document.createElement("td"); 
+
+	                            tr.appendChild(td1);
+	                            tr.appendChild(td2);
+	                            table.appendChild(tr);
+
+	                            var div0 = document.createElement("div");
+	                            div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
+	                            var pageInfo = document.createElement("p");
+	                            var t = document.createTextNode("page " + (page.pageIndex + 1) + "/" + (nbPages));
+	                            pageInfo.appendChild(t);
+	                            div0.appendChild(pageInfo);
+	                            
+	                            td1.appendChild(div0);
+	                            
+	                            
+	                            var div = document.createElement("div");
+
+	                            // Set id attribute with page-#{pdf_page_number} format
+	                            div.setAttribute("id", "page-" + (page.pageIndex + 1));
+
+	                            // This will keep positions of child elements as per our needs, and add a light border
+	                            div.setAttribute("style", "position: relative; ");
+
+	                           
+	                            // Create a new Canvas element
+	                            var canvas = document.createElement("canvas");
+	                            canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
+
+	                            // Append Canvas within div#page-#{pdf_page_number}
+	                            div.appendChild(canvas);
+
+	                            // Append div within div#container
+	                            td1.setAttribute('style', 'width:70%;');
+	                            td1.appendChild(div);
+
+	                            var annot = document.createElement("div");
+	                            annot.setAttribute('style', 'vertical-align:top;');
+	                            annot.setAttribute('id', 'detailed_annot-' + (page.pageIndex+1));
+	                            td2.setAttribute('style', 'vertical-align:top;width:30%;');
+	                            td2.appendChild(annot);
+
+	                            container.appendChild(table);
+	                            
+	                            //fitToContainer(canvas);
+
+	                            // we could think about a dynamic way to set the scale based on the available parent width
+	                            //var scale = 1.2;
+	                            //var viewport = page.getViewport(scale);
+	                            var viewport = page.getViewport((td1.offsetWidth*0.98) / page.getViewport(1.0).width);
+
+	                            var context = canvas.getContext('2d');
+	                            canvas.height = viewport.height;
+	                            canvas.width = viewport.width;
+
+	                            var renderContext = {
+	                                canvasContext: context,
+	                                viewport: viewport
+	                            };
+
+	                            // Render PDF page
+	                            page.render(renderContext).then(function () {
+	                                // Get text-fragments
+	                                return page.getTextContent();
+	                            })
+	                                .then(function (textContent) {
+	                                    // Create div which will hold text-fragments
+	                                    var textLayerDiv = document.createElement("div");
+
+	                                    // Set it's class to textLayer which have required CSS styles
+	                                    textLayerDiv.setAttribute("class", "textLayer");
+
+	                                    // Append newly created div in `div#page-#{pdf_page_number}`
+	                                    div.appendChild(textLayerDiv);
+
+	                                    // Create new instance of TextLayerBuilder class
+	                                    var textLayer = new TextLayerBuilder({
+	                                        textLayerDiv: textLayerDiv,
+	                                        pageIndex: page.pageIndex,
+	                                        viewport: viewport
+	                                    });
+
+	                                    // Set text-fragments
+	                                    textLayer.setTextContent(textContent);
+
+	                                    // Render text-fragments
+	                                    textLayer.render();
+	                                });
+	                        });
+	                    }
+	                });
+	            }
+	            reader.readAsArrayBuffer(document.getElementById("inputFile").files[0]);
+
+	            xhr.onreadystatechange = function (e) {
+	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                    var response = e.target.response;
+	                    //var response = JSON.parse(xhr.responseText);
+	                    //console.log(response);
+	                    setupAnnotations(response);
+	                } else if (xhr.status != 200) {
+	                    AjaxError2("Response " + xhr.status + ": ");
+	                }
+	            };
+	            xhr.send(formData);
+			}
+		}
 		else {
+			var formData = new FormData();
+			formData.append("query", $('#input').val());
 			$.ajax({
 			  type: 'POST',
 			  url: urlLocal,
-			  data: $('#input').val(),
+			  data: formData,
 		 	  //data: JSON.stringify($('#textInputArea').val()),
 			  //beforeSubmit: ShowRequest2,
+			  contentType: false,
+			  processData: false,
 			  success: SubmitSuccesful,
-			  error: AjaxError,
-			  dataType: "text"
+			  error: AjaxError
 			});
 		}
 		
-		$('#requestResult').html('<font color="grey">Requesting server...</font>');
+		$('#infoResult').html('<font color="grey">Requesting server...</font>');
 	}
 
 	function AjaxError() {
-		$('#requestResult').html("<font color='red'>Error encountered while requesting the server.</font>");      
+		$('#infoResult').html("<font color='red'>Error encountered while requesting the server.</font>");      
 		responseJson = null;
 	}
 
-	function SubmitSuccesful(responseJson, statusText) { 
+	//function SubmitSuccesful(responseJson, statusText) { 
+	function SubmitSuccesful(responseText, statusText, xhr) {	
+		responseJson = responseText;
 		var selected = $('#selectedService').attr('value');
-		if (selected == 'processNERDQuery') {
-			responseJson = jQuery.parseJSON(responseJson);
-		}
-
-		/*if (selected == 'processNERDText') {
-			SubmitSuccesfulNERD(responseJson, statusText);
-		}
-		else*/ 
 		if ( (selected == 'processNERDQuery') && (responseJson.text != null) && (responseJson.text.length > 0) ) {
 			SubmitSuccesfulNERD(responseJson, statusText);          
 		}
-		/*else if (selected == 'processERDText') {
-			SubmitSuccesfulNERD(responseText, statusText);
-		}
-		else if (selected == 'processERDQuery') {
-			SubmitSuccesfulNERD(responseText, statusText);          
-		}*/
 		else if (selected == 'processLIdText') {
 			SubmitSuccesfulLId(responseJson, statusText);
 		}
@@ -277,6 +414,9 @@ var nerd = (function($) {
 		else if (selected == 'KBTermLookup') {
 			SubmitSuccesfulKBTermLookup(responseJson, statusText);           
 		}
+		else if (selected == 'KBConcept') {
+			SubmitSuccesfulKBConceptLookup(responseJson, statusText);           
+		}
 		
 	}
 
@@ -284,21 +424,15 @@ var nerd = (function($) {
     	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   	}
 
-	function SubmitSuccesfulNERD(responseText, statusText) {          					             
+	function SubmitSuccesfulNERD(responseJson, statusText) {     
+		$('#infoResult').html('');
 		//console.log(responseText);
-		responseJson = responseText;
 		
 		if ( (responseJson == null) || (responseJson.length == 0) ) {
-			$('#requestResult')
+			$('#infoResult')
 				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
 			return;
 		}
-
-		/*if ( ($('#selectedService').attr('value') == 'processNERDQuery') ) {//|| 
-			//($('#selectedService').attr('value') == 'processERDQuery') ||
-			//($('#selectedService').attr('value') == 'processERDSearchQuery') ) {
-			responseJson = jQuery.parseJSON(responseJson);
-		}*/
 
 		var display = '<div class=\"note-tabs\"> \
 			<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
@@ -410,7 +544,6 @@ var nerd = (function($) {
 				}
 //console.log(entityMap);
 				string = "<p>" + string.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
-				//string = string.replace("<p></p>", "");
 			
 				display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>'+string+'</p></td>';
 				display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';	
@@ -418,15 +551,12 @@ var nerd = (function($) {
 				display += '</tr>';
 			}
 			else {
-				//for(var sentence in responseJson.sentences) 
-				{    
-					display += '<tr style="background-color:#FFF;">';  
+				display += '<tr style="background-color:#FFF;">';  
 					
-					display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p><span id="sentence_ner">'+
-						" "+'</span></p></td>';
-					display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';	
-					display += '</tr>';
-				}
+				display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p><span id="sentence_ner">'+
+					" "+'</span></p></td>';
+				display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';	
+				display += '</tr>';
 			}
 			
 			display += '</table>\n';
@@ -440,11 +570,7 @@ var nerd = (function($) {
 		display += '<pre style="background-color:#FFF;width:50%;" id="displayCategories">'; 
 		// display global categories information if available
 		if (responseJson.global_categories) {
-			//display += '<div class="span6" style="width:80%;">';
 			display += '<p>';
-				//display += '<tr style="border-top:0px;"><td style="border-top:0px;"><span style="color:black;"><b>term</b></span></td><td style="border-top:0px;">';
-				//display += '<span style="color:black;"><b>score</b></span></td><td style="border-top:0px;">'; 
-				//display += '<span style="color:black;"><b>entities</b></span></td></tr>';
 			display += '<table class="table table-striped" style="width:100%;border:1px solid white;">';
 			display += '<tr style="border-top:0px;"><td style="border-top:0px;"><span style="color:black;"><b>category</b></span></td><td style="border-top:0px;"></td><td style="border-top:0px;">';
 			display += '<span style="color:black;"><b>score</b></span></td><td style="border-top:0px;">'; 
@@ -452,9 +578,6 @@ var nerd = (function($) {
 			var categories = sortCategories(responseJson.global_categories);
 			for(var category in categories) {   
 				var theCategory = responseJson.global_categories[category].category;
-				if (categoryToBefiltered(theCategory)) {
-					continue;
-				}
 
 				var score = categories[category].weight;
 				var pageId = categories[category].page_id;
@@ -489,7 +612,7 @@ var nerd = (function($) {
 		display += "<pre class='prettyprint' id='jsonCode'>";  
 		
 		display += "<pre class='prettyprint lang-json' id='xmlCode'>";  
-		var testStr = vkbeautify.json(responseText);
+		var testStr = vkbeautify.json(responseJson);
 		
 		display += htmll(testStr);
 
@@ -522,12 +645,9 @@ var nerd = (function($) {
 	}
 	
 	function SubmitSuccesfulERDSearch(responseJson, statusText) {
-		//console.log("SubmitSuccesfulERDSearch");					             
-		//console.log(responseText);
-		//responseJson = JSON.parse(responseText);
-		
+		$('#infoResult').html('');   
 		if ( (responseJson == null) || (responseJson.length == 0) ) {
-			$('#requestResult')
+			$('#infoResult')
 				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
 			return;
 		}
@@ -611,10 +731,9 @@ var nerd = (function($) {
 	}
 
 	var SubmitSuccesfulKBTermLookup = function(responseText, statusText) {
-		//responseJson = JSON.parse(responseText);
-		//responseJson = responseText;
+		$('#infoResult').html('');   
 		if ( (responseJson == null) || (responseJson.length == 0) ) {
-			$('#requestResult')
+			$('#infoResult')
 				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
 			return;
 		}
@@ -659,15 +778,7 @@ var nerd = (function($) {
 
 		display += "</pre>"; 		
 		display += '</div></div></div>';	
-		
-		
-        //$('#requestResult').append(piece);
 
-        // we need to bind the checkbox...
-        /*for (var sens in jsonObject['entities']) {
-            $('input#selectEntity' + sens).bind('change', clickfilterchoice);
-        }*/
-        //$('#disambiguation_panel').show();
 		$('#requestResult').html(display);     
 		window.prettyPrint && prettyPrint();
 
@@ -693,10 +804,159 @@ var nerd = (function($) {
 				});
 			}
 		}
-
 	}
 
-	var getPieceShowexpandNERD = function (jsonObject, lang){
+	var SubmitSuccesfulKBConceptLookup = function(responseText, statusText) {
+		$('#infoResult').html('');   
+		if ( (responseJson == null) || (responseJson.length == 0) ) {
+			$('#infoResult')
+				.html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
+			return;
+		}
+
+		var lang = 'en'; //default
+ 		var language = responseJson.language;
+ 		if (language)
+ 			lang = language.lang;
+
+ 		var display = '<div class=\"note-tabs\"> \
+		<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
+	   		<li class="active"><a href=\"#navbar-fixed-annotation\" data-toggle=\"tab\">Entity</a></li> \
+			<li><a href=\"#navbar-fixed-json\" data-toggle=\"tab\">Response</a></li> \
+		</ul> \
+		<div class="tab-content"> \
+		<div class="tab-pane active" id="navbar-fixed-annotation">\n';   	
+		
+		//display += '<pre style="background-color:#FFF;width:95%;" id="displayAnnotatedText">'; 
+		display += '<table style="width:100%;table-layout:fixed;" class="table">'; 
+		display += '<colgroup><col style="width: 70%;"><col style="width: 25%;"><col style="width: 5%;"></colgroup>';
+		//display += '<tr style="background-color:#FFF;"><td>';
+        display += getPieceShowConcept(responseJson, lang);
+		//display += '</td></tr>';
+		display += '</table>';
+						
+		display += '</div> \
+					<div class="tab-pane " id="navbar-fixed-json">\n';
+		// JSON visualisation component 	
+		// with pretty print
+		display += "<pre class='prettyprint lang-json' id='jsonCode'>";  
+		var testStr = vkbeautify.json(responseJson);
+		display += htmll(testStr);
+		display += "</pre>"; 		
+		display += '</div></div></div>';
+		$('#requestResult').html(display);     
+		window.prettyPrint && prettyPrint();
+	}
+
+	var getPieceShowConcept = function(entity, lang) {
+        var type = entity.type;
+
+        var colorLabel = null;
+        if (type)
+            colorLabel = type;
+        else if (domains && domains.length > 0) {
+            colorLabel = domain;
+        }
+        else
+            colorLabel = entity.preferredTerm;
+
+        var subType = entity.subtype;
+        var wikipedia = entity.wikipediaExternalRef;
+
+        var piece = '<tr><td>';
+        // we ouput here all fields
+      
+        // term in target language
+        piece += '<table class="concept" style="width:100%;">';
+		piece += '<tr><td style="width:100%;border-top:0px;"><table><tr><td style="padding-left:0px;border-top:0px;"><p><b>' + 
+				entity.preferredTerm + ' (' + lang + ')</b></p></td>';
+
+		// multilingual terms
+		if (entity.multilingual) {
+			for(var mult in entity.multilingual) {
+				piece += '<td style="border-top:0px;"><p>' + entity.multilingual[mult].term + ' (' + entity.multilingual[mult].lang + ')</p></td>';
+			}
+		}
+		piece += '</tr></table></td></tr>';
+
+		// definition
+		var definitions = entity.definitions;
+		var localHtml = "";
+		if (definitions && (definitions.length > 0))
+			localHtml += wiki2html(definitions[0]['definition'], lang);       
+        piece += '<tr><td><div class="wiky_preview_area2">'+ localHtml + '</div></td></tr>';
+
+        // domains
+        var domains = entity.domains;
+        localHtml = "";
+		if (domains && (domains.length > 0)) {
+			for (var domain in domains) {
+				if (domain != 0)
+					localHtml += ", "
+				localHtml += domains[domain];
+			}
+		}    
+        piece += '<tr><td><p><b>Domains</b>: ' + localHtml + '</p></td></tr>';
+		
+        // categories
+        var categories = entity.categories;
+        localHtml = "";
+		if (categories && (categories.length > 0)) {
+			for (var cat in categories) {
+				if (cat != 0)
+					localHtml += ", "
+				localHtml += categories[cat].category;
+			}
+		}    
+        piece += '<tr><td><p><b>Categories</b>: ' + localHtml + '</p></td></tr>';
+
+        // properties
+        var properties = entity.properties;
+		if ((properties != null) && (properties.length > 0)) {
+			localHtml = "";
+			for(var i in properties) {
+				var property = properties[i];
+				if (property.template) {
+					localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
+				}
+			}
+			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Properties: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
+						localHtml+"</table></div></td></tr></table></td></tr>";
+		}
+
+		// relations
+		var relations = entity.relations;
+		if ((relations != null) && (relations.length > 0)) {
+			localHtml = "";
+			for(var i in relations) {
+				var relation = relations[i];
+				if (relation.template) {
+					localHtml += "<tr><td>" + relation.relationName + "</td><td>" + relation.target + "</td></tr>"
+				}
+			}
+			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Relations: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
+						localHtml+"</table></div></td></tr></table></td></tr>";
+		}
+
+		piece += '</table>';
+
+		// wikimedia image
+		piece += '</td><td>';
+		piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
+        
+        // clickable wikipedia icon
+        piece += '<td>';
+        if (wikipedia) {
+            piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
+                    wikipedia +
+                    '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
+        }
+        piece += '</td></tr>';
+	    
+	    return piece;
+	}
+
+	var getPieceShowexpandNERD = function(jsonObject, lang) {
 	    var piece = '<div class="mini-layout fluid" style="background-color:#F7EDDC;"> \
 					   		 <div class="row-fluid"><div class="span12" style="width:100%;">';
 //							 <div class="row-fluid"><div class="span11" style="width:95%;">';
@@ -966,6 +1226,244 @@ var nerd = (function($) {
 		$('#detailed_annot-0').hide();	
 	}
 
+	function setupAnnotations(response) {
+        // TBD: we must check/wait that the corresponding PDF page is rendered at this point
+        if ((response == null) || (response.length == 0)) {
+            $('#infoResult')
+                .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
+            return;
+        } else {
+            $('#infoResult').html('');
+        }
+
+        responseJson = jQuery.parseJSON(response);
+
+        var pageInfo = responseJson.pages;
+        var page_height = 0.0;
+        var page_width = 0.0;
+
+        var entities = responseJson.entities;
+        if (entities) {
+            // hey bro, this must be asynchronous to avoid blocking the brothers
+            entities.forEach(function(entity, n) {
+                var entityType = entity.type;
+                if (!entityType) {
+                	if (entity.domains && entity.domains.length > 0)
+	                	entityType = entity.domains[0]
+                }
+                
+                entityMap[n] = [];
+				entityMap[n].push(entity);
+
+				var lang = 'en'; //default
+		 		var language = responseJson.language;
+		 		if (language)
+		 			lang = language.lang;
+
+				var identifier = entity.wikipediaExternalRef;
+				if (identifier && (conceptMap[identifier] == null)) {
+					$.ajax({
+					  	type: 'GET',
+					  	url: 'service/KBConcept',
+					  	data: { id : identifier, lang : lang },
+					  	success: function(result) { conceptMap[result.wikipediaExternalRef] = result; },
+					  	dataType: 'json'  
+					});
+				}
+
+                //var theId = measurement.type;
+                //var theUrl = null;
+                //var theUrl = annotation.url;
+                var pos = entity.pos;
+                if ( (pos != null) && (pos.length > 0) ) {
+                    pos.forEach(function(thePos, m) {
+                        // get page information for the annotation
+                        var pageNumber = thePos.p;
+                        if (pageInfo[pageNumber-1]) {
+                            page_height = pageInfo[pageNumber-1].page_height;
+                            page_width = pageInfo[pageNumber-1].page_width;
+                        }
+                        annotateEntity(entityType, thePos, page_height, page_width, n, m);
+                    });   
+                }
+            });
+        }
+	}
+
+	function annotateEntity(theType, thePos, page_height, page_width, entitytIndex, positionIndex) {
+        var page = thePos.p;
+        var pageDiv = $('#page-'+page);
+        var canvas = pageDiv.children('canvas').eq(0);
+        //var canvas = pageDiv.find('canvas').eq(0);;
+
+        var canvasHeight = canvas.height();
+        var canvasWidth = canvas.width();
+        var scale_x = canvasHeight / page_height;
+        var scale_y = canvasWidth / page_width;
+
+        var x = thePos.x * scale_x - 1;
+        var y = thePos.y * scale_y - 1 ;
+        var width = thePos.w * scale_x + 1;
+        var height = thePos.h * scale_y + 1;
+
+        //make clickable the area
+        theType = "" + theType;
+        if (theType)
+            theType = theType.replace(" ", "_");
+        var element = document.createElement("a");
+        var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
+            y+"px; left:"+x+"px;";
+        element.setAttribute("style", attributes + "border-width: 2px;border-style:solid; "); //border-color: " + getColor(theId) +";");
+        //element.setAttribute("style", attributes + "border:2px solid;");
+        element.setAttribute("class", theType.toLowerCase());
+        element.setAttribute("id", 'annot-' + entitytIndex  + '-' + positionIndex);
+        element.setAttribute("page", page);
+
+        pageDiv.append(element);
+
+        $('#annot-' + entitytIndex + '-' + positionIndex).bind('hover', viewEntityPDF);
+        $('#annot-' + entitytIndex + '-' + positionIndex).bind('click', viewEntityPDF);
+    }
+
+    function viewEntityPDF() {
+        var pageIndex = $(this).attr('page');
+        var localID = $(this).attr('id');
+
+console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
+
+		if (responseJson == null)
+			return;
+
+		if (responseJson.entities == null) {
+			return;
+		}
+
+		var topPos = $(this).position().top;
+
+		var ind1 = localID.indexOf('-');
+		var localEntityNumber = parseInt(localID.substring(ind1+1,localID.length));
+
+		if ( (entityMap[localEntityNumber] == null) || (entityMap[localEntityNumber].length == 0) ) {
+			// this should never be the case
+			console.log("Error for visualising annotation with id " + localEntityNumber 
+				+ ", empty list of entities");
+		}
+
+		var lang = 'en'; //default
+		var language = responseJson.language;
+		if (language)
+			lang = language.lang;
+		var string = "";
+		for(var entityListIndex = entityMap[localEntityNumber].length-1; 
+				entityListIndex >= 0; 
+				entityListIndex--) {
+			var entity = entityMap[localEntityNumber][entityListIndex];
+			var wikipedia = entity.wikipediaExternalRef;
+			var domains = entity.domains;
+			var type = entity.type;
+
+			var colorLabel = null;
+			if (type)
+				colorLabel = type;
+			else if (domains && domains.length>0) {
+				colorLabel = domains[0].toLowerCase();
+			}
+			else 
+				colorLabel = entity.rawName;
+
+			var subType = entity.subtype;
+			var conf = entity.nerd_score;
+			//var definitions = entity.definitions;
+			var definitions = getDefinitions(wikipedia);
+			
+			var content = entity.rawName; 
+			//var normalized = entity.preferredTerm; 
+			var normalized = getPreferredTerm(wikipedia);
+			
+			var sense = null;
+			if (entity.sense)
+				sense = entity.sense.fineSense;
+
+			string += "<div class='info-sense-box "+colorLabel+"'";
+			if (topPos != -1) 
+	            string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
+
+			string += "><h3 style='color:#FFF;padding-left:10px;'>"+content.toUpperCase()+
+				"</h3>";
+			string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+				"<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
+				
+			if (type)	
+				string += "<p>Type: <b>"+type+"</b></p>";
+
+			if (sense) {
+				// to do: cut the sense string to avoid a string too large 
+				if (sense.length <= 20)
+					string += "<p>Sense: <b>"+sense+"</b></p>";
+				else {
+					var ind = sense.indexOf('_');
+					if (ind != -1) {
+						string += "<p>Sense: <b>"+sense.substring(0, ind+1)+"<br/>"+
+							sense.substring(ind+1, sense.length)+"</b></p>";
+					}
+					else 
+						string += "<p>Sense: <b>"+sense+"</b></p>";
+				}
+			}
+			if (normalized)
+				string += "<p>Normalized: <b>"+normalized+"</b></p>";
+			
+			if (domains && domains.length>0) {
+				string += "<p>Domains: <b>";
+				for(var i=0; i<domains.length; i++) {
+					if (i != 0) 
+						string += ", ";
+					string += domains[i];
+				}
+				string += "</b></p>";
+			}
+
+			string += "<p>conf: <i>"+conf+ "</i></p>";
+			string += "</td><td style='align:right;bgcolor:#fff'>";
+			string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
+
+			string += "</td></tr></table>";
+
+			if ((definitions != null) && (definitions.length > 0)) {
+				var localHtml = wiki2html(definitions[0]['definition'], lang);
+				string += "<p><div class='wiky_preview_area2'>"+localHtml+"</div></p>";
+			}
+
+			// properties and relations if taxon
+			var properties = getProperties(wikipedia);
+			if ((properties != null) && (properties.length > 0)) {
+				var localHtml = "";
+				for(var i in properties) {
+					var property = properties[i];
+					if (property.template && (property.template == 'Taxobox')) {
+						localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
+					}
+				}
+				string += "<p><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
+			}
+
+			if (wikipedia != null) {
+				string += '<p>Reference: '
+				if (wikipedia != null) {
+					string += '<a href="http://'+lang+'.wikipedia.org/wiki?curid=' + 
+					wikipedia + 
+					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
+					' src="resources/img/wikipedia.png"/></a>';
+				}
+				string += '</p>';
+			}
+		
+			string += "</div></div>";
+		}
+		$('#detailed_annot-'+pageIndex).html(string);
+        $('#detailed_annot-'+pageIndex).show();
+	}
+
 	function getDefinitions(identifier) {
 		var localEntity = conceptMap[identifier];
 		if (localEntity != null) {
@@ -1006,8 +1504,19 @@ var nerd = (function($) {
 			return null;
 	}
 
+	function getRelations(identifier) {
+		var localEntity = conceptMap[identifier];
+		if (localEntity != null) {
+			return localEntity.relations;
+		} else
+			return null;
+	}
+
 	function viewEntity() {
 		var localID = $(this).attr('id');
+
+		if (responseJson == null)
+			return;
 
 		if (responseJson.entities == null) {
 			return;
@@ -1135,7 +1644,14 @@ var nerd = (function($) {
 	}
 
 	function SubmitSuccesfulLId(responseJson, statusText) {
-console.log(responseJson);
+		$('#infoResult').html(''); 
+		if ( (responseJson == null) || (responseJson.length == 0) ){
+			$('#infoResult')
+				.html("<font color='red'>Error encountered while receiving the server's answer: " + 
+					  "response is empty.</font>");   
+			return;
+		}
+
 		//responseJson = responseText;//jQuery.parseJSON(responseText);
 		
 		var display = '<pre style="background-color:#FFF;width:95%;" id="displayLanguageIdentification">'; 
@@ -1151,9 +1667,10 @@ console.log(responseJson);
 		$('#requestResult').html(display);  
 	}
 	
-	function SubmitSuccesfulSentenceSegmentation(responseJson, statusText) {     
+	function SubmitSuccesfulSentenceSegmentation(responseJson, statusText) {
+		$('#infoResult').html('');
 		if ( (responseJson == null) || (responseJson.length == 0) ){
-			$('#requestResult')
+			$('#infoResult')
 				.html("<font color='red'>Error encountered while receiving the server's answer: " + 
 					  "response is empty.</font>");   
 			return;
@@ -1208,14 +1725,17 @@ console.log(responseJson);
 		$('#requestResult').html(display);  
 	}
 
+	// query for text XOR shortText content
 	var queryTemplate = { "text" : "", "shortText" : "", "termVector" : [], "language" : { "lang" : "en" }, "entities" : [], "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
 						  "nbest" : false, "sentence" : false, "format" : "JSON", 
  						  "customisation" : "generic" };
 
-	var queryTemplate2 = { "text" : "", "language" : { "lang" : "en" }, "entities" : [], "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
+ 	// query + PDF
+	var queryTemplate2 = { "language" : { "lang" : "en" }, "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
 						  "nbest" : false, "format" : "JSON",
  						  "customisation" : "generic" };
 
+ 	// term lookup
  	var queryTemplate3 = { "term" : "", "language" : { "lang" : "en" } };
 
 	function processChange() {
@@ -1224,64 +1744,56 @@ console.log(responseJson);
 		if (selected == 'processNERDQuery') {
 			createInputTextArea('query');
 			setBaseUrl('processNERDQuery');
-			$("#nerd-text").hide();
+			removeInputFile();
+			//$("#nerd-text").hide();
 			//$("#default_nerd_query").attr('checked', 'checked');
 			//$("#nerd-query").show();
 			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
 		} 
-		/*else if (selected == 'processNERDText') {
+		else if (selected == 'processNERDQueryPDF') {
 			createInputTextArea('query');
-			setBaseUrl('processNERDText');   
-			//$("#nerd-query").hide();     
-			//$("#default_nerd_text").attr('checked', 'checked');
-			$("#nerd-text").show();
-			//$("#lid").hide();   
-		}*/
-		/*else if (selected == 'processERDQuery') {
-			setBaseUrl('processERDQuery');
-			$("#nerd-text").hide();     
-			//$("#default_nerd_query").attr('checked', 'checked');
-			//$("#nerd-query").show();
-			//$("#lid").hide();
-			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
-		} 
-		else if (selected == 'processERDText') {
-			setBaseUrl('processERDText');   
-			//$("#nerd-query").hide();     
-			//$("#default_nerd_text").attr('checked', 'checked');
-			$("#nerd-text").show();
-			//$("#lid").hide();   
-		}*/
-		else if (selected == 'processLIdText') {
-			createInputTextArea('query');
-			setBaseUrl('processLIdText');  
-			//$("#lid").show();   
-			//$("#nerd-query").hide();  
-			$("#nerd-text").hide();     
-			//$("#default_lid").attr('checked', 'checked');
-		}
-		else if (selected == 'processSentenceSegmentation') {
-			createInputTextArea('query');
-			setBaseUrl('processSentenceSegmentation');  
-			//$("#lid").show(); 
-			//$("#nerd-query").hide();  
-			$("#nerd-text").hide();     
-			//$("#default_lid").attr('checked', 'checked');
-		}
-		/*else if (selected == 'processERDSearchQuery') {
-			createInputTextArea('query');
-			setBaseUrl('processERDSearchQuery');
-			$("#nerd-text").hide();     
+			createInputFile();
+			setBaseUrl('processNERDQuery');
+			//$("#nerd-text").hide();
 			//$("#default_nerd_query").attr('checked', 'checked');
 			//$("#nerd-query").show();
 			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate2)));
-		} */
+		}  
+		else if (selected == 'processLIdText') {
+			createInputTextArea('query');
+			setBaseUrl('processLIdText'); 
+			removeInputFile(); 
+			//$("#lid").show();   
+			//$("#nerd-query").hide();  
+			//$("#nerd-text").hide();     
+			//$("#default_lid").attr('checked', 'checked');
+		}
+		else if (selected == 'processSentenceSegmentation') {
+			createInputTextArea('query');
+			setBaseUrl('processSentenceSegmentation'); 
+			removeInputFile(); 
+			//$("#lid").show(); 
+			//$("#nerd-query").hide();  
+			//$("#nerd-text").hide();     
+			//$("#default_lid").attr('checked', 'checked');
+		}
 		else if (selected == 'KBTermLookup') {
-			createSimpleTextFieldArea('query');
+			createSimpleTextFieldArea('query', 'term');
 			setBaseUrl('KBTermLookup');
-			$("#nerd-text").hide();  
+			//$("#nerd-text").hide();  
+			removeInputFile();
+			//$("#default_nerd_query").attr('checked', 'checked');
+			//$("#nerd-query").show();
+			//$("#lid").hide();
+			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate3)));
+		}
+		else if (selected == 'KBConcept') {
+			createSimpleTextFieldArea('query', 'concept ID');
+			setBaseUrl('KBConcept');
+			//$("#nerd-text").hide();  
+			removeInputFile();
 			//$("#default_nerd_query").attr('checked', 'checked');
 			//$("#nerd-query").show();
 			//$("#lid").hide();
@@ -1290,14 +1802,23 @@ console.log(responseJson);
 	}
 
 	function createInputFile() {
-		$('#label').html('Select a pdf file');
-		$('#input').remove();
-		$('#field').append(
-				$('<input/>').attr('type', 'file').attr('id', 'input').attr(
-						'name', 'input'));				
-		$('#gbdForm').attr('enctype', 'multipart/form-data');
-		$('#gbdForm').attr('method', 'post'); 
+		// we actually create the input file thingy only if not already created
+		if ($('#labelFile').is(':empty')) {
+			$('#labelFile').html('Select a pdf file');
+			$('#fieldFile').append(
+					$('<input/>').attr('type', 'file').attr('id', 'inputFile').attr('name', 'inputFile'));
+			$('#gbdForm').attr('enctype', 'multipart/form-data');
+			$('#gbdForm').attr('method', 'post'); 
+		} 
+		$('#labelFile').show();
+		$('#fieldFile').show();
 	}
+
+	function removeInputFile() {
+		// we actually simply hide it...
+		$('#labelFile').hide();
+		$('#fieldFile').hide();
+	}	
 
 	var textExamples = ["Austria invaded and fought the Serbian army at the Battle of Cer and Battle of Kolubara beginning on 12 August. \n\nThe army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg (17 August – 2 September). But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne. \n\nUnfortunately for the Allies, the pro-German King Constantine I dismissed the pro-Allied government of E. Venizelos before the Allied expeditionary force could arrive. Beginning in 1915, the Italians under Cadorna mounted eleven offensives on the Isonzo front along the Isonzo River, northeast of Trieste.\n\n At the Siege of Maubeuge about 40000 French soldiers surrendered, at the battle of Galicia Russians took about 100-120000 Austrian captives, at the Brusilov Offensive about 325 000 to 417 000 Germans and Austrians surrendered to Russians, at the Battle of Tannenberg 92,000 Russians surrendered.\n\n After marching through Belgium, Luxembourg and the Ardennes, the German Army advanced, in the latter half of August, into northern France where they met both the French army, under Joseph Joffre, and the initial six divisions of the British Expeditionary Force, under Sir John French. A series of engagements known as the Battle of the Frontiers ensued. Key battles included the Battle of Charleroi and the Battle of Mons. In the former battle the French 5th Army was \
 almost destroyed by the German 2nd and 3rd Armies and the latter delayed the German advance by a day. A general Allied retreat followed, resulting in more clashes such as the Battle of Le Cateau, the Siege of Maubeuge and the Battle of St. Quentin (Guise). \n\nThe German army came within 70 km (43 mi) of Paris, but at the First Battle of the Marne (6–12 September), French and British troops were able to force a German retreat by exploiting a gap which appeared between the 1st and 2nd Armies, ending the German advance into France. The German army retreated north of the Aisne River and dug in there, establishing the beginnings of a static western front that was to last for the next three years. Following this German setback, the opposing forces tried to outflank each other in the Race for the Sea, and quickly extended their trench systems from the North Sea to the Swiss frontier. The resulting German-occupied territory held 64% of France's pig-iron production, 24% of its steel manufacturing, dealing a serious, but not crippling setback to French industry.\n ",
@@ -1354,14 +1875,14 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 		$('#reuters4').removeClass('section-active').addClass('section-non-active');
 	}
 
-	function createSimpleTextFieldArea(nameInput) {
+	function createSimpleTextFieldArea(nameInput, entryType) {
 		$('#label').html('&nbsp;'); 					                   
 		$('#input').remove();
-		$('#examples').remove();
+		$('#withExamples').remove();
 		$('#field').html("");
  
 		var piece = '<table><tr>' + 
-					'<td><textarea style="height:28px;" rows="1" id="input2" name="'+nameInput+'" placeholder="Enter a term..."/></td>' +
+					'<td><textarea style="height:28px;" rows="1" id="input2" name="'+nameInput+'" placeholder="Enter a ' + entryType + '..."/></td>' +
 					'<td style="width:10px;"></td>' +
 					'<td><select style="height:auto;width:auto;top:-10px;right:10px;" name="lang" id="lang">' +
 					'<option value="en" selected>en</option>' + 
@@ -1377,15 +1898,15 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 		$('#input').remove();
 		$('#field').html("");
  
-		$('#field').append('<table id="examples"><tr><td><textarea class="span7" rows="5" id="input" name="'+nameInput+'" /></td>'+
+		$('#field').append('<table id="withExamples"><tr><td><textarea class="span7" rows="5" id="input" name="'+nameInput+'" /></td>'+
 			"<td><span style='padding-left:20px;'>&nbsp;</span></td>"+
-		"<td><table><tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>Cendari</span></td></tr>"+
+		"<td><table id='examplesBlock1'><tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>Cendari</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example2' style='font-size:90%;'>PubMed_1</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example3' style='font-size:90%;'>PubMed_2</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example4' style='font-size:90%;'>HAL_1</span></td></tr>"+		
 			"</table></td>"+
 			"<td><span style='padding-left:20px;'>&nbsp;</span></td>"+
-		"<td><table><tr style='line-height:130%;'><td><span id='reuters1' style='font-size:90%;'>Reuters_1</span></td></tr>"+
+		"<td><table id='examplesBlock2'><tr style='line-height:130%;'><td><span id='reuters1' style='font-size:90%;'>Reuters_1</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='reuters2' style='font-size:90%;'>Reuters_2</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='reuters3' style='font-size:90%;'>French_1</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='reuters4' style='font-size:90%;'>German_1</span></td></tr>"+
@@ -1832,6 +2353,16 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 		return docData;
 	}
 	
+	function sortCategories(categories) {
+		var newCategories = []; 
+		if (categories) {
+			newCategories = categories.sort(function(a, b) {
+    			return (b.weight) - (a.weight);
+    		});;
+		}
+		return newCategories;
+	}
+
 	var bratLocation = 'brat/';
 	/*head.js(
 	    // External libraries
@@ -1937,6 +2468,15 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			});
 	}
 	
+	function fitToContainer(canvas){
+	  	// make a canvas visually fill the positioned parent
+	  	canvas.style.width ='100%';
+	  	canvas.style.height='100%';
+	  	// ...then set the internal size to match
+	  	canvas.width  = canvas.offsetWidth;
+	  	canvas.height = canvas.offsetHeight;
+	}
+
 	function changePropertySuccesful(responseText, statusText) {
 		$("#"+selectedAdmKey).find("div").html(responseText);
 		$('#admMessage').html("<font color='green'>Property "+selectedAdmKey.split('-').join('.')+" updated with success</font>");

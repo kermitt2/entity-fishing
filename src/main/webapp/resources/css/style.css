@@ -192,7 +192,7 @@ pre, pre.prettyprint {
 
 a:focus{outline:thin dotted #BC0E0E;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
 a:hover,a:active{outline:0;color:#BC0E0E;}
-a{color:#70695C;text-decoration:none;}                
+a{color:#70695C;text-decoration:none;}
 a:hover{color:#BC0E0E;text-decoration:underline;}
 
 h3{ color:#70695C; }
@@ -202,8 +202,8 @@ a.section-active { color: #BC0E0E; }
 span.section-not-active { color: #70695C; }
 span.section-active { color: #BC0E0E; }
 
-table.properties th{ } 
-table.properties tr{}
+table.properties th {} 
+table.properties tr {}
 table.properties tbody tr td { 
   font-size: 12px;
   background-color: #FCF8E3; 
@@ -211,9 +211,12 @@ table.properties tbody tr td {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/*table th{background-color:#FCF8E3;}
-table tr{background-color:#FCF8E3;}
-table tbody tr.highlight td { background-color: #F2DEDE; word-break:normal; }*/
+table.concept th {}
+table.concept tr {}
+table.concept td {
+  word-break:normal; padding:4px;
+  border-top:1px solid #ddd;
+}
 
 p {word-break:normal;}
 span {word-break:normal;}
@@ -343,3 +346,87 @@ span {word-break:normal;}
 .info-sense-box.electronics {
     background-color: #01A9DB;
 }
+
+// boxes
+a.location {
+    border-color: #398739;
+}
+a.person {
+    border-color: #c43c35;
+}
+a.period {
+    border-color: #f89406;
+}
+a.event {
+    border-color: #01A9DB;
+}
+a.national {
+    border-color: #8904B1;
+}
+a.measure {
+    border-color: #c43c35;
+}
+a.acronym {
+    border-color: #c43c35;
+}
+a.institution {
+    border-color: #c43c35;
+}
+a.date {
+    border-color: #87A1A8;
+}
+a.biology {
+    border-color: #398739;
+}
+a.chemistry {
+    border-color: #c43c35;
+}
+a.food {
+    border-color: #398739;
+}
+a.medicine {
+    border-color: #f89406;
+}
+a.anatomy {
+    border-color: #f89406;
+}
+a.engineering {
+    border-color: #01A9DB;
+}
+a.animals {
+    border-color: #8904B1;
+}
+a.plants {
+    border-color: #c43c35;
+}
+a.earth {
+    border-color: #c43c35;
+}
+a.mathematics {
+    border-color: #c43c35;
+}
+a.physics {
+    border-color: #87A1A8;
+}
+a.optics {
+    border-color: #87A1A8;
+}
+a.architecture {
+    border-color: #A901DB;
+}
+a.astronautics {
+    border-color: #87A1A8;
+}
+a.telecommunication {
+    border-color: #5C460C;
+}
+a.computer_science {
+    border-color: #04B4AE;
+}
+a.environment {
+    border-color: #31B404;
+}
+a.electronics {
+    border-color: #01A9DB;
+}
+

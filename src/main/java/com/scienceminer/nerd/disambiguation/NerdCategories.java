@@ -159,5 +159,19 @@ public class NerdCategories {
 		
 		return query;
 	}
+
+	private static List<String> categoryFilter = Arrays.asList("article", "disambiguation", "pilot", "list of", "beadwork", "births");
+
+	public static boolean categoryToBefiltered(String category) {
+		if (category != null) {
+			String cat = category.toLowerCase();
+			for (int i=0; i < categoryFilter.size(); i++) {
+				if (cat.indexOf(categoryFilter.get(i)) != -1)
+					return true;
+			}
+			return false;
+		}
+		return true;
+	}
 	
 }

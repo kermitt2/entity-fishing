@@ -50,13 +50,21 @@
 		<script type="text/javascript" src="resources/js/wiki2html.js"></script>
         <link href="resources/css/wiky.css" rel="stylesheet" type="text/css">
 
+        <!-- PDF.js stuff -->
+        <link type="text/css" href="resources/pdf.js/web/text_layer_builder.css" rel="stylesheet"/>
+        <link type="text/css" href="resources/pdf.js/web/annotation_layer_builder.css" rel="stylesheet"/>
+        <script type="text/javascript" src="resources/pdf.js/web/text_layer_builder.js"></script>
+        <script type="text/javascript" src="resources/pdf.js/web/pdf_link_service.js"></script>
+        <script type="text/javascript" src="resources/pdf.js/web/annotation_layer_builder.js"></script>
+        <script type="text/javascript" src="resources/pdf.js/build/pdf.js"></script>
+
  		<!-- The Javascript library -->
         <script src="nerd/nerd.js"></script>    
 
     </head>
     
     <body>  
-		<div class="container">  
+		<div class="container" style="width:85%;">  
 			
 		  <div class="content">  
 			
@@ -101,21 +109,21 @@
 				                    <option value="processLIdText">Language identification</option>	
 									<option value="processSentenceSegmentation">Sentence segmentation</option>	
 									<!--option value="processNERDText">NERD text</option-->					
-									<option value="processNERDQuery">NERD query</option>
+									<option value="processNERDQuery">disambiguate - text</option>
+									<option value="processNERDQueryPDF">disambiguate - PDF</option>
 									<!--option value="processERDSearchQuery">ERD search query</option-->
 									<option value="KBConcept">Concept look-up</option>
 									<option value="KBTermLookup">Term look-up</option>
 								</select>
 										</td>
 										<td>
-								<span id ="nerd-text">
+								<!--span id ="nerd-text">
 										<table>
 											<tr>
 												<td style="width:10px;"></td>
 												<td>
 										<select style="height:auto;width:auto;top:-10px;right:10px;" id="format">
 						                    <option value="JSON" selected>JSON</option>	
-											<!--option value="XML">XML</option-->	
 										</select>
 												</td>
 												<td style="width:10px;"></td>
@@ -140,13 +148,6 @@
 												</td>
 												<td style="width:10px;"></td>
 												<td>
-										<!--div class="checkbox checkbox-danger checkbox-inline">
-										    <input type="checkbox" id="shortText" name="shortText" value="0">
-										    <label for="shortText"> short text </label>
-										</div>
-												</td>
-												<td style="width:10px;"></td>
-												<td-->
 										<div class="checkbox checkbox-danger checkbox-inline">
 										    <input type="checkbox" id="nbest" name="nbest" value="0">
 										    <label for="nbest"> nbest </label>
@@ -154,18 +155,24 @@
 												</td>
 											</tr>
 										</table>		 
-								</span>
+								</span-->
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
-						<tr><td>&nbsp;</td><td/></tr>
+						<!--tr><td>&nbsp;</td><td/></tr-->
 						<tr>
-							<td><span id="label">&nbsp;</span></td>
+							<td><span id="label"/></td>
 							<td>
-								<div id="field">			
-								</div>
+								<div id="field"/>			
+							</td>
+						</tr>
+						<!--tr><td>&nbsp;</td><td/></tr-->
+						<tr>
+							<td><span id="labelFile"/></td>
+							<td>
+								<div id="fieldFile"/>			
 							</td>
 						</tr>
 						<tr>
@@ -174,6 +181,7 @@
 			        </table>
 				</div>
 				<br>
+				<div id="infoResult"></div>
 				<div id="requestResult"></div>
 			</div>
 
