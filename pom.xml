@@ -1,203 +1,200 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 		                    http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.scienceminer.nerd</groupId>
-	<artifactId>com.scienceminer.nerd</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.2</version>
-	
+    <groupId>com.scienceminer.nerd</groupId>
+    <artifactId>com.scienceminer.nerd</artifactId>
+    <packaging>war</packaging>
+    <version>0.0.2</version>
+
 	<name>(N)ERD</name>
 	<description>(Named) Entity Recognition and Disambiguation</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<lmdbjni.version>0.4.6</lmdbjni.version>
-	</properties>
-	
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
-	
-	<contributors>
-		<contributor>
-			<name>Patrice Lopez</name>
-			<roles>
-				<role>Developer</role>
-			</roles>
-		</contributor>
-	</contributors>	
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <avro.version>1.7.5</avro.version>
+        <lmdbjni.version>0.4.6</lmdbjni.version>
+    </properties>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-			
-			<resource>
-				<directory>src</directory>
-				<targetPath>source/src</targetPath>
-			</resource>
-			<resource>
-				<directory>${basedir}</directory>
-				<targetPath>source</targetPath>
-				<includes>
-					<include>pom.xml</include>
-				</includes>
-			</resource>
-		</resources>
-		
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<executions>
-					<execution>
-						<id>make-a-jar</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>com.jolira</groupId>
-				<artifactId>onejar-maven-plugin</artifactId>
-				<version>1.4.4</version>
-				<executions>
-					<execution>
-						<configuration>
-							<mainClass>com.scienceminer.nerd.main.Main</mainClass>
-							<onejarVersion>0.97</onejarVersion>
-							<attachToBuild>true</attachToBuild>
-							<classifier>onejar</classifier>
-						</configuration>
-						<goals>
-							<goal>one-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.4</version>
-				<configuration>
-					<argLine>-Xms256m -Xmx3072m</argLine>
-				</configuration>
-			</plugin>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
 
-			<!-- start: for generating license headers in source files. Run mvn license:format -->
-			<plugin>
-				<groupId>com.google.code.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
-				<version>1.4.0</version>
-				<configuration>
-					<header>${basedir}/src/etc/header.txt</header>
-					<includes>
-						<include>src/main/java/**</include>
-						<include>src/test/java/**</include>
-					</includes>
-				</configuration>
-			</plugin>
-			<!-- end: for generating license headers in source files. Run mvn license:format -->
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>src/main/webapp/WEB-INF</directory>
-							<!--excludes>
-								<exclude>src/main/resources/</exclude>
-							</excludes-->
-							<!--includes>
-								<include>web.xml</include>        
-							</includes-->
-							<!--filtering>true</filtering-->
-							<targetPath>WEB-INF</targetPath>  
-						</resource>  
-						<!--resource>  
-							<directory>utils/brat</directory>   
-						    <targetPath>brat</targetPath>   
-						</resource--> 
-						<resource>  
-							<directory>doc</directory>   
-						    <targetPath>doc</targetPath>   
-						</resource> 
-						<resource>
-							<directory>lib</directory>   
-						    <targetPath>WEB-INF/lib</targetPath>   
-						</resource>   
-					</webResources>     
-				</configuration>
-			</plugin>
-			<plugin>
-				<!--groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.10</version-->		
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>		
-			    <!--groupId>org.eclipse.jetty</groupId>
-			    <artifactId>jetty-maven-plugin</artifactId>
-			    <version>9.0.0.M4</version-->
-				<configuration>
-					<jvmArgs>-Xms8g -Xmx13g -Dfile.encoding=UTF-8</jvmArgs>
-					<contextPath>/</contextPath> 
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<connectors>
-					       <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-					          <port>8090</port>
-					          <maxIdleTime>60000</maxIdleTime>
-							  <requestHeaderSize>65536</requestHeaderSize>
-							  <requestBufferSize>2097152</requestBufferSize>
-					       </connector>
-					</connectors>
-					<!--connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8090</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-					</connectors-->  
-				  	<resourceBases>
-					    <resourceBase>src/main/webapp</resourceBase>
-						<resourceBase>doc</resourceBase>
-			            <!--resourceBase>utils/brat</resourceBase-->   
-						<resourceBase>lib</resourceBase>    
-			        </resourceBases>
-					<jettyConfig>target/classes/jetty.xml</jettyConfig>
-				</configuration>
-			</plugin>
+    <contributors>
+        <contributor>
+            <name>Patrice Lopez</name>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </contributor>
+    </contributors>
 
-		</plugins>	
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+
+            <resource>
+                <directory>src</directory>
+                <targetPath>source/src</targetPath>
+            </resource>
+            <resource>
+                <directory>${basedir}</directory>
+                <targetPath>source</targetPath>
+                <includes>
+                    <include>pom.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-a-jar</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.jolira</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>com.scienceminer.nerd.main.Main</mainClass>
+                            <onejarVersion>0.97</onejarVersion>
+                            <attachToBuild>true</attachToBuild>
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <argLine>-Xms256m -Xmx3072m</argLine>
+                </configuration>
+            </plugin>
+
+            <!-- start: for generating license headers in source files. Run mvn license:format -->
+            <plugin>
+                <groupId>com.google.code.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <header>${basedir}/src/etc/header.txt</header>
+                    <includes>
+                        <include>src/main/java/**</include>
+                        <include>src/test/java/**</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <!-- end: for generating license headers in source files. Run mvn license:format -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <!--excludes>
+                                <exclude>src/main/resources/</exclude>
+                            </excludes-->
+                            <!--includes>
+                                <include>web.xml</include>
+                            </includes-->
+                            <!--filtering>true</filtering-->
+                            <targetPath>WEB-INF</targetPath>
+                        </resource>
+                        <!--resource>
+                            <directory>utils/brat</directory>
+                            <targetPath>brat</targetPath>
+                        </resource-->
+                        <resource>
+                            <directory>doc</directory>
+                            <targetPath>doc</targetPath>
+                        </resource>
+                        <resource>
+                            <directory>lib</directory>
+                            <targetPath>WEB-INF/lib</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.2.v20170220</version>
+
+                <configuration>
+                    <jvmArgs>-Xms8g -Xmx13g -Dfile.encoding=UTF-8</jvmArgs>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <stopKey/>
+                    <stopPort/>
+                    <systemProperties>
+                        <!-- enable easy JMX connection to JConsole -->
+                        <systemProperty>
+                            <name>com.sun.management.jmxremote</name>
+                            <value/>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8090</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>maxIdleTime</name>
+                            <value>60000</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>log4j.configuration</name>
+                            <value>log4j-jetty.properties</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+
+            </plugins>
 	</build>
-	
+
 	<profiles>
 		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapWikiEN -->	
+		  <!-- mvn compile exec:exec -PbuildMapWikiEN -->
 		  <id>buildMapWikiEN</id>
 		  <activation><property><name>buildMapWikiEN</name></property></activation>
 		  <build>
@@ -219,54 +216,68 @@
 		</build>
 		</profile>
 
-		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapWikiFR -->	
-		  <id>buildMapWikiFR</id>
-		  <activation><property><name>buildMapWikiFR</name></property></activation>
-		  <build>
-			<plugins><plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>exec-maven-plugin</artifactId>
-		    <configuration>
-		      <executable>java</executable>
-		      <arguments>
-				<argument>-Xms7g</argument>
-            	<argument>-Xmx13g</argument>
-		        <argument>-classpath</argument><classpath />
-		        <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-		        <argument>data/wikipedia/wikipedia-fr.yaml</argument>
-		      </arguments>
-		    </configuration>
-		  </plugin></plugins>
-		</build>
-		</profile>
-
-		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapWikiDE -->	
-		  <id>buildMapWikiDE</id>
-		  <activation><property><name>buildMapWikiDE</name></property></activation>
-		  <build>
-			<plugins><plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>exec-maven-plugin</artifactId>
-		    <configuration>
-		      <executable>java</executable>
-		      <arguments>
-				<argument>-Xms7g</argument>
-            	<argument>-Xmx13g</argument>
-		        <argument>-classpath</argument><classpath />
-		        <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-		        <argument>data/wikipedia/wikipedia-de.yaml</argument>
-		      </arguments>
-		    </configuration>
-		  </plugin></plugins>
-		</build>
-		</profile>
+        <profile>
+            <!-- mvn compile exec:exec -PbuildMapWikiFR -->
+            <id>buildMapWikiFR</id>
+            <activation>
+                <property>
+                    <name>buildMapWikiFR</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Xms7g</argument>
+                                <argument>-Xmx13g</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
+                                <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
+                                <argument>data/wikipedia/wikipedia-fr.yaml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
         <profile>
-        	<!-- mvn compile exec:exec -Ptrain_annotate_en -->
+            <!-- mvn compile exec:exec -PbuildMapWikiDE -->
+            <id>buildMapWikiDE</id>
+            <activation>
+                <property>
+                    <name>buildMapWikiDE</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Xms7g</argument>
+                                <argument>-Xmx13g</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
+                                <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
+                                <argument>data/wikipedia/wikipedia-de.yaml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- mvn compile exec:exec -Ptrain_annotate_en -->
             <id>train_annotate_en</id>
             <activation>
                 <property>
@@ -284,17 +295,17 @@
                             <arguments>
                                 <argument>-classpath</argument>
                                 <classpath/>
-								<argument>-Xms4098m</argument>
+                                <argument>-Xms4098m</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-								<argument>data/wikipedia/training/</argument>
-								<argument>en</argument>
+                                <argument>data/wikipedia/training/</argument>
+                                <argument>en</argument>
                             </arguments>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-		
+
         <profile>
             <!-- mvn compile exec:exec -Ptrain_annotate_de -->
             <id>train_annotate_de</id>
@@ -315,17 +326,17 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-								<argument>data/wikipedia/training/</argument>
-								<argument>de</argument>
+                                <argument>data/wikipedia/training/</argument>
+                                <argument>de</argument>
                             </arguments>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-		
+
         <profile>
-        	<!-- mvn compile exec:exec -Ptrain_annotate_fr -->
+            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
             <id>train_annotate_fr</id>
             <activation>
                 <property>
@@ -344,17 +355,18 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-								<argument>data/wikipedia/training/</argument>
-								<argument>fr</argument>
+                                <argument>data/wikipedia/training/</argument>
+                                <argument>fr</argument>
                             </arguments>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-	
+
+
 	</profiles>
-	
+
 	<repositories>
 		<repository>
 			<id>3rd-party-local-repo</id>
@@ -377,102 +389,176 @@
 		    <snapshots>
 		      <enabled>true</enabled>
 		    </snapshots>
-	  </repository>		
+	  </repository>
 	</repositories>
-	
-	<dependencies>	
 
+	<dependencies>
 		<!--Apache commons -->
 		<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.5</version>
         </dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-			<version>4.1</version>
-		</dependency>
-		
-		<!-- for web services - to be updated -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>1.8</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.8</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-multipart</artifactId>
-			<version>1.8</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-		   <groupId>org.apache.httpcomponents</groupId>
-		   <artifactId>httpclient</artifactId>
-		   <version>4.2</version>
-		</dependency>
-		<dependency>
-		   <groupId>org.apache.httpcomponents</groupId>
-		   <artifactId>httpmime</artifactId>
-		   <version>4.2</version>
-		</dependency>
-
-        <!-- to be removed !-->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-core</artifactId>
-			<version>1.2.1</version>
-		</dependency>	
-
-		<!-- to be removed for NLP4J -->
-		<dependency>
-			<groupId>org.apache.opennlp</groupId>
-			<artifactId>opennlp-tools</artifactId>
-			<version>1.5.3</version>
-		</dependency>
-		
-		<!-- TBD: update to the latest NLP4J! -->
-		<dependency>
-		    <groupId>com.googlecode.clearnlp</groupId>
-		    <artifactId>clearnlp</artifactId>
-		    <version>1.3.1</version>
-		</dependency>
-
-		<!-- language identification - to be removed for using grobid's one -->
         <dependency>
-			<groupId>com.cybozu</groupId>
-			<artifactId>language-detection</artifactId>
-			<version>09-13-2011</version>
-		</dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.1</version>
+        </dependency>
+
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <!-- for test only -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Servlet and JSP -->
+<!--
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
+-->
+
+<!--        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>-->
+
+        <!-- Jersey and dependencies -->
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.8</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.8</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>1.8</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <!--<dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-servlet</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-jdk-http</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-simple-http</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-jetty-http</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-jetty-servlet</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.connectors</groupId>
+            <artifactId>jersey-jetty-connector</artifactId>
+            <version>2.25.1</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.cybozu</groupId>
+            <artifactId>language-detection</artifactId>
+            <version>09-13-2011</version>
+        </dependency>
 
         <!-- LMDB -->
         <dependency>
-          <groupId>org.deephacks.lmdbjni</groupId>
-          <artifactId>lmdbjni</artifactId>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni</artifactId>
           <version>${lmdbjni.version}</version>
         </dependency>
         <dependency>
@@ -485,10 +571,10 @@
         <dependency>
       		<groupId>com.github.haifengl</groupId>
       		<artifactId>smile-core</artifactId>
-      		<version>1.3.0</version>
-    	</dependency>
-    	
-    	<!-- Serialization -->
+            <version>1.3.1</version>
+        </dependency>
+
+        <!-- Serialization -->
     	<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
@@ -520,65 +606,56 @@
         	<version>2.7.2</version>
 	    </dependency>
 
-	    <!-- TBD: remove this dependency! -->
-		<dependency>
-		   <groupId>org.json</groupId>
-		   <artifactId>json</artifactId>
-		   <version>20080701</version>
-		</dependency>
-
 	    <!-- avro hadoop serialization - to be removed at some point! -->
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
-            <version>1.7.5</version>
+            <version>${avro.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-maven-plugin</artifactId>
-            <version>1.7.5</version>
+            <version>${avro.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-compiler</artifactId>
-            <version>1.7.5</version>
+            <version>${avro.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-mapred</artifactId>
-            <version>1.7.5</version>
+            <version>${avro.version}</version>
         </dependency>
 
-		<!-- for GROBID NER -->
-		<dependency>
-			<groupId>org.grobid</groupId>
-			<artifactId>grobid-core</artifactId>
-			<version>0.4.2-SNAPSHOT</version>
-			<scope>system</scope>
-		    <systemPath>${project.basedir}/lib/grobid-core-0.4.2-SNAPSHOT.jar</systemPath>
-		</dependency>
-		<dependency>
-		    <groupId>org.grobid.ner</groupId>
-		    <artifactId>grobid-ner</artifactId>
-		    <version>0.4.2-SNAPSHOT</version>
-		    <scope>system</scope>
-		    <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>directory-naming</groupId>
-			<artifactId>naming-java</artifactId>
-			<version>0.8</version>
-		</dependency>
-		<dependency>
+        <!-- for GROBID NER -->
+        <dependency>
+            <groupId>org.grobid</groupId>
+            <artifactId>grobid-core</artifactId>
+            <version>0.4.2-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/grobid-core-0.4.2-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.grobid.ner</groupId>
+            <artifactId>grobid-ner</artifactId>
+            <version>0.4.2-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>directory-naming</groupId>
+            <artifactId>naming-java</artifactId>
+            <version>0.8</version>
+        </dependency>
+        <dependency>
             <groupId>fr.limsi.wapiti</groupId>
             <artifactId>wapiti</artifactId>
             <version>1.5.0</version>
         </dependency>
-         <dependency>
-			<groupId>net.arnx</groupId>
-			<artifactId>jsonic</artifactId>
-			<version>1.3.5</version>
-		</dependency>
 		<dependency>
             <groupId>org.wipo.analysers</groupId>
             <artifactId>wipo-analysers</artifactId>
@@ -591,27 +668,120 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
-
-        <!-- for test only -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
+            <groupId>net.arnx</groupId>
+            <artifactId>jsonic</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+        
+        <!-- LMDB -->
+        <dependency>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni</artifactId>
+            <version>${lmdbjni.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni-linux64</artifactId>
+            <version>${lmdbjni.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni-osx64</artifactId>
+            <version>${lmdbjni.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni-win64</artifactId>
+            <version>${lmdbjni.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni-osx64</artifactId>
+            <version>${lmdbjni.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deephacks.lmdbjni</groupId>
+            <artifactId>lmdbjni-win64</artifactId>
+            <version>${lmdbjni.version}</version>
         </dependency>
 
-        <!-- logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.6</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+        <!-- Special libraries -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.8</version>
+        </dependency>
+        <!-- TBD: update to the latest version! -->
+        <dependency>
+            <groupId>com.googlecode.clearnlp</groupId>
+            <artifactId>clearnlp</artifactId>
+            <version>1.3.1</version>
+        </dependency>
 
-	</dependencies>
-		
+        <!-- to be removed for NLP4J -->
+        <dependency>
+            <groupId>org.apache.opennlp</groupId>
+            <artifactId>opennlp-tools</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
+        <!-- to be removed !-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-core</artifactId>
+            <version>1.2.1</version>
+            <!--<exclusions>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jetty</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jetty-util</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jsp-2.1</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jsp-api-2.1</artifactId>
+                </exclusion>
+            </exclusions>-->
+        </dependency>
+
+
+        <!-- TBD: remove this dependency! -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20080701</version>
+        </dependency>
+
+
+        <!-- to be finished: remove entirely weka -->
+        <dependency>
+            <groupId>org.dmilne</groupId>
+            <artifactId>weka-wrapper</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>weka.wrapper</groupId>
+            <artifactId>weka-wrapper</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>

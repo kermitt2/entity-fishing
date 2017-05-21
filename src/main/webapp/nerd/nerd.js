@@ -196,7 +196,7 @@ var nerd = (function($) {
 			  type: 'GET',
 			  url: urlLocal,
 			  data: { term : $('#input2').val().trim(), 
-					  format : $('#format').val() },
+					  lang : $('#lang').val() },
 //			  processData: false,
 			  success: SubmitSuccesful,
 			  error: AjaxError,
@@ -209,7 +209,7 @@ var nerd = (function($) {
 			  type: 'GET',
 			  url: urlLocal,
 			  data: { id : $('#input2').val().trim(), 
-					  format : $('#format').val() },
+					  lang : $('#lang').val() },
 //			  processData: false,
 			  success: SubmitSuccesful,
 			  error: AjaxError,
@@ -739,9 +739,8 @@ console.log("process pdf...");
 		}
 
 		var lang = 'en'; //default
- 		var language = responseJson.language;
- 		if (language)
- 			lang = language.lang;
+		if (responseJson.lang)
+			lang = responseJson.lang;
 
  		var display = '<div class=\"note-tabs\"> \
 		<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
@@ -815,9 +814,8 @@ console.log("process pdf...");
 		}
 
 		var lang = 'en'; //default
- 		var language = responseJson.language;
- 		if (language)
- 			lang = language.lang;
+		if ($('#lang').val())
+	 		lang = $('#lang').val();
 
  		var display = '<div class=\"note-tabs\"> \
 		<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
@@ -1712,7 +1710,7 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 		display += "<pre class='prettyprint' id='jsonCode'>";  
 	
 		display += "<pre class='prettyprint lang-json' id='xmlCode'>";  
-		var testStr = vkbeautify.json(responseText);
+		var testStr = vkbeautify.json(responseJson);
 	
 		display += htmll(testStr);
 

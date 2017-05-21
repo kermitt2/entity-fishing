@@ -210,29 +210,29 @@ for(NerdCandidate cand : cands) {
 }
 }*/
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, 0.3);
-for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
 for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
-}
+}*/
 		prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
-for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
 for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
-}
+}*/
 		impactOverlap(candidates);
-for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
 for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
-}
+}*/
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
 			
