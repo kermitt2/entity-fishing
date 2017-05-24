@@ -37,6 +37,8 @@ import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
+import static com.scienceminer.nerd.service.NerdRestProcessQuery.parseQuery;
+
 /**
  * 
  * @author Patrice
@@ -78,21 +80,7 @@ public class NerdRestProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-				NerdQuery nerdQuery = null; 
-				try {
-					ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-					nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
-				}
-				catch(JsonGenerationException e) {
-					e.printStackTrace();
-				}
-				catch (JsonMappingException e) {
-			       	e.printStackTrace();
-				}
-				catch(IOException e) {
-					e.printStackTrace();
-				}
+				NerdQuery nerdQuery = parseQuery(theQuery);
 				
 				if ( (nerdQuery == null) || 
 				  	 ( (nerdQuery.getText() != null) && (nerdQuery.getText().trim().length() > 1) ) ||

@@ -75,4 +75,11 @@ public class TestProcessText {
         assertThat(ngrams, hasSize(26));
     }
 
+    @Test
+    public void testProcessBrutal() {
+        List<Entity> entities = processText.processBrutal("The Maven is here with us, beware not to be too aggressive.", "en");
+
+        assertThat(entities, hasSize(5));
+    }
+
 }

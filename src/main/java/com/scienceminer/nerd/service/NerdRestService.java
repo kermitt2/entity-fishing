@@ -40,10 +40,6 @@ import com.sun.jersey.spi.resource.Singleton;
 @Singleton
 @Path(NerdPaths.PATH_NERD)
 public class NerdRestService implements NerdPaths {
-
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestService.class);
 
 	private static final String SHA1 = "sha1";
@@ -202,9 +198,9 @@ public class NerdRestService implements NerdPaths {
 									@FormDataParam(FILE) InputStream inputStream) {
 		if (inputStream != null) {
 			return NerdRestProcessFile.processQueryPDFFile(query, inputStream);
-		}
-		else
+		} else {
 			return NerdRestProcessQuery.processQuery(query);
+		}
 	}
 
 	// deprecated

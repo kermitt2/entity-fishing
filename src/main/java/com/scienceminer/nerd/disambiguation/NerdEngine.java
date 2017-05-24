@@ -346,7 +346,7 @@ for(NerdCandidate cand : cands) {
 					}
 				}
 				
-				List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
+				List<NerdCandidate> candidates = new ArrayList<>();
 				if (!bestLabel.exists()) {
 //System.out.println("No concepts found for '" + entity.getRawName() + "'");
 					//if (strict)
