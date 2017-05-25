@@ -195,9 +195,9 @@ public class ProcessText {
 			return null;
 		}
 
-		if (text != null) 	//Text process
+		if (text != null)
 			return processText(nerdQuery);
-		else              	//PDF process
+		else
 			return processTokens(nerdQuery);
 	}
 
@@ -265,10 +265,8 @@ public class ProcessText {
 					//Utilities.initGrobid();
 					nerParsers = new NERParsers();	
 				}
-				LOGGER.debug(language.toString());
-				LOGGER.debug(text);
 				results = nerParsers.extractNE(text, language);
-				LOGGER.debug(results.size() + " NER entities found...");
+//System.out.println(results.size() + " NER entities found...");
 			}
 			catch(Exception e) {
 				throw new NerdException("NERD error when processing text.", e);
@@ -726,14 +724,14 @@ System.out.println("pool: " + pool.size());
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
 		if ((text == null) && (shortText == null)) {
-			LOGGER.info("Cannot parse the text, because it is null.");
+//System.out.println("Cannot parse the text, because it is null.");
 			//return null;
 		}
 		
 		if ( StringUtils.isEmpty(text) ) {
 			text = shortText;
 			
-			LOGGER.info("The length of the text to be processed is 0.");
+//System.out.println("The length of the text to be processed is 0.");
 			//PDF processing
 			if ( (tokens != null) && (tokens.size() > 0) )
 				text = LayoutTokensUtil.toText(tokens);
@@ -814,9 +812,9 @@ System.out.println("pool: " + pool.size());
 		}
 		else {
 			if (CollectionUtils.isNotEmpty (tokens) )
-				return processBrutal(tokens, lang);	//pdf
+				return processBrutal(tokens, lang);
 			else
-				return processBrutal(text, lang); //text
+				return processBrutal(text, lang);
 		}
 		return results;
 	}
