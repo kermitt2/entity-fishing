@@ -235,7 +235,7 @@ for(NerdCandidate cand : cands) {
 }*/
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
-			
+
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 		List<NerdEntity> result = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
