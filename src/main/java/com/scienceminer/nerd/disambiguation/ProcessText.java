@@ -6,6 +6,8 @@ import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.Utilities;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.utilities.BoundingBoxCalculator;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.BoundingBox;
@@ -176,6 +178,8 @@ public class ProcessText {
 	 */
 	public List<Entity> process(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
+
+		//TODO: maybe this should be done at controller level
 		if (text == null)
 			text = nerdQuery.getShortText();
 
@@ -184,18 +188,16 @@ public class ProcessText {
 		if ( (text == null) && (tokens == null)) {
 			throw new NerdException("Cannot parse the content, because it is null.");
 		} else if ((text != null) && (text.length() == 0)) {
-			System.out.println("The length of the text to be processed is 0.");
 			LOGGER.error("The length of the text to be parsed is 0.");
 			return null;
 		} else if ((tokens != null) && (tokens.size() == 0)) {
-			System.out.println("The number of tokens to be processed is 0.");
 			LOGGER.error("The number of tokens to be processed is 0.");
 			return null;
 		}
 
-		if (text != null) 
+		if (text != null) 	//Text process
 			return processText(nerdQuery);
-		else
+		else              	//PDF process
 			return processTokens(nerdQuery);
 	}
 
@@ -217,8 +219,7 @@ public class ProcessText {
 		List<Sentence> sentences = nerdQuery.getSentences();
 
 		// do we need to process the whole text only a sentence?
-		if ( (processSentence != null) && (processSentence.length > 0) &&
-			(sentences != null) && (sentences.size() > 0) ) {
+		if (ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences) ) {
 			// we process only the indicated sentences
 			String text2tag = null;
 			for(int i=0; i<processSentence.length; i++) {
@@ -229,6 +230,7 @@ public class ProcessText {
 				// message to the client
 				if (index.intValue() >= sentences.size())
 					continue;
+
 				Sentence sentence = sentences.get(index.intValue());
 				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
 				try {
@@ -239,20 +241,19 @@ public class ProcessText {
 					List<Entity> localResults = nerParsers.extractNE(text2tag, language);
 
 					// we "shift" the entities offset in case only specific sentences are processed
-					if ( (localResults != null) && (localResults.size() > 0) ) {
+					if ( CollectionUtils.isNotEmpty(localResults)) {
 						for(Entity entity : localResults) {
 							entity.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
 							entity.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
 						}
-						for(Entity entity : localResults) {
-							if (results == null)
-								results = new ArrayList<Entity>();
-							results.add(entity);
+						if (results == null) {
+							results = new ArrayList<>();
 						}
+
+						results.addAll(localResults);
 					}
 				}
 				catch(Exception e) {
-					e.printStackTrace();
 					throw new NerdException("NERD error when processing text.", e);
 				}
 			}
@@ -264,13 +265,12 @@ public class ProcessText {
 					//Utilities.initGrobid();
 					nerParsers = new NERParsers();	
 				}
-System.out.println(language.toString());
-System.out.println(text);
+				LOGGER.debug(language.toString());
+				LOGGER.debug(text);
 				results = nerParsers.extractNE(text, language);
-System.out.println(results.size() + " NER entities found...");				
+				LOGGER.debug(results.size() + " NER entities found...");
 			}
 			catch(Exception e) {
-				e.printStackTrace();
 				throw new NerdException("NERD error when processing text.", e);
 			}
 		}
@@ -376,33 +376,35 @@ System.out.println(results.size() + " NER entities found...");
 			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
 		
 			// candidates which start and end with a stop word are removed. 
-			// beware not to be too agressive. 
+			// beware not to be too aggressive.
 			List<Integer> toRemove = new ArrayList<Integer>();
 			
 			for(int i=0; i<pool.size(); i++) {
-				StringPos term1 = pool.get(i);
-				String term = term1.string;
-				String termLow = term.toLowerCase();
+				StringPos termPosition = pool.get(i);
+				String termValue = termPosition.string;
+				String termValueLowercase = termValue.toLowerCase();
 
-				if (termLow.indexOf("\n") != -1) {
+				if (termValueLowercase.indexOf("\n") != -1) {
 					toRemove.add(new Integer(i));
 					continue;
-				} 
+				}
 
+				//if there are delimiters and no stop words within the term, then I remove the term (register the index)
 				if (stopwords != null) {
-					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
-						 stopwords.startsWithStopword(termLow, lang) ||
-						 stopwords.endsWithStopword(termLow, lang) 
+					if ( (delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
+						 stopwords.startsWithStopword(termValueLowercase, lang) ||
+						 stopwords.endsWithStopword(termValueLowercase, lang)
 					) {
 						toRemove.add(new Integer(i));
 						continue;
 					} 
 				}
-
-				while (delimiters.indexOf(termLow.charAt(termLow.length()-1)) != -1) {
-					term1.string = term1.string.substring(0,term1.string.length()-1);
-					termLow = termLow.substring(0,termLow.length()-1);
-					if (termLow.length() == 0) {
+				//remove all charcter at the end that are delimiters, if the whole term is composed by delimiters,
+				//then it removing the whole term
+				while (delimiters.indexOf(termValueLowercase.charAt(termValueLowercase.length()-1)) != -1) {
+					termPosition.string = termPosition.string.substring(0,termPosition.string.length()-1);
+					termValueLowercase = termValueLowercase.substring(0,termValueLowercase.length()-1);
+					if (termValueLowercase.length() == 0) {
 						toRemove.add(new Integer(i));
 						continue;
 					}
@@ -418,7 +420,8 @@ System.out.println(results.size() + " NER entities found...");
 					subPool.add(pool.get(i));
 				}
 			}
-		
+
+			// Calculating the positions
 			for(StringPos candidate : subPool) {
 				Entity entity = new Entity(candidate.string);
 				
@@ -431,9 +434,7 @@ System.out.println(results.size() + " NER entities found...");
 				if (validEntity(entity, lang))
 					results.add(entity);
 			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
+		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
 		}
 		
@@ -729,12 +730,11 @@ System.out.println("pool: " + pool.size());
 			//return null;
 		}
 		
-		if ( (text == null) || (text.length() == 0) ) 
+		if ( StringUtils.isEmpty(text) ) {
 			text = shortText;
-
-		if ( (text == null) || (text.length() == 0) ) {
-			System.out.println("The length of the text to be processed is 0.");
-			LOGGER.info("The length of the text to be parsed is 0.");
+			
+			LOGGER.info("The length of the text to be processed is 0.");
+			//PDF processing
 			if ( (tokens != null) && (tokens.size() > 0) )
 				text = LayoutTokensUtil.toText(tokens);
 			else {
@@ -761,7 +761,6 @@ System.out.println("pool: " + pool.size());
 			}
 			catch(Exception e) {
 				LOGGER.debug("exception language identifier for: " + text);
-				//e.printStackTrace();
 			}
 		}
 		
@@ -776,8 +775,7 @@ System.out.println("pool: " + pool.size());
 		List<Entity> results = new ArrayList<Entity>();
 		
 		// do we need to process the whole text only a sentence?
-		if ( (processSentence != null) && (processSentence.length > 0) &&
-			(sentences != null) && (sentences.size() > 0) ) {
+		if ( ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences) ) {
 			// we process only the indicated sentences
 			String text2tag = null;
 			for(int i=0; i<processSentence.length; i++) {
@@ -794,7 +792,7 @@ System.out.println("pool: " + pool.size());
 					List<Entity> localResults = processBrutal(text, lang);
 
 					// we "shift" the entities offset in case only specific sentences are processed
-					if ( (localResults != null) && (localResults.size() > 0) ) {
+					if ( CollectionUtils.isNotEmpty(localResults) ) {
 						for(Entity entity : localResults) {
 							entity.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
 							entity.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
@@ -815,10 +813,10 @@ System.out.println("pool: " + pool.size());
 			}
 		}
 		else {
-			if ( (tokens != null) && (tokens.size() > 0) )
-				return processBrutal(tokens, lang);
+			if (CollectionUtils.isNotEmpty (tokens) )
+				return processBrutal(tokens, lang);	//pdf
 			else
-				return processBrutal(text, lang);
+				return processBrutal(text, lang); //text
 		}
 		return results;
 	}

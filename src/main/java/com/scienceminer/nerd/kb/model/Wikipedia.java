@@ -27,7 +27,7 @@ import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.Relation;
 
 /**
- * Represent a language speccific instance of Wikipedia
+ * Represent a language specific instance of Wikipedia
  * 
  * -> to be replaced by com.scienceminer.nerd.kb.KnowledgeBase
  */

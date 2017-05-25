@@ -1,7 +1,5 @@
 package com.scienceminer.nerd.utilities;
 
-import java.util.Comparator;
-
 /**
  * Store a string and a position index. 
  */

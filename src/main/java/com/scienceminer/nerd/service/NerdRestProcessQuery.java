@@ -11,10 +11,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.HttpHeaders; 
 
-import com.scienceminer.nerd.utilities.NerdRestUtils;
-import com.scienceminer.nerd.utilities.NerdServiceProperties;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.lang.Language;
 import org.grobid.core.data.Entity;
@@ -64,21 +62,7 @@ public class NerdRestProcessQuery {
 //		System.out.println(theQuery);		
 		LOGGER.debug(">> received query to process: " + theQuery);
 		try {
-			NerdQuery nerdQuery = null; 
-			try {
-				ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-				nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
-			}
-			catch(JsonGenerationException e) {
-				e.printStackTrace();
-			}
-			catch (JsonMappingException e) {
-		       	e.printStackTrace();
-			}
-			catch(IOException e) {
-				e.printStackTrace();
-			}
+			NerdQuery nerdQuery = parseQuery(theQuery);
 
 			// we analyze the query object in order to determine the kind of object
 			// to be processed
@@ -119,6 +103,25 @@ public class NerdRestProcessQuery {
 		return response;
 	}
 
+	public static NerdQuery parseQuery(String theQuery) {
+		NerdQuery nerdQuery = null;
+		try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
+        }
+        catch(JsonGenerationException e) {
+            e.printStackTrace();
+        }
+        catch (JsonMappingException e) {
+               e.printStackTrace();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+		return nerdQuery;
+	}
+
 
 	/**
 	 * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -146,24 +149,24 @@ public class NerdRestProcessQuery {
 				System.out.println("lang is already defined");
 				LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
 			}
-			
+
 			if ( (lang == null) || (lang.getLang() == null) ) {
 				response = Response.status(Status.NOT_ACCEPTABLE).build();
-				LOGGER.debug(methodLogOut());  
+				LOGGER.debug(methodLogOut());
 				return response;
 			}
 			else {
 				String theLang = lang.getLang();
 				if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
-					LOGGER.debug(methodLogOut());  
+					LOGGER.debug(methodLogOut());
 					return response;
 				}
 			}
 			
 			// entities originally from the query are marked as such
 			List<NerdEntity> originalEntities = null;
-			if  ( (nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0) ) {
+			if  ( CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
 				for(NerdEntity entity : nerdQuery.getEntities()) {
 					entity.setNer_conf(1.0);
 					
@@ -180,10 +183,12 @@ public class NerdRestProcessQuery {
 			ProcessText processText = ProcessText.getInstance();
 			Integer[] processSentence =  nerdQuery.getProcessSentence();
 			List<Sentence> sentences = nerdQuery.getSentences();
+			//If not previously segmented, call the sentence segmentation and set it back
 			if ( (sentences == null) && (nerdQuery.getSentence() || (processSentence != null)) ) {
 				sentences = processText.sentenceSegmentation(nerdQuery.getText());
 				nerdQuery.setSentences(sentences);
 			}
+
 			List<Entity> entities = processText.process(nerdQuery);
 			if (!nerdQuery.getOnlyNER()) {
 				List<Entity> entities2 = processText.processBrutal(nerdQuery);
