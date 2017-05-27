@@ -9,6 +9,8 @@ import com.scienceminer.nerd.kb.db.KBEnvironment;
 /**
  * Represents redirects in Wikipedia; the links that have been defined to connect synonyms to the correct article
  * (i.e <em>Farming</em> redirects to <em>Agriculture</em>).   
+ *  
+ *  -> to be removed
  */
 public class Redirect extends Page {
 	

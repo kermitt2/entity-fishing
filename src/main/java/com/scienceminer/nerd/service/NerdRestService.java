@@ -176,20 +176,6 @@ public class NerdRestService implements NerdPaths {
 		return NerdRestProcessAdmin.changePropertyValue(xml);
 	}
 
-	/*@Path(PATH_NERD_QUERY)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	@GET
-	public Response processQueryGet(String query) {
-		return NerdRestProcessQuery.processQuery(query);
-	}
-
-	@POST
-	@Path(PATH_NERD_QUERY)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processQuery(String query) {
-		return NerdRestProcessQuery.processQuery(query);
-	}*/
-
 	@POST
 	@Path(PATH_NERD_QUERY)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -202,100 +188,6 @@ public class NerdRestService implements NerdPaths {
 			return NerdRestProcessQuery.processQuery(query);
 		}
 	}
-
-	// deprecated
-	/*@Path(PATH_ERD_QUERY)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	@GET
-	public Response processERDQueryGet(String query) {
-		return NerdRestProcessQuery.processERDQuery(query);
-	}*/
-
-	// deprecated
-	/*@POST
-	@Path(PATH_ERD_QUERY)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processERDQuery(String query) {
-		return NerdRestProcessQuery.processERDQuery(query);
-	}*/
-
-	// deprecated
-	/*@POST
-	@Path(PATH_ERD_QUERY_TERMS)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processQueryTermVector(String query) {
-		return NerdRestProcessQuery.processQueryTermVector(query);
-	}*/
-
-	// deprecated
-	/*@Path(PATH_ERD_QUERY_TERMS)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	@GET
-	public Response processQueryTermVectorGet(String query) {
-		return NerdRestProcessQuery.processQueryTermVector(query);
-	}*/
-
-	// deprecateds
-	/*@Path(PATH_ERD_SEARCH_QUERY)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	@GET
-	public Response processERDSearchQueryGet(String query) {
-		return NerdRestProcessQuery.processSearchQuery(query);        
-	}*/
-
-	// deprecated
-	/*@POST
-	@Path(PATH_ERD_SEARCH_QUERY)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processERDSearchQuery(String query) {
-		return NerdRestProcessQuery.processSearchQuery(query);        
-	}*/
-
-	// deprecated
-	/*@POST
-	@Path(PATH_NER_TEXT)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processNERDTextPost(@QueryParam(TEXT) String text, 
-									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
-									@DefaultValue("false") @QueryParam(SENTENCE) boolean sentence,
-									@DefaultValue("json") @QueryParam(FORMAT) String format,
-									@DefaultValue("") @QueryParam(CUSTOMISATION) String customisation) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestProcessString.processNERDText(text, 
-												onlyNER, 	// onlyNER 
-												nbest, 		// nbest
-												sentence, 	// sentence segmentation
-												form, // output format
-												customisation); 	// field customisation
-	}*/
-
-	// deprecated
-	/*@GET
-	@Path(PATH_NER_TEXT)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processNERDText(@QueryParam(TEXT) String text, 
-									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
-									@DefaultValue("false") @QueryParam(SENTENCE) boolean sentence,
-									@DefaultValue("JSON") @QueryParam(FORMAT) String format,
-									@DefaultValue("") @QueryParam(CUSTOMISATION) String customisation) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestProcessString.processNERDText(text, 
-												onlyNER, 	// onlyNER 
-												nbest, 		// nbest
-												sentence, 	// sentence segmentation
-												form, // output format
-												customisation); 	// field customisation
-	}*/
 
 	/**
 	 * @see com.scienceminer.nerd.service.NerdRestProcessString#processLIdText(String)
