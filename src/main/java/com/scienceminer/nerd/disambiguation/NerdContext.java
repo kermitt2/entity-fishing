@@ -76,8 +76,7 @@ public class NerdContext {
 			art.setWeight((art.getWeight() + (4*avgRelatedness)) /5);
 		}*/
 		
-		Collections.sort(articles);
-		
+		Collections.sort(articles);		
 		contextArticles = new ArrayList<Article>(); 
 		contextArticlesIds = new ArrayList<Integer>(); 
 		int c = 0;
@@ -115,6 +114,28 @@ public class NerdContext {
 		}
 	}
 	
+	protected void addArticle(Article article) {
+		if (article == null)
+			return;
+		if (contextArticles == null) {
+			contextArticles = new ArrayList<Article>();
+			contextArticlesIds = new ArrayList<Integer>(); 
+		}
+		
+		double sp = article.getWeight();
+
+		//if below sp threshold, skip
+		if (sp < NerdEngine.minSenseProbability) return; 
+		
+		//if this is a date or number, skip
+		if (isDateOrNumeric(article)) return;
+		
+		if (!contextArticlesIds.contains(new Integer(article.getId()))) {
+			contextArticles.add(article);
+			contextArticlesIds.add(new Integer(article.getId()));
+		}
+	}
+
 	/*public void addPage(Page page) {
 		if (page == null)
 			return;
@@ -184,7 +205,7 @@ public class NerdContext {
 		return relatednessScore / totalWeight;
 	}
 	
-	private boolean isDateOrNumeric(Article art) {
+	private static boolean isDateOrNumeric(Article art) {
 		String title = art.getTitle();
 		// is it a number?
 		boolean isNumber = false;
@@ -222,6 +243,15 @@ public class NerdContext {
 			return true;	
 		else 
 			return false;		
+	}
+
+	/**
+	 * Merge the current context articles with the NerdContext given as parameter
+	 */
+	public void merge(NerdContext context) {
+		for(Article article : contextArticles) {
+			context.addArticle(article);
+		}
 	}
 	
 	@Override

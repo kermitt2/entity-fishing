@@ -178,7 +178,7 @@ public class NerdRestProcessFile {
 		                    if (titleTokens != null) {
 System.out.println("Process title... ");// + LayoutTokensUtil.toText(titleTokens));
 		                    	//workingQuery.setEntities(null);
-		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, documentContext, workingQuery);
+		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
 if (newEntities != null)
 System.out.println(newEntities.size() + " nerd entities");		                        
 		                        nerdQuery.addNerdEntities(newEntities);
@@ -189,7 +189,7 @@ System.out.println(newEntities.size() + " nerd entities");
 		                    if (abstractTokens != null) {
 System.out.println("Process abstract...");
 		                    	//workingQuery.setEntities(null);
-		                        List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
+		                        List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, null, workingQuery);
 if (newEntities != null)
 System.out.println(newEntities.size() + " nerd entities");	
 		                        nerdQuery.addNerdEntities(newEntities);
@@ -200,9 +200,35 @@ System.out.println(newEntities.size() + " nerd entities");
 		                    if (keywordTokens != null) {
 System.out.println("Process keywords...");
 		                    	//workingQuery.setEntities(null);
-		                        List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
+		                        List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, null, workingQuery);
 if (newEntities != null)
 System.out.println(newEntities.size() + " nerd entities");	
+		                        nerdQuery.addNerdEntities(newEntities);
+		                    }
+
+		                    // create document context from this first pass
+		                    documentContext.seed(nerdQuery.getEntities(), lang);
+		                    nerdQuery.setEntities(null);
+
+		                    // as alternative, we should use key phrase extraction and disambiguation on the whole document
+		                    // to seed the document context
+
+		                    // reprocess header fields with document context
+		                    if (titleTokens != null) {
+		                    	//workingQuery.setEntities(null);
+		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, documentContext, workingQuery);                        
+		                        nerdQuery.addNerdEntities(newEntities);
+		                    }
+
+		                    if (abstractTokens != null) {
+		                    	//workingQuery.setEntities(null);
+		                        List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
+		                        nerdQuery.addNerdEntities(newEntities);
+		                    }
+
+		                    if (keywordTokens != null) {
+		                    	//workingQuery.setEntities(null);
+		                        List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
 		                        nerdQuery.addNerdEntities(newEntities);
 		                    }
 		                }
@@ -258,7 +284,7 @@ System.out.println(newEntities.size() + " nerd entities");
 		            }
 
 		            // we can process annexes
-		            /*documentParts = doc.getDocumentPart(SegmentationLabel.ANNEX);
+		            documentParts = doc.getDocumentPart(SegmentationLabel.ANNEX);
 		            if (documentParts != null) {
 System.out.println("Process annex...");  
 		            	//workingQuery.setEntities(null);
@@ -277,7 +303,7 @@ System.out.println("Process footnotes...");
 if (newEntities != null)
 System.out.println(newEntities.size() + " nerd entities");	
 		                nerdQuery.addNerdEntities(newEntities);
-		            }*/
+		            }
 
 		        } catch (Exception e) {
 		        	LOGGER.error("Cannot process input pdf file. ", e);
@@ -400,6 +426,7 @@ System.out.println("\n");*/
 	        workingQuery.setText(null);
 	        workingQuery.setShortText(null);
 	        workingQuery.setTokens(layoutTokens);
+	        workingQuery.setContext(documentContext);
 	        try {
 		        // ner
 				ProcessText processText = ProcessText.getInstance();
@@ -456,7 +483,9 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
 						}
 					}
 				}
-				resultingEntities.addAll(workingQuery.getEntities());
+				if (workingQuery.getEntities() != null) {
+					resultingEntities.addAll(workingQuery.getEntities());
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				LOGGER.error("An unexpected exception occurs. ", e);

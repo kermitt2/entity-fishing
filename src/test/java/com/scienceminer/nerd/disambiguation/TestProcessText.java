@@ -68,7 +68,7 @@ public class TestProcessText {
         }
     }
 
-    @Test
+    /*@Test
     public void testNgram() {
         List<StringPos> ngrams = processText.ngrams("the house of card is here with us", 4);
 
@@ -80,6 +80,6 @@ public class TestProcessText {
         List<Entity> entities = processText.processBrutal("The Maven is here with us, beware not to be too aggressive.", "en");
 
         assertThat(entities, hasSize(5));
-    }
+    }*/
 
 }

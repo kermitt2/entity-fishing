@@ -113,12 +113,9 @@ public class NerdEngine {
 	 * Disambiguate a structured query and return the corresponding normalized 
      * enriched and disambiguated query object.
 	 * 
-	 * @param nerdQuery the
-	 *            POJO query object
-	 * @param shortText boolean indicating if the text to be disambiguated is short,
-	 *  		e.g. a text query. 		 
+	 * @param nerdQuery the POJO query object	 
 	 * @return a response query object containing the structured representation of
-	 *         the enriched and disambiguated query.
+	 *         the enriched and disambiguated query
 	 */
 	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
 		String text = nerdQuery.getText();
@@ -182,6 +179,8 @@ public class NerdEngine {
 		List<NerdEntity> entities = nerdQuery.getEntities();
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		
+		NerdContext context = nerdQuery.getContext();
+
 		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(entities, lang);
 
 int nbEntities = 0;
@@ -200,7 +199,7 @@ for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 System.out.println("total number of entities: " + nbEntities);
 System.out.println("total number of candidates: " + nbCandidates);
 
-		rank(candidates, lang);
+		rank(candidates, lang, context);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
@@ -428,7 +427,7 @@ for(NerdCandidate cand : cands) {
 	/**
 	 * Ranking of the candidates for a set of mentions from a contextual text
 	 */
-	private void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang) {
+	private void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context) {
 		// we rank candidates for each entity mention
 //relatedness.resetCache(lang);
 
@@ -441,16 +440,23 @@ for(NerdCandidate cand : cands) {
 			}
 		}
 
-		// we create a context for the disambiguation
-		NerdContext context = null;
+		// we create/augment the context for the disambiguation
+		 NerdContext localContext = null;
 		try {
-			 context = relatedness.getContext(candidates, userEntities, lang);
+			 localContext = relatedness.getContext(candidates, userEntities, lang);
+			 // merge context
+			 if (context != null) {
+			 	context.merge(localContext);
+			 } 
 //System.out.println("size of context: " + context.getSenseNumber());
 //System.out.println(context.toString());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		double quality = context.getQuality();
+		double quality = 0.0;
+
+		if (localContext != null)
+			quality = localContext.getQuality();
 
 		NerdRanker disambiguator = rankers.get(lang);
 		if (disambiguator == null) {
@@ -480,7 +486,7 @@ for(NerdCandidate cand : cands) {
 				double score = 0.0;
 				try {
 					double commonness = candidate.getProb_c(); 
-					double related = relatedness.getRelatednessTo(candidate, context, lang);
+					double related = relatedness.getRelatednessTo(candidate, localContext, lang);
 					if (disambiguator == null) {
 						System.out.println("Cannot rank candidates: disambiguator for the language " + 
 							lang + " is invalid");

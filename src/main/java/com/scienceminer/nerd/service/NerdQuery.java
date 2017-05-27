@@ -8,6 +8,7 @@ import org.grobid.core.data.Entity;
 import org.grobid.core.document.Document;
 import org.grobid.core.utilities.KeyGen;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
+import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.Sentence;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
@@ -82,6 +83,8 @@ public class NerdQuery {
 	
 	// in case the input to be processed is a list of LayoutToken (text then ust be null)
 	private List<LayoutToken> tokens = null;
+
+	private NerdContext context = null;
 
 	public NerdQuery() {
 	}
@@ -307,6 +310,14 @@ public class NerdQuery {
 
 	public void setTokens(List<LayoutToken> tokens) {
 		this.tokens = tokens;
+	}
+
+	public NerdContext getContext() {
+		return this.context;
+	}
+
+	public void setContext(NerdContext nerdContext) {
+		this.context = nerdContext;
 	}
 
 	public String toJSON() {
