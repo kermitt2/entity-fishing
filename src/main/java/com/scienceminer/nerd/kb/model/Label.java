@@ -1,9 +1,12 @@
 package com.scienceminer.nerd.kb.model;
 
 import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.db.struct.DbSenseForLabel;
+
+import java.util.*;
 
 /**
  * A term or phrase that has been used to refer to one or more {@link Article Articles} in Wikipedia. 
@@ -190,8 +193,10 @@ public class Label {
 
 			if (linkOccCount == 0)
 				return 0;
-			else 			
+			else {
+//System.out.println("sLinkOccCount " + sLinkOccCount + " / linkOccCount " + linkOccCount + " = " + ((double)sLinkOccCount) / linkOccCount);
 				return ((double)sLinkOccCount) / linkOccCount;
+			}
 		}
 		
 		/**
@@ -226,14 +231,49 @@ public class Label {
 		this.textDocCount = lbl.getTextDocCount();
 		this.textOccCount = lbl.getTextOccCount();
 		
-		this.senses = new Sense[lbl.getSenses().size()];
+		//this.senses = new Sense[lbl.getSenses().size()];
 		
+		Map<Integer, DbSenseForLabel> sensesCatalogue = new HashMap<Integer, DbSenseForLabel>();
+
 		int i = 0;
-		for (DbSenseForLabel dbs:lbl.getSenses()) {
-			this.senses[i] = new Sense(env, dbs);
+		for (DbSenseForLabel dbs : lbl.getSenses()) {
+			Page page = Page.createPage(env, dbs.getId());
+			PageType pageType = page.getType();
+			// solve possible redirect
+			if (pageType == PageType.redirect) {
+				Article article = ((Redirect)page).getTarget();
+				dbs.setId(article.getId());
+				dbs.setFromRedirect(true);
+				dbs.setFromTitle(false);
+			} else {
+				// no redirect
+				dbs.setFromTitle(true);
+				dbs.setFromRedirect(false);
+			}
+
+			DbSenseForLabel sfl = sensesCatalogue.get(dbs.getId());
+			if (sfl == null) {
+				sensesCatalogue.put(dbs.getId(), dbs);
+			} else {
+				// merging counts because a redirect directs to an already 
+				// existing article in the sense list
+				dbs.setLinkDocCount(dbs.getLinkDocCount() + sfl.getLinkDocCount());
+				dbs.setLinkOccCount(dbs.getLinkOccCount() + sfl.getLinkOccCount());
+				dbs.setFromTitle(true);
+				dbs.setFromRedirect(false);
+				sensesCatalogue.put(dbs.getId(), dbs);
+			}
+		}
+
+		// create final sense list 
+		this.senses = new Sense[sensesCatalogue.size()];
+		Iterator it = sensesCatalogue.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			this.senses[i] = new Sense(env, (DbSenseForLabel)pair.getValue());
 			i++;
 		}
-		
+
 		this.detailsSet = true;
 	}
 	

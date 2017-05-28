@@ -168,6 +168,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		offsets.end = entity.getOffsetEnd();
 		boundingBoxes = entity.getBoundingBoxes();
 		prob = entity.getProb();
+		prob_c = entity.getProb_c();
+		prob_i = entity.getProb_i();
+		linkProbability= entity.linkProbability;
 		ner_conf = entity.getNer_conf();
 		sense = entity.getSense();
 		origin = entity.getOrigin();
@@ -579,8 +582,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
 				return thisScore.compareTo(score);
 			else {
-				thisScore = new Double(getLinkProbability());
-				score = new Double(theEntity.getLinkProbability());
+				thisScore = new Double(getProb_c());
+				score = new Double(theEntity.getProb_c());
 				return thisScore.compareTo(score);
 			} 
 		} else if (offsets.start != start) 
