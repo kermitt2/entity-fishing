@@ -452,7 +452,7 @@ console.log("process pdf...");
 			display += 
 				'<div style="max-height:150px; overflow:auto;"><table id="sentenceIndex" class="table table-bordered table-condensed">';  
 			var m = 0;
-			var text = responseJson.text;
+			var text = responseJson.text.replace(/\n/g, " ");
 			for(var sentence in responseJson.sentences) {    
 				if (m == 0) { 	
 	  				display += '<tr class="highlight" id="sent_'+m+'" rank="'+m+'" >'; 
@@ -480,7 +480,7 @@ console.log("process pdf...");
 		var lastMaxIndex = responseJson.text.length;
 		{    
 			display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">'; 
-			var string = responseJson.text;
+			var string = responseJson.text.replace(/\n/g, " ");
 			if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
 				display += '<tr style="background-color:#FFF;">';     
 				var lang = 'en'; //default

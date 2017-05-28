@@ -210,7 +210,7 @@ public class Label {
 		
 	}
 
-	private void setDetails() {
+	private void setDetails() {	
 		try {
 			DbLabel lbl = env.getDbLabel().retrieve(text);
 		

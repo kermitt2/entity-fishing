@@ -6,12 +6,10 @@ import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.Utilities;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.grobid.core.utilities.BoundingBoxCalculator;
-import org.grobid.core.lang.Language;
-import org.grobid.core.layout.BoundingBox;
-import org.grobid.core.utilities.LanguageUtilities;
+import org.apache.commons.lang3.StringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -25,8 +23,7 @@ import com.googlecode.clearnlp.engine.EngineGetter;
 import com.googlecode.clearnlp.reader.AbstractReader;
 import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 
-import org.apache.commons.lang3.StringUtils;
-
+import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
@@ -38,6 +35,10 @@ import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.LayoutTokensUtil;
+import org.grobid.core.utilities.BoundingBoxCalculator;
+import org.grobid.core.lang.Language;
+import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.utilities.LanguageUtilities;
 
 import com.scienceminer.nerd.utilities.Stopwords;
 
@@ -212,9 +213,9 @@ public class ProcessText {
 		List<Entity> results = null;
 		
 		Language language = nerdQuery.getLanguage();
-		String lang = null;
+		/*String lang = null;
 		if (language != null)
-			lang = language.getLang();
+			lang = language.getLang();*/
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 
@@ -266,7 +267,6 @@ public class ProcessText {
 					nerParsers = new NERParsers();	
 				}
 				results = nerParsers.extractNE(text, language);
-//System.out.println(results.size() + " NER entities found...");
 			}
 			catch(Exception e) {
 				throw new NerdException("NERD error when processing text.", e);
@@ -284,9 +284,9 @@ public class ProcessText {
 		List<Entity> results = null;
 		
 		Language language = nerdQuery.getLanguage();
-		String lang = null;
+		/*String lang = null;
 		if (language != null)
-			lang = language.getLang();
+			lang = language.getLang();*/
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 
@@ -338,9 +338,7 @@ public class ProcessText {
 					//Utilities.initGrobid();
 					nerParsers = new NERParsers();	
 				}
-System.out.println(language.toString());
 				results = nerParsers.extractNE(tokens, language);
-System.out.println(results.size() + " NER entities found...");				
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -359,7 +357,7 @@ System.out.println(results.size() + " NER entities found...");
 	 * @return 
 	 * 		the list of identified entities.
 	 */
-	public List<Entity> processBrutal(String text, String lang) throws NerdException { 
+	public List<Entity> processBrutal(String text, Language lang) throws NerdException { 
 		if (text == null) {
 			throw new NerdException("Cannot parse the text, because it is null.");
 		}
@@ -371,8 +369,8 @@ System.out.println(results.size() + " NER entities found...");
 		
 		List<Entity> results = new ArrayList<Entity>();
 		try {
-			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
-		
+			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
+
 			// candidates which start and end with a stop word are removed. 
 			// beware not to be too aggressive.
 			List<Integer> toRemove = new ArrayList<Integer>();
@@ -382,16 +380,16 @@ System.out.println(results.size() + " NER entities found...");
 				String termValue = termPosition.string;
 				String termValueLowercase = termValue.toLowerCase();
 
-				if (termValueLowercase.indexOf("\n") != -1) {
+				/*if (termValueLowercase.indexOf("\n") != -1) {
 					toRemove.add(new Integer(i));
 					continue;
-				}
+				}*/
 
 				//if there are delimiters and no stop words within the term, then I remove the term (register the index)
 				if (stopwords != null) {
 					if ( (delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
-						 stopwords.startsWithStopword(termValueLowercase, lang) ||
-						 stopwords.endsWithStopword(termValueLowercase, lang)
+						 stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
+						 stopwords.endsWithStopword(termValueLowercase, lang.getLang())
 					) {
 						toRemove.add(new Integer(i));
 						continue;
@@ -429,8 +427,9 @@ System.out.println(results.size() + " NER entities found...");
 				pos.end = pos.start + candidate.string.length();
 				entity.setOffsets(pos);
 				// we have an additional check of validy based on language
-				if (validEntity(entity, lang))
+				if (validEntity(entity, lang.getLang())) {
 					results.add(entity);
+				}
 			}
 		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
@@ -522,7 +521,7 @@ System.out.println("pool: " + pool.size());
 	 * @return 
 	 * 		the list of identified entities.
 	 */
-	public List<Entity> processBrutal(List<LayoutToken> tokens, String lang) throws NerdException { 
+	public List<Entity> processBrutal(List<LayoutToken> tokens, Language lang) throws NerdException { 
 		if ( (tokens == null) || (tokens.size() == 0) ) {
 			System.out.println("Content to be processed is empty.");
 			LOGGER.error("Content to be processed is empty.");
@@ -531,7 +530,7 @@ System.out.println("pool: " + pool.size());
 		String text = LayoutTokensUtil.toText(tokens);
 		List<Entity> results = new ArrayList<Entity>();
 		try {
-			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
+			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
 		
 			// candidates which start and end with a stop word are removed. 
 			// beware not to be too agressive. 
@@ -550,8 +549,8 @@ System.out.println("pool: " + pool.size());
 
 				if (stopwords != null) {
 					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
-						 stopwords.startsWithStopword(termLow, lang) ||
-						 stopwords.endsWithStopword(termLow, lang) 
+						 stopwords.startsWithStopword(termLow, lang.getLang()) ||
+						 stopwords.endsWithStopword(termLow, lang.getLang()) 
 					) {
 						toRemove.add(new Integer(i));
 						continue;
@@ -623,7 +622,7 @@ System.out.println("pool: " + pool.size());
 				else 
 					LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
 				// we have an additional check of validy based on language
-				if (validEntity(entity, lang))
+				if (validEntity(entity, lang.getLang()))
 					results.add(entity);
 			}
 		}
@@ -765,6 +764,7 @@ System.out.println("pool: " + pool.size());
 		if (lang == null) {
 			// default - it might be better to raise an exception?
 			lang = "en";
+			language = new Language(lang, 1.0);
 		}
 		
 		Integer[] processSentence = nerdQuery.getProcessSentence();
@@ -787,7 +787,7 @@ System.out.println("pool: " + pool.size());
 				Sentence sentence = sentences.get(index.intValue());
 				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
 				try {
-					List<Entity> localResults = processBrutal(text, lang);
+					List<Entity> localResults = processBrutal(text, language);
 
 					// we "shift" the entities offset in case only specific sentences are processed
 					if ( CollectionUtils.isNotEmpty(localResults) ) {
@@ -812,9 +812,9 @@ System.out.println("pool: " + pool.size());
 		}
 		else {
 			if (CollectionUtils.isNotEmpty (tokens) )
-				return processBrutal(tokens, lang);
+				return processBrutal(tokens, language);
 			else
-				return processBrutal(text, lang);
+				return processBrutal(text, language);
 		}
 		return results;
 	}
@@ -864,18 +864,20 @@ System.out.println("pool: " + pool.size());
 		return results; 
 	}
 
-	public static List<StringPos> ngrams(String str, int ngram) {
+	public static List<StringPos> ngrams(String str, int ngram, Language lang) {
+		int actualNgram = (ngram * 2) - 1; // for taking into account separators
 		List<StringPos> ngrams = new ArrayList<StringPos>();
 		if (str == null) {
 			return ngrams;
 		}
-		String[] words = str.split(" ");
-		for (int n = 1; n <= ngram; n++) {
+		GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
+		List<String> words = analyzer.tokenize(str, lang);
+		for (int n = 1; n <= actualNgram; n++) {
 			int currentPos = 1;
-	        for (int i = 0; i < words.length - n + 1; i++) {
-	        	if (words[i].length() == 0)
+	        for (int i = 0; i < words.size() - n + 1; i++) {
+	        	if (words.get(i).length() == 0)
 	        		continue;
-				currentPos = str.indexOf(words[i], currentPos-1);
+				currentPos = str.indexOf(words.get(i), currentPos-1);
 				StringPos stringp = new StringPos();
 				stringp.string = concat(words, i, i+n);
 				stringp.pos = currentPos;
@@ -885,39 +887,13 @@ System.out.println("pool: " + pool.size());
         return ngrams;
     }
 
-    public static String concat(String[] words, int start, int end) {
+    public static String concat(List<String> words, int start, int end) {
         StringBuilder sb = new StringBuilder();
         for (int i = start; i < end; i++) {
-            sb.append((i > start ? " " : "") + words[i]);
+            sb.append(words.get(i));
 		}
         return sb.toString();
     }
-    
-    /*public static List<List<LayoutToken>> ngrams(List<LayoutToken> tokens, int ngram) {
-    	int actualNgram = (ngram * 2) - 1; // for taking into account separators
-		List<List<LayoutToken>> ngrams = new ArrayList<List<LayoutToken>>();
-		if (tokens == null) {
-			return ngrams;
-		}
-		for(int n = 1; n <= actualNgram; n++) {
-			for (int i = 0; i < tokens.size() - n + 1; i++) {
-				if (tokens.get(i).getText().trim().length() == 0)
-					continue;
-				List<LayoutToken> piece = new ArrayList<LayoutToken>();
-				boolean endWithSpace = false;
-				for (int j = i; j < i+n; j++) {
-					piece.add(tokens.get(j));
-					if (tokens.get(j).getText().trim().length() == 0)
-						endWithSpace = true;
-					else
-						endWithSpace = false;
-				}
-				if (!endWithSpace)
-					ngrams.add(piece);
-			}
-		}
-        return ngrams;
-    }*/
 
     /**
      * Validity criteria for a raw entity. The entity raw string must not be

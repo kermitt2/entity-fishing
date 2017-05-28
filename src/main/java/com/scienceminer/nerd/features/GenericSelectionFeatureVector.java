@@ -19,6 +19,7 @@ public class GenericSelectionFeatureVector {
 	public boolean Add_prob_c = false; // conditional probability of the concept given the surface string
 	public boolean Add_dice = false; // Dice coefficient for lexical cohesion
 	public boolean Add_tf_idf = false; // term frequency inverse document frequency, tf-idf
+	public boolean Add_total_occ_number = false; // the total number of occurrence of the mention in language-specific Wikipedia
 
 	// decision types
 	public boolean target_numeric = false;
@@ -30,6 +31,7 @@ public class GenericSelectionFeatureVector {
 	public double prob_c = 0.0;
 	public double dice = 0.0; // Dice coefficient
 	public double tf_idf = 0.0; // tf-idf
+	public int total_occ_number = 0; // shall we use some discretized, log, or relative version instead? 
 
 	/**
 	 *  Write header of ARFF files.
@@ -58,6 +60,8 @@ public class GenericSelectionFeatureVector {
 			header.append("@attribute dice REAL\n");
 		if (Add_tf_idf)	
 			header.append("@attribute tf_idf REAL\n");
+		if (Add_total_occ_number)	
+			header.append("@attribute total_occ_number NUMERIC\n");
 
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -78,6 +82,8 @@ public class GenericSelectionFeatureVector {
 		if (Add_dice)
 			num++;
 		if (Add_tf_idf)
+			num++;
+		if (Add_total_occ_number)
 			num++;
 		// class
 		num++;	
@@ -140,6 +146,16 @@ public class GenericSelectionFeatureVector {
 			}
 		}
 
+		// the total number of occurrence of the mention in language-specific Wikipedia
+		if (Add_total_occ_number) {
+			if (first) {
+				res.append(total_occ_number);
+				first = false;	
+			} else {
+				res.append(", " + total_occ_number);
+			}
+		}
+
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
 			res.append("," + label);
@@ -170,6 +186,10 @@ public class GenericSelectionFeatureVector {
 		}
 		if (Add_tf_idf) {
 			result[i] = tf_idf;
+			i++;
+		}
+		if (Add_total_occ_number) {
+			result[i] = total_occ_number;
 			i++;
 		}
 		return result;

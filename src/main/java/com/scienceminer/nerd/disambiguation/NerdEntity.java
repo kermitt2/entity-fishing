@@ -47,8 +47,13 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 	};
 
-	// name of the entity = entity type                   
+	// exact mention form of the entity, as appearing in the input
 	private String rawName = null;
+
+	// mention form of the entity, with soft normalization: replacing \n per space, 
+	// replacing sequence of space by a unique space
+	// this is usually this surface form that should be used
+	private String normalizedRawName = null;
 	
 	// preferred/normalised name of the entity
     private String preferredTerm = null;
@@ -139,6 +144,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	public NerdEntity(Entity entity) {
 		rawName = entity.getRawName();
+		if (rawName != null) {
+	        this.normalizedRawName = simpleStringNormalization(rawName);
+		}
 		preferredTerm = entity.getNormalisedName();
 		type = entity.getType();
 		subTypes = entity.getSubTypes();
@@ -160,6 +168,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	public NerdEntity(NerdEntity entity) {
 		rawName = entity.getRawName();
+		normalizedRawName = entity.getNormalizedRawName();
 		preferredTerm = entity.getPreferredTerm();
 		type = entity.getType();
 		subTypes = entity.getSubTypes();
@@ -185,6 +194,17 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	public void setRawName(String raw) {
         this.rawName = raw;
+        if (raw != null) {
+	        this.normalizedRawName = simpleStringNormalization(raw);
+		}
+    }
+
+	/*public void setNormalizedRawName(String raw) {
+        this.normalizedRawName = raw;
+    }*/
+
+    public String getNormalizedRawName() {
+        return normalizedRawName;
     }
 
 	public String getPreferredTerm() {
@@ -629,8 +649,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
 				
-		if (rawName != null)
-			buffer.append(rawName + "\t");
+		if (normalizedRawName != null)
+			buffer.append(normalizedRawName + "\t");
 		if (definitions != null)
 			buffer.append("[" + definitions.toString() + "]\t");	
 		if (wiktionaryExternalRef != -1) {
@@ -689,7 +709,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
-		byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
+		byte[] encodedRawName = encoder.quoteAsUTF8(normalizedRawName);
 		String outputRawName = new String(encodedRawName); 
 		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
 		if (preferredTerm != null) {
@@ -874,7 +894,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
-		byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
+		byte[] encodedRawName = encoder.quoteAsUTF8(normalizedRawName);
 		String outputRawName = new String(encodedRawName); 
 		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
 		/*if (preferredTerm != null) {
@@ -1033,5 +1053,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 				return null;
 		}
 		return theSense;
+	}
+
+	private String simpleStringNormalization(String str) {
+		return str.replace("\n", " ").trim().replaceAll(" +", " ");
 	}
 }

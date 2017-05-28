@@ -205,7 +205,7 @@ System.out.println("total number of candidates: " + nbCandidates);
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
 for(NerdCandidate cand : cands) {
-	System.out.println(cand.toString());
+	System.out.println("rank: " + cand.toString());
 }
 }*/
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, 0.3);
@@ -312,31 +312,35 @@ for(NerdCandidate cand : cands) {
 //System.out.println("check mention: " + entity.getRawName());
 				Label label = null;
 
-				// exact mention as it appears
-				Label bestLabel = new Label(wikipedia.getEnvironment(), entity.getRawName());
+				String normalizedEntity = entity.getNormalizedRawName();
+				if (isEmpty(normalizedEntity))
+					continue;
+
+				// normalized mention following case as it appears
+				Label bestLabel = new Label(wikipedia.getEnvironment(), normalizedEntity);
 
 				// try case variants
 				if (!bestLabel.exists() || 
-					ProcessText.isAllUpperCase(entity.getRawName()) ||
-					ProcessText.isAllLowerCase(entity.getRawName()) ) {
+					ProcessText.isAllUpperCase(normalizedEntity) ||
+					ProcessText.isAllLowerCase(normalizedEntity) ) {
 					
 					// full upper or lower case
-					if (ProcessText.isAllUpperCase(entity.getRawName())) {
-						label = new Label(wikipedia.getEnvironment(), entity.getRawName().toLowerCase());
+					if (ProcessText.isAllUpperCase(normalizedEntity)) {
+						label = new Label(wikipedia.getEnvironment(), normalizedEntity.toLowerCase());
 					}
-					else if (ProcessText.isAllLowerCase(entity.getRawName())) {
-						label = new Label(wikipedia.getEnvironment(), entity.getRawName().toUpperCase());
+					else if (ProcessText.isAllLowerCase(normalizedEntity)) {
+						label = new Label(wikipedia.getEnvironment(), normalizedEntity.toUpperCase());
 					}
 					else {
-						label = new Label(wikipedia.getEnvironment(), entity.getRawName().toLowerCase());
-						Label label2 = new Label(wikipedia.getEnvironment(), entity.getRawName().toUpperCase());
+						label = new Label(wikipedia.getEnvironment(), normalizedEntity.toLowerCase());
+						Label label2 = new Label(wikipedia.getEnvironment(), normalizedEntity.toUpperCase());
 						if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 							label = label2;
 						}
 					}
 
 					// first letter upper case
-					Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(entity.getRawName().toLowerCase()));
+					Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalizedEntity.toLowerCase()));
 					if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 						label = label2;
 					}
@@ -347,7 +351,7 @@ for(NerdCandidate cand : cands) {
 				
 				List<NerdCandidate> candidates = new ArrayList<>();
 				if (!bestLabel.exists()) {
-//System.out.println("No concepts found for '" + entity.getRawName() + "'");
+//System.out.println("No concepts found for '" + normalizedEntity + "'");
 					//if (strict)
 					if (entity.getType() != null) {
 						result.put(entity, candidates);
@@ -355,12 +359,12 @@ for(NerdCandidate cand : cands) {
 					}
 				}
 				else {
-//System.out.println("Concept(s) found for '" + entity.getRawName() + "'");
+//System.out.println("Concept(s) found for '" + normalizedEntity + "'");
 					entity.setLinkProbability(bestLabel.getLinkProbability());
-//System.out.println("LinkProbability for the string '" + entity.getRawName() + "': " + entity.getLinkProbability());
+//System.out.println("LinkProbability for the string '" + normalizedEntity + "': " + entity.getLinkProbability());
 					Label.Sense[] senses = bestLabel.getSenses();
 					if ((senses != null) && (senses.length > 0)) {
-//System.out.println(senses.length + " concept(s) found for '" + entity.getRawName() + "'");					
+//System.out.println(senses.length + " concept(s) found for '" + normalizedEntity + "'");					
 						int s = 0;
 						for(int i=0; i<senses.length; i++) {
 							Label.Sense sense = senses[i];
@@ -694,7 +698,8 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 			NerdEntity entity = entry.getKey();
 			if (cands == null)
 				continue;
-			int arity = entity.getRawName().split("[ ,-.]").length;
+			// the arity measure bellow does not need to be precise
+			int arity = entity.getNormalizedRawName().split("[ ,-.]").length;
 			for(NerdCandidate candidate : cands) {
 				double score = candidate.getNerdScore();
 				double new_score = score - ( (5-arity)*0.01);
@@ -724,12 +729,13 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 				if (!toRemove.contains(new Integer(pos1))) {
 					toRemove.add(new Integer(pos1));
 				}
-//System.out.println("Removing " + pos1 + " - " + entity1.getRawName());
+//System.out.println("Removing " + pos1 + " - " + entity1.getNormalizedRawName());
 				continue;
 			}
 
-			int arity1 = entity1.getRawName().length() - entity1.getRawName().replaceAll("\\s", "").length() + 1;
-//System.out.println("Position1 " + pos1 + " / arity1 : " + entity1.getRawName() + ": " + arity1);
+			// the arity measure bellow does not need to be precise
+			int arity1 = entity1.getNormalizedRawName().length() - entity1.getNormalizedRawName().replaceAll("\\s", "").length() + 1;
+//System.out.println("Position1 " + pos1 + " / arity1 : " + entity1.getNormalizedRawName() + ": " + arity1);
 			
 			// find all sub term of this entity and entirely or partially overlapping entities
 			for (int pos2=0; pos2<entities.size(); pos2++) {
@@ -762,7 +768,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 						if (!toRemove.contains(new Integer(pos2))) {
 							toRemove.add(new Integer(pos2));
 						}
-//System.out.println("Removing " + pos2 + " - " + entity2.getRawName());
+//System.out.println("Removing " + pos2 + " - " + entity2.getRawNormalizedName());
 						continue;
 					}
 
@@ -773,7 +779,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 							if (!toRemove.contains(new Integer(pos2))) {
 								toRemove.add(new Integer(pos2));
 							}
-//System.out.println("Removing " + pos2 + " - " + entity2.getRawName());
+//System.out.println("Removing " + pos2 + " - " + entity2.getNormalizedRawName());
 							continue;
 						} 
 					} 
@@ -785,7 +791,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 							if (!toRemove.contains(new Integer(pos1))) {
 								toRemove.add(new Integer(pos1));
 							}
-//System.out.println("Removing " + pos1 + " - " + entity1.getRawName());
+//System.out.println("Removing " + pos1 + " - " + entity1.getNormalizedRawName());
 							break;
 						} 
 					} 
@@ -800,18 +806,18 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 						if ( (entity1.getType() != null) && (entity2.getType() == null) ) {
 							if (!toRemove.contains(new Integer(pos2)))
 								toRemove.add(new Integer(pos2));
-//System.out.println("Removing " + pos2 + " - " + entity2.getRawName());
+//System.out.println("Removing " + pos2 + " - " + entity2.getNormalizedRawName());
 							continue;
 						}
 					}
 
-					int arity2 = entity2.getRawName().length() - entity2.getRawName().replaceAll("\\s", "").length() + 1;
-//System.out.println("arity2 : " + entity2.getRawName() + ": " + arity2);
+					int arity2 = entity2.getNormalizedRawName().length() - entity2.getNormalizedRawName().replaceAll("\\s", "").length() + 1;
+//System.out.println("arity2 : " + entity2.getNormalizedRawName() + ": " + arity2);
 					if (arity2 < arity1) {
 						// longest match wins
 						if (!toRemove.contains(new Integer(pos2)))
 							toRemove.add(new Integer(pos2));
-//System.out.println("Removing " + pos2 + " - " + entity2.getRawName());
+//System.out.println("Removing " + pos2 + " - " + entity2.getNormalizedRawName());
 						continue;
 					}
 					else if (arity2 == arity1) {
@@ -822,7 +828,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 							if (!toRemove.contains(new Integer(pos2))) {
 								toRemove.add(new Integer(pos2));
 							}
-//System.out.println("Removing " + pos2 + " - " + entity2.getRawName());
+//System.out.println("Removing " + pos2 + " - " + entity2.getNormalizedRawName());
 							continue;
 						}
 					}
@@ -938,7 +944,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 	 *  redirection) by taking the highest probability and summing the number of occurences. We merge NER 
 	 *  type and entity candidate when compatible.   
 	 */
-	public List<NerdCandidate> merge(List<NerdCandidate> terms, 
+	/*public List<NerdCandidate> merge(List<NerdCandidate> terms, 
 									List<NerdCandidate> senses, 
 									List<NerdCandidate> mentions) {
 System.out.println("Merging...");
@@ -954,7 +960,7 @@ System.out.println("Merging...");
 			}
 			NerdCandidate term1 = terms.get(i);
 			if (term1.getMethod() == NerdCandidate.NERD) {
-				String surface1 = term1.getEntity().getRawName();
+				String surface1 = term1.getEntity().getNormalizedRawName();
 				
 				if (term1.getFreeBaseExternalRef() == null) {
 					continue;
@@ -972,7 +978,7 @@ System.out.println("Merging...");
 										
 					NerdCandidate term2 = terms.get(j);
 					if (term2.getMethod() == NerdCandidate.NERD) {
-						String surface2 = term2.getEntity().getRawName();
+						String surface2 = term2.getEntity().getNormalizedRawName();
 						if (term2.getFreeBaseExternalRef() != null) {
 							if (surface2.equals(surface1) && 
 								(term2.getFreeBaseExternalRef().equals(term1.getFreeBaseExternalRef())) ) {
@@ -1005,7 +1011,7 @@ System.out.println("Merging...");
 		}
 		
 		return result;
-	}
+	}*/
 	
 	/**	 
 	 *  Pruning for vector of terms.
@@ -1028,7 +1034,7 @@ System.out.println("Merging...");
 			}
 			
 			if (term1.getMethod() == NerdCandidate.NERD) {
-				String surface1 = term1.getEntity().getRawName();
+				String surface1 = term1.getEntity().getNormalizedRawName();
 				
 				// we check if the raw string is a substring of another NerdCandidate from the ERD method
 				for(int j=0; j<candidates.size(); j++) {
@@ -1071,7 +1077,7 @@ System.out.println("Merging...");
 							//}
 						//}
 					}
-					String surface2 = term2.getEntity().getRawName();
+					String surface2 = term2.getEntity().getNormalizedRawName();
 					if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
 						toRemove.add(new Integer(i));
 						break;
@@ -1136,6 +1142,9 @@ System.out.println("Merging...");
 				}
 			}
 
+/*for(NerdCandidate cand : candidates) {
+	System.out.println(cand.toString());
+}*/
 			List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
 			for(NerdCandidate candidate : candidates) {
 				if (candidate.getSelectionScore() < threshold) {

@@ -301,12 +301,13 @@ System.out.println("Cleaned content: " + contentString);
 		ProcessText processText = ProcessText.getInstance();
 		List<Entity> entities = new ArrayList<Entity>();
 		String lang = wikipedia.getConfig().getLangCode();
+		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
-			entities = processText.process(contentString, new Language(lang, 1.0));
+			entities = processText.process(contentString, language);
 		}
-System.out.println("number of NE found: " + entities.size());		
-		List<Entity> entities2 = processText.processBrutal(contentString, lang);
-System.out.println("number of non-N entities found: " + entities2.size());	
+System.out.println("number of NE found: " + entities.size());	
+		List<Entity> entities2 = processText.processBrutal(contentString, language);
+System.out.println("number of non-NE found: " + entities2.size());	
 		for(Entity entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
