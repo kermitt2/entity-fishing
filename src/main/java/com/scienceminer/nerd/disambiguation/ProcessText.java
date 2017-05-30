@@ -385,7 +385,8 @@ public class ProcessText {
 					continue;
 				}*/
 
-				//if there are delimiters and no stop words within the term, then I remove the term (register the index)
+				// remove term starting or ending with a stopword, and term starting with a separator (conservative
+				// it should never be the case)
 				if (stopwords != null) {
 					if ( (delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
 						 stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
@@ -395,8 +396,8 @@ public class ProcessText {
 						continue;
 					} 
 				}
-				//remove all charcter at the end that are delimiters, if the whole term is composed by delimiters,
-				//then it removing the whole term
+
+				// remove term ending with a separator (conservative it should never be the case)
 				while (delimiters.indexOf(termValueLowercase.charAt(termValueLowercase.length()-1)) != -1) {
 					termPosition.string = termPosition.string.substring(0,termPosition.string.length()-1);
 					termValueLowercase = termValueLowercase.substring(0,termValueLowercase.length()-1);

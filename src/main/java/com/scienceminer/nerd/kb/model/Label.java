@@ -188,8 +188,8 @@ public class Label {
 		 */
 		public double getPriorProbability() {
 
-			if (getSenses().length == 1)
-				return 1;
+			//if (getSenses().length == 1)
+			//	return 1;
 
 			if (linkOccCount == 0)
 				return 0;
@@ -274,6 +274,14 @@ public class Label {
 			i++;
 		}
 
+		// as the count have been changed, the sense list requires an additional sort
+		if (this.senses.length > 0) {
+	 		Arrays.sort(this.senses, new Comparator<Label.Sense>() {
+			    public int compare(Label.Sense idx1, Label.Sense idx2) {
+			        return Double.compare(idx2.getPriorProbability(), idx1.getPriorProbability());
+		    	}
+			});
+	 	}
 		this.detailsSet = true;
 	}
 	

@@ -437,8 +437,8 @@ console.log("process pdf...");
 		var display = '<div class=\"note-tabs\"> \
 			<ul id=\"resultTab\" class=\"nav nav-tabs\"> \
 		   		<li class="active"><a href=\"#navbar-fixed-annotation\" data-toggle=\"tab\">Annotations</a></li>\n';
-		if (responseJson.global_categories)
-		   display += '<li><a href=\"#navbar-fixed-categories\" data-toggle=\"tab\">Categories</a></li>\n';
+		/*if (responseJson.global_categories)
+		   display += '<li><a href=\"#navbar-fixed-categories\" data-toggle=\"tab\">Categories</a></li>\n';*/
 		display += '<li><a href=\"#navbar-fixed-json\" data-toggle=\"tab\">Response</a></li> \
 			</ul> \
 			<div class="tab-content"> \
@@ -480,7 +480,8 @@ console.log("process pdf...");
 		var lastMaxIndex = responseJson.text.length;
 		{    
 			display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">'; 
-			var string = responseJson.text.replace(/\n/g, " ");
+			//var string = responseJson.text.replace(/\n/g, " ");
+			var string = responseJson.text;
 			if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
 				display += '<tr style="background-color:#FFF;">';     
 				var lang = 'en'; //default

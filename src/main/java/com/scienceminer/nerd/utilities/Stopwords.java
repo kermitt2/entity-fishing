@@ -120,6 +120,8 @@ public class Stopwords {
         boolean result = false;
         Set<String> stopwords = allStopwords.get(lang);
         int ind = term.indexOf(" ");
+        if (ind == -1)
+            ind = term.indexOf("'");
         if (ind == -1) {
             if ( (stopwords != null) && (stopwords.contains(term)) )
                 return true;
@@ -142,6 +144,8 @@ public class Stopwords {
         boolean result = false;
         Set<String> stopwords = allStopwords.get(lang);
         int ind = term.lastIndexOf(" ");
+        if (ind == -1)
+            ind = term.lastIndexOf("'");
         if (ind == -1) {
             if ( (stopwords != null) && (stopwords.contains(term)) )
                 return true;
