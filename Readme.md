@@ -18,7 +18,7 @@ Supervised machine learning is used for the disambiguation, based on a Random Fo
 
 The tool currently supports English, German and French languages. For English and French, a Name Entity Recognition based on CRF ([grobid-ner](https://github.com/kermitt2/grobid-ner)) is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
 
-The tool has been designed for fast processing (at least for a NERD system, 400-500 words per seconds on an medium-profile linux server), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy. (N)ERD uses the very fast SMILE ML library for machine learning and a JNI integration of LMDB as embedded database. 
+The tool has been designed for fast processing (at least for a NERD system, 400-1000 words per seconds on an medium-profile linux server), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy. (N)ERD uses the very fast SMILE ML library for machine learning and a JNI integration of LMDB as embedded database. 
 
 (N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Windows environment has not been tested. Bellow, we make available the LMDB binary data for Linux-64 architecture. 
 
@@ -72,9 +72,9 @@ The documentation of the service is available in the following document [```doc/
 
 ## Training
 
-###Training with Wikipedia
+### Training with Wikipedia
 
-Currently the markups in a random sample of Wikipedia articles are used for training. For training, the full article content is therefore necessary and a dedicated database will be created the first time the training is launched. This additional database is used and required only for training. You will need the Wikipedia XML dump corresponding to the target languages indicated in the yaml config files under `data/wikipedia/` (warning, as it contains the whole textual content of all Wikipedia articles (with wiki markups), this additional database is quite big, around 3.4 GB for the English Wikipedia). 
+Currently a random sample of Wikipedia articles is used for training. The full article content is therefore necessary and a dedicated database will be created the first time the training is launched. This additional database is used and required only for training. You will need the Wikipedia XML dump corresponding to the target languages available in a directory indicated in the `yaml` config files under `data/wikipedia/` by the parameter `dataDirectory` (warning, as this additional database contains the whole textual content of all Wikipedia articles (with wiki markups), it is quite big, around 3.4 GB for the English Wikipedia). 
 
 The following command will build the two models used in (N)ERD, the `ranker` and the `selector` model (both being a Random Forest) and preliminary build the full article content database the first time for the English Wikipedia:
 
