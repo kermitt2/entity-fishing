@@ -305,7 +305,7 @@ public class ArticleSet extends ArrayList<Article> {
 			return true;
 		
 		// get and prepare markup
-		String markup = art.getMarkup();
+		String markup = art.getFullMarkup();
 		
 		if (markup == null)
 			return false;

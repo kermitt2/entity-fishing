@@ -512,7 +512,7 @@ public class KBEnvironment  {
 	 * The full markup database is built separately because it is only required for training
 	 * purposes. 
 	 */
-	public void buildFullMarkup(NerdConfig conf, boolean overwrite) throws IOException, XMLStreamException, CompressorException {
+	public void buildFullMarkup(boolean overwrite) throws IOException, XMLStreamException, CompressorException {
 		System.out.println("building full markup database for language " + conf.getLangCode());	
 
 		KBDatabaseFactory dbFactory = new KBDatabaseFactory(this);

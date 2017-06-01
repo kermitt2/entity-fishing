@@ -29,15 +29,15 @@ import com.scienceminer.nerd.kb.model.Article;
  */
 public class ArticleCleaner {
 	
-	public enum SnippetLength { full, firstSentence, firstParagraph } ;	
+	public enum SnippetLength { full, firstSentence, firstParagraph };	
 	
-	private MarkupStripper stripper ;
+	private MarkupStripper stripper;
 	
 	/**
 	 * Initializes a new ArticleCleaner
 	 */
 	public ArticleCleaner() {
-		stripper = new MarkupStripper() ;
+		stripper = new MarkupStripper();
 	}
 	
 	/**
@@ -56,20 +56,20 @@ public class ArticleCleaner {
 		switch (length) {
 		
 		/*case firstSentence :
-			markup = article.getSentenceMarkup(0) ;
-			break ;*/
+			markup = article.getSentenceMarkup(0);
+			break;*/
 		case firstParagraph :
-			markup = article.getFirstParagraphMarkup() ;
-			break ;
+			markup = article.getFirstParagraphMarkup();
+			break;
 		default : 
-			markup = article.getMarkup() ;
-			break ;
+			markup = article.getFullMarkup();
+			break;
 		}
 				
-		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null) ;
-		markup = stripper.stripNonArticleInternalLinks(markup, null) ;
+		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
+		markup = stripper.stripNonArticleInternalLinks(markup, null);
 		
-		return markup ;	
+		return markup;	
 	}
 	
 	/**
@@ -83,23 +83,23 @@ public class ArticleCleaner {
 	}
 
 	public String getCleanedContent(Article article, SnippetLength length) throws Exception {
-		String markup ;
+		String markup;
 		
 		switch (length) {
 		
 		/*case firstSentence :
-			markup = article.getSentenceMarkup(0) ;
-			break ;*/
+			markup = article.getSentenceMarkup(0);
+			break;*/
 		case firstParagraph :
-			markup = article.getFirstParagraphMarkup() ;
-			break ;
+			markup = article.getFirstParagraphMarkup();
+			break;
 		default : 
-			markup = article.getMarkup() ;
-			break ;
+			markup = article.getFullMarkup();
+			break;
 		}
 		
-		markup = stripper.stripToPlainText(markup, null) ;
+		markup = stripper.stripToPlainText(markup, null);
 				
-		return markup ;
+		return markup;
 	}
 }

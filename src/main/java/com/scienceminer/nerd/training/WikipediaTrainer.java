@@ -54,6 +54,10 @@ public class WikipediaTrainer {
 		this.wikipedia = lexicon.getWikipediaConf(lang);
 		this.lang = lang;
 
+		// load, and possibly create if not yet done, the full text of wikipedia articles
+		// database
+		this.wikipedia.loadFullContentDB();
+
 		this.ranker = new NerdRanker(this.wikipedia, 
 			NerdEngine.minSenseProbability,
 			NerdEngine.maxLabelLength, 

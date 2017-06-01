@@ -20,7 +20,7 @@
 
 package org.wikipedia.miner.annotation;
 
-import com.scienceminer.nerd.kb.model.* ;
+import com.scienceminer.nerd.kb.model.*;
 import org.wikipedia.miner.util.*;
 
 import org.grobid.core.utilities.OffsetPosition;
@@ -32,10 +32,10 @@ import org.grobid.core.utilities.OffsetPosition;
  */
 public class TopicReference implements Comparable<TopicReference>{
 	
-	private Label label ;
-	private int topicId ;
-	private OffsetPosition position ;
-	//private double disambigConfidence ;
+	private Label label;
+	private int topicId;
+	private OffsetPosition position;
+	//private double disambigConfidence;
 	
 	/**
 	 * Initializes a disambiguated topic reference.
@@ -45,10 +45,10 @@ public class TopicReference implements Comparable<TopicReference>{
 	 * @param position the location (start and end character indices) from which this reference was mined
 	 */
 	public TopicReference(Label label, int topicId, OffsetPosition position) {
-		this.label = label ;
-		this.topicId = topicId ;
-		this.position = position ;
-		//this.disambigConfidence = disambigConfidence ;
+		this.label = label;
+		this.topicId = topicId;
+		this.position = position;
+		//this.disambigConfidence = disambigConfidence;
 	}
 	
 	/**
@@ -59,17 +59,17 @@ public class TopicReference implements Comparable<TopicReference>{
 	 * @throws SQLException if there is a problem with the Wikipedia database that the label was obtained from
 	 */
 	public TopicReference(Label label, OffsetPosition position) {
-		this.label = label ;
-		this.position = position ;
+		this.label = label;
+		this.position = position;
 		
-		Label.Sense[] senses = label.getSenses() ;
+		Label.Sense[] senses = label.getSenses();
 		
 		if (senses.length == 1) {
-			topicId = senses[0].getId() ;
-			//disambigConfidence = 1 ;
+			topicId = senses[0].getId();
+			//disambigConfidence = 1;
 		} else {
-			topicId = 0 ;
-			//disambigConfidence = 0 ;
+			topicId = 0;
+			//disambigConfidence = 0;
 		}
 	}
 		
@@ -77,7 +77,7 @@ public class TopicReference implements Comparable<TopicReference>{
 	 * @return true if the reference has been not been disambiguated yet, otherwise false. 
 	 */
 	public boolean isAmbiguous() {
-		return topicId > 0 ;
+		return topicId > 0;
 	}
 	
 	/**
@@ -85,28 +85,28 @@ public class TopicReference implements Comparable<TopicReference>{
 	 * @return true if this overlaps the given reference, otherwise false.
 	 */
 	public boolean overlaps(TopicReference tr) {
-		return position.overlaps(tr.getPosition()) ;
+		return position.overlaps(tr.getPosition());
 	}
 	
 	/**
 	 * @return the label that reference was mined from
 	 */
 	public Label getLabel() {
-		return label ;
+		return label;
 	}
 	
 	/**
 	 * @return the id that this reference has been disambiguated to, or 0 if it hasnt been disambiguated yet.
 	 */
 	public Integer getTopicId() {
-		return topicId ;
+		return topicId;
 	}
 
 	/**
 	 * @return the position (start and end character locations) in the document where this reference was found.
 	 */
 	public OffsetPosition getPosition() {
-		return position ;
+		return position;
 	}
 	
 	public int getOffsetStart() {
@@ -122,7 +122,7 @@ public class TopicReference implements Comparable<TopicReference>{
 	}	
 
 	//public double getDisambigConfidence() {
-	//	return disambigConfidence ;
+	//	return disambigConfidence;
 	//}
 	
 	
@@ -130,14 +130,14 @@ public class TopicReference implements Comparable<TopicReference>{
 		
 		if (position != null) {
 			//starts first, then goes first
-			int c = new Integer(position.start).compareTo(tr.getPosition().start) ;
-			if (c != 0) return c ;
+			int c = new Integer(position.start).compareTo(tr.getPosition().start);
+			if (c != 0) return c;
 			
 			//starts at same time, so longest one goes first
-			c = new Integer(tr.getPosition().end).compareTo(position.end) ;
-			if (c != 0) return c ;
+			c = new Integer(tr.getPosition().end).compareTo(position.end);
+			if (c != 0) return c;
 		}
 		
-		return new Integer(topicId).compareTo(new Integer(tr.getTopicId())) ;
+		return new Integer(topicId).compareTo(new Integer(tr.getTopicId()));
 	}
 }

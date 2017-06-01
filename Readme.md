@@ -70,6 +70,28 @@ The editor (client is work-in-progress, not stable) can be opened under [http://
 
 The documentation of the service is available in the following document [```doc/nerd-service-manual.pdf```](https://github.com/kermitt2/nerd/raw/master/doc/nerd-service-manual.pdf).
 
+## Training
+
+###Training with Wikipedia
+
+Currently the markups in a random sample of Wikipedia articles are used for training. For training, the full article content is therefore necessary and a dedicated database will be created the first time the training is launched. This additional database is used and required only for training. You will need the Wikipedia XML dump corresponding to the target languages indicated in the yaml config files under `data/wikipedia/` (warning, as it contains the whole textual content of all Wikipedia articles (with wiki markups), this additional database is quite big, around 3.4 GB for the English Wikipedia). 
+
+The following command will build the two models used in (N)ERD, the `ranker` and the `selector` model (both being a Random Forest) and preliminary build the full article content database the first time for the English Wikipedia:
+
+```bash
+> mvn compile exec:exec -Ptrain_annotate_en
+```
+
+For other languages, replace the ending language code (`en`) by the desired one (`fr` or `de` only supported for the moment), e.g.:
+
+
+```bash
+> mvn compile exec:exec -Ptrain_annotate_de
+> mvn compile exec:exec -Ptrain_annotate_fr
+```
+
+Models will be saved under `data/models`. `ARFF` training data files used to build the model are saved under `data/wikipedia/training/`.
+
 ## Contact
 
 Author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)

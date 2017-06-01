@@ -221,10 +221,18 @@ public class Page implements Comparable<Page> {
 	}
 
 	/**
-	 * @return the content of this page, in mediawiki markup format
+	 * @return the summary content of this page, in mediawiki markup format - normally the first paragraph
 	 */
-	public String getMarkup() {
+	/*public String getMarkup() {
 		String markup = env.getDbMarkup().retrieve(id); 
+		return markup;
+	}*/
+
+	/**
+	 * @return the full content of this page, in mediawiki markup format
+	 */
+	public String getFullMarkup() {
+		String markup = env.getDbMarkupFull().retrieve(id); 
 		return markup;
 	}
 
@@ -281,7 +289,8 @@ public class Page implements Comparable<Page> {
 
 		MarkupStripper stripper = new MarkupStripper();
 
-		String markup = getMarkup();
+		//String markup = getMarkup();
+		String markup = env.getDbMarkup().retrieve(id); 
 
 		/*markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
 		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);

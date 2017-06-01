@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.grobid.core.utilities.TextUtilities;
 
@@ -32,6 +35,8 @@ import com.scienceminer.nerd.kb.Relation;
  * -> to be replaced by com.scienceminer.nerd.kb.KnowledgeBase
  */
 public class Wikipedia {
+
+	protected static final Logger LOGGER = LoggerFactory.getLogger(Wikipedia.class);
 
 	private KBEnvironment env = null;
 	private int wikipediaArticleCount = -1;
@@ -68,6 +73,21 @@ public class Wikipedia {
 	 */
 	public KBEnvironment getEnvironment() {
 		return env;
+	}
+
+	/**
+	 * Make ready the full content database of articles
+	 * 
+	 */
+	public void loadFullContentDB() {
+		try {
+			if (this.env != null)
+				this.env.buildFullMarkup(false);
+			else 
+				LOGGER.error("Environment for Wikipedia full content article DB is null");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
 	}
 
 	/**
@@ -282,12 +302,12 @@ public class Wikipedia {
 	public void finalize() {
         try {
             if (this.env != null)
-                Logger.getLogger(Wikipedia.class).warn("Unclosed wikipedia. You may be causing a memory leak.");
+                LOGGER.warn("Unclosed wikipedia. You may be causing a memory leak.");
         } finally {
             try {
                 super.finalize();
             } catch (Throwable ex) {
-                Logger.getLogger(Wikipedia.class).warn("Unclosed wikipedia. You may be causing a memory leak.");
+                LOGGER.warn("Unclosed wikipedia. You may be causing a memory leak.");
             }
         }
 	}
