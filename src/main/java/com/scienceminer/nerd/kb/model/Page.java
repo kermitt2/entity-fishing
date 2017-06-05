@@ -5,7 +5,7 @@ import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import org.wikipedia.miner.db.struct.DbIntList;
 import org.wikipedia.miner.db.struct.DbPage;
 
-import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.db.*;
 
 import org.wikipedia.miner.util.MarkupStripper;
 
@@ -51,12 +51,13 @@ public class Page implements Comparable<Page> {
 	};
 
 	protected int id;
+	protected String wikidataId;
 	protected String title;
 	protected PageType type;
 	protected int depth;
 	protected Double weight = null;
 
-	protected KBEnvironment env;
+	protected KBLowerEnvironment env;
 	protected boolean detailsSet;
 
 	/**
@@ -68,32 +69,48 @@ public class Page implements Comparable<Page> {
 	 * @param	id	the unique identifier of the page
 	 * @param	pd  details (title, type, etc) of the page	 
 	 */
-	protected Page(KBEnvironment env, int id, DbPage pd)  {
+	protected Page(KBLowerEnvironment env, int id, DbPage pd)  {
 		this.env = env;
 		this.id = id;
 		setDetails(pd);
 	}
 
 	/**
-	 * Initialises a newly created Page so that it represents the page given by <em>id</em>. This is also an efficient
-	 * constructor, since details (page title, type, etc) are only retrieved when requested.
-	 * 
+	 * Initialises a newly created Page so that it represents the page given by <em>id</em>. 
 	 * @param	env	an active WikipediaEnvironment
 	 * @param	id	the unique identifier of the Wikipedia page
 	 */
-	public Page(KBEnvironment env, int id) {
+	public Page(KBLowerEnvironment env, int id) {
 		this.env = env;
 		this.id = id;
 		this.detailsSet = false;
 	}
 
+	public String getWikidataId() {
+		if (!detailsSet) 
+			setDetails();
+
+		return wikidataId;
+	}
+
+	/**
+	 * Initialises a newly created Page so that it represents the page given by a <em>Wikidata ID</em>. 
+	 * 
+	 * @param	env	an active WikipediaEnvironment
+	 * @param	WikidataId	the Wikipedia identifier of the Wikipedia page
+	 */
+	/*public Page(KBEnvironment env, String wikidataId) {
+		this.env = env;
+		this.wikidataId = wikidataId;
+		this.detailsSet = false;
+	}*/
+
 	/**
 	 * @return the database environment
 	 */
-	public KBEnvironment getEnvironment() {
+	public KBLowerEnvironment getEnvironment() {
 		return env;
 	}
-
 
 	/**
 	 *  @return true if a page with this id is defined in Wikipedia, otherwise false.
@@ -221,14 +238,6 @@ public class Page implements Comparable<Page> {
 	}
 
 	/**
-	 * @return the summary content of this page, in mediawiki markup format - normally the first paragraph
-	 */
-	/*public String getMarkup() {
-		String markup = env.getDbMarkup().retrieve(id); 
-		return markup;
-	}*/
-
-	/**
 	 * @return the full content of this page, in mediawiki markup format
 	 */
 	public String getFullMarkup() {
@@ -236,46 +245,6 @@ public class Page implements Comparable<Page> {
 		return markup;
 	}
 
-	/**
-	 * @return the character positions of sentence breaks within this page's content
-	 */
-	/*public Integer[] getSentenceSplits() {
-		DbIntList splits = env.getDbSentenceSplits().retrieve(id); 
-		if (splits == null || splits.getValues() == null) 
-			return new Integer[0];
-
-		return splits.getValues().toArray(new Integer[splits.getValues().size()]);
-	}*/
-
-	/**
-	 * @param index the index of the desired sentence
-	 * @return the content of the desired sentence, in mediawiki markup format
-	 */
-	/*public String getSentenceMarkup(int index) {
-		String markup = getMarkup();
-		Integer[] splits = getSentenceSplits();
-
-		MarkupStripper s = new MarkupStripper();
-		markup = s.stripAllButInternalLinksAndEmphasis(markup, ' ');
-		markup = s.stripNonArticleInternalLinks(markup, ' ');
-
-		String sentence;
-
-		if (splits.length == 0)
-			sentence = markup;
-		else if (index == 0)
-			sentence = markup.substring(0, splits[0]);
-		else if (index < splits.length) 
-			sentence = markup.substring(splits[index-1], splits[index]);
-		else if (index == splits.length)
-			sentence = markup.substring(splits[index-1]);
-		else
-			sentence = "";
-
-		sentence = sentence.replaceAll("\\s+", " ");
-
-		return sentence.trim();
-	}*/
 
 	/**
 	 * Returns the first paragraph from the content of this page, cleaned of all markup except links and 
@@ -286,37 +255,9 @@ public class Page implements Comparable<Page> {
 	 * @return the first paragraph on this page.
 	 */
 	public String getFirstParagraphMarkup() {
-
 		MarkupStripper stripper = new MarkupStripper();
-
-		//String markup = getMarkup();
 		String markup = env.getDbMarkup().retrieve(id); 
 
-		/*markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
-		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
-		markup = stripper.stripNonArticleInternalLinks(markup, null);
-		markup = stripper.stripExcessNewlines(markup);
-
-		String fp = "";
-		int pos = markup.indexOf("\n\n");
-
-		while (pos>=0) {
-			fp = markup.substring(0, pos);
-
-			if (pos > 150) 
-				break;
-
-			pos = markup.indexOf("\n\n", pos+2);
-		}
-
-		//fp = stripper.stripAllButInternalLinksAndEmphasis(fp, null);
-		//fp = stripper.stripNonArticleInternalLinks(fp, null);
-
-		fp = fp.replaceAll("\n", " ");
-		fp = fp.replaceAll("\\s+", " ");  //turn all whitespace into spaces, and collapse them.
-		fp = fp.trim();
-
-		return fp;*/
 		return markup;
 	}
 
@@ -370,7 +311,7 @@ public class Page implements Comparable<Page> {
 	 * @param id the id of the page
 	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
-	public static Page createPage(KBEnvironment env, int id)  {
+	public static Page createPage(KBLowerEnvironment env, int id)  {
 		DbPage pd = env.getDbPage().retrieve(id); 
 
 		if (pd != null)
@@ -390,7 +331,7 @@ public class Page implements Comparable<Page> {
 	 * @param pd the details of the page
 	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
-	public static Page createPage(KBEnvironment env, int id, DbPage pd) {
+	public static Page createPage(KBLowerEnvironment env, int id, DbPage pd) {
 
 		Page p = null;
 
@@ -440,6 +381,8 @@ public class Page implements Comparable<Page> {
 		title = pd.getTitle();
 		type = PageType.values()[pd.getType()];
 		depth = pd.getDepth();
+
+		wikidataId = env.getDbConceptByPageId().retrieve(id);
 
 		detailsSet = true;
 	}

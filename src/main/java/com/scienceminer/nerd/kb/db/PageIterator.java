@@ -13,7 +13,7 @@ import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 public class PageIterator implements Iterator<Page> {
-	private KBEnvironment env = null;
+	private KBLowerEnvironment env = null;
 	private KBIterator iter = null;
 
 	private Page nextPage = null;
@@ -24,7 +24,7 @@ public class PageIterator implements Iterator<Page> {
 	 * 
 	 * @param database an active (connected) Wikipedia database.
 	 */
-	public PageIterator(KBEnvironment env) {
+	public PageIterator(KBLowerEnvironment env) {
 		this.env = env;
 		iter = env.getDbPage().getIterator(); 
 //System.out.println(env.getDbPage().getDatabaseSize());		
@@ -38,7 +38,7 @@ public class PageIterator implements Iterator<Page> {
 	 * @param pageType the type of page to restrict the iterator to (ARTICLE, CATEGORY, REDIRECT or DISAMBIGUATION_PAGE)
 	 * @throws SQLException if there is a problem with the Wikipedia database.
 	 */
-	public PageIterator(KBEnvironment env, PageType type)  {
+	public PageIterator(KBLowerEnvironment env, PageType type)  {
 		this.env = env;
 		this.type = type;
 		this.iter = this.env.getDbPage().getIterator(); 

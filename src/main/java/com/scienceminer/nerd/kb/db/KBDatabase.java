@@ -146,14 +146,25 @@ public abstract class KBDatabase<K,V> {
 		statistics,
 
 		/**
-		 * Associates two integer id of articles via a relation type
+		 * Associates integer id of page with the identifier of the corresponding language-independent concept in the KB
 		 */
-		relations,
+		conceptByPageId,
 
 		/**
-		 * Associates an integer id of article to a property (which is an attribute/value pair)
+		 * Associates one concept id (the subject of the statetement) to a property and values (litteral values 
+		 * and/or other concept identifiers)
 		 */
-		properties
+		statements,
+
+		/**
+		 * Associates the string identifier of a property to a property description
+		 */
+		properties,
+
+		/**
+		 * Associates an integer id of a concept to the language-specific mapping to article id
+		 */
+		concepts
 	}
 
 	protected Env environment = null;
@@ -315,13 +326,13 @@ public abstract class KBDatabase<K,V> {
 	}
 
 	/**
-	 * Builds the persistent database from a file.
+	 * Builds the persistent database from a file (CSV normally, or JSON).
 	 * 
 	 * @param dataFile the file (here a CSV file) containing data to be loaded
 	 * @param overwrite true if the existing database should be overwritten, otherwise false
 	 * @throws IOException if there is a problem reading or deserialising the given data file.
 	 */
-	public abstract void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException;
+	public abstract void loadFromFile(File dataFile, boolean overwrite) throws IOException;
 
 	/**
 	 * @return an iterator for the entries in this database, in ascending key order.

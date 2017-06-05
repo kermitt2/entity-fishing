@@ -2,7 +2,7 @@ package com.scienceminer.nerd.kb.model;
 
 import java.util.*; 
 
-import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.Relation;
 
@@ -21,27 +21,37 @@ public class Article extends Page {
 	 * @param env	KBEnvironment
 	 * @param id 	unique identifier of the article
 	 */
-	public Article(KBEnvironment env, int id) {
+	public Article(KBLowerEnvironment env, int id) {
 		super(env, id);
 	}
 
-	protected Article(KBEnvironment env, int id, DbPage pd) {
+	protected Article(KBLowerEnvironment env, int id, DbPage pd) {
 		super(env, id, pd);
 	}
 
 	/**
 	 * Return the list of properties associated to the article
 	 */
-	public List<Property> getProperties() {
-		return env.getDbProperties().retrieve(id);
-	}
+	/*public List<Property> getProperties() {
+		// get the concept id first
+		String conceptId = env.getDbConceptByPageId().retrieve(id);
+		if (conceptId == null)
+			return null;
+		else
+			return env.getDbProperties().retrieve(conceptId);
+	}*/
 
 	/**
 	 * Return the list of relations associated to the article
 	 */
-	public List<Relation> getRelations() {
-		return env.getDbRelations().retrieve(id);
-	}
+	/*public List<Relation> getRelations() {
+		// get the concept id first
+		String conceptId = env.getDbConceptByPageId().retrieve(id);
+		if (conceptId == null)
+			return null;
+		else
+			return env.getDbRelations().retrieve(conceptId);
+	}*/
 
 	/**
 	 * Returns a array of {@link Redirect Redirects}, sorted by id, that point to this article.

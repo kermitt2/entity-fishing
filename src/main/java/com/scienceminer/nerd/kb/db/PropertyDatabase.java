@@ -2,7 +2,10 @@ package com.scienceminer.nerd.kb.db;
 
 import java.io.*;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.math.BigInteger;
@@ -23,7 +26,16 @@ import com.scienceminer.nerd.kb.Property;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-public class PropertyDatabase extends IntRecordDatabase<List<Property>> {
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
+
+public class PropertyDatabase extends StringRecordDatabase<List<Property>> {
 	private static final Logger logger = LoggerFactory.getLogger(PropertyDatabase.class);	
 
 	public PropertyDatabase(KBEnvironment env) {
@@ -31,109 +43,95 @@ public class PropertyDatabase extends IntRecordDatabase<List<Property>> {
 	}
 
 	@Override
-	public KBEntry<Integer, List<Property>> deserialiseCsvRecord(
+	public KBEntry<String, List<Property>> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
-	private KBEntry<Integer, List<Property>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
+	/*private KBEntry<String, List<Property>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
-	}
+	}*/
 
+	/**
+	 *  Property descriptions are expressed in JSON format
+	 */
 	@Override 
-	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
-		// ok it's not csv here, rather piped but let's go on ;)
+	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+System.out.println("input file: " + dataFile.getPath());
+		// ok it's not csv here, it's json but let's go on ;)
+
+		// input example: 
+		// {
+      	// 		"property" : {
+        // 		"type" : "uri",
+        // 		"value" : "http://www.wikidata.org/entity/P6"
+        // 	},
+        // 	"propertyLabel" : {
+        // 		"xml:lang" : "en",
+        // 		"type" : "literal",
+        // 		"value" : "head of government"
+        // 	}
+        // } 
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
 
-		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+		String json = FileUtils.readFileToString(dataFile, "UTF-8");
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode jsonNode = mapper.readTree(json);
 
-		String line = null;
-		int nbToAdd = 0;
+		Map<String,String> properties = new HashMap<String,String>();
+
+        JsonNode resultsNode = jsonNode.findPath("results");
+        if ((resultsNode != null) && (!resultsNode.isMissingNode())) {
+	        JsonNode bindingsNode = resultsNode.findPath("bindings");
+	        if ((bindingsNode != null) && (!bindingsNode.isMissingNode())) {
+	        	// properties are children of claimsNode
+	        	Iterator<JsonNode> ite = bindingsNode.elements();
+	            while (ite.hasNext()) {
+	            	JsonNode propertyNode = ite.next();
+
+	            	String propertyId = null;
+	            	String label = null;
+
+                   	// get property id (e.g. P6)
+                    JsonNode propNode = propertyNode.findPath("property");
+                    if ((propNode != null) && (!propNode.isMissingNode())) {
+                    	JsonNode valueNode = propNode.findPath("value");
+                    	if ((valueNode != null) && (!valueNode.isMissingNode())) {
+                    		propertyId = valueNode.textValue().replace("http://www.wikidata.org/entity/", "");
+                    	}
+                    }
+
+                    // get the property label
+                    JsonNode labelNode = propertyNode.findPath("propertyLabel");
+                    if ((labelNode != null) && (!labelNode.isMissingNode())) {
+	                    JsonNode valueNode = propNode.findPath("value");
+	                    if ((valueNode != null) && (!valueNode.isMissingNode())) {
+                    		label = valueNode.textValue();
+                    	}
+                    }
+
+                    if ( (propertyId != null) && (label != null) )
+	                    properties.put(propertyId, label);
+                }
+            }
+        }
+
 		int nbTotalAdded = 0;
-		int currentPageId = -1;
-		List<Property> properties = new ArrayList<Property>();
-		Transaction tx = environment.createWriteTransaction();
-		while ((line=input.readLine()) != null) {
-			if (nbToAdd == 10000) {
-				tx.commit();
-				tx.close();
-				nbToAdd = 0;
-				tx = environment.createWriteTransaction();
+        Transaction tx = environment.createWriteTransaction();
+        for(Map.Entry<String, String> entry : properties.entrySet()) {
+        	try {
+	        	db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+				nbTotalAdded++;
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
-
-			String[] pieces = line.split("\\|");
-			int pageId = -1;
-			for(int n=0; n<pieces.length; n++) {
-				// each line gives the page id then a sequence of triplets
-				if (n== 0) {
-					String page = pieces[n];
-					try {
-						pageId = Integer.parseInt(page);
-					} catch(Exception e) {
-						logger.warn("Invalid page id: " + page);
-						break;
-					}
-					n++;
-				} 
-				
-				if (pageId != currentPageId) {
-					try {
-						db.put(tx, KBEnvironment.serialize(currentPageId), KBEnvironment.serialize(properties));
-						nbToAdd++;
-					} catch(Exception e) {
-						e.printStackTrace();
-					}
-
-					currentPageId = pageId;
-					properties = new ArrayList<Property>();
-				}
-
-				String rel = null;
-				if (n<pieces.length) {
-					rel = pieces[n];
-					n++;
-				}
-				String value = null;
-				int valueId = -1;
-				if (n<pieces.length) {
-					value = pieces[n];
-					// basically value can be another page id (it's a relation) or a string (it's then a property)
-					try {
-						// this is a page id
-						valueId = Integer.parseInt(value);
-					} catch(Exception e) {
-						// if not an page id (number), this is an attribute value
-					}
-					n++;
-				}
-				String template = null;
-				if (n<pieces.length) {
-					template = pieces[n];
-				}
-
-				if (valueId == -1) {
-					Property property = new Property(new Integer(pageId), rel, value, template, null);
-					properties.add(property);
-					nbTotalAdded++;
-				}
-			}
-		}
-
-		// add last property list
-		try {
-			db.put(tx, KBEnvironment.serialize(currentPageId), KBEnvironment.serialize(properties));
-			nbToAdd++;
-			nbTotalAdded++;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+        }
 
 		// add last db commit
 		tx.commit();
 		tx.close();
-		input.close();
 		isLoaded = true;
 		System.out.println("Total of " + nbTotalAdded + " properties indexed");
 	}

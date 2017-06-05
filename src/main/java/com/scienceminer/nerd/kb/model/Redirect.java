@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 
 import org.wikipedia.miner.db.struct.DbPage;
 
-import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.db.*;
 
 /**
  * Represents redirects in Wikipedia; the links that have been defined to connect synonyms to the correct article
@@ -17,14 +17,14 @@ public class Redirect extends Page {
 	/**
 	 * Initialises a newly created Redirect so that it represents the article given by <em>id</em>.
 	 * 
-	 * @param env	an active WikipediaEnvironment
+	 * @param env	an active KBLowerEnvironment
 	 * @param id	the unique identifier of the article
 	 */
-	public Redirect(KBEnvironment env, int id) {
+	public Redirect(KBLowerEnvironment env, int id) {
 		super(env, id);
 	}
 	
-	protected Redirect(KBEnvironment env, int id, DbPage pd) {
+	protected Redirect(KBLowerEnvironment env, int id, DbPage pd) {
 		super(env, id, pd);
 	}
 	

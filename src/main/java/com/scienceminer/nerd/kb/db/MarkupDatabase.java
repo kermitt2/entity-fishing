@@ -63,7 +63,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	}
 	
 	@Override 
-	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
 		throw new UnsupportedOperationException();
 	}
 

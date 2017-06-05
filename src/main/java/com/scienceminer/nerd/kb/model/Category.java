@@ -2,7 +2,7 @@ package com.scienceminer.nerd.kb.model;
 
 import java.util.Collections;
 
-import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.db.*;
 
 import org.wikipedia.miner.db.struct.DbIntList;
 import org.wikipedia.miner.db.struct.DbPage;
@@ -20,11 +20,11 @@ public class Category extends Page {
 	 * @param env	an active WikipediaEnvironment
 	 * @param id	the unique identifier of the article
 	 */
-	public Category(KBEnvironment env, int id) {
+	public Category(KBLowerEnvironment env, int id) {
 		super(env, id);
 	}
 	
-	protected Category(KBEnvironment env, int id, DbPage pd) {
+	protected Category(KBLowerEnvironment env, int id, DbPage pd) {
 		super(env, id, pd);
 	}
 	

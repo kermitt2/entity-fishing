@@ -89,7 +89,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 	 * @param overwrite true if the existing database should be overwritten, otherwise false
 	 * @throws IOException if there is a problem reading or deserialising the given data file.
 	 */
-	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");

@@ -19,6 +19,7 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdPropertyKeys;
 import com.scienceminer.nerd.utilities.NerdConfig;
 
+import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.model.*;
 
@@ -35,13 +36,18 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 public class TestLookup {
 	
 	private Wikipedia wikipedia = null;
+	private KnowledgeBase knowledgeBase = null;
 
 	@Before
 	public void setUp() {
 		try {
 			NerdProperties.getInstance();
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
+			
+			NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
+            knowledgeBase = new KnowledgeBase(conf);
+
+            conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
         	wikipedia = new Wikipedia(conf); 
         } catch(Exception e) {
         	e.printStackTrace();
@@ -75,33 +81,39 @@ public class TestLookup {
 		}
 	}
 
-	@Test
+	/*@Test
 	public void testProperties() {
 		try {
 			List<Property> properties = wikipedia.getProperties(3966054);
 
 			System.out.println("properties for Mexico (" + 3966054 + ")");
-			for (Property property : properties)
-				System.out.println(property.toJson());
+			if (properties != null) {
+				for (Property property : properties)
+					System.out.println(property.toJson());
+			} else 
+				System.out.println("no property found");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-	@Test
+	/*@Test
 	public void testRelations() {
 		try {
 			List<Relation> relations = wikipedia.getRelations(3966054);
 
 			System.out.println("relations for Mexico (" + 3966054 + ")");
-			for (Relation relation : relations)
-				System.out.println(relation.toJson());
+			if (relations != null) {
+				for (Relation relation : relations)
+					System.out.println(relation.toJson());
+			} else 
+				System.out.println("no relation found");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@After
 	public void testClose() {

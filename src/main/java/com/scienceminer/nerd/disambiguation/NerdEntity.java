@@ -85,11 +85,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// list of conceptual variants for the term
 	private List<Variant> variants = null;
 	
-	// link to Wikipedia page ID
+	// Wikipedia page ID
 	private int wikipediaExternalRef = -1;
 	
-	// link to Wiktionary page ID
+	// Wiktionary page ID
 	private int wiktionaryExternalRef = -1;
+
+	// Wikidata identifier
+	private String wikidataId = null;
 
 	// multilingual Wikipedia information
 	private Map<String,String> wikipediaMultilingualRef = null;
@@ -370,6 +373,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
         this.wikipediaExternalRef = ref;
     }
 
+    public String getWikidataId() {
+		return wikidataId;
+	}
+
+	public void setWikidataId(String ref) {
+        this.wikidataId = ref;
+    }
+
     public void setBoundingBoxes(List<BoundingBox> boundingBoxes) {
 		this.boundingBoxes = boundingBoxes;
 	}
@@ -617,7 +628,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	 */
 	public void populateFromCandidate(NerdCandidate candidate, String lang) {
 		wikipediaExternalRef = candidate.getWikipediaExternalRef();
-		
+		wikidataId = candidate.getWikidataId();
+
 		Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang);
 		Page page = wikipedia.getPageById(wikipediaExternalRef);
 		Definition definition = new Definition();
@@ -658,6 +670,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		} 
 		if (wikipediaExternalRef != -1) {
 			buffer.append(wikipediaExternalRef + "\t");	
+		}
+		if (wikidataId != null) {
+			buffer.append(wikidataId + "\t");	
 		}
 		/*if (freeBaseExternalRef != null) {
 			buffer.append(freeBaseExternalRef + "\t");	
@@ -779,6 +794,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		if (wikipediaExternalRef != -1)
 			buffer.append(", \"wikipediaExternalRef\" : \"" + wikipediaExternalRef + "\"");
+
+		if (wikidataId != null)
+			buffer.append(", \"wikidataId\" : \"" + wikidataId + "\"");
 
 		/*if (freeBaseExternalRef != null)
 			buffer.append(", \"freeBaseExternalRef\" : \"" + freeBaseExternalRef + "\"" );*/
@@ -964,6 +982,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		if (wikipediaExternalRef != -1)
 			buffer.append(", \"wikipediaExternalRef\" : \"" + wikipediaExternalRef + "\"");
+
+		if (wikidataId != null)
+			buffer.append(", \"wikidataId\" : \"" + wikidataId + "\"");
 
 		/*if (freeBaseExternalRef != null)
 			buffer.append(", \"freeBaseExternalRef\" : \"" + freeBaseExternalRef + "\"" );*/

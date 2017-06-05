@@ -38,13 +38,14 @@ public class TitleDatabase extends StringIntDatabase {
 		PageType pageType = PageType.values()[p.getType()];
 		DatabaseType dbType = getType();
 
-		if (dbType == DatabaseType.articlesByTitle && (pageType != PageType.article && pageType != PageType.disambiguation && pageType != PageType.redirect))
+		if ( (dbType == DatabaseType.articlesByTitle) && 
+				((pageType != PageType.article) && (pageType != PageType.disambiguation) && (pageType != PageType.redirect)) )
 			return null;
 
-		if (dbType == DatabaseType.categoriesByTitle && pageType != PageType.category)
+		if ( (dbType == DatabaseType.categoriesByTitle) && (pageType != PageType.category) )
 			return null;
 
-		if (dbType == DatabaseType.templatesByTitle && pageType != PageType.template)
+		if ( (dbType == DatabaseType.templatesByTitle) && (pageType != PageType.template) )
 			return null;
 
 
@@ -52,7 +53,7 @@ public class TitleDatabase extends StringIntDatabase {
 	}
 
 	@Override
-	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName());

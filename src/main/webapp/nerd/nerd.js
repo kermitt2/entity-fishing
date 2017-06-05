@@ -493,6 +493,7 @@ console.log("process pdf...");
 					for(var m=responseJson.entities.length-1; m>=0; m--) {
 						var entity = responseJson.entities[m];
 						var identifier = entity.wikipediaExternalRef;
+						var wikidataId = entity.wikidataId;
 						//var language = entity.lang;
 						if (identifier && (conceptMap[identifier] == null)) {
 							$.ajax({
@@ -861,6 +862,7 @@ console.log("process pdf...");
 
         var subType = entity.subtype;
         var wikipedia = entity.wikipediaExternalRef;
+        var wikidataId = entity.wikidataId;
 
         var piece = '<tr><td>';
         // we ouput here all fields
@@ -950,6 +952,11 @@ console.log("process pdf...");
                     wikipedia +
                     '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
         }
+        if (wikidataId) {
+            piece += '<a href="https://www.wikidata.org/wiki/' +
+                    wikidataId +
+                    '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
+        }
         piece += '</td></tr>';
 	    
 	    return piece;
@@ -994,6 +1001,7 @@ console.log("process pdf...");
 	            //var definitions = getDefinitions(identifier);
 
 	            var wikipedia = entity.wikipediaExternalRef;
+	            var wikidataId = entity.wikidataId;
 	            var content = entity.rawName; //$(this).text();
 	            //var preferredTerm = getPreferredTerm(identifier);
 
@@ -1030,6 +1038,11 @@ console.log("process pdf...");
 	                        wikipedia +
 	                        '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
 	            }
+	            if (wikidataId) {
+		            piece += '<a href="https://www.wikidata.org/wiki/' +
+		                    wikidataId +
+		                    '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
+		        }
 	            piece += '</td></tr><tr><td>';
 	            piece += '</td></tr></table>';
 
@@ -1067,6 +1080,7 @@ console.log("process pdf...");
 	                prob_c = prob_c.substring(0, 6);*/
 
 	            var wikipedia = entity.pageid;
+	            var wikidataId = entity.wikidataId;
 	            var content = entity.preferred; 
 
 	            piece += '<tr id="selectLine' + sens + '" href="'
@@ -1085,13 +1099,16 @@ console.log("process pdf...");
 	            piece += '</td><td>';
 	            piece += '<table><tr><td>';
 
-
-
 	            if (wikipedia) {
 	                piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
 	                        wikipedia +
 	                        '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
 	            }
+	            if (wikidataId) {
+		            piece += '<a href="https://www.wikidata.org/wiki/' +
+		                    wikidataId +
+		                    '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
+		        }
 	            piece += '</td></tr><tr><td>';
 	            piece += '</td></tr></table>';
 
@@ -1358,6 +1375,7 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				entityListIndex--) {
 			var entity = entityMap[localEntityNumber][entityListIndex];
 			var wikipedia = entity.wikipediaExternalRef;
+			var wikidataId = entity.wikidataId;
 			var domains = entity.domains;
 			var type = entity.type;
 
@@ -1446,13 +1464,19 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				string += "<p><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
 			}
 
-			if (wikipedia != null) {
-				string += '<p>Reference: '
+			if ( (wikipedia != null) || (wikidataId != null) ) {
+				string += '<p>References: '
 				if (wikipedia != null) {
 					string += '<a href="http://'+lang+'.wikipedia.org/wiki?curid=' + 
 					wikipedia + 
 					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
 					' src="resources/img/wikipedia.png"/></a>';
+				}
+				if (wikidataId != null) {
+					string += '<a href="https://www.wikidata.org/wiki/' + 
+					wikidataId + 
+					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
+					' src="resources/img/Wikidata-logo.svg"/></a>';
 				}
 				string += '</p>';
 			}
@@ -1540,6 +1564,7 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				entityListIndex--) {
 			var entity = entityMap[localEntityNumber][entityListIndex];
 			var wikipedia = entity.wikipediaExternalRef;
+			var wikidataId = entity.wikidataId;
 			var domains = entity.domains;
 			var type = entity.type;
 
@@ -1626,12 +1651,18 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 			}
 
 			if (wikipedia != null) {
-				string += '<p>Reference: '
+				string += '<p>References: '
 				if (wikipedia != null) {
 					string += '<a href="http://'+lang+'.wikipedia.org/wiki?curid=' + 
 					wikipedia + 
 					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
 					' src="resources/img/wikipedia.png"/></a>';
+				}
+				if (wikidataId != null) {
+					string += '<a href="https://www.wikidata.org/wiki/' + 
+					wikidataId + 
+					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
+					' src="resources/img/Wikidata-logo.svg"/></a>';
 				}
 				string += '</p>';
 			}

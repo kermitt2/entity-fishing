@@ -1,6 +1,6 @@
 package com.scienceminer.nerd.kb.model;
 
-import com.scienceminer.nerd.kb.db.KBEnvironment;
+import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.wikipedia.miner.db.struct.DbLabel;
@@ -25,7 +25,7 @@ public class Label {
 	
 	private Sense[] senses = null;
 	
-	protected KBEnvironment env;
+	protected KBLowerEnvironment env;
 	private boolean detailsSet;
 
 	/**
@@ -34,7 +34,7 @@ public class Label {
 	 * @param env an active KBEnvironment
 	 * @param text the term or phrase of interest
 	 */
-	public Label(KBEnvironment env, String text) {
+	public Label(KBLowerEnvironment env, String text) {
 		this.env = env;
 		this.text = text;
 		this.detailsSet = false;
@@ -133,7 +133,7 @@ public class Label {
 		private final boolean fromTitle;
 		private final boolean fromRedirect;
 		
-		protected Sense(KBEnvironment env,  DbSenseForLabel s) {
+		protected Sense(KBLowerEnvironment env,  DbSenseForLabel s) {
 			super(env, s.getId());
 
 			this.sLinkDocCount = s.getLinkDocCount();
@@ -285,7 +285,7 @@ public class Label {
 		this.detailsSet = true;
 	}
 	
-	public static Label createLabel(KBEnvironment env, String text, DbLabel dbLabel) {
+	public static Label createLabel(KBLowerEnvironment env, String text, DbLabel dbLabel) {
 		Label l = new Label(env, text);
 		l.setDetails(dbLabel);
 		

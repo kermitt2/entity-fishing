@@ -23,25 +23,26 @@ import com.scienceminer.nerd.kb.Relation.RelationType;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-public class RelationDatabase extends IntRecordDatabase<List<Relation>> {
-	private static final Logger logger = LoggerFactory.getLogger(RelationDatabase.class);	
+public class StatementDatabase extends StringRecordDatabase<List<Relation>> {
+	private static final Logger logger = LoggerFactory.getLogger(StatementDatabase.class);	
 
-	public RelationDatabase(KBEnvironment env) {
-		super(env, DatabaseType.relations);
+	public StatementDatabase(KBEnvironment env) {
+		super(env, DatabaseType.statements);
 	}
 
 	@Override
-	public KBEntry<Integer, List<Relation>> deserialiseCsvRecord(
+	public KBEntry<String, List<Relation>> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
-	private KBEntry<Integer, List<Relation>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
+	private KBEntry<String, List<Relation>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override 
-	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+System.out.println("input file: " + dataFile.getPath());
 		// ok it's not csv here, rather piped but let's go on ;)
 		if (isLoaded && !overwrite)
 			return;

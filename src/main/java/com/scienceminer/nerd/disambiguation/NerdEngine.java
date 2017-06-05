@@ -386,6 +386,7 @@ for(NerdCandidate cand : cands) {
 							candidate.setPreferredTerm(sense.getTitle());
 							candidate.setLang(lang);
 							candidate.setLabel(bestLabel);
+							candidate.setWikidataId(sense.getWikidataId());
 							boolean invalid = false;
 //System.out.println("check categories for " + sense.getId());							
 							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();

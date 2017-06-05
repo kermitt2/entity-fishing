@@ -84,11 +84,11 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 	}
 
 	@Override 
-	public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
 		throw new UnsupportedOperationException();
 	}
 
-	public void loadFromCsvFiles(File linksInFile, File linksOutFile, boolean overwrite) throws IOException  {
+	public void loadFromFiles(File linksInFile, File linksOutFile, boolean overwrite) throws IOException  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName() + " database");

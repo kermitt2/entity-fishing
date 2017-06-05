@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-//import org.apache.log4j.Logger;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +20,6 @@ import org.wikipedia.miner.db.struct.DbLabel;
 import org.wikipedia.miner.db.struct.DbIntList;
 
 import com.scienceminer.nerd.kb.model.Page.PageType;
-import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
 
 import org.xml.sax.SAXException;
 
@@ -38,7 +35,7 @@ public class Wikipedia {
 
 	protected static final Logger LOGGER = LoggerFactory.getLogger(Wikipedia.class);
 
-	private KBEnvironment env = null;
+	private KBLowerEnvironment env = null;
 	private int wikipediaArticleCount = -1;
 
 	public enum Direction {
@@ -52,7 +49,7 @@ public class Wikipedia {
 	 * @param conf a Nerd configuration 
 	 */
 	public Wikipedia(NerdConfig conf) {
-		this.env = new KBEnvironment(conf);
+		this.env = new KBLowerEnvironment(conf);
 		try {
 			this.env.buildEnvironment(conf, false);
 		} catch(Exception e) {
@@ -71,7 +68,7 @@ public class Wikipedia {
 	 * 
 	 * @return the environment that this is connected to
 	 */
-	public KBEnvironment getEnvironment() {
+	public KBLowerEnvironment getEnvironment() {
 		return env;
 	}
 
@@ -120,18 +117,39 @@ public class Wikipedia {
 	}
 
 	/**
+	 * Returns the Page referenced by the given Wikidata id for the language of the Wikipedia. 
+	 * The page can be cast into the appropriate type for more specific functionality. 
+	 *  
+	 * @param id	the Wikidata id of the Page to retrieve.
+	 * @return the Page referenced by the given id, or null if one does not exist. 
+	 */
+	/*public Page getPageByWikidataId(String wikidataId) {
+		return Page.createPage(env, wikidataId);
+	}*/
+
+	/**
 	 * Return the list of properties associated to an article id
 	 */
-	public List<Property> getProperties(int id) {
-		return env.getDbProperties().retrieve(id);
-	}
+	/*public List<Property> getProperties(int id) {
+		// get the concept id first
+		String conceptId = env.getDbConceptByPageId().retrieve(id);
+		if (conceptId == null)
+			return null;
+		else
+			return env.getDbProperties().retrieve(conceptId);
+	}*/
 
 	/**
 	 * Return the list of relations associated to an article id
 	 */
-	public List<Relation> getRelations(int id) {
-		return env.getDbRelations().retrieve(id);
-	}
+	/*public List<Relation> getRelations(int id) {
+		// get the concept id first
+		String conceptId = env.getDbConceptByPageId().retrieve(id);
+		if (conceptId == null)
+			return null;
+		else
+			return env.getDbRelations().retrieve(conceptId);
+	}*/
 
 	/**
 	 * Returns the Article referenced by the given (case sensitive) title. If the title

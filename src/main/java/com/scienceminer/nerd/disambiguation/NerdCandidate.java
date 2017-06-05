@@ -60,12 +60,15 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// The Wikipedia label corresponding to the candidate
 	private Label label = null;
 
-	// link to Wikipedia page ID
+	// Wikipedia page ID
 	private int wikipediaExternalRef = -1;
 	
-	// link to Wiktionary page ID
+	// Wiktionary page ID
 	private int wiktionaryExternalRef = -1;
 	
+	// Wikidata identifier
+	private String wikidataId = null;
+
 	// preferred term for the corresponding sense
 	private String preferredTerm = null;
 	
@@ -236,6 +239,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	
 	public void setWikipediaExternalRef(int ref) {
         this.wikipediaExternalRef = ref;
+    }
+
+    public String getWikidataId() {
+		return wikidataId;
+	}
+
+	public void setWikidataId(String ref) {
+        this.wikidataId = ref;
     }
 
 	public List<com.scienceminer.nerd.kb.Category> getWikipediaCategories() {

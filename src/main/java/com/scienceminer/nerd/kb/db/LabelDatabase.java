@@ -20,7 +20,7 @@ import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 /**
- * A {@link KBDatabase} for associating Strings with statistics about the articles (senses) this string could refer to. 
+ * A {@link KBDatabase} for associating Strings with a record. 
  */
 public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 
@@ -36,8 +36,6 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 
 	/**
 	 * Retrieves the label statistics associated with the given text key. 
-	 * 
-	 * <p>Note:<b> you should NOT apply text processors to the key; that will be done internally within this method.
 	 * 
 	 * @return true if the database has been prepared for use, otherwise false
 	 */

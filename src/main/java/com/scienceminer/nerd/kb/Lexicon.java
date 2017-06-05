@@ -52,8 +52,10 @@ public class Lexicon {
 
 	// we use map for multilingual resources, where the language code is the key
     private Map<String, Set<String>> dictionaries = null;
-	private Map<String, Wikipedia> wikipedias = null;
+    private KnowledgeBase knowledgeBase = null;
+    private Map<String, Wikipedia> wikipedias = null;
     private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
+
     //private Map<String, FreeBaseTypeMap> freeBaseTypeMaps = null;
 
     public static Lexicon getInstance() {
@@ -85,15 +87,17 @@ public class Lexicon {
 		//WikipediaConfiguration conf = 
 		//	new WikipediaConfiguration(new File(NerdProperties.getInstance().getWikipediaMinerConfigPath()));
 		try {
-			LOGGER.info("Initiating Wikipedia DBs");
+            LOGGER.info("\nInit Upper Knowledeg base layer");
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
+            knowledgeBase = new KnowledgeBase(conf);
+
+			//LOGGER.info("Initiating Wikipedia DBs");
 			wikipedias = new HashMap<String, Wikipedia>(); 
             wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
             //freeBaseTypeMaps = new HashMap<String,FreeBaseTypeMap>();
 
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-
-System.out.println("\nloading English environment...");
+            conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
 			Wikipedia wikipedia_en = new Wikipedia(conf);
 
 			wikipedias.put(Language.EN, wikipedia_en);
@@ -102,18 +106,16 @@ System.out.println("\nloading English environment...");
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-de.yaml"), NerdConfig.class);;
-System.out.println("\nloading German environment...");
 			Wikipedia wikipedia_de = new Wikipedia(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-fr.yaml"), NerdConfig.class);;
-System.out.println("\nloading French environment...");
 			Wikipedia wikipedia_fr = new Wikipedia(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
 
-System.out.println("\nEnd of Initialization of Wikipedia environments\n");			
+            System.out.println("\nEnd of Initialization of Wikipedia environments\n");			
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
             Utilities.initGrobid();

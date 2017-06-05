@@ -14,7 +14,7 @@ import static org.fusesource.lmdbjni.Constants.*;
 
 public class LabelIterator implements Iterator<Label> {
 
-    private KBEnvironment env = null;
+    private KBLowerEnvironment env = null;
     private KBIterator iter = null;
 
     /**
@@ -22,7 +22,7 @@ public class LabelIterator implements Iterator<Label> {
      *
      * @param database an active (connected) Wikipedia database.
      */
-    public LabelIterator(KBEnvironment env) {
+    public LabelIterator(KBLowerEnvironment env) {
         this.env = env;
         iter = env.getDbLabel().getIterator();
     }

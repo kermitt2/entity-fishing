@@ -139,45 +139,6 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Create a database associating page ids with the labels used to refer to that page
-	 */
-	/*public KBDatabase<Integer,DbLabelForPageList> buildPageLabelDatabase() {
-
-		return new IntRecordDatabase<DbLabelForPageList>(env, DatabaseType.pageLabel) {
-
-			@Override
-			public KBEntry<Integer,DbLabelForPageList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				Integer id = record.readInt(null);
-				DbLabelForPageList labels = new DbLabelForPageList();
-				labels.deserialize(record);
-
-				return new KBEntry<Integer,DbLabelForPageList>(id, labels);
-			}
-		};
-	}*/
-
-	/**
-	 * Create a database associating ids with the ids of articles it links to or that link to it, and the sentence indexes where these links are found
-	 */
-	/*public KBDatabase<Integer, DbLinkLocationList> buildPageLinkDatabase(DatabaseType type) {
-		if (type != DatabaseType.pageLinksIn && type != DatabaseType.pageLinksOut)
-			throw new IllegalArgumentException("type must be either DatabaseType.pageLinksIn or DatabaseType.pageLinksOut");
-
-		return new IntRecordDatabase<DbLinkLocationList>(env, type) {
-			@Override
-			public KBEntry<Integer, DbLinkLocationList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-
-				Integer id = record.readInt(null);
-
-				DbLinkLocationList l = new DbLinkLocationList();
-				l.deserialize(record);
-
-				return new KBEntry<Integer, DbLinkLocationList>(id, l);
-			}
-		};
-	}*/
-
-	/**
 	 * Create a database associating ids with the ids of articles it links to or that link to it
 	 */
 	public KBDatabase<Integer, DbIntList> buildPageLinkNoSentencesDatabase(DatabaseType type) {
@@ -204,7 +165,7 @@ public class KBDatabaseFactory {
 			}
 			
 			@Override
-			public void loadFromCsvFile(File dataFile, boolean overwrite) throws IOException  {
+			public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
 				if (isLoaded && !overwrite)
 					return;
 				System.out.println("Loading " + getName());
@@ -328,20 +289,6 @@ public class KBDatabaseFactory {
 	}
 
 	/**
-	 * Create a database associating integer id of page with an InfoBox relation (relation to other page)
-	 */
-	public RelationDatabase buildInfoBoxRelationDatabase() {
-		return new RelationDatabase(env);
-	}
-
-	/**
-	 * Create a database associating integer id of page with an InfoBox properties (attribute/value)
-	 */
-	public PropertyDatabase buildInfoBoxPropertyDatabase() {
-		return new PropertyDatabase(env);
-	}
-
-	/**
 	 * Create a database associating ids with counts of how many pages it links to or that link to it
 	 */
 	public PageLinkCountDatabase buildPageLinkCountDatabase() {
@@ -360,5 +307,101 @@ public class KBDatabaseFactory {
 	 */
 	public KBDatabase<Integer,String> buildMarkupFullDatabase() {
 		return new MarkupDatabase(env, DatabaseType.markupFull);
+	}
+
+	public KBDatabase<Integer,String> buildDbConceptByPageIdDatabase() {
+		return new KBDatabase<Integer,String>(env, DatabaseType.conceptByPageId) {
+			protected void add(KBEntry<Integer,String> entry) {
+				try (Transaction tx = environment.createWriteTransaction()) {
+					//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
+					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					tx.commit();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			// using standard LMDB copy mode
+			@Override
+			public String retrieve(Integer key) {
+				byte[] cachedData = null;
+				String record = null;
+				try (Transaction tx = environment.createReadTransaction()) {
+					//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
+					cachedData = db.get(tx, KBEnvironment.serialize(key));
+					if (cachedData != null) {
+						//record = new BigInteger(cachedData).longValue();
+						record = (String)KBEnvironment.deserialize(cachedData);
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				return record;
+			}
+
+			/**
+			 * Builds the persistent database from a file.
+			 * 
+			 * @param dataFile the file (here a text file with fields separated by a tabulation) containing data to be loaded
+			 * @param overwrite true if the existing database should be overwritten, otherwise false
+			 * @throws IOException if there is a problem reading or deserialising the given data file.
+			 */
+			public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+System.out.println("input file: " + dataFile.getPath());
+System.out.println("isLoaded: " + isLoaded);
+				if (isLoaded && !overwrite)
+					return;
+				System.out.println("Loading " + name + " database");
+
+				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+				//long bytesRead = 0;
+
+				String line = null;
+				int nbToAdd = 0;
+				Transaction tx = environment.createWriteTransaction();
+				while ((line=input.readLine()) != null) {
+					if (nbToAdd == 10000) {
+						tx.commit();
+						tx.close();
+						nbToAdd = 0;
+						tx = environment.createWriteTransaction();
+					}
+					//bytesRead = bytesRead + line.length() + 1;
+
+					//CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
+					//KBEntry<Integer,Long> entry = deserialiseCsvRecord(cri);
+					String[] pieces = line.split("\t");
+					if (pieces.length != 2)
+						continue;
+					Integer keyVal = null;
+					try {
+						keyVal = Integer.parseInt(pieces[0]);
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+					if (keyVal == null)
+						continue;
+					KBEntry<Integer,String> entry = new KBEntry<Integer,String>(keyVal, pieces[1]);
+					if (entry != null) {
+						try {
+							//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
+							db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+							nbToAdd++;
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				tx.commit();
+				tx.close();
+				input.close();
+				isLoaded = true;
+			}
+
+			@Override
+			public KBEntry<Integer,String> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+				throw new UnsupportedOperationException();
+			}
+		};
 	}
 }
