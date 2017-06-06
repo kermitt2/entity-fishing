@@ -347,7 +347,7 @@ public class KBDatabaseFactory {
 			 * @throws IOException if there is a problem reading or deserialising the given data file.
 			 */
 			public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
-System.out.println("input file: " + dataFile.getPath());
+//System.out.println("input file: " + dataFile.getPath());
 System.out.println("isLoaded: " + isLoaded);
 				if (isLoaded && !overwrite)
 					return;
