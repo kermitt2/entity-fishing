@@ -1281,7 +1281,7 @@ System.out.println("Merging...");
 			}
 
 			n++;
-		}	
+		}
 		// calculate the global categories
 		nerdQuery = NerdCategories.addCategoryDistributionWeightedTermVector(nerdQuery);
 	}
@@ -1323,10 +1323,12 @@ System.out.println("Merging...");
 					NerdCandidate candidate = new NerdCandidate(entity);
 					candidate.setWikiSense(sense);
 					candidate.setWikipediaExternalRef(sense.getId());
+					candidate.setWikidataId(sense.getWikidataId());
 					candidate.setProb_c(sense.getPriorProbability());
 					candidate.setPreferredTerm(sense.getTitle());
 					candidate.setLang(lang);
 					candidate.setLabel(lbl);
+					candidate.setProb_c(sense.getPriorProbability());
 					for(com.scienceminer.nerd.kb.model.Category theCategory : sense.getParentCategories()) {
 						if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 							candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));

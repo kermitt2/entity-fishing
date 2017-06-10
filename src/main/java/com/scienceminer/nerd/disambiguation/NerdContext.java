@@ -42,6 +42,9 @@ public class NerdContext {
 		for(Label.Sense sense : unambig) {
 			double sp = sense.getPriorProbability();
 			
+			//if (sense.getTitle() == null)
+			//	continue;
+
 			//if below sp threshold, skip
 			if (sp < NerdEngine.minSenseProbability) continue; 
 			
@@ -207,6 +210,8 @@ public class NerdContext {
 	
 	private static boolean isDateOrNumeric(Article art) {
 		String title = art.getTitle();
+		if (title == null)
+			return false;
 		// is it a number?
 		boolean isNumber = false;
 		Integer number = null;

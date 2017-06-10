@@ -582,8 +582,9 @@ System.out.println("runtime: " + (end - start));
 			//nerdQuery.setEntities(disambiguatedEntities);
 			//disambiguatedEntities = disambiguator.disambiguate(nerdQuery, true, false);
 			// add the NerdEntity objects to the WeightedTerm object if disambiguation 
-			// is successful
+			// is successful	
 			disambiguator.disambiguateWeightedTerms(nerdQuery);
+//System.out.println(nerdQuery.toJSONCompactClean(null));	
 			nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
 
 			long end = System.currentTimeMillis();
