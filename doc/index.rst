@@ -5,22 +5,17 @@
 
 
 (N)ERD - (Named) Entity Recognition and Disambiguation documentation!
-=====================================================================
+---------------------------------------------------------------------
 
 
 .. toctree::
-   :maxdepth: 2
-   :numbered:
+   :maxdepth: 1
+   :titlesonly:
 
    overview.rst
 
-
-
-.. toctree::
-   :maxdepth: 2
-   :titlesonly:
-
    console.rst
+
    restAPI.rst
 
 

@@ -395,7 +395,6 @@ The type of recognised entities are restricted to a set of 26 classes of named e
 
 **Response when processing a search query**
 ::
-
    {
       "runtime": 146,
       "onlyNER": false,
