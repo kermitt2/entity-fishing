@@ -311,3 +311,269 @@ Example request:
       "customisation": "generic"
    }
 
+
+Response
+--------
+
+The response returned by the (N)ERD text processing service is basically the same JSON as the JSON query, enriched by the list of identified and, when possible, disambiguated entities, together with a server runtime information.
+
+If the textual content to be processed is provided in the query as a string, the identified entities will be associated to offset positions in the input string, so that the client can associate precisely the textual mention and the entity “annotation”.
+
+If the textual content to be processed is provided as a PDF document, the identified entities will be associated to coordinates positions in the input PDF, so that the client can associate precisely the textual mention in the PDF via a bounding box and makes possible dynamic PDF annotations.
+
+
+**Response when processing a text**
+::
+   {
+      "runtime": 223,
+      "onlyNER": false,
+      "nbest": false,
+      "text": "Austria was attaching Serbia.",
+      "language": {
+         "lang": "en",
+         "conf": 0.9999948456042864
+      },
+      "entities":
+      [
+         {
+            "rawName": "Austria",
+            "type": "LOCATION",
+            "offsetStart": 0,
+            "offsetEnd": 7,
+            "nerd_score": "0.5447067973132087",
+            "nerd_selection_score": "0.8667510394325003",
+            "sense": {
+               "fineSense": "country/N1"
+            },
+            "wikipediaExternalRef": "26964606",
+            "domains": [
+               "Atomic_Physic",
+               "Engineering",
+               "Administration",
+               "Geology",
+               "Oceanography",
+               "Earth"
+            ]
+         },
+   [...] }
+
+
+In the example above, the root layer of JSON values correspond to:
+
+- runtime: the amount of time in milliseconds to process the request on server side,
+
+- onlyNER: as provided in the query - when true the disambiguation against wikipedia is skipped,
+
+- nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
+
+- text: input text as provided in the query, all the offset position information are based on the text in this field,
+
+- language: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
+
+- entities: list of named entities recognised in the text (with possibly entities provided in the query, considered then as certain),
+
+- global_categories: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
+
+For each entity the following information are provided:
+
+- rawName: string realizing the entity as it appears in the text
+
+- offsetStart, offsetEnd: the position offset of where the entity starts and ends in the text element in characters (JSON UTF-8 characters)
+
+- nerd_score: disambiguation confidence score, indicates the score of the entity against the other entity candidates for the text mention,
+
+- nerd_selection_score: selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention,
+
+- wikipediaExternalRef: id of the wikipedia page. This id can be used to retrieve the original page from wikipedia3 or to retrieve all the information associated to the concept in the knowledge base (definition, synonyms, categories, etc. - see the section “Knowledge base concept retrieval”),
+
+- type: NER class of the entity (see table of the 26 NER classes below under “2. Named entity types”),
+
+- sense: NER sense mapped on the Wordnet4 synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
+
+
+The type of recognised entities are restricted to a set of 26 classes of named entities (see GROBID NER documentation5). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
+
+**Response when processing a search query**
+::
+
+   {
+      "runtime": 146,
+      "onlyNER": false,
+      "nbest": false,
+      "shortText": "concrete pump sensor",
+      "language": {
+         "lang": "en",
+         "conf": 0.0
+      },
+      "global_categories":
+      [
+         {
+            "weight": 0.08448995135780164,
+            "source": "wikipedia-en",
+            "category": "Construction equipment",
+            "page_id": 24719865
+         },
+         [...]
+      ],
+      "entities":
+      [
+         {
+            "rawName": "concrete",
+            "offsetStart": 0,
+            "offsetEnd": 8,
+            "nerd_score": "0.3416037625644609",
+            "nerd_selection_score": "0.9793831523036264",
+            "wikipediaExternalRef": "5371",
+            "domains": [
+               "Mechanics", "Engineering", "Architecture"
+            ]
+         },
+         {
+            "rawName": "concrete pump",
+            "offsetStart": 0,
+            "offsetEnd": 13,
+            "nerd_score": "0.695783745626837",
+            "nerd_selection_score": "0.9576960838921623",
+            "wikipediaExternalRef": "7088907",
+            "domains": [
+               "Mechanics",
+               "Engineering"
+            ]
+         },
+         {
+            "rawName": "pump",
+            "offsetStart": 9,
+            "offsetEnd": 13,
+            "nerd_score": "0.33995668143945024",
+            "nerd_selection_score": "0.9640450279784305",
+            "wikipediaExternalRef": "23617",
+            "domains": [
+               "Engineering",
+               "Mechanics"
+            ]
+         },
+         [...]
+
+
+**Response when processing a weighted vector of terms**
+::
+   {
+      "runtime": 870,
+      "onlyNER": false,
+      "nbest": false,
+      "termVector": [
+         {
+            "term": "computer science", "score": 0.3,
+            "entities": [
+               {
+                  "rawName": "computer science",
+                  "preferredTerm": "Computer science",
+                  "nerd_score": "0.5238665311593967",
+                  "nerd_selection_score": "0.0",
+                  "wikipediaExternalRef": "5323",
+                  "definitions": [
+                     {
+                        "definition": "'''Computer science''' blablabla.",
+                        "source": "wikipedia-en",
+                        "lang": "en"
+                     }
+                  ],
+                  "categories": [
+                     {
+                        "source": "wikipedia-en",
+                        "category": "Computer science",
+                        "page_id": 691117
+                     },
+                     [...]
+                  ],
+            "multilingual": [
+               {
+               "lang": "de",
+               "term": "Informatik",
+               "page_id": 2335
+            } ]
+      } ]
+   }
+
+**Response description when processing PDF**
+::
+   {
+      "runtime": 2823,
+      "onlyNER": false,
+      "nbest": false,
+      "file”: "filename.pdf",
+      “pages”: 10,
+      "language": {
+         "lang": "en",
+         "conf": 0.9999948456042864
+      },
+      "pages":
+         [
+            {
+               "page_height":792.0,
+               "page_width":612.0
+            },
+            {
+               "page_height":792.0,
+               "page_width":612.0
+            },
+            {
+               "page_height":792.0,
+               "page_width":612.0
+            },
+            {
+               "page_height":792.0,
+               "page_width":612.0
+            }
+         ],
+      "entities": [
+         {
+            "rawName": "Austria",
+            "type": "LOCATION",
+            "nerd_score": "0.5447067973132087",
+            "nerd_selection_score": "0.8667510394325003",
+            "pos": [
+               { "p": 1, "x": 20, "y": 20, "h": 10, "w": 30 },
+               { "p": 1, "x": 30, "y": 20, "h": 10, "w": 30 } ]
+            "sense": {
+               "fineSense": "country/N1"
+            },
+            "wikipediaExternalRef": "26964606",
+            "domains": [
+               "Atomic_Physic", "Engineering", "Administration", "Geology", "Oceanography", "Earth"
+            ] },
+      [...] }
+
+As apparent in the above example, for PDF the offset position of the entities are replaced by coordinates information introduced by the JSON attribute pos. These coordinates refer to the PDF that has been processed and permit to identify the chunk of annotated text by the way of a list of bounding boxes.
+
+In addition, an attribute pages is used to indicate the size of each page of the PDF document which is a necessary information to position correctly annotations.
+
+The next section further specifies the coordinates information provided by the service (see `GROBID <http://github.com/kermitt2/grobid>`_).
+
+**PDF Coordinates**
+
+The PDF coordinates system has three main characteristics:
+
+* contrary to usage, the origin of a document is at the upper left corner. The x-axis extends to the right and the y-axis extends downward,
+* all locations and sizes are stored in an abstract value called a PDF unit,
+* PDF documents do not have a resolution: to convert a PDF unit to a physical value such as pixels, an external value must be provided for the resolution.
+
+In addition, contrary to usage in computer science, the index associated to the first page is 1 (not 0).
+
+The response of the processing of a PDF document by the NERD service contains two specific structures for positioning entity annotations in the PDF:
+
+* the list of page size, introduced by the JSON attribute pages. The dimension of each page is given successively by two attributes page_height and page_height.
+* for each entity, a json attribute pos introduces a list of bounding boxes to identify the area of the annotation corresponding to the entity. Several bounding boxes might be necessary because a textual mention does not need to be a rectangle, but the union of rectangles (a union of bounding boxes), for instance when a mention to be annotated is on several lines.
+
+A bounding box is defined by the following attributes:
+
+* p: the number of the page (beware, in the PDF world the first page has index 1!),
+* x: the x-axis coordinate of the upper-left point of the bounding box,
+* y: the y-axis coordinate of the upper-left point of the bounding box (beware, in the PDF world the y-axis extends downward!),
+* h: the height of the bounding box,
+* w: the width of the bounding box.
+
+As a PDF document expresses value in abstract PDF unit and do not have resolution, the coordinates have to be converted into the scale of the PDF layout used by the client (usually in pixels).
+This is why the dimension of the pages are necessary for the correct scaling, taking into account that, in a PDF document, pages can be of different size.
+
+The (N)ERD console offers a reference implementation with PDF.js for dynamically positioning entity annotations on a processed PDF.
