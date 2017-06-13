@@ -205,7 +205,6 @@ System.out.println("lang id:" + text);
 				LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 				Language lang = languageUtilities.runLanguageId(text);
 				nerdQuery.setLanguage(lang);
-
 				if ( (lang == null) || (lang.getLang() == null) ) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());
