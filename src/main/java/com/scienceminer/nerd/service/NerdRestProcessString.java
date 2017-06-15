@@ -25,9 +25,6 @@ import org.grobid.core.data.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.json.JSONException;
-import org.json.JSONStringer;
-
 import com.fasterxml.jackson.databind.*;
 
 /**
@@ -66,14 +63,14 @@ System.out.println("lang id:" + text);
 			}
 
 	 		if (result != null) {
-				JSONStringer stringer = new JSONStringer();
-
-				stringer.object();
-				stringer.key("lang").value(result.getLang());
-				stringer.key("conf").value(result.getConf());
-				stringer.endObject();
-
-				retVal = stringer.toString();
+	 			StringBuilder builder = new StringBuilder();
+	 			builder
+	 				.append("{")
+	 				.append("\"lang\": \""+result.getLang()+"\"")
+	 				.append(", \"conf\":")
+	 				.append(result.getConf())
+	 				.append("}");
+				retVal = builder.toString();
 			}
 
 			if (!NerdRestUtils.isResultOK(retVal)) {
@@ -88,11 +85,6 @@ System.out.println("lang id:" + text);
 		catch(NoSuchElementException nseExp) {
 			LOGGER.error("Could not get an WSD tagger instance. Sending service unavailable.");
 			response = Response.status(Status.SERVICE_UNAVAILABLE).build();
-		}
-		catch(JSONException ex) {
-			LOGGER.error("Error when building the JSON response string.");
-			System.out.println("Error when building the JSON response string.");
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		catch(Exception e) {
 			LOGGER.error("An unexpected exception occurs. ", e);
@@ -157,11 +149,6 @@ System.out.println("lang id:" + text);
 		catch(NoSuchElementException nseExp) {
 			LOGGER.error("Could not get an WSD tagger instance. Sending service unavailable.");
 			response = Response.status(Status.SERVICE_UNAVAILABLE).build();
-		}
-		catch(JSONException ex) {
-			LOGGER.error("Error when building the JSON response string.");
-			System.out.println("Error when building the JSON response string.");
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		catch(Exception e) {
 			LOGGER.error("An unexpected exception occurs. ", e);
@@ -421,7 +408,7 @@ System.out.println("lang id:" + text);
 	 *            term vector to be processed
 	 * @return a response JSON object containing the identified and resolved entities as a weighted term vector.
 	 */
-	public static Response processWeigthedTermVector(String text,
+	/*public static Response processWeigthedTermVector(String text,
 										boolean onlyNER,
 										boolean nbest,
 										NerdRestUtils.Format output,
@@ -502,12 +489,12 @@ System.out.println("lang id:" + text);
 
 			if (terms != null) {
 				// disambiguate and solve term mentions
-				/*List<NerdEntity> disambiguatedEntities = null;
-				disambiguatedEntities = new ArrayList<NerdEntity>();
-				for (Entity entity : entities) {
-					NerdEntity nerdEntity = new NerdEntity(entity);
-					disambiguatedEntities.add(nerdEntity);
-				}*/
+				//List<NerdEntity> disambiguatedEntities = null;
+				//disambiguatedEntities = new ArrayList<NerdEntity>();
+				//for (Entity entity : entities) {
+				//	NerdEntity nerdEntity = new NerdEntity(entity);
+				//	disambiguatedEntities.add(nerdEntity);
+				//}
 
 				NerdEngine disambiguator = NerdEngine.getInstance();
 				//nerdQuery.setEntities(disambiguatedEntities);
@@ -549,7 +536,7 @@ System.out.println("lang id:" + text);
 		LOGGER.debug(methodLogOut());
 
 		return response;
-	}
+	}*/
 
 
 	/**

@@ -764,25 +764,5 @@
             </exclusions>-->
         </dependency>
 
-
-        <!-- TBD: remove this dependency! -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20080701</version>
-        </dependency>
-
-
-        <!-- to be finished: remove entirely weka -->
-        <dependency>
-            <groupId>org.dmilne</groupId>
-            <artifactId>weka-wrapper</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>weka.wrapper</groupId>
-            <artifactId>weka-wrapper</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 </project>

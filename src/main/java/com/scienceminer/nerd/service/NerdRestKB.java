@@ -21,9 +21,6 @@ import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.json.JSONException;
-import org.json.JSONStringer;
-
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
