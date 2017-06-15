@@ -13,7 +13,6 @@ public class TopicReference implements Comparable<TopicReference>{
 	private Label label;
 	private int topicId;
 	private OffsetPosition position;
-	//private double disambigConfidence;
 	
 	/**
 	 * Initializes a disambiguated topic reference.
@@ -26,7 +25,6 @@ public class TopicReference implements Comparable<TopicReference>{
 		this.label = label;
 		this.topicId = topicId;
 		this.position = position;
-		//this.disambigConfidence = disambigConfidence;
 	}
 	
 	/**
@@ -44,10 +42,8 @@ public class TopicReference implements Comparable<TopicReference>{
 		
 		if (senses.length == 1) {
 			topicId = senses[0].getId();
-			//disambigConfidence = 1;
 		} else {
 			topicId = 0;
-			//disambigConfidence = 0;
 		}
 	}
 		
@@ -97,12 +93,7 @@ public class TopicReference implements Comparable<TopicReference>{
 		if (position == null)
 			return -1;
 		return position.end;
-	}	
-
-	//public double getDisambigConfidence() {
-	//	return disambigConfidence;
-	//}
-	
+	}
 	
 	public int compareTo(TopicReference tr) {
 		
