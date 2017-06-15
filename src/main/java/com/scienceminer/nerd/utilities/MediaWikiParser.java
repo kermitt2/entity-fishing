@@ -16,8 +16,6 @@ public class MediaWikiParser {
 	private Pattern isolatedBefore = Pattern.compile("(\\s*|.*\\n(\\s*))", Pattern.DOTALL);
 	private Pattern isolatedAfter = Pattern.compile("(\\s*|(\\s*)\\n.*)", Pattern.DOTALL);
 	
-	//private EmphasisResolver emphasisResolver = new EmphasisResolver();
-
 	/**
 	 * @param article the article to clean
 	 * @param length the portion of the article that is to be extracted and cleaned (ALL, FIRST_SENTENCE, or FIRST_PARAGRAPH)

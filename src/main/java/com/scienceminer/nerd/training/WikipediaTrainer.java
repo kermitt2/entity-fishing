@@ -71,8 +71,7 @@ public class WikipediaTrainer {
 		modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
 	}
 
-	private void gatherArticleSamples() throws IOException{
-		//int[] sizes = {5000,1000};
+	private void createArticleSamples() throws IOException{
 		int[] sizes = {500,100,100};
 		//int[] sizes = {5000,1000,1000};
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
@@ -81,13 +80,6 @@ public class WikipediaTrainer {
 		criterias.setMinWordCount(150);
 		criterias.setMaxWordCount(1000);
 		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sizes, wikipedia);
-	    /*articleSets = new ArticleSetBuilder()
-	        .setMinOutLinks(20)
-	        .setMinInLinks(30)
-	        .setMaxListProportion(0.1)
-	        .setMinWordCount(150)
-	        .setMaxWordCount(1000)
-	        .buildExclusiveSets(sizes, wikipedia);*/
 	}
 
 	private void createArffFiles(String datasetName) throws IOException, Exception {
@@ -126,7 +118,7 @@ public class WikipediaTrainer {
 		WikipediaTrainer trainer = new WikipediaTrainer(dataDir, lang);
 
 		System.out.println("Create article sets...");
-		trainer.gatherArticleSamples();
+		trainer.createArticleSamples();
 
 		System.out.println("Create arff files...");
 		trainer.createArffFiles("wikipedia");
