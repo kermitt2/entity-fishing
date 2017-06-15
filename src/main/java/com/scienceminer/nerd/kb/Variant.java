@@ -1,9 +1,6 @@
 package com.scienceminer.nerd.kb;
 
 import java.io.*;
-import java.sql.*;
-import javax.naming.*;
-import javax.sql.*;
 import java.util.*;
 
 /**
@@ -16,13 +13,29 @@ public class Variant {
 	
     public Variant() {}
     
-    public void setTerm(String term) { this.term = term; }
-    public void setSource(String s) { source = s; }
-    public void setLanguage(String lang) { this.language = lang; }
+    public void setTerm(String term) { 
+    	this.term = term; 
+    }
+    
+    public void setSource(String s) { 
+    	source = s; 
+    }
+    
+    public void setLanguage(String lang) { 
+    	this.language = lang; 
+    }
 	
-	public String getTerm() { return term; }
-	public String getSource() { return source; }
-	public String getLanguage() { return language; }
+	public String getTerm() { 
+		return term; 
+	}
+	
+	public String getSource() { 
+		return source; 
+	}
+	
+	public String getLanguage() { 
+		return language; 
+	}
 	
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();

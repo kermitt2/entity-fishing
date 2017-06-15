@@ -6,7 +6,7 @@ import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.Relation;
 
-import org.wikipedia.miner.db.struct.*;
+import com.scienceminer.nerd.kb.model.hadoop.*;
 
 /**
  * Represents a page of type article in Wikipedia, e.g. en entity or a concept

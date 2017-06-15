@@ -3,11 +3,6 @@ package com.scienceminer.nerd.kb.db;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
-import java.math.BigInteger;
-
-import javax.xml.stream.XMLStreamException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +37,7 @@ public class StatementDatabase extends StringRecordDatabase<List<Relation>> {
 
 	@Override 
 	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
-System.out.println("input file: " + dataFile.getPath());
+//System.out.println("input file: " + dataFile.getPath());
 		// ok it's not csv here, rather piped but let's go on ;)
 		if (isLoaded && !overwrite)
 			return;

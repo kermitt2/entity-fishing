@@ -1,7 +1,7 @@
 package com.scienceminer.nerd.kb.model;
 
 import com.scienceminer.nerd.kb.db.*;
-import org.wikipedia.miner.db.struct.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 public class Template extends Page {
 	/**

@@ -3,8 +3,8 @@ package com.scienceminer.nerd.kb.model;
 import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
-import org.wikipedia.miner.db.struct.DbLabel;
-import org.wikipedia.miner.db.struct.DbSenseForLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
 
 import java.util.*;
 

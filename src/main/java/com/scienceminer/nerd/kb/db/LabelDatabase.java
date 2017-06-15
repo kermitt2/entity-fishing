@@ -1,18 +1,16 @@
 package com.scienceminer.nerd.kb.db;
 
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
-
 import java.io.*;
 import java.util.*;
 
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.hadoop.record.CsvRecordOutput;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.wikipedia.miner.db.struct.DbLabel;
-import org.wikipedia.miner.db.struct.DbSenseForLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
 
 import com.scienceminer.nerd.utilities.*;
 

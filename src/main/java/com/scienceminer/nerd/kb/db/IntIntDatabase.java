@@ -2,7 +2,9 @@ package com.scienceminer.nerd.kb.db;
 
 import org.apache.hadoop.record.CsvRecordInput;
 
-import java.math.BigInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 
 import com.scienceminer.nerd.utilities.*;
@@ -43,11 +45,9 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 		byte[] cachedData = null;
 		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
 			cachedData = db.get(tx, KBEnvironment.serialize(key));
 			if (cachedData != null) {
 				record = (Integer)KBEnvironment.deserialize(cachedData);
-				//record = new BigInteger(cachedData).intValue();
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -65,7 +65,6 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
 				record = (Integer)KBEnvironment.deserialize(cursor.valBytes());
-				//record = new BigInteger(cursor.valBytes()).intValue();
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -75,7 +74,6 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 	
 	protected void add(KBEntry<Integer,Integer> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
 			db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
@@ -115,7 +113,6 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 			KBEntry<Integer,Integer> entry = deserialiseCsvRecord(cri);
 			if (entry != null) {
 				try {
-					//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {

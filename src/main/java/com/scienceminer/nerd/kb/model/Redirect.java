@@ -2,8 +2,7 @@ package com.scienceminer.nerd.kb.model;
 
 import java.util.concurrent.*;
 
-import org.wikipedia.miner.db.struct.DbPage;
-
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 import com.scienceminer.nerd.kb.db.*;
 
 /**

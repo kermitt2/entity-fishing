@@ -22,14 +22,13 @@ import org.slf4j.LoggerFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import org.wikipedia.miner.annotation.*;
-import org.wikipedia.miner.util.*;
-import org.wikipedia.miner.util.text.*;
-
 import com.scienceminer.nerd.kb.model.Label.Sense;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.features.*;
+import com.scienceminer.nerd.training.*;
+import com.scienceminer.nerd.utilities.MediaWikiParser;
+import com.scienceminer.nerd.evaluation.*;
 
 import smile.validation.ConfusionMatrix;
 import smile.validation.FMeasure;
@@ -55,7 +54,7 @@ public class NerdSelector {
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
 
 	private Wikipedia wikipedia = null;
-	private ArticleCleaner cleaner = null;
+	private MediaWikiParser cleaner = null;
 
 	// regression model
 	private RandomForest forest = null;
@@ -71,7 +70,7 @@ public class NerdSelector {
 		this.wikipedia = wikipedia;
 		
 		NerdConfig conf = wikipedia.getConfig();
-		cleaner = new ArticleCleaner();
+		cleaner = new MediaWikiParser();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -192,14 +191,14 @@ public class NerdSelector {
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
 
-	public void train(ArticleSet articles, String datasetName) throws Exception {
+	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
 		StringBuilder arffBuilder = new StringBuilder();
 		SimpleSelectionFeatureVector feat = new SimpleSelectionFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		int nbArticle = 0;
 		NerdRanker ranker = new NerdRanker(wikipedia);
-		for (Article art: articles) {
-			arffBuilder = trainArticle(art, arffBuilder, ranker);	
+		for (Article article : articles.getSample()) {
+			arffBuilder = trainArticle(article, arffBuilder, ranker);	
 			nbArticle++;
 System.out.println("nb article processed: " + nbArticle);
 		}
@@ -210,10 +209,10 @@ System.out.println(arffDataset);
 	}
 
 	private StringBuilder trainArticle(Article article, 
-			StringBuilder arffBuilder, 
-			NerdRanker ranker) throws Exception {
+									StringBuilder arffBuilder, 
+									NerdRanker ranker) throws Exception {
 		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		Vector<TopicReference> ambigRefs = new Vector<TopicReference>();
+		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 		content = content.replace("''", "");
@@ -395,7 +394,7 @@ System.out.println("get context for this content");
 		return arffBuilder;
 	}
 
-	public Result<Integer> test(ArticleSet testSet, NerdRanker ranker) throws Exception{
+	public Result<Integer> test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception{
 		Result<Integer> r = new Result<Integer>();
 		
 		double worstRecall = 1;
@@ -405,13 +404,15 @@ System.out.println("get context for this content");
 		int perfectRecall = 0;
 		int perfectPrecision = 0;
 
-		for (Article art : testSet) {			
+		for (Article article : testSet.getSample()) {
 			articlesTested++;
 			
-			Result<Integer> ir = testArticle(art, ranker);
+			Result<Integer> ir = testArticle(article, ranker);
 			
-			if (ir.getRecall() ==1) perfectRecall++;
-			if (ir.getPrecision() == 1) perfectPrecision++;
+			if (ir.getRecall() ==1) 
+				perfectRecall++;
+			if (ir.getPrecision() == 1) 
+				perfectPrecision++;
 			
 			worstRecall = Math.min(worstRecall, ir.getRecall());
 			worstPrecision = Math.min(worstPrecision, ir.getPrecision());
@@ -430,7 +431,7 @@ System.out.println("get context for this content");
 		System.out.println(" - testing " + article);
 
 		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		Vector<TopicReference> ambigRefs = new Vector<TopicReference>();
+		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 
@@ -480,7 +481,7 @@ System.out.println("get context for this content");
 
 		// resolve senses		
 		double quality = context.getQuality();
-		for (TopicReference ref: ambigRefs) {
+		for (TopicReference ref : ambigRefs) {
 			TreeSet<Article> validSenses = new TreeSet<Article>();
 			for (Sense sense : ref.getLabel().getSenses()) {
 				if (sense.getPriorProbability() < NerdEngine.minSenseProbability) break;

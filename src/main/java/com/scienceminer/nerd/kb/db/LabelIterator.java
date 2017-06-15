@@ -2,11 +2,9 @@ package com.scienceminer.nerd.kb.db;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.math.BigInteger;
 
-import org.wikipedia.miner.db.struct.DbLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
 import com.scienceminer.nerd.kb.model.Label;
-
 import com.scienceminer.nerd.utilities.*;
 
 import org.fusesource.lmdbjni.*;

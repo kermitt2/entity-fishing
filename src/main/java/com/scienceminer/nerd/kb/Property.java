@@ -7,8 +7,6 @@ import com.fasterxml.jackson.core.io.*;
 /**
  * Class for representing and exchanging a property associated to a concept.
  */
-//public class Property extends org.apache.hadoop.record.Record implements Serializable { 
-
 public class Property implements Serializable { 
 
     private String attribute = null;
@@ -114,8 +112,6 @@ public class Property implements Serializable {
             String outputTemplate = new String(encodedTemplate); 
             sb.append(", \"template\" : \"" + outputTemplate + "\" }");        
         }
-
-        //Integer valueConcept
 
         return sb.toString();
     }

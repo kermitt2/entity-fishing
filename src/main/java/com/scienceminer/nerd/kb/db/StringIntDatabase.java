@@ -1,9 +1,11 @@
 package com.scienceminer.nerd.kb.db;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.hadoop.record.Record;
 
-import java.math.BigInteger;
 import java.io.*;
 
 import com.scienceminer.nerd.utilities.*;

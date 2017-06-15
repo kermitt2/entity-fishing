@@ -6,20 +6,19 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.math.BigInteger;
 
-import com.scienceminer.nerd.utilities.*;
-
 import org.apache.hadoop.record.*;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
-
+import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.Relation;
 import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;
-
-import org.wikipedia.miner.db.struct.*;
+import com.scienceminer.nerd.kb.model.hadoop.*;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;

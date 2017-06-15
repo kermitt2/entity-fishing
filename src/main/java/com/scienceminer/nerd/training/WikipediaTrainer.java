@@ -7,12 +7,10 @@ import java.io.InputStreamReader;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.disambiguation.*;
-
 import com.scienceminer.nerd.kb.*;
+import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
-
 import com.scienceminer.nerd.kb.model.Wikipedia;
-import org.wikipedia.miner.util.*;
 
 /**
  * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as 
@@ -29,7 +27,7 @@ public class WikipediaTrainer {
 	private NerdRanker ranker = null; 
 	private NerdSelector selector = null;
 
-	ArticleSet[] articleSets = null;
+	ArticleTrainingSample[] articleSamples = null;
 
 	//feature data files
 	private File arffRanker = null;
@@ -73,26 +71,32 @@ public class WikipediaTrainer {
 		modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
 	}
 
-	private void gatherArticleSets() throws IOException{
+	private void gatherArticleSamples() throws IOException{
 		//int[] sizes = {5000,1000};
 		int[] sizes = {500,100,100};
 		//int[] sizes = {5000,1000,1000};
-	    articleSets = new ArticleSetBuilder()
+		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
+		criterias.setMinOutLinks(20);
+		criterias.setMinInLinks(30);
+		criterias.setMinWordCount(150);
+		criterias.setMaxWordCount(1000);
+		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sizes, wikipedia);
+	    /*articleSets = new ArticleSetBuilder()
 	        .setMinOutLinks(20)
 	        .setMinInLinks(30)
 	        .setMaxListProportion(0.1)
 	        .setMinWordCount(150)
 	        .setMaxWordCount(1000)
-	        .buildExclusiveSets(sizes, wikipedia);
+	        .buildExclusiveSets(sizes, wikipedia);*/
 	}
 
 	private void createArffFiles(String datasetName) throws IOException, Exception {
-	    ArticleSet trainingSet = articleSets[0];
+	    ArticleTrainingSample trainingSample = articleSamples[0];
 
-	    ranker.train(trainingSet, datasetName + "_disambiguation");
+	    ranker.train(trainingSample, datasetName + "_disambiguation");
 	    ranker.saveTrainingData(arffRanker);
 	      
-	    selector.train(trainingSet, datasetName + "_selection");
+	    selector.train(trainingSample, datasetName + "_selection");
 	    selector.saveTrainingData(arffSelector);
 	}
 
@@ -105,11 +109,11 @@ public class WikipediaTrainer {
 	}
 
 	private void evaluate() throws Exception {
-		ArticleSet rankerSet = articleSets[1];
-	    Result<Integer> rankerResults = ranker.test(rankerSet);
+		ArticleTrainingSample rankerSample = articleSamples[1];
+	    Result<Integer> rankerResults = ranker.test(rankerSample);
 		
-	    ArticleSet selectorSet = articleSets[1];
-	    Result<Integer> selectorResults = selector.test(selectorSet, ranker);
+	    ArticleTrainingSample selectorSample = articleSamples[1];
+	    Result<Integer> selectorResults = selector.test(selectorSample, ranker);
 		
 	    System.out.println("------------------------------------------------");
 	    System.out.println("Ranker results: " + rankerResults);
@@ -122,7 +126,7 @@ public class WikipediaTrainer {
 		WikipediaTrainer trainer = new WikipediaTrainer(dataDir, lang);
 
 		System.out.println("Create article sets...");
-		trainer.gatherArticleSets();
+		trainer.gatherArticleSamples();
 
 		System.out.println("Create arff files...");
 		trainer.createArffFiles("wikipedia");

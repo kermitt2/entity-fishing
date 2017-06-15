@@ -7,8 +7,6 @@ import com.fasterxml.jackson.core.io.*;
 /**
  * Class for representing and exchanging a semantic relation.
  */
-//public class Relation extends org.apache.hadoop.record.Record implements Serializable { 
-
 public class Relation implements Serializable { 
 
     // Orign of the entity definition

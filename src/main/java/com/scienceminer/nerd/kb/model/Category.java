@@ -3,9 +3,7 @@ package com.scienceminer.nerd.kb.model;
 import java.util.Collections;
 
 import com.scienceminer.nerd.kb.db.*;
-
-import org.wikipedia.miner.db.struct.DbIntList;
-import org.wikipedia.miner.db.struct.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.*;
 
 /**
  * Represents categories in Wikipedia; the pages that exist to hierarchically organise other pages

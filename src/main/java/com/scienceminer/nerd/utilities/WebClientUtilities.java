@@ -15,14 +15,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.zip.GZIPInputStream;
 
-/*import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;*/
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -40,8 +32,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-//import javax.xml.parsers.SAXParser;
-//import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Useful static methods for web service requests.

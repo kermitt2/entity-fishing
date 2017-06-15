@@ -3,10 +3,12 @@ package com.scienceminer.nerd.kb.db;
 import org.apache.hadoop.record.Record;
 import org.apache.hadoop.record.CsvRecordInput;
 
-import java.math.BigInteger;
 import java.io.*;
 
 import com.scienceminer.nerd.utilities.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -43,7 +45,6 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
 			cachedData = db.get(tx, KBEnvironment.serialize(key));
 			if (cachedData != null) {
 				record = (Record)KBEnvironment.deserialize(cachedData);
@@ -61,7 +62,6 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();
 			 BufferCursor cursor = db.bufferCursor(tx)) {
-			//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
 			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
 				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
@@ -74,7 +74,6 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 
 	protected void add(KBEntry<Integer,Record> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), KBEnvironment.serialize(entry.getValue()));
 			db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
@@ -113,7 +112,6 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 				KBEntry<Integer,Record> entry = deserialiseCsvRecord(cri);
 				if ( (entry != null) && (filterEntry(entry) != null) ) {
 					try {
-						//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), KBEnvironment.serialize(entry.getValue()));
 						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 						nbToAdd++;
 					} catch(Exception e) {

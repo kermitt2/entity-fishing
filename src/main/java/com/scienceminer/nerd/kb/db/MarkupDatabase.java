@@ -1,10 +1,11 @@
 package com.scienceminer.nerd.kb.db;
 
 import java.io.*;
-import java.math.BigInteger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.apache.commons.io.input.CountingInputStream;
@@ -16,9 +17,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
-import org.apache.commons.compress.compressors.CompressorException;
-import org.apache.commons.compress.compressors.CompressorInputStream;
-import org.apache.commons.compress.compressors.CompressorStreamFactory;
 
 import org.apache.tools.bzip2.*;
 
@@ -108,7 +106,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	 * @throws XMLStreamException if the XML within the data file cannot be parsed.
      * @throws org.apache.commons.compress.compressors.CompressorException
 	 */
-	public void loadFromXmlFile(File dataFile, boolean overwrite) throws IOException, XMLStreamException, CompressorException  {
+	public void loadFromXmlFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName() + " database");

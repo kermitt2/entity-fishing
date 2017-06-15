@@ -6,17 +6,17 @@ import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.concurrent.*;
-import java.math.BigInteger;
 
 import org.nustaq.serialization.*;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.compress.compressors.CompressorException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import org.wikipedia.miner.db.struct.*; 
+import com.scienceminer.nerd.kb.model.hadoop.*; 
 import com.scienceminer.nerd.kb.model.Wikipedia;
 
 import org.apache.hadoop.record.*;

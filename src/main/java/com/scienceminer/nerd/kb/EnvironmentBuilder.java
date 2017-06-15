@@ -3,9 +3,7 @@ package com.scienceminer.nerd.kb;
 import java.io.File;
 
 import com.scienceminer.nerd.kb.db.*;
-
 import com.scienceminer.nerd.kb.model.*;
-//import org.wikipedia.miner.util.*;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.utilities.NerdConfig;

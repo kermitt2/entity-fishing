@@ -317,27 +317,6 @@ public class NerdRestService implements NerdPaths {
 												customisation); 	// field customisation
 	}
 	*/
-		/*
-	@GET
-	@Path(PATH_ERD_TERMS)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processWeigthedTermVector(@QueryParam(TEXT) String text, 
-									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
-									@DefaultValue("JSON") @QueryParam(FORMAT) String format,
-									@DefaultValue("") @QueryParam(CUSTOMISATION) String customisation) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestProcessString.processWeigthedTermVector(text, 
-												onlyNER, 	// onlyNER 
-												nbest, 		// nbest
-												form, // output format
-												customisation); 	// field customisation
-	}
-	*/
 
 	@GET
 	@Path(PATH_KB_CONCEPT)

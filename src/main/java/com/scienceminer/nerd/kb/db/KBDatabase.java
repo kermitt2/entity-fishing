@@ -15,8 +15,11 @@ import java.util.concurrent.*;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.hadoop.record.CsvRecordInput;
-import org.apache.log4j.Logger;
-import org.wikipedia.miner.db.struct.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.scienceminer.nerd.kb.model.hadoop.*;
 
 import java.util.concurrent.*;
 import org.apache.hadoop.record.*;

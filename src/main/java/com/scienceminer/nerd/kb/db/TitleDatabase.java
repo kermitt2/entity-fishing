@@ -2,17 +2,16 @@ package com.scienceminer.nerd.kb.db;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.apache.hadoop.record.CsvRecordInput;
-import java.math.BigInteger;
 
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.Page.PageType;
-
-import org.wikipedia.miner.db.struct.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;

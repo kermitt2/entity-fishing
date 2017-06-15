@@ -3,7 +3,7 @@ package com.scienceminer.nerd.kb.db;
 import java.util.*;
 import java.math.BigInteger;
 
-import org.wikipedia.miner.db.struct.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;

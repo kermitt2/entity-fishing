@@ -1,17 +1,12 @@
 package com.scienceminer.nerd.kb.db;
 
 import java.io.*;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
-import java.math.BigInteger;
-
-import javax.xml.stream.XMLStreamException;
 
 import org.apache.hadoop.record.CsvRecordInput;
 
-import org.wikipedia.miner.db.struct.DbLinkLocation;
-import org.wikipedia.miner.db.struct.DbLinkLocationList;
-import org.wikipedia.miner.db.struct.DbPageLinkCounts;
+import com.scienceminer.nerd.kb.model.hadoop.DbLinkLocation;
+import com.scienceminer.nerd.kb.model.hadoop.DbLinkLocationList;
+import com.scienceminer.nerd.kb.model.hadoop.DbPageLinkCounts;
 
 import com.scienceminer.nerd.utilities.*;
 

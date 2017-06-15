@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.utilities.NerdConfig;
-
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
 /**

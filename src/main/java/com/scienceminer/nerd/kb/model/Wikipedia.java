@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
+//import javax.xml.parsers.ParserConfigurationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,15 +16,15 @@ import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.utilities.NerdConfig;
 
-import org.wikipedia.miner.db.struct.DbLabel;
-import org.wikipedia.miner.db.struct.DbIntList;
+import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
 
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.xml.sax.SAXException;
 
-import com.scienceminer.nerd.kb.Property;
-import com.scienceminer.nerd.kb.Relation;
+//import com.scienceminer.nerd.kb.Property;
+//import com.scienceminer.nerd.kb.Relation;
 
 /**
  * Represent a language specific instance of Wikipedia

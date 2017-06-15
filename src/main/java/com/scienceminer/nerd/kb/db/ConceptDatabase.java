@@ -9,10 +9,11 @@ import java.util.*;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.hadoop.record.CsvRecordOutput;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.wikipedia.miner.db.struct.DbLabel;
-import org.wikipedia.miner.db.struct.DbSenseForLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
+import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
 
 import com.scienceminer.nerd.utilities.*;
 
@@ -71,10 +72,7 @@ System.out.println("isLoaded: " + isLoaded);
 				nbToAdd = 0;
 				tx = environment.createWriteTransaction();
 			}
-			//bytesRead = bytesRead + line.length() + 1;
 
-			//CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
-			//KBEntry<Integer,Long> entry = deserialiseCsvRecord(cri);
 			String[] pieces = line.split(",");
 			if (pieces.length < 3)
 				continue;
@@ -104,7 +102,6 @@ System.out.println("isLoaded: " + isLoaded);
 			KBEntry<String,Map<String,Integer>> entry = new KBEntry<String,Map<String,Integer>>(keyVal, conceptMap);
 			if (entry != null) {
 				try {
-					//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {

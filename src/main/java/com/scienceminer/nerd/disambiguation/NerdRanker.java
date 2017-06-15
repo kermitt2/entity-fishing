@@ -22,9 +22,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import com.scienceminer.nerd.kb.model.*;
-import org.wikipedia.miner.annotation.*;
-import org.wikipedia.miner.util.*;
-import org.wikipedia.miner.util.text.*;
+import com.scienceminer.nerd.training.*;
+import com.scienceminer.nerd.utilities.MediaWikiParser;
+import com.scienceminer.nerd.evaluation.*;
 
 import com.scienceminer.nerd.kb.model.Label.Sense;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
@@ -52,7 +52,7 @@ public class NerdRanker {
 	private static String MODEL_PATH_LONG = "data/models/ranker-long";
 
 	private Wikipedia wikipedia = null;
-	private ArticleCleaner cleaner = null;
+	private MediaWikiParser cleaner = null;
 
 	private double minSenseProbability = 0.0; 
 	private int maxLabelLength = 20; 
@@ -77,7 +77,7 @@ public class NerdRanker {
 		this.maxContextSize = NerdEngine.maxContextSize;
 		
 		NerdConfig conf = wikipedia.getConfig();
-		cleaner = new ArticleCleaner();
+		cleaner = new MediaWikiParser();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -97,7 +97,7 @@ public class NerdRanker {
 		this.maxContextSize = maxContextSize;
 		
 		NerdConfig conf = wikipedia.getConfig();
-		cleaner = new ArticleCleaner();
+		cleaner = new MediaWikiParser();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -216,13 +216,13 @@ public class NerdRanker {
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
 
-	public void train(ArticleSet articles, String datasetName) throws Exception {
+	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
 		StringBuilder arffBuilder = new StringBuilder();
 		GenericRankerFeatureVector feat = new MilneWittenFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		int nbArticle = 0;
-		for (Article art: articles) {
-			arffBuilder = trainArticle(art, arffBuilder);	
+		for (Article article : articles.getSample()) {
+			arffBuilder = trainArticle(article, arffBuilder);	
 			nbArticle++;
 System.out.println("nb article processed: " + nbArticle);
 		}
@@ -234,7 +234,7 @@ System.out.println("nb article processed: " + nbArticle);
 
 	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
 		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		Vector<TopicReference> ambigRefs = new Vector<TopicReference>();
+		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 		content = content.replace("''", "");
@@ -414,7 +414,7 @@ System.out.println("get context for this content");
 		return arffBuilder;
 	}
 
-	public Result<Integer> test(ArticleSet testSet) throws Exception{
+	public Result<Integer> test(ArticleTrainingSample testSet) throws Exception {
 		Result<Integer> r = new Result<Integer>();
 		
 		double worstRecall = 1;
@@ -424,13 +424,15 @@ System.out.println("get context for this content");
 		int perfectRecall = 0;
 		int perfectPrecision = 0;
 		
-		for (Article art : testSet) {			
+		for (Article article : testSet.getSample()) {			
 			articlesTested ++;
 			
-			Result<Integer> ir = testArticle(art);
+			Result<Integer> ir = testArticle(article);
 			
-			if (ir.getRecall() ==1) perfectRecall++;
-			if (ir.getPrecision() == 1) perfectPrecision++;
+			if (ir.getRecall() ==1) 
+				perfectRecall++;
+			if (ir.getPrecision() == 1) 
+				perfectPrecision++;
 			
 			worstRecall = Math.min(worstRecall, ir.getRecall());
 			worstPrecision = Math.min(worstPrecision, ir.getPrecision());
@@ -449,7 +451,7 @@ System.out.println("get context for this content");
 		System.out.println(" - testing " + article);
 
 		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		Vector<TopicReference> ambigRefs = new Vector<TopicReference>();
+		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 

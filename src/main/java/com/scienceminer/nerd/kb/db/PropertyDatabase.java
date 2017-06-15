@@ -6,11 +6,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
-import java.math.BigInteger;
-
-import javax.xml.stream.XMLStreamException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,10 +42,6 @@ public class PropertyDatabase extends StringRecordDatabase<List<Property>> {
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
-
-	/*private KBEntry<String, List<Property>> deserializePageLinkCsvRecord(CsvRecordInput record) throws IOException {
-		throw new UnsupportedOperationException();
-	}*/
 
 	/**
 	 *  Property descriptions are expressed in JSON format

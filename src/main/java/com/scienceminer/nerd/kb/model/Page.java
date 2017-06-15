@@ -2,12 +2,12 @@ package com.scienceminer.nerd.kb.model;
 
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 
-import org.wikipedia.miner.db.struct.DbIntList;
-import org.wikipedia.miner.db.struct.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 import com.scienceminer.nerd.kb.db.*;
 
-import org.wikipedia.miner.util.MarkupStripper;
+import com.scienceminer.nerd.utilities.MediaWikiParser;
 
 /**
  * Represents pages of any type in Wikipedia
@@ -255,14 +255,13 @@ public class Page implements Comparable<Page> {
 	 * @return the first paragraph on this page.
 	 */
 	public String getFirstParagraphMarkup() {
-		MarkupStripper stripper = new MarkupStripper();
+		//MediaWikiParser stripper = new MediaWikiParser();
 		String markup = env.getDbMarkup().retrieve(id); 
-
 		return markup;
 	}
 
 	public static String formatFirstParagraphMarkup(String markup) {
-		MarkupStripper stripper = new MarkupStripper();
+		MediaWikiParser stripper = new MediaWikiParser();
 
 		markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
 		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
@@ -289,7 +288,7 @@ public class Page implements Comparable<Page> {
 	}
 
 	public static String formatAllMarkup(String markup) {
-		MarkupStripper stripper = new MarkupStripper();
+		MediaWikiParser stripper = new MediaWikiParser();
 
 		//markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
 		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);

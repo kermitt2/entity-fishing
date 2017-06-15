@@ -2,6 +2,7 @@ package com.scienceminer.nerd.kb;
 
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.utilities.NerdProperties;
+
 import org.grobid.core.utilities.OffsetPosition;
 
 import org.slf4j.Logger;
@@ -9,9 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
-
-import java.io.BufferedReader;
-import java.util.List;    
 
 import org.apache.commons.lang3.StringUtils;
 
