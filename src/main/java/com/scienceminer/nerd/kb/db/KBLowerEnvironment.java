@@ -26,6 +26,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  * 
  */
 public class KBLowerEnvironment extends KBEnvironment {
+	private static final Logger LOGGER = LoggerFactory.getLogger(KBLowerEnvironment.class);	
 
 	// the different language-specific databases of the KB
 	private KBDatabase<Integer, DbPage> dbPage = null;
@@ -428,15 +429,15 @@ public class KBLowerEnvironment extends KBEnvironment {
 		});
 		
 		if ((files == null) || (files.length == 0)) {
-			Logger.getLogger(KBEnvironment.class).info("Could not locate markup file in " + dataDirectory);
+			LOGGER.info("Could not locate markup file in " + dataDirectory);
 			return null;
 		}
 		else { 
 			if (files.length > 1)
-				Logger.getLogger(KBEnvironment.class).info("There are multiple markup files in " + dataDirectory);
+				LOGGER.info("There are multiple markup files in " + dataDirectory);
 		
 			if (!files[0].canRead())
-				Logger.getLogger(KBEnvironment.class).info(files[0] + " is not readable");
+				LOGGER.info(files[0] + " is not readable");
 		}
 		return files[0];
 	}

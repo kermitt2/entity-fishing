@@ -266,7 +266,6 @@ System.out.print("\n");*/
                 int[] theDomains = createMapping((Article) page);
                 if (theDomains != null) {
                     try {
-                        //db.put(tx, BigInteger.valueOf(pageId).toByteArray(), KBEnvironment.serialize(theDomains));
                         db.put(tx, KBEnvironment.serialize(pageId), KBEnvironment.serialize(theDomains));
                         nbToAdd++;
                     } catch(Exception e) {
@@ -377,11 +376,8 @@ System.out.print("\n");*/
     }
 
     // LMDB zero copy version
-    public List<String> getDomains2(int pageId) {
+    /*public List<String> getDomains2(int pageId) {
         int[] list = null;
-        /*if (domainsCache != null)
-            domainsCache.get(new Integer(pageId));
-        else*/ 
         {
             try (Transaction tx = environment.createReadTransaction();
                 BufferCursor cursor = db.bufferCursor(tx)) {
@@ -404,7 +400,7 @@ System.out.print("\n");*/
             }
         }
         return result;
-    }
+    }*/
 
     public void close() {
         if (db != null)

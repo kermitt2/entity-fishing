@@ -27,6 +27,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  * A factory for creating the LMDB databases used in (N)ERD 
  */
 public class KBDatabaseFactory {
+	private static final Logger LOGGER = LoggerFactory.getLogger(KBDatabaseFactory.class);	
 	
 	private KBEnvironment env = null;
 
@@ -263,7 +264,7 @@ public class KBDatabaseFactory {
 				try {
 					k = StatisticName.valueOf(statName).ordinal();
 				} catch (Exception e) {
-					Logger.getLogger(KBDatabaseFactory.class).warn("Ignoring unknown statistic: " + statName);
+					LOGGER.warn("Ignoring unknown statistic: " + statName);
 					return null;
 				}
 				return new KBEntry<Integer, Long>(k,v);

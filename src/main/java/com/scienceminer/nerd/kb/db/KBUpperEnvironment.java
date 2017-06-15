@@ -27,6 +27,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  * 
  */
 public class KBUpperEnvironment extends KBEnvironment {
+	private static final Logger LOGGER = LoggerFactory.getLogger(KBUpperEnvironment.class);	
 
 	// the different databases of the KB
 	private ConceptDatabase dbConcepts = null;
@@ -125,15 +126,6 @@ public class KBUpperEnvironment extends KBEnvironment {
 		
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
 	}
-
-	/*private static File getDataFile(File dataDirectory, String fileName) throws IOException {
-		File file = new File(dataDirectory + File.separator + fileName);
-		if (!file.canRead()) {
-			Logger.getLogger(KBEnvironment.class).info(file + " is not readable");
-			return null;
-		} else
-			return file;
-	}*/
 
 	/**
 	 * Create a database associating integer id of page with an InfoBox relation (relation to other page)

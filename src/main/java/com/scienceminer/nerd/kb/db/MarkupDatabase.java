@@ -9,6 +9,8 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
 import org.apache.commons.io.input.CountingInputStream;
+import org.apache.commons.compress.compressors.CompressorInputStream;
+import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.hadoop.record.CsvRecordInput;
 import com.scienceminer.nerd.kb.model.Page;
 
@@ -102,9 +104,6 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	 * 
 	 * @param dataFile the XML file containing a wikipedia dump 
 	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
-	 * @throws XMLStreamException if the XML within the data file cannot be parsed.
-     * @throws org.apache.commons.compress.compressors.CompressorException
 	 */
 	public void loadFromXmlFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)

@@ -5,12 +5,8 @@ import com.scienceminer.nerd.utilities.*;
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.concurrent.*;
 
 import org.nustaq.serialization.*;
-import javax.xml.stream.XMLStreamException;
-
-import org.apache.commons.compress.compressors.CompressorException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +25,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  * 
  */
 public abstract class KBEnvironment {
+	private static final Logger LOGGER = LoggerFactory.getLogger(KBEnvironment.class);	
 	
 	// this is the singleton FST configuration for all serialization operations with the KB
 	protected static FSTConfiguration singletonConf = FSTConfiguration.createDefaultConfiguration();
@@ -107,12 +104,12 @@ public abstract class KBEnvironment {
 	 * @throws IOException if any of the required files cannot be read
 	 * @throws XMLStreamException if the XML dump of wikipedia cannot be parsed
 	 */
-	public abstract void buildEnvironment(NerdConfig conf, boolean overwrite) throws IOException, XMLStreamException, CompressorException;
+	public abstract void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception;
 
 	protected static File getDataFile(File dataDirectory, String fileName) throws IOException {
 		File file = new File(dataDirectory + File.separator + fileName);
 		if (!file.canRead()) {
-			Logger.getLogger(KBEnvironment.class).info(file + " is not readable");
+			LOGGER.info(file + " is not readable");
 			return null;
 		} else
 			return file;
