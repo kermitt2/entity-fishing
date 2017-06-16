@@ -156,7 +156,7 @@
                         </systemProperty>
                         <systemProperty>
                             <name>log4j.configuration</name>
-                            <value>log4j-jetty.properties</value>
+                            <value>log4j-jetty.xml</value>
                         </systemProperty>
                     </systemProperties>
                 </configuration>
