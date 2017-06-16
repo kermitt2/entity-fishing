@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import com.scienceminer.nerd.exceptions.NerdServiceException;
 
@@ -26,7 +27,7 @@ public class NerdRestUtils {
 		
 		private String name;
 
-		private Format(String name) {
+		Format(String name) {
           	this.name = name;
 		}
 
@@ -35,29 +36,20 @@ public class NerdRestUtils {
 		}
 	};
 
-	/**
-	 * The class Logger.
-	 */
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(NerdRestUtils.class);
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestUtils.class);
 
 	/**
 	 * Check whether the result is null or empty.
-	 * 
-	 * @param result
-	 *            the result of the process.
+	 *
+	 * @param result is the result of the process.
 	 * @return true if the result is not null and not empty, false else.
 	 */
 	public static boolean isResultOK(String result) {
-		return StringUtils.isBlank(result) ? false : true;
+		return StringUtils.isNotBlank(result);
 	}
 
 	/**
 	 * Write an input stream in temp directory.
-	 * 
-	 * @param inputStream
-	 * @return
 	 */
 	public static File writeInputFile(InputStream inputStream) {
 		LOGGER.debug(">> set origin document for stateless service'...");
@@ -76,23 +68,12 @@ public class NerdRestUtils {
 			}
 		} 
 		catch (IOException e) {
-			LOGGER.error(
-					"An internal error occurs, while writing to disk (file to write '"
-							+ originFile + "').", e);
+			LOGGER.error("An internal error occurs, while writing to disk (file to write '"
+					+ originFile + "').", e);
 			originFile = null;
 		} 
 		finally {
-			try {
-				if (out != null) {
-					out.close();
-				}
-				inputStream.close();
-			} 
-			catch (IOException e) {
-				LOGGER.error("An internal error occurs, while writing to disk (file to write '"
-						+ originFile + "').");
-				originFile = null;
-			}
+			IOUtils.closeQuietly(out, inputStream);
 		}
 		return originFile;
 	}
@@ -106,8 +87,7 @@ public class NerdRestUtils {
 		try {
 			return File.createTempFile(fileName, extension);
 		} catch (IOException e) {
-			throw new NerdServiceException(
-					"Could not create temprorary file, '" + fileName + "."
+			throw new NerdServiceException("Could not create temporary file, '" + fileName + "."
 							+ extension + "'.");
 		}
 	}
@@ -122,8 +102,7 @@ public class NerdRestUtils {
 		try {
 			LOGGER.debug("Removing " + file.getAbsolutePath());
 			file.delete();
-		} 
-		catch (Exception exp) {
+		} catch (Exception exp) {
 			LOGGER.error("Error while deleting the temporary file: " + exp);
 		}
 	}

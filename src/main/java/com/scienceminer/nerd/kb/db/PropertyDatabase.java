@@ -1,36 +1,18 @@
 package com.scienceminer.nerd.kb.db;
 
-import java.io.*;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Iterator;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scienceminer.nerd.kb.Property;
+import org.apache.commons.compress.compressors.CompressorInputStream;
+import org.apache.commons.compress.compressors.CompressorStreamFactory;
+import org.apache.hadoop.record.CsvRecordInput;
+import org.fusesource.lmdbjni.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.commons.compress.compressors.*;
-import org.apache.hadoop.record.CsvRecordInput;
-
-import com.scienceminer.nerd.kb.db.*;
-import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import com.scienceminer.nerd.utilities.*;
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.Property;
-import com.scienceminer.nerd.kb.Property.ValueType;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
-
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.io.*;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.FileUtils;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PropertyDatabase extends StringRecordDatabase<Property> {
 	private static final Logger logger = LoggerFactory.getLogger(PropertyDatabase.class);	
@@ -50,7 +32,6 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 	 */
 	@Override 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
-//System.out.println("input file: " + dataFile.getPath());
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
@@ -67,15 +48,15 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 			if (line.length() == 0) continue;
 			if (line.startsWith("[")) continue;
 			if (line.startsWith("]")) break;
-			
+
 			JsonNode rootNode = mapper.readTree(line);
-			
+
 			JsonNode typeNode = rootNode.findPath("type");
 			String type = null;
 			if ((typeNode != null) && (!typeNode.isMissingNode())) {
 				type = typeNode.textValue();
 			}
-			
+
 			if (type == null)
 				continue;
 
@@ -87,7 +68,7 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 			if ((idNode != null) && (!idNode.isMissingNode())) {
 				itemId = idNode.textValue();
 			}
-            
+
             if (itemId == null)
             	continue;
 
@@ -108,7 +89,7 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 				}
 			}
 
-			if (valueType == null) 
+			if (valueType == null)
 				continue;
 
 			String name = null;
@@ -126,7 +107,7 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 
 			Property property = new Property(itemId, name, valueType);
 			properties.add(property);
-		}			
+		}
 
 		int nbTotalAdded = 0;
         Transaction tx = environment.createWriteTransaction();
@@ -149,7 +130,7 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 
 
 
-	//@Override 
+	//@Override
 	/*public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
 System.out.println("input file: " + dataFile.getPath());
 		// ok it's not csv here, it's json but let's go on ;)
