@@ -49,11 +49,6 @@ public abstract class KBDatabase<K,V> {
 		label,
 
 		/**
-		 * Associates Integer page ids with the labels used to refer to that page
-		 */
-//		pageLabel,
-
-		/**
 		 * Associates String titles with the id of the page within the article namespace that this refers to
 		 */
 		articlesByTitle,
@@ -69,19 +64,9 @@ public abstract class KBDatabase<K,V> {
 		templatesByTitle,
 
 		/**
-		 * Associates integer ids with the ids of articles that link to it, and the sentence indexes where these links are found
-		 */
-		pageLinksIn, 
-
-		/**
 		 * Associates integer ids with the ids of articles that link to it
 		 */
 		pageLinksInNoSentences,
-
-		/**
-		 * Associates integer ids with the ids of articles that it links to, and the sentence indexes where these links are found
-		 */
-//		pageLinksOut, 
 
 		/**
 		 * Associates integer ids with the ids of articles that it links to
@@ -122,11 +107,6 @@ public abstract class KBDatabase<K,V> {
 		 * Associates integer id of article with the redirects that target it
 		 */
 		redirectSourcesByTarget,
-
-		/**
-		 * Associates integer id of page with the character indexes of sentence breaks within it
-		 */
-//		sentenceSplits,
 
 		/**
 		 * Associates integer id of page with a {@link DbTranslations}. 
@@ -178,9 +158,6 @@ public abstract class KBDatabase<K,V> {
 	protected String name = null;
 	protected DatabaseType type = null;
 	protected KBEnvironment env = null;
-
-	protected boolean isCached = false;
-	protected ConcurrentMap<K,V> cache = null;
 
 	/**
 	 * Creates or connects to a database, whose name will match the given {@link KBDatabase.DatabaseType}
@@ -279,26 +256,6 @@ public abstract class KBDatabase<K,V> {
 	}
 
 	/**
-	 * Returns the number of entries that have been cached to memory
-	 * 
-	 * @return the number of entries that have been cached to memory
-	 */
-	public long getCacheSize() {
-		if (!isCached)
-			return 0;
-		return cache.size();
-	}
-
-	/**
-	 * Returns true if this has been cached to memory, otherwise false
-	 * 
-	 * @return true if this has been cached to memory, otherwise false
-	 */
-	public boolean isCached() {
-		return isCached;
-	}
-
-	/**
 	 * Retrieves the value associated with the given key, either from the persistent database, or from memory if
 	 * the database has been cached. This will return null if the key is not found, or has been excluded from the cache.
 	 * 
@@ -317,25 +274,12 @@ public abstract class KBDatabase<K,V> {
 	public abstract KBEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException;
 
 	/**
-	 * Decides whether an entry should be indexed or not.
-	 * 
-	 * @param e the key,value pair to be filtered
-	 * @param conf a configuration containing options for controling the indexing
-	 * @return the value that should be cached along with the given key, or null if it should be excluded
-	 */
-	public V filterEntry(KBEntry<K,V> e) {
-		// default, no filter
-		return e.getValue();
-	}
-
-	/**
 	 * Builds the persistent database from a file (CSV normally, or JSON).
 	 * 
-	 * @param dataFile the file (here a CSV file) containing data to be loaded
-	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
+	 * @param dataFile the file (CSV , JSON or XML file) containing data to be loaded
+	 * @param overwrite indicate if the existing database should be overwritten
 	 */
-	public abstract void loadFromFile(File dataFile, boolean overwrite) throws IOException;
+	public abstract void loadFromFile(File dataFile, boolean overwrite) throws Exception;
 
 	/**
 	 * @return an iterator for the entries in this database, in ascending key order.

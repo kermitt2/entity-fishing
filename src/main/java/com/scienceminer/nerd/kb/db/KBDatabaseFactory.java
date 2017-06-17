@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.utilities.*;
-import com.scienceminer.nerd.kb.Relation;
+import com.scienceminer.nerd.kb.Statement;
 import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;
@@ -31,18 +31,10 @@ public class KBDatabaseFactory {
 	
 	private KBEnvironment env = null;
 
-	/**
-	 * Creates a new KBDatabaseFactory for the given KBEnvironment
-	 * 
-	 * @param env a KBEnvironment
-	 */
 	public KBDatabaseFactory(KBEnvironment env) {
 		this.env = env;
 	}
 
-	/**
-	 * Create a database associating page ids with the title, type and generality of the page
-	 */
 	public KBDatabase<Integer, DbPage> buildPageDatabase() {
 		return new IntRecordDatabase<DbPage>(env, DatabaseType.page) {
 			@Override
@@ -60,7 +52,6 @@ public class KBDatabaseFactory {
 				DbPage record = null;
 				try (Transaction tx = environment.createReadTransaction();
 					BufferCursor cursor = db.bufferCursor(tx)) {
-					//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
 					cursor.keyWriteBytes(KBEnvironment.serialize(key));
 					if (cursor.seekKey()) {
 						record = (DbPage)KBEnvironment.deserialize(cursor.valBytes());
@@ -77,7 +68,6 @@ public class KBDatabaseFactory {
 				byte[] cachedData = null;
 				DbPage record = null;
 				try (Transaction tx = environment.createReadTransaction()) {
-					//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
 					cachedData = db.get(tx, KBEnvironment.serialize(key));
 					if (cachedData != null)
 						record = (DbPage)KBEnvironment.deserialize(cachedData);
@@ -87,23 +77,58 @@ public class KBDatabaseFactory {
 				return record;
 			}
 
-			@Override
 			public DbPage filterEntry(KBEntry<Integer, DbPage> e) {
 				// we want to index only articles
 				PageType pageType = PageType.values()[e.getValue().getType()];
-				
-				//if (validIds == null || validIds.contains(e.getKey()) || pageType == PageType.category || pageType==PageType.redirect) 
 				if ( (pageType == PageType.article) || (pageType == PageType.category) || (pageType == PageType.redirect))
 					return e.getValue();
 				else
 					return null;
 			}
+
+			public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
+				if (isLoaded && !overwrite)
+					return;
+				System.out.println("Loading " + name + " database");
+
+				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+				long bytesRead = 0;
+
+				String line = null;
+				int nbToAdd = 0;
+				Transaction tx = environment.createWriteTransaction();
+				while ((line=input.readLine()) != null) {
+					if (nbToAdd == 10000) {
+						tx.commit();
+						tx.close();
+						nbToAdd = 0;
+						tx = environment.createWriteTransaction();
+					}
+					bytesRead = bytesRead + line.length() + 1;
+					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
+					try {
+						KBEntry<Integer,DbPage> entry = deserialiseCsvRecord(cri);
+						if ( (entry != null) && (filterEntry(entry) != null) ) {
+							try {
+								db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+								nbToAdd++;
+							} catch(Exception e) {
+								e.printStackTrace();
+							}
+						}
+					} catch(Exception e) {
+						System.out.println("Error deserialising: " + line);
+						e.printStackTrace();
+					}
+				}
+				tx.commit();
+				tx.close();
+				input.close();
+				isLoaded = true;
+			}
 		};
 	}
 
-	/**
-	 * Create a database associating article, category or template titles with their page ids
-	 */
 	public KBDatabase<String,Integer> buildTitleDatabase(DatabaseType type) {
 		return new StringIntDatabase(env, type) {
 			@Override
@@ -131,16 +156,10 @@ public class KBDatabaseFactory {
 		};
 	}
 
-	/**
-	 * Create a database associating labels with the statistics about the articles these labels could realize
-	 */
 	public LabelDatabase buildLabelDatabase() {
 		return new LabelDatabase(env);
 	}
 
-	/**
-	 * Create a database associating ids with the ids of articles it links to or that link to it
-	 */
 	public KBDatabase<Integer, DbIntList> buildPageLinkNoSentencesDatabase(DatabaseType type) {
 		if (type != DatabaseType.pageLinksInNoSentences && type != DatabaseType.pageLinksOutNoSentences)
 			throw new IllegalArgumentException("type must be either DatabaseType.pageLinksInNoSentences or DatabaseType.pageLinksOutNoSentences");
@@ -155,13 +174,11 @@ public class KBDatabaseFactory {
 				l.deserialize(record);
 				
 				ArrayList<Integer> linkIds = new ArrayList<Integer>();
-				
 				for (DbLinkLocation ll : l.getLinkLocations()) {
 					if (!linkIds.contains(ll.getLinkId()))
 						linkIds.add(ll.getLinkId());
 				}
-				
-				return new KBEntry<Integer, DbIntList>(id, new DbIntList(linkIds));
+				return new KBEntry<Integer,DbIntList>(id, new DbIntList(linkIds));
 			}
 			
 			@Override
@@ -171,11 +188,6 @@ public class KBDatabaseFactory {
 				System.out.println("Loading " + getName());
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-
-				long bytesRead = 0;
-
-				//Database db = getDatabase(false);
-
 				String line = null;
 				int nbToAdd = 0;
 				Transaction tx = environment.createWriteTransaction();
@@ -186,11 +198,9 @@ public class KBDatabaseFactory {
 						nbToAdd = 0;
 						tx = environment.createWriteTransaction();
 					}
-					bytesRead = bytesRead + line.length() + 1;
 					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 					KBEntry<Integer,DbIntList> entry = deserialiseCsvRecord(cri);
 					try {
-						//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), KBEnvironment.serialize(entry.getValue()));
 						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 						nbToAdd++;
 					} catch(Exception e) {
@@ -204,11 +214,6 @@ public class KBDatabaseFactory {
 		};
 	}
 
-	/**
-	 * Create a database appropriate for the given {@link DatabaseType}
-	 * 
-	 * @param type {@link DatabaseType#categoryParents}, {@link DatabaseType#articleParents}, {@link DatabaseType#childCategories},{@link DatabaseType#childArticles}, {@link DatabaseType#redirectSourcesByTarget}, {@link DatabaseType#sentenceSplits}
-	 */
 	public KBDatabase<Integer,DbIntList> buildIntIntListDatabase(final DatabaseType type) {
 		switch (type) {
 			case categoryParents:
@@ -216,7 +221,6 @@ public class KBDatabaseFactory {
 			case childCategories:
 			case childArticles:
 			case redirectSourcesByTarget:
-//			case sentenceSplits:
 				break;
 			default: 
 				throw new IllegalArgumentException(type.name() + " is not a valid DatabaseType for IntIntListDatabase");
@@ -234,9 +238,6 @@ public class KBDatabaseFactory {
 		};
 	}
 
-	/**
-	 * Create a database associating id of redirect with the id of its target
-	 */
 	public KBDatabase<Integer,Integer> buildRedirectTargetBySourceDatabase() {
 
 		return new IntIntDatabase(env, DatabaseType.redirectTargetBySource) {
@@ -244,17 +245,12 @@ public class KBDatabaseFactory {
 			public KBEntry<Integer, Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				int k = record.readInt(null);
 				int v = record.readInt(null);
-
 				return new KBEntry<Integer, Integer>(k,v);
 			}
 		};
 	}
 
-	/**
-	 * Create a database storing KB statistics
-	 */
 	public IntLongDatabase buildStatisticsDatabase() {
-
 		return new IntLongDatabase(env, DatabaseType.statistics) {
 			@Override
 			public KBEntry<Integer, Long> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
@@ -272,9 +268,6 @@ public class KBDatabaseFactory {
 		};
 	}
 
-	/**
-	 * Create a database associating the id of a page to its other wikipedia language mapping
-	 */
 	public KBDatabase<Integer,DbTranslations> buildTranslationsDatabase() {
 		return new IntRecordDatabase<DbTranslations>(env, DatabaseType.translations) {
 			@Override
@@ -282,29 +275,19 @@ public class KBDatabaseFactory {
 				int k = record.readInt(null);
 				DbTranslations v = new DbTranslations();
 				v.deserialize(record);
-
 				return new KBEntry<Integer, DbTranslations>(k,v);
 			}
 		};
 	}
 
-	/**
-	 * Create a database associating ids with counts of how many pages it links to or that link to it
-	 */
 	public PageLinkCountDatabase buildPageLinkCountDatabase() {
 		return new PageLinkCountDatabase(env);
 	}
 
-	/**
-	 * Create a database associating id of page with its first paragraph/definition, in mediawiki markup format
-	 */
 	public KBDatabase<Integer,String> buildMarkupDatabase() {
 		return new MarkupDatabase(env, DatabaseType.markup);
 	}
 
-	/**
-	 * Create a database associating id of page with its full content/article, in original mediawiki markup format
-	 */
 	public KBDatabase<Integer,String> buildMarkupFullDatabase() {
 		return new MarkupDatabase(env, DatabaseType.markupFull);
 	}
@@ -313,7 +296,6 @@ public class KBDatabaseFactory {
 		return new KBDatabase<Integer,String>(env, DatabaseType.conceptByPageId) {
 			protected void add(KBEntry<Integer,String> entry) {
 				try (Transaction tx = environment.createWriteTransaction()) {
-					//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					tx.commit();
 				} catch(Exception e) {
@@ -327,10 +309,8 @@ public class KBDatabaseFactory {
 				byte[] cachedData = null;
 				String record = null;
 				try (Transaction tx = environment.createReadTransaction()) {
-					//cachedData = db.get(tx, BigInteger.valueOf(key).toByteArray());
 					cachedData = db.get(tx, KBEnvironment.serialize(key));
 					if (cachedData != null) {
-						//record = new BigInteger(cachedData).longValue();
 						record = (String)KBEnvironment.deserialize(cachedData);
 					}
 				} catch(Exception e) {
@@ -339,14 +319,7 @@ public class KBDatabaseFactory {
 				return record;
 			}
 
-			/**
-			 * Builds the persistent database from a file.
-			 * 
-			 * @param dataFile the file (here a text file with fields separated by a tabulation) containing data to be loaded
-			 * @param overwrite true if the existing database should be overwritten, otherwise false
-			 * @throws IOException if there is a problem reading or deserialising the given data file.
-			 */
-			public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+			public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 //System.out.println("input file: " + dataFile.getPath());
 System.out.println("isLoaded: " + isLoaded);
 				if (isLoaded && !overwrite)
@@ -354,8 +327,6 @@ System.out.println("isLoaded: " + isLoaded);
 				System.out.println("Loading " + name + " database");
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-				//long bytesRead = 0;
-
 				String line = null;
 				int nbToAdd = 0;
 				Transaction tx = environment.createWriteTransaction();
@@ -366,10 +337,7 @@ System.out.println("isLoaded: " + isLoaded);
 						nbToAdd = 0;
 						tx = environment.createWriteTransaction();
 					}
-					//bytesRead = bytesRead + line.length() + 1;
 
-					//CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
-					//KBEntry<Integer,Long> entry = deserialiseCsvRecord(cri);
 					String[] pieces = line.split("\t");
 					if (pieces.length != 2)
 						continue;
@@ -384,7 +352,6 @@ System.out.println("isLoaded: " + isLoaded);
 					KBEntry<Integer,String> entry = new KBEntry<Integer,String>(keyVal, pieces[1]);
 					if (entry != null) {
 						try {
-							//db.put(tx, BigInteger.valueOf(entry.getKey()).toByteArray(), BigInteger.valueOf(entry.getValue()).toByteArray());
 							db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 							nbToAdd++;
 						} catch(Exception e) {

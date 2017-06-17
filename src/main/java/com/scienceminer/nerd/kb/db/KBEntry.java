@@ -1,7 +1,7 @@
 package com.scienceminer.nerd.kb.db;
 
 /**
- * An entry (key,value pair) to be used for an LMDB database implementation
+ * A key/value pair to be used for an LMDB database implementation
  *
  * @param <K> the key type
  * @param <V> the value type

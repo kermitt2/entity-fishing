@@ -20,39 +20,19 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-/**
- * A {@link KBDatabase} for associating concept identifier with list of identifier associated to a language. 
- */
+
 public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 
-	/**
-	 * Creates or connects to a database, whose name and type will be {@link KBDatabase.DatabaseType#concepts}. 
-	 * This will index label statistics according to their raw, unprocessed texts. 
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 */
 	public ConceptDatabase(KBEnvironment env) {
 		super(env, DatabaseType.concepts);
 	}
 
-	/**
-	 * Retrieves the label statistics associated with the given text key. 
-	 * 
-	 * @return true if the database has been prepared for use, otherwise false
-	 */
 	@Override
 	public Map<String,Integer> retrieve(String key) {
 		return super.retrieve(key);
 	}
 
-	/**
-	 * Builds the persistent database from a file.
-	 * 
-	 * @param dataFile the file (here a text file with fields separated by a tabulation) containing data to be loaded
-	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
-	 */
-	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 //System.out.println("input file: " + dataFile.getPath());
 System.out.println("isLoaded: " + isLoaded);
 		if (isLoaded && !overwrite)

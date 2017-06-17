@@ -304,7 +304,7 @@ public class Lexicon {
         return wikipediaDomainMaps;
     }
 
-    /*public Map<String, FreeBaseTypeMap> getFreeBaseTypeMaps () {
-        return freeBaseTypeMaps;
-    }*/
+    public KnowledgeBase getKnowledgeBase() {
+        return knowledgeBase;
+    }
 }

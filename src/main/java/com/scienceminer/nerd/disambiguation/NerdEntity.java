@@ -138,8 +138,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	private String lang = null;
 
-	private List<Property> properties = null;
-	private List<Relation> relations = null;
+	//private List<Property> properties = null;
+	private List<Statement> statements = null;
 
 	public NerdEntity() {
 		offsets = new OffsetPosition();
@@ -399,10 +399,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		return wikipediaMultilingualRef;
 	}
 
-	public void setWikipediaMultilingualRef(TreeMap<String,String> translations, 
+	public void setWikipediaMultilingualRef(Map<String,String> translations, 
 											List<String> targetLanguages,
 											Map<String, Wikipedia> wikipedias) {
-		if ( (targetLanguages != null) && (targetLanguages.size() != 0) ) {	 
+		if ( (targetLanguages != null) && (targetLanguages.size() != 0) ) {	
 			Map<String,String> subTranslations = new TreeMap<String,String>();
 			Map<String,Integer> subArticleCorrespondance = new TreeMap<String,Integer>();
 			for(String targetLanguage : targetLanguages) {
@@ -566,28 +566,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		isSubTerm = sub;
 	}
 
-	public void setProperties(List<Property> properties) {
+	/*public void setProperties(List<Property> properties) {
 		this.properties = properties;
-	}
+	}*/
 
-	public void setRelations(List<Relation> relations, Wikipedia wikipedia) {
-		this.relations = relations;
-		// due to DBPedia terrible quality and for consistency, we make relations also exposed as properties
-		if (relations != null) {
-			for(Relation relation : relations) {
-				Page page = wikipedia.getPageById(relation.getConcept2ID().intValue());
-				if ( (page != null) && (page.exists()) ) {
-					if (page.getTitle() != null) {
-						Property property = new Property(new Integer(wikipediaExternalRef), 
-														relation.getRelationName(), 
-														page.getTitle(), 
-														relation.getTemplateName(), 
-														null);
-						properties.add(property);
-					}
-				}
-			}
-		}
+	public void setStatements(List<Statement> statements, Wikipedia wikipedia) {
+		this.statements = statements;
 	}
 	
 	@Override
@@ -651,7 +635,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
 		//properties = wikipedia.getProperties(wikipediaExternalRef); 
-		//relations = wikipedia.getRelations(wikipediaExternalRef); 
+		//statements = wikipedia.getStatements(wikipediaExternalRef); 
 
 		preferredTerm = candidate.getPreferredTerm();
 		this.lang = lang;
@@ -873,7 +857,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 
 		// properties
-		if (properties != null) {
+		/*if (properties != null) {
 			buffer.append(", \"properties\": [");
 			boolean start = true;
 			for(Property property : properties) {
@@ -884,18 +868,18 @@ public class NerdEntity implements Comparable<NerdEntity> {
 				buffer.append(property.toJson());
 			}
 			buffer.append("]");
-		}
+		}*/
 		
-		// relations
-		if (relations != null) {
-			buffer.append(", \"relations\": [");
+		// statements
+		if (statements != null) {
+			buffer.append(", \"statements\": [");
 			boolean start = true;
-			for(Relation relation : relations) {
+			for(Statement statement : statements) {
 				if (start)
 					start = false;
 				else 
 					buffer.append(", ");
-				buffer.append(relation.toJson());
+				buffer.append(statement.toJson());
 			}
 			buffer.append("]");
 		}

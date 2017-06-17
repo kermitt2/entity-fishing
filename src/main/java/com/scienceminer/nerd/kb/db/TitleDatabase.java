@@ -52,14 +52,13 @@ public class TitleDatabase extends StringIntDatabase {
 	}
 
 	@Override
-	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName());
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 
-		//TreeMap<String, Integer> tmp = new TreeMap<String, Integer>();
 		int nbToAdd = 0;
 		String line = null;
 		Transaction tx = environment.createWriteTransaction();
@@ -74,12 +73,7 @@ public class TitleDatabase extends StringIntDatabase {
 			KBEntry<String,Integer> entry = deserialiseCsvRecord(cri);
 
 			if (entry != null) {				
-				//tmp.put(entry.getKey(), entry.getValue());
-				//}
-			//for (Map.Entry<String, Integer> entry: tmp.entrySet()) {
-			//if (entry != null) {
 				try {
-					//db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
 					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {

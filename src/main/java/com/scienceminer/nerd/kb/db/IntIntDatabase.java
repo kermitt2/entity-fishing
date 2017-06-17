@@ -12,29 +12,13 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-/**
- * A {@link KBDatabase} for associating Integer keys with a Long value object.
- *
- */
+
 public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 
-	/**
-	 * Creates or connects to a database, whose name will match the given {@link KBDatabe.DatabaseType}
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 */
 	public IntIntDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
 	}
 	
-	/**
-	 * Creates or connects to a database with the given name.
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 * @param name the name of the database 
-	 */
 	public IntIntDatabase(KBEnvironment envi, DatabaseType type, String name) {
 		super(envi, type, name);
 	}
@@ -81,14 +65,7 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 		}
 	}
 
-	/**
-	 * Builds the persistent database from a file.
-	 * 
-	 * @param dataFile the file (here a CSV file) containing data to be loaded
-	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
-	 */
-	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");

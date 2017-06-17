@@ -15,11 +15,6 @@ public class LabelIterator implements Iterator<Label> {
     private KBLowerEnvironment env = null;
     private KBIterator iter = null;
 
-    /**
-     * Creates an iterator that will loop through all pages in Wikipedia.
-     *
-     * @param database an active (connected) Wikipedia database.
-     */
     public LabelIterator(KBLowerEnvironment env) {
         this.env = env;
         iter = env.getDbLabel().getIterator();

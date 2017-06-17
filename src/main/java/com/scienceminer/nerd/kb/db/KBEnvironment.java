@@ -86,24 +86,8 @@ public abstract class KBEnvironment {
 		}
 	}
 	
-	/**
-	 * @param sn the name of the desired statistic
-	 * @return the value of the desired statistic
-	 */
 	public abstract Long retrieveStatistic(StatisticName sn);
 
-	/**
-	 * Builds a KBEnvironment, by loading all of the data files stored in the given directory into persistent databases.
-	 * 
-	 * It will not create the environment or any databases unless all of the required files are found in the given directory. 
-	 * 
-	 * It will not delete any existing databases, and will only overwrite them if explicitly specified (even if they are incomplete).
-	 * 
-	 * @param conf a configuration specifying where the databases are to be stored, etc.
-	 * @param overwrite true if existing databases should be overwritten, otherwise false
-	 * @throws IOException if any of the required files cannot be read
-	 * @throws XMLStreamException if the XML dump of wikipedia cannot be parsed
-	 */
 	public abstract void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception;
 
 	protected static File getDataFile(File dataDirectory, String fileName) throws IOException {

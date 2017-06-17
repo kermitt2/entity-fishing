@@ -13,29 +13,12 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-/**
- * A {@link KBDatabase} for associating String keys with an Integer object.
- *
- */
 public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 
-	/**
-	 * Creates or connects to a database, whose name will match the given {@link KBDatabase.DatabaseType}
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 */
 	public StringIntDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
 	}
 	
-	/**
-	 * Creates or connects to a database with the given name.
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 * @param name the name of the database 
-	 */
 	public StringIntDatabase(KBEnvironment envi, DatabaseType type, String name) {
 		super(envi, type, name);
 	}
@@ -47,7 +30,6 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		try (Transaction tx = environment.createReadTransaction()) {
 			cachedData = db.get(tx, bytes(key));
 			if (cachedData != null) {
-				//record = new BigInteger(cachedData).intValue();
 				record = (Integer)KBEnvironment.deserialize(cachedData);
 			}
 		} catch(Exception e) {
@@ -65,7 +47,6 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 			BufferCursor cursor = db.bufferCursor(tx)) {
 			cursor.keyWriteBytes(bytes(key));
 			if (cursor.seekKey()) {
-				//record = new BigInteger(cursor.valBytes()).intValue();
 				record = (Integer)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
@@ -74,32 +55,21 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		return record;
 	}
 	
-	public void add(KBEntry<String,Integer> entry) {
+	/*public void add(KBEntry<String,Integer> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
-			//db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-	/**
-	 * Builds the persistent database from a file.
-	 * 
-	 * @param dataFile the file (here a CSV file) containing data to be loaded
-	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
-	 */
-	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-
-		long bytesRead = 0;
-
 		String line = null;
 		int nbToAdd = 0;
 		Transaction tx = environment.createWriteTransaction();
@@ -110,14 +80,12 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 				nbToAdd = 0;
 				tx = environment.createWriteTransaction();
 			}
-			bytesRead = bytesRead + line.length() + 1;
 
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 			KBEntry<String,Integer> entry = deserialiseCsvRecord(cri);
 
 			if (entry != null) {
 				try {
-					//db.put(tx, bytes(entry.getKey()), BigInteger.valueOf(entry.getValue()).toByteArray());
 					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {

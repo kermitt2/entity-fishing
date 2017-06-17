@@ -15,15 +15,9 @@ import static org.fusesource.lmdbjni.Constants.*;
 public class PageIterator implements Iterator<Page> {
 	private KBLowerEnvironment env = null;
 	private KBIterator iter = null;
-
 	private Page nextPage = null;
 	private PageType type = null;
 
-	/**
-	 * Creates an iterator that will loop through all pages in Wikipedia.
-	 * 
-	 * @param database an active (connected) Wikipedia database.
-	 */
 	public PageIterator(KBLowerEnvironment env) {
 		this.env = env;
 		iter = env.getDbPage().getIterator(); 
@@ -31,13 +25,6 @@ public class PageIterator implements Iterator<Page> {
 		queueNext();
 	}
 
-	/**
-	 * Creates an iterator that will loop through all pages of the given type in Wikipedia.
-	 * 
-	 * @param database an active (connected) Wikipedia database.
-	 * @param pageType the type of page to restrict the iterator to (ARTICLE, CATEGORY, REDIRECT or DISAMBIGUATION_PAGE)
-	 * @throws SQLException if there is a problem with the Wikipedia database.
-	 */
 	public PageIterator(KBLowerEnvironment env, PageType type)  {
 		this.env = env;
 		this.type = type;
@@ -57,10 +44,8 @@ public class PageIterator implements Iterator<Page> {
 	public Page next() {
 		if (nextPage == null) 
 			throw new NoSuchElementException();
-		
 		Page p = nextPage;
 		queueNext();
-		
 		return p;
 	}
 
@@ -88,7 +73,6 @@ public class PageIterator implements Iterator<Page> {
 					/*else 
 						System.out.println("skipped");*/
 				} catch(Exception e) {
-					//Logger.getLogger(PageIterator.class).error("Failed deserialize");
 					e.printStackTrace();
 				}
 			}

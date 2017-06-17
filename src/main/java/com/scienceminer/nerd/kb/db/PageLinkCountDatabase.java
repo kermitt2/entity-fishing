@@ -83,7 +83,7 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 		throw new UnsupportedOperationException();
 	}
 
-	public void loadFromFiles(File linksInFile, File linksOutFile, boolean overwrite) throws IOException  {
+	public void loadFromFiles(File linksInFile, File linksOutFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName() + " database");
@@ -91,15 +91,12 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 		BufferedReader linksInInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksInFile), "UTF-8"));
 		BufferedReader linksOutInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksOutFile), "UTF-8"));
 
-		long bytesRead = 0;
 
 		String inLinkLine = linksInInput.readLine();
-		bytesRead += (inLinkLine.length() + 1);
 		CsvRecordInput linksInRecord = new CsvRecordInput(new ByteArrayInputStream((inLinkLine + "\n").getBytes("UTF-8")));
 		KBEntry<Integer, DbLinkLocationList> inLinkEntry = deserializePageLinkCsvRecord(linksInRecord);
 
 		String outLinkLine = linksOutInput.readLine();
-		bytesRead += (outLinkLine.length() + 1);
 		CsvRecordInput linksOutRecord = new CsvRecordInput(new ByteArrayInputStream((outLinkLine + "\n").getBytes("UTF-8")));
 		KBEntry<Integer, DbLinkLocationList> outLinkEntry = deserializePageLinkCsvRecord(linksOutRecord);
 
@@ -135,7 +132,6 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
 			if (linkCountEntry != null) {
 				try {
-					//b.put(tx, BigInteger.valueOf(linkCountEntry.getKey()).toByteArray(), KBEnvironment.serialize(linkCountEntry.getValue()));
 					db.put(tx, KBEnvironment.serialize(linkCountEntry.getKey()), KBEnvironment.serialize(linkCountEntry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
@@ -146,7 +142,6 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 			if (advanceInLinks) {
 				inLinkLine = linksInInput.readLine();
 				if (inLinkLine != null) {
-					bytesRead += (inLinkLine.length() + 1);
 					linksInRecord = new CsvRecordInput(new ByteArrayInputStream((inLinkLine + "\n").getBytes("UTF-8")));
 					inLinkEntry = deserializePageLinkCsvRecord(linksInRecord);
 				} else {
@@ -157,7 +152,6 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 			if (advanceOutLinks) {
 				outLinkLine = linksOutInput.readLine();
 				if (outLinkLine != null) {
-					bytesRead += (outLinkLine.length() + 1);
 					linksOutRecord = new CsvRecordInput(new ByteArrayInputStream((outLinkLine + "\n").getBytes("UTF-8")));
 					outLinkEntry = deserializePageLinkCsvRecord(linksOutRecord);
 				} else {

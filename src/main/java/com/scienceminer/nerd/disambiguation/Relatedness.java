@@ -302,16 +302,12 @@ public class Relatedness {
 
 	/**
 	 * Given a set of candidate entities extracted from the text, computes which
-	 * one of these are the least ambiguous ones. From this, creates a vector of Wikipedia
+	 * one of these are the least ambiguous ones. From this, creates a list of Wikipedia
 	 * articles representing their senses. This list is computed for a given target candidate
 	 * which has to be excluded.
 	 * 
-	 * @param candidates all the candidates entities
-	 * @param targetCandidate the target candidate
-	 * @param lang the language to be considered
-	 * @return vector of context articles
 	 */
-	public Vector<Article> collectContextTerms(List<NerdCandidate> candidates, 
+	/*public Vector<Article> collectContextTerms(List<NerdCandidate> candidates, 
 											NerdCandidate targetCandidate,
 											String lang) {
 
@@ -337,7 +333,7 @@ public class Relatedness {
 					bestArticle = wikipedia.getArticleByTitle(candidate.getEntity().getRawName());
 					if (bestArticle == null) {
 						//TextProcessor tp = new org.wikipedia.miner.util.text.CaseFolder();
-						bestArticle = wikipedia.getMostLikelyArticle(candidate.getEntity().getRawName());
+						bestArticle = wikipedia.getMostProbableArticle(candidate.getEntity().getRawName());
 					}
 						
 					if (bestArticle != null) {
@@ -348,19 +344,12 @@ public class Relatedness {
 				if (bestSense == -1)
 					continue;
 				if (bestArticle == null) {
-					//bestArticle = wikipedia.getArticleByTitle(bestSense.replace("_", " "));	
 					bestArticle = (Article)wikipedia.getPageById(bestSense);
 				}
 				if (bestArticle == null) 
 					continue;
 				try {
-
-					// if required number of context articles
-					// is reached, break
-					/*if (context.size() >= contextSize) {
-						break;
-					}*/
-					// what is the most likely sense for the given candidate
+					// what is the most probable sense for the given candidate
 					//Sense bestSense = anchor.getSenses().first();
 
 			//		double comonness = bestSense.getProbability();
@@ -379,8 +368,7 @@ public class Relatedness {
 					// from ngrams with one possible meaning
 					// and high keyphrasenesss
 					//if ((anchor.getSenses().size() == 1) && (keyphraseness >= 0.5)) {
-					if (keyphraseness >= 0.4) 
-					{	
+					if (keyphraseness >= 0.4) {	
 						if (context.contains(bestArticle)) {
 							continue;
 						}
@@ -406,7 +394,6 @@ public class Relatedness {
 		// if not enough context was collected
 		//if (context.size() < contextSize) {
 		if (context.size() == 0) { 	
-			// fill up context anchors with most likely mappings
 			for (int i = 0; (i < bestCandidateSenses.size()) && (context.size() < contextSize); i++) {
 				Article sense = bestCandidateSenses.get(i);
 		//		System.out.println("Adding best from ambiguous " + sense);
@@ -415,7 +402,7 @@ public class Relatedness {
 			}
 		}
 		return context;
-	}
+	}*/
 	
 	public Set<Article> collectAllContextTerms(List<NerdCandidate> candidates, String lang) {
 		// vector to store unambiguous context articles
@@ -440,7 +427,7 @@ public class Relatedness {
 				// if required number of context articles
 				// is reached, break
 
-				// what is the most likely sense for the given candidate
+				// what is the most probable sense for the given candidate
 				//Sense bestSense = anchor.getSenses().first();
 
 				//double comonness = bestSense.getProbability();

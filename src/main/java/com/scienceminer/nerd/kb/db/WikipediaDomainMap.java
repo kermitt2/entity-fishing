@@ -26,8 +26,6 @@ import static org.fusesource.lmdbjni.Constants.*;
 /**
  * Persistent mapping between Wikipedia page and GRISP domain taxonomy based on Wikipedia categories.
  * 
- * @author Patrice Lopez
- * 
  */
 public class WikipediaDomainMap { 
     /**
@@ -78,7 +76,6 @@ public class WikipediaDomainMap {
         }
         this.environment.open(this.envFilePath, Constants.NOTLS);
         db = this.environment.openDatabase();
-        //openCache();
     }
 
     public void setWikipedia(Wikipedia wikipedia) {
@@ -97,73 +94,6 @@ public class WikipediaDomainMap {
     public String getLang() {
         return this.lang;
     }
-
-    /**
-     * Open cache for domains
-     */
-    /*public void openCache() {
-        File homeCache = null;
-        ObjectInputStream in = null;
-        try {
-            homeCache = new File(NerdProperties.getInstance().getMapsPath() + "/" + database_name + ".obj");
-        } catch (Exception e) {
-            throw new NerdException(e);
-        }
-        try {
-            if (homeCache.exists()) {
-                FileInputStream fileIn = new FileInputStream(homeCache);
-                in = new ObjectInputStream(fileIn);
-                System.out.println("Opening domain cache from file...");
-                domainsCache = (ConcurrentMap<Integer, int[]>)in.readObject();
-            } else if (domainsCache == null) {
-                domainsCache = new ConcurrentHashMap<Integer, int[]>();
-            }
-        } catch (Exception dbe) {
-            LOGGER.debug("Error when opening the domain map.");
-            throw new NerdException(dbe);
-        } finally {
-            try {
-                if (in != null)
-                    in.close();
-            } catch(IOException e) {
-                LOGGER.debug("Error when closing the domain map.");
-                throw new NerdException(e);
-            }
-        }
-    }*/
-    
-    /**
-     * Close index for domains
-     */
-    /*public void saveCache() {
-        if (domainsCache == null)
-            return;
-        File home = null;
-        ObjectOutputStream out = null;
-        try {
-            home = new File(NerdProperties.getInstance().getMapsPath() + "/" + database_name + ".obj");
-        } catch (Exception e) {
-            throw new NerdException(e);
-        }
-        try {
-            if (home != null) {
-                FileOutputStream fileOut = new FileOutputStream(home);
-                out = new ObjectOutputStream(fileOut);
-                out.writeObject(domainsCache);
-            }
-        } catch(IOException e) {
-            LOGGER.debug("Error when saving the domain map.");
-            throw new NerdException(e);
-        } finally {
-            try {
-                if (out != null)
-                    out.close();
-            } catch(IOException e) {
-                LOGGER.debug("Error when closing the domain map.");
-                throw new NerdException(e);
-            }
-        }
-    }*/
     
     private void loadGrispMapping() throws Exception {
         importDomains();
@@ -374,33 +304,6 @@ System.out.print("\n");*/
         }
         return result;
     }
-
-    // LMDB zero copy version
-    /*public List<String> getDomains2(int pageId) {
-        int[] list = null;
-        {
-            try (Transaction tx = environment.createReadTransaction();
-                BufferCursor cursor = db.bufferCursor(tx)) {
-                cursor.keyWriteBytes(BigInteger.valueOf(pageId).toByteArray());
-                if (cursor.seekKey()) {
-                    list = (int[])KBEnvironment.deserialize(cursor.valBytes());
-                }
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        List<String> result = null;
-        if (list != null) {
-            result = new ArrayList<String>();
-            for(int i=0; i<list.length; i++) {
-                String domain = id2domain.get(new Integer(list[i]));
-                if (domain != null)
-                    result.add(domain);
-            }
-        }
-        return result;
-    }*/
 
     public void close() {
         if (db != null)

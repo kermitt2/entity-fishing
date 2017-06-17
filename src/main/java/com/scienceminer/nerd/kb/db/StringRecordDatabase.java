@@ -13,28 +13,12 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-/**
- * A {@link KBDatabase} for associating String keys with some generic record value object.
- *
- */
 public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Record> {
-	/**
-	 * Creates or connects to a database, whose name will match the given {@link KBDatabase.DatabaseType}
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 */
+
 	public StringRecordDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
 	}
 	
-	/**
-	 * Creates or connects to a database with the given name.
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 * @param name the name of the database 
-	 */
 	public StringRecordDatabase(KBEnvironment envi, DatabaseType type, String name) {
 		super(envi, type, name);
 	}
@@ -71,29 +55,21 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		return record;
 	}
 	
-	public void add(KBEntry<String,Record> entry) {
+	/*public void add(KBEntry<String,Record> entry) {
 		try (Transaction tx = environment.createWriteTransaction()) {
 			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-	/**
-	 * Builds the persistent database from a file.
-	 * 
-	 * @param dataFile the file (here a CSV file) containing data to be loaded
-	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
-	 */
-	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-		long bytesRead = 0;
 
 		String line = null;
 		int nbToAdd = 0;
@@ -105,7 +81,6 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 				nbToAdd = 0;
 				tx = environment.createWriteTransaction();
 			}
-			bytesRead = bytesRead + line.length() + 1;
 
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 			KBEntry<String,Record> entry = deserialiseCsvRecord(cri);

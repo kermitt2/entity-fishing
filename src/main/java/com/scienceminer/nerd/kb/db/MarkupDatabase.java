@@ -27,22 +27,12 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-/**
- * A {@link KBDatababe} for associating page ids with page markup. 
- * 
- */
 public class MarkupDatabase extends KBDatabase<Integer, String> {
 
 	private boolean full = false;
 
 	private enum DumpTag {page, id, text, ignorable};
 
-	/**
-	 * Creates or connects to a database, whose name and type will be {@link KBDatabase.DatabaseType#markup}.
-	 * If full, the complete text content will be indexed, otherwise only the first paragraph
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 */
 	public MarkupDatabase(KBEnvironment env) {
 		super (env, DatabaseType.markup); 
 	}
@@ -70,10 +60,8 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	// using standard LMDB copy mode
 	@Override
 	public String retrieve(Integer key) {
-		//byte[] cachedData = null;
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			//theString = string(db.get(tx, BigInteger.valueOf(key).toByteArray()));
 			theString = string(db.get(tx, KBEnvironment.serialize(key)));
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -88,7 +76,6 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction();
 			BufferCursor cursor = db.bufferCursor(tx)) {
-			//cursor.keyWriteBytes(BigInteger.valueOf(key).toByteArray());
 			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
 				theString = string(cursor.valBytes());

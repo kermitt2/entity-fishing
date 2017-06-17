@@ -5,26 +5,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-//import javax.xml.parsers.ParserConfigurationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.grobid.core.utilities.TextUtilities;
 
 import com.scienceminer.nerd.kb.db.*;
+import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.utilities.NerdConfig;
-
 import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
 import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
-
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import org.xml.sax.SAXException;
-
-//import com.scienceminer.nerd.kb.Property;
-//import com.scienceminer.nerd.kb.Relation;
 
 /**
  * Represent a language specific instance of Wikipedia
@@ -46,7 +40,6 @@ public class Wikipedia {
 	/**
 	 * Initialises a newly created Wikipedia according to the given configuration. 
 	 *  
-	 * @param conf a Nerd configuration 
 	 */
 	public Wikipedia(NerdConfig conf) {
 		this.env = new KBLowerEnvironment(conf);
@@ -65,8 +58,6 @@ public class Wikipedia {
 
 	/**
 	 * Returns the environment that this is connected to
-	 * 
-	 * @return the environment that this is connected to
 	 */
 	public KBLowerEnvironment getEnvironment() {
 		return env;
@@ -89,8 +80,6 @@ public class Wikipedia {
 
 	/**
 	 * Returns the configuration of this wikipedia dump
-	 * 
-	 * @return the configuration of this wikipedia dump
 	 */
 	public NerdConfig getConfig() {
 		return env.getConfiguration();
@@ -99,18 +88,13 @@ public class Wikipedia {
 	/**
 	 * Returns the root Category from which all other categories can be browsed.
 	 * 
-	 * @return the root category
 	 */
 	public Category getRootCategory() {
 		return new Category(env, env.retrieveStatistic(StatisticName.rootCategoryId).intValue());
 	}
 
 	/**
-	 * Returns the Page referenced by the given id. The page can be cast into the appropriate type for 
-	 * more specific functionality. 
-	 *  
-	 * @param id	the id of the Page to retrieve.
-	 * @return the Page referenced by the given id, or null if one does not exist. 
+	 * Returns the Page referenced by the given id. T
 	 */
 	public Page getPageById(int id) {
 		return Page.createPage(env, id);
@@ -128,38 +112,21 @@ public class Wikipedia {
 	}*/
 
 	/**
-	 * Return the list of properties associated to an article id
+	 * Return the list of statements associated to an article id
 	 */
-	/*public List<Property> getProperties(int id) {
+	/*public List<Statement> getStatements(int id) {
 		// get the concept id first
 		String conceptId = env.getDbConceptByPageId().retrieve(id);
 		if (conceptId == null)
 			return null;
 		else
-			return env.getDbProperties().retrieve(conceptId);
-	}*/
-
-	/**
-	 * Return the list of relations associated to an article id
-	 */
-	/*public List<Relation> getRelations(int id) {
-		// get the concept id first
-		String conceptId = env.getDbConceptByPageId().retrieve(id);
-		if (conceptId == null)
-			return null;
-		else
-			return env.getDbRelations().retrieve(conceptId);
+			return env.getDbStatements().retrieve(conceptId);
 	}*/
 
 	/**
 	 * Returns the Article referenced by the given (case sensitive) title. If the title
-	 * matches a redirect, this will be resolved to return the redirect's target.
-	 * <p>
-	 * The given title must be matched exactly to return an article. If you want some more lee-way,
-	 * use getMostLikelyArticle() instead. 
-	 *  
-	 * @param title	the title of an Article (or its redirect).
-	 * @return the Article referenced by the given title, or null if one does not exist
+	 * matches a redirect, this will be resolved to return the final target.
+	 * 
 	 */
 	public Article getArticleByTitle(String title) {
 		if (title == null || title.length() == 0)
@@ -183,11 +150,7 @@ public class Wikipedia {
 
 	/**
 	 * Returns the Category referenced by the given (case sensitive) title. 
-	 * 
-	 * The given title must be matched exactly to return a Category. 
-	 *  
-	 * @param title	the title of an Article (or it's redirect).
-	 * @return the Article referenced by the given title, or null if one does not exist
+	 *
 	 */
 	public Category getCategoryByTitle(String title) {
 		title = title.substring(0,1).toUpperCase() + title.substring(1);
@@ -205,11 +168,7 @@ public class Wikipedia {
 
 	/**
 	 * Returns the Template referenced by the given (case sensitive) title. 
-	 * 
-	 * The given title must be matched exactly to return a Template. 
 	 *  
-	 * @param title the title of a Template.
-	 * @return the Template referenced by the given title, or null if one does not exist
 	 */
 	public Template getTemplateByTitle(String title) {
 		title = title.substring(0,1).toUpperCase() + title.substring(1);
@@ -227,21 +186,9 @@ public class Wikipedia {
 
 
 	/**
-	 * Returns the most likely article for a given term. For example, searching for "tree" will return
-	 * the article "30579: Tree", rather than "30806: Tree (data structure)" or "7770: Christmas tree"
-	 * This is defined by the number of times the term is used as an anchor for links to each of these 
-	 * destinations. 
-	 *  <p>
-	 * An optional text processor (may be null) can be used to alter the way labels are 
-	 * retrieved (e.g. via stemming or case folding) 
-	 * 
-	 * @param term	the term to obtain articles for
-	 * 
-	 * @return the most likely sense of the given term.
-	 * 
-	 * for the given text processor.
+	 * Returns the most probable article for a given term. 
 	 */
-	public Article getMostLikelyArticle(String term){
+	public Article getMostProbableArticle(String term) {
 		Label label = new Label(env, term);
 		if (!label.exists()) 
 			return null;
@@ -253,14 +200,11 @@ public class Wikipedia {
 	 * A convenience method for quickly finding out if the given text is ever used as a label
 	 * in Wikipedia. If this returns false, then all of the getArticle methods will return null or empty sets. 
 	 * 
-	 * @param text the text to search for
-	 * @return true if there is an anchor corresponding to the given text, otherwise false
 	 */
-	public boolean isLabel(String text)  {
+	/*public boolean isLabel(String text)  {
 		DbLabel lbl = env.getDbLabel().retrieve(text); 
-
 		return lbl != null;
-	}
+	}*/
 
 	public Label getLabel(String text)  {
 		return new Label(env, text);
@@ -269,7 +213,6 @@ public class Wikipedia {
 	/**
 	 * Returns an iterator for all pages in the database, in order of ascending ids.
 	 * 
-	 * @return an iterator for all pages in the database, in order of ascending ids.
 	 */
 	public PageIterator getPageIterator() {
 		return new PageIterator(env);
@@ -278,8 +221,6 @@ public class Wikipedia {
 	/**
 	 * Returns an iterator for all pages in the database of the given type, in order of ascending ids.
 	 * 
-	 * @param type the type of page of interest
-	 * @return an iterator for all pages in the database of the given type, in order of ascending ids.
 	 */
 	public PageIterator getPageIterator(PageType type) {
 		return new PageIterator(env, type);		
@@ -288,7 +229,6 @@ public class Wikipedia {
 	/**
 	 * Returns an iterator for all labels in the database, processed according to the given text processor (may be null), in alphabetical order.
 	 * 
-	 * @return an iterator for all labels in the database, processed according to the given text processor (may be null), in alphabetical order.
 	 */
 	public LabelIterator getLabelIterator() {
 		return new LabelIterator(env);
@@ -316,7 +256,7 @@ public class Wikipedia {
 		this.env = null;
 	}
 
-	@Override
+	/*@Override
 	public void finalize() {
         try {
             if (this.env != null)
@@ -328,5 +268,5 @@ public class Wikipedia {
                 LOGGER.warn("Unclosed wikipedia. You may be causing a memory leak.");
             }
         }
-	}
+	}*/
 }

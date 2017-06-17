@@ -1,12 +1,9 @@
 package com.scienceminer.nerd.kb.model;
 
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
-
 import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
-
 import com.scienceminer.nerd.kb.db.*;
-
 import com.scienceminer.nerd.utilities.MediaWikiParser;
 
 /**
@@ -51,35 +48,21 @@ public class Page implements Comparable<Page> {
 	};
 
 	protected int id;
-	protected String wikidataId;
-	protected String title;
+	protected String wikidataId = null;
+	protected String title = null;
 	protected PageType type;
 	protected int depth;
 	protected Double weight = null;
 
-	protected KBLowerEnvironment env;
-	protected boolean detailsSet;
+	protected KBLowerEnvironment env = null;
+	protected boolean detailsSet = false;
 
-	/**
-	 * Initialises a newly created Page so that it represents the page given by <em>id</em> and <em>DbPage</em>.
-	 * 
-	 * This is the most efficient page constructor as no database lookup is required.
-	 * 
-	 * @param	env	an active WikipediaEnvironment
-	 * @param	id	the unique identifier of the page
-	 * @param	pd  details (title, type, etc) of the page	 
-	 */
 	protected Page(KBLowerEnvironment env, int id, DbPage pd)  {
 		this.env = env;
 		this.id = id;
 		setDetails(pd);
 	}
 
-	/**
-	 * Initialises a newly created Page so that it represents the page given by <em>id</em>. 
-	 * @param	env	an active WikipediaEnvironment
-	 * @param	id	the unique identifier of the Wikipedia page
-	 */
 	public Page(KBLowerEnvironment env, int id) {
 		this.env = env;
 		this.id = id;
@@ -89,28 +72,15 @@ public class Page implements Comparable<Page> {
 	public String getWikidataId() {
 		if (!detailsSet) 
 			setDetails();
-
 		return wikidataId;
 	}
 
 	/**
-	 * Initialises a newly created Page so that it represents the page given by a <em>Wikidata ID</em>. 
-	 * 
-	 * @param	env	an active WikipediaEnvironment
-	 * @param	WikidataId	the Wikipedia identifier of the Wikipedia page
-	 */
-	/*public Page(KBEnvironment env, String wikidataId) {
-		this.env = env;
-		this.wikidataId = wikidataId;
-		this.detailsSet = false;
-	}*/
-
-	/**
 	 * @return the database environment
 	 */
-	public KBLowerEnvironment getEnvironment() {
+	/*public KBLowerEnvironment getEnvironment() {
 		return env;
-	}
+	}*/
 
 	/**
 	 *  @return true if a page with this id is defined in Wikipedia, otherwise false.
@@ -118,81 +88,47 @@ public class Page implements Comparable<Page> {
 	public boolean exists() {
 		if (!detailsSet) 
 			setDetails();
-
 		return (type != PageType.invalid);
 	}
 
-	/**
-	 * Sets the weight by which this page will be compared to others.
-	 * 
-	 * @param weight  the weight by which this page will be compared to others.
-	 */
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 
-	/**
-	 * @return the weight by which this page is compared to others. (may be null, in which case the page is compared only via id)
-	 */	
 	public Double getWeight() {
 		return weight;
 	}
 
-
-	/**
-	 * @param p the page to compare to
-	 * @return true if this page has the same id as the given one, otherwise false
-	 */
 	public boolean equals(Page p) {
 		return p.id == id;
 	}
 
 	/**
-	 * Compares this page to another. If weights are defined for both pages, then the page with the larger 
-	 * weight will be considered smaller (and thus appear earlier in sorted lists). Otherwise, the comparison is made based on their ids. 
+	 * Compares this page to another page based on their weights. 
 	 * 
-	 * @param	p	the Page to be compared
-	 * @return	see above.
 	 */
-        @Override
+    @Override
 	public int compareTo(Page p) {
-
 		if (p.id == id)
 			return 0;
-
 		int cmp = 0;
-
 		if (p.weight != null && weight != null && p.weight != weight)
 			cmp =  p.weight.compareTo(weight); 
-
 		if (cmp == 0)
 			cmp = new Integer(id).compareTo(p.id);
-
 		return cmp;
-
 	}
 
-	/**
-	 * Returns a string representation of this page, in the format "<em>id</em>: <em>title</em>".
-	 * 
-	 * @return a string representation of the page
-	 */
-        @Override
+    @Override
 	public String toString()  {
 		String s = getId() + ": " + getTitle();
 		return s;
 	}
 
-	/**
-	 * @return the unique identifier
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the title
-	 */
 	public String getTitle() {
 		if (!detailsSet) 
 			setDetails();
@@ -200,9 +136,6 @@ public class Page implements Comparable<Page> {
 		return title;
 	}
 
-	/**
-	 * @return	the type of the page
-	 */
 	public PageType getType() {
 		if (!detailsSet) 
 			setDetails();
@@ -211,9 +144,9 @@ public class Page implements Comparable<Page> {
 	}
 
 	/**
-	 * @return the length of the shortest path from this page to the root category, or null if no path exists.
+	 * Length of the shortest path from this page to the root category, or null if no path exists.
 	 */
-	public Integer getDepth() {
+	/*public Integer getDepth() {
 		if (!detailsSet) 
 			setDetails();
 
@@ -221,12 +154,12 @@ public class Page implements Comparable<Page> {
 			return null;
 		else
 			return depth;
-	}
+	}*/
 
 	/**
 	 * @return a number representing the height of this page in the category hierarchy, between {@value 0} (as far from the root category as possible) and 1 {the root category}, or null if no path exists 
 	 */
-	public Float getGenerality() {
+	/*public Float getGenerality() {
 		Integer d = getDepth();
 
 		if (d == null)
@@ -235,29 +168,22 @@ public class Page implements Comparable<Page> {
 		int maxDepth = env.retrieveStatistic(StatisticName.maxCategoryDepth).intValue();
 
 		return 1-((float)d/maxDepth);
-	}
+	}*/
 
 	/**
 	 * @return the full content of this page, in mediawiki markup format
 	 */
 	public String getFullMarkup() {
-		String markup = env.getDbMarkupFull().retrieve(id); 
-		return markup;
+		return env.getDbMarkupFull().retrieve(id);
 	}
-
 
 	/**
 	 * Returns the first paragraph from the content of this page, cleaned of all markup except links and 
 	 * basic formating. 
-	 * This generally serves as a more specific definition of the concept or concepts for which this 
-	 * article, disambiguation page or category was written.
 	 * 
-	 * @return the first paragraph on this page.
 	 */
 	public String getFirstParagraphMarkup() {
-		//MediaWikiParser stripper = new MediaWikiParser();
-		String markup = env.getDbMarkup().retrieve(id); 
-		return markup;
+		return env.getDbMarkup().retrieve(id);
 	}
 
 	public static String formatFirstParagraphMarkup(String markup) {
@@ -302,40 +228,27 @@ public class Page implements Comparable<Page> {
 		return markup;
 	}
 
-
 	/**
 	 * Instantiates the appropriate subclass of Page given the supplied parameters
-	 * 
-	 * @param env an active Wikipedia environment
-	 * @param id the id of the page
-	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
 	public static Page createPage(KBLowerEnvironment env, int id)  {
 		DbPage pd = env.getDbPage().retrieve(id); 
-
 		if (pd != null)
 			return createPage(env, id, pd);
 		else {
 			pd = new DbPage("Invalid id or excluded via caching", PageType.invalid.ordinal(), -1);
-
 			return new Page(env, id, pd);
+			//return null;
 		}
 	}
 
 	/**
 	 * Instantiates the appropriate subclass of Page given the supplied parameters
 	 * 
-	 * @param env an active Wikipedia environment
-	 * @param id the id of the page
-	 * @param pd the details of the page
-	 * @return the instantiated page, which can be safely cast as appropriate
 	 */
 	public static Page createPage(KBLowerEnvironment env, int id, DbPage pd) {
-
 		Page p = null;
-
 		PageType type = PageType.values()[pd.getType()];
-
 		switch (type) {
 			case article:
 				p = new Article(env, id, pd);
@@ -360,29 +273,20 @@ public class Page implements Comparable<Page> {
 	}
 
 	private void setDetails()  {
-
-		try {
-			DbPage pd = env.getDbPage().retrieve(id);
-
-			if (pd == null) {
-				throw new Exception();
-			} else {
-				setDetails(pd);
-			}
-		} catch (Exception e) {
+		DbPage pd = env.getDbPage().retrieve(id);
+		if (pd == null) {
 			title = null;
 			type = PageType.invalid;
+		} else {
+			setDetails(pd);
 		}
 	}
 
 	private void setDetails(DbPage pd)  {
-
 		title = pd.getTitle();
 		type = PageType.values()[pd.getType()];
 		depth = pd.getDepth();
-
 		wikidataId = env.getDbConceptByPageId().retrieve(id);
-
 		detailsSet = true;
 	}
 

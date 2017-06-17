@@ -52,19 +52,31 @@ public class KnowledgeBase {
 			return null;
 		else
 			return new Concept(env, wikidataId);
-	}	
+	}
+
+	/**
+	 * Return the page id corresponding to a given concept id and a target lang
+	 */
+	public Integer getPageIdByLang(String wikidataId, String lang) {
+		if (env.getDbConcepts().retrieve(wikidataId) == null) 
+			return null;
+		else {
+			Concept concept = new Concept(env, wikidataId);
+			return concept.getPageIdByLang(lang);
+		}
+	}
 
 	/**
 	 * Return the list of properties associated to a given concept id
 	 */
-	public List<Property> getProperties(String wikidataId) {
+	/*public List<Property> getProperties(String wikidataId) {
 		return env.getDbProperties().retrieve(wikidataId);
-	}
+	}*/
 
 	/**
 	 * Return the list of relations associated to a given concept id
 	 */
-	public List<Relation> getStatements(String wikidataId) {
+	public List<Statement> getStatements(String wikidataId) {
 		return env.getDbStatements().retrieve(wikidataId);
 	}
 }

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.hadoop.*; 
 import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.*;
 
 import org.apache.hadoop.record.*;
 
@@ -40,7 +41,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	public KBUpperEnvironment(NerdConfig conf) {
 		super(conf);
 		// register classes to be serialized
-		//singletonConf.registerClass();*/
+		singletonConf.registerClass(Property.class, Statement.class);
 		initDatabases();
 	}
 	
@@ -68,9 +69,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	@Override
 	protected void initDatabases() {
 		System.out.println("\ninit upper level language independent environment");
-		
-		//KBDatabaseFactory dbFactory = new KBDatabaseFactory(this);
-		
+				
 		databasesByType = new HashMap<DatabaseType, KBDatabase>();
 		
 		dbConcepts = buildConceptDatabase();//new ConceptDatabase(env, DatabaseType.concepts);
@@ -105,53 +104,40 @@ public class KBUpperEnvironment extends KBEnvironment {
 		File wikidata = getDataFile(dataDirectory, "wikidataIds.csv");
 
 		// definition of properties used in Wikidata
-		File wikidataProperties = getDataFile(dataDirectory, "wikidata-properties.json");
+		//File wikidataProperties = getDataFile(dataDirectory, "wikidata-properties.json");
 
-		// the actual list of statemnents in Wikidata
-		File wikidataStatements = getDataFile(dataDirectory, "wikidataStatements.csv");
+		// the actual list of statements in Wikidata with the JSON Wikidata dump file
+		File wikidataStatements = getDataFile(dataDirectory, "latest-all.json.bz2");
 
 		//now load databases
 		File dbDirectory = new File(conf.getDbDirectory());
 		if (!dbDirectory.exists())
 			dbDirectory.mkdirs();
 
-		//System.out.println("Building statistics db");
+		//System.out.println("Building Concept db");
 		dbConcepts.loadFromFile(wikidata, overwrite);
 
 		//System.out.println("Building Properties db");
-		dbProperties.loadFromFile(wikidataProperties, overwrite);
+		dbProperties.loadFromFile(wikidataStatements, overwrite);
 
-		//System.out.println("Building Relations db");
+		//System.out.println("Building Statement db");
 		dbStatements.loadFromFile(wikidataStatements, overwrite);
 		
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
 	}
 
-	/**
-	 * Create a database associating integer id of page with an InfoBox relation (relation to other page)
-	 */
 	private StatementDatabase buildStatementDatabase() {
 		return new StatementDatabase(this);
 	}
 
-	/**
-	 * Create a database associating integer id of page with an InfoBox properties (attribute/value)
-	 */
 	private PropertyDatabase buildPropertyDatabase() {
 		return new PropertyDatabase(this);
 	}
 
-	/**
-	 * Create a database associating integer id of page with an InfoBox properties (attribute/value)
-	 */
 	private ConceptDatabase buildConceptDatabase() {
 		return new ConceptDatabase(this);
 	}
 
-	/**
-	 * @param sn the name of the desired statistic
-	 * @return the value of the desired statistic
-	 */
 	public Long retrieveStatistic(StatisticName sn) {
 		throw new UnsupportedOperationException();
 	}

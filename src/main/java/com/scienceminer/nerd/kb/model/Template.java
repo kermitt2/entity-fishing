@@ -4,12 +4,7 @@ import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 public class Template extends Page {
-	/**
-	 * Initialises a newly created Template so that it represents the template given by <em>id</em>.
-	 * 
-	 * @param env	an active KBLowerEnvironment
-	 * @param id	the unique identifier of the template
-	 */
+
 	public Template(KBLowerEnvironment env, int id) {
 		super(env, id);
 	}

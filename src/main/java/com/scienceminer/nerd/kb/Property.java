@@ -1,117 +1,118 @@
 package com.scienceminer.nerd.kb;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.scienceminer.nerd.kb.db.*;
 
 import com.fasterxml.jackson.core.io.*;
 
 /**
- * Class for representing and exchanging a property associated to a concept.
+ * Class for representing and exchanging a property.
  */
 public class Property implements Serializable { 
 
-    private String attribute = null;
-    private String value = null;
-    private String templateName = null;
-    private Integer conceptId = -1;
-    private Integer valueConcept = null; // this is a concept associated to the value, 
-                                         // for instance a unit in case of measurement
+    // Value type of the property
+    // see https://www.wikidata.org/wiki/Special:ListDatatypes
+    public enum ValueType {
+        STRING      ("string"),
+        TEXT        ("monolingualtext"),
+        ENTITY      ("wikibase-item"),
+        GLOBE_COORDINATE      ("globe-coordinate"),
+        GEO_SHAPE   ("geo-shape"),
+        QUANTITY    ("quantity"),
+        TIME        ("time"),
+        WIKIMEDIA   ("commonsMedia"),
+        TABULAR_DATA   ("tabular-data"),
+        EXTERNAL_ID    ("external-id"),
+        PROPERTY    ("property"),
+        MATH        ("math"),
+        URL         ("url"),
+        UNKOWN      ("unknown");
+
+        private String name;
+
+        private ValueType(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static ValueType fromString(String text) {
+            for (ValueType b : ValueType.values()) {
+                if (b.name.equalsIgnoreCase(text)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+    };
+
+    private String id = null; // e.g. P37
+    private String name = null; 
+    private ValueType valueType = null;
+
     public Property() {}
 
-    public Property(Integer conceptId, String attribute, String value, String template, Integer valueConcept) {
-        this.attribute = attribute;
-        this.conceptId = conceptId;
-        this.value = value;
-        this.templateName = template;
-        this.valueConcept = valueConcept;
+    public Property(String id, String name, ValueType valueType) {
+        this.id = id;
+        this.name = name;
+        this.valueType = valueType;
     }
 
-    public String getAttribute() {
-        return attribute;
+    public String getId() {
+        return this.id;
     }
 
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return this.name;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTemplateName() {
-        return templateName;
+    public ValueType getValueType() {
+        return this.valueType;
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
+    public void setValueType(ValueType valueType) {
+        this.valueType = valueType;
     }
 
-    public Integer getConceptId() {
-        return conceptId;
-    }
-
-    public void setConceptId(Integer conceptId) {
-        this.conceptId = conceptId;
-    }
-
-    public Integer getValueConcept() {
-        return valueConcept;
-    }
-
-    public void setValueConcept(Integer valueConcept) {
-        this.valueConcept = valueConcept;
+    /**
+     * Return the list of statements associated to the property
+     */
+    public List<Statement> getStatements(KBUpperEnvironment env) {
+        return env.getDbStatements().retrieve(id);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(conceptId).append("\t").append(" -> ").append(attribute).append(" -> ").append(value).append("\n");
+        sb.append(id).append("\t").append(" -> ").append(name).append(" -> ").append(valueType).append("\n");
         return sb.toString();
     }
-
-    /*@Override
-    public int compareTo(Object theProp) {
-        Property theProperty = (Property)theProp;
-        if ( (conceptId == theProperty.getConceptId()) &&
-             (attribute.equals(theProperty.getAttribute())) &&
-             (value.equals(theProperty.getValue())) ) {
-                return 0;
-        } else {
-            return -1;
-        }
-    }*/
-
-    /*@Override
-    public void deserialize(final org.apache.hadoop.record.RecordInput _rio_a, final String _rio_tag) throws java.io.IOException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-     public void serialize(final org.apache.hadoop.record.RecordOutput _rio_a, final String _rio_tag)
-        throws java.io.IOException {
-        throw new UnsupportedOperationException();
-    }*/
 
     public String toJson() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder sb = new StringBuilder();
 
-        byte[] encodedAttribute = encoder.quoteAsUTF8(attribute);
-        String outputAttribute = new String(encodedAttribute); 
-        sb.append("{ \"attribute\" : \"" + outputAttribute + "\"");
+        sb.append("{ \"id\" : \"" + id + "\"");
 
-        byte[] encodedValue = encoder.quoteAsUTF8(value);
-        String outputValue = new String(encodedValue); 
-        sb.append(", \"value\" : \"" + outputValue + "\"");
+        byte[] encodedName = encoder.quoteAsUTF8(name);
+        String outputName = new String(encodedName); 
+        sb.append(", \"name\" : \"" + outputName + "\"");
 
-        if (templateName != null) {
-            byte[] encodedTemplate = encoder.quoteAsUTF8(templateName);
-            String outputTemplate = new String(encodedTemplate); 
-            sb.append(", \"template\" : \"" + outputTemplate + "\" }");        
-        }
+        byte[] encodedValueType = encoder.quoteAsUTF8(valueType.getName());
+        String outputValueType = new String(encodedValueType); 
+        sb.append(", \"valueType\" : \"" + outputValueType + "\" }");
 
         return sb.toString();
     }

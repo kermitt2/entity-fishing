@@ -11,13 +11,7 @@ import com.scienceminer.nerd.kb.model.hadoop.*;
  * -> to be replaced by com.scienceminer.nerd.kb.Category
  */
 public class Category extends Page {
-
-	/**
-	 * Initialises a newly created Category so that it represents the category given by <em>id</em>.
-	 * 
-	 * @param env	an active WikipediaEnvironment
-	 * @param id	the unique identifier of the article
-	 */
+	 
 	public Category(KBLowerEnvironment env, int id) {
 		super(env, id);
 	}
@@ -27,10 +21,7 @@ public class Category extends Page {
 	}
 	
 	/**
-	 * Returns an array of Categories that this category belongs to. These are the categories 
-	 * that are linked to at the bottom of any Wikipedia category. 
-	 * 
-	 * @return	an array of Categories (sorted by id)
+	 * Returns an array of Categories that this category belongs to.
 	 */
 	public Category[] getParentCategories() {
 		DbIntList tmpParents = env.getDbCategoryParents().retrieve(id); 
@@ -49,10 +40,7 @@ public class Category extends Page {
 	}
 	
 	/**
-	 * Returns an array of Categories that this category contains. These are the categories 
-	 * that are presented in alphabetical lists in any Wikipedia category. 
-	 * 
-	 * @return	an array of Categories, sorted by id
+	 * Returns an array of Categories that this category contains. 
 	 */
 	public Category[] getChildCategories() {
 		DbIntList tmpChildCats = env.getDbChildCategories().retrieve(id); 
@@ -73,8 +61,6 @@ public class Category extends Page {
 	/**
 	 * Returns true if the argument {@link Article} is a child of this category, otherwise false
 	 * 
-	 * @param article the article of interest
-	 * @return	true if the argument article is a child of this category, otherwise false
 	 */
 	public boolean contains(Article article) {
 
@@ -88,7 +74,6 @@ public class Category extends Page {
 	/**
 	 * Returns an array of {@link Article Articles} that belong to this category.  
 	 * 
-	 * @return	an array of Articles, sorted by id
 	 */
 	public Article[] getChildArticles() {
 

@@ -3,7 +3,7 @@
 # path to the LMDB data
 dbDirectory: data/wikipedia/db-kb
 
-# path to the compiled wikidata files
+# path to the wikidata files (dump, list of properties, mapping)
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
 dataDirectory: /mnt/data/wikipedia/latest/wikidata/

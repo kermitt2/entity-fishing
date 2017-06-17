@@ -1,0 +1,79 @@
+package com.scienceminer.nerd.kb;
+
+import java.io.Serializable;
+
+import com.scienceminer.nerd.kb.db.*;
+
+import com.fasterxml.jackson.core.io.*;
+
+/**
+ * Class for representing and exchanging a semantic statement about an entity.
+ */
+public class Statement implements Serializable { 
+
+    private String propertyId = null;
+    private String conceptId = null;
+    private String value = null;
+
+    public Statement() {}
+
+    public Statement(String wikidataId, String propertyId, String value) {
+        this.conceptId = wikidataId;
+        this.propertyId = propertyId;
+        this.value = value;
+    }
+
+    public String getConceptId() {
+        return this.conceptId;
+    }
+
+    public void setConceptId(String id) {
+        this.conceptId = id;
+    }
+
+    public String getPropertyId() {
+        return this.propertyId;
+    }
+
+    public void setPropertyId(String propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(conceptId).append("\t").append(" -> ")
+            .append(propertyId)
+            .append(" -> ").append(value);
+        return sb.toString();
+    }
+
+    public String toJson() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{ \"conceptId\" : \"" + conceptId + "\"");
+
+        if (propertyId != null) {
+            sb.append(", \"propertyId\" : \"" + propertyId + "\"");
+        }
+
+        if (value != null) {
+            byte[] encodedValue = encoder.quoteAsUTF8(value);
+            String outputValue = new String(encodedValue); 
+            sb.append(", \"value\" : " + value);        
+        }
+
+        sb.append("}");   
+
+        return sb.toString();
+    }
+}

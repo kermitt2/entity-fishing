@@ -13,28 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
-/**
- * A {@link KBDatabase} for associating Integer keys with some generic record value type.
- *
- */
 public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Record> {
-	/**
-	 * Creates or connects to a database, whose name will match the given {@link KBDatabe.DatabaseType}
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 */
+
 	public IntRecordDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
 	}
 	
-	/**
-	 * Creates or connects to a database with the given name.
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 * @param name the name of the database 
-	 */
 	public IntRecordDatabase(KBEnvironment envi, DatabaseType type, String name) {
 		super(envi, type, name);
 	}
@@ -72,23 +56,7 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 		return record;
 	}
 
-	protected void add(KBEntry<Integer,Record> entry) {
-		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-			tx.commit();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Builds the persistent database from a file.
-	 * 
-	 * @param dataFile the file (here a CSV file) containing data to be loaded
-	 * @param overwrite true if the existing database should be overwritten, otherwise false
-	 * @throws IOException if there is a problem reading or deserialising the given data file.
-	 */
-	public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
+	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
@@ -110,7 +78,7 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 			try {
 				KBEntry<Integer,Record> entry = deserialiseCsvRecord(cri);
-				if ( (entry != null) && (filterEntry(entry) != null) ) {
+				if (entry != null) {
 					try {
 						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 						nbToAdd++;

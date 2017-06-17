@@ -234,7 +234,6 @@ for(NerdCandidate cand : cands) {
 }*/
 		//if (!shortText && !nerdQuery.getNbest())
 		//	pruneOverlap(candidates);
-
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 		List<NerdEntity> result = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -278,7 +277,6 @@ for(NerdCandidate cand : cands) {
 				}
 			}
 		}
-
 		Collections.sort(result);
 		//if (!shortText && !nerdQuery.getNbest())
 		if (!nerdQuery.getNbest()) {

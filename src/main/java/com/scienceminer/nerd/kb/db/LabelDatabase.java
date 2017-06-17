@@ -22,21 +22,10 @@ import static org.fusesource.lmdbjni.Constants.*;
  */
 public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 
-	/**
-	 * Creates or connects to a database, whose name and type will be {@link KBDatabase.DatabaseType#label}. 
-	 * This will index label statistics according to their raw, unprocessed texts. 
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 */
 	public LabelDatabase(KBEnvironment env) {
 		super(env, DatabaseType.label);
 	}
 
-	/**
-	 * Retrieves the label statistics associated with the given text key. 
-	 * 
-	 * @return true if the database has been prepared for use, otherwise false
-	 */
 	@Override
 	public DbLabel retrieve(String key) {
 		return super.retrieve(key);
