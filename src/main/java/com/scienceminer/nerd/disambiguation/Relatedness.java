@@ -65,14 +65,7 @@ public class Relatedness {
 	}
 
 	/**
-	 * Given a Wikipedia article and a set of context article collected from the
-	 * same text, this method computes the article's average semantic
-	 * relatedness to the context
-	 * 
-	 * @param article
-	 * @param contextArticles
-	 * @param lang the language to be considered
-	 * @return double value between 0 and 1 measuring the semantic relatedness
+	 * Calculate the relatedness of a candidate with a context
 	 */
 	public double getRelatednessTo(NerdCandidate candidate, NerdContext context, String lang) {
 		double totalRelatedness = 0.0;
@@ -120,6 +113,9 @@ public class Relatedness {
 		return totalRelatedness / totalComparisons;
 	}
 
+	/**
+	 * Calculate the relatedness between two articles
+	 */
 	public double getRelatedness(Article art1, Article art2, String lang) throws Exception {
 		comparisonsRequested++;
 		
@@ -186,7 +182,6 @@ public class Relatedness {
 		NerdConfig conf = wikipedia.getConfig();
 
 		epr = setPageLinkFeatures(epr, Direction.In, wikipedia);
-
 		if (conf.getUseLinkOut()) 	
 			epr = setPageLinkFeatures(epr, Direction.Out, wikipedia);
 
@@ -196,7 +191,9 @@ public class Relatedness {
 		return epr;
 	}
 
-	// following Milne & Witten relatedness measurement as implemented in WikipediaMiner
+	/**
+	 *  Following Milne anf Witten relatedness measurement as implemented in WikipediaMiner
+	 */
 	private EntityPairRelatedness setPageLinkFeatures(EntityPairRelatedness epr, Direction dir, Wikipedia wikipedia) {
 		if (epr.getArticleA().getId() == epr.getArticleB().getId()) {
 			// nothing to do
@@ -454,7 +451,7 @@ public class Relatedness {
 	}
 	
 	/**
-     *  Get a Wikipedia-miner context from a text based on the unambiguous labels and the 
+     *  Get a context from a text based on the unambiguous labels and the 
 	 *  certain disambiguated entities. 
 	 *  	 
 	 */	

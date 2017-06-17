@@ -76,13 +76,6 @@ public class Page implements Comparable<Page> {
 	}
 
 	/**
-	 * @return the database environment
-	 */
-	/*public KBLowerEnvironment getEnvironment() {
-		return env;
-	}*/
-
-	/**
 	 *  @return true if a page with this id is defined in Wikipedia, otherwise false.
 	 */
 	public boolean exists() {
@@ -142,33 +135,6 @@ public class Page implements Comparable<Page> {
 
 		return type;
 	}
-
-	/**
-	 * Length of the shortest path from this page to the root category, or null if no path exists.
-	 */
-	/*public Integer getDepth() {
-		if (!detailsSet) 
-			setDetails();
-
-		if (depth < 0)
-			return null;
-		else
-			return depth;
-	}*/
-
-	/**
-	 * @return a number representing the height of this page in the category hierarchy, between {@value 0} (as far from the root category as possible) and 1 {the root category}, or null if no path exists 
-	 */
-	/*public Float getGenerality() {
-		Integer d = getDepth();
-
-		if (d == null)
-			return null;
-
-		int maxDepth = env.retrieveStatistic(StatisticName.maxCategoryDepth).intValue();
-
-		return 1-((float)d/maxDepth);
-	}*/
 
 	/**
 	 * @return the full content of this page, in mediawiki markup format

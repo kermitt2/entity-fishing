@@ -8,7 +8,7 @@ import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
 import java.util.*;
 
 /**
- * A term or phrase that has been used to refer to one or more {@link Article Articles} in Wikipedia. 
+ * A term (anchor, title or redirection) used to refer to articles in Wikipedia. 
  * 
  */
 public class Label {
@@ -33,9 +33,6 @@ public class Label {
 		return "\"" + text + "\""; 
 	}
 	
-	/**
-	 * @return the text used to refer to concepts
-	 */
 	public String getText() {
 		return text;
 	}

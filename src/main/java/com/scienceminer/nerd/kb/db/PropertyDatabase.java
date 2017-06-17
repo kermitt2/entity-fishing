@@ -50,7 +50,7 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 	 */
 	@Override 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
-System.out.println("input file: " + dataFile.getPath());
+//System.out.println("input file: " + dataFile.getPath());
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");

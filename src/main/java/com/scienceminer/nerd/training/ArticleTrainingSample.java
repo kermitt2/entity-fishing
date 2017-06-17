@@ -35,8 +35,6 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 	public ArticleTrainingSample(Wikipedia wikipedia, int size, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {
 		super();
 		this.wikipedia = wikipedia;
-		//build(wikipedia, size, criterias, exclude);
-		//DecimalFormat df = new DecimalFormat("#0.00 %");
 		double lastWarningProgress = 0;
 		PageIterator ite = wikipedia.getPageIterator(PageType.article);
 		try {

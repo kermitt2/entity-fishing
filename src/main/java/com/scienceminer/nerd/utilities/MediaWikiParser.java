@@ -40,7 +40,7 @@ public class MediaWikiParser {
 				markup = article.getFullMarkup();
 				break;
 		}
-				
+		
 		markup = stripAllButInternalLinksAndEmphasis(markup, null);
 		markup = stripNonArticleInternalLinks(markup, null);
 		
