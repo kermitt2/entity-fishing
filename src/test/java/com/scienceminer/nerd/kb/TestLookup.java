@@ -81,6 +81,20 @@ public class TestLookup {
 		}
 	}
 
+	@Test
+	public void testConcept() {
+		try {
+			Concept concept = knowledgeBase.getConcept("Q18498");
+			if (concept != null) {
+				System.out.println(concept.getId());
+				System.out.println("en pageId:" + concept.getPageIdByLang("en"));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/*@Test
 	public void testProperties() {
 		try {

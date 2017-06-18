@@ -138,7 +138,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	private String lang = null;
 
-	//private List<Property> properties = null;
 	private List<Statement> statements = null;
 
 	public NerdEntity() {
@@ -566,10 +565,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		isSubTerm = sub;
 	}
 
-	/*public void setProperties(List<Property> properties) {
-		this.properties = properties;
-	}*/
-
 	public void setStatements(List<Statement> statements, Wikipedia wikipedia) {
 		this.statements = statements;
 	}
@@ -615,6 +610,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		wikidataId = candidate.getWikidataId();
 
 		Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang);
+		KnowledgeBase kb = Lexicon.getInstance().getKnowledgeBase();
 		Page page = wikipedia.getPageById(wikipediaExternalRef);
 		Definition definition = new Definition();
 		try {
@@ -634,8 +630,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		selectionScore = candidate.getSelectionScore();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
-		//properties = wikipedia.getProperties(wikipediaExternalRef); 
-		//statements = wikipedia.getStatements(wikipediaExternalRef); 
+		statements = kb.getStatements(wikidataId); 
 
 		preferredTerm = candidate.getPreferredTerm();
 		this.lang = lang;
@@ -855,20 +850,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	       }
 			buffer.append(" ] ");
 		}
-
-		// properties
-		/*if (properties != null) {
-			buffer.append(", \"properties\": [");
-			boolean start = true;
-			for(Property property : properties) {
-				if (start)
-					start = false;
-				else 
-					buffer.append(", ");
-				buffer.append(property.toJson());
-			}
-			buffer.append("]");
-		}*/
 		
 		// statements
 		if (statements != null) {

@@ -28,7 +28,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			cachedData = db.get(tx, bytes(key));
+			cachedData = db.get(tx, KBEnvironment.serialize(key));
 			if (cachedData != null) {
 				record = (Record)KBEnvironment.deserialize(cachedData);
 			}
@@ -45,7 +45,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();
 			BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(bytes(key));
+			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
 				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
 			}
@@ -87,7 +87,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 
 			if (entry != null) {
 				try {
-					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					//System.out.println("Invalid input line: " + line);

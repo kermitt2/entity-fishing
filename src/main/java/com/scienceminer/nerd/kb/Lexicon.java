@@ -95,7 +95,6 @@ public class Lexicon {
 			//LOGGER.info("Initiating Wikipedia DBs");
 			wikipedias = new HashMap<String, Wikipedia>(); 
             wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
-            //freeBaseTypeMaps = new HashMap<String,FreeBaseTypeMap>();
 
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
 			Wikipedia wikipedia_en = new Wikipedia(conf);

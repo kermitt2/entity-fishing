@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.hadoop.*; 
 import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.*;
 
 import org.apache.hadoop.record.*;
 
@@ -51,7 +52,7 @@ public class KBLowerEnvironment extends KBEnvironment {
 	public KBLowerEnvironment(NerdConfig conf) {
 		super(conf);
 		// register classes to be serialized
-		singletonConf.registerClass(DbPage.class, DbIntList.class, DbTranslations.class);
+		//singletonConf.registerClass(DbPage.class, DbIntList.class, DbTranslations.class);
 		initDatabases();
 	}
 
@@ -203,14 +204,10 @@ public class KBLowerEnvironment extends KBEnvironment {
 		File articleParents = getDataFile(dataDirectory, "articleParents.csv");
 		File childCategories = getDataFile(dataDirectory, "childCategories.csv");
 		File childArticles = getDataFile(dataDirectory, "childArticles.csv");
-		
 		File redirectTargetBySource = getDataFile(dataDirectory, "redirectTargetsBySource.csv");
 		File redirectSourcesByTarget = getDataFile(dataDirectory, "redirectSourcesByTarget.csv");
-		
 		File wikidata = getDataFile(dataDirectory, "wikidata.txt");
-
 		File translations = getDataFile(dataDirectory, "translations.csv");
-
 		File markup = getMarkupDataFile(dataDirectory);
 		
 		//now load databases

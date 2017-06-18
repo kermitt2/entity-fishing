@@ -67,7 +67,7 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 			int total = 0;
 			int distinct = 0;
 
-			for (DbLinkLocation ll:outLinkEntry.getValue().getLinkLocations()) {
+			for (DbLinkLocation ll : outLinkEntry.getValue().getLinkLocations()) {
 				distinct++;
 				total += ll.getSentenceIndexes().size();
 			}

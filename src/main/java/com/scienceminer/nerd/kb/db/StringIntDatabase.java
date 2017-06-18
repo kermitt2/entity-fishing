@@ -28,7 +28,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		byte[] cachedData = null;
 		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			cachedData = db.get(tx, bytes(key));
+			cachedData = db.get(tx, KBEnvironment.serialize(key));
 			if (cachedData != null) {
 				record = (Integer)KBEnvironment.deserialize(cachedData);
 			}
@@ -45,7 +45,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		Integer record = null;
 		try (Transaction tx = environment.createReadTransaction();
 			BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(bytes(key));
+			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
 				record = (Integer)KBEnvironment.deserialize(cursor.valBytes());
 			}
@@ -86,7 +86,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 
 			if (entry != null) {
 				try {
-					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

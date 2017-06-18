@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.hadoop.*; 
 import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.*;
 
 import org.apache.hadoop.record.*;
 
@@ -63,7 +64,7 @@ public abstract class KBEnvironment {
 	public KBEnvironment(NerdConfig conf) {
 		this.conf = conf;
 		// register classes to be serialized
-		//singletonConf.registerClass(DbPage.class, DbIntList.class, DbTranslations.class);
+		singletonConf.registerClass(DbPage.class, DbIntList.class, DbTranslations.class, Property.class, Statement.class);
 		//initDatabases();
 	}
 

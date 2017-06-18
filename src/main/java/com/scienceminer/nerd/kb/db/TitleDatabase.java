@@ -47,7 +47,6 @@ public class TitleDatabase extends StringIntDatabase {
 		if ( (dbType == DatabaseType.templatesByTitle) && (pageType != PageType.template) )
 			return null;
 
-
 		return new KBEntry<String,Integer>(p.getTitle(), id);
 	}
 
@@ -74,7 +73,7 @@ public class TitleDatabase extends StringIntDatabase {
 
 			if (entry != null) {				
 				try {
-					db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

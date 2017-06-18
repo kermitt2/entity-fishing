@@ -911,22 +911,22 @@ console.log("process pdf...");
 		}    
         piece += '<tr><td><p><b>Categories</b>: ' + localHtml + '</p></td></tr>';
 
-        // properties
-        var properties = entity.properties;
-		if ((properties != null) && (properties.length > 0)) {
+        // statements
+        var statements = entity.statements;
+		if ((statements != null) && (statements.length > 0)) {
 			localHtml = "";
-			for(var i in properties) {
-				var property = properties[i];
-				if (property.template) {
-					localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
+			for(var i in statements) {
+				var statement = statements[i];
+				if (statement.propertyId) {
+					localHtml += "<tr><td>" + statement.propertyId + "</td><td>" + statement.value + "</td></tr>"
 				}
 			}
-			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Properties: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
+			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Statements: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
 						localHtml+"</table></div></td></tr></table></td></tr>";
 		}
 
 		// relations
-		var relations = entity.relations;
+		/*var relations = entity.relations;
 		if ((relations != null) && (relations.length > 0)) {
 			localHtml = "";
 			for(var i in relations) {
@@ -937,7 +937,7 @@ console.log("process pdf...");
 			}
 			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Relations: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
 						localHtml+"</table></div></td></tr></table></td></tr>";
-		}
+		}*/
 
 		piece += '</table>';
 
@@ -1452,16 +1452,16 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 			}
 
 			// properties and relations if taxon
-			var properties = getProperties(wikipedia);
-			if ((properties != null) && (properties.length > 0)) {
+			var statements = getStatements(wikipedia);
+			if ((statements != null) && (statements.length > 0)) {
 				var localHtml = "";
-				for(var i in properties) {
-					var property = properties[i];
-					if (property.template && (property.template == 'Taxobox')) {
-						localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
+				for(var i in statements) {
+					var statement = statements[i];
+					if (statement.propertyId) { //} && (property.template == 'Taxobox')) {
+						localHtml += "<tr><td>" + statement.propertyId + "</td><td>" + property.value + "</td></tr>"
 					}
 				}
-				string += "<p><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
+				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
 			}
 
 			if ( (wikipedia != null) || (wikidataId != null) ) {
@@ -1519,21 +1519,21 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 			return null;
 	}
 
-	function getProperties(identifier) {
+	function getStatements(identifier) {
 		var localEntity = conceptMap[identifier];
 		if (localEntity != null) {
-			return localEntity.properties;
+			return localEntity.statements;
 		} else
 			return null;
 	}
 
-	function getRelations(identifier) {
+	/*function getRelations(identifier) {
 		var localEntity = conceptMap[identifier];
 		if (localEntity != null) {
 			return localEntity.relations;
 		} else
 			return null;
-	}
+	}*/
 
 	function viewEntity() {
 		var localID = $(this).attr('id');
@@ -1637,17 +1637,17 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				string += "<p><div class='wiky_preview_area2'>"+localHtml+"</div></p>";
 			}
 
-			// properties and relations if taxon
-			var properties = getProperties(wikipedia);
-			if ((properties != null) && (properties.length > 0)) {
+			// statements
+			var statements = getStatements(wikipedia);
+			if ((statements != null) && (statements.length > 0)) {
 				var localHtml = "";
-				for(var i in properties) {
-					var property = properties[i];
-					if (property.template && (property.template == 'Taxobox')) {
-						localHtml += "<tr><td>" + property.attribute + "</td><td>" + property.value + "</td></tr>"
+				for(var i in statements) {
+					var statement = statements[i];
+					if (statement.propertyId){ //} && (statement.template == 'Taxobox')) {
+						localHtml += "<tr><td>" + statement.propertyId + "</td><td>" + statement.value + "</td></tr>"
 					}
 				}
-				string += "<p><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
+				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
 			}
 
 			if (wikipedia != null) {

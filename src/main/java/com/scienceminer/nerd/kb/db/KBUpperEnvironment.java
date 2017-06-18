@@ -41,7 +41,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	public KBUpperEnvironment(NerdConfig conf) {
 		super(conf);
 		// register classes to be serialized
-		singletonConf.registerClass(Property.class, Statement.class);
+		//singletonConf.registerClass(Property.class, Statement.class);
 		initDatabases();
 	}
 	

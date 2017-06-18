@@ -60,9 +60,13 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	// using standard LMDB copy mode
 	@Override
 	public String retrieve(Integer key) {
+		byte[] cachedData = null;
 		String theString = null;
 		try (Transaction tx = environment.createReadTransaction()) {
-			theString = string(db.get(tx, KBEnvironment.serialize(key)));
+			cachedData = db.get(tx, KBEnvironment.serialize(key));
+			if (cachedData != null) {
+				theString = (String)KBEnvironment.deserialize(cachedData);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -78,7 +82,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 			BufferCursor cursor = db.bufferCursor(tx)) {
 			cursor.keyWriteBytes(KBEnvironment.serialize(key));
 			if (cursor.seekKey()) {
-				theString = string(cursor.valBytes());
+				theString = (String)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -163,7 +167,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 							if (currMarkup.trim().length() > 5) {
 								try {
 									//db.put(tx, BigInteger.valueOf(currId).toByteArray(), bytes(currMarkup));
-									db.put(tx, KBEnvironment.serialize(currId), bytes(currMarkup));
+									db.put(tx, KBEnvironment.serialize(currId), KBEnvironment.serialize(currMarkup));
 									nbToAdd++;
 								} catch(Exception e) {
 									System.out.println("Markup addition failed: " + currId + " / " + currMarkup);

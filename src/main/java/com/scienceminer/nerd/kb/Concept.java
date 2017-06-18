@@ -37,13 +37,6 @@ public class Concept {
 	}
 
 	/**
-	 * Return the list of properties associated to the concept
-	 */
-	/*public List<Property> getProperties() {
-		return env.getDbProperties().retrieve(wikidataId);
-	}*/
-
-	/**
 	 * Return the list of statements associated to the concept
 	 */
 	public List<Statement> getStatements() {
