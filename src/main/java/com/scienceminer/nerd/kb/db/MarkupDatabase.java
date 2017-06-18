@@ -2,6 +2,7 @@ package com.scienceminer.nerd.kb.db;
 
 import java.io.*;
 
+import org.codehaus.plexus.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +28,10 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
+/**
+ * A {@link KBDatabase} for associating page ids with page markup.
+ * 
+ */
 public class MarkupDatabase extends KBDatabase<Integer, String> {
 
 	private boolean full = false;
@@ -97,8 +102,9 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	 * @param overwrite true if the existing database should be overwritten, otherwise false
 	 */
 	public void loadFromXmlFile(File dataFile, boolean overwrite) throws Exception  {
-		if (isLoaded && !overwrite)
+		if (dataFile == null || (isLoaded && !overwrite))
 			return;
+
 		System.out.println("Loading " + getName() + " database");
 
 		Integer currId = null;
