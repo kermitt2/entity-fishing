@@ -1,24 +1,23 @@
 package com.scienceminer.nerd.kb.db;
 
 import org.apache.hadoop.record.CsvRecordInput;
-import org.apache.hadoop.record.Record;
-
-import java.io.*;
-
+import org.fusesource.lmdbjni.BufferCursor;
+import org.fusesource.lmdbjni.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.utilities.*;
+import java.io.*;
 
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import static org.fusesource.lmdbjni.Constants.bytes;
 
 public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Record> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringRecordDatabase.class);
 
 	public StringRecordDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
 	}
-	
+
 	public StringRecordDatabase(KBEnvironment envi, DatabaseType type, String name) {
 		super(envi, type, name);
 	}
@@ -50,7 +49,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+            LOGGER.error("Cannot retrieve key " + key, e);
 		}
 		return record;
 	}
@@ -60,14 +59,15 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 			tx.commit();
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Cannot add entry (" + entry.getKey() + ", " + entry.getValue() + ")", e);
 		}
 	}*/
 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-		if (isLoaded && !overwrite)
+		if (dataFile == null || (isLoaded && !overwrite))
 			return;
-		System.out.println("Loading " + name + " database");
+		
+        LOGGER.info("Loading " + name + " database");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 

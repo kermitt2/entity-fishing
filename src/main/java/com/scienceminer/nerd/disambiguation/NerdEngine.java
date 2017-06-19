@@ -121,9 +121,10 @@ public class NerdEngine {
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
 		boolean shortTextVal = false;
-
+		
+		//TODO: these tests should be moved up in one place and one time 
 		if ((text == null) && (shortText == null)) {
-			LOGGER.info("Cannot parse the text, because it is null.");
+			LOGGER.warn("Cannot parse the text, because it is null.");
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) {
@@ -140,7 +141,6 @@ public class NerdEngine {
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) {
-			System.out.println("The length of the text to be processed is 0.");
 			LOGGER.info("The length of the text to be parsed is 0.");
 			return null;
 		}

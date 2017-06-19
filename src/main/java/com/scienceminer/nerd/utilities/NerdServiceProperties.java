@@ -79,11 +79,8 @@ public class NerdServiceProperties {
 	/**
 	 * Creates a new {@link NerdServiceProperties} object, initializes it and
 	 * returns it. {@inheritDoc #NerdServiceProperties()} First checks to find
-	 * the Nerd home folder by resolving the given context. When no context
-	 * properties exist, The detection will be given to
-	 * {@link NerdProperties#detectNerdHomePath()}.
+	 * the Nerd home folder by resolving the given context.
 	 * 
-	 * @return
 	 */
 	protected static synchronized NerdServiceProperties getNewInstance() {
 		LOGGER.debug("Start NerdServiceProperties.getNewInstance");
@@ -106,8 +103,7 @@ public class NerdServiceProperties {
 	}
 
 	/**
-	 * @param props
-	 *            the props to set
+	 * @param pProps the props to set
 	 */
 	protected static void setProps(Properties pProps) {
 		props = pProps;
@@ -263,8 +259,7 @@ public class NerdServiceProperties {
 	 *            value to replace
 	 * @throws IOException
 	 */
-	public static void updatePropertyFile(String pKey, String pValue)
-			throws IOException {
+	public static void updatePropertyFile(String pKey, String pValue) throws IOException {
 		NerdProperties.updatePropertyFile(getNerdPropertiesPath(), pKey,
 				pValue);
 	}

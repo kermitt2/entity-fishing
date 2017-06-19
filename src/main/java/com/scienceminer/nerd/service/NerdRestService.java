@@ -1,349 +1,232 @@
 package com.scienceminer.nerd.service;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.util.List; 
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
-import javax.ws.rs.core.UriInfo;
-
-import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.Lexicon;
+import com.scienceminer.nerd.utilities.NerdServiceProperties;
+import com.sun.jersey.multipart.FormDataParam;
+import com.sun.jersey.spi.resource.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.jersey.multipart.FormDataParam;
-import com.sun.jersey.spi.resource.Singleton;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.io.InputStream;
 
 /**
- * 
  * RESTful service for the NERD system.
  *
  * @author Patrice
- *
  */
-
 @Singleton
-@Path(NerdPaths.PATH_NERD)
+@Path(NerdPaths.ROOT)
 public class NerdRestService implements NerdPaths {
-	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestService.class);
 
-	private static final String SHA1 = "sha1";
-	private static final String QUERY = "query";
-	private static final String XML = "xml";
-	private static final String NERD = "nerd";
-	private static final String TEXT = "text"; 
-	private static final String TERM = "term"; 
-	private static final String ID = "id"; 
-	private static final String FILE = "file"; 
-	private static final String LANG = "lang"; 
-	private static final String ONLY_NER = "onlyNER";
-	private static final String NBEST = "nbest";
-	private static final String SENTENCE = "sentence";
-	private static final String FORMAT = "format";
-	private static final String CUSTOMISATION = "customisation";
+    private static final String SHA1 = "authToken";
+    private static final String NAME = "name";
+    private static final String PROFILE = "profile";
+    private static final String VALUE = "value";
+    private static final String QUERY = "query";
+    private static final String XML = "xml";
+    private static final String NERD = "nerd";
+    private static final String TEXT = "text";
+    private static final String TERM = "term";
+    private static final String ID = "id";
+    private static final String FILE = "file";
+    private static final String LANG = "lang";
+    private static final String ONLY_NER = "onlyNER";
+    private static final String NBEST = "nbest";
+    private static final String SENTENCE = "sentence";
+    private static final String FORMAT = "format";
+    private static final String CUSTOMISATION = "customisation";
 
-	public NerdRestService() {
-		LOGGER.info("Init Servlet NerdRestService.");
-		NerdServiceProperties.getInstance();
-		//Utilities.initGrobid();
-		LOGGER.info("Init of Servlet NerdRestService finished.");
-		LOGGER.info("Init lexicon and KB resources.");
-		Lexicon.getInstance();
-		LOGGER.info("Init lexicon and KB resources finished.");
-	}
+    public NerdRestService() {
+        LOGGER.info("Init Servlet NerdRestService.");
+        NerdServiceProperties.getInstance();
+        LOGGER.info("Init of Servlet NerdRestService finished.");
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessGeneric#isAlive()
-	 */
-	@Path(NerdPaths.PATH_IS_ALIVE)
-	@Produces(MediaType.TEXT_PLAIN)
-	@GET
-	public Response isAlive() {
-		return NerdRestProcessGeneric.isAlive();
-	}
+        LOGGER.info("Init lexicon and KB resources.");
+        Lexicon.getInstance();
+        LOGGER.info("Init lexicon and KB resources finished.");
+    }
 
-	/**
-	 * 
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessGeneric#getDescription_html(UriInfo)
-	 */
-	@Produces(MediaType.TEXT_HTML)
-	@GET
-	@Path(NERD)
-	public Response getDescription_html(@Context UriInfo uriInfo) {
-		return NerdRestProcessGeneric.getDescription_html(uriInfo);
-	}
+    /**
+     * @see com.scienceminer.nerd.service.NerdRestProcessGeneric#isAlive()
+     */
+    @GET
+    @Path(NerdPaths.IS_ALIVE)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response isAlive() {
+        return NerdRestProcessGeneric.isAlive();
+    }
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#getAdminParams(String)
-	 */
-	@Path(PATH_ADMIN)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_HTML)
-	@POST
-	public Response getAdmin_htmlPost(@FormParam(SHA1) String sha1) {
-		return NerdRestProcessAdmin.getAdminParams(sha1);
-	}
+    /**
+     * @see com.scienceminer.nerd.service.NerdRestProcessGeneric#getDescriptionAsHtml(UriInfo)
+     */
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    @Path(NERD)
+    public Response getDescription_html(@Context UriInfo uriInfo) {
+        return NerdRestProcessGeneric.getDescriptionAsHtml(uriInfo);
+    }
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#getAdminParams(String)
-	 */
-	@Path(PATH_ADMIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
-	@Produces(MediaType.TEXT_HTML)
-	@GET
-	public Response getAdmin_htmlGet(@QueryParam(SHA1) String sha1) {
-		return NerdRestProcessAdmin.getAdminParams(sha1);
-	}
+    /**
+     * Sentence Segmentation
+     **/
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#processSHA1(String)
-	 */
-	@Path(PATH_SHA1)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
-	@POST
-	public Response processSHA1Post(@FormParam(SHA1) String sha1) {
-		return NerdRestProcessAdmin.processSHA1(sha1);
-	}
+    @GET
+    @Path(SEGMENTATION)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processSentenceSegmentationGet(@QueryParam(TEXT) String text) {
+        return NerdRestProcessString.processSentenceSegmentation(text);
+    }
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#processSHA1(String)
-	 */
-	@Path(PATH_SHA1)
-	//@Consumes(MediaType.TEXT_PLAIN)
-	@Produces(MediaType.TEXT_PLAIN)
-	@GET
-	public Response processSHA1Get(@QueryParam(SHA1) String sha1) {
-		return NerdRestProcessAdmin.processSHA1(sha1);
-	}
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#getAllPropertiesValues(String)
-	 */
-	@Path(PATH_ALL_PROPS)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
-	@POST
-	public Response getAllPropertiesValuesPost(@FormParam(SHA1) String sha1) {
-		return NerdRestProcessAdmin.getAllPropertiesValues(sha1);
-	}
+    @POST
+    @Path(SEGMENTATION)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response processSentenceSegmentationPost(@FormDataParam(TEXT) String text) {
+        return NerdRestProcessString.processSentenceSegmentation(text);
+    }
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#getAllPropertiesValues(String)
-	 */
-	@Path(PATH_ALL_PROPS)
-	//@Consumes(MediaType.TEXT_PLAIN)
-	@Produces(MediaType.TEXT_PLAIN)
-	@GET
-	public Response getAllPropertiesValuesGet(@QueryParam(SHA1) String sha1) {
-		return NerdRestProcessAdmin.getAllPropertiesValues(sha1);
-	}
+    /** Language Identification **/
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#changePropertyValue(String)
-	 */
-	@Path(PATH_CHANGE_PROPERTY_VALUE)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
-	@POST
-	public Response changePropertyValuePost(@FormParam(XML) String xml) {
-		return NerdRestProcessAdmin.changePropertyValue(xml);
-	}
+    /**
+     * @see com.scienceminer.nerd.service.NerdRestProcessString#processLanguageIdentification(String)
+     */
+    @GET
+    @Path(LANGUAGE)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processLanguageIdentificationGet(@QueryParam(TEXT) String text) {
+        return NerdRestProcessString.processLanguageIdentification(text);
+    }
 
-	/**
-	 * @see com.scienceminer.nerd.service.process.NerdRestProcessAdmin#changePropertyValue(String)
-	 */
-	@Path(PATH_CHANGE_PROPERTY_VALUE)
-	@Consumes(MediaType.TEXT_PLAIN)
-	@Produces(MediaType.TEXT_PLAIN)
-	@GET
-	public Response changePropertyValueGet(@QueryParam(XML) String xml) {
-		return NerdRestProcessAdmin.changePropertyValue(xml);
-	}
+    /**
+     * @see com.scienceminer.nerd.service.NerdRestProcessString#processLanguageIdentification(String)
+     */
+    @POST
+    @Path(LANGUAGE)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response processLanguageIdentificationPost(@FormDataParam(TEXT) String text) {
+        return NerdRestProcessString.processLanguageIdentification(text);
+    }
 
-	@POST
-	@Path(PATH_NERD_QUERY)
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processQueryGet(@FormDataParam(QUERY) String query,
-									@FormDataParam(FILE) InputStream inputStream) {
-		if (inputStream != null) {
-			return NerdRestProcessFile.processQueryPDFFile(query, inputStream);
-		} else {
-			return NerdRestProcessQuery.processQuery(query);
-		}
-	}
+    @POST
+    @Path(DISAMBIGUATE)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processQueryJson(@FormDataParam(QUERY) String query,
+                                     @FormDataParam(FILE) InputStream inputStream) {
+        if (inputStream != null) {
+            return NerdRestProcessFile.processQueryAndPdfFile(query, inputStream);
+        } else {
+            return NerdRestProcessQuery.processQuery(query);
+        }
+    }
 
-	/**
-	 * @see com.scienceminer.nerd.service.NerdRestProcessString#processLIdText(String)
-	 */
-	@GET
-	@Path(PATH_LID)	
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processLIdText(@QueryParam(TEXT) String text) {
-		return NerdRestProcessString.processLIdText(text);        
-	}
-	
-	/**
-	 * @see com.scienceminer.nerd.service.NerdRestProcessString#processLIdText(String)
-	 */
-	@Path(PATH_LID)
-	@POST
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processLIdText_post(@QueryParam(TEXT) String text) {
-		return NerdRestProcessString.processLIdText(text);        
-	}
-	
-	/**
-	 */
-	@GET
-	@Path(PATH_SENTENCE_SEGMENTATION)	
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processSentenceSegmentation(@QueryParam(TEXT) String text) {
-		return NerdRestProcessString.processSentenceSegmentation(text);        
-	}
+    @POST
+    @Path(DISAMBIGUATE)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response processQueryXml(@FormDataParam(QUERY) String query,
+                                    @FormDataParam(FILE) InputStream inputStream) {
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
 
-	/**
-	 */
-	@Path(PATH_SENTENCE_SEGMENTATION)
-	@POST
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processSentenceSegmentation_post(@QueryParam(TEXT) String text) {
-		return NerdRestProcessString.processSentenceSegmentation(text);        
-	}
-	
-	/**
-	 */
-	@GET
-	@Path(PATH_NER_CUSTOMISATIONS)	
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processNerdCustomisations() {
-		return NerdRestCustomisation.processNerdCustomisations();        
-	}
-	
-	/**
-	 */
-	@GET
-	@Path(PATH_NER_CUSTOMISATION+"/{name}")	
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processNerdCustomisation(@PathParam("name") String name) {
-		return NerdRestCustomisation.processNerdCustomisation(name);        
-	}
-	
-	/**
-	 */
-	@PUT
-	@Path("createNERDCustomisation/{name}")	
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processCreateNerdCustomisation(@PathParam("name") String name, String profile) {
-		return NerdRestCustomisation.processCreateNerdCustomisation(name, profile);        
-	}
 
-	/**
-	 */
-	@POST
-	@Path("createNERDCustomisation/{name}")
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processCreateNerdCustomisation_post(@PathParam("name") String name, String profile) {
-		return NerdRestCustomisation.processCreateNerdCustomisation(name, profile);        
-	}
+    /**
+     * Admin REST API
+     **/
 
-	/**
-	 */
-	@PUT
-	@Path(PATH_NER_EXTEND_CUSTOMISATION+"/{name}")	
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processExtendNerdCustomisation(@PathParam("name") String name, String profile) {
-		return NerdRestCustomisation.processExtendNerdCustomisation(name, profile);        
-	}
+    @Path(ADMIN)
+    @Produces(MediaType.TEXT_HTML)
+    @GET
+    public Response getAdmin_htmlGet(@QueryParam(SHA1) String sha1) {
+        return NerdRestProcessAdmin.getAdminParams(sha1);
+    }
 
-	/**
-	 */
-	@POST
-	@Path(PATH_NER_EXTEND_CUSTOMISATION+"/{name}")
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processExtendNerdCustomisation_post(@PathParam("name") String name, String profile) {
-		return NerdRestCustomisation.processExtendNerdCustomisation(name, profile);        
-	}
+    @Path(ADMIN_PROPERTIES)
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response getAllProperties(@QueryParam(SHA1) String sha1) {
+        return NerdRestProcessAdmin.getAllPropertiesValues(sha1);
+    }
 
-	/**
-	 */
-	@Path(PATH_NER_DELETE_CUSTOMISATION+"/{name}")
-	@DELETE
-	public Response processDeleteNerdCustomisation(@PathParam("name") String name) {
-		return NerdRestCustomisation.processDeleteNerdCustomisation(name);        
-	}	
-	
-	/**
-	 */
-	/*@Path(PATH_NER_TERM_VECTOR+"/{name}")
-	@DELETE
-	public Response processWeigthedTermVector(@PathParam("name") String name) {
-		return NerdRestCustomisation.processDeleteNerdCustomisation(name);        
-	}*/
-	
-	/*@POST
-	@Path(PATH_ERD_TERMS)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response processWeigthedTermVectorPost(@QueryParam(TEXT) String text, 
-									@DefaultValue("false") @QueryParam(ONLY_NER) boolean onlyNER,
-									@DefaultValue("false") @QueryParam(NBEST) boolean nbest,
-									@DefaultValue("JSON") @QueryParam(FORMAT) String format,
-									@DefaultValue("") @QueryParam(CUSTOMISATION) String customisation) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestProcessString.processWeigthedTermVector(text, 
-												onlyNER, 	// onlyNER 
-												nbest, 		// nbest
-												form, // output format
-												customisation); 	// field customisation
-	}
-	*/
+    @Path(ADMIN + "/property/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response getProperty(@QueryParam(SHA1) String sha1, @PathParam(NAME) String propertyName) {
+        return NerdRestProcessAdmin.getProperty(sha1, propertyName);
+    }
 
-	@GET
-	@Path(PATH_KB_CONCEPT)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response getConceptInformation(@QueryParam(ID) String identifier, 
-									@DefaultValue("en") @QueryParam(LANG) String lang, 
-									@DefaultValue("json") @QueryParam(FORMAT) String format) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestKB.getConceptInfo(identifier, lang, form); 	// field customisation
-	}
-	
-	@GET
-	@Path(PATH_KB_TERM_LOOKUP)
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response getTermLookup(@QueryParam(TERM) String term, 
-									@DefaultValue("en") @QueryParam(LANG) String lang, 
-									@DefaultValue("json") @QueryParam(FORMAT) String format) {
-		NerdRestUtils.Format form = null;
-		if ( (format != null) && (format.length() > 0) ) {
-			format = format.toUpperCase();
-			form = NerdRestUtils.Format.valueOf(format);
-		}
-		return NerdRestKB.getTermLookup(term, lang, form); 	// field customisation
-	}
+
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(ADMIN + "/property/{name}")
+    @PUT
+    public Response updateProperty(@QueryParam(SHA1) String sha1,
+                                   @PathParam(NAME) String propertyName,
+                                   @FormDataParam(VALUE) String newValue) {
+        return NerdRestProcessAdmin.changePropertyValue(sha1, propertyName, newValue);
+    }
+
+
+    @Path(KB + "/" + CONCEPT + "/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response getConceptInformation(@PathParam(ID) String identifier,
+                                          @DefaultValue("en") @QueryParam(LANG) String lang) {
+        return NerdRestKB.getConceptInfo(identifier, lang);
+    }
+
+    @GET
+    @Path(LOOKUP + "/" + TERM + "/{term}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTermLookup(@PathParam(TERM) String term,
+                                  @DefaultValue("en") @QueryParam(LANG) String lang) {
+        return NerdRestKB.getTermLookup(term, lang);
+    }
+
+
+    @GET
+    @Path(CUSTOMISATIONS)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomisations() {
+        return NerdRestCustomisation.processNerdCustomisations();
+    }
+
+    @GET
+    @Path(CUSTOMISATION + "/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomisation(@PathParam(NAME) String name) {
+        return NerdRestCustomisation.processNerdCustomisation(name);
+    }
+
+    @PUT
+    @Path(CUSTOMISATION + "/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response updateCustomisation(@PathParam(NAME) String name, @FormDataParam(VALUE) String newContent) {
+        return NerdRestCustomisation.updateCustomisation(name, newContent);
+    }
+
+    @POST
+    @Path(CUSTOMISATIONS)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response addCustomisation(@FormDataParam(NAME) String name, @FormDataParam(VALUE) String content) {
+        return NerdRestCustomisation.createNewCustomisation(name, content);
+    }
+
+
+    @Path(CUSTOMISATION + "/{name}")
+    @DELETE
+    public Response processDeleteNerdCustomisation(@PathParam(NAME) String name) {
+        return NerdRestCustomisation.processDeleteNerdCustomisation(name);
+    }
 
 }

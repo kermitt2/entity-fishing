@@ -1,9 +1,7 @@
 package com.scienceminer.nerd.kb.model;
 
-import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
-import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
+import com.scienceminer.nerd.kb.db.KBLowerEnvironment;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
-import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.utilities.MediaWikiParser;
 
 /**

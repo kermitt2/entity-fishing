@@ -1,5 +1,9 @@
 package com.scienceminer.nerd.utilities;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -48,6 +52,18 @@ public class NerdPropertiesUtil {
 		}
 		gbdProperties.append(XmlUtils.endTag("properties"));
 		return gbdProperties.toString();
+	}
+
+	public static String getAllPropertiesListJson() {
+		StringWriter sw = new StringWriter();
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapper.writeValue(sw, getAllPropertiesList());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return sw.toString();
 	}
 
 }

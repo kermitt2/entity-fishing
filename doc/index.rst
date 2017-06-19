@@ -13,9 +13,7 @@
    :titlesonly:
 
    overview.rst
-
    console.rst
-
    restAPI.rst
 
 
