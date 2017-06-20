@@ -1266,8 +1266,7 @@ var nerd = (function($) {
 				if (identifier && (conceptMap[identifier] == null)) {
 					$.ajax({
 					  	type: 'GET',
-					  	url: 'service/KBConcept',
-					  	data: { id : identifier, lang : lang },
+					  	url: 'service/kb/concept/'+identifier+'?lang='+lang,
 					  	success: function(result) { conceptMap[result.wikipediaExternalRef] = result; },
 					  	dataType: 'json'
 					});
@@ -1743,12 +1742,12 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 
 	// query for text XOR shortText content
 	var queryTemplate = { "text" : "", "shortText" : "", "termVector" : [], "language" : { "lang" : "en" }, "entities" : [], "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
-						  "nbest" : false, "sentence" : false, "format" : "JSON",
+						  "nbest" : false, "sentence" : false,
  						  "customisation" : "generic" };
 
  	// query + PDF
 	var queryTemplate2 = { "language" : { "lang" : "en" }, "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
-						  "nbest" : false, "format" : "JSON",
+						  "nbest" : false, 
  						  "customisation" : "generic" };
 
  	// term lookup
