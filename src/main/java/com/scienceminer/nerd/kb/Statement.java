@@ -83,7 +83,10 @@ public class Statement implements Serializable {
         if (value != null) {
             byte[] encodedValue = encoder.quoteAsUTF8(value);
             String outputValue = new String(encodedValue); 
-            sb.append(", \"value\" : " + value);        
+            if (value.startsWith("Q"))
+                sb.append(", \"value\" : \"" + value + "\"");
+            else
+                sb.append(", \"value\" : " + value);   
         }
 
         sb.append("}");   

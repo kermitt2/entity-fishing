@@ -77,7 +77,7 @@ public class KnowledgeBase {
 	 * Return the list of relations associated to a given concept id
 	 */
 	public List<Statement> getStatements(String wikidataId) {
-		System.out.println("get statements for: " + wikidataId);
+		//System.out.println("get statements for: " + wikidataId);
 		List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
 		//if (statements != null)
 		//	System.out.println(statements.size() + " statements: ");
