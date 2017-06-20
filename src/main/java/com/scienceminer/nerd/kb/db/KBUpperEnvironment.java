@@ -114,7 +114,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 		if (!dbDirectory.exists())
 			dbDirectory.mkdirs();
 
-		//System.out.println("Building Concept db");
+		//System.out.println("Building Concept db");                                                     	
 		dbConcepts.loadFromFile(wikidata, overwrite);
 
 		//System.out.println("Building Properties db");

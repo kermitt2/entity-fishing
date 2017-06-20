@@ -12,6 +12,7 @@ import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -55,6 +56,9 @@ public class TitleDatabase extends StringIntDatabase {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName());
+
+		if (dataFile == null)
+			throw new NerdResourceException("Resource file not found");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 

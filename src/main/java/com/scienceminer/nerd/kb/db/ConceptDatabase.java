@@ -20,6 +20,7 @@ import com.scienceminer.nerd.utilities.*;
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 
 public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 
@@ -37,6 +38,8 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 //System.out.println("isLoaded: " + isLoaded);
 		if (isLoaded && !overwrite)
 			return;
+		if (dataFile == null)
+			throw new NerdResourceException("Concept dump file not found");
 		System.out.println("Loading " + name + " database");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));

@@ -34,7 +34,6 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
  * 
  * REST service to access data in the knowledge base
  * 
- * 
  */
 public class NerdRestKB {
 
@@ -50,7 +49,7 @@ public class NerdRestKB {
 	 *
 	 *  @return a response object containing the information related to the identified concept.
 	 */
-	public static Response getConceptInfo(String id, String lang, NerdRestUtils.Format format) {
+	public static Response getConceptInfo(String id, String lang) {
 		//LOGGER.debug(methodLogIn());       
 
 		Response response = null;
@@ -180,7 +179,7 @@ public class NerdRestKB {
 	 *
 	 *  @return a response object containing the concept information related to the term.
 	 */
-	public static Response getTermLookup(String term, String lang, NerdRestUtils.Format format) {
+	public static Response getTermLookup(String term, String lang) {
 		//LOGGER.debug(methodLogIn());       
 
 		Response response = null;

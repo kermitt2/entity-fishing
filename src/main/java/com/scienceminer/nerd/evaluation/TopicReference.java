@@ -32,7 +32,6 @@ public class TopicReference implements Comparable<TopicReference>{
 	 * 
 	 * @param label the label from which the reference was mined
 	 * @param position the location (start and end character indices) from which this reference was mined
-	 * @throws SQLException if there is a problem with the Wikipedia database that the label was obtained from
 	 */
 	public TopicReference(Label label, OffsetPosition position) {
 		this.label = label;

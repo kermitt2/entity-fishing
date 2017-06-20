@@ -6,6 +6,9 @@ import java.util.regex.*;
 import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.Statement;
 
+/**
+ * Semantic filter on entities with criteria expressed on the statements of the entity.
+ */
 public class Filter {
 
 	private Property property = null;

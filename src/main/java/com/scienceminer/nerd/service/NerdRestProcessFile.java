@@ -1,44 +1,37 @@
 package com.scienceminer.nerd.service;
 
-import java.util.*;
-import java.io.*;
-
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.HttpHeaders; 
-
-import com.scienceminer.nerd.utilities.NerdRestUtils;
-import com.scienceminer.nerd.utilities.NerdServiceProperties;
-import com.scienceminer.nerd.utilities.NerdProperties;
-
-import org.grobid.core.lang.Language;
-import org.grobid.core.exceptions.GrobidException;
+import com.scienceminer.nerd.disambiguation.*;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.data.Entity;
+import org.grobid.core.document.Document;
+import org.grobid.core.document.DocumentPiece;
+import org.grobid.core.document.DocumentSource;
+import org.grobid.core.engines.Engine;
+import org.grobid.core.engines.FullTextParser;
+import org.grobid.core.engines.SegmentationLabel;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
-import org.grobid.core.engines.*;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
+import org.grobid.core.factory.GrobidFactory;
+import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.lang.Language;
-import org.grobid.core.document.*;
-import org.grobid.core.utilities.*;
-import org.grobid.core.data.*;
-
-import com.scienceminer.nerd.disambiguation.*;
-
+import org.grobid.core.utilities.IOUtilities;
+import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.io.*;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import java.io.File;
+import java.io.InputStream;
+import java.util.*;
 
-import static com.scienceminer.nerd.service.NerdRestProcessQuery.parseQuery;
+import static org.grobid.core.lang.Language.*;
 
 /**
  * 
@@ -46,9 +39,6 @@ import static com.scienceminer.nerd.service.NerdRestProcessQuery.parseQuery;
  */
 public class NerdRestProcessFile {
 
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
 
 	/**
@@ -63,7 +53,7 @@ public class NerdRestProcessFile {
 	 * @return a response query object containing the structured representation of
 	 *         the enriched and disambiguated query.
 	 */
-	public static Response processQueryPDFFile(String theQuery, final InputStream inputStream) {
+	public static Response processQueryAndPdfFile(String theQuery, final InputStream inputStream) {
 		LOGGER.debug(methodLogIn());
 		Response response = null;		
 		File originFile = null;
@@ -80,7 +70,7 @@ public class NerdRestProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-				NerdQuery nerdQuery = parseQuery(theQuery);
+				NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
 				
 				if ( (nerdQuery == null) || 
 				  	 ( (nerdQuery.getText() != null) && (nerdQuery.getText().trim().length() > 1) ) ||
@@ -90,30 +80,23 @@ public class NerdRestProcessFile {
 				LOGGER.debug(">> set query object...");
 								
 				// language identification
-				// test first if the language is already indicated in the query structure	
+				// if the language is already indicated in the query structure it's used with conf = 1.0,
+				// if not, it's detected. If detection doesn't goes well, 406 is returned
 				Language lang = nerdQuery.getLanguage();
-				if ( (nerdQuery.getLanguage() == null) || (nerdQuery.getLanguage().getLang() == null) ) {
+				if ( !nerdQuery.hasValidLanguage() ) {
 					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
 					lang = languageUtilities.runLanguageId(nerdQuery.getText());
 					nerdQuery.setLanguage(lang);
 					LOGGER.debug(">> identified language: " + lang.toString());
 				} else {
-					System.out.println("lang is already defined");
 					lang.setConf(1.0);
 					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
 				}
 				
-				if ( (lang == null) || (lang.getLang() == null) ) {
+				if (!nerdQuery.hasValidLanguage()) {
 					response = Response.status(Status.NOT_ACCEPTABLE).build();
 					LOGGER.debug(methodLogOut());  
 					return response;
-				} else {
-					String theLang = lang.getLang();
-					if ( !theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr") ) {
-						response = Response.status(Status.NOT_ACCEPTABLE).build();
-						LOGGER.debug(methodLogOut());  
-						return response;
-					}
 				}
 				
 				// entities originally from the query are marked as such
@@ -142,7 +125,6 @@ public class NerdRestProcessFile {
 					doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
 					
 		            // here we process the relevant textual content of the document
-
 		            // for refining the process based on structures, we need to filter
 		            // segment of interest (e.g. header, body, annex) and possibly apply 
 		            // the corresponding model to further filter by structure types 
@@ -371,12 +353,13 @@ System.out.println(newEntities.size() + " nerd entities");
 
 				long end = System.currentTimeMillis();
 				nerdQuery.setRuntime(end - start);
-				System.out.println("runtime: " + (end - start));
+				LOGGER.info("runtime: " + (end - start));
 				Collections.sort(nerdQuery.getEntities());
-				String json = nerdQuery.toJSONCompactClean(doc);
-				
-				// TBD: output in the resulting json also page info from the doc object as in GROBID
 
+				String json = nerdQuery.toJSONCompactClean(doc);
+
+
+				// TBD: output in the resulting json also page info from the doc object as in GROBID
 				if (json == null) {
 					response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 				}
@@ -510,17 +493,11 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
 		return processLayoutTokenSequence(tokenizationParts, documentContext, workingQuery);
 	}
 
-	/**
-	 * @return
-	 */
 	public static String methodLogIn() {
 		return ">> " + NerdRestProcessFile.class.getName() + "." + 
 			Thread.currentThread().getStackTrace()[1].getMethodName();
 	}
 
-	/**
-	 * @return
-	 */
 	public static String methodLogOut() {
 		return "<< " + NerdRestProcessFile.class.getName() + "." + 
 			Thread.currentThread().getStackTrace()[1].getMethodName();

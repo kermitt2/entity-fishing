@@ -46,74 +46,34 @@
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/nerd/nerd.js</url-pattern>
     </servlet-mapping>
-
+    
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/sha1</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/allProperties</url-pattern>
+        <url-pattern>/language</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/changePropertyValue</url-pattern>
+        <url-pattern>/disambiguate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/nerd</url-pattern>
+        <url-pattern>/segmenter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processLIdText</url-pattern>
+        <url-pattern>/customisations</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processNERDText</url-pattern>
+        <url-pattern>/customisation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processNERDQuery</url-pattern>
-    </servlet-mapping>
-    <!--servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processERDText</url-pattern>
-    </servlet-mapping-->
-    <!--servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processERDQuery</url-pattern>
-    </servlet-mapping-->
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processERDQueryTerms</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processERDTerms</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processERDSearchQuery</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/processSentenceSegmentation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/NERDCustomisations</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/createNERDCustomisation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/extendNERDCustomisation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/KBConcept</url-pattern>
+        <url-pattern>/kb/concept/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>

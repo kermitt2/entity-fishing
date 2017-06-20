@@ -15,6 +15,7 @@ import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.*;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 //import com.scienceminer.nerd.kb.Property.ValueType;
 
 import com.fasterxml.jackson.core.*;
@@ -49,6 +50,9 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
+
+		if (dataFile == null)
+			throw new NerdResourceException("Wikidata dump file not found");
 
 		// open file
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(dataFile));

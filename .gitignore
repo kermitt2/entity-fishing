@@ -1,3 +1,4 @@
+doc/_build*
 target
 .DS_Store
 .project

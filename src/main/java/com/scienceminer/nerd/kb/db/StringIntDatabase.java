@@ -9,6 +9,7 @@ import org.apache.hadoop.record.Record;
 import java.io.*;
 
 import com.scienceminer.nerd.utilities.*;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -68,6 +69,9 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
+
+		if (dataFile == null)
+			throw new NerdResourceException("Resource file not found");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 		String line = null;

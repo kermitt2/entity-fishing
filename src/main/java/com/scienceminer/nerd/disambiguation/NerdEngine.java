@@ -120,9 +120,10 @@ public class NerdEngine {
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
 		boolean shortTextVal = false;
-
+		
+		//TODO: these tests should be moved up in one place and one time 
 		if ((text == null) && (shortText == null)) {
-			LOGGER.info("Cannot parse the text, because it is null.");
+			LOGGER.warn("Cannot parse the text, because it is null.");
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) {
@@ -139,7 +140,6 @@ public class NerdEngine {
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) {
-			System.out.println("The length of the text to be processed is 0.");
 			LOGGER.info("The length of the text to be parsed is 0.");
 			return null;
 		}
@@ -429,7 +429,7 @@ for(NerdCandidate cand : cands) {
 	/**
 	 * Ranking of the candidates for a set of mentions from a contextual text
 	 */
-	private void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context) {
+	public void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context) {
 		// we rank candidates for each entity mention
 //relatedness.resetCache(lang);
 
@@ -443,7 +443,7 @@ for(NerdCandidate cand : cands) {
 		}
 
 		// we create/augment the context for the disambiguation
-		 NerdContext localContext = null;
+		NerdContext localContext = null;
 		try {
 			 localContext = relatedness.getContext(candidates, userEntities, lang);
 			 // merge context

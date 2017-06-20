@@ -13,6 +13,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.trainer.LabelStat;
 
 import com.scienceminer.nerd.exceptions.*;
 
@@ -394,8 +395,11 @@ System.out.println("get context for this content");
 		return arffBuilder;
 	}
 
-	public Result<Integer> test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception{
-		Result<Integer> r = new Result<Integer>();
+	public LabelStat test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception{
+	//public Result<Integer> test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception {
+		LabelStat stats = null;
+
+		/*Result<Integer> r = new Result<Integer>();
 		
 		double worstRecall = 1;
 		double worstPrecision = 1;
@@ -423,14 +427,15 @@ System.out.println("get context for this content");
 
 		System.out.println("worstR:" + worstRecall + ", worstP:" + worstPrecision);
 		System.out.println("tested:" + articlesTested + ", perfectR:" + perfectRecall + ", perfectP:" + perfectPrecision);
-		
-		return r;
+		*/
+		return stats;
 	}
 
-	private Result<Integer> testArticle(Article article, NerdRanker ranker) throws Exception {
-		System.out.println(" - testing " + article);
+	private LabelStat testArticle(Article article, NerdRanker ranker) throws Exception {
 
-		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
+		LabelStat stats = null;
+
+		/*List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
 		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
@@ -506,7 +511,9 @@ System.out.println("get context for this content");
 		Result<Integer> result = new Result<Integer>(disambiguatedLinks, goldStandard);
 		System.out.println("   " + result);
 
-		return result;
+		return result;*/
+
+		return stats;
 	}
 
 }

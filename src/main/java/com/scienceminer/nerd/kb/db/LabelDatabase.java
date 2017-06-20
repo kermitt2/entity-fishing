@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
 import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
-
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.utilities.*;
 
 import org.fusesource.lmdbjni.*;

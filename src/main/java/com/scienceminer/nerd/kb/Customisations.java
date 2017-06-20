@@ -38,25 +38,19 @@ public final class Customisations {
     // map a customisation id to the json definition
     private ConcurrentMap<String, String> cDB = null;
 
-	public static Customisations getInstance() throws Exception {
+	public static Customisations getInstance() {
         if (instance == null) {
 			getNewInstance();
         }
         return instance;
     }
 
-	/**
-     * Creates a new instance.
-     */
-	private static synchronized void getNewInstance() throws Exception {
+	private static synchronized void getNewInstance() {
 		LOGGER.debug("Get new instance of Customisation");		
 		instance = new Customisations();
 	}
 	
-	/**
-     * Hidden constructor
-     */
-    public Customisations() {		
+    public Customisations() {
 	}
 
 	/**
@@ -155,8 +149,7 @@ public final class Customisations {
 			}
 		}
 		catch(Exception e) {
-			LOGGER.debug("error, invalid retrieved DBObject.");
-			e.printStackTrace();
+			LOGGER.debug("error, invalid retrieved DBObject.", e );
 			message = "Server error";
 		} 
 		return message;
@@ -166,8 +159,10 @@ public final class Customisations {
 		String message = null;
 		
 		try {
-			if (cDB == null)
+			if (cDB == null) {
 				open();
+			}
+
 			if (cDB.get(name) == null) {
                 cDB.put(name, profile);
                 message = "OK";
@@ -175,8 +170,7 @@ public final class Customisations {
 				message = "Customisation already created.";
             }
 		} catch (Exception e) {
-            LOGGER.debug("Cannot create customisation.");
-			e.printStackTrace();
+            LOGGER.debug("Cannot create customisation.", e);
 			message = "Server error";
         } finally {
         	save();
@@ -184,18 +178,24 @@ public final class Customisations {
 		return message;
 	}
 
-	public String extendCustomisation(String name, String profile) {
+	public String updateCustomisation(String name, String profile) {
 		String message = null;
 		try {
 			if (cDB == null)
 				open();
-		}
-		catch(Exception e) {
+
+			if(cDB.get(name) == null) {
+				message = "The Customisation " + name + "doesn't exists.";
+			} else {
+				cDB.put(name, profile);
+				message = "OK";
+			}
+
+		} catch(Exception e) {
 			LOGGER.debug("Cannot extend customisation.");
-			e.printStackTrace();
 			message = "Server error";
 		} finally {
-			//save();
+			save();
 		}
 		return message;
 	}

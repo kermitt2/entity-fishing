@@ -14,11 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class NerdRestProcessGeneric {
 	
-	/**
-	 * The class Logger.
-	 */
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(NerdRestProcessGeneric.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessGeneric.class);
 	
 	/**
 	 * Returns a string containing true, if the service is alive.
@@ -29,18 +25,18 @@ public class NerdRestProcessGeneric {
 	public static Response isAlive() {
 		Response response = null;
 		try {
-			LOGGER.debug("called isAlive()...");
+			LOGGER.debug("Called isAlive()...");
 
 			String retVal = null;
 			try {
 				retVal = Boolean.valueOf(true).toString();
 			} catch (Exception e) {
-				LOGGER.error("Nerd service is not alive, because of: ", e);
+				LOGGER.error("Nerd service is not alive. ", e);
 				retVal = Boolean.valueOf(false).toString();
 			}
 			response = Response.status(Status.OK).entity(retVal).build();
 		} catch (Exception e) {
-			LOGGER.error("" + e);
+			LOGGER.error("Exception occurred while check if the service is alive. " + e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		return response;
@@ -52,10 +48,10 @@ public class NerdRestProcessGeneric {
 	 * 
 	 * @return returns a response object containing a html description
 	 */
-	public static Response getDescription_html(UriInfo uriInfo) {
+	public static Response getDescriptionAsHtml(UriInfo uriInfo) {
 		Response response = null;
 		try {
-			LOGGER.debug("called getDescription_html()...");
+			LOGGER.debug("called getDescriptionAsHtml()...");
 
 			StringBuffer htmlCode = new StringBuffer();
 
@@ -66,8 +62,7 @@ public class NerdRestProcessGeneric {
 			response = Response.status(Status.OK).entity(htmlCode.toString())
 					.type(MediaType.TEXT_HTML).build();
 		} catch (Exception e) {
-			LOGGER.error(
-					"Cannot response the description for nerd-service. ", e);
+			LOGGER.error("Cannot response the description for nerd-service. ", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		return response;

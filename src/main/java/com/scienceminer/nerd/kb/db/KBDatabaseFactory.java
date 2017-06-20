@@ -19,6 +19,7 @@ import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.hadoop.*;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -90,6 +91,9 @@ public class KBDatabaseFactory {
 				if (isLoaded && !overwrite)
 					return;
 				System.out.println("Loading " + name + " database");
+
+				if (dataFile == null)
+					throw new NerdResourceException("Markup file not found");
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 				long bytesRead = 0;
@@ -186,6 +190,9 @@ public class KBDatabaseFactory {
 				if (isLoaded && !overwrite)
 					return;
 				System.out.println("Loading " + getName());
+
+				if (dataFile == null)
+					throw new NerdResourceException("Markup file not found");
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 				String line = null;
@@ -294,14 +301,14 @@ public class KBDatabaseFactory {
 
 	public KBDatabase<Integer,String> buildDbConceptByPageIdDatabase() {
 		return new KBDatabase<Integer,String>(env, DatabaseType.conceptByPageId) {
-			protected void add(KBEntry<Integer,String> entry) {
+			/*protected void add(KBEntry<Integer,String> entry) {
 				try (Transaction tx = environment.createWriteTransaction()) {
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					tx.commit();
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-			}
+			}*/
 
 			// using standard LMDB copy mode
 			@Override
@@ -325,6 +332,9 @@ System.out.println("isLoaded: " + isLoaded);
 				if (isLoaded && !overwrite)
 					return;
 				System.out.println("Loading " + name + " database");
+
+				if (dataFile == null)
+					throw new NerdResourceException("Markup file not found");
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 				String line = null;

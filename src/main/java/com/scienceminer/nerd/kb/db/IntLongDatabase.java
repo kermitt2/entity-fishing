@@ -5,13 +5,13 @@ import org.apache.hadoop.record.CsvRecordInput;
 import java.io.*;
 
 import com.scienceminer.nerd.utilities.*;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
-
 
 public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 
@@ -68,6 +68,10 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)
 			return;
+
+		if (dataFile == null)
+			throw new NerdResourceException("Resource file not found");
+
 		System.out.println("Loading " + name + " database");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));

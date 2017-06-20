@@ -13,7 +13,7 @@ import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.model.Wikipedia;
 
-import org.grobid.trainer.Stats;
+import org.grobid.trainer.LabelStat;
 
 /**
  * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as 
@@ -107,11 +107,11 @@ public class WikipediaTrainer {
 	private void evaluate() throws Exception {
 		ArticleTrainingSample rankerSample = articleSamples[1];
 	    //Result<Integer> rankerResults = ranker.test(rankerSample);
-		Stats rankerStats = ranker.test(rankerSample);
+		LabelStat rankerStats = ranker.test(rankerSample);
 	    
 	    ArticleTrainingSample selectorSample = articleSamples[1];
-	    Result<Integer> selectorResults = selector.test(selectorSample, ranker);
-		//Stats selectorStats = selector.test(selectorSample, ranker);
+	    LabelStat selectorResults = selector.test(selectorSample, ranker);
+		//LabelStat selectorStats = selector.test(selectorSample, ranker);
 
 	    System.out.println("------------------------------------------------");
 	    //System.out.println("Ranker results: " + rankerResults);

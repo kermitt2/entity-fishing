@@ -9,6 +9,7 @@ import com.scienceminer.nerd.kb.model.hadoop.DbLinkLocationList;
 import com.scienceminer.nerd.kb.model.hadoop.DbPageLinkCounts;
 
 import com.scienceminer.nerd.utilities.*;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -87,6 +88,12 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + getName() + " database");
+
+		if (linksInFile == null)
+			throw new NerdResourceException("linksInFile file not found");
+
+		if (linksOutFile == null)
+			throw new NerdResourceException("linksOutFile file not found");
 
 		BufferedReader linksInInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksInFile), "UTF-8"));
 		BufferedReader linksOutInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksOutFile), "UTF-8"));
