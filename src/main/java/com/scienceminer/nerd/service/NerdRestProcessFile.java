@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Entity;
 import org.grobid.core.document.Document;
@@ -47,10 +48,8 @@ public class NerdRestProcessFile {
 	 * normalized enriched and disambiguated query object, where resulting entities include
 	 * position coordinates in the PDF.
 	 * 
-	 * @param theQuery 
-	 *            the POJO query object
-	 * @param inputStream
-	 *            the PDF file as InputStream
+	 * @param theQuery 		the POJO query object
+	 * @param inputStream 	the PDF file as InputStream
 	 * @return a response query object containing the structured representation of
 	 *         the enriched and disambiguated query.
 	 */
@@ -79,7 +78,8 @@ public class NerdRestProcessFile {
 					return Response.status(Status.BAD_REQUEST).build();	 
 				}
 				LOGGER.debug(">> set query object...");
-								
+
+				//TODO: fix this part, the language will fail when not specified and text == null
 				// language identification
 				// if the language is already indicated in the query structure it's used with conf = 1.0,
 				// if not, it's detected. If detection doesn't goes well, 406 is returned
@@ -139,17 +139,17 @@ public class NerdRestProcessFile {
 		                String labeledResult = null;
 
 		                // alternative
-		                String header2 = doc.getHeaderFeatured(true, true);
+		                String alternativeHeader = doc.getHeaderFeatured(true, true);
 		                // we choose the longest header
-		                if ((header == null) || (header.trim().length() == 0)) {
-		                	header = header2;
+		                if (StringUtils.isNotBlank(StringUtils.trim(header))) {
+		                	header = alternativeHeader;
 		                	tokenizationHeader = doc.getTokenizationsHeader();
-		                } else if ( (header2!= null) && (header2.length() > header.length()) ) {
-			            	header = header2;
+		                } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
+			            	header = alternativeHeader;
 			                tokenizationHeader = doc.getTokenizationsHeader();
 						}
 		                
-		                if ((header != null) && (header.trim().length() > 0)) {
+		                if (StringUtils.isNotBlank(StringUtils.trim(header))) {
 		                    labeledResult = engine.getParsers().getHeaderParser().label(header);
 
 		                    BiblioItem resHeader = new BiblioItem();
@@ -158,33 +158,37 @@ public class NerdRestProcessFile {
 		                    // title
 		                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
 		                    if (titleTokens != null) {
-System.out.println("Process title... ");// + LayoutTokensUtil.toText(titleTokens));
-		                    	//workingQuery.setEntities(null);
+								System.out.println("Process title... ");// + LayoutTokensUtil.toText(titleTokens));
+
+								//workingQuery.setEntities(null);
 		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
-if (newEntities != null)
-System.out.println(newEntities.size() + " nerd entities");		                        
+								if (newEntities != null) {
+									System.out.println(newEntities.size() + " nerd entities");
+								}
 		                        nerdQuery.addNerdEntities(newEntities);
 		                    }
 
 		                    // abstract
 		                    List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
 		                    if (abstractTokens != null) {
-System.out.println("Process abstract...");
+								System.out.println("Process abstract...");
 		                    	//workingQuery.setEntities(null);
 		                        List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, null, workingQuery);
-if (newEntities != null)
-System.out.println(newEntities.size() + " nerd entities");	
+								if (newEntities != null) {
+									System.out.println(newEntities.size() + " nerd entities");
+								}
+
 		                        nerdQuery.addNerdEntities(newEntities);
 		                    }
 
 		                    // keywords
 		                    List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
 		                    if (keywordTokens != null) {
-System.out.println("Process keywords...");
+								System.out.println("Process keywords...");
 		                    	//workingQuery.setEntities(null);
 		                        List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, null, workingQuery);
-if (newEntities != null)
-System.out.println(newEntities.size() + " nerd entities");	
+								if (newEntities != null)
+									System.out.println(newEntities.size() + " nerd entities");
 		                        nerdQuery.addNerdEntities(newEntities);
 		                    }
 
@@ -220,7 +224,7 @@ System.out.println(newEntities.size() + " nerd entities");
 		            // object of more refined processing
 		            documentParts = doc.getDocumentPart(SegmentationLabel.BODY);
 		            if (documentParts != null) {
-System.out.println("Process body...");
+						System.out.println("Process body...");
 						// full text processing
 						Pair<String, LayoutTokenization> featSeg = engine.getParsers().getFullTextParser().getBodyTextFeatured(doc, documentParts);
 						if (featSeg != null) {
@@ -257,33 +261,33 @@ System.out.println("Process body...");
 		            // acknowledgement
 		            documentParts = doc.getDocumentPart(SegmentationLabel.ACKNOWLEDGEMENT);
 		            if (documentParts != null) {
-System.out.println("Process acknowledgement...");
+						System.out.println("Process acknowledgement...");
 		            	workingQuery.setEntities(null);
 		                List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
-if (newEntities != null)
-System.out.println(newEntities.size() + " nerd entities");	
+						if (newEntities != null)
+							System.out.println(newEntities.size() + " nerd entities");
 		                nerdQuery.addNerdEntities(newEntities);
 		            }
 
 		            // we can process annexes
 		            documentParts = doc.getDocumentPart(SegmentationLabel.ANNEX);
 		            if (documentParts != null) {
-System.out.println("Process annex...");  
+						System.out.println("Process annex...");
 		            	//workingQuery.setEntities(null);
 		                List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
-if (newEntities != null)
-System.out.println(newEntities.size() + " nerd entities");	
+						if (newEntities != null)
+							System.out.println(newEntities.size() + " nerd entities");
 		                nerdQuery.addNerdEntities(newEntities);
 		            }
 
 		            // footnotes are also relevant
 		            documentParts = doc.getDocumentPart(SegmentationLabel.FOOTNOTE);
 		            if (documentParts != null) {
-System.out.println("Process footnotes...");  
+						System.out.println("Process footnotes...");
 		            	//workingQuery.setEntities(null);
 		                List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
-if (newEntities != null)
-System.out.println(newEntities.size() + " nerd entities");	
+						if (newEntities != null)
+							System.out.println(newEntities.size() + " nerd entities");
 		                nerdQuery.addNerdEntities(newEntities);
 		            }
 
@@ -379,8 +383,7 @@ System.out.println(newEntities.size() + " nerd entities");
 			LOGGER.error("An unexpected exception occurs. ", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		finally {
-		}
+		
 		LOGGER.debug(methodLogOut());
 		return response;
 	}
@@ -414,12 +417,13 @@ System.out.println("\n");*/
 		        // ner
 				ProcessText processText = ProcessText.getInstance();
 				List<Entity> nerEntities = processText.process(workingQuery);
-if (nerEntities != null)
-System.out.println(nerEntities.size() + " ner entities");
+				if (nerEntities != null)
+					System.out.println(nerEntities.size() + " ner entities");
+
 				if (!workingQuery.getOnlyNER()) {
 					List<Entity> entities2 = processText.processBrutal(workingQuery);
 					if (entities2 != null) {
-System.out.println(entities2.size() + " non-ner entities");
+						System.out.println(entities2.size() + " non-ner entities");
 						for(Entity entity : entities2) {
 							// we add entities only if the mention is not already present
 							if (!nerEntities.contains(entity))

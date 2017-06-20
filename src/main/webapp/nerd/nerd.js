@@ -180,7 +180,7 @@ var nerd = (function($) {
 		var selected = $('#selectedService').attr('value');
 
 		//console.log(JSON.stringify($('#textInputArea').val()));
-		if ( (urlLocal.indexOf('LId') != -1) || (urlLocal.indexOf('SentenceSegmentation') != -1) ) {
+		if ( (urlLocal.indexOf('language') != -1) || (urlLocal.indexOf('segmentation') != -1) ) {
 			$.ajax({
 			  type: 'GET',
 			  url: urlLocal+'?text='+$('#input').val() ,
@@ -189,7 +189,7 @@ var nerd = (function($) {
 			  contentType:false
 			});
 		}
-		else if ( urlLocal.indexOf('KBTermLookup') != -1 ) {
+		else if ( urlLocal.indexOf('kb/term') != -1 ) {
 			$.ajax({
 			  type: 'GET',
 			  url: urlLocal+'/'+$('#input2').val().trim()+'?lang='+$('#lang').val(),
@@ -198,7 +198,7 @@ var nerd = (function($) {
 			  contentType:false
 			});
 		}
-		else if ( urlLocal.indexOf('KBConcept') != -1 ) {
+		else if ( urlLocal.indexOf('kb/concept') != -1 ) {
 			$.ajax({
 			  type: 'GET',
 			  url: urlLocal+'/'+$('#input2').val().trim()+'?lang='+$('#lang').val(),
@@ -389,7 +389,7 @@ var nerd = (function($) {
 		if ( (selected == 'processNERDQuery') && (responseJson.text != null) && (responseJson.text.length > 0) ) {
 			SubmitSuccesfulNERD(responseJson, statusText);
 		}
-		else if (selected == 'processLIdText') {
+		else if (selected == 'processLanguage') {
 			SubmitSuccesfulLId(responseJson, statusText);
 		}
 		else if (selected == 'processSentenceSegmentation') {
@@ -484,7 +484,7 @@ var nerd = (function($) {
 						var entity = responseJson.entities[m];
 						var identifier = entity.wikipediaExternalRef;
 						var wikidataId = entity.wikidataId;
-						//var language = entity.lang;
+
 						if (identifier && (conceptMap[identifier] == null)) {
 							$.ajax({
 							  	type: 'GET',
@@ -777,8 +777,7 @@ var nerd = (function($) {
 	        if (identifier && (conceptMap[identifier] == null)) {
 				$.ajax({
 				  	type: 'GET',
-				  	url: 'service/KBConcept',
-				  	data: { id : identifier, lang : lang },
+				  	url: 'service/kb/concept/'+identifier+"?lang="+lang,
 				  	success: function(result) {
 				  		var localIdentifier = result.wikipediaExternalRef;
 				  		conceptMap[localIdentifier] = result;
@@ -1763,23 +1762,15 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 			createInputTextArea('query');
 			setBaseUrl('disambiguate');
 			removeInputFile();
-			//$("#nerd-text").hide();
-			//$("#default_nerd_query").attr('checked', 'checked');
-			//$("#nerd-query").show();
-			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
 		}
 		else if (selected == 'processNERDQueryPDF') {
 			createInputTextArea('query');
 			createInputFile();
 			setBaseUrl('disambiguate');
-			//$("#nerd-text").hide();
-			//$("#default_nerd_query").attr('checked', 'checked');
-			//$("#nerd-query").show();
-			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate2)));
 		}
-		else if (selected == 'processLIdText') {
+		else if (selected == 'processLanguage') {
 			createInputTextArea('query');
 			setBaseUrl('language');
 			removeInputFile();
@@ -1788,29 +1779,17 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 			createInputTextArea('query');
 			setBaseUrl('segmentation');
 			removeInputFile();
-			//$("#lid").show();
-			//$("#nerd-query").hide();
-			//$("#nerd-text").hide();
-			//$("#default_lid").attr('checked', 'checked');
 		}
 		else if (selected == 'KBTermLookup') {
 			createSimpleTextFieldArea('query', 'term');
-			setBaseUrl('lookup/term');
-			//$("#nerd-text").hide();
+			setBaseUrl('kb/term');
 			removeInputFile();
-			//$("#default_nerd_query").attr('checked', 'checked');
-			//$("#nerd-query").show();
-			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate3)));
 		}
 		else if (selected == 'KBConcept') {
 			createSimpleTextFieldArea('query', 'concept ID');
 			setBaseUrl('kb/concept');
-			//$("#nerd-text").hide();
 			removeInputFile();
-			//$("#default_nerd_query").attr('checked', 'checked');
-			//$("#nerd-query").show();
-			//$("#lid").hide();
 			$('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate3)));
 		}
 	}

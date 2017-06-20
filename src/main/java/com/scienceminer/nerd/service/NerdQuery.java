@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -21,6 +22,8 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.Page;
 import org.grobid.core.utilities.KeyGen;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -40,6 +43,8 @@ import static org.grobid.core.lang.Language.FR;
  * @author Patrice
  */
 public class NerdQuery {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NerdQuery.class);
 
     public static final String QUERY_TYPE_TEXT = "text";
     public static final String QUERY_TYPE_SHORT_TEXT = "shortText";
@@ -596,13 +601,12 @@ public class NerdQuery {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
-        } catch(JsonGenerationException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
+        } catch(JsonGenerationException |JsonMappingException e) {
+            LOGGER.error("JSON cannot be processed: \n " + theQuery + "\n ", e);
         } catch(IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Some serious error when deserialise the JSON object: \n" + theQuery, e);
         }
         return nerdQuery;
     }

@@ -10,7 +10,6 @@ import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Wikipedia;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,7 +54,7 @@ public class NerdRestKB {
             try {
                 identifier = Integer.parseInt(id);
             } catch (Exception e) {
-                LOGGER.error("Could not parse the concept identifier. Bad request.");
+                LOGGER.error("Could not parse the concept identifier for: " + identifier + ". Bad request.", e);
                 return Response.status(Status.BAD_REQUEST).build();
             }
 
@@ -258,17 +257,11 @@ public class NerdRestKB {
 
     private static List<String> targetLanguages = Arrays.asList("en", "de", "fr");
 
-    /**
-     * @return
-     */
     public static String methodLogIn() {
         return ">> " + NerdRestKB.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 
-    /**
-     * @return
-     */
     public static String methodLogOut() {
         return "<< " + NerdRestKB.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();

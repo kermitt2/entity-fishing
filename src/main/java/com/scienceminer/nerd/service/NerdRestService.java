@@ -138,9 +138,7 @@ public class NerdRestService implements NerdPaths {
     }
 
 
-    /**
-     * Admin REST API
-     **/
+    /** Admin API **/
 
     @Path(ADMIN)
     @Produces(MediaType.TEXT_HTML)
@@ -174,6 +172,7 @@ public class NerdRestService implements NerdPaths {
         return NerdRestProcessAdmin.changePropertyValue(sha1, propertyName, newValue);
     }
 
+    /** KB operations **/
 
     @Path(KB + "/" + CONCEPT + "/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -184,13 +183,14 @@ public class NerdRestService implements NerdPaths {
     }
 
     @GET
-    @Path(LOOKUP + "/" + TERM + "/{term}")
+    @Path(KB + "/" + TERM + "/{term}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTermLookup(@PathParam(TERM) String term,
                                   @DefaultValue("en") @QueryParam(LANG) String lang) {
         return NerdRestKB.getTermLookup(term, lang);
     }
 
+    /** Customisation API **/
 
     @GET
     @Path(CUSTOMISATIONS)
