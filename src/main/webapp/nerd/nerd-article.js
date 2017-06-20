@@ -116,7 +116,6 @@ var nerd = (function($) {
 				  	  shortText : $('#shortText').is(':checked'),
 				  	  nbest : $('#nbest').is(':checked'),
 					  sentence : $('#sentence').is(':checked'),
-					  format : $('#format').val(),
 					  customisation : $('#customisation').val() },
 //			  processData: false,
 			  success: SubmitSuccesful,

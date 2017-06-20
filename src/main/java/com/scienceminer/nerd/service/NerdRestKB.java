@@ -2,6 +2,20 @@ package com.scienceminer.nerd.service;
 
 import java.util.*;
 import java.io.*;
+import com.scienceminer.nerd.disambiguation.NerdCategories;
+import com.scienceminer.nerd.disambiguation.NerdEntity;
+import com.scienceminer.nerd.kb.Definition;
+import com.scienceminer.nerd.kb.Lexicon;
+import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
+import com.scienceminer.nerd.kb.model.Page;
+import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.Wikipedia;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -136,6 +150,7 @@ public class NerdRestKB {
 						List<Statement> statements = 
 							Lexicon.getInstance().getKnowledgeBase().getStatements(entity.getWikidataId());
 						entity.setStatements(statements);
+
 //						entity.setProperties(wikipedia.getProperties(identifier.intValue())); 
 //						entity.setRelations(wikipedia.getRelations(identifier.intValue()), wikipedia); 
 

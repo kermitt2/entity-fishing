@@ -137,9 +137,7 @@ public class NerdRestService implements NerdPaths {
     }
 
 
-    /**
-     * Admin REST API
-     **/
+    /** Admin API **/
 
     @Path(ADMIN)
     @Produces(MediaType.TEXT_HTML)
@@ -173,6 +171,7 @@ public class NerdRestService implements NerdPaths {
         return NerdRestProcessAdmin.changePropertyValue(sha1, propertyName, newValue);
     }
 
+    /** KB operations **/
 
     @Path(KB + "/" + CONCEPT + "/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -190,6 +189,7 @@ public class NerdRestService implements NerdPaths {
         return NerdRestKB.getTermLookup(term, lang);
     }
 
+    /** Customisation API **/
 
     @GET
     @Path(CUSTOMISATIONS)

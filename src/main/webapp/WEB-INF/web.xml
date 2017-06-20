@@ -3,11 +3,10 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>NERD service - a RESTful service for the Named Entity Recognition and Disambiguation</display-name>
+    <display-name>NERD service - a RESTful service for the (Named) Entity Recognition and Disambiguation</display-name>
     <servlet>
         <servlet-name>nerd-service</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-        <!--<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>-->
 
         <init-param>
             <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
@@ -18,10 +17,6 @@
             <param-value>com.scienceminer.nerd.service</param-value>
         </init-param>
 
-<!--        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.scienceminer.nerd.service</param-value>
-        </init-param>-->
 <!--        <init-param>
           <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
           <param-value>com.sun.jersey.api.container.filter.LoggingFilter</param-value>
@@ -61,7 +56,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/segmenter</url-pattern>
+        <url-pattern>/segmentetation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
@@ -73,11 +68,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/kb/concept/</url-pattern>
+        <url-pattern>/kb/concept</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/KBTermLookup</url-pattern>
+        <url-pattern>/kb/term</url-pattern>
     </servlet-mapping>
 
     <!--servlet-mapping>
