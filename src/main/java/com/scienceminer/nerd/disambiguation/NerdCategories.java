@@ -16,7 +16,6 @@ import com.scienceminer.nerd.kb.model.*;
  * Exploit disambiguation for processing categories, e.g. compute a category distribution 
  * over a set of entities. 
  * 
- * @author Patrice Lopez
  *
  */
 public class NerdCategories {

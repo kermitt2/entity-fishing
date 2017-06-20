@@ -16,7 +16,6 @@ import com.fasterxml.jackson.core.io.*;
  * Representation of a category (here an uncontrolled typing, as in Wikipedia) for a concept or similar 
  * entity associated to a given source.
  * 
- * @author Patrice Lopez
  * 
  */
 public class Category { 

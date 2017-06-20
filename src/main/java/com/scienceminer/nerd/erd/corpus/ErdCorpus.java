@@ -29,7 +29,6 @@ import java.util.List;
 /**
  * Class for generating and managing the ERD corpus.
  * 
- * @author Patrice Lopez
  * 
  */
 public class ErdCorpus {

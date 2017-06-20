@@ -7,7 +7,6 @@ import java.util.Properties;
 /**
  * Utility methods for managing NERD properties.
  * 
- * @author Patrice
  * 
  */
 public class NerdPropertiesUtil {

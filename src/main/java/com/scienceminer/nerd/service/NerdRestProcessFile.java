@@ -42,7 +42,6 @@ import static com.scienceminer.nerd.service.NerdRestProcessQuery.parseQuery;
 
 /**
  * 
- * @author Patrice
  * 
  */
 public class NerdRestProcessFile {

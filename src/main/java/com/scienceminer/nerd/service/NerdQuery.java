@@ -7,12 +7,15 @@ import org.grobid.core.layout.Page;
 import org.grobid.core.data.Entity;
 import org.grobid.core.document.Document;
 import org.grobid.core.utilities.KeyGen;
+
+import com.scienceminer.nerd.utilities.Filter;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.Sentence;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
 import com.scienceminer.nerd.kb.Category;
+import com.scienceminer.nerd.kb.*;
 
 import java.io.*;
 import java.util.List;
@@ -28,7 +31,6 @@ import com.fasterxml.jackson.core.io.*;
  * This is the POJO object for representing input and output "enriched" query. 
  * Having Jersey supporting JSON/object mapping, this permits to consume JSON post query.
  * 
- * @author Patrice
  *
  */
 public class NerdQuery {
@@ -82,6 +84,10 @@ public class NerdQuery {
 	private List<LayoutToken> tokens = null;
 
 	private NerdContext context = null;
+
+	// only the entities fullfilling the constraints expressed in the filter will be 
+	// disambiguated and outputed
+	private Filter filter = null;
 
 	public NerdQuery() {
 	}
@@ -420,6 +426,12 @@ public class NerdQuery {
 			buffer.append(", \"entities\": [");
 			boolean first = true;
 			for(NerdEntity entity : entities) {
+				if (filter != null) {
+					List<Statement> statements = entity.getStatements();
+					if (!filter.valid(statements))
+						continue; 
+				}
+
 				if (first) 
 					first = false;
 				else 

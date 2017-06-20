@@ -42,7 +42,6 @@ import org.slf4j.LoggerFactory;
 /**
  * Class for managing all the lexical resources used by NERD.
  *
- * @author Patrice Lopez
  */
 public class Lexicon {
 	private static final Logger LOGGER = LoggerFactory

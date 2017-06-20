@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * @author Patrice Lopez
  * 
  */
 public class NerdRestProcessAdmin {

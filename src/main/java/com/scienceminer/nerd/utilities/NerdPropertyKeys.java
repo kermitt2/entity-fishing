@@ -3,7 +3,6 @@ package com.scienceminer.nerd.utilities;
 /**
  * This class contains all the keys of the properties files.
  * 
- * @author Patrice
  * 
  */
 public interface NerdPropertyKeys {

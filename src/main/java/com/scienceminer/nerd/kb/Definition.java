@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
  * Representation of a description (e.g. definition) for a concept or similar entity 
  * associated to a given source.
  * 
- * @author Patrice Lopez
  * 
  */
 public class Definition {

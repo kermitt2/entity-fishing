@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
  * 
  * Class containing the key, value and type of a NERD property.
  * 
- * @author Patrice
  * 
  */
 public class NerdProperty {

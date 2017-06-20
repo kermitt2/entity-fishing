@@ -82,7 +82,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
-                    <argLine>-Xms256m -Xmx3072m -Dfile.encoding=UTF-8</argLine>
+                    <argLine>-Xms256m -Xmx3072m -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</argLine>
                 </configuration>
             </plugin>
 
@@ -136,7 +136,7 @@
                 <version>9.4.6.v20170531</version>
 
                 <configuration>
-                    <jvmArgs>-Xms2g -Xmx8g -Dfile.encoding=UTF-8</jvmArgs>
+                    <jvmArgs>-Xms2g -Xmx8g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <stopKey/>
                     <stopPort/>
@@ -531,6 +531,13 @@
             <version>0.4.2-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.grobid.trainer</groupId>
+            <artifactId>grobid-trainer</artifactId>
+            <version>0.4.2-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/grobid-trainer-0.4.2-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>

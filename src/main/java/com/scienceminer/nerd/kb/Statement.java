@@ -38,6 +38,13 @@ public class Statement implements Serializable {
     public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
     }
+ 
+    public Property getProperty() {
+        if (propertyId == null)
+            return null;
+        else
+           return Lexicon.getInstance().getKnowledgeBase().getProperty(propertyId);
+    }
 
     public String getValue() {
         return value;
@@ -64,6 +71,13 @@ public class Statement implements Serializable {
 
         if (propertyId != null) {
             sb.append(", \"propertyId\" : \"" + propertyId + "\"");
+
+            Property property = Lexicon.getInstance().getKnowledgeBase().getProperty(propertyId);
+            if (property != null) {
+                sb.append(", \"propertyName\" : \"" + property.getName() + "\""); 
+                if (property.getValueType() != null)
+                    sb.append(", \"valueType\" : \"" + property.getValueType().getName() + "\"");   
+            }
         }
 
         if (value != null) {

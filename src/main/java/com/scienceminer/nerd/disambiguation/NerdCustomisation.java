@@ -28,8 +28,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * Representation of a customization. A customisation is currently a list of wikipedia articles that
  * will weight the relatedness score when ranking candidates for disambiguation so it is a NerdContext.
- *  
- * @author Patrice Lopez
  * 
  */
 public class NerdCustomisation extends NerdContext { 

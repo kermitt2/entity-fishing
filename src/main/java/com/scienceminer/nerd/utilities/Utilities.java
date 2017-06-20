@@ -19,7 +19,6 @@ import com.scienceminer.nerd.exceptions.NerdException;
 /**
  * Some utilities methods that I don't know where to put.
  * 
- * @author Patrice Lopez
  */
 public class Utilities {
 

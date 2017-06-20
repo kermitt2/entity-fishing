@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Common representation of the domains used in a KB.
  * 
- * @author Patrice Lopez
  * 
  */
 public class Domains {

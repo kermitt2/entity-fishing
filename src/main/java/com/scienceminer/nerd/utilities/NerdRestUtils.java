@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * @author Patrice
  * 
  */
 public class NerdRestUtils {

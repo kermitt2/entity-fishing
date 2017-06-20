@@ -29,7 +29,6 @@ import com.fasterxml.jackson.databind.*;
 
 /**
  *
- * @author Patrice
  *
  */
 @Deprecated

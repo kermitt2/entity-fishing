@@ -36,7 +36,6 @@ import org.xml.sax.SAXException;
 /**
  * Useful static methods for web service requests.
  * 
- * @author Patrice Lopez
  */
 public class WebClientUtilities {
 

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.core.io.*;
  * This class represents a weighted term, i.e. a phrase associated to a probabilistic score and the
  * list of disambiguated entities corresponding to the term. 
  * 
- * @author Patrice Lopez
  *
  */
 public class WeightedTerm {

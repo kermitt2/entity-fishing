@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.disambiguation.*;
@@ -11,6 +12,8 @@ import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.model.Wikipedia;
+
+import org.grobid.trainer.Stats;
 
 /**
  * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as 
@@ -72,8 +75,9 @@ public class WikipediaTrainer {
 	}
 
 	private void createArticleSamples() throws IOException{
-		int[] sizes = {500,100,100};
+		//int[] sizes = {500,100,100};
 		//int[] sizes = {5000,1000,1000};
+		List<Integer> sizes = Arrays.asList(500,100,100);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
 		criterias.setMinOutLinks(20);
 		criterias.setMinInLinks(30);
@@ -102,14 +106,18 @@ public class WikipediaTrainer {
 
 	private void evaluate() throws Exception {
 		ArticleTrainingSample rankerSample = articleSamples[1];
-	    Result<Integer> rankerResults = ranker.test(rankerSample);
-		
+	    //Result<Integer> rankerResults = ranker.test(rankerSample);
+		Stats rankerStats = ranker.test(rankerSample);
+	    
 	    ArticleTrainingSample selectorSample = articleSamples[1];
 	    Result<Integer> selectorResults = selector.test(selectorSample, ranker);
-		
+		//Stats selectorStats = selector.test(selectorSample, ranker);
+
 	    System.out.println("------------------------------------------------");
-	    System.out.println("Ranker results: " + rankerResults);
-	    System.out.println("Selector results: " + selectorResults);
+	    //System.out.println("Ranker results: " + rankerResults);
+	    //System.out.println("Selector results: " + selectorResults);
+	    //System.out.println("Ranker results: " + rankerStats.toString());
+	    //System.out.println("Selector results: " + selectorStats.toString());
 	}
 
 	public static void main(String args[]) throws Exception {

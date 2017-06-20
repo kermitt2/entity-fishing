@@ -26,7 +26,6 @@ import org.codehaus.jackson.node.*;
 /**
  * Method for evaluating the disambiguation of a vector of weighted terms
  *
- * @author Patrice Lopez
  */
 public class TermVectorEvaluation {
 	public static final Logger LOGGER = LoggerFactory.getLogger(TermVectorEvaluation.class);

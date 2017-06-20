@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
  * It is directly extended by the {@link NerdProperties} class and
  * therefore also contains all necessary properties. 
  * 
- * @author Patrice
  * 
  */
 public class NerdServiceProperties {

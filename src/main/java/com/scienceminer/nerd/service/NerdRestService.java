@@ -33,7 +33,6 @@ import com.sun.jersey.spi.resource.Singleton;
  * 
  * RESTful service for the NERD system.
  *
- * @author Patrice
  *
  */
 

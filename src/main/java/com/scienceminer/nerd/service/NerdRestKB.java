@@ -34,7 +34,6 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
  * 
  * REST service to access data in the knowledge base
  * 
- * @author Patrice
  * 
  */
 public class NerdRestKB {
@@ -133,7 +132,11 @@ public class NerdRestKB {
 							entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
 						entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
+						entity.setWikidataId(article.getWikidataId());
 
+						List<Statement> statements = 
+							Lexicon.getInstance().getKnowledgeBase().getStatements(entity.getWikidataId());
+						entity.setStatements(statements);
 //						entity.setProperties(wikipedia.getProperties(identifier.intValue())); 
 //						entity.setRelations(wikipedia.getRelations(identifier.intValue()), wikipedia); 
 

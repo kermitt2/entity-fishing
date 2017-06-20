@@ -14,6 +14,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.trainer.Stats;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -414,9 +415,11 @@ System.out.println("get context for this content");
 		return arffBuilder;
 	}
 
-	public Result<Integer> test(ArticleTrainingSample testSet) throws Exception {
-		Result<Integer> r = new Result<Integer>();
-		
+	//public Result<Integer> test(ArticleTrainingSample testSet) throws Exception {
+	public Stats test(ArticleTrainingSample testSet) throws Exception {	
+		//Result<Integer> r = new Result<Integer>();
+		Stats stats = null;
+
 		double worstRecall = 1;
 		double worstPrecision = 1;
 		
@@ -427,9 +430,9 @@ System.out.println("get context for this content");
 		for (Article article : testSet.getSample()) {			
 			articlesTested ++;
 			
-			Result<Integer> ir = testArticle(article);
+			Stats ir = testArticle(article);
 			
-			if (ir.getRecall() ==1) 
+			/*if (ir.getRecall() ==1) 
 				perfectRecall++;
 			if (ir.getPrecision() == 1) 
 				perfectPrecision++;
@@ -438,16 +441,17 @@ System.out.println("get context for this content");
 			worstPrecision = Math.min(worstPrecision, ir.getPrecision());
 			
 			r.addIntermediateResult(ir);
-			System.out.println("articlesTested: " + articlesTested);
+			System.out.println("articlesTested: " + articlesTested);*/
 		}
 
-		System.out.println("worstR:" + worstRecall + ", worstP:" + worstPrecision);
-		System.out.println("tested:" + articlesTested + ", perfectR:" + perfectRecall + ", perfectP:" + perfectPrecision);
+		//System.out.println("worstR:" + worstRecall + ", worstP:" + worstPrecision);
+		//System.out.println("tested:" + articlesTested + ", perfectR:" + perfectRecall + ", perfectP:" + perfectPrecision);
 		
-		return r;
+		return stats;
 	}
 
-	private Result<Integer> testArticle(Article article) throws Exception {
+	//private Result<Integer> testArticle(Article article) throws Exception {
+	private Stats testArticle(Article article) throws Exception {
 		System.out.println(" - testing " + article);
 
 		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
@@ -493,9 +497,7 @@ System.out.println("get context for this content");
 			}
 		}
 
-		// use all terms as context
 		Relatedness relatedness = Relatedness.getInstance();
-		//NerdContext context = relatedness.getContext(article, snippetLength);
 		
 		//only use links
 		NerdContext context = new NerdContext(unambigLabels, null, wikipedia.getConfig().getLangCode());
@@ -524,11 +526,9 @@ System.out.println("get context for this content");
 				disambiguatedLinks.add(validSenses.first().getId());
 		}
 
-		Result<Integer> result = new Result<Integer>(disambiguatedLinks, goldStandard);
-
-		System.out.println("   " + result);
-
-		return result;
+		//Result<Integer> result = new Result<Integer>(disambiguatedLinks, goldStandard);
+		Stats stats = null;
+		return stats;
 	}
 
 }

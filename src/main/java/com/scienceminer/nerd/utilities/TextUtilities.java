@@ -16,7 +16,6 @@ import java.util.StringTokenizer;
 /**
  * Class for holding static methods for text processing.
  *
- * @author Patrice Lopez
  */
 public class TextUtilities {
 

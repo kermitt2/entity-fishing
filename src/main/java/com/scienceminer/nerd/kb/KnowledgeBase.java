@@ -67,16 +67,20 @@ public class KnowledgeBase {
 	}
 
 	/**
-	 * Return the list of properties associated to a given concept id
+	 * Return the defintiion of a property 
 	 */
-	/*public List<Property> getProperties(String wikidataId) {
-		return env.getDbProperties().retrieve(wikidataId);
-	}*/
+	public Property getProperty(String propertyId) {
+		return env.getDbProperties().retrieve(propertyId);
+	}
 
 	/**
 	 * Return the list of relations associated to a given concept id
 	 */
 	public List<Statement> getStatements(String wikidataId) {
+		System.out.println("get statements for: " + wikidataId);
+		List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
+		System.out.println(statements.size() + " statements: ");
+
 		return env.getDbStatements().retrieve(wikidataId);
 	}
 }

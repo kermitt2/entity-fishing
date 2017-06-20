@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 /**
  * Class for managing stopword lists in several languages and associated methods.
  *
- * @author Patrice Lopez
  */
 public class Stopwords {
     private static final Logger LOGGER = LoggerFactory

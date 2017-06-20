@@ -19,7 +19,6 @@ import com.fasterxml.jackson.core.io.*;
 /**
  * This class represents a context to be exploited for performing a disambiguation. 
  * 
- * @author Patrice Lopez
  *
  */
 public class NerdContext {
@@ -42,18 +41,13 @@ public class NerdContext {
 		for(Label.Sense sense : unambig) {
 			double sp = sense.getPriorProbability();
 			
-			//if (sense.getTitle() == null)
-			//	continue;
-
-			//if below sp threshold, skip
-			if (sp < NerdEngine.minSenseProbability) continue; 
+			if (sp < NerdEngine.minSenseProbability) 
+				continue; 
 			
-			//if this is a date or a number, skip
-			if (isDateOrNumeric(sense)) continue;
+			if (isDate(sense) || isNumber(sense)) 
+				continue;
 			
-			//sense.setWeight((lp + sp)/2);	
-			sense.setWeight(sp);	
-			
+			sense.setWeight(sp);				
 			if (!articles.contains(sense)) {
 				articles.add(sense);
 			}
@@ -65,19 +59,6 @@ public class NerdContext {
 				articles.add(page);
 			}
 		}
-
-		//now weight candidates by their relatedness to each other
-		/*for (Article art : articles) {
-			double avgRelatedness = 0;
-			for (Article art2:articles) {
-				if (art.getId() != art2.getId()) {
-					avgRelatedness += relatednessCache.getRelatedness(art, art2);
-				}
-			}
-			
-			avgRelatedness = avgRelatedness / (articles.size() - 1);
-			art.setWeight((art.getWeight() + (4*avgRelatedness)) /5);
-		}*/
 		
 		Collections.sort(articles);		
 		contextArticles = new ArrayList<Article>(); 
@@ -104,11 +85,11 @@ public class NerdContext {
 		
 		double sp = sense.getPriorProbability();
 
-		//if below sp threshold, skip
-		if (sp < NerdEngine.minSenseProbability) return; 
+		if (sp < NerdEngine.minSenseProbability) 
+			return; 
 		
-		//if this is a date or number, skip
-		if (isDateOrNumeric(sense)) return;
+		if (isDate(sense) || isNumber(sense)) 
+			return;
 
 		sense.setWeight(sp);	
 		if (!contextArticlesIds.contains(new Integer(sense.getId()))) {
@@ -127,27 +108,17 @@ public class NerdContext {
 		
 		double sp = article.getWeight();
 
-		//if below sp threshold, skip
-		if (sp < NerdEngine.minSenseProbability) return; 
+		if (sp < NerdEngine.minSenseProbability) 
+			return; 
 		
-		//if this is a date or number, skip
-		if (isDateOrNumeric(article)) return;
+		if (isDate(article) || isNumber(article)) 
+			return;
 		
 		if (!contextArticlesIds.contains(new Integer(article.getId()))) {
 			contextArticles.add(article);
 			contextArticlesIds.add(new Integer(article.getId()));
 		}
 	}
-
-	/*public void addPage(Page page) {
-		if (page == null)
-			return;
-		if (contextArticles == null)
-			contextArticles = new HashSet<Article>();
-		if (page.getType() == Page.PageType.article) {
-			contextArticles.add(((Article)page));
-		}
-	}*/
 	
 	public List<Article> getArticles() {
 		return contextArticles;
@@ -160,9 +131,6 @@ public class NerdContext {
 			contextArticles.size();
 	}
 
-	/**
-	 * @return the quality (size and homogeneity) of the available context. 
-	 */
 	public double getQuality() {
 		if ((contextArticles == null) || (contextArticles.size() == 0)) 
 			return 0.0;
@@ -208,17 +176,34 @@ public class NerdContext {
 		return relatednessScore / totalWeight;
 	}
 	
-	private static boolean isDateOrNumeric(Article art) {
+	private static boolean isDate(Article art) {
 		String title = art.getTitle();
 		if (title == null)
 			return false;
-		// is it a number?
-		boolean isNumber = false;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d"); 
+		// to be reviewed with actual wikipedia dates in title
+		Date date = null;
+		try {
+			date = sdf.parse(title);
+		} catch (ParseException e) {
+		}
+
+		if (date != null)
+			return true;	
+		else 
+			return false;		
+	}
+
+	private static boolean isNumber(Article art) {
+		String title = art.getTitle();
+		if (title == null)
+			return false;
+
 		Integer number = null;
 		try { 	
 			number = Integer.parseInt(title);
 		} catch (Exception e) {
-			isNumber = false;
 		}
 
 		if (number != null)
@@ -228,26 +213,12 @@ public class NerdContext {
 		try { 	
 			doub = Double.parseDouble(title);
 		} catch (Exception e) {
-			isNumber = false;
 		}
 
 		if (doub != null)
 			return true;
-
-		// is it a date ? this is to be reviewed !
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d") ;
-		Date date = null;
-		boolean isDate = false;
-		try {
-			date = sdf.parse(title);
-		} catch (ParseException e) {
-			isDate = false;
-		}
-
-		if (date != null)
-			return true;	
 		else 
-			return false;		
+			return false;	
 	}
 
 	/**

@@ -25,7 +25,6 @@ import com.scienceminer.nerd.kb.model.*;
 /**
  * Class for managing the NERD customisation which are contexts for particular domains.
  *
- * @author Patrice Lopez
  */
 public final class Customisations {
 	

@@ -35,7 +35,6 @@ import java.util.*;
 /**
  * SAX parser handler for the Yahoo L24 dataset.
  * 
- * @author Patrice Lopez
  */
 public class YahooL24SaxHandler extends DefaultHandler {
 

@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.io.*;
 /**
  * This class represents a context in relation to a document. 
  * 
- * @author Patrice Lopez
  *
  */
 public class DocumentContext extends NerdContext {

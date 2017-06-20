@@ -36,7 +36,6 @@ import com.fasterxml.jackson.core.io.*;
 
 /**
  * 
- * @author Patrice
  * 
  */
 public class NerdRestProcessQuery {

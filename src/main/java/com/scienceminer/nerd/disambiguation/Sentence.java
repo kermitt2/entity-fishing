@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.io.*;
 /**
  * This class represents a sentence with stand-off position to mark its boundaries in a text. 
  * 
- * @author Patrice Lopez
  *
  */
 public class Sentence {

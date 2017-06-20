@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
  * to load Nerd-properties from a property file. Each property will be copied
  * to a system property having the same name.
  * 
- * @author Patrice Lopez
  */
 public class NerdProperties {
 

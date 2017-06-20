@@ -337,16 +337,16 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 	}*/
 
 	public static ArticleTrainingSample[] buildExclusiveSamples(ArticleTrainingSampleCriterias constraints, 
-																int[] sizes, Wikipedia wikipedia) {
-		ArticleTrainingSample samples[] = new ArticleTrainingSample[sizes.length];
+																List<Integer> sizes, Wikipedia wikipedia) {
+		ArticleTrainingSample samples[] = new ArticleTrainingSample[sizes.size()];
 		List<Integer> exclude = constraints.getExclude();
 		
 		/*if (this.exclude != null)
 			exclude.addAll(this.exclude);*/
 		
 		//List<Article> candidates = null;//ArticleSet.getRoughCandidates(wikipedia, minInLinks, minOutLinks);
-		for (int i=0; i<sizes.length; i++) {
-			samples[i] = new ArticleTrainingSample(wikipedia, sizes[i], constraints, exclude);
+		for (int i=0; i<sizes.size(); i++) {
+			samples[i] = new ArticleTrainingSample(wikipedia, sizes.get(i), constraints, exclude);
 			for(Article article : samples[i].getSample())
 				exclude.add(article.getId());
 			constraints.setExclude(exclude);

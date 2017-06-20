@@ -25,7 +25,6 @@ import com.scienceminer.nerd.kb.model.Wikipedia;
 import com.scienceminer.nerd.kb.model.Article;
 
 /**
- * @author Patrice Lopez
  * 
  */
 public class ErdEvaluate {

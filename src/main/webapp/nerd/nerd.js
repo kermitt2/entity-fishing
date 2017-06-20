@@ -946,7 +946,7 @@ console.log("process pdf...");
 		piece += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("'+wikipedia+'", "'+lang+'")</script></span>';
         
         // clickable wikipedia icon
-        piece += '<td>';
+        piece += '<td style="align:center;">';
         if (wikipedia) {
             piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
                     wikipedia +

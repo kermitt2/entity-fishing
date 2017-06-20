@@ -23,7 +23,6 @@ import com.scienceminer.nerd.exceptions.*;
 /**
  * Some utilities methods for the ERD challenge.
  * 
- * @author Patrice Lopez
  */
 public class ErdUtilities {
 

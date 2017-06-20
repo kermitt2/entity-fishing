@@ -24,7 +24,6 @@ import com.fasterxml.jackson.core.io.*;
  * This class represents disambiguated entity (the result), including conceptual and 
  * encyclopedic information, with the information necessary for a disambiguation. 
  * 
- * @author Patrice Lopez
  *
  */
 public class NerdEntity implements Comparable<NerdEntity> {
@@ -299,6 +298,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		this.origin = origin;
 	}
 
+	public List<Statement> getStatements() {
+		return this.statements;
+	}
+
+	public void setStatements(List<Statement> statements) {
+		this.statements = statements;
+	}
+
 	/*public List<String> getFreebaseTypes() {
 		return freebaseTypes;
 	}
@@ -563,10 +570,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	public void setIsSubTerm(boolean sub) {
 		isSubTerm = sub;
-	}
-
-	public void setStatements(List<Statement> statements, Wikipedia wikipedia) {
-		this.statements = statements;
 	}
 	
 	@Override

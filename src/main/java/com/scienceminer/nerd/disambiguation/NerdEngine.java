@@ -43,7 +43,6 @@ import static org.apache.commons.lang3.StringUtils.trim;
  * all the input information (text, existing annotations, customization, languages) and the
  * parameters for the disambiguation.
  *
- * @author Patrice Lopez
  * 
  */
 public class NerdEngine {

@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.erd;
 
 /**
- * @author Patrice Lopez
  * 
  */
 public class ErdAnnotationLong {

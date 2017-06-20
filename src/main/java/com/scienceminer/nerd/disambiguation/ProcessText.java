@@ -48,7 +48,6 @@ import com.scienceminer.nerd.utilities.Stopwords;
  * NerdQuery object, we generate a list of Entity objects corresponding to the potential 
  * mentions of entity to be considred by the further disambiguation stage. 
  *
- * @author Patrice Lopez
  *
  */
 public class ProcessText {

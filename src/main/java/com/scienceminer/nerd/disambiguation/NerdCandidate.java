@@ -22,7 +22,6 @@ import com.fasterxml.jackson.core.io.*;
  * This class represents a candidate for disambiguated entity, including conceptual and 
  * encyclopedic information, with all the information necessary for a disambiguation. 
  * 
- * @author Patrice Lopez
  *
  */
 public class NerdCandidate implements Comparable<NerdCandidate> {

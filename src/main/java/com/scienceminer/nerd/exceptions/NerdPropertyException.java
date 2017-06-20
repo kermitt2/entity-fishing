@@ -2,7 +2,6 @@ package com.scienceminer.nerd.exceptions;
 
 /**
  * 
- * @author Patrice
  *
  */
 
