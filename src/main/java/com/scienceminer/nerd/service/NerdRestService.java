@@ -127,14 +127,14 @@ public class NerdRestService implements NerdPaths {
         }
     }
 
-    @POST
+    /*@POST
     @Path(DISAMBIGUATE)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_XML)
     public Response processQueryXml(@FormDataParam(QUERY) String query,
                                     @FormDataParam(FILE) InputStream inputStream) {
         return Response.status(Response.Status.NOT_FOUND).build();
-    }
+    }*/
 
 
     /** Admin API **/

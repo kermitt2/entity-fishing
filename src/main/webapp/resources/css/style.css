@@ -202,9 +202,9 @@ a.section-active { color: #BC0E0E; }
 span.section-not-active { color: #70695C; }
 span.section-active { color: #BC0E0E; }
 
-table.properties th {} 
-table.properties tr {}
-table.properties tbody tr td { 
+table.statements th {} 
+table.statements tr {}
+table.statements tbody tr td { 
   font-size: 12px;
   background-color: #FCF8E3; 
   word-break:normal; 

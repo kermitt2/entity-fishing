@@ -56,7 +56,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/segmentetation</url-pattern>
+        <url-pattern>/segmentation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>

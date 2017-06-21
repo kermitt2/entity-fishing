@@ -904,7 +904,15 @@ var nerd = (function($) {
 			for(var i in statements) {
 				var statement = statements[i];
 				if (statement.propertyId) {
-					localHtml += "<tr><td>" + statement.propertyId + "</td><td>" + statement.value + "</td></tr>"
+					if (statement.propertyName)
+						localHtml += "<tr><td>" + statement.propertyName + "</td>"; 
+					else
+						localHtml += "<tr><td>" + statement.propertyId + "</td>";
+
+					if (statement.valueName)
+						localHtml += "<td>" + statement.valueName + "</td></tr>";
+					else 
+						localHtml += "<td>" + statement.value + "</td></tr>";
 				}
 			}
 			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Statements: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
@@ -1436,15 +1444,26 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				string += "<p><div class='wiky_preview_area2'>"+localHtml+"</div></p>";
 			}
 
-			// properties and relations if taxon
+			// statements
 			var statements = getStatements(wikipedia);
 			if ((statements != null) && (statements.length > 0)) {
 				var localHtml = "";
 				for(var i in statements) {
 					var statement = statements[i];
-					if (statement.propertyId) { //} && (property.template == 'Taxobox')) {
-						localHtml += "<tr><td>" + statement.propertyId + "</td><td>" + property.value + "</td></tr>"
+					if (statement.propertyId) { 
+						if (statement.propertyName) {
+							localHtml += "<tr><td>" + statement.propertyName + "</td>";
+						} else if (statement.propertyId) { 
+							localHtml += "<tr><td>" + statement.propertyId + "</td>";
+						}
+
+						if (statement.valueName) {
+							localHtml += "<td>" + property.valueName + "</td></tr>";
+						} else if (statement.value) {
+							localHtml += "<td>" + property.value + "</td></tr>";
+						}
 					}
+
 				}
 				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
 			}
@@ -1628,8 +1647,16 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				var localHtml = "";
 				for(var i in statements) {
 					var statement = statements[i];
-					if (statement.propertyId){ //} && (statement.template == 'Taxobox')) {
-						localHtml += "<tr><td>" + statement.propertyId + "</td><td>" + statement.value + "</td></tr>"
+					if (statement.propertyId) {
+						if (statement.propertyName)
+							localHtml += "<tr><td>" + statement.propertyName + "</td>"; 
+						else
+							localHtml += "<tr><td>" + statement.propertyId + "</td>";
+
+						if (statement.valueName)
+							localHtml += "<td>" + statement.valueName + "</td></tr>";
+						else 
+							localHtml += "<td>" + statement.value + "</td></tr>";
 					}
 				}
 				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";

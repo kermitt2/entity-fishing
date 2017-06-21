@@ -3,6 +3,7 @@ package com.scienceminer.nerd.kb;
 import java.io.Serializable;
 
 import com.scienceminer.nerd.kb.db.*;
+import com.scienceminer.nerd.kb.model.*;
 
 import com.fasterxml.jackson.core.io.*;
 
@@ -63,7 +64,10 @@ public class Statement implements Serializable {
         return sb.toString();
     }
 
-    public String toJson() {
+    /**
+     * Simple json serialization, keeping identifiers
+     */
+    public String toJsonOld() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder sb = new StringBuilder();
 
@@ -93,4 +97,53 @@ public class Statement implements Serializable {
 
         return sb.toString();
     }
+
+    /**
+     * Json serialization replacing identifier by litteral names
+     */
+    public String toJson() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{ \"conceptId\" : \"" + conceptId + "\"");
+
+        if (propertyId != null) {
+            sb.append(", \"propertyId\" : \"" + propertyId + "\"");
+            Property property = Lexicon.getInstance().getKnowledgeBase().getProperty(propertyId);
+            if (property != null) {
+                sb.append(", \"propertyName\" : \"" + property.getName() + "\""); 
+                if (property.getValueType() != null)
+                    sb.append(", \"valueType\" : \"" + property.getValueType().getName() + "\"");   
+            }
+        }
+
+        if (value != null) {
+            byte[] encodedValue = encoder.quoteAsUTF8(value);
+            String outputValue = new String(encodedValue); 
+            boolean done = false;
+            if (value.startsWith("Q")) {
+                sb.append(", \"value\" : \"" + value + "\"");
+                Concept concept = Lexicon.getInstance().getKnowledgeBase().getConcept(value);
+                if (concept != null) {
+                    Integer pageId = concept.getPageIdByLang("en");
+                    if (pageId != null) {
+                        Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf("en");
+                        Page page = wikipedia.getPageById(pageId);
+                        if (page != null) {
+                            byte[] encodedValueTitle = encoder.quoteAsUTF8(page.getTitle());
+                            String outputValueTitle = new String(encodedValueTitle); 
+                            sb.append(", \"valueName\" : \"" + outputValueTitle + "\"");
+                            done = true;
+                        }
+                    }
+                }
+            }
+            if (!done)
+                sb.append(", \"value\" : " + value);   
+        }
+
+        sb.append("}");   
+
+        return sb.toString();
+    }    
 }
