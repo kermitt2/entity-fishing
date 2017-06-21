@@ -5,7 +5,7 @@ import com.scienceminer.nerd.kb.model.Article;
 /**
  * Created by lfoppiano on 20/06/2017.
  */
-public class MediaWikiSweetParser {
+public class MediaWikiSwebleParser {
 
     /**
      * Convenience method which combines both of the above methods - i.e. returns a copy of the
