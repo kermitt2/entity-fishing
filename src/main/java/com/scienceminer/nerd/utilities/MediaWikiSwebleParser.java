@@ -32,7 +32,7 @@ public class MediaWikiSwebleParser {
      * string and the locations of unstripped characters is not modified.
      */
     public String stripInternalLinks(String markup, Character replacement) {
-        
+        return markup;   
     }
 
     /**
