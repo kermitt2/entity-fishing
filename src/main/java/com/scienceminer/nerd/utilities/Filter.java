@@ -43,6 +43,10 @@ public class Filter {
 
 	public boolean valid(List<Statement> statements) {
 		boolean validity = false;
+		if (property == null) 
+			return true;
+		if ( (statements == null) || (statements.size() == 0) )
+			return true;
 		for(Statement statement : statements) {
 			if (statement.getProperty() != null) {
 				if (statement.getProperty().getId().equals(property.getId()) ) {
@@ -81,5 +85,17 @@ public class Filter {
 		}
 
 		return validity;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		if (property != null)
+			builder.append(property.getId() + "\t");
+		if (valueMustMatch != null)
+			builder.append(valueMustMatch + "\t");
+		if (valueMustNotMatch != null)	
+			builder.append(valueMustNotMatch);
+		return builder.toString();
 	}
 }

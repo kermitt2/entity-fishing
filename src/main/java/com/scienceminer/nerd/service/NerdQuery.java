@@ -128,7 +128,6 @@ public class NerdQuery {
         this.tokens = query.getTokens();
 
         this.abstract_ = query.getAbstract_();
-        ;
         this.claims = query.getClaims();
         this.description = query.getDescription();
 
@@ -146,6 +145,8 @@ public class NerdQuery {
 
         this.termVector = query.getTermVector();
         this.globalCategories = query.getGlobalCategories();
+
+        this.filter = filter;
     }
 
     public String getText() {
@@ -449,6 +450,17 @@ public class NerdQuery {
             buffer.append(", \"entities\": [");
             boolean first = true;
             for (NerdEntity entity : entities) {
+                if (filter != null) {
+                    List<Statement> statements = entity.getStatements();
+                    if ( (statements == null) && 
+                         ( (filter.getValueMustNotMatch() == null) || (filter.getValueMustMatch() != null) ) )
+                        continue;
+                    if (statements != null) {
+                        if (!filter.valid(statements))
+                            continue;
+                    }
+                }
+
                 if (first)
                     first = false;
                 else
@@ -543,6 +555,17 @@ public class NerdQuery {
             buffer.append(", \"entities\": [");
             boolean first = true;
             for (NerdEntity entity : entities) {
+                if (filter != null) {
+                    List<Statement> statements = entity.getStatements();
+                    if ( (statements == null) && 
+                         ( (filter.getValueMustNotMatch() == null) || (filter.getValueMustMatch() != null) ) )
+                        continue;
+                    if (statements != null) {
+                        if (!filter.valid(statements))
+                            continue;
+                    }
+                }
+
                 if (first)
                     first = false;
                 else

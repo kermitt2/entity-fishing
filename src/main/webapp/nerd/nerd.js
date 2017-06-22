@@ -1458,9 +1458,9 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 						}
 
 						if (statement.valueName) {
-							localHtml += "<td>" + property.valueName + "</td></tr>";
+							localHtml += "<td>" + statement.valueName + "</td></tr>";
 						} else if (statement.value) {
-							localHtml += "<td>" + property.value + "</td></tr>";
+							localHtml += "<td>" + statement.value + "</td></tr>";
 						}
 					}
 
