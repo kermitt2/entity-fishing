@@ -1,6 +1,6 @@
 package com.scienceminer.nerd.utilities.mediaWiki;
 
-import java.util.LinkedList;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import com.scienceminer.nerd.utilities.TextUtilities;
@@ -39,10 +39,14 @@ import org.sweble.wikitext.parser.parser.LinkTargetException;
 import de.fau.cs.osr.ptk.common.AstVisitor;
 
 /**
- * MediaWiki file parser using Sweble parsing framework.
+ * MediaWiki text parser using Sweble parsing framework.
  * 
- * A visitor to convert an article AST into a pure text representation, from 
- * TextConverter.java example of sweble-wikitext. 
+ * By default all the media wiki markup are removed. The elements to be kept in 
+ * the output of the converter need to be speficied to the converter before
+ * application. 
+ * 
+ * Implemented as a visitor converting an article AST into a various text 
+ * representation, derived from the TextConverter.java example of sweble-wikitext. 
  * 
  * The methods needed to descend into an AST and visit the children of a given
  * node <code>n</code> are
@@ -57,7 +61,7 @@ import de.fau.cs.osr.ptk.common.AstVisitor;
  * value of the call to <code>visit(c)</code>.</li>
  * </ul>
  */
-public class TextConverter extends AstVisitor<WtNode> {
+public class WikiTextConverter extends AstVisitor<WtNode> {
 	private static final Pattern ws = Pattern.compile("\\s+");
 
 	private final WikiConfig config;
@@ -65,6 +69,12 @@ public class TextConverter extends AstVisitor<WtNode> {
 	private StringBuilder line;
 
 	private int extLinkNum;
+
+	private List<Integer> toKeep = null;
+
+	public static int INTERNAL_LINKS = 0;
+	public static int BOLD = 1;
+	public static int ITALICS = 2;
 
 	/**
 	 * Becomes true if we are no long at the Beginning Of the whole Document.
@@ -77,8 +87,27 @@ public class TextConverter extends AstVisitor<WtNode> {
 
 	private LinkedList<Integer> sections;
 
-	public TextConverter(WikiConfig config) {
+	public WikiTextConverter(WikiConfig config) {
 		this.config = config;
+	}
+
+	public WikiTextConverter(WikiConfig config, List<Integer> toKeep) {
+		this.config = config;
+		this.toKeep = toKeep;
+	}
+
+	public void addToKeep(Integer element) {
+		if (toKeep == null)
+			toKeep = new ArrayList<Integer>();
+		toKeep.add(element);
+	}
+
+	public void setToKeep(List<Integer> toKeep) {
+		this.toKeep = toKeep;
+	}
+
+	public List<Integer> getToKeep() {
+		return this.toKeep;
 	}
 
 	@Override
@@ -140,15 +169,23 @@ public class TextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtBold b) {
-		//write("**");
+		if ((toKeep != null) && (toKeep.contains(new Integer(BOLD)))) {
+			write("'''");
+		}
 		iterate(b);
-		//write("**");
+		if ((toKeep != null) && (toKeep.contains(new Integer(BOLD)))) {
+			write("'''");
+		}
 	}
 
 	public void visit(WtItalics i) {
-		//write("//");
+		if ((toKeep != null) && (toKeep.contains(new Integer(ITALICS)))) {
+			write("''");
+		}
 		iterate(i);
-		//write("//");
+		if ((toKeep != null) && (toKeep.contains(new Integer(ITALICS)))) {
+			write("''");
+		}
 	}
 
 	public void visit(WtXmlCharRef cr) {
@@ -182,24 +219,30 @@ public class TextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtInternalLink link) {
-		try {
-			if (link.getTarget().isResolved()) {
-				PageTitle page = PageTitle.make(config, link.getTarget().getAsString());
-				if (page.getNamespace().equals(config.getNamespace("Category")))
-					return;
-			}
-		}
-		catch (LinkTargetException e) {
-		}
-
-		write(link.getPrefix());
-		if (!link.hasTitle()) {
+		if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS)))) {
+			write(link.getPrefix());
+			write("[[");
+			
 			iterate(link.getTarget());
+
+			if (link.hasTitle()) {
+				write("|");
+				iterate(link.getTitle());		
+			} 
+
+			write("]]");
+			write(link.getPostfix());
 		}
 		else {
-			iterate(link.getTitle());
+			write(link.getPrefix());
+			if (!link.hasTitle()) {
+				iterate(link.getTarget());
+			}
+			else {
+				iterate(link.getTitle());
+			}
+			write(link.getPostfix());
 		}
-		write(link.getPostfix());
 	}
 
 	public void visit(WtSection s) {
@@ -254,7 +297,7 @@ public class TextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtHorizontalRule hr) {
-		newline(1);
+		//newline(1);
 		//write(TextUtilities.strrep('-', 80));
 		newline(2);
 	}

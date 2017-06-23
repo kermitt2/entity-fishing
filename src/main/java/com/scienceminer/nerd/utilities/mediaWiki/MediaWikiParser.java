@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Handler for the parser instance for document in mediawiki format able to modify
+ * Handler for the parser of mediawiki format able, in particular, to modify
  * the mediawiki articles into simpler text formats. 
  */
 public class MediaWikiParser {
@@ -57,6 +57,9 @@ public class MediaWikiParser {
         config = DefaultConfigEnWp.generate();
     }
 
+    /**
+     * @return the content of the wiki text fragment with all markup removed
+     */
     public String toTextOnly(String wikitext) {
         String result = "";
 
@@ -71,7 +74,7 @@ public class MediaWikiParser {
 
             // Compile the retrieved page
             EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
-            TextConverter converter = new TextConverter(config);
+            WikiTextConverter converter = new WikiTextConverter(config);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text");
@@ -80,6 +83,67 @@ public class MediaWikiParser {
 
         return result;
     }
+
+    /**
+     * @return the content of the wiki text fragment with all markup removed except links 
+     * to internal wikipedia (external links to the internet are removed)
+     */
+    public String toTextWithInternalLinksOnly(String wikitext) {
+        String result = "";
+
+        // Instantiate a compiler for wiki pages
+        WtEngineImpl engine = new WtEngineImpl(config);        
+
+        try {
+            // Retrieve a page 
+            // PL: no clue what is this??
+            PageTitle pageTitle = PageTitle.make(config, "crap");
+            PageId pageId = new PageId(pageTitle, -1);
+
+            // Compile the retrieved page
+            EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
+            WikiTextConverter converter = new WikiTextConverter(config);
+            converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
+            result = (String)converter.go(cp.getPage());
+        } catch(Exception e) {
+            LOGGER.warn("Fail to parse MediaWiki text");
+            e.printStackTrace();
+        }
+
+        return result;
+    }   
+
+    /**
+     * @return the content of the wiki text fragment with all markup removed except links 
+     * to internal wikipedia (external links to the internet are removed) and emphasis 
+     * (bold and italics)
+     */
+    public String toTextWithInternalLinksEmphasisOnly(String wikitext) {
+        String result = "";
+
+        // Instantiate a compiler for wiki pages
+        WtEngineImpl engine = new WtEngineImpl(config);        
+
+        try {
+            // Retrieve a page 
+            // PL: no clue what is this??
+            PageTitle pageTitle = PageTitle.make(config, "crap");
+            PageId pageId = new PageId(pageTitle, -1);
+
+            // Compile the retrieved page
+            EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
+            WikiTextConverter converter = new WikiTextConverter(config);
+            converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
+            converter.addToKeep(WikiTextConverter.BOLD);
+            converter.addToKeep(WikiTextConverter.ITALICS);
+            result = (String)converter.go(cp.getPage());
+        } catch(Exception e) {
+            LOGGER.warn("Fail to parse MediaWiki text");
+            e.printStackTrace();
+        }
+
+        return result;
+    }    
 }
 
 
