@@ -205,8 +205,7 @@ System.out.println("nb article processed: " + nbArticle);
 	}
 
 	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
-		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
+		List<NerdEntity> ambigRefs = new ArrayList<NerdEntity>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 		content = content.replace("''", "");
@@ -248,12 +247,15 @@ System.out.println(content);
 			Article dest = wikipedia.getArticleByTitle(destText);
 			
 			if (dest != null && senses.length >= 1) {
-				TopicReference ref = new TopicReference(label, 
-						dest.getId(), 
-						new OffsetPosition(contentText.length()-labelText.length(), contentText.length()));
+				NerdEntity ref = new NerdEntity();
+				ref.setRawName(labelText);
+				ref.setWikipediaExternalRef(dest.getId());
+				ref.setOffsetStart(contentText.length()-labelText.length());
+				ref.setOffsetEnd(contentText.length());
 
-				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-minSenseProbability))
-					unambigLabels.add(senses[0]);
+				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-minSenseProbability)) {
+					//unambigLabels.add(senses[0]);
+				}
 				else {
 					ambigRefs.add(ref);
 System.out.println(linkText + ", " + labelText + ", " + 
@@ -312,11 +314,11 @@ System.out.println("total entities with candidates: " + candidates.size());
 			int start = entity.getOffsetStart();
 			int end = entity.getOffsetEnd();
 //System.out.println("entity: " + start + " / " + end + " - " + contentString.substring(start, end));
-			for(TopicReference ref : ambigRefs) {
+			for(NerdEntity ref : ambigRefs) {
 				int start_ref = ref.getOffsetStart();
 				int end_ref = ref.getOffsetEnd();
 				if ( (start_ref == start) && (end_ref == end) ) {
-					entity.setWikipediaExternalRef(ref.getTopicId());
+					entity.setWikipediaExternalRef(ref.getWikipediaExternalRef());
 					break;
 				} 
 			}
@@ -394,77 +396,6 @@ System.out.println("get context for this content");
 		return EvaluationUtil.evaluate(testSet, stats);
 	}
 
-	/*	double accumulatedRecall = 0.0;
-		double accumulatedPrecision = 0.0;
-		double accumulatedF1Score = 0.0;
-
-		double lowerPrecision = 1;
-		double lowerRecall = 1;
-		double lowerF1Score = 1;
-		
-		int perfectRecall = 0;
-		int perfectPrecision = 0;
-		
-		LabelStat globalStats = new LabelStat(); 
-		for (Article article : testSet.getSample()) {						
-			LabelStat localStats = evaluateArticle(article);
-			
-			globalStats.incrementObserved(localStats.getObserved());
-			globalStats.incrementExpected(localStats.getExpected());
-			globalStats.incrementFalsePositive(localStats.getFalsePositive());
-			globalStats.incrementFalseNegative(localStats.getFalseNegative());
-
-			accumulatedRecall += localStats.getRecall();
-			accumulatedPrecision += localStats.getPrecision();
-			accumulatedF1Score += localStats.getF1Score();
-
-			lowerPrecision = Math.min(lowerPrecision, localStats.getPrecision());
-			lowerRecall = Math.min(lowerRecall, localStats.getRecall());
-			
-			if (localStats.getPrecision() == 1.0) 
-				perfectPrecision++;
-			if (localStats.getRecall() == 1) 
-				perfectRecall++;
-		}
-
-		double microAveragePrecision = 0.0;
-		double microAverageRecall = 0.0;
-		double microAverageF1Score = 0.0;
-
-		double macroAveragePrecision = 0.0;
-		double macroAverageRecall = 0.0;
-		double macroAverageF1Score = 0.0;
-
-		StringBuilder builder = new StringBuilder();
-
-		builder.append("Evaluation on " + testSet.size() + " articles ");
-
-		builder.append("-- Macro-average --\n");
-		builder.append("precision: ").append(format.format(accumulatedPrecision / testSet.size())).append("\n");
-		builder.append("recall: ").append(format.format(accumulatedRecall / testSet.size())).append("\n");
-		builder.append("f1-score: ").append(format.format(accumulatedF1Score / testSet.size())).append("\n\n");
-
-		builder.append("-- Micro-average --\n");
-		builder.append("precision: ").append(format.format(globalStats.getPrecision())).append("\n");
-		builder.append("recall: ").append(format.format(globalStats.getRecall())).append("\n");
-		builder.append("f1-score: ").append(format.format(globalStats.getF1Score())).append("\n\n");		
-
-		builder.append("lower precision in evaluation set: ").append(format.format(lowerPrecision)).append("\n");
-		builder.append("lower recall in evalution set : ").append(format.format(lowerRecall)).append("\n");
-		builder
-			.append("perfect precision in evaluation set: ")
-			.append(format.format((double)perfectPrecision / 100))
-			.append("\n");
-		builder
-			.append("perfect recall in evaluation set: ")
-			.append(format.format((double)perfectPrecision / 100))
-			.append("\n");
-		
-		System.out.println(builder.toString());
-
-		return globalStats;
-	}*/
-
 	private LabelStat evaluateArticle(Article article) throws Exception {
 		System.out.println(" - testing " + article);
 		String content = cleaner.getMarkupLinksOnly(article);
@@ -473,7 +404,6 @@ System.out.println("get context for this content");
 		Matcher linkMatcher = linkPattern.matcher(content);
 
 		Set<Integer> referenceDisamb = new HashSet<Integer>();
-		//Set<Integer> disambiguatedLinks = new HashSet<Integer>();
 		Set<Integer> producedDisamb = new HashSet<Integer>();
 
 		while (linkMatcher.find()) {			

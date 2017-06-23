@@ -181,8 +181,7 @@ System.out.println(arffDataset);
 	private StringBuilder trainArticle(Article article, 
 									StringBuilder arffBuilder, 
 									NerdRanker ranker) throws Exception {
-		List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
+		List<NerdEntity> ambigRefs = new ArrayList<NerdEntity>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 		content = content.replace("''", "");
@@ -224,12 +223,15 @@ System.out.println(content);
 			Article dest = wikipedia.getArticleByTitle(destText);
 			
 			if (dest != null && senses.length >= 1) {
-				TopicReference ref = new TopicReference(label, 
-						dest.getId(), 
-						new OffsetPosition(contentText.length()-labelText.length(), contentText.length()));
+				NerdEntity ref = new NerdEntity();
+				ref.setRawName(labelText);
+				ref.setWikipediaExternalRef(dest.getId());
+				ref.setOffsetStart(contentText.length()-labelText.length());
+				ref.setOffsetEnd(contentText.length());
 
-				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-NerdEngine.minSenseProbability))
-					unambigLabels.add(senses[0]);
+				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-NerdEngine.minSenseProbability)) {
+					//unambigLabels.add(senses[0]);
+				}
 				else {
 					ambigRefs.add(ref);
 System.out.println(linkText + ", " + labelText + ", " + 
@@ -288,11 +290,11 @@ System.out.println("total entities with candidates: " + candidates.size());
 			int start = entity.getOffsetStart();
 			int end = entity.getOffsetEnd();
 //System.out.println("entity: " + start + " / " + end + " - " + contentString.substring(start, end));
-			for(TopicReference ref : ambigRefs) {
+			for(NerdEntity ref : ambigRefs) {
 				int start_ref = ref.getOffsetStart();
 				int end_ref = ref.getOffsetEnd();
 				if ( (start_ref == start) && (end_ref == end) ) {
-					entity.setWikipediaExternalRef(ref.getTopicId());
+					entity.setWikipediaExternalRef(ref.getWikipediaExternalRef());
 					break;
 				} 
 			}
@@ -371,42 +373,6 @@ System.out.println("get context for this content");
 		}
 		return EvaluationUtil.evaluate(testSet, stats);
 	}
-
-	/*public LabelStat evaluate(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception{
-	//public Result<Integer> test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception {
-		LabelStat stats = null;
-
-		Result<Integer> r = new Result<Integer>();
-		
-		double worstRecall = 1;
-		double worstPrecision = 1;
-		
-		int articlesTested = 0;
-		int perfectRecall = 0;
-		int perfectPrecision = 0;
-
-		for (Article article : testSet.getSample()) {
-			articlesTested++;
-			
-			Result<Integer> ir = testArticle(article, ranker);
-			
-			if (ir.getRecall() ==1) 
-				perfectRecall++;
-			if (ir.getPrecision() == 1) 
-				perfectPrecision++;
-			
-			worstRecall = Math.min(worstRecall, ir.getRecall());
-			worstPrecision = Math.min(worstPrecision, ir.getPrecision());
-			
-			r.addIntermediateResult(ir);
-			System.out.println("articlesTested: " + articlesTested);
-		}
-
-		System.out.println("worstR:" + worstRecall + ", worstP:" + worstPrecision);
-		System.out.println("tested:" + articlesTested + ", perfectR:" + perfectRecall + ", perfectP:" + perfectPrecision);
-		
-		return stats;
-	}*/
 
 	private LabelStat evaluateArticle(Article article, NerdRanker ranker) throws Exception {
 
