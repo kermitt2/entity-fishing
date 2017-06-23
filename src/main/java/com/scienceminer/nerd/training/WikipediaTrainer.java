@@ -27,7 +27,7 @@ public class WikipediaTrainer {
 	private File dataDir = null;
 
 	//classes for performing annotation
-	private NerdRanker ranker = null; 
+	private NerdRanker ranker = null;
 	private NerdSelector selector = null;
 
 	ArticleTrainingSample[] articleSamples = null;
@@ -106,18 +106,12 @@ public class WikipediaTrainer {
 
 	private void evaluate() throws Exception {
 		ArticleTrainingSample rankerSample = articleSamples[1];
-	    //Result<Integer> rankerResults = ranker.test(rankerSample);
-		LabelStat rankerStats = ranker.test(rankerSample);
+		System.out.println("-------------------------- evaluating ranker model --------------------------");
+		LabelStat rankerStats = ranker.evaluate(rankerSample);
 	    
 	    ArticleTrainingSample selectorSample = articleSamples[1];
-	    LabelStat selectorResults = selector.test(selectorSample, ranker);
-		//LabelStat selectorStats = selector.test(selectorSample, ranker);
-
-	    System.out.println("------------------------------------------------");
-	    //System.out.println("Ranker results: " + rankerResults);
-	    //System.out.println("Selector results: " + selectorResults);
-	    //System.out.println("Ranker results: " + rankerStats.toString());
-	    //System.out.println("Selector results: " + selectorStats.toString());
+	    System.out.println("------------------------- evaluating selector model -------------------------");
+	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker);
 	}
 
 	public static void main(String args[]) throws Exception {

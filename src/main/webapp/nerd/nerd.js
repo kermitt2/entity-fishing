@@ -903,35 +903,11 @@ var nerd = (function($) {
 			localHtml = "";
 			for(var i in statements) {
 				var statement = statements[i];
-				if (statement.propertyId) {
-					if (statement.propertyName)
-						localHtml += "<tr><td>" + statement.propertyName + "</td>"; 
-					else
-						localHtml += "<tr><td>" + statement.propertyId + "</td>";
-
-					if (statement.valueName)
-						localHtml += "<td>" + statement.valueName + "</td></tr>";
-					else 
-						localHtml += "<td>" + statement.value + "</td></tr>";
-				}
+				localHtml += displayStatement(statement);
 			}
 			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Statements: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
 						localHtml+"</table></div></td></tr></table></td></tr>";
 		}
-
-		// relations
-		/*var relations = entity.relations;
-		if ((relations != null) && (relations.length > 0)) {
-			localHtml = "";
-			for(var i in relations) {
-				var relation = relations[i];
-				if (relation.template) {
-					localHtml += "<tr><td>" + relation.relationName + "</td><td>" + relation.target + "</td></tr>"
-				}
-			}
-			piece += "<tr><td><table><tr><td style='padding:0px;border-top:0px;'><p><b>Relations: </b></p></td><td style='border-top:0px;'><div><table class='properties' style='width:100%;background-color:#fff;border:0px'>"+
-						localHtml+"</table></div></td></tr></table></td></tr>";
-		}*/
 
 		piece += '</table>';
 
@@ -1450,22 +1426,9 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				var localHtml = "";
 				for(var i in statements) {
 					var statement = statements[i];
-					if (statement.propertyId) { 
-						if (statement.propertyName) {
-							localHtml += "<tr><td>" + statement.propertyName + "</td>";
-						} else if (statement.propertyId) { 
-							localHtml += "<tr><td>" + statement.propertyId + "</td>";
-						}
-
-						if (statement.valueName) {
-							localHtml += "<td>" + statement.valueName + "</td></tr>";
-						} else if (statement.value) {
-							localHtml += "<td>" + statement.value + "</td></tr>";
-						}
-					}
-
+					localHtml += displayStatement(statement);
 				}
-				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
+				string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>"+localHtml+"</table></div></p>";
 			}
 
 			if ( (wikipedia != null) || (wikidataId != null) ) {
@@ -1530,14 +1493,6 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 		} else
 			return null;
 	}
-
-	/*function getRelations(identifier) {
-		var localEntity = conceptMap[identifier];
-		if (localEntity != null) {
-			return localEntity.relations;
-		} else
-			return null;
-	}*/
 
 	function viewEntity() {
 		var localID = $(this).attr('id');
@@ -1647,19 +1602,9 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				var localHtml = "";
 				for(var i in statements) {
 					var statement = statements[i];
-					if (statement.propertyId) {
-						if (statement.propertyName)
-							localHtml += "<tr><td>" + statement.propertyName + "</td>"; 
-						else
-							localHtml += "<tr><td>" + statement.propertyId + "</td>";
-
-						if (statement.valueName)
-							localHtml += "<td>" + statement.valueName + "</td></tr>";
-						else 
-							localHtml += "<td>" + statement.value + "</td></tr>";
-					}
+					localHtml += displayStatement(statement);
 				}
-				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:0px'>"+localHtml+"</table></div></p>";
+				string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>"+localHtml+"</table></div></p>";
 			}
 
 			if (wikipedia != null) {
@@ -1683,6 +1628,24 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 		}
 		$('#detailed_annot-0').html(string);
 		$('#detailed_annot-0').show();
+	}
+
+	function displayStatement(statement) {
+		var localHtml = "";
+		if (statement.propertyId) { 
+			if (statement.propertyName) {
+				localHtml += "<tr><td>" + statement.propertyName + "</td>";
+			} else if (statement.propertyId) { 
+				localHtml += "<tr><td>" + statement.propertyId + "</td>";
+			}
+
+			if (statement.valueName) {
+				localHtml += "<td>" + statement.valueName + "</td></tr>";
+			} else if (statement.value) {
+				localHtml += "<td>" + statement.value + "</td></tr>";
+			}
+		}
+		return localHtml;
 	}
 
 	function SubmitSuccesfulLId(responseJson, statusText) {

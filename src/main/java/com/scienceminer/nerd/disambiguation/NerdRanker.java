@@ -3,12 +3,14 @@ package com.scienceminer.nerd.disambiguation;
 import java.util.*;
 import java.io.*;
 import java.util.regex.*;
+import java.text.*;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.exceptions.*;
+import com.scienceminer.nerd.evaluation.*;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
@@ -106,35 +108,6 @@ public class NerdRanker {
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
-	@SuppressWarnings("unchecked")
-	private void weightTrainingInstances() {
-		double positiveInstances = 0;
-		double negativeInstances = 0; 
-
-		/*attributeDataset 
-
-		Enumeration<Instance> e = dataset.enumerateInstances();
-		while (e.hasMoreElements()) {
-			Instance i = (Instance) e.nextElement();
-			double isValidSense = i.value(3);
-			if (isValidSense == 0) 
-				positiveInstances ++;
-			else
-				negativeInstances ++;
-		}
-
-		double p = (double) positiveInstances / (positiveInstances + negativeInstances);
-		e = dataset.enumerateInstances();
-		while (e.hasMoreElements()) {
-			Instance i = (Instance) e.nextElement();
-			double isValidSense = i.value(3);
-			if (isValidSense == 0) 
-				i.setWeight(0.5 * (1.0/p));
-			else
-				i.setWeight(0.5 * (1.0/(1-p)));
-		}*/
-	}
-
 	public double getProbability(double commonness, double relatedness, double quality) throws Exception {
 		if (forest == null) {
 			// load model
@@ -166,7 +139,6 @@ public class NerdRanker {
 	public void loadTrainingData(File file) throws Exception{
 		attributeDataset = arffParser.parse(new FileInputStream(file));
 		System.out.println("Training data loaded from file " + file.getPath());
-		weightTrainingInstances();
 	}
 	
 	public void clearTrainingData() {
@@ -230,7 +202,6 @@ System.out.println("nb article processed: " + nbArticle);
 		System.out.println(arffBuilder.toString());
 		arffDataset = arffBuilder.toString();
 		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
-		weightTrainingInstances();
 	}
 
 	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
@@ -415,21 +386,28 @@ System.out.println("get context for this content");
 		return arffBuilder;
 	}
 
-	public LabelStat test(ArticleTrainingSample testSet) throws Exception {	
-		double accumulatedRecall = 0.0;
-		double accumulatedPrecision = 0.0;
+	public LabelStat evaluate(ArticleTrainingSample testSet) throws Exception {	
+		List<LabelStat> stats = new ArrayList<LabelStat>();
+		for (Article article : testSet.getSample()) {						
+			stats.add(evaluateArticle(article));
+		}
+		return EvaluationUtil.evaluate(testSet, stats);
+	}
 
-		double worstRecall = 1;
-		double worstPrecision = 1;
+	/*	double accumulatedRecall = 0.0;
+		double accumulatedPrecision = 0.0;
+		double accumulatedF1Score = 0.0;
+
+		double lowerPrecision = 1;
+		double lowerRecall = 1;
+		double lowerF1Score = 1;
 		
-		int articlesTested = 0;
 		int perfectRecall = 0;
 		int perfectPrecision = 0;
 		
 		LabelStat globalStats = new LabelStat(); 
-
 		for (Article article : testSet.getSample()) {						
-			LabelStat localStats = testArticle(article);
+			LabelStat localStats = evaluateArticle(article);
 			
 			globalStats.incrementObserved(localStats.getObserved());
 			globalStats.incrementExpected(localStats.getExpected());
@@ -438,17 +416,15 @@ System.out.println("get context for this content");
 
 			accumulatedRecall += localStats.getRecall();
 			accumulatedPrecision += localStats.getPrecision();
+			accumulatedF1Score += localStats.getF1Score();
 
-			/*if (ir.getRecall() ==1) 
-				perfectRecall++;
-			if (ir.getPrecision() == 1) 
+			lowerPrecision = Math.min(lowerPrecision, localStats.getPrecision());
+			lowerRecall = Math.min(lowerRecall, localStats.getRecall());
+			
+			if (localStats.getPrecision() == 1.0) 
 				perfectPrecision++;
-			
-			worstRecall = Math.min(worstRecall, ir.getRecall());
-			worstPrecision = Math.min(worstPrecision, ir.getPrecision());
-			
-			r.addIntermediateResult(ir);
-			System.out.println("articlesTested: " + articlesTested);*/
+			if (localStats.getRecall() == 1) 
+				perfectRecall++;
 		}
 
 		double microAveragePrecision = 0.0;
@@ -459,18 +435,38 @@ System.out.println("get context for this content");
 		double macroAverageRecall = 0.0;
 		double macroAverageF1Score = 0.0;
 
-		//System.out.println("worstR:" + worstRecall + ", worstP:" + worstPrecision);
-		//System.out.println("tested:" + articlesTested + ", perfectR:" + perfectRecall + ", perfectP:" + perfectPrecision);
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("Evaluation on " + testSet.size() + " articles ");
+
+		builder.append("-- Macro-average --\n");
+		builder.append("precision: ").append(format.format(accumulatedPrecision / testSet.size())).append("\n");
+		builder.append("recall: ").append(format.format(accumulatedRecall / testSet.size())).append("\n");
+		builder.append("f1-score: ").append(format.format(accumulatedF1Score / testSet.size())).append("\n\n");
+
+		builder.append("-- Micro-average --\n");
+		builder.append("precision: ").append(format.format(globalStats.getPrecision())).append("\n");
+		builder.append("recall: ").append(format.format(globalStats.getRecall())).append("\n");
+		builder.append("f1-score: ").append(format.format(globalStats.getF1Score())).append("\n\n");		
+
+		builder.append("lower precision in evaluation set: ").append(format.format(lowerPrecision)).append("\n");
+		builder.append("lower recall in evalution set : ").append(format.format(lowerRecall)).append("\n");
+		builder
+			.append("perfect precision in evaluation set: ")
+			.append(format.format((double)perfectPrecision / 100))
+			.append("\n");
+		builder
+			.append("perfect recall in evaluation set: ")
+			.append(format.format((double)perfectPrecision / 100))
+			.append("\n");
 		
+		System.out.println(builder.toString());
+
 		return globalStats;
-	}
+	}*/
 
-	private LabelStat testArticle(Article article) throws Exception {
+	private LabelStat evaluateArticle(Article article) throws Exception {
 		System.out.println(" - testing " + article);
-
-		//List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		//List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
-
 		String content = cleaner.getMarkupLinksOnly(article);
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
@@ -499,14 +495,6 @@ System.out.println("get context for this content");
 
 			if ((senses.length > 0) && (dest != null)) {
 				referenceDisamb.add(dest.getId());
-
-				/*if ((senses.length == 1) || (senses[0].getPriorProbability() >= (1-minSenseProbability))) { 
-					unambigLabels.add(senses[0]);
-					disambiguatedLinks.add(dest.getId());
-				} else {
-					TopicReference ref = new TopicReference(label, dest.getId(), null);
-					ambigRefs.add(ref);
-				}*/
 			}
 		}
 
@@ -538,31 +526,6 @@ System.out.println("get context for this content");
 			if (cands.size() > 0)
 				producedDisamb.add(cands.get(0).getWikipediaExternalRef());
 		}
-
-		/*Relatedness relatedness = Relatedness.getInstance();
-		NerdContext context = new NerdContext(unambigLabels, null, wikipedia.getConfig().getLangCode());
-		double quality =  context.getQuality();
-		for (TopicReference ref: ambigRefs) {
-			Set<Article> validSenses = new TreeSet<Article>();
-			for (Sense sense:ref.getLabel().getSenses()) {
-				if (sense.getPriorProbability() < minSenseProbability) 
-					break;
-
-				double prob = getProbability(sense.getPriorProbability(), 
-					context.getRelatednessTo(sense), quality); 
-				if (prob>0.5) {
-					Article art = new Article(wikipedia.getEnvironment(), sense.getId());
-					art.setWeight(prob);
-					validSenses.add(art);					
-				}
-			}
-
-			//use most valid sense
-			if (!validSenses.isEmpty()) 
-				producedDisamb.add(validSenses.first().getId());
-		}*/
-
-		//Result<Integer> result = new Result<Integer>(producedDisamb, referenceDisamb);
 
 		LabelStat stats = new LabelStat();
 		for(Integer index : producedDisamb) {

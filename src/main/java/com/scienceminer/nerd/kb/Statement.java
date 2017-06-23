@@ -121,9 +121,16 @@ public class Statement implements Serializable {
             byte[] encodedValue = encoder.quoteAsUTF8(value);
             String outputValue = new String(encodedValue); 
             boolean done = false;
-            if (value.startsWith("Q")) {
-                sb.append(", \"value\" : \"" + value + "\"");
-                Concept concept = Lexicon.getInstance().getKnowledgeBase().getConcept(value);
+            if (value.startsWith("Q") || value.startsWith("\"Q")) {
+                Concept concept = null;
+                if (value.startsWith("Q")) {
+                    sb.append(", \"value\" : \"" + value + "\"");
+                    concept = Lexicon.getInstance().getKnowledgeBase().getConcept(value);                    
+                } else {
+                    sb.append(", \"value\" : " + value);
+                    concept = Lexicon.getInstance().getKnowledgeBase().getConcept(value.replace("\"", ""));
+                }
+
                 if (concept != null) {
                     Integer pageId = concept.getPageIdByLang("en");
                     if (pageId != null) {

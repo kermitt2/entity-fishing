@@ -202,19 +202,31 @@ a.section-active { color: #BC0E0E; }
 span.section-not-active { color: #70695C; }
 span.section-active { color: #BC0E0E; }
 
-table.statements th {} 
-table.statements tr {}
-table.statements tbody tr td { 
+table.statements {
+  border-collapse: separate; 
+  font-size: 12px;
+  border-spacing: 2;
+  padding: 0px;
+  border-collapse: separate;
+}
+table.statements tr { 
   font-size: 12px;
   background-color: #FCF8E3; 
   word-break:normal; 
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-spacing: 2;
+  padding: 0px;
+  border-collapse: separate;
+}
+table.statements td { 
+  padding: 0px;
 }
 
 table.concept th {}
 table.concept tr {}
 table.concept td {
-  word-break:normal; padding:4px;
+  word-break:normal; 
+  padding:4px;
   border-top:1px solid #ddd;
 }
 

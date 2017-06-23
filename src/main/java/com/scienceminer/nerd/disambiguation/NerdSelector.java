@@ -79,35 +79,6 @@ public class NerdSelector {
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
-	@SuppressWarnings("unchecked")
-	private void weightTrainingInstances() {
-		double positiveInstances = 0;
-		double negativeInstances = 0; 
-
-		/*attributeDataset 
-
-		Enumeration<Instance> e = dataset.enumerateInstances();
-		while (e.hasMoreElements()) {
-			Instance i = (Instance) e.nextElement();
-			double isValidSense = i.value(3);
-			if (isValidSense == 0) 
-				positiveInstances ++;
-			else
-				negativeInstances ++;
-		}
-
-		double p = (double) positiveInstances / (positiveInstances + negativeInstances);
-		e = dataset.enumerateInstances();
-		while (e.hasMoreElements()) {
-			Instance i = (Instance) e.nextElement();
-			double isValidSense = i.value(3);
-			if (isValidSense == 0) 
-				i.setWeight(0.5 * (1.0/p));
-			else
-				i.setWeight(0.5 * (1.0/(1-p)));
-		}*/
-	}
-
 	public double getProbability(double nerd_score, double prob_anchor_string, double prob_c) throws Exception {
 		if (forest == null) {
 			// load model
@@ -143,7 +114,6 @@ public class NerdSelector {
 	public void loadTrainingData(File file) throws Exception{
 		attributeDataset = arffParser.parse(new FileInputStream(file));
 		System.out.println("Training data loaded from file " + file.getPath());
-		weightTrainingInstances();
 	}
 	
 	public void clearTrainingData() {
@@ -206,7 +176,6 @@ System.out.println("nb article processed: " + nbArticle);
 		arffDataset = arffBuilder.toString();
 System.out.println(arffDataset);
 		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
-		weightTrainingInstances();
 	}
 
 	private StringBuilder trainArticle(Article article, 
@@ -395,11 +364,19 @@ System.out.println("get context for this content");
 		return arffBuilder;
 	}
 
-	public LabelStat test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception{
+	public LabelStat evaluate(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception {	
+		List<LabelStat> stats = new ArrayList<LabelStat>();
+		for (Article article : testSet.getSample()) {						
+			stats.add(evaluateArticle(article, ranker));
+		}
+		return EvaluationUtil.evaluate(testSet, stats);
+	}
+
+	/*public LabelStat evaluate(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception{
 	//public Result<Integer> test(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception {
 		LabelStat stats = null;
 
-		/*Result<Integer> r = new Result<Integer>();
+		Result<Integer> r = new Result<Integer>();
 		
 		double worstRecall = 1;
 		double worstPrecision = 1;
@@ -427,11 +404,11 @@ System.out.println("get context for this content");
 
 		System.out.println("worstR:" + worstRecall + ", worstP:" + worstPrecision);
 		System.out.println("tested:" + articlesTested + ", perfectR:" + perfectRecall + ", perfectP:" + perfectPrecision);
-		*/
+		
 		return stats;
-	}
+	}*/
 
-	private LabelStat testArticle(Article article, NerdRanker ranker) throws Exception {
+	private LabelStat evaluateArticle(Article article, NerdRanker ranker) throws Exception {
 
 		LabelStat stats = null;
 

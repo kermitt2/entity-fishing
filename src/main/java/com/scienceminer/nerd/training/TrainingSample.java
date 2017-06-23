@@ -17,6 +17,10 @@ public abstract class TrainingSample<D> {
 		return sample;
 	}
 
+	public int size() {
+		return sample.size();
+	}
+
 	public abstract void save(File file);
 
 	public abstract void load(File file);
