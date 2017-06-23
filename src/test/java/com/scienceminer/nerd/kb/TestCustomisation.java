@@ -14,7 +14,7 @@ import org.junit.Test;
 import com.scienceminer.nerd.utilities.NerdProperties;
 
 /**
- *  @author Patrice Lopez
+ *  
  */
 public class TestCustomisation {
 	

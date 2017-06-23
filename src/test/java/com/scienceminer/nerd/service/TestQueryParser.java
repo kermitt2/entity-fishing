@@ -24,10 +24,6 @@ import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import org.grobid.core.data.Entity;
 
-/*import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;*/
-
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
@@ -35,7 +31,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
 /**
- *  @author Patrice Lopez
+ *  
  */
 public class TestQueryParser {
 	private String testPath = null;

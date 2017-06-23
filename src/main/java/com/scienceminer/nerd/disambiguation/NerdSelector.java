@@ -181,7 +181,7 @@ System.out.println(arffDataset);
 	private StringBuilder trainArticle(Article article, 
 									StringBuilder arffBuilder, 
 									NerdRanker ranker) throws Exception {
-		List<NerdEntity> ambigRefs = new ArrayList<NerdEntity>();
+		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 		content = content.replace("''", "");
@@ -233,7 +233,7 @@ System.out.println(content);
 					//unambigLabels.add(senses[0]);
 				}
 				else {
-					ambigRefs.add(ref);
+					refs.add(ref);
 System.out.println(linkText + ", " + labelText + ", " + 
 	destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
 				}
@@ -290,7 +290,7 @@ System.out.println("total entities with candidates: " + candidates.size());
 			int start = entity.getOffsetStart();
 			int end = entity.getOffsetEnd();
 //System.out.println("entity: " + start + " / " + end + " - " + contentString.substring(start, end));
-			for(NerdEntity ref : ambigRefs) {
+			for(NerdEntity ref : refs) {
 				int start_ref = ref.getOffsetStart();
 				int end_ref = ref.getOffsetEnd();
 				if ( (start_ref == start) && (end_ref == end) ) {
@@ -375,19 +375,14 @@ System.out.println("get context for this content");
 	}
 
 	private LabelStat evaluateArticle(Article article, NerdRanker ranker) throws Exception {
-
-		LabelStat stats = null;
-
-		/*List<Label.Sense> unambigLabels = new ArrayList<Label.Sense>();
-		List<TopicReference> ambigRefs = new ArrayList<TopicReference>();
-
+System.out.println(" - evaluating " + article);
 		String content = cleaner.getMarkupLinksOnly(article);
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
 
-		Set<Integer> goldStandard = new HashSet<Integer>();
-		Set<Integer> disambiguatedLinks = new HashSet<Integer>();
+		Set<Integer> referenceDisamb = new HashSet<Integer>();
+		Set<Integer> producedDisamb = new HashSet<Integer>();
 
 		while (linkMatcher.find()) {			
 			String linkText = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
@@ -401,60 +396,61 @@ System.out.println("get context for this content");
 				labelText = linkText.substring(pos+1);
 			}
 
-			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);     // Get first char and capitalize
-
+			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
 			Label label = new Label(wikipedia.getEnvironment(), labelText);
 			Label.Sense[] senses = label.getSenses();
 			Article dest = wikipedia.getArticleByTitle(destText);
 
-			if (senses.length > 0 && dest != null) {
-
-				goldStandard.add(dest.getId());
-
-				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-NerdEngine.minSenseProbability)) { 
-					unambigLabels.add(senses[0]);
-					disambiguatedLinks.add(dest.getId());
-				} else {
-					TopicReference ref = new TopicReference(label, dest.getId(), null);
-					ambigRefs.add(ref);
-				}
+			if ((senses.length > 0) && (dest != null)) {
+				referenceDisamb.add(dest.getId());
 			}
 		}
 
-		// use all terms as context
-		Relatedness relatedness = Relatedness.getInstance();
-		
-		//only use links
-		NerdContext context = new NerdContext(unambigLabels, null, wikipedia.getConfig().getLangCode());
-
-		// resolve senses		
-		double quality = context.getQuality();
-		for (TopicReference ref : ambigRefs) {
-			TreeSet<Article> validSenses = new TreeSet<Article>();
-			for (Sense sense : ref.getLabel().getSenses()) {
-				if (sense.getPriorProbability() < NerdEngine.minSenseProbability) break;
-
-				double nerd_score = ranker.getProbability(sense.getPriorProbability(), 
-					context.getRelatednessTo(sense), quality); 
-				double prob = this.getProbability(nerd_score, 
-					ref.getLabel().getLinkProbability(), 
-					sense.getPriorProbability());
-				if (prob>0.5) {
-					Article art = new Article(wikipedia.getEnvironment(), sense.getId());
-					art.setWeight(prob);
-					validSenses.add(art);		
-				}
+		ProcessText processText = ProcessText.getInstance();
+		String text = cleaner.getCleanedContent(article);
+		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
+		List<Entity> nerEntities = processText.process(text, lang);
+		List<Entity> nerEntities2 = processText.processBrutal(text, lang);
+		for(Entity entity : nerEntities2) {
+			// we add entities only if the mention is not already present
+			if (!nerEntities.contains(entity)) {
+				nerEntities.add(entity);
 			}
-
-			//use most valid sense
-			if (!validSenses.isEmpty()) 
-				disambiguatedLinks.add(validSenses.first().getId());
 		}
 
-		Result<Integer> result = new Result<Integer>(disambiguatedLinks, goldStandard);
-		System.out.println("   " + result);
+		List<NerdEntity> entities = new ArrayList<NerdEntity>();
+		for (Entity entity : nerEntities) {
+			NerdEntity theEntity = new NerdEntity(entity);
+			entities.add(theEntity);
+		}
 
-		return result;*/
+		NerdEngine engine = NerdEngine.getInstance();
+		Map<NerdEntity, List<NerdCandidate>> candidates = 
+			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
+		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null);
+		engine.pruneWithSelector(candidates, 
+			wikipedia.getConfig().getLangCode(), false, false, NerdEngine.minSelectorScore);
+
+		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+			if (cands.size() > 0)
+				producedDisamb.add(cands.get(0).getWikipediaExternalRef());
+		}
+
+		LabelStat stats = new LabelStat();
+		for(Integer index : producedDisamb) {
+			stats.incrementObserved();
+			if (referenceDisamb.contains(index)) {
+				stats.incrementObserved();
+			} else if (referenceDisamb.contains(index)) {
+				stats.incrementFalsePositive();
+			}
+		}
+
+		for(Integer index : referenceDisamb) {
+			stats.incrementExpected();
+		}
 
 		return stats;
 	}

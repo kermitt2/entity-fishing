@@ -462,6 +462,11 @@
             <artifactId>swc-parser-lazy</artifactId>
             <version>3.1.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.sweble.wikitext</groupId>
+            <artifactId>swc-engine</artifactId>
+            <version>3.1.5</version>
+        </dependency>
 
         <!-- Serialization -->
     	<dependency>

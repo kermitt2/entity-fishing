@@ -80,7 +80,6 @@ public class Article extends Page {
 			return new Article[0];
 
 		Article[] links = new Article[tmpLinks.getValues().size()];
-
 		int index = 0;
 		for (Integer id : tmpLinks.getValues()) {
 			links[index] = new Article(env, id.intValue());
@@ -143,7 +142,6 @@ public class Article extends Page {
 	 */
 	public int getTotalLinksOutCount() {
 		DbPageLinkCounts lc = env.getDbPageLinkCounts().retrieve(id);
-
 		if (lc == null) 
 			return 0;
 		else

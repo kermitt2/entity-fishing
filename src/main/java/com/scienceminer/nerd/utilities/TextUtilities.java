@@ -1121,4 +1121,12 @@ public class TextUtilities {
 		// we assume all json string will be bounded by double quotes
 		return json.replaceAll("\"", "\\\"").replaceAll("\n", "\\\n");
 	}
+
+    public static String strrep(char c, int times) {
+        StringBuilder builder = new StringBuilder();
+        for(int i=0; i<times; i++) {
+            builder.append(c);
+        }
+        return builder.toString();
+    }
 }

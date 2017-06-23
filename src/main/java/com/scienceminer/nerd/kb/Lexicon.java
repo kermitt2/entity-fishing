@@ -44,9 +44,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class Lexicon {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(Lexicon.class);
-    // private static volatile Boolean instanceController = false;
+	private static final Logger LOGGER = LoggerFactory.getLogger(Lexicon.class);
     private static volatile Lexicon instance;
 
 	// we use map for multilingual resources, where the language code is the key

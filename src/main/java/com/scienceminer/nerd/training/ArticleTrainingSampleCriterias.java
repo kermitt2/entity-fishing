@@ -26,15 +26,6 @@ public class ArticleTrainingSampleCriterias {
 	// maxWordCount the maximum number of words allowed in an article
 	private Integer maxWordCount = null; 
 
-	// the maximum proportion of list items (over total line count) that an article may contain. 
-	//private Double maxListProportion = null; 
-
-	// a filter regex pattern that the article has to match
-	//private Pattern mustMatch = null; 
-
-	// a filter regex pattern that the article has not to match
-	//private Pattern mustNotMatch = null; 
-
 	// a list of article ids that should not appear in the sample of articles
 	private List<Integer> exclude = null;
 
@@ -85,30 +76,6 @@ public class ArticleTrainingSampleCriterias {
 	public void setMaxWordCount(Integer maxWordCount) {
 		this.maxWordCount = maxWordCount;
 	}
-
-	/*public Double getMaxListProportion() {
-		return this.maxListProportion;
-	}
-
-	public void setMaxListProportion(Double maxListProportion) {
-		this.maxListProportion = maxListProportion;
-	}*/
-
-	/*public Pattern getMustMatchPattern() {
-		return this.mustMatch;
-	}
-
-	public void setMustMatchPattern(Pattern mustMatch) {
-		this.mustMatch = mustMatch;
-	}
-
-	public Pattern getMustNotMatchPattern() {
-		return this.mustNotMatch;
-	}
-
-	public void setMustNotMatchPattern(Pattern mustNotMatch) {
-		this.mustNotMatch = mustNotMatch;
-	}*/
 
 	public List<Integer> getExclude() {
 		return this.exclude;

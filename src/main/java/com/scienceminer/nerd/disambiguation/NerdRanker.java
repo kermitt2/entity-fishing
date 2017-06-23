@@ -205,7 +205,7 @@ System.out.println("nb article processed: " + nbArticle);
 	}
 
 	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
-		List<NerdEntity> ambigRefs = new ArrayList<NerdEntity>();
+		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 
 		String content = cleaner.getMarkupLinksOnly(article);
 		content = content.replace("''", "");
@@ -257,7 +257,7 @@ System.out.println(content);
 					//unambigLabels.add(senses[0]);
 				}
 				else {
-					ambigRefs.add(ref);
+					refs.add(ref);
 System.out.println(linkText + ", " + labelText + ", " + 
 	destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
 				}
@@ -314,7 +314,7 @@ System.out.println("total entities with candidates: " + candidates.size());
 			int start = entity.getOffsetStart();
 			int end = entity.getOffsetEnd();
 //System.out.println("entity: " + start + " / " + end + " - " + contentString.substring(start, end));
-			for(NerdEntity ref : ambigRefs) {
+			for(NerdEntity ref : refs) {
 				int start_ref = ref.getOffsetStart();
 				int end_ref = ref.getOffsetEnd();
 				if ( (start_ref == start) && (end_ref == end) ) {
@@ -380,7 +380,7 @@ System.out.println("get context for this content");
 				catch(Exception e) {
 					e.printStackTrace();
 				}
-							}
+			}
 			Collections.sort(cands);
 		}
 
@@ -397,7 +397,7 @@ System.out.println("get context for this content");
 	}
 
 	private LabelStat evaluateArticle(Article article) throws Exception {
-		System.out.println(" - testing " + article);
+System.out.println(" - evaluating " + article);
 		String content = cleaner.getMarkupLinksOnly(article);
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 

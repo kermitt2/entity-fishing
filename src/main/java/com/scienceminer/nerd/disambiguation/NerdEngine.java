@@ -68,8 +68,9 @@ public class NerdEngine {
 	static public double minLinkProbability = 0.005;
 	static public double minSenseProbability = 0.01;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
+	static public double minSelectorScore = 0.3; // threshold for selctor pruning 
 	static public double minEntityScore = 0.2; // threshold for final entity pruning
-	
+
 	public static NerdEngine getInstance() throws Exception {
 	    if (instance == null) {
 			getNewInstance();	        
@@ -207,7 +208,7 @@ for(NerdCandidate cand : cands) {
 	System.out.println("rank: " + cand.toString());
 }
 }*/
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, 0.3);
+		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, this.minSelectorScore);
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();

@@ -26,7 +26,6 @@ import org.codehaus.jackson.node.*;
 /**
  * Method for training and generating training data for the disambiguation of a vector of weighted terms
  *
- * @author Patrice Lopez
  */
 public class TermVectorTrainer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(TermVectorTrainer.class);

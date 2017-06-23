@@ -30,7 +30,7 @@ public class WikipediaTrainer {
 	private NerdRanker ranker = null;
 	private NerdSelector selector = null;
 
-	ArticleTrainingSample[] articleSamples = null;
+	List<ArticleTrainingSample> articleSamples = null;
 
 	//feature data files
 	private File arffRanker = null;
@@ -87,7 +87,7 @@ public class WikipediaTrainer {
 	}
 
 	private void createArffFiles(String datasetName) throws IOException, Exception {
-	    ArticleTrainingSample trainingSample = articleSamples[0];
+	    ArticleTrainingSample trainingSample = articleSamples.get(0);
 
 	    ranker.train(trainingSample, datasetName + "_disambiguation");
 	    ranker.saveTrainingData(arffRanker);
@@ -105,11 +105,11 @@ public class WikipediaTrainer {
 	}
 
 	private void evaluate() throws Exception {
-		ArticleTrainingSample rankerSample = articleSamples[1];
+		ArticleTrainingSample rankerSample = articleSamples.get(1);
 		System.out.println("-------------------------- evaluating ranker model --------------------------");
 		LabelStat rankerStats = ranker.evaluate(rankerSample);
 	    
-	    ArticleTrainingSample selectorSample = articleSamples[1];
+	    ArticleTrainingSample selectorSample = articleSamples.get(1);
 	    System.out.println("------------------------- evaluating selector model -------------------------");
 	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker);
 	}
