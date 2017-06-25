@@ -68,7 +68,7 @@ public class Stopwords {
                 while((s0 = br0.readLine()) != null) {
                     if (s0.trim().length() == 0) 
                         continue;
-                    stopwords.add(s0);
+                    stopwords.add(s0.trim());
                 }
             }
             catch(Exception e) {
@@ -116,7 +116,10 @@ public class Stopwords {
      *  Check efficiently if a complex term starts with a stop word
      */
     public boolean startsWithStopword(String term, String lang) {
+        if (term == null)
+            return false;
         boolean result = false;
+        term = term.trim();
         Set<String> stopwords = allStopwords.get(lang);
         int ind = term.indexOf(" ");
         if (ind == -1)
@@ -140,7 +143,10 @@ public class Stopwords {
      *  Check efficiently if a complex term ends with a stop word
      */
     public boolean endsWithStopword(String term, String lang) {
+        if (term == null)
+            return false;
         boolean result = false;
+        term = term.trim();
         Set<String> stopwords = allStopwords.get(lang);
         int ind = term.lastIndexOf(" ");
         if (ind == -1)
