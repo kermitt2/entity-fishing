@@ -202,7 +202,8 @@ public class ProcessText {
 	}
 
 	/**
-	 *  Precondition: text in the query object is not empty
+	 *  Precondition: text in the query object is not empty and 
+	 *  we assume here that the text has been dehyphenized before calling this method.
 	 */
 	private List<Entity> processText(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
@@ -350,6 +351,7 @@ public class ProcessText {
 	/**
 	 * Processing of some raw text by extracting all non-trivial ngrams. We do not
 	 * control here the textual mentions by a NER. Generate a list of entity mentions. 
+	 * We assume here that the text has been dehyphenized before calling this method.
 	 *
 	 * @param text 
 	 *		the raw text to be parsed

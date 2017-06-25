@@ -226,7 +226,6 @@ public class NerdRestKB {
 						definition.setSource("wikipedia-en");
 						definition.setLang("en");
 						entity.addDefinition(definition);
-
 						entity.setWikipediaExternalRef(pageId);
 
 						// categories

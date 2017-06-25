@@ -86,7 +86,7 @@ public class MediaWikiParser {
 
     /**
      * @return the content of the wiki text fragment with all markup removed except links 
-     * to internal wikipedia : external links to the internet are removed)
+     * to internal wikipedia pages: external links to the internet are removed
      */
     public String toTextWithInternalLinksOnly(String wikitext) {
         String result = "";
@@ -133,7 +133,7 @@ public class MediaWikiParser {
             // Compile the retrieved page
             EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
             WikiTextConverter converter = new WikiTextConverter(config);
-            converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
+            converter.addToKeep(WikiTextConverter.INTERNAL_LINKS_ARTICLES);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text");
@@ -145,7 +145,7 @@ public class MediaWikiParser {
 
     /**
      * @return the content of the wiki text fragment with all markup removed except links 
-     * to internal wikipedia (external links to the internet are removed) and emphasis 
+     * to internal wikipedia (external links to the internet are removed) and except emphasis 
      * (bold and italics)
      */
     public String toTextWithInternalLinksEmphasisOnly(String wikitext) {
@@ -182,7 +182,7 @@ public class MediaWikiParser {
     public String formatFirstParagraphWikiText(String wikitext) {
         //MediaWikiParser stripper = new MediaWikiParser();
         wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
-        //clear section headings completely - not just formating, but content as well.          
+        // clear section headings completely, not just formating, but content as well          
         
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext);
         /*markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
@@ -210,8 +210,9 @@ public class MediaWikiParser {
      */
     public String formatAllWikiText(String wikitext) {
         //MediaWikiParser stripper = new MediaWikiParser();
+        wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
+        // clear section headings completely, not just formating, but content as well  
 
-        //markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.            
         /*markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
         markup = stripper.stripNonArticleInternalLinks(markup, null);
         markup = stripper.stripExcessNewlines(markup);*/
