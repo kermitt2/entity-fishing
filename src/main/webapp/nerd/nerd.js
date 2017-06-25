@@ -781,10 +781,15 @@ var nerd = (function($) {
 				  		var localIdentifier = result.wikipediaExternalRef;
 				  		conceptMap[localIdentifier] = result;
 				  		var definitions = result.definitions;
-				  		var localHtml = "";
 				  		if (definitions && (definitions.length > 0)) {
-							localHtml = wiki2html(definitions[0]['definition'], lang);
+							var localHtml = wiki2html(definitions[0]['definition'], lang);
 							$("#def-"+localIdentifier).html(localHtml);
+				  		}
+				  		var wikidataId = result.wikidataId;
+				  		if (wikidataId) {
+				  			var localHtml = '<a href="https://www.wikidata.org/wiki/' + wikidataId +
+		                    '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
+		                    $("#wikidata-"+localIdentifier).html(localHtml);
 				  		}
 				  	},
 				  	dataType: 'json'
@@ -1078,6 +1083,8 @@ var nerd = (function($) {
 		            piece += '<a href="https://www.wikidata.org/wiki/' +
 		                    wikidataId +
 		                    '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
+		        } else {
+		        	piece += '<span id="wikidata-'+wikipedia+'"></span>';
 		        }
 	            piece += '</td></tr><tr><td>';
 	            piece += '</td></tr></table>';
@@ -1639,10 +1646,64 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				localHtml += "<tr><td>" + statement.propertyId + "</td>";
 			}
 
-			if (statement.valueName) {
-				localHtml += "<td>" + statement.valueName + "</td></tr>";
-			} else if (statement.value) {
-				localHtml += "<td>" + statement.value + "</td></tr>";
+			// value dislay depends on the valueType of the property
+			var valueType = statement.valueType;
+			if (valueType && (valueType == 'time')) {
+				// we have here an ISO time expression
+				if (statement.value) {
+					var time = statement.value.time;
+					if (time) {
+						var ind = time.indexOf("T");
+						if (ind == -1)
+							localHtml += "<td>" + time.substring(1) + "</td></tr>";
+						else	
+							localHtml += "<td>" + time.substring(1, ind) + "</td></tr>";
+					}
+				}
+			} else if (valueType && (valueType == 'globe-coordinate')) {
+				// we have some (Earth) GPS coordinates
+				if (statement.value) {
+					var latitude = statement.value.latitude;
+					var longitude = statement.value.longitude;
+					var precision = statement.value.precision;
+					var gpsString = "";
+					if (latitude) {
+						gpsString += "latitude: " + latitude;
+					}
+					if (longitude) {
+						gpsString += ", longitude: " + longitude;
+					}
+					if (precision) {
+						gpsString += ", precision: " + precision;
+					}
+					localHtml += "<td>" + gpsString + "</td></tr>";
+				}
+			} else if (valueType && (valueType == 'string')) {
+				if (statement.propertyId == "P2572") {
+					// twitter hashtag
+					if (statement.value) {
+						localHtml += "<td><a href='https://twitter.com/#"+statement.value.trim()+"' target='_blank'>#" + 
+							statement.value + "</a></td></tr>";
+					} else {
+						localHtml += "<td>" + "</td></tr>";
+					}
+				} else {
+					if (statement.value) {
+						localHtml += "<td>" + statement.value + "</td></tr>";
+					} else {
+						localHtml += "<td>" + "</td></tr>";
+					}
+				}
+			}
+			else {
+				// default
+				if (statement.valueName) {
+					localHtml += "<td>" + statement.valueName + "</td></tr>";
+				} else if (statement.value) {
+					localHtml += "<td>" + statement.value + "</td></tr>";
+				} else {
+					localHtml += "<td>" + "</td></tr>";
+				}
 			}
 		}
 		return localHtml;

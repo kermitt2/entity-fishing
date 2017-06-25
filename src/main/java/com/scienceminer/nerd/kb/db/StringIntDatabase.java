@@ -55,15 +55,6 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		}
 		return record;
 	}
-	
-	/*public void add(KBEntry<String,Integer> entry) {
-		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-			tx.commit();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (isLoaded && !overwrite)

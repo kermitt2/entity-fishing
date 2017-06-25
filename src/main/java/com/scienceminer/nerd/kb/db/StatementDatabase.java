@@ -16,7 +16,6 @@ import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
-//import com.scienceminer.nerd.kb.Property.ValueType;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
@@ -134,7 +133,6 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 							statements.add(statement);
 						}
 					}
-
 				}
 			}
 

@@ -98,7 +98,6 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 		BufferedReader linksInInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksInFile), "UTF-8"));
 		BufferedReader linksOutInput = new BufferedReader(new InputStreamReader(new FileInputStream(linksOutFile), "UTF-8"));
 
-
 		String inLinkLine = linksInInput.readLine();
 		CsvRecordInput linksInRecord = new CsvRecordInput(new ByteArrayInputStream((inLinkLine + "\n").getBytes("UTF-8")));
 		KBEntry<Integer, DbLinkLocationList> inLinkEntry = deserializePageLinkCsvRecord(linksInRecord);
@@ -121,12 +120,12 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 			boolean advanceOutLinks = false;
 
 
-			if (inLinkEntry == null || outLinkEntry.getKey() < inLinkEntry.getKey()) {
+			if (inLinkEntry == null || (outLinkEntry.getKey() < inLinkEntry.getKey())) {
 				linkCountEntry = buildLinkSummaryEntry(null, outLinkEntry);
 				advanceOutLinks = true;
 			}
 
-			if (outLinkEntry == null || inLinkEntry.getKey() < outLinkEntry.getKey()) {
+			if (outLinkEntry == null || (inLinkEntry.getKey() < outLinkEntry.getKey())) {
 				linkCountEntry = buildLinkSummaryEntry(inLinkEntry, null);
 				advanceInLinks = true;
 			}

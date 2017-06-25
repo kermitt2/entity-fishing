@@ -34,6 +34,143 @@ import static org.fusesource.lmdbjni.Constants.*;
  */
 public abstract class KBDatabase<K,V> {
 
+	protected Env environment = null;
+  	protected Database db = null;
+  	protected String envFilePath = null;
+  	protected boolean isLoaded = false;
+	protected String name = null;
+	protected DatabaseType type = null;
+	protected KBEnvironment env = null;
+
+	/**
+	 * Creates or load an existing database whose name will match the given {@link KBDatabase.DatabaseType}
+	 * 
+	 * @param env the KBEnvironment for this database
+	 * @param type the type of database
+	 */
+	public KBDatabase(KBEnvironment env, DatabaseType type) {
+		this.env = env;
+		this.type = type;
+		this.name = type.name();
+
+		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + type.toString();
+		//System.out.println("db path: " + this.envFilePath);
+
+		this.environment = new Env();
+    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	File thePath = new File(this.envFilePath);
+    	if (!thePath.exists()) {
+    		thePath.mkdirs();
+    		isLoaded = false;
+    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
+    	} else {
+    		// we assume that if the DB files exist, it has been already loaded
+    		isLoaded = true;
+    	}
+    	this.environment.open(envFilePath, Constants.NOTLS);
+		db = this.environment.openDatabase();
+	}
+
+	/**
+	 * Creates or load an existing database with a given name
+	 * 
+	 * @param env the KBEnvironment for this database
+	 * @param type the type of the database
+	 * @param name the name of the database 
+	 */
+	public KBDatabase(KBEnvironment env, DatabaseType type, String name) {
+		this.env = env;
+		this.type = type;
+		this.name = name;
+
+		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + name;
+		this.environment = new Env();
+    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	File thePath = new File(this.envFilePath);
+    	if (!thePath.exists()) {
+    		thePath.mkdirs();
+    		isLoaded = false;
+    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
+    	} else {
+    		// we assume that if the DB files exist, it has been already loaded
+    		isLoaded = true;
+    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
+    	}
+    	this.environment.open(envFilePath);
+		db = this.environment.openDatabase();
+	}
+
+	public Database getDatabase() {
+		return db;
+	}
+
+	public Env getEnvironment() {
+		return environment;
+	}
+
+	public DatabaseType getType() {
+		return type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * 
+	 * @return the number of entries in the database
+	 */
+	public long getDatabaseSize() {
+		Stat statistics = db.stat();
+		return statistics.ms_entries;
+	}
+
+	/**
+	 * Retrieve the value associated with a given key from the persistent database. 
+	 * 
+	 * @param key the key to retrieve
+	 * @return the value associated with the given key or null if not exists
+	 */
+	public abstract V retrieve(K key);
+
+	/**
+	 * Deserialises a CSV record.
+	 * 
+	 * @param record the CSV record to deserialise
+	 * @return the key/value pair encoded within the record
+	 * @throws IOException if there is a problem decoding the record
+	 */
+	public abstract KBEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException;
+
+	/**
+	 * Builds the persistent database from a file (CSV normally or JSON or XML).
+	 * 
+	 * @param dataFile the file (CSV , JSON or XML file) containing data to be loaded
+	 * @param overwrite indicate if the existing database should be overwritten
+	 */
+	public abstract void loadFromFile(File dataFile, boolean overwrite) throws Exception;
+
+	/**
+	 * @return an iterator for the entries in this database in ascending key order
+	 */
+	public KBIterator getIterator() {
+		return new KBIterator(this);
+	}
+
+	/**
+	 * Closes the underlying database
+	 */
+	public void close() {
+		if (db != null)
+			db.close();
+    	if (environment != null)
+	    	environment.close();
+	}
+
+	public boolean isLoaded() {
+		return isLoaded;
+	}
+
 	/**
 	 * Database types
 	 */
@@ -148,157 +285,5 @@ public abstract class KBDatabase<K,V> {
 		 * Associates an integer id of a concept to the language-specific mapping to article id
 		 */
 		concepts
-	}
-
-	protected Env environment = null;
-  	protected Database db = null;
-  	protected String envFilePath = null;
-  	protected boolean isLoaded = false;
-
-	protected String name = null;
-	protected DatabaseType type = null;
-	protected KBEnvironment env = null;
-
-	/**
-	 * Creates or connects to a database, whose name will match the given {@link KBDatabase.DatabaseType}
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 */
-	public KBDatabase(KBEnvironment env, DatabaseType type) {
-		this.env = env;
-		this.type = type;
-		this.name = type.name();
-
-		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + type.toString();
-		//System.out.println("db path: " + this.envFilePath);
-
-		this.environment = new Env();
-    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
-    	File thePath = new File(this.envFilePath);
-    	if (!thePath.exists()) {
-    		thePath.mkdirs();
-    		isLoaded = false;
-    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
-    	} else {
-    		// we assume that if the DB files exist, it has been already loaded
-    		isLoaded = true;
-    	}
-    	this.environment.open(envFilePath, Constants.NOTLS);
-		db = this.environment.openDatabase();
-	}
-
-	/**
-	 * Creates or connects to a database with the given name.
-	 * 
-	 * @param env the KBEnvironment surrounding this database
-	 * @param type the type of database
-	 * @param name the name of the database 
-	 */
-	public KBDatabase(KBEnvironment env, DatabaseType type, String name) {
-		this.env = env;
-		this.type = type;
-		this.name = name;
-
-		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + name;
-		this.environment = new Env();
-    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
-    	File thePath = new File(this.envFilePath);
-    	if (!thePath.exists()) {
-    		thePath.mkdirs();
-    		isLoaded = false;
-    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
-    	} else {
-    		// we assume that if the DB files exist, it has been already loaded
-    		isLoaded = true;
-    		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
-    	}
-    	this.environment.open(envFilePath);
-		db = this.environment.openDatabase();
-	}
-
-	public Database getDatabase() {
-		return db;
-	}
-
-	public Env getEnvironment() {
-		return environment;
-	}
-
-	/**
-	 * Returns the type of this database
-	 * 
-	 * @return the type of this database
-	 */
-	public DatabaseType getType() {
-		return type;
-	}
-
-	/**
-	 * Returns the name of this database
-	 * 
-	 * @return the name of this database
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Returns the number of entries in the database
-	 * 
-	 * @return the number of entries in the database
-	 */
-	public long getDatabaseSize() {
-		//return getDatabase(true).count();
-
-		Stat statistics = db.stat();
-		return statistics.ms_entries;
-	}
-
-	/**
-	 * Retrieves the value associated with the given key, either from the persistent database, or from memory if
-	 * the database has been cached. This will return null if the key is not found, or has been excluded from the cache.
-	 * 
-	 * @param key the key to search for
-	 * @return the value associated with the given key, or null if none exists.
-	 */
-	public abstract V retrieve(K key);
-
-	/**
-	 * Deserialises a CSV record.
-	 * 
-	 * @param record the CSV record to deserialise
-	 * @return the key,value pair encoded within the record
-	 * @throws IOException if there is a problem decoding the record
-	 */
-	public abstract KBEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException;
-
-	/**
-	 * Builds the persistent database from a file (CSV normally, or JSON).
-	 * 
-	 * @param dataFile the file (CSV , JSON or XML file) containing data to be loaded
-	 * @param overwrite indicate if the existing database should be overwritten
-	 */
-	public abstract void loadFromFile(File dataFile, boolean overwrite) throws Exception;
-
-	/**
-	 * @return an iterator for the entries in this database, in ascending key order.
-	 */
-	public KBIterator getIterator() {
-		return new KBIterator(this);
-	}
-
-	/**
-	 * Closes the underlying database
-	 */
-	public void close() {
-		if (db != null)
-			db.close();
-    	if (environment != null)
-	    	environment.close();
-	}
-
-	public boolean isLoaded() {
-		return isLoaded;
 	}
 }

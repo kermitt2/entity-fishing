@@ -105,37 +105,37 @@ public abstract class KBEnvironment {
 	 */
 	public enum StatisticName {
 		/**
-		 * The number of articles (not disambiguations or redirects) available
+		 * number of articles (not disambiguations or redirects)
 		 */
 		articleCount,
 		
 		/**
-		 * The number of categories available
+		 * number of categories
 		 */
 		categoryCount,
 		
 		/**
-		 * The number of disambiguation pages available
+		 * number of disambiguation pages
 		 */
 		disambiguationCount,
 		
 		/**
-		 * The number of redirects available
+		 * number of redirects
 		 */
 		redirectCount,
 		
 		/**
-		 * A long value representation of the date and time this dump was last edited -- use new Date(long) to get to parse
+		 * date and time this dump was last edited, use new Date(long)
 		 */
 		lastEdit,
 		
 		/**
-		 * The maximum path length between articles and the root category 
+		 * maximum path length between articles and the root category 
 		 */
 		maxCategoryDepth,
 		
 		/**
-		 * The id of root category, below which all articles should be organized 
+		 * id of root category
 		 */
 		rootCategoryId 
 	}

@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Handler for the parser of mediawiki format able, in particular, to modify
  * the mediawiki articles into simpler text formats. 
+ * Based on the Sweble parsing framework.
  */
 public class MediaWikiParser {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MediaWikiParser.class);

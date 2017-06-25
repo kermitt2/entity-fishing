@@ -16,6 +16,8 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 /**
  * The class offering an access to the (N)ERD Knowledge Base, concepts and all the language indenpendent
  * semantic information, and access to language-specific data level.
+ *
+ * -> to be replaced by com.scienceminer.nerd.kb.UpperKnowledgeBase
  * 
  */
 public class KnowledgeBase {

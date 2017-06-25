@@ -10,7 +10,7 @@ import com.scienceminer.nerd.kb.model.hadoop.*;
 /**
  * Represents a page of type article in Wikipedia, e.g. en entity or a concept
  * 
- *  -> to be replaced by a Concept object
+ *  -> to be replaced by a LanguageConcept object
  */
 public class Article extends Page {
 

@@ -83,7 +83,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	}
 
 	/**
-	 * Builds a KBEnvironment, by loading all of the data files stored in the given directory into persistent databases.
+	 * Builds a KBEnvironment by loading all of the data files stored in the given directory into persistent databases.
 	 * 
 	 * It will not create the environment or any databases unless all of the required files are found in the given directory. 
 	 * 

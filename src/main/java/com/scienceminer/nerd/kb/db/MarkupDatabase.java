@@ -28,7 +28,8 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(KBDatabase.class);
 
-	// by default we only store the first paragraph with markup, not the full markup content
+	// by default we only store the first paragraph of the wiki text associated to a page, 
+	// not the full markup content
 	private boolean full = false;
 
 	private enum DumpTag {page, id, text, ignorable};

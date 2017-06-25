@@ -25,7 +25,8 @@ public class TitleDatabase extends StringIntDatabase {
 		if ((type != DatabaseType.articlesByTitle) && 
 			(type != DatabaseType.categoriesByTitle) && 
 			(type != DatabaseType.templatesByTitle) ) 
-			throw new IllegalArgumentException("type must be either DatabaseType.articlesByTitle, DatabaseType.categoriesByTitle or DatabaseType.templatesByTitle");
+			throw new IllegalArgumentException("type must be either DatabaseType.articlesByTitle, " + 
+				"DatabaseType.categoriesByTitle or DatabaseType.templatesByTitle");
 	}
 
 	@Override
@@ -61,7 +62,6 @@ public class TitleDatabase extends StringIntDatabase {
 			throw new NerdResourceException("Resource file not found");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-
 		int nbToAdd = 0;
 		String line = null;
 		Transaction tx = environment.createWriteTransaction();
@@ -74,7 +74,6 @@ public class TitleDatabase extends StringIntDatabase {
 			}
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 			KBEntry<String,Integer> entry = deserialiseCsvRecord(cri);
-
 			if (entry != null) {				
 				try {
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));

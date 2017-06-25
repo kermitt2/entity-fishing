@@ -25,7 +25,8 @@ import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 /**
- * A factory for creating the LMDB databases used in (N)ERD 
+ * A factory for creating the LMDB databases used in (N)ERD Knowlegde Base for the 
+ * lower environment (e.g. the language-dependent part of the KB).
  */
 public class KBDatabaseFactory {
 	private static final Logger LOGGER = LoggerFactory.getLogger(KBDatabaseFactory.class);	
@@ -96,8 +97,6 @@ public class KBDatabaseFactory {
 					throw new NerdResourceException("Markup file not found");
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-				long bytesRead = 0;
-
 				String line = null;
 				int nbToAdd = 0;
 				Transaction tx = environment.createWriteTransaction();
@@ -108,7 +107,6 @@ public class KBDatabaseFactory {
 						nbToAdd = 0;
 						tx = environment.createWriteTransaction();
 					}
-					bytesRead = bytesRead + line.length() + 1;
 					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 					try {
 						KBEntry<Integer,DbPage> entry = deserialiseCsvRecord(cri);
@@ -301,15 +299,6 @@ public class KBDatabaseFactory {
 
 	public KBDatabase<Integer,String> buildDbConceptByPageIdDatabase() {
 		return new KBDatabase<Integer,String>(env, DatabaseType.conceptByPageId) {
-			/*protected void add(KBEntry<Integer,String> entry) {
-				try (Transaction tx = environment.createWriteTransaction()) {
-					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-					tx.commit();
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-			}*/
-
 			// using standard LMDB copy mode
 			@Override
 			public String retrieve(Integer key) {

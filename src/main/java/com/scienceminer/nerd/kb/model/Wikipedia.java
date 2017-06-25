@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 /**
  * Represent a language specific instance of Wikipedia
  * 
- * -> to be replaced by com.scienceminer.nerd.kb.KnowledgeBase
+ * -> to be replaced by com.scienceminer.nerd.kb.LowerKnowledgeBase
  */
 public class Wikipedia {
 

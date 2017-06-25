@@ -56,15 +56,6 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 		}
 		return record;
 	}
-	
-	/*protected void add(KBEntry<Integer,Integer> entry) {
-		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-			tx.commit();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
 		if (isLoaded && !overwrite)

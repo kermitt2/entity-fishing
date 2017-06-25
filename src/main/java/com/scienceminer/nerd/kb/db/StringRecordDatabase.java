@@ -55,15 +55,6 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		}
 		return record;
 	}
-	
-	/*public void add(KBEntry<String,Record> entry) {
-		try (Transaction tx = environment.createWriteTransaction()) {
-			db.put(tx, bytes(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-			tx.commit();
-		} catch(Exception e) {
-			LOGGER.error("Cannot add entry (" + entry.getKey() + ", " + entry.getValue() + ")", e);
-		}
-	}*/
 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 		if (dataFile == null || (isLoaded && !overwrite))
@@ -74,7 +65,6 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 			throw new NerdResourceException("Resource file not found");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-
 		String line = null;
 		int nbToAdd = 0;
 		Transaction tx = environment.createWriteTransaction();

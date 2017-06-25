@@ -23,7 +23,8 @@ import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 /**
- * A KB corresponding to a Wikipedia instance, which is concretely stored as a set of LMDB databases.
+ * The part of the KB corresponding to language-dependent resources, e.g. 
+ * a Wikipedia instance, which is concretely stored as a set of LMDB databases.
  * 
  */
 public class KBLowerEnvironment extends KBEnvironment {

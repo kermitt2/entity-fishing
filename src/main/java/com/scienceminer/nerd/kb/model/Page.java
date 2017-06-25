@@ -4,7 +4,7 @@ import com.scienceminer.nerd.kb.db.KBLowerEnvironment;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 /**
- * Represents pages of any type in Wikipedia
+ * Represents pages of any types in Wikipedia
  */
 public class Page implements Comparable<Page> {
 

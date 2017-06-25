@@ -57,11 +57,7 @@ public class Lexicon {
 
     public static Lexicon getInstance() {
         if (instance == null) {
-            //double check idiom
-            // synchronized (instanceController) {
-                if (instance == null)
-					getNewInstance();
-            // }
+			getNewInstance();
         }
         return instance;
     }
@@ -165,8 +161,6 @@ public class Lexicon {
                 ist = new FileInputStream(file);
             //else
             //    ist = getClass().getResourceAsStream(path);
-
-
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 

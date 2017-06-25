@@ -8,7 +8,7 @@ import com.scienceminer.nerd.kb.db.*;
 /**
  * Represents redirects in Wikipedia.   
  *  
- *  -> to be removed
+ *  -> to be replaced by com.scienceminer.nerd.kb.Variant
  */
 public class Redirect extends Page {
 	
