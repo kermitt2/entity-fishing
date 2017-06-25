@@ -55,8 +55,8 @@ public class DocumentContext extends NerdContext {
 		}
 
 		int nb = 0;
-		Map<String, Wikipedia> wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
-		Wikipedia wikipedia = wikipedias.get(scopeLang.getLang());
+		Map<String, LowerKnowledgeBase> wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
+		LowerKnowledgeBase wikipedia = wikipedias.get(scopeLang.getLang());
 		for(NerdEntity entity : entities) {
 			if (nb == MAX_SENSES)
 				break;

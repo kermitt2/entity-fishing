@@ -35,7 +35,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
  */
 public class TestLookup {
 	
-	private Wikipedia wikipedia = null;
+	private LowerKnowledgeBase wikipedia = null;
 
 	@Before
 	public void setUp() {

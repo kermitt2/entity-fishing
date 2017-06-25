@@ -56,7 +56,7 @@ public class NerdEngine {
 	
 	private EngineParsers parsers = null;
 	
-	private Map<String, Wikipedia> wikipedias = null;
+	private Map<String, LowerKnowledgeBase> wikipedias = null;
 	private Map<String, NerdRanker> rankers = null;
 	private Map<String, NerdSelector> selectors = null;
 	private Relatedness relatedness = null;
@@ -288,7 +288,7 @@ for(NerdCandidate cand : cands) {
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidates(List<NerdEntity> entities,
 															String lang) {
 		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<NerdEntity, List<NerdCandidate>>();
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
 		}
@@ -461,7 +461,7 @@ for(NerdCandidate cand : cands) {
 
 		NerdRanker disambiguator = rankers.get(lang);
 		if (disambiguator == null) {
-			Wikipedia wikipedia = wikipedias.get(lang);
+			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
 				disambiguator = new NerdRanker(wikipedia, 
 												minSenseProbability, 
@@ -523,7 +523,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 		// get the disambiguator for this language
 		NerdRanker disambiguator = rankers.get(lang);
 		if (disambiguator == null) {
-			Wikipedia wikipedia = wikipedias.get(lang);
+			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
 				disambiguator = new NerdRanker(wikipedia, 
 												minSenseProbability, 
@@ -1106,7 +1106,7 @@ System.out.println("Merging...");
 			double threshold) {	
 		NerdSelector selector = selectors.get(lang);
 		if (selector == null) {
-			Wikipedia wikipedia = wikipedias.get(lang);
+			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
 				selector = new NerdSelector(wikipedia);
 				selectors.put(lang, selector);
@@ -1285,7 +1285,7 @@ System.out.println("Merging...");
 	private List<List<NerdCandidate>> generateCandidatesTerms(List<WeightedTerm> terms, String lang) {
 		List<List<NerdCandidate>> result = new ArrayList<List<NerdCandidate>>();
 		int n = 0;
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		for(WeightedTerm term : terms) {
 			List<NerdCandidate> candidates = null;
 			List<NerdEntity> entities = term.getNerdEntities();
@@ -1365,7 +1365,7 @@ System.out.println("Merging...");
 	 */
 	/*public List<Category> getParentCategories(String articleID, String lang) {
 		// get the wikipedia article
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		Article article = wikipedia.getArticleByTitle(articleID.replace("_", " "));
 		if (article == null) {
 			System.out.println("article NOT found in wiki.miner: " + articleID);

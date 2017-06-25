@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.hadoop.*; 
-import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.*;
 
 import org.apache.hadoop.record.*;
@@ -23,6 +23,8 @@ import static org.fusesource.lmdbjni.Constants.*;
 
 /**
  * A KB corresponding to a Wikipedia instance, which is concretely stored as a set of LMDB databases.
+ *
+ * -> should be renamed LowerKBEnvironment
  * 
  */
 public abstract class KBEnvironment {

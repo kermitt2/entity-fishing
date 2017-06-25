@@ -8,6 +8,7 @@ import java.util.*;
 
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.kb.db.*;
+import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
@@ -22,9 +23,9 @@ import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 public class ArticleTrainingSample extends TrainingSample<Article> {
 	public static final Logger LOGGER = LoggerFactory.getLogger(TermVectorTrainer.class);	
 	
-	private Wikipedia wikipedia = null;
+	private LowerKnowledgeBase wikipedia = null;
 
-	public ArticleTrainingSample(Wikipedia wikipedia) {
+	public ArticleTrainingSample(LowerKnowledgeBase wikipedia) {
 		super();
 		this.wikipedia = wikipedia;
 	}
@@ -32,7 +33,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 	/**
 	 * Create a random sample of articles from Wikipedia given some constraints
 	 */
-	public ArticleTrainingSample(Wikipedia wikipedia, int size, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {
+	public ArticleTrainingSample(LowerKnowledgeBase wikipedia, int size, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {
 		super();
 		this.wikipedia = wikipedia;
 		double lastWarningProgress = 0;
@@ -171,7 +172,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 
 	public static List<ArticleTrainingSample> buildExclusiveSamples(ArticleTrainingSampleCriterias constraints, 
 																List<Integer> sizes, 
-																Wikipedia wikipedia) {
+																LowerKnowledgeBase wikipedia) {
 		List<ArticleTrainingSample> samples = new ArrayList<ArticleTrainingSample>();
 		List<Integer> exclude = constraints.getExclude();
 

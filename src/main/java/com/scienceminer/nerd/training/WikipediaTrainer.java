@@ -11,7 +11,7 @@ import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
-import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ import org.grobid.trainer.LabelStat;
 public class WikipediaTrainer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WikipediaTrainer.class);
 
-	private Wikipedia wikipedia = null;
+	private LowerKnowledgeBase wikipedia = null;
 
 	//directory in which files will be stored
 	private File dataDir = null;

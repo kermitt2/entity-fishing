@@ -31,7 +31,7 @@ public class UpperKnowledgeBase {
 
 	private KBUpperEnvironment env = null;
 
-	private Map<String, Wikipedia> wikipedias = null;
+	private Map<String, LowerKnowledgeBase> wikipedias = null;
     private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
 
 	private long conceptCount = -1;
@@ -67,12 +67,12 @@ public class UpperKnowledgeBase {
 			this.env = new KBUpperEnvironment(conf);
 			this.env.buildEnvironment(conf, false);
 
-			wikipedias = new HashMap<String, Wikipedia>(); 
+			wikipedias = new HashMap<String, LowerKnowledgeBase>(); 
             wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
 
             LOGGER.info("Init English lower Knowledge base layer");
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-			Wikipedia wikipedia_en = new Wikipedia(conf);
+			LowerKnowledgeBase wikipedia_en = new LowerKnowledgeBase(conf);
 
 			wikipedias.put(Language.EN, wikipedia_en);
             WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
@@ -81,13 +81,13 @@ public class UpperKnowledgeBase {
 			
 			LOGGER.info("Init German lower Knowledge base layer");
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-de.yaml"), NerdConfig.class);;
-			Wikipedia wikipedia_de = new Wikipedia(conf);
+			LowerKnowledgeBase wikipedia_de = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
             LOGGER.info("Init French lower Knowledge base layer");
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-fr.yaml"), NerdConfig.class);;
-			Wikipedia wikipedia_fr = new Wikipedia(conf);
+			LowerKnowledgeBase wikipedia_fr = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
 
@@ -100,11 +100,11 @@ public class UpperKnowledgeBase {
 		} 
 	}
 
-	public Wikipedia getWikipediaConf(String lang) {
+	public LowerKnowledgeBase getWikipediaConf(String lang) {
 		return wikipedias.get(lang);
 	}
 	
-	public Map<String, Wikipedia> getWikipediaConfs() {
+	public Map<String, LowerKnowledgeBase> getWikipediaConfs() {
 		return wikipedias;
 	}
 
@@ -161,8 +161,8 @@ public class UpperKnowledgeBase {
 
 	public void close() {
 		// close wikipedia instances
-		for (Map.Entry<String, Wikipedia> entry : wikipedias.entrySet()) {
-			Wikipedia wikipedia = entry.getValue();
+		for (Map.Entry<String, LowerKnowledgeBase> entry : wikipedias.entrySet()) {
+			LowerKnowledgeBase wikipedia = entry.getValue();
 			wikipedia.close();
 		}
 		env.close();

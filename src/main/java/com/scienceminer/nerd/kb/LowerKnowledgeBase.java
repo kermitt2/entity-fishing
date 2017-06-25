@@ -1,4 +1,4 @@
-package com.scienceminer.nerd.kb.model;
+package com.scienceminer.nerd.kb;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,17 +17,18 @@ import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
 import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.*;
 
 import org.xml.sax.SAXException;
 
 /**
- * Represent a language specific instance of Wikipedia
+ * Represent the language specific resources of the Knowledge Base, e.g. a 
+ * Wikipedia instance. 
  * 
- * -> to be replaced by com.scienceminer.nerd.kb.LowerKnowledgeBase
  */
-public class Wikipedia {
+public class LowerKnowledgeBase {
 
-	protected static final Logger LOGGER = LoggerFactory.getLogger(Wikipedia.class);
+	protected static final Logger LOGGER = LoggerFactory.getLogger(LowerKnowledgeBase.class);
 
 	private KBLowerEnvironment env = null;
 	private int wikipediaArticleCount = -1;
@@ -41,7 +42,7 @@ public class Wikipedia {
 	 * Initialises a newly created Wikipedia according to the given configuration. 
 	 *  
 	 */
-	public Wikipedia(NerdConfig conf) {
+	public LowerKnowledgeBase(NerdConfig conf) {
 		this.env = new KBLowerEnvironment(conf);
 		try {
 			this.env.buildEnvironment(conf, false);
@@ -89,8 +90,8 @@ public class Wikipedia {
 	 * Returns the root Category from which all other categories can be browsed.
 	 * 
 	 */
-	public Category getRootCategory() {
-		return new Category(env, env.retrieveStatistic(StatisticName.rootCategoryId).intValue());
+	public com.scienceminer.nerd.kb.model.Category getRootCategory() {
+		return new com.scienceminer.nerd.kb.model.Category(env, env.retrieveStatistic(StatisticName.rootCategoryId).intValue());
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class Wikipedia {
 	 * Returns the Page referenced by the given Wikidata id for the language of the Wikipedia. 
 	 * The page can be cast into the appropriate type for more specific functionality. 
 	 *  
-	 * @param id	the Wikidata id of the Page to retrieve.
+	 * @param id the Wikidata id of the Page to retrieve.
 	 * @return the Page referenced by the given id, or null if one does not exist. 
 	 */
 	/*public Page getPageByWikidataId(String wikidataId) {
@@ -152,7 +153,7 @@ public class Wikipedia {
 	 * Returns the Category referenced by the given (case sensitive) title. 
 	 *
 	 */
-	public Category getCategoryByTitle(String title) {
+	public com.scienceminer.nerd.kb.model.Category getCategoryByTitle(String title) {
 		title = title.substring(0,1).toUpperCase() + title.substring(1);
 		Integer id = env.getDbCategoriesByTitle().retrieve(title);
 
@@ -161,7 +162,7 @@ public class Wikipedia {
 
 		Page page = Page.createPage(env, id);
 		if (page.getType() == PageType.category)
-			return (Category) page;
+			return (com.scienceminer.nerd.kb.model.Category) page;
 		else
 			return null;
 	}

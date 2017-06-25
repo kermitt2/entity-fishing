@@ -10,7 +10,7 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
-import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -108,8 +108,8 @@ public class NerdRestKB {
 		if (identifier != null) {
 			NerdEntity entity = new NerdEntity();
 			entity.setLang(lang);
-			//Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
-			Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
+			//LowerKnowledgeBase wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
+			LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
 
 			if (wikipedia == null) {
 				LOGGER.error("Language is not supported. Bad request.");
@@ -164,7 +164,7 @@ public class NerdRestKB {
 
 					// translations
 					//Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
-					Map<String, Wikipedia> wikipedias = 
+					Map<String, LowerKnowledgeBase> wikipedias = 
 						UpperKnowledgeBase.getInstance().getWikipediaConfs();
 					//Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
 					Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
@@ -213,7 +213,7 @@ public class NerdRestKB {
 			if (concept != null) {
 				Integer pageId = concept.getPageIdByLang("en");
 	            if (pageId != null) {
-	                Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
+	                LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
 	                Article article = (Article)wikipedia.getPageById(pageId);
 	                if (article != null) {
 						entity.setPreferredTerm(article.getTitle());
@@ -251,7 +251,7 @@ public class NerdRestKB {
 						}
 
 						// translations
-						Map<String, Wikipedia> wikipedias = 
+						Map<String, LowerKnowledgeBase> wikipedias = 
 							UpperKnowledgeBase.getInstance().getWikipediaConfs();
 						Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
 							UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
@@ -315,7 +315,7 @@ public class NerdRestKB {
 		String json = null;
 		try {
 			//LOGGER.debug(">> set raw text for stateless service'...");
-			Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
+			LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
 
 			if ((term == null) || (term.trim().length() == 0)) {
 				LOGGER.error("Empty term. Bad request.");

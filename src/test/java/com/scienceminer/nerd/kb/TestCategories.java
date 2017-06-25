@@ -34,7 +34,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
  */
 public class TestCategories {
 	
-	private Wikipedia wikipedia = null;
+	private LowerKnowledgeBase wikipedia = null;
 
 	@Before
 	public void setUp() {
@@ -42,7 +42,7 @@ public class TestCategories {
 			NerdProperties.getInstance();
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-        	wikipedia = new Wikipedia(conf); 
+        	wikipedia = new LowerKnowledgeBase(conf); 
         } catch(Exception e) {
         	e.printStackTrace();
         }

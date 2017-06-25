@@ -25,6 +25,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.scienceminer.nerd.kb.model.Label.Sense;
 import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.features.*;
 import com.scienceminer.nerd.training.*;
@@ -54,7 +55,7 @@ public class NerdSelector {
 	// ranker model files
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
 
-	private Wikipedia wikipedia = null;
+	private LowerKnowledgeBase wikipedia = null;
 	//private MediaWikiParser cleaner = null;
 
 	// regression model
@@ -67,7 +68,7 @@ public class NerdSelector {
 	private String arffDataset = null;
 	private AttributeDataset attributeDataset = null;
 
-	public NerdSelector(Wikipedia wikipedia) throws Exception {
+	public NerdSelector(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
 		
 		NerdConfig conf = wikipedia.getConfig();

@@ -46,7 +46,7 @@ public class EnvironmentBuilder {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         NerdConfig conf = mapper.readValue(confFile, NerdConfig.class);
         // this will build the LMDB databases if not available (so the first time) form the CSV files
-        Wikipedia wikipedia = new Wikipedia(conf);
+        LowerKnowledgeBase wikipedia = new LowerKnowledgeBase(conf);
 
         // mapping wikipedia categories / domains and domain assigments for all pageid
         if (lang.equals("en")) {

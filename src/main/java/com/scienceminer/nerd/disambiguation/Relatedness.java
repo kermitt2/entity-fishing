@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.model.Wikipedia.Direction;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
 
 import org.grobid.core.utilities.OffsetPosition;
 
@@ -34,7 +34,7 @@ public class Relatedness {
 	private static volatile Relatedness instance = null;
 		
 	// all the maps use the language code as a key
-	private Map<String, Wikipedia> wikipedias = null;
+	private Map<String, LowerKnowledgeBase> wikipedias = null;
 	private Map<String, ConcurrentMap<Long,Double>> caches = null;
 
 	private long comparisonsRequested = 0;
@@ -147,7 +147,7 @@ public class Relatedness {
 		if (artA.getId() == artB.getId()) 
 			return 1.0;
 
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		NerdConfig conf = wikipedia.getConfig();
 
 		EntityPairRelatedness epr = getEntityPairRelatedness(artA, artB, wikipedia);
@@ -176,7 +176,7 @@ public class Relatedness {
 			return total/count;
 	}
 
-	public EntityPairRelatedness getEntityPairRelatedness(Article artA, Article artB, Wikipedia wikipedia) {
+	public EntityPairRelatedness getEntityPairRelatedness(Article artA, Article artB, LowerKnowledgeBase wikipedia) {
 		EntityPairRelatedness epr = new EntityPairRelatedness(artA, artB);
 		NerdConfig conf = wikipedia.getConfig();
 
@@ -193,7 +193,7 @@ public class Relatedness {
 	/**
 	 *  Following Milne anf Witten relatedness measurement as implemented in WikipediaMiner
 	 */
-	private EntityPairRelatedness setPageLinkFeatures(EntityPairRelatedness epr, Direction dir, Wikipedia wikipedia) {
+	private EntityPairRelatedness setPageLinkFeatures(EntityPairRelatedness epr, Direction dir, LowerKnowledgeBase wikipedia) {
 		if (epr.getArticleA().getId() == epr.getArticleB().getId()) {
 			// nothing to do
 			return epr;
@@ -316,7 +316,7 @@ public class Relatedness {
 		// probability
 		List<Article> bestCandidateSenses = new ArrayList<Article>();
 
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		for (NerdCandidate candidate : candidates) {
 			if (candidate != targetCandidate) {
 				int bestSense = candidate.getWikipediaExternalRef();
@@ -408,7 +408,7 @@ public class Relatedness {
 		// probability
 		//List<Article> bestCandidateSenses = new ArrayList<Article>();
 
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		for (NerdCandidate candidate : candidates) {
 			
 			int bestSense = candidate.getWikipediaExternalRef();
@@ -463,7 +463,7 @@ public class Relatedness {
 		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
 		List<Integer> extraSensesIds = new ArrayList<Integer>();
 		
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		// we add the "certain" senses
 		List<Article> certainPages = new ArrayList<Article>();
@@ -561,7 +561,7 @@ public class Relatedness {
 
 		List<Integer> matchIndexes = new ArrayList<Integer>();
 		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		while (m.find()) 
 			matchIndexes.add(m.start());
@@ -638,7 +638,7 @@ public class Relatedness {
 							String lang) throws Exception{
 		Vector<Label.Sense> unambig = new Vector<Label.Sense>();
 		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		for (WeightedTerm term : terms) {
 
 			String termString = term.getTerm();
@@ -689,7 +689,7 @@ public class Relatedness {
 	}
 	
 	public long getTermOccurrence(String text, String lang) {
-		Wikipedia wikipedia = wikipedias.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		Label label = wikipedia.getLabel(text);
 		if (label != null)
 			return label.getOccCount();
@@ -723,7 +723,7 @@ public class Relatedness {
 		Iterator it = wikipedias.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
-	        Wikipedia wikipedia = (Wikipedia)pair.getValue();
+	        LowerKnowledgeBase wikipedia = (LowerKnowledgeBase)pair.getValue();
 			wikipedia.close();
 	        it.remove(); // avoids a ConcurrentModificationException
 	   	}

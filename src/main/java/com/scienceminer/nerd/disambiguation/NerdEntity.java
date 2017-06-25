@@ -407,7 +407,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	public void setWikipediaMultilingualRef(Map<String,String> translations, 
 											List<String> targetLanguages,
-											Map<String, Wikipedia> wikipedias) {
+											Map<String, LowerKnowledgeBase> wikipedias) {
 		if ( (targetLanguages != null) && (targetLanguages.size() != 0) ) {	
 			Map<String,String> subTranslations = new TreeMap<String,String>();
 			Map<String,Integer> subArticleCorrespondance = new TreeMap<String,Integer>();
@@ -612,7 +612,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		wikipediaExternalRef = candidate.getWikipediaExternalRef();
 		wikidataId = candidate.getWikidataId();
 
-		Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
+		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 		Page page = wikipedia.getPageById(wikipediaExternalRef);
 		Definition definition = new Definition();
 		try {

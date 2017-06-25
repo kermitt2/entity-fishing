@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.model.hadoop.*; 
-import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.*;
 
 import org.apache.hadoop.record.*;

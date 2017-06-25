@@ -25,6 +25,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.training.*;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import com.scienceminer.nerd.evaluation.*;
@@ -54,7 +55,7 @@ public class NerdRanker {
 	// ranker model files
 	private static String MODEL_PATH_LONG = "data/models/ranker-long";
 
-	private Wikipedia wikipedia = null;
+	private LowerKnowledgeBase wikipedia = null;
 	//private MediaWikiParser cleaner = null;
 
 	private double minSenseProbability = 0.0; 
@@ -72,7 +73,7 @@ public class NerdRanker {
 	private String arffDataset = null;
 	private AttributeDataset attributeDataset = null;
 
-	public NerdRanker(Wikipedia wikipedia) throws Exception {
+	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
 		this.minSenseProbability = NerdEngine.minSenseProbability;
 		this.maxLabelLength = NerdEngine.maxLabelLength;
@@ -88,7 +89,7 @@ public class NerdRanker {
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
-	public NerdRanker(Wikipedia wikipedia, 
+	public NerdRanker(LowerKnowledgeBase wikipedia, 
 						double minSenseProbability,
 						int maxLabelLength, 
 						double minLinkProbability,

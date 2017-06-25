@@ -21,7 +21,7 @@ import org.grobid.core.data.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Article;
 
 /**

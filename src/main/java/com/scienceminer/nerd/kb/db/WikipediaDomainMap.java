@@ -19,6 +19,7 @@ import org.apache.commons.lang.ArrayUtils;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
@@ -52,7 +53,7 @@ public class WikipediaDomainMap {
     // wikipedia main categories (pageId of the category) to grisp domains
     private Map<Integer,List<Integer>> wikiCat2domains = null;
 
-    private Wikipedia wikipedia = null;
+    private LowerKnowledgeBase wikipedia = null;
     private String lang = null;
 
     private static String grispDomains = "data/grisp/domains.txt";
@@ -78,7 +79,7 @@ public class WikipediaDomainMap {
         db = this.environment.openDatabase();
     }
 
-    public void setWikipedia(Wikipedia wikipedia) {
+    public void setWikipedia(LowerKnowledgeBase wikipedia) {
         this.wikipedia = wikipedia;
         try {
             loadGrispMapping();

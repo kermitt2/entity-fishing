@@ -28,7 +28,7 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.kb.db.*;
-import com.scienceminer.nerd.kb.model.Wikipedia;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

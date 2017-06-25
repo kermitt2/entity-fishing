@@ -134,7 +134,7 @@ public class Statement implements Serializable {
                 if (concept != null) {
                     Integer pageId = concept.getPageIdByLang("en");
                     if (pageId != null) {
-                        Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
+                        LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
                         Page page = wikipedia.getPageById(pageId);
                         if (page != null) {
                             byte[] encodedValueTitle = encoder.quoteAsUTF8(page.getTitle());
