@@ -75,6 +75,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	public static int INTERNAL_LINKS = 0;
 	public static int BOLD = 1;
 	public static int ITALICS = 2;
+	public static int INTERNAL_LINKS_ARTICLES = 3;
 
 	/**
 	 * Becomes true if we are no long at the Beginning Of the whole Document.
@@ -219,29 +220,49 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtInternalLink link) {
-		if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS)))) {
-			write(link.getPrefix());
-			write("[[");
-			
-			iterate(link.getTarget());
+		if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
+			if (link.getPrefix() == null) {
+				// this is an article so we preserve the link - there is no prefix
+				write("[[");
+				iterate(link.getTarget());
+				if (link.hasTitle()) {
+					write("|");
+					iterate(link.getTitle());		
+				} 
+				write("]]");
+				// note: what to do with the postfix? 
+			} else {
+				// its not an article so we output only the anchor
+				if (!link.hasTitle()) {
+					iterate(link.getTarget());
+				}
+				else {
+					iterate(link.getTitle());
+				}
+				//write(link.getPostfix());
+				// note: what to do with the postfix?
+			}
 
+		} else if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS)))) {
+			write("[[");
+			write(link.getPrefix());
+			iterate(link.getTarget());
 			if (link.hasTitle()) {
 				write("|");
 				iterate(link.getTitle());		
 			} 
-
 			write("]]");
-			write(link.getPostfix());
+			//write(link.getPostfix()); // ? what is a postfix?
 		}
 		else {
-			write(link.getPrefix());
+			//write(link.getPrefix()); // ?
 			if (!link.hasTitle()) {
 				iterate(link.getTarget());
 			}
 			else {
 				iterate(link.getTitle());
 			}
-			write(link.getPostfix());
+			//write(link.getPostfix()); // ? what is a postfix?
 		}
 	}
 

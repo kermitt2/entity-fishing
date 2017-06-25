@@ -129,10 +129,10 @@ public class NerdRestKB {
 					// definition
 					Definition definition = new Definition();
 					try {
-						definition.setDefinition(article.getFirstParagraphMarkup());
+						definition.setDefinition(article.getFirstParagraphWikiText());
 					}
 					catch(Exception e) {
-						LOGGER.debug("Error when getFirstParagraphMarkup for PageID "+ identifier);
+						LOGGER.debug("Error when getFirstParagraphWikiText for page id "+ identifier);
 					}
 					definition.setSource("wikipedia-" + lang);
 					definition.setLang(lang);
@@ -218,10 +218,10 @@ public class NerdRestKB {
 						// definition
 						Definition definition = new Definition();
 						try {
-							definition.setDefinition(article.getFirstParagraphMarkup());
+							definition.setDefinition(article.getFirstParagraphWikiText());
 						}
 						catch(Exception e) {
-							LOGGER.debug("Error when getFirstParagraphMarkup for PageID "+ id);
+							LOGGER.debug("Error when getFirstParagraphWikiTextfor page id "+ id);
 						}
 						definition.setSource("wikipedia-en");
 						definition.setLang("en");

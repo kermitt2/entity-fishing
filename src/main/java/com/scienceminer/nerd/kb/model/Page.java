@@ -2,7 +2,6 @@ package com.scienceminer.nerd.kb.model;
 
 import com.scienceminer.nerd.kb.db.KBLowerEnvironment;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
-import com.scienceminer.nerd.utilities.MediaWikiParser;
 
 /**
  * Represents pages of any type in Wikipedia
@@ -95,7 +94,7 @@ public class Page implements Comparable<Page> {
 	}
 
 	/**
-	 * Compares this page to another page based on their weights. 
+	 * Compares this page to another page based on their associated weights 
 	 * 
 	 */
     @Override
@@ -135,61 +134,18 @@ public class Page implements Comparable<Page> {
 	}
 
 	/**
-	 * @return the full content of this page, in mediawiki markup format
+	 * @return the full content of this page in mediawiki markup format, after basic cleaning
 	 */
-	public String getFullMarkup() {
+	public String getFullWikiText() {
 		return env.getDbMarkupFull().retrieve(id);
 	}
 
 	/**
-	 * Returns the first paragraph from the content of this page, cleaned of all markup except links and 
-	 * basic formating. 
+	 * @return the first paragraph from the mediawiki markup content, after basic cleaning 
 	 * 
 	 */
-	public String getFirstParagraphMarkup() {
+	public String getFirstParagraphWikiText() {
 		return env.getDbMarkup().retrieve(id);
-	}
-
-	public static String formatFirstParagraphMarkup(String markup) {
-		MediaWikiParser stripper = new MediaWikiParser();
-
-		markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
-		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
-		markup = stripper.stripNonArticleInternalLinks(markup, null);
-		markup = stripper.stripExcessNewlines(markup);
-
-		String fp = "";
-		int pos = markup.indexOf("\n\n");
-
-		while (pos>=0) {
-			fp = markup.substring(0, pos);
-
-			if (pos > 150) 
-				break;
-
-			pos = markup.indexOf("\n\n", pos+2);
-		}
-
-		fp = fp.replaceAll("\n", " ");
-		fp = fp.replaceAll("\\s+", " ");  //turn all whitespace into spaces, and collapse them.
-		fp = fp.trim();
-
-		return fp;
-	}
-
-	public static String formatAllMarkup(String markup) {
-		MediaWikiParser stripper = new MediaWikiParser();
-
-		//markup = markup.replaceAll("={2,}(.+)={2,}", "\n"); //clear section headings completely - not just formating, but content as well.			
-		markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
-		markup = stripper.stripNonArticleInternalLinks(markup, null);
-		markup = stripper.stripExcessNewlines(markup);
-
-		markup = markup.replaceAll("\n", " ");
-		markup = markup.replaceAll("\\s+", " ");  //turn all whitespace into spaces, and collapse them.
-		markup = markup.trim();
-
-		return markup;
 	}
 
 	/**

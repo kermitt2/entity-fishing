@@ -28,7 +28,7 @@ import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.features.*;
 import com.scienceminer.nerd.training.*;
-import com.scienceminer.nerd.utilities.MediaWikiParser;
+import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import com.scienceminer.nerd.evaluation.*;
 
 import smile.validation.ConfusionMatrix;
@@ -55,7 +55,7 @@ public class NerdSelector {
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
 
 	private Wikipedia wikipedia = null;
-	private MediaWikiParser cleaner = null;
+	//private MediaWikiParser cleaner = null;
 
 	// regression model
 	private RandomForest forest = null;
@@ -71,7 +71,7 @@ public class NerdSelector {
 		this.wikipedia = wikipedia;
 		
 		NerdConfig conf = wikipedia.getConfig();
-		cleaner = new MediaWikiParser();
+		//cleaner = new MediaWikiParser();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -183,7 +183,8 @@ System.out.println(arffDataset);
 									NerdRanker ranker) throws Exception {
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 
-		String content = cleaner.getMarkupLinksOnly(article);
+		//String content = cleaner.getMarkupLinksOnly(article);
+		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
 System.out.println(content);
@@ -376,7 +377,8 @@ System.out.println("get context for this content");
 
 	private LabelStat evaluateArticle(Article article, NerdRanker ranker) throws Exception {
 System.out.println(" - evaluating " + article);
-		String content = cleaner.getMarkupLinksOnly(article);
+		//String content = cleaner.getMarkupLinksOnly(article);
+		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
@@ -407,7 +409,8 @@ System.out.println(" - evaluating " + article);
 		}
 
 		ProcessText processText = ProcessText.getInstance();
-		String text = cleaner.getCleanedContent(article);
+		//String text = cleaner.getCleanedContent(article);
+		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText());
 		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		List<Entity> nerEntities = processText.process(text, lang);
 		List<Entity> nerEntities2 = processText.processBrutal(text, lang);

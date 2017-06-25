@@ -10,7 +10,7 @@ import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
-import com.scienceminer.nerd.utilities.MediaWikiParser;
+import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 
 /**
  *
@@ -130,31 +130,33 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 			return true;
 		
 		// get and prepare markup
-		String markup = article.getFullMarkup();
-		if (markup == null)
+		String wikiText = article.getFullWikiText();
+		if (wikiText == null)
 			return false;
 		
-		MediaWikiParser stripper = new MediaWikiParser();
-		markup = stripper.stripToPlainText(markup, null); 
-		markup = stripper.stripExcessNewlines(markup);
-				
+		//MediaWikiParser stripper = new MediaWikiParser();
+		//markup = stripper.stripToPlainText(markup, null); 
+		//markup = stripper.stripExcessNewlines(markup);
+		
+		String content = MediaWikiParser.getInstance().toTextOnly(wikiText);
+
 		if ((criterias.getMinWordCount() != null) || (criterias.getMaxWordCount() != null) || 
 			(criterias.getMinLinkProportion() != null) || (criterias.getMaxLinkProportion() != null) ) {
 			//we need to count words
 					
-			StringTokenizer t = new StringTokenizer(markup);
-	    	int wordCount = t.countTokens();
+			StringTokenizer st = new StringTokenizer(content);
+	    	int tokenCount = st.countTokens();
 
-			if ((criterias.getMinWordCount() != null) && (wordCount < criterias.getMinWordCount())) {
+			if ((criterias.getMinWordCount() != null) && (tokenCount < criterias.getMinWordCount())) {
 				return false;
 			}
 			
-			if ((criterias.getMaxWordCount() != null) && (wordCount > criterias.getMaxWordCount())) {
+			if ((criterias.getMaxWordCount() != null) && (tokenCount > criterias.getMaxWordCount())) {
 				return false;
 			}
 			
 			int linkCount = article.getTotalLinksOutCount();
-			float linkProportion = (float)linkCount/wordCount;
+			float linkProportion = (float)linkCount/tokenCount;
 			if ((criterias.getMinLinkProportion() != null) && (linkProportion < criterias.getMinLinkProportion())) {
 				return false;
 			}

@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.kb.db;
 
-import com.scienceminer.nerd.kb.model.Page;
+import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
+
 import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.input.CountingInputStream;
@@ -27,6 +28,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(KBDatabase.class);
 
+	// by default we only store the first paragraph with markup, not the full markup content
 	private boolean full = false;
 
 	private enum DumpTag {page, id, text, ignorable};
@@ -89,9 +91,9 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 	}
 
 	/**
-	 * Builds the persistent markup database from an XML dump
+	 * Builds the persistent markup database from th Wikipedia XML article dump
 	 *
-	 * @param dataFile the XML file containing a wikipedia dump
+	 * @param dataFile the XML wikipedia dump
 	 * @param overwrite true if the existing database should be overwritten, otherwise false
 	 */
 	public void loadFromXmlFile(File dataFile, boolean overwrite) throws Exception  {
@@ -122,7 +124,6 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		XMLInputFactory xmlStreamFactory = XMLInputFactory.newInstance();
 		CountingInputStream countingReader = new CountingInputStream(reader);
 		XMLStreamReader xmlStreamReader = xmlStreamFactory.createXMLStreamReader(new InputStreamReader(countingReader,decoder));
-        //System.out.println("Parser class: " + xmlStreamReader.getClass().toString());
 
 		int pageTotal = 0;
 		int nbToAdd = 0;
@@ -132,16 +133,13 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 			switch (eventCode) {
 				case XMLStreamReader.START_ELEMENT :
 					switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
-						case page:
+						case page: // nothing to do
 					}
-
 					break;
 				case XMLStreamReader.END_ELEMENT :
-
 					switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
-
 						case id:
-							//only take the first id (there is a 2nd one for the revision)
+							//only take the first id (there is a second one for the revision)
 							if (currId == null)
 								currId = Integer.parseInt(characters.toString().trim());
 							break;
@@ -156,17 +154,16 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								tx = environment.createWriteTransaction();
 							}
 							if (full) {
-								// we only store the first paragraph/summary
-								currMarkup = Page.formatAllMarkup(currMarkup);
+								// we store the complete article
+								currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup);
 							} else {
 								// we only store the first paragraph/summary
-								currMarkup = Page.formatFirstParagraphMarkup(currMarkup);
+								currMarkup = MediaWikiParser.getInstance().formatFirstParagraphWikiText(currMarkup);
 							}
 							pageTotal++;
 
 							if (currMarkup.trim().length() > 5) {
 								try {
-									//db.put(tx, BigInteger.valueOf(currId).toByteArray(), bytes(currMarkup));
 									db.put(tx, KBEnvironment.serialize(currId), KBEnvironment.serialize(currMarkup));
 									nbToAdd++;
 								} catch(Exception e) {

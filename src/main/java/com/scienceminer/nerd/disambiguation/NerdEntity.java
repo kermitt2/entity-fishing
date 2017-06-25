@@ -617,9 +617,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		Page page = wikipedia.getPageById(wikipediaExternalRef);
 		Definition definition = new Definition();
 		try {
-			definition.setDefinition(page.getFirstParagraphMarkup());
+			definition.setDefinition(page.getFirstParagraphWikiText());
 		} catch(Exception e) {
-			LOGGER.debug("Error when getFirstParagraphMarkup for PageID "+ wikipediaExternalRef);
+			LOGGER.debug("Error when getFirstParagraphWikiText for page id: "+ wikipediaExternalRef);
 			//e.printStackTrace();
 		}
 		definition.setSource("wikipedia-" + lang);
