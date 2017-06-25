@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.kb.Lexicon;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.utilities.NerdServiceProperties;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
@@ -46,9 +47,13 @@ public class NerdRestService implements NerdPaths {
         NerdServiceProperties.getInstance();
         LOGGER.info("Init of Servlet NerdRestService finished.");
 
-        LOGGER.info("Init lexicon and KB resources.");
+        LOGGER.info("Init lexicon.");
         Lexicon.getInstance();
-        LOGGER.info("Init lexicon and KB resources finished.");
+        LOGGER.info("Init lexicon finished.");
+
+        LOGGER.info("Init KB resources.");
+        UpperKnowledgeBase.getInstance();
+        LOGGER.info("Init KB resources finished.");
     }
 
     /**

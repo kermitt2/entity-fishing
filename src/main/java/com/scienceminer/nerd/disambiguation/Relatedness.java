@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import com.scienceminer.nerd.kb.Lexicon;
+import com.scienceminer.nerd.kb.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +59,7 @@ public class Relatedness {
 	 * Hidden constructor
 	 */
 	private Relatedness() {	
-		wikipedias = Lexicon.getInstance().getWikipediaConfs();
+		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		caches = new HashMap<String, ConcurrentMap<Long,Double>>();
 	}
 

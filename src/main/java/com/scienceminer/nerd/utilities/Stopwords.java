@@ -168,6 +168,6 @@ public class Stopwords {
 
 	public boolean isStopword(String text, String lang) {
 		Set<String> stopwords = allStopwords.get(lang);
-		return stopwords.contains(text);
+		return stopwords.contains(text.trim());
 	}
 }

@@ -5,7 +5,6 @@ import java.io.*;
 import com.scienceminer.nerd.disambiguation.NerdCategories;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.kb.Definition;
-import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
@@ -31,6 +30,7 @@ import org.grobid.core.lang.Language;
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,7 +108,8 @@ public class NerdRestKB {
 		if (identifier != null) {
 			NerdEntity entity = new NerdEntity();
 			entity.setLang(lang);
-			Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
+			//Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
+			Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
 
 			if (wikipedia == null) {
 				LOGGER.error("Language is not supported. Bad request.");
@@ -162,8 +163,12 @@ public class NerdRestKB {
 					}
 
 					// translations
-					Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
-					Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+					//Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
+					Map<String, Wikipedia> wikipedias = 
+						UpperKnowledgeBase.getInstance().getWikipediaConfs();
+					//Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+					Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
+						UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 					WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 					if (wikipediaDomainMap == null)
 						System.out.println("wikipediaDomainMap is null for " + lang);
@@ -173,8 +178,7 @@ public class NerdRestKB {
 					entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
 					entity.setWikidataId(article.getWikidataId());
 
-					List<Statement> statements = 
-						Lexicon.getInstance().getKnowledgeBase().getStatements(entity.getWikidataId());
+					List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(entity.getWikidataId());
 					entity.setStatements(statements);
 
 					String json = entity.toJsonFull();
@@ -197,10 +201,10 @@ public class NerdRestKB {
 		NerdEntity entity = new NerdEntity();
 		Response response = null;
 		entity.setLang("en");
-		KnowledgeBase knowledgeBase = Lexicon.getInstance().getKnowledgeBase(); 
+		UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance(); 
 
 		if (knowledgeBase == null) {
-			LOGGER.error("NERD knowledge base not available.");
+			LOGGER.error("NERD upper knowledge base not available.");
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			return response;
 		}
@@ -209,7 +213,7 @@ public class NerdRestKB {
 			if (concept != null) {
 				Integer pageId = concept.getPageIdByLang("en");
 	            if (pageId != null) {
-	                Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf("en");
+	                Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
 	                Article article = (Article)wikipedia.getPageById(pageId);
 	                if (article != null) {
 						entity.setPreferredTerm(article.getTitle());
@@ -247,8 +251,10 @@ public class NerdRestKB {
 						}
 
 						// translations
-						Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
-						Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+						Map<String, Wikipedia> wikipedias = 
+							UpperKnowledgeBase.getInstance().getWikipediaConfs();
+						Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
+							UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 						WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get("en");
 						if (wikipediaDomainMap == null)
 							System.out.println("wikipediaDomainMap is null for en");
@@ -267,7 +273,7 @@ public class NerdRestKB {
 			entity.setWikidataId(id);
 
 			List<Statement> statements = 
-				Lexicon.getInstance().getKnowledgeBase().getStatements(id);
+				UpperKnowledgeBase.getInstance().getStatements(id);
 			entity.setStatements(statements);
 		} else if (id.startsWith("P")) {
 			Property property = knowledgeBase.getProperty(id);
@@ -278,7 +284,7 @@ public class NerdRestKB {
 		entity.setWikidataId(id);
 
 		List<Statement> statements = 
-			Lexicon.getInstance().getKnowledgeBase().getStatements(id);
+			UpperKnowledgeBase.getInstance().getStatements(id);
 		entity.setStatements(statements);
 
 		String json = entity.toJsonFull();
@@ -309,7 +315,7 @@ public class NerdRestKB {
 		String json = null;
 		try {
 			//LOGGER.debug(">> set raw text for stateless service'...");
-			Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
+			Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
 
 			if ((term == null) || (term.trim().length() == 0)) {
 				LOGGER.error("Empty term. Bad request.");

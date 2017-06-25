@@ -269,8 +269,11 @@ public class Utilities {
 	
 			System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 		}
+		catch(javax.naming.NameAlreadyBoundException e) {
+			// already loaded, nothing to do
+		}
 		catch(Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
 	}

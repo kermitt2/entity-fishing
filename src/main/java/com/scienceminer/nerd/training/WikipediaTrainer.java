@@ -13,6 +13,9 @@ import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.model.Wikipedia;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.grobid.trainer.LabelStat;
 
 /**
@@ -20,6 +23,7 @@ import org.grobid.trainer.LabelStat;
  * traininig data.
  */
 public class WikipediaTrainer {
+	private static final Logger LOGGER = LoggerFactory.getLogger(WikipediaTrainer.class);
 
 	private Wikipedia wikipedia = null;
 
@@ -43,20 +47,21 @@ public class WikipediaTrainer {
 	private String lang = null;
 
 	public WikipediaTrainer(File dataDir, String lang) throws Exception {
-		// lexicon
-		Lexicon lexicon = null;
+		// KB
+		UpperKnowledgeBase upperKnowledgeBase = null;
 		try {
-			lexicon = Lexicon.getInstance();
+			upperKnowledgeBase = UpperKnowledgeBase.getInstance();
 		}
 		catch(Exception e) {
-			throw new NerdResourceException("Error instanciating the lexicon. ", e);
+			throw new NerdResourceException("Error instanciating the knowledge base. ", e);
 		}
 		this.dataDir = dataDir;
-		this.wikipedia = lexicon.getWikipediaConf(lang);
+		this.wikipedia = upperKnowledgeBase.getWikipediaConf(lang);
 		this.lang = lang;
 
 		// load, and possibly create if not yet done, the full text of wikipedia articles
 		// database
+		LOGGER.info("Loading full wikitext content - this will take a while the first time");
 		this.wikipedia.loadFullContentDB();
 
 		this.ranker = new NerdRanker(this.wikipedia, 

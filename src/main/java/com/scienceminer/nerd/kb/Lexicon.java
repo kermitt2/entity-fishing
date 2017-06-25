@@ -49,11 +49,6 @@ public class Lexicon {
 
 	// we use map for multilingual resources, where the language code is the key
     private Map<String, Set<String>> dictionaries = null;
-    private KnowledgeBase knowledgeBase = null;
-    private Map<String, Wikipedia> wikipedias = null;
-    private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
-
-    //private Map<String, FreeBaseTypeMap> freeBaseTypeMaps = null;
 
     public static Lexicon getInstance() {
         if (instance == null) {
@@ -75,42 +70,8 @@ public class Lexicon {
      * Hidden constructor
      */
     private Lexicon() {
-        initDictionary();
-		
-		//WikipediaConfiguration conf = 
-		//	new WikipediaConfiguration(new File(NerdProperties.getInstance().getWikipediaMinerConfigPath()));
-		try {
-            LOGGER.info("\nInit Upper Knowledeg base layer");
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
-            knowledgeBase = new KnowledgeBase(conf);
-
-			//LOGGER.info("Initiating Wikipedia DBs");
-			wikipedias = new HashMap<String, Wikipedia>(); 
-            wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
-
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-			Wikipedia wikipedia_en = new Wikipedia(conf);
-
-			wikipedias.put(Language.EN, wikipedia_en);
-            WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
-            wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
-            wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
-			
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-de.yaml"), NerdConfig.class);;
-			Wikipedia wikipedia_de = new Wikipedia(conf);
-			wikipedias.put(Language.DE, wikipedia_de);
-            wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
-
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-fr.yaml"), NerdConfig.class);;
-			Wikipedia wikipedia_fr = new Wikipedia(conf);
-			wikipedias.put(Language.FR, wikipedia_fr);
-            wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
-
-            System.out.println("\nEnd of Initialization of Wikipedia environments\n");			
-			LOGGER.info("End of Initialization of Wikipedia environments");
-
-            Utilities.initGrobid();
+        try {
+            initDictionary();
 		}
 		catch(Exception e) {
 			LOGGER.debug(e.getMessage());
@@ -280,21 +241,5 @@ public class Lexicon {
                 return true;
         }
         return false;
-    }
-
-	public Wikipedia getWikipediaConf(String lang) {
-		return wikipedias.get(lang);
-	}
-	
-	public Map<String, Wikipedia> getWikipediaConfs() {
-		return wikipedias;
-	}
-
-    public Map<String, WikipediaDomainMap> getWikipediaDomainMaps () {
-        return wikipediaDomainMaps;
-    }
-
-    public KnowledgeBase getKnowledgeBase() {
-        return knowledgeBase;
     }
 }

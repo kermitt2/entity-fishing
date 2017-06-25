@@ -256,17 +256,4 @@ public class Wikipedia {
 		this.env = null;
 	}
 
-	/*@Override
-	public void finalize() {
-        try {
-            if (this.env != null)
-                LOGGER.warn("Unclosed wikipedia. You may be causing a memory leak.");
-        } finally {
-            try {
-                super.finalize();
-            } catch (Throwable ex) {
-                LOGGER.warn("Unclosed wikipedia. You may be causing a memory leak.");
-            }
-        }
-	}*/
 }

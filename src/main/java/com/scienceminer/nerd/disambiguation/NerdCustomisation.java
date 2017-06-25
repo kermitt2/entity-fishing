@@ -7,7 +7,7 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Wikipedia;
-import com.scienceminer.nerd.kb.Lexicon;
+import com.scienceminer.nerd.kb.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +66,7 @@ public class NerdCustomisation extends NerdContext {
 				throw new NerdException("Language not specified: " + customisationName);
 			}
 
-			Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
+			Map<String, Wikipedia> wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 			Wikipedia wikipedia = wikipedias.get(lang);
 			if (wikipedia == null) {
 				throw new NerdException("Language is not supported: " + lang);

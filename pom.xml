@@ -166,8 +166,8 @@
 	</build>
 
 	<profiles>
+        <!-- mvn compile exec:exec -PbuildMapWikiEN -->
 		<profile>
-		  <!-- mvn compile exec:exec -PbuildMapWikiEN -->
 		  <id>buildMapWikiEN</id>
 		  <activation><property><name>buildMapWikiEN</name></property></activation>
 		  <build>
@@ -185,12 +185,12 @@
 		        <argument>data/wikipedia/wikipedia-en.yaml</argument>
 		      </arguments>
 		    </configuration>
-		  </plugin></plugins>
-		</build>
+		    </plugin></plugins>
+		  </build>
 		</profile>
 
-        <profile>
-            <!-- mvn compile exec:exec -PbuildMapWikiFR -->
+        <!-- mvn compile exec:exec -PbuildMapWikiFR -->
+        <!--profile>
             <id>buildMapWikiFR</id>
             <activation>
                 <property>
@@ -217,10 +217,10 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile-->
 
-        <profile>
-            <!-- mvn compile exec:exec -PbuildMapWikiDE -->
+        <!-- mvn compile exec:exec -PbuildMapWikiDE -->
+        <!--profile>
             <id>buildMapWikiDE</id>
             <activation>
                 <property>
@@ -247,7 +247,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile-->
 
         <profile>
             <!-- mvn compile exec:exec -Ptrain_annotate_en -->
@@ -336,7 +336,6 @@
                 </plugins>
             </build>
         </profile>
-
 
 	</profiles>
 

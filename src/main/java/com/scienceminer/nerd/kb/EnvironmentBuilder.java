@@ -16,6 +16,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /*
  * Initialize LMDB and categories for a given pre-processed Wikipedia
+ * 
+ * ******* Normally ths is deprecated! **********
  */
 public class EnvironmentBuilder {
 

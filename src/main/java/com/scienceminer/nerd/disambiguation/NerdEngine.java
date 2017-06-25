@@ -54,7 +54,6 @@ public class NerdEngine {
 
 	private static volatile NerdEngine instance = null;
 	
-	private Lexicon lexicon = null;
 	private EngineParsers parsers = null;
 	
 	private Map<String, Wikipedia> wikipedias = null;
@@ -90,20 +89,19 @@ public class NerdEngine {
 	 * Hidden constructor
 	 */
 	private NerdEngine() throws Exception {			
-		// lexicon
 		try {
-			lexicon = Lexicon.getInstance();
+			UpperKnowledgeBase.getInstance();
 			parsers = new EngineParsers();
 		} catch(Exception e) {
-			throw new NerdResourceException("Error instanciating the (N)ERD lexicon. ", e);
+			throw new NerdResourceException("Error instanciating the (N)ERD knowledge base. ", e);
 		}
 
-		wikipedias = Lexicon.getInstance().getWikipediaConfs();
+		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		try {
 			relatedness = Relatedness.getInstance();
 			rankers = new HashMap<String, NerdRanker>();
 			selectors = new HashMap<String, NerdSelector>();
-			wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+			wikipediaDomainMaps = UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 		} catch(Exception e) {
 			throw new NerdResourceException("Error when opening the relatedness model", e);
 		}
@@ -1435,14 +1433,14 @@ System.out.println(terms.toString());
 				}
 				if (features.Add_inDictionary) {
 					boolean inDict = false;				
-					if (lexicon.inDictionary(candidate.getRawString())) {
+					if (Lexicon.getInstance().inDictionary(candidate.getRawString())) {
 						inDict = true;
 					}
 					else {
 						String[] toks = candidate.getRawString().split(" -,");
 						boolean allDict = false;
 						for (int i=0; i<toks.length; i++) {
-							if (!lexicon.inDictionary(toks[i])) {
+							if (!Lexicon.getInstance().inDictionary(toks[i])) {
 								allDict = false;
 								break;
 							}
@@ -1687,14 +1685,14 @@ System.out.println("The selector score: " + prob);
 							// and they have be identified as NE by the NER or is not in the dictionary
 							boolean inDict = false;
 						
-							if (lexicon.inDictionary(key)) {
+							if (Lexicon.getInstance().inDictionary(key)) {
 								inDict = true;
 							}
 							else {
 								String[] toks = key.split(" -,");
 								boolean allDict = false;
 								for (int i=0; i<toks.length; i++) {
-									if (!lexicon.inDictionary(toks[i])) {
+									if (!Lexicon.getInstance().inDictionary(toks[i])) {
 										allDict = false;
 										break;
 									}

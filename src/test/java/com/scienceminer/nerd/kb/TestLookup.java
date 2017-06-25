@@ -36,19 +36,21 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 public class TestLookup {
 	
 	private Wikipedia wikipedia = null;
-	private KnowledgeBase knowledgeBase = null;
 
 	@Before
 	public void setUp() {
 		try {
 			NerdProperties.getInstance();
-			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+			/*ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			
 			NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
-            knowledgeBase = new KnowledgeBase(conf);
+            knowledgeBase = new UpperKnowledgeBase(conf);
 
             conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-        	wikipedia = new Wikipedia(conf); 
+        	wikipedia = new Wikipedia(conf); */
+
+        	UpperKnowledgeBase.getInstance(); 
+        	wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
         } catch(Exception e) {
         	e.printStackTrace();
         }
@@ -84,7 +86,7 @@ public class TestLookup {
 	@Test
 	public void testConcept() {
 		try {
-			Concept concept = knowledgeBase.getConcept("Q18498");
+			Concept concept = UpperKnowledgeBase.getInstance().getConcept("Q18498");
 			if (concept != null) {
 				System.out.println(concept.getId());
 				System.out.println("en pageId:" + concept.getPageIdByLang("en"));
@@ -129,14 +131,14 @@ public class TestLookup {
 		}
 	}*/
 	
-	@After
+	/*@After
 	public void testClose() {
 		try {
-			wikipedia.close();
+			UpperKnowledgeBase.getInstance().close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
 

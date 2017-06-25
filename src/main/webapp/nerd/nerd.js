@@ -1682,7 +1682,7 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				if (statement.propertyId == "P2572") {
 					// twitter hashtag
 					if (statement.value) {
-						localHtml += "<td><a href='https://twitter.com/#"+statement.value.trim()+"' target='_blank'>#" + 
+						localHtml += "<td><a href='https://twitter.com/hashtag/"+statement.value.trim()+"?src=hash' target='_blank'>#" + 
 							statement.value + "</a></td></tr>";
 					} else {
 						localHtml += "<td>" + "</td></tr>";

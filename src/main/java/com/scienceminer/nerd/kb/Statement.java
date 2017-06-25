@@ -44,7 +44,7 @@ public class Statement implements Serializable {
         if (propertyId == null)
             return null;
         else
-           return Lexicon.getInstance().getKnowledgeBase().getProperty(propertyId);
+           return UpperKnowledgeBase.getInstance().getProperty(propertyId);
     }
 
     public String getValue() {
@@ -76,7 +76,7 @@ public class Statement implements Serializable {
         if (propertyId != null) {
             sb.append(", \"propertyId\" : \"" + propertyId + "\"");
 
-            Property property = Lexicon.getInstance().getKnowledgeBase().getProperty(propertyId);
+            Property property = UpperKnowledgeBase.getInstance().getProperty(propertyId);
             if (property != null) {
                 sb.append(", \"propertyName\" : \"" + property.getName() + "\""); 
                 if (property.getValueType() != null)
@@ -109,7 +109,7 @@ public class Statement implements Serializable {
 
         if (propertyId != null) {
             sb.append(", \"propertyId\" : \"" + propertyId + "\"");
-            Property property = Lexicon.getInstance().getKnowledgeBase().getProperty(propertyId);
+            Property property = UpperKnowledgeBase.getInstance().getProperty(propertyId);
             if (property != null) {
                 sb.append(", \"propertyName\" : \"" + property.getName() + "\""); 
                 if (property.getValueType() != null)
@@ -125,16 +125,16 @@ public class Statement implements Serializable {
                 Concept concept = null;
                 if (value.startsWith("Q")) {
                     sb.append(", \"value\" : \"" + value + "\"");
-                    concept = Lexicon.getInstance().getKnowledgeBase().getConcept(value);                    
+                    concept = UpperKnowledgeBase.getInstance().getConcept(value);                    
                 } else {
                     sb.append(", \"value\" : " + value);
-                    concept = Lexicon.getInstance().getKnowledgeBase().getConcept(value.replace("\"", ""));
+                    concept = UpperKnowledgeBase.getInstance().getConcept(value.replace("\"", ""));
                 }
 
                 if (concept != null) {
                     Integer pageId = concept.getPageIdByLang("en");
                     if (pageId != null) {
-                        Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf("en");
+                        Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
                         Page page = wikipedia.getPageById(pageId);
                         if (page != null) {
                             byte[] encodedValueTitle = encoder.quoteAsUTF8(page.getTitle());

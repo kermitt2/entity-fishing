@@ -612,8 +612,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		wikipediaExternalRef = candidate.getWikipediaExternalRef();
 		wikidataId = candidate.getWikidataId();
 
-		Wikipedia wikipedia = Lexicon.getInstance().getWikipediaConf(lang);
-		KnowledgeBase kb = Lexicon.getInstance().getKnowledgeBase();
+		Wikipedia wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 		Page page = wikipedia.getPageById(wikipediaExternalRef);
 		Definition definition = new Definition();
 		try {
@@ -633,7 +632,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		selectionScore = candidate.getSelectionScore();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
-		statements = kb.getStatements(wikidataId); 
+		statements = UpperKnowledgeBase.getInstance().getStatements(wikidataId); 
 
 		preferredTerm = candidate.getPreferredTerm();
 		this.lang = lang;
