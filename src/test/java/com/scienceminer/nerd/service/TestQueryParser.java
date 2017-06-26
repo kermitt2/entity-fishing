@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.service;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -72,7 +73,7 @@ public class TestQueryParser {
 			throw new NerdException("Cannot start test, because test resource folder is not correctly set.");
 		}
 		try {
-			theQuery = FileUtils.readFileToString(queryFile);
+			theQuery = FileUtils.readFileToString(queryFile, UTF_8);
 		}
 		catch(IOException e) {
 			e.printStackTrace();
