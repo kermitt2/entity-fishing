@@ -1,0 +1,399 @@
+{{pp-vandalism|small=yes}}
+{{Other uses}}{{Infobox royalty
+| name            = Cleopatra VII Philopator
+| image           = Kleopatra-VII.-Altes-Museum-Berlin1.jpg
+| caption         = Bust believed to be of Cleopatra VII, [[Altes Museum]], Berlin
+| succession      = [[Ptolemaic Dynasty|Ptolemaic Queen]] of [[Ptolemaic Kingdom|Egypt]]
+| reign           = 51 – 12 August 30 BC (21 years)
+| predecessor     = [[Ptolemy XII Auletes]]
+| regent          =[[Ptolemy XII Auletes]] &lt;br&gt;[[Ptolemy XIII Theos Philopator]] &lt;br&gt;[[Ptolemy XIV]] &lt;br&gt;[[Ptolemy XV Caesarion]]
+| reg-type        =Co-rulers
+| full name       = Cleopatra VII Thea Philopator
+| spouse          = [[Ptolemy XIII Theos Philopator]]&lt;br&gt;[[Ptolemy XIV]]&lt;br&gt;[[Mark Antony]]
+| issue           = [[Caesarion|Caesarion, Ptolemy XV Philopator Philometor Caesar]]&lt;br&gt;[[Alexander Helios]]&lt;br&gt;[[Cleopatra Selene II|Cleopatra Selene, Queen of Mauretania]]&lt;br&gt;[[Ptolemy Philadelphus (son of Cleopatra)|Ptolemy XVI Philadelphus]]
+| children = {{startplainlist}}    
+*[[Ceasarion]]
+*[[Alexander Helios]]
+*[[Cleopatra Selene II]]
+| royal house     = [[Ptolemaic dynasty|Ptolemaic Dynasty]]
+| father          = [[Ptolemy XII Auletes]]
+| mother          = [[Cleopatra V of Egypt]] (presumably)
+| birth_date      = 69&amp;nbsp;BC
+| birth_place     = [[Alexandria]], [[Ptolemaic Kingdom|Egypt]]
+| death_date      = 12 August 30&amp;nbsp;BC (aged 39)
+| death_place     = Alexandria, Egypt
+| place of burial = Unknown (probably in Egypt)
+}}
+
+{{Infobox hieroglyphs |title = Cleopatra VII
+| name  = &lt;hiero&gt;q:rw-i-wA-p-A-d:r-t-A-H8&lt;/hiero&gt;
+| name transcription = Cleopatra&lt;br /&gt;''Qlwpdrt''
+|name in cartouche = yes
+|name2 = &lt;hiero&gt;wr:r-nb-nfr-nfr-nfr-H2:x-O22&lt;/hiero&gt;
+|name2 in Serekh = yes
+|name2 Serekh symbol = &lt;hiero&gt;G5&lt;/hiero&gt;
+|name2 determinative =
+|name2 transcription =
+|name2 explanation = '''[[Horus name]] (1):''' Wer(et)-neb(et)-neferu-achet-seh&lt;br /&gt;''Wr(.t)-nb(.t)-nfrw-3ḫ(t)-sḥ''&lt;br /&gt; ''The great Lady of perfection, excellent in counsel''
+|name3= &lt;hiero&gt;wr*t:r-t:W:t-A53-n:X2*t:z&lt;/hiero&gt;
+|name3 in Serekh = yes
+|name3 Serekh symbol = &lt;hiero&gt;G5&lt;/hiero&gt;
+|name3 determinative =
+|name3 transcription =
+|name3 explanation ='''Horus name (2):''' Weret-tut-en-it-es&lt;br /&gt;''Wr.t-twt-n-jt=s''&lt;br /&gt; ''The great one, sacred image of her father''
+|name4 = &lt;hiero&gt;q:rw-W:p-d:r:t*H8-nTr-t:H8-R7:t-z:N36&lt;/hiero&gt;
+|name4 cartouche symbol =
+|name4 in cartouche = yes
+|name4 determinative =
+|name4 transcription = Cleopatra netjeret mer(et) ites&lt;br /&gt;''Qlwpdrt nṯrt mr(t) jts''&lt;br /&gt;''The goddess Cleopatra who is beloved of her father''
+|image1 =
+|image1 description =
+}}
+
+{{Ancient Rome and the fall of the Republic}}
+'''Cleopatra VII Philopator''' ({{lang-grc-gre|Κλεοπάτρα Φιλοπάτωρ}}; 69&lt;ref name = Walker129&gt;Walker, p. 129.&lt;/ref&gt; – August 12, 30&amp;nbsp;BC&lt;ref&gt;T.C.&amp;nbsp;Skeat, &quot;The Last Days of Cleopatra: A Chronological Problem&quot;, ''The Journal of Roman Studies'', '''43''' (1953), pp.&amp;nbsp;98–100 [http://www.jstor.org/stable/297786].&lt;/ref&gt;), known to history simply as '''Cleopatra''', was the last active ruler of [[Ptolemaic Egypt]], briefly survived as pharaoh by her son [[Caesarion]]. After her reign, Egypt became a [[Egypt (Roman province)|province]] of the recently established [[Roman Empire]].
+
+Cleopatra was a member of the [[Ptolemaic dynasty]], a family of [[Ancient Macedonians|Macedonian Greek]]&lt;ref&gt;*Western civilisation:ideas, Politics, and society by Marvin Perry, Margaret C Jacob, Myrna Chase, James R Jacob page 132: ”Cleopatra (69- 30&amp;nbsp;BC), the Greek queen of Egypt, belonged to the Ptolemaic family, the Macedonian Greeks who ruled Egypt during the Hellenistic Age”. *The Civilization of Rome by Donald R. Dudley, Page 57: ”In Egypt the Greek dynasty of the Ptolemies was the successor to the native Pharaohs, exploiting through a highly organized bureaucracy the great natural resources of the Nile Valley”. *''The Oxford Encyclopedia of Ancient Egypt''. Cleopatra VII was born to Ptolemy XII Auletes (80–57&amp;nbsp;BC, ruled 55–51&amp;nbsp;BC) and Cleopatra, both parents being Macedonian Greeks.&quot; *''Encyclopedia of the Archaeology of Ancient Egypt'' by Kathryn Bard, page 488 “Ptolemaic kings were still crowned at Memphis and the city was popularly regarded as the Egyptian rival to Alexandria, founded by the Macedonian Greeks”; Page 687: &quot;During the Ptolemaic period, when Egypt was governed by rulers of Greek descent…” *Cleopatra: A Sourcebook (Oklahoma Series in Classical Culture) by Prudence J. Jones (Author) page14: “They were members of the Ptolemaic dynasty of Macedonian Greeks, who ruled Egypt after the death of its conqueror, Alexander the Great.” *''Women in Hellenistic Egypt'' by Sarah B. Pomeroy, page 16 “while Ptolemaic Egypt was a monarchy with a Greek ruling class.&quot;&lt;/ref&gt;
+origin that ruled [[Egypt]] after [[Alexander the Great]]'s death during the [[Hellenistic period]]. The Ptolemies spoke [[Ancient Greek|Greek]]&lt;ref&gt;Cleopatra: the life of an Egyptian queen  By Gary Jeffrey, Anita Ganeri page 6  :” Throughout their dynasty, the Ptolemies held onto their Greek culture and continued to speak Greek as their main language.”.&lt;/ref&gt; throughout their dynasty, and refused to speak [[Egyptian language|Egyptian]], which is the reason that Greek as well as Egyptian languages were used on official court documents such as the [[Rosetta Stone]].&lt;ref&gt;{{cite web|url=http://www.bbc.co.uk/programmes/b00sbrz3 |title=Radio 4 Programmes - A History of the World in 100 Objects, Empire Builders (300 BC - 1 AD), Rosetta Stone |publisher=BBC |date= |accessdate=2010-06-07}}&lt;/ref&gt; By contrast, Cleopatra did learn to speak Egyptian&lt;ref&gt;[[Plutarch]], ''Antony'' 27&lt;/ref&gt; and represented herself as the reincarnation of the Egyptian goddess [[Isis]].
+
+Cleopatra originally ruled jointly with her father [[Ptolemy XII Auletes]], and later with her brothers [[Ptolemy XIII]] and [[Ptolemy XIV]], whom she married as per Egyptian custom, but eventually she became sole ruler. As queen, she consummated a liaison with [[Julius Caesar]] that solidified her grip on the throne. She later elevated Caesarion, her son with Caesar, to co-ruler in name.
+
+After [[Assassination of Julius Caesar|Caesar's assassination]] in 44&amp;nbsp;BC, she aligned with [[Mark Antony]] in opposition to Caesar's legal heir Gaius Julius Caesar Octavianus (later known as [[Augustus]]). With Antony, she bore the twins [[Cleopatra Selene II]] and [[Alexander Helios]], and son [[Ptolemy Philadelphus (Cleopatra)|Ptolemy Philadelphus]] (her unions with her brothers had produced no children). Antony committed suicide after losing the [[Battle of Actium]] to Octavian's forces, and Cleopatra followed suit. According to tradition,{{What|reason=According to tradition? A tradition is a practice, not a belief.|date=September 2016}} she killed herself by means of an [[Asp (reptile)|asp]] bite on August 12, 30&amp;nbsp;BC.&lt;ref&gt;{{cite web|url = http://www.smithsonianmag.com/history-archaeology/biography/cleopatra.html|title = Who Was Cleopatra? (page 2)|accessdate = 2008-01-22|publisher = Smithsonian Magazine}}&lt;/ref&gt; She was  outlived by Caesarion, who was declared pharaoh by his supporters, but he was soon killed on Octavian's orders. Egypt then became the [[Roman province]] of ''[[Egypt (Roman province)|Aegyptus]]''.
+
+Her legacy survives in numerous works of art and many dramatizations of incidents from her life in literature and other media, such as [[William Shakespeare]]'s tragedy ''[[Antony and Cleopatra]]'', [[George Bernard Shaw]]'s play ''[[Caesar and Cleopatra (play)|Caesar and Cleopatra]]'', [[Jules Massenet]]'s opera ''[[Cléopâtre]]'', and the films ''[[Cleopatra (1934 film)|Cleopatra]]'' (1934) and ''[[Cleopatra (1963 film)|Cleopatra]]'' (1963).
+
+==Etymology of the name==
+[[File:Limestone stela of a high priest of god Ptah. It bears the cartouches of Cleopatra and Caesarion. From Egypt. Ptolemaic Period. The Petrie Museum of Egyptian Archaeology, London.jpg|thumb|left|Limestone stela of a high priest of god Ptah. It bears the cartouches of Cleopatra and Caesarion. From Egypt. Ptolemaic Period. The Petrie Museum of Egyptian Archaeology, London]]
+The name Cleopatra is derived from the [[Ancient Greek|Greek]] name Κλεοπάτρα (Kleopatra) which meant &quot;she who comes from glorious father&quot; or &quot;glory of the father&quot; in the [[Grammatical gender|feminine form]], derived from κλέος (kleos) &quot;glory&quot; combined with πατήρ (pater) &quot;father&quot; (the masculine form would be written either as Kleopatros (Κλεόπατρος), or Patroklos (Πάτροκλος)).&lt;ref&gt;{{cite web|title=Cleopatra: Meaning &amp; History|url=http://www.behindthename.com/name/cleopatra|publisher=Behind the Name.com|accessdate=4 April 2014}}&lt;/ref&gt;&lt;ref&gt;{{cite web|title=Kleopatros: Meaning &amp; History|url=http://www.behindthename.com/name/kleopatros|publisher=Behind the Name.com|accessdate=4 April 2014}}&lt;/ref&gt;
+
+==Biography==
+
+===Accession to the throne===
+[[File:Ptolemaic Queen (Cleopatra VII?), 50-30 B.C.E., 71.12.jpg|thumb|left|upright|Ptolemaic Queen (Cleopatra VII?), 50-30 B.C., 71.12, [[Brooklyn Museum]]]]
+The identity of Cleopatra's mother is unknown, but she is generally believed to be [[Cleopatra V of Egypt|Cleopatra V Tryphaena]] of Egypt, the sister or cousin and wife of [[Ptolemy XII Auletes]], or possibly another Ptolemaic family member who was the daughter of Ptolemy X and Cleopatra Berenice III Philopator if Cleopatra V was not the daughter of Ptolemy X and Berenice III.&lt;ref&gt;German historian Werner Huß (''Die Herkunft der Kleopatra Philopator'' (''The descent of Cleopatra Philopator''), Aegyptus 70, 1990, pp. 191–203) assumes instead that Cleopatra's mother was a high-born Egyptian woman, who possibly had become the second wife of Ptolemy XII after he had repudiated Cleopatra V.&lt;/ref&gt; Cleopatra's father Auletes was a direct descendant of [[Alexander the Great]]'s general [[Ptolemy I Soter]], son of [[Arsinoe of Macedon|Arsinoe]] and [[Lagus]], both of [[Macedon]].
+
+[[Centralization of power]] and [[Political corruption|corruption]] led to uprisings in and the losses of [[Cyprus]] and [[Cyrenaica]], making Ptolemy XII's reign one of the most calamitous of the dynasty. Ptolemy went to Rome with Cleopatra; [[Cleopatra VI Tryphaena]] seized the crown but died shortly afterwards in suspicious circumstances. It is believed (though not proven by historical sources) that [[Berenice IV]] poisoned her so that she could assume sole rulership. Regardless of the cause, she ruled until Ptolemy Auletes returned in 55&amp;nbsp;BC with Roman support, capturing Alexandria aided by Roman general [[Aulus Gabinius]]. Berenice was imprisoned and executed shortly afterwards, her head allegedly being sent to the royal court on the decree of her father, the king. Cleopatra now became joint regent and deputy to her father at age 14, although her power would have been severely limited.
+
+[[Ptolemy XII]] died in March 51&amp;nbsp;BC. His will made 18-year-old Cleopatra and her 10-year-old brother [[Ptolemy XIII]] joint monarchs. The first three years of their reign were difficult due to economic failures, famine, deficient floods of the [[Nile]], and political conflicts. Cleopatra was married to her young brother, but she quickly made it clear that she had no intention of sharing power with him.
+
+In August 51&amp;nbsp;BC, relations completely broke down between Cleopatra and Ptolemy. Cleopatra dropped Ptolemy's name from official documents and her face alone appeared on coins, which went against Ptolemaic tradition of female rulers being subordinate to male co-rulers. In 50&amp;nbsp;BC, Cleopatra came into serious conflict with the [[Gabiniani]], powerful Roman troops of Aulus Gabinius who had left them in Egypt to protect Ptolemy XII after his restoration to the throne in 55&amp;nbsp;BC. The Gabiniani killed the sons of the Roman governor of Syria [[Marcus Calpurnius Bibulus]] when they came to ask the Gabiniani to assist their father against the Parthians. Cleopatra handed the murderers over to Bibulus in chains, whereupon the Gabiniani became bitter enemies of the queen.&lt;ref&gt;[[Valerius Maximus]] 4.1.15&lt;/ref&gt; This conflict was one of the main causes of Cleopatra's fall from power shortly afterward. The sole reign of Cleopatra was finally ended by a cabal of courtiers led by the [[eunuch]] [[Pothinus]], in connection with half-Greek general [[Achillas]], and [[Theodotus of Chios]]. Circa 48&amp;nbsp;BC, Cleopatra's younger brother Ptolemy XIII became sole ruler.&lt;ref name=&quot;Anderson2003&quot;&gt;{{cite book|last=Anderson|first=Jaynie|title=Tiepolo's Cleopatra|url=https://books.google.com/books?id=K_zR2mHWPmoC&amp;pg=PA38|accessdate=10 February 2012|year=2003|publisher=Macmillan Education AU|isbn=978-1-876832-44-5|page=38}}&lt;/ref&gt;
+
+Cleopatra tried to raise a rebellion around [[Pelusium]], but was soon forced to flee with her only remaining sister [[Arsinoe IV|Arsinoë]].&lt;ref&gt;{{Citation | title=Alexander to Actium: The Historical Evolution of the Hellenistic Age | author=Peter Green | year=1990 |pages=661–664 | isbn=0-520-05611-6 | location= Berkeley | publisher=University of California Press | authorlink= Peter Green (historian)}}&lt;/ref&gt;
+
+===Relations with Rome===
+
+====Assassination of Pompey====
+While Cleopatra was in exile, [[Pompey]] became embroiled in the [[Caesar's Civil War|Roman civil war]]. Pompey fled to [[Alexandria]] from the forces of Caesar, seeking sanctuary after his defeat at the [[Battle of Pharsalus]] in late 48&amp;nbsp;BC. Ptolemy was thirteen years old at that time, and had set up a throne for himself on the harbor. From there, he watched as Pompey was murdered on September 28, 48&amp;nbsp;BC, by one of his former officers, now in Ptolemaic service. He was beheaded in front of his wife and children, who were on the ship from which he had just disembarked. Ptolemy is thought to have ordered the death to ingratiate himself with Caesar, thus becoming an ally of Rome, to which Egypt was in debt at the time. This act proved a miscalculation on Ptolemy's part. Caesar arrived in Egypt two days later, and Ptolemy presented him with Pompey's severed head. Caesar was enraged. Pompey was Caesar's political enemy, but he was a [[List of Roman consuls|Roman consul]] and the [[widower]] of Caesar's only legitimate daughter [[Julia (daughter of Julius Caesar)|Julia]], who died during childbirth. Caesar seized the Egyptian capital and imposed himself as arbiter between the rival claims of Ptolemy and Cleopatra.
+
+====Relationship with Julius Caesar====
+[[File:Cleopatra and Caesar by Jean-Leon-Gerome.jpg|left|thumb|upright|''[[Cleopatra and Caesar (painting)|Cleopatra and Caesar]]'' (1866). Painting by [[Jean-Léon Gérôme]]]]
+Cleopatra was eager to take advantage of [[Julius Caesar]]'s anger toward Ptolemy and had herself secretly smuggled into his palace to meet with Caesar. [[Plutarch]] gives a vivid description in his ''[[Parallel Lives|Life of Julius Caesar]]''&lt;ref&gt;[[Parallel Lives]] - The Life of Julius Caesar, 49&lt;/ref&gt; of how she entered past Ptolemy’s guards rolled up in a carpet that [[Apollodorus the Sicilian]] was carrying.&lt;ref&gt;So dramatic is the report of Plutarch (''Caesar'' 49.1–3) that it is doubted by some scholars. {{who|date=November 2012}} Cleopatra had to be smuggled in secretly because Ptolemy XIII had blocked all entries to Alexandria, making it impossible for his half-sister to come into the city.&lt;/ref&gt; She became Caesar’s mistress and gave birth to their son Ptolemy Caesar in 47&amp;nbsp;BC, nine months after their first meeting. He was [[nickname]]d [[Caesarion]], which means &quot;little Caesar.&quot;
+
+At this point, Caesar abandoned his plans to annex Egypt, instead backing Cleopatra's claim to the throne. [[Mithridates I of the Bosporus|Mithridates]] raised the [[Siege of Alexandria (47&amp;nbsp;BC)|siege of Alexandria]], and Caesar defeated Ptolemy's army at the [[Battle of the Nile (47&amp;nbsp;BC)|Battle of the Nile]]. Ptolemy XIII drowned in the [[Nile]],&lt;ref&gt;''[[De Bello Alexandrino]]''28–32&lt;/ref&gt;&lt;ref&gt;Cassius Dio, ''Roman History'' 42.43&lt;/ref&gt; and Caesar restored Cleopatra to her throne with younger brother [[Ptolemy XIV]] as her new co-ruler.&lt;ref&gt;''De Bello Alexandrino'' 33&lt;/ref&gt;&lt;ref&gt;Cassius Dio, ''Roman History'' 42.44&lt;/ref&gt;&lt;ref&gt;Suetonius, ''Caesar'' 35.1&lt;/ref&gt; When Caesar left Egypt, he stationed a Roman occupying army there of three legions under the command of [[Rufio (officer of Caesar)|Rufio]].&lt;ref&gt;Suetonius, ''Caesar'' 76.3&lt;/ref&gt;
+[[File:Denderah3 Cleopatra Cesarion.jpg|thumb|right|upright|Cleopatra VII and her son [[Caesarion]] at the [[Dendera Temple complex|Temple of Dendera]]]]
+
+Cleopatra was 21&amp;nbsp;years old when they met and Caesar was 52; they became lovers during Caesar’s stay in Egypt between 48&amp;nbsp;BC and 47&amp;nbsp;BC. Cleopatra claimed that Caesar was the father of her son and wished him to name the boy his heir; but Caesar refused, choosing his grandnephew [[Augustus|Octavian]] instead. During this relationship, it was also rumored that Cleopatra introduced Caesar to her astronomer [[Sosigenes of Alexandria]], who proposed the idea of [[leap day]]s and [[leap year]]s.  This was not new; they were proclaimed in 238 BC but the reform never took effect.  Caesar made this the basis of his reform of the Roman calendar in 45 BC, and the Egyptian calendar was reformed along these lines in 26 BC.
+
+Cleopatra, Ptolemy XIV, and Caesarion visited Rome in mid-46&amp;nbsp;BC. The Egyptian queen resided in one of Caesar's country houses, which included the [[Horti Caesaris]] just outside Rome. (As a foreign head of state, she was not allowed inside Rome's [[pomerium]].)&lt;ref&gt;Cassius Dio, ''Roman History'' 43.27.3&lt;/ref&gt;&lt;ref name=&quot;ReferenceA&quot;&gt;Cicero, ''Letters to Atticus'' 15.15.2&lt;/ref&gt; The relationship between Cleopatra and Caesar was obvious to the Roman people and caused a scandal because the Roman dictator was already married to [[Calpurnia (wife of Caesar)|Calpurnia]]. But Caesar even erected a golden statue of Cleopatra represented as [[Isis]] in the temple of [[Venus Genetrix]] (the mythical ancestress of Caesar's family), which was situated at the [[Forum of Caesar|Forum Julium]].&lt;ref&gt;Appian, ''Civil Wars'' 2.102.424&lt;/ref&gt;&lt;ref&gt;Cassius Dio, ''Roman History'' 51.22.3&lt;/ref&gt;  Roman orator [[Cicero]] said in his preserved letters that he hated the foreign queen.&lt;ref name=&quot;ReferenceA&quot;/&gt; Cleopatra and her entourage were still in Rome when Caesar was assassinated on 15 March 44&amp;nbsp;BC,&lt;ref&gt;Cicero (''Letters to Atticus'' 14.8.1, written on 16 April 44&amp;nbsp;BC) says that he was very glad that the Queen fled.&lt;/ref&gt; and after his death returned with her relatives to Egypt. When Ptolemy XIV died, allegedly poisoned by his older sister, Cleopatra made [[Caesarion]] her co-regent and successor and gave him the [[epithet]]s ''Theos Philopator Philometor'' (''Father-loving and mother-loving God'').&lt;ref&gt;[[Josephus]], ''[[Antiquities of the Jews]]'' 15.89&lt;/ref&gt;&lt;ref&gt;[[Porphyry (philosopher)|Porphyry]], ''[[Fragmente der griechischen Historiker]]'' (FGrH) 260 F 2, 16-17&lt;/ref&gt;&lt;ref&gt;stele BM 377 (15 February 42&amp;nbsp;BC) and others&lt;/ref&gt;
+
+====Cleopatra in the Roman Civil War====
+Cleopatra sided with the Caesarian party in the Roman civil war between the Caesarian faction, led by [[Mark Antony]] and Octavian, and the faction including the assassins of Caesar led by [[Marcus Junius Brutus]] and [[Gaius Cassius Longinus]], because of her past. Brutus and Cassius left Italy and sailed to the east of the Roman Empire, where they conquered large areas and established military bases. At the beginning of 43&amp;nbsp;BC, Cleopatra formed an alliance with the leader of the Caesarian party in the east, [[Publius Cornelius Dolabella]], who also recognized Caesarion as her co-ruler.&lt;ref&gt;Appian, ''Civil Wars'' 4.61.262–263&lt;/ref&gt;&lt;ref&gt;Cassius Dio, ''Roman History'' 47.30.4 and 47.31.5&lt;/ref&gt; But soon, Dolabella was encircled in Laodicea and committed suicide (July 43&amp;nbsp;BC).
+
+Cassius wanted to invade Egypt to seize the treasures of that country and punish Cleopatra for her support for Dolabella. Egypt seemed an easy target because it did not have strong land forces and there was famine and an epidemic. Cassius also wanted to prevent Cleopatra from bringing reinforcements for Antony and Octavian. But he could not execute an invasion of Egypt because Brutus summoned him back to [[Smyrna]] at the end of 43&amp;nbsp;BC. Cassius tried to blockade Cleopatra’s route to the Caesarians. For this purpose, Lucius Staius Murcus moved with 60 ships and a legion of elite troops into position at [[Cape Matapan]] in the south of the [[Peloponnese]]. Nevertheless, Cleopatra sailed with her fleet from Alexandria to the west along the Libyan coast to join the Caesarian leaders, but she was forced to return to Egypt because her ships were damaged by a violent storm and she became ill. Staius Murcus learned of the queen's misfortune and saw wreckage from her ships on the coast of Greece. He then sailed with his ships into the [[Adriatic Sea]].&lt;ref&gt;Appian, ''Civil Wars'' 4.63; 4.74; 4.82; 5.8&lt;/ref&gt;
+
+====Cleopatra and Mark Antony====
+[[File:Lawrence Alma-Tadema- Anthony and Cleopatra.JPG|thumb|''Antony and Cleopatra'', by [[Lawrence Alma-Tadema]]]]
+[[File:011-Mark Antony, with Cleopatra VII -3.jpg|thumb|[[Denarius]], 32 BC. Obverse: Diademed bust of Cleopatra, CLEOPATRA[E REGINAE REGVM]FILIORVM REGVM. Reverse: Bust of M. Antony, ANTONI ARMENIA DEVICTA]]
+[[Mark Antony]] was one of the [[Second Triumvirate|triumvirs]] who ruled Rome in the power vacuum following Caesar's death. He sent his intimate friend [[Quintus Dellius]] to Egypt in 41&amp;nbsp;BC, summoning Cleopatra to [[Tarsus in Cilicia|Tarsus]] in order to meet Antony and answer questions about her loyalty. During the Roman civil war, she allegedly had paid much money to Cassius. It seems that, in reality, Antony wanted Cleopatra’s promise to support his intended war against the [[Parthians]]. Cleopatra arrived in great state, and so charmed Antony that he chose to spend late 41&amp;nbsp;BC to early 40&amp;nbsp;BC with her in Alexandria.&lt;ref&gt;Plutarch, ''Life of Antony'' 25-29; Appian, ''Civil Wars'' 5.8-11; Cassius Dio, ''Roman History'' 48.24&lt;/ref&gt;
+
+To safeguard herself and Caesarion, she had Antony order the death of her sister [[Arsinoe IV of Egypt|Arsinoe]], who had been banished to the [[Temple of Artemis]] in Roman-controlled [[Ephesus]] for her role in leading the [[Siege of Alexandria (47&amp;nbsp;BC)|Siege of Alexandria]]. The execution was carried out in 41&amp;nbsp;BC on the steps of the temple, and this violation of temple sanctuary scandalised Rome.&lt;ref name=&quot;cleopatrakiller&quot;&gt;[[BBC]] documentary, ''Cleopatra portrait of a killer''&lt;/ref&gt; Cleopatra also retrieved her [[strategos]] (military governor) of Cyprus [[Serapion (strategos)|Serapion]], who had supported Cassius against her wishes.&lt;ref&gt;Appian, ''Civil Wars'' 5.9.35&lt;/ref&gt;
+
+On 25 December 40&amp;nbsp;BC, Cleopatra gave birth to [[fraternal twin|twins]] fathered by Antony, [[Alexander Helios]] and [[Cleopatra Selene II]]. Four years later, Antony visited Alexandria again en route to make war with the Parthians. He renewed his relationship with Cleopatra and, from this point on, Alexandria was his home. He married Cleopatra according to the Egyptian rite (a letter quoted in [[Lives of the Twelve Caesars|Suetonius]] suggests this), although he was married at the time to [[Octavia Minor]], sister of his fellow triumvir [[Augustus|Octavian]]. He and Cleopatra had another child, [[Ptolemy Philadelphus (Cleopatra)|Ptolemy Philadelphus]].
+[[File:Cleopatra VII tetradrachm Syria mint.jpg|left|thumb|A tetradrachm of Cleopatra VII, [[Syria]] mint]]
+Cleopatra and Caesarion were crowned co-rulers of [[Egypt]] and [[Cyprus]] at the [[Donations of Alexandria]] in late 34&amp;nbsp;BC, following Antony's conquest of [[Kingdom of Armenia (antiquity)|Armenia]]. [[Alexander Helios]] was crowned ruler of Armenia, [[Medes|Media]], and [[Parthia]]; Cleopatra Selene II was crowned ruler of [[Cyrenaica]] and [[Libya]]; and Ptolemy Philadelphus was crowned ruler of [[Phoenicia]], [[Syria]], and [[Cilicia]]. Cleopatra was also given the title of &quot;Queen of Kings&quot; by Antonius.&lt;ref&gt;Syme, p. 270.&lt;/ref&gt; Her enemies in Rome feared that Cleopatra &quot;was planning a war of revenge that was to array all the East against Rome, establish herself as empress of the world at Rome, cast justice from [[Capitolium]], and inaugurate a new universal kingdom.&quot;&lt;ref&gt;Syme, p. 274.&lt;/ref&gt; [[Caesarion]] was elevated to having coregency with Cleopatra; he was also proclaimed with many titles, including god, son of god, and [[king of kings]], and was depicted as [[Horus]].&lt;ref name=&quot;Burstein2007&quot;&gt;{{Citation|author=Stanley Mayer Burstein|title=The Reign of Cleopatra|url=https://books.google.com/books?id=KSonyiReFY8C&amp;pg=PA20|accessdate=31 March 2011|date=30 December 2007|publisher=University of Oklahoma Press|isbn=978-0-8061-3871-8|page=20}}&lt;/ref&gt; Egyptians thought that Cleopatra was a reincarnation of the goddess [[Isis]], as she called herself ''Nea Isis''.&lt;ref&gt;Plutarch, ''Life of Antony'' 54.9&lt;/ref&gt;
+
+Relations between Antony and Octavian had been disintegrating for several years; they finally broke down in 33&amp;nbsp;BC, and Octavian convinced the Senate to levy war against Egypt. In 31&amp;nbsp;BC, Antony's forces faced the Romans in a naval action off the coast of [[Actium]]. Cleopatra was present with a fleet of her own.
+According to Plutarch, Cleopatra took flight with her ships at the height of the battle, and Antony followed her.&lt;ref&gt;'Actium', ''The Oxford Companion to Classical Literature'', third edition, edited by M. C. Howatson. Oxford University, 2011.&lt;/ref&gt; Following the [[Battle of Actium]], Octavian invaded Egypt. As he approached Alexandria, Antony's armies deserted to Octavian on August 1, 30&amp;nbsp;BC. To finance her war against Octavian, Cleopatra took gold from the [[tomb of Alexander the Great]], which had been previously robbed.&lt;ref&gt;{{cite web | url =http://www.archaeology.org/issues/95-1307/features/1089-alexander-the-great-macedon-alexandria-the-soma|title=Alexander the Great, King of Macedon|work=[[Archaeology (magazine)|Archaeology]]| date=July 16, 2013| accessdate =August 12, 2016}}&lt;/ref&gt;
+
+There are a number of unverifiable stories about Cleopatra. One of the best known is that she playfully bet Antony, at one of the lavish dinners which they shared, that she could spend ten million [[sestertius|sestertii]] on a dinner. He accepted the bet. The next night, she had a conventional, unspectacular meal served; he was ridiculing this, when she ordered the second course — only a cup of strong vinegar. She then removed one of her priceless pearl earrings, dropped it into the vinegar, allowed it to dissolve, and drank the mixture. The earliest report of this story comes from [[Pliny the Elder]] and dates to about 100&amp;nbsp;years after the banquet described would have happened. The [[calcium carbonate]] in pearls does dissolve in vinegar, but slowly unless the pearl is first crushed.&lt;ref&gt;{{Citation | last = Ullman | first = Berthold L. | authorlink = | coauthors = | title = Cleopatra's Pearls | journal = The Classical Journal | volume = 52 | issue = 5 | pages = 193–201 | publisher = | year = 1957 | url = | postscript = . }}&lt;/ref&gt;
+
+===Death===
+[[File:Guido Cagnacci 003.jpg|thumb|''The Death of Cleopatra'' by [[Guido Cagnacci]], 1658]]
+The ancient sources, particularly the Roman ones, are in general agreement that Cleopatra killed herself by inducing an Egyptian cobra to [[snakebite|bite]] her. The oldest source is [[Strabo]], who was alive at the time of the event and might even have been in Alexandria. He says that there are two stories — that she applied a toxic ointment or that she was bitten by an [[Asp (reptile)|asp]] on her breast — but he said in his writings that he was not sure if Cleopatra poisoned herself or was murdered.&lt;ref&gt;
+{{Citation
+  | last =Strabo
+  | author-link =Strabo
+  | title =[[Geographica (Strabo)|Geography]]
+  | location =XVII 10}}&lt;/ref&gt; Several Roman poets writing within ten years of the event mention bites by two asps,&lt;ref&gt;Note that an unnamed editor of the respected [[Loeb Classical Library]] translation stated that the &quot;twin snakes&quot; mentioned in the text are simply a &quot;symbol of death.&quot;{{Citation
+  | last =Virgil
+  | author-link =Virgil
+  | title =[[Aeneid]]
+  | location =VIII 696–697}}
+&lt;/ref&gt;&lt;ref&gt;
+{{Citation
+  | last =Horace
+  | author-link =Horace
+  | title =Odes
+  | location =I 37
+}}
+&lt;/ref&gt;&lt;ref&gt;
+{{Citation
+  | last =Sextus Propertius
+  | author-link =Sextus Propertius
+  | title =Elegies
+  | location =III 11
+}}
+&lt;/ref&gt; as does [[Florus]], a historian, some 150&amp;nbsp;years later.&lt;ref&gt;
+{{Citation
+  | last =Florus
+  | author-link =Florus
+  | title =Epitome of Roman History
+  | location =II 21
+}}
+&lt;/ref&gt; [[Marcus Velleius Paterculus|Velleius]], sixty years after the event, also refers to an asp.&lt;ref&gt;
+{{Citation
+  | last =Velleius Paterculus
+  | author-link =Marcus Velleius Paterculus
+  | title =Compendium of Roman History
+  | location =II 87
+}}
+
+&lt;/ref&gt;&lt;ref&gt;For a possible poetic allusion to the asp, see Wallace Stevens' In the Carolinas&lt;/ref&gt; Other authors have questioned these historical accounts, stating that it is possible that Augustus had her killed.&lt;ref&gt;{{Citation |author=Everitt, Anthony |title=Augustus: The Life of Rome's First Emperor |publisher=Random House Trade Paperbacks |location=New York |year=2007 |pages=194–195 |isbn=0-8129-7058-6}}&lt;/ref&gt;
+In 2010, German historian Christoph Schaefer challenged all other theories, declaring that the queen had actually been poisoned and died from drinking a mixture of poisons. After studying historical texts and consulting with toxicologists, the historian concluded that the asp could not have caused the quick and pain-free death claimed by most sources, since the asp ([[Egyptian cobra]]) venom paralyses parts of the body, starting with the eyes, before causing death. Living when and where she did, Cleopatra would have known of the violent and painful effects of an asp's venomous bite, so it is unlikely that it was the cause of her death. Also, the asp's bite is not always fatal. Schaefer and his toxicologist Dietrich Mebs have theorized that Cleopatra used a mixture of [[Conium|hemlock]], [[Aconitum|wolfsbane]], and [[opium]].&lt;ref&gt;{{cite news | url=http://edition.cnn.com/2010/WORLD/europe/06/30/cleopatra.suicide/ | title= Poison, not snake, killed Cleopatra, scholar says - Cleopatra died a quiet and pain free death, historian alleges.| publisher= [[CNN]] | author = Melissa Gray | date= 2010-06-30 | accessdate=2015-10-11}}&lt;/ref&gt;
+[[File:The Death of Cleopatra arthur.jpg|left|thumb|''The Death of Cleopatra'' by Reginald Arthur, 1892]]
+[[Plutarch]], writing about 130&amp;nbsp;years after the event, reports that Octavian succeeded in capturing Cleopatra in her mausoleum after the death of Antony. He ordered his freedman [[Epaphroditus (freedman of Augustus)|Epaphroditus]] to guard her to prevent her from committing suicide, because he allegedly wanted to present her in his [[Roman triumph|triumph]]. But Cleopatra was able to deceive Epaphroditus and kill herself nevertheless.&lt;ref&gt;Plutarch, ''Life of Antony'' 79.6 and 85.4–6; Cassius Dio, ''Roman History'' 51.11.4–5 and 51.13.3–5&lt;/ref&gt; Plutarch states that she was found dead, her handmaiden Iras dying at her feet, and handmaiden Charmion adjusting her crown before she herself fell.&lt;ref&gt;
+{{Citation
+  | last =Plutarch
+  | author-link =Plutarch
+  | title =Parallel Lives
+  | location =LXXXV 2–3 (Life of Antony)
+}}
+&lt;/ref&gt; He then goes on to state that an asp was concealed in a basket of figs that was brought to her by a rustic and, finding it after eating a few figs, she held out her arm for it to bite. Other stories state that it was hidden in a vase and that she poked it with a spindle until it got angry enough to bite her on the arm. Finally, he indicates that, in Octavian's triumphal march back in Rome, an effigy of Cleopatra was part of the parade that had an asp clinging to it.&lt;ref&gt;
+{{Citation
+  | last =Plutarch
+  | author-link =Plutarch
+  | title =ibid.
+  | location =LXXXVI 3.
+}}
+See also
+{{Citation
+  | last =Cassius Dio
+  | author-link =Cassius Dio
+  | title =Roman History
+  | location =LI 21
+}}
+&lt;/ref&gt;
+
+[[Suetonius]], writing about the same time as Plutarch, also says Cleopatra died from an asp bite.&lt;ref&gt;
+{{Citation
+  | last =Suetonius
+  | author-link =Suetonius
+  | title =[[On the Life of the Caesars]]
+  | volume =Augustus
+  | location =XVII 4
+}}
+&lt;/ref&gt;
+
+Classical sources say that Cleopatra was bitten on the arm,&lt;ref&gt;
+{{Citation
+  | last =Plutarch
+  | author-link =Plutarch
+  | title =loc. cit.
+}}
+&lt;/ref&gt;&lt;ref&gt;
+{{Citation
+  | last =Cassius Dio
+  | author-link =Cassius Dio
+  | title =op. cit.
+  | location =LI 14
+}}
+&lt;/ref&gt;&lt;ref&gt;
+{{Citation
+  | last =Galen
+  | author-link =Galen
+  | title =De Theriaca ad Pisonem
+  | location =CCXXXVII, who says she bit herself, rather than an asp biting her.
+}}
+&lt;/ref&gt; but she is more usually depicted in medieval and Renaissance iconography with asps at her breast, a tradition followed by Shakespeare.&lt;ref&gt;
+{{Citation
+  | last =Shakespeare
+  | author-link =William Shakespeare
+  | title =[[Antony and Cleopatra]]
+  | location =V ii
+}}
+&lt;/ref&gt;
+
+[[File:The Death of Cleopatra by Juan Luna1881.jpg|thumb|left|The Death of Cleopatra by [[Juan Luna]], 1881.]]
+[[Image:Adam Lenckhardt - Cleopatra - Walters 71416 - Right.jpg|thumb|upright|Cleopatra is depicted taking her own life with the bite of a venomous serpent. [[Adam Lenckhardt]] (Ivory).&lt;ref&gt;{{cite web |publisher= [[The Walters Art Museum]]
+ |url= http://art.thewalters.org/detail/35053
+ |title= Cleopatra}}&lt;/ref&gt; The Walters Art Museum.]]
+Plutarch tells us of the death of Antony. When his armies deserted him and joined with Octavian, he cried out that Cleopatra had betrayed him. She locked herself in her monument with only her two handmaidens, fearing his wrath, and sent messengers to tell Antony that she was dead. Believing them, Antony stabbed himself in the stomach with his sword, and lay on his couch to die. Instead, the blood flow stopped, and he begged any and all to finish him off. Another messenger came from Cleopatra with instructions to bring him to her, and he consented, rejoicing that Cleopatra was still alive. She would not open the door, but tossed ropes out of a window. After Antony was securely trussed up, she and her handmaidens hauled him up into the monument. This nearly finished him off. After dragging him in through the window, they laid him on a couch. Cleopatra tore off her clothes and covered him with them. She raved and cried, beat her breasts, and engaged in self-mutilation. Antony told her to calm down, asked for a glass of wine, and died upon finishing it.&lt;ref&gt;{{Citation | last =Plutarch | author-link =Plutarch | title =ibid.}}&lt;/ref&gt;
+
+The site of their [[mausoleum]] is uncertain, though the [[Egyptian Antiquities Service]] believes that it is in or near the temple of [[Taposiris Magna]], southwest of [[Alexandria]].&lt;ref&gt;{{cite news|url=http://news.bbc.co.uk/1/hi/world/middle_east/8000978.stm |title=Dig 'may reveal' Cleopatra's tomb |publisher=BBC News |date=2009-04-15 |accessdate=2009-04-24}}&lt;/ref&gt;
+
+[[Caesarion]], Cleopatra's son by Caesar, was proclaimed pharaoh by the Egyptians after Alexandria fell to Octavian. Caesarion was captured and killed, his fate reportedly sealed when one of Octavian's advisers paraphrased Homer: &quot;It is bad to have too many Caesars.&quot;&lt;ref&gt;Plutarch, ''Life of Antony'' 81.4 – 82.1; Cassius Dio, ''Roman History'' 51.15.5; Suetonius, ''Augustus'' 17.5&lt;/ref&gt; This ended the Hellenistic line of Egyptian pharaohs and, in fact, the line of ''all'' Egyptian pharaohs. The three children of Cleopatra and Antony were spared and taken back to Rome, where they were taken care of by Antony's wife [[Octavia Minor]]. The daughter [[Cleopatra Selene II|Cleopatra Selene]] was married through arrangements of Octavian to [[Juba II of Mauretania]].&lt;ref&gt;Plutarch, ''Life of Antony'' 87.1–2; Cassius Dio, ''Roman History'' 51.15.6; Suetonius, ''Augustus'' 17.5 and ''Caligula'' 26.1&lt;/ref&gt;
+
+{{Clear}}
+
+==Character and cultural depictions==
+[[File:Клеопатра VII.jpg|thumb|upright|Statue of Cleopatra as [[Egyptian goddess]]; Basalt, second half of the 1st century BC. Hermitage, [[Saint Petersburg]]]]
+[[File:Alexandre Cabanel - Cléopatre essayant des poisons sur des condamnés à mort.jpg|thumb|left|''Cleopatra Testing Poisons on Condemned Prisoners'' by [[Alexandre Cabanel]] (1887).]]
+{{Main|Cultural depictions of Cleopatra}}
+Cleopatra was regarded as a great beauty, even in the ancient world. In his ''Life of Antony'', [[Plutarch]] remarks that &quot;judging by the proofs which she had had before this of the effect of her beauty upon Caius Caesar and Gnaeus the son of Pompey, she had hopes that she would more easily bring Antony to her feet. For Caesar and Pompey had known her when she was still a girl and inexperienced in affairs, but she was going to visit Antony at the very time when women have the most brilliant beauty.&quot;&lt;ref name=cleoppearance&gt;{{cite web|url = http://penelope.uchicago.edu/~grout/encyclopaedia_romana/miscellanea/cleopatra/bust.html|title = The Beauty of Cleopatra|accessdate = 2008-05-28|publisher = University of Chicago}}&lt;/ref&gt; Later in the work, however, Plutarch indicates that &quot;her beauty, as we are told, was in itself neither altogether incomparable, nor such as to strike those who saw her.&quot;&lt;ref name=cleoppearance/&gt; Rather, what ultimately made Cleopatra attractive were her wit, charm and &quot;sweetness in the tones of her voice.&quot;&lt;ref name=cleoppearance/&gt;
+
+[[Cassius Dio]] also spoke of Cleopatra's allure: &quot;For she was a woman of surpassing beauty, and at that time, when she was in the prime of her youth, she was most striking; she also possessed a most charming voice and knowledge of how to make herself agreeable to everyone. Being brilliant to look upon and to listen to, with the power to subjugate everyone, even a love-sated man already past his prime, she thought that it would be in keeping with her role to meet Caesar, and she reposed in her beauty all her claims to the throne.&quot;&lt;ref name=cleoppearance/&gt;
+
+These accounts influenced later cultural depictions of Cleopatra, which typically present her using her charms to influence the most powerful men in the Western world.
+
+Cleopatra was also renowned for her intellect. Plutarch writes that she could speak at least nine languages and rarely had need of an interpreter.&lt;ref&gt;&quot;she could pass from one language to another; so that there were few of the barbarian nations that she answered by an interpreter; to most of them she spoke herself, as to the Ethiopians, Troglodytes, Hebrews, Arabians, Syrians, Medes, Parthians, and many others, whose language she had learnt; which was all the more surprising because most of the kings, her predecessors, scarcely gave themselves the trouble to acquire the Egyptian tongue, and several of them quite abandoned the Macedonian.&quot; Plutarch, ''Antony'', 27.3-4&lt;/ref&gt;
+
+==Ancestry==
+The high degree of [[inbreeding]] amongst the Ptolemies is also illustrated by Cleopatra's immediate ancestry, of which a reconstruction is shown below.&lt;ref&gt;Dodson, Aidan and Hilton, Dyan. The Complete Royal Families of Ancient Egypt. Thames &amp; Hudson. 2004. ISBN 0-500-05128-3 The family tree and short discussions of the individuals can be found on pages 268-281. The authors refer to Cleopatra V as Cleopatra VI and Cleopatra Selene I is called Cleopatra V Selene.&lt;/ref&gt; Through three uncle–niece marriages and three sister–brother marriages, her family tree collapses to a single couple at four, five or six generations back (counting through different lines).&lt;ref&gt;[[Stacy Schiff]], ''Cleopatra: A Life'', Hachette Digital, Inc., 2010, ISBN 978-0-316-00192-2 [https://books.google.com/books?id=dKIo6D9yh3cC Google Books]&lt;/ref&gt;
+
+It has often been said that &quot;there was not one drop of Egyptian blood in the Ptolemaic line&quot;,&lt;ref&gt;HSC Ancient History, By Peter Roberts, pg 125, at https://books.google.co.za/books?id=Krh7n9AyS40C&amp;pg=PA129&amp;dq=arsinoe+iv&amp;hl=en&amp;sa=X&amp;ved=0ahUKEwjYz-KfxrzOAhXEAsAKHbaGD2MQ6AEILDAD#v=onepage&amp;q=arsinoe%20iv&amp;f=false&lt;/ref&gt; and that the Romans, in all their anti-Cleopatra propaganda, made no mention of any illegitimacy against her.
+
+&lt;div style=&quot;clear: both; width: 100%; padding: 0; text-align: left; border: none;&quot; class=&quot;NavFrame&quot;&gt;
+&lt;div style=&quot;background:#cdc; text-align:center; border:1px solid #676;&quot; class=&quot;NavHead&quot;&gt;'''Ancestors of Cleopatra VII of Egypt '''
+&lt;/div&gt;
+&lt;div class=&quot;NavContent&quot;&gt;
+&lt;center&gt;{{Ahnentafel-compact5
+|style=font-size: 100%; line-height: 110%;
+|border=1
+|boxstyle=padding-top: 0; padding-bottom: 0;hi wat up
+|boxstyle_1=background-color: #fcc;
+|boxstyle_2=background-color: #fb9;
+|boxstyle_3=background-color: #ffc;
+|boxstyle_4=background-color: #bfc;
+|boxstyle_5=background-color: #9fe;
+|1= 1. '''Cleopatra VII'''
+|2= 2. [[Ptolemy XII Auletes]]
+|3= 3. [[Cleopatra V Tryphaena]] 
+|4= 4. [[Ptolemy IX Lathyros]]
+|5= 5. [[Cleopatra IV of Egypt]]
+|6= 6. [[Ptolemy X Alexander I]]
+|7= 7. [[Berenice III]]
+|8= 8. [[Ptolemy VIII Physcon]]
+|9= 9. [[Cleopatra III of Egypt]]
+|10= 10. Ptolemy VIII Physcon (= 8)
+|11= 11. Cleopatra III of Egypt (= 9)
+|12= 12. [[Ptolemy VIII Physcon]] (= 8)
+|13= 13. [[Cleopatra III of Egypt]] (= 9)
+|14= 14. [[Ptolemy IX Lathyros]] (= 4)
+|15= 15. [[Cleopatra Selene I]]
+|16= 16. [[Ptolemy V Epiphanes]]
+|17= 17. [[Cleopatra I of Egypt]]
+|18= 18. [[Ptolemy VI Philometor]] (brother of no. 8)
+|19= 19. [[Cleopatra II of Egypt]] (sister of no. 8)
+|20= 20. Ptolemy V Epiphanes (= 16)
+|21= 21. Cleopatra I of Egypt (= 17)
+|22= 22. Ptolemy VI Philometor (= 18)
+|23= 23. Cleopatra II of Egypt (= 19)
+|24= 24. [[Ptolemy V Epiphanes]] (= 16)
+|25= 25. [[Cleopatra I of Egypt]] (= 17)
+|26= 26. [[Ptolemy VI Philometor]] (= 18)
+|27= 27. [[Cleopatra II of Egypt]] (= 19)
+|28= 28. Ptolemy VIII Physcon (= 8)
+|29= 29. Cleopatra III of Egypt (= 9)
+|30= 30. Ptolemy VIII Physcon (= 8)
+|31= 31. Cleopatra III of Egypt (= 9)
+}}&lt;/center&gt;
+&lt;/div&gt;&lt;/div&gt;
+
+Some of Cleopatra's ancestors were the same person.  For instance, her mother was her father's niece and thus not only her mother but also her cousin. This family tree attempts to present those relationships in a more easily-understood format.
+{{chart/start|align=center|summary=Cleopatra's father was likely the uncle of Cleopatra's mother. There were three uncle/niece and three brother/sister relationships in her ancestry going back to a single set of either great grandparents or great great grandparents, depending on how the ancestry was traced.}}
+{{chart| |PTOLEMY5|~|y|~|CLEO1|PTOLEMY5=[[Ptolemy V Epiphanes]]|CLEO1=[[Cleopatra I of Egypt|Cleopatra I]]}}
+{{chart| | | |,|-|^|-|-|-|v|-|-|-|-|.}}
+{{chart| | |PTOLEMY8|7| |PTOLEMY6|~|y|~|CLEO2|PTOLEMY8=[[Ptolemy VIII Physcon]]|PTOLEMY6=[[Ptolemy VI Philometor]]|CLEO2=[[Cleopatra II of Egypt|Cleopatra II]]}}
+{{chart| | | | | |:| | | | | |!}}
+{{chart| | | | | |L|~|~|y|~|CLEO3|CLEO3=[[Cleopatra III of Egypt|Cleopatra III]]}}
+{{chart| | |,|-|-|-|v|-|^|-|-|-|v|-|-|-|-|-|.| }}
+{{chart|PTOLEMY10|7| |CLEOSELENE|~|y|~|PTOLEMY9|~|y|~|CLEO4|PTOLEMY10=[[Ptolemy X Alexander I]]|CLEOSELENE=[[Cleopatra Selene I|Cleopatra Selene&amp;nbsp;I]]|PTOLEMY9=[[Ptolemy IX Lathyros]]|CLEO4=[[Cleopatra IV of Egypt|Cleopatra IV]]}}
+{{chart| | | |:| | | | | |!| | | | | |!}}
+{{chart| | | |L|~|~|y|~|BERENICE3| | |F|PTOLEMY12|BERENICE3=[[Berenice III of Egypt|Berenice III]]|PTOLEMY12=[[Ptolemy XII Auletes]]}}
+{{chart| | | | | | |!| | | | | | |:}}
+{{chart| | | | | |CLEO5|~|~|y|~|~|J|CLEO5=[[Cleopatra V of Egypt|Cleopatra V]]}}
+{{chart| | | | | | | | | |CLEO7|CLEO7='''Cleopatra VII'''}}
+{{chart/end}}
+{{chart bottom}}
+
+==See also==
+*[[List of female rulers and title holders]]
+*[[Zenobia]]
+
+==Notes==
+{{Reflist|30em}}
+
+== References ==
+;Primary sources
+{{refbegin}}
+*Hegesippus, ''Historiae'' i.29–32''.
+*[[Lucan]], ''Bellum civile ix.909–911, x''.
+*Macrobius, ''Saturnalia iii.17.14–18''.
+*Orosius, ''Historiae adversus paganos vi.16.1–2, 19.4–18''.
+*Pliny, ''Naturalis historia vii.2.14, ix.58.119–121, xxi.9.12''.
+*{{Citation|last=Plutarch|editor-last=Warner|editor-first=Rex|title=Fall of the Roman Republic|year=1958|publisher=Penguin Books|location=London|isbn=0-14-044084-4|chapter=Caesar}}
+*{{Citation|last=Plutarch|editor-last=Scott-Kilvert|editor-first=Ian|title=Makers of Rome|year=1965|publisher=Penguin Books|location=Baltimore|isbn=0-14-044158-1|chapter=Mark Antony}}
+*Suetonius, ''De vita Caesarum'' ''Iul '' i.35.52, ii.17''.
+{{refend}}
+
+;Modern sources
+{{refbegin}}
+*{{citation|last=Bradford|first=Ernle Dusgate Selby|title=Cleopatra|publisher=Penguin Group|year=2000|isbn=978-0-14-139014-7}}
+*{{Citation|last=Burstein|first=Stanley M.|title=The reign of Cleopatra|year=2004|publisher=Greenwood Press|location=Westport, CT|isbn=0-313-32527-8}}
+*{{Citation|last=Flamarion|first=Edith|last2=Bonfante-Warren|first2=Alexandra|title=Cleopatra: The Life and Death of a Pharaoh|publisher=Harry Abrams|year=1997|isbn=978-0-8109-2805-3}}
+*{{citation|last=Foss|first=Michael|title=The Search for Cleopatra|publisher=Arcade Publishing|year=1999|isbn=978-1-55970-503-5}}
+*{{Citation|last=Fraser|first=P.M.|title=Ptolemaic Alexandria|year=1972|publisher=Clarendon Press|location=Oxford|isbn=0-19-814278-1}}
+*{{Citation|last=Lindsay|first=Jack|title=Cleopatra|year=1972|publisher=Coward-McCann|location=New York}}
+*{{citation|last=Nardo|first=Don|title=Cleopatra|publisher=Lucent Books|year=1994|isbn=978-1-56006-023-9}}
+*{{Citation|last=Pomeroy|first=Sarah B.|title=Women in Hellenistic Egypt: from Alexander to Cleopatra|year=1984|publisher=Schocken Books|location=New York|isbn=0-8052-3911-1}}
+*{{Citation|last=Roller|first=Duane W.|title=Cleopatra: a biography|year=2010|publisher=Oxford University Press|location=Oxford|isbn=978-0-19-536553-5}}
+*{{citation|last=Southern|first=Pat|title=Cleopatra|publisher=Tempus|year=2000|isbn=978-0-7524-1494-2}}
+*{{citation|last=Syme|first=Ronald|title=The Roman Revolution|publisher=Oxford University Press|year=1962}}
+*{{Citation|last=Volkmann|first=H.|title=Cleopatra: A Study in Politics and Propaganda|year=1958|publisher=Sagamore Press|location=New York|others=T.J. Cadoux, trans}}
+*{{citation|last=Walker|first=Susan|last2=Higgs|first2=Peter|title=Cleopatra of Egypt, From History to Myth|publisher=British Museum Press|year=2001|isbn=978-0-7141-1943-4}}
+*{{Citation|last=Weigall|first=Arthur|title=The Life and Times of Cleopatra Queen of Egypt|url=http://name.umdl.umich.edu/AJL1424.0001.001|year=1923|publisher=Putnam|location=London}}
+{{refend}}
+
+== External links ==
+{{Sister project links |commons=Category:Cleopatra VII of Egypt}}
+{{Wikinews|Egyptian archaeologist finds artifacts which may lead to Cleopatra's tomb}}
+*{{In Our Time|Cleopatra|b00w7clj|Cleopatra}}
+*{{cite news| author=Vanessa Collingridge | title=Cleopatra: A Timewatch Guide| date=2014 | accessdate=5 July 2016 |url=http://www.bbc.co.uk/iplayer/live/bbcfour }}
+*[http://www.gutenberg.org/ebooks/10992 Cleopatra], a Victorian children's book by [[Jacob Abbott]], 1852, [[Project Gutenberg]] edition
+*[http://www.discoverychannelasia.com/ontv_egyptweek/death_cleopatra/index.shtml &quot;Mysterious Death of Cleopatra&quot;] at the [http://www.discoverychannelasia.com/ Discovery Channel]
+*[http://www.bbc.co.uk/history/historic_figures/cleopatra_vii.shtml Cleopatra VII] at [http://www.bbc.co.uk/history/ BBC History]
+
+{{S-start}}
+{{S-hou|[[Ptolemaic dynasty]]||69&amp;nbsp;BC||30&amp;nbsp;BC}}
+{{S-reg}}
+{{S-bef|before=[[Ptolemy XII]]}}
+{{S-ttl|title=[[List of Pharaohs#Ptolemaic Dynasty|Queen of Egypt]]|years=51–30&amp;nbsp;BC
+|regent1=[[Ptolemy XII]],
+|regent2=[[Ptolemy XIII]],
+|regent3=[[Ptolemy XIV]] and
+|regent4=[[Ptolemy XV Caesarion]]}}
+{{S-non|reason=Office abolished &lt;br&gt; &lt;small&gt; [[History of Roman Egypt|Egypt annexed by Roman Republic]]}} &lt;/small&gt;
+{{s-end}}
+
+{{Hellenistic rulers}}
+{{Pharaohs |late}}
+
+{{Authority control}}
+
+{{DEFAULTSORT:Cleopatra 7}}
+[[Category:Cleopatra| ]]
+[[Category:69 BC births]]
+[[Category:30 BC deaths]]
+[[Category:1st-century BC African rulers]]
+[[Category:1st-century BC female rulers]]
+[[Category:Queens consort of the Ptolemaic dynasty]]
+[[Category:Egyptian people of Greek descent]]
+[[Category:Deaths due to snake bites]]
+[[Category:Egyptian queens regnant]]
+[[Category:Female Shakespearean characters]]
+[[Category:Pharaohs of the Ptolemaic dynasty]]
+[[Category:Royal suicides in the classical world]]
+[[Category:Female suicides]]
+[[Category:Female pharaohs]]
+[[Category:Julius Caesar]]
+[[Category:1st century BC in Egypt]]

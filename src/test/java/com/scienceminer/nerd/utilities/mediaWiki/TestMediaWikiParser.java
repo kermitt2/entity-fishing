@@ -49,6 +49,57 @@ public class TestMediaWikiParser {
 
         assertThat(result, startsWith("1. Events"));
         assertThat(result, endsWith("5. External links"));
+
+        assertThat(result, not(containsString("[[")));
+        assertThat(result, not(containsString("]]")));
+        assertThat(result, not(containsString("'''")));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinks_complexArticle() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksOnly(input);
+
+        assertThat(result, startsWith("1. Events"));
+        assertThat(result, endsWith("5. External links"));
+
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinksEmphasisOnly() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("Cleopatra_articlePage.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input);
+
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, containsString("'''"));
+
+        assertThat(result, startsWith("'''Cleopatra VII Philopator'''"));
+        //TODO: this should be fixed
+        assertThat(result, endsWith("at </small>"));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinksArticlesOnly() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("Cleopatra_articlePage.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input);
+
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
+
+        assertThat(result, startsWith("Cleopatra VII Philopator"));
+        //TODO: this should be fixed
+        assertThat(result, endsWith("at </small>"));
     }
 
 

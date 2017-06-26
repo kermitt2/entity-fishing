@@ -40,14 +40,14 @@ import de.fau.cs.osr.ptk.common.AstVisitor;
 
 /**
  * MediaWiki text parser using Sweble parsing framework.
- * 
- * By default all the media wiki markup are removed. The elements to be kept in 
+ *
+ * By default all the media wiki markup are removed. The elements to be kept in
  * the output of the converter need to be speficied to the converter before
- * application. 
- * 
- * Implemented as a visitor converting an article AST into a various text 
- * representation, derived from the TextConverter.java example of sweble-wikitext. 
- * 
+ * application.
+ *
+ * Implemented as a visitor converting an article AST into a various text
+ * representation, derived from the TextConverter.java example of sweble-wikitext.
+ *
  * The methods needed to descend into an AST and visit the children of a given
  * node <code>n</code> are
  * <ul>
@@ -201,7 +201,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 			write(';');
 		}
 		else {
-			write(ch); 
+			write(ch);
 		}
 	}
 
@@ -217,52 +217,57 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtInternalLink link) {
-		if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
-			if (link.getPrefix() == null) {
-				// this is an article so we preserve the link - there is no prefix
+		if(!isCategory(link)) {
+			if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
+
+				if (link.getPrefix() == null) {
+
+					// this is an article so we preserve the link - there is no prefix
+					write("[[");
+					iterate(link.getTarget());
+					if (link.hasTitle()) {
+						write("|");
+						iterate(link.getTitle());
+					}
+					write("]]");
+
+					// note: what to do with the postfix?
+				} else {
+					// its not an article so we output only the anchor
+					if (!link.hasTitle()) {
+						iterate(link.getTarget());
+					} else {
+						iterate(link.getTitle());
+					}
+					//write(link.getPostfix());
+					// note: what to do with the postfix?
+				}
+
+			} else if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS)))) {
 				write("[[");
+				write(link.getPrefix());
 				iterate(link.getTarget());
 				if (link.hasTitle()) {
 					write("|");
-					iterate(link.getTitle());		
-				} 
-				write("]]");
-				// note: what to do with the postfix? 
-			} else {
-				// its not an article so we output only the anchor
-				if (!link.hasTitle()) {
-					iterate(link.getTarget());
-				}
-				else {
 					iterate(link.getTitle());
 				}
-				//write(link.getPostfix());
-				// note: what to do with the postfix?
-			}
-
-		} else if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS)))) {
-			write("[[");
-			write(link.getPrefix());
-			iterate(link.getTarget());
-			if (link.hasTitle()) {
-				write("|");
-				iterate(link.getTitle());		
-			} 
-			write("]]");
-			//write(link.getPostfix()); // ? what is a postfix?
-		}
-		else {
-			//write(link.getPrefix()); // ?
-			if (!link.hasTitle()) {
-				//ignore categories
-				if(!link.getTarget().getAsString().startsWith("Category")) {
-					iterate(link.getTarget());
-				}
+				write("]]");
+				//write(link.getPostfix()); // ? what is a postfix?
 			} else {
-				iterate(link.getTitle());
+				//write(link.getPrefix()); // ?
+				if (!link.hasTitle()) {
+					//ignore categories
+					iterate(link.getTarget());
+				} else {
+					iterate(link.getTitle());
+				}
+				//write(link.getPostfix()); // ? what is a postfix?
 			}
-			//write(link.getPostfix()); // ? what is a postfix?
 		}
+	}
+
+	private boolean isCategory(WtInternalLink link) {
+		return link.getTarget().getAsString().startsWith("Category");
 	}
 
 	public void visit(WtSection s) {

@@ -96,7 +96,7 @@ public class MediaWikiParser {
             LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
-        return result;
+        return trim(result);
     }   
 
     /**
@@ -125,7 +125,7 @@ public class MediaWikiParser {
             LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
-        return result;
+        return trim(result);
     }   
 
     /**
@@ -156,7 +156,7 @@ public class MediaWikiParser {
             LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
-        return result;
+        return trim(result);
     }
 
     /**
@@ -181,7 +181,7 @@ public class MediaWikiParser {
         firstParagraph = firstParagraph.replaceAll("\n", " ");
         firstParagraph = firstParagraph.replaceAll("\\s+", " "); 
 
-        return firstParagraph.trim();
+        return trim(firstParagraph);
     }
 
     /**
@@ -196,7 +196,7 @@ public class MediaWikiParser {
         wikitext = wikitext.replaceAll("\n", " ");
         wikitext = wikitext.replaceAll("\\s+", " ");  
 
-        return wikitext.trim();
+        return trim(wikitext);
     }    
 }
 
