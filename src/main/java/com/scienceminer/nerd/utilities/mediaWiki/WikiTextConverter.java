@@ -78,7 +78,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	public static int INTERNAL_LINKS_ARTICLES = 3;
 
 	/**
-	 * Becomes true if we are no long at the Beginning Of the whole Document.
+	 * Becomes true if we are no longer at the Beginning Of the whole Document.
 	 */
 	private boolean pastBod;
 
@@ -214,9 +214,6 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtExternalLink link) {
-		write('[');
-		write(extLinkNum++);
-		write(']');
 	}
 
 	public void visit(WtInternalLink link) {
@@ -257,9 +254,11 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 		else {
 			//write(link.getPrefix()); // ?
 			if (!link.hasTitle()) {
-				iterate(link.getTarget());
-			}
-			else {
+				//ignore categories
+				if(!link.getTarget().getAsString().startsWith("Category")) {
+					iterate(link.getTarget());
+				}
+			} else {
 				iterate(link.getTitle());
 			}
 			//write(link.getPostfix()); // ? what is a postfix?
@@ -324,6 +323,8 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtXmlElement e) {
+//		System.out.println("processing: "+e.getName());
+//		System.out.println(e.getBody().toString());
 		if (e.getName().equalsIgnoreCase("br")) {
 			newline(1);
 		}

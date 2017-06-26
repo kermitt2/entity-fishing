@@ -1,28 +1,15 @@
 package com.scienceminer.nerd.utilities.mediaWiki;
 
-import java.util.*;
-import java.io.*;
-import java.nio.charset.Charset;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-
-import org.sweble.wikitext.engine.EngineException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sweble.wikitext.engine.PageId;
 import org.sweble.wikitext.engine.PageTitle;
 import org.sweble.wikitext.engine.WtEngineImpl;
 import org.sweble.wikitext.engine.config.WikiConfig;
 import org.sweble.wikitext.engine.nodes.EngProcessedPage;
-import org.sweble.wikitext.engine.output.HtmlRenderer;
-import org.sweble.wikitext.engine.output.HtmlRendererCallback;
-import org.sweble.wikitext.engine.output.MediaInfo;
 import org.sweble.wikitext.engine.utils.DefaultConfigEnWp;
-import org.sweble.wikitext.engine.utils.UrlEncoding;
-import org.sweble.wikitext.parser.nodes.WtUrl;
-import org.sweble.wikitext.parser.parser.LinkTargetException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
  * Handler for the parser of mediawiki format able, in particular, to modify
@@ -78,11 +65,10 @@ public class MediaWikiParser {
             WikiTextConverter converter = new WikiTextConverter(config);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text");
-            e.printStackTrace();
+            LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
-        return result;
+        return trim(result);
     }
 
     /**
@@ -107,8 +93,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text");
-            e.printStackTrace();
+            LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
         return result;
@@ -137,8 +122,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS_ARTICLES);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text");
-            e.printStackTrace();
+            LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
         return result;
@@ -169,8 +153,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.ITALICS);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text");
-            e.printStackTrace();
+            LOGGER.warn("Fail to parse MediaWiki text", e);
         }
 
         return result;
