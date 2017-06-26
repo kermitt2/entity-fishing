@@ -209,10 +209,11 @@ System.out.println("nb article processed: " + nbArticle);
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 
 		//String content = cleaner.getMarkupLinksOnly(article);
+//System.out.println(article.getFullWikiText());
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
-System.out.println(content);
+//System.out.println(content);
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
 
@@ -267,7 +268,7 @@ System.out.println(linkText + ", " + labelText + ", " +
 		}
 		contentText.append(content.substring(head));
 		String contentString = contentText.toString();
-System.out.println("Cleaned content: " + contentString);
+//System.out.println("Cleaned content: " + contentString);
 		
 		// get candidates for this content
 		NerdEngine nerdEngine = NerdEngine.getInstance();

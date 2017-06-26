@@ -102,7 +102,19 @@ public class TestMediaWikiParser {
         assertThat(result, endsWith("at </small>"));
     }
 
+    @Test
+    public void testWikiMedia3TextWithInternalLinksArticlesOnly() throws Exception {
 
+        InputStream is = this.getClass().getResourceAsStream("acropolis.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input);
+
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
+
+        assertThat(result, startsWith("An acropolis"));
+    }
     
 
 }

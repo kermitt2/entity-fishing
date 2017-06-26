@@ -33,14 +33,17 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 	/**
 	 * Create a random sample of articles from Wikipedia given some constraints
 	 */
-	public ArticleTrainingSample(LowerKnowledgeBase wikipedia, int size, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {
+	public ArticleTrainingSample(LowerKnowledgeBase wikipedia, 
+								int size, 
+								ArticleTrainingSampleCriterias criterias, 
+								List<Integer> exclude) {
 		super();
 		this.wikipedia = wikipedia;
 		double lastWarningProgress = 0;
 		PageIterator ite = wikipedia.getPageIterator(PageType.article);
 		try {
 			while (ite.hasNext()) {
-				if (sample.size() >= size)
+				if ( (sample != null) && (sample.size() >= size))
 					break; //we have enough ids
 				Page page = ite.next();
 				if (page.getType() != PageType.article)
@@ -52,8 +55,11 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 				if ((criterias.getMinInLinks() != null) && 
 					(article.getLinksIn().length < criterias.getMinInLinks()))
 					continue;
-				if (isArticleValid(article, criterias, exclude)) 
+				if (isArticleValid(article, criterias, exclude)) {
+					if (sample == null)
+						sample = new ArrayList<Article>();
 					sample.add(article);
+				}
 			}
 		} finally {
 			ite.close();
@@ -135,10 +141,6 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 		if (wikiText == null)
 			return false;
 		
-		//MediaWikiParser stripper = new MediaWikiParser();
-		//markup = stripper.stripToPlainText(markup, null); 
-		//markup = stripper.stripExcessNewlines(markup);
-		
 		String content = MediaWikiParser.getInstance().toTextOnly(wikiText);
 
 		if ((criterias.getMinWordCount() != null) || (criterias.getMaxWordCount() != null) || 
@@ -178,8 +180,11 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 
 		for (int i=0; i<sizes.size(); i++) {
 			samples.add(new ArticleTrainingSample(wikipedia, sizes.get(i), constraints, exclude));
-			for(Article article : samples.get(i).getSample())
+			for(Article article : samples.get(i).getSample()) {
+				if (exclude == null)
+					exclude = new ArrayList<Integer>();
 				exclude.add(article.getId());
+			}
 			constraints.setExclude(exclude);
 		}
 		

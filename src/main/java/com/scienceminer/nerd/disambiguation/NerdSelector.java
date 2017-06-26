@@ -184,11 +184,10 @@ System.out.println(arffDataset);
 									NerdRanker ranker) throws Exception {
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 
-		//String content = cleaner.getMarkupLinksOnly(article);
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
-System.out.println(content);
+//System.out.println(content);
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
 
@@ -243,7 +242,7 @@ System.out.println(linkText + ", " + labelText + ", " +
 		}
 		contentText.append(content.substring(head));
 		String contentString = contentText.toString();
-System.out.println("Cleaned content: " + contentString);
+//System.out.println("Cleaned content: " + contentString);
 		
 		// get candidates for this content
 		NerdEngine nerdEngine = NerdEngine.getInstance();
@@ -319,8 +318,9 @@ System.out.println("get context for this content");
 			NerdEntity entity = entry.getKey();
 			int expectedId = entity.getWikipediaExternalRef();
 			int nbCandidate = 0;
-			if (expectedId == -1)
+			if (expectedId == -1) {
 				continue;
+			}
 			if ((cands == null) || (cands.size() <= 1)) {
 				// do not considerer unambiguous entities
 				continue;
