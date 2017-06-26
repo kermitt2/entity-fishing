@@ -181,14 +181,10 @@ public class MediaWikiParser {
      * preserving all links and style markup
      */
     public String formatFirstParagraphWikiText(String wikitext) {
-        //MediaWikiParser stripper = new MediaWikiParser();
         wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
-        // clear section headings completely, not just formating, but content as well          
+        // clear section headings completely          
         
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext);
-        /*markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
-        markup = stripper.stripNonArticleInternalLinks(markup, null);
-        markup = stripper.stripExcessNewlines(markup);*/
 
         String firstParagraph = "";
         int pos = wikitext.indexOf("\n\n");
@@ -210,13 +206,8 @@ public class MediaWikiParser {
      * preserving all links and style markup
      */
     public String formatAllWikiText(String wikitext) {
-        //MediaWikiParser stripper = new MediaWikiParser();
         wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
-        // clear section headings completely, not just formating, but content as well  
-
-        /*markup = stripper.stripAllButInternalLinksAndEmphasis(markup, null);
-        markup = stripper.stripNonArticleInternalLinks(markup, null);
-        markup = stripper.stripExcessNewlines(markup);*/
+        // clear section headings completely
 
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext);
         wikitext = wikitext.replaceAll("\n", " ");

@@ -266,6 +266,7 @@
                             <executable>java</executable>
                             <classpathScope>compile</classpathScope>
                             <arguments>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>-Xms4098m</argument>
@@ -296,8 +297,10 @@
                             <executable>java</executable>
                             <classpathScope>compile</classpathScope>
                             <arguments>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
+                                <argument>-Xms4098m</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>de</argument>
@@ -325,8 +328,10 @@
                             <executable>java</executable>
                             <classpathScope>compile</classpathScope>
                             <arguments>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
+                                <argument>-Xms4098m</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>fr</argument>
