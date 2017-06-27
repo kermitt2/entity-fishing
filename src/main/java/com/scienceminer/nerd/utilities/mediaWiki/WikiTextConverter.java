@@ -219,8 +219,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	public void visit(WtInternalLink link) {
 		if(!isCategory(link)) {
 			if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
-
-				if (link.getPrefix() == null) {
+				if ( (link.getPrefix() == null) || (link.getPrefix().trim().length() == 0) ) {
 
 					// this is an article so we preserve the link - there is no prefix
 					write("[[");

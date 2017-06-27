@@ -189,7 +189,7 @@ public class MediaWikiParser {
      * preserving all links and style markup
      */
     public String formatAllWikiText(String wikitext) {
-        wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
+        //wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
         // clear section headings completely
 
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext);
