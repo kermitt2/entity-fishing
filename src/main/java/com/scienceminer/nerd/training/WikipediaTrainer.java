@@ -83,7 +83,7 @@ public class WikipediaTrainer {
 		//int[] sizes = {500,100,100};
 		//int[] sizes = {5000,1000,1000};
 		//List<Integer> sizes = Arrays.asList(500,100,100);
-		List<Integer> sizes = Arrays.asList(2,1,1);
+		List<Integer> sizes = Arrays.asList(5,2,2);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
 		criterias.setMinOutLinks(20);
 		criterias.setMinInLinks(30);

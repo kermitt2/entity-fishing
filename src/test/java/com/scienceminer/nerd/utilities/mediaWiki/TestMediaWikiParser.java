@@ -108,7 +108,7 @@ public class TestMediaWikiParser {
     @Test
     public void testWikiMedia2TextWithInternalLinksArticlesOnly_2september() throws Exception {
 
-        InputStream is = this.getClass().getResourceAsStream("september2_articlePage.txt");
+        InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input);
 
