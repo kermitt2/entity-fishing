@@ -5,6 +5,8 @@ import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 
 /**
  * Represents pages of any types in Wikipedia
+ * 
+ * -> To be removed
  */
 public class Page implements Comparable<Page> {
 

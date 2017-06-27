@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * A term (anchor, title or redirection) used to refer to articles in Wikipedia. 
  * 
+ * -> to be replaced
  */
 public class Label {
 	

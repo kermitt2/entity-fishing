@@ -56,7 +56,6 @@ public class NerdSelector {
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
 
 	private LowerKnowledgeBase wikipedia = null;
-	//private MediaWikiParser cleaner = null;
 
 	// regression model
 	private RandomForest forest = null;
@@ -72,7 +71,6 @@ public class NerdSelector {
 		this.wikipedia = wikipedia;
 		
 		NerdConfig conf = wikipedia.getConfig();
-		//cleaner = new MediaWikiParser();
 		
 		xstream = new XStream();
 		arffParser = new ArffParser();
@@ -378,7 +376,6 @@ System.out.println("get context for this content");
 
 	private LabelStat evaluateArticle(Article article, NerdRanker ranker) throws Exception {
 System.out.println(" - evaluating " + article);
-		//String content = cleaner.getMarkupLinksOnly(article);
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
@@ -410,7 +407,6 @@ System.out.println(" - evaluating " + article);
 		}
 
 		ProcessText processText = ProcessText.getInstance();
-		//String text = cleaner.getCleanedContent(article);
 		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText());
 		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		List<Entity> nerEntities = processText.process(text, lang);
