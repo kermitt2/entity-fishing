@@ -12,6 +12,7 @@ import java.text.*;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Page.PageType;
 
 import com.fasterxml.jackson.core.io.*;
 
@@ -62,7 +63,15 @@ public class DocumentContext extends NerdContext {
 				break;
 			if (contextArticlesIds.contains(entity.getWikipediaExternalRef()))
 				continue;
-			Article article = (Article)wikipedia.getPageById(entity.getWikipediaExternalRef());
+			Page page = wikipedia.getPageById(entity.getWikipediaExternalRef());
+			// conservative type checking
+			PageType pageType = page.getType();
+			if (pageType != PageType.article) {
+				// something should be logged here...
+				continue;
+			}
+
+			Article article = (Article)page;
 			article.setWeight(entity.getSelectionScore());
 			contextArticles.add(article);
 			contextArticlesIds.add(entity.getWikipediaExternalRef());

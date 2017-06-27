@@ -56,6 +56,11 @@ public class EvaluationUtil {
 			accumulatedPrecision += localStats.getPrecision();
 			accumulatedF1Score += localStats.getF1Score();
 
+System.out.println(localStats.toString());
+System.out.println("local recall: " + localStats.getRecall());
+System.out.println("local precision: " + localStats.getPrecision());
+System.out.println("local f1: " + localStats.getF1Score());
+
 			lowerPrecision = Math.min(lowerPrecision, localStats.getPrecision());
 			lowerRecall = Math.min(lowerRecall, localStats.getRecall());
 			
@@ -77,7 +82,7 @@ public class EvaluationUtil {
 
 		StringBuilder builder = new StringBuilder();
 
-		builder.append("Evaluation on " + testSet.size() + " articles ");
+		builder.append("\nEvaluation on " + testSet.size() + " articles ");
 
 		builder.append("-- Macro-average --\n");
 		builder.append("precision: ").append(format.format(accumulatedPrecision / testSet.size())).append("\n");
