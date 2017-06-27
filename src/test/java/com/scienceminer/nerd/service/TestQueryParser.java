@@ -31,9 +31,6 @@ import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
-/**
- *  
- */
 public class TestQueryParser {
 	private String testPath = null;
 

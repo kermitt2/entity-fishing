@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.utilities.mediaWiki;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
 public class TestMediaWikiParser {
@@ -71,13 +73,30 @@ public class TestMediaWikiParser {
     }
 
     @Test
-    public void testWikiMedia2TextWithInternalLinksEmphasisOnly() throws Exception {
+    public void testWikiMedia2TextWithInternalLinksEmphasisOnly_2september() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input);
+
+        assertThat(result, containsString("[["));
+        assertThat(StringUtils.countMatches(result, "[["), is(693));
+        assertThat(result, containsString("]]"));
+        assertThat(result, containsString("'''"));
+
+        assertThat(result, startsWith("1. Events"));
+        assertThat(result, endsWith("5. External links"));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinksEmphasisOnly_cleopatra() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("Cleopatra_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
         String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input);
 
         assertThat(result, containsString("[["));
+        assertThat(StringUtils.countMatches(result, "[["), is(183));
         assertThat(result, containsString("]]"));
         assertThat(result, containsString("'''"));
 
@@ -87,13 +106,30 @@ public class TestMediaWikiParser {
     }
 
     @Test
-    public void testWikiMedia2TextWithInternalLinksArticlesOnly() throws Exception {
+    public void testWikiMedia2TextWithInternalLinksArticlesOnly_2september() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("september2_articlePage.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input);
+
+        assertThat(result, containsString("[["));
+        assertThat(StringUtils.countMatches(result, "[["), is(693));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
+
+        assertThat(result, startsWith("1. Events"));
+        assertThat(result, endsWith("5. External links"));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinksArticlesOnly_cleopatra() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("Cleopatra_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input);
 
         assertThat(result, containsString("[["));
+        assertThat(StringUtils.countMatches(result, "[["), is(183));
         assertThat(result, containsString("]]"));
         assertThat(result, not(containsString("'''")));
 

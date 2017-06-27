@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import com.scienceminer.nerd.utilities.TextUtilities;
 
+import org.apache.commons.lang3.StringUtils;
 import org.sweble.wikitext.engine.PageTitle;
 import org.sweble.wikitext.engine.config.WikiConfig;
 import org.sweble.wikitext.engine.nodes.EngPage;
@@ -219,7 +220,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	public void visit(WtInternalLink link) {
 		if(!isCategory(link)) {
 			if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
-				if ( (link.getPrefix() == null) || (link.getPrefix().trim().length() == 0) ) {
+				if (StringUtils.isBlank(link.getPrefix())) {
 
 					// this is an article so we preserve the link - there is no prefix
 					write("[[");
