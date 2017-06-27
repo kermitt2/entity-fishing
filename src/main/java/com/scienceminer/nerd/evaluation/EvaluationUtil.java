@@ -33,9 +33,9 @@ public class EvaluationUtil {
 		double accumulatedPrecision = 0.0;
 		double accumulatedF1Score = 0.0;
 
-		double lowerPrecision = 1;
-		double lowerRecall = 1;
-		double lowerF1Score = 1;
+		double lowerPrecision = 1.0;
+		double lowerRecall = 1.0;
+		double lowerF1Score = 1.0;
 		
 		int perfectRecall = 0;
 		int perfectPrecision = 0;
@@ -56,17 +56,17 @@ public class EvaluationUtil {
 			accumulatedPrecision += localStats.getPrecision();
 			accumulatedF1Score += localStats.getF1Score();
 
-System.out.println(localStats.toString());
+/*System.out.println(localStats.toString());
 System.out.println("local recall: " + localStats.getRecall());
 System.out.println("local precision: " + localStats.getPrecision());
-System.out.println("local f1: " + localStats.getF1Score());
+System.out.println("local f1: " + localStats.getF1Score());*/
 
 			lowerPrecision = Math.min(lowerPrecision, localStats.getPrecision());
 			lowerRecall = Math.min(lowerRecall, localStats.getRecall());
 			
 			if (localStats.getPrecision() == 1.0) 
 				perfectPrecision++;
-			if (localStats.getRecall() == 1) 
+			if (localStats.getRecall() == 1.0) 
 				perfectRecall++;
 
 			i++;
@@ -84,7 +84,7 @@ System.out.println("local f1: " + localStats.getF1Score());
 
 		builder.append("\nEvaluation on " + testSet.size() + " articles ");
 
-		builder.append("-- Macro-average --\n");
+		builder.append("\n\n-- Macro-average --\n");
 		builder.append("precision: ").append(format.format(accumulatedPrecision / testSet.size())).append("\n");
 		builder.append("recall: ").append(format.format(accumulatedRecall / testSet.size())).append("\n");
 		builder.append("f1-score: ").append(format.format(accumulatedF1Score / testSet.size())).append("\n\n");
@@ -98,11 +98,15 @@ System.out.println("local f1: " + localStats.getF1Score());
 		builder.append("lower recall in evalution set : ").append(format.format(lowerRecall)).append("\n");
 		builder
 			.append("perfect precision in evaluation set: ")
-			.append(format.format((double)perfectPrecision / 100))
+			.append(perfectPrecision)
+			.append(" / ")
+			.append(testSet.size())
 			.append("\n");
 		builder
 			.append("perfect recall in evaluation set: ")
-			.append(format.format((double)perfectPrecision / 100))
+			.append(perfectRecall)
+			.append(" / ")
+			.append(testSet.size())
 			.append("\n");
 		
 		System.out.println(builder.toString());

@@ -80,10 +80,9 @@ public class WikipediaTrainer {
 	}
 
 	private void createArticleSamples() throws IOException{
-		//int[] sizes = {500,100,100};
-		//int[] sizes = {5000,1000,1000};
-		//List<Integer> sizes = Arrays.asList(500,100,100);
-		List<Integer> sizes = Arrays.asList(5,2,2);
+		//List<Integer> sizes = Arrays.asList(5000,5000,1000);
+		List<Integer> sizes = Arrays.asList(100,500,100);
+		//List<Integer> sizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
 		criterias.setMinOutLinks(20);
 		criterias.setMinInLinks(30);
@@ -94,10 +93,10 @@ public class WikipediaTrainer {
 
 	private void createArffFiles(String datasetName) throws IOException, Exception {
 	    ArticleTrainingSample trainingSample = articleSamples.get(0);
-
 	    ranker.train(trainingSample, datasetName + "_disambiguation");
 	    ranker.saveTrainingData(arffRanker);
-	      
+
+	    trainingSample = articleSamples.get(1);
 	    selector.train(trainingSample, datasetName + "_selection");
 	    selector.saveTrainingData(arffSelector);
 	}
@@ -111,12 +110,12 @@ public class WikipediaTrainer {
 	}
 
 	private void evaluate() throws Exception {
-		ArticleTrainingSample rankerSample = articleSamples.get(1);
+		ArticleTrainingSample rankerSample = articleSamples.get(2);
 		System.out.println("-------------------------- evaluating ranker model --------------------------");
 		LabelStat rankerStats = ranker.evaluate(rankerSample);
 	    
-	    ArticleTrainingSample selectorSample = articleSamples.get(1);
-	    System.out.println("------------------------- evaluating selector model -------------------------");
+	    ArticleTrainingSample selectorSample = articleSamples.get(2);
+	    System.out.println("------------------ evaluating selector model (end-to-end) -------------------");
 	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker);
 	}
 

@@ -65,9 +65,14 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 			ite.close();
 		}
 		
-		if (sample.size() < size)
-			LOGGER.warn("Only " + sample.size() + " suitable articles found out of " + size + " articles.");
-		Collections.sort(sample);
+		if ((sample == null) || (sample.size() < size)) {
+			int sampleSize = 0;
+			if (sample != null)
+				sampleSize = sample.size();
+			LOGGER.warn("Only " + sampleSize + " suitable articles found out of " + size + " articles.");
+		}
+		if (sample != null)
+			Collections.sort(sample);
 	}
 
 	/**
@@ -180,12 +185,16 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 
 		for (int i=0; i<sizes.size(); i++) {
 			samples.add(new ArticleTrainingSample(wikipedia, sizes.get(i), constraints, exclude));
-			for(Article article : samples.get(i).getSample()) {
-				if (exclude == null)
-					exclude = new ArrayList<Integer>();
-				exclude.add(article.getId());
+			if (samples.get(i).getSample() == null) {
+				System.out.println("Article sample is empty for set " + i);
+			} else {
+				for(Article article : samples.get(i).getSample()) {
+					if (exclude == null)
+						exclude = new ArrayList<Integer>();
+					exclude.add(article.getId());
+				}
+				constraints.setExclude(exclude);
 			}
-			constraints.setExclude(exclude);
 		}
 		
 		return samples;

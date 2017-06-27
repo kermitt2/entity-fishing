@@ -196,7 +196,7 @@ public class NerdRanker {
 			nbArticle++;
 System.out.println("nb article processed: " + nbArticle);
 		}
-		System.out.println(arffBuilder.toString());
+//System.out.println(arffBuilder.toString());
 		arffDataset = arffBuilder.toString();
 		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
 	}
@@ -215,24 +215,23 @@ System.out.println("nb article processed: " + nbArticle);
 		// gather reference gold values
 		int head = 0;
 		while (linkMatcher.find()) {			
-			String linkText = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
+			String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
 			if (head != linkMatcher.start())
 				contentText.append(content.substring(head, linkMatcher.start()));
+			String labelText = link;
+			String destText = link;
 
-			String labelText = linkText;
-			String destText = linkText;
-
-			int pos = linkText.lastIndexOf('|');
+			int pos = link.lastIndexOf('|');
 			if (pos>0) {
-				destText = linkText.substring(0, pos);
-				labelText = linkText.substring(pos+1);
+				destText = link.substring(0, pos);
+				labelText = link.substring(pos+1);
 			} else {
 				// labelText and destText are the same, but we could have an anchor #
-				int pos2 = linkText.indexOf('#');
+				int pos2 = link.indexOf('#');
 				if (pos2 != -1) {
-					destText = linkText.substring(0,pos2);
+					destText = link.substring(0,pos2);
 				} else {
-					destText = linkText;
+					destText = link;
 				}
 				labelText = destText;
 			}
@@ -244,21 +243,15 @@ System.out.println("nb article processed: " + nbArticle);
 			Label.Sense[] senses = label.getSenses();
 			Article dest = wikipedia.getArticleByTitle(destText);
 			
-			if (dest != null && senses.length >= 1) {
+			if ((dest != null) && (senses.length > 1)) {
 				NerdEntity ref = new NerdEntity();
 				ref.setRawName(labelText);
 				ref.setWikipediaExternalRef(dest.getId());
 				ref.setOffsetStart(contentText.length()-labelText.length());
 				ref.setOffsetEnd(contentText.length());
-
-				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-minSenseProbability)) {
-					//unambigLabels.add(senses[0]);
-				}
-				else {
-					refs.add(ref);
-System.out.println(linkText + ", " + labelText + ", " + 
-	destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
-				}
+	
+				refs.add(ref);
+//System.out.println(link + ", " + labelText + ", " + destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
 			}
 		}
 		contentText.append(content.substring(head));
@@ -277,9 +270,9 @@ System.out.println(linkText + ", " + labelText + ", " +
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.process(contentString, language);
 		}
-System.out.println("number of NE found: " + entities.size());	
+//System.out.println("number of NE found: " + entities.size());	
 		List<Entity> entities2 = processText.processBrutal(contentString, language);
-System.out.println("number of non-NE found: " + entities2.size());	
+//System.out.println("number of non-NE found: " + entities2.size());	
 		for(Entity entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
@@ -295,11 +288,11 @@ System.out.println("number of non-NE found: " + entities2.size());
 			NerdEntity nerdEntity = new NerdEntity(entity);
 			disambiguatedEntities.add(nerdEntity);
 		}
-System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
+//System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			nerdEngine.generateCandidates(disambiguatedEntities, lang);
-System.out.println("total entities with candidates: " + candidates.size());
+//System.out.println("total entities with candidates: " + candidates.size());
 		// set the expected concept to the NerdEntity
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -323,7 +316,7 @@ System.out.println("total entities with candidates: " + candidates.size());
 		}
 
 		// get context for this content
-System.out.println("get context for this content");		
+//System.out.println("get context for this content");		
 		NerdContext context = null;
 		try {
 			 context = relatedness.getContext(candidates, null, lang);
@@ -349,16 +342,16 @@ System.out.println("get context for this content");
 			for(NerdCandidate candidate : cands) {
 				try {
 					nbCandidate++;
-					System.out.println(nbCandidate + " candidate / " + cands.size());
+//System.out.println(nbCandidate + " candidate / " + cands.size());
 					Label.Sense sense = candidate.getWikiSense();
 					if (sense == null)
 						continue;
 
 					double commonness = sense.getPriorProbability();
-					System.out.println("commonness: " + commonness);
+//System.out.println("commonness: " + commonness);
 
 					double related = relatedness.getRelatednessTo(candidate, context, lang);
-					System.out.println("relatedness: " + related);
+//System.out.println("relatedness: " + related);
 
 					GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
 					feature.prob_c = commonness;
@@ -369,11 +362,11 @@ System.out.println("get context for this content");
 					arffBuilder.append(feature.printVector()).append("\n");
 					nbInstance++;
 					
-					System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
+/*					System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 							entity.toString());
 					System.out.println("\t\t" + "commonness: " + commonness + 
 						", relatedness: " + related + 
-						", quality: " + quality);
+						", quality: " + quality);*/
 				}
 				catch(Exception e) {
 					e.printStackTrace();
@@ -388,14 +381,14 @@ System.out.println("get context for this content");
 
 	public LabelStat evaluate(ArticleTrainingSample testSet) throws Exception {	
 		List<LabelStat> stats = new ArrayList<LabelStat>();
-		for (Article article : testSet.getSample()) {						
+		for (Article article : testSet.getSample()) {								
 			stats.add(evaluateArticle(article));
 		}
 		return EvaluationUtil.evaluate(testSet, stats);
 	}
 
 	private LabelStat evaluateArticle(Article article) throws Exception {
-System.out.println(" - evaluating " + article);
+//System.out.println(" - evaluating " + article);
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
@@ -403,30 +396,71 @@ System.out.println(" - evaluating " + article);
 
 		Set<Integer> referenceDisamb = new HashSet<Integer>();
 		Set<Integer> producedDisamb = new HashSet<Integer>();
-
+		List<NerdEntity> referenceEntities = new ArrayList<NerdEntity>();
+		List<String> labelTexts = new ArrayList<String>();
+		int head = 0;
+		StringBuilder contentText = new StringBuilder(); 
 		while (linkMatcher.find()) {			
-			String linkText = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
+			/*String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
+			String labelText = link;
+			String destText = link;
 
-			String labelText = linkText;
-			String destText = linkText;
-
-			int pos = linkText.lastIndexOf('|');
-			if (pos>0) {
-				destText = linkText.substring(0, pos);
-				labelText = linkText.substring(pos+1);
+			int pos = link.lastIndexOf('|');
+			if (pos != -1) {
+				destText = link.substring(0, pos);
+				labelText = link.substring(pos+1);
 			}
 
 			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
 			Label label = new Label(wikipedia.getEnvironment(), labelText);
 			Label.Sense[] senses = label.getSenses();
 			Article dest = wikipedia.getArticleByTitle(destText);
-
 			if ((senses.length > 0) && (dest != null)) {
 				referenceDisamb.add(dest.getId());
+				labelTexts.add(labelText);
+			}*/
+
+			String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
+			if (head != linkMatcher.start())
+				contentText.append(content.substring(head, linkMatcher.start()));
+			String labelText = link;
+			String destText = link;
+
+			int pos = link.lastIndexOf('|');
+			if (pos>0) {
+				destText = link.substring(0, pos);
+				labelText = link.substring(pos+1);
+			} else {
+				// labelText and destText are the same, but we could have an anchor #
+				int pos2 = link.indexOf('#');
+				if (pos2 != -1) {
+					destText = link.substring(0,pos2);
+				} else {
+					destText = link;
+				}
+				labelText = destText;
+			}
+			contentText.append(labelText);
+
+			head = linkMatcher.end();
+			
+			Label label = new Label(wikipedia.getEnvironment(), labelText);
+			Label.Sense[] senses = label.getSenses();
+			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
+			Article dest = wikipedia.getArticleByTitle(destText);
+			if ((dest != null) && (senses.length > 0)) {
+				NerdEntity ref = new NerdEntity();
+				ref.setRawName(labelText);
+				ref.setWikipediaExternalRef(dest.getId());
+				ref.setOffsetStart(contentText.length()-labelText.length());
+				ref.setOffsetEnd(contentText.length());
+
+				referenceDisamb.add(dest.getId());
+				referenceEntities.add(ref);
 			}
 		}
 
-		ProcessText processText = ProcessText.getInstance();
+		/*ProcessText processText = ProcessText.getInstance();
 		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText());
 		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		List<Entity> nerEntities = processText.process(text, lang);
@@ -436,6 +470,14 @@ System.out.println(" - evaluating " + article);
 			if (!nerEntities.contains(entity)) {
 				nerEntities.add(entity);
 			}
+		}*/
+
+		List<Entity> nerEntities = new ArrayList<Entity>();
+		for(NerdEntity refEntity : referenceEntities) {
+			Entity localEntity = new Entity(refEntity.getRawName());
+			localEntity.setOffsetStart(refEntity.getOffsetStart());
+			localEntity.setOffsetEnd(refEntity.getOffsetEnd());
+			nerEntities.add(localEntity);
 		}
 
 		List<NerdEntity> entities = new ArrayList<NerdEntity>();
@@ -452,21 +494,22 @@ System.out.println(" - evaluating " + article);
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
 			if (cands.size() > 0)
-				producedDisamb.add(cands.get(0).getWikipediaExternalRef());
+				producedDisamb.add(new Integer(cands.get(0).getWikipediaExternalRef()));
 		}
-
+ 
 		LabelStat stats = new LabelStat();
+		stats.setObserved(producedDisamb.size());
 		for(Integer index : producedDisamb) {
-			stats.incrementObserved();
-			if (referenceDisamb.contains(index)) {
-				stats.incrementObserved();
-			} else if (referenceDisamb.contains(index)) {
+			if (!referenceDisamb.contains(index)) {
 				stats.incrementFalsePositive();
 			}
 		}
 
+		stats.setExpected(referenceDisamb.size());
 		for(Integer index : referenceDisamb) {
-			stats.incrementExpected();
+			if (!producedDisamb.contains(index)) {
+				stats.incrementFalseNegative();
+			}
 		}
 
 		return stats;

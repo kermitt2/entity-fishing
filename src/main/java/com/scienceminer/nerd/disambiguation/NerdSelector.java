@@ -173,7 +173,7 @@ public class NerdSelector {
 System.out.println("nb article processed: " + nbArticle);
 		}
 		arffDataset = arffBuilder.toString();
-System.out.println(arffDataset);
+//System.out.println(arffDataset);
 		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
 	}
 
@@ -221,21 +221,14 @@ System.out.println(arffDataset);
 			Label.Sense[] senses = label.getSenses();
 			Article dest = wikipedia.getArticleByTitle(destText);
 			
-			if (dest != null && senses.length >= 1) {
+			if ((dest != null) && (senses.length >= 0)) {
 				NerdEntity ref = new NerdEntity();
 				ref.setRawName(labelText);
 				ref.setWikipediaExternalRef(dest.getId());
 				ref.setOffsetStart(contentText.length()-labelText.length());
 				ref.setOffsetEnd(contentText.length());
-
-				if (senses.length == 1 || senses[0].getPriorProbability() >= (1-NerdEngine.minSenseProbability)) {
-					//unambigLabels.add(senses[0]);
-				}
-				else {
-					refs.add(ref);
-System.out.println(linkText + ", " + labelText + ", " + 
-	destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
-				}
+				refs.add(ref);
+//System.out.println(linkText + ", " + labelText + ", " + destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
 			}
 		}
 		contentText.append(content.substring(head));
@@ -254,16 +247,16 @@ System.out.println(linkText + ", " + labelText + ", " +
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.process(contentString, language);
 		}
-System.out.println("number of NE found: " + entities.size());		
+//System.out.println("number of NE found: " + entities.size());		
 		List<Entity> entities2 = processText.processBrutal(contentString, language);
-System.out.println("number of non-NE found: " + entities2.size());	
+//System.out.println("number of non-NE found: " + entities2.size());	
 		for(Entity entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
 				entities.add(entity);
 		}
 
-		if (entities == null) 
+		if ( (entities == null) || (entities.size() == 0) )
 			return arffBuilder;
 
 		// disambiguate and solve entity mentions
@@ -272,11 +265,11 @@ System.out.println("number of non-NE found: " + entities2.size());
 			NerdEntity nerdEntity = new NerdEntity(entity);
 			disambiguatedEntities.add(nerdEntity);
 		}
-System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
+//System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			nerdEngine.generateCandidates(disambiguatedEntities, lang);
-System.out.println("total entities with candidates: " + candidates.size());
+//System.out.println("total entities with candidates: " + candidates.size());
 		// set the expected concept to the NerdEntity
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -300,7 +293,7 @@ System.out.println("total entities with candidates: " + candidates.size());
 		}
 
 		// get context for this content
-System.out.println("get context for this content");		
+//System.out.println("get context for this content");		
 		NerdContext context = null;
 		try {
 			 context = relatedness.getContext(candidates, null, lang);
@@ -327,16 +320,16 @@ System.out.println("get context for this content");
 			for(NerdCandidate candidate : cands) {
 				try {
 					nbCandidate++;
-					System.out.println(nbCandidate + " candidate / " + cands.size());
+//System.out.println(nbCandidate + " candidate / " + cands.size());
 					Label.Sense sense = candidate.getWikiSense();
 					if (sense == null)
 						continue;
 
 					double commonness = sense.getPriorProbability();
-					System.out.println("commonness: " + commonness);
+//System.out.println("commonness: " + commonness);
 
 					double related = relatedness.getRelatednessTo(candidate, context, lang);
-					System.out.println("relatedness: " + related);
+//System.out.println("relatedness: " + related);
 
 					// nerd score
 					double nerd_score = ranker.getProbability(commonness, related, quality);
@@ -350,10 +343,10 @@ System.out.println("get context for this content");
 					arffBuilder.append(feature.printVector()).append("\n");
 					nbInstance++;
 					
-					System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
-							entity.toString());
-					System.out.println("\t\t" + "nerd_score: " + nerd_score + 
-						", prob_anchor_string: " + feature.prob_anchor_string);
+					//System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
+					//		entity.toString());
+					//System.out.println("\t\t" + "nerd_score: " + nerd_score + 
+					//	", prob_anchor_string: " + feature.prob_anchor_string);
 				}
 				catch(Exception e) {
 					e.printStackTrace();
@@ -439,17 +432,18 @@ System.out.println(" - evaluating " + article);
 		}
 
 		LabelStat stats = new LabelStat();
+		stats.setObserved(producedDisamb.size());
 		for(Integer index : producedDisamb) {
-			stats.incrementObserved();
-			if (referenceDisamb.contains(index)) {
-				stats.incrementObserved();
-			} else if (referenceDisamb.contains(index)) {
+			if (!referenceDisamb.contains(index)) {
 				stats.incrementFalsePositive();
 			}
 		}
 
+		stats.setExpected(referenceDisamb.size());
 		for(Integer index : referenceDisamb) {
-			stats.incrementExpected();
+			if (!producedDisamb.contains(index)) {
+				stats.incrementFalseNegative();
+			}
 		}
 
 		return stats;
