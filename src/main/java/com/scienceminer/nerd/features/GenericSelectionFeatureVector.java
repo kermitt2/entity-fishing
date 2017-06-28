@@ -20,6 +20,7 @@ public class GenericSelectionFeatureVector {
 	public boolean Add_dice = false; // Dice coefficient for lexical cohesion
 	public boolean Add_tf_idf = false; // term frequency inverse document frequency, tf-idf
 	public boolean Add_total_occ_number = false; // the total number of occurrence of the mention in language-specific Wikipedia
+	public boolean Add_nb_tokens = false; // number of tokens of the mention
 
 	// decision types
 	public boolean target_numeric = false;
@@ -32,6 +33,7 @@ public class GenericSelectionFeatureVector {
 	public double dice = 0.0; // Dice coefficient
 	public double tf_idf = 0.0; // tf-idf
 	public int total_occ_number = 0; // shall we use some discretized, log, or relative version instead? 
+	public int nb_tokens = 0;
 
 	/**
 	 *  Write header of ARFF files.
@@ -62,6 +64,8 @@ public class GenericSelectionFeatureVector {
 			header.append("@attribute tf_idf REAL\n");
 		if (Add_total_occ_number)	
 			header.append("@attribute total_occ_number NUMERIC\n");
+		if (Add_nb_tokens)
+			header.append("@attribute nb_tokens NUMERIC\n");
 
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -84,6 +88,8 @@ public class GenericSelectionFeatureVector {
 		if (Add_tf_idf)
 			num++;
 		if (Add_total_occ_number)
+			num++;
+		if (Add_nb_tokens)
 			num++;
 		// class
 		num++;	
@@ -156,6 +162,16 @@ public class GenericSelectionFeatureVector {
 			}
 		}
 
+		// the number of tokens of the mention
+		if (Add_nb_tokens) {
+			if (first) {
+				res.append(nb_tokens);
+				first = false;	
+			} else {
+				res.append(", " + nb_tokens);
+			}
+		}
+
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
 			res.append("," + label);
@@ -192,6 +208,11 @@ public class GenericSelectionFeatureVector {
 			result[i] = total_occ_number;
 			i++;
 		}
+		if (Add_nb_tokens) {
+			result[i] = nb_tokens;
+			i++;
+		}
+
 		return result;
 	}
 }

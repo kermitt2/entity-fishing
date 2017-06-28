@@ -14,6 +14,7 @@ import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.trainer.LabelStat;
+import org.grobid.core.analyzers.GrobidAnalyzer;
 
 import com.scienceminer.nerd.exceptions.*;
 
@@ -78,7 +79,10 @@ public class NerdSelector {
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
-	public double getProbability(double nerd_score, double prob_anchor_string, double prob_c) throws Exception {
+	public double getProbability(double nerd_score, 
+								double prob_anchor_string, 
+								double prob_c,
+								int nb_tokens) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -95,6 +99,7 @@ public class NerdSelector {
 		feature.nerd_score = nerd_score;
 		feature.prob_anchor_string = prob_anchor_string;
 		feature.prob_c = prob_c;
+		feature.nb_tokens = nb_tokens;
 		double[] features = feature.toVector();
 		return forest.predict(features);
 	}
@@ -309,9 +314,9 @@ System.out.println("nb article processed: " + nbArticle);
 			NerdEntity entity = entry.getKey();
 			int expectedId = entity.getWikipediaExternalRef();
 			int nbCandidate = 0;
-			if (expectedId == -1) {
+			/*if (expectedId == -1) {
 				continue;
-			}
+			}*/
 			if ((cands == null) || (cands.size() <= 1)) {
 				// do not considerer unambiguous entities
 				continue;
@@ -334,10 +339,15 @@ System.out.println("nb article processed: " + nbArticle);
 					// nerd score
 					double nerd_score = ranker.getProbability(commonness, related, quality);
 
+					GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
+					List<String> words = analyzer.tokenize(entity.getRawName(), 
+						new Language(wikipedia.getConfig().getLangCode(), 1.0));
+
 					SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
 					feature.nerd_score = nerd_score;
 					feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
 					feature.prob_c = commonness;
+					feature.nb_tokens = words.size();
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					arffBuilder.append(feature.printVector()).append("\n");
@@ -359,15 +369,15 @@ System.out.println("nb article processed: " + nbArticle);
 		return arffBuilder;
 	}
 
-	public LabelStat evaluate(ArticleTrainingSample testSet, NerdRanker ranker) throws Exception {	
+	public LabelStat evaluate(ArticleTrainingSample testSet, NerdRanker ranker, boolean full) throws Exception {	
 		List<LabelStat> stats = new ArrayList<LabelStat>();
 		for (Article article : testSet.getSample()) {						
-			stats.add(evaluateArticle(article, ranker));
+			stats.add(evaluateArticle(article, ranker, full));
 		}
 		return EvaluationUtil.evaluate(testSet, stats);
 	}
 
-	private LabelStat evaluateArticle(Article article, NerdRanker ranker) throws Exception {
+	private LabelStat evaluateArticle(Article article, NerdRanker ranker, boolean full) throws Exception {
 System.out.println(" - evaluating " + article);
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 
@@ -418,11 +428,20 @@ System.out.println(" - evaluating " + article);
 		}
 
 		NerdEngine engine = NerdEngine.getInstance();
+		//Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
 		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null);
-		engine.pruneWithSelector(candidates, 
-			wikipedia.getConfig().getLangCode(), false, false, NerdEngine.minSelectorScore);
+
+		if (full) {
+			engine.pruneWithSelector(candidates, 
+				wikipedia.getConfig().getLangCode(), false, false, NerdEngine.minSelectorScore);
+			engine.prune(candidates, false, false, NerdEngine.minEntityScore, wikipedia.getConfig().getLangCode());
+			engine.impactOverlap(candidates);
+		} else {
+			engine.pruneWithSelector(candidates, 
+				wikipedia.getConfig().getLangCode(), false, false, NerdEngine.minSelectorScore);
+		}
 
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();

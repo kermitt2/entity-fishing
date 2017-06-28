@@ -475,9 +475,10 @@ public class NerdRestProcessQuery {
 			}
 
 			// sort the entities
-			Collections.sort(nerdQuery.getEntities());
+			if (nerdQuery.getEntities() != null)
+				Collections.sort(nerdQuery.getEntities());
 
-			if (entities != null) {
+			if (nerdQuery.getEntities() != null) {
 				// disambiguate and solve entity mentions
 				NerdEngine disambiguator = NerdEngine.getInstance();
 				List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
@@ -489,7 +490,8 @@ public class NerdRestProcessQuery {
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
 
-			Collections.sort(nerdQuery.getEntities());
+			if (nerdQuery.getEntities() != null)
+				Collections.sort(nerdQuery.getEntities());
 			String json = nerdQuery.toJSONCompactClean(null);
 
 			if (json == null) {

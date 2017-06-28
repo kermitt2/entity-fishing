@@ -18,6 +18,7 @@ import org.grobid.core.engines.SegmentationLabel;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.analyzers.GrobidAnalyzer;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
@@ -67,7 +68,7 @@ public class NerdEngine {
 	static public double minLinkProbability = 0.005;
 	static public double minSenseProbability = 0.01;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
-	static public double minSelectorScore = 0.3; // threshold for selctor pruning 
+	static public double minSelectorScore = 0.05; // threshold for selector pruning 
 	static public double minEntityScore = 0.2; // threshold for final entity pruning
 
 	public static NerdEngine getInstance() throws Exception {
@@ -1105,8 +1106,8 @@ System.out.println("Merging...");
 			boolean shortText, 
 			double threshold) {	
 		NerdSelector selector = selectors.get(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (selector == null) {
-			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
 				selector = new NerdSelector(wikipedia);
 				selectors.put(lang, selector);
@@ -1128,9 +1129,14 @@ System.out.println("Merging...");
 				//if (candidate.getMethod() == NerdCandidate.NERD) 
 				{
 					try {
+						GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
+						List<String> words = analyzer.tokenize(entity.getRawName(), 
+							new Language(wikipedia.getConfig().getLangCode(), 1.0));
+
 						double prob = selector.getProbability(candidate.getNerdScore(), 
 							candidate.getLabel().getLinkProbability(), 
-							candidate.getWikiSense().getPriorProbability());				
+							candidate.getWikiSense().getPriorProbability(), 
+							words.size());				
 //System.out.println("selector score: " + prob);
 						candidate.setSelectionScore(prob);
 					} catch(Exception e) {

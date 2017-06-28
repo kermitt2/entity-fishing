@@ -123,7 +123,9 @@ public class NerdRanker {
 		//GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 		feature.prob_c = commonness;
 		feature.relatedness = relatedness;
-		feature.context_quality = quality;
+		//feature.relatedness = 1.0;
+		feature.context_quality = quality; 
+		//feature.context_quality = 1.0;
 		//feature.dice_coef = dice_coef;
 		double[] features = feature.toVector();
 		return forest.predict(features);

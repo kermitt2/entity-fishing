@@ -91,20 +91,24 @@ public class WikipediaTrainer {
 		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sizes, wikipedia);
 	}
 
-	private void createArffFiles(String datasetName) throws IOException, Exception {
+	private void createRankerArffFiles(String datasetName) throws IOException, Exception {
 	    ArticleTrainingSample trainingSample = articleSamples.get(0);
 	    ranker.train(trainingSample, datasetName + "_disambiguation");
 	    ranker.saveTrainingData(arffRanker);
+	}
 
-	    trainingSample = articleSamples.get(1);
+	private void createSelectorArffFiles(String datasetName) throws IOException, Exception {
+	    ArticleTrainingSample trainingSample = articleSamples.get(1);
 	    selector.train(trainingSample, datasetName + "_selection");
 	    selector.saveTrainingData(arffSelector);
 	}
 
-	private void createModels() throws Exception {
+	private void createRankerModel() throws Exception {
 	    ranker.trainModel();
 	    ranker.saveModel(modelRanker);
-		
+	}
+
+	private void createSelectorModel() throws Exception {
 		selector.trainModel();
 	    selector.saveModel(modelSelector);
 	}
@@ -115,8 +119,11 @@ public class WikipediaTrainer {
 		LabelStat rankerStats = ranker.evaluate(rankerSample);
 	    
 	    ArticleTrainingSample selectorSample = articleSamples.get(2);
-	    System.out.println("------------------ evaluating selector model (end-to-end) -------------------");
-	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker);
+	    System.out.println("------------------------- evaluating selector model -------------------------");
+	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker, false);
+
+	    System.out.println("--------------------------- evaluating end-to-end ---------------------------");
+	    LabelStat finalResults = selector.evaluate(selectorSample, ranker, true);
 	}
 
 	public static void main(String args[]) throws Exception {
@@ -127,11 +134,15 @@ public class WikipediaTrainer {
 		System.out.println("Create article sets...");
 		trainer.createArticleSamples();
 
-		System.out.println("Create arff files...");
-		trainer.createArffFiles("wikipedia");
+		System.out.println("Create Ranker arff files...");
+		trainer.createRankerArffFiles("wikipedia");
+		System.out.println("Create Ranker classifier...");
+		trainer.createRankerModel();
 
-		System.out.println("Create classifiers...");
-		trainer.createModels();
+		System.out.println("Create Selector arff files...");
+		trainer.createSelectorArffFiles("wikipedia");
+		System.out.println("Create Selector classifier...");
+		trainer.createSelectorModel();
 
 		System.out.println("Evaluate classifiers...");
 		trainer.evaluate();

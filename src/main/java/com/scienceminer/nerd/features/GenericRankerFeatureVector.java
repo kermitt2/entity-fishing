@@ -197,7 +197,7 @@ public class GenericRankerFeatureVector {
 		// conditional probability of the concept given the string
 		if (Add_prob_c) {
 			res.append(prob_c);
-			first = false;	
+			first = false;
 		}
 		
 		// conditional probability of the string given the concept (i.e. reverse prob_c)

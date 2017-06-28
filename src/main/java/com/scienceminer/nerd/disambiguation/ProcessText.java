@@ -146,7 +146,7 @@ public class ProcessText {
 			throw new NerdException("Cannot parse the sentence, because it is null.");
 		}
 		else if (text.length() == 0) {
-			System.out.println("The length of the text to be processed is 0.");
+			//System.out.println("The length of the text to be processed is 0.");
 			LOGGER.error("The length of the text to be parsed is 0.");
 			return null;
 		}
@@ -363,7 +363,7 @@ public class ProcessText {
 			throw new NerdException("Cannot parse the text, because it is null.");
 		}
 		else if (text.length() == 0) {
-			System.out.println("The length of the text to be processed is 0.");
+			//System.out.println("The length of the text to be processed is 0.");
 			LOGGER.error("The length of the text to be parsed is 0.");
 			return null;
 		}
@@ -525,7 +525,7 @@ System.out.println("pool: " + pool.size());
 	 */
 	public List<Entity> processBrutal(List<LayoutToken> tokens, Language lang) throws NerdException { 
 		if ( (tokens == null) || (tokens.size() == 0) ) {
-			System.out.println("Content to be processed is empty.");
+			//System.out.println("Content to be processed is empty.");
 			LOGGER.error("Content to be processed is empty.");
 			return null;
 		}
@@ -725,15 +725,14 @@ System.out.println("pool: " + pool.size());
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
 		if ((text == null) && (shortText == null)) {
-//System.out.println("Cannot parse the text, because it is null.");
-			//return null;
+			LOGGER.info("Cannot parse the given text, because it is null.");
 		}
 		
-		if ( StringUtils.isEmpty(text) ) {
+		if ( (text == null) || (text.length() == 0) ) 
 			text = shortText;
-			
-//System.out.println("The length of the text to be processed is 0.");
-			//PDF processing
+
+		if ( (text == null) || (text.length() == 0) ) {
+			LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
 			if ( (tokens != null) && (tokens.size() > 0) )
 				text = LayoutTokensUtil.toText(tokens);
 			else {
