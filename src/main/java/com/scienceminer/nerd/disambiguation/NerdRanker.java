@@ -403,25 +403,6 @@ System.out.println("nb article processed: " + nbArticle);
 		int head = 0;
 		StringBuilder contentText = new StringBuilder(); 
 		while (linkMatcher.find()) {			
-			/*String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
-			String labelText = link;
-			String destText = link;
-
-			int pos = link.lastIndexOf('|');
-			if (pos != -1) {
-				destText = link.substring(0, pos);
-				labelText = link.substring(pos+1);
-			}
-
-			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
-			Label label = new Label(wikipedia.getEnvironment(), labelText);
-			Label.Sense[] senses = label.getSenses();
-			Article dest = wikipedia.getArticleByTitle(destText);
-			if ((senses.length > 0) && (dest != null)) {
-				referenceDisamb.add(dest.getId());
-				labelTexts.add(labelText);
-			}*/
-
 			String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
 			if (head != linkMatcher.start())
 				contentText.append(content.substring(head, linkMatcher.start()));
@@ -461,18 +442,6 @@ System.out.println("nb article processed: " + nbArticle);
 				referenceEntities.add(ref);
 			}
 		}
-
-		/*ProcessText processText = ProcessText.getInstance();
-		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText());
-		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
-		List<Entity> nerEntities = processText.process(text, lang);
-		List<Entity> nerEntities2 = processText.processBrutal(text, lang);
-		for(Entity entity : nerEntities2) {
-			// we add entities only if the mention is not already present
-			if (!nerEntities.contains(entity)) {
-				nerEntities.add(entity);
-			}
-		}*/
 
 		List<Entity> nerEntities = new ArrayList<Entity>();
 		for(NerdEntity refEntity : referenceEntities) {

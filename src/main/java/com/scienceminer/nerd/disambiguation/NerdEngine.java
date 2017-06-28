@@ -66,10 +66,10 @@ public class NerdEngine {
 	static public int maxContextSize = 30;	
 	static public int maxLabelLength = 50;
 	static public double minLinkProbability = 0.005;
-	static public double minSenseProbability = 0.01;
+	static public double minSenseProbability = 0.2;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
-	static public double minSelectorScore = 0.05; // threshold for selector pruning 
-	static public double minEntityScore = 0.2; // threshold for final entity pruning
+	static public double minSelectorScore = 0.3; // threshold for selector pruning 
+	static public double minEntityScore = 0.25; // threshold for final entity pruning
 
 	public static NerdEngine getInstance() throws Exception {
 	    if (instance == null) {
@@ -232,7 +232,8 @@ for(NerdCandidate cand : cands) {
 }
 }*/
 		//if (!shortText && !nerdQuery.getNbest())
-		//	pruneOverlap(candidates);
+			prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
+
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 		List<NerdEntity> result = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
