@@ -14,8 +14,8 @@
 * entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
 ![(N)ERD](doc/images/screen7.png)
 
-* search query disambiguation (the _short text_ mode),
-![Search query disambiguation](doc/images/screen3.png)
+* search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
+![Search query disambiguation](doc/images/screen8.png)
 
 * weighted term vector disambiguation (a term being a phrase),
 ![Search query disambiguation](doc/images/screen4.png)
@@ -27,9 +27,9 @@ Supervised machine learning is used for the disambiguation, based on a Random Fo
 
 The API also offers the possibility to apply filters based on Wikipedia properties and values, allowing to create specialised entity identification and extraction (e.g. extract species mentions or all medical entities only in a document) relying on the current 27M entities and 154M statements present in Wikipedia. 
 
-The tool currently supports English, German and French languages. For English and French, a Name Entity Recognition based on CRF ([grobid-ner](https://github.com/kermitt2/grobid-ner)) is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
+The tool currently supports English, German and French languages (more to come!). For English and French, a Name Entity Recognition based on CRF ([grobid-ner](https://github.com/kermitt2/grobid-ner)) is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
 
-The tool has been designed for fast processing (at least for a NERD system, 500-1000 words per second on an medium-profile linux server single thread or one PDF page of a scientific articles between 1 and 2 seconds), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy. A search query can be disambiguated in 1-5 seconds. (N)ERD uses the very fast SMILE ML library for machine learning and a JNI integration of LMDB as embedded database. 
+The tool is developed in Java and has been designed for fast processing (at least for a NERD system, 500-1000 words per second on an medium-profile linux server single thread or one PDF page of a scientific articles between 1 and 2 seconds), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-5 seconds. (N)ERD uses the very fast [SMILE ML](https://haifengl.github.io/smile/) library for machine learning and a [JNI integration of LMDB](https://github.com/deephacks/lmdbjni) as embedded database. 
 
 (N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for Linux-64 architecture. 
 
@@ -77,8 +77,6 @@ Some tests will be executed. Congratulation, you're now ready to run the service
 The documentation of the service is available [here](http://nerd.readthedocs.io).
 
 ## Run the web service 
-
-![(N)ERD console](doc/images/Screen1.png)
 
 ```bash
 > mvn -Dmaven.test.skip=true jetty:run-war
