@@ -26,7 +26,7 @@ The tool currently supports English, German and French languages. For English an
 
 The tool has been designed for fast processing (at least for a NERD system, 500-1000 words per seconds on an medium-profile linux server), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy. A search query can be disambiguated in 1-5 seconds. (N)ERD uses the very fast SMILE ML library for machine learning and a JNI integration of LMDB as embedded database. 
 
-(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Bellow, we make available the LMDB binary data for Linux-64 architecture. 
+(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for Linux-64 architecture. 
 
 ## Install and build 
 
@@ -45,15 +45,7 @@ Then install the Wikipedia index:
 
 * download the zipped index files (warning: total around 9 GB!) at the following address: 
 
-https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1 GB)
-
-https://grobid.s3.amazonaws.com/nerd/db-en1.zip (2.7 GB)
-
-https://grobid.s3.amazonaws.com/nerd/db-en2.zip (2.6 GB)
-
-https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.6 GB)
-
-https://grobid.s3.amazonaws.com/nerd/db-de.zip (1.8 GB)
+*TBD*
 
 * unzip the 5 archives files under ```data/wikipedia/```. This will install three sub-directories ```data/wikipedia/db-kb/```, ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/``` and ```data/wikipedia/db-fr/```. Uncompressed data is about 20 GB. 
 
@@ -65,6 +57,10 @@ Build the project, under the NERD projet repository:
 
 Some tests will be executed. Congratulation, you're now ready to run the service. 
 
+## Documentation 
+
+The documentation of the service is available [here](http://nerd.readthedocs.io).
+
 ## Run the web service 
 
 ![(N)ERD console](doc/images/Screen1.png)
@@ -75,8 +71,6 @@ Some tests will be executed. Congratulation, you're now ready to run the service
 
 By default the demo/console is available at [http://localhost:8090](http://localhost:8090)
 The editor (client is work-in-progress, not stable) can be opened under [http://localhost:8090/editor.html](http://localhost:8090/editor.html)
-
-The documentation of the service is available [here](http://nerd.readthedocs.io).
 
 ## Training
 
