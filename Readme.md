@@ -76,7 +76,7 @@ Some tests will be executed. Congratulation, you're now ready to run the service
 By default the demo/console is available at [http://localhost:8090](http://localhost:8090)
 The editor (client is work-in-progress, not stable) can be opened under [http://localhost:8090/editor.html](http://localhost:8090/editor.html)
 
-The documentation of the service is available in the following document [```doc/nerd-service-manual.pdf```](https://github.com/kermitt2/nerd/raw/master/doc/nerd-service-manual.pdf).
+The documentation of the service is available [here](http://nerd.readthedocs.io).
 
 ## Training
 
