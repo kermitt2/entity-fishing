@@ -23,9 +23,7 @@ One and only one input type is mandatory in a query, otherwise an HTTP error 400
 Supported languages
 -------------------
 
-In the current version, only English, French and German are supported. We plan to experiment in the next months with Spanish and Italian.
-
-Why a language like Greek cannot be supported by NERD? To support a language in (N)ERD, some open language resources and a large enough Wikipedia are necessary. For Greek for instance, we are unable to find open and freely available language resources to make possible the training of a named entity recogniser and the usage of a large covering morpho-syntactic lexicon. In addition, the Greek Wikipedia is too small to allow a meaningful rate of entity identification and the training of the machine learning models: the Greek Wikipedia is currently around position 50 of all Wikipedias1, similar to Uzbek and Latin, with around 129.000 articles (2.3% of the size of the English Wikipedia).
+In the current version, only English, French and German are supported. We plan to extend the support to with Spanish and Italian in the next iterations.
 
 The service returns an HTTP error 406 if the language of the text to be processed is not supported, see below.
 
@@ -289,9 +287,9 @@ Search query disambiguation
 
 This functionality provides disambiguation for a search query expressed as a “short text”.
 
-The input is the list of terms that are typically provided in the search bar of a search engine.
+The input is the list of terms that are typically provided in the search bar of a search engine, and response time are optimized to remain very low (1-5ms).
 
-For example the query: concrete pump sensor. From this association of search terms, it is clear that the sense corresponding to concrete is the material, the entity is the device called “concrete pump”, and it has nothing to do with “concrete” as the antonym of “abstract”.
+For example the query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to concrete is the material, the entity is the device called “concrete pump”, and it has nothing to do with “concrete” as the antonym of “abstract”.
 
 Processing this kind of input permits to implement semantic search (search based on concept matching) and semantic-based ranking (ranking of documents based on semantic proximity with a query) in a search engine.
 

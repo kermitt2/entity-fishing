@@ -4,8 +4,8 @@
    contain the root `toctree` directive.
 
 
-(N)ERD - (Named) Entity Recognition and Disambiguation documentation!
----------------------------------------------------------------------
+(N)ERD - (Named) Entity Recognition and Disambiguation documentation
+--------------------------------------------------------------------
 
 
 .. toctree::
