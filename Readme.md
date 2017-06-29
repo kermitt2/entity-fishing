@@ -23,7 +23,7 @@
 * interactive disambiguation in text editing mode.  
 ![Editor with real time disambiguation](doc/images/screen6.png)
 
-Supervised machine learning is used for the disambiguation, based on a Random Forest, exploiting various features. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and statements 
+Supervised machine learning is used for the disambiguation, based on a Random Forest, exploiting various features. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and, optionally, statements. 
 
 The API also offers the possibility to apply filters based on Wikipedia properties and values, allowing to create specialised entity identification and extraction (e.g. extract species mentions or all medical entities only in a document) relying on the current 27M entities and 154M statements present in Wikipedia. 
 
@@ -50,7 +50,7 @@ Then install the Wikipedia index:
 
 * download the zipped index files (warning: total around 9 GB!) at the following address: 
 
-... currently updated, come soon! ...
+... currently updated, come back soon! ...
 
 <!-- https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1 GB)
 
@@ -74,9 +74,9 @@ Some tests will be executed. Congratulation, you're now ready to run the service
 
 ## Documentation 
 
-The documentation of the service is available [here](http://nerd.readthedocs.io).
+The documentation of the REST service is available [here](http://nerd.readthedocs.io).
 
-## Run the web service 
+## Run the REST service 
 
 ```bash
 > mvn -Dmaven.test.skip=true jetty:run-war
@@ -109,6 +109,8 @@ For other languages, replace the ending language code (`en`) by the desired one 
 
 Models will be saved under `data/models`. `ARFF` training data files used to build the model are saved under `data/wikipedia/training/`.
 
-## Contact
+## License and contact
 
-Author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
+Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
+
+Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
