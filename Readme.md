@@ -31,7 +31,7 @@ The tool currently supports English, German and French languages. For English an
 
 The tool has been designed for fast processing (at least for a NERD system, 500-1000 words per second on an medium-profile linux server single thread or one PDF page of a scientific articles between 1 and 2 seconds), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy. A search query can be disambiguated in 1-5 seconds. (N)ERD uses the very fast SMILE ML library for machine learning and a JNI integration of LMDB as embedded database. 
 
-(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Bellow, we make available the LMDB binary data for Linux-64 architecture. 
+(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for Linux-64 architecture. 
 
 ## Install and build 
 
@@ -49,7 +49,6 @@ com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.prop
 Then install the Wikipedia index:
 
 * download the zipped index files (warning: total around 9 GB!) at the following address: 
-
 
 ... currently updated, come soon! ...
 
@@ -73,6 +72,10 @@ Build the project, under the NERD projet repository:
 
 Some tests will be executed. Congratulation, you're now ready to run the service. 
 
+## Documentation 
+
+The documentation of the service is available [here](http://nerd.readthedocs.io).
+
 ## Run the web service 
 
 ![(N)ERD console](doc/images/Screen1.png)
@@ -83,8 +86,6 @@ Some tests will be executed. Congratulation, you're now ready to run the service
 
 By default the demo/console is available at [http://localhost:8090](http://localhost:8090)
 The editor (client is work-in-progress, not stable) can be opened under [http://localhost:8090/editor.html](http://localhost:8090/editor.html)
-
-The documentation of the service is available [here](http://nerd.readthedocs.io).
 
 ## Training
 
