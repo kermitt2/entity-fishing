@@ -101,8 +101,8 @@ public class NerdRestProcessFile {
 				
 				// we assume for the moment that there are no entities originally set in the query 
 				// however, it would be nice to have them specified with coordinates and map
-				// them to their right layout tokens when processing the PDF as done for 
-				// instance in the project grobid-astro
+				// them to their right layout tokens when processing the PDF (as done for 
+				// instance in the project grobid-astro)
 
 				/*List<NerdEntity> originalEntities = null;
 				if  ( (nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0) ) {
