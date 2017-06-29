@@ -449,80 +449,6 @@ public class ProcessText {
 	 * @return 
 	 * 		the list of identified entities.
 	 */
-	/*public List<Entity> processBrutal(List<LayoutToken> tokens, String lang) throws NerdException { 
-System.out.println("processBrutal");
-		List<Entity> results = new ArrayList<Entity>();
-		try {
-			List<List<LayoutToken>> pool = ngrams(tokens, NGRAM_LENGTH);
-System.out.println("pool: " + pool.size());			
-		
-			// candidates which start and end with a stop word are removed. 
-			// beware not to be too agressive. 
-			List<Integer> toRemove = new ArrayList<Integer>();
-			
-			for(int i=0; i<pool.size(); i++) {
-				List<LayoutToken> term1 = pool.get(i);
-				String term = org.grobid.core.utilities.TextUtilities.dehyphenize(term1);//LayoutTokensUtil.toText(term1);
-				term = term.replace("\n", " ");
-				String termLow = term.toLowerCase();
-
-				if (stopwords != null) {
-					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
-						 stopwords.startsWithStopword(termLow, lang) ||
-						 stopwords.endsWithStopword(termLow, lang) 
-					) {
-						toRemove.add(new Integer(i));
-						continue;
-					} 
-				}
-
-				while (delimiters.indexOf(termLow.charAt(termLow.length()-1)) != -1) {
-					term = term.substring(0, term.length()-1);
-					termLow = termLow.substring(0,termLow.length()-1);
-					if (termLow.length() == 0) {
-						toRemove.add(new Integer(i));
-						continue;
-					}
-				}
-			}
-
-			List<List<LayoutToken>> subPool = new ArrayList<List<LayoutToken>>();
-			for(int i=0; i<pool.size(); i++) {
-				if (toRemove.contains(new Integer(i))) {
-					continue;
-				}
-				else {
-					subPool.add(pool.get(i));
-				}
-			}
-		
-			for(List<LayoutToken> candidate : subPool) {
-				Entity entity = new Entity(LayoutTokensUtil.toText(candidate));
-				
-				List<BoundingBox> boxes = BoundingBoxCalculator.calculate(candidate);
-				entity.setBoundingBoxes(boxes);
-				// we have an additional check of validy based on language
-				if (validEntity(entity, lang))
-					results.add(entity);
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new NerdException("NERD error when processing text.", e);
-		}
-		
-		return results;
-	}*/
-
-	/**
-	 * Processing of some raw text by extracting all non-trivial ngrams. We do not
-	 * control here the textual mentions by a NER. Generate a list of entity mentions. 
-	 *
-	 * @param tokens 
-	 *		the sequence of tokens to be parsed
-	 * @return 
-	 * 		the list of identified entities.
-	 */
 	public List<Entity> processBrutal(List<LayoutToken> tokens, Language lang) throws NerdException { 
 		if ( (tokens == null) || (tokens.size() == 0) ) {
 			//System.out.println("Content to be processed is empty.");
@@ -724,9 +650,9 @@ System.out.println("pool: " + pool.size());
 		String shortText = nerdQuery.getShortText();
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
-		if ((text == null) && (shortText == null)) {
-			LOGGER.info("Cannot parse the given text, because it is null.");
-		}
+		//if ((text == null) && (shortText == null)) {
+			//LOGGER.info("Cannot parse the given text, because it is null.");
+		//}
 		
 		if ( (text == null) || (text.length() == 0) ) 
 			text = shortText;
