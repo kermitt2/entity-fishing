@@ -10,7 +10,6 @@
 
 .. toctree::
    :maxdepth: 2
-   :titlesonly:
 
    overview.rst
    console.rst

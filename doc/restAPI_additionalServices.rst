@@ -1,7 +1,7 @@
 .. topic:: Description of the REST API additional services
 
-NERD REST API additional service
-================================
+(N)ERD REST API additional services
+===================================
 
 Knowledge base concept retrieval
 ********************************
