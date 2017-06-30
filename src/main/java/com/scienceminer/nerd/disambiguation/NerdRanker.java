@@ -57,11 +57,6 @@ public class NerdRanker {
 
 	private LowerKnowledgeBase wikipedia = null;
 
-	private double minSenseProbability = 0.0; 
-	private int maxLabelLength = 20; 
-	private double minLinkProbability = 0.0;
-	private int maxContextSize = -1;
-
 	// regression model
 	private RandomForest forest = null;
 
@@ -74,35 +69,11 @@ public class NerdRanker {
 
 	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
-		this.minSenseProbability = NerdEngine.minSenseProbability;
-		this.maxLabelLength = NerdEngine.maxLabelLength;
-		this.minLinkProbability = NerdEngine.minLinkProbability;
-		this.maxContextSize = NerdEngine.maxContextSize;
-		
-		NerdConfig conf = wikipedia.getConfig();
-		
+				
 		xstream = new XStream();
 		arffParser = new ArffParser();
-		GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
-		arffParser.setResponseIndex(feature.getNumFeatures()-1);
-	}
-
-	public NerdRanker(LowerKnowledgeBase wikipedia, 
-						double minSenseProbability,
-						int maxLabelLength, 
-						double minLinkProbability,
-						int maxContextSize) throws Exception {
-		this.wikipedia = wikipedia;
-		this.minSenseProbability = minSenseProbability;
-		this.maxLabelLength = maxLabelLength;
-		this.minLinkProbability = minLinkProbability;
-		this.maxContextSize = maxContextSize;
-		
-		NerdConfig conf = wikipedia.getConfig();
-		
-		xstream = new XStream();
-		arffParser = new ArffParser();
-		GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
+		//GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
+		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
@@ -119,13 +90,14 @@ public class NerdRanker {
 				MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 		}
 
-		GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
-		//GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
-		feature.prob_c = commonness;
+		//GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
+		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
+		//feature.prob_c = commonness;
+		feature.prob_c = 1.0;
 		feature.relatedness = relatedness;
 		//feature.relatedness = 1.0;
-		feature.context_quality = quality; 
-		//feature.context_quality = 1.0;
+		//feature.context_quality = quality; 
+		feature.context_quality = 1.0;
 		//feature.dice_coef = dice_coef;
 		double[] features = feature.toVector();
 		return forest.predict(features);
@@ -190,7 +162,8 @@ public class NerdRanker {
 
 	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
 		StringBuilder arffBuilder = new StringBuilder();
-		GenericRankerFeatureVector feat = new MilneWittenFeatureVector();
+		//GenericRankerFeatureVector feat = new MilneWittenFeatureVector();
+		GenericRankerFeatureVector feat = new SimpleNerdFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		int nbArticle = 0;
 		for (Article article : articles.getSample()) {
@@ -206,11 +179,10 @@ System.out.println("nb article processed: " + nbArticle);
 	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 
-//System.out.println(article.getFullWikiText());
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
-//System.out.println(content);
+//System.out.println("Content: " + content);
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
 
@@ -224,8 +196,13 @@ System.out.println("nb article processed: " + nbArticle);
 			String destText = link;
 
 			int pos = link.lastIndexOf('|');
-			if (pos>0) {
+			if (pos > 0) {
 				destText = link.substring(0, pos);
+				// possible anchor #
+				int pos2 = destText.indexOf('#');
+				if (pos2 != -1) {
+					destText = destText.substring(0,pos2);
+				}
 				labelText = link.substring(pos+1);
 			} else {
 				// labelText and destText are the same, but we could have an anchor #
@@ -243,8 +220,13 @@ System.out.println("nb article processed: " + nbArticle);
 			
 			Label label = new Label(wikipedia.getEnvironment(), labelText);
 			Label.Sense[] senses = label.getSenses();
+			if (destText.length() > 1)
+				destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
+			else {
+				// no article considered as single letter
+				continue;
+			}
 			Article dest = wikipedia.getArticleByTitle(destText);
-			
 			if ((dest != null) && (senses.length > 1)) {
 				NerdEntity ref = new NerdEntity();
 				ref.setRawName(labelText);
@@ -295,9 +277,10 @@ System.out.println("nb article processed: " + nbArticle);
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			nerdEngine.generateCandidates(disambiguatedEntities, lang);
 //System.out.println("total entities with candidates: " + candidates.size());
+		
 		// set the expected concept to the NerdEntity
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-			List<NerdCandidate> cands = entry.getValue();
+			//List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
 
 			/*for (NerdCandidate cand : cands) {
@@ -321,7 +304,7 @@ System.out.println("nb article processed: " + nbArticle);
 //System.out.println("get context for this content");		
 		NerdContext context = null;
 		try {
-			 context = relatedness.getContext(candidates, null, lang);
+			 context = relatedness.getContext(candidates, null, lang, false);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -334,10 +317,13 @@ System.out.println("nb article processed: " + nbArticle);
 			NerdEntity entity = entry.getKey();
 			int expectedId = entity.getWikipediaExternalRef();
 			int nbCandidate = 0;
-			if (expectedId == -1)
+			if (expectedId == -1) {
+				// we skip cases when no gold entity is present (nothing to rank against)
 				continue;
+			}
 			if ((cands == null) || (cands.size() <= 1)) {
-				// do not considerer unambiguous entities
+				// if no or only one candidate, nothing to rank and the example is not 
+				// useful for training
 				continue;
 			}
 			
@@ -355,10 +341,14 @@ System.out.println("nb article processed: " + nbArticle);
 					double related = relatedness.getRelatednessTo(candidate, context, lang);
 //System.out.println("relatedness: " + related);
 
-					GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
-					feature.prob_c = commonness;
+					//GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
+					GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
+					//feature.prob_c = commonness;
+					feature.prob_c = 1.0;
 					feature.relatedness = related;
-					feature.context_quality = quality;
+					//feature.relatedness = 1.0;
+					//feature.context_quality = quality;
+					feature.context_quality = 1.0;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					arffBuilder.append(feature.printVector()).append("\n");
@@ -377,7 +367,7 @@ System.out.println("nb article processed: " + nbArticle);
 			Collections.sort(cands);
 		}
 
-		System.out.println("Final Article: " + nbInstance + " training instances");
+		System.out.println("article contribution: " + nbInstance + " training instances");
 		return arffBuilder;
 	}
 
@@ -410,8 +400,13 @@ System.out.println("nb article processed: " + nbArticle);
 			String destText = link;
 
 			int pos = link.lastIndexOf('|');
-			if (pos>0) {
+			if (pos > 0) {
 				destText = link.substring(0, pos);
+				// possible anchor #
+				int pos2 = destText.indexOf('#');
+				if (pos2 != -1) {
+					destText = destText.substring(0,pos2);
+				}
 				labelText = link.substring(pos+1);
 			} else {
 				// labelText and destText are the same, but we could have an anchor #
@@ -427,11 +422,16 @@ System.out.println("nb article processed: " + nbArticle);
 
 			head = linkMatcher.end();
 			
-			Label label = new Label(wikipedia.getEnvironment(), labelText);
-			Label.Sense[] senses = label.getSenses();
-			destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
+			//Label label = new Label(wikipedia.getEnvironment(), labelText);
+			//Label.Sense[] senses = label.getSenses();
+			if (destText.length() > 1)
+				destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
+			else {
+				// no article considered as single letter
+				continue;
+			}
 			Article dest = wikipedia.getArticleByTitle(destText);
-			if ((dest != null) && (senses.length > 0)) {
+			if ((dest != null)) {// && (senses.length > 0)) {
 				NerdEntity ref = new NerdEntity();
 				ref.setRawName(labelText);
 				ref.setWikipediaExternalRef(dest.getId());
@@ -443,6 +443,10 @@ System.out.println("nb article processed: " + nbArticle);
 			}
 		}
 
+		contentText.append(content.substring(head));
+		String contentString = contentText.toString();
+
+		// be sure to have the entities to be ranked
 		List<Entity> nerEntities = new ArrayList<Entity>();
 		for(NerdEntity refEntity : referenceEntities) {
 			Entity localEntity = new Entity(refEntity.getRawName());
@@ -450,22 +454,60 @@ System.out.println("nb article processed: " + nbArticle);
 			localEntity.setOffsetEnd(refEntity.getOffsetEnd());
 			nerEntities.add(localEntity);
 		}
-
 		List<NerdEntity> entities = new ArrayList<NerdEntity>();
 		for (Entity entity : nerEntities) {
 			NerdEntity theEntity = new NerdEntity(entity);
 			entities.add(theEntity);
 		}
 
+		// process the text for building actual context for training
+		ProcessText processText = ProcessText.getInstance();
+		nerEntities = new ArrayList<Entity>();
+		String lang = wikipedia.getConfig().getLangCode();
+		Language language = new Language(lang, 1.0);
+		if (lang.equals("en") || lang.equals("fr")) {
+			nerEntities = processText.process(contentString, language);
+		}
+		for(Entity entity : nerEntities) {
+			// we add entities only if the mention is not already present
+			NerdEntity theEntity = new NerdEntity(entity);
+			if (!entities.contains(theEntity))
+				entities.add(theEntity);
+		}
+		// add non trivial terms
+//System.out.println("number of NE found: " + entities.size());	
+		List<Entity> entities2 = processText.processBrutal(contentString, language);
+//System.out.println("number of non-NE found: " + entities2.size());	
+		for(Entity entity : entities2) {
+			// we add entities only if the mention is not already present
+			NerdEntity theEntity = new NerdEntity(entity);
+			if (!entities.contains(theEntity))
+				entities.add(theEntity);
+		}
+
 		NerdEngine engine = NerdEngine.getInstance();
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
-		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null);
+		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false);
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
-			if (cands.size() > 0)
-				producedDisamb.add(new Integer(cands.get(0).getWikipediaExternalRef()));
+			if (cands.size() > 0) {
+				// check that we have a reference result for the same chunck
+				int start = entity.getOffsetStart();
+				int end = entity.getOffsetEnd(); 
+				boolean found = false;
+				for(NerdEntity refEntity : referenceEntities) {
+					int startRef = refEntity.getOffsetStart();
+					int endRef = refEntity.getOffsetEnd(); 
+					if ((start == startRef) && (end == endRef)) {
+						found = true;
+						break;
+					}
+				}
+				if (found)
+					producedDisamb.add(new Integer(cands.get(0).getWikipediaExternalRef()));
+			}
 		}
  
 		LabelStat stats = new LabelStat();

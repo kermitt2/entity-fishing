@@ -82,7 +82,8 @@ public class NerdSelector {
 	public double getProbability(double nerd_score, 
 								double prob_anchor_string, 
 								double prob_c,
-								int nb_tokens) throws Exception {
+								int nb_tokens, 
+								double relatedness) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -100,6 +101,7 @@ public class NerdSelector {
 		feature.prob_anchor_string = prob_anchor_string;
 		feature.prob_c = prob_c;
 		feature.nb_tokens = nb_tokens;
+		feature.relatedness = relatedness;
 		double[] features = feature.toVector();
 		return forest.predict(features);
 	}
@@ -301,7 +303,7 @@ System.out.println("nb article processed: " + nbArticle);
 //System.out.println("get context for this content");		
 		NerdContext context = null;
 		try {
-			 context = relatedness.getContext(candidates, null, lang);
+			 context = relatedness.getContext(candidates, null, lang, false);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -348,6 +350,7 @@ System.out.println("nb article processed: " + nbArticle);
 					feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
 					feature.prob_c = commonness;
 					feature.nb_tokens = words.size();
+					feature.relatedness = related;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					arffBuilder.append(feature.printVector()).append("\n");
@@ -365,7 +368,7 @@ System.out.println("nb article processed: " + nbArticle);
 			Collections.sort(cands);
 		}
 
-		System.out.println("Final Article: " + nbInstance + " training instances");
+		System.out.println("article contribution: " + nbInstance + " training instances");
 		return arffBuilder;
 	}
 
@@ -431,7 +434,7 @@ System.out.println(" - evaluating " + article);
 		//Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
-		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null);
+		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false);
 
 		if (full) {
 			engine.pruneWithSelector(candidates, 

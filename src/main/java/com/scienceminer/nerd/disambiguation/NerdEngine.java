@@ -66,10 +66,10 @@ public class NerdEngine {
 	static public int maxContextSize = 30;	
 	static public int maxLabelLength = 50;
 	static public double minLinkProbability = 0.005;
-	static public double minSenseProbability = 0.2;
+	static public double minSenseProbability = 0.05;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
-	static public double minSelectorScore = 0.3; // threshold for selector pruning 
-	static public double minEntityScore = 0.25; // threshold for final entity pruning
+	static public double minSelectorScore = 0.1; // threshold for selector pruning 
+	static public double minEntityScore = 0.2; // threshold for final entity pruning
 
 	public static NerdEngine getInstance() throws Exception {
 	    if (instance == null) {
@@ -198,7 +198,7 @@ for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 System.out.println("total number of entities: " + nbEntities);
 System.out.println("total number of candidates: " + nbCandidates);
 
-		rank(candidates, lang, context);
+		rank(candidates, lang, context, shortTextVal);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
@@ -430,7 +430,7 @@ for(NerdCandidate cand : cands) {
 	/**
 	 * Ranking of the candidates for a set of mentions from a contextual text
 	 */
-	public void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context) {
+	public void rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context, boolean shortText) {
 		// we rank candidates for each entity mention
 //relatedness.resetCache(lang);
 
@@ -446,7 +446,7 @@ for(NerdCandidate cand : cands) {
 		// we create/augment the context for the disambiguation
 		NerdContext localContext = null;
 		try {
-			 localContext = relatedness.getContext(candidates, userEntities, lang);
+			 localContext = relatedness.getContext(candidates, userEntities, lang, shortText);
 			 // merge context
 			 if (context != null) {
 			 	context.merge(localContext);
@@ -465,11 +465,7 @@ for(NerdCandidate cand : cands) {
 		if (disambiguator == null) {
 			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
-				disambiguator = new NerdRanker(wikipedia, 
-												minSenseProbability, 
-												maxLabelLength, 
-												minLinkProbability, 
-												maxContextSize);
+				disambiguator = new NerdRanker(wikipedia);
 				rankers.put(lang, disambiguator);
 			}
 			catch(Exception e) {
@@ -490,6 +486,7 @@ for(NerdCandidate cand : cands) {
 				try {
 					double commonness = candidate.getProb_c(); 
 					double related = relatedness.getRelatednessTo(candidate, localContext, lang);
+					candidate.setRelatednessScore(related);
 					if (disambiguator == null) {
 						System.out.println("Cannot rank candidates: disambiguator for the language " + 
 							lang + " is invalid");
@@ -508,9 +505,9 @@ for(NerdCandidate cand : cands) {
 			Collections.sort(cands);
 		}
 
-System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
-System.out.println("relatedness - Comparisons calculated: " + relatedness.getComparisonsCalculated());
-System.out.println("relatedness - cache proportion: " + relatedness.getCachedProportion());
+//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
+System.out.println("relatedness - comparisons calculated: " + relatedness.getComparisonsCalculated() 
+		+ " - cache proportion: " + relatedness.getCachedProportion());
 	}
 
 	/**
@@ -527,11 +524,7 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 		if (disambiguator == null) {
 			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
-				disambiguator = new NerdRanker(wikipedia, 
-												minSenseProbability, 
-												maxLabelLength, 
-												minLinkProbability, 
-												maxContextSize);
+				disambiguator = new NerdRanker(wikipedia);
 				rankers.put(lang, disambiguator);
 			}
 			catch(Exception e) {
@@ -592,10 +585,6 @@ System.out.println("relatedness - cache proportion: " + relatedness.getCachedPro
 			catch(Exception e) {
 				e.printStackTrace();
 			}
-
-/*				if (candidate.getProb_c() > 0) {
-				candidate.setNerdScore(candidate.getNerdScore() + candidate.getProb_c());
-			}*/
 			candidate.setNerdScore(score);
 		}
 		Collections.sort(candidates);
@@ -1137,7 +1126,8 @@ System.out.println("Merging...");
 						double prob = selector.getProbability(candidate.getNerdScore(), 
 							candidate.getLabel().getLinkProbability(), 
 							candidate.getWikiSense().getPriorProbability(), 
-							words.size());				
+							words.size(),
+							candidate.getRelatednessScore());			
 //System.out.println("selector score: " + prob);
 						candidate.setSelectionScore(prob);
 					} catch(Exception e) {

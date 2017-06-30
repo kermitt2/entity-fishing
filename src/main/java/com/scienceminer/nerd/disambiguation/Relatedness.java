@@ -86,7 +86,7 @@ public class Relatedness {
 
 		if ( (contextArticles == null) || (contextArticles.size() == 0) ) {
 			// if there is no context, we can set an arbitrary score
-			return 0.5;
+			return 0.1;
 		} 
 		
 		if (article == null) {
@@ -296,121 +296,12 @@ public class Relatedness {
 		return epr;
 	}
 
-	/**
-	 * Given a set of candidate entities extracted from the text, computes which
-	 * one of these are the least ambiguous ones. From this, creates a list of Wikipedia
-	 * articles representing their senses. This list is computed for a given target candidate
-	 * which has to be excluded.
-	 * 
-	 */
-	/*public Vector<Article> collectContextTerms(List<NerdCandidate> candidates, 
-											NerdCandidate targetCandidate,
-											String lang) {
 
-		// vector to store unambiguous context articles
-		Vector<Article> context = new Vector<Article>();
-
-		int contextSize = 10;
-
-		// vector to store senses of ambiguos candidates and sort them by
-		// probability
-		List<Article> bestCandidateSenses = new ArrayList<Article>();
-
-		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
-		for (NerdCandidate candidate : candidates) {
-			if (candidate != targetCandidate) {
-				int bestSense = candidate.getWikipediaExternalRef();
-				Label label = wikipedia.getLabel(candidate.getPreferredTerm());
-				if (label == null) {
-					label = wikipedia.getLabel(candidate.getEntity().getRawName());
-				}
-				Article bestArticle = null;
-				if (bestSense == -1) {
-					bestArticle = wikipedia.getArticleByTitle(candidate.getEntity().getRawName());
-					if (bestArticle == null) {
-						//TextProcessor tp = new org.wikipedia.miner.util.text.CaseFolder();
-						bestArticle = wikipedia.getMostProbableArticle(candidate.getEntity().getRawName());
-					}
-						
-					if (bestArticle != null) {
-						//bestSense = bestArticle.getTitle().replace(" ", "_");
-						bestSense = bestArticle.getId();
-					}
-				}
-				if (bestSense == -1)
-					continue;
-				if (bestArticle == null) {
-					bestArticle = (Article)wikipedia.getPageById(bestSense);
-				}
-				if (bestArticle == null) 
-					continue;
-				try {
-					// what is the most probable sense for the given candidate
-					//Sense bestSense = anchor.getSenses().first();
-
-			//		double comonness = bestSense.getProbability();
-			//		if (comonness == 0)
-					double commonness = candidate.getProb_c();
-					//double comonness = candidate.getProb_i();
-			
-					String termText = candidate.getPreferredTerm();
-					if (termText == null) {
-						termText = candidate.getEntity().getRawName();
-					}
-					
-					double keyphraseness = label.getLinkProbability();
-			
-					// add to the context all articles that map
-					// from ngrams with one possible meaning
-					// and high keyphrasenesss
-					//if ((anchor.getSenses().size() == 1) && (keyphraseness >= 0.5)) {
-					if (keyphraseness >= 0.4) {	
-						if (context.contains(bestArticle)) {
-							continue;
-						}
-						context.add(bestArticle);
-					}
-
-					// in case if not enough non-ambigious terms were collected
-					// additionally collect other mappings based on
-					// sense probability and keyphraseness 
-					if ((commonness >= 0.5) && (keyphraseness > 0.1)) {
-						bestArticle.setWeight(commonness);
-						bestCandidateSenses.add(bestArticle);
-					}
-
-				} 
-				catch (Exception e) {
-					System.out.println("Error computing senses for " + candidate.toString());
-					e.printStackTrace();
-				}
-			}
-		}
-
-		// if not enough context was collected
-		//if (context.size() < contextSize) {
-		if (context.size() == 0) { 	
-			for (int i = 0; (i < bestCandidateSenses.size()) && (context.size() < contextSize); i++) {
-				Article sense = bestCandidateSenses.get(i);
-		//		System.out.println("Adding best from ambiguous " + sense);
-				context.add(sense);
-				break;
-			}
-		}
-		return context;
-	}*/
-	
 	public Set<Article> collectAllContextTerms(List<NerdCandidate> candidates, String lang) {
-		// vector to store unambiguous context articles
+		// unambiguous context articles
 		Set<Article> context = new HashSet<Article>();
-
-		// vector to store senses of ambiguos candidates and sort them by
-		// probability
-		//List<Article> bestCandidateSenses = new ArrayList<Article>();
-
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		for (NerdCandidate candidate : candidates) {
-			
 			int bestSense = candidate.getWikipediaExternalRef();
 			if (bestSense == -1)
 				continue;
@@ -419,22 +310,6 @@ public class Relatedness {
 			if (bestArticle == null) 
 				continue;
 			try {
-
-				// if required number of context articles
-				// is reached, break
-
-				// what is the most probable sense for the given candidate
-				//Sense bestSense = anchor.getSenses().first();
-
-				//double comonness = bestSense.getProbability();
-				//double comonness = candidate.getProb_i();
-				/*String termText = candidate.getPreferredTerm();
-				if (termText == null) {
-					termText = candidate.getRawName();
-				}
-				Label label = wikipedia.getLabel(termText);
-				//double keyphraseness = label.getLinkProbability();
-				*/
 				if (context.contains(bestArticle)) {
 					continue;
 				}
@@ -456,7 +331,8 @@ public class Relatedness {
 	 */	
 	public NerdContext getContext(Map<NerdEntity, List<NerdCandidate>> candidates, 
 							List<NerdEntity> userEntities, 
-							String lang) throws Exception {
+							String lang,
+							boolean shortText) throws Exception {
 		List<Label.Sense> unambig = new ArrayList<Label.Sense>();
 		List<Integer> unambigIds = new ArrayList<Integer>();
 		
@@ -464,6 +340,7 @@ public class Relatedness {
 		List<Integer> extraSensesIds = new ArrayList<Integer>();
 		
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
 
 		// we add the "certain" senses
 		List<Article> certainPages = new ArrayList<Article>();
@@ -472,7 +349,6 @@ public class Relatedness {
 		if ( (userEntities != null) && (userEntities.size() > 0) ){
 			for(NerdEntity ent : userEntities) {
 				if (ent.getWikipediaExternalRef() != -1) {
-					//resultContext.addPage(wikipedia.getPageById(ent.getWikipediaExternalRef()));
 					Page thePage = wikipedia.getPageById(ent.getWikipediaExternalRef());
 					if (thePage.getType() == Page.PageType.article) {
 						if (!certainPagesIds.contains(new Integer(thePage.getId()))) {
@@ -498,7 +374,7 @@ public class Relatedness {
 				}
 			} else {
 				for(NerdCandidate cand : cands) {
-					if (cand.getProb_c() >= (1-NerdEngine.minSenseProbability)) {
+					if (cand.getProb_c() >= (1-minSenseProbability)) {
 						Label.Sense theSense = cands.get(0).getWikiSense();
 						if (!unambigIds.contains(new Integer(theSense.getId()))) {
 							unambig.add(theSense);
@@ -507,7 +383,8 @@ public class Relatedness {
 						//extraSenses.add(cands.get(0).getWikiSense());
 						break;
 					}
-					else if (cand.getProb_c() >= 0.8) {
+					else if (cand.getProb_c() >= 0.8) { 
+						// we store some extra "good" senses in case we need more of them
 						Label.Sense theSense = cands.get(0).getWikiSense();
 						if ( !extraSensesIds.contains(new Integer(theSense.getId())) && 
 							!unambigIds.contains(new Integer(theSense.getId())) ) {
@@ -521,18 +398,21 @@ public class Relatedness {
 			if (unambig.size()+certainPages.size() > NerdEngine.maxContextSize)
 				break;
 		}
-//System.out.println(unambig.size()+ " unambiguous entities; " + unambig.size());		
-		// if the context is still too small, we add the best senses of ambiguous labels
-		if (unambig.size()+certainPages.size() < NerdEngine.maxContextSize) {
-			if ((extraSenses != null) && (extraSenses.size() > 0)) {
-				for(Label.Sense sense : extraSenses) {
-					Integer theId = new Integer(sense.getId());
-					if (!unambigIds.contains(theId)) {
-						unambig.add(sense);
-						unambigIds.add(theId);
+//System.out.println(unambig.size()+ " unambiguous entities; " + unambig.size());	
+
+		// if the context is still too small, we add come of the top sense of ambiguous labels
+		if (shortText) {
+			if (unambig.size()+certainPages.size() < NerdEngine.maxContextSize) {
+				if ((extraSenses != null) && (extraSenses.size() > 0)) {
+					for(Label.Sense sense : extraSenses) {
+						Integer theId = new Integer(sense.getId());
+						if (!unambigIds.contains(theId)) {
+							unambig.add(sense);
+							unambigIds.add(theId);
+						}
+						if (unambig.size()+certainPages.size() > NerdEngine.maxContextSize)
+							break;
 					}
-					if (unambig.size()+certainPages.size() > NerdEngine.maxContextSize)
-						break;
 				}
 			}
 		}
@@ -544,6 +424,8 @@ public class Relatedness {
 
 	/**
      *  Get a context from a text based on the unambiguous labels and the certain disambiguated entities. 
+     *
+     *  Note: To be removed !
 	 *  	 
 	 */	
 	public NerdContext getContextFromText(String content, 
@@ -562,6 +444,7 @@ public class Relatedness {
 		List<Integer> matchIndexes = new ArrayList<Integer>();
 		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
 
 		while (m.find()) 
 			matchIndexes.add(m.start());
@@ -574,28 +457,17 @@ public class Relatedness {
 				int currIndex = matchIndexes.get(j);	
 				String ngram = s.substring(startIndex, currIndex);
 
-				/*if (ngram.indexOf(targetString) != -1)
-					continue;
-				
-				if (targetString.indexOf(ngram) != -1)
-					continue;
-				*/
 				if (! (ngram.length()==1 && s.substring(startIndex-1, startIndex).equals("'")) && 
 						!ngram.trim().equals("")) {
-					//Label label = new Label(wikipedia.getEnvironment(), ngram, tp);
 					Label label = new Label(wikipedia.getEnvironment(), ngram);
-
 					if (label.getLinkProbability() > NerdEngine.minLinkProbability) {
-						
-						Label.Sense[] senses = label.getSenses();
-						
+						Label.Sense[] senses = label.getSenses();						
 						if ( senses.length == 1 || 
-							(senses[0].getPriorProbability() >= (1-NerdEngine.minSenseProbability)) ) 
+							(senses[0].getPriorProbability() >= (1-minSenseProbability)) ) 
 							unambig.add(senses[0]);
 						
-						// we store some extra senses if needed
+						// we store some extra senses in case the context is too small
 						if ( (senses.length > 1) && (senses[0].getPriorProbability() >= 0.8 ) ) {
-							//if ( senses.length > 1 )	
 							extraSenses.add(senses[0]);
 						}
 					}
@@ -639,6 +511,7 @@ public class Relatedness {
 		Vector<Label.Sense> unambig = new Vector<Label.Sense>();
 		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
 		for (WeightedTerm term : terms) {
 
 			String termString = term.getTerm();
@@ -651,7 +524,7 @@ public class Relatedness {
 					
 					Label.Sense[] senses = label.getSenses();
 					
-					if ( senses.length == 1 || (senses[0].getPriorProbability() >= (1-NerdEngine.minSenseProbability)) ) 
+					if ( senses.length == 1 || (senses[0].getPriorProbability() >= (1-minSenseProbability)) ) 
 						unambig.add(senses[0]);
 					
 					// we store some extra senses if needed

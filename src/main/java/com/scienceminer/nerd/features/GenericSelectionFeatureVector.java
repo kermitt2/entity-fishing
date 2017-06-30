@@ -21,6 +21,7 @@ public class GenericSelectionFeatureVector {
 	public boolean Add_tf_idf = false; // term frequency inverse document frequency, tf-idf
 	public boolean Add_total_occ_number = false; // the total number of occurrence of the mention in language-specific Wikipedia
 	public boolean Add_nb_tokens = false; // number of tokens of the mention
+	public boolean Add_relatedness = false;	// semantic relatedness measure bewteen candidate and context	
 
 	// decision types
 	public boolean target_numeric = false;
@@ -34,6 +35,7 @@ public class GenericSelectionFeatureVector {
 	public double tf_idf = 0.0; // tf-idf
 	public int total_occ_number = 0; // shall we use some discretized, log, or relative version instead? 
 	public int nb_tokens = 0;
+	public double relatedness = 0.0;
 
 	/**
 	 *  Write header of ARFF files.
@@ -66,6 +68,8 @@ public class GenericSelectionFeatureVector {
 			header.append("@attribute total_occ_number NUMERIC\n");
 		if (Add_nb_tokens)
 			header.append("@attribute nb_tokens NUMERIC\n");
+		if (Add_relatedness)	
+			header.append("@attribute relatedness REAL\n");
 
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -90,6 +94,8 @@ public class GenericSelectionFeatureVector {
 		if (Add_total_occ_number)
 			num++;
 		if (Add_nb_tokens)
+			num++;
+		if (Add_relatedness)
 			num++;
 		// class
 		num++;	
@@ -172,6 +178,15 @@ public class GenericSelectionFeatureVector {
 			}
 		}
 
+		if (Add_relatedness) {
+			if (first) {
+				res.append(relatedness);
+				first = false;	
+			} else {
+				res.append("," + relatedness);
+			}
+		}
+
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
 			res.append("," + label);
@@ -210,6 +225,10 @@ public class GenericSelectionFeatureVector {
 		}
 		if (Add_nb_tokens) {
 			result[i] = nb_tokens;
+			i++;
+		}
+		if (Add_relatedness) {
+			result[i] = relatedness;
 			i++;
 		}
 

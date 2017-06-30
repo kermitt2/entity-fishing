@@ -16,7 +16,7 @@ public class SimpleNerdFeatureVector extends GenericRankerFeatureVector {
 		Add_prob_c = true;
 		Add_relatedness = true;
 		Add_context_quality = true;
-		Add_dice_coef = true;
+		//Add_ner = true;
 		target_numeric = true;
 		target_class = false;
 	}

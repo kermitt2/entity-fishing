@@ -64,11 +64,7 @@ public class WikipediaTrainer {
 		LOGGER.info("Loading full wikitext content - this will take a while the first time");
 		this.wikipedia.loadFullContentDB();
 
-		this.ranker = new NerdRanker(this.wikipedia, 
-			NerdEngine.minSenseProbability,
-			NerdEngine.maxLabelLength, 
-			NerdEngine.minLinkProbability,
-			NerdEngine.maxContextSize);
+		this.ranker = new NerdRanker(this.wikipedia);
 		
 		this.selector = new NerdSelector(this.wikipedia);
 
@@ -81,13 +77,13 @@ public class WikipediaTrainer {
 
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sizes = Arrays.asList(5000,5000,1000);
-		List<Integer> sizes = Arrays.asList(100,500,100);
+		List<Integer> sizes = Arrays.asList(100,100,200);
 		//List<Integer> sizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
 		criterias.setMinOutLinks(20);
-		criterias.setMinInLinks(30);
-		criterias.setMinWordCount(150);
-		criterias.setMaxWordCount(1000);
+		criterias.setMinInLinks(50);
+		criterias.setMinWordCount(200);
+		criterias.setMaxWordCount(2000);
 		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sizes, wikipedia);
 	}
 
@@ -113,11 +109,13 @@ public class WikipediaTrainer {
 	    selector.saveModel(modelSelector);
 	}
 
-	private void evaluate() throws Exception {
+	private void evaluateRanker() throws Exception {
 		ArticleTrainingSample rankerSample = articleSamples.get(2);
 		System.out.println("-------------------------- evaluating ranker model --------------------------");
 		LabelStat rankerStats = ranker.evaluate(rankerSample);
-	    
+	}
+
+	private void evaluateSelector() throws Exception {
 	    ArticleTrainingSample selectorSample = articleSamples.get(2);
 	    System.out.println("------------------------- evaluating selector model -------------------------");
 	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker, false);
@@ -135,17 +133,18 @@ public class WikipediaTrainer {
 		trainer.createArticleSamples();
 
 		System.out.println("Create Ranker arff files...");
-		trainer.createRankerArffFiles("wikipedia");
+		//trainer.createRankerArffFiles("wikipedia");
 		System.out.println("Create Ranker classifier...");
-		trainer.createRankerModel();
+		//trainer.createRankerModel();
 
 		System.out.println("Create Selector arff files...");
-		trainer.createSelectorArffFiles("wikipedia");
+		//trainer.createSelectorArffFiles("wikipedia");
 		System.out.println("Create Selector classifier...");
-		trainer.createSelectorModel();
+		//trainer.createSelectorModel();
 
 		System.out.println("Evaluate classifiers...");
-		trainer.evaluate();
+		trainer.evaluateRanker();
+		trainer.evaluateSelector();
 	}
 	
 }

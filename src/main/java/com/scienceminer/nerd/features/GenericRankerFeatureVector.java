@@ -25,10 +25,9 @@ public class GenericRankerFeatureVector {
 	public boolean Add_relatedness = false;	// semantic relatedness measure bewteen candidate and context											
 	public boolean Add_context_quality = false;	// quality of the context
 
-	public boolean Add_ner_st = false; // boolean indicating if identified as NER mention by Stanford NER
-	public boolean Add_ner_id = false; // boolean indicating if identified as NER mention by Idilia service 
-	public boolean Add_ner_type = false; // wordnet ner type
-	public boolean Add_ner_subtype = false; // wordnet ner subtype
+	public boolean Add_ner = false; // boolean indicating if identified as NER mention GROBID NER
+	public boolean Add_ner_type = false; // GROBID NER class
+	public boolean Add_ner_subtype = false; // wordnet ner sense/subtype 
 	
 	public boolean Add_isSubTerm = false; // true if sub-string of another term candidate
 	
@@ -70,8 +69,7 @@ public class GenericRankerFeatureVector {
 	public double relatedness = 0.0;
 	public double context_quality = 0.0;
 	
-	public boolean ner_st = false;
-	public boolean ner_id = false;
+	public boolean ner = false;
 	public String ner_type = "NotNER";
 	public String ner_subtype = "NotNER";
 
@@ -118,10 +116,8 @@ public class GenericRankerFeatureVector {
 			header.append("@attribute context_quality REAL\n");
 		if (Add_isSubTerm)	
 			header.append("@attribute isSubTerm {false, true}\n");	
-		if (Add_ner_st) 
-			header.append("@attribute ner_st {false, true}\n");
-		if (Add_ner_id)
-			header.append("@attribute ner_id {false, true}\n");
+		if (Add_ner) 
+			header.append("@attribute ner {false, true}\n");
 		if (Add_ner_type)
 			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION}\n");
 		if (Add_ner_subtype)	
@@ -163,9 +159,7 @@ public class GenericRankerFeatureVector {
 			num++;
 		if (Add_isSubTerm)
 			num++;
-		if (Add_ner_st) 
-			num++;
-		if (Add_ner_id)
+		if (Add_ner) 
 			num++;
 		if (Add_ner_type)
 			num++;
@@ -248,7 +242,12 @@ public class GenericRankerFeatureVector {
 		}
 		
 		if (Add_relatedness) {
-			res.append(","+relatedness);
+			if (first) {
+				res.append(relatedness);
+				first = false;
+			}
+			else
+				res.append(","+relatedness);
 		}
 
 		if (Add_context_quality) {
@@ -261,14 +260,8 @@ public class GenericRankerFeatureVector {
 			else 
 				res.append(",false");
 		}
-		if (Add_ner_st) {
-			if (ner_st) 
-				res.append(",true");
-			else 
-				res.append(",false");
-		}
-		if (Add_ner_id) {
-			if (ner_id) 
+		if (Add_ner) {
+			if (ner) 
 				res.append(",true");
 			else 
 				res.append(",false");
