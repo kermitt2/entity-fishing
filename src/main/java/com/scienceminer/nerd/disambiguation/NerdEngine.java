@@ -68,8 +68,8 @@ public class NerdEngine {
 	static public double minLinkProbability = 0.005;
 	static public double minSenseProbability = 0.05;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
-	static public double minSelectorScore = 0.1; // threshold for selector pruning 
-	static public double minEntityScore = 0.2; // threshold for final entity pruning
+	static public double minSelectorScore = 0.05; // threshold for selector pruning 
+	static public double minEntityScore = 0.01; // threshold for final entity pruning
 
 	public static NerdEngine getInstance() throws Exception {
 	    if (instance == null) {
@@ -215,7 +215,7 @@ for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
 }*/
-		prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
+		//prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
@@ -223,7 +223,7 @@ for(NerdCandidate cand : cands) {
 	System.out.println(cand.toString());
 }
 }*/
-		impactOverlap(candidates);
+		//impactOverlap(candidates);
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
@@ -232,7 +232,7 @@ for(NerdCandidate cand : cands) {
 }
 }*/
 		//if (!shortText && !nerdQuery.getNbest())
-			prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
+//			prune(candidates, nerdQuery.getNbest(), shortTextVal, minEntityScore, lang);
 
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 		List<NerdEntity> result = new ArrayList<NerdEntity>();
@@ -272,8 +272,8 @@ for(NerdCandidate cand : cands) {
 						}
 					}
 					result.add(nerdEntity);
-					//if (!nerdQuery.getNbest())
-					//	break;
+					if (!nerdQuery.getNbest())
+						break;
 				}
 			}
 		}
@@ -1114,7 +1114,6 @@ System.out.println("Merging...");
 			if ( (candidates == null) || (candidates.size() == 0) ) 
 				continue;
 			NerdEntity entity = entry.getKey();
-
 			for(NerdCandidate candidate : candidates) {			
 				//if (candidate.getMethod() == NerdCandidate.NERD) 
 				{
@@ -1141,7 +1140,8 @@ System.out.println("Merging...");
 }*/
 			List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
 			for(NerdCandidate candidate : candidates) {
-				if (candidate.getSelectionScore() < threshold) {
+				// note: we don't prune named entities
+				if ( (candidate.getSelectionScore() < threshold) && (entity.getType() == null) ) {
 					continue;
 				} else {
 					newCandidates.add(candidate);

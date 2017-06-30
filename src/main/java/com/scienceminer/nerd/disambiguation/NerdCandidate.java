@@ -639,8 +639,22 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		//return this.selectionScore - compareQuantity;
 
 		//descending order
-		return ((int)((compareQuantity - this.nerdScore) * 1000));
+		int val = ((int)((compareQuantity - this.nerdScore) * 1000));
 		//return ((int)((compareQuantity - this.selectionScore) * 1000));
+
+		if (val == 0) {
+			val = ((int)((compareNerdCandidate.getSelectionScore() - this.selectionScore) * 1000));
+		}
+
+		if (val == 0) {
+			val = ((int)((compareNerdCandidate.getRelatednessScore() - this.relatednessScore) * 1000));
+		}
+
+		if (val == 0) {
+			val = ((int)((compareNerdCandidate.getProb_c() - this.prob_c) * 1000));	
+		}
+
+		return val;
 	}
 	
 }

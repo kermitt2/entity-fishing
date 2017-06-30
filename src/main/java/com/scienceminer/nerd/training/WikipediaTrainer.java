@@ -77,7 +77,7 @@ public class WikipediaTrainer {
 
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sizes = Arrays.asList(5000,5000,1000);
-		List<Integer> sizes = Arrays.asList(100,100,200);
+		List<Integer> sizes = Arrays.asList(100,100,100);
 		//List<Integer> sizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
 		criterias.setMinOutLinks(20);
@@ -133,14 +133,14 @@ public class WikipediaTrainer {
 		trainer.createArticleSamples();
 
 		System.out.println("Create Ranker arff files...");
-		//trainer.createRankerArffFiles("wikipedia");
+		trainer.createRankerArffFiles("wikipedia");
 		System.out.println("Create Ranker classifier...");
-		//trainer.createRankerModel();
+		trainer.createRankerModel();
 
 		System.out.println("Create Selector arff files...");
-		//trainer.createSelectorArffFiles("wikipedia");
+		trainer.createSelectorArffFiles("wikipedia");
 		System.out.println("Create Selector classifier...");
-		//trainer.createSelectorModel();
+		trainer.createSelectorModel();
 
 		System.out.println("Evaluate classifiers...");
 		trainer.evaluateRanker();

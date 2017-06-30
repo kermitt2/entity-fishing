@@ -68,7 +68,7 @@ public class ProcessText {
 
 	private Stopwords stopwords = Stopwords.getInstance();
 	
-	public static final int NGRAM_LENGTH = 4;
+	public static final int NGRAM_LENGTH = 5;
 
 	// default indo-european delimiters, should be moved to language specific analysers
 	private static String delimiters = " \n\t" + TextUtilities.fullPunctuations;

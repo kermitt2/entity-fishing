@@ -99,7 +99,8 @@ public class NerdSelector {
 		GenericSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
 		feature.nerd_score = nerd_score;
 		feature.prob_anchor_string = prob_anchor_string;
-		feature.prob_c = prob_c;
+		//feature.prob_c = prob_c;
+		feature.prob_c = 1.0;
 		feature.nb_tokens = nb_tokens;
 		feature.relatedness = relatedness;
 		double[] features = feature.toVector();
@@ -348,7 +349,8 @@ System.out.println("nb article processed: " + nbArticle);
 					SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
 					feature.nerd_score = nerd_score;
 					feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
-					feature.prob_c = commonness;
+					//feature.prob_c = commonness;
+					feature.prob_c = 1.0;
 					feature.nb_tokens = words.size();
 					feature.relatedness = related;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
@@ -360,6 +362,12 @@ System.out.println("nb article processed: " + nbArticle);
 					//		entity.toString());
 					//System.out.println("\t\t" + "nerd_score: " + nerd_score + 
 					//	", prob_anchor_string: " + feature.prob_anchor_string);
+
+					if ( (feature.label == 1.0) && (nbCandidate > 1) )
+						break;
+					if ( (expectedId == -1) && (nbCandidate > 0) ) {
+						break;
+					}
 				}
 				catch(Exception e) {
 					e.printStackTrace();

@@ -96,8 +96,8 @@ public class NerdRanker {
 		feature.prob_c = 1.0;
 		feature.relatedness = relatedness;
 		//feature.relatedness = 1.0;
-		//feature.context_quality = quality; 
-		feature.context_quality = 1.0;
+		feature.context_quality = quality; 
+		//feature.context_quality = 1.0;
 		//feature.dice_coef = dice_coef;
 		double[] features = feature.toVector();
 		return forest.predict(features);
@@ -347,8 +347,8 @@ System.out.println("nb article processed: " + nbArticle);
 					feature.prob_c = 1.0;
 					feature.relatedness = related;
 					//feature.relatedness = 1.0;
-					//feature.context_quality = quality;
-					feature.context_quality = 1.0;
+					feature.context_quality = quality;
+					//feature.context_quality = 1.0;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					arffBuilder.append(feature.printVector()).append("\n");
