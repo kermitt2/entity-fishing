@@ -1,3 +1,5 @@
+.. topic:: Description of the REST API for disambiguation
+
 (N)ERD REST API
 ===============
 

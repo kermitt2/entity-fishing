@@ -4,17 +4,18 @@
    contain the root `toctree` directive.
 
 
-(N)ERD - (Named) Entity Recognition and Disambiguation documentation
---------------------------------------------------------------------
+(N)ERD - (Named) Entity Recognition and Disambiguation
+------------------------------------------------------
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :titlesonly:
 
    overview.rst
    console.rst
    restAPI.rst
+   restAPI_additionalServices.rst
 
 
 
