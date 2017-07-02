@@ -423,7 +423,12 @@ System.out.println(" - evaluating " + article);
 		ProcessText processText = ProcessText.getInstance();
 		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText());
 		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
-		List<Entity> nerEntities = processText.process(text, lang);
+		List<Entity> nerEntities = null;
+		if (lang.getLang().equals("en") || lang.getLang().equals("fr")) {
+			nerEntities = processText.process(text, lang);
+		}
+		if (nerEntities == null)
+			nerEntities = new ArrayList<Entity>();
 		List<Entity> nerEntities2 = processText.processBrutal(text, lang);
 		for(Entity entity : nerEntities2) {
 			// we add entities only if the mention is not already present

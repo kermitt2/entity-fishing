@@ -1,6 +1,10 @@
 package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
+import com.scienceminer.nerd.kb.model.Page;
+import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 
 import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
@@ -126,6 +130,11 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		CountingInputStream countingReader = new CountingInputStream(reader);
 		XMLStreamReader xmlStreamReader = xmlStreamFactory.createXMLStreamReader(new InputStreamReader(countingReader,decoder));
 
+		LowerKnowledgeBase wikipedia = null;
+		if (full) {
+			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(env.getConfiguration().getLangCode());
+		}
+
 		int pageTotal = 0;
 		int nbToAdd = 0;
 		Transaction tx = environment.createWriteTransaction();
@@ -155,15 +164,25 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								tx = environment.createWriteTransaction();
 							}
 							if (full) {
-								// we store the complete article
-								currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup);
+								// we store the complete text if we have an article
+								if ( (currId != null) && (wikipedia != null) ) {
+									Page page = wikipedia.getPageById(currId.intValue());
+									if (page.getType() == Page.PageType.article)
+										currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup);
+									else 
+										currMarkup = null;
+									// we don't consider articles when too short or too long
+									if ( (currMarkup != null) && ((currMarkup.length() < 500) || (currMarkup.length() > 50000)) ) {
+										currMarkup = null;
+									}
+								}
 							} else {
 								// we only store the first paragraph/summary
 								currMarkup = MediaWikiParser.getInstance().formatFirstParagraphWikiText(currMarkup);
 							}
 							pageTotal++;
 
-							if (currMarkup.trim().length() > 5) {
+							if ((currMarkup != null) && (currMarkup.trim().length() > 5)) {
 								try {
 									db.put(tx, KBEnvironment.serialize(currId), KBEnvironment.serialize(currMarkup));
 									nbToAdd++;

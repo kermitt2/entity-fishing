@@ -12,10 +12,11 @@
    :maxdepth: 2
 
    overview.rst
+   build.rst
    console.rst
    restAPI.rst
-   restAPI_additionalServices.rst
-
+   train.rst
+   license.rst
 
 
 

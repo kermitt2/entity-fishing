@@ -19,6 +19,7 @@ import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.lexicon.NERLexicon.NER_Type;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
@@ -305,6 +306,10 @@ for(NerdCandidate cand : cands) {
 						continue;
 					}
 				}
+
+				// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
+				if (entity.getType() == NERLexicon.NER_Type.MEASURE)
+					continue;
 
 				// we go only with Wikipedia for the moment
 //System.out.println("check mention: " + entity.getRawName());

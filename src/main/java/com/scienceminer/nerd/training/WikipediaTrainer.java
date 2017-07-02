@@ -76,9 +76,9 @@ public class WikipediaTrainer {
 	}
 
 	private void createArticleSamples() throws IOException{
-		//List<Integer> sizes = Arrays.asList(5000,5000,1000);
-		List<Integer> sizes = Arrays.asList(100,100,100);
-		//List<Integer> sizes = Arrays.asList(20,20,10);
+		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
+		List<Integer> sampleSizes = Arrays.asList(100,100,100);
+		//List<Integer> sampleSizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
 		criterias.setMinOutLinks(20);
 		criterias.setMinInLinks(50);

@@ -8,18 +8,19 @@ As RESTful web services, (N)ERD is defined by a certain number of stateless tran
 All these RESTful services are available through Cross-origin resource sharing (CORS), allowing clients, such as web browser and server to interact in a flexible manner with cross-origin request.
 
 
-NERD text processing
-********************
+(N)ERD query processing
+***********************
 
 
-The NERD text processing service takes as input a JSON structured query and returns the JSON query enriched with a list of identified and, when possible, disambiguated entities.
-The NERD service can be applied on 4 types of input:
+The NERD query processing service takes as input a JSON structured query and returns the JSON query enriched with a list of identified and, when possible, disambiguated entities.
+
+The NERD service can be applied on 4 types of input content:
  * **text**, provided as JSON string value, for example one or several paragraphs of natural language,
  * **search query**, provided as JSON string value, corresponding to several search terms used together and which can possibly be disambiguated when associated,
  * **weighted vector of terms**, provided by a structured JSON array, where each term will be disambiguated, when possible, in the context of the complete vector - weighted vector of term is a very common structure used in information retrieval, clustering and classification.
  * **PDF document**, provided as multipart data with the JSON query string.
 
-One and only one input type is mandatory in a query, otherwise an HTTP error 400 is returned (see response status codes below). Multiple inputs are not possible in a single request.
+One and only one input type is mandatory in a query, otherwise an HTTP error 400 is returned (see response status codes below). Combining multiple inputs in a single request is currently not supported.
 
 
 Supported languages
@@ -80,7 +81,7 @@ POST /disambiguate
 Query format description
 ------------------------
 
-The NERD text processing service always consumes a parameter which is a JSON string representing a query, and optionally a PDF file. The service thus follows a Query DSL approach (like for instance ElasticSearch) to express queries instead of multiples HTTP parameters. This approach allows queries which are much richer, flexible and simple to express, but also interactive scenarios (where output of the services can be used easily as input after some changes from the user, as for instance in an interactive text editing task).
+The NERD query processing service always consumes a parameter which is a JSON string representing a query, and optionally a PDF file. The service thus follows a Query DSL approach (like, for instance, ElasticSearch) to express queries instead of multiples HTTP parameters. This approach allows queries which are much richer, flexible and simple to express, but also interactive scenarios (where output of the services can be used easily as input after some changes from the user, as for instance in an interactive text editing task).
 
 The JSON query indicates what is the textual content to process, the various (optional) parameters to consider when processing it, optionally some already existing disambiguated entities (already disambiguated by a user or via a particular workflow), and an optional customisation to provide more context to the disambiguation process.
 
@@ -237,7 +238,9 @@ When *processSentence* is set, the sentence segmentation is triggered anyway and
 PDF input
 ^^^^^^^^^
 
-This service is processing text contained in the PDF provided in input. In addition to the query it accepts a PDF file via multi-part/form-data.
+This service is processing a PDF provided as input after extracting and structuring its raw content. Structuration is currently specialized to scientific and technical articles. Processing a PDF not corresponding to scientific articles is currently not recommended. 
+
+In addition to the query it accepts a PDF file via ```multi-part/form-data```.
 
 The JSON format for the query parameter to be sent to the service is identical to a response of the service:
 ::
@@ -291,13 +294,13 @@ This functionality provides disambiguation for a search query expressed as a “
 
 The input is the list of terms that are typically provided in the search bar of a search engine, and response time are optimized to remain very low (1-5ms).
 
-For example the query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to concrete is the material, the entity is the device called “concrete pump”, and it has nothing to do with “concrete” as the antonym of “abstract”.
+For example the query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to *concrete* is the material, the entity is the device called *concrete pump*, and it has nothing to do with *concrete* as the antonym of *abstract*.
 
-Processing this kind of input permits to implement semantic search (search based on concept matching) and semantic-based ranking (ranking of documents based on semantic proximity with a query) in a search engine.
+Processing this kind of input permits to implement semantic search (search based on concept matching) and semantic-based ranking (ranking of documents based on semantic proximity with a query, for instance exploiting clasifications, domain information, etc.) in a search engine.
 
 Search query disambiguation uses a special model optimized for a small number of non-strictly ordered terms and trained with search queries.
 
-The difference between standard text and short text is similar to the one of the `ERD 2014 challenge <http://web-ngram.research.microsoft.com/erd2014/Docs/Detail%20Rules.pdf>`_.
+The difference between standard *text* and *short text* is similar to the one of the `ERD 2014 challenge <http://web-ngram.research.microsoft.com/erd2014/Docs/Detail%20Rules.pdf>`_.
 
 
 Example request:
@@ -315,7 +318,7 @@ Example request:
 Response
 --------
 
-The response returned by the (N)ERD text processing service is basically the same JSON as the JSON query, enriched by the list of identified and, when possible, disambiguated entities, together with a server runtime information.
+The response returned by the (N)ERD query processing service is basically the same JSON as the JSON query, enriched by the list of identified and, when possible, disambiguated entities, together with a server runtime information.
 
 If the textual content to be processed is provided in the query as a string, the identified entities will be associated to offset positions in the input string, so that the client can associate precisely the textual mention and the entity “annotation”.
 
@@ -576,3 +579,647 @@ As a PDF document expresses value in abstract PDF unit and do not have resolutio
 This is why the dimension of the pages are necessary for the correct scaling, taking into account that, in a PDF document, pages can be of different size.
 
 The (N)ERD console offers a reference implementation with PDF.js for dynamically positioning entity annotations on a processed PDF.
+
+Knowledge base concept retrieval
+********************************
+
+This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main NERD query processing service in order to retrieve a full description of an identified entity.
+
+The (N)ERD content processing service returns the identifiers of the resulting entities with some position offset information. Then, if the client wants, for instance, to display an infobox for this entity, it will send a second call to this service and retrieve the full information for this particular entity.
+Adding all the associated information for each entity in the response of the NERD query processing service would result in a very large response which would slow a lot the client, such as a web browser for instance. Using such separate queries allows efficient asynchronous calls which will never block a browser and permits to make only one call per entity, even if the same entity has been found in several places in the same text.
+
+The (N)ERD console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main NERD query processing service and the Knowledge base concept retrieval.
+
+
+Response status codes
+---------------------
+In the following table are listed the status codes returned by this entry point.
+
+.. table::
+   :widths: auto
+
+   ===================  ========================================================
+     HTTP Status code    Reason
+   ===================  ========================================================
+         200               Successful operation.
+         400               Wrong request, missing parameters, missing header
+         404               Indicates property was not found
+         500               Indicate an internal service error
+   ===================  ========================================================
+
+
+
+GET /kb/concept/{id}
+^^^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =======  =====================  =====================================
+ required    name     content-type value      description
+==========  =======  =====================  =====================================
+ required    id       String                 ID of the concept to be retrieved
+==========  =======  =====================  =====================================
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------+------------------+--------------------------------------+
+| required | name   | value            | description                          |
++==========+========+==================+======================================+
+| optional | Accept | application/json | Set the response type of the output  |
++----------+--------+------------------+--------------------------------------+
+
+
+(3) Example response
+::
+   {
+     "rawName": "Austria",
+     "preferredTerm": "Austria",
+     "nerd_score": "0.0",
+     "nerd_selection_score": "0.0",
+     "wikipediaExternalRef": "26964606",
+     "definitions": [
+       {
+         "definition": "'''Austria''', officially the '''Republic of Austria'''",
+         "source": "wikipedia-en",
+         "lang": "en"
+       }
+     ],
+     "categories": [
+       {
+         "source": "wikipedia-en",
+         "category": "Austria",
+         "page_id": 707451
+       },
+       {
+         "lang": "de",
+         "source": "wikipedia-en",
+         "category": "Erasmus Prize winners",
+         "page_id": 1665997
+       }
+     ],
+     "multilingual": [
+       {
+         "term": "Österreich",
+         "page_id": 1188788
+       },
+       {
+         "lang": "fr",
+         "term": "Autriche",
+         "page_id": 15
+       }
+     ]
+   }
+
+The elements present in this response are:
+- rawName: The term name
+
+- preferredTerm: The normalised term name
+
+- nerd_score: NERD score confidence
+
+- nerd_selection_score: NERD selection score confidence
+
+- wikipediaExternalRef: unique identifier of the concept
+
+- definitions: list of wikipedia definitions (usually in wikipedia a concept contains one and only one definition). Each definition is characterized by three properties:
+
+ - definition: The text of the definition
+
+ - source: The knowledge base from which the definition comes from (in this case can be wikipedia-en, wikipedia-de and wikipedia-fr)
+
+ - lang: the language of the definition
+
+- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated Named Entity. Each category is characterised by the following properties:
+
+ - category: The category name
+
+ - source: The knowledge base from which the definition comes from.
+
+ - pageId: the Id of the page describing the category
+
+- domains: For each entry, Wikipedia provides a huge set of categories, that are not always well curated (1 milion categories in the whole wikipedia). Domains are generic classification of concepts, they are mapped from the wikipedia categories.
+
+- multilingual: provides references to multi-languages resources referring to the same entity. E.g. the entity country called Austria is Österreich in German wikipedia and Autriche in French wikipedia. The page_id provided here relates to the language-specific Wikipedia (e.g. in the above example the page_id for the country Autriche in the French Wikipedia is 15).
+
+
+Term Lookup
+***********
+
+This service is used to search terms in the knowledge base. This service is useful to verify how many ambiguity a certain term can generate.
+
+Response status codes
+---------------------
+
+In the following table are listed the status codes returned by this entry point.
+
+.. table::
+  :widths: auto
+
+   ===================  ========================================================
+     HTTP Status code    Reason
+   ===================  ========================================================
+         200               Successful operation.
+         400               Wrong request, missing parameters, missing header
+         404               Indicates property was not found
+         500               Indicate an internal service error
+   ===================  ========================================================
+
+GET /kb/term/{term}
+^^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+  :widths: auto
+
+==========  =======  =====================  =====================================
+ required    name     content-type value      description
+==========  =======  =====================  =====================================
+ required    term      String                 The term to be retrieved
+==========  =======  =====================  =====================================
+
+(2) Request header
+
+.. table:: Request headers
+  :widths: auto
+
++----------+--------+------------------+--------------------------------------+
+| required | name   | value            | description                          |
++==========+========+==================+======================================+
+| optional | Accept | application/json | Set the response type of the output  |
++----------+--------+------------------+--------------------------------------+
+
+
+
+Language identification
+***********************
+
+Identify the language of a provided text, associated to a confidence score.
+
+Response status codes
+---------------------
+In the following table are listed the status codes returned by this entry point.
+
+.. table::
+   :widths: auto
+
+   ===================  ========================================================
+     HTTP Status code    Reason
+   ===================  ========================================================
+         200               Successful operation.
+         400               Wrong request, missing parameters, missing header
+         404               Indicates property was not found
+         500               Indicate an internal service error
+   ===================  ========================================================
+
+
+POST /language
+^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =======  =====================  ================================================
+ required    name     content-type value      description
+==========  =======  =====================  ================================================
+ required    text     String                 The text whose language needs to be identified
+==========  =======  =====================  ================================================
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
+| optional | Content-Type | multipart/form-data | Define the format of the posted property  |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+(3) Example response (ISO 639-1)
+::
+{
+   "lang":"en",
+   "conf": 0.9
+}
+
+
+GET /language?text={text}
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =======  =====================  ================================================
+ required    name     content-type value      description
+==========  =======  =====================  ================================================
+ required    text     String                 The text whose language needs to be identified
+==========  =======  =====================  ================================================
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+(3) Example response (ISO 639-1)
+::
+{
+   "lang":"en",
+   "conf": 0.9
+}
+
+Sentence segmentation
+*********************
+
+This service segments a text into sentences. It is useful in particular for the interactive mode for indicating that only certain sentences need to be processed for a given query.
+
+Beginning and end of each sentence are indicated with offset positions with respect to the input text.
+
+Response status codes
+---------------------
+In the following table are listed the status codes returned by this entry point.
+
+.. table::
+  :widths: auto
+
+   ===================  ========================================================
+     HTTP Status code    Reason
+   ===================  ========================================================
+         200               Successful operation.
+         400               Wrong request, missing parameters, missing header
+         404               Indicates property was not found
+         500               Indicate an internal service error
+   ===================  ========================================================
+
+POST /segmentation
+^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =======  =====================  ================================================
+ required    name     content-type value      description
+==========  =======  =====================  ================================================
+ required    text     String                 The text to be segmented into sentences
+==========  =======  =====================  ================================================
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
+| optional | Content-Type | multipart/form-data | Define the format of the posted property  |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+(3) Example response
+::
+{
+  "sentences": [
+    {
+      "offsetStart": 0,
+      "offsetEnd": 7
+    },
+    {
+      "offsetStart": 6,
+      "offsetEnd": 21
+    }
+  ]
+}
+
+
+GET /segmentation?text={text}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =======  =====================  ================================================
+ required    name     content-type value      description
+==========  =======  =====================  ================================================
+ required    text     String                 The text whose language needs to be identified
+==========  =======  =====================  ================================================
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+(3) Example response
+
+Here a sample of the response:
+::
+   {
+     "sentences": [
+       {
+         "offsetStart": 0,
+         "offsetEnd": 7
+       },
+       {
+         "offsetStart": 6,
+         "offsetEnd": 21
+       }
+     ]
+   }
+
+
+Customisation API
+*****************
+
+The customisation is a way to specialize the entity recognition, disambiguation and resolution for a particular domain.
+This API allows to manage customisations for the (N)ERD instance which can then be used as a parameter by the (N)ERD services.
+
+Customisation are identified by their name (or, also called profile in the API).
+
+Customisation body
+^^^^^^^^^^^^^^^^^^
+
+The JSON profile of a customisation to be sent to the server for creation and extension has the following structure:
+::
+   {
+     "wikipedia": [
+       4764461,
+       51499,
+       1014346
+     ],
+     "freebase": [
+       "/m/0cm2xh",
+       "/m/0dl4z",
+       "/m/02kxg_",
+       "/m/06v9th"
+     ],
+     "texts": [
+       "World War I (WWI or WW1 or World War One), also known as Germany and Austria-Hungary."
+     ],
+     "description": "Customisation for World War 1 domain"
+   }
+
+
+The context will be build based on Wikipedia articles and raw texts, which are all optional. Wikipedia articles are expressed as an array of Wikipedia page IDs.
+
+Texts are represented as an array of raw text segments.
+
+Response status codes
+---------------------
+In the following table are listed the status codes returned by this entry point.
+
+.. table::
+   :widths: auto
+
+   ===================  ========================================================
+     HTTP Status code    Reason
+   ===================  ========================================================
+         200               Successful operation.
+         400               Wrong request, missing parameters, missing header
+         404               Indicates property was not found
+         500               Indicate an internal service error
+   ===================  ========================================================
+
+
+GET /customisations
+^^^^^^^^^^^^^^^^^^^
+
+Returns the list of existing customisations as a JSON array of customisation names.
+
+
+(1) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+(2) Example response
+
+Here a sample of the response: 
+::
+   [
+      "ww1",
+      “ww2”,
+      “biology”
+   ]
+
+
+GET /customisation/{profile}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =========  =====================  ================================================
+ required    name       content-type value      description
+==========  =========  =====================  ================================================
+ required    profile     String                 name of the customisation to be retrieved
+==========  =========  =====================  ================================================
+
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+
+(3) Example response
+
+Here a sample of the response
+::
+   {
+     "wikipedia": [
+       4764461,
+       51499,
+       1014346
+     ],
+     "freebase": [
+       "/m/0cm2xh",
+       "/m/0dl4z",
+       "/m/02kxg_",
+       "/m/06v9th"
+     ],
+     "texts": [
+       "World War I (WWI or WW1 or World War One), also known as the First World War or the Great War, was a global war centred in Europe that began on 28 July 1914 and lasted until 11 November 1918."
+     ],
+     "description": "Customisation for World War 1 domain"
+   }
+
+
+
+POST /customisations
+^^^^^^^^^^^^^^^^^^^^
+
+Creates a customisation as defined in the input JSON, named following the path parameter.
+The JSON profile specifies a context via the combination of a list of Wikipedia article IDs and text fragments.
+A text describing informally the customisation can be added optionally.
+
+If the customisation already exists an error is returned.
+
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =========  =====================  ================================================
+ required    name       content-type value      description
+==========  =========  =====================  ================================================
+ required    profile     String                 profile of the customisation to be created
+==========  =========  =====================  ================================================
+
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+
+(3) Example response
+
+Here a sample of the response
+::
+   {
+     "status": "ok",
+     "profile": "profileName"
+     "customisation": {
+     "wikipedia": [
+       1,
+       222,
+       21233
+     ],
+     "texts": [
+       "World War II"
+     ],
+     "description": "Customisation for World War 2 domain"
+   }
+
+
+PUT /customisation/{profile}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Update an existing customisation as defined in the input JSON, named following the path parameter.
+The JSON profile specifies a context via the combination of a list of Wikipedia article IDs, FreeBase entity mid and text fragments.
+
+A text describing informally the customisation can be added optionally.
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =========  =====================  ================================================
+ required    name       content-type value      description
+==========  =========  =====================  ================================================
+ required    profile     String                 name of the customisation to be updated
+==========  =========  =====================  ================================================
+
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
+
+
+
+(3) Example response
+
+Here a sample of the response
+::
+   {
+     "status": "ok",
+     "profile": "profileName"
+     "customisation": {
+     "wikipedia": [
+       1,
+       222,
+       21233
+     ],
+     "texts": [
+       "World War II"
+     ],
+     "description": "Customisation for World War 2 domain"
+   }
+
+DELETE /customisation/{profile}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+(1) Parameters
+
+.. table:: Parameters
+   :widths: auto
+
+==========  =========  =====================  ================================================
+ required    name       content-type value      description
+==========  =========  =====================  ================================================
+ required    profile     String                 name of the customisation to be deleted
+==========  =========  =====================  ================================================
+
+
+(2) Request header
+
+.. table:: Request headers
+   :widths: auto
+
++----------+--------------+---------------------+-------------------------------------------+
+| required | name         | value               | description                               |
++==========+==============+=====================+===========================================+
+| optional | Accept       | application/json    | Set the response type of the output       |
++----------+--------------+---------------------+-------------------------------------------+
