@@ -35,8 +35,5 @@ In addition, it is possible to view the service raw response (in JSON format), f
 
 More details of the response in the following chapter.
 
-The administration section "Admin" allows to manage dynamically the properties contained in nerd.properties and nerd_service.properties.
-
-.. image:: images/nerdConsole6.png
 
 

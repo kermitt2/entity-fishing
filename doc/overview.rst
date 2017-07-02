@@ -1,13 +1,16 @@
 .. topic:: Overview of (N)ERD
 
 
+Overview
+========
+
 One of the backbone of the activities of scientists regarding technical and scientific information at large is the identification and resolution of specialist entities. This could be the identification of scientific terms, of nomenclature-based expressions such as chemical formula, of quantity expressions, etc. Researchers in Digital Humanities and in Social Sciences are often first of all interested in the identification and resolution of so-called named entities, e.g. person names, places, events, dates, organisation, etc. Entities can be known in advance and present in generalist or specialized knowledge bases, or can be created based on open nomenclatures and vocabularies, and frequently impossible to enumerate.
 
 The (N)ERD services try to automate this task in a generic manner, avoiding as much as possible restrictions of research domains and limitations to particular usages.
 
 
 Tasks
-=====
+*****
 
 (N)ERD performs the following tasks:
 
@@ -33,7 +36,7 @@ Tasks
 
 
 Summary
-=======
+*******
 
 Supervised machine learning is used for the disambiguation, based on a Random Forest, exploiting various features. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and, optionally, statements. 
 
