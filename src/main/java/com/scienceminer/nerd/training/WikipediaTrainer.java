@@ -80,11 +80,11 @@ public class WikipediaTrainer {
 		List<Integer> sampleSizes = Arrays.asList(100,100,100);
 		//List<Integer> sampleSizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
-		criterias.setMinOutLinks(20);
+		criterias.setMinOutLinks(30);
 		criterias.setMinInLinks(50);
 		criterias.setMinWordCount(200);
 		criterias.setMaxWordCount(2000);
-		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sizes, wikipedia);
+		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sampleSizes, wikipedia);
 	}
 
 	private void createRankerArffFiles(String datasetName) throws IOException, Exception {

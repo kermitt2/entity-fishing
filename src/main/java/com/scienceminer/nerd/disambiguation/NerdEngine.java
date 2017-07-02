@@ -19,6 +19,7 @@ import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.lexicon.NERLexicon.NER_Type;
 
 import com.scienceminer.nerd.kb.*;

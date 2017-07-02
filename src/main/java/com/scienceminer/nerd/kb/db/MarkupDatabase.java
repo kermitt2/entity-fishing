@@ -135,8 +135,9 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(env.getConfiguration().getLangCode());
 		}
 
-		int pageTotal = 0;
 		int nbToAdd = 0;
+		int totalAdded = 0;
+		boolean isArticle = false;
 		Transaction tx = environment.createWriteTransaction();
 		while (xmlStreamReader.hasNext()) {
 			int eventCode = xmlStreamReader.next();
@@ -150,8 +151,14 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 					switch(resolveDumpTag(xmlStreamReader.getLocalName())) {
 						case id:
 							//only take the first id (there is a second one for the revision)
-							if (currId == null)
+							if (currId == null) {
 								currId = Integer.parseInt(characters.toString().trim());
+								if ( full && (currId != null) && (wikipedia != null) ) {
+									Page page = wikipedia.getPageById(currId.intValue());
+									if (page.getType() == Page.PageType.article)
+										isArticle = true;
+								}
+							}
 							break;
 						case text:
 							currMarkup = characters.toString().trim();
@@ -162,30 +169,29 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								tx.close();
 								nbToAdd = 0;
 								tx = environment.createWriteTransaction();
+System.out.println(totalAdded + " / " + currId);
 							}
-							if (full) {
+							if (full && isArticle) {
 								// we store the complete text if we have an article
-								if ( (currId != null) && (wikipedia != null) ) {
-									Page page = wikipedia.getPageById(currId.intValue());
-									if (page.getType() == Page.PageType.article)
-										currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup);
-									else 
-										currMarkup = null;
-									// we don't consider articles when too short or too long
-									if ( (currMarkup != null) && ((currMarkup.length() < 500) || (currMarkup.length() > 50000)) ) {
-										currMarkup = null;
-									}
+								currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup);
+								// we don't consider articles when too short or too long
+								if ( (currMarkup != null) && ((currMarkup.length() < 500) || (currMarkup.length() > 50000)) ) {
+									currMarkup = null;
 								}
-							} else {
+								
+							} else if (!full) {
 								// we only store the first paragraph/summary
 								currMarkup = MediaWikiParser.getInstance().formatFirstParagraphWikiText(currMarkup);
+							} else {
+								// full and not article: we don't store that
+								currMarkup = null;
 							}
-							pageTotal++;
 
 							if ((currMarkup != null) && (currMarkup.trim().length() > 5)) {
 								try {
 									db.put(tx, KBEnvironment.serialize(currId), KBEnvironment.serialize(currMarkup));
 									nbToAdd++;
+									totalAdded++;
 								} catch(Exception e) {
 									System.out.println("Markup addition failed: " + currId + " / " + currMarkup);
 									e.printStackTrace();
@@ -194,6 +200,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 
 							currId = null;
 							currMarkup = null;
+							isArticle = false;
 						default:
 							break;
 					}
