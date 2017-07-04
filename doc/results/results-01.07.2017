@@ -1,0 +1,28 @@
+Ranker
+
+-- Macro-average --
+precision: 0.84
+recall: 0.83
+f1-score: 0.84
+
+-- Micro-average --
+precision: 0.85
+recall: 0.83
+f1-score: 0.84
+
+
+
+
+Selector end-to--end
+
+-- Macro-average --
+precision: 0.38
+recall: 0.63
+f1-score: 0.47
+
+-- Micro-average --
+precision: 0.40
+recall: 0.64
+f1-score: 0.49
+
+

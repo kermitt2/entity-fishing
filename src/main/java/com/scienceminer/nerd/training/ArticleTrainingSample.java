@@ -49,6 +49,11 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 				if (page.getType() != PageType.article)
 					continue;
 				Article article = (Article)page;
+
+				String title = article.getTitle();
+				if ((title == null) || title.startsWith("List of") || title.startsWith("Liste des")) 
+					continue;
+				
 				if ((criterias.getMinOutLinks() != null) && 
 					(article.getLinksOut().length < criterias.getMinOutLinks()))
 					continue;

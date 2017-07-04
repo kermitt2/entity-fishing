@@ -83,7 +83,9 @@ public class NerdSelector {
 								double prob_anchor_string, 
 								double prob_c,
 								int nb_tokens, 
-								double relatedness) throws Exception {
+								double relatedness,
+								boolean inContext,
+								boolean isNe) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -97,12 +99,16 @@ public class NerdSelector {
 		}
 
 		GenericSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
-		feature.nerd_score = nerd_score;
+		//feature.nerd_score = nerd_score;
+		feature.nerd_score = 1.0;
 		feature.prob_anchor_string = prob_anchor_string;
-		//feature.prob_c = prob_c;
-		feature.prob_c = 1.0;
+		feature.prob_c = prob_c;
+		//feature.prob_c = 1.0;
 		feature.nb_tokens = nb_tokens;
 		feature.relatedness = relatedness;
+		feature.inContext = inContext;
+		feature.isNe = isNe;
+		//feature.isNe = false;
 		double[] features = feature.toVector();
 		return forest.predict(features);
 	}
@@ -311,6 +317,8 @@ System.out.println("nb article processed: " + nbArticle);
 
 		double quality = (double)context.getQuality();
 		int nbInstance = 0;
+		int nbPositiveInstance = 0;
+		int nbNegativeInstance = 0;
 		// second pass for producing the disambiguation observations
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -342,32 +350,53 @@ System.out.println("nb article processed: " + nbArticle);
 					// nerd score
 					double nerd_score = ranker.getProbability(commonness, related, quality);
 
+					boolean inContext = false;
+					if (context.contains(candidate))
+						inContext = true;
+
+					boolean isNe = false;
+					if (entity.getType() != null)
+						isNe = true;
+
 					GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
 					List<String> words = analyzer.tokenize(entity.getRawName(), 
 						new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
 					SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
-					feature.nerd_score = nerd_score;
-					feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
-					//feature.prob_c = commonness;
-					feature.prob_c = 1.0;
+					//feature.nerd_score = nerd_score;
+					feature.nerd_score = 1.0;
+					//feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
+					feature.prob_anchor_string = entity.getLinkProbability();
+					feature.prob_c = commonness;
+					//feature.prob_c = 1.0;
 					feature.nb_tokens = words.size();
 					feature.relatedness = related;
+					feature.inContext = inContext;
+					feature.isNe = isNe;
+					//feature.isNe = false;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
-					arffBuilder.append(feature.printVector()).append("\n");
-					nbInstance++;
-					
+					if ( (feature.label == 1.0) || (nbNegativeInstance < nbPositiveInstance) ) { 	
+						arffBuilder.append(feature.printVector()).append("\n");
+						nbInstance++;
+						if (feature.label == 1.0) 
+							nbPositiveInstance++;
+						else 
+							nbNegativeInstance++;
+					}			
 					//System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 					//		entity.toString());
 					//System.out.println("\t\t" + "nerd_score: " + nerd_score + 
 					//	", prob_anchor_string: " + feature.prob_anchor_string);
 
-					if ( (feature.label == 1.0) && (nbCandidate > 1) )
+					/*if ( (feature.label == 1.0) && (nbCandidate > 1) )
 						break;
 					if ( (expectedId == -1) && (nbCandidate > 0) ) {
 						break;
-					}
+					}*/
+
+					/*if (nbCandidate > 0)
+						break;*/
 				}
 				catch(Exception e) {
 					e.printStackTrace();
@@ -447,23 +476,41 @@ System.out.println(" - evaluating " + article);
 		//Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
-		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false);
+		NerdContext context = engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false);
 
-		if (full) {
+		/*if (full) {
 			engine.pruneWithSelector(candidates, 
-				wikipedia.getConfig().getLangCode(), false, false, NerdEngine.minSelectorScore);
+				wikipedia.getConfig().getLangCode(), false, false, wikipedia.getConfig().getMinSelectorScore(), context);
 			engine.prune(candidates, false, false, NerdEngine.minEntityScore, wikipedia.getConfig().getLangCode());
 			engine.impactOverlap(candidates);
-		} else {
-			engine.pruneWithSelector(candidates, 
-				wikipedia.getConfig().getLangCode(), false, false, NerdEngine.minSelectorScore);
-		}
 
+			engine.pruneOverlap(result, false);
+		} else {*/
+			engine.pruneWithSelector(candidates, 
+				wikipedia.getConfig().getLangCode(), false, false, wikipedia.getConfig().getMinSelectorScore(), context);
+		//}
+
+		List<NerdEntity> result = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
-			if (cands.size() > 0)
+			if (full) {
+				for(NerdCandidate candidate : cands) {
+				NerdEntity nerdEntity = new NerdEntity(entity);
+					nerdEntity.populateFromCandidate(candidate, wikipedia.getConfig().getLangCode());
+					result.add(nerdEntity);
+					break;
+				}
+			} else if (cands.size() > 0)
 				producedDisamb.add(cands.get(0).getWikipediaExternalRef());
+			
+		}
+		
+		if (full) {
+			Collections.sort(result);
+			result = engine.pruneOverlap(result, false);
+			for(NerdEntity entit : result)
+				producedDisamb.add(entit.getWikipediaExternalRef());
 		}
 
 		LabelStat stats = new LabelStat();

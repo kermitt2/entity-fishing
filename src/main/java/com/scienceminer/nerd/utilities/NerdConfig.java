@@ -45,6 +45,14 @@ public class NerdConfig {
 	// in principle)
 	private boolean useLinkOut = false;
 
+	// minimum score produced by the selector model under which the entity 
+	// will be pruned
+	private double minSelectorScore = 0.5; 
+
+	// minimum score produced by the ranker model under which the entity 
+	// will be pruned
+	private double minRankerScore = 0.1; 
+
 	public String getLangCode() {
 		return langCode;
 	}
@@ -108,6 +116,22 @@ public class NerdConfig {
 	public void setMinSenseProbability(float minSenseProbability) {
 		this.minSenseProbability = minSenseProbability;
 	}
+
+	public double getMinSelectorScore() {
+		return this.minSelectorScore;
+	} 
+
+	public void setMinSelectorScore(double s) {
+		this.minSelectorScore = s;
+	} 	
+
+	public double getMinRankerScore() {
+		return this.minRankerScore;
+	} 
+
+	public void setMinRankerScore(double s) {
+		this.minRankerScore = s;
+	} 	
 
 	public boolean getUseLinkOut() {
 		return useLinkOut;

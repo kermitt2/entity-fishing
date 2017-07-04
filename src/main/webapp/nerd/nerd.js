@@ -1942,7 +1942,7 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 
 		$('#field').append('<table id="withExamples"><tr><td><textarea class="span7" rows="5" id="input" name="'+nameInput+'" /></td>'+
 			"<td><span style='padding-left:20px;'>&nbsp;</span></td>"+
-		"<td><table id='examplesBlock1'><tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>History</span></td></tr>"+
+		"<td><table id='examplesBlock1'><tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>WW1</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example2' style='font-size:90%;'>PubMed_1</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example3' style='font-size:90%;'>PubMed_2</span></td></tr>"+
 		"<tr style='line-height:130%;'><td><span id='example4' style='font-size:90%;'>HAL_1</span></td></tr>"+

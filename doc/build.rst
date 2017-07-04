@@ -21,10 +21,16 @@ Then install the Wikipedia index:
 
 * download the zipped index files (warning: total around 9 GB!) at the following address:
 
-... currently updated, come back soon! ...
+https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1 GB)
 
-* unzip the 5 archives files under ```data/wikipedia/```.
-This will install three sub-directories ```data/wikipedia/db-kb/```, ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/``` and ```data/wikipedia/db-fr/```.
+https://grobid.s3.amazonaws.com/nerd/db-en1.zip (5.4 GB)
+
+https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.6 GB)
+
+https://grobid.s3.amazonaws.com/nerd/db-de.zip (1.8 GB)
+
+* unzip the 4 archives files under ```data/wikipedia/```.
+This will install four sub-directories ```data/wikipedia/db-kb/```, ```data/wikipedia/db-en/```, ```data/wikipedia/db-de/``` and ```data/wikipedia/db-fr/```.
 The uncompressed data is about 20 GB.
 
 Build the project, under the NERD project repository:

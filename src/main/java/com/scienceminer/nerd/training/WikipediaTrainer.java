@@ -77,10 +77,10 @@ public class WikipediaTrainer {
 
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
-		List<Integer> sampleSizes = Arrays.asList(100,100,100);
+		List<Integer> sampleSizes = Arrays.asList(100,1000,100,100,100);
 		//List<Integer> sampleSizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
-		criterias.setMinOutLinks(30);
+		criterias.setMinOutLinks(20);
 		criterias.setMinInLinks(50);
 		criterias.setMinWordCount(200);
 		criterias.setMaxWordCount(2000);
@@ -116,12 +116,13 @@ public class WikipediaTrainer {
 	}
 
 	private void evaluateSelector() throws Exception {
-	    ArticleTrainingSample selectorSample = articleSamples.get(2);
+	    ArticleTrainingSample selectorSample = articleSamples.get(3);
 	    System.out.println("------------------------- evaluating selector model -------------------------");
 	    LabelStat selectorResults = selector.evaluate(selectorSample, ranker, false);
 
+	    ArticleTrainingSample end2endSample = articleSamples.get(4);
 	    System.out.println("--------------------------- evaluating end-to-end ---------------------------");
-	    LabelStat finalResults = selector.evaluate(selectorSample, ranker, true);
+	    LabelStat finalResults = selector.evaluate(end2endSample, ranker, true);
 	}
 
 	public static void main(String args[]) throws Exception {

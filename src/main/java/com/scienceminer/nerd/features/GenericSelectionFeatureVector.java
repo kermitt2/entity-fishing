@@ -22,6 +22,8 @@ public class GenericSelectionFeatureVector {
 	public boolean Add_total_occ_number = false; // the total number of occurrence of the mention in language-specific Wikipedia
 	public boolean Add_nb_tokens = false; // number of tokens of the mention
 	public boolean Add_relatedness = false;	// semantic relatedness measure bewteen candidate and context	
+	public boolean Add_inContext = false; // true if entity present in the relatedness context
+	public boolean Add_isNe = false; // if the entity is recognized as a NE
 
 	// decision types
 	public boolean target_numeric = false;
@@ -36,6 +38,8 @@ public class GenericSelectionFeatureVector {
 	public int total_occ_number = 0; // shall we use some discretized, log, or relative version instead? 
 	public int nb_tokens = 0;
 	public double relatedness = 0.0;
+	public boolean inContext = false;
+	public boolean isNe = false;
 
 	/**
 	 *  Write header of ARFF files.
@@ -70,6 +74,10 @@ public class GenericSelectionFeatureVector {
 			header.append("@attribute nb_tokens NUMERIC\n");
 		if (Add_relatedness)	
 			header.append("@attribute relatedness REAL\n");
+		if (Add_inContext)	
+			header.append("@attribute inContext {false, true}\n");
+		if (Add_isNe)	
+			header.append("@attribute isNe {false, true}\n");
 
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -96,6 +104,10 @@ public class GenericSelectionFeatureVector {
 		if (Add_nb_tokens)
 			num++;
 		if (Add_relatedness)
+			num++;
+		if (Add_inContext)
+			num++;
+		if (Add_isNe)
 			num++;
 		// class
 		num++;	
@@ -134,7 +146,7 @@ public class GenericSelectionFeatureVector {
 				res.append(prob_c);
 				first = false;	
 			} else {
-				res.append(", " + prob_c);
+				res.append("," + prob_c);
 			}
 		}
 
@@ -144,7 +156,7 @@ public class GenericSelectionFeatureVector {
 				res.append(dice);
 				first = false;	
 			} else {
-				res.append(", " + dice);
+				res.append("," + dice);
 			}
 		}
 
@@ -154,7 +166,7 @@ public class GenericSelectionFeatureVector {
 				res.append(tf_idf);
 				first = false;	
 			} else {
-				res.append(", " + tf_idf);
+				res.append("," + tf_idf);
 			}
 		}
 
@@ -164,7 +176,7 @@ public class GenericSelectionFeatureVector {
 				res.append(total_occ_number);
 				first = false;	
 			} else {
-				res.append(", " + total_occ_number);
+				res.append("," + total_occ_number);
 			}
 		}
 
@@ -174,7 +186,7 @@ public class GenericSelectionFeatureVector {
 				res.append(nb_tokens);
 				first = false;	
 			} else {
-				res.append(", " + nb_tokens);
+				res.append("," + nb_tokens);
 			}
 		}
 
@@ -184,6 +196,38 @@ public class GenericSelectionFeatureVector {
 				first = false;	
 			} else {
 				res.append("," + relatedness);
+			}
+		}
+
+		// true if the entity is present in the relatedness context
+		if (Add_inContext) {
+			if (first) {
+				if (inContext) 
+					res.append("true");
+				else 
+					res.append("false");
+				first = false;	
+			} else {
+				if (inContext) 
+					res.append(",true");
+				else 
+					res.append(",false");
+			}
+		}
+
+		// true if the entity is recognized as a NE
+		if (Add_isNe) {
+			if (first) {
+				if (isNe) 
+					res.append("true");
+				else 
+					res.append("false");
+				first = false;	
+			} else {
+				if (isNe) 
+					res.append(",true");
+				else 
+					res.append(",false");
 			}
 		}
 
@@ -229,6 +273,20 @@ public class GenericSelectionFeatureVector {
 		}
 		if (Add_relatedness) {
 			result[i] = relatedness;
+			i++;
+		}
+		if (Add_inContext) {
+			if (inContext)
+				result[i] = 1.0;
+			else
+				result[i] = 0.0;
+			i++;
+		}
+		if (Add_isNe) {
+			if (isNe)
+				result[i] = 1.0;
+			else
+				result[i] = 0.0;
 			i++;
 		}
 

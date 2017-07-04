@@ -32,6 +32,10 @@ public class NerdContext {
 	
 	public NerdContext() {}
 
+	public NerdContext(String lang) {
+		this.lang = lang;
+	}
+
 	public NerdContext(List<Label.Sense> unambig, 
 					List<Article> certainPages,
 					String lang) throws Exception {
@@ -230,6 +234,14 @@ public class NerdContext {
 		}
 	}
 	
+	/**
+	 * @return true if the candidate sense is present in the relatedness context
+	 */
+	public boolean contains(NerdCandidate candidate) {
+		Integer entityId = candidate.getWikipediaExternalRef();
+		return contextArticlesIds.contains(new Integer(entityId));
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
