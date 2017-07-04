@@ -12,7 +12,7 @@ First install ```GROBID``` and ```grobid-ner```, see the relative instruction of
 
 The path to grobid-home shall indicated in the file `src/main/resource/nerd.properties`, for instance:
 ::
-	com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
+    com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
 	com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.properties
 
 
