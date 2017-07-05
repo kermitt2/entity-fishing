@@ -26,19 +26,19 @@ Then install the compiled indexed data:
 
     **Linux**
 
-    	- https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1.9 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1.9 GB)
 
  		- https://grobid.s3.amazonaws.com/nerd/db-en1.zip (2.5 GB)
 
  		- https://grobid.s3.amazonaws.com/nerd/db-en2.zip (2.9 GB)
 
-		- https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.8 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.8 GB)
 
-		- https://grobid.s3.amazonaws.com/nerd/db-de.zip (2.0 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-de.zip (2.0 GB)
 
     **Max OSX**
 
-    	- https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-kb.osx.zip (1.8 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-kb.osx.zip (1.8 GB)
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-en.osx.zip (5.3 GB)
 
