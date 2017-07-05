@@ -1,7 +1,7 @@
 .. topic:: Build and install NERD
 
-Install, build and run:
-=======================
+Install: build and run
+======================
 
 (N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. 
 
@@ -26,17 +26,17 @@ Then install the compiled indexed data:
 
     **Linux**
 
-    	- https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1.9 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1.9 GB)
 
- 		- https://grobid.s3.amazonaws.com/nerd/db-en.zip (5.4 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-en.zip (5.4 GB)
 
-		- https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.8 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.8 GB)
 
-		- https://grobid.s3.amazonaws.com/nerd/db-de.zip (2.0 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-de.zip (2.0 GB)
 
     **Max OSX**
 
-    	- https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-kb.osx.zip (1.8 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-kb.osx.zip (1.8 GB)
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-en.osx.zip (5.3 GB)
 
