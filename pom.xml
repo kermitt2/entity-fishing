@@ -269,7 +269,8 @@
                                 <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
-                                <argument>-Xms4098m</argument>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>en</argument>
@@ -300,7 +301,8 @@
                                 <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
-                                <argument>-Xms4098m</argument>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>de</argument>
@@ -331,7 +333,8 @@
                                 <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
-                                <argument>-Xms4098m</argument>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>fr</argument>

@@ -9,7 +9,7 @@ import org.grobid.trainer.LabelStat;
 
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.training.*;
 import com.scienceminer.nerd.kb.model.*;
 
@@ -27,7 +27,7 @@ public class EvaluationUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationUtil.class);
 
 	public static LabelStat evaluate(ArticleTrainingSample testSet, List<LabelStat> stats) throws Exception {	
-		DecimalFormat format = new DecimalFormat("#0.00");
+		//DecimalFormat format = new DecimalFormat("#0.00");
 
 		double accumulatedRecall = 0.0;
 		double accumulatedPrecision = 0.0;
@@ -85,17 +85,17 @@ System.out.println("local f1: " + localStats.getF1Score());*/
 		builder.append("\nEvaluation on " + testSet.size() + " articles ");
 
 		builder.append("\n\n-- Macro-average --\n");
-		builder.append("precision: ").append(format.format(accumulatedPrecision / testSet.size())).append("\n");
-		builder.append("recall: ").append(format.format(accumulatedRecall / testSet.size())).append("\n");
-		builder.append("f1-score: ").append(format.format(accumulatedF1Score / testSet.size())).append("\n\n");
+		builder.append("precision: ").append(TextUtilities.formatFourDecimals(accumulatedPrecision / testSet.size())).append("\n");
+		builder.append("recall: ").append(TextUtilities.formatFourDecimals(accumulatedRecall / testSet.size())).append("\n");
+		builder.append("f1-score: ").append(TextUtilities.formatFourDecimals(accumulatedF1Score / testSet.size())).append("\n\n");
 
 		builder.append("-- Micro-average --\n");
-		builder.append("precision: ").append(format.format(globalStats.getPrecision())).append("\n");
-		builder.append("recall: ").append(format.format(globalStats.getRecall())).append("\n");
-		builder.append("f1-score: ").append(format.format(globalStats.getF1Score())).append("\n\n");		
+		builder.append("precision: ").append(TextUtilities.formatFourDecimals(globalStats.getPrecision())).append("\n");
+		builder.append("recall: ").append(TextUtilities.formatFourDecimals(globalStats.getRecall())).append("\n");
+		builder.append("f1-score: ").append(TextUtilities.formatFourDecimals(globalStats.getF1Score())).append("\n\n");		
 
-		builder.append("lower precision in evaluation set: ").append(format.format(lowerPrecision)).append("\n");
-		builder.append("lower recall in evalution set : ").append(format.format(lowerRecall)).append("\n");
+		builder.append("lower precision in evaluation set: ").append(TextUtilities.formatFourDecimals(lowerPrecision)).append("\n");
+		builder.append("lower recall in evalution set : ").append(TextUtilities.formatFourDecimals(lowerRecall)).append("\n");
 		builder
 			.append("perfect precision in evaluation set: ")
 			.append(perfectPrecision)

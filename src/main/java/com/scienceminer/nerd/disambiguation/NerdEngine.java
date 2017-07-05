@@ -653,6 +653,10 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
 
 		for(NerdEntity entity : entities) {
+			/*if (entity.getNerdScore() < threshold) {
+				toRemove.add(entity);
+			}*/
+			// variant: prune named entities less aggressively
 			if ( (entity.getNerdScore() < threshold) && (entity.getType() == null) ) {
 				toRemove.add(entity);
 			} else if ( (entity.getNerdScore() < threshold/2) && (entity.getType() != null) ) {
@@ -723,7 +727,7 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
      *  the longest match from the KB and which have not been merged, are lowered.
 	 */
 	public void impactOverlap(Map<NerdEntity, List<NerdCandidate>> candidates) {
-		List<Integer> toRemove = new ArrayList<Integer>();
+		//List<Integer> toRemove = new ArrayList<Integer>();
 		
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -1206,6 +1210,7 @@ System.out.println("Merging...");
 							context.contains(candidate),
 							isNe);			
 //System.out.println("selector score: " + prob);
+
 						candidate.setSelectionScore(prob);
 					} catch(Exception e) {
 						e.printStackTrace();
@@ -1237,9 +1242,10 @@ System.out.println("Merging...");
 			// variant: we don't prune top-relatedness candidate if a lower candidate for the same 
 			// mention remains - the goal is to avoid the selector reversing a ranker decision
 			// because ranker is more accurate than selector
-			NerdCandidate topCandidate = candidates.get(0);
+			/*NerdCandidate topCandidate = candidates.get(0);
 			if ( (newCandidates.size() > 0) && (!newCandidates.contains(topCandidate)) )
 				newCandidates.add(0, topCandidate);
+			*/
 
 			if (newCandidates.size() > 0)
 				cands.replace(entity, newCandidates);

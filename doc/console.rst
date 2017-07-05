@@ -19,21 +19,21 @@ The web page "Services" allows to test the different REST requests.
 
 A free text form allows the analysis of any text. On the right side of the input form, samples of text can be found, from news, historical documents, etc.
 
-In the lower part, entities are recognised in the provided text and displayed using different colors, based on the entity type and domain. On the lower right side, an infobox is displaying various information provided by the service about the disambiguated wikipedia entity.
+In the lower part, entities are recognised in the provided text and displayed using different colors, based on the entity type and domain. On the lower right side, an infobox is displaying various information provided by the service about the disambiguated Wikidata/Wikipedia entity.
 
 In this example the text box is used to disambiguate a search query:
 
 .. image:: images/nerdConsole3.png
 
-The console allows to test all the different services provided by (N)ERD, e.g. it’s possible to visualise the various sentences identified by the the sentence segmentation service (more details on this specific service below in the REST API specification).
+The console allows to test all the different services provided by (N)ERD, e.g. it’s possible to visualise the various sentences identified by the the sentence segmentation service (more details on this specific service in the REST API documentation).
 
 .. image:: images/nerdConsole4.png
 
-In addition, it is possible to view the service raw response (in JSON format), for helping the integration phase:
+In addition, it is possible to view the service raw response (in JSON format) for helping the integration phase:
 
 .. image:: images/nerdConsole5.png
 
-More details of the response in the following chapter.
+More details about the response in the next section.
 
 
 

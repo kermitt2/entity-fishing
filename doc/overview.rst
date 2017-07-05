@@ -4,10 +4,11 @@
 Overview
 ========
 
-One of the backbone of the activities of scientists regarding technical and scientific information at large is the identification and resolution of specialist entities. This could be the identification of scientific terms, of nomenclature-based expressions such as chemical formula, of quantity expressions, etc. Researchers in Digital Humanities and in Social Sciences are often first of all interested in the identification and resolution of so-called named entities, e.g. person names, places, events, dates, organisation, etc. Entities can be known in advance and present in generalist or specialized knowledge bases, or can be created based on open nomenclatures and vocabularies, and frequently impossible to enumerate.
+One of the backbone of the activities of scientists regarding technical and scientific information at large is the identification and resolution of specialist entities. This could be the identification of scientific terms, of nomenclature-based expressions such as chemical formula, of quantity expressions, etc. It is considered that between 30 to 80% of the content of a technical or scientific document is written in specialist language `(Ahmad, 1996)`. Researchers in Digital Humanities and in Social Sciences are often first of all interested in the identification and resolution of so-called named entities, e.g. person names, places, events, dates, organisation, etc. Entities can be known in advance and present in generalist or specialized knowledge bases. They can also be created based on open nomenclatures and vocabularies and impossible to enumerate in advance.
 
-The (N)ERD services try to automate this task in a generic manner, avoiding as much as possible restrictions of research domains and limitations to particular usages.
+The (N)ERD services try to automate this recognition and disambiguisation task in a generic manner, avoiding as much as possible restrictions of domains and limitations to particular usages.
 
+`(Ahmad, 1996)` `POINTER Project Final Report <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.50.7956&rep=rep1&type=pdf>`_
 
 Tasks
 *****
@@ -38,10 +39,11 @@ Tasks
 Summary
 *******
 
-Supervised machine learning is used for the disambiguation, based on a Random Forest, exploiting various features. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and, optionally, statements. 
+Supervised machine learning is used for the disambiguation, based on Random Forest models exploiting various features. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and, optionally, statements. 
 
 The API also offers the possibility to apply filters based on Wikipedia properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 27M entities and 154M statements present in Wikipedia. 
 
 The tool currently supports English, German and French languages (more to come!). For English and French, a Name Entity Recognition based on CRF ([grobid-ner](https://github.com/kermitt2/grobid-ner)) is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
 
 The tool is developed in Java and has been designed for fast processing (at least for a NERD system, 500-1000 words per second on a medium-profile linux server single thread or one PDF page of a scientific articles in 1-2 seconds), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-5 milliseconds. (N)ERD uses the very fast [SMILE ML](https://haifengl.github.io/smile/) library for machine learning and a [JNI integration of LMDB](https://github.com/deephacks/lmdbjni) as embedded database. 
+

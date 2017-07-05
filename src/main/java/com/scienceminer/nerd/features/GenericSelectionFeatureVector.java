@@ -5,6 +5,8 @@ import java.util.*;
 import java.text.*;
 import java.util.regex.*;
 
+import smile.data.Attribute;
+
 public class GenericSelectionFeatureVector {
 
 	public String title = "Generic selector";
@@ -240,7 +242,7 @@ public class GenericSelectionFeatureVector {
 		return res.toString();	
 	}
 
-	public double[] toVector() {
+	public double[] toVector(Attribute[] attributes) {
 		double[] result = new double[this.getNumFeatures()];
 		int i = 0;
 		if (Add_nerd_score) {
@@ -276,17 +278,47 @@ public class GenericSelectionFeatureVector {
 			i++;
 		}
 		if (Add_inContext) {
+			Attribute att = attributes[i];
+			double trueVal = 1.0;
+			double falseVal = 0.0;
+			try {
+				trueVal = att.valueOf("true");
+				falseVal = att.valueOf("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			if (inContext)
+				result[i] = trueVal;
+			else
+				result[i] = falseVal;
+
+			/*if (inContext)
 				result[i] = 1.0;
 			else
-				result[i] = 0.0;
+				result[i] = 0.0;*/
 			i++;
 		}
 		if (Add_isNe) {
+			Attribute att = attributes[i];
+			double trueVal = 1.0;
+			double falseVal = 0.0;
+			try {
+				trueVal = att.valueOf("true");
+				falseVal = att.valueOf("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			if (isNe)
+				result[i] = trueVal;
+			else
+				result[i] = falseVal;
+
+			/*if (isNe)
 				result[i] = 1.0;
 			else
-				result[i] = 0.0;
+				result[i] = 0.0;*/
 			i++;
 		}
 

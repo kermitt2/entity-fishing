@@ -5,6 +5,8 @@ import java.util.*;
 import java.text.*;
 import java.util.regex.*;
 
+import smile.data.Attribute;
+
 public class GenericRankerFeatureVector {
 	public String title = "Generic";
 
@@ -294,7 +296,7 @@ public class GenericRankerFeatureVector {
 		return res.toString();	
 	}
 	
-	public double[] toVector() {
+	public double[] toVector(Attribute[] attributes) {
 		double[] result = new double[this.getNumFeatures()];
 		int i = 0;
 		if (Add_prob_c) {
@@ -325,13 +327,23 @@ public class GenericRankerFeatureVector {
 			i++;
 		}
 
-		/*if (Add_inDictionary) {
+		if (Add_inDictionary) {
+			Attribute att = attributes[i];
+			double trueVal = 1.0;
+			double falseVal = 0.0;
+			try {
+				trueVal = att.valueOf("true");
+				falseVal = att.valueOf("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			if (inDictionary) 
-				result[i] = true;
+				result[i] = trueVal;
 			else 
-				result[i] = false;
+				result[i] = falseVal;
 			i++;
-		}*/
+		}
 		
 		if (Add_relatedness) {
 			result[i] = relatedness;
@@ -343,27 +355,40 @@ public class GenericRankerFeatureVector {
 			i++;
 		}
 		
-		/*if (Add_isSubTerm) {
+		if (Add_isSubTerm) {
+			Attribute att = attributes[i];
+			double trueVal = 1.0;
+			double falseVal = 0.0;
+			try {
+				trueVal = att.valueOf("true");
+				falseVal = att.valueOf("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			if (isSubTerm) 
-				result[i] = true;
+				result[i] = trueVal;
 			else 
-				result[i] = false;
+				result[i] = falseVal;
 			i++;
 		}
-		if (Add_ner_st) {
-			if (ner_st) 
-				result[i] = true;
+		if (Add_ner) {
+			Attribute att = attributes[i];
+			double trueVal = 1.0;
+			double falseVal = 0.0;
+			try {
+				trueVal = att.valueOf("true");
+				falseVal = att.valueOf("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (ner) 
+				result[i] = trueVal;
 			else 
-				result[i] = false;
+				result[i] = falseVal;
 			i++;
 		}
-		if (Add_ner_id) {
-			if (ner_id) 
-				result[i] = true;
-			else 
-				result[i] = false;
-			i++;
-		}*/
 		/*if (Add_ner_type) {
 			result[i] = ner_type;
 			i++;

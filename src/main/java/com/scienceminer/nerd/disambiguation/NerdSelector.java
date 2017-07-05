@@ -67,6 +67,7 @@ public class NerdSelector {
 
 	private String arffDataset = null;
 	private AttributeDataset attributeDataset = null;
+	private Attribute[] attributes = null;
 
 	public NerdSelector(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
@@ -94,6 +95,18 @@ public class NerdSelector {
 			}
 			String xml = FileUtils.readFileToString(modelFile, "UTF-8");
 			forest = (RandomForest)xstream.fromXML(xml);
+			if (attributeDataset != null) 
+				attributes = attributeDataset.attributes();
+			else {
+				StringBuilder arffBuilder = new StringBuilder();
+				SimpleSelectionFeatureVector feat = new SimpleSelectionFeatureVector();
+				arffBuilder.append(feat.getArffHeader()).append("\n");
+				arffBuilder.append(feat.printVector());
+				String arff = arffBuilder.toString();
+				attributeDataset = arffParser.parse(IOUtils.toInputStream(arff, "UTF-8"));
+				attributes = attributeDataset.attributes();
+				attributeDataset = null;
+			}
 			logger.info("Model for nerd selector loaded: " + 
 				MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 		}
@@ -109,7 +122,7 @@ public class NerdSelector {
 		feature.inContext = inContext;
 		feature.isNe = isNe;
 		//feature.isNe = false;
-		double[] features = feature.toVector();
+		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
 	}
 
@@ -134,7 +147,7 @@ public class NerdSelector {
 		attributeDataset = null;
 	}
 
-	public void saveModel(File file) throws IOException, Exception {
+	public void saveModel() throws IOException, Exception {
 		logger.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
@@ -143,10 +156,10 @@ public class NerdSelector {
             logger.debug("Invalid file for saving author filtering model.");
 		}
 		FileUtils.writeStringToFile(modelFile, xml, "UTF-8");
-		System.out.println("Model saved under " + file.getPath());
+		System.out.println("Model saved under " + modelFile.getPath());
 	}
 
-	public void loadModel(File file) throws IOException, Exception {
+	public void loadModel() throws IOException, Exception {
 		logger.info("loading model");
 		// load model
 		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -175,7 +188,7 @@ public class NerdSelector {
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
 
-	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
+	public void train2(ArticleTrainingSample articles, String datasetName, File file) throws Exception {
 		StringBuilder arffBuilder = new StringBuilder();
 		SimpleSelectionFeatureVector feat = new SimpleSelectionFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
@@ -183,12 +196,36 @@ public class NerdSelector {
 		NerdRanker ranker = new NerdRanker(wikipedia);
 		for (Article article : articles.getSample()) {
 			arffBuilder = trainArticle(article, arffBuilder, ranker);	
-			nbArticle++;
 System.out.println("nb article processed: " + nbArticle);
+			nbArticle++;
 		}
 		arffDataset = arffBuilder.toString();
 //System.out.println(arffDataset);
 		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
+		
+		FileUtils.writeStringToFile(file, arffDataset);
+		System.out.println("Training data saved under " + file.getPath());
+	}
+
+	public void train(ArticleTrainingSample articles, String datasetName, File file) throws Exception {
+		StringBuilder arffBuilder = new StringBuilder();
+		SimpleSelectionFeatureVector feat = new SimpleSelectionFeatureVector();
+		arffBuilder.append(feat.getArffHeader()).append("\n");
+		FileUtils.writeStringToFile(file, arffBuilder.toString());
+		int nbArticle = 0;
+		NerdRanker ranker = new NerdRanker(wikipedia);
+		for (Article article : articles.getSample()) {
+			arffBuilder = new StringBuilder();
+			arffBuilder = trainArticle(article, arffBuilder, ranker);	
+System.out.println("nb article processed: " + nbArticle);
+			FileUtils.writeStringToFile(file, arffBuilder.toString(), true);
+			nbArticle++;
+		}
+		//arffDataset = arffBuilder.toString();
+		arffDataset = FileUtils.readFileToString(file, "UTF-8");
+//System.out.println(arffDataset);
+		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
+		System.out.println("Training data saved under " + file.getPath());
 	}
 
 	private StringBuilder trainArticle(Article article, 
@@ -328,10 +365,10 @@ System.out.println("nb article processed: " + nbArticle);
 			/*if (expectedId == -1) {
 				continue;
 			}*/
-			if ((cands == null) || (cands.size() <= 1)) {
+			/*if ((cands == null) || (cands.size() <= 1)) {
 				// do not considerer unambiguous entities
 				continue;
-			}
+			}*/
 			
 			for(NerdCandidate candidate : cands) {
 				try {

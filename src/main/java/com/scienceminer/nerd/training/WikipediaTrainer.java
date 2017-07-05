@@ -71,19 +71,19 @@ public class WikipediaTrainer {
 		arffRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.arff");
 		arffSelector = new File(dataDir.getPath() + "/" + lang + "/selector.arff");
 
-		modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
-		modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
+		//modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
+		//modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
 	}
 
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
-		List<Integer> sampleSizes = Arrays.asList(100,1000,100,100,100);
+		List<Integer> sampleSizes = Arrays.asList(100,500,100,100,100);
 		//List<Integer> sampleSizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
-		criterias.setMinOutLinks(20);
-		criterias.setMinInLinks(50);
-		criterias.setMinWordCount(200);
-		criterias.setMaxWordCount(2000);
+		criterias.setMinOutLinks(60);
+		criterias.setMinInLinks(60);
+		criterias.setMinWordCount(300);
+		criterias.setMaxWordCount(2500);
 		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sampleSizes, wikipedia);
 	}
 
@@ -95,18 +95,18 @@ public class WikipediaTrainer {
 
 	private void createSelectorArffFiles(String datasetName) throws IOException, Exception {
 	    ArticleTrainingSample trainingSample = articleSamples.get(1);
-	    selector.train(trainingSample, datasetName + "_selection");
-	    selector.saveTrainingData(arffSelector);
+	    selector.train(trainingSample, datasetName + "_selection", arffSelector);
+	    //selector.saveTrainingData(arffSelector);
 	}
 
 	private void createRankerModel() throws Exception {
 	    ranker.trainModel();
-	    ranker.saveModel(modelRanker);
+	    ranker.saveModel();
 	}
 
 	private void createSelectorModel() throws Exception {
 		selector.trainModel();
-	    selector.saveModel(modelSelector);
+	    selector.saveModel();
 	}
 
 	private void evaluateRanker() throws Exception {
@@ -133,10 +133,10 @@ public class WikipediaTrainer {
 		System.out.println("Create article sets...");
 		trainer.createArticleSamples();
 
-		System.out.println("Create Ranker arff files...");
+		/*System.out.println("Create Ranker arff files...");
 		trainer.createRankerArffFiles("wikipedia");
 		System.out.println("Create Ranker classifier...");
-		trainer.createRankerModel();
+		trainer.createRankerModel();*/
 
 		System.out.println("Create Selector arff files...");
 		trainer.createSelectorArffFiles("wikipedia");
@@ -144,7 +144,7 @@ public class WikipediaTrainer {
 		trainer.createSelectorModel();
 
 		System.out.println("Evaluate classifiers...");
-		trainer.evaluateRanker();
+		//trainer.evaluateRanker();
 		trainer.evaluateSelector();
 	}
 	

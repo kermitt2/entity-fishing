@@ -66,6 +66,7 @@ public class NerdRanker {
 
 	private String arffDataset = null;
 	private AttributeDataset attributeDataset = null;
+	private Attribute[] attributes = null;
 
 	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
@@ -86,6 +87,18 @@ public class NerdRanker {
 			}
 			String xml = FileUtils.readFileToString(modelFile, "UTF-8");
 			forest = (RandomForest)xstream.fromXML(xml);
+			if (attributeDataset != null) 
+				attributes = attributeDataset.attributes();
+			else {
+				StringBuilder arffBuilder = new StringBuilder();
+				GenericRankerFeatureVector feat = new SimpleNerdFeatureVector();
+				arffBuilder.append(feat.getArffHeader()).append("\n");
+				arffBuilder.append(feat.printVector());
+				String arff = arffBuilder.toString();
+				attributeDataset = arffParser.parse(IOUtils.toInputStream(arff, "UTF-8"));
+				attributes = attributeDataset.attributes();
+				attributeDataset = null;
+			}
 			logger.info("Model for nerd ranker loaded: " + 
 				MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 		}
@@ -99,7 +112,7 @@ public class NerdRanker {
 		feature.context_quality = quality; 
 		//feature.context_quality = 1.0;
 		//feature.dice_coef = dice_coef;
-		double[] features = feature.toVector();
+		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
 	}
 
@@ -119,7 +132,7 @@ public class NerdRanker {
 		attributeDataset = null;
 	}
 
-	public void saveModel(File file) throws IOException, Exception {
+	public void saveModel() throws IOException, Exception {
 		logger.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
@@ -128,10 +141,10 @@ public class NerdRanker {
             logger.debug("Invalid file for saving author filtering model.");
 		}
 		FileUtils.writeStringToFile(modelFile, xml, "UTF-8");
-		System.out.println("Model saved under " + file.getPath());
+		System.out.println("Model saved under " + modelFile.getPath());
 	}
 
-	public void loadModel(File file) throws IOException, Exception {
+	public void loadModel() throws IOException, Exception {
 		logger.info("loading model");
 		// load model
 		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
