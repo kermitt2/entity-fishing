@@ -80,14 +80,14 @@ public class WikipediaTrainer {
 		List<Integer> sampleSizes = Arrays.asList(100,500,100,100,100);
 		//List<Integer> sampleSizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
-		/*criterias.setMinOutLinks(60);
+		criterias.setMinOutLinks(60);
 		criterias.setMinInLinks(60);
 		criterias.setMinWordCount(300);
-		criterias.setMaxWordCount(2500);*/
-		criterias.setMinOutLinks(50);
+		criterias.setMaxWordCount(2500);
+		/*criterias.setMinOutLinks(50);
 		criterias.setMinInLinks(100);
 		criterias.setMinWordCount(300);
-		criterias.setMaxWordCount(2000);
+		criterias.setMaxWordCount(2000);*/
 		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sampleSizes, wikipedia);
 	}
 
@@ -137,10 +137,10 @@ public class WikipediaTrainer {
 		System.out.println("Create article sets...");
 		trainer.createArticleSamples();
 
-		/*System.out.println("Create Ranker arff files...");
+		System.out.println("Create Ranker arff files...");
 		trainer.createRankerArffFiles("wikipedia");
 		System.out.println("Create Ranker classifier...");
-		trainer.createRankerModel();*/
+		trainer.createRankerModel();
 
 		System.out.println("Create Selector arff files...");
 		trainer.createSelectorArffFiles("wikipedia");
@@ -148,7 +148,7 @@ public class WikipediaTrainer {
 		trainer.createSelectorModel();
 
 		System.out.println("Evaluate classifiers...");
-		//trainer.evaluateRanker();
+		trainer.evaluateRanker();
 		trainer.evaluateSelector();
 	}
 	
