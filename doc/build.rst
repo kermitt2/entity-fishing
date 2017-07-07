@@ -56,7 +56,7 @@ Then install the compiled indexed data:
    ::
       mvn clean install
 
-   Some tests will be executed. If all tests are sucessful, you should be now ready to run the service.
+   Some tests will be executed. If all tests are successful, you should be now ready to run the service.
 
 #. run the service with Jetty:
    ::
