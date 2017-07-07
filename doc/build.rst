@@ -1,4 +1,4 @@
-.. topic:: Build and install NERD
+.. topic:: Build and install NERD.
 
 Install, build and run
 ======================
@@ -12,25 +12,25 @@ First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GR
 
 The path to grobid-home shall indicated in the file `src/main/resource/nerd.properties`, for instance:
 ::
-    com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
-	com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.properties
+   com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
+   com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.properties
 
 Install (N)ERD:
 ::
-	git clone https://github.com/kermitt2/nerd
+   git clone https://github.com/kermitt2/nerd
 
 
 Then install the compiled indexed data:
 
-- download the zipped data files corresponding to your environment (warning: total around 10 GB) at the following address:
+#. download the zipped data files corresponding to your environment (warning: total around 10 GB) at the following address:
 
     **Linux**
 
         - https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1.9 GB)
 
- 		- https://grobid.s3.amazonaws.com/nerd/db-en1.zip (2.5 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-en1.zip (2.5 GB)
 
- 		- https://grobid.s3.amazonaws.com/nerd/db-en2.zip (2.9 GB)
+        - https://grobid.s3.amazonaws.com/nerd/db-en2.zip (2.9 GB)
 
         - https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.8 GB)
 
@@ -47,22 +47,20 @@ Then install the compiled indexed data:
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-de.osx.zip (2 GB)
 
 
-- unzip the 4 (or 5) archives files under ``data/wikipedia/``.
+#. unzip the 4 (or 5) archives files under ``data/wikipedia/``.
 
     This will install three sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
     The uncompressed data is about 34 GB.
 
-- Build the project, under the NERD project repository.
-    With maven: 
-    ::
-		mvn clean install
+#. Build the project, under the NERD project repository.
+   ::
+      mvn clean install
 
-    Some tests will be executed. If all tests are sucessful, you should be now ready to run the service.
+   Some tests will be executed. If all tests are sucessful, you should be now ready to run the service.
 
-- run the service with 
-    Jetty: 
-    ::
-        mvn -Dmaven.test.skip=true jetty:run-war
+#. run the service with Jetty:
+   ::
+      mvn -Dmaven.test.skip=true jetty:run-war
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
