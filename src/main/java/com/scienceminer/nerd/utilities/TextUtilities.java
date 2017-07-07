@@ -3,6 +3,8 @@ package com.scienceminer.nerd.utilities;
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.kb.Lexicon;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1128,5 +1130,9 @@ public class TextUtilities {
             builder.append(c);
         }
         return builder.toString();
+    }
+
+    public static int getOccCount(String term, String string) {
+        return StringUtils.countMatches(term, string);
     }
 }

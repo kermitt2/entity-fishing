@@ -32,6 +32,7 @@ import com.scienceminer.nerd.features.*;
 import com.scienceminer.nerd.training.*;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import com.scienceminer.nerd.evaluation.*;
+import com.scienceminer.nerd.utilities.TextUtilities;
 
 import smile.validation.ConfusionMatrix;
 import smile.validation.FMeasure;
@@ -86,7 +87,8 @@ public class NerdSelector {
 								int nb_tokens, 
 								double relatedness,
 								boolean inContext,
-								boolean isNe) throws Exception {
+								boolean isNe,
+								double tf_idf) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -112,8 +114,8 @@ public class NerdSelector {
 		}
 
 		GenericSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
-		//feature.nerd_score = nerd_score;
-		feature.nerd_score = 1.0;
+		feature.nerd_score = nerd_score;
+		//feature.nerd_score = 1.0;
 		feature.prob_anchor_string = prob_anchor_string;
 		feature.prob_c = prob_c;
 		//feature.prob_c = 1.0;
@@ -121,6 +123,7 @@ public class NerdSelector {
 		feature.relatedness = relatedness;
 		feature.inContext = inContext;
 		feature.isNe = isNe;
+		feature.tf_idf = tf_idf;
 		//feature.isNe = false;
 		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
@@ -400,8 +403,8 @@ System.out.println("nb article processed: " + nbArticle);
 						new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
 					SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
-					//feature.nerd_score = nerd_score;
-					feature.nerd_score = 1.0;
+					feature.nerd_score = nerd_score;
+					//feature.nerd_score = 1.0;
 					//feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
 					feature.prob_anchor_string = entity.getLinkProbability();
 					feature.prob_c = commonness;
@@ -411,6 +414,11 @@ System.out.println("nb article processed: " + nbArticle);
 					feature.inContext = inContext;
 					feature.isNe = isNe;
 					//feature.isNe = false;
+
+					int tf = TextUtilities.getOccCount(candidate.getLabel().getText(), contentString);
+					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
+					feature.tf_idf = (double)tf * idf;
+
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					if ( (feature.label == 1.0) || (nbNegativeInstance < nbPositiveInstance) ) { 	
@@ -524,7 +532,7 @@ System.out.println(" - evaluating " + article);
 			engine.pruneOverlap(result, false);
 		} else {*/
 			engine.pruneWithSelector(candidates, 
-				wikipedia.getConfig().getLangCode(), false, false, wikipedia.getConfig().getMinSelectorScore(), context);
+				wikipedia.getConfig().getLangCode(), false, false, wikipedia.getConfig().getMinSelectorScore(), context, text);
 		//}
 
 		List<NerdEntity> result = new ArrayList<NerdEntity>();

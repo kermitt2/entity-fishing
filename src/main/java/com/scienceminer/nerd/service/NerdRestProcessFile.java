@@ -422,6 +422,8 @@ System.out.println("\n");*/
 				List<Entity> nerEntities = processText.process(workingQuery);
 				if (nerEntities != null)
 					System.out.println(nerEntities.size() + " ner entities");
+				else
+					nerEntities = new ArrayList<Entity>();
 
 				if (!workingQuery.getOnlyNER()) {
 					List<Entity> entities2 = processText.processBrutal(workingQuery);

@@ -213,9 +213,11 @@ public class ProcessText {
 		List<Entity> results = null;
 		
 		Language language = nerdQuery.getLanguage();
-		/*String lang = null;
+		String lang = null;
 		if (language != null)
-			lang = language.getLang();*/
+			lang = language.getLang();
+		if (!lang.equals("en") && !lang.equals("fr"))
+			return results;
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 
@@ -284,9 +286,13 @@ public class ProcessText {
 		List<Entity> results = null;
 		
 		Language language = nerdQuery.getLanguage();
-		/*String lang = null;
+		String lang = null;
 		if (language != null)
-			lang = language.getLang();*/
+			lang = language.getLang();
+
+		if (!lang.equals("en") && !lang.equals("fr"))
+			return results;
+		
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 

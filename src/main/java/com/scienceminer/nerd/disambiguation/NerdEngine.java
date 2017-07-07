@@ -7,7 +7,6 @@ import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.document.*;
 import org.grobid.core.utilities.*;
 import org.grobid.core.data.*;
@@ -28,6 +27,7 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
+import com.scienceminer.nerd.utilities.TextUtilities;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -216,7 +216,7 @@ for(NerdCandidate cand : cands) {
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
 
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext);
+		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
@@ -1171,7 +1171,8 @@ System.out.println("Merging...");
 			boolean nbest, 
 			boolean shortText, 
 			double threshold,
-			NerdContext context) {	
+			NerdContext context,
+			String text) {	
 		NerdSelector selector = selectors.get(lang);
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (selector == null) {
@@ -1202,13 +1203,17 @@ System.out.println("Merging...");
 						List<String> words = analyzer.tokenize(entity.getRawName(), 
 							new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
+						double tf = (double)TextUtilities.getOccCount(candidate.getLabel().getText(), text);
+						double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
+
 						double prob = selector.getProbability(candidate.getNerdScore(), 
 							candidate.getLabel().getLinkProbability(), 
 							candidate.getWikiSense().getPriorProbability(), 
 							words.size(),
 							candidate.getRelatednessScore(),
 							context.contains(candidate),
-							isNe);			
+							isNe, 
+							tf*idf);			
 //System.out.println("selector score: " + prob);
 
 						candidate.setSelectionScore(prob);

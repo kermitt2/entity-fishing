@@ -80,10 +80,14 @@ public class WikipediaTrainer {
 		List<Integer> sampleSizes = Arrays.asList(100,500,100,100,100);
 		//List<Integer> sampleSizes = Arrays.asList(20,20,10);
 		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
-		criterias.setMinOutLinks(60);
+		/*criterias.setMinOutLinks(60);
 		criterias.setMinInLinks(60);
 		criterias.setMinWordCount(300);
-		criterias.setMaxWordCount(2500);
+		criterias.setMaxWordCount(2500);*/
+		criterias.setMinOutLinks(50);
+		criterias.setMinInLinks(100);
+		criterias.setMinWordCount(300);
+		criterias.setMaxWordCount(2000);
 		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sampleSizes, wikipedia);
 	}
 

@@ -270,7 +270,7 @@ public class GenericSelectionFeatureVector {
 			i++;
 		}
 		if (Add_nb_tokens) {
-			result[i] = nb_tokens;
+			result[i] = (double)nb_tokens;
 			i++;
 		}
 		if (Add_relatedness) {

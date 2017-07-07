@@ -60,8 +60,8 @@ Then install the compiled indexed data:
     Some tests will be executed. If all tests are sucessful, you should be now ready to run the service.
 
 - run the service with Jetty: 
-::
-	mvn -Dmaven.test.skip=true jetty:run-war
+	::
+		mvn -Dmaven.test.skip=true jetty:run-war
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
