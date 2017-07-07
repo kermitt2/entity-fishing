@@ -33,6 +33,36 @@ public class TestMediaWikiParser {
     }
 
     @Test
+    public void testWikiMedia2PureTextFr() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("cantal.fr.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextOnly(input);
+        assertThat(result, startsWith("Le Cantal est un département français situé dans la région Auvergne-Rhône-Alpes"));
+        assertThat(result, not(containsString("[[")));
+        assertThat(result, not(containsString("'''")));
+    }
+
+    @Test
+    public void testWikiMedia2PureTextFrBis() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("japan.fr.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextOnly(input);
+        assertThat(result, startsWith("La culture japonaise a subi un apport considérable des cultures chinoise et coréenne"));
+        assertThat(result, not(containsString("[[")));
+        assertThat(result, not(containsString("'''")));
+    }
+
+    @Test
+    public void testWikiMedia2PureTextDe() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("astana.de.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextOnly(input);
+        assertThat(result, startsWith("Astana [astaˈna], deutsch auch [asˈtana] (kasachisch und russisch Астана; Астана ist auch das kasachische Wort für Hauptstadt) ist seit 1997 die Hauptstadt Kasachstans"));
+        assertThat(result, not(containsString("[[")));
+        assertThat(result, not(containsString("'''")));
+    }
+
+    @Test
     public void testWikiMedia2TextWithInternalLinks() throws Exception {
         String testWikiMedia = "The '''United Kingdom European Union membership referendum''', also known as the '''EU referendum''', took place in the [[United Kingdom]] and [[Gibraltar]] on 23 June 2016. [[Member state of the European Union|Membership of the European Union]] has been a topic of debate in the [[United Kingdom]] since the country joined the [[European Economic Community]] (the Common Market), as it was known then, in 1973.";
         String result = mediaWikiParser.toTextWithInternalLinksOnly(testWikiMedia);
@@ -152,5 +182,7 @@ public class TestMediaWikiParser {
         assertThat(result, startsWith("An acropolis"));
     }
     
+
+
 
 }
