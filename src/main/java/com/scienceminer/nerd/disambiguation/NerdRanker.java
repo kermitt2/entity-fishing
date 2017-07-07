@@ -191,8 +191,10 @@ System.out.println("nb article processed: " + nbArticle);
 
 	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
+		String lang = wikipedia.getConfig().getLangCode();
 
-		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
+		String content = MediaWikiParser.getInstance().
+			toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
 //System.out.println("Content: " + content);
@@ -262,7 +264,6 @@ System.out.println("nb article processed: " + nbArticle);
 		// process the text
 		ProcessText processText = ProcessText.getInstance();
 		List<Entity> entities = new ArrayList<Entity>();
-		String lang = wikipedia.getConfig().getLangCode();
 		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.process(contentString, language);
@@ -394,7 +395,9 @@ System.out.println("nb article processed: " + nbArticle);
 
 	private LabelStat evaluateArticle(Article article) throws Exception {
 //System.out.println(" - evaluating " + article);
-		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
+		String lang = wikipedia.getConfig().getLangCode();
+		String content = MediaWikiParser.getInstance()
+			.toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
@@ -476,7 +479,6 @@ System.out.println("nb article processed: " + nbArticle);
 		// process the text for building actual context for training
 		ProcessText processText = ProcessText.getInstance();
 		nerEntities = new ArrayList<Entity>();
-		String lang = wikipedia.getConfig().getLangCode();
 		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
 			nerEntities = processText.process(contentString, language);

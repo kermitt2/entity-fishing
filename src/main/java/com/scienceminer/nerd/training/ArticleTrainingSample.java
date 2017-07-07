@@ -132,7 +132,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 		}	
 	}
 
-	private static boolean isArticleValid(Article article, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {	
+	private boolean isArticleValid(Article article, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {	
 		if (article.getType() == PageType.disambiguation) {
 			return false;	
 		}
@@ -151,7 +151,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 		if (wikiText == null)
 			return false;
 		
-		String content = MediaWikiParser.getInstance().toTextOnly(wikiText);
+		String content = MediaWikiParser.getInstance().toTextOnly(wikiText, wikipedia.getConfig().getLangCode());
 
 		if ((criterias.getMinWordCount() != null) || (criterias.getMaxWordCount() != null) || 
 			(criterias.getMinLinkProportion() != null) || (criterias.getMaxLinkProportion() != null) ) {

@@ -173,7 +173,8 @@ System.out.println(totalAdded + " / " + currId);
 							}
 							if (full && isArticle) {
 								// we store the complete text if we have an article
-								currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup);
+								currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup, 
+									env.getConfiguration().getLangCode());
 								// we don't consider articles when too short or too long
 								if ( (currMarkup != null) && ((currMarkup.length() < 500) || (currMarkup.length() > 50000)) ) {
 									currMarkup = null;
@@ -181,7 +182,8 @@ System.out.println(totalAdded + " / " + currId);
 								
 							} else if (!full) {
 								// we only store the first paragraph/summary
-								currMarkup = MediaWikiParser.getInstance().formatFirstParagraphWikiText(currMarkup);
+								currMarkup = MediaWikiParser.getInstance().formatFirstParagraphWikiText(currMarkup, 
+									env.getConfiguration().getLangCode());
 							} else {
 								// full and not article: we don't store that
 								currMarkup = null;

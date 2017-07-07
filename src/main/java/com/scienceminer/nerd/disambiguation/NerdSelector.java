@@ -235,8 +235,8 @@ System.out.println("nb article processed: " + nbArticle);
 									StringBuilder arffBuilder, 
 									NerdRanker ranker) throws Exception {
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
-
-		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
+		String lang = wikipedia.getConfig().getLangCode();
+		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
 //System.out.println(content);
@@ -296,7 +296,6 @@ System.out.println("nb article processed: " + nbArticle);
 		// process the text
 		ProcessText processText = ProcessText.getInstance();
 		List<Entity> entities = new ArrayList<Entity>();
-		String lang = wikipedia.getConfig().getLangCode();
 		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.process(contentString, language);
@@ -464,7 +463,9 @@ System.out.println("nb article processed: " + nbArticle);
 
 	private LabelStat evaluateArticle(Article article, NerdRanker ranker, boolean full) throws Exception {
 System.out.println(" - evaluating " + article);
-		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText());
+		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
+		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), 
+			lang.getLang());
 
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
@@ -495,8 +496,8 @@ System.out.println(" - evaluating " + article);
 		}
 
 		ProcessText processText = ProcessText.getInstance();
-		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText());
-		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
+		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText(), lang.getLang());
+		
 		List<Entity> nerEntities = null;
 		if (lang.getLang().equals("en") || lang.getLang().equals("fr")) {
 			nerEntities = processText.process(text, lang);

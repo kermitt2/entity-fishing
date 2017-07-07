@@ -52,15 +52,14 @@ Then install the compiled indexed data:
     This will install three sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
     The uncompressed data is about 34 GB.
 
-- Build the project, under the NERD project repository.
+- build the project, under the NERD project repository.
     With maven: 
     ::
 		mvn clean install
 
     Some tests will be executed. If all tests are sucessful, you should be now ready to run the service.
 
-- run the service with 
-    Jetty: 
+- run the service with Jetty: 
     ::
         mvn -Dmaven.test.skip=true jetty:run-war
 
