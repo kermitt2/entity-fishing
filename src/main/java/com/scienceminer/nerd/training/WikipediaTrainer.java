@@ -100,7 +100,6 @@ public class WikipediaTrainer {
 	private void createSelectorArffFiles(String datasetName) throws IOException, Exception {
 	    ArticleTrainingSample trainingSample = articleSamples.get(1);
 	    selector.train(trainingSample, datasetName + "_selection", arffSelector);
-	    //selector.saveTrainingData(arffSelector);
 	}
 
 	private void createRankerModel() throws Exception {

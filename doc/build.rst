@@ -22,7 +22,7 @@ Install (N)ERD:
 
 Then install the compiled indexed data:
 
-#. download the zipped data files corresponding to your environment (warning: total around 10 GB) at the following address:
+#. Download the zipped data files corresponding to your environment (warning: total around 10 GB) at the following address:
 
     **Linux**
 
@@ -47,7 +47,7 @@ Then install the compiled indexed data:
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-de.osx.zip (2 GB)
 
 
-#. unzip the 4 (or 5) archives files under ``data/wikipedia/``.
+#. Unzip the 4 (or 5) archives files under ``data/wikipedia/``.
 
     This will install three sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
     The uncompressed data is about 34 GB.
@@ -58,7 +58,7 @@ Then install the compiled indexed data:
 
    Some tests will be executed. If all tests are successful, you should be now ready to run the service.
 
-#. run the service with Jetty:
+#. Run the service with Jetty:
    ::
       mvn -Dmaven.test.skip=true jetty:run-war
 

@@ -234,6 +234,7 @@ System.out.println("nb article processed: " + nbArticle);
 	private StringBuilder trainArticle(Article article, 
 									StringBuilder arffBuilder, 
 									NerdRanker ranker) throws Exception {
+System.out.println(" - training " + article);
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 		String lang = wikipedia.getConfig().getLangCode();
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);

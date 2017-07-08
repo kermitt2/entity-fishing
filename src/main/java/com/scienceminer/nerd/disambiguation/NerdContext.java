@@ -180,7 +180,7 @@ public class NerdContext {
 		return relatednessScore / totalWeight;
 	}
 	
-	private static boolean isDate(Article art) {
+	public static boolean isDate(Article art) {
 		String title = art.getTitle();
 		if (title == null)
 			return false;
@@ -199,7 +199,7 @@ public class NerdContext {
 			return false;		
 	}
 
-	private static boolean isNumber(Article art) {
+	public static boolean isNumber(Article art) {
 		String title = art.getTitle();
 		if (title == null)
 			return false;

@@ -12,6 +12,7 @@ import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
+import com.scienceminer.nerd.disambiguation.NerdContext;
 
 /**
  *
@@ -141,11 +142,15 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 			return false;	
 		}
 	
+		// avoid - as a general principle date and numerical articles
+		if (NerdContext.isDate(article) || NerdContext.isNumber(article))
+			return false;
+
 		// no other constraints?
 		if ((criterias.getMinLinkProportion() == null) && (criterias.getMaxLinkProportion() == null) && 
 			(criterias.getMinWordCount() == null) && (criterias.getMaxWordCount() == null))
 			return true;
-		
+
 		// get and prepare markup
 		String wikiText = article.getFullWikiText();
 		if (wikiText == null)
