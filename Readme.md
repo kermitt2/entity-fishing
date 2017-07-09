@@ -8,7 +8,7 @@
 
 (N)ERD performs the following tasks:
 
-* entity recognition and disambiguation against Wikidata and Wikipedia in a raw text, partially-annotated text segment,
+* entity recognition and disambiguation against Wikidata and Wikipedia in a raw text or partially-annotated text segment,
 ![(N)ERD](doc/images/screen2.png)
 
 * entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,

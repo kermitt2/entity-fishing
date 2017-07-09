@@ -99,7 +99,7 @@ public class DefaultConfigEnWp extends DefaultConfigWp {
 		c.addNamespace(new NamespaceImpl(
 				4,
 				"Wikipedia",
-				"Project",
+				"Wikipedia",
 				false,
 				false,
 				Arrays.asList("WP")));
@@ -107,7 +107,7 @@ public class DefaultConfigEnWp extends DefaultConfigWp {
 		c.addNamespace(new NamespaceImpl(
 				5,
 				"Wikipedia talk",
-				"Project talk",
+				"Wikipedia talk",
 				false,
 				false,
 				Arrays.asList("WT")));
@@ -223,6 +223,102 @@ public class DefaultConfigEnWp extends DefaultConfigWp {
 				false,
 				false,
 				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				118,
+				"Draft",
+				"Draft",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				119,
+				"Draft talk",
+				"Draft talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				446,
+				"Education Program",
+				"Education Program",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				447,
+				"Education Program talk",
+				"Education Program talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				710,
+				"TimedText",
+				"TimedText",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				711,
+				"TimedText talk",
+				"TimedText talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				828,
+				"Module",
+				"Module",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				829,
+				"Module talk",
+				"Module talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2300,
+				"Gadget",
+				"Gadget",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2301,
+				"Gadget talk",
+				"Gadget talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2302,
+				"Gadget definition",
+				"Gadget definition",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2303,
+				"Gadget definition talk",
+				"Gadget definition talk",
+				false,
+				false,
+				new ArrayList<String>()));		
 
 		c.setDefaultNamespace(c.getNamespace(0));
 		c.setTemplateNamespace(c.getNamespace(10));

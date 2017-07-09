@@ -50,7 +50,7 @@ public class DefaultConfigDeWp extends DefaultConfigWp {
 	{
 		c.addNamespace(new NamespaceImpl(
 				-2,
-				"Media",
+				"Medium",
 				"Media",
 				false,
 				false,
@@ -58,7 +58,7 @@ public class DefaultConfigDeWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				-1,
-				"Special",
+				"Spezial",
 				"Special",
 				false,
 				false,
@@ -99,7 +99,7 @@ public class DefaultConfigDeWp extends DefaultConfigWp {
 		c.addNamespace(new NamespaceImpl(
 				4,
 				"Wikipedia",
-				"Project",
+				"Wikipedia",
 				false,
 				false,
 				Arrays.asList("WP")));
@@ -107,7 +107,7 @@ public class DefaultConfigDeWp extends DefaultConfigWp {
 		c.addNamespace(new NamespaceImpl(
 				5,
 				"Wikipedia Diskussion",
-				"Project talk",
+				"Wikipedia talk",
 				false,
 				false,
 				Arrays.asList("WT")));
@@ -204,6 +204,62 @@ public class DefaultConfigDeWp extends DefaultConfigWp {
 				101,
 				"Portal Diskussion",
 				"Portal talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				828,
+				"Modul",
+				"Module",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				829,
+				"Modul Diskussion",
+				"Module talk",
+				false,
+				false,
+				new ArrayList<String>()));		
+
+		c.addNamespace(new NamespaceImpl(
+				2300,
+				"Gadget",
+				"Gadget",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2301,
+				"Gadget Diskussion",
+				"Gadget talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2302,
+				"Gadget-Definition",
+				"Gadget definition",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2303,
+				"Gadget-Definition Diskussion",
+				"Gadget definition talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2600,
+				"Thema",
+				"Theme",
 				false,
 				false,
 				new ArrayList<String>()));

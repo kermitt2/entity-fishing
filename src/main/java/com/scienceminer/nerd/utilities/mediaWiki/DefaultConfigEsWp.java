@@ -12,26 +12,26 @@ import org.sweble.wikitext.engine.utils.*;
 
 /**
  * Programatically generate a default configuration for that is similar to that
- * of the French Wikipedia.
+ * of the Spanish Wikipedia.
  */
-public class DefaultConfigFrWp extends DefaultConfigWp {
+public class DefaultConfigEsWp extends DefaultConfigWp {
 
 	public static WikiConfigImpl generate()
 	{
 		WikiConfigImpl c = new WikiConfigImpl();
-		new DefaultConfigFrWp().configureWiki(c);
+		new DefaultConfigEsWp().configureWiki(c);
 		return c;
 	}
 
 	protected void configureSiteProperties(WikiConfigImpl c)
 	{
-		c.setSiteName("My French Wiki");
+		c.setSiteName("My Spanish Wiki");
 
 		c.setWikiUrl("http://localhost/");
 
-		c.setContentLang("fr");
+		c.setContentLang("es");
 
-		c.setIwPrefix("fr");
+		c.setIwPrefix("es");
 	}
 
 	protected ParserConfigImpl configureParser(WikiConfigImpl c)
@@ -50,7 +50,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 	{
 		c.addNamespace(new NamespaceImpl(
 				-2,
-				"Media",
+				"Medio",
 				"Media",
 				false,
 				false,
@@ -58,7 +58,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				-1,
-				"Spécial",
+				"Especial",
 				"Special",
 				false,
 				false,
@@ -74,7 +74,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				1,
-				"Discussion",
+				"Discusión",
 				"Talk",
 				false,
 				false,
@@ -82,7 +82,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				2,
-				"Utilisateur",
+				"Usuario",
 				"User",
 				false,
 				false,
@@ -90,7 +90,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				3,
-				"Discussion utilisateur",
+				"Usuario discusión",
 				"User talk",
 				false,
 				false,
@@ -98,7 +98,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				4,
-				"Wikipédia",
+				"Wikipedia",
 				"Wikipedia",
 				false,
 				false,
@@ -106,7 +106,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				5,
-				"Discussion Wikipédia",
+				"Wikipedia discusión",
 				"Wikipedia talk",
 				false,
 				false,
@@ -114,7 +114,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				6,
-				"Fichier",
+				"Archivo",
 				"File",
 				false,
 				true,
@@ -122,7 +122,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				7,
-				"Discussion fichier",
+				"Archivo discusión",
 				"File talk",
 				false,
 				false,
@@ -138,7 +138,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				9,
-				"Discussion MediaWiki",
+				"MediaWiki discusión",
 				"MediaWiki talk",
 				false,
 				false,
@@ -146,7 +146,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				10,
-				"Modèle",
+				"Plantilla",
 				"Template",
 				false,
 				false,
@@ -154,7 +154,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				11,
-				"Discussion modèle",
+				"Plantilla discusión",
 				"Template talk",
 				false,
 				false,
@@ -162,7 +162,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				12,
-				"Aide",
+				"Ayuda",
 				"Help",
 				false,
 				false,
@@ -170,7 +170,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				13,
-				"Discussion aide",
+				"Ayuda discusión",
 				"Help talk",
 				false,
 				false,
@@ -178,7 +178,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				14,
-				"Catégorie",
+				"Categoría",
 				"Category",
 				false,
 				false,
@@ -186,7 +186,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				15,
-				"Discussion catégorie",
+				"Categoría discusión",
 				"Category talk",
 				false,
 				false,
@@ -194,7 +194,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				100,
-				"Portail",
+				"Portal",
 				"Portal",
 				false,
 				false,
@@ -202,7 +202,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				101,
-				"Discussion Portail",
+				"Portal Discusión",
 				"Portal talk",
 				false,
 				false,
@@ -210,7 +210,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				102,
-				"Projet",
+				"Wikiproyecto",
 				"Project",
 				false,
 				false,
@@ -218,7 +218,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				103,
-				"Discussion Projet",
+				"Wikiproyecto Discusión",
 				"Project talk",
 				false,
 				false,
@@ -226,23 +226,39 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				104,
-				"Référence",
-				"Reference",
+				"Anexo",
+				"Annex",
 				false,
 				false,
 				new ArrayList<String>()));
 
 		c.addNamespace(new NamespaceImpl(
 				105,
-				"Discussion Référence",
-				"Reference talk",
+				"Anexo Discusión",
+				"Annex talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				446,
+				"Programa educativo",
+				"Education Program",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				447,
+				"Programa educativo discusión",
+				"Education Program talk",
 				false,
 				false,
 				new ArrayList<String>()));
 
 		c.addNamespace(new NamespaceImpl(
 				828,
-				"Module",
+				"Módulo",
 				"Module",
 				false,
 				false,
@@ -250,19 +266,43 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 
 		c.addNamespace(new NamespaceImpl(
 				829,
-				"Discussion module",
+				"Módulo discusión",
 				"Module talk",
 				false,
 				false,
 				new ArrayList<String>()));
 
 		c.addNamespace(new NamespaceImpl(
-				2600,
-				"Sujet",
-				"Theme",
+				2300,
+				"Accesorio",
+				"Gadget",
 				false,
 				false,
 				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2301,
+				"Accesorio discusión",
+				"Gadget talk",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2302,
+				"Accesorio definición",
+				"Gadget definition",
+				false,
+				false,
+				new ArrayList<String>()));
+
+		c.addNamespace(new NamespaceImpl(
+				2303,
+				"Accesorio definición discusión",
+				"Gadget definition talk",
+				false,
+				false,
+				new ArrayList<String>()));		
 
 		c.setDefaultNamespace(c.getNamespace(0));
 		c.setTemplateNamespace(c.getNamespace(10));
