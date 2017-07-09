@@ -71,10 +71,6 @@ public class NerdEngine {
 	static public double minSenseProbability = 0.05;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
 
-	// values bellow are set in language config files
-	//public double minSelectorScore = 0.55; // threshold for selector pruning 
-	//public double minRankerScore = 0.1; // threshold for ranker entity pruning
-
 	public static NerdEngine getInstance() throws Exception {
 	    if (instance == null) {
 			getNewInstance();	        
