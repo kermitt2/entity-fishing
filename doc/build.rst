@@ -17,7 +17,7 @@ The path to grobid-home shall indicated in the file `src/main/resource/nerd.prop
 
 Install (N)ERD:
 ::
-   git clone https://github.com/kermitt2/nerd
+   $ git clone https://github.com/kermitt2/nerd
 
 
 Then install the compiled indexed data:
@@ -49,18 +49,18 @@ Then install the compiled indexed data:
 
 #. Unzip the 4 (or 5) archives files under ``data/wikipedia/``.
 
-    This will install three sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
+    This will install four sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
     The uncompressed data is about 34 GB.
 
 #. Build the project, under the NERD project repository.
    ::
-      mvn clean install
+      $ mvn clean install
 
    Some tests will be executed. If all tests are successful, you should be now ready to run the service.
 
 #. Run the service with Jetty:
    ::
-      mvn -Dmaven.test.skip=true jetty:run-war
+      $ mvn -Dmaven.test.skip=true jetty:run-war
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
