@@ -13,9 +13,7 @@ import org.junit.Test;
 
 import com.scienceminer.nerd.utilities.NerdProperties;
 
-/**
- *  
- */
+
 public class TestCustomisation {
 	
 	@Before

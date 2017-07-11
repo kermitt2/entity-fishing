@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
 import com.googlecode.clearnlp.component.AbstractComponent;
 import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
@@ -846,5 +847,137 @@ public class ProcessText {
     	}
 
     	return true;
+    }
+
+    /**
+    *  Detect possible explicit acronym introductions based on patterns
+    */
+   	public static Map<Entity, Entity> acronymCandidates(NerdQuery nerdQuery) {
+    	String text = nerdQuery.getText();
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+
+		if ( (text == null) || (text.length() == 0) ) {
+			LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
+			if ( (tokens != null) && (tokens.size() > 0) )
+				text = LayoutTokensUtil.toText(tokens);
+			else {
+				LOGGER.error("All possible content to process are empty - process stops.");
+				return null;
+			}
+		}
+
+		// source language 
+		String lang = null;
+		Language language = nerdQuery.getLanguage();
+		if (language != null) 
+			lang = language.getLang();
+		
+		if (lang == null) {
+			// the language recognition has not been done upstream of the call to this method, so
+			// let's do it
+			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
+			try {
+				language = languageUtilities.runLanguageId(text);
+				nerdQuery.setLanguage(language);
+				lang = language.getLang();
+				LOGGER.debug(">> identified language: " + lang);
+			}
+			catch(Exception e) {
+				LOGGER.debug("exception language identifier for: " + text);
+			}
+		}
+		
+		if (lang == null) {
+			// default - it might be better to raise an exception?
+			lang = "en";
+			language = new Language(lang, 1.0);
+		}
+		
+		if (CollectionUtils.isNotEmpty (tokens) ) 
+			return acronymCandidates(tokens);
+		else
+			return acronymCandidates(text, language);
+	}
+
+
+	public static Map<Entity, Entity> acronymCandidates(String text, Language language) {
+		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
+		return acronymCandidates(tokens);
+    }
+
+    public static Map<Entity, Entity> acronymCandidates(List<LayoutToken> tokens) {
+    	Map<Entity, Entity> acronyms = null;
+
+    	// detect possible acronym
+    	boolean openParenthesis = false;
+    	int posParenthesis = -1;
+    	int i =0;
+    	LayoutToken acronym = null;
+    	for(LayoutToken token : tokens) {
+    		if (token.getText() == null) {
+    			i++;
+    			continue;
+    		}
+			if (token.getText().equals("(")) {
+				openParenthesis = true;
+				posParenthesis = i;
+				acronym = null;
+			} else if (token.getText().equals(")")) {
+				openParenthesis = false;
+			} else if (openParenthesis) {
+				if (TextUtilities.isAllUpperCase(token.getText())) {
+					acronym = token;
+				} else {
+					acronym = null;
+				}
+			}
+
+			if ( (acronym != null) && (!openParenthesis) ) {
+				// check if this possible acronym matches an immediatly preceeding term
+				int j = posParenthesis;
+				int k = acronym.getText().length();
+				boolean stop = false;
+				while ( (k > 0) && (!stop) ) {
+					k--;
+					char c = acronym.getText().toLowerCase().charAt(k);
+					while(j>0) {
+						j--;
+						if (tokens.get(j) != null) {
+							String tok = tokens.get(j).getText();
+							if (tok.trim().length() == 0)
+								continue;
+							if (tok.toLowerCase().charAt(0) == c) {
+								if (k == 0) {
+									if (acronyms == null) 
+										acronyms = new HashMap<Entity,Entity>();
+									StringBuilder builder = new StringBuilder();
+									for(int l = j; l <posParenthesis; l++) {
+										builder.append(tokens.get(l));
+									}
+
+									Entity entityAcronym = new Entity(acronym.getText());
+									entityAcronym.setOffsetStart(acronym.getOffset());
+									entityAcronym.setOffsetEnd(acronym.getOffset() + acronym.getText().length());
+
+									Entity entityBase = new Entity(builder.toString());
+									entityBase.setOffsetStart(tokens.get(j).getOffset());
+									entityBase.setOffsetEnd(tokens.get(j).getOffset() + entityBase.getRawName().length());
+
+									acronyms.put(entityAcronym, entityBase); 
+									stop = true;
+								} else
+									break;
+							} else {
+								stop = true;
+							}
+						}
+					}
+				}
+				acronym = null;
+			} 
+    		i++;
+    	}
+
+    	return acronyms;
     }
 }

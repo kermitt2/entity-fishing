@@ -115,16 +115,13 @@ public class NerdSelector {
 
 		GenericSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
 		feature.nerd_score = nerd_score;
-		//feature.nerd_score = 1.0;
 		feature.prob_anchor_string = prob_anchor_string;
 		feature.prob_c = prob_c;
-		//feature.prob_c = 1.0;
 		feature.nb_tokens = nb_tokens;
 		feature.relatedness = relatedness;
 		feature.inContext = inContext;
 		feature.isNe = isNe;
 		feature.tf_idf = tf_idf;
-		//feature.isNe = false;
 		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
 	}
@@ -404,16 +401,12 @@ System.out.println(" - training " + article);
 
 					SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
 					feature.nerd_score = nerd_score;
-					//feature.nerd_score = 1.0;
-					//feature.prob_anchor_string = candidate.getLabel().getLinkProbability();
 					feature.prob_anchor_string = entity.getLinkProbability();
 					feature.prob_c = commonness;
-					//feature.prob_c = 1.0;
 					feature.nb_tokens = words.size();
 					feature.relatedness = related;
 					feature.inContext = inContext;
 					feature.isNe = isNe;
-					//feature.isNe = false;
 
 					int tf = TextUtilities.getOccCount(candidate.getLabel().getText(), contentString);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();

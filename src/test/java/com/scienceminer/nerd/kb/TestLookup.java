@@ -30,9 +30,7 @@ import javax.xml.parsers.SAXParserFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-/**
- *
- */
+
 public class TestLookup {
 	
 	private LowerKnowledgeBase wikipedia = null;

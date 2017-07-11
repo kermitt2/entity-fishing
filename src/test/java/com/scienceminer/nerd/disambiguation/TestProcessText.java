@@ -4,18 +4,22 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.data.Entity;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lang.Language;
+import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.hasSize;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-/**
- * @author Patrice Lopez
- */
 public class TestProcessText {
     private String testPath = null;
     private ProcessText processText = null;
@@ -68,8 +72,64 @@ public class TestProcessText {
         }
     }
 
+    @Test
+    public void testAcronymsStringAllUpper() {
+        String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
+
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        assertNotNull(acronyms);
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            Entity base = entry.getValue();
+            Entity acronym = entry.getKey();
+        }
+    }
+
+    @Test
+    public void testAcronymsTokensAllUpper() {
+        String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        assertNotNull(acronyms);
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            Entity base = entry.getValue();
+            Entity acronym = entry.getKey();
+
+
+        }
+    }
+
+    @Test
+    public void testAcronymsStringMixedCase() {
+        String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
+            "the pathogenesis of chronic obstructive pulmonary disease (COPD)";
+
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        assertNotNull(acronyms);
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            Entity base = entry.getValue();
+            Entity acronym = entry.getKey();
+
+        }
+    } 
+
+    @Test
+    public void testAcronymsTokensMixedCase() {
+        String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
+            "the pathogenesis of chronic obstructive pulmonary disease (COPD)";
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        assertNotNull(acronyms);
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            Entity base = entry.getValue();
+            Entity acronym = entry.getKey();
+        }
+    }
+
     /*@Test
     public void testNgram() {
+        if (processText == null) {
+            System.err.println("text processor was not properly initialised!");
+        }
         List<StringPos> ngrams = processText.ngrams("the house of card is here with us", 4);
 
         assertThat(ngrams, hasSize(26));
@@ -77,6 +137,9 @@ public class TestProcessText {
 
     @Test
     public void testProcessBrutal() {
+        if (processText == null) {
+            System.err.println("text processor was not properly initialised!");
+        }
         List<Entity> entities = processText.processBrutal("The Maven is here with us, beware not to be too aggressive.", "en");
 
         assertThat(entities, hasSize(5));

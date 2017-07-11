@@ -26,9 +26,7 @@ import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
-/**
- *  @author Patrice Lopez
- */
+
 public class TestWeightedTerm {
 	private String testPath = null;
 	
