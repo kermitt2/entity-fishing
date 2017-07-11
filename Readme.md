@@ -14,7 +14,7 @@
 * entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
 ![(N)ERD](doc/images/screen7.png)
 
-* search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
+* search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
 ![Search query disambiguation](doc/images/screen8.png)
 
 * weighted term vector disambiguation (a term being a phrase),

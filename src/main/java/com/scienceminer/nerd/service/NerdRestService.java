@@ -17,7 +17,6 @@ import java.io.InputStream;
 
 /**
  * RESTful service for the NERD system.
- *
  */
 @Singleton
 @Path(NerdPaths.ROOT)
@@ -138,7 +137,22 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_XML)
     public Response processQueryXml(@FormDataParam(QUERY) String query,
                                     @FormDataParam(FILE) InputStream inputStream) {
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(new Response.StatusType() {
+            @Override
+            public int getStatusCode() {
+                return 501;
+            }
+
+            @Override
+            public Response.Status.Family getFamily() {
+                return Response.Status.Family.SERVER_ERROR;
+            }
+
+            @Override
+            public String getReasonPhrase() {
+                return "Not implemented";
+            }
+        }).build();
     }*/
 
 

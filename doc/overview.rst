@@ -24,7 +24,7 @@ Tasks
 .. image:: images/screen7.png
    :alt: PDF query processing
 
-* search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
+* search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
 .. image:: images/screen8.png
    :alt: short text query processing
 

@@ -17,9 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- *
- */
 public class NerdRestProcessQuery {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
@@ -27,7 +24,7 @@ public class NerdRestProcessQuery {
 	/**
 	 * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
 	 *
-	 * @param the POJO query object
+	 * @param theQuery POJO query object
 	 * @return a response query object containing the structured representation of
 	 *         the enriched and disambiguated query.
 	 */
@@ -74,7 +71,7 @@ public class NerdRestProcessQuery {
 	/**
 	 * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
 	 *
-	 * @param the POJO query object
+	 * @param nerdQuery POJO query object
 	 * @return a response query object containing the structured representation of
 	 *         the enriched and disambiguated query.
 	 */

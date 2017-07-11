@@ -730,7 +730,7 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 			NerdEntity entity = entry.getKey();
 			if (cands == null)
 				continue;
-			// the arity measure bellow does not need to be precise
+			// the arity measure below does not need to be precise
 			int arity = entity.getNormalizedRawName().split("[ ,-.]").length;
 			for(NerdCandidate candidate : cands) {
 				double score = candidate.getNerdScore();
@@ -765,7 +765,7 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 				continue;
 			}
 
-			// the arity measure bellow does not need to be precise
+			// the arity measure below does not need to be precise
 			int arity1 = entity1.getNormalizedRawName().length() - entity1.getNormalizedRawName().replaceAll("\\s", "").length() + 1;
 //System.out.println("Position1 " + pos1 + " / arity1 : " + entity1.getNormalizedRawName() + ": " + arity1);
 			

@@ -16,14 +16,7 @@ import com.scienceminer.nerd.kb.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- */
 public class EvaluationUtil {
-
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationUtil.class);
 
 	public static LabelStat evaluate(ArticleTrainingSample testSet, List<LabelStat> stats) throws Exception {	
@@ -66,7 +59,7 @@ System.out.println("local f1: " + localStats.getF1Score());*/
 			
 			if (localStats.getPrecision() == 1.0) 
 				perfectPrecision++;
-			if (localStats.getRecall() == 1.0) 
+			if (localStats.getRecall() == 1.0)
 				perfectRecall++;
 
 			i++;

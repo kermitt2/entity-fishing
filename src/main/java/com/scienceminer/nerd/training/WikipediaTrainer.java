@@ -1,26 +1,22 @@
 package com.scienceminer.nerd.training;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
-
-import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.evaluation.*;
+import com.scienceminer.nerd.disambiguation.NerdEngine;
+import com.scienceminer.nerd.disambiguation.NerdRanker;
+import com.scienceminer.nerd.disambiguation.NerdSelector;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import org.grobid.trainer.LabelStat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.grobid.trainer.LabelStat;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as 
- * traininig data.
+ * Train and evaluate a NerdRanker and a NerdSelector using Wikipedia articles as training data.
  */
 public class WikipediaTrainer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WikipediaTrainer.class);
