@@ -24,7 +24,7 @@ Tasks
 .. image:: images/screen7.png
    :alt: PDF query processing
 
-* search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
+* search query disambiguation (the *short text* mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
 .. image:: images/screen8.png
    :alt: short text query processing
 
@@ -44,7 +44,7 @@ Supervised machine learning is used for the disambiguation, based on Random Fore
 
 The API also offers the possibility to apply filters based on Wikipedia properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 27M entities and 154M statements present in Wikipedia. 
 
-The tool currently supports English, German and French languages (more to come!). For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A _nbest_ mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores. 
+The tool currently supports English, German and French languages (more to come!). For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A *nbest* mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores.
 
 The tool is developed in Java and has been designed for fast processing (at least for a NERD system, 500-1000 words per second on a medium-profile linux server single thread or one PDF page of a scientific articles in 1-2 seconds), with limited memory (at least for a NERD system, here 2GB of RAM) and to offer close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-5 milliseconds. (N)ERD uses the very fast `SMILE ML <https://haifengl.github.io/smile/>`_ library for machine learning and a `JNI integration of LMDB <https://github.com/deephacks/lmdbjni>`_ as embedded database. 
 
