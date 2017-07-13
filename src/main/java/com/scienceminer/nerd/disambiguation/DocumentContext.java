@@ -18,18 +18,19 @@ import com.fasterxml.jackson.core.io.*;
 
 /**
  * This class represents a context in relation to a document. 
- * 
+ * The document context is enriched with lexical and statistical information
+ * applying to the document.
  *
  */
 public class DocumentContext extends NerdContext {
 	
 	private static int MAX_SENSES = 10;
 
-	// equivalent mentions (e.g. acronyms) valid for the document only
-	private TreeMap<String, String> localMentions = null;
+	// strictly equivalent mentions (e.g. acronyms) valid for the document only
+	private Map<Entity, Entity> localMentions = null; 
 
-	// local sense statistics
-	// .. 
+	// local sense statistics for document-level reimforcement
+	// 
 
 	public DocumentContext() {
 		super();
@@ -77,6 +78,20 @@ public class DocumentContext extends NerdContext {
 			contextArticlesIds.add(entity.getWikipediaExternalRef());
 			nb++;
 		}
+	}
+
+	public void setLocalMentions(Map<Entity, Entity> mentions) {
+		this.localMentions = mentions;
+	}
+
+	public Map<Entity, Entity> getLocalMentions() {
+		return this.localMentions;
+	}
+
+	public void putLocalMention(Entity variant, Entity base) {
+		if (this.localMentions == null)
+			localMentions = new HashMap<Entity, Entity>();
+		localMentions.put(variant, base);	
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public class ProcessText {
 
 	private Stopwords stopwords = Stopwords.getInstance();
 	
-	public static final int NGRAM_LENGTH = 5;
+	public static final int NGRAM_LENGTH = 6;
 
 	// default indo-european delimiters, should be moved to language specific analysers
 	private static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
@@ -852,7 +852,7 @@ public class ProcessText {
     /**
     *  Detect possible explicit acronym introductions based on patterns
     */
-   	public static Map<Entity, Entity> acronymCandidates(NerdQuery nerdQuery) {
+   	public static Map<OffsetPosition, Entity> acronymCandidates(NerdQuery nerdQuery) {
     	String text = nerdQuery.getText();
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
@@ -900,13 +900,13 @@ public class ProcessText {
 	}
 
 
-	public static Map<Entity, Entity> acronymCandidates(String text, Language language) {
+	public static Map<OffsetPosition, Entity> acronymCandidates(String text, Language language) {
 		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
 		return acronymCandidates(tokens);
     }
 
-    public static Map<Entity, Entity> acronymCandidates(List<LayoutToken> tokens) {
-    	Map<Entity, Entity> acronyms = null;
+    public static Map<OffsetPosition, Entity> acronymCandidates(List<LayoutToken> tokens) {
+    	Map<OffsetPosition, Entity> acronyms = null;
 
     	// detect possible acronym
     	boolean openParenthesis = false;
@@ -940,7 +940,7 @@ public class ProcessText {
 				while ( (k > 0) && (!stop) ) {
 					k--;
 					char c = acronym.getText().toLowerCase().charAt(k);
-					while(j>0) {
+					while((j>0) && (!stop)) {
 						j--;
 						if (tokens.get(j) != null) {
 							String tok = tokens.get(j).getText();
@@ -949,21 +949,21 @@ public class ProcessText {
 							if (tok.toLowerCase().charAt(0) == c) {
 								if (k == 0) {
 									if (acronyms == null) 
-										acronyms = new HashMap<Entity,Entity>();
+										acronyms = new HashMap<OffsetPosition,Entity>();
 									StringBuilder builder = new StringBuilder();
-									for(int l = j; l <posParenthesis; l++) {
+									for(int l = j; l < posParenthesis; l++) {
 										builder.append(tokens.get(l));
 									}
 
-									Entity entityAcronym = new Entity(acronym.getText());
-									entityAcronym.setOffsetStart(acronym.getOffset());
-									entityAcronym.setOffsetEnd(acronym.getOffset() + acronym.getText().length());
+									OffsetPosition offsetAcronym = new OffsetPosition();
+									offsetAcronym.start = acronym.getOffset();
+									offsetAcronym.end = acronym.getOffset() + acronym.getText().length();
 
-									Entity entityBase = new Entity(builder.toString());
+									Entity entityBase = new Entity(builder.toString().trim());
 									entityBase.setOffsetStart(tokens.get(j).getOffset());
 									entityBase.setOffsetEnd(tokens.get(j).getOffset() + entityBase.getRawName().length());
 
-									acronyms.put(entityAcronym, entityBase); 
+									acronyms.put(offsetAcronym, entityBase); 
 									stop = true;
 								} else
 									break;
@@ -974,6 +974,7 @@ public class ProcessText {
 					}
 				}
 				acronym = null;
+				posParenthesis = -1;
 			} 
     		i++;
     	}

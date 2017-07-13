@@ -5,6 +5,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.utilities.OffsetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class NerdRestProcessQuery {
@@ -144,6 +146,19 @@ public class NerdRestProcessQuery {
 					}
 				}
 			}
+
+			// inject explicit acronyms
+			/*Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(nerdQuery);
+        	if (acronyms != null) {
+				for(Entity entity : entities) {
+					OffsetPosition offsetPos = new OffsetPosition(entity.getOffsetStart(), entity.getOffsetEnd());
+					if (acronyms.get(offsetPos) != null) {
+						Entity base = acronyms.get(offsetPos);
+	System.out.println("acronym: " + offsetPos.start + " " + offsetPos.end + "/ base: " + base.getRawName());
+
+					}
+				}
+			}*/
 
 			// we keep only entities not conflicting with the ones already present in the query
 			List<NerdEntity> newEntities = new ArrayList<NerdEntity>();

@@ -4,6 +4,7 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.data.Entity;
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lang.Language;
 import org.grobid.core.analyzers.GrobidAnalyzer;
@@ -73,55 +74,72 @@ public class TestProcessText {
     }
 
     @Test
-    public void testAcronymsStringAllUpper() {
+    public void testAcronymsStringAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
 
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+            OffsetPosition acronym = entry.getKey();
+            assertEquals(input.substring(acronym.start, acronym.end).trim(), "PGM");
+            assertEquals(base.getRawName(), "probabilistic graphical model");
         }
     }
 
     @Test
-    public void testAcronymsTokensAllUpper() {
+    public void testAcronymsTokensAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+            OffsetPosition acronym = entry.getKey();
+            assertEquals(input.substring(acronym.start, acronym.end).trim(), "PGM");
+            assertEquals(base.getRawName(), "probabilistic graphical model");
 
-
+            //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
         }
     }
 
     @Test
     public void testAcronymsStringMixedCase() {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
-            "the pathogenesis of chronic obstructive pulmonary disease (COPD)";
+            "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
 
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
-
+            OffsetPosition acronym = entry.getKey();
+//System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
+            if (input.substring(acronym.start, acronym.end).trim().equals("CS")) {
+                assertEquals(base.getRawName(), "Cigarette smoke");
+            } else {
+                assertEquals(input.substring(acronym.start, acronym.end).trim(), "COPD");
+                assertEquals(base.getRawName(), "chronic obstructive pulmonary disease");
+            }
         }
     } 
 
     @Test
     public void testAcronymsTokensMixedCase() {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
-            "the pathogenesis of chronic obstructive pulmonary disease (COPD)";
+            "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+            OffsetPosition acronym = entry.getKey();
+//System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
+            if (input.substring(acronym.start, acronym.end).trim().equals("CS")) {
+                assertEquals(base.getRawName(), "Cigarette smoke");
+            } else {
+                assertEquals(input.substring(acronym.start, acronym.end).trim(), "COPD");
+                assertEquals(base.getRawName(), "chronic obstructive pulmonary disease");
+            }
         }
     }
 
