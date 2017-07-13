@@ -3,6 +3,7 @@
 <!-- [![Build Status](https://travis-ci.org/kermitt2/nerd.svg?branch=master)](https://travis-ci.org/kermitt2/nerd) -->
 <!-- [![Coverage Status](https://coveralls.io/repos/kermitt2/nerd/badge.svg)](https://coveralls.io/r/kermitt2/nerd) -->
 <!-- [![Docker Status](https://images.microbadger.com/badges/version/lfoppiano/grobid.svg)](https://hub.docker.com/r/lfoppiano/ grobid/ "Latest Docker HUB image") -->
+[![Dependency Status](https://www.versioneye.com/user/projects/5954c15f6725bd005fa19832/badge.svg)](https://www.versioneye.com/user/projects/5954c15f6725bd005fa19832)
 
 # (N)ERD
 
