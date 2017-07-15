@@ -852,7 +852,7 @@ public class ProcessText {
     /**
     *  Detect possible explicit acronym introductions based on patterns
     */
-   	public static Map<OffsetPosition, Entity> acronymCandidates(NerdQuery nerdQuery) {
+   	public static Map<Entity, Entity> acronymCandidates(NerdQuery nerdQuery) {
     	String text = nerdQuery.getText();
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
@@ -900,13 +900,13 @@ public class ProcessText {
 	}
 
 
-	public static Map<OffsetPosition, Entity> acronymCandidates(String text, Language language) {
+	public static Map<Entity, Entity> acronymCandidates(String text, Language language) {
 		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
 		return acronymCandidates(tokens);
     }
 
-    public static Map<OffsetPosition, Entity> acronymCandidates(List<LayoutToken> tokens) {
-    	Map<OffsetPosition, Entity> acronyms = null;
+    public static Map<Entity, Entity> acronymCandidates(List<LayoutToken> tokens) {
+    	Map<Entity, Entity> acronyms = null;
 
     	// detect possible acronym
     	boolean openParenthesis = false;
@@ -949,21 +949,24 @@ public class ProcessText {
 							if (tok.toLowerCase().charAt(0) == c) {
 								if (k == 0) {
 									if (acronyms == null) 
-										acronyms = new HashMap<OffsetPosition,Entity>();
+										acronyms = new HashMap<Entity,Entity>();
 									StringBuilder builder = new StringBuilder();
 									for(int l = j; l < posParenthesis; l++) {
 										builder.append(tokens.get(l));
 									}
 
-									OffsetPosition offsetAcronym = new OffsetPosition();
-									offsetAcronym.start = acronym.getOffset();
-									offsetAcronym.end = acronym.getOffset() + acronym.getText().length();
+									Entity entityAcronym = new Entity();
+									entityAcronym.setRawName(acronym.getText());
+									entityAcronym.setNormalisedName(builder.toString().trim());
+									entityAcronym.setOffsetStart(acronym.getOffset());
+									entityAcronym.setOffsetEnd(acronym.getOffset() + acronym.getText().length());
+									entityAcronym.setType(null);
 
 									Entity entityBase = new Entity(builder.toString().trim());
 									entityBase.setOffsetStart(tokens.get(j).getOffset());
 									entityBase.setOffsetEnd(tokens.get(j).getOffset() + entityBase.getRawName().length());
 
-									acronyms.put(offsetAcronym, entityBase); 
+									acronyms.put(entityAcronym, entityBase); 
 									stop = true;
 								} else
 									break;
@@ -980,5 +983,43 @@ public class ProcessText {
     	}
 
     	return acronyms;
+    }
+    
+    /**
+     * Add entities corresponding to acronym defintions to a query
+     */
+    public static List<Entity> propagateAcronyms(NerdQuery nerdQuery, Map<Entity, Entity> acronyms) {
+    	List<Entity> entities = null;
+    	String text = nerdQuery.getText();
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+
+		if ( (text == null) || (text.length() == 0) ) {
+			LOGGER.info("The length of the text to be processed is 0. Look at the layout tokens.");
+			if ( (tokens != null) && (tokens.size() > 0) )
+				text = LayoutTokensUtil.toText(tokens);
+			else {
+				LOGGER.error("All possible content to process are empty - process stops.");
+				return null;
+			}
+		}
+
+		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            Entity acronym = entry.getKey();
+            Entity base = entry.getValue();
+			Pattern linkPattern = Pattern.compile(acronym.getRawName()); 
+			Matcher linkMatcher = linkPattern.matcher(text);
+			while (linkMatcher.find()) {			
+				String entityText = text.substring(linkMatcher.start(), linkMatcher.end());
+				Entity entity = new Entity(entityText);
+				entity.setNormalisedName(base.getRawName());
+				entity.setOffsetStart(linkMatcher.start());
+				entity.setOffsetEnd(linkMatcher.end());
+				entity.setType(null);
+				if (entities == null)
+					entities = new ArrayList<Entity>();
+				entities.add(entity);
+			}
+		}
+		return entities;
     }
 }

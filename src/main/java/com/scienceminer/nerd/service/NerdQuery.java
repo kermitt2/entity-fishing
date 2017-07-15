@@ -220,10 +220,10 @@ public class NerdQuery {
     public void setAllEntities(List<Entity> nerEntities) {
 		if (nerEntities != null) {
 			this.entities = new ArrayList<NerdEntity>();
-        for (Entity entity : nerEntities) {
-            this.entities.add(new NerdEntity(entity));
+            for (Entity entity : nerEntities) {
+                this.entities.add(new NerdEntity(entity));
+            }
         }
-    }
 	}
 
     public void setEntities(List<NerdEntity> entities) {

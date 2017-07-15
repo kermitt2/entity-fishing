@@ -366,7 +366,8 @@ for(NerdCandidate cand : cands) {
 				}
 				
 				if (!bestLabel.exists()) {
-//System.out.println("No concepts found for '" + normalizedEntity + "'");
+//if (entity.getIsAcronym()) 
+//System.out.println("No concepts found for '" + normalizedEntity + "' " + " / " + entity.getRawName());
 					//if (strict)
 					if (entity.getType() != null) {
 						result.put(entity, candidates);
@@ -374,7 +375,8 @@ for(NerdCandidate cand : cands) {
 					}
 				}
 				else {
-//System.out.println("Concept(s) found for '" + normalizedEntity + "'");
+//if (entity.getIsAcronym()) 
+//System.out.println("Concept(s) found for '" + normalizedEntity + "' " + " / " + entity.getRawName());
 					entity.setLinkProbability(bestLabel.getLinkProbability());
 //System.out.println("LinkProbability for the string '" + normalizedEntity + "': " + entity.getLinkProbability());
 					Label.Sense[] senses = bestLabel.getSenses();
@@ -653,7 +655,7 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 				toRemove.add(entity);
 			}*/
 			// variant: prune named entities less aggressively
-			if ( (entity.getNerdScore() < threshold) && (entity.getType() == null) ) {
+			if ( (entity.getNerdScore() < threshold) && ( (entity.getType() == null) || entity.getIsAcronym() ) ) {
 				toRemove.add(entity);
 			} else if ( (entity.getNerdScore() < threshold/2) && (entity.getType() != null) ) {
 				toRemove.add(entity);

@@ -124,7 +124,6 @@ public class NerdRestProcessQuery {
 				originalEntities = nerdQuery.getEntities();
 			}
 
-			// ner
 			ProcessText processText = ProcessText.getInstance();
 			Integer[] processSentence =  nerdQuery.getProcessSentence();
 			List<Sentence> sentences = nerdQuery.getSentences();
@@ -134,6 +133,7 @@ public class NerdRestProcessQuery {
 				nerdQuery.setSentences(sentences);
 			}
 
+			// ner
 			List<Entity> entities = processText.process(nerdQuery);
 			if (!nerdQuery.getOnlyNER()) {
 				List<Entity> entities2 = processText.processBrutal(nerdQuery);
@@ -148,17 +148,32 @@ public class NerdRestProcessQuery {
 			}
 
 			// inject explicit acronyms
-			/*Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(nerdQuery);
+			Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(nerdQuery);
         	if (acronyms != null) {
-				for(Entity entity : entities) {
-					OffsetPosition offsetPos = new OffsetPosition(entity.getOffsetStart(), entity.getOffsetEnd());
-					if (acronyms.get(offsetPos) != null) {
-						Entity base = acronyms.get(offsetPos);
-	System.out.println("acronym: " + offsetPos.start + " " + offsetPos.end + "/ base: " + base.getRawName());
+        		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            		Entity base = entry.getValue();
+            		Entity acronym = entry.getKey();
+System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
+					
+					Entity localEntity = new Entity();
+					localEntity.setRawName(acronym.getRawName());
+					localEntity.setOffsetStart(acronym.getOffsetStart());
+					localEntity.setOffsetEnd(acronym.getOffsetEnd());
+					localEntity.setIsAcronym(true);
+					localEntity.setNormalisedName(base.getRawName());
 
+					entities.add(localEntity);
+				}
+
+				// propagate back mentions
+				List<Entity> acronymEntities = ProcessText.propagateAcronyms(nerdQuery, acronyms);
+				if (acronymEntities != null) {
+					for(Entity entity : acronymEntities) {
+						//if (!entities.contains(entity))	
+							entities.add(entity);
 					}
 				}
-			}*/
+			}
 
 			// we keep only entities not conflicting with the ones already present in the query
 			List<NerdEntity> newEntities = new ArrayList<NerdEntity>();

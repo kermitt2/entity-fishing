@@ -73,7 +73,6 @@ public class NerdRanker {
 				
 		xstream = new XStream();
 		arffParser = new ArffParser();
-		//GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
 		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
@@ -103,14 +102,11 @@ public class NerdRanker {
 				MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 		}
 
-		//GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
 		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 		//feature.prob_c = commonness;
 		feature.prob_c = 1.0;
 		feature.relatedness = relatedness;
-		//feature.relatedness = 1.0;
 		feature.context_quality = quality; 
-		//feature.context_quality = 1.0;
 		//feature.dice_coef = dice_coef;
 		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
@@ -175,7 +171,6 @@ public class NerdRanker {
 
 	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
 		StringBuilder arffBuilder = new StringBuilder();
-		//GenericRankerFeatureVector feat = new MilneWittenFeatureVector();
 		GenericRankerFeatureVector feat = new SimpleNerdFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		int nbArticle = 0;
@@ -355,14 +350,11 @@ System.out.println("nb article processed: " + nbArticle);
 					double related = relatedness.getRelatednessTo(candidate, context, lang);
 //System.out.println("relatedness: " + related);
 
-					//GenericRankerFeatureVector feature = new MilneWittenFeatureVector();
 					GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 					//feature.prob_c = commonness;
 					feature.prob_c = 1.0;
 					feature.relatedness = related;
-					//feature.relatedness = 1.0;
 					feature.context_quality = quality;
-					//feature.context_quality = 1.0;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					arffBuilder.append(feature.printVector()).append("\n");

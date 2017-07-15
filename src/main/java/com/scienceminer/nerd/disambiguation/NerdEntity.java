@@ -51,7 +51,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	// mention form of the entity, with soft normalization: replacing \n per space, 
 	// replacing sequence of space by a unique space
-	// this is usually this surface form that should be used
+	// this is usually this surface form that should be used, in particular for
+	// acronyms where this field capture the expended form
 	private String normalizedRawName = null;
 	
 	// preferred/normalised name of the entity
@@ -114,6 +115,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	private List<com.scienceminer.nerd.kb.Category> categories = null;
 	
 	public boolean isSubTerm = false;
+	public boolean isAcronym = false;
 	
 	// to carry statistics/priors
 	// conditional probability of the concept given the string
@@ -145,7 +147,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	public NerdEntity(Entity entity) {
 		rawName = entity.getRawName();
-		if (rawName != null) {
+		if (entity.getNormalisedName() != null) 
+			this.normalizedRawName = entity.getNormalisedName();
+		else if (rawName != null) {
 	        this.normalizedRawName = simpleStringNormalization(rawName);
 		}
 		preferredTerm = entity.getNormalisedName();
@@ -158,6 +162,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		ner_conf = entity.getConf();
 		sense = entity.getSense();
 		boundingBoxes = entity.getBoundingBoxes();
+		isAcronym = entity.getIsAcronym();
 		switch(entity.getOrigin()) {
 			case GROBID : origin = Origin.GROBID;
 						break;
@@ -185,6 +190,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		sense = entity.getSense();
 		origin = entity.getOrigin();
 		domains = entity.domains;
+		isAcronym = entity.getIsAcronym();
 		//freebaseTypes = entity.freebaseTypes;
 		lang = entity.getLang();
 	}
@@ -296,6 +302,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	public void setOrigin(Origin origin) {
 		this.origin = origin;
+	}
+
+	public boolean getIsAcronym() {
+		return this.isAcronym;
+	}
+
+	public void setIsAcronym(boolean acronym) {
+		this.isAcronym = acronym;
 	}
 
 	public List<Statement> getStatements() {
@@ -670,6 +684,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		
 		if (isSubTerm)
 			buffer.append("isSubTerm\t");
+
+		if (isAcronym)
+			buffer.append("isAcronym\t");
 		
 		//if (nerdScore > 0.0) 
 		{

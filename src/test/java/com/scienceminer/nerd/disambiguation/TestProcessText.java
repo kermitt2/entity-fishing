@@ -77,12 +77,12 @@ public class TestProcessText {
     public void testAcronymsStringAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
 
-        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
-        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            OffsetPosition acronym = entry.getKey();
-            assertEquals(input.substring(acronym.start, acronym.end).trim(), "PGM");
+            Entity acronym = entry.getKey();
+            assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "PGM");
             assertEquals(base.getRawName(), "probabilistic graphical model");
         }
     }
@@ -91,12 +91,12 @@ public class TestProcessText {
     public void testAcronymsTokensAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
         assertNotNull(acronyms);
-        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            OffsetPosition acronym = entry.getKey();
-            assertEquals(input.substring(acronym.start, acronym.end).trim(), "PGM");
+            Entity acronym = entry.getKey();
+            assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "PGM");
             assertEquals(base.getRawName(), "probabilistic graphical model");
 
             //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
@@ -108,16 +108,16 @@ public class TestProcessText {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
             "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
 
-        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
-        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            OffsetPosition acronym = entry.getKey();
+            Entity acronym = entry.getKey();
 //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
-            if (input.substring(acronym.start, acronym.end).trim().equals("CS")) {
+            if (input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim().equals("CS")) {
                 assertEquals(base.getRawName(), "Cigarette smoke");
             } else {
-                assertEquals(input.substring(acronym.start, acronym.end).trim(), "COPD");
+                assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "COPD");
                 assertEquals(base.getRawName(), "chronic obstructive pulmonary disease");
             }
         }
@@ -128,16 +128,16 @@ public class TestProcessText {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
             "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<OffsetPosition, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
         assertNotNull(acronyms);
-        for (Map.Entry<OffsetPosition, Entity> entry : acronyms.entrySet()) {
+        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity base = entry.getValue();
-            OffsetPosition acronym = entry.getKey();
+            Entity acronym = entry.getKey();
 //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
-            if (input.substring(acronym.start, acronym.end).trim().equals("CS")) {
+            if (input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim().equals("CS")) {
                 assertEquals(base.getRawName(), "Cigarette smoke");
             } else {
-                assertEquals(input.substring(acronym.start, acronym.end).trim(), "COPD");
+                assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "COPD");
                 assertEquals(base.getRawName(), "chronic obstructive pulmonary disease");
             }
         }
