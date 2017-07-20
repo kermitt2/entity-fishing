@@ -1462,6 +1462,32 @@ System.out.println("Merging...");
 	}	
 	
 	/**
+	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
+	 *  document.
+	 */
+	public void reconciliateAcronyms(NerdQuery nerdQuery, Map<Entity, Entity> acronyms) {
+		List<NerdEntity> entities = nerdQuery.getEntities();
+
+		// gives for a given base all the acronyms mentions
+		Map<Entity, List<Entity>> reverseAcronyms = new HashMap<Entity, List<Entity>>();
+
+		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+            Entity acronym = entry.getKey();
+            Entity base = entry.getValue();
+
+            if (reverseAcronyms.get(base) == null) {
+            	List<Entity> acros = new ArrayList<Entity>();
+            	acros.add(acronym);
+            	reverseAcronyms.put(base, acros);
+            } else {
+            	List<Entity> acros = reverseAcronyms.get(base);
+            	acros.add(acronym);
+            	reverseAcronyms.replace(base, acros);
+            }
+        }
+	}
+
+	/**
 	 *  Return the Wikipedia categories of the specified article
 	 */
 	/*public List<Category> getParentCategories(String articleID, String lang) {

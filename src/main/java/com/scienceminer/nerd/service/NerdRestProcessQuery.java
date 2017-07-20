@@ -251,6 +251,12 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 				}
 			}
 
+			// reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
+			// document
+			if (acronyms != null) {
+				NerdEngine.getInstance().reconciliateAcronyms(nerdQuery, acronyms);
+			}
+			
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
 			System.out.println("runtime: " + (end - start));

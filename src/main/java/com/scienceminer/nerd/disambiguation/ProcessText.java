@@ -1018,6 +1018,7 @@ public class ProcessText {
 				if (entities == null)
 					entities = new ArrayList<Entity>();
 				entities.add(entity);
+				//acronyms.put(entity, base);
 			}
 		}
 		return entities;

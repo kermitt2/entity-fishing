@@ -63,7 +63,7 @@ POST /disambiguate
  required    name     content-type value      description
 ==========  =======  =====================  =====================================
  required    query    application/json       Query to be processed in JSON UTF-8
- required    file     multipart/form-data    PDF file (as multipart)
+ optional    file     multipart/form-data    PDF file (as multipart)
 ==========  =======  =====================  =====================================
 
 (2) Request header
