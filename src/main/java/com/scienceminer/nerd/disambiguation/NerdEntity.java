@@ -767,8 +767,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append("]");
 		}
 
-		buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
-		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");
+		/*buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
+		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");*/
+
+		buffer.append(", \"nerd_score\":" + TextUtilities.formatFourDecimals(nerdScore));
+		buffer.append(", \"nerd_selection_score\":" + TextUtilities.formatFourDecimals(selectionScore));
+
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");
@@ -791,7 +795,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 
 		if (wikipediaExternalRef != -1)
-			buffer.append(", \"wikipediaExternalRef\" : \"" + wikipediaExternalRef + "\"");
+			buffer.append(", \"wikipediaExternalRef\":" + wikipediaExternalRef);
 
 		if (wikidataId != null)
 			buffer.append(", \"wikidataId\" : \"" + wikidataId + "\"");
@@ -941,8 +945,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append("]");
 		}
 
-		buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
-		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");
+		buffer.append(", \"nerd_score\": " + TextUtilities.formatFourDecimals(nerdScore));
+		buffer.append(", \"nerd_selection_score\": " + TextUtilities.formatFourDecimals(selectionScore));
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");
@@ -965,7 +969,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 
 		if (wikipediaExternalRef != -1)
-			buffer.append(", \"wikipediaExternalRef\" : \"" + wikipediaExternalRef + "\"");
+			buffer.append(", \"wikipediaExternalRef\": " + wikipediaExternalRef);
 
 		if (wikidataId != null)
 			buffer.append(", \"wikidataId\" : \"" + wikidataId + "\"");
