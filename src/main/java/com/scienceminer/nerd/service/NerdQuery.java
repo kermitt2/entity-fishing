@@ -118,6 +118,9 @@ public class NerdQuery {
 	// only the entities fullfilling the constraints expressed in the filter will be 
 	// disambiguated and outputed
 	private Filter filter = null;
+ 
+    // indicate if the full description of the entities should be included in the result
+    private boolean full = false;
 
 	public NerdQuery() {
 	}
@@ -363,6 +366,14 @@ public class NerdQuery {
         this.filter = filter;
     }
 
+    public boolean getFull() {
+        return this.full;
+    }
+
+    public void setFull(boolean full) {
+        this.full = full;
+    }
+
     public String toJSON() {
         ObjectMapper mapper = new ObjectMapper();
         String json = null;
@@ -375,7 +386,7 @@ public class NerdQuery {
         return json;
     }
 
-    public String toJSONFullClean() {
+    /*public String toJSONFullClean() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
@@ -405,11 +416,17 @@ public class NerdQuery {
             String output = new String(encoded);
             buffer.append(", \"text\": \"" + output + "\"");
             if (CollectionUtils.isNotEmpty(sentences)) {
-                buffer.append(Sentence.listToJSON(sentences));
+                buffer.append(",").append(Sentence.listToJSON(sentences));
             }
         }
 
-        if ((termVector != null) && (termVector.size() > 0)) {
+        if (shortText != null) {
+            byte[] encoded = encoder.quoteAsUTF8(shortText);
+            String output = new String(encoded);
+            buffer.append(", \"shortText\": \"" + output + "\"");
+        }
+
+        if (CollectionUtils.isNotEmpty(termVector)) {
             buffer.append(", \"termVector\": [ ");
             boolean begin = true;
             for (WeightedTerm term : termVector) {
@@ -446,7 +463,7 @@ public class NerdQuery {
             buffer.append("]");
         }
 
-        if ((entities != null) && (entities.size() > 0)) {
+        if (CollectionUtils.isNotEmpty(entities)) {
             buffer.append(", \"entities\": [");
             boolean first = true;
             for (NerdEntity entity : entities) {
@@ -469,12 +486,32 @@ public class NerdQuery {
             }
             buffer.append("]");
         }
+
+        // possible page information
+        // page height and width
+        if (doc != null) {
+            List<Page> pages = doc.getPages();
+            boolean first = true;
+            if (pages != null) {
+                buffer.append(", \"pages\":[");
+                for (Page page : pages) {
+                    if (first)
+                        first = false;
+                    else
+                        buffer.append(", ");
+                    buffer.append("{\"page_height\":" + page.getHeight());
+                    buffer.append(", \"page_width\":" + page.getWidth() + "}");
+                }
+                buffer.append("]");
+            }
+        }
+
         buffer.append("}");
 
         return buffer.toString();
-    }
+    }*/
 
-    public String toJSONCompactClean(Document doc) {
+    public String toJSONClean(Document doc) {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
@@ -570,7 +607,10 @@ public class NerdQuery {
                     first = false;
                 else
                     buffer.append(", ");
-                buffer.append(entity.toJsonCompact());
+                if (this.full)
+                    buffer.append(entity.toJsonFull());
+                else   
+                    buffer.append(entity.toJsonCompact());
             }
             buffer.append("]");
         }

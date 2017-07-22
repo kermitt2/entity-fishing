@@ -144,8 +144,8 @@ public class Statement implements Serializable {
                         }
                     }
                 }
-                if (!done)
-                    sb.append(", \"value\" : \"" + value + "\"");  
+                /*if (!done)
+                    sb.append(", \"value\" : \"" + value + "\"");*/  
             } else
                 sb.append(", \"value\" : " + value);   
         }

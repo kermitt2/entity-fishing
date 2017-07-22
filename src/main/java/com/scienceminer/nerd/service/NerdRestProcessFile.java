@@ -364,7 +364,7 @@ public class NerdRestProcessFile {
 				LOGGER.info("runtime: " + (end - start));
 				Collections.sort(nerdQuery.getEntities());
 
-				String json = nerdQuery.toJSONCompactClean(doc);
+				String json = nerdQuery.toJSONClean(doc);
 
 
 				// TBD: output in the resulting json also page info from the doc object as in GROBID

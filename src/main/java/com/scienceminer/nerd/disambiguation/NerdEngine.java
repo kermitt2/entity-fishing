@@ -192,10 +192,10 @@ for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	nbEntities += 1;
 	if (cands != null)
 		nbCandidates += cands.size();
-	//System.out.println(entity.toString());
-	/*for(NerdCandidate cand : cands) {
+	/*System.out.println(entity.toString());
+	for(NerdCandidate cand : cands) {
 		System.out.println(cand.toString());
-		}*/
+	}*/
 }
 System.out.println("total number of entities: " + nbEntities);
 System.out.println("total number of candidates: " + nbCandidates);
@@ -205,9 +205,11 @@ System.out.println("total number of candidates: " + nbCandidates);
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
+System.out.println("Surface: " + entity.getRawName());	
 for(NerdCandidate cand : cands) {
 	System.out.println("rank: " + cand.toString());
 }
+System.out.println("--");
 }*/
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();

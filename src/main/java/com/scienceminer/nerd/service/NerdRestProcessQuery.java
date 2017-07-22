@@ -262,7 +262,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 			System.out.println("runtime: " + (end - start));
 
 			Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean(null);
+			String json = nerdQuery.toJSONClean(null);
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -345,14 +345,14 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 			// add the NerdEntity objects to the WeightedTerm object if disambiguation
 			// is successful
 			disambiguator.disambiguateWeightedTerms(nerdQuery);
-//System.out.println(nerdQuery.toJSONCompactClean(null));	
+//System.out.println(nerdQuery.toJSONClean(null));	
 			nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
 
 			long end = System.currentTimeMillis();
 			nerdQuery.setRuntime(end - start);
 
 			//Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean(null);
+			String json = nerdQuery.toJSONClean(null);
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			}
@@ -527,7 +527,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
 			if (nerdQuery.getEntities() != null)
 				Collections.sort(nerdQuery.getEntities());
-			String json = nerdQuery.toJSONCompactClean(null);
+			String json = nerdQuery.toJSONClean(null);
 
 			if (json == null) {
 				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();

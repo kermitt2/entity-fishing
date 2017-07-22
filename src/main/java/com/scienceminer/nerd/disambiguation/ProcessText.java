@@ -665,7 +665,7 @@ public class ProcessText {
 			text = shortText;
 
 		if ( (text == null) || (text.length() == 0) ) {
-			LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
+			//LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
 			if ( (tokens != null) && (tokens.size() > 0) )
 				text = LayoutTokensUtil.toText(tokens);
 			else {
@@ -857,7 +857,7 @@ public class ProcessText {
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
 		if ( (text == null) || (text.length() == 0) ) {
-			LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
+			//LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
 			if ( (tokens != null) && (tokens.size() > 0) )
 				text = LayoutTokensUtil.toText(tokens);
 			else {
@@ -994,7 +994,7 @@ public class ProcessText {
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
 		if ( (text == null) || (text.length() == 0) ) {
-			LOGGER.info("The length of the text to be processed is 0. Look at the layout tokens.");
+			//LOGGER.info("The length of the text to be processed is 0. Look at the layout tokens.");
 			if ( (tokens != null) && (tokens.size() > 0) )
 				text = LayoutTokensUtil.toText(tokens);
 			else {
