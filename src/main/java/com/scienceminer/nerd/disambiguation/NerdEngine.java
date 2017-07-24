@@ -1472,14 +1472,20 @@ System.out.println("Merging...");
 	 *  sequence / document.
 	 */
 	public void reconciliateAcronyms(NerdQuery nerdQuery, Map<Entity, Entity> acronyms) {
+		if ( (acronyms == null) || (acronyms.size() == 0) )
+			return;
+
 		List<NerdEntity> entities = nerdQuery.getEntities();
+		if ( (entities == null) || (entities.size() == 0) )
+			return; 
 
 		// prepare access to the acronym entities
 		Map<String, List<NerdEntity>> entityPositions = indexEntityPositions(entities);
+		if ( (entityPositions == null) || (entityPositions.size() ==0) )
+			return;
 
 		// gives for a given base all the acronyms mentions
 		Map<String, List<Entity>> reverseAcronyms = new HashMap<String, List<Entity>>();
-
 		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity acronym = entry.getKey();
             Entity base = entry.getValue();
