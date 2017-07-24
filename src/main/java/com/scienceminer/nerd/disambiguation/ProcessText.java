@@ -75,13 +75,8 @@ public class ProcessText {
 	private static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
 
 	public static ProcessText getInstance() throws Exception {
-        if (instance == null) {
-            //double check idiom
-            // synchronized (instanceController) {
-                if (instance == null)
-					getNewInstance();
-            // }
-        }
+        if (instance == null)
+			getNewInstance();
         return instance;
     }
 
@@ -90,7 +85,6 @@ public class ProcessText {
      */
 	private static synchronized void getNewInstance() throws Exception {
 		LOGGER.debug("Get new instance of ProcessText");
-		
 		instance = new ProcessText();
 	}
 	
@@ -99,8 +93,7 @@ public class ProcessText {
      */
     private ProcessText() throws Exception {	
 		String dictionaryFile = "data/clearNLP/dictionary-1.3.1.zip";
-		tokenizer = 
-			EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));	
+		tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));	
 	}
 	
 	/**
@@ -1003,12 +996,17 @@ public class ProcessText {
 			}
 		}
 
+		Map<Entity, Entity> toBeAdded = new HashMap<Entity, Entity>();
 		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity acronym = entry.getKey();
             Entity base = entry.getValue();
 			Pattern linkPattern = Pattern.compile(acronym.getRawName()); 
 			Matcher linkMatcher = linkPattern.matcher(text);
-			while (linkMatcher.find()) {			
+			while (linkMatcher.find()) {
+				// we need to ignore the current acronym to avoid having it twice
+				if ( (linkMatcher.start() == acronym.getOffsetStart())	&&
+					(linkMatcher.end() == acronym.getOffsetEnd()) )
+					continue;
 				String entityText = text.substring(linkMatcher.start(), linkMatcher.end());
 				Entity entity = new Entity(entityText);
 				entity.setNormalisedName(base.getRawName());
@@ -1018,8 +1016,15 @@ public class ProcessText {
 				if (entities == null)
 					entities = new ArrayList<Entity>();
 				entities.add(entity);
-				//acronyms.put(entity, base);
+				toBeAdded.put(entity, base);
 			}
+		}
+
+		for (Map.Entry<Entity, Entity> entry : toBeAdded.entrySet()) {
+			Entity entity = entry.getKey();
+            Entity base = entry.getValue();
+            if (acronyms.get(entity) == null)
+	            acronyms.put(entity, base);
 		}
 		return entities;
     }

@@ -184,6 +184,16 @@ public class NerdEngine {
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(entities, lang);
 
+/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+	List<NerdCandidate> cands = entry.getValue();
+	NerdEntity entity = entry.getKey();
+System.out.println("Surface: " + entity.getRawName() + " / normalized: " + entity.getNormalizedRawName());	
+for(NerdCandidate cand : cands) {
+	System.out.println("generated candidates: " + cand.toString());
+}
+System.out.println("--");
+}*/
+
 int nbEntities = 0;
 int nbCandidates = 0;
 for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -285,6 +295,7 @@ for(NerdCandidate cand : cands) {
 			}
 		}
 		Collections.sort(result);
+
 		//if (!shortText && !nerdQuery.getNbest())
 		if (!nerdQuery.getNbest()) {
 			result = pruneOverlap(result, shortTextVal);
@@ -301,7 +312,7 @@ for(NerdCandidate cand : cands) {
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidates(List<NerdEntity> entities,
 															String lang) {
-		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<NerdEntity, List<NerdCandidate>>();
+		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<NerdEntity, List<NerdCandidate>>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
@@ -318,7 +329,7 @@ for(NerdCandidate cand : cands) {
 					}
 				}
 
-				List<NerdCandidate> candidates = new ArrayList<>();
+				List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
 
 				// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
 				if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
@@ -327,7 +338,6 @@ for(NerdCandidate cand : cands) {
 				}
 
 				// we go only with Wikipedia for the moment
-//System.out.println("check mention: " + entity.getRawName());
 				Label label = null;
 
 				String normalizedEntity = entity.getNormalizedRawName();
@@ -369,7 +379,7 @@ for(NerdCandidate cand : cands) {
 				
 				if (!bestLabel.exists()) {
 //if (entity.getIsAcronym()) 
-//System.out.println("No concepts found for '" + normalizedEntity + "' " + " / " + entity.getRawName());
+//System.out.println("No concepts found for '" + normalizedEntity + "' " + " / " + entity.getRawName() );
 					//if (strict)
 					if (entity.getType() != null) {
 						result.put(entity, candidates);
@@ -439,12 +449,14 @@ for(NerdCandidate cand : cands) {
 							}
 						}
 					}
-					if ( (candidates.size() > 0) || (entity.getType() != null) )
+					if ( (candidates.size() > 0) || (entity.getType() != null) ) {
 						result.put(entity, candidates);
+					}
 				}
 				
 			}
 		}
+
 		return result;
 	}
 
@@ -1438,14 +1450,6 @@ System.out.println("Merging...");
 
 					}
 					
-					// inject KB info (frequencies and FreeBase/Wiki mapping)
-					//if (strict) 
-					{
-						//kbAccessScience.accessMongoDB(candidate);
-					}
-					//else {
-						//kbAccessERD.accessKB(candidate);
-					//}
 					if (invalid)
 						continue;
 					candidates.add(candidate);
@@ -1465,55 +1469,115 @@ System.out.println("Merging...");
 	
 	/**
 	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
-	 *  document.
+	 *  sequence / document.
 	 */
 	public void reconciliateAcronyms(NerdQuery nerdQuery, Map<Entity, Entity> acronyms) {
 		List<NerdEntity> entities = nerdQuery.getEntities();
 
+		// prepare access to the acronym entities
+		Map<String, List<NerdEntity>> entityPositions = indexEntityPositions(entities);
+
 		// gives for a given base all the acronyms mentions
-		Map<Entity, List<Entity>> reverseAcronyms = new HashMap<Entity, List<Entity>>();
+		Map<String, List<Entity>> reverseAcronyms = new HashMap<String, List<Entity>>();
 
 		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
             Entity acronym = entry.getKey();
             Entity base = entry.getValue();
-
-            if (reverseAcronyms.get(base) == null) {
+            String basePos = "" + base.getOffsetStart() + "/" + base.getOffsetEnd();
+            if (reverseAcronyms.get(basePos) == null) {
             	List<Entity> acros = new ArrayList<Entity>();
             	acros.add(acronym);
-            	reverseAcronyms.put(base, acros);
+            	reverseAcronyms.put(basePos, acros);
             } else {
-            	List<Entity> acros = reverseAcronyms.get(base);
+            	List<Entity> acros = reverseAcronyms.get(basePos);
             	acros.add(acronym);
-            	reverseAcronyms.replace(base, acros);
+            	reverseAcronyms.replace(basePos, acros);
             }
+        }
+
+        // work with complete nerd entities now
+        for(NerdEntity entity : entities) {
+        	// is it a base?
+        	String checkBase = "" + entity.getOffsetStart() + "/" + entity.getOffsetEnd();
+			if (reverseAcronyms.get(checkBase) != null) {
+				List<Entity> localAcronyms = reverseAcronyms.get(checkBase);
+				// gather the disambiguations
+				NerdEntity best = entity;
+				List<NerdEntity> acronymSubset = null;
+				for(Entity acroEntity : localAcronyms) {
+					int localStartPos = acroEntity.getOffsetStart();
+					int localEndPos = acroEntity.getOffsetEnd();
+					acronymSubset = getEntitiesAtPos(entityPositions, localStartPos, localEndPos);
+					if (acronymSubset != null) {
+						for(NerdEntity localAcronym : acronymSubset) {
+							if (localAcronym.getNerdScore() > best.getNerdScore()) {
+								best = localAcronym;
+							} 
+						}
+					}
+				}
+				// get the best one and propagate it to all base/acronyms NerdEntity
+				if (best != null) {
+					updateEntity(entity, best);
+					for(Entity acroEntity : localAcronyms) {
+						int localStartPos = acroEntity.getOffsetStart();
+						int localEndPos = acroEntity.getOffsetEnd();
+						acronymSubset = getEntitiesAtPos(entityPositions, localStartPos, localEndPos);
+						if (acronymSubset != null) {
+							for(NerdEntity localAcronym : acronymSubset) {
+								updateEntity(localAcronym, best);
+							}
+						}
+					}
+				}
+			} 
         }
 	}
 
+	private Map<String, List<NerdEntity>> indexEntityPositions(List<NerdEntity> entities) {
+		Map<String, List<NerdEntity>> result = new HashMap<String, List<NerdEntity>>();
+		for(NerdEntity entity : entities) {
+			String pos = "" + entity.getOffsetStart() + "/" + entity.getOffsetEnd();
+			if (result.get(pos) == null) {
+				List<NerdEntity> localList = new ArrayList<NerdEntity>();
+				localList.add(entity);
+				result.put(pos, localList);
+			} else {
+				List<NerdEntity> localList = result.get(pos);
+				localList.add(entity);
+				result.replace(pos, localList);
+			}
+		}
+		return result;
+	}
+
+	private List<NerdEntity> getEntitiesAtPos(Map<String, List<NerdEntity>> entityPositions, 
+		int localStartPos, int localEndPos) {
+		String pos = "" + localStartPos + "/" + localEndPos;
+		return entityPositions.get(pos);
+	}
+	
 	/**
-	 *  Return the Wikipedia categories of the specified article
+	 * Update disambiguation information of a NerdEntity based on a given NerdEntity
 	 */
-	/*public List<Category> getParentCategories(String articleID, String lang) {
-		// get the wikipedia article
-		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
-		Article article = wikipedia.getArticleByTitle(articleID.replace("_", " "));
-		if (article == null) {
-			System.out.println("article NOT found in wiki.miner: " + articleID);
-			return null;
-		}
-		List<Category> categories = new ArrayList<Category>();
-		Category[] cats = article.getParentCategories();
-		
-		// we keep only considered categories
-		for(int i = 0; i<cats.length; i++) {
-			Category cat = cats[i];
-			//System.out.println(cat.toString());
-			//System.out.println(cat.getTitle());
-		}
-		
-		return categories;
-	}*/
-	
-	
+	private void updateEntity(NerdEntity toBeUpDated, NerdEntity best) {
+		toBeUpDated.setSense(best.getSense());
+		toBeUpDated.setWikipediaExternalRef(best.getWikipediaExternalRef());
+		toBeUpDated.setProb_c(best.getProb_c());
+		toBeUpDated.setPreferredTerm(best.getPreferredTerm());
+		toBeUpDated.setLang(best.getLang());
+		toBeUpDated.setWikidataId(best.getWikidataId());
+		toBeUpDated.setDefinitions(best.getDefinitions());
+		toBeUpDated.setDomains(best.getDomains());
+		toBeUpDated.setNerdScore(best.getNerdScore());
+		toBeUpDated.setSelectionScore(best.getSelectionScore());
+		toBeUpDated.setCategories(best.getCategories());
+		toBeUpDated.setStatements(best.getStatements()); 
+		toBeUpDated.setType(best.getType());
+		toBeUpDated.setSubTypes(best.getSubTypes());
+	}	
+
+
 	/**
 	 * Based on computed candidate scores, select n-best candidates.  
 	 */

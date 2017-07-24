@@ -390,8 +390,8 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		if (wikipediaExternalRef != -1) {
 			buffer.append(wikipediaExternalRef + "\t");	
 		}
-		if (freeBaseExternalRef != null) {
-			buffer.append(freeBaseExternalRef + "\t");	
+		if (wikidataId != null) {
+			buffer.append(wikidataId + "\t");	
 		}
 		
 		if (domains != null) {

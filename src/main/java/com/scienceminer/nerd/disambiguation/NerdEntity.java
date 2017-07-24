@@ -601,22 +601,63 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	@Override
 	public int compareTo(NerdEntity theEntity) {
+		// if we have offsets
 		int start = theEntity.getOffsetStart();
 		int end = theEntity.getOffsetEnd();
-		Double score = new Double(theEntity.getNerdScore());
-		if ( (offsets.start == start) && (offsets.end == end) ) {
-			Double thisScore = new Double(nerdScore);
-			if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
-				return thisScore.compareTo(score);
+		//if ( (start != -1) && (end != -1) ) {
+			Double score = new Double(theEntity.getNerdScore());
+			if ( (offsets.start == start) && (offsets.end == end) ) {
+				Double thisScore = new Double(nerdScore);
+				if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
+					return thisScore.compareTo(score);
+				else {
+					thisScore = new Double(getProb_c());
+					score = new Double(theEntity.getProb_c());
+					return thisScore.compareTo(score);
+				} 
+			} else if (offsets.start != start) 
+				return offsets.start - start;
 			else {
-				thisScore = new Double(getProb_c());
-				score = new Double(theEntity.getProb_c());
-				return thisScore.compareTo(score);
-			} 
-		} else if (offsets.start != start) 
-			return offsets.start - start;
-		else 
-			return offsets.end - end;
+				if (offsets.end != end)
+					return offsets.end - end;
+				else
+					return rawName.length() - theEntity.getRawName().length();
+			}
+		/*} else {
+			// we have coordinates
+			List<BoundingBox> bb = theEntity.getBoundingBoxes();
+			if ( (bb.size() > 0) && (boundingBoxes.size() > 0) ) {
+				int thePage = bb.get(0).getPage();
+				int page = boundingBoxes.get(0).getPage();
+				if (page != thePage) 
+					return page - thePage;
+				else {
+					// same page, we look at the coordinates of the top-left point 
+					// (warning: this is occidental-biased)
+					double theX = bb.get(0).getX();
+					double theY = bb.get(0).getY();
+					double x = boundingBoxes.get(0).getX();
+					double y = boundingBoxes.get(0).getY();
+					if (theY != y) {
+						if (y > theY)
+							return 1;
+						else 
+							return -1;
+					} else {
+						if (theX != x) {
+							if (x > theX)
+								return 1;
+							else 
+								return -1;
+						} else 
+							return rawName.length() - theEntity.getRawName().length();
+					}
+				}  
+			} else {
+				// normally never happen 
+				return rawName.length() - theEntity.getRawName().length();
+			}
+		}*/
 	}
 
 	/**
