@@ -10,8 +10,8 @@
     <packaging>war</packaging>
     <version>0.0.2</version>
 
-	<name>(N)ERD</name>
-	<description>(Named) Entity Recognition and Disambiguation</description>
+    <name>(N)ERD</name>
+    <description>(Named) Entity Recognition and Disambiguation</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,24 +43,6 @@
     </contributors>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-
-            <resource>
-                <directory>src</directory>
-                <targetPath>source/src</targetPath>
-            </resource>
-            <resource>
-                <directory>${basedir}</directory>
-                <targetPath>source</targetPath>
-                <includes>
-                    <include>pom.xml</include>
-                </includes>
-            </resource>
-        </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -77,12 +59,18 @@
             </plugin>
 
             <plugin>
-                <inherited>true</inherited>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
-                    <argLine>-Xms256m -Xmx3072m -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</argLine>
+                    <argLine>-Xms256m -Xmx3072m -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000
+                    </argLine>
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                    </excludes>
+                    <systemPropertyVariables>
+                        <log4j.configuration>log4j.test.xml</log4j.configuration>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
@@ -161,33 +149,39 @@
                     </systemProperties>
                 </configuration>
             </plugin>
+        </plugins>
+    </build>
 
-            </plugins>
-	</build>
-
-	<profiles>
+    <profiles>
         <!-- mvn compile exec:exec -PbuildMapWikiEN -->
-		<profile>
-		  <id>buildMapWikiEN</id>
-		  <activation><property><name>buildMapWikiEN</name></property></activation>
-		  <build>
-			<plugins><plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>exec-maven-plugin</artifactId>
-		    <configuration>
-		      <executable>java</executable>
-		      <arguments>
-				<argument>-Xms2g</argument>
-            	<argument>-Xmx8g</argument>
-		        <argument>-classpath</argument><classpath />
-	     		<argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-		        <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-		        <argument>data/wikipedia/wikipedia-en.yaml</argument>
-		      </arguments>
-		    </configuration>
-		    </plugin></plugins>
-		  </build>
-		</profile>
+        <profile>
+            <id>buildMapWikiEN</id>
+            <activation>
+                <property>
+                    <name>buildMapWikiEN</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
+                                <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
+                                <argument>data/wikipedia/wikipedia-en.yaml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
         <!-- mvn compile exec:exec -PbuildMapWikiFR -->
         <!--profile>
@@ -345,36 +339,168 @@
             </build>
         </profile>
 
-	</profiles>
+        <profile>
+            <id>tomcat</id>
+            <activation>
+                <property>
+                    <name>tomcat</name>
+                </property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.0.2</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources-source</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/classes</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/resources</directory>
+                                            <excludes>
+                                                <exclude>jetty.xml</exclude>
+                                                <exclude>log4j-jetty.xml</exclude>
+                                                <exclude>log4j.xml</exclude>
+                                                <exclude>log4j.test.xml</exclude>
+                                            </excludes>
+                                            <includes>
+                                                <include>log4j-tomcat.xml</include>
+                                                <include>*.properties</include>
+                                            </includes>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-resources-test</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>testResources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/test-classes</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/test/resources</directory>
+                                            <excludes>
+                                                <exclude>query.json</exclude>
+                                            </excludes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <configuration>
+                            <packagingExcludes>**/**jetty*.xml, **/log4j.xml</packagingExcludes>
+                            <webResources>
+                                <resource>
+                                    <directory>${basedir}/src/main/webapp/WEB-INF/</directory>
+                                    <includes>
+                                        <include>web.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                    <targetPath>WEB-INF</targetPath>
+                                </resource>
+                                <!--<resource>
+                                    <directory>${basedir}/src/main/resources</directory>
+                                    <excludes>
+                                        <exclude>log4j.xml</exclude>
+                                        <exclude>jetty.xml</exclude>
+                                        <exclude>log4j-jetty.xml</exclude>
+                                    </excludes>
+                                </resource>-->
+                                <!--<resource>
+                                    <directory>${basedir}/src/test/resources</directory>
+                                    <excludes>
+                                        <exclude>log4j.test.xml</exclude>
+                                    </excludes>
+                                </resource>-->
+                                <resource>
+                                    <excludes>
+                                        <exclude>**/db-de/**</exclude>
+                                        <exclude>**/db-en/**</exclude>
+                                        <exclude>**/db-kb/**</exclude>
+                                        <exclude>**/db-fr/**</exclude>
+                                    </excludes>
+                                    <directory>data</directory>
+                                    <targetPath>data</targetPath>
+                                </resource>
+                                <resource>
+                                    <directory>doc</directory>
+                                    <targetPath>doc</targetPath>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.6</version>
+                        
+                        <!--<executions>
+                            <execution>
+                                <id>assembly-data</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>assembly</goal>
+                                </goals>
+                            </execution>
+                        </executions>-->
+                        <configuration>
+                            <finalName>${project.artifactId}_${project.version}-data</finalName>
+                            <descriptors>
+                                <descriptor>src/main/assembly/resources.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
-	<repositories>
-		<repository>
-			<id>3rd-party-local-repo</id>
-			<name>This is a local repository included in the project, to access 3rd party libs.</name>
-			<url>file:///${basedir}/lib/</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-	    	<id>sonatype-oss-public</id>
-		    <url>https://oss.sonatype.org/content/groups/public/</url>
-		    <releases>
-		      <enabled>true</enabled>
-		    </releases>
-		    <snapshots>
-		      <enabled>true</enabled>
-		    </snapshots>
-	  </repository>
-	</repositories>
+    </profiles>
 
-	<dependencies>
-		<!--Apache commons -->
-		<dependency>
+    <repositories>
+        <repository>
+            <id>3rd-party-local-repo</id>
+            <name>This is a local repository included in the project, to access 3rd party libs.</name>
+            <url>file:///${basedir}/lib/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>sonatype-oss-public</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!--Apache commons -->
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
@@ -458,8 +584,8 @@
 
         <!-- machine learning library -->
         <dependency>
-      		<groupId>com.github.haifengl</groupId>
-      		<artifactId>smile-core</artifactId>
+            <groupId>com.github.haifengl</groupId>
+            <artifactId>smile-core</artifactId>
             <version>1.3.1</version>
         </dependency>
 
@@ -476,17 +602,17 @@
         </dependency>
 
         <!-- Serialization -->
-    	<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.4.10</version>
-		</dependency>
-		<dependency>
-    		<groupId>de.ruedigermoeller</groupId>
-		    <artifactId>fst</artifactId>
-		    <version>2.50</version>
-		</dependency>
-		<dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+            <version>2.50</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
@@ -502,12 +628,12 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-        	<groupId>com.fasterxml.jackson.dataformat</groupId>
-        	<artifactId>jackson-dataformat-yaml</artifactId>
-        	<version>${jackson.version}</version>
-	    </dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
-	    <!-- avro hadoop serialization - to be removed at some point! -->
+        <!-- avro hadoop serialization - to be removed at some point! -->
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
@@ -534,22 +660,16 @@
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
             <version>0.4.2-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/grobid-core-0.4.2-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.grobid.ner</groupId>
             <artifactId>grobid-ner</artifactId>
             <version>0.4.2-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/grobid-ner-0.4.2-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.grobid.trainer</groupId>
             <artifactId>grobid-trainer</artifactId>
             <version>0.4.2-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/grobid-trainer-0.4.2-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>
@@ -561,13 +681,13 @@
             <artifactId>wapiti</artifactId>
             <version>1.5.0</version>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>org.wipo.analysers</groupId>
             <artifactId>wipo-analysers</artifactId>
             <version>0.0.1</version>
         </dependency>
-        
-		<!-- utilities -->
+
+        <!-- utilities -->
         <dependency>
             <groupId>net.arnx</groupId>
             <artifactId>jsonic</artifactId>
@@ -578,12 +698,12 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
-        
+
         <!-- LMDB -->
         <dependency>
             <groupId>org.deephacks.lmdbjni</groupId>
             <artifactId>lmdbjni</artifactId>
-          <version>${lmdbjni.version}</version>
+            <version>${lmdbjni.version}</version>
         </dependency>
         <dependency>
             <groupId>org.deephacks.lmdbjni</groupId>
@@ -600,7 +720,7 @@
             <artifactId>lmdbjni-win64</artifactId>
             <version>${lmdbjni.version}</version>
         </dependency>
-        
+
         <!-- TBD: update to the latest version! -->
         <dependency>
             <groupId>com.googlecode.clearnlp</groupId>
