@@ -1,36 +1,19 @@
 package com.scienceminer.nerd.kb;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.io.*;
-
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.Ignore; 
-
-import com.scienceminer.nerd.utilities.NerdProperties;
-import com.scienceminer.nerd.utilities.NerdPropertyKeys;
-import com.scienceminer.nerd.utilities.NerdConfig;
-
-import com.scienceminer.nerd.kb.db.*;
-import com.scienceminer.nerd.kb.model.*;
-
-import org.xml.sax.SAXException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Page;
+import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.utilities.NerdProperties;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
+import java.io.File;
 
-public class TestCategories {
+public class CategoriesIntegrationTest {
 	
 	private LowerKnowledgeBase wikipedia = null;
 

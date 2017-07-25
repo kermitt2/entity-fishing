@@ -1,20 +1,14 @@
 package com.scienceminer.nerd.kb;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import com.scienceminer.nerd.utilities.NerdProperties;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-
-import com.scienceminer.nerd.utilities.NerdProperties;
-
-
-public class TestCustomisation {
+public class CustomisationIntegrationTest {
 	
 	@Before
 	public void setUp() {
