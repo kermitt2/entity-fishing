@@ -131,6 +131,17 @@ public class NerdRestService implements NerdPaths {
         }
     }
 
+    /**
+     * Same as processQueryJson when the user send only the query and can avoid using multipart/form-data
+     */
+    @POST
+    @Path(DISAMBIGUATE)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processQueryJsonNoMultipart(String query) {
+        return NerdRestProcessQuery.processQuery(query);
+    }
+
     /*@POST
     @Path(DISAMBIGUATE)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -156,7 +167,9 @@ public class NerdRestService implements NerdPaths {
     }*/
 
 
-    /** Admin API **/
+    /**
+     * Admin API
+     **/
 
     @Path(ADMIN)
     @Produces(MediaType.TEXT_HTML)
@@ -190,7 +203,9 @@ public class NerdRestService implements NerdPaths {
         return NerdRestProcessAdmin.changePropertyValue(sha1, propertyName, newValue);
     }
 
-    /** KB operations **/
+    /**
+     * KB operations
+     **/
 
     @Path(KB + "/" + CONCEPT + "/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -208,7 +223,9 @@ public class NerdRestService implements NerdPaths {
         return NerdRestKB.getTermLookup(term, lang);
     }
 
-    /** Customisation API **/
+    /**
+     * Customisation API
+     **/
 
     @GET
     @Path(CUSTOMISATIONS)

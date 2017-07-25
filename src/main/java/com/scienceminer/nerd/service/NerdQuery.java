@@ -690,10 +690,10 @@ public class NerdQuery {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
-        } catch(JsonGenerationException |JsonMappingException e) {
+        } catch(JsonGenerationException | JsonMappingException e) {
             LOGGER.error("JSON cannot be processed: \n " + theQuery + "\n ", e);
         } catch(IOException e) {
-            LOGGER.error("Some serious error when deserialise the JSON object: \n" + theQuery, e);
+            LOGGER.error("Some serious error when deserialize the JSON object: \n" + theQuery, e);
         }
         return nerdQuery;
     }

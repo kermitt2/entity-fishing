@@ -66,6 +66,8 @@ POST /disambiguate
  optional    file     multipart/form-data    PDF file (as multipart)
 ==========  =======  =====================  =====================================
 
+NOTE: To process the text query only (no PDF), is also possible to send it as normal `application/json` raw data.
+
 (2) Request header
 
 .. table:: Request headers
@@ -76,6 +78,7 @@ POST /disambiguate
 +==========+========+==================+======================================+
 | optional | Accept | application/json | Set the response type of the output  |
 +----------+--------+------------------+--------------------------------------+
+
 
 
 Query format description
