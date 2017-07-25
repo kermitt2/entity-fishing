@@ -273,7 +273,6 @@ public class Utilities {
 			// already loaded, nothing to do
 		}
 		catch(Exception e) {
-			//e.printStackTrace();
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
 	}
