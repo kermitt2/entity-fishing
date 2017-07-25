@@ -44,6 +44,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import com.scienceminer.nerd.utilities.Stopwords;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * 
@@ -180,18 +181,21 @@ public class ProcessText {
 		
 		if (isBlank(text) && CollectionUtils.isEmpty(tokens)) {
 			throw new NerdException("Cannot parse the content, because it is null.");
-		} else if (isBlank(text)) {
-			LOGGER.error("The length of the text to be parsed is 0.");
-			return null;
-		} else if (CollectionUtils.isEmpty(tokens)) {
-			LOGGER.error("The number of tokens to be processed is 0.");
-			return null;
 		}
 
-		if (isBlank(text))
+		if (isBlank(text)) {
+			LOGGER.error("The length of the text to be parsed is 0.");
+		} else {
 			return processText(nerdQuery);
-		else
+		}
+
+		if (CollectionUtils.isEmpty(tokens)) {
+			LOGGER.error("The number of tokens to be processed is 0.");
+		} else {
 			return processTokens(nerdQuery);
+		}
+
+		return null;
 	}
 
 	/**
