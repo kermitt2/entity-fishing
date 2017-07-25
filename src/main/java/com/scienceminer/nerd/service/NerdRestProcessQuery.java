@@ -149,7 +149,7 @@ public class NerdRestProcessQuery {
             }
 
             // inject explicit acronyms
-			//entities = ProcessText.acronymCandidates(nerdQuery, entities);
+			entities = ProcessText.acronymCandidates(nerdQuery, entities);
 
             // we keep only entities not conflicting with the ones already present in the query
             List<NerdEntity> newEntities = new ArrayList<NerdEntity>();

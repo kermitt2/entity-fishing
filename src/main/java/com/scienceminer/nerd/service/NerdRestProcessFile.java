@@ -454,7 +454,7 @@ public class NerdRestProcessFile {
 				}
 
 				// inject explicit acronyms
-				//nerEntities = ProcessText.acronymCandidates(workingQuery, nerEntities);
+				nerEntities = ProcessText.acronymCandidates(workingQuery, nerEntities);
 
 				/*if (nerEntities != null) {
 					// we keep only entities not conflicting with the ones already present in the query
