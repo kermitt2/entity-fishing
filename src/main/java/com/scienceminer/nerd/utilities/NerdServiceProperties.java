@@ -128,7 +128,7 @@ public class NerdServiceProperties {
 	}
 
 	/**
-	 * Loads all properties given in property file {@link #NERD_HOME_PATH}.
+	 * Loads all properties given in property file {@link #NeNERD_HOME_PATH}.
 	 */
 	protected static void init() {
 		LOGGER.debug("Initiating property loading");
@@ -148,7 +148,7 @@ public class NerdServiceProperties {
 	 * 
 	 */
 	public NerdServiceProperties() throws NamingException {
-		LOGGER.debug("Instanciating NerdServiceProperties");
+		LOGGER.debug("Instantiating NerdServiceProperties");
 		init();
 		setProps(new Properties());
 		String nerdServicePath = null;
@@ -156,9 +156,7 @@ public class NerdServiceProperties {
 			nerdServicePath = (String) context.lookup("java:comp/env/"
 					+ NerdPropertyKeys.PROP_NERD_SERVICE_PROPERTY);
 		} catch (Exception exp) {
-			//throw new NerdServicePropertyException(
-			//		"Could not load the path to nerd_service.properties from the context",
-			//		exp);
+			LOGGER.warn("Cannot load " + NerdPropertyKeys.PROP_NERD_SERVICE_PROPERTY + ", trying in other ways. ");
 		}
 		if (nerdServicePath == null) {
 			// default path
@@ -169,17 +167,14 @@ public class NerdServiceProperties {
 		// check in default ClassLoader
 		if (nerdServicePropFile == null || !nerdServicePropFile.exists()) {
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			URL nerdServiceProp = classLoader.getResource("nerd_service.properties");
+			URL nerdServiceProp = classLoader.getResource("nerd_services.properties");
 			nerdServicePropFile = new File(nerdServiceProp.getPath());
-			
-			//NerdServicePropFile = new File("./Nerd_service.properties");		
 		}
 		
 		// exception if prop file does not exist
 		if (nerdServicePropFile == null || !nerdServicePropFile.exists()) {
 			throw new NerdServicePropertyException(
-					"Could not read nerd_service.properties, the file '"
-							+ nerdServicePropFile + "' does not exist.");
+					"Could not read nerd_service.properties, the file '" + nerdServicePropFile + "' does not exist.");
 		}
 
 		// load server properties and copy them to this properties
@@ -191,12 +186,10 @@ public class NerdServiceProperties {
 			getProps().putAll(serviceProps);
 		} catch (FileNotFoundException e) {
 			throw new NerdServicePropertyException(
-					"Cannot load properties from file " + nerdServicePropFile
-							+ "''.");
+					"Cannot load properties from file " + nerdServicePropFile + "''.");
 		} catch (IOException e) {
 			throw new NerdServicePropertyException(
-					"Cannot load properties from file " + nerdServicePropFile
-							+ "''.");
+					"Cannot load properties from file " + nerdServicePropFile + "''.");
 		}
 
 		// prevent NullPointerException if NerdProperties is not yet
