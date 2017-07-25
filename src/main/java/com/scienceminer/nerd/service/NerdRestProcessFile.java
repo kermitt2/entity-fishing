@@ -33,7 +33,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.*;
 
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class NerdRestProcessFile {
 
@@ -67,31 +67,16 @@ public class NerdRestProcessFile {
             } else {
                 long start = System.currentTimeMillis();
 				NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
-                
-				if (nerdQuery == null || isNotEmpty(nerdQuery.getText()) || isNotEmpty(nerdQuery.getShortText())) {
+
+				if (nerdQuery == null || isNotBlank(nerdQuery.getText()) || isNotBlank(nerdQuery.getShortText())) {
 					return Response.status(Status.BAD_REQUEST).build();
 				}
 				LOGGER.debug(">> set query object...");
 
-				//TODO: fix this part, the language will fail when not specified and text == null
-				// language identification
-				// if the language is already indicated in the query structure it's used with conf = 1.0,
-				// if not, it's detected. If detection doesn't goes well, 406 is returned
 				Language lang = nerdQuery.getLanguage();
-				if (!nerdQuery.hasValidLanguage() ) {
-					LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-					lang = languageUtilities.runLanguageId(nerdQuery.getText());
-					nerdQuery.setLanguage(lang);
-					LOGGER.debug(">> identified language: " + lang.toString());
-				} else {
+				if (nerdQuery.hasValidLanguage()) {
 					lang.setConf(1.0);
-					LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
-				}
-
-				if (!nerdQuery.hasValidLanguage()) {
-					response = Response.status(Status.NOT_ACCEPTABLE).build();
-					LOGGER.debug(methodLogOut());
-					return response;
+					LOGGER.debug(">> language provided in query: " + lang);
 				}
 
 				// we assume for the moment that there are no entities originally set in the query
@@ -117,7 +102,7 @@ public class NerdRestProcessFile {
 		        Document doc = null;
 		        DocumentContext documentContext = new DocumentContext();
 		        NerdQuery workingQuery = new NerdQuery(nerdQuery);
-		        //NerdQuery workingQuery = nerdQuery;
+
 		        try {
 					DocumentSource documentSource =
 						DocumentSource.fromPdf(originFile, config.getStartPage(), config.getEndPage());
@@ -153,10 +138,23 @@ public class NerdRestProcessFile {
 		                    BiblioItem resHeader = new BiblioItem();
 		                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
 
+		                    if(lang == null) {
+								BiblioItem resHeaderLangIdentification = new BiblioItem();
+								engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
+										tokenizationHeader, resHeaderLangIdentification);
+
+								lang = identifyLanguage(resHeaderLangIdentification, doc);
+								if (lang != null) {
+									workingQuery.setLanguage(lang);
+								} else {
+									LOGGER.error("Language was not specified and there was not enough text to identify it. The process might fail. ");
+								}
+							}	
+
 		                    // title
 		                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
 		                    if (titleTokens != null) {
-								System.out.println("Process title... ");// + LayoutTokensUtil.toText(titleTokens));
+								System.out.println("Process title... ");
 
 								//workingQuery.setEntities(null);
 		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
@@ -164,7 +162,7 @@ public class NerdRestProcessFile {
 									System.out.println(newEntities.size() + " nerd entities");
 								}
 		                        nerdQuery.addNerdEntities(newEntities);
-		                    }
+							}
 
 		                    // abstract
 		                    List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
@@ -390,6 +388,30 @@ public class NerdRestProcessFile {
 		return response;
 	}
 
+	private static Language identifyLanguage(BiblioItem resHeader, Document doc) {
+
+		String contentSample = "";
+		if (resHeader.getTitle() != null)
+			contentSample += resHeader.getTitle();
+		if (resHeader.getAbstract() != null)
+			contentSample += "\n" + resHeader.getAbstract();
+		if (resHeader.getKeywords() != null)
+			contentSample += "\n" + resHeader.getKeywords();
+		if (contentSample.length() < 200) {
+			// we need more textual content to ensure that the language identification will be
+			// correct
+			contentSample += doc.getBody();
+		}
+		LanguageUtilities languageIdentifier = LanguageUtilities.getInstance();
+
+		Language resultLang = null;
+		synchronized (languageIdentifier) {
+			resultLang = languageIdentifier.runLanguageId(contentSample, 2000);
+		}
+
+        return resultLang;
+	}
+
 	/**
 	 * Generate a global context for a document
 	 */
@@ -404,12 +426,7 @@ public class NerdRestProcessFile {
 		List<NerdEntity> resultingEntities = new ArrayList<NerdEntity>();
 		for(LayoutTokenization layoutTokenization : layoutTokenizations) {
 			List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
-	        //String text = LayoutTokensUtil.toText(layoutTokens);
-	        //List<NerdEntity> entities = workingQuery.getEntities();
-/*for(LayoutToken token : layoutTokens) {
-	System.out.print(token.getText());
-}
-System.out.println("\n");*/
+
 			workingQuery.setEntities(null);
 	        workingQuery.setText(null);
 	        workingQuery.setShortText(null);
@@ -478,7 +495,6 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
 					resultingEntities.addAll(workingQuery.getEntities());
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				LOGGER.error("An unexpected exception occurs. ", e);
 			}
 		}

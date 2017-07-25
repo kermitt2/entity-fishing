@@ -43,13 +43,13 @@ import org.grobid.core.utilities.LanguageUtilities;
 
 import com.scienceminer.nerd.utilities.Stopwords;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 /**
  * 
  * Everything we need to get the mentions and names entities from a text. From a text or a 
  * NerdQuery object, we generate a list of Entity objects corresponding to the potential 
  * mentions of entity to be considred by the further disambiguation stage. 
- *
- *
  */
 public class ProcessText {
 	public final String language = AbstractReader.LANG_EN;
@@ -165,31 +165,30 @@ public class ProcessText {
 	 * NER processing of a structured NERD query (text with already annotations, sentence 
 	 * segmentation, etc.). Generate a list of recongnized named entities. 
 	 *
-	 * @param nerdQuery 
-	 *		the NERD query to be processed
-	 * @return 
-	 * 		the list of identified entities
+	 * @param nerdQuery the NERD query to be processed
+	 * @return the list of identified entities
 	 */
 	public List<Entity> process(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
 
 		//TODO: maybe this should be done at controller level
-		if (text == null)
+		if (isBlank(text)) {
 			text = nerdQuery.getShortText();
+		}
 
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 		
-		if ( (text == null) && (tokens == null)) {
+		if (isBlank(text) && CollectionUtils.isEmpty(tokens)) {
 			throw new NerdException("Cannot parse the content, because it is null.");
-		} else if ((text != null) && (text.length() == 0)) {
+		} else if (isBlank(text)) {
 			LOGGER.error("The length of the text to be parsed is 0.");
 			return null;
-		} else if ((tokens != null) && (tokens.size() == 0)) {
+		} else if (CollectionUtils.isEmpty(tokens)) {
 			LOGGER.error("The number of tokens to be processed is 0.");
 			return null;
 		}
 
-		if (text != null)
+		if (isBlank(text))
 			return processText(nerdQuery);
 		else
 			return processTokens(nerdQuery);
