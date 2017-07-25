@@ -437,6 +437,9 @@ System.out.println("\n");*/
 					}
 				}
 
+				// inject explicit acronyms
+				nerEntities = ProcessText.acronymCandidates(workingQuery, nerEntities);
+
 				/*if (nerEntities != null) {
 					// we keep only entities not conflicting with the ones already present in the query
 					if (entities == null) {*/
@@ -448,6 +451,7 @@ System.out.println("\n");*/
 						}
 					}
 				}*/
+
 
 				if (workingQuery.getEntities() != null) {
 /*for (NerdEntity entity : workingQuery.getEntities()) {

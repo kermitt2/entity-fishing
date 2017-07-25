@@ -26,6 +26,9 @@ public class NerdContext {
 	protected List<Article> contextArticles = null;
 	protected List<Integer> contextArticlesIds = null;
 	
+	// working acronyms for this context
+	protected Map<Entity, Entity> acronyms = null;
+
 	protected double totalWeight = 0.0;
 	protected Relatedness relatedness = Relatedness.getInstance();
 	protected String lang = null;
@@ -229,8 +232,10 @@ public class NerdContext {
 	 * Merge the current context articles with the NerdContext given as parameter
 	 */
 	public void merge(NerdContext context) {
-		for(Article article : contextArticles) {
-			context.addArticle(article);
+		if (contextArticles != null) {
+			for(Article article : contextArticles) {
+				context.addArticle(article);
+			}
 		}
 	}
 	
@@ -240,6 +245,14 @@ public class NerdContext {
 	public boolean contains(NerdCandidate candidate) {
 		Integer entityId = candidate.getWikipediaExternalRef();
 		return contextArticlesIds.contains(new Integer(entityId));
+	}
+
+	public Map<Entity, Entity> getAcronyms() {
+		return this.acronyms;
+	} 
+
+	public void setAcronyms(Map<Entity, Entity> acronyms) {
+		this.acronyms = acronyms;
 	}
 
 	@Override

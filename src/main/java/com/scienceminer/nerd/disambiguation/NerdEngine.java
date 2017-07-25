@@ -181,6 +181,10 @@ public class NerdEngine {
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		
 		NerdContext context = nerdQuery.getContext();
+		if (context == null) {
+			context = new NerdContext();
+			nerdQuery.setContext(context);
+		}
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(entities, lang);
 
@@ -221,6 +225,7 @@ for(NerdCandidate cand : cands) {
 }
 System.out.println("--");
 }*/
+
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
 
@@ -250,6 +255,13 @@ for(NerdCandidate cand : cands) {
 }*/
 		//if (!shortText && !nerdQuery.getNbest())
 //			prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
+
+
+		// reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
+		// document
+		if (context.getAcronyms() != null) {
+			reconciliateAcronyms(nerdQuery);
+		}
 
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 		List<NerdEntity> result = new ArrayList<NerdEntity>();
@@ -1471,7 +1483,11 @@ System.out.println("Merging...");
 	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
 	 *  sequence / document.
 	 */
-	public void reconciliateAcronyms(NerdQuery nerdQuery, Map<Entity, Entity> acronyms) {
+	public void reconciliateAcronyms(NerdQuery nerdQuery) {
+		if (nerdQuery.getContext() == null)
+			return;
+
+		Map<Entity, Entity> acronyms = nerdQuery.getContext().getAcronyms();
 		if ( (acronyms == null) || (acronyms.size() == 0) )
 			return;
 
@@ -1479,6 +1495,11 @@ System.out.println("Merging...");
 		if ( (entities == null) || (entities.size() == 0) )
 			return; 
 
+for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
+Entity acronym = entry.getKey();
+Entity base = entry.getValue();
+System.out.println(acronym.getRawName() + " / " + base.getRawName());
+}
 		// prepare access to the acronym entities
 		Map<String, List<NerdEntity>> entityPositions = indexEntityPositions(entities);
 		if ( (entityPositions == null) || (entityPositions.size() ==0) )

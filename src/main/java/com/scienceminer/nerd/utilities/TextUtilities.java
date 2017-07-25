@@ -954,6 +954,19 @@ public class TextUtilities {
         return true;
     }
 
+    /**
+     * Useful for recognising an acronym candidate: check if a text is only 
+     * composed of upper case, dot and digit characters
+     */
+    public static boolean isAllUpperCaseOrDigitOrDot(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isUpperCase(text.charAt(i)) && !Character.isDigit(text.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static boolean isAllLowerCase(String text) {
         for (int i = 0; i < text.length(); i++) {
             if (!Character.isLowerCase(text.charAt(i))) {

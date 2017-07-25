@@ -109,6 +109,9 @@ public class NerdRestProcessQuery {
 				}
 			}
 
+			// create an empty context for the query
+			nerdQuery.setContext(new NerdContext());
+
 			// entities originally from the query are marked as such
 			List<NerdEntity> originalEntities = null;
 			if  ( CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
@@ -133,12 +136,14 @@ public class NerdRestProcessQuery {
 				nerdQuery.setSentences(sentences);
 			}
 
+			// first process all mentions
+
 			// ner
 			List<Entity> entities = processText.process(nerdQuery);
+			if (entities == null)
+					entities = new ArrayList<Entity>();
 			if (!nerdQuery.getOnlyNER()) {
 				List<Entity> entities2 = processText.processBrutal(nerdQuery);
-				if (entities == null)
-					entities = new ArrayList<Entity>();
 				for(Entity entity : entities2) {
 					// we add entities only if the mention is not already present
 					if (!entities.contains(entity)) {
@@ -148,32 +153,7 @@ public class NerdRestProcessQuery {
 			}
 
 			// inject explicit acronyms
-			Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(nerdQuery);
-        	if (acronyms != null) {
-        		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
-            		Entity base = entry.getValue();
-            		Entity acronym = entry.getKey();
-System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
-					
-					Entity localEntity = new Entity();
-					localEntity.setRawName(acronym.getRawName());
-					localEntity.setOffsetStart(acronym.getOffsetStart());
-					localEntity.setOffsetEnd(acronym.getOffsetEnd());
-					localEntity.setIsAcronym(true);
-					localEntity.setNormalisedName(base.getRawName());
-
-					entities.add(localEntity);
-				}
-
-				// propagate back mentions
-				List<Entity> acronymEntities = ProcessText.propagateAcronyms(nerdQuery, acronyms);
-				if (acronymEntities != null) {
-					for(Entity entity : acronymEntities) {
-						//if (!entities.contains(entity))	
-							entities.add(entity);
-					}
-				}
-			}
+			entities = ProcessText.acronymCandidates(nerdQuery, entities);
 
 			// we keep only entities not conflicting with the ones already present in the query
 			List<NerdEntity> newEntities = new ArrayList<NerdEntity>();
@@ -249,12 +229,6 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 						entity.setNerdScore(entity.getNer_conf());
 					}
 				}
-			}
-
-			// reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
-			// document
-			if (acronyms != null) {
-				NerdEngine.getInstance().reconciliateAcronyms(nerdQuery, acronyms);
 			}
 			
 			long end = System.currentTimeMillis();
@@ -441,6 +415,9 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 				}
 				originalEntities = nerdQuery.getEntities();
 			}
+
+			// create an empty context for the query
+			nerdQuery.setContext(new NerdContext());
 
 			// possible entity mentions
 			ProcessText processText = ProcessText.getInstance();

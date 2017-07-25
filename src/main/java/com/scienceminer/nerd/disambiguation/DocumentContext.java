@@ -5,6 +5,7 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
+import org.grobid.core.utilities.Pair;
 
 import java.util.*; 
 import java.text.*;
@@ -30,7 +31,7 @@ public class DocumentContext extends NerdContext {
 	private Map<Entity, Entity> localMentions = null; 
 
 	// local sense statistics for document-level reimforcement
-	// 
+	private Map<String, Pair<NerdEntity, Integer>> entityCount = null;
 
 	public DocumentContext() {
 		super();
@@ -92,6 +93,27 @@ public class DocumentContext extends NerdContext {
 		if (this.localMentions == null)
 			localMentions = new HashMap<Entity, Entity>();
 		localMentions.put(variant, base);	
+	}
+
+	public void setEntityCount(Map<String, Pair<NerdEntity, Integer>> counts) {
+		this.entityCount = counts;
+	}
+
+	public Map<String, Pair<NerdEntity, Integer>> getEntityCount() {
+		return this.entityCount;
+	}
+
+	public void addEntityCount(String surface, NerdEntity entity) {
+		if (this.entityCount == null)
+			entityCount = new HashMap<String, Pair<NerdEntity, Integer>>();
+		if (entityCount.get(surface) == null) {
+			Pair<NerdEntity, Integer> thePair = new Pair<NerdEntity, Integer>(entity, 1);
+			entityCount.put(surface, thePair);
+		} else {
+			Pair<NerdEntity, Integer> thePair = entityCount.get(surface);
+			Pair<NerdEntity, Integer> newPair = new Pair<NerdEntity, Integer>(thePair.getA(), thePair.getB() + 1);
+			entityCount.replace(surface, newPair);
+		}
 	}
 
 	@Override
