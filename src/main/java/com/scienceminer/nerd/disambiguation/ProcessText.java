@@ -44,6 +44,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import com.scienceminer.nerd.utilities.Stopwords;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * 
