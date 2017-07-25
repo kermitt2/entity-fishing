@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.exceptions.QueryException;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.Page;
@@ -683,19 +684,23 @@ public class NerdQuery {
                 && (language.getLang().equals(EN) || language.getLang().equals(DE) || language.getLang().equals(FR)) ;
     }
 
-    public static NerdQuery fromJson(String theQuery) {
+    public static NerdQuery fromJson(String theQuery) throws QueryException {
         NerdQuery nerdQuery = null;
+
+        if(theQuery == null) {
+            throw new QueryException("The query cannot be null:\n " + theQuery);
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-            nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
+            return mapper.readValue(theQuery, NerdQuery.class);
         } catch(JsonGenerationException | JsonMappingException e) {
-            LOGGER.error("JSON cannot be processed: \n " + theQuery + "\n ", e);
+            throw new QueryException("JSON cannot be processed:\n " + theQuery + "\n ", e);
         } catch(IOException e) {
-            LOGGER.error("Some serious error when deserialize the JSON object: \n" + theQuery, e);
+            throw new QueryException("Some serious error when deserialize the JSON object: \n" + theQuery, e);
         }
-        return nerdQuery;
     }
 
     /**

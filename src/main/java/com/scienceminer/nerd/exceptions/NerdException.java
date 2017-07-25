@@ -1,10 +1,5 @@
 package com.scienceminer.nerd.exceptions;
 
-/**
- * 
- *
- */
-
 public class NerdException extends RuntimeException {
 
     public NerdException() {

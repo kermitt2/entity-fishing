@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Entity;
@@ -377,7 +378,11 @@ public class NerdRestProcessFile {
 						.build();
 				}
 			}
-		} 
+		}
+		catch(QueryException qe) {
+			LOGGER.error("The sent query is invalid. Query sent: " + theQuery, qe);
+			response = Response.status(Status.BAD_REQUEST).build();
+		}
 		catch (NoSuchElementException nseExp) {
 			LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
 			response = Response.status(Status.SERVICE_UNAVAILABLE).build();
