@@ -1,26 +1,17 @@
 package com.scienceminer.nerd.kb;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
-import com.scienceminer.nerd.utilities.TextUtilities;
-import org.grobid.core.utilities.OffsetPosition;
 import com.scienceminer.nerd.utilities.NerdProperties;
-import com.scienceminer.nerd.disambiguation.NerdCandidate;
-
-import java.util.*;
-import java.io.*;
-import java.util.concurrent.*;
-
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.io.*;
-
-import com.scienceminer.nerd.kb.model.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Class for managing the NERD customisation which are contexts for particular domains.
@@ -70,20 +61,13 @@ public final class Customisations {
          	 	in = new ObjectInputStream(fileIn);
 	 			cDB = (ConcurrentMap<String, String>)in.readObject();
 	 		} else if (cDB == null) {
- 				cDB = new ConcurrentHashMap<String, String>();
+ 				cDB = new ConcurrentHashMap<>();
  			}
         } catch (Exception dbe) {
-            LOGGER.debug("Error when opening the customization map.");
-            throw new NerdException(dbe);
+            throw new NerdException("Error when opening the customization map.", dbe);
         } finally {
-        	try {
-	        	if (in != null)
-		        	in.close();
-		    } catch(IOException e) {
-		    	LOGGER.debug("Error when closing the customization map.");
-            	throw new NerdException(e);
-		    }
-        }
+			IOUtils.closeQuietly(in);
+		}
     }
 	
     /**
@@ -106,16 +90,9 @@ public final class Customisations {
 		    	out.writeObject(cDB);
 		    }
 		} catch(IOException e) {
-			LOGGER.debug("Error when saving the customization map.");
-            throw new NerdException(e);
+            throw new NerdException("Error when saving the customization map.", e);
 		} finally {
-			try {
-				if (out != null)
-	        		out.close();
-	        } catch(IOException e) {
-		    	LOGGER.debug("Error when closing the customization map.");
-            	throw new NerdException(e);
-		    }
+			IOUtils.closeQuietly(out);
 		}
     }
 

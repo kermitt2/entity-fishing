@@ -43,13 +43,13 @@ import org.grobid.core.utilities.LanguageUtilities;
 
 import com.scienceminer.nerd.utilities.Stopwords;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 /**
  * 
  * Everything we need to get the mentions and names entities from a text. From a text or a 
  * NerdQuery object, we generate a list of Entity objects corresponding to the potential 
  * mentions of entity to be considred by the further disambiguation stage. 
- *
- *
  */
 public class ProcessText {
 	public final String language = AbstractReader.LANG_EN;
@@ -165,33 +165,33 @@ public class ProcessText {
 	 * NER processing of a structured NERD query (text with already annotations, sentence 
 	 * segmentation, etc.). Generate a list of recognized named entities. 
 	 *
-	 * @param nerdQuery 
-	 *		the NERD query to be processed
-	 * @return 
-	 * 		the list of identified entities
+	 * @param nerdQuery the NERD query to be processed
+	 * @return the list of identified entities
 	 */
 	public List<Entity> process(NerdQuery nerdQuery) throws NerdException { 
 		String text = nerdQuery.getText();
 
-		//TODO: maybe this should be done at controller level
-		if (text == null)
+		if (text == null) {
 			text = nerdQuery.getShortText();
+		}
 
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 		
-		if ( (text == null) && (tokens == null)) {
-			throw new NerdException("Cannot parse the content, because it is null.");
-		} else if ((text != null) && (text.length() == 0)) {
-			LOGGER.error("The length of the text to be parsed is 0.");
+		if (isBlank(text) && CollectionUtils.isEmpty(tokens)) {
+			LOGGER.warn("No content to process.");
 			return null;
-		} else if ((tokens != null) && (tokens.size() == 0)) {
-			LOGGER.error("The number of tokens to be processed is 0.");
+			//throw new NerdException("Cannot parse the content, because it is null.");
+		} /*else if (isBlank(text)) {
+			LOGGER.warn("The length of the text to be parsed is 0.");
 			return null;
-		}
+		} else if (CollectionUtils.isEmpty(tokens)) {
+			LOGGER.warn("The number of tokens to be processed is 0.");
+			return null;
+		}*/
 
-		if (text != null)
+		if (!isBlank(text))
 			return processText(nerdQuery);
-		else
+		else 
 			return processTokens(nerdQuery);
 	}
 
@@ -430,13 +430,13 @@ public class ProcessText {
 				entity.setOffsets(pos);
 				// we have an additional check of validy based on language
 				if (validEntity(entity, lang.getLang())) {
-					results.add(entity);
+					if (!results.contains(entity))
+						results.add(entity);
 				}
 			}
 		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
 		}
-		
 		return results;
 	}
 	
@@ -551,7 +551,8 @@ public class ProcessText {
 					LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
 				// we have an additional check of validy based on language
 				if (validEntity(entity, lang.getLang()))
-					results.add(entity);
+					if (!results.contains(entity))
+						results.add(entity);
 			}
 		}
 		catch(Exception e) {
@@ -738,7 +739,7 @@ public class ProcessText {
 			}
 		}
 		else {
-			if (CollectionUtils.isNotEmpty (tokens) )
+			if (CollectionUtils.isNotEmpty(tokens) )
 				return processBrutal(tokens, language);
 			else
 				return processBrutal(text, language);

@@ -425,7 +425,6 @@ public class NerdProperties {
 	 */
 	public static void setGrobidHome(String home) {
 		setPropertyValue(NerdPropertyKeys.PROP_GROBID_HOME, home);
-		//GrobidProperties.set_GROBID_HOME_PATH(home);
 	}
      
 	/**

@@ -13,7 +13,6 @@ import org.grobid.core.data.*;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.EngineParsers;
-import org.grobid.core.engines.SegmentationLabel;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
@@ -125,7 +124,7 @@ public class NerdEngine {
 		
 		//TODO: these tests should be moved up in one place and one time 
 		if ((text == null) && (shortText == null)) {
-			LOGGER.warn("Cannot parse the text, because it is null.");
+			LOGGER.info("Cannot parse the text, because it is null.");
 		}
 		
 		if ( (text == null) || (text.length() == 0) ) {
@@ -185,6 +184,10 @@ public class NerdEngine {
 			context = new NerdContext();
 			nerdQuery.setContext(context);
 		}
+
+/*for(NerdEntity entity : entities) {
+System.out.println("Surface: " + entity.getRawName() + " / normalized: " + entity.getNormalizedRawName());	
+}*/
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(entities, lang);
 
@@ -259,9 +262,9 @@ for(NerdCandidate cand : cands) {
 
 		// reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
 		// document
-		if (context.getAcronyms() != null) {
+		/*if (context.getAcronyms() != null) {
 			reconciliateAcronyms(nerdQuery);
-		}
+		}*/
 
 		WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
 		List<NerdEntity> result = new ArrayList<NerdEntity>();

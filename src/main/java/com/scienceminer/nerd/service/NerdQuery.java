@@ -1,16 +1,5 @@
 package com.scienceminer.nerd.service;
 
-import org.grobid.core.lang.Language;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.layout.Page;
-
-import org.grobid.core.data.Entity;
-import org.grobid.core.document.Document;
-import org.grobid.core.utilities.KeyGen;
-
-import com.scienceminer.nerd.utilities.Filter;
-import com.scienceminer.nerd.disambiguation.NerdEntity;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -22,14 +11,14 @@ import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.disambiguation.Sentence;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
+import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
-
-import com.scienceminer.nerd.kb.*;
-
+import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.utilities.Filter;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Entity;
 import org.grobid.core.document.Document;
 import org.grobid.core.lang.Language;
@@ -39,16 +28,13 @@ import org.grobid.core.utilities.KeyGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.grobid.core.lang.Language.DE;
-import static org.grobid.core.lang.Language.EN;
-import static org.grobid.core.lang.Language.FR;
+import static org.grobid.core.lang.Language.*;
 
 /**
  * This is the POJO object for representing input and output "enriched" query.
@@ -683,19 +669,23 @@ public class NerdQuery {
                 && (language.getLang().equals(EN) || language.getLang().equals(DE) || language.getLang().equals(FR)) ;
     }
 
-    public static NerdQuery fromJson(String theQuery) {
+    public static NerdQuery fromJson(String theQuery) throws QueryException {
         NerdQuery nerdQuery = null;
+
+        if(StringUtils.isEmpty(theQuery)) {
+            throw new QueryException("The query cannot be null:\n " + theQuery);
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-            nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
-        } catch(JsonGenerationException |JsonMappingException e) {
-            LOGGER.error("JSON cannot be processed: \n " + theQuery + "\n ", e);
+            return mapper.readValue(theQuery, NerdQuery.class);
+        } catch(JsonGenerationException | JsonMappingException e) {
+            throw new QueryException("JSON cannot be processed:\n " + theQuery + "\n ", e);
         } catch(IOException e) {
-            LOGGER.error("Some serious error when deserialise the JSON object: \n" + theQuery, e);
+            throw new QueryException("Some serious error when deserialize the JSON object: \n" + theQuery, e);
         }
-        return nerdQuery;
     }
 
     /**
