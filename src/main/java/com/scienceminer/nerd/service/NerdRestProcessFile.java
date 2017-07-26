@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.exceptions.QueryException;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Entity;
@@ -62,8 +63,8 @@ public class NerdRestProcessFile {
             LOGGER.debug(">> input PDF file saved locally...");
 
             GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
-            if (originFile == null) {
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+            if (originFile == null || FileUtils.sizeOf(originFile) == 0) {
+                response = Response.status(Status.BAD_REQUEST).build();
             } else {
                 long start = System.currentTimeMillis();
 				NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
