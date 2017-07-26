@@ -220,22 +220,28 @@ When *processSentence* is set, the sentence segmentation is triggered anyway and
        "sentences": [
            {
                "offsetStart": 0,
-               "offsetEnd": 163
+               "offsetEnd": 138
            },
            {
-               "offsetStart": 163,
-               "offsetEnd": 319
+               "offsetStart": 138,
+               "offsetEnd": 293
            }
        ],
        "entities": [
            {
                "rawName": "Russian",
                "type": "NATIONAL",
-               "offsetStart": 179,
-               "offsetEnd": 186
+               "offsetStart": 153,
+               "offsetEnd": 160
            }
        ]
    }
+
+
+**Example using CURL** (using the query above):
+::
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={ 'text': 'The army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg. But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne.', 'processSentence': [ 1 ], 'sentences': [ { 'offsetStart': 0, 'offsetEnd': 138 }, { 'offsetStart': 138, 'offsetEnd': 293 } ], 'entities': [ { 'rawName': 'Russian', 'type': 'NATIONAL', 'offsetStart': 153, 'offsetEnd': 160 } ] }"
+
 
 
 PDF input
@@ -258,6 +264,11 @@ The JSON format for the query parameter to be sent to the service is identical t
       "sentence": false,
       "customisation": "generic"
    }
+
+**Example using CURL** (using the query above):
+::
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'onlyNER': false, 'resultLanguages': ['de','fr'],'nbest': false, 'sentence': false, 'customisation': 'generic'}" -F"file=@PATH_FILENAME.pdf"
+
 
 Weighted term disambiguation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -289,6 +300,10 @@ Example request
 
 The termVector field is required for having a well-formed query. resultLanguages can be set to get wikipedia pages for languages in addition to the language of the input terms.
 
+**Example using CURL** (using the query above):
+::
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={ 'termVector': [ { 'term' : 'computer science', 'score' : 0.3 }, { 'term' : 'engine', 'score' : 0.1 } ], 'language': { 'lang': 'en' }, 'resultLanguages': ['de'], 'nbest': 0, 'customisation': 'generic' }"
+
 
 Search query disambiguation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -316,6 +331,10 @@ Example request:
       "nbest": 0,
       "customisation": "generic"
    }
+
+**Example using CURL** (using the query above):
+::
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'shortText': 'concrete pump sensor','language': { 'lang': 'en'},'nbest': 0,'customisation': 'generic' }"
 
 
 Response
@@ -968,9 +987,9 @@ This API allows to manage customisations for the (N)ERD instance which can then 
 
 Customisation are identified by their name (or, also called profile in the API).
 
-Customisation body
-^^^^^^^^^^^^^^^^^^
 
+Customisation body
+------------------
 The JSON profile of a customisation to be sent to the server for creation and extension has the following structure:
 ::
    {
