@@ -133,10 +133,10 @@ public class WikipediaTrainer {
 		System.out.println("Create article sets...");
 		trainer.createArticleSamples();
 
-		/*System.out.println("Create Ranker arff files...");
+		System.out.println("Create Ranker arff files...");
 		trainer.createRankerArffFiles("wikipedia");
 		System.out.println("Create Ranker classifier...");
-		trainer.createRankerModel();*/
+		trainer.createRankerModel();
 
 		System.out.println("Create Selector arff files...");
 		trainer.createSelectorArffFiles("wikipedia");
@@ -144,7 +144,7 @@ public class WikipediaTrainer {
 		trainer.createSelectorModel();
 
 		System.out.println("Evaluate classifiers...");
-		//trainer.evaluateRanker();
+		trainer.evaluateRanker();
 		trainer.evaluateSelector();
 	}
 	
