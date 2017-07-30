@@ -13,10 +13,11 @@ public class SimpleNerdFeatureVector extends GenericRankerFeatureVector {
 	public SimpleNerdFeatureVector() {
 		super();
 		title = "(N)ERD ranker";
-		Add_prob_c = true;
+		//Add_prob_c = true;
 		Add_relatedness = true;
 		Add_context_quality = true;
 		//Add_ner = true;
+		Add_bestCaseContext = true;
 		target_numeric = true;
 		target_class = false;
 	}

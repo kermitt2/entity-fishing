@@ -46,7 +46,7 @@ import com.thoughtworks.xstream.*;
 /**
  * A machine learning model for ranking a list of ambiguous candidates for a given mention.
  */
-public class NerdRanker {
+public class NerdRanker extends NerdModel {
 	/**
 	 * The class Logger.
 	 */
@@ -57,27 +57,17 @@ public class NerdRanker {
 
 	private LowerKnowledgeBase wikipedia = null;
 
-	// regression model
-	private RandomForest forest = null;
-
-	// for serialization of the classifier
-	private XStream xstream = null;
-	private ArffParser arffParser = null;
-
-	private String arffDataset = null;
-	private AttributeDataset attributeDataset = null;
-	private Attribute[] attributes = null;
-
 	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
-				
-		xstream = new XStream();
-		arffParser = new ArffParser();
+
+		//model = MLModel.GRADIENT_TREE_BOOST;
+		model = MLModel.RANDOM_FOREST;
+
 		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
-	public double getProbability(double commonness, double relatedness, double quality) throws Exception {
+	public double getProbability(double commonness, double relatedness, double quality, boolean bestCaseContext) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -85,7 +75,10 @@ public class NerdRanker {
                 logger.debug("Invalid model file for nerd ranker.");
 			}
 			String xml = FileUtils.readFileToString(modelFile, "UTF-8");
-			forest = (RandomForest)xstream.fromXML(xml);
+			if (model == MLModel.RANDOM_FOREST)
+				forest = (RandomForest)xstream.fromXML(xml);
+			else
+				forest = (GradientTreeBoost)xstream.fromXML(xml);
 			if (attributeDataset != null) 
 				attributes = attributeDataset.attributes();
 			else {
@@ -103,29 +96,13 @@ public class NerdRanker {
 		}
 
 		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
-		//feature.prob_c = commonness;
-		feature.prob_c = 1.0;
+		feature.prob_c = commonness;
 		feature.relatedness = relatedness;
 		feature.context_quality = quality; 
 		//feature.dice_coef = dice_coef;
+		feature.bestCaseContext = bestCaseContext;
 		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
-	}
-
-	public void saveTrainingData(File file) throws IOException, Exception {
-		FileUtils.writeStringToFile(file, arffDataset);
-		System.out.println("Training data saved under " + file.getPath());
-	}
-	
-	public void loadTrainingData(File file) throws Exception{
-		attributeDataset = arffParser.parse(new FileInputStream(file));
-		System.out.println("Training data loaded from file " + file.getPath());
-	}
-	
-	public void clearTrainingData() {
-		//dataset = null;
-		arffDataset = null;
-		attributeDataset = null;
 	}
 
 	public void saveModel() throws IOException, Exception {
@@ -149,7 +126,10 @@ public class NerdRanker {
         	throw new NerdResourceException("Model file for nerd ranker does not exist.");
 		}
 		String xml = FileUtils.readFileToString(modelFile, "UTF-8");
-		forest = (RandomForest)xstream.fromXML(xml);
+		if (model == MLModel.RANDOM_FOREST)
+			forest = (RandomForest)xstream.fromXML(xml);
+		else
+			forest = (GradientTreeBoost)xstream.fromXML(xml);
 		logger.debug("Model for nerd ranker loaded.");
 	}
 
@@ -163,8 +143,14 @@ public class NerdRanker {
 		double[] y = attributeDataset.toArray(new double[attributeDataset.size()]);
 		
 		long start = System.currentTimeMillis();
-		forest = new RandomForest(attributeDataset.attributes(), x, y, 200);
-		
+		if (model == MLModel.RANDOM_FOREST)
+			forest = new RandomForest(attributeDataset.attributes(), x, y, 200);
+		else {
+			//nb trees: 200, maxNodes: 6, srinkage: 0.05, subsample: 0.5
+			forest = new GradientTreeBoost(attributeDataset.attributes(), x, y, 
+				GradientTreeBoost.Loss.LeastAbsoluteDeviation, 500, 6, 0.05, 0.5);
+		}
+
         System.out.println("NERD ranker model created in " + 
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
@@ -174,6 +160,8 @@ public class NerdRanker {
 		GenericRankerFeatureVector feat = new SimpleNerdFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		int nbArticle = 0;
+		this.positives = 1;
+		this.negatives = 0;
 		for (Article article : articles.getSample()) {
 			arffBuilder = trainArticle(article, arffBuilder);	
 			nbArticle++;
@@ -350,15 +338,30 @@ System.out.println("nb article processed: " + nbArticle);
 					double related = relatedness.getRelatednessTo(candidate, context, lang);
 //System.out.println("relatedness: " + related);
 
+					boolean bestCaseContext = true;
+					// actual label used
+					Label bestLabel = candidate.getLabel();
+					if (!entity.getNormalisedName().equals(bestLabel.getText())) {
+						bestCaseContext = false;
+					}
+
 					GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
-					//feature.prob_c = commonness;
-					feature.prob_c = 1.0;
+					feature.prob_c = commonness;
 					feature.relatedness = related;
 					feature.context_quality = quality;
+					feature.bestCaseContext = bestCaseContext;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
-					arffBuilder.append(feature.printVector()).append("\n");
-					nbInstance++;
+					// addition of the example is constrained by the sampling ratio
+					if ( ((feature.label == 0.0) && ((double)this.negatives / this.positives < sampling)) ||
+						 ((feature.label == 1.0) && ((double)this.negatives / this.positives >= sampling)) ) {
+						arffBuilder.append(feature.printVector()).append("\n");
+						nbInstance++;
+						if (feature.label == 0.0)
+							this.negatives++;
+						else
+							this.positives++;
+					}
 					
 /*					System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 							entity.toString());
@@ -467,8 +470,14 @@ System.out.println("nb article processed: " + nbArticle);
 			NerdEntity theEntity = new NerdEntity(entity);
 			entities.add(theEntity);
 		}
+		// the entity for evaluation
+		List<NerdEntity> evalEntities = new ArrayList<NerdEntity>();
+		for (Entity entity : nerEntities) {
+			NerdEntity theEntity = new NerdEntity(entity);
+			evalEntities.add(theEntity);
+		}
 
-		// process the text for building actual context for training
+		// process the text for building actual context for evaluation
 		ProcessText processText = ProcessText.getInstance();
 		nerEntities = new ArrayList<Entity>();
 		Language language = new Language(lang, 1.0);
@@ -481,8 +490,8 @@ System.out.println("nb article processed: " + nbArticle);
 			if (!entities.contains(theEntity))
 				entities.add(theEntity);
 		}
-		// add non trivial terms
-//System.out.println("number of NE found: " + entities.size());	
+		//System.out.println("number of NE found: " + entities.size());	
+		// add non NE terms
 		List<Entity> entities2 = processText.processBrutal(contentString, language);
 //System.out.println("number of non-NE found: " + entities2.size());	
 		for(Entity entity : entities2) {
@@ -494,7 +503,7 @@ System.out.println("nb article processed: " + nbArticle);
 
 		NerdEngine engine = NerdEngine.getInstance();
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
+			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());	
 		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false);
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();

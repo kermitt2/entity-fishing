@@ -49,11 +49,11 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// exact mention form of the entity, as appearing in the input
 	private String rawName = null;
 
-	// mention form of the entity, with soft normalization: replacing \n per space, 
+	// mention form of the entity, with soft normalisation: replacing \n per space, 
 	// replacing sequence of space by a unique space
 	// this is usually this surface form that should be used, in particular for
 	// acronyms where this field capture the expended form
-	private String normalizedRawName = null;
+	private String normalisedRawName = null;
 	
 	// preferred/normalised name of the entity
     private String preferredTerm = null;
@@ -148,9 +148,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public NerdEntity(Entity entity) {
 		rawName = entity.getRawName();
 		if (entity.getNormalisedName() != null) 
-			this.normalizedRawName = entity.getNormalisedName();
+			this.normalisedRawName = entity.getNormalisedName();
 		else if (rawName != null) {
-	        this.normalizedRawName = simpleStringNormalization(rawName);
+	        this.normalisedRawName = simpleStringNormalisation(rawName);
 		}
 		preferredTerm = entity.getNormalisedName();
 		type = entity.getType();
@@ -174,7 +174,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	public NerdEntity(NerdEntity entity) {
 		rawName = entity.getRawName();
-		normalizedRawName = entity.getNormalizedRawName();
+		normalisedRawName = entity.getNormalisedName();
 		preferredTerm = entity.getPreferredTerm();
 		type = entity.getType();
 		subTypes = entity.getSubTypes();
@@ -202,16 +202,16 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setRawName(String raw) {
         this.rawName = raw;
         if (raw != null) {
-	        this.normalizedRawName = simpleStringNormalization(raw);
+	        this.normalisedRawName = simpleStringNormalisation(raw);
 		}
     }
 
-	/*public void setNormalizedRawName(String raw) {
-        this.normalizedRawName = raw;
+	/*public void setNormalisedRawName(String raw) {
+        this.normalisedRawName = raw;
     }*/
 
-    public String getNormalizedRawName() {
-        return normalizedRawName;
+    public String getNormalisedName() {
+        return normalisedRawName;
     }
 
 	public String getPreferredTerm() {
@@ -697,8 +697,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
 				
-		if (normalizedRawName != null)
-			buffer.append(normalizedRawName + "\t");
+		if (normalisedRawName != null)
+			buffer.append(normalisedRawName + "\t");
 		if (definitions != null)
 			buffer.append("[" + definitions.toString() + "]\t");	
 		if (wiktionaryExternalRef != -1) {
@@ -763,7 +763,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
-		byte[] encodedRawName = encoder.quoteAsUTF8(normalizedRawName);
+		byte[] encodedRawName = encoder.quoteAsUTF8(normalisedRawName);
 		String outputRawName = new String(encodedRawName); 
 		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
 		if (preferredTerm != null) {
@@ -941,7 +941,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
-		byte[] encodedRawName = encoder.quoteAsUTF8(normalizedRawName);
+		byte[] encodedRawName = encoder.quoteAsUTF8(normalisedRawName);
 		String outputRawName = new String(encodedRawName); 
 		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
 		/*if (preferredTerm != null) {
@@ -1105,7 +1105,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		return theSense;
 	}
 
-	private String simpleStringNormalization(String str) {
+	private String simpleStringNormalisation(String str) {
 		return str.replace("\n", " ").trim().replaceAll(" +", " ");
 	}
 }

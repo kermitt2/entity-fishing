@@ -143,6 +143,41 @@ public class TestProcessText {
         }
     }
 
+    @Test
+    public void testDICECoefficient() {
+        if (processText == null) {
+            System.err.println("text processor was not properly initialised!");
+        }
+        
+        String mention = "Setophaga ruticilla";
+        Double dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+
+        mention = "Setophaga";
+        dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+
+        mention = "ruticilla";
+        dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+
+        mention = "bird";
+        dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+
+        mention = "washing machine";
+        dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+
+        mention = "washing";
+        dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+
+        mention = "machine";
+        dice = ProcessText.getDICECoefficient(mention, "en");
+        System.out.println(mention + ": " + dice);
+    }
+
     /*@Test
     public void testNgram() {
         if (processText == null) {

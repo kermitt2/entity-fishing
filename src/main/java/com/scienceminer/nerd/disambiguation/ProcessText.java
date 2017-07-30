@@ -6,6 +6,9 @@ import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.Utilities;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Label;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -1092,4 +1095,84 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		}
 		return entities;
     }
+
+    /**
+     * Compute modified generalized DICE coefficient of a term given global Wikipedia frequencies,
+     * in order to capture lexical cohesion of the term.
+     * see [Park and al., 2002] for formula of Generalized DICE coefficients, 
+     * http://aclweb.org/anthology/C02-1142 
+     */
+    public static double getDICECoefficient(String term, String lang) {
+		// term frequency
+		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
+		Label label = NerdEngine.bestLabel(term, wikipedia);
+
+		double avFreqTerm = 0.0;
+		if (label.getOccCount() != 0)
+			avFreqTerm = (double)label.getOccCount();
+
+		// tokenise according to language and remove punctuations/delimeters
+		List<String> tokens = GrobidAnalyzer.getInstance().tokenize(term, new Language(lang, 1.0));
+		List<String> newTokens = new ArrayList<String>();
+		for(String token : tokens) {
+			if ((token.trim().length() == 0) || (delimiters.indexOf(token) != -1))
+				continue;
+			newTokens.add(token);
+		}
+		tokens = newTokens;
+		int termLength = tokens.size();
+
+		double avFreqComponent = 1000000000.0;
+
+		// get component frequencies
+
+		// The modification with respect to Generalized DICE coefficient is here - we take the min rather
+		// the sum of component frequencies, the idea is to better capture terms where one component is
+		// very frequent and the second appear only with the first component (component frequency then 
+		// equals full term frequency) which mean normally a very high lexical cohesion for the term.
+		
+		for(String component : tokens) {
+			Label labelComponent = NerdEngine.bestLabel(component, wikipedia);
+			if (labelComponent.getOccCount() < avFreqTerm) {
+				//avFreqComponent += (double)labelComponent.getOccCount() + avFreqTerm;
+				avFreqComponent = Math.min(avFreqComponent, (double)labelComponent.getOccCount() + avFreqTerm);
+			}
+			else {
+				//avFreqComponent += (double)labelComponent.getOccCount();
+				avFreqComponent = Math.min(avFreqComponent, (double)labelComponent.getOccCount());
+			}
+
+//System.out.println(component + " - labelComponent.getOccCount(): " + labelComponent.getOccCount() );
+		}
+				
+		// compute generalized DICE coef.
+		double dice = 0.0;
+		
+		if (avFreqTerm == 0.0)
+			dice = 0.0;
+		else if ( (avFreqTerm <= 1.0) & (termLength > 1) ) {
+			// we don't want to have dice == 0 when only 1 occurence, but at least a very small value
+			dice = (Math.log10(1.1) * termLength) / avFreqComponent; 
+		}
+		else {
+			// get the default generalized DICE's coef.
+			dice = (avFreqTerm * Math.log10((double)avFreqTerm) * termLength) / avFreqComponent;
+		}
+		
+		// single word needs to be reduced (see [Park & al., 2002])
+		if ( (termLength == 1) && (avFreqTerm != 0.0) ) {
+			dice = dice / avFreqTerm;
+		}
+
+//System.out.println("label.getOccCount(): " + label.getOccCount());
+//System.out.println("avFreqTerm: " + avFreqTerm);
+//System.out.println("avFreqComponent: " + avFreqComponent);
+//System.out.println("termLength: " + termLength);
+	
+		if (dice > 1.0)
+			dice = 1.0;
+
+		return dice;
+    }
+
 }

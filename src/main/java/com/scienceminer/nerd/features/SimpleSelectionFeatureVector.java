@@ -22,6 +22,7 @@ public class SimpleSelectionFeatureVector extends GenericSelectionFeatureVector 
 		Add_inContext = true;
 		Add_isNe = true;
 		Add_tf_idf = true;
+		Add_dice = true;
 		target_numeric = true;
 		target_class = false;
 	}

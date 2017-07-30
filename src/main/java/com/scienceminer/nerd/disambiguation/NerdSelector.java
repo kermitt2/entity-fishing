@@ -48,7 +48,7 @@ import com.thoughtworks.xstream.*;
  * entity realized by a mention. This model is applied after the NerdRanker and make a 
  * decision based on the ranked entities and the context. 
  */
-public class NerdSelector {
+public class NerdSelector extends NerdModel {
 	/**
 	 * The class Logger.
 	 */
@@ -59,24 +59,15 @@ public class NerdSelector {
 
 	private LowerKnowledgeBase wikipedia = null;
 
-	// regression model
-	private RandomForest forest = null;
-
-	// for serialization of the classifier
-	private XStream xstream = null;
-	private ArffParser arffParser = null;
-
-	private String arffDataset = null;
-	private AttributeDataset attributeDataset = null;
-	private Attribute[] attributes = null;
-
 	public NerdSelector(LowerKnowledgeBase wikipedia) throws Exception {
+		super();
 		this.wikipedia = wikipedia;
 		
 		NerdConfig conf = wikipedia.getConfig();
+
+		//model = MLModel.GRADIENT_TREE_BOOST;
+		model = MLModel.RANDOM_FOREST;
 		
-		xstream = new XStream();
-		arffParser = new ArffParser();
 		SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
@@ -88,7 +79,8 @@ public class NerdSelector {
 								double relatedness,
 								boolean inContext,
 								boolean isNe,
-								double tf_idf) throws Exception {
+								double tf_idf, 
+								double dice) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -96,7 +88,10 @@ public class NerdSelector {
                 logger.debug("Invalid model file for nerd selector.");
 			}
 			String xml = FileUtils.readFileToString(modelFile, "UTF-8");
-			forest = (RandomForest)xstream.fromXML(xml);
+			if (model == MLModel.RANDOM_FOREST)
+				forest = (RandomForest)xstream.fromXML(xml);
+			else
+				forest = (GradientTreeBoost)xstream.fromXML(xml);
 			if (attributeDataset != null) 
 				attributes = attributeDataset.attributes();
 			else {
@@ -122,29 +117,9 @@ public class NerdSelector {
 		feature.inContext = inContext;
 		feature.isNe = isNe;
 		feature.tf_idf = tf_idf;
+		feature.dice = dice;
 		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
-	}
-
-	/**
-	 * Saves the training data to an arff file, so that it can be used by Weka.
-	 */
-	public void saveTrainingData(File file) throws IOException, Exception {
-		FileUtils.writeStringToFile(file, arffDataset);
-		System.out.println("Training data saved under " + file.getPath());
-	}
-	
-	/**
-	 * Loads the training data from an arff file saved previously. 
-	 */
-	public void loadTrainingData(File file) throws Exception{
-		attributeDataset = arffParser.parse(new FileInputStream(file));
-		System.out.println("Training data loaded from file " + file.getPath());
-	}
-	
-	public void clearTrainingData() {
-		arffDataset = null;
-		attributeDataset = null;
 	}
 
 	public void saveModel() throws IOException, Exception {
@@ -168,7 +143,10 @@ public class NerdSelector {
         	throw new NerdResourceException("Model file for nerd selector does not exist.");
 		}
 		String xml = FileUtils.readFileToString(modelFile, "UTF-8");
-		forest = (RandomForest)xstream.fromXML(xml);
+		if (model == MLModel.RANDOM_FOREST)
+			forest = (RandomForest)xstream.fromXML(xml);
+		else
+			forest = (GradientTreeBoost)xstream.fromXML(xml);
 		logger.debug("Model for nerd ranker loaded.");
 	}
 
@@ -182,8 +160,13 @@ public class NerdSelector {
 		double[] y = attributeDataset.toArray(new double[attributeDataset.size()]);
 		
 		long start = System.currentTimeMillis();
-		forest = new RandomForest(attributeDataset.attributes(), x, y, 200);
-		
+		if (model == MLModel.RANDOM_FOREST)
+			forest = new RandomForest(attributeDataset.attributes(), x, y, 200);
+		else {
+			//nb trees: 500, maxNodes: 6, srinkage: 0.05, subsample: 0.7
+			forest = new GradientTreeBoost(attributeDataset.attributes(), x, y, 
+				GradientTreeBoost.Loss.LeastAbsoluteDeviation, 500, 6, 0.05, 0.7);
+		}
         System.out.println("NERD selector model created in " + 
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
@@ -213,6 +196,8 @@ System.out.println("nb article processed: " + nbArticle);
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		FileUtils.writeStringToFile(file, arffBuilder.toString());
 		int nbArticle = 0;
+		positives = 1;
+		negatives = 0;
 		NerdRanker ranker = new NerdRanker(wikipedia);
 		for (Article article : articles.getSample()) {
 			arffBuilder = new StringBuilder();
@@ -354,8 +339,6 @@ System.out.println(" - training " + article);
 
 		double quality = (double)context.getQuality();
 		int nbInstance = 0;
-		int nbPositiveInstance = 0;
-		int nbNegativeInstance = 0;
 		// second pass for producing the disambiguation observations
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -384,8 +367,15 @@ System.out.println(" - training " + article);
 					double related = relatedness.getRelatednessTo(candidate, context, lang);
 //System.out.println("relatedness: " + related);
 
+					boolean bestCaseContext = true;
+					// actual label used
+					Label bestLabel = candidate.getLabel();
+					if (!entity.getNormalisedName().equals(bestLabel.getText())) {
+						bestCaseContext = false;
+					}
+
 					// nerd score
-					double nerd_score = ranker.getProbability(commonness, related, quality);
+					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext);
 
 					boolean inContext = false;
 					if (context.contains(candidate))
@@ -396,7 +386,7 @@ System.out.println(" - training " + article);
 						isNe = true;
 
 					GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
-					List<String> words = analyzer.tokenize(entity.getRawName(), 
+					List<String> words = analyzer.tokenize(entity.getNormalisedName(), 
 						new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
 					SimpleSelectionFeatureVector feature = new SimpleSelectionFeatureVector();
@@ -407,6 +397,7 @@ System.out.println(" - training " + article);
 					feature.relatedness = related;
 					feature.inContext = inContext;
 					feature.isNe = isNe;
+					feature.dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
 
 					int tf = TextUtilities.getOccCount(candidate.getLabel().getText(), contentString);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
@@ -414,14 +405,17 @@ System.out.println(" - training " + article);
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
-					if ( (feature.label == 1.0) || (nbNegativeInstance < nbPositiveInstance) ) { 	
+					// addition of the example is constrained by the sampling ratio
+					if ( ((feature.label == 0.0) && ((double)this.negatives / this.positives < sampling)) ||
+						 ((feature.label == 1.0) && ((double)this.negatives / this.positives >= sampling)) ) {
 						arffBuilder.append(feature.printVector()).append("\n");
 						nbInstance++;
-						if (feature.label == 1.0) 
-							nbPositiveInstance++;
-						else 
-							nbNegativeInstance++;
-					}			
+						if (feature.label == 0.0)
+							this.negatives++;
+						else
+							this.positives++;
+					}
+		
 					//System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 					//		entity.toString());
 					//System.out.println("\t\t" + "nerd_score: " + nerd_score + 

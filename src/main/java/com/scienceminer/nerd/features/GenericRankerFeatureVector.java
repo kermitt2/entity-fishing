@@ -40,6 +40,8 @@ public class GenericRankerFeatureVector {
 	
 	public boolean Add_dice_coef = false; // lexical cohesion measure based on DICE coefficient
 
+	public boolean Add_bestCaseContext = false; // indicate if the actual case context matches the sense best term case
+
 	// relateness with the context:
 	// - with context terms
 	// - with all other candidates (average)
@@ -82,6 +84,8 @@ public class GenericRankerFeatureVector {
 
 	public long occ_term = 0;
 	public double dice_coef = 0.0;
+
+	public boolean bestCaseContext = false; // true if the actual case context matches the sense best term case
 
 	/**
 	 *  Write header of ARFF files.
@@ -131,7 +135,9 @@ public class GenericRankerFeatureVector {
 		if (Add_occ_term) 
 			header.append("@attribute occ_term NUMERIC\n");	
 		if (Add_dice_coef) 
-			header.append("@attribute dice_coef REAL\n");			
+			header.append("@attribute dice_coef REAL\n");
+		if (Add_bestCaseContext) 
+			header.append("@attribute bestCaseContext {false, true}\n");				
 		
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -174,6 +180,8 @@ public class GenericRankerFeatureVector {
 		if (Add_occ_term) 
 			num++;
 		if (Add_dice_coef) 
+			num++;
+		if (Add_bestCaseContext)
 			num++;
 		// class
 		num++;	
@@ -285,6 +293,12 @@ public class GenericRankerFeatureVector {
 		}
 		if (Add_dice_coef) {
 			res.append("," + dice_coef);
+		}
+		if (Add_bestCaseContext) {
+			if (bestCaseContext) 
+				res.append(",true");
+			else 
+				res.append(",false");
 		}
 		
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
@@ -412,6 +426,24 @@ public class GenericRankerFeatureVector {
 		if (Add_dice_coef) {
 			result[i] = dice_coef;
 			i++;
+		}
+		if (Add_bestCaseContext) {
+			Attribute att = attributes[i];
+			double trueVal = 1.0;
+			double falseVal = 0.0;
+			try {
+				trueVal = att.valueOf("true");
+				falseVal = att.valueOf("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (bestCaseContext) 
+				result[i] = trueVal;
+			else 
+				result[i] = falseVal;
+			i++;
+
 		}
 
 		return result;

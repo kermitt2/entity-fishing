@@ -14,6 +14,7 @@ import java.text.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.service.NerdQuery;
 
 import com.fasterxml.jackson.core.io.*;
 
@@ -103,6 +104,13 @@ public class DocumentContext extends NerdContext {
 		return this.entityCount;
 	}
 
+	public Pair<NerdEntity, Integer> getEntityCount(String surface) {
+		if (this.entityCount != null)
+			return this.entityCount.get(surface);
+		else 
+			return null;
+	}
+
 	public void addEntityCount(String surface, NerdEntity entity) {
 		if (this.entityCount == null)
 			entityCount = new HashMap<String, Pair<NerdEntity, Integer>>();
@@ -113,6 +121,36 @@ public class DocumentContext extends NerdContext {
 			Pair<NerdEntity, Integer> thePair = entityCount.get(surface);
 			Pair<NerdEntity, Integer> newPair = new Pair<NerdEntity, Integer>(thePair.getA(), thePair.getB() + 1);
 			entityCount.replace(surface, newPair);
+		}
+	}
+
+	/**
+	 * Update the document content with results present in a given NerdQuery. This NerdQuery must be
+	 * fully disambiguated and processed.    
+	 */
+	public void update(NerdQuery nerdQuery) {
+		// update entity counts
+		List<NerdEntity> entities = nerdQuery.getEntities();
+		for(NerdEntity entity : entities) {
+			addEntityCount(entity.getRawName(), entity);
+		}
+
+		// update acronyms
+		if (nerdQuery.getContext() != null) {
+			Map<Entity,Entity> localAcronyms = nerdQuery.getContext().getAcronyms();
+			if (localAcronyms != null) {
+				for (Map.Entry<Entity, Entity> entry : localAcronyms.entrySet()) {
+	        		Entity base = entry.getValue();
+	        		Entity acronym = entry.getKey();
+
+	        		if (acronyms == null)
+	        			acronyms = new HashMap<Entity, Entity>();
+
+	        		if (acronyms.get(acronym) == null) {
+	        			acronyms.put(acronym, base);
+	        		}
+	        	}
+	        }
 		}
 	}
 
