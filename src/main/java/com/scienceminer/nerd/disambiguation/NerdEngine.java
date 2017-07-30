@@ -238,6 +238,8 @@ System.out.println("--");
 
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
+		if (nerdQuery.getMinSelectorScore() != 0.0)
+			minSelectorScore = nerdQuery.getMinSelectorScore();
 
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -327,6 +329,8 @@ for(NerdCandidate cand : cands) {
 
 		// final pruning
 		double minRankerScore = wikipedia.getConfig().getMinRankerScore();
+		if (nerdQuery.getMinRankerScore() != 0.0)
+			minRankerScore = nerdQuery.getMinRankerScore();
 		if ( (!shortTextVal) && (!nerdQuery.getNbest()) )
 			prune(result, minRankerScore);
 

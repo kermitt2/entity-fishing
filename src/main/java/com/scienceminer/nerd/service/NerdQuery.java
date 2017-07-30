@@ -108,6 +108,10 @@ public class NerdQuery {
     // indicate if the full description of the entities should be included in the result
     private boolean full = false;
 
+    // query-based threshold, override default values in the config file only for the present query
+    private double minSelectorScore;
+    private double minRankerScore;
+
 	public NerdQuery() {
 	}
 
@@ -358,6 +362,22 @@ public class NerdQuery {
 
     public void setFull(boolean full) {
         this.full = full;
+    }
+
+    public double getMinSelectorScore() {
+        return this.minSelectorScore;
+    }
+
+    public void setMinSelectionScore(double minSelectorScore) {
+        this.minSelectorScore = minSelectorScore;
+    }
+
+    public double getMinRankerScore() {
+        return this.minRankerScore;
+    }
+
+    public void setMinRankerScore(double minRankerScore) {
+        this.minRankerScore = minRankerScore;
     }
 
     public String toJSON() {

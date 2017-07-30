@@ -499,7 +499,8 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
 				if (workingQuery.getEntities() != null) {
 					resultingEntities.addAll(workingQuery.getEntities());
 					// update document context
-					((DocumentContext)documentContext).update(workingQuery);
+					if (documentContext != null)
+						((DocumentContext)documentContext).update(workingQuery);
 				}
 			} catch (Exception e) {
 				LOGGER.error("An unexpected exception occurs. ", e);
