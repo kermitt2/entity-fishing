@@ -670,8 +670,6 @@ public class NerdQuery {
     }
 
     public static NerdQuery fromJson(String theQuery) throws QueryException {
-        NerdQuery nerdQuery = null;
-
         if(StringUtils.isEmpty(theQuery)) {
             throw new QueryException("The query cannot be null:\n " + theQuery);
         }

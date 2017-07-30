@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.exceptions.QueryException;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Entity;
@@ -10,7 +11,7 @@ import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.engines.FullTextParser;
-import org.grobid.core.engines.label.SegmentationLabel;
+import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
@@ -62,8 +63,8 @@ public class NerdRestProcessFile {
             LOGGER.debug(">> input PDF file saved locally...");
 
             GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
-            if (originFile == null) {
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+            if (originFile == null || FileUtils.sizeOf(originFile) == 0) {
+                response = Response.status(Status.BAD_REQUEST).build();
             } else {
                 long start = System.currentTimeMillis();
 				NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
@@ -114,7 +115,7 @@ public class NerdRestProcessFile {
 		            // the corresponding model to further filter by structure types
 
 		            // from the header, we are interested in title, abstract and keywords
-		            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabel.HEADER);
+		            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
 		            if (documentParts != null) {
 		                String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
 		                List<LayoutToken> tokenizationHeader =
@@ -218,7 +219,7 @@ public class NerdRestProcessFile {
 
 		            // we can process all the body, in the future figure and table could be the
 		            // object of more refined processing
-		            documentParts = doc.getDocumentPart(SegmentationLabel.BODY);
+		            documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
 		            if (documentParts != null) {
 						System.out.println("Process body...");
 						// full text processing
@@ -255,7 +256,7 @@ public class NerdRestProcessFile {
 		            // we don't process references (although reference titles could be relevant)
 
 		            // acknowledgement
-		            documentParts = doc.getDocumentPart(SegmentationLabel.ACKNOWLEDGEMENT);
+		            documentParts = doc.getDocumentPart(SegmentationLabels.ACKNOWLEDGEMENT);
 		            if (documentParts != null) {
 						System.out.println("Process acknowledgement...");
 		            	workingQuery.setEntities(null);
@@ -266,7 +267,7 @@ public class NerdRestProcessFile {
 		            }
 
 		            // we can process annexes
-		            documentParts = doc.getDocumentPart(SegmentationLabel.ANNEX);
+		            documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
 		            if (documentParts != null) {
 						System.out.println("Process annex...");
 		            	//workingQuery.setEntities(null);
@@ -277,7 +278,7 @@ public class NerdRestProcessFile {
 		            }
 
 		            // footnotes are also relevant
-		            documentParts = doc.getDocumentPart(SegmentationLabel.FOOTNOTE);
+		            documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
 		            if (documentParts != null) {
 						System.out.println("Process footnotes...");
 		            	//workingQuery.setEntities(null);
