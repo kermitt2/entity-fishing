@@ -63,7 +63,7 @@ public class NerdRanker extends NerdModel {
 		//model = MLModel.GRADIENT_TREE_BOOST;
 		model = MLModel.RANDOM_FOREST;
 
-		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
+		GenericRankerFeatureVector feature = new SimpleRankerFeatureVector();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
@@ -83,7 +83,7 @@ public class NerdRanker extends NerdModel {
 				attributes = attributeDataset.attributes();
 			else {
 				StringBuilder arffBuilder = new StringBuilder();
-				GenericRankerFeatureVector feat = new SimpleNerdFeatureVector();
+				GenericRankerFeatureVector feat = new SimpleRankerFeatureVector();
 				arffBuilder.append(feat.getArffHeader()).append("\n");
 				arffBuilder.append(feat.printVector());
 				String arff = arffBuilder.toString();
@@ -95,12 +95,15 @@ public class NerdRanker extends NerdModel {
 				MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 		}
 
-		GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
-		feature.prob_c = commonness;
+		GenericRankerFeatureVector feature = new SimpleRankerFeatureVector();
+		//feature.prob_c = commonness;
 		feature.relatedness = relatedness;
+		//feature.relatedness = 0.0;
 		feature.context_quality = quality; 
+		//feature.context_quality = 0.0; 
 		//feature.dice_coef = dice_coef;
 		feature.bestCaseContext = bestCaseContext;
+		//feature.bestCaseContext = false;
 		double[] features = feature.toVector(attributes);
 		return forest.predict(features);
 	}
@@ -157,7 +160,7 @@ public class NerdRanker extends NerdModel {
 
 	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
 		StringBuilder arffBuilder = new StringBuilder();
-		GenericRankerFeatureVector feat = new SimpleNerdFeatureVector();
+		GenericRankerFeatureVector feat = new SimpleRankerFeatureVector();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
 		int nbArticle = 0;
 		this.positives = 1;
@@ -345,11 +348,14 @@ System.out.println("nb article processed: " + nbArticle);
 						bestCaseContext = false;
 					}
 
-					GenericRankerFeatureVector feature = new SimpleNerdFeatureVector();
-					feature.prob_c = commonness;
+					GenericRankerFeatureVector feature = new SimpleRankerFeatureVector();
+					//feature.prob_c = commonness;
 					feature.relatedness = related;
+					//feature.relatedness = 0.0;
 					feature.context_quality = quality;
+					//feature.context_quality = 0.0;
 					feature.bestCaseContext = bestCaseContext;
+					//feature.bestCaseContext = false;
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					// addition of the example is constrained by the sampling ratio
@@ -518,11 +524,13 @@ System.out.println("nb article processed: " + nbArticle);
 					int endRef = refEntity.getOffsetEnd(); 
 					if ((start == startRef) && (end == endRef)) {
 						found = true;
+						//producedDisamb.add(new Integer(refEntity.getWikipediaExternalRef()));
 						break;
 					}
 				}
-				if (found)
+				if (found) {
 					producedDisamb.add(new Integer(cands.get(0).getWikipediaExternalRef()));
+				}
 			}
 		}
  

@@ -8,9 +8,9 @@ import java.util.regex.*;
 /**
  * A simple working features set for NERD ranker.
  */
-public class SimpleNerdFeatureVector extends GenericRankerFeatureVector {
+public class SimpleRankerFeatureVector extends GenericRankerFeatureVector {
 
-	public SimpleNerdFeatureVector() {
+	public SimpleRankerFeatureVector() {
 		super();
 		title = "(N)ERD ranker";
 		//Add_prob_c = true;
