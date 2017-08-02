@@ -327,7 +327,7 @@ public class NerdRestKB {
 				StringBuilder jsonBuilder = new StringBuilder();
 				jsonBuilder.append("{ \"term\": \"" + term + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
 				
-				Label lbl = new Label(wikipedia.getEnvironment(), term);
+				Label lbl = new Label(wikipedia.getEnvironment(), term.trim());
 				if (lbl.exists()) {
 					Label.Sense[] senses = lbl.getSenses();
 					if ((senses != null) && (senses.length > 0)) {

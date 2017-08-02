@@ -317,11 +317,11 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	}
 	
 	public double getProb_c() {
-		return prob_c;
+		return this.prob_c;
 	}
 	
 	public void setProb_c(double p) {
-		prob_c = p;
+		this.prob_c = p;
 	}
 	
 	public double getProb_i() {

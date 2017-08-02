@@ -1,15 +1,15 @@
 .. topic:: Description of the REST API for disambiguation
 
-(N)ERD REST API
-===============
+*entity-fishing* REST API
+=========================
 
-As RESTful web services, (N)ERD is defined by a certain number of stateless transformations of data made available to "consumers" via its interface.
+As RESTful web services, *entity-fishing* is defined by a certain number of stateless transformations of data made available to "consumers" via its interface.
 
 All these RESTful services are available through Cross-origin resource sharing (CORS), allowing clients, such as web browser and server to interact in a flexible manner with cross-origin request.
 
 
-(N)ERD query processing
-***********************
+*entity-fishing* query processing
+*********************************
 
 
 The NERD query processing service takes as input a JSON structured query and returns the JSON query enriched with a list of identified and, when possible, disambiguated entities.
@@ -188,7 +188,7 @@ The annotated text is displayed to a user which might correct some invalid annot
 
 The client updates the modified annotations in the first JSON response and can send it back to the service now as new query via the */disambiguate*.
 
-The corrected annotations will then be exploited by the (N)ERD system to possibly improve the other annotations and disambiguations.
+The corrected annotations will then be exploited by the *entity-fishing* system to possibly improve the other annotations and disambiguations.
 
 (7) processSentence
 """""""""""""""""""
@@ -340,7 +340,7 @@ Example request:
 Response
 --------
 
-The response returned by the (N)ERD query processing service is basically the same JSON as the JSON query, enriched by the list of identified and, when possible, disambiguated entities, together with a server runtime information.
+The response returned by the *entity-fishing* query processing service is basically the same JSON as the JSON query, enriched by the list of identified and, when possible, disambiguated entities, together with a server runtime information.
 
 If the textual content to be processed is provided in the query as a string, the identified entities will be associated to offset positions in the input string, so that the client can associate precisely the textual mention and the entity “annotation”.
 
@@ -600,17 +600,17 @@ A bounding box is defined by the following attributes:
 As a PDF document expresses value in abstract PDF unit and do not have resolution, the coordinates have to be converted into the scale of the PDF layout used by the client (usually in pixels).
 This is why the dimension of the pages are necessary for the correct scaling, taking into account that, in a PDF document, pages can be of different size.
 
-The (N)ERD console offers a reference implementation with PDF.js for dynamically positioning entity annotations on a processed PDF.
+The *entity-fishing* console offers a reference implementation with PDF.js for dynamically positioning entity annotations on a processed PDF.
 
 Knowledge base concept retrieval
 ********************************
 
 This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main NERD query processing service in order to retrieve a full description of an identified entity.
 
-The (N)ERD content processing service returns the identifiers of the resulting entities with some position offset information. Then, if the client wants, for instance, to display an infobox for this entity, it will send a second call to this service and retrieve the full information for this particular entity.
+The *entity-fishing* content processing service returns the identifiers of the resulting entities with some position offset information. Then, if the client wants, for instance, to display an infobox for this entity, it will send a second call to this service and retrieve the full information for this particular entity.
 Adding all the associated information for each entity in the response of the NERD query processing service would result in a very large response which would slow a lot the client, such as a web browser for instance. Using such separate queries allows efficient asynchronous calls which will never block a browser and permits to make only one call per entity, even if the same entity has been found in several places in the same text.
 
-The (N)ERD console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main NERD query processing service and the Knowledge base concept retrieval.
+The *entity-fishing* console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main NERD query processing service and the Knowledge base concept retrieval.
 
 
 Response status codes
@@ -983,7 +983,7 @@ Customisation API
 *****************
 
 The customisation is a way to specialize the entity recognition, disambiguation and resolution for a particular domain.
-This API allows to manage customisations for the (N)ERD instance which can then be used as a parameter by the (N)ERD services.
+This API allows to manage customisations for the *entity-fishing* instance which can then be used as a parameter by the *entity-fishing* services.
 
 Customisation are identified by their name (or, also called profile in the API).
 

@@ -15,7 +15,7 @@ public class GenericRankerFeatureVector {
 	public String classes = "N"; // class label if known
 	
 	// mask of features
-	public boolean Add_prob_c = false;  // conditional probability of the concept given the string
+	public boolean Add_prob_c = false;  // commonness: conditional probability of the concept given the string
 	public boolean Add_prob_i = false; // conditional probability of the string given the concept 
 												 // (i.e. reverse prob_c)
 	public boolean Add_frequencyStrict = false;  // frequency of usage of the string to refer to the 

@@ -3,7 +3,7 @@
 Install, build and run
 ======================
 
-(N)ERD requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. 
+*entity-fishing* requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. 
 
 Running the service requires at least 2GB of RAM, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities).
 After decompressing all the index data, 34 GB of disk space will be used - be sure to have enough free space. SSD is recommended for best performance and experience.
@@ -15,7 +15,7 @@ The path to grobid-home shall indicated in the file `src/main/resource/nerd.prop
    com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
    com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.properties
 
-Install (N)ERD:
+Install *entity-fishing*:
 ::
    $ git clone https://github.com/kermitt2/nerd
 
@@ -64,4 +64,4 @@ Then install the compiled indexed data:
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
-For more information, see the next section on the (N)ERD Console.
+For more information, see the next section on the *entity-fishing* Console.

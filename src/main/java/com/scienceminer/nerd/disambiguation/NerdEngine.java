@@ -322,8 +322,8 @@ for(NerdCandidate cand : cands) {
 		}
 		Collections.sort(result);
 
-		//if (!shortText && !nerdQuery.getNbest())
-		if (!nerdQuery.getNbest()) {
+		if (!shortTextVal && !nerdQuery.getNbest()) {
+		//if (!nerdQuery.getNbest()) {
 			result = pruneOverlap(result, shortTextVal);
 		}
 
@@ -365,15 +365,14 @@ for(NerdCandidate cand : cands) {
 					continue;
 				}
 
-				String normalisedEntity = entity.getNormalisedName();
-				if (isEmpty(normalisedEntity))
+				String normalisedString = entity.getNormalisedName();
+				if (isEmpty(normalisedString))
 					continue;
 
-				Label bestLabel = this.bestLabel(normalisedEntity, wikipedia);
-				
+				Label bestLabel = this.bestLabel(normalisedString, wikipedia);
 				if (!bestLabel.exists()) {
 //if (entity.getIsAcronym()) 
-//System.out.println("No concepts found for '" + normalisedEntity + "' " + " / " + entity.getRawName() );
+//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
 					//if (strict)
 					if (entity.getType() != null) {
 						result.put(entity, candidates);
@@ -382,15 +381,14 @@ for(NerdCandidate cand : cands) {
 				}
 				else {
 //if (entity.getIsAcronym()) 
-//System.out.println("Concept(s) found for '" + normalisedEntity + "' " + " / " + entity.getRawName());
+//System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName());
 					entity.setLinkProbability(bestLabel.getLinkProbability());
-//System.out.println("LinkProbability for the string '" + normalisedEntity + "': " + entity.getLinkProbability());
+//System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
 					Label.Sense[] senses = bestLabel.getSenses();
-					if ((senses != null) && (senses.length > 0)) {
-//System.out.println(senses.length + " concept(s) found for '" + normalisedEntity + "'");					
+					if ((senses != null) && (senses.length > 0)) {				
 						int s = 0;
 						for(int i=0; i<senses.length; i++) {
-							Label.Sense sense = senses[i];
+							Label.Sense sense = senses[i];	
 							//PageType pageType = PageType.values()[sense.getType()];
 							PageType pageType = sense.getType();
 							if (pageType != PageType.article)
@@ -402,14 +400,9 @@ for(NerdCandidate cand : cands) {
 							String title = sense.getTitle();
 							if ((title == null) || title.startsWith("List of") || title.startsWith("Liste des")) 
 								continue;
+							
 							NerdCandidate candidate = new NerdCandidate(entity);
-							candidate.setWikiSense(sense);
-							candidate.setWikipediaExternalRef(sense.getId());
-							candidate.setProb_c(sense.getPriorProbability());
-							candidate.setPreferredTerm(sense.getTitle());
-							candidate.setLang(lang);
-							candidate.setLabel(bestLabel);
-							candidate.setWikidataId(sense.getWikidataId());
+
 							boolean invalid = false;
 //System.out.println("check categories for " + sense.getId());							
 							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
@@ -435,6 +428,14 @@ for(NerdCandidate cand : cands) {
 							}
 							if (invalid)
 								continue;
+							
+							candidate.setWikiSense(sense);
+							candidate.setWikipediaExternalRef(sense.getId());
+							candidate.setProb_c(sense.getPriorProbability());
+							candidate.setPreferredTerm(sense.getTitle());
+							candidate.setLang(lang);
+							candidate.setLabel(bestLabel);
+							candidate.setWikidataId(sense.getWikidataId());
 							candidates.add(candidate);
 							s++;
 							if (s == MAX_SENSES-1) {
@@ -1254,7 +1255,9 @@ System.out.println("--");*/
 
 			List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
 			for(NerdCandidate candidate : candidates) {
-				if (candidate.getSelectionScore() < threshold)
+				if ( (candidate.getSelectionScore() < minSenseProbability) && shortText )
+					continue;
+				else if ( (candidate.getSelectionScore() < threshold) && !shortText )
 					continue;
 				else {
 					newCandidates.add(candidate);
@@ -1606,42 +1609,42 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		toBeUpDated.setSubTypes(best.getSubTypes());
 	}	
 
-	public static Label bestLabel(String normalisedEntity, LowerKnowledgeBase wikipedia) {
+	public static Label bestLabel(String normalisedString, LowerKnowledgeBase wikipedia) {
 		Label label = null;
-
-		//String normalisedEntity = entity.getNormalisedName();
-		if (isEmpty(normalisedEntity))
+		//String normalisedString = entity.getNormalisedName();
+		if (isEmpty(normalisedString))
 			return null;
 
 		// normalised mention following case as it appears
-		Label bestLabel = new Label(wikipedia.getEnvironment(), normalisedEntity);
+		Label bestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
 
 		// try case variants
-		if (!bestLabel.exists() || 
-			ProcessText.isAllUpperCase(normalisedEntity) ||
-			ProcessText.isAllLowerCase(normalisedEntity) ) {
+		if (!bestLabel.exists() /*|| 
+			ProcessText.isAllUpperCase(normalisedString) ||
+			ProcessText.isAllLowerCase(normalisedString) */
+			) {
 			
 			// full upper or lower case
-			if (ProcessText.isAllUpperCase(normalisedEntity)) {
-				label = new Label(wikipedia.getEnvironment(), normalisedEntity.toLowerCase());
+			if (ProcessText.isAllUpperCase(normalisedString)) {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
 			}
-			else if (ProcessText.isAllLowerCase(normalisedEntity)) {
-				label = new Label(wikipedia.getEnvironment(), normalisedEntity.toUpperCase());
+			else if (ProcessText.isAllLowerCase(normalisedString)) {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 			}
 			else {
-				label = new Label(wikipedia.getEnvironment(), normalisedEntity.toLowerCase());
-				Label label2 = new Label(wikipedia.getEnvironment(), normalisedEntity.toUpperCase());
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
+				Label label2 = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 				if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 					label = label2;
 				}
 			}
 
 			// first letter upper case
-			Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedEntity.toLowerCase()));
+			Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
 			if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 				label = label2;
 			}
-			if (label.exists() && (!bestLabel.exists() || label.getLinkOccCount() > bestLabel.getLinkOccCount())) {
+			if (label.exists() && (!bestLabel.exists() || label.getLinkOccCount() > bestLabel.getLinkOccCount()*2)) {
 				bestLabel = label;
 			}
 		} 
