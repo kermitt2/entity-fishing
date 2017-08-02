@@ -5,15 +5,15 @@
 <!-- [![Coverage Status](https://coveralls.io/repos/kermitt2/nerd/badge.svg)](https://coveralls.io/r/kermitt2/nerd) -->
 <!-- [![Docker Status](https://images.microbadger.com/badges/version/lfoppiano/grobid.svg)](https://hub.docker.com/r/lfoppiano/ grobid/ "Latest Docker HUB image") -->
 
-# (N)ERD
+# entity-fishing
 
-(N)ERD performs the following tasks:
+*entity-fishing* performs the following tasks:
 
 * entity recognition and disambiguation against Wikidata and Wikipedia in a raw text or partially-annotated text segment,
-![(N)ERD](doc/images/screen2.png)
+![entity-fishing](doc/images/screen2.png)
 
 * entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
-![(N)ERD](doc/images/screen7.png)
+![entity-fishing](doc/images/screen7.png)
 
 * search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
 ![Search query disambiguation](doc/images/screen8.png)
@@ -27,7 +27,7 @@
 
 # Documentation
 
-The documentation of (N)ERD is available [here](http://nerd.readthedocs.io)
+The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io)
 
 
 ## License and contact
