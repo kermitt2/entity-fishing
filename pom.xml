@@ -659,7 +659,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.4.2-SNAPSHOT</version>
+            <version>0.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.grobid.ner</groupId>
@@ -669,7 +669,7 @@
         <dependency>
             <groupId>org.grobid.trainer</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.4.2-SNAPSHOT</version>
+            <version>0.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>

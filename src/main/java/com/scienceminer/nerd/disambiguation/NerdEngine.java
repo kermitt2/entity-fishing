@@ -26,7 +26,6 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
-import com.scienceminer.nerd.utilities.TextUtilities;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

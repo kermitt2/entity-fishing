@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Wed Aug 09 19:27:02 CEST 2017
+grobid-trainer-0.4.3-SNAPSHOT.pom>=
+grobid-trainer-0.4.3-SNAPSHOT.jar>=
+grobid-trainer-0.4.3-SNAPSHOT-onejar.jar>=

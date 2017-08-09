@@ -4,7 +4,6 @@ import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
-import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
@@ -43,6 +42,7 @@ import org.grobid.core.utilities.BoundingBoxCalculator;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.utilities.TextUtilities;
 
 import com.scienceminer.nerd.utilities.Stopwords;
 

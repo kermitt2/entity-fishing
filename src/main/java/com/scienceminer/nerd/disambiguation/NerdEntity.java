@@ -6,11 +6,11 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
+import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.layout.BoundingBox;
 
 import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.kb.model.*;
 
 import org.slf4j.Logger;

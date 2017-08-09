@@ -7,9 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.scienceminer.nerd.utilities.NerdProperties;
-import com.scienceminer.nerd.utilities.TextUtilities;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.kb.*;
+
+import org.grobid.core.utilities.TextUtilities;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

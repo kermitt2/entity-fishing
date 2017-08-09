@@ -3,7 +3,7 @@ package com.scienceminer.nerd.utilities.mediaWiki;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import com.scienceminer.nerd.utilities.TextUtilities;
+import org.grobid.core.utilities.TextUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sweble.wikitext.engine.PageTitle;
