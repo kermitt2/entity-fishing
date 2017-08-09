@@ -10,10 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.text.NumberFormat;
+import java.util.*;
 
 /**
  * Class for holding static methods for text processing.
@@ -936,13 +934,17 @@ public class TextUtilities {
     }
 
     public static String formatTwoDecimals(double d) {
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
-        return twoDForm.format(d);
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat)nf;
+        df.applyPattern("#.##");
+        return df.format(d);
     }
 
     public static String formatFourDecimals(double d) {
-        DecimalFormat fourDForm = new DecimalFormat("#.####");
-        return fourDForm.format(d);
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat)nf;
+        df.applyPattern("#.####");
+        return df.format(d);
     }
 
     public static boolean isAllUpperCase(String text) {

@@ -1,6 +1,5 @@
 package com.scienceminer.nerd.training;
 
-import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdRanker;
 import com.scienceminer.nerd.disambiguation.NerdSelector;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
