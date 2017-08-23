@@ -1,7 +1,7 @@
 .. topic:: Description of the NERD console.
 
 *entity-fishing* Console
-==============
+========================
 
 The *entity-fishing* console is a **graphical web interface**, part of the *entity-fishing* project, providing means to test the service and explore the functionalities. With the console, it is possible to process chunks of text, PDF files and to verify which entities are recognised and how they are disambiguated.
 
