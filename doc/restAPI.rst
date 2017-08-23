@@ -175,7 +175,9 @@ Below an example of how the pre-annotated entity can be provided. The algorithm 
 The users can alter this result, by forcing the term to be the *German Army* of the Second World War (wikipediaId: 11702744).
 In the response the entity should be returned with confidence 1.0 (as it has been manually provided).
 
-At the moment the entity is taken in account only when the *wikipediaExternalRef* is provided:
+In order to get the wikipedia information for a term, check the `term lookup documentation <Term Lookup_>`_
+
+NOTE: At the moment the entity is taken in account only when the *wikipediaExternalRef* is provided:
 ::
    {
        "text": "Austria invaded and fought the Serbian army at the Battle of Cer and Battle of Kolubara beginning on 12 August.",
