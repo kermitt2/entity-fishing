@@ -719,7 +719,7 @@ public class ProcessText {
 				Sentence sentence = sentences.get(index.intValue());
 				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
 				try {
-					List<Entity> localResults = processBrutal(text, language);
+					List<Entity> localResults = processBrutal(text2tag, language);
 
 					// we "shift" the entities offset in case only specific sentences are processed
 					if ( CollectionUtils.isNotEmpty(localResults) ) {
@@ -730,7 +730,7 @@ public class ProcessText {
 						for(Entity entity : localResults) {
 							if (validEntity(entity, lang)) {
 								if (results == null)
-									results = new ArrayList<Entity>();
+									results = new ArrayList<>();
 								results.add(entity);
 							}
 						}
