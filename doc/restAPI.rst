@@ -143,7 +143,7 @@ Using multiple input type in the same query is not supported in the version of t
 
 (1) text
 """"""""
-Provides a text to be processed (e.g. one or several paragraphs).
+Provides a text to be processed (e.g. one or several paragraphs). The text have be greater than 5 character or 406 is returned. 
 
 (2) shortText
 """""""""""""
