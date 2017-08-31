@@ -71,7 +71,7 @@ var editor = (function($) {
 		// extend customisation field with the registered existing ones
 		$.ajax({
 		  type: 'GET',
-		  url: 'service/NERDCustomisations',
+		  url: 'service/customisations',
 //		  data: { text : $('#input').val() },
 		  success: fillCustumisationField,
 		  error: AjaxError,
@@ -113,16 +113,22 @@ var editor = (function($) {
 		query.text = startUpText;
 		query.sentences = sentences;
 		query.onlyNER = onlyNER;
-		query.nbest = false,
+		query.nbest = false;
 		query.customisation = 'generic';
+
+        var formData = new FormData();
+        formData.append("query", JSON.stringify(query));
+
 		$.ajax({
 		  type: 'POST',
-		  url: 'service/processNERDQuery',
-		  data: JSON.stringify(query),
+		  url: 'service/disambiguate',
+		  data: formData,
 		  beforeSubmit: setTimeCall(), 		  
 		  success: SubmitSuccesfulNERD,
 		  error: AjaxError,
-		  dataType: "text"
+		  // dataType: "text",
+            processData: false,
+            contentType: false,
 		});
 
 		//codeMirror
@@ -338,15 +344,20 @@ console.log(changeObject);
 				}
 			}
 		}
+
+        var formData = new FormData();
+        formData.append("query", JSON.stringify(query));
 		
 		$.ajax({
 		  	type: 'POST',
-		  	url: 'service/processNERDQuery',
-	 	 	data: JSON.stringify(query),
+		  	url: 'service/disambiguate',
+	 	 	data: formData,
 		  	beforeSubmit: setTimeCall(),
 		  	success: SubmitSuccesfulNERD,				  
 		  	error: AjaxError,
-		  	dataType: "text"
+            processData: false,
+            contentType: false
+		  	// dataType: "text"
 		});
 		accumulated = "";
 		processSentence = [];
