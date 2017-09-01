@@ -1902,8 +1902,8 @@ The report said that for the first nine months of 1996, 8.3 percent of job cuts 
 In the first nine months of 1996, 362,297 layoffs were announced, against 302,017 in the first nine months of 1995, the report said.\n\
 -- N.A. Treasury 212-859-1660\n\
 (c) Reuters Limited 1996",
-		"",
-		""
+        "Charlemagne, du latin Carolus Magnus, ou Charles Ier dit « le Grand », né le 2 avril 742 (voire 747 ou 748)2, mort le 28 janvier 814 à Aix-la-Chapelle, est un roi des Francs et empereur. Il appartient à la dynastie des Carolingiens, à laquelle il a donné son nom.\nFils de Pépin le Bref, il est roi des Francs à partir de 768, devient par conquête roi des Lombards en 774 et est couronné empereur à Rome par le pape Léon III le 25 décembre 800, relevant une dignité disparue depuis la chute de l'Empire romain d'Occident en 476.\nRoi guerrier, il agrandit notablement son royaume par une série de campagnes militaires, en particulier contre les Saxons païens dont la soumission fut difficile et violente (772-804), mais aussi contre les Lombards en Italie et les musulmans d'Al-Andalus.",
+		"Freiherr Manfred Albrecht von Richthofen (2. Mai 1892 in Breslau; 21. April 1918 bei Vaux-sur-Somme, Département Somme) war ein deutscher Jagdflieger im Ersten Weltkrieg. Er erzielte die höchste Zahl von Luftsiegen, die im Ersten Weltkrieg von einem einzelnen Piloten erreicht wurde. Den bekannten Beinamen \"Der Rote Baron\" erhielt von Richthofen, der einen Großteil seiner Einsätze in mehr oder weniger rot gestrichenen Flugzeugen flog, erst nach dem Krieg. Er geht vermutlich auf ein englisches Nachkriegsbuch zurück, das seinen Titel \"Freiherr\", den es im Englischen nicht gibt, mit \"Baron\" übersetzte. Im Ersten Weltkrieg wurde Richthofen auf französischer Seite « le petit rouge » (deutsch: „Der kleine Rote“) oder auch « Diable Rouge » (deutsch: „Roter Teufel“) genannt. Seine Autobiographie (1917) trägt den Titel Der rote Kampfflieger."
 	];
 
 	function resetExamplesClasses() {
@@ -2032,7 +2032,7 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 				$(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
 					queryInstance.text=reutersExamples[1];
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
@@ -2046,7 +2046,8 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 				$(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
+					queryInstance.language.lang = "fr";
 					queryInstance.text=reutersExamples[2];
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
@@ -2060,7 +2061,8 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 				$(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
+                    queryInstance.language.lang = "de";
 					queryInstance.text=reutersExamples[3];
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}

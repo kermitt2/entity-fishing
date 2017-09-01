@@ -5,7 +5,7 @@
 */
 
 var editor = (function($) {
-	
+    var conceptMap = new Object();
 	var sentences = null;
 	var entities = null;
 	var marked = [];
@@ -120,15 +120,14 @@ var editor = (function($) {
         formData.append("query", JSON.stringify(query));
 
 		$.ajax({
-		  type: 'POST',
-		  url: 'service/disambiguate',
-		  data: formData,
-		  beforeSubmit: setTimeCall(), 		  
-		  success: SubmitSuccesfulNERD,
-		  error: AjaxError,
-		  // dataType: "text",
-            processData: false,
-            contentType: false,
+		  	type: 'POST',
+		  	url: 'service/disambiguate',
+		  	data: formData,
+		  	beforeSubmit: setTimeCall(),
+		  	success: SubmitSuccesfulNERD,
+		  	error: AjaxError,
+			processData: false,
+            contentType: false
 		});
 
 		//codeMirror
@@ -188,8 +187,9 @@ var editor = (function($) {
 		}
 	}
 	
-	function updateAfterChange(cMirror, changeObject) { 
-console.log(changeObject);
+	function updateAfterChange(cMirror, changeObject) {
+        $('#requestResult').html("");
+		console.log(changeObject);
 		autoCallDone = false;
 		var line = changeObject.from.line;
 
@@ -380,7 +380,7 @@ console.log(sentences);
 	function SubmitSuccesfulNERD(responseText, statusText) {    
 		var timeForCall = new Date() - lastTimeCall;
 		averageNERDCallTime = (timeForCall + averageNERDCallTime) / 2;
-		
+
 		var responseJson = responseText;
 		if ( (responseJson == null) ){
 			$('#requestResult')
@@ -424,6 +424,20 @@ console.log(sentences);
 			//for(var m=responseJson.entities.length-1; m>=0; m--) {
 			for(var m=0; m<responseJson.entities.length; m++) {	
 				var entity = responseJson.entities[m];
+
+				var identifier = entity.wikipediaExternalRef;
+                var wikidataId = entity.wikidataId;
+
+                if (identifier && (conceptMap[identifier] == null)) {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'service/kb/concept/'+identifier+'?lang='+lang,
+                        success: function(result) { conceptMap[result.wikipediaExternalRef] = result; },
+                        dataType: 'json'
+                    });
+                }
+
+
 				var label = entity.type;	
 				if (!label)
 					label = entity.rawName;
@@ -575,6 +589,8 @@ console.log('set up timer at ' + delay + ' ms');
 			var entity = entityMap[localEntityNumber][entityListIndex];*/
 			var domains = entity.domains;
 			var type = entity.type;
+        var wikipedia = entity.wikipediaExternalRef;
+        var wikidataId = entity.wikidataId;
 
 			var colorLabel = null;
 			if (type)
@@ -587,11 +603,12 @@ console.log('set up timer at ' + delay + ' ms');
 
 			var subType = entity.subtype;
 			var conf = entity.nerd_score;
-			var definitions = entity.definitions;
+        	var definitions = getDefinitions(wikipedia);
+
 			var wikipedia = entity.wikipediaExternalRef;
 			//var freebase = entity.freeBaseExternalRef;
-			var content = entity.rawName; 
-			var normalized = entity.preferredTerm; 
+			var content = entity.rawName;
+        	var normalized = getPreferredTerm(wikipedia);
 			
 			var sense = null;
 			if (entity.sense)
@@ -663,13 +680,12 @@ console.log('set up timer at ' + delay + ' ms');
 					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
 					' src="resources/img/wikipedia.png"/></a>';
 				}
-				/*if (freebase != null) {
-					string += '<a href="http://www.freebase.com' + 
-					freebase + 
-					'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
-					' src="resources/img/freebase_icon.png"/></a>';
-				
-				}*/
+                if (wikidataId != null) {
+                    string += '<a href="https://www.wikidata.org/wiki/' +
+                        wikidataId +
+                        '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" '+
+                        ' src="resources/img/Wikidata-logo.svg"/></a>';
+                }
 				string += '</p>';
 			}
 		
@@ -811,6 +827,46 @@ console.log('set up timer at ' + delay + ' ms');
 		$('#detailed_annot-0').html(string);	
 		$('#detailed_annot-0').show();
 	}
+
+    function getDefinitions(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.definitions;
+        } else
+            return null;
+    }
+
+    function getCategories(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.categories;
+        } else
+            return null;
+    }
+
+    function getMultilingual(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.multilingual;
+        } else
+            return null;
+    }
+
+    function getPreferredTerm(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.preferredTerm;
+        } else
+            return null;
+    }
+
+    function getStatements(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.statements;
+        } else
+            return null;
+    }
 	
 	
 	
