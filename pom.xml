@@ -664,7 +664,7 @@
         <dependency>
             <groupId>org.grobid.ner</groupId>
             <artifactId>grobid-ner</artifactId>
-            <version>0.4.2-SNAPSHOT</version>
+            <version>0.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.grobid.trainer</groupId>
