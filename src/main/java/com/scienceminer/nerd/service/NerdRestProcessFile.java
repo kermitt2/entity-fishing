@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.exceptions.QueryException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
@@ -356,7 +357,9 @@ public class NerdRestProcessFile {
 				long end = System.currentTimeMillis();
 				nerdQuery.setRuntime(end - start);
 				LOGGER.info("runtime: " + (end - start));
-				Collections.sort(nerdQuery.getEntities());
+				if(CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+					Collections.sort(nerdQuery.getEntities());
+				}
 
 				String json = nerdQuery.toJSONClean(doc);
 
