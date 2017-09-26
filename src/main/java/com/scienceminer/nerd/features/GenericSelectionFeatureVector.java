@@ -26,6 +26,8 @@ public class GenericSelectionFeatureVector {
 	public boolean Add_relatedness = false;	// semantic relatedness measure bewteen candidate and context	
 	public boolean Add_inContext = false; // true if entity present in the relatedness context
 	public boolean Add_isNe = false; // if the entity is recognized as a NE
+	public boolean Add_embeddings_LR_similarity = false; // entity/term context LR score similarity
+	public boolean Add_embeddings_centroid_similarity = false; // entity/term context centroid score similarity
 
 	// decision types
 	public boolean target_numeric = false;
@@ -42,6 +44,8 @@ public class GenericSelectionFeatureVector {
 	public double relatedness = 0.0;
 	public boolean inContext = false;
 	public boolean isNe = false;
+	public float embeddings_LR_similarity = 0.0F;
+	public float embeddings_centroid_similarity = 0.0F;
 
 	/**
 	 *  Write header of ARFF files.
@@ -80,6 +84,10 @@ public class GenericSelectionFeatureVector {
 			header.append("@attribute inContext {false, true}\n");
 		if (Add_isNe)	
 			header.append("@attribute isNe {false, true}\n");
+		if (Add_embeddings_LR_similarity) 
+			header.append("@attribute embeddings_LR_similarity REAL\n");
+		if (Add_embeddings_centroid_similarity) 
+			header.append("@attribute embeddings_centroid_similarity REAL\n");
 
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -110,6 +118,10 @@ public class GenericSelectionFeatureVector {
 		if (Add_inContext)
 			num++;
 		if (Add_isNe)
+			num++;
+		if (Add_embeddings_LR_similarity)
+			num++;
+		if (Add_embeddings_centroid_similarity)
 			num++;
 		// class
 		num++;	
@@ -232,6 +244,12 @@ public class GenericSelectionFeatureVector {
 					res.append(",false");
 			}
 		}
+		if (Add_embeddings_LR_similarity) {
+			res.append(","+embeddings_LR_similarity);
+		}
+		if (Add_embeddings_centroid_similarity) {
+			res.append(","+embeddings_centroid_similarity);
+		}
 
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
@@ -319,6 +337,14 @@ public class GenericSelectionFeatureVector {
 				result[i] = 1.0;
 			else
 				result[i] = 0.0;*/
+			i++;
+		}
+		if (Add_embeddings_LR_similarity) {
+			result[i] = embeddings_LR_similarity;
+			i++;
+		}
+		if (Add_embeddings_centroid_similarity) {
+			result[i] = embeddings_centroid_similarity;
 			i++;
 		}
 

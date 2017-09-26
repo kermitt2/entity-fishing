@@ -50,7 +50,7 @@ public class Page implements Comparable<Page> {
 	protected String wikidataId = null;
 	protected String title = null;
 	protected PageType type;
-	protected int depth;
+	//protected int depth;
 	protected Double weight = null;
 
 	protected KBLowerEnvironment env = null;
@@ -207,7 +207,7 @@ public class Page implements Comparable<Page> {
 	private void setDetails(DbPage pd)  {
 		title = pd.getTitle();
 		type = PageType.values()[pd.getType()];
-		depth = pd.getDepth();
+		//depth = pd.getDepth();
 		wikidataId = env.getDbConceptByPageId().retrieve(id);
 		detailsSet = true;
 	}

@@ -6,18 +6,19 @@ import java.util.*;
 import java.util.regex.*;
 
 /**
- * A simple working features set for NERD ranker.
+ * A features set for NERD ranker with basic features and entity embeddings similarity score
  */
-public class SimpleRankerFeatureVector extends GenericRankerFeatureVector {
+public class NerdRankerFeatureVector extends GenericRankerFeatureVector {
 
-	public SimpleRankerFeatureVector() {
+	public NerdRankerFeatureVector() {
 		super();
-		title = "Simple (N)ERD ranker";
+		title = "(N)ERD ranker with embeddings";
 		//Add_prob_c = true;
 		Add_relatedness = true;
 		Add_context_quality = true;
 		//Add_ner = true;
 		Add_bestCaseContext = true;
+		Add_embeddings_LR_similarity = true;
 		target_numeric = true;
 		target_class = false;
 	}

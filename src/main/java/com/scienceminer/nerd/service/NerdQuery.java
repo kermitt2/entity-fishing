@@ -16,7 +16,7 @@ import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
 import com.scienceminer.nerd.utilities.Filter;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Entity;

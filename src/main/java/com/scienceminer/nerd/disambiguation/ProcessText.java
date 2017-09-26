@@ -9,7 +9,7 @@ import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Label;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -76,7 +76,7 @@ public class ProcessText {
 	public static final int NGRAM_LENGTH = 6;
 
 	// default indo-european delimiters, should be moved to language specific analysers
-	private static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
+	public static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
 
 	public static ProcessText getInstance() throws Exception {
         if (instance == null)
@@ -262,11 +262,11 @@ public class ProcessText {
 		else {
 			// we process the whole text
 			try {
-				if (nerParsers == null) {
+				/*if (nerParsers == null) {
 					//Utilities.initGrobid();
 					nerParsers = new NERParsers();	
 				}
-				results = nerParsers.extractNE(text, language);
+				results = nerParsers.extractNE(text, language);*/
 			}
 			catch(Exception e) {
 				throw new NerdException("NERD error when processing text.", e);
@@ -338,11 +338,11 @@ public class ProcessText {
 		else {*/
 			// we process the whole text
 			try {
-				if (nerParsers == null) {
+				/*if (nerParsers == null) {
 					//Utilities.initGrobid();
 					nerParsers = new NERParsers();	
 				}
-				results = nerParsers.extractNE(tokens, language);
+				results = nerParsers.extractNE(tokens, language);*/
 			}
 			catch(Exception e) {
 				e.printStackTrace();

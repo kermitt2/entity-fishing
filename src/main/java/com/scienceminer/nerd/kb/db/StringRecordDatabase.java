@@ -78,15 +78,15 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 			KBEntry<String,Record> entry = deserialiseCsvRecord(cri);
-
 			if (entry != null) {
 				try {
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 				} catch(Exception e) {
 					//System.out.println("Invalid input line: " + line);
-					e.printStackTrace();
-					System.out.println("We skip this particular invalid (and awful) entry and continue loading...");
+					//e.printStackTrace();
+					LOGGER.warn("Invalid key: " + entry.getKey());
+					LOGGER.warn("but don't worry, we skip this particular invalid (and awful) entry and continue loading...");
 				}
 			}
 		}

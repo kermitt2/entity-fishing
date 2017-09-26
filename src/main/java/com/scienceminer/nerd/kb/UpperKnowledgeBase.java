@@ -36,6 +36,9 @@ public class UpperKnowledgeBase {
 
 	private long conceptCount = -1;
 
+	// this is the list of supported languages 
+  	public static List<String> targetLanguages = Arrays.asList(Language.EN, Language.FR, Language.DE); //, Language.IT, Language.ES);
+ 
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
 			getNewInstance();
@@ -157,6 +160,14 @@ public class UpperKnowledgeBase {
 		//	System.out.println(statements.size() + " statements: ");
 
 		return env.getDbStatements().retrieve(wikidataId);
+	}
+
+	/**
+	 * Returns an iterator for all pages in the database, in order of ascending ids.
+	 * 
+	 */
+	public KBIterator getEntityIterator() {
+		return new KBIterator(env.getDbConcepts());
 	}
 
 	public void close() {

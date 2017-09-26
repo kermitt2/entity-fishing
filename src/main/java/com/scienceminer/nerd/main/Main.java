@@ -75,6 +75,13 @@ public class Main {
                     i++;
                     continue;
                 }
+                if (currArg.equals("-lang")) {
+                    if (pArgs[i + 1] != null) {
+                        gbdArgs.setLang(pArgs[i + 1]);
+                    }
+                    i++;
+                    continue;
+                }
                 if (currArg.equals("-tdata")) {
                     if (pArgs[i + 1] != null) {
                         gbdArgs.setPathInputDirectory(pArgs[i + 1]);
@@ -159,8 +166,7 @@ public class Main {
 					System.out.println("processing: " + jsonfile.getName());
 					trainer.generateTrainingFromJSON(jsonfile, jsonfile.getParent()+"/processed/");
 				}
-            }
-			else if (gbdArgs.getProcessMethodName().equals("evaluatetermvector")) {
+            } else if (gbdArgs.getProcessMethodName().equals("evaluatetermvector")) {
                 String evaluationPath = gbdArgs.getPathInputDirectory();
 				if (evaluationPath == null) {
                     // default evaluation data
@@ -171,7 +177,7 @@ public class Main {
 				for(int i=0; i<10; i++) {
 					eval.evaluate(evaluationPath, 0.1 * i);
 				}
-			}
+			} 
         }
     }
 

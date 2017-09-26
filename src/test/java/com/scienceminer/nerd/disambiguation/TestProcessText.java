@@ -41,7 +41,7 @@ public class TestProcessText {
         }
     }
 
-    @Test
+    //@Test
     public void testProcess() {
         if (processText == null) {
             System.err.println("text processor was not properly initialised!");

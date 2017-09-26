@@ -42,6 +42,9 @@ public class GenericRankerFeatureVector {
 
 	public boolean Add_bestCaseContext = false; // indicate if the actual case context matches the sense best term case
 
+	public boolean Add_embeddings_LR_similarity = false; // entity/term context LR score similarity
+	public boolean Add_embeddings_centroid_similarity = false; // entity/term context centroid score similarity
+
 	// relateness with the context:
 	// - with context terms
 	// - with all other candidates (average)
@@ -86,6 +89,9 @@ public class GenericRankerFeatureVector {
 	public double dice_coef = 0.0;
 
 	public boolean bestCaseContext = false; // true if the actual case context matches the sense best term case
+
+	public float embeddings_LR_similarity = 0.0F;
+	public float embeddings_centroid_similarity = 0.0F;
 
 	/**
 	 *  Write header of ARFF files.
@@ -137,7 +143,11 @@ public class GenericRankerFeatureVector {
 		if (Add_dice_coef) 
 			header.append("@attribute dice_coef REAL\n");
 		if (Add_bestCaseContext) 
-			header.append("@attribute bestCaseContext {false, true}\n");				
+			header.append("@attribute bestCaseContext {false, true}\n");
+		if (Add_embeddings_LR_similarity) 
+			header.append("@attribute embeddings_LR_similarity REAL\n");
+		if (Add_embeddings_centroid_similarity) 
+			header.append("@attribute embeddings_centroid_similarity REAL\n");
 		
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -181,7 +191,9 @@ public class GenericRankerFeatureVector {
 			num++;
 		if (Add_dice_coef) 
 			num++;
-		if (Add_bestCaseContext)
+		if (Add_embeddings_LR_similarity)
+			num++;
+		if (Add_embeddings_centroid_similarity)
 			num++;
 		// class
 		num++;	
@@ -261,7 +273,12 @@ public class GenericRankerFeatureVector {
 		}
 
 		if (Add_context_quality) {
-			res.append(","+context_quality);
+			if (first) {
+				res.append(context_quality);
+				first = false;
+			}
+			else
+				res.append(","+context_quality);
 		}
 		
 		if (Add_isSubTerm) {
@@ -300,7 +317,13 @@ public class GenericRankerFeatureVector {
 			else 
 				res.append(",false");
 		}
-		
+		if (Add_embeddings_LR_similarity) {
+			res.append(","+embeddings_LR_similarity);
+		}
+		if (Add_embeddings_centroid_similarity) {
+			res.append(","+embeddings_centroid_similarity);
+		}
+
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
 			res.append("," + label);
@@ -445,7 +468,15 @@ public class GenericRankerFeatureVector {
 			i++;
 
 		}
+		if (Add_embeddings_LR_similarity) {
+			result[i] = embeddings_LR_similarity;
+			i++;
+		}
 
+		if (Add_embeddings_centroid_similarity) {
+			result[i] = embeddings_centroid_similarity;
+			i++;
+		}
 		return result;
 	}
 }

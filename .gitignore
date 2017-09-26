@@ -15,5 +15,12 @@ data/maps/customisations.obj
 data/wikipedia/db-en
 data/wikipedia/db-fr
 data/wikipedia/db-de
+data/wikipedia/db-it
+data/wikipedia/db-es
 data/wikipedia/db-kb
 data/wikipedia/domains-en.db
+data/wikipedia/embeddings/en
+data/wikipedia/embeddings/fr
+data/wikipedia/embeddings/de
+data/wikipedia/embeddings/es
+data/wikipedia/embeddings/it

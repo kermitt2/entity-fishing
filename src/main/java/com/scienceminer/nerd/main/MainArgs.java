@@ -19,10 +19,8 @@ public class MainArgs {
 
 	private int nbThreads = 1; // default
 	
-	private String dblpPath;
+	private String lang;
 	
-	private int graphType;
-
     /**
      * @return the processMethodName
      */
@@ -97,6 +95,14 @@ public class MainArgs {
 
     public void setNbThreads(int nb) {
         this.nbThreads = nb;
+    }
+
+    public String getLang() {
+        return this.lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 	
 }
