@@ -467,88 +467,93 @@ var nerd = (function($) {
 		// in case of nbest results, we haveonly one annotation in the text, but this can
 		// lead to the visualisation of several info boxes on the right panel (one per entity candidate)
 		var lastMaxIndex = responseJson.text.length;
+		{
+			display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">';
+			//var string = responseJson.text.replace(/\n/g, " ");
+			var string = responseJson.text;
+			if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
+				display += '<tr style="background-color:#FFF;">';
+				var lang = 'en'; //default
+		 		var language = responseJson.language;
+		 		if (language)
+		 			lang = language.lang;
+				if (responseJson.entities) {
+					var currentAnnotationIndex = responseJson.entities.length-1;
+					for(var m=responseJson.entities.length-1; m>=0; m--) {
+						var entity = responseJson.entities[m];
+						var identifier = entity.wikipediaExternalRef;
+						var wikidataId = entity.wikidataId;
 
-        display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">';
-        //var string = responseJson.text.replace(/\n/g, " ");
-        var string = responseJson.text;
-        if (responseJson.entities) {
-            display += '<tr style="background-color:#FFF;">';
-            var lang = 'en'; //default
-            var language = responseJson.language;
-            if (language)
-                lang = language.lang;
+						if (identifier && (conceptMap[identifier] == null)) {
+							$.ajax({
+							  	type: 'GET',
+							  	url: 'service/kb/concept/'+identifier+'?lang='+lang,
+							  	success: function(result) { conceptMap[result.wikipediaExternalRef] = result; },
+							  	dataType: 'json'
+							});
+						}
+						var domains = entity.domains;
+						var label = null;
+						if (entity.type)
+							label = entity.type;
+						else if (domains && domains.length>0) {
+							label = domains[0].toLowerCase();
+						}
+						else
+							label = entity.rawName;
 
-                var currentAnnotationIndex = responseJson.entities.length-1;
-                for(var m = responseJson.entities.length-1; m>=0; m--) {
-                    var entity = responseJson.entities[m];
-                    var identifier = entity.wikipediaExternalRef;
-                    var wikidataId = entity.wikidataId;
+				    	var start = parseInt(entity.offsetStart,10);
+					    var end = parseInt(entity.offsetEnd,10);
 
-                    if (identifier && (conceptMap[identifier] == null)) {
-                        $.ajax({
-                            type: 'GET',
-                            url: 'service/kb/concept/'+identifier+'?lang='+lang,
-                            success: function(result) { conceptMap[result.wikipediaExternalRef] = result; },
-                            dataType: 'json'
-                        });
-                    }
-                    var domains = entity.domains;
-                    var label = null;
-                    if (entity.type)
-                        label = entity.type;
-                    else if (domains && domains.length>0) {
-                        label = domains[0].toLowerCase();
-                    }
-                    else
-                        label = entity.rawName;
+						if (start > lastMaxIndex) {
+							// we have a problem in the initial sort of the entities
+							// the server response is not compatible with the client
+							console.log("Sorting of entities as present in the server's response not valid for this client.");
+						}
+						else if (start == lastMaxIndex) {
+							// the entity is associated to the previous map
+							entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
+						}
+						else if (end > lastMaxIndex) {
+							end = lastMaxIndex;
+							lastMaxIndex = start;
+							// the entity is associated to the previous map
+							entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
+						}
+						else {
+							string = string.substring(0,start)
+								+ '<span id="annot-'+m+'" rel="popover" data-color="'+label+'">'
+								+ '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+								+ string.substring(start,end) + '</span></span>' + string.substring(end,string.length+1);
+							lastMaxIndex = start;
+							currentAnnotationIndex = m;
+							entityMap[currentAnnotationIndex] = [];
+							entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
+						}
+				    }
+				}
+//console.log(entityMap);
+				string = "<p>" + string.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
 
-                    var start = parseInt(entity.offsetStart,10);
-                    var end = parseInt(entity.offsetEnd,10);
+				display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>'+string+'</p></td>';
+				display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
 
-                    if (start > lastMaxIndex) {
-                        // we have a problem in the initial sort of the entities
-                        // the server response is not compatible with the client
-                        console.log("Sorting of entities as present in the server's response not valid for this client.");
-                    }
-                    else if (start == lastMaxIndex) {
-                        // the entity is associated to the previous map
-                        entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                    }
-                    else if (end > lastMaxIndex) {
-                        end = lastMaxIndex;
-                        lastMaxIndex = start;
-                        // the entity is associated to the previous map
-                        entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                    }
-                    else {
-                        string = string.substring(0,start)
-                            + '<span id="annot-'+m+'" rel="popover" data-color="'+label+'">'
-                            + '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-                            + string.substring(start,end) + '</span></span>' + string.substring(end,string.length+1);
-                        lastMaxIndex = start;
-                        currentAnnotationIndex = m;
-                        entityMap[currentAnnotationIndex] = [];
-                        entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                    }
-                }
-            
-            string = "<p>" + string.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
+				display += '</tr>';
+			}
+			else {
+				display += '<tr style="background-color:#FFF;">';
 
-            display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>'+string+'</p></td>';
-            display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
-            display += '</tr>';
-        }
-        else {
-            display += '<tr style="background-color:#FFF;">';
+				display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p><span id="sentence_ner">'+
+					" "+'</span></p></td>';
+				display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
+				display += '</tr>';
+			}
 
-            display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p><span id="sentence_ner">'+
-                " "+'</span></p></td>';
-            display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
-            display += '</tr>';
-        }
+			display += '</table>\n';
+		}
 
-        display += '</table>\n';
 		display += '</pre>\n';
+
 		display += '</div> \
 					<div class="tab-pane " id="navbar-fixed-categories">\n';
 
