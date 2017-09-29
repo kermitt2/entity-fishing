@@ -1,0 +1,397 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		NYT20001109.1946.0315
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		WASHINGTON
+	</SurfaceForm>
+	<Offset>
+		88
+	</Offset>
+	<Length>
+		10
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Washington,_D.C."
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Washington,_D.C."
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Ralph Nader
+	</SurfaceForm>
+	<Offset>
+		101
+	</Offset>
+	<Length>
+		11
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Ralph_Nader
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Ralph_Nader
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		America
+	</SurfaceForm>
+	<Offset>
+		469
+	</Offset>
+	<Length>
+		7
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/United_States
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		United_States
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Noni
+	</SurfaceForm>
+	<Offset>
+		815
+	</Offset>
+	<Length>
+		4
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		White House
+	</SurfaceForm>
+	<Offset>
+		1081
+	</Offset>
+	<Length>
+		11
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/White_House
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		White_House
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Florida
+	</SurfaceForm>
+	<Offset>
+		1390
+	</Offset>
+	<Length>
+		7
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Florida
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Florida
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		John Ruth
+	</SurfaceForm>
+	<Offset>
+		1636
+	</Offset>
+	<Length>
+		9
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Oregon
+	</SurfaceForm>
+	<Offset>
+		2068
+	</Offset>
+	<Length>
+		6
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Oregon
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Oregon
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Julie Quastler
+	</SurfaceForm>
+	<Offset>
+		2243
+	</Offset>
+	<Length>
+		14
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Portland
+	</SurfaceForm>
+	<Offset>
+		2286
+	</Offset>
+	<Length>
+		8
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Portland
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Portland
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Dorothy Byrne
+	</SurfaceForm>
+	<Offset>
+		3463
+	</Offset>
+	<Length>
+		13
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Green Party
+	</SurfaceForm>
+	<Offset>
+		3514
+	</Offset>
+	<Length>
+		11
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Green_Party_of_Florida
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Green_Party_of_Florida
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Barbara Lange
+	</SurfaceForm>
+	<Offset>
+		3931
+	</Offset>
+	<Length>
+		13
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Sierra Club
+	</SurfaceForm>
+	<Offset>
+		4003
+	</Offset>
+	<Length>
+		11
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Sierra_Club
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Sierra_Club
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Patricia Newell
+	</SurfaceForm>
+	<Offset>
+		4242
+	</Offset>
+	<Length>
+		15
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		University of Florida
+	</SurfaceForm>
+	<Offset>
+		4289
+	</Offset>
+	<Length>
+		21
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/University_of_Florida
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		University_of_Florida
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Gainesville
+	</SurfaceForm>
+	<Offset>
+		4314
+	</Offset>
+	<Length>
+		11
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Gainesville,_Florida"
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Gainesville,_Florida"
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

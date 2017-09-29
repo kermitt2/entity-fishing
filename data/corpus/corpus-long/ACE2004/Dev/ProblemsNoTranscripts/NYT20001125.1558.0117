@@ -1,0 +1,190 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		NYT20001125.1558.0117
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		GROSSE POINTE PARK
+	</SurfaceForm>
+	<Offset>
+		55
+	</Offset>
+	<Length>
+		18
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Grosse_Pointe_Park,_Michigan"
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Grosse_Pointe_Park,_Michigan"
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Mich.
+	</SurfaceForm>
+	<Offset>
+		75
+	</Offset>
+	<Length>
+		5
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Michigan
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Michigan
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		New York
+	</SurfaceForm>
+	<Offset>
+		640
+	</Offset>
+	<Length>
+		8
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/New_York
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		New_York
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Pennsylvania
+	</SurfaceForm>
+	<Offset>
+		653
+	</Offset>
+	<Length>
+		12
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Pennsylvania
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Pennsylvania
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Department of Natural Resources
+	</SurfaceForm>
+	<Offset>
+		904
+	</Offset>
+	<Length>
+		31
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Michigan_Department_of_Natural_Resources_and_Environment
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Michigan_Department_of_Natural_Resources_and_Environment
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Rob Williams
+	</SurfaceForm>
+	<Offset>
+		2330
+	</Offset>
+	<Length>
+		12
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Detroit
+	</SurfaceForm>
+	<Offset>
+		2481
+	</Offset>
+	<Length>
+		7
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Detroit
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Detroit
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Peter Thompson
+	</SurfaceForm>
+	<Offset>
+		3719
+	</Offset>
+	<Length>
+		14
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

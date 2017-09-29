@@ -44,14 +44,14 @@ public class LREntityScorer extends EntityScorer {
             int word_size = word_model.dimensions();
             float s = 0;
             for( int i = 0; i < n_words; ++i ) {
-                int word_count = word_counts[ i ];
+                int word_count = word_counts[i];
                 int word_offset = i * word_size;
                 //double dotprod = entity_vec[ word_size ];
                 // PL: size is word_size, not word_size+1, initialize at 0.0
                 double dotprod = LinearAlgebra.inner( word_size, word_vecs, word_offset, entity_vec, 0 );
                 s += word_count * Math.log( 1 + Math.exp( dotprod ) );
             }
-
+//System.out.println("LR scorer: " + word_counts.length + " words context / " + (-s));
             return -s;
         }
     }

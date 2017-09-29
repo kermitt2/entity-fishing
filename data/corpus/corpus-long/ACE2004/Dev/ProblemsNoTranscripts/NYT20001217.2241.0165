@@ -1,0 +1,374 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		NYT20001217.2241.0165
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		Chicago O'Hare
+	</SurfaceForm>
+	<Offset>
+		539
+	</Offset>
+	<Length>
+		14
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/O'Hare_International_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		O'Hare_International_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		La Guardia
+	</SurfaceForm>
+	<Offset>
+		558
+	</Offset>
+	<Length>
+		10
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/LaGuardia_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		LaGuardia_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		New York
+	</SurfaceForm>
+	<Offset>
+		572
+	</Offset>
+	<Length>
+		8
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/New_York_City
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		New_York_City
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		South
+	</SurfaceForm>
+	<Offset>
+		679
+	</Offset>
+	<Length>
+		5
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Southern_United_States
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Southern_United_States
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Transportation Department
+	</SurfaceForm>
+	<Offset>
+		1018
+	</Offset>
+	<Length>
+		25
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/United_States_Department_of_Transportation
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		United_States_Department_of_Transportation
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Los Angeles International
+	</SurfaceForm>
+	<Offset>
+		1664
+	</Offset>
+	<Length>
+		25
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Los_Angeles_International_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Los_Angeles_International_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Burbank
+	</SurfaceForm>
+	<Offset>
+		1725
+	</Offset>
+	<Length>
+		7
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Bob_Hope_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Bob_Hope_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		John Wayne Airport
+	</SurfaceForm>
+	<Offset>
+		1736
+	</Offset>
+	<Length>
+		18
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/John_Wayne_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		John_Wayne_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Orange County
+	</SurfaceForm>
+	<Offset>
+		1758
+	</Offset>
+	<Length>
+		13
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Orange_County,_California"
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Orange_County,_California"
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Calif
+	</SurfaceForm>
+	<Offset>
+		1773
+	</Offset>
+	<Length>
+		5
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/California
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		California
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Westchester County Airport
+	</SurfaceForm>
+	<Offset>
+		1788
+	</Offset>
+	<Length>
+		26
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Westchester_County_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Westchester_County_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		JFK
+	</SurfaceForm>
+	<Offset>
+		1826
+	</Offset>
+	<Length>
+		3
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/John_F._Kennedy_International_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		John_F._Kennedy_International_Airport
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Federal Aviation Administration
+	</SurfaceForm>
+	<Offset>
+		2704
+	</Offset>
+	<Length>
+		31
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Federal_Aviation_Administration
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Federal_Aviation_Administration
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Washington
+	</SurfaceForm>
+	<Offset>
+		4586
+	</Offset>
+	<Length>
+		10
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Washington,_D.C."
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Washington,_D.C."
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Aviation Consumer Protection Div
+	</SurfaceForm>
+	<Offset>
+		4785
+	</Offset>
+	<Length>
+		32
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Airline_complaints
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Airline_complaints
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		400 Seventh St. S.W.
+	</SurfaceForm>
+	<Offset>
+		4859
+	</Offset>
+	<Length>
+		20
+	</Length>
+	<ChosenAnnotation>
+		*null*
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		none
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

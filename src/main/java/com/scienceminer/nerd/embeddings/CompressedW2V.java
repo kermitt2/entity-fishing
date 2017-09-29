@@ -110,20 +110,10 @@ public class CompressedW2V implements Serializable {
             if(q.length() == 0) continue;
             String[] strings = q.split("/");
             List<String> w = Arrays.asList(strings[0].split(" "));
-            //EntityEmbeddings eb = new EntityEmbeddings();
             float sim1 = scorer1.score(strings[1], w);
             float sim2 = scorer2.score(strings[1], w);
             float[] entity = vectors.getVectorOf(strings[1]);
             if(entity != null) {
-                /*for(String aW : w) {
-                    float[] v = wv.get(aW);
-                    if(v != null) {
-                        double score = eb.scoreLR(entity, v);
-                        System.out.println("score sigmoid / " + aW + ":" + score);
-                    }
-                    System.out.println();
-                }*/
-
                 System.out.println(" sim LR ([ " + strings[ 0 ] + "] , [" + strings[ 1 ] + "]) = " + sim1);
                 System.out.println(" sim Centroid ([ " + strings[ 0 ] + "] , [" + strings[ 1 ] + "]) = " + sim2);
             } else {

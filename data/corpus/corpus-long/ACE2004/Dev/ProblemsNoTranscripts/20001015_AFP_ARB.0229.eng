@@ -1,0 +1,121 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		20001015_AFP_ARB.0229.eng
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		London
+	</SurfaceForm>
+	<Offset>
+		2
+	</Offset>
+	<Length>
+		6
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/London
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		London
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		AFP
+	</SurfaceForm>
+	<Offset>
+		16
+	</Offset>
+	<Length>
+		3
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Agence_France-Presse
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Agence_France-Presse
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Baghdad
+	</SurfaceForm>
+	<Offset>
+		123
+	</Offset>
+	<Length>
+		7
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Baghdad
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Baghdad
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Riyadh
+	</SurfaceForm>
+	<Offset>
+		164
+	</Offset>
+	<Length>
+		6
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Riyadh
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Riyadh
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Riyadh International Airport
+	</SurfaceForm>
+	<Offset>
+		370
+	</Offset>
+	<Length>
+		28
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/King_Khalid_International_Airport
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		King_Khalid_International_Airport
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

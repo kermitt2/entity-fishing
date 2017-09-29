@@ -10,6 +10,8 @@ import com.scienceminer.nerd.kb.Definition;
 import com.scienceminer.nerd.kb.Domains;
 import com.scienceminer.nerd.kb.Variant;
 import com.scienceminer.nerd.kb.Category;
+import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 
 import java.util.List;    
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import com.fasterxml.jackson.core.io.*;
  */
 public class NerdCandidate implements Comparable<NerdCandidate> {
 
-	// entity associated to the present diambiguated entity candidate
+	// entity associated to the present disambiguated entity candidate
 	private NerdEntity entity = null;
 
 	// true if the textual content corresponding to this element is not continuous
@@ -557,6 +559,24 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		}*/
 		
 		return result;
+	}
+
+	/**
+	 * Return the Wikidata identifier of the entity in relation to the candidate wikidata ID
+	 * via P31 (instance of) if such relation exists in the list of statements
+	 */
+	public String getWikidataP31Id() {
+		if (wikidataId == null) 
+			return null;
+		// check the statements
+		List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(wikidataId);
+		if (statements == null || statements.size() == 0)
+			return null;
+		for(Statement statement : statements) {
+			if (statement.getPropertyId() != null && statement.getPropertyId().equals("P31"))
+				return statement.getValue(); 
+		}
+		return null;
 	}
 	
 	/**

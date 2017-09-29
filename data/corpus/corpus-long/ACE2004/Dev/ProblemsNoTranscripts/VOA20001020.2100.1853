@@ -1,0 +1,75 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		VOA20001020.2100.1853
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		navy
+	</SurfaceForm>
+	<Offset>
+		8
+	</Offset>
+	<Length>
+		4
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/United_States_Navy
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		United_States_Navy
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		USS Cole
+	</SurfaceForm>
+	<Offset>
+		26
+	</Offset>
+	<Length>
+		8
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/USS_COLE_(DDG-67)
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		USS_COLE_(DDG-67)
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Yemen
+	</SurfaceForm>
+	<Offset>
+		93
+	</Offset>
+	<Length>
+		5
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Yemen
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Yemen
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

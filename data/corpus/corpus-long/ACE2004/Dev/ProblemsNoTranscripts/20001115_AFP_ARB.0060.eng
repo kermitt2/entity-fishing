@@ -1,0 +1,98 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		20001115_AFP_ARB.0060.eng
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		Bandar Seri Begawan
+	</SurfaceForm>
+	<Offset>
+		2
+	</Offset>
+	<Length>
+		19
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Bandar_Seri_Begawan
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Bandar_Seri_Begawan
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		AFP
+	</SurfaceForm>
+	<Offset>
+		29
+	</Offset>
+	<Length>
+		3
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Agence_France-Presse
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Agence_France-Presse
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Sultanate of Brunei
+	</SurfaceForm>
+	<Offset>
+		751
+	</Offset>
+	<Length>
+		19
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Brunei
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Brunei
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Iran
+	</SurfaceForm>
+	<Offset>
+		2438
+	</Offset>
+	<Length>
+		4
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Iran
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Iran
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

@@ -1,0 +1,33 @@
+Astronomers Confirm The First Image Of A Planet Outside Of Our Solar System
+
+ScienceDaily (May 1, 2005) — An international team of astronomers reports April 29 the confirmation of the discovery of a giant planet, approximately five times the mass of Jupiter, that is gravitationally bound to a young brown dwarf. This discovery puts an end to a yearlong discussion on the nature of this object, which started with the detection of a red object close to the brown dwarf.
+
+In February and March of this year, the astronomers took new images of the young brown dwarf and its giant planet companion with the state-of-the-science NACO instrument on the European Southern Observatory's (ESO) Very Large Telescope in northern Chile. The planet is near the southern constellation of Hydra and approximately 200 light years from Earth.
+
+"Our new images show convincingly that this really is a planet, the first planet that has ever been imaged outside of our solar system," said Gael Chauvin, astronomer at the ESO and leader of the team of astronomers who conducted the study.
+
+"The two objects — the giant planet and the young brown dwarf — are moving together; we have observed them for a year, and the new images essentially confirm our 2004 finding," said Benjamin Zuckerman, UCLA professor of physics and astronomy, member of NASA's Astrobiology Institute, and a member of the team. "I'm more than 99 percent confident. This is also the first time that a planet outside of our solar system has been detected far from a star or brown dwarf — nearly twice as far as the distance between Neptune and the sun."
+
+Anne-Marie Lagrange, another member of the team from the Grenoble Observatory in France, said, "Our discovery represents a first step towards one of the most important goals of modern astrophysics: to characterize the physical structure and chemical composition of giant and, eventually, terrestrial-like planets."
+
+Last September, the same team of astronomers reported a faint reddish speck of light in the close vicinity of a young brown dwarf. The feeble object, now called 2M1207b, is more than 100 times fainter than the brown dwarf, 2M1207A. The spectrum of 2M1207b presents a strong signature of water molecules, thereby confirming that it must be cold. Based on the infrared colors and the spectral data, evolutionary model calculations led to the conclusion that 2M1207b is a five-Jupiter-mass planet. Its mass can be estimated also by use of a different method of analysis, which focuses on the strength of its gravitational field; this technique suggests that the mass might be even less than that of five Jupiters.
+
+At the time of its discovery in April 2004, it was impossible to prove that the faint source is not a background object (such as an unusual galaxy or a peculiar cool star with abnormal infrared colors), even though this appeared very unlikely. Observations with the Hubble Space Telescope, obtained in August 2004, corroborated the VLT/NACO observations, but were taken too soon after the NACO ones to demonstrate conclusively that the faint source is a planet.
+
+The new observations show with high confidence that the two objects are moving together and hence are gravitationally bound.
+
+The paper describing this research has been accepted for publication in Astronomy and Astrophysics, a premier journal in astronomy.
+
+"Given the rather unusual properties of the 2M1207 system, the giant planet most probably did not form like the planets in our solar system," Chauvin said. "Instead it must have formed the same way our sun formed, by a one-step gravitational collapse of a cloud of gas and dust."
+
+The same European/American team has had another paper just accepted for publication in Astronomy and Astrophysics. This paper reports the imaging discovery with the same VLT/NACO instrumentation of a lightweight companion to AB Pictoris, a young star located about 150 light years from Earth. The estimated mass of the companion is between 13 and 14 times the mass of Jupiter, which places the companion right on the borderline between massive planets and the lowest mass brown dwarfs.
+
+"Remarkably, this companion is located very far from its host star — about nine times farther from AB Pictoris than Neptune is from the sun," Zuckerman said. Nothing so far from its star has ever been seen in a planetary system before, he added.
+
+Brown dwarfs, the missing link between gas giant planets like Jupiter and small, low‑mass stars, are failed stars about the size of Jupiter, with a much larger mass — but not quite large enough to become stars. Like the sun and Jupiter, they are composed mainly of hydrogen gas, perhaps with swirling cloud belts. Unlike the sun, they cannot fuse protons to helium nuclei as their primary internal energy source, and they emit almost no visible light.
+
+Web sites for reference:
+
+ESO: http://www.eso.org/
+
+UCLA Astronomy and Astrophysics: http://www.astro.ucla.edu

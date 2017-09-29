@@ -1,0 +1,24 @@
+Hijacking Satellite Navigation
+Sending false signals to GPS receivers could disrupt critical infrastructure
+
+The Global Positioning System (GPS) lies at the heart of an increasing number of technologies, from vehicle navigation systems to the power grid. And yet, although the military version of GPS includes security features such as encryption, civilian signals are transmitted in the clear. Now, researchers at Cornell University and Virginia Tech have demonstrated a relatively simple way to fool ordinary GPS receivers into accepting bogus signals using a briefcase-size transmitter.
+
+Paul Kintner, a professor of electrical and computer engineering at Cornell, who worked on the project, warns that society is becoming dependent on GPS for an ever-broadening list of applications, including management of the power grid and tracking criminals under house arrest. "I'm just amazed at the way people are using these GPS systems," Kintner says. "Ten years from now, there will be more ways that we just don't know about--it migrates into our technological fabric, and we become dependent on it."
+
+Kintner and his group, which recently presented details of the spoofing attack at the Institute of Navigation's Global Navigation Satellite Systems (GNSS) meeting in Savannah, GA, did not start out looking for a way to subvert GPS. They were working on a software-based GPS receiver to help them understand the effects of solar flares on GPS satellites. But as their design progressed, Todd Humphreys, one of the researchers in the group, realized that the same system could be used to spoof ordinary GPS signals.
+
+Here's how GPS works: roughly 30 satellites orbit the earth, broadcasting signals that can be picked up by a receiver virtually anywhere on the planet. By collecting signals from several satellites and measuring the time delay between each signal, GPS receivers can calculate their exact position and receive very precise time signals.
+
+The software GPS device built at Cornell can receive and transmit any GPS signal. To attack a target receiver, the device need only be placed nearby. It would start out simply retransmitting ordinary satellite signals without any modifications. After a few seconds, the target receiver should focus on the signal coming from the device, because it's the clearest source. At that point, the device could begin modifying transmissions, altering the signals little by little until the target receiver shows any time and position the attacker chooses. Kintner says that an attacker could use fake GPS signals to disrupt the power grid, potentially causing power spikes and even damaging generators. The same trick could let criminals under house arrest move around freely, he adds.
+
+
+Richard Langley, a professor in the Department of Geodesy and Geomatics at the University of New Brunswick, in Canada, who has worked extensively with GPS, says that this potential weak spot in the technology has, in fact, been known for years, although little has been done to date to protect the civilian system against it. "You would think that more would have been developed by now," he says, "but maybe it takes the demonstration that these guys have carried out to show how easily a GPS receiver can be spoofed."
+
+Langley notes that solutions are some distance away. Although a European navigation system, called Galileo, will have the ability to send encrypted signals for civilian use, it isn't scheduled to be fully operational until 2013. It would be possible to add encryption to the existing system, but Langley says that the likely cost and disruption make this an unlikely solution. The best bet in the near term, he says, is to add security features to normal GPS receivers.
+
+One option would be to add more antennas to receivers. The attack relies on the fact that most consumer GPS receivers use just a single antenna to receive signals from multiple satellites. By adding multiple antennas, a normal receiver could recognize that the spoofed signals in fact come from only one source. But Langley notes that there would be a cost trade-off. "Manufacturers have to get a return on any investment they make in antispoofing technology," he says.
+
+Kintner says that manufacturers have time to respond before attacks become realistic, but he warns that countermeasures have to be introduced. "We live in a time where we're really dependent on technology," he says. "We need to understand how that makes us vulnerable."
+
+If the technology needed to make a GPS spoofing device is miniaturized, then handheld devices could be produced for about $1,000 each, Kintner warns. "My greatest fear is that someone will reduce it to the size of a cigarette pack, and the world will be flooded with these small devices at a fairly cheap price," he says. "That would make GPS useless in a whole variety of circumstances."
+

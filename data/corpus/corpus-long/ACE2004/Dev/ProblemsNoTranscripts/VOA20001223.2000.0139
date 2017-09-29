@@ -1,0 +1,75 @@
+<ReferenceProblem>
+	<ReferenceFileName>
+		VOA20001223.2000.0139
+	</ReferenceFileName>
+<ReferenceInstance>
+	<SurfaceForm>
+		Democratic opposition
+	</SurfaceForm>
+	<Offset>
+		138
+	</Offset>
+	<Length>
+		21
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Democratic_Opposition_of_Serbia
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Democratic_Opposition_of_Serbia
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Slobodan Milosevic
+	</SurfaceForm>
+	<Offset>
+		325
+	</Offset>
+	<Length>
+		18
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Slobodan_Milošević
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Slobodan_Milošević
+	</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+	<SurfaceForm>
+		Socialist Party
+	</SurfaceForm>
+	<Offset>
+		372
+	</Offset>
+	<Length>
+		15
+	</Length>
+	<ChosenAnnotation>
+		http://en.wikipedia.org/wiki/Socialist_Party_of_Serbia
+	</ChosenAnnotation>
+<NumAnnotators>
+		1
+	</NumAnnotators>
+	<AnnotatorId>
+		MajorityVoteOf5Turkers
+	</AnnotatorId>
+	<Annotation>
+		Socialist_Party_of_Serbia
+	</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

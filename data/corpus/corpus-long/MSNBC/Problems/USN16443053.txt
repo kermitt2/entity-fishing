@@ -1,0 +1,1109 @@
+<ReferenceProblem>
+<ReferenceFileName>
+USN16443053.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+U.S.
+</SurfaceForm>
+<Offset>
+13
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+WASHINGTON
+</SurfaceForm>
+<Offset>
+126
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Washington,_D.C.
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Washington, D.C.
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+U.S.
+</SurfaceForm>
+<Offset>
+154
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Associated Press
+</SurfaceForm>
+<Offset>
+372
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/The_Associated_Press
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+The Associated Press
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Washington
+</SurfaceForm>
+<Offset>
+480
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Washington,_D.C.
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Washington, D.C.
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+D.C.
+</SurfaceForm>
+<Offset>
+492
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/District_of_Columbia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+District of Columbia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+San Diego
+</SurfaceForm>
+<Offset>
+498
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/San_Diego,_California
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+San Diego, California
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Minneapolis-St. Paul
+</SurfaceForm>
+<Offset>
+509
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Minneapolis-St._Paul
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Minneapolis-St. Paul
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Columbus
+</SurfaceForm>
+<Offset>
+531
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Columbus,_Ohio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Columbus, Ohio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Ohio
+</SurfaceForm>
+<Offset>
+541
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Ohio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Ohio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sioux Falls
+</SurfaceForm>
+<Offset>
+547
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sioux_Falls,_South_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sioux Falls, South Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+S.D.
+</SurfaceForm>
+<Offset>
+560
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/South_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+South Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Laramie County
+</SurfaceForm>
+<Offset>
+570
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Laramie_County,_Wyoming
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Laramie County, Wyoming
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Wyo.
+</SurfaceForm>
+<Offset>
+586
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Wyoming
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Wyoming
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Chicago
+</SurfaceForm>
+<Offset>
+620
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Chicago,_Illinois
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Chicago, Illinois
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Cleveland
+</SurfaceForm>
+<Offset>
+629
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cleveland,_Ohio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cleveland, Ohio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Baton Rouge
+</SurfaceForm>
+<Offset>
+640
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Baton_Rouge,_Louisiana
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Baton Rouge, Louisiana
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+La.
+</SurfaceForm>
+<Offset>
+653
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Louisiana
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Louisiana
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Mandan
+</SurfaceForm>
+<Offset>
+658
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Mandan,_North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Mandan, North Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+N.D.
+</SurfaceForm>
+<Offset>
+666
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+North Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+American Samoa
+</SurfaceForm>
+<Offset>
+676
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/American_Samoa
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+American Samoa
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+U.S. territories
+</SurfaceForm>
+<Offset>
+765
+</Offset>
+<Length>
+16
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/U.S._territories
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+U.S. territories
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Homeland Security Department
+</SurfaceForm>
+<Offset>
+1193
+</Offset>
+<Length>
+28
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Department_of_Homeland_Security
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Department of Homeland Security
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Congress
+</SurfaceForm>
+<Offset>
+1275
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Congress
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Congress
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Charles Schumer
+</SurfaceForm>
+<Offset>
+1720
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Charles_Schumer
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Charles Schumer
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Homeland Security
+</SurfaceForm>
+<Offset>
+1833
+</Offset>
+<Length>
+17
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Department_of_Homeland_Security
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Department of Homeland Security
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Russ Knocke
+</SurfaceForm>
+<Offset>
+1861
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Russ_Knocke
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Russ Knocke
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Homeland Security
+</SurfaceForm>
+<Offset>
+1953
+</Offset>
+<Length>
+17
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Department_of_Homeland_Security
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Department of Homeland Security
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Michael Chertoff
+</SurfaceForm>
+<Offset>
+1981
+</Offset>
+<Length>
+16
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Michael_Chertoff
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Michael Chertoff
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New York
+</SurfaceForm>
+<Offset>
+2106
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_City
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York City
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+World Trade Center
+</SurfaceForm>
+<Offset>
+2287
+</Offset>
+<Length>
+18
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/World_Trade_Center
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+World Trade Center
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New York
+</SurfaceForm>
+<Offset>
+2410
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_City
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York City
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New York
+</SurfaceForm>
+<Offset>
+2603
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_City
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York City
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Hurricane Katrina
+</SurfaceForm>
+<Offset>
+2638
+</Offset>
+<Length>
+17
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Hurricane_Katrina
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Hurricane Katrina
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Los Angeles
+</SurfaceForm>
+<Offset>
+3585
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Los_Angeles._California
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Los Angeles. California
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+San Francisco
+</SurfaceForm>
+<Offset>
+3736
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/San_Francisco,_California
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+San Francisco, California
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Congress
+</SurfaceForm>
+<Offset>
+4092
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Congress
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Congress
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Homeland Security Department
+</SurfaceForm>
+<Offset>
+4299
+</Offset>
+<Length>
+28
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Department_of_Homeland_Security
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Department of Homeland Security
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Chicago
+</SurfaceForm>
+<Offset>
+4637
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Chicago,_Illinois
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Chicago, Illinois
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Cleveland
+</SurfaceForm>
+<Offset>
+4646
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cleveland,_Ohio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cleveland, Ohio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Baton Rouge
+</SurfaceForm>
+<Offset>
+4660
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Baton_Rouge,_Louisiana
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Baton Rouge, Louisiana
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Mandan
+</SurfaceForm>
+<Offset>
+4763
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Mandan,_North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Mandan, North Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+N.D.
+</SurfaceForm>
+<Offset>
+4771
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+North Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+American Samoa
+</SurfaceForm>
+<Offset>
+4798
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/American_Samoa
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+American Samoa
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Tammy Lapp
+</SurfaceForm>
+<Offset>
+4983
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Tammy_Lapp
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Tammy Lapp
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Mandan
+</SurfaceForm>
+<Offset>
+5025
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Mandan,_North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Mandan, North Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Morton County
+</SurfaceForm>
+<Offset>
+5036
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Morton_County,_North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Morton County, North Dakota
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+N.D.
+</SurfaceForm>
+<Offset>
+5051
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/North_Dakota
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+North Dakota
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>

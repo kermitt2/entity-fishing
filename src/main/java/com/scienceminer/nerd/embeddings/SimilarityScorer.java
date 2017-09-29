@@ -8,6 +8,7 @@ import com.scienceminer.nerd.disambiguation.ProcessText;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.exceptions.*;
+import com.scienceminer.nerd.utilities.Stopwords;
 
 import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.layout.LayoutToken;
@@ -72,18 +73,20 @@ public class SimilarityScorer {
 
 		for(String lang : UpperKnowledgeBase.getInstance().targetLanguages) {
 			try {
-				File wvFile = new File("data/wikipedia/embeddings/"+lang+"/word.embeddings."+lang+".quantized.compressed");
+				String path = "data/wikipedia/embeddings/"+lang+"/word."+lang+".embeddings.quantized.compressed";
+				File wvFile = new File(path);
 				if (!wvFile.exists()) {
-					LOGGER.error("The word embeddings file for " + lang + " does not exist");
+					LOGGER.error("The word embeddings file for " + lang + " does not exist: " + path);
 					continue;
 				}
 
 				CompressedW2V wordVectors = new CompressedW2V(wvFile.getPath());
 				wordEmbeddings.put(lang, wordVectors);
 
-				File entityFile = new File("data/wikipedia/embeddings/"+lang+"/entity.embeddings."+lang+".quantized.compressed");
+				path = "data/wikipedia/embeddings/"+lang+"/entity."+lang+".embeddings.quantized.compressed";
+				File entityFile = new File(path);
 				if (!entityFile.exists()) {
-					LOGGER.error("The entity embeddings file for " + lang + " does not exist");
+					LOGGER.error("The entity embeddings file for " + lang + " does not exist: " + path);
 					continue;
 				}
 
@@ -98,21 +101,33 @@ public class SimilarityScorer {
 	}
 
 	public float getLRScore(NerdCandidate candidate, List<LayoutToken> tokens, String lang) {
+		if (candidate.getWikidataId() == null)
+			return 0.0F;
+		//System.out.println("LR score (" +lang+ "): " + candidate.getWikidataId() + tokens.toString());
 		LREntityScorer scorer = lrscorers.get(lang);
 		if (scorer != null) {
-			List<String> terms = toStringEmbeddings(tokens);
+			List<String> terms = toStringEmbeddings(tokens, lang);
 			return scorer.score(candidate.getWikidataId(), terms);
 		} else {
+			LOGGER.warn(lang + " LR scorer is null!");
 			return 0.0F;
 		}
 	}
 
 	public float getCentroidScore(NerdCandidate candidate, List<LayoutToken> tokens, String lang) {
+		if (candidate.getWikidataId() == null)
+			return 0.0F;
 		CentroidEntityScorer scorer = centroidScorers.get(lang);
 		if (scorer != null) {
-			List<String> terms = toStringEmbeddings(tokens);
-			return scorer.score(candidate.getWikidataId(), terms);
+			List<String> terms = toStringEmbeddings(tokens, lang);
+//System.out.println(candidate.toString());
+//System.out.println(terms.toString());
+			float score = scorer.score(candidate.getWikidataId(), terms);
+			if (score < 0.0F)
+				score = 0.0F;
+			return score;
 		} else {
+			LOGGER.warn(lang + " centroid scorer is null!");
 			return 0.0F;
 		}
 	}
@@ -120,12 +135,16 @@ public class SimilarityScorer {
 	/**
 	 * Normalise LayoutTokens sequence as an array of words correspond to word embeddings
 	 */
-	private List<String> toStringEmbeddings(List<LayoutToken> tokens) {
+	private List<String> toStringEmbeddings(List<LayoutToken> tokens, String lang) {
 		List<String> toks = new ArrayList<String>();
 		for(LayoutToken token : tokens) {
-			if (ProcessText.delimiters.indexOf(token.getText()) != -1)
-				continue;
 			String word = token.getText();
+
+			if (word == null || word.trim().length() == 0)
+				continue;
+			if (ProcessText.delimiters.indexOf(word) != -1)
+				continue;
+
 			// unicode normalization
 			word = UnicodeUtil.normaliseText(word);
 
@@ -139,7 +158,16 @@ public class SimilarityScorer {
 			word = word.toLowerCase();
 			word = word.replace("\t", "");
 
-			toks.add(word);
+			if (word.trim().length() == 0)
+				continue;
+
+			try {
+				if (!Stopwords.getInstance().isStopword(word, lang))
+					toks.add(word);
+			} catch(Exception e) {
+				LOGGER.warn("Problem getting Stopwords instance", e);
+				toks.add(word);
+			}
 		}
 		return toks;
 	}

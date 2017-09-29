@@ -1,0 +1,1362 @@
+<ReferenceProblem>
+<ReferenceFileName>
+Bus16451112.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+0
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+15
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ATLANTA
+</SurfaceForm>
+<Offset>
+107
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Atlanta,_Georgia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Atlanta, Georgia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bob Nardelli
+</SurfaceForm>
+<Offset>
+117
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Home Depot Inc.
+</SurfaceForm>
+<Offset>
+193
+</Offset>
+<Length>
+19
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+374
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+General Electric Co.
+</SurfaceForm>
+<Offset>
+583
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/General_Electric
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+General Electric
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+611
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+652
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+668
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Frank Blake
+</SurfaceForm>
+<Offset>
+699
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Frank_Blake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Frank Blake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Blake
+</SurfaceForm>
+<Offset>
+705
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Frank_Blake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Frank Blake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+791
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Jerry Shields
+</SurfaceForm>
+<Offset>
+812
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Jerry_Shields
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Jerry Shields
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Shields
+</SurfaceForm>
+<Offset>
+818
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Jerry_Shields
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Jerry Shields
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Blake
+</SurfaceForm>
+<Offset>
+927
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Frank_Blake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Frank Blake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+979
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+1065
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+1150
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+1173
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Associated Press
+</SurfaceForm>
+<Offset>
+1230
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/The_Associated_Press
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+The Associated Press
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+1372
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+1507
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+1519
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+1622
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Home Depot
+</SurfaceForm>
+<Offset>
+1663
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+1667
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+1736
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Atlanta
+</SurfaceForm>
+<Offset>
+1799
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Atlanta,_Georgia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Atlanta, Georgia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bob
+</SurfaceForm>
+<Offset>
+1850
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Home Depot
+</SurfaceForm>
+<Offset>
+1883
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bob
+</SurfaceForm>
+<Offset>
+1929
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+2237
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+2280
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+President Bush
+</SurfaceForm>
+<Offset>
+2365
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/George_H._W._Bush
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+George H. W. Bush
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+2423
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+2509
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Blake
+</SurfaceForm>
+<Offset>
+2763
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Frank_Blake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Frank Blake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+2814
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+James Senn
+</SurfaceForm>
+<Offset>
+2874
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/James_Senn
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+James Senn
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Robinson College
+</SurfaceForm>
+<Offset>
+2898
+</Offset>
+<Length>
+16
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/J._Mack_Robinson_College_of_Business
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+J. Mack Robinson College of Business
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Center for Global Business Leadership
+</SurfaceForm>
+<Offset>
+2917
+</Offset>
+<Length>
+37
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Center_for_Global_Business_Leadership
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Center for Global Business Leadership
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Georgia State University
+</SurfaceForm>
+<Offset>
+2958
+</Offset>
+<Length>
+24
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Georgia_State_University
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Georgia State University
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bob
+</SurfaceForm>
+<Offset>
+3072
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+3143
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Carol Tome
+</SurfaceForm>
+<Offset>
+3180
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Carol_Tome
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Carol Tome
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Joe DeAngelo
+</SurfaceForm>
+<Offset>
+3225
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Joe_DeAngelo
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Joe DeAngelo
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot Supply
+</SurfaceForm>
+<Offset>
+3272
+</Offset>
+<Length>
+17
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot_Supply
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot Supply
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+DeAngelo
+</SurfaceForm>
+<Offset>
+3466
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Joe_DeAngelo
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Joe DeAngelo
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+3550
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+3563
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+3780
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+4682
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+4829
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nardelli
+</SurfaceForm>
+<Offset>
+4857
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+John L. Clendenin
+</SurfaceForm>
+<Offset>
+5017
+</Offset>
+<Length>
+17
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/John_L._Clendenin
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+John L. Clendenin
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Claudio X. Gonzales
+</SurfaceForm>
+<Offset>
+5036
+</Offset>
+<Length>
+19
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Claudio_X._Gonzales
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Claudio X. Gonzales
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Milledge A. Hart III
+</SurfaceForm>
+<Offset>
+5060
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Milledge_A._Hart_III
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Milledge A. Hart III
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+5208
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>

@@ -1,0 +1,834 @@
+<ReferenceProblem>
+<ReferenceFileName>
+Ent16453733.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+Barbara Walters
+</SurfaceForm>
+<Offset>
+0
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Rosie O'Donnell
+</SurfaceForm>
+<Offset>
+26
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Trump
+</SurfaceForm>
+<Offset>
+62
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+NEW YORK
+</SurfaceForm>
+<Offset>
+116
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_City
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York City
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Barbara Walters
+</SurfaceForm>
+<Offset>
+127
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Rosie O'Donnell
+</SurfaceForm>
+<Offset>
+189
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Donald Trump
+</SurfaceForm>
+<Offset>
+240
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Walters
+</SurfaceForm>
+<Offset>
+257
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ABC
+</SurfaceForm>
+<Offset>
+277
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/American_Broadcasting_Company
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+American Broadcasting Company
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The View
+</SurfaceForm>
+<Offset>
+284
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/The_View
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+The View
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Trump
+</SurfaceForm>
+<Offset>
+355
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+O'Donnell
+</SurfaceForm>
+<Offset>
+377
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Walters
+</SurfaceForm>
+<Offset>
+547
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+O'Donnell
+</SurfaceForm>
+<Offset>
+563
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Walters
+</SurfaceForm>
+<Offset>
+622
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Walters
+</SurfaceForm>
+<Offset>
+686
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Donald
+</SurfaceForm>
+<Offset>
+740
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+O'Donnell
+</SurfaceForm>
+<Offset>
+778
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The View
+</SurfaceForm>
+<Offset>
+797
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/The_View
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+The View
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ABC
+</SurfaceForm>
+<Offset>
+854
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/American_Broadcasting_Company
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+American Broadcasting Company
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Donald Trump
+</SurfaceForm>
+<Offset>
+926
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Walters
+</SurfaceForm>
+<Offset>
+1084
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Barbara_Walters
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Barbara Walters
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+O'Donnell
+</SurfaceForm>
+<Offset>
+1101
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Trump
+</SurfaceForm>
+<Offset>
+1115
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Trump
+</SurfaceForm>
+<Offset>
+1281
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Miss Universe Organization
+</SurfaceForm>
+<Offset>
+1307
+</Offset>
+<Length>
+26
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Miss_Universe_Organization
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Miss Universe Organization
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Miss USA
+</SurfaceForm>
+<Offset>
+1350
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Miss_USA
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Miss USA
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Miss Teen USA
+</SurfaceForm>
+<Offset>
+1363
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Miss_Teen_USA
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Miss Teen USA
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The View
+</SurfaceForm>
+<Offset>
+1421
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/The_View
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+The View
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Trump
+</SurfaceForm>
+<Offset>
+1471
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Conner
+</SurfaceForm>
+<Offset>
+1500
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Tara_Conner
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Tara Conner
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+America
+</SurfaceForm>
+<Offset>
+1654
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Trump
+</SurfaceForm>
+<Offset>
+1667
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Donald_Trump
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Donald Trump
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+O'Donnell
+</SurfaceForm>
+<Offset>
+1693
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Rosie_O'Donnell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Rosie O'Donnell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+NBC
+</SurfaceForm>
+<Offset>
+1799
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/NBC
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+NBC
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+The Apprentice
+</SurfaceForm>
+<Offset>
+1806
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/The_Apprentice
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+The Apprentice
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

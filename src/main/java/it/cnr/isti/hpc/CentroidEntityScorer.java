@@ -51,7 +51,9 @@ public class CentroidEntityScorer extends EntityScorer {
         @Override
         public float compute_score() {
             int word_size = centroid_vec.length;
-            return LinearAlgebra.inner( word_size, entity_vec, 0, centroid_vec, 0 ) / norm;
+            float score = LinearAlgebra.inner(word_size, entity_vec, 0, centroid_vec, 0) / norm;
+//System.out.println("centroid scorer: " + word_counts.length + " words context / " + score);
+            return score;
         }
     }
 

@@ -1,0 +1,558 @@
+<ReferenceProblem>
+<ReferenceFileName>
+Ent16444023.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+Timberlake
+</SurfaceForm>
+<Offset>
+0
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Justin_Timberlake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Justin Timberlake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Diaz
+</SurfaceForm>
+<Offset>
+12
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cameron_Diaz
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cameron Diaz
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+N' Sync
+</SurfaceForm>
+<Offset>
+45
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/'N_Sync
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+'N Sync
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Justin Timberlake
+</SurfaceForm>
+<Offset>
+101
+</Offset>
+<Length>
+17
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Justin_Timberlake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Justin Timberlake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Cameron Diaz
+</SurfaceForm>
+<Offset>
+123
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cameron_Diaz
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cameron Diaz
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Star magazine
+</SurfaceForm>
+<Offset>
+183
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Star_(magazine)
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Star (magazine)
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Star
+</SurfaceForm>
+<Offset>
+214
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Star_(magazine)
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Star (magazine)
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Diaz
+</SurfaceForm>
+<Offset>
+220
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cameron_Diaz
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cameron Diaz
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Christmas
+</SurfaceForm>
+<Offset>
+236
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Christmas
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Christmas
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Vail
+</SurfaceForm>
+<Offset>
+265
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Vail,_Colorado
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Vail, Colorado
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Colo.
+</SurfaceForm>
+<Offset>
+271
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Colorado
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Colorado
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Timberlake
+</SurfaceForm>
+<Offset>
+284
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Justin_Timberlake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Justin Timberlake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Memphis
+</SurfaceForm>
+<Offset>
+325
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Memphis,_Tennessee
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Memphis, Tennessee
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+N' Sync
+</SurfaceForm>
+<Offset>
+383
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/'N_Sync
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+'N Sync
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Saturday Night Live
+</SurfaceForm>
+<Offset>
+544
+</Offset>
+<Length>
+19
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Saturday_Night_Live
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Saturday Night Live
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Diaz
+</SurfaceForm>
+<Offset>
+569
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cameron_Diaz
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cameron Diaz
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Timberlake
+</SurfaceForm>
+<Offset>
+578
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Justin_Timberlake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Justin Timberlake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Kids' Choice Awards
+</SurfaceForm>
+<Offset>
+650
+</Offset>
+<Length>
+19
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Nickelodeon_Kids'_Choice_Awards
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Nickelodeon Kids' Choice Awards
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Timberlake
+</SurfaceForm>
+<Offset>
+706
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Justin_Timberlake
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Justin Timberlake
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Veronica Finn
+</SurfaceForm>
+<Offset>
+752
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Veronica_Finn
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Veronica Finn
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Britney Spears
+</SurfaceForm>
+<Offset>
+822
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Britney_Spears
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Britney Spears
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Spears
+</SurfaceForm>
+<Offset>
+830
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Britney_Spears
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Britney Spears
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Innosense
+</SurfaceForm>
+<Offset>
+899
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Innosense_(band)
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Innosense (band)
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Lou Pearlman
+</SurfaceForm>
+<Offset>
+940
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Lou_Pearlman
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Lou Pearlman
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

@@ -1,0 +1,31 @@
+A Source of Men's Stem Cells
+
+Stem cells from human testes could be used for personalized medicine. 
+Adult stem cells that behave much like embryonic ones have been isolated from human testes, raising hopes for a new source of versatile stem cells without genetic manipulation or the destruction of embryos. If the new stem cells can be used therapeutically, a simple testicular biopsy could provide the starting material for personalized regenerative medicine.
+
+The new stem cells, known as human adult germline stem cells (GSCs), were grown by researchers in Germany and the U.K. by adding special growth factors to spermatogonial cells extracted from testes. Spermatogonial cells are stem cells in the adult testis that normally generate only one type of differentiated cell (sperm). But with the right growth factors, these spermatogonial cells can change to become pluripotent. They begin to produce proteins normally made by embryonic stem cells and acquire the ability to differentiate into many different cell types.
+
+In a paper published today in Nature, Thomas Skutella of the University of Tübingen, in Germany, and his colleagues raise the possibility that adult GSCs could overcome many of the hurdles still facing alternative approaches.
+
+Unlike embryonic stem cells, which require the destruction of human embryos and pose immunological challenges because a patient's body will reject foreign cells, adult GSCs do not require embryos and should be tolerated by patients because they are made from their own cells. Adult GSCs should also be more versatile than other types of adult stem cells, which typically can only give rise to one or a few types of differentiated cells.
+
+Furthermore, in contrast with induced pluripotent stem cells (iPS), which are made by engineering embryonic stem-cell genes into normal adult cells with the help of retroviruses, the adult GSCs do not require significant manipulations and therefore avoid the associated cancer risks.
+
+Skutella says that his results are similar to those from recent experiments performed on mice, but that it was much trickier to isolate the right kind of cells in humans. "You can use the power of genetics to make transgenic mice with green spermatogonia to easily isolate these cells," he says. "But for regenerative medicine, it's essential to use the human system. We obviously cannot make transgenic humans, so we had to go back to the roots of cell biology, and try a mixture of things to isolate the stem cells."
+
+Using 22 testis-tissue samples from men ages 17 to 81, the researchers isolated spermatogonial stem cells with the help of magnetic beads that physically pulled the right cells out of the cell mix. These beads were coated with an antibody that recognizes a surface molecule that is enriched on germline cells. The researchers followed this with two more rounds of purification: one that used culture-dish coatings that preferentially stick to germline cells, and a second one that used coatings that stick to somatic (nongermline) cells. 
+
+
+
+By adding leukemia inhibitory factor (LIF)--a molecule that is normally used to keep embryonic stem cells from differentiating--the team managed to transform the resulting spermatogonial stem cells into stem cells that much more closely resembled embryonic stem cells and can form a similar variety of cell types.
+
+Skutella thinks that germ stem cells are fundamentally more amenable to reprogramming than cells that do not participate in the germline (the production of sperm or eggs). In support of this, a similar transformation into pluripotent cells had previously been observed with primordial germ cells--cells in the embryo that later go on to form sperm and egg precursors. But obtaining these germ cells requires destroying the embryo, while the testicular adult cells do not face this issue. "The DNA of germ cells is more open to manipulations, so they have advantages compared to other adult stem cells," says Skutella.
+
+Fari Izadyar, director of scientific development for the germline stem-cell program at biotech company PrimeGen, says that his team has also had promising results with getting human testicular tissue to differentiate into cardiac, brain, bone, and cartilage cells, although the company has not yet published the data. "It has been difficult to produce consistent results without a steady supply of normal human testicular tissue," he says.
+
+While the starting material is easy to obtain with small testicular biopsies, Skutella admits that his method of producing stable pluripotent germ stem-cell lines takes several months, and that this would need to be sped up if the cells are to be used therapeutically. "We are currently looking to improve our enrichment procedure by finding more-specific cell surface molecules which can be used to isolate the cells more quickly in the future," he says.
+
+Another open question is whether and how women might be able to benefit from the discovery. Skutella argues that at the very least, male germ stem cells could be used to treat women in much the same way that bone marrow is used in cancer therapy: by finding a closely related male donor and treating the patient with immunosuppressants, to prevent the body from rejecting the cells.
+
+But others are hopeful that similarly versatile stem cells can be obtained from the female reproductive tract. Antonin Bukovsky of the University of Knoxville, in Tennessee, has previously found stem cells on the surface of the ovary and managed to differentiate them into neuronal cells. "I think these cells might hold very similar potential to the testicular ones, and they would be just as easy to obtain," he says. "You would only have to brush the surface of the ovary, and we already know they still exist in women of advanced age."
+

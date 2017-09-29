@@ -1,0 +1,19 @@
+Apple's Greatest Innovations
+
+Everywhere you turn this year, Apple's machines are on the march. Apple's iPhone is continuing to gobble up the smart phone market. Apple's PCs and notebook computers--long relegated to a niche status--are tearing off big gobs of the PC market. Even Apple's least successful effort--AppleTV--has rivals such as Blockbuster scrambling to blunt Apple's attack.
+
+The common denominator? Software. While great industrial design--whether it's for great cars or great buildings--always attracts gawkers, it's software that makes Apple's proliferating array of machines so comfortable to use on a long-term basis. Apple's best products mix the curb appeal of a Lamborghini with easy-to-drive friendliness of a Honda Accord.
+
+Software might also explain, in part, why Apple has developed such a cult following. It certainly explains Apple's ability to crank out consumer-friendly gizmos where rivals, ranging from consumer electronics giant Sony to PC powerhouse Dell, have stumbled.
+
+The most surprising part, is it's a trick that normally secretive Apple Chief Executive Steve Jobs has shared again and again with the press--and his competitors. "We make the whole widget," Jobs is fond of saying.
+
+In part, Apple's strategy is a throwback to an earlier era, when companies such as Digital Equipment Corporation paired their own software with cutting-edge computers built from the ground up. And, two decades ago, that was certainly the case when Apple paired up a quirky all-in-one computer with a breakthrough graphical user interface for the original Macintosh computer, introduced in 1984.
+
+Now, however, describing Apple as just a throwback would be an oversimplification. While Apple's designs are unique, its hardware is powered by the same Intel microprocessors you'll find in any computer sold by Dell or Hewlett-Packard. Similarly, while Apple's OS X's user interface is not just easy to use but engaging, it's just a candy shell built around the kind of tried-and-true Unix software that's powered everything from phone networks to computer science labs for a generation.
+
+Best of all, Apple doesn't actually have to manufacture the hardware. Long ago, when Apple managed its own factories, precisely matching the waxing and waning demand of the market sometimes caught the company flatfooted. But, taking a page from other manufacturers, Apple now relies on others to do most of the nuts and bolts manufacturing work.
+
+That approach means that every bit of code that Apple cranks out can be a telling indicator of where the company is going next. Before the launch of the iPhone, even non-technical users could crack open Apple's iTunes digital music software and find numerous references to a gadget dubbed the "iPhone." Likewise, this month, hackers uncovered references to a next-generation wireless chip in Apple software--pointing the way to the imminent launch of a fresh version of Apple's handset.
+
+More broadly, Apple's move to put a shrunk-down version of its operating system, OS X, on the iPhone and the iPod Touch tells us that Apple sees portable, Web-friendly gizmos as a big part of its future. It's why speculation about Apple's next move is so rampant: we may not know what it will look like, but Apple users know it will run the Apple software they know and love.

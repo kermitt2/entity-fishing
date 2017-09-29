@@ -25,6 +25,7 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.Page;
 import org.grobid.core.utilities.KeyGen;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

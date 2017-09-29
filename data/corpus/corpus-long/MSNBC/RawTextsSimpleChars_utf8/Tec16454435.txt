@@ -1,0 +1,22 @@
+Upgrade makes aging Mars rovers smarter 
+Engineers transmitted new software to the rovers' onboard computers 
+ 
+LOS ANGELES - The twin Mars rovers are getting wiser with age. 
+ 
+Engineers have transmitted new flight software to the rovers' onboard computers — just in time for the third anniversary of their landing. The software is aimed at boosting their intelligence and independence so that they can roll around the Red Planet with less help from humans. 
+ 
+"We're teaching an old dog new tricks," said John Callas, the mission project manager with the Jet Propulsion Laboratory, the NASA agency in charge of the rovers. 
+ 
+Among the rovers' new skills is the ability to automatically recognize and transmit to Earth photographs that they take of swirling dust devils or floating clouds. They can also independently decide whether it is safe to extend its robotic arm to sample a piece of rock. 
+ 
+Before, scientists had to painstakingly dissect thousands of images just to find the frames they need and decide for the rovers whether to use their arms. The high-tech upgrades should help save time — as much as a day because scientists on Earth don't have to study a rock before sending commands to the robot to pick it up. 
+ 
+If successful, the changes could get incorporated into future Mars missions. 
+ 
+Spirit and Opportunity were also fitted with a new navigation system that allows them to think several steps ahead when faced with an obstacle, allowing them to back out of a dead end or even navigate a maze on their own, Callas said. The geologic robots have previously tackled one problem at a time. 
+ 
+Spirit landed three years ago Wednesday and Opportunity on Jan. 24, 2004. Entering their fourth year of exploration, both golf cart-sized vehicles have long outlasted their missions, originally planned for about three months. While scientists are impressed by the rovers' longevity, they admit the robots could die at any time. 
+ 
+The rovers' biggest accomplishment is uncovering geologic evidence that water once flowed on Mars. Spirit is currently studying rocks and soil samples near a Martian ridge while Opportunity is circling the rim of a massive crater for possible ways in. 
+
+

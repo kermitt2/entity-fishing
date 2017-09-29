@@ -12,7 +12,7 @@ public class SimpleRankerFeatureVector extends GenericRankerFeatureVector {
 
 	public SimpleRankerFeatureVector() {
 		super();
-		title = "Simple (N)ERD ranker";
+		title = "Simple NERD ranker";
 		//Add_prob_c = true;
 		Add_relatedness = true;
 		Add_context_quality = true;

@@ -1,0 +1,1110 @@
+<ReferenceProblem>
+<ReferenceFileName>
+Bus3683270.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+69
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+NEW YORK
+</SurfaceForm>
+<Offset>
+105
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_City
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York City
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot Inc
+</SurfaceForm>
+<Offset>
+295
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Wal-Mart Stores Inc.
+</SurfaceForm>
+<Offset>
+315
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Wal-Mart
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Wal-Mart
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Dow Jones
+</SurfaceForm>
+<Offset>
+417
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Dow Jones Industrial Average
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+518
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Wall Street
+</SurfaceForm>
+<Offset>
+662
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Wall_Street
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Wall Street
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Institute for Supply Management
+</SurfaceForm>
+<Offset>
+750
+</Offset>
+<Length>
+31
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Institute_for_Supply_Management
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Institute for Supply Management
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ISM
+</SurfaceForm>
+<Offset>
+855
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Institute_for_Supply_Management
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Institute for Supply Management
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Al Goldman
+</SurfaceForm>
+<Offset>
+939
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Al_Goldman
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Al Goldman
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+A.G. Edwards
+</SurfaceForm>
+<Offset>
+978
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/A.G._Edwards
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+A.G. Edwards
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Dow
+</SurfaceForm>
+<Offset>
+1115
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Dow Jones Industrial Average
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nasdaq
+</SurfaceForm>
+<Offset>
+1269
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/NASDAQ
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+NASDAQ
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Standard &amp; Poor's 500
+</SurfaceForm>
+<Offset>
+1328
+</Offset>
+<Length>
+21
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/S&amp;P_500
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+S&amp;P 500
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nasdaq
+</SurfaceForm>
+<Offset>
+1418
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/NASDAQ
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+NASDAQ
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ISM
+</SurfaceForm>
+<Offset>
+1667
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Institute_for_Supply_Management
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Institute for Supply Management
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Automatic Data Processing Inc.
+</SurfaceForm>
+<Offset>
+1741
+</Offset>
+<Length>
+30
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Automatic_Data_Processing
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Automatic Data Processing
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ADP
+</SurfaceForm>
+<Offset>
+1772
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Automatic_Data_Processing
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Automatic Data Processing
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New York Mercantile Exchange
+</SurfaceForm>
+<Offset>
+2158
+</Offset>
+<Length>
+28
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_Mercantile_Exchange
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York Mercantile Exchange
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+United States
+</SurfaceForm>
+<Offset>
+2239
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Gerald R. Ford
+</SurfaceForm>
+<Offset>
+2366
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Gerald_Ford
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Gerald Ford
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Wall Street
+</SurfaceForm>
+<Offset>
+2382
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Wall_Street
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Wall Street
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+ISM
+</SurfaceForm>
+<Offset>
+2573
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Institute_for_Supply_Management
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Institute for Supply Management
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Commerce Department
+</SurfaceForm>
+<Offset>
+2999
+</Offset>
+<Length>
+19
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States_Department_of_Commerce
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States Department of Commerce
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Goldman
+</SurfaceForm>
+<Offset>
+3194
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Al_Goldman
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Al Goldman
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bob Nardelli
+</SurfaceForm>
+<Offset>
+3277
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Robert_Nardelli
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Robert Nardelli
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Wal-Mart Stores Inc.
+</SurfaceForm>
+<Offset>
+3411
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Wal-Mart
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Wal-Mart
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Home Depot
+</SurfaceForm>
+<Offset>
+3563
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Home_Depot
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Home Depot
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Wal-Mart
+</SurfaceForm>
+<Offset>
+3610
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Wal-Mart
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Wal-Mart
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Cytokinetics Inc
+</SurfaceForm>
+<Offset>
+3684
+</Offset>
+<Length>
+16
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Cytokinetics_Inc
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Cytokinetics Inc
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Amgen Inc
+</SurfaceForm>
+<Offset>
+3767
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Amgen
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Amgen
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Amgen
+</SurfaceForm>
+<Offset>
+3820
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Amgen
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Amgen
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sirius Satellite Radio Inc
+</SurfaceForm>
+<Offset>
+3854
+</Offset>
+<Length>
+26
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sirius_Satellite_Radio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sirius Satellite Radio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Goodyear Tire &amp; Rubber Co
+</SurfaceForm>
+<Offset>
+4026
+</Offset>
+<Length>
+25
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Goodyear_Tire_&amp;_Rubber
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Goodyear Tire &amp; Rubber
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Lennar Corp.
+</SurfaceForm>
+<Offset>
+4253
+</Offset>
+<Length>
+12
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Lennar_Corporation
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Lennar Corporation
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+U.S.
+</SurfaceForm>
+<Offset>
+4279
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Lennar
+</SurfaceForm>
+<Offset>
+4435
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Lennar_Corporation
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Lennar Corporation
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New York Stock Exchange
+</SurfaceForm>
+<Offset>
+4546
+</Offset>
+<Length>
+23
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_York_Stock_Exchange
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New York Stock Exchange
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New Year
+</SurfaceForm>
+<Offset>
+4710
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_Year
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New Year
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Russell 2000 index
+</SurfaceForm>
+<Offset>
+4737
+</Offset>
+<Length>
+18
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Russell_2000
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Russell 2000
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Japan
+</SurfaceForm>
+<Offset>
+4831
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Japan
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Japan
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Nikkei stock average
+</SurfaceForm>
+<Offset>
+4839
+</Offset>
+<Length>
+20
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Nikkei_225
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Nikkei 225
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Britain
+</SurfaceForm>
+<Offset>
+4879
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Great_Britain
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Great Britain
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+FTSE 100
+</SurfaceForm>
+<Offset>
+4889
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/FTSE_100_Index
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+FTSE 100 Index
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Germany
+</SurfaceForm>
+<Offset>
+4922
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Germany
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Germany
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+DAX
+</SurfaceForm>
+<Offset>
+4932
+</Offset>
+<Length>
+3
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/DAX
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+DAX
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+France
+</SurfaceForm>
+<Offset>
+4967
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/France
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+France
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+CAC-40
+</SurfaceForm>
+<Offset>
+4976
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/CAC_40
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+CAC 40
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

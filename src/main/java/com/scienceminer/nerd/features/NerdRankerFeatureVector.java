@@ -12,7 +12,7 @@ public class NerdRankerFeatureVector extends GenericRankerFeatureVector {
 
 	public NerdRankerFeatureVector() {
 		super();
-		title = "(N)ERD ranker with embeddings";
+		title = "NERD ranker with basic and embeddings features";
 		//Add_prob_c = true;
 		Add_relatedness = true;
 		Add_context_quality = true;

@@ -1,0 +1,28 @@
+Eye Implants to Fight Progressive Blindness 
+
+
+Last week, the U.S. Food and Drug Administration fast-tracked a novel treatment for two eye diseases: age-related macular degeneration and retinitis pigmentosa. The treatment, developed by the Lincoln, RI, biotech company Neurotech, is a capsule that's surgically implanted in the eye. Inside the capsule are genetically engineered cells that produce a protein that may prevent light-sensitive cells in the retina from dying--thereby protecting vision. The device is currently in phase II clinical trials.
+
+Neurotech's platform is "unique" and "fills a significant void in treatment options for retinal degenerative diseases," says Stephen Rose, chief research officer at the nonprofit Foundation Fighting Blindness, which has given grant money to Neurotech but does not have a financial stake in it. "To my knowledge, no other company is testing a similar device," Rose says.
+
+Normally, cells in the back of the eye--the retina--translate light into electrical signals, which are relayed to the brain. In both retinitis pigmentosa and the most common form of age-related macular degeneration, dry AMD, light-sensitive cells in the retina degenerate over time. This results in loss of vision.
+
+Patients with these diseases currently have few or no treatment options. To date, no drugs or devices have been approved for retinitis pigmentosa or for dry AMD, says Rose. (A drug called Lucentis is available for a less common form of macular degeneration, called wet AMD, which is characterized by the leaking of blood vessels.)
+
+Neurotech's device is implanted in a part of the eye called the vitreous humor, a transparent gel that lies between the lens in front and the retina in back. The capsule is made of a semipermeable plastic, which allows the protein produced by the genetically engineered cells to diffuse into the retina. In animal studies, the protein--ciliary neurotrophic factor, or CNTF--slowed the degeneration of retinal cells in diseases analogous to retinitis pigmentosa. According to Weng Tao, chief scientific officer of Neurotech, there's even evidence that CNTF could promote retinal regeneration.
+
+Implanting a device in the vitreous humor is relatively easy, says Peter Francis, an ophthalmologist and expert in retinal disease and ophthalmic genetics at the Casey Eye Institute in Portland, OR. It's a procedure already used, for instance, with devices that release steroid molecules into the eyes of patients with intraocular inflammation. But because Neurotech's device contains cells, it offers the prospect of longer-term treatment. At least in theory, those cells should continue to release CNTF as long as they remain alive.
+
+So far, Neurotech's approach appears to be safe for patients with degenerative diseases of the retina. That was the finding of a phase I trial with 10 patients, the results of which were published in 2006. "The real challenge is whether we'll be able to translate the positive observations in animals in humans," says Tao. The phase II trials, which Tao says should conclude by early 2009, are intended to answer that question
+
+
+Neurotech's is not the only approach to combating degenerative retinal diseases, however. Other researchers are transplanting various kinds of cells into the retina itself. For instance, Thomas Reh, a biologist and expert in retinal-cell development and regeneration at the University of Washington, has used embryonic stem cells to produce light-sensitive cells, which resemble those of the retina. His team is now transplanting the cells into the eyes of blind mice to see whether they improve the animals' sight. In related work, Advanced Cell Technology, a biotech company based in Alameda, CA, has used embryonic stem cells to produce another type of retinal cells--called pigment epithelial cells--that degenerate in macular degeneration. When transplanted into animal models, these cells appear to protect the light-sensitive cells of the retina and improve vision. Still other researchers are working with cells derived from fetal tissue.
+
+In these approaches, the goal is to integrate new cells into the retina to help restore its function. Rebuilding parts of the retina might result in more dramatic or long-lasting improvement than simply slowing degeneration, says Reh. On the other hand, Neurotech's strategy "may be less risky because if something goes wrong, you can get the cells out again" simply by removing the device, he says.
+
+Neurotech is also farther along in the clinical-trials process than any other cell-therapy group, so its platform could be available to patients sooner, Reh adds.
+
+Other active research involves gene therapy. For example, Ceregene, a biotech company based in San Diego, is working with the gene for a protein called NT4. Researchers at the company have introduced the gene into the retinas of several animal models and seen improvements in vision, according to Jeffrey Ostrove, president and CEO of Ceregene. The company expects to begin clinical trials in people with retinitis pigmentosa and macular degeneration soon, possibly in 2009.
+
+Rose, however, emphasizes that Neurotech offers more than just a specific treatment regimen; it also offers a novel drug delivery system. "Even if the results of the current trials aren't 100 percent spectacular," he says, Neurotech's approach could be adapted to deliver other growth factors or therapeutic molecules down the road. "That's the beauty of it. It's a spectacular platform."
+

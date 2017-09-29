@@ -360,8 +360,8 @@
                                 <classpath/>
                                 <argument>-Xms2g</argument>
                                 <argument>-Xmx8g</argument>
-                                <argument>com.scienceminer.nerd.training.EntityDescription</argument>
-                                <argument>data/wikipedia/training/</argument>
+                                <argument>com.scienceminer.nerd.embeddings.EntityDescription</argument>
+                                <argument>data/wikipedia/embeddings/en/</argument>
                                 <argument>en</argument>
                             </arguments>
                         </configuration>

@@ -23,9 +23,12 @@ import org.grobid.core.lexicon.NERLexicon.NER_Type;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.utilities.NerdProperties;
+import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
+import com.scienceminer.nerd.embeddings.SimilarityScorer;
+import com.scienceminer.nerd.features.GenericRankerFeatureVector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,6 +147,8 @@ public class NerdEngine {
 			return null;
 		}
 
+
+
 		// source language 
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
@@ -171,6 +176,11 @@ public class NerdEngine {
 			lang = "en";
 		}
 		
+		// get the LayoutToken ready if not already the case
+		if (tokens == null) {
+			tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, new Language(lang, 1.0));
+		}
+
 		// additional target languages for translations (source language is always the default target 
 		// language for the results!)
 		List<String> targetLanguages = nerdQuery.getResultLanguages();
@@ -218,7 +228,7 @@ System.out.println("--");*/
 System.out.println("total number of entities: " + nbEntities);
 System.out.println("total number of candidates: " + nbCandidates);
 
-		NerdContext localContext = rank(candidates, lang, context, shortTextVal);
+		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
@@ -460,7 +470,8 @@ for(NerdCandidate cand : cands) {
 	 * @return the context enriched with the internal context considered when ranking.
 	 * 
 	 */
-	public NerdContext rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context, boolean shortText) {
+	public NerdContext rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, 
+		NerdContext context, boolean shortText, List<LayoutToken> tokens) {
 		// we rank candidates for each entity mention
 //relatedness.resetCache(lang);
 
@@ -486,10 +497,6 @@ for(NerdCandidate cand : cands) {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		double quality = 0.0;
-
-		if (localContext != null)
-			quality = localContext.getQuality();
 
 		NerdRanker disambiguator = rankers.get(lang);
 		if (disambiguator == null) {
@@ -503,6 +510,16 @@ for(NerdCandidate cand : cands) {
 			} 
 		}
 
+		GenericRankerFeatureVector feature = disambiguator.getNewFeature();
+		
+		double quality = 0.0;
+		if (localContext != null) {
+			if (feature.Add_context_quality) {
+				// computed only if required
+				quality = localContext.getQuality();
+			}
+		}
+
 		// second pass for producing the ranking score
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -511,16 +528,33 @@ for(NerdCandidate cand : cands) {
 			if (cands == null)
 				continue;
 			
+			// get a window of layout tokens around without target tokens
+			List<LayoutToken> subTokens = com.scienceminer.nerd.utilities.Utilities.getWindow(entity, tokens, 10, lang);
+
 			for(NerdCandidate candidate : cands) {			
 				double score = 0.0;
 				try {
 					double commonness = candidate.getProb_c(); 
-					double related = relatedness.getRelatednessTo(candidate, localContext, lang);
+					
+					double related = 0.0;
+					// computed only if needed
+					if (feature.Add_relatedness) {
+						related = relatedness.getRelatednessTo(candidate, localContext, lang);
+					}
+
 					boolean bestCaseContext = true;
+					
 					// actual label used
 					Label bestLabel = candidate.getLabel();
 					if (!entity.getNormalisedName().equals(bestLabel.getText())) {
 						bestCaseContext = false;
+					}
+					
+					float embeddingsSimilarity = 0.0F;
+					// computed only if needed
+					if (feature.Add_embeddings_LR_similarity) {
+						//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, subTokens, lang);
+						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 					}
 
 					candidate.setRelatednessScore(related);
@@ -528,7 +562,17 @@ for(NerdCandidate cand : cands) {
 						System.out.println("Cannot rank candidates: disambiguator for the language " + 
 							lang + " is invalid");
 					}
-					score = disambiguator.getProbability(commonness, related, quality, bestCaseContext);
+
+					String wikidataId = "Q0"; // undefined entity
+					if (candidate.getWikidataId() != null)	
+						wikidataId = candidate.getWikidataId();
+
+					String wikidataP31Id = "Q0"; // undefined entity
+					if (candidate.getWikidataP31Id() != null)
+						wikidataP31Id = candidate.getWikidataP31Id();
+
+					score = disambiguator.getProbability(commonness, related, quality, 
+						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 					
 					//System.out.println(candidate.getWikiSense().getTitle() + " " + candidate.getNerdScore() +  " " + entity.toString());
 					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related);
@@ -553,7 +597,7 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 	 * Ranking of candidates for a term rawTerm in a vector of weighted terms.
 	 * Optionally a contextual text is given, where the terms of the vector might occur (or not). 
 	 */
-	private void rank(List<NerdCandidate> candidates, String rawTerm, //List<WeightedTerm> terms, 
+	private void rank(List<NerdCandidate> candidates, String rawTerm, List<WeightedTerm> terms, 
 					  String text, String lang, NerdContext context, List<NerdEntity> userEntities) {
 	    if ( (candidates == null) || (candidates.size() == 0) )
 			return;
@@ -571,6 +615,12 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 			} 
 		}
 		
+		// for the embeddings similiarity we need a textual context as a list of LayoutToken
+		List<LayoutToken> tokens = new ArrayList<LayoutToken>();
+		for(WeightedTerm term : terms) {
+			tokens.add(new LayoutToken(term.getTerm()));
+		} 
+
 		// if we have extra textual information, we can try to get the different local contexts
 		List<NerdContext> localContexts = null;
 		if ( (text != null) && (text.length() > 0) ) {
@@ -586,11 +636,18 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 				catch(Exception e) {
 					e.printStackTrace();
 				}
+				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString);
+				for(LayoutToken token : subTokens)
+					tokens.add(token);
 			}
 		}
 		
-		double quality = context.getQuality();
-
+		GenericRankerFeatureVector feature = disambiguator.getNewFeature();
+		double quality = 0.0;
+		if (feature.Add_context_quality) {
+			// calculated if needed
+			quality = context.getQuality();
+		}
 		// second pass for producing the ranking score
 		for(NerdCandidate candidate : candidates) {			
 			double score = 0.0;
@@ -604,20 +661,46 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 					bestCaseContext = false;
 				}
 
+				float embeddingsSimilarity = 0.0F;
+				// computed only of needed
+				
+				if (feature.Add_embeddings_LR_similarity) {
+					//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, tokens, lang);
+					embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, tokens, lang);
+				}
+
 				// for the candidate
 				double related = 0.0;
-				if (localContexts == null) {
+				// computed only if needed
+				if (feature.Add_relatedness)
 					related = relatedness.getRelatednessTo(candidate, context, lang);
-					score = disambiguator.getProbability(commonness, related, quality, bestCaseContext);
+
+				String wikidataId = "Q0"; // undefined entity
+				if (candidate.getWikidataId() != null)	
+					wikidataId = candidate.getWikidataId();
+
+				String wikidataP31Id = "Q0"; // undefined entity
+				if (candidate.getWikidataP31Id() != null)
+					wikidataP31Id = candidate.getWikidataP31Id();
+
+
+				if (localContexts == null) {
+					score = disambiguator.getProbability(commonness, related, quality, 
+						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 				}
 				else {
 					// we disambiguate for each local context
-					related = relatedness.getRelatednessTo(candidate, context, lang);
-					score = disambiguator.getProbability(commonness, related, quality, bestCaseContext);
-
+					score = disambiguator.getProbability(commonness, related, quality, 
+						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 					for(NerdContext localContext : localContexts) {
-						related = relatedness.getRelatednessTo(candidate, localContext, lang);
-						score += disambiguator.getProbability(commonness, related, localContext.getQuality(), bestCaseContext);
+						if (feature.Add_relatedness)
+							related = relatedness.getRelatednessTo(candidate, localContext, lang);
+						double localQuality = 0.0;
+						if (feature.Add_context_quality) {
+							localQuality = localContext.getQuality();
+						}
+						score += disambiguator.getProbability(commonness, related, localQuality, 
+							bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 						//double localScore = disambiguator.getProbability(commonness, related, localContext);
 						//if (localScore > score)
 						//	score = localScore;
@@ -1380,7 +1463,7 @@ System.out.println("--");*/
 			if (term.getNerdEntities() == null) {
 				List<NerdCandidate> candidateList = candidates.get(n);
 
-				rank(candidateList, term.getTerm().toLowerCase(), text, lang, stableContext, userEntities);
+				rank(candidateList, term.getTerm().toLowerCase(), terms, text, lang, stableContext, userEntities);
 				prune(candidateList, nerdQuery.getNbest(), 0.1);
 
 				List<NerdEntity> result = new ArrayList<NerdEntity>();

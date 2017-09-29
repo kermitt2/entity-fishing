@@ -1,0 +1,465 @@
+<ReferenceProblem>
+<ReferenceFileName>
+TvN16442342.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+U.S.
+</SurfaceForm>
+<Offset>
+0
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sago Mine accident
+</SurfaceForm>
+<Offset>
+62
+</Offset>
+<Length>
+18
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sago_Mine_disaster
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sago Mine disaster
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+BUCKHANNON
+</SurfaceForm>
+<Offset>
+118
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Buckhannon,_West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Buckhannon, West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+W. Va
+</SurfaceForm>
+<Offset>
+130
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sago Mine
+</SurfaceForm>
+<Offset>
+242
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sago_Mine_disaster
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sago Mine disaster
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Buckhannon
+</SurfaceForm>
+<Offset>
+257
+</Offset>
+<Length>
+10
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Buckhannon,_West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Buckhannon, West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+W. Va
+</SurfaceForm>
+<Offset>
+269
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+West Virginia
+</SurfaceForm>
+<Offset>
+348
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Randal McCloy
+</SurfaceForm>
+<Offset>
+371
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Randal_McCloy
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Randal McCloy
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Debbie Hamner
+</SurfaceForm>
+<Offset>
+635
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Debbie_Hamner
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Debbie Hamner
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sago
+</SurfaceForm>
+<Offset>
+690
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sago_Mine_disaster
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sago Mine disaster
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+West Virginia
+</SurfaceForm>
+<Offset>
+701
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Davitt McAteer
+</SurfaceForm>
+<Offset>
+1150
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Davitt_McAteer
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Davitt McAteer
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Mine Safety and Health Administration
+</SurfaceForm>
+<Offset>
+1219
+</Offset>
+<Length>
+37
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Mine_Safety_and_Health_Administration
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Mine Safety and Health Administration
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+West Virginia
+</SurfaceForm>
+<Offset>
+1265
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/West_Virginia
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+West Virginia
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sago Mine
+</SurfaceForm>
+<Offset>
+1281
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sago_Mine_disaster
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sago Mine disaster
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+McAteer
+</SurfaceForm>
+<Offset>
+1369
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Davitt_McAteer
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Davitt McAteer
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sago
+</SurfaceForm>
+<Offset>
+1615
+</Offset>
+<Length>
+4
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sago_Mine_disaster
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sago Mine disaster
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Dennis O'Dell
+</SurfaceForm>
+<Offset>
+2156
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Dennis_O'Dell
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Dennis O'Dell
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+United Mine Workers of America
+</SurfaceForm>
+<Offset>
+2173
+</Offset>
+<Length>
+30
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_Mine_Workers
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United Mine Workers
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>

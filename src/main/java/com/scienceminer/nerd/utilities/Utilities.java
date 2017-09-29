@@ -7,20 +7,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.grobid.core.factory.*;
 import org.grobid.core.mock.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.layout.LayoutToken;
+
+import com.scienceminer.nerd.disambiguation.NerdEntity;
 
 import org.apache.commons.lang3.StringUtils;
 import com.scienceminer.nerd.exceptions.NerdException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Some utilities methods that I don't know where to put.
  * 
  */
 public class Utilities {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(Utilities.class);
 
 	/**
 	 * Deletes all files and subdirectories under dir. Returns true if all
@@ -290,6 +300,36 @@ public class Utilities {
 		ByteArrayInputStream in = new ByteArrayInputStream(data);
 		ObjectInputStream is = new ObjectInputStream(in);
 		return is.readObject();
+	}
+
+	public static List<LayoutToken> getWindow(NerdEntity entity, List<LayoutToken> tokens, int size, String lang) {
+		List<LayoutToken> subTokens = new ArrayList<LayoutToken>();
+		
+		int start = entity.getOffsetStart();
+		int end = entity.getOffsetEnd();
+
+		// first locate the entity in the token list
+		int pos = 0;
+		for(LayoutToken token : tokens) {
+			if ( (token.getOffset() >= start) && ((token.getOffset()+token.getText().length()) <= end) ) 
+				break;
+			pos++;
+		}
+
+		int posStart = pos - size;
+		if (posStart < 0)
+			posStart = 0;
+		int posEnd = pos + size;
+		if (posEnd >= tokens.size())
+			posEnd = tokens.size()-1;
+
+		for(int p = posStart; p <= posEnd; p++) {
+			if (p != pos) { 
+				subTokens.add(tokens.get(p));
+			}
+		}
+
+		return subTokens;
 	}
 
 }

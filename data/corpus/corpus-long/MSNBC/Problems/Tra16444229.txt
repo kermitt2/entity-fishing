@@ -1,0 +1,442 @@
+<ReferenceProblem>
+<ReferenceFileName>
+Tra16444229.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+Texas
+</SurfaceForm>
+<Offset>
+13
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Texas
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Texas
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+HOUSTON
+</SurfaceForm>
+<Offset>
+121
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Houston,_Texas
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Houston, Texas
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+George Bush Intercontinental Airport
+</SurfaceForm>
+<Offset>
+241
+</Offset>
+<Length>
+36
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/George_Bush_Intercontinental_Airport
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+George Bush Intercontinental Airport
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Houston
+</SurfaceForm>
+<Offset>
+354
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Houston,_Texas
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Houston, Texas
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Police
+</SurfaceForm>
+<Offset>
+396
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/List_of_U.S._state_and_local_law_enforcement_agencies
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+List of U.S. state and local law enforcement agencies
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Manuel
+</SurfaceForm>
+<Offset>
+694
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+*null*
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+---
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Ricardo Aguilar
+</SurfaceForm>
+<Offset>
+705
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Ricardo_Aguilar
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Ricardo Aguilar
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Carlos Osorio
+</SurfaceForm>
+<Offset>
+726
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Carlos_Osorio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Carlos Osorio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Erick Perez
+</SurfaceForm>
+<Offset>
+745
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Erick_Perez
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Erick Perez
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Daniel Venegas
+</SurfaceForm>
+<Offset>
+766
+</Offset>
+<Length>
+14
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Daniel_Venegas
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Daniel Venegas
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Osorio
+</SurfaceForm>
+<Offset>
+828
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Carlos_Osorio
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Carlos Osorio
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Perez
+</SurfaceForm>
+<Offset>
+839
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Erick_Perez
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Erick Perez
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Harris County Jail
+</SurfaceForm>
+<Offset>
+868
+</Offset>
+<Length>
+18
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Harris_County_Jail
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Harris County Jail
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Venegas
+</SurfaceForm>
+<Offset>
+938
+</Offset>
+<Length>
+7
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Daniel_Venegas
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Daniel Venegas
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bownds
+</SurfaceForm>
+<Offset>
+1020
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Houston_Police_Capt._Rick_Bownds
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Houston Police Capt. Rick Bownds
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Menzies Aviation Group
+</SurfaceForm>
+<Offset>
+1051
+</Offset>
+<Length>
+22
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Menzies_Aviation_Group
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Menzies Aviation Group
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+United States
+</SurfaceForm>
+<Offset>
+1140
+</Offset>
+<Length>
+13
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/United_States
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+United States
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+London
+</SurfaceForm>
+<Offset>
+1267
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/London
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+London
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Bownds
+</SurfaceForm>
+<Offset>
+1451
+</Offset>
+<Length>
+6
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Houston_Police_Capt._Rick_Bownds
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Houston Police Capt. Rick Bownds
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>

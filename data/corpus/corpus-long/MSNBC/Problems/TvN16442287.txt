@@ -1,0 +1,328 @@
+<ReferenceProblem>
+<ReferenceFileName>
+TvN16442287.txt
+</ReferenceFileName>
+<ReferenceInstance>
+<SurfaceForm>
+Joy Bauer
+</SurfaceForm>
+<Offset>
+55
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Joy_Bauer
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Joy Bauer
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New Year's resolution
+</SurfaceForm>
+<Offset>
+120
+</Offset>
+<Length>
+21
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_Year's_resolution
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New Year's resolution
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Joy Bauer
+</SurfaceForm>
+<Offset>
+203
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Joy_Bauer
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Joy Bauer
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Joy's Healthy Resolutions
+</SurfaceForm>
+<Offset>
+320
+</Offset>
+<Length>
+25
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Joy's_Healthy_Resolutions
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Joy's Healthy Resolutions
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+New Year
+</SurfaceForm>
+<Offset>
+505
+</Offset>
+<Length>
+8
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/New_Year
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+New Year
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+LDL-Cholesterol
+</SurfaceForm>
+<Offset>
+835
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Low_density_lipoprotein
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Low density lipoprotein
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+HDL-Cholesterol
+</SurfaceForm>
+<Offset>
+868
+</Offset>
+<Length>
+15
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/High_density_lipoprotein
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+High density lipoprotein
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+American Journal of Clinical Nutrition
+</SurfaceForm>
+<Offset>
+1276
+</Offset>
+<Length>
+38
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/American_Journal_of_Clinical_Nutrition
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+American Journal of Clinical Nutrition
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Sara Lee Food &amp; Beverage
+</SurfaceForm>
+<Offset>
+1938
+</Offset>
+<Length>
+24
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Sara_Lee_Food_&amp;_Beverage
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Sara Lee Food &amp; Beverage
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Whole Wheat
+</SurfaceForm>
+<Offset>
+2250
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Whole_grain
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Whole grain
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Whole Grain
+</SurfaceForm>
+<Offset>
+2270
+</Offset>
+<Length>
+11
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Whole_grain
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Whole grain
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Annual Scientific Meeting
+</SurfaceForm>
+<Offset>
+2461
+</Offset>
+<Length>
+25
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Annual_Scientific_Meeting
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Annual Scientific Meeting
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+NAASO
+</SurfaceForm>
+<Offset>
+2489
+</Offset>
+<Length>
+5
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/NAASO
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+NAASO
+</Annotation>
+</ReferenceInstance>
+<ReferenceInstance>
+<SurfaceForm>
+Joy Bauer
+</SurfaceForm>
+<Offset>
+3297
+</Offset>
+<Length>
+9
+</Length>
+<ChosenAnnotation>
+http://en.wikipedia.org/wiki/Joy_Bauer
+</ChosenAnnotation>
+<NumAnnotators>
+1
+</NumAnnotators>
+<AnnotatorId>
+Silviu Cucerzan
+</AnnotatorId>
+<Annotation>
+Joy Bauer
+</Annotation>
+</ReferenceInstance>
+</ReferenceProblem>
+

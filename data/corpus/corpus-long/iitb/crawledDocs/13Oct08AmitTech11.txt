@@ -1,0 +1,17 @@
+Ensuring Chip Stability
+
+Hardware bugs could be avoided by limiting chips to tested behaviors.
+Researchers from the University of Michigan have developed a new approach to handling bugs on computer chips. The system, known as the semantic 
+guardian, only allows a chip to work in ways that have been tested by the manufacturer. All other scenarios are automatically disabled by the guardian, to help ensure that the computer runs smoothly.
+
+"Companies spend lots of effort, time, and money trying to make sure the chip design is as [good] as possible before they send it to the market," says Valeria Bertacco, an assistant professor of computer science and electrical engineering at the University of Michigan. But chip manufacturers don't have time to test every possible scenario, so rare configurations are sometimes overlooked. "There always are some additional bugs that are found after market release," Bertacco says. These bugs can lead to computer crashes and expensive product recalls. They could present a security risk as well: if properly exploited, a design bug on a computer processor could allow hackers to take control of computers from a remote location.
+
+Chip manufacturers can solve some basic problems by providing downloadable software, known as a microcode patch, to consumers. But such patches can only correct bugs caused by a single command. The semantic guardian developed by Bertacco and her doctoral student Ilya Wagner can also handle bugs caused by the interaction of multiple instructions.
+
+So far, Bertacco has been working with software-based simulations of the guardian and processors. If the processor needs to work in an untested way, the guardian directs the chip to use an approved process instead. The chip runs in a safe mode very briefly while the process is completed and then automatically switches back to functioning in its regular mode. The researchers say that the guardian will have no impact on performance while the process is in regular mode.
+
+"The monitoring process does not hinder the chip at all if no bugs are encountered," Bertacco says. "But there is a small slowdown when a bug is encountered." Still, she says that the slowdown should be imperceptible to consumers, assuming the chip manufacturer tested all the commonly used scenarios. The power consumed by the guardian, which will ultimately be a piece of hardware that resides on the processor, should also be minimal, she says.
+
+Wagner says that they still need to make the system work on commercial processors, which are far more complicated. Daniel Sorin, an assistant professor of electrical and computer engineering at Duke University, who designs fault-tolerant chips, notes that additional research will also be required to allow the system to deal with multicore processors. But Sorin, who is not involved in the semantic-guardian project, says that he's impressed by the research so far. "I hope it has a big impact because the potential is there."
+
+Wagner and Bertacco hope to improve the performance of the semantic guardian by developing a system that uses multiple guardians spread out over the same chip. "It can take a long time to get a signal from one area to another" on a chip, says Wagner. Including guardians in multiple locations should decrease the transmission time and decrease the lag caused by the guardian. But to make this approach palatable to manufacturers, Bertacco says, the researchers will need to decrease the size of each guardian.

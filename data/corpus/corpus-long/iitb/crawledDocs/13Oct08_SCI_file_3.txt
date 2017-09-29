@@ -1,0 +1,23 @@
+Is It A Planet? Exotic Object Orbiting Star Stirs Exoplanet Classification Rethink
+
+ScienceDaily (Oct. 7, 2008) — The European spacecraft COROT has discovered a massive planet-sized object orbiting its parent star closely, unlike anything ever spotted before. It is so exotic, that scientists are unsure as to whether this oddity is actually a planet or a failed star.
+
+The object, named COROT-exo-3b, is about the size of Jupiter, but packs more than 20 times the mass. It takes only 4 days and 6 hours to orbit its parent star, which is slightly larger than the Sun.
+
+COROT-exo-3b was found as the satellite observed the drop in the brightness of the star each time the object (COROT-exo-3b) passed in front. "We were taken by surprise when we found this massive object orbiting so close to its parent star", said Dr Magali Deleuil from the Laboratoire d'Astrophysique de Marseille (LAM), leader of the team that made the discovery. She added, "COROT-exo-3b is really unique - we’re still debating its nature."  
+
+The search for planets with orbital periods less than 10 days orbiting close to the parent star has lasted almost 15 years. During this time, scientists have encountered planets with masses 12 times that of Jupiter, and stars 70 times as massive as Jupiter, but none in between. This is why the 20-Jupiter-mass COROT-exo-3b was such a surprise.
+
+This odd find does not fall into either conventional category of planets or brown dwarfs. A brown dwarf is a ‘failed star’, a sub-stellar object that is not undergoing nuclear fusion at its core, but displays some stellar characteristics.
+
+"COROT-exo-3b might turn out to be a rare object found by sheer luck", said Dr Francois Bouchy, from Institut d'Astrophysique de Paris (IAP), member of the team that made the discovery. “But it might just be a member of a new-found family of very massive planets that encircle stars more massive than our Sun. We’re now beginning to think that the more massive the star, the more massive the planet," he said.
+
+Team member Dr Hans Deeg, of the Instituto de Astrofisica de Canarias (IAC), explains why this new object is such an important find for planet hunters, "It has puzzled us; we’re not sure where to draw the boundary between planets and brown dwarfs.”
+
+As a planet, COROT-exo-3b would be the most massive and the densest found to date - more than twice as dense as lead. Studying it will help them better understand how to categorise such objects. The team also wants to understand how such a massive object formed so close to its parent.
+
+This discovery of COROT-exo-3b was supported by a number of ground-based observations that made use of a network of observatories operated by different institutes worldwide. The telescope of Observatoire de Haute Provence (France) studied the object’s mass, orbit and stellar properties; the European Southern Observatory telescopes at Paranal and La Silla (Chile), looked into the properties of its parent star; the Thuringia State Observatory in Tautenburg (Germany) was used to help determining the object’s mass and orbit; the Canada-France-Hawaii Telescope on Mauna Kea looked for signals from faint stars in the vicinity; the Swiss Euler Telescope at La Silla (Chile) helped determine its mass and orbit; the Wise Observatory (Israel), the ESA telescope on Mt. Teide, Tenerife, and the telescope of the Astrophysical Institute of the Canary Islands were used to exclude signal contributions from other stars.
+
+The results are due to appear in ‘Transiting exoplanets from the COROT space mission, VI. COROT-exo-3b: The first secure inhabitant of the Brown-dwarf desert’ by M. Deleuil et al, in the journal Astronomy and Astrophysics.
+
+COROT is a mission led by the French Space Agency (CNES), with contributions from ESA, Austria, Belgium, Germany, Spain and Brazil. It was launched in December 2006. It carries a 27-cm aperture telescope designed to detect tiny changes in brightness from nearby stars. The mission’s main objectives are to search for exoplanets and to study stellar interiors.

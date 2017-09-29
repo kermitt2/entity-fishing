@@ -1,0 +1,23 @@
+Magnetic Nanoparticles flush cancer cells out of mice's bodies
+
+Thu, Jul 17 12:05 PM
+
+Washington, July 17 (ANI): Georgia Tech scientists have devised a novel way to flush cancer cells out of the body using magnetic nanoparticles.
+
+Lab experiments on mice that furnished such promising results have been reported online in the Journal of the American Chemical Society.
+
+"We've been able to use magnetic nanoparticles to capture free-floating cancer cells and then take them out of the body," said John McDonald, chair of the School of Biology at Georgia Tech and chief research scientist at the Ovarian Cancer Institute.
+
+"This technology may be of special importance in the treatment of ovarian cancer where the malignancy is typically spread by free-floating cancer cells released from the primary tumour into the abdominal cavity," he added.
+
+During the study, the researchers first gave the cancer cells in the mice fluorescent green tag, and stained the magnetic nanoparticles red.
+
+Afterwards, the research group applied a magnet to move the green cancer cells to the abdominal region, where the magnetic nanoparticles attached to them, and carried them out of the body.
+
+"If the therapy is able to pass further tests that show it can prevent the cancer from spreading from the original tumour, it could be an important tool in cancer treatment," said Ken Scarberry, a Ph.D. student in Tech's School of Chemistry and Biochemistry, who originally conceived of the idea as a means of extracting viruses and virally infected cells.
+
+The new approach holds more promise than solely using antibodies to fight cancer because there seems to be less potential for the body to develop an immune response due to the unique peptide-targeting strategy, and the composition of the magnetic nanoparticles.
+
+"If you modify the nanoparticle and target it directly to the tumour cells using a small peptide, you are less likely to generate an undesirable immune response and more accurately target the cells of interest," said Research Scientist Erin Dickerson.
+
+Besides testing magnetic nanoparticles, the research team is also collaborating with other groups at Georgia Tech to determine how peptide-directed gold nanoparticles and nanohydrogels might also be used in fighting cancer. (ANI)

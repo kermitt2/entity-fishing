@@ -151,11 +151,12 @@ public class ProcessText {
 		
 		List<Entity> results = null;
 		try {
-			if (nerParsers == null) {
+			/*if (nerParsers == null) {
 				//Utilities.initGrobid();
 				nerParsers = new NERParsers();	
 			}
-			results = nerParsers.extractNE(text, lang);
+			results = nerParsers.extractNE(text, lang);*/
+			results = new ArrayList<Entity>();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

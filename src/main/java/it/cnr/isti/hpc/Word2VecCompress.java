@@ -40,7 +40,7 @@ import java.util.List;
 public class Word2VecCompress implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = LoggerFactory.getLogger( Word2VecCompress.class );
+    private static final Logger logger = LoggerFactory.getLogger(Word2VecCompress.class);
 
     private int numWords;
     private int vectorSize;
@@ -54,7 +54,7 @@ public class Word2VecCompress implements Serializable {
 
     }
 
-    public Word2VecCompress( int numWords, int vectorSize, float quantizationFactor, byte[] vectorStreams, EliasFanoMonotoneLongBigList endpoints, Object2LongFunction<? extends CharSequence> dictionary, int[] golombModuli ) {
+    public Word2VecCompress(int numWords, int vectorSize, float quantizationFactor, byte[] vectorStreams, EliasFanoMonotoneLongBigList endpoints, Object2LongFunction<? extends CharSequence> dictionary, int[] golombModuli) {
         this.numWords = numWords;
         this.vectorSize = vectorSize;
         this.quantizationFactor = quantizationFactor;
@@ -66,64 +66,72 @@ public class Word2VecCompress implements Serializable {
     }
 
     // only for testing
-    public int[] getInt( long idx ) {
+    public int[] getInt(long idx) {
         int[] ret = new int[ vectorSize ];
-        long endpoint = endpoints.get( idx );
-        FastInputBitStream ibs = new FastInputBitStream( vectorStreams );
-        ibs.position( endpoint );
+        long endpoint = endpoints.get(idx);
+        FastInputBitStream ibs = new FastInputBitStream(vectorStreams);
+        ibs.position(endpoint);
 
-        for( int col = 0; col < vectorSize; ++col ) {
-            ret[ col ] = Fast.nat2int( ibs.readGolomb( golombModuli[ col ] ) );
+        for(int col = 0; col < vectorSize; ++col) {
+            ret[ col ] = Fast.nat2int(ibs.readGolomb(golombModuli[ col ]));
         }
 
         return ret;
     }
 
-    public int[] getInt( String word ) {
-        Long idx = word_id( word );
-        if( idx == null ) {
+    public int[] getInt(String word) {
+        Long idx = word_id(word);
+        if(idx == null) {
             return null;
         }
-        return getInt( idx );
+        return getInt(idx);
     }
 
-    public void get( long idx, float[] result, int offset ) {
-        long endpoint = endpoints.get( idx );
-        FastInputBitStream ibs = new FastInputBitStream( vectorStreams );
-        ibs.position( endpoint );
+    public void get(long idx, float[] result, int offset) {
+        long endpoint = endpoints.get(idx);
+        FastInputBitStream ibs = new FastInputBitStream(vectorStreams);
+        ibs.position(endpoint);
 
-        for( int col = 0; col < vectorSize; ++col ) {
-            int val = Fast.nat2int( ibs.readGolomb( golombModuli[ col ] ) );
-            result[ offset + col ] = ( ( ( float ) val ) + 0.5f * Integer.signum( val ) ) / quantizationFactor;
+        for(int col = 0; col < vectorSize; ++col) {
+            int val = Fast.nat2int(ibs.readGolomb(golombModuli[ col ]));
+            result[ offset + col ] = (((float) val) + 0.5f * Integer.signum(val)) / quantizationFactor;
         }
 
     }
 
-    public float[] get( long idx ) {
+    public float[] get(long idx) {
         float[] ret = new float[ vectorSize ];
-        get( idx, ret, 0 );
+        get(idx, ret, 0);
         return ret;
     }
 
-    public boolean get( String word, float[] result, int offset ) {
-        Long idx = word_id( word );
-        if( idx == null ) {
+    public boolean get(String word, float[] result, int offset) {
+        Long idx = word_id(word);
+        if(idx == null) {
             return false;
         }
-        get( idx, result, offset );
+        get(idx, result, offset);
         return true;
     }
 
-    public float[] get( String word ) {
-        Long idx = word_id( word );
-        if( idx == null ) {
+    public float[] get(String word) {
+        Long idx = word_id(word);
+        if(idx == null) {
             return null;
         }
-        return get( idx );
+        return get(idx);
     }
 
-    public Long word_id( String word ) {
-        return dictionary.get( word );
+    public Long word_id(String word) {
+        Long theLong = null;
+        try {
+            theLong = dictionary.get(word);
+        } catch(Exception e) {
+            System.out.println(word);
+            e.printStackTrace();
+        }
+        //return dictionary.get(word);
+        return theLong;
     }
 
     public int size() {
@@ -134,14 +142,14 @@ public class Word2VecCompress implements Serializable {
         return vectorSize;
     }
 
-    public static void main( String[] args ) throws Exception {
-        SimpleJSAP jsap = new SimpleJSAP( Word2VecCompress.class.getName(), "Creates a compressed representation of quantized word2vec vectors", new Parameter[]{ new UnflaggedOption( "input", JSAP.STRING_PARSER, true,
-				"Input file" ), new UnflaggedOption( "output", JSAP.STRING_PARSER, false, "Compressed version" ), new Switch( "check", JSAP.NO_SHORTFLAG, "check", "Check correctness of output" ) } );
-        JSAPResult jsapResult = jsap.parse( args );
-        if( jsap.messagePrinted() ) return;
+    public static void main(String[] args) throws Exception {
+        SimpleJSAP jsap = new SimpleJSAP(Word2VecCompress.class.getName(), "Creates a compressed representation of quantized word2vec vectors", new Parameter[]{ new UnflaggedOption("input", JSAP.STRING_PARSER, true,
+				"Input file"), new UnflaggedOption("output", JSAP.STRING_PARSER, false, "Compressed version"), new Switch("check", JSAP.NO_SHORTFLAG, "check", "Check correctness of output") });
+        JSAPResult jsapResult = jsap.parse(args);
+        if(jsap.messagePrinted()) return;
 
-        String input_filename = jsapResult.getString( "input" );
-        String output_filename = jsapResult.getString( "output", null );
+        String input_filename = jsapResult.getString("input");
+        String output_filename = jsapResult.getString("output", null);
 
         int numWords, vectorSize;
         float quantizationFactor;
@@ -149,21 +157,21 @@ public class Word2VecCompress implements Serializable {
         int[] entries;
         long[] columnAbsSum;
 
-        ProgressLogger pl = new ProgressLogger( logger );
+        ProgressLogger pl = new ProgressLogger(logger);
 
-        try( final BufferedReader lines = new BufferedReader( new FileReader( input_filename ) ) ) {
+        try(final BufferedReader lines = new BufferedReader(new FileReader(input_filename))) {
 
-            String[] header = lines.readLine().split( "\t" );
-            numWords = Integer.parseInt( header[ 0 ] );
-            vectorSize = Integer.parseInt( header[ 1 ] );
-            quantizationFactor = Float.parseFloat( header[ 2 ] );
+            String[] header = lines.readLine().split("\t");
+            numWords = Integer.parseInt(header[ 0 ]);
+            vectorSize = Integer.parseInt(header[ 1 ]);
+            quantizationFactor = Float.parseFloat(header[ 2 ]);
 
             pl.expectedUpdates = numWords;
-            pl.start( "Reading the dictionary" );
+            pl.start("Reading the dictionary");
             indexToWord = new ArrayList<>();
-            for( int i = 0; i < numWords; ++i ) {
+            for(int i = 0; i < numWords; ++i) {
                 pl.lightUpdate();
-                indexToWord.add( lines.readLine().trim() );
+                indexToWord.add(lines.readLine().trim());
             }
             pl.done();
 
@@ -171,14 +179,14 @@ public class Word2VecCompress implements Serializable {
             columnAbsSum = new long[ vectorSize ];
 
             pl.expectedUpdates = numWords;
-            pl.start( "Reading the vectors" );
-            for( int i = 0; i < numWords; ++i ) {
+            pl.start("Reading the vectors");
+            for(int i = 0; i < numWords; ++i) {
                 pl.lightUpdate();
-                String[] lineEntries = lines.readLine().split( " " );
-                for( int col = 0; col < vectorSize; ++col ) {
-                    int entry = Integer.parseInt( lineEntries[ col ] );
+                String[] lineEntries = lines.readLine().split(" ");
+                for(int col = 0; col < vectorSize; ++col) {
+                    int entry = Integer.parseInt(lineEntries[ col ]);
                     entries[ i * vectorSize + col ] = entry;
-                    columnAbsSum[ col ] += Fast.int2nat( entry ) + 1;
+                    columnAbsSum[ col ] += Fast.int2nat(entry) + 1;
                 }
             }
             pl.done();
@@ -186,73 +194,73 @@ public class Word2VecCompress implements Serializable {
         }
 
         int[] golombModuli = new int[ vectorSize ];
-        for( int col = 0; col < vectorSize; ++col ) {
+        for(int col = 0; col < vectorSize; ++col) {
             int m = 0;
-            if( columnAbsSum[ col ] > numWords ) {
-                double f = ( ( double ) numWords ) / columnAbsSum[ col ];
-                m = ( int ) Math.ceil( Math.log( 2.0 - f ) / -Math.log( 1.0 - f ) );
+            if(columnAbsSum[ col ] > numWords) {
+                double f = ((double) numWords) / columnAbsSum[ col ];
+                m = (int) Math.ceil(Math.log(2.0 - f) / -Math.log(1.0 - f));
             }
             golombModuli[ col ] = m;
         }
 
         // logger.debug("Golomb moduli {}", golombModuli);
 
-        ShiftAddXorSignedStringMap dictionaryHash = new ShiftAddXorSignedStringMap( indexToWord.iterator(), new MinimalPerfectHashFunction.Builder<CharSequence>().keys( indexToWord ).transform(
-				TransformationStrategies.utf16() ).build() );
+        ShiftAddXorSignedStringMap dictionaryHash = new ShiftAddXorSignedStringMap(indexToWord.iterator(), new MinimalPerfectHashFunction.Builder<CharSequence>().keys(indexToWord).transform(
+				TransformationStrategies.utf16()).build());
         int[] permutation = new int[ numWords ];
-        for( int i = 0; i < numWords; ++i ) {
-            int newPos = dictionaryHash.get( indexToWord.get( i ) ).intValue();
+        for(int i = 0; i < numWords; ++i) {
+            int newPos = dictionaryHash.get(indexToWord.get(i)).intValue();
             permutation[ newPos ] = i;
         }
 
         FastByteArrayOutputStream oa = new FastByteArrayOutputStream();
-        OutputBitStream obs = new OutputBitStream( oa, 0 );
+        OutputBitStream obs = new OutputBitStream(oa, 0);
         final LongArrayList endpoints = new LongArrayList();
 
         pl.expectedUpdates = numWords;
-        pl.start( "Compressing the vectors" );
-        for( int i = 0; i < numWords; ++i ) {
+        pl.start("Compressing the vectors");
+        for(int i = 0; i < numWords; ++i) {
             pl.lightUpdate();
-            endpoints.add( obs.writtenBits() );
+            endpoints.add(obs.writtenBits());
             int rowStart = permutation[ i ] * vectorSize;
 
-            for( int col = 0; col < vectorSize; ++col ) {
+            for(int col = 0; col < vectorSize; ++col) {
                 int entry = entries[ rowStart + col ];
-                obs.writeGolomb( Fast.int2nat( entry ), golombModuli[ col ] );
+                obs.writeGolomb(Fast.int2nat(entry), golombModuli[ col ]);
 
             }
         }
         pl.done();
 
         obs.close();
-        while( oa.length() % 4 != 0 ) {
-            oa.write( 0 ); // pad to int for FastInputBitStream
+        while(oa.length() % 4 != 0) {
+            oa.write(0); // pad to int for FastInputBitStream
         }
         oa.trim();
 
         double bps = 8.0 * oa.array.length / entries.length;
-        logger.info( "Overall vector bit streams: {} bytes, {} bps", oa.array.length, bps );
-        System.out.println( bps );
+        logger.info("Overall vector bit streams: {} bytes, {} bps", oa.array.length, bps);
+        System.out.println(bps);
 
-        EliasFanoMonotoneLongBigList efEndpoints = new EliasFanoMonotoneLongBigList( endpoints );
-        Word2VecCompress word2vec = new Word2VecCompress( numWords, vectorSize, quantizationFactor, oa.array, efEndpoints, dictionaryHash, golombModuli );
-        if( output_filename != null ) {
-            BinIO.storeObject( word2vec, output_filename );
+        EliasFanoMonotoneLongBigList efEndpoints = new EliasFanoMonotoneLongBigList(endpoints);
+        Word2VecCompress word2vec = new Word2VecCompress(numWords, vectorSize, quantizationFactor, oa.array, efEndpoints, dictionaryHash, golombModuli);
+        if(output_filename != null) {
+            BinIO.storeObject(word2vec, output_filename);
         }
 
-        if( jsapResult.getBoolean( "check" ) ) {
+        if(jsapResult.getBoolean("check")) {
             pl.expectedUpdates = numWords;
-            pl.start( "Checking the output" );
+            pl.start("Checking the output");
 
-            for( int i = 0; i < numWords; ++i ) {
+            for(int i = 0; i < numWords; ++i) {
                 pl.lightUpdate();
-                int[] vec = word2vec.getInt( indexToWord.get( i ) );
-                for( int col = 0; col < vectorSize; ++col ) {
+                int[] vec = word2vec.getInt(indexToWord.get(i));
+                for(int col = 0; col < vectorSize; ++col) {
                     int expected = entries[ i * vectorSize + col ];
                     int got = vec[ col ];
-                    if( expected != got ) {
-                        logger.error( "Row {}, Column {}: Expected {}, got {}", i, col, expected, got );
-                        System.exit( 1 );
+                    if(expected != got) {
+                        logger.error("Row {}, Column {}: Expected {}, got {}", i, col, expected, got);
+                        System.exit(1);
                     }
                 }
             }

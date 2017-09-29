@@ -8,6 +8,7 @@ import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.embeddings.SimilarityScorer;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
@@ -16,6 +17,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.trainer.LabelStat;
 import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.layout.LayoutToken;
 
 import com.scienceminer.nerd.exceptions.*;
 
@@ -53,6 +55,9 @@ public class NerdSelector extends NerdModel {
 	 * The class Logger.
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(NerdSelector.class);
+
+	// selected feature set for this particular selector
+	private FeatureType featureType = FeatureType.NERD;
 
 	// ranker model files
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
@@ -200,9 +205,9 @@ System.out.println("nb article processed: " + nbArticle);
 		negatives = 0;
 		NerdRanker ranker = new NerdRanker(wikipedia);
 		for (Article article : articles.getSample()) {
+			System.out.println("Training on " + (nbArticle+1) + "  / " + articles.getSample().size());
 			arffBuilder = new StringBuilder();
 			arffBuilder = trainArticle(article, arffBuilder, ranker);	
-System.out.println("nb article processed: " + nbArticle);
 			FileUtils.writeStringToFile(file, arffBuilder.toString(), true);
 			nbArticle++;
 		}
@@ -271,7 +276,8 @@ System.out.println(" - training " + article);
 		contentText.append(content.substring(head));
 		String contentString = contentText.toString();
 //System.out.println("Cleaned content: " + contentString);
-		
+		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(contentString, new Language(lang, 1.0));
+
 		// get candidates for this content
 		NerdEngine nerdEngine = NerdEngine.getInstance();
 		Relatedness relatedness = Relatedness.getInstance();
@@ -374,8 +380,19 @@ System.out.println(" - training " + article);
 						bestCaseContext = false;
 					}
 
+					float embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, tokens, lang);
+
+					String wikidataId = "Q0"; // undefined entity
+					if (candidate.getWikidataId() != null)	
+						wikidataId = candidate.getWikidataId();
+
+					String wikidataP31Id = "Q0"; // undefined entity
+					if (candidate.getWikidataP31Id() != null)
+						wikidataP31Id = candidate.getWikidataP31Id();
+
 					// nerd score
-					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext);
+					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext, 
+						embeddingsSimilarity, wikidataId, wikidataP31Id);
 
 					boolean inContext = false;
 					if (context.contains(candidate))
@@ -443,8 +460,11 @@ System.out.println(" - training " + article);
 
 	public LabelStat evaluate(ArticleTrainingSample testSet, NerdRanker ranker, boolean full) throws Exception {	
 		List<LabelStat> stats = new ArrayList<LabelStat>();
-		for (Article article : testSet.getSample()) {						
+		int n = 0;
+		for (Article article : testSet.getSample()) {
+			System.out.println("Evaluating on article " + (n+1) + " / " + testSet.getSample().size());
 			stats.add(evaluateArticle(article, ranker, full));
+			n++;
 		}
 		return EvaluationUtil.evaluate(testSet, stats);
 	}
@@ -485,7 +505,7 @@ System.out.println(" - evaluating " + article);
 
 		ProcessText processText = ProcessText.getInstance();
 		String text = MediaWikiParser.getInstance().toTextOnly(article.getFullWikiText(), lang.getLang());
-		
+		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, lang);
 		List<Entity> nerEntities = null;
 		if (lang.getLang().equals("en") || lang.getLang().equals("fr")) {
 			nerEntities = processText.process(text, lang);
@@ -510,7 +530,7 @@ System.out.println(" - evaluating " + article);
 		//Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());
-		NerdContext context = engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false);
+		NerdContext context = engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false, tokens);
 
 		/*if (full) {
 			engine.pruneWithSelector(candidates, 
