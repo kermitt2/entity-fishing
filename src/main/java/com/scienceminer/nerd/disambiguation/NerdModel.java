@@ -51,6 +51,7 @@ public class NerdModel {
 	public enum FeatureType {
 		BASELINE, 		// only use conditional prob.
 		MILNE_WITTEN, 	// Milne and Witten features
+		MILNE_WITTEN_RELATEDNESS, // only Milne and Witten relatedness measure
 		SIMPLE, 		// basic features in addition to Milne&Witten relatedness
 		EMBEDDINGS, 	// only entity embeddings similarity
 		NERD, 			// basic features with Milne&Witten and entity embeddings 

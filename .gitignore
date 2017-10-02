@@ -24,3 +24,7 @@ data/wikipedia/embeddings/fr
 data/wikipedia/embeddings/de
 data/wikipedia/embeddings/es
 data/wikipedia/embeddings/it
+data/corpus/corpus-long/aida/RawText
+data/corpus/corpus-long/aida-train/RawText
+data/corpus/corpus-long/aida-testa/RawText
+data/corpus/corpus-long/aida-testb/RawText

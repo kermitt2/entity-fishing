@@ -187,14 +187,19 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 		return true;
 	}
 
-	public static List<ArticleTrainingSample> buildExclusiveSamples(ArticleTrainingSampleCriterias constraints, 
+	public static List<ArticleTrainingSample> buildExclusiveSamples(ArticleTrainingSampleCriterias trainingConstraints, 
+																ArticleTrainingSampleCriterias evaluationConstraints, 
 																List<Integer> sizes, 
 																LowerKnowledgeBase wikipedia) {
 		List<ArticleTrainingSample> samples = new ArrayList<ArticleTrainingSample>();
-		List<Integer> exclude = constraints.getExclude();
+		List<Integer> exclude = trainingConstraints.getExclude();
 
 		for (int i=0; i<sizes.size(); i++) {
-			samples.add(new ArticleTrainingSample(wikipedia, sizes.get(i), constraints, exclude));
+			// rank over i: training ranker, training selector, eval ranker, eval selector, eval end-to-end
+			if ( i <2 )
+				samples.add(new ArticleTrainingSample(wikipedia, sizes.get(i), trainingConstraints, exclude));
+			else
+				samples.add(new ArticleTrainingSample(wikipedia, sizes.get(i), evaluationConstraints, exclude));
 			if (samples.get(i).getSample() == null) {
 				System.out.println("Article sample is empty for set " + i);
 			} else {
@@ -203,7 +208,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 						exclude = new ArrayList<Integer>();
 					exclude.add(article.getId());
 				}
-				constraints.setExclude(exclude);
+				trainingConstraints.setExclude(exclude);
 			}
 		}
 		

@@ -1,0 +1,173 @@
+Date: Thu, 01 Mar 2012 16:07:16 GMT
+Last-Modified: Thu, 13 Oct 2011 10:08:05 GMT
+Server: IdeaWebServer/v0.70
+TEAC VRDS25
+Start Page
+Update list
+Speakers
+Amplifiers
+Transport
+Lampucera
+Alphabetical
+Tripath
+Download Lampizator
+TDA1541A
+VRDS-25 from TEAC
+Related
+articles:   T1 VRDS
+transport,   Denon DCD2560
+with same dac AD1862
+Feb 2008
+Teac has a hell of a reputation, I don't know why exactly. Nothing
+special sets them apart but maybe they are a little bit better in
+marketing than their peers. For example Philips invented so many
+wonderful all the goodies, all best chips,
+mechanisms, etc and they don't have even 10 % of TEAC reputation.
+Maybe it is the VRDS thing - every hifi rag devoted countless pages
+explaining the principle of very rigid disc clamping system - how the
+pressure clamping disc "prevents the CD from vibrations" but in other
+players nothing prevents the vibrations and yet they still manage to
+play well. So to me it seems like TEAC created an antidote to a
+non existent poison, and then they sold the whole concept as their key
+differenciator and they had to invent the poison. Clever people.
+Anyway, they took the stock, middle of the range SONY mechanism KSS151A
+(like in Sony CDP227ESD player)
+and added a large puck on top of it. Is it good or bad - I dunno, but
+it looks positively hitech.
+To be able to sell the story even better - in this VRDS 25 player (they
+named the player after the mechanism name - see how important the
+plastic puck is to their marketing?  Sortof like calling a car
+Turbo.) they made the face plate of 10 mm solid aluminium and
+everything
+is oh-so-heavy.
+To my big surprise - the main PCB is REALLY a very nice one. Almost
+like in Copland. Premium parts, audio grade electrolytes, very very
+neat auto-CAD of PCB layout, fully differential balanced topology and
+OH MY GOD - the AD1862 super
+duper chip. What a rare DAC. A white raven. To be found only in world's
+best players, like for example in the best denon - the 2560.
+This DAC has current output (the better, more kosher type) and it can
+be lampized with R conversion. I used 570 Ohms which I had on hand.
+I quickly cut the leg 11 of the chip from the PCB track (I mean I cut
+the track leading from leg 11 to next parts - 4 opamps in a row per
+phase.)
+I wired the now freely floating leg 11 to lampizator leg 7 and then
+from leg 7 to leg 9 - a resistor of 570 Ohms.
+Surprisingly this player has balanced outputs.
+Lampization is possible as SE ( RCA)  and balanced  XLR at
+the same time.
+I quite like plain and simple face plates like this one. The only minor
+reservation in this player rating is it's very slow drawer.
+Golden drawer in black player. Hmmmm.....
+Great PCB - neat, simple, beautiful - everything is first class. Hats
+off.
+ASD-Audiotuning company from Germany offers upgrade replacement chips
+for these two suckers on the picture's right - the demodulator and the
+upsampler- NPC and the AD1893. The better parts from Mr. Andreas (we
+paid some 100 Euro plus) are 24/192  compatible and the DAC is a
+20 bit one. The clock is not typical - 18 ,xx meg. The upgrade allows
+to squeeze the max from the 1862 DAC. It took me 10 minutes do de
+solder and solder the upgrade.
+I suspect that 1862 is the same as Burr Brown 1702. Something is
+telling me ....
+Enter Analog
+Devices AD1862 N-J DAC chip
+Four DAC chips in
+a row. Mmmmmmm. Nice. One per channel per phase. They
+go like this from bottom of the photo :  L-, L+, R+, L-. I took
+the signal from the inner pair.
+Please ignore the most right yellow wire - my mistake (left channel
+phase neg). Top-most blue wire is the earth.
+Test hookup of the lampizator. (traces are cut underneath the board to
+free float the leg 11 of each DAC,  so it is not innocent kind of
+reversible test.)
+After good result from the test, I went for full lampization, internal
+tubes, one per channel in anode follower mode - four triodes creating
+balanced XLR outputs and RCA single ended too.
+I started by removing the main PCB and installing Trichord 4 clock.
+Below you see the crystal, two caps and a resistor that had to be
+removed (18 meg crystal, not typical 16 meg.)
+The new clock connects to the legs 1 of the 74HCU04 chip (signal) and
+leg 7th - GND (see red lines).
+The VRDS level two (middle) with composite bridge and cast alloy clamp
+flywheel. Much much better than the ugly cheap level 1 CMK4 mechanism
+from TEAC T1 (CD7)
+Laser assembly and pickup is Sony KSS151A on magnetic rails - again -
+very decent laser.
+I simply love that PCB
+As you see - this player has a transformer with dual primaries - 230
+and 120 VAC. Good for all continents.
+The XLRs and RCAs are so good quality that they do not need to be
+replaced. They can stay.
+The power supply section houses a nice, big, potted and encapsulated
+transformer. Very nice. There is provision for 230/120 selection. The
+raw supplies and rectifiers are heavy duty, oversized, and (whatever
+that means) - FOR AUDIO. In my opinion that is BS because a cap can be
+either good or bad, but FOR AUDIO means nothing.  Just marketing
+buzzword.
+You see the AUDIO caps and my new bolt for holding the transformer of
+lampizator.
+This is empty space under the main PCB where all my new power supplies
+and filters will be located.
+New transformer installed. I had two secondaries of 110 VAC so I used
+them in dual mono config.
+A tube (two triodes) in balanced mode is ideally supplied from ons
+ingle source. If positive signal causes one tube to draw current MORE,
+the negative impulse causes the other half to draw EQUALLY LESS.
+Summary current demand is CONSTANT and this is very good.
+This is main AC cable of TEAC with added parasitic Lampizator brown
+twisted pair that is transformer primary.
+This way the Lampizator is connected AFTER the switch, after filter of
+AC noise and after fuses as well.
+In the central section of the player where the mechanism is located -
+there is additional large power supply section with 4 gigantic caps and
+some other stuff. So the main PCB gets very good power.
+Above you see the SPDIF digitall output section.  There is no
+transformer for signal (good) and there is TOSLINK as well to the left.
+It makes overall a nice transport, should you EVER want a DAC better
+than internal AD1862.
+The Lampizator power supplies are getting glued and wired together. On
+the right - 12 V DC, on the left hand side - two high voltage anode
+supplies (CRC filters and integrated bridges.
+This is the resistor kit that goes on the socket. Two Cathode resistors
+of 200 Ohms and two grid resistors of 240K. The twisted end becomes
+system ground.
+Lampizator circuit ready to go. Anode resistors are mounted away on
+anode supply caps output. This makes the triode socket less congested.
+Above: all power supplies are glued to the floor under the main PCB.
+the long black thing is the power switch extension rod.
+Dark red resistors connected to red wires are anode resistors in anode
+follower setup.
+The tubes were mounted above main PCB after I removed the analog output
+stage - 8 op-amps and their capacitors. There was enough space for 2
+tubes.
+Red wires go to anodes of triodes. All grounds are connected together
+in star fashion: both tube grounds, RCA's, XLRs, anode supply ground,
+heater ground and main PCB ground.
+XLR and RCA inputs were floated from the  PCB and freed.
+Clock was powered from now un-used OPAMP supply of plus 12V DC (on the
+copper rail.)
+SOUND of TEAC VRDS-25
+The sound is
+right there with the top players. League zero - which stands for no
+compromise, best CD playback under the sun. It is not a winner, but
+definitely in the same league as the best ones I tried.
+The sound is overall the safest all rounder. Not as goose bump magical
+midrange timbre as the TDA1541 players, not as thunderous superbass as
+Wolfson, not as crystal clear trebles as Lampucera DAC CS4397, and not
+as deep deep hallucination as from BB-1794 of the Shanling CD300. But
+it has no flaws or
+faults. Very highly recommended.
+The tube: Russian 6H2P (6N2P) with SRPP and 200 Ohms in both cathodes.
+ECC88 and E88CC works great as well.
+2 days later: a very enlightening listening session with a comparison
+between Audionote DAC 2 signature (2 x PCM63)  driven by TEAC as a
+transport versus
+TEAC lampized. As good as the Audio-Note DAC2  is, the Teac
+VRDS-25 walks over it. The
+amount of hidden information that TEAC pulls from very familiar
+recordings is just unbelievable. At the same time it is more powerful,
+more spacious, and with stronger bass, which is  is controlled and
+powerful. My admiration for the application of the AD-1862 grows. I
+like equally well the DENON DCD2560
+The Teac is better built, but DENON

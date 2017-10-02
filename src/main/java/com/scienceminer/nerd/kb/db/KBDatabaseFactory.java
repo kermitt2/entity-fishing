@@ -82,8 +82,10 @@ public class KBDatabaseFactory {
 			public DbPage filterEntry(KBEntry<Integer, DbPage> e) {
 				// we want to index only articles
 				PageType pageType = PageType.values()[e.getValue().getType()];
-				if ( (pageType == PageType.article) || (pageType == PageType.category) || (pageType == PageType.redirect))
+				if ( (pageType == PageType.article) || (pageType == PageType.category) || (pageType == PageType.redirect) ) {
+					//|| (pageType == PageType.disambiguation))
 					return e.getValue();
+				}
 				else
 					return null;
 			}

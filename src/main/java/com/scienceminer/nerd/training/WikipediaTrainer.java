@@ -73,19 +73,28 @@ public class WikipediaTrainer {
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
 		//List<Integer> sampleSizes = Arrays.asList(500,500,100,100,100);
-		List<Integer> sampleSizes = Arrays.asList(100,5,100,5,5);
+		List<Integer> sampleSizes = Arrays.asList(100,5,5,5,5);
 		// training ranker, training selector, eval ranker, eval selector, eval end-to-end
 
-		ArticleTrainingSampleCriterias criterias = new ArticleTrainingSampleCriterias();
-		criterias.setMinOutLinks(60);
-		criterias.setMinInLinks(60);
-		criterias.setMinWordCount(300);
-		criterias.setMaxWordCount(2500);
+		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
+		criteriaTraining.setMinOutLinks(60);
+		criteriaTraining.setMinInLinks(60);
+		criteriaTraining.setMinWordCount(300);
+		criteriaTraining.setMaxWordCount(2500);
+
+		ArticleTrainingSampleCriterias criteriaEvaluation = new ArticleTrainingSampleCriterias();
+		criteriaEvaluation.setMinOutLinks(60);
+		criteriaEvaluation.setMinInLinks(60);
+		criteriaEvaluation.setMinWordCount(300);
+		criteriaEvaluation.setMaxWordCount(2500);
+
 		/*criterias.setMinOutLinks(50);
 		criterias.setMinInLinks(100);
 		criterias.setMinWordCount(300);
 		criterias.setMaxWordCount(2000);*/
-		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criterias, sampleSizes, wikipedia);
+
+		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criteriaTraining, 
+			criteriaEvaluation, sampleSizes, wikipedia);
 	}
 
 	private void createRankerArffFiles(String datasetName) throws IOException, Exception {

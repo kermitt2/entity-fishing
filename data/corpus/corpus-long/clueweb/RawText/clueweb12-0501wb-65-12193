@@ -1,0 +1,33 @@
+Via: 1.0 www.facweb.iitkgp.ernet.in
+Vary: Accept-Encoding
+Connection: close
+IIT Kharagpur
+Department of
+Computer Science and Engineering
+Computational Geometry (Spring 2012) Course numbers PG
+CS60064 (LTP 3-0-0) 3 credits.
+Classes start January 05, 2012 at 4:30 pm.
+------------ Books and References:
+FP Preparata and MI Shamos, Computational
+Geometry: An Introduction, New York, NY, Springer-Verlag, 1985.
+Herbert Edelsbrunner, Algorithms in Combinatorial
+Geometry, Springer-Verlag
+Subir Kumar Ghosh, Visibility algorithms in the plane,
+Cambridge University Press, 2007.
+Data Structures and Algorithms: Volumes I
+and III by Kurt Mehlhorn, Springer-Verlag.
+Ketan Mulmuley, Computational Geometry: An Introduction
+through Randomized Algorithms.
+Motwani and Raghavan, Randomized Algorithms.
+K. Mehlhorn and S. Naher, LEDA: A Platform for
+Combinatorial and Geometric Computing, Cambridge, UK, Cambridge University Press, 1999.
+Mark de Berg, Otfried Schwarzkopf, Marc van Kreveld and Mark Overmars, Computational Geometry: Algorithms and Applications, Springer.
+Joseph O' Rourke, Computational Geometry in C, Cambridge University Press.
+=============================================================================
+CS60064 COMPUTATIONAL GEOMETRY	L-T-P: 3-0-0,
+Credits: 3
+Convex hulls: construction in 2d and 3d, lower bounds; Triangulations: polygon triangulations, representations, point-set triangulations, planar graphs; Voronoi diagrams: construction and applications, variants; Delaunay triangulations: divide-and-conquer, flip and incremental algorithms, duality of Voronoi diagrams, min-max angle properties; Geometric searching: point location, fractional cascading, linear programming with prune and search, finger trees, concatenable queues, segment trees, interval trees; Visibility: algorithms for weak and strong visibility, visibility with reflections, art-gallery problems; Arrangements of lines: arrangements of hyperplanes, zone theorems, many-faces complexity and algorithms; Combinatorial geometry: Ham-sandwich cuts, Helly's theorems, k-sets, polytopes and hierarchies, polytopes and linear programming in d-dimensions, complexity of the union of convex sets, simply connected sets and visible regions; Sweep techniques: plane sweep for segment intersections, Fortune's sweep for Voronoi diagrams, topological sweep for line arrangements; Randomization in computational geometry: algorithms, techniques for counting; Robust geometric computing; Applications of computational geometry.
+References
+1. Mark de Berg, Otfried Schwarzkopf, Marc van Kreveld and Mark Overmars, Computational Geometry: Algorithms and Applications, Springer.
+2. FP Preparata and Michael I. Shamos, Computational Geometry: An Introduction, Springer.
+3. Joseph O' Rourke, Computational Geometry in C, Cambridge University Press

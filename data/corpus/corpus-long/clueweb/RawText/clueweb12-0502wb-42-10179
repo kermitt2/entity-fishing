@@ -1,0 +1,393 @@
+Fields Institute - Dynamical Systems Seminar
+Home
+About Us
+People & Contacts
+Programs & Activities
+Thematic & Focus Programs
+General Scientific Activity
+Commercial & Industrial Programs
+Centre for Mathematical Medicine
+Mathematics Education
+Outreach
+Calendar of Events
+Mailing List
+Audio & Slides
+Proposals & Applications
+Honours, Prizes & Fellowships
+Publications
+Resources and Facilities
+Search
+THEMATIC PROGRAMS
+March  1, 2012
+Fall 2005
+Renormalization and Universality in Mathematics and Mathematical Physics
+Spring 2006
+Holomorphic Dynamics, Laminations, and Hyperbolic Geometry
+Dynamical Systems Seminar
+Mondays, 3:10 p.m. Room 230
+Audio of talks available here.
+May 31, 1:30 p.m.
+** (Note special time)
+Hui Guo (Fields Institute)
+Integrable Teichmuller spaces
+We introduce a new kind of subspaces of the universal
+Teichmuller space. Some characterizations of them are given in terms
+of univalent functions, Beltrami coefficients and quasisymmetric
+homeomorphisms of the boundary of the unit disc.
+May 1
+Mitsuhiro Shishikura (Kyoto University
+and Fields Institute)
+Teichmuller contraction and renormalization
+According to Royden-Gardiner theorem, any holomorphic
+mapping between Teichmuller spaces does not expand the Teichmuller
+distance. (Just like Schwarz-Pick theorem says that any holomorphic
+mapping between hyperbolic Riemann surfaces does not expand the
+Poincare metric.) In the theory of renormalizations, one often wants
+to show that the renormalization map (which is defined in a transcendental
+way) on the space of certain dynamical systems is hyperbolic or
+contracting.
+Therefore Royden-Gardiner theorem is an obvious
+candidate of tools to obtain the contraction. This idea was first
+used by Sullivan in his work on generalized Feigenbaum type renormalization.
+In this talk, we will discuss two applications of Teichmuller
+theory to renormalizations:
+1. Parabolic renormalization for parabolic fixed
+points and their perturbations. 2. Rigidity of real quadratic
+polynomials only using Yoccoz's combinatorial a priori bounds.
+For these cases, we deal with the Teichmuller
+spaces of a disk or a punctured disk and show that a certain inclusion
+map induces a contraction in Teichmuller distance.
+Apr. 17
+Jeremy Kahn (SUNY Stony Brook / Fields Institute)
+The complex a priori bounds, continued
+We describe how to reduce the a priori bounds for
+bounded-primitive type renormalization to a simple combinatorial
+statement regarding the combinatorial dynamics of arcs. We show
+how the combinatorial statement follows from the expanding dynamics
+on the Hubbard tree.
+Apr. 10
+Mary Rees (Liverpool)
+A fundamental domain for V_{3}.
+Abstract: We consider the space V_{n} of quadratic
+rational maps with one named critical point of period n, quotiented
+by M\"obius conjugacy preserving named critical points. Thus,
+the space V_{1} is the space of all quadratic polynomials up to
+affine conjugacy. The parameter space V_{1} must be one of the most
+studied in all dynamics. But V_{1} differs from most other parameter
+spaces in an important respect: there is a natural ``base map''
+and, within the Mandelbrot set, natural paths, up to a natural homotopy,
+to any other map in the Mandelbrot set. The simplest parameter space
+for which this fails to be true is V_{3}.
+One can say (truthfully) that there is no canonical
+choice of fundamental domain for V_{3,m}, which is obtained from
+V_{3} by removing a natural dynamically defined puncture set.
+I shall exhibit a fundamental domain, using the dynamical planes
+of three maps within V_{3} and a theory known as the ``Resident's
+View''. This enables one to at least formulate an analogue of
+MLC for this family.
+Three parts of the fundamental domain are straightforward
+(although the proof in one of these cases is probably new). The
+structure of the fourth part is much more interesting, involving
+a spiral in the dynamical plane of the so-called ``aeroplane''
+quadratic polynomial z\mapsto z^{2}+c for the (unique) real parameter
+c for which the critical point 0 has period 3.
+Apr. 3
+Matilde Martinez (Fields Institute)
+Measures on hyperbolic surface laminations
+We will consider laminations by hyperbolic Riemann
+surfaces, and different
+measures that can be associated with these objects (holonomy-invariant
+measures, harmonic measures, measures invariant under the geodesic
+and
+horocycle flows). We will state some results that show how these
+measures
+are related. We will mainly focus on two families of examples: Riccati
+foliations and Hilbert modular foliations.
+Mar. 20
+Peter Makienko
+Remarks on Ruelle Operator, Invariant Differentials and invariant
+line fields problem.
+Abstract: TBA
+Mar. 13th
+**12PM (Note special time**)
+Special Brown Bag Lunch Dynamical Systems
+Seminar
+Dierk Schleicher (IU Bremen), Johannes Rueckert (IU
+Bremen), Magnus Aspenberg (Fields), and Vladim Timorin
+(Stony Brook) + anyone who wants to can give input.
+Combinatorics of Rational maps
+Mar. 6
+Roland Roeder (Fields)
+Newton's Method in two complex variables: Indeterminant points
+and the topology of basins of attraction
+The equations x(x-1)=0, y^2+Bxy-y=0 are easy
+to solve, but the Newton Map
+N: C^2 \rightarrow C^2 for finding the four roots has very complicated
+dynamics: N is four-to-one and N has points of indeterminacy.
+Furthermore, high iterates of N have many points of indeterminacy.
+By restricting to parameters |1-B|>1, all of these points of
+indeterminacy are in the set X_l = Re(x) < 1/2, which is invariant
+under N. If one wants to consider the homotopy type of a basin
+of attraction, W(r_i), for one of the roots r_i \in X_l under
+N, one encounters a kind of ``topological indeterminacy.'' When
+studying the homotopy type of a loop \gamma in W(r_i), should
+one consider the homotopies that hit the points of indeterminacy
+of N^k or should one avoid them? Both seem reasonable. To avoid
+such questions, one can perform blow-ups at the points of indeterminacy
+of all iterates of N, obtaining a new space X_l^\infty from X_l
+on which all iterates of N are defined.
+We show how to make precise the notion of linking
+numbers in X_l^\infty, overcoming a different kind of indeterminacy
+that is a result of the fact that H_2(X_l^\infty) is infinitely
+generated. Having developed this technology, I will explain how
+we can use it to study the homotopy type of the basins of attraction
+W(r_i) within X_l^\infty.
+Feb. 27
+Robert Devaney (Boston University)
+Rings around the McMullen Domain
+Feb. 13
+Andrzej Bis (University of Illinois
+at Chicago)
+Dynamics of foliated spaces in codimension greater than one
+Abstract. Dynamics of foliated spaces can be characterized
+by the exceptional minimal sets and topological entropy. Dynamical
+theory of codimension one foliations was developed by Hector, Cantwell
+and Conlon, and others. We present some results on exceptional minimal
+sets, which are analogous to the attractors in a standard dynamical
+system, of foliated spaces in codimension greater than one.
+Feb. 6
+Yoel Feler (Fields Institute)
+Holomorphic endomorphisms of configuration spaces
+Abstract: The most traditional configuration space
+C(X,n) of a complex space X consists of all n point subsets ("configurations")
+Q in X.
+If X carries an additional geometric structure, it may be taken
+into account; say if X=CP^m or C^m, the space C(X,n;gp) of geometrically
+generic configurations consists of all n point configurations Q
+such that no hyperplane in X contains more than m points of Q. An
+automorphism T of X (preserving an additional geometric structure,
+whenever it is relevant) produces a holomorphic endomorphism f of
+the configuration space via f(Q)=TQ. If the automorphism group Aut
+X is a complex Lie group, one may take T=T(Q) depending analytically
+on a configuration Q and define the corresponding holomorphic endomorphism
+f by f(Q)=T(Q)Q. Such a map f is called tame. In the talk, we shall
+see that for every non-hyperbolic Riemann surface X all "non-degenerate"
+holomorphic endomorphisms of configuration spaces C(X,n) are tame.
+To some extent, this is true also for spaces of geometrically generic
+configurations.
+Jan. 30
+Tomoki Kawahira (Fields Institute)
+Tessellation and Lyubich-Minsky laminations associated with quadratic
+maps
+Abstract: In 1990s, M.Lyubich and Y.Minsky introduced
+the hyperbolic 3-laminations associated with rational maps as an
+analogue of the hyperbolic 3-manifolds associated with Kleinian
+groups. In this talk I will present a new method to describe topological
+and combinatorial changes of laminations associated with hyperbolic-to-parabolic
+degeneration of quadratic maps.
+The method is based on tessellation of filled Julia sets, which
+gives a nice organization of the dynamics inside the filled Julia
+set like
+external rays outside.
+Jan. 23
+Dierk Schleicher (International
+University Bremen)
+Dynamics of transcendental entire functions from the point of
+view of polynomials
+Abstract: In this talk, we will discuss some fundamentals
+of iterated entire functions and indicate why and how they differ
+from polynomial dynamics, with a special focus on the simplest representatives
+in both cases, and a view towards generalization.
+Jan. 16
+Dmitrii V. Anosov (Steklov Mathematical
+Institute)
+A lemma about families of epsilon pseudo-trajectories revisited
+In hyperbolic dynamics there are results related
+to the existence of a true trajectory near an epsilon pseudo-trajectory
+for sufficiently small epsilon (although, formally, some of these
+results are expressed rather differently.) Many years ago I found
+a lemma which covers most of these questions. The proof is rather
+involved and some famous mathematicians expressed complaints about
+the difficulty. In this talk, I will present a simplified version
+of the proof.
+Dec. 5
+Viviane Baladi (Institut Mathematiques
+de Jussieu)
+Anisotropic spaces of distributions and dynamical zeta functions
+Abstract: (Joint work with M. Tsujii) The Ruelle
+transfer operator is a powerful tool in ergodic theory, which involves
+composition with the dynamics. Many relevant dynamical systems are
+hyperbolic, i.e. they involve contracting and expanding directions.
+Composition with a contraction
+improves regularity - but composing with an expanding map "worsens"
+regularity: It has been an open problem for many years to find a
+space
+of distributions on which composition by a hyperbolic diffeomorphism
+(of finite smoothness) can be well understood. Last year we constructed
+such a space and estimated the essential spectral radius of the
+transfer operator on this space. After recalling this result, we
+shall describe more recent progress including spectral interpretation
+of zeroes of dynamical determinants.
+Nov. 28
+Kristian Bjerklov (University
+of Toronto)
+The dynamics of the quasi-periodic Schroedinger cocycle at the
+lowest energy of the spectrum
+Abstract: We will study properties of the quasi-periodic
+Schroedinger equation at the lowest energy of the spectrum. This
+will lead us into the study of phase transitions. Moreover, we will
+answer a question by M. Herman concerning the geometry of a certain
+minimal set - a non-chaotic strange atractor - of the projective
+Schroedinger cocycle. We study the case of large coupling constant
+and Diophantine frequency.
+Nov. 25, 1:10 p.m.
+**Note: special day and time
+Mitchell Feigenbaum (The Rockefeller
+University)
+Exponents in period doubling
+Nov. 24, 1:10 p.m.
+**Note: special day and time
+Yulij Ilyashenko (Cornell University)
+Topological properties of polynomial and analytic foliations
+Abstract: Geometrical study of holomorphic foliations
+of the complex plane, both projective and affine, lies on the boundary
+of differential equations, topology and complex analysis. Foliations
+of \Bbb CP^2 have an algebraic origin: they are defined by polynomial
+vector fields, but their behavior is highly transcendental. Their
+properties are drastically different from those of real polynomial
+vector fields. Properties of density of leaves, absolute rigidity
+and existence of a countable number of limit cycles were discovered
+by different authors in 60s and 70s. The talk will present these
+results together with a survey of the further development and open
+problems.
+Foliations of \Bbb C^2 have an analytic origin: they are defined
+by analytic vector fields. Generic properties of these fields were
+studied very recently. Yet genericity of density of leaves and existence
+of the infinite number of complex limit cycles is recently proved.
+Moreover, generic leaves of such foliations are either disks, or
+cylinders. These results are obtained by graduate students Firsova,
+Kutuzova and Volk.
+Nov. 21
+Konstantin Khanin (University of
+Toronto)
+Minimizers for random Lagrangian systems
+Abstract: We shall discuss random Aubry-Mather theory
+and prove that for time-dependent random Lagrangian systems on compact
+manifolds there exists a unique global minimizer. In the one-dimensional
+case we show that the global minimizer corresponds to a hyperbolic
+invariant measure for the random Lagrangian flow. We also discuss
+dynamical properties of shocks and show that their global structure
+is quite rigid and reflects the topology of the configuration manifold.
+Nov. 14
+** talk at 4:10 p.m.
+Israel Sigal (University of Toronto).
+Spectral Renormalization Group and Theory of Radiation
+Abstract: Non-relativistic quantum electrodynamics
+describes interaction of charged particles (electrons and nuclei)
+with quantized electro-magnetic field (photons). The key problem
+here is to describe emission and absorption of radiation by systems
+of matter such as atoms and molecules. In this talk I will present
+some recent rigorous results on the problem of radiation and describe
+a novel renormalization group technique used in proving these results.
+I will not assume any prior knowledge of quantum field theory or
+quantum mechanics.
+Nov. 7
+Marco Martens (University of Groeningen)
+Henon renormalization (I)
+Abstract: This mini-course will introduce a renormalization
+operator for dissipative Henon-like maps. The fixed point of the
+one-dimensional renormalization operator will also be a hyperbolic
+fixed point of the Henon-renormalization operator. This corresponds
+to universal geometrical properties of the Cantor attractor of infinitely
+renormalizable Henon-like maps. However, the two-dimensional theory
+is richer than the unimodal case. In particular, the Cantor attractor
+is not rigid, does not lie on a smooth curve and generically does
+not have bounded geometry. The quantitative aspects of these phenomena
+are controlled by the average Jacobian.
+The global topological properties of finitely renormalizable Henon-like
+maps in phase and parameter space are also controlled by the average
+Jacobian. In particular, density of hyperbolicity will be discussed
+in a neighborhood of the infinitely renormalizable maps.
+Oct. 31
+Hans Koch (University of Texas,
+Austin)
+Renormalization of vector fields (I)
+Abstract: This mini-course covers some of the recent
+developments in the renormalization of flows - mainly Hamiltonian
+flows and skew flows. After stating some of the problems and describing
+alternative approaches, we focus on the definition and basic properties
+of a single renormalization step. A second part deals with the construction
+of conjugacies and invariant tori, including shearless tori, and
+non-differentiable tori for critical Hamiltonians. Then we discuss
+properties related to the spectrum of the linearized renormalization
+transformation, such as the accumulation rates for sequences of
+closed orbits. The last part describes extensions from "simple"
+to Diophantine rotation vectors. This involves sequences of renormalization
+transformations that are related to continued fractions expansions
+in one and more dimensions. Whenever appropriate, the discussion
+of details will be restricted to special cases where inessential
+technical complications can be avoided.
+Oct. 24
+Michael Shub (U Toronto)
+Lower bounds for the entropy in several families of dynamical
+systems
+Abstract: Using soft techniques we prove lower bounds
+for the maximum entropy of a system in a family in terms of the
+entropy of a random product of the systems in the family. We accomplish
+this for two families of immersions of the circle. For one family
+this is joint work with Leonel Robert and Enrique Pujals and the
+other Rafael de la Llave and Carles Simo. Time permitting we recall
+a two dimensional analog whose entropy properties are still unknown,
+but for which partial
+results have been achieved in joint work with Francois Ledrappier,
+Carles Simo and Amie Wilkinson.
+Oct. 17
+Robert MacKay (University of Warwick, UK)
+Some robustly mixing fluid flows
+Abstract: I suggest an example of a C^3 divergence-free
+vector field in a domain of R^3 with smooth boundary, vanishing
+on the boundary, which is mixing and remains so for all small
+perturbations in this class. Two other candidates are also presented.
+Oct. 10
+Thankgiving holiday
+Oct. 3
+Charles Pugh (UC Berkeley)
+Smoothing Topological Manifolds
+Abstract: The Cairns-Whitehead Smoothing Theorem
+is proved by dynamical systems methods, namely the Invariant Section
+Theorem.
+Sept. 26
+Roland Roeder (Fields Institute)
+Super-stable manifolds for Newton's methods in two complex
+variables
+Abstract: While the equations x(x-1)=0, y^2+Bxy-y=0
+are easy to solve, the dynamics of the Newton map N(x,y) for finding
+the four roots is quite complicated. In particular, N is many-to-one
+and N has points of indeterminacy.
+The two vertical lines x=0 and x=1 are invariant under N and super-attracting.
+Within these lines the ''circles'' Re(y) = 1/2 and Re(y) = (1-B)/2,
+respectively, are hyperbolically repelling with multiplier 2.
+In this talk we will prove that these circles have superstable
+manifolds of real dimension 3 using the technique of holomorphic
+motions. These manifolds extend to all points with Re(x) <
+1/2 and Re(x) > 1/2 respectively and provide insight into the
+topology of the basins of attraction for the four roots.
+This work follows the ideas of John H. Hubbard and Sebastien Krief.
+Sep. 19
+M. Shishikura, Kyoto University
+Renormalization for irrationally indifferent fixed points of
+holomorphic maps
+Abstract: Indifferent fixed points of holomorphic
+maps give rise to delicate problems such as linearization problems,
+discontinuous Julia sets etc. In this talk, we review the study
+of those phenomena from the renormalization point of view. We
+define a certain class of holomorphic maps with "non-degenerate"
+parabolic fixed points. The parabolic renormalizaion is defined
+for this class and shown to leave the class invariant. Then the
+class is still invariant under a small perturbation, therefore
+we can handle irrationally indifferent fixed points with large
+continued fraction coefficients. This is a joint work with Hiroyuki
+Inou.
+We will compare this approach with Yoccoz's and McMullen's renormalizations.
+We will also mention possible applications such as Buff-Cheritat's
+work toward positive measure Julia

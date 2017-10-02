@@ -1,0 +1,222 @@
+Last-Modified: Mon, 12 Jan 2009 01:16:03 GMT
+Accept-Ranges: bytes
+ETag: "d4b0fc555374c91:0"
+Server: Microsoft-IIS/7.0
+X-Powered-By: ASP.NET
+Date: Thu, 01 Mar 2012 17:26:40 GMT
+Connection: close
+Content-Length: 13330
+EXCEL Basics: Data Types and Data Input
+EXCEL 2007 Basics: Data Input and Types of Data
+A. Colin Cameron, Dept. of Economics, Univ. of
+Calif.
+- Davis
+This September 1999 help sheet gives information
+Text files and non-text files.
+File formats.
+Methods to input data from a range of sources
+1. Type data into an existing Worksheet
+2. Read in data from an existing worksheet or
+workbook
+3. Copy data from an existing worksheet
+4. Read in data from an existing comma-separated
+values file
+5. Read in data from an existing text file
+6. Read in data from files in other formats
+Saving files
+It can be surprisingly difficult to input data from
+sources other than
+an Excel workbook from versions of Excel the same as or earlier than
+the
+version you are using.
+TEXT FILES AND NON-TEXT FILES
+There are many ways to represent data on a computer.
+The essential
+divide is between text files and non-text files.
+Text files can
+be directly read using a text editor such as Notepad in Microsoft Windows.
+These files often have extension .txt but can often have other
+extensions (a common one we will use is .csv).
+Example: For the text file carsdata.txt Notepad
+yields
+Non-text files cannot be meaningfully read using a text editor such as Notepad.
+Then one obtains non-text characters that appear as, for example, @Z
+xxxxxxx
+Example: For the non-text file carsdata.xls (an Excel file)
+Notepad yields
+Instead non-text files can only be read using
+special software.
+In this example an Excel file can be meaningfully read using the Excel
+program.
+FILE FORMATS
+The most common data formats used to store data in
+files that can be
+read data into Excel are:
+Existing Excel workbook or worksheet with
+extension .xls
+This is easily read into Excel, just like reading a Word
+file with extension .doc using MS Word.
+Existing Excel workbook or worksheet with
+extension .xlsx
+The extension .xlsx mean that the file is in Excel 2007
+format.
+This may not be recognized by earlier versions of Excel such as Excel
+97 or Excel 2003.
+Comma-separated values text file with extension .csv
+This is easily read into Excel.
+Furthermore, because this is a text file it can be read by many other
+programs.
+Text file, often with extension .txt
+or extension .asc
+This can be read into Excel but information about the
+formatting of the data needs to be provided, as explained below.
+METHODS TO INPUT DATA
+Common ways to input data into Excel are:
+Type in data into a new Excel worksheet.
+Read in data from an existing Excel workbook.
+Copy data from an existing Excel worksheet.
+Read in data from an existing comma-separated
+values text file.
+Read in data from and existing text file
+(possibly
+downloaded
+from the internet)
+and convert the file to an Excel worksheet.
+Read in data from other format files if Excel
+recognizes this
+format.
+1. TYPE IN DATA INTO A NEW EXCEL WORKSHEET
+Open Excel, for example from Windows Start Menu |
+Programs.
+This immediately puts you into a new Excel worksheet, or prompts you
+to ask for a new Excel worksheet.
+Consider entry of the following data on the number
+of cars in a
+household
+(first column) and the number of persons in the household (second
+column).
+1
+1
+2
+2
+2
+3
+2
+4
+3
+5
+Type the data into cells A1:A5 and cells B1:B5.
+(Click on cell A1
+and
+enter 1 and then enter, then 2 and enter ....)
+Then give headers to the two columns.
+Put cursor in cell A1 and right-click and select Insert and then select
+Entire Row.
+Then in the new blank cell A1 type CARS and in the new blank cell A2
+type HH SIZE.
+Now headers (CARS and HH SIZE) are in row 1 and data
+are in rows 2
+to
+6. The final data are:
+Next give the worksheet a name.
+Go to the sheet tab at the bottom, which may be called Sheet 1,
+right-click
+and select Rename and give the worksheet a name.
+Finally save the workbook by using Office Button and
+Save As if a new workbook
+or Office Button and Save if saving an existing workbook.
+If typing in a lot of data it is obviously best to save the workbook a
+number of times before typing is finished.
+2. READ IN DATA FROM AN EXISTING EXCEL WORKBOOK
+OR WORKSHEET
+This is the easiest, if you have approriate
+version(s) of Excel.
+Open Excel, for example from Start Menu | Programs.
+Left-click the Office Button, select Open and give the filename or
+browse for the file you
+want to input.
+Usually the filename will have extension .xls
+or .xlsx
+Excel 2007 should read all previous versions of Excel files, though not
+vice-versa.
+For example, read in the file carsdata.xls
+(which is an Excel 97-2003 workbook).
+3. COPY DATA FROM AN EXISTING EXCEL WORKSHEET
+Suppose we are already in an existing worksheet
+within an existing
+workbook.
+Right click on the Worksheet Tab at the bottom.
+This yields the Move or Copy dialog box
+If copy is to the existing workbook (the default)
+then most often
+one
+chooses the (move to end) option in Before Sheet.
+If copy is to a new workbook then choose the (new
+book) option in
+to
+book and type in the name of the new book.
+In either case select the Create a Copy option.
+Give the new worksheet an appropriate name by going
+to the sheet tab
+at the bottom, right-click and select rename and give the worksheet a
+name.
+4. READ IN DATA FROM A COMMA-SEPARATED VALUES FILE
+A comma-separated values file is a text file where
+each row is a spreadsheet row and each entry, separated by a comma, is
+a column entry for that row.
+The first row provides names for the columns of the spreadsheet.
+These files are given extension .csv.
+Excel automatically reads in files with extension .csv
+Many other programs are able to read in data a .csv
+file, but not data in an .xls file.
+It is a standard format for transferring data across different programs.
+For example the file carsdata.csv
+is a text file with the following entries
+Related text files include tab-delimited text
+and  space-delimited formatted text.
+5. READ IN DATA FROM AN EXISTING TEXT FILE
+5a. Obtain text file with data from the internet
+Skip this step if you already have the data file carsdata.txt on
+your computer.
+In your web browser click on file carsdata.txt
+The web browser displays
+1. 1.
+2. 2.
+2. 3.
+2. 4.
+3. 5.
+Choose File / Save As in your browser to save the
+data as carsdata.txt in
+directory
+of your choosing, e.g. in c:/Temp
+5b. Enter the text file with data into Excel
+Now open Excel and from the Office Button choose Open
+At the bottom of the Open dialog box choose the option Files of type |
+All Files (*.*) and navigate to highlight file c:/Temp/carsdata.txt and
+click Open.
+This yields the Text Import Wizard
+The challenge is to places the first and second
+numbers into separate columns, rather than
+combined into one column.
+In text import import wizard
+Choose Delimited if the data are delimited and
+Fixed width if the
+data are fixed width.
+In this example either option can be chosen.
+Set the Start import at row to the first row that
+has data, skipping any preceding text such as explanation of the data.
+In this example there is now preceding text, so Start
+import at row 1.
+So Step 1: choose Delimited and Start Import at Row
+1 and hit Next.
+This yields Step 2. The default Delimiter is Tab. Change this to Space.
+Then check that the Data preview has correctly split up the data, as is
+the case below.
+Hit next.
+This yields step 3. In this case leave the column data format as
+general.
+Hit Finish.
+This should give you an Excel worksheet with 2 columns and 5 rows in
+cells A1
+
+

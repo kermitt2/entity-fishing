@@ -69,7 +69,7 @@ public class NerdRanker extends NerdModel {
 
 		//model = MLModel.GRADIENT_TREE_BOOST;
 		model = MLModel.RANDOM_FOREST;
-		featureType = FeatureType.NERD;
+		featureType = FeatureType.BASELINE;
 
 		GenericRankerFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
@@ -89,6 +89,8 @@ public class NerdRanker extends NerdModel {
 			feature = new NerdRankerFeatureVector();
 		else if (featureType == FeatureType.WIKIDATA)
 			feature = new WikidataRankerFeatureVector();
+		else if (featureType == FeatureType.MILNE_WITTEN_RELATEDNESS)
+			feature = new MilneWittenRelatednessFeatureVector();
 		return feature;
 	}
 
@@ -107,6 +109,10 @@ public class NerdRanker extends NerdModel {
 		if (featureType == FeatureType.EMBEDDINGS) {
 			// special case of embeddings only, we just need the embeddings similarity score
 			return embeddingsSimilarity;
+		}
+		if (featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) {
+			// special case of embeddings only, we just need the embeddings similarity score
+			return relatedness;
 		}
 
 		if (forest == null) {
@@ -184,7 +190,9 @@ public class NerdRanker extends NerdModel {
 
 	public void trainModel() throws Exception {
 		// special cases, no need to train a model
-		if (featureType == FeatureType.BASELINE || featureType == FeatureType.EMBEDDINGS) 
+		if (featureType == FeatureType.BASELINE || 
+			featureType == FeatureType.EMBEDDINGS || 
+			featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) 
 			return;
 
 		if (attributeDataset == null) {
@@ -210,6 +218,13 @@ public class NerdRanker extends NerdModel {
 	}
 
 	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
+		if (featureType == FeatureType.BASELINE || 
+			featureType == FeatureType.EMBEDDINGS || 
+			featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) {
+			// no model need to be trained
+			return;
+		}
+
 		StringBuilder arffBuilder = new StringBuilder();
 
 		GenericRankerFeatureVector feature = getNewFeature();
@@ -553,13 +568,7 @@ public class NerdRanker extends NerdModel {
 			NerdEntity theEntity = new NerdEntity(entity);
 			entities.add(theEntity);
 		}
-		// the entity for evaluation
-		List<NerdEntity> evalEntities = new ArrayList<NerdEntity>();
-		for (Entity entity : nerEntities) {
-			NerdEntity theEntity = new NerdEntity(entity);
-			evalEntities.add(theEntity);
-		}
-
+		
 		// process the text for building actual context for evaluation
 		ProcessText processText = ProcessText.getInstance();
 		nerEntities = new ArrayList<Entity>();

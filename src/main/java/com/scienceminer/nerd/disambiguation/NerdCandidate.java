@@ -119,6 +119,10 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// list of wikipedia categories corresponding to the disambiguated term
 	private List<com.scienceminer.nerd.kb.Category> wikipediaCategories = null;
 
+	// if true, the candidate has been defined for a coreference mention from
+	// the candidates originally from the first reference
+	private boolean coReference = false;
+
 	public NerdCandidate(NerdEntity entity) {
 		this.entity = entity;
 	}
@@ -374,6 +378,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		relatednessScore = score;
 	}
 	
+	public boolean isCoReference() {
+		return coReference;
+	}
+
+	public void setCoReference(boolean coReference) {
+		this.coReference = coReference;
+	}
+
 	//@Override
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
@@ -651,15 +663,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	 *  Comparable implementation. We sort against the nerdScore
 	 */
 	public int compareTo(NerdCandidate compareNerdCandidate) {
-
-		double compareQuantity = compareNerdCandidate.getNerdScore(); 
-		//double compareQuantity = compareNerdCandidate.getSelectionScore(); 
-		//ascending order
-		//return this.nerdScore - compareQuantity;
-		//return this.selectionScore - compareQuantity;
-
+		
 		//descending order
-		int val = ((int)((compareQuantity - this.nerdScore) * 1000));
+		int val = ((int)((compareNerdCandidate.getNerdScore() - this.nerdScore) * 1000));
 		//return ((int)((compareQuantity - this.selectionScore) * 1000));
 
 		if (val == 0) {
@@ -676,5 +682,20 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 
 		return val;
 	}
-	
+
+	/**
+	 * Copy of a candidate, with deep copy of relevant instance variable
+	 */
+	public NerdCandidate copy(NerdEntity entity) {
+		NerdCandidate copy = new NerdCandidate(entity);
+		copy.setWikiSense(this.getWikiSense());
+		copy.setWikipediaExternalRef(this.getWikipediaExternalRef());
+		copy.setProb_c(this.getProb_c());
+		copy.setPreferredTerm(this.getPreferredTerm());
+		copy.setLang(this.getLang());
+		copy.setLabel(this.getLabel());
+		copy.setWikidataId(this.getWikidataId());
+		copy.setWikipediaCategories(this.getWikipediaCategories());
+		return copy;
+	}
 }

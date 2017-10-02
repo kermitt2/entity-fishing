@@ -140,9 +140,6 @@ public class KBLowerEnvironment extends KBEnvironment {
 		dbPage = dbFactory.buildPageDatabase();
 		databasesByType.put(DatabaseType.page, dbPage);
 		
-		dbLabel = dbFactory.buildLabelDatabase();
-		databasesByType.put(DatabaseType.label, dbLabel);
-		
 		dbArticlesByTitle = dbFactory.buildTitleDatabase(DatabaseType.articlesByTitle);
 		databasesByType.put(DatabaseType.articlesByTitle, dbArticlesByTitle);
 		dbCategoriesByTitle = dbFactory.buildTitleDatabase(DatabaseType.categoriesByTitle);
@@ -150,6 +147,9 @@ public class KBLowerEnvironment extends KBEnvironment {
 		dbTemplatesByTitle = dbFactory.buildTitleDatabase(DatabaseType.templatesByTitle);
 		databasesByType.put(DatabaseType.templatesByTitle, dbTemplatesByTitle);
 		
+		dbLabel = dbFactory.buildLabelDatabase();
+		databasesByType.put(DatabaseType.label, dbLabel);
+
 		dbPageLinkInNoSentences = dbFactory.buildPageLinkNoSentencesDatabase(DatabaseType.pageLinksInNoSentences); 
 		databasesByType.put(DatabaseType.pageLinksInNoSentences, dbPageLinkInNoSentences);
 		
@@ -222,9 +222,6 @@ public class KBLowerEnvironment extends KBEnvironment {
 		//System.out.println("Building Page db");
 		dbPage.loadFromFile(page, overwrite);
 
-		//System.out.println("Building Label db");
-		dbLabel.loadFromFile(label, overwrite);
-
 		//System.out.println("Building ArticlesByTitle db");
 		dbArticlesByTitle.loadFromFile(page, overwrite);
 
@@ -240,6 +237,9 @@ public class KBLowerEnvironment extends KBEnvironment {
 		//System.out.println("Building RedirectSourcesByTarget db");
 		dbRedirectSourcesByTarget.loadFromFile(redirectSourcesByTarget, overwrite);
 		
+		//System.out.println("Building Label db");
+		dbLabel.loadFromFile(label, overwrite);
+
 		//System.out.println("Building PageLinkInNoSentences db");
 		dbPageLinkInNoSentences.loadFromFile(pageLinksIn, overwrite);
 
@@ -269,6 +269,10 @@ public class KBLowerEnvironment extends KBEnvironment {
 
 		//System.out.println("Building Markup db");
 		dbMarkup.loadFromXmlFile(markup, overwrite);
+
+		// we need to enrich the Label database with the article titles to ensure 
+		// better mention resolution
+		//dbLabel.enrich(dbArticlesByTitle);
 
 		System.out.println("Environment built - " + dbPage.getDatabaseSize() + " pages.");
 	}

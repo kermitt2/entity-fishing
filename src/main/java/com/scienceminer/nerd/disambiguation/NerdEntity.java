@@ -9,6 +9,8 @@ import org.grobid.core.data.Sense;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.analyzers.GrobidAnalyzer;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
@@ -1107,5 +1109,56 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	private String simpleStringNormalisation(String str) {
 		return str.replace("\n", " ").trim().replaceAll(" +", " ");
+	}
+
+	/**
+	 * True if the token of entity is a continuous subsequence of the token of 
+	 * otherEntity 
+	 */
+	public static boolean subSequence(NerdEntity entity, NerdEntity otherEntity, boolean caseSensitive) {
+		String entityString = entity.getNormalisedName();
+		if (entityString == null)
+			entityString = entity.getRawName();
+		if ((entityString == null) || (entityString.length() == 0))
+			return false;
+		if (!caseSensitive)
+			entityString = entityString.toLowerCase();
+		List<LayoutToken> entityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(entityString);
+
+		String otherEntityString = otherEntity.getNormalisedName();
+		if (otherEntityString == null)
+			otherEntityString = otherEntity.getRawName();
+		if (otherEntityString == null)
+			return false;
+		if (!caseSensitive)
+			otherEntityString = otherEntityString.toLowerCase();
+		List<LayoutToken> otherEntityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(otherEntityString);
+
+		if (entityTokens.size() >= otherEntityTokens.size())
+			return false;
+
+		LayoutToken entityToken = entityTokens.get(0);
+		int n = 0;
+		for(LayoutToken otherEntityToken : otherEntityTokens) {
+			if (entityToken.getText().equals(otherEntityToken.getText())) {
+				// beginning of a sequence, but does the remaining entity tokens also match?
+				if (entityTokens.size() == 1)
+					return true;
+				else {
+					int i = 1;
+					for(; i<entityTokens.size(); i++) {
+						if (n+i >= otherEntityTokens.size())
+							break;
+						if (!entityTokens.get(i).getText().equals(otherEntityTokens.get(n+i)))
+							break;
+					}
+					if (i == entityTokens.size())
+						return true;
+				}
+			}
+			n++; 
+		}
+
+		return false;
 	}
 }

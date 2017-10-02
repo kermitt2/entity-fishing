@@ -334,7 +334,6 @@ public class NerdRestKB {
 						boolean first = true;
 						for(int i=0; i<senses.length; i++) {
 							Label.Sense sense = senses[i];
-							//PageType pageType = PageType.values()[sense.getType()];
 							PageType pageType = sense.getType();
 							if (pageType != PageType.article)
 								continue;
