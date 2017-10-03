@@ -15,6 +15,7 @@
    build.rst
    console.rst
    restAPI.rst
+   evaluation.rst
    train.rst
    license.rst
 

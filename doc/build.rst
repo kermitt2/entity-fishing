@@ -52,7 +52,7 @@ Then install the compiled indexed data:
     This will install four sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
     The uncompressed data is about 34 GB.
 
-#. Build the project, under the NERD project repository.
+#. Build the project, under the *entity-fishing* project repository.
    ::
       $ mvn clean install
 

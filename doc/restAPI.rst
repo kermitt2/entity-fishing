@@ -408,7 +408,7 @@ In the example above, the root layer of JSON values correspond to:
 
 - language: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
 
-- entities: list of named entities recognised in the text (with possibly entities provided in the query, considered then as certain),
+- entities: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
 
 - global_categories: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
@@ -730,7 +730,7 @@ The elements present in this response are:
 
  - lang: the language of the definition
 
-- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated Named Entity. Each category is characterised by the following properties:
+- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated entity. Each category is characterised by the following properties:
 
  - category: The category name
 

@@ -154,7 +154,8 @@ public class NEDCorpusEvaluation {
 				System.out.println("Document is empty: " + docPath);
 			}
 
-			// if the corpus is AIDA, we need to ignore the two first lines 
+			// if the corpus is AIDA, we need to ignore the two first lines and "massage" 
+			// a bit the text
 			if (corpus.startsWith("aida")) {
 				int ind = docContent.indexOf("\n");
 				ind = docContent.indexOf("\n", ind +1);
