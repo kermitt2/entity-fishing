@@ -619,9 +619,9 @@ Knowledge base concept retrieval
 ********************************
 
 This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main NERD query processing service in order to retrieve a full description of an identified entity.
+
 The service supports the following identifiers:
  - wikidata identifier (starting with `Q`, e.g. `Q61`)
- - wikidata property identifier (starting with `P`, e.g. `P31`)
  - wikipedia identifier
 
 The *entity-fishing* content processing service returns the identifiers of the resulting entities with some position offset information. Then, if the client wants, for instance, to display an infobox for this entity, it will send a second call to this service and retrieve the full information for this particular entity.
@@ -660,7 +660,7 @@ GET /kb/concept/{id}
  required    name     content-type value      description
 ==========  =======  =====================  ===============================================================================================================
  required    id       String                 ID of the concept to be retrieved (wikipedia, wikidata id (starting with `Q`) or property (starting with `P`).
- optional    lang     String                 The language knowledge base where to fetch the concept from. Default: `en`.
+ optional    lang     String                 (valid only for wikipedia IDs) The language knowledge base where to fetch the concept from. Default: `en`.
 ==========  =======  =====================  ===============================================================================================================
 
 (2) Request header
