@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -151,6 +153,70 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 		tx.commit();
 		tx.close();
 		reader.close();
+		isLoaded = true;
+		System.out.println("Total of " + nbTotalAdded + " statements indexed");
+	}
+
+	/**
+	 * Reverse statement index (where the key is the tail entity) is created only when needed.
+	 * Creation is based on the normal statement database (where key is the head entity).
+	 */
+	public void loadReverseStatements(boolean overwrite, StatementDatabase statementDb) {
+		if (isLoaded && !overwrite)
+			return;
+		System.out.println("Loading " + name + " database");
+
+		KBIterator iter = new KBIterator(statementDb);
+		Transaction tx = environment.createWriteTransaction();
+		Map<String, List<Statement>> tmpMap = new HashMap<String, List<Statement>>();
+		int nbToAdd = 0;
+		int nbTotalAdded = 0;
+		while(iter.hasNext()) {
+			if (nbToAdd >= 10000) {
+				try {
+					tx.commit();
+					tx.close();
+					nbToAdd = 0;
+					tx = environment.createWriteTransaction();
+					// reset temporary map
+					tmpMap = new HashMap<String, List<Statement>>(); 
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			Entry entry = iter.next();
+			byte[] keyData = entry.getKey();
+			byte[] valueData = entry.getValue();
+			//Page p = null;
+			
+			try {
+				String entityId = (String)KBEnvironment.deserialize(keyData);
+				List<Statement> statements = (List<Statement>)KBEnvironment.deserialize(valueData);
+				for (Statement statement : statements) {
+					String value = statement.getValue();
+					if ( (value != null) && value.startsWith("Q") ) {
+						// the statement value is an entity
+
+						// check temporary map first
+						List<Statement> newStatements = tmpMap.get(value);
+						if (newStatements == null)
+							newStatements = new ArrayList<Statement>();
+						newStatements.add(statement);
+
+						db.put(tx, KBEnvironment.serialize(value), KBEnvironment.serialize(newStatements));
+						tmpMap.put(value, newStatements);
+						nbToAdd++;
+					} 
+				} 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// last commit
+		tx.commit();
+		tx.close();
 		isLoaded = true;
 		System.out.println("Total of " + nbTotalAdded + " statements indexed");
 	}

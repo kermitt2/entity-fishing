@@ -32,8 +32,12 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 	// the different databases of the KB
 	private ConceptDatabase dbConcepts = null;
+	// gives statement by the head entity
 	private StatementDatabase dbStatements = null;
 	private PropertyDatabase dbProperties = null;
+
+	// loaded only if needed, gives the statements by the tail entity
+	private StatementDatabase dbReverseStatements = null;
 
 	/**
 	 * Constructor
@@ -66,6 +70,14 @@ public class KBUpperEnvironment extends KBEnvironment {
 		return dbStatements;
 	}
 	
+	/**
+	 * Returns the reverse {@link DatabaseType#statements} database
+	 */
+	public StatementDatabase getDbReverseStatements() {
+		return dbReverseStatements;
+	}
+	
+
 	@Override
 	protected void initDatabases() {
 		System.out.println("\ninit upper level language independent environment");
@@ -80,6 +92,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		dbStatements = buildStatementDatabase();
 		databasesByType.put(DatabaseType.statements, dbStatements);
+
+		dbReverseStatements = buildReverseStatementDatabase();
+		databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
 	}
 
 	/**
@@ -126,7 +141,19 @@ public class KBUpperEnvironment extends KBEnvironment {
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
 	}
 
+	/**
+	 * Loaded only if needed, gives the statements by the tail entity.
+	 * dbStatements must be already built to create the reverse one.  
+	 */
+	public void loadReverseStatementDatabase(boolean overwrite) {
+		dbReverseStatements.loadReverseStatements(overwrite, dbStatements);
+	}
+
 	private StatementDatabase buildStatementDatabase() {
+		return new StatementDatabase(this);
+	}
+
+	private StatementDatabase buildReverseStatementDatabase() {
 		return new StatementDatabase(this);
 	}
 

@@ -2965,7 +2965,9 @@
 		</annotation>
 		<annotation>
 			<mention>World Trade Center</mention>
-			<wikiName>World Trade Center</wikiName>
+			<!--wikiName>World Trade Center</wikiName-->
+			<!-- PL corrected for 2017/09 Wikipedia -->
+			<wikiName>World Trade Center (1973-2001)</wikiName>
 			<offset>3305</offset>
 			<length>18</length>
 		</annotation>

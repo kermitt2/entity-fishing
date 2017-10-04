@@ -173,7 +173,7 @@ public class Label {
 		 */
 		public double getPriorProbability() {
 			if (linkOccCount == 0)
-				return 0;
+				return 0.0;
 			else {
 				return ((double)sLinkOccCount) / linkOccCount;
 			}
@@ -222,7 +222,10 @@ public class Label {
 					dbs.setFromRedirect(true);
 					dbs.setFromTitle(false);
 				} else {
-					LOGGER.warn("Page " + page.getId() + " is of type redirect but its target is null, it will be ignored");
+					//LOGGER.warn("Page " + page.getId() + " is of type redirect but its target is null, it will be ignored");
+					// this is cases like this one: 
+					// https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=1487195&inprop=url
+ 					// quite frequent, redirect is empty, still we get redirected to category pages
 					continue;
 				} 
 			} else {

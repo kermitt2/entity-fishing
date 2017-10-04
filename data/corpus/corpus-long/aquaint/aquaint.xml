@@ -1817,7 +1817,9 @@
 		</annotation>
 		<annotation>
 			<mention>State</mention>
-			<wikiName>Federated State</wikiName>
+			<!--wikiName>Federated State</wikiName-->
+			<!-- corrected PL for 2017-09 Wikipedia -->
+			<wikiName>Federated state</wikiName>
 			<offset>55</offset>
 			<length>5</length>
 		</annotation>
@@ -3843,7 +3845,9 @@
 		</annotation>
 		<annotation>
 			<mention>tender</mention>
-			<wikiName>Tender</wikiName>
+			<!--wikiName>Tender</wikiName-->
+			<!-- corrected PL for 2017-09 Wikipedia -->
+			<wikiName>Request for tender</wikiName>
 			<offset>625</offset>
 			<length>6</length>
 		</annotation>

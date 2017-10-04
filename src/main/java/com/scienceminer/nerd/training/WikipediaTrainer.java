@@ -73,20 +73,20 @@ public class WikipediaTrainer {
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
 		//List<Integer> sampleSizes = Arrays.asList(500,500,100,100,100);
-		List<Integer> sampleSizes = Arrays.asList(100,5,5,5,5);
+		List<Integer> sampleSizes = Arrays.asList(500,5,100,5,5);
 		// training ranker, training selector, eval ranker, eval selector, eval end-to-end
 
 		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
-		criteriaTraining.setMinOutLinks(60);
-		criteriaTraining.setMinInLinks(60);
-		criteriaTraining.setMinWordCount(300);
-		criteriaTraining.setMaxWordCount(2500);
+		criteriaTraining.setMinOutLinks(20);
+		criteriaTraining.setMinInLinks(30);
+		criteriaTraining.setMinWordCount(200);
+		criteriaTraining.setMaxWordCount(1000);
 
 		ArticleTrainingSampleCriterias criteriaEvaluation = new ArticleTrainingSampleCriterias();
-		criteriaEvaluation.setMinOutLinks(60);
-		criteriaEvaluation.setMinInLinks(60);
-		criteriaEvaluation.setMinWordCount(300);
-		criteriaEvaluation.setMaxWordCount(2500);
+		criteriaEvaluation.setMinOutLinks(20);
+		criteriaEvaluation.setMinInLinks(30);
+		criteriaEvaluation.setMinWordCount(200);
+		criteriaEvaluation.setMaxWordCount(1000);
 
 		/*criterias.setMinOutLinks(50);
 		criterias.setMinInLinks(100);

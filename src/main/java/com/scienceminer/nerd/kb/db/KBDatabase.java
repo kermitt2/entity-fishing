@@ -271,10 +271,16 @@ public abstract class KBDatabase<K,V> {
 		conceptByPageId,
 
 		/**
-		 * Associates one concept id (the subject of the statetement) to a property and values (litteral values 
+		 * Associates one concept id (the head of the statement relation) to a property / value (litteral values 
 		 * and/or other concept identifiers)
 		 */
 		statements,
+
+		/**
+		 * Associates one concept id (the tail of the statetement relation) to property / value (always another
+		 * concept identifier as value)
+		 */
+		reverseStatements,
 
 		/**
 		 * Associates the string identifier of a property to a property description

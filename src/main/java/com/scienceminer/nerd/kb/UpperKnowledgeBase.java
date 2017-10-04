@@ -151,15 +151,26 @@ public class UpperKnowledgeBase {
 	}
 
 	/**
-	 * Return the list of relations associated to a given concept id
+	 * Return the list of statements associated to a given concept id as head
 	 */
 	public List<Statement> getStatements(String wikidataId) {
 		//System.out.println("get statements for: " + wikidataId);
-		List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
+		//List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
 		//if (statements != null)
 		//	System.out.println(statements.size() + " statements: ");
 
 		return env.getDbStatements().retrieve(wikidataId);
+	}
+
+	/**
+	 * Return the list of statements associated to a given concept id as tail
+	 */
+	public List<Statement> getReverseStatements(String wikidataId) {
+		//System.out.println("get reverse statements for: " + wikidataId);
+		//List<Statement> statements = env.getDbReverseStatements().retrieve(wikidataId);
+		//if (statements != null)
+		//	System.out.println(statements.size() + " statements: ");
+		return env.getDbReverseStatements().retrieve(wikidataId);
 	}
 
 	/**
@@ -168,6 +179,14 @@ public class UpperKnowledgeBase {
 	 */
 	public KBIterator getEntityIterator() {
 		return new KBIterator(env.getDbConcepts());
+	}
+
+	/**
+	 * Load on demand the reverse statement database (get statements by the tail entities), 
+	 * which is not loaded by default.
+	 */
+	public void loadReverseStatementDatabase(boolean overwrite) {
+		env.loadReverseStatementDatabase(overwrite);
 	}
 
 	public void close() {

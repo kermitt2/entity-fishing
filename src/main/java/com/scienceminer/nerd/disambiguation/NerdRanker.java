@@ -69,7 +69,7 @@ public class NerdRanker extends NerdModel {
 
 		//model = MLModel.GRADIENT_TREE_BOOST;
 		model = MLModel.RANDOM_FOREST;
-		featureType = FeatureType.BASELINE;
+		featureType = FeatureType.SIMPLE;
 
 		GenericRankerFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);

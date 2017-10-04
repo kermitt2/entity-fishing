@@ -48,7 +48,7 @@ public class NEDCorpusEvaluation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NEDCorpusEvaluation.class);
 
 	private static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb", 
-		"aquaint", "msnbc", "clueweb", "wikipedia");
+		"aquaint", "iitb", "msnbc", "clueweb", "wikipedia");
 
 	private NerdRanker ranker = null;
 	private LowerKnowledgeBase wikipedia = null;
@@ -206,7 +206,7 @@ public class NEDCorpusEvaluation {
 				int pageId = -1;
 				Article article = wikipedia.getArticleByTitle(wikiName);
 				if (article == null) {
-					System.out.println("Invalid article name - article not found in Wikipedia: " + wikiName);
+					System.out.println(docName + ": Invalid article name - article not found in Wikipedia: " + wikiName);
 					continue;
 				} else 
 					pageId = article.getId();
@@ -296,21 +296,24 @@ public class NEDCorpusEvaluation {
 				Map<NerdEntity, List<NerdCandidate>> candidates = 
 					engine.generateCandidates(entities, "en");	
 
-				for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-					List<NerdCandidate> cands = entry.getValue();
-					NerdEntity entity = entry.getKey();
-					int start = entity.getOffsetStart();
-					int end = entity.getOffsetEnd(); 
-					for(NerdEntity refEntity : referenceEntities) {
-						int startRef = refEntity.getOffsetStart();
-						int endRef = refEntity.getOffsetEnd(); 
+				for(NerdEntity refEntity : referenceEntities) {
+					int startRef = refEntity.getOffsetStart();
+					int endRef = refEntity.getOffsetEnd(); 
+					boolean found = false;
+					for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+						List<NerdCandidate> cands = entry.getValue();
+						NerdEntity entity = entry.getKey();
+						int start = entity.getOffsetStart();
+						int end = entity.getOffsetEnd(); 
 						if ((start == startRef) && (end == endRef)) {
-							if (cands == null || cands.size() == 0) {
-								System.out.println("found no candidate for mention: " + entity.getRawName());
+							if (cands != null && cands.size() != 0) {
+								found = true;
+								break;
 							}
-							break;
 						}
 					}
+					if (!found)
+						System.out.println("found no candidate for mention: " + refEntity.getRawName());
 				}
 
 				// do we have the expected result in the candidates for the mentions?

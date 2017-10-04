@@ -18,7 +18,7 @@ import java.util.List;
  * This class is a wrapper forwarding everything to it.cnr.isti.hpc.Word2VecCompress. 
  * It also provides a command line tool for computing entity/word similarity.
  *
- * Example command for interactive word and entity similarities calculation:
+ * Command for interactive word and entity similarities calculation:
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.CompressedW2V 
  * -Dexec.args="/mnt/data/wikipedia/embeddings/entity.en.embeddings.quantized.compressed 
  * /mnt/data/wikipedia/embeddings/wiki.en.quantized.compressed"

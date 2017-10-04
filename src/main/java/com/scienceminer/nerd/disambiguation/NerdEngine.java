@@ -452,7 +452,7 @@ for(NerdCandidate cand : cands) {
 						candidates.add(candidate);
 //System.out.println(candidate.toString());						
 						s++;
-						if (s == MAX_SENSES-1) {
+						if (s == MAX_SENSES) {
 							// max. sense alternative has been reach
 							break;
 						}
@@ -510,6 +510,9 @@ for(NerdCandidate cand : cands) {
 				continue;
 			if ((entityNormalisedString != null) && entityNormalisedString.length() < 3)
 				continue;
+			// avoiding the case "iii" subsequence of "Valentinian III" which appears from time to time
+			if (entityNormalisedString.equals("iii"))
+				continue;
 
 			if (failures.contains(entityString)) 
 				continue;
@@ -555,6 +558,9 @@ for(NerdCandidate cand : cands) {
 				List<NerdCandidate> otherCands = entry.getValue();
 				NerdEntity otherEntity = entry.getKey();
 
+				if (otherEntity.getRawName().length() <= entityString.length())
+					continue;
+
 				if (otherEntity.getRawName().toLowerCase().equals(entityString) || 
 					otherEntity.getNormalisedName().toLowerCase().equals(entityNormalisedString) )
 					continue;
@@ -578,7 +584,7 @@ for(NerdCandidate cand : cands) {
 				}
 				
 				if (NerdEntity.subSequence(entity, otherEntity, false)) {	
-System.out.println(entityString + " is subsequence of " + otherEntity.getRawName() + " -> merging candidates...");
+//System.out.println(entityString + " is subsequence of " + otherEntity.getRawName() + " -> merging candidates...");
 					if (otherEntity.getLinkProbability() > entity.getLinkProbability())
 						entity.setLinkProbability(otherEntity.getLinkProbability());
 					// we merge the candidates of otherEntity in those of entity
