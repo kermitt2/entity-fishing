@@ -19,6 +19,7 @@ data/wikipedia/db-it
 data/wikipedia/db-es
 data/wikipedia/db-kb
 data/wikipedia/domains-en.db
+data/wikipedia/embeddings
 data/wikipedia/embeddings/en
 data/wikipedia/embeddings/fr
 data/wikipedia/embeddings/de

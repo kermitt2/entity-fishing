@@ -302,11 +302,15 @@ public class Utilities {
 		return is.readObject();
 	}
 
-	public static List<LayoutToken> getWindow(NerdEntity entity, List<LayoutToken> tokens, int size, String lang) {
-		List<LayoutToken> subTokens = new ArrayList<LayoutToken>();
-		
+	public static List<LayoutToken> getWindow(NerdEntity entity, List<LayoutToken> tokens, int size, String lang) {		
 		int start = entity.getOffsetStart();
 		int end = entity.getOffsetEnd();
+
+		return getWindow(start, end, tokens, size, lang);
+	}
+
+	public static List<LayoutToken> getWindow(int start, int end, List<LayoutToken> tokens, int size, String lang) {
+		List<LayoutToken> subTokens = new ArrayList<LayoutToken>();
 
 		// first locate the entity in the token list
 		int pos = 0;

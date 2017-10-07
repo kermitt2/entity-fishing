@@ -150,11 +150,11 @@ public class KBUpperEnvironment extends KBEnvironment {
 	}
 
 	private StatementDatabase buildStatementDatabase() {
-		return new StatementDatabase(this);
+		return new StatementDatabase(this, DatabaseType.statements);
 	}
 
 	private StatementDatabase buildReverseStatementDatabase() {
-		return new StatementDatabase(this);
+		return new StatementDatabase(this, DatabaseType.reverseStatements);
 	}
 
 	private PropertyDatabase buildPropertyDatabase() {

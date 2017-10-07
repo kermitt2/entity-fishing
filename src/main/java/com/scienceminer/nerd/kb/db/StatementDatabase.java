@@ -31,8 +31,8 @@ import static org.fusesource.lmdbjni.Constants.*;
 public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 	private static final Logger logger = LoggerFactory.getLogger(StatementDatabase.class);	
 
-	public StatementDatabase(KBUpperEnvironment env) {
-		super(env, DatabaseType.statements);
+	public StatementDatabase(KBUpperEnvironment env, DatabaseType type) {
+		super(env, type);
 	}
 
 	@Override
@@ -200,8 +200,13 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 
 						// check temporary map first
 						List<Statement> newStatements = tmpMap.get(value);
-						if (newStatements == null)
+						if (newStatements == null) {
+							// get statements from the db
+							newStatements = this.retrieve(value);
+						}
+						if (newStatements == null) {
 							newStatements = new ArrayList<Statement>();
+						}
 						newStatements.add(statement);
 
 						db.put(tx, KBEnvironment.serialize(value), KBEnvironment.serialize(newStatements));
