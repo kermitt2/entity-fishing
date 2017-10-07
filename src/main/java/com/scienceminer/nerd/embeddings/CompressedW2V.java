@@ -24,7 +24,7 @@ import java.util.List;
  * /mnt/data/wikipedia/embeddings/wiki.en.quantized.compressed"
  *
  *
- * @author roi blanco (original), with modification patrice lopez
+ * @author roi blanco (original), with modifications patrice lopez
  */
 public class CompressedW2V implements Serializable {
 

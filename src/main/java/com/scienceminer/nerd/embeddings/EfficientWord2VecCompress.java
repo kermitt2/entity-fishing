@@ -36,11 +36,14 @@ import java.util.Random;
  * Word2VecCompress implementation doesn't scale for many million entries.
  * Word strings are hashed and quantized vectors are golomb coded.
  *
+ * From the origianl FEL version, refactoring and replace command argument processing which was 
+ * relying on a library not comatible with Apache 2 license.
+ * 
  * Example command:
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EfficientWord2VecCompress 
  * -Dexec.args="/mnt/data/wikipedia/embeddings/wiki.en.q /mnt/data/wikipedia/embeddings/wiki.en.q.compressed"
  * 
- * @author roi blanco (original), with modification patrice lopez
+ * @author roi blanco (original), with modifications patrice lopez
  */
 public class EfficientWord2VecCompress extends Word2VecCompress {
     private static final Logger logger = LoggerFactory.getLogger(EfficientWord2VecCompress.class);

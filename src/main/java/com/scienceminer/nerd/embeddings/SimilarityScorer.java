@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
  * Instance class for computing similarity between entities and context based on word 
  * and entity embeddings, the context being terms and/or other entities.
  * Embeddings and thus similarity scoring depend on the language. The class uses as resources
- * pre-trained word and entity embeddings produced by the grisp library, which have been 
- * quantized and compressed.
+ * pre-trained word and entity embeddings produced by the class EntityDescription, which have 
+ * been both quantized and compressed.
  */
 public class SimilarityScorer {
 	/**

@@ -68,8 +68,8 @@ public class Main {
                     break;
                 }
                 if (currArg.equals("-gH")) {
-                    gbdArgs.setPath2grobidHome(pArgs[i + 1]);
                     if (pArgs[i + 1] != null) {
+                        gbdArgs.setPath2grobidHome(pArgs[i + 1]);
                         gbdArgs.setPath2grobidProperty(getPath2GbdProperties(pArgs[i + 1]));
                     }
                     i++;
@@ -84,14 +84,14 @@ public class Main {
                 }
                 if (currArg.equals("-tdata")) {
                     if (pArgs[i + 1] != null) {
-                        gbdArgs.setPathInputDirectory(pArgs[i + 1]);
+                        gbdArgs.setInput(pArgs[i + 1]);
                     }
                     i++;
                     continue;
                 }
                 if (currArg.equals("-out")) {
                     if (pArgs[i + 1] != null) {
-                        gbdArgs.setResultDirectoryPath(pArgs[i + 1]);
+                        gbdArgs.setOutput(pArgs[i + 1]);
                     }
                     i++;
                     continue;
@@ -137,13 +137,13 @@ public class Main {
         gbdArgs = new MainArgs();
         if (processArgs(args) && (gbdArgs.getProcessMethodName() != null)) {
             if (gbdArgs.getProcessMethodName().equals("createtrainingvector")) {
-                if (gbdArgs.getPathInputDirectory() == null) {
+                if (gbdArgs.getInput() == null) {
                     System.err.println("usage: createTrainingVector " +
                             "path-to-input-directory");
                     return;
                 }
 				TermVectorTrainer trainer = new TermVectorTrainer();
-                File directory = new File(gbdArgs.getPathInputDirectory());
+                File directory = new File(gbdArgs.getInput());
 				if (!directory.exists()) {
                     System.err.println("Path to the data directory is not valid");
                     return;
@@ -167,7 +167,7 @@ public class Main {
 					trainer.generateTrainingFromJSON(jsonfile, jsonfile.getParent()+"/processed/");
 				}
             } else if (gbdArgs.getProcessMethodName().equals("evaluatetermvector")) {
-                String evaluationPath = gbdArgs.getPathInputDirectory();
+                String evaluationPath = gbdArgs.getInput();
 				if (evaluationPath == null) {
                     // default evaluation data
 					evaluationPath = "data/evaluation/termVector";
