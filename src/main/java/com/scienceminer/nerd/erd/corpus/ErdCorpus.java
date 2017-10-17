@@ -6,7 +6,8 @@ import java.io.*;
 
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.disambiguation.ProcessText;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.erd.ErdAnnotationShort;
 import com.scienceminer.nerd.erd.ErdUtilities;
@@ -259,18 +260,19 @@ public class ErdCorpus {
 				try {
 					NerdQuery nerdQuery = new NerdQuery();
 					nerdQuery.setShortText(query);
-					nerdQuery.setOnlyNER(false);
+					//nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
+					nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
 					//nerdQuery.setFormat(output);
 					//nerdQuery.setCustomisation(customisation);
 
 					ProcessText processText = ProcessText.getInstance();
-					List<Entity> entities = processText.processBrutal(nerdQuery);
+					List<Mention> entities = processText.process(nerdQuery);
 					List<NerdEntity> disambiguatedEntities = new ArrayList<NerdEntity>();
 
 					if (entities != null) {
-						for (Entity entity : entities) {
+						for (Mention entity : entities) {
 							NerdEntity nerdEntity = new NerdEntity(entity);
 							disambiguatedEntities.add(nerdEntity);
 						}

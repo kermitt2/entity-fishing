@@ -12,9 +12,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -107,8 +111,27 @@ public class EntityEmbeddings {
             }
 
             // recompose result files into one
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(gbdArgs.getOutput())));
+            for(int i=0; i<nbThreads; i++) {
+                try (BufferedReader brr = new BufferedReader(new FileReader(gbdArgs.getOutput()+"."+i))) {
+                    String text = null;
+                    while ((text = brr.readLine()) != null) {
+                        bw.write(text);
+                        bw.newLine();
+                    }
+                } finally {
+                    // delete the part file
+                    try {
+                        Path path = FileSystems.getDefault().getPath(gbdArgs.getOutput()+"."+i);
+                        Files.delete(path);
+                    } catch (Exception e) {
+                        System.out.println("Fail to delete part file: " + gbdArgs.getOutput()+"."+i);
+                    }
+                }
+
+            }
         } else {
-            System.out.println("Command line error, usage: \n" + Quantizer.getHelp());
+            System.out.println("Command line error, usage: \n" + EntityEmbeddings.getHelp());
         }
     }
 

@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -433,26 +434,28 @@ public class NerdRestProcessFile {
 	        workingQuery.setShortText(null);
 	        workingQuery.setTokens(layoutTokens);
 	        workingQuery.setContext(documentContext);
+	        //workingQuery.setMentions(mentions);
 	        try {
 		        // ner
 				ProcessText processText = ProcessText.getInstance();
-				List<Entity> nerEntities = processText.process(workingQuery);
-				if (nerEntities != null)
+				List<Mention> nerEntities = processText.process(workingQuery);
+				/*if (nerEntities != null)
 					System.out.println(nerEntities.size() + " ner entities");
 				else
-					nerEntities = new ArrayList<Entity>();
+					nerEntities = new ArrayList<Mention>();*/
 
-				if (!workingQuery.getOnlyNER()) {
-					List<Entity> entities2 = processText.processBrutal(workingQuery);
+				//if (!workingQuery.getOnlyNER()) 
+				/*{
+					List<Mention> entities2 = processText.processWikipedia(workingQuery);
 					if (entities2 != null) {
 						System.out.println(entities2.size() + " non-ner entities");
-						for(Entity entity : entities2) {
+						for(Mention entity : entities2) {
 							// we add entities only if the mention is not already present
 							if (!nerEntities.contains(entity))
 								nerEntities.add(entity);
 						}
 					}
-				}
+				}*/
 
 				// inject explicit acronyms
 				nerEntities = ProcessText.acronymCandidates(workingQuery, nerEntities);
@@ -479,7 +482,8 @@ public class NerdRestProcessFile {
 					// sort the entities
 					Collections.sort(workingQuery.getEntities());
 					// disambiguate and solve entity mentions
-					if (!workingQuery.getOnlyNER()) {
+					//if (!workingQuery.getOnlyNER()) 
+					{
 						NerdEngine disambiguator = NerdEngine.getInstance();
 						List<NerdEntity> disambiguatedEntities =
 							disambiguator.disambiguate(workingQuery);
@@ -490,11 +494,11 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
 		if (entity.getBoundingBoxes() == null)
 			System.out.println("Empty bounding box for " + entity.toString());
 	}*/
-					} else {
+					} /*else {
 						for (NerdEntity entity : workingQuery.getEntities()) {
 							entity.setNerdScore(entity.getNer_conf());
 						}
-					}
+					}*/
 				}
 				if (workingQuery.getEntities() != null) {
 					resultingEntities.addAll(workingQuery.getEntities());

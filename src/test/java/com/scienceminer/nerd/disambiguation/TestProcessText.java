@@ -1,8 +1,9 @@
-package com.scienceminer.nerd.disambiguation;
+package com.scienceminer.nerd.mention;
 
 import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
+import com.scienceminer.nerd.mention.Mention;
 import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.layout.LayoutToken;
@@ -47,11 +48,11 @@ public class TestProcessText {
             System.err.println("text processor was not properly initialised!");
         }
         try {
-            List<Entity> entities = processText.process(testText, new Language("en", 1.0));
+            List<Mention> entities = processText.processNER(testText, new Language("en", 1.0));
 
             System.out.println("\n" + testText);
             if (entities != null) {
-                for (Entity entity : entities) {
+                for (Mention entity : entities) {
                     System.out.print(testText.substring(entity.getOffsetStart(), entity.getOffsetEnd()) + "\t");
                     System.out.println(entity.toString());
                 }
@@ -76,12 +77,12 @@ public class TestProcessText {
     @Test
     public void testAcronymsStringAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
-
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
-            Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+            Mention base = entry.getValue();
+            Mention acronym = entry.getKey();
             assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "PGM");
             assertEquals(base.getRawName(), "probabilistic graphical model");
         }
@@ -91,11 +92,11 @@ public class TestProcessText {
     public void testAcronymsTokensAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
-            Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+            Mention base = entry.getValue();
+            Mention acronym = entry.getKey();
             assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "PGM");
             assertEquals(base.getRawName(), "probabilistic graphical model");
 
@@ -108,11 +109,11 @@ public class TestProcessText {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
             "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
 
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
-            Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+            Mention base = entry.getValue();
+            Mention acronym = entry.getKey();
 //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
             if (input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim().equals("CS")) {
                 assertEquals(base.getRawName(), "Cigarette smoke");
@@ -128,11 +129,11 @@ public class TestProcessText {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
             "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Entity, Entity> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens); 
         assertNotNull(acronyms);
-        for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
-            Entity base = entry.getValue();
-            Entity acronym = entry.getKey();
+        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+            Mention base = entry.getValue();
+            Mention acronym = entry.getKey();
 //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
             if (input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim().equals("CS")) {
                 assertEquals(base.getRawName(), "Cigarette smoke");
@@ -176,6 +177,21 @@ public class TestProcessText {
         mention = "machine";
         dice = ProcessText.getDICECoefficient(mention, "en");
         System.out.println(mention + ": " + dice);
+    }
+
+    @Test
+    public void testProcessSpecies() {
+        if (processText == null) {
+            System.err.println("text processor was not properly initialised!");
+        }
+        try {
+            List<Mention> entities = processText.processSpecies("The mouse is here with us, beware not to be too aggressive.", 
+                new Language("en"));
+
+            assertThat(entities, hasSize(1));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*@Test

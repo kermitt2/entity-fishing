@@ -2,9 +2,9 @@ package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.utilities.NerdProperties;
+import com.scienceminer.nerd.mention.Mention;
 
 import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
 
 import java.util.*; 
@@ -27,7 +27,7 @@ public class NerdContext {
 	protected List<Integer> contextArticlesIds = null;
 	
 	// working acronyms for this context
-	protected Map<Entity, Entity> acronyms = null;
+	protected Map<Mention, Mention> acronyms = null;
 
 	protected double totalWeight = 0.0;
 	protected Relatedness relatedness = Relatedness.getInstance();
@@ -247,11 +247,11 @@ public class NerdContext {
 		return contextArticlesIds.contains(new Integer(entityId));
 	}
 
-	public Map<Entity, Entity> getAcronyms() {
+	public Map<Mention, Mention> getAcronyms() {
 		return this.acronyms;
 	} 
 
-	public void setAcronyms(Map<Entity, Entity> acronyms) {
+	public void setAcronyms(Map<Mention, Mention> acronyms) {
 		this.acronyms = acronyms;
 	}
 

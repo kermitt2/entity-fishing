@@ -34,3 +34,26 @@ An evaluation is produced at the end of training base on a random sample of Wiki
 Note that the ratio of disambiguated mentions in a Wikipedia article is low. As a consequence, the precision of our models will be very low because they are built for disambiguating a maximum of entities. Recall is probably a more meaningful measure when evaluating with Wikipedia.
 
 For an evaluation of the NED aspect (ranker in our framework) with well-known datasets, which is much more standard and allows comparison with other similar works, see the evaluation section.
+
+Training with an annotated corpus
+******************************
+
+It is possible to train the entity-fishing models with several well-known available datasets. For convenience, the datasets indicated here :doc:`evaluation` are present in the *entity-fishing* distribution.
+
+Use the following maven command with a dataset and a language identifier for running a training with this dataset:
+::
+	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aquaint en"
+
+For instance for training with the train subset of the AIDA-CONLL, use: 
+::
+	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aida-train en"
+
+
+
+Creating entity embeddings
+==========================
+
+Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. For creating these entity embeddings, the process is as follow: 
+
+1. Download available word embeddings 
+

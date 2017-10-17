@@ -9,8 +9,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.disambiguation.Sentence;
+import com.scienceminer.nerd.mention.Sentence;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
@@ -32,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -81,7 +84,11 @@ public class NerdQuery {
     private long runtime = 0;
 
     // mode indicating if we disambiguate or not
-    private boolean onlyNER = false;
+    //private boolean onlyNER = false;
+
+    private List<ProcessText.MentionMethod> mentions = 
+        Arrays.asList(ProcessText.MentionMethod.ner, ProcessText.MentionMethod.wikipedia);
+
     private boolean nbest = false;
     private boolean sentence = false;
     private NerdRestUtils.Format format = NerdRestUtils.Format.valueOf("JSON");
@@ -130,7 +137,8 @@ public class NerdQuery {
         this.sentences = query.getSentences();
         this.resultLanguages = query.getResultLanguages();
 
-        this.onlyNER = query.getOnlyNER();
+        //this.onlyNER = query.getOnlyNER();
+        this.mentions = query.getMentions();
         this.nbest = query.getNbest();
         this.sentence = query.getSentence();
         this.format = query.getFormat();
@@ -188,7 +196,21 @@ public class NerdQuery {
     }
 
     public List<String> getResultLanguages() {
-        return resultLanguages;
+        return this.resultLanguages;
+    }
+
+    public List<ProcessText.MentionMethod> getMentions() {
+        return this.mentions;
+    }
+
+    public void setMentions(List<ProcessText.MentionMethod> mentions) {
+        this.mentions = mentions;
+    }
+
+    public void addMention(ProcessText.MentionMethod mention) {
+        if (this.mentions == null) 
+            mentions = new ArrayList<ProcessText.MentionMethod>();
+        mentions.add(mention);
     }
 
     public void setRuntime(long tim) {
@@ -211,10 +233,10 @@ public class NerdQuery {
         return entities;
     }
 
-    public void setAllEntities(List<Entity> nerEntities) {
+    public void setAllEntities(List<Mention> nerEntities) {
 		if (nerEntities != null) {
 			this.entities = new ArrayList<NerdEntity>();
-            for (Entity entity : nerEntities) {
+            for (Mention entity : nerEntities) {
                 this.entities.add(new NerdEntity(entity));
             }
         }
@@ -243,13 +265,13 @@ public class NerdQuery {
         this.sentences = sentences;
     }
 
-    public boolean getOnlyNER() {
+    /*public boolean getOnlyNER() {
         return onlyNER;
     }
 
     public void setOnlyNER(boolean onlyNER) {
         this.onlyNER = onlyNER;
-    }
+    }*/
 
     public String getShortText() {
         return shortText;
@@ -527,7 +549,7 @@ public class NerdQuery {
         buffer.append("\"runtime\": " + runtime);
 
         // parameters
-        buffer.append(", \"onlyNER\": " + onlyNER);
+        //buffer.append(", \"onlyNER\": " + onlyNER);
         buffer.append(", \"nbest\": " + nbest);
 
         // parameters

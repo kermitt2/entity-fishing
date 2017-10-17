@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Entity;
@@ -116,7 +117,7 @@ public class NerdRestProcessQuery {
 
                     // do we have disambiguated entity information for the entity?
                     if (entity.getWikipediaExternalRef() != -1) {
-                        entity.setOrigin(NerdEntity.Origin.USER);
+                        entity.setSource(ProcessText.MentionMethod.user);
                         entity.setNerdScore(1.0);
                     }
                 }
@@ -133,21 +134,8 @@ public class NerdRestProcessQuery {
             }
 
             // first process all mentions
-
-            // ner
-            List<Entity> entities = processText.process(nerdQuery);
-            if (!nerdQuery.getOnlyNER()) {
-                List<Entity> entities2 = processText.processBrutal(nerdQuery);
-                if (entities == null)
-                    entities = new ArrayList<Entity>();
-                for (Entity entity : entities2) {
-                    // we add entities only if the mention is not already present
-                    if (!entities.contains(entity)) {
-                        entities.add(entity);
-                    }
-                }
-            }
-
+            List<Mention> entities = processText.process(nerdQuery);
+            
             // inject explicit acronyms
 			entities = ProcessText.acronymCandidates(nerdQuery, entities);
 
@@ -160,7 +148,7 @@ public class NerdRestProcessQuery {
                 if (originalEntities == null)
                     nerdQuery.setAllEntities(entities);
                 else {
-                    for (Entity entity : entities) {
+                    for (Mention entity : entities) {
                         int begin = entity.getOffsetStart();
                         int end = entity.getOffsetEnd();
 
@@ -209,16 +197,17 @@ public class NerdRestProcessQuery {
             // disambiguate
             if (entities != null) {
                 // disambiguate and solve entity mentions
-                if (!nerdQuery.getOnlyNER()) {
+                //if (!nerdQuery.getOnlyNER()) 
+                {
                     NerdEngine disambiguator = NerdEngine.getInstance();
                     List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
                     nerdQuery.setEntities(disambiguatedEntities);
                     nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-                } else {
+                } /*else {
                     for (NerdEntity entity : nerdQuery.getEntities()) {
                         entity.setNerdScore(entity.getNer_conf());
                     }
-                }
+                }*/
             }
 
             long end = System.currentTimeMillis();
@@ -389,7 +378,7 @@ public class NerdRestProcessQuery {
 
                     // do we have disambiguated entity information for the entity?
                     if (entity.getWikipediaExternalRef() != -1) {
-                        entity.setOrigin(NerdEntity.Origin.USER);
+                        entity.setSource(ProcessText.MentionMethod.user);
                         entity.setNerdScore(1.0);
                     }
                 }
@@ -404,7 +393,7 @@ public class NerdRestProcessQuery {
 				sentences = processText.sentenceSegmentation(nerdQuery.getText());
 				nerdQuery.setSentences(sentences);
 			}*/
-            List<Entity> entities = processText.processBrutal(nerdQuery);
+            List<Mention> entities = processText.process(nerdQuery);
             List<NerdEntity> newEntities = new ArrayList<NerdEntity>();
 
             if (entities != null) {
@@ -415,7 +404,7 @@ public class NerdRestProcessQuery {
                 if (originalEntities == null)
                     nerdQuery.setAllEntities(entities);
                 else {
-                    for (Entity entity : entities) {
+                    for (Mention entity : entities) {
                         int begin = entity.getOffsetStart();
                         int end = entity.getOffsetEnd();
 

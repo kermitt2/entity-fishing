@@ -1792,12 +1792,12 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 	}
 
 	// query for text XOR shortText content
-	var queryTemplate = { "text" : "", "shortText" : "", "termVector" : [], "language" : { "lang" : "en" }, "entities" : [], "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
+	var queryTemplate = { "text" : "", "shortText" : "", "termVector" : [], "language" : { "lang" : "en" }, "entities" : [], "mentions" : ["ner", "wikipedia"], "resultLanguages" : [ "de", "fr"],
 						  "nbest" : false, "sentence" : false,
  						  "customisation" : "generic" };
 
  	// query + PDF
-	var queryTemplate2 = { "language" : { "lang" : "en" }, "onlyNER" : false, "resultLanguages" : [ "de", "fr"],
+	var queryTemplate2 = { "language" : { "lang" : "en" }, "mentions" : ["ner", "wikipedia"], "resultLanguages" : [ "de", "fr"],
 						  "nbest" : false, 
  						  "customisation" : "generic" };
 

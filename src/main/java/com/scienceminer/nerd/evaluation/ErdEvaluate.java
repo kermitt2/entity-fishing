@@ -12,7 +12,8 @@ import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.erd.ErdAnnotationShort;
 import com.scienceminer.nerd.erd.ErdUtilities;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
-import com.scienceminer.nerd.disambiguation.ProcessText;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.NerdConfig;
@@ -107,17 +108,18 @@ public class ErdEvaluate {
 				String text = tokens[1];
 				try {
 					NerdQuery nerdQuery = new NerdQuery();
-					nerdQuery.setOnlyNER(false);
+					//nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
 					nerdQuery.setShortText(text);
+					nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
 
 					ProcessText processText = ProcessText.getInstance();
-					List<Entity> entities = processText.processBrutal(nerdQuery);
+					List<Mention> entities = processText.process(nerdQuery);
 					List<NerdEntity> disambiguatedEntities = new ArrayList<NerdEntity>();
 
 					if (entities != null) {
-						for (Entity entity : entities) {
+						for (Mention entity : entities) {
 							NerdEntity nerdEntity = new NerdEntity(entity);
 							disambiguatedEntities.add(nerdEntity);
 						}

@@ -80,6 +80,7 @@ public class UpperKnowledgeBase {
 			wikipedias.put(Language.EN, wikipedia_en);
             WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
             wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
+            wikipediaDomainMaps_en.createAllMappings();
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
 			LOGGER.info("Init German lower Knowledge base layer");

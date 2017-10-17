@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.disambiguation.ProcessText;
+import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.exceptions.*;

@@ -8,18 +8,19 @@ import java.nio.file.*;
 import org.apache.commons.io.FileUtils;
 
 import org.grobid.core.utilities.TextUtilities;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lang.Language;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.Entity;
 
 import com.scienceminer.nerd.exceptions.*;
-import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.training.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.mention.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,7 +48,7 @@ import org.slf4j.LoggerFactory;
 public class NEDCorpusEvaluation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NEDCorpusEvaluation.class);
 
-	private static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb", 
+	public static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb", 
 		"aquaint", "iitb", "msnbc", "clueweb", "wikipedia");
 
 	private NerdRanker ranker = null;
@@ -165,6 +166,8 @@ public class NEDCorpusEvaluation {
 				docContent = docContent.replace("&amp;", "&");
 			}
 
+			docContent = UnicodeUtil.normaliseText(docContent);
+
 			// get the annotations, mentions + entity
 			NodeList annotations = docElement.getElementsByTagName("annotation");
 			if (annotations == null || annotations.getLength() <= 0)
@@ -257,15 +260,15 @@ public class NEDCorpusEvaluation {
 
 			List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(docContent, lang);
 			// be sure to have the entities to be ranked
-			List<Entity> nerEntities = new ArrayList<Entity>();
+			List<Mention> nerEntities = new ArrayList<Mention>();
 			for(NerdEntity refEntity : referenceEntities) {
-				Entity localEntity = new Entity(refEntity.getRawName());
+				Mention localEntity = new Mention(refEntity.getRawName());
 				localEntity.setOffsetStart(refEntity.getOffsetStart());
 				localEntity.setOffsetEnd(refEntity.getOffsetEnd());
 				nerEntities.add(localEntity);
 			}
 			List<NerdEntity> entities = new ArrayList<NerdEntity>();
-			for (Entity entity : nerEntities) {
+			for (Mention entity : nerEntities) {
 				NerdEntity theEntity = new NerdEntity(entity);
 				entities.add(theEntity);
 			}
@@ -273,10 +276,10 @@ public class NEDCorpusEvaluation {
 			try {
 				// process the text for building actual context for evaluation
 				ProcessText processText = ProcessText.getInstance();
-				nerEntities = new ArrayList<Entity>();
+				nerEntities = new ArrayList<Mention>();
 				Language language = new Language("en", 1.0);
-				nerEntities = processText.process(docContent, lang);
-				for(Entity entity : nerEntities) {
+				nerEntities = processText.processNER(docContent, lang);
+				for(Mention entity : nerEntities) {
 					// we add entities only if the mention is not already present
 					NerdEntity theEntity = new NerdEntity(entity);
 					if (!entities.contains(theEntity))
@@ -284,8 +287,8 @@ public class NEDCorpusEvaluation {
 				}
 				//System.out.println("number of NE found: " + entities.size());	
 				// add non NE terms
-				List<Entity> entities2 = processText.processBrutal(docContent, lang);
-				for(Entity entity : entities2) {
+				List<Mention> entities2 = processText.processWikipedia(docContent, lang);
+				for(Mention entity : entities2) {
 					// we add entities only if the mention is not already present
 					NerdEntity theEntity = new NerdEntity(entity);
 					if (!entities.contains(theEntity))
@@ -294,7 +297,7 @@ public class NEDCorpusEvaluation {
 
 				NerdEngine engine = NerdEngine.getInstance();
 				Map<NerdEntity, List<NerdCandidate>> candidates = 
-					engine.generateCandidates(entities, "en");	
+					engine.generateCandidatesMultiple(entities, "en");	
 
 				for(NerdEntity refEntity : referenceEntities) {
 					int startRef = refEntity.getOffsetStart();
@@ -339,7 +342,6 @@ public class NEDCorpusEvaluation {
 					} 
 				}
 
-
 				// evaluate priors and mention selection recall
 				int foundPrior = 0;
 				int correctPrior = 0;
@@ -377,6 +379,44 @@ System.out.println("--");
 }*/
 
 				engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false, tokens);
+
+				// adjust subterm 
+				/*Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<NerdEntity, List<NerdCandidate>>();
+				for(NerdEntity refEntity : referenceEntities) {
+					int startRef = refEntity.getOffsetStart();
+					int endRef = refEntity.getOffsetEnd(); 
+					boolean localFound = false;
+					for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+						List<NerdCandidate> cands = entry.getValue();
+						NerdEntity entity = entry.getKey();
+						int start = entity.getOffsetStart();
+						int end = entity.getOffsetEnd(); 
+						if ((start == startRef) && (end == endRef)) {
+							localFound = true;
+							break;
+						}
+					}
+					if (!localFound) {
+						// check for a subterm
+						for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+							List<NerdCandidate> cands = entry.getValue();
+							NerdEntity entity = entry.getKey();
+							int start = entity.getOffsetStart();
+							int end = entity.getOffsetEnd(); 
+							if ((start >= startRef) && (end <= endRef)) {
+								// let's add it then
+								newCandidates.put(refEntity, cands);
+								break;
+							}
+						}
+					}
+				}
+				for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : newCandidates.entrySet()) {
+					List<NerdCandidate> cands = entry.getValue();
+					NerdEntity entity = entry.getKey();
+
+					candidates.put(entity, cands);
+				}*/
 			
 				int found = 0;
 				int correct = 0;

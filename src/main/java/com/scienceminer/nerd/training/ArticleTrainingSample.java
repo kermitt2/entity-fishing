@@ -14,6 +14,13 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 /**
  *
  *	A training sample corresponding to a subset of Wikipedia articles. 
@@ -213,5 +220,70 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 		}
 		
 		return samples;
+	}
+
+	public static List<ArticleTrainingSample> buildExclusiveCorpusSets(String corpus, double ratio, LowerKnowledgeBase wikipedia) {
+		List<ArticleTrainingSample> sets = new ArrayList<ArticleTrainingSample>();
+
+		ArticleTrainingSample rankerSet = new ArticleTrainingSample(wikipedia);
+		ArticleTrainingSample selectorSet = new ArticleTrainingSample(wikipedia);
+
+		String corpusPath = "data/corpus/corpus-long/" + corpus + "/";
+		String corpusRefPath = corpusPath + corpus + ".xml";
+
+		// first we parse the result to get the documents and mentions
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = null;
+		org.w3c.dom.Document dom = null;
+		try {
+			//Using factory get an instance of document builder
+			db = dbf.newDocumentBuilder();
+			//parse using builder to get DOM representation
+			dom = db.parse(corpusRefPath);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		Random rand = new Random();
+
+		//get the root element and the document node
+		Element root = dom.getDocumentElement();
+		NodeList docs = root.getElementsByTagName("document");
+		if (docs == null || docs.getLength() <= 0) {
+			LOGGER.error("the list documents for this corpus is empty");
+			return null;
+		}
+
+		for (int i = 0; i < docs.getLength(); i++) {
+			//get each document name
+			Element docElement = (Element)docs.item(i);
+			String docName = docElement.getAttribute("docName");
+			String docPath = corpusPath + "RawText/" + docName;
+
+			File docFile = new File(docPath);
+			if (!docFile.exists()) {
+				System.out.println("The document file " + docPath + " for corpus " + corpus + " is not found: ");
+				continue;
+			}
+			CorpusArticle article = new CorpusArticle(corpus, wikipedia);
+			article.setPath(docPath);
+			// file ratio filtering
+			double random = rand.nextDouble();
+
+			if (random < ratio) {
+				if (rankerSet.sample == null)
+					rankerSet.sample = new ArrayList<>();
+				rankerSet.sample.add(article);
+			} else {
+				if (selectorSet.sample == null)
+					selectorSet.sample = new ArrayList<>();
+				selectorSet.sample.add(article);
+			}
+		}
+
+		sets.add(rankerSet);
+		sets.add(selectorSet);
+
+		return sets;
 	}
 }

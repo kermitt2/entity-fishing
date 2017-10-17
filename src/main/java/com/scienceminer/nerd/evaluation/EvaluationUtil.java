@@ -49,10 +49,10 @@ public class EvaluationUtil {
 			accumulatedPrecision += localStats.getPrecision();
 			accumulatedF1Score += localStats.getF1Score();
 
-/*System.out.println(localStats.toString());
+System.out.println(localStats.toString());
 System.out.println("local recall: " + localStats.getRecall());
 System.out.println("local precision: " + localStats.getPrecision());
-System.out.println("local f1: " + localStats.getF1Score());*/
+System.out.println("local f1: " + localStats.getF1Score());
 
 			lowerPrecision = Math.min(lowerPrecision, localStats.getPrecision());
 			lowerRecall = Math.min(lowerRecall, localStats.getRecall());

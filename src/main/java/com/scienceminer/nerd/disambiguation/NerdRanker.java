@@ -12,6 +12,7 @@ import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.evaluation.*;
+import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 
 import org.grobid.core.utilities.OffsetPosition;
@@ -21,6 +22,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.trainer.LabelStat;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.UnicodeUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +49,13 @@ import smile.data.parser.*;
 import smile.regression.*;
 import com.thoughtworks.xstream.*;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 /**
  * A machine learning model for ranking a list of ambiguous candidates for a given mention.
  */
@@ -67,9 +76,9 @@ public class NerdRanker extends NerdModel {
 	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
 
-		//model = MLModel.GRADIENT_TREE_BOOST;
-		model = MLModel.RANDOM_FOREST;
-		featureType = FeatureType.SIMPLE;
+		model = MLModel.GRADIENT_TREE_BOOST;
+		//model = MLModel.RANDOM_FOREST;
+		featureType = FeatureType.NERD;
 
 		GenericRankerFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
@@ -147,12 +156,9 @@ public class NerdRanker extends NerdModel {
 
 		feature.prob_c = commonness;
 		feature.relatedness = relatedness;
-		//feature.relatedness = 0.0;
 		feature.context_quality = quality; 
-		//feature.context_quality = 0.0; 
 		//feature.dice_coef = dice_coef;
 		feature.bestCaseContext = bestCaseContext;
-		//feature.bestCaseContext = false;
 		feature.embeddings_LR_similarity = embeddingsSimilarity;
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
@@ -217,7 +223,7 @@ public class NerdRanker extends NerdModel {
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
 
-	public void train(ArticleTrainingSample articles, String datasetName) throws Exception {
+	public void train(ArticleTrainingSample articles) throws Exception {
 		if (featureType == FeatureType.BASELINE || 
 			featureType == FeatureType.EMBEDDINGS || 
 			featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) {
@@ -235,14 +241,18 @@ public class NerdRanker extends NerdModel {
 		this.negatives = 0;
 		for (Article article : articles.getSample()) {
 			System.out.println("Training on " + (nbArticle+1) + "  / " + articles.getSample().size());
-			arffBuilder = trainArticle(article, arffBuilder);	
+			if (article instanceof CorpusArticle)
+				arffBuilder = trainCorpusArticle(article, arffBuilder);
+			else
+				arffBuilder = trainWikipediaArticle(article, arffBuilder);	
+				
 			nbArticle++;
 		}
 		arffDataset = arffBuilder.toString();
 		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
 	}
 
-	private StringBuilder trainArticle(Article article, StringBuilder arffBuilder) throws Exception {
+	private StringBuilder trainWikipediaArticle(Article article, StringBuilder arffBuilder) throws Exception {
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 		String lang = wikipedia.getConfig().getLangCode();
 
@@ -250,7 +260,7 @@ public class NerdRanker extends NerdModel {
 			toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
-//System.out.println("Content: " + content);
+
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
 
@@ -317,15 +327,15 @@ public class NerdRanker extends NerdModel {
 
 		// process the text
 		ProcessText processText = ProcessText.getInstance();
-		List<Entity> entities = new ArrayList<Entity>();
+		List<Mention> entities = new ArrayList<Mention>();
 		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
-			//entities = processText.process(tokens, language);
+			entities = processText.processNER(tokens, language);
 		}
 //System.out.println("number of NE found: " + entities.size());	
-		List<Entity> entities2 = processText.processBrutal(tokens, language);
+		List<Mention> entities2 = processText.processWikipedia(tokens, language);
 //System.out.println("number of non-NE found: " + entities2.size());	
-		for(Entity entity : entities2) {
+		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
 				entities.add(entity);
@@ -336,14 +346,14 @@ public class NerdRanker extends NerdModel {
 
 		// disambiguate and solve entity mentions
 		List<NerdEntity> disambiguatedEntities = new ArrayList<NerdEntity>();
-		for (Entity entity : entities) {
+		for (Mention entity : entities) {
 			NerdEntity nerdEntity = new NerdEntity(entity);
 			disambiguatedEntities.add(nerdEntity);
 		}
 //System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			nerdEngine.generateCandidates(disambiguatedEntities, lang);
+			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang);
 //System.out.println("total entities with candidates: " + candidates.size());
 		
 		// set the expected concept to the NerdEntity
@@ -429,11 +439,8 @@ public class NerdRanker extends NerdModel {
 
 					feature.prob_c = commonness;
 					feature.relatedness = related;
-					//feature.relatedness = 0.0;
 					feature.context_quality = quality;
-					//feature.context_quality = 0.0;
 					feature.bestCaseContext = bestCaseContext;
-					//feature.bestCaseContext = false;
 					feature.embeddings_LR_similarity = embeddingsSimilarity;
 					if (candidate.getWikidataId() != null)	
 						feature.wikidata_id = candidate.getWikidataId();
@@ -458,7 +465,338 @@ public class NerdRanker extends NerdModel {
 							this.positives++;
 					}
 					
-/*					System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
+/*System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
+							entity.toString());
+					System.out.println("\t\t" + "commonness: " + commonness + 
+						", relatedness: " + related + 
+						", quality: " + quality);*/
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			Collections.sort(cands);
+		}
+
+		System.out.println("article contribution: " + nbInstance + " training instances");
+		return arffBuilder;
+	}
+
+	private StringBuilder trainCorpusArticle(Article article, StringBuilder arffBuilder) throws Exception {
+		String docPath = ((CorpusArticle)article).getPath();
+		String corpus = ((CorpusArticle)article).getCorpus();
+		File docFile = new File(docPath);
+		String lang = wikipedia.getConfig().getLangCode();
+System.out.println(docPath);
+		if (!docFile.exists()) {
+			System.out.println("File invalid: " + docPath);
+			return arffBuilder;
+		}
+
+		String docContent = null;
+		try {
+			docContent = FileUtils.readFileToString(docFile, "UTF-8");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		if (docContent == null || docContent.length() == 0) {
+			System.out.println("Document is empty: " + docPath);
+			return arffBuilder;
+		}
+
+		// if the corpus is AIDA, we need to ignore the two first lines and "massage" 
+		// a bit the text
+		if (corpus.startsWith("aida")) {
+			int ind = docContent.indexOf("\n");
+			ind = docContent.indexOf("\n", ind +1);
+			docContent = docContent.substring(ind+1);
+			docContent = docContent.replace("\n\n", "\n");
+			docContent = docContent.replace("\n", "\n\n");
+			docContent = docContent.replace("&amp;", "&");
+		}
+
+		docContent = UnicodeUtil.normaliseText(docContent);
+System.out.println(docContent.length() + " characters");
+
+		// xml annotation file
+		String corpusPath = "data/corpus/corpus-long/" + corpus + "/";
+		String corpusRefPath = corpusPath + corpus + ".xml";
+		File corpusRefFile = new File(corpusRefPath);
+
+		if (!corpusRefFile.exists()) {
+			System.out.println("The reference file for corpus " + corpus + " is not found: " + corpusRefFile.getPath());
+			return null;
+		}
+
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = null;
+		org.w3c.dom.Document dom = null;
+		try {
+			//Using factory get an instance of document builder
+			db = dbf.newDocumentBuilder();
+			//parse using builder to get DOM representation
+			dom = db.parse(corpusRefFile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		//get the root element and the document node
+		Element root = dom.getDocumentElement();
+		NodeList docs = root.getElementsByTagName("document");
+		if (docs == null || docs.getLength() <= 0) {
+			logger.error("the list documents for this corpus is empty");
+			return null;
+		}
+
+		Set<Integer> referenceDisamb = new HashSet<Integer>();
+		Set<Integer> producedDisamb = new HashSet<Integer>();
+		List<NerdEntity> referenceEntities = new ArrayList<NerdEntity>();
+
+		// find the annotations for the training file
+		for (int i = 0; i < docs.getLength(); i++) {
+			//get the annotations of each document.
+			Element docElement = (Element)docs.item(i);
+			String docName = docElement.getAttribute("docName");
+
+			if (!docName.equals(docFile.getName()))
+				continue;
+System.out.println("found annotations!");
+			// get the annotations, mentions + entity
+			NodeList annotations = docElement.getElementsByTagName("annotation");
+			if (annotations == null || annotations.getLength() <= 0)
+				continue;
+System.out.println(annotations.getLength() + " annotations in total");
+			for (int j = 0; j < annotations.getLength(); j++) {
+				Element element = (Element) annotations.item(j);
+
+				String wikiName = null;
+				NodeList nl = element.getElementsByTagName("wikiName");
+				if (nl != null && nl.getLength() > 0) {
+					Element elem = (Element) nl.item(0);
+					if (elem.hasChildNodes())
+						wikiName = elem.getTextContent();
+				}
+
+				String mentionName = null;
+				nl = element.getElementsByTagName("mention");
+				if (nl != null && nl.getLength() > 0) {
+					Element elem = (Element) nl.item(0);
+					if (element.hasChildNodes())
+						mentionName = elem.getTextContent();
+				}
+
+				if (wikiName != null && (wikiName.equals("NIL") || wikiName.isEmpty()))
+					wikiName = null;
+				
+				// ignore mentions with no true entity
+				if (wikiName == null)
+					continue;
+				if (mentionName == null || mentionName.isEmpty()) {
+					continue;
+				}
+
+				int pageId = -1;
+				Article theArticle = wikipedia.getArticleByTitle(wikiName);
+				if (theArticle == null) {
+					System.out.println(docName + ": Invalid article name - article not found in Wikipedia: " + wikiName);
+					continue;
+				} else 
+					pageId = theArticle.getId();
+
+				// offset info
+				int start = -1;
+				int end = -1;				
+				nl = element.getElementsByTagName("offset");
+				if (nl != null && nl.getLength() > 0) {
+					Element elem = (Element) nl.item(0);
+					if (elem.hasChildNodes()) {
+						String startString = elem.getFirstChild().getNodeValue();
+						try {
+							start = Integer.parseInt(startString);
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				nl = element.getElementsByTagName("length");
+				if (nl != null && nl.getLength() > 0) {
+					Element elem = (Element) nl.item(0);
+					if (elem.hasChildNodes()) {
+						String lengthString = elem.getFirstChild().getNodeValue();
+						try {
+							end = start + Integer.parseInt(lengthString);
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				if (!mentionName.equals(docContent.substring(start, end))) {
+					System.out.println(docPath + ": " + mentionName + " =/= " + docContent.substring(start, end));
+				}
+
+				// create expected entity
+				NerdEntity ref = new NerdEntity();
+				ref.setRawName(mentionName);
+				ref.setWikipediaExternalRef(pageId);
+				ref.setOffsetStart(start);
+				ref.setOffsetEnd(end);
+System.out.println("reference entity: " + start + " / " + end + " - " + docContent.substring(start, end) + " - " + pageId);
+				referenceEntities.add(ref);
+				referenceDisamb.add(new Integer(pageId));
+			}
+		}
+
+		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(docContent, new Language(lang, 1.0));
+		
+		// get candidates for this content
+		NerdEngine nerdEngine = NerdEngine.getInstance();
+		Relatedness relatedness = Relatedness.getInstance();
+
+		// process the text
+		ProcessText processText = ProcessText.getInstance();
+		List<Mention> entities = new ArrayList<Mention>();
+		Language language = new Language(lang, 1.0);
+		if (lang.equals("en") || lang.equals("fr")) {
+			entities = processText.processNER(tokens, language);
+		}
+System.out.println("number of NE found: " + entities.size());	
+		List<Mention> entities2 = processText.processWikipedia(tokens, language);
+System.out.println("number of non-NE found: " + entities2.size());	
+		for(Mention entity : entities2) {
+			// we add entities only if the mention is not already present
+			if (!entities.contains(entity))
+				entities.add(entity);
+		}
+
+		if (entities == null) 
+			return arffBuilder;
+
+		// disambiguate and solve entity mentions
+		List<NerdEntity> disambiguatedEntities = new ArrayList<NerdEntity>();
+		for (Mention entity : entities) {
+			NerdEntity nerdEntity = new NerdEntity(entity);
+			disambiguatedEntities.add(nerdEntity);
+		}
+//System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
+
+		Map<NerdEntity, List<NerdCandidate>> candidates = 
+			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang);
+//System.out.println("total entities with candidates: " + candidates.size());
+		
+		// set the expected concept to the NerdEntity
+		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			//List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+
+			/*for (NerdCandidate cand : cands) {
+				System.out.println(cand.toString());
+			}*/
+
+			int start = entity.getOffsetStart();
+			int end = entity.getOffsetEnd();
+
+			for(NerdEntity ref : referenceEntities) {
+				int start_ref = ref.getOffsetStart();
+				int end_ref = ref.getOffsetEnd();
+				if ( (start_ref == start) && (end_ref == end) ) {
+System.out.println("entity: " + start + " / " + end + " - " + docContent.substring(start, end));
+					entity.setWikipediaExternalRef(ref.getWikipediaExternalRef());
+					break;
+				} 
+			}
+		}
+
+		// get context for this content
+//System.out.println("get context for this content");		
+		NerdContext context = null;
+		try {
+			 context = relatedness.getContext(candidates, null, lang, false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		double quality = (double)context.getQuality();
+		int nbInstance = 0;
+		// second pass for producing the disambiguation observations
+		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+			int expectedId = entity.getWikipediaExternalRef();
+			int nbCandidate = 0;
+			if (expectedId == -1) {
+				// we skip cases when no gold entity is present (nothing to rank against)
+				continue;
+			}
+			if ((cands == null) || (cands.size() <= 1)) {
+				// if no or only one candidate, nothing to rank and the example is not 
+				// useful for training
+				continue;
+			}
+			
+			// get a window of layout tokens around without target tokens
+			List<LayoutToken> subTokens = Utilities.getWindow(entity, tokens, 10, lang);
+
+			for(NerdCandidate candidate : cands) {
+				try {
+					nbCandidate++;
+//System.out.println(nbCandidate + " candidate / " + cands.size());
+					Label.Sense sense = candidate.getWikiSense();
+					if (sense == null)
+						continue;
+
+					double commonness = sense.getPriorProbability();
+//System.out.println("commonness: " + commonness);
+
+					double related = relatedness.getRelatednessTo(candidate, context, lang);
+//System.out.println("relatedness: " + related);
+
+					boolean bestCaseContext = true;
+					// actual label used
+					Label bestLabel = candidate.getLabel();
+					if (!entity.getNormalisedName().equals(bestLabel.getText())) {
+						bestCaseContext = false;
+					}
+
+					float embeddingsSimilarity = 0.0F;
+					// computed only if needed because it takes time
+					GenericRankerFeatureVector feature = getNewFeature();
+					if (feature.Add_embeddings_LR_similarity) {
+						//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, subTokens, lang);
+						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
+					}
+
+					feature.prob_c = commonness;
+					feature.relatedness = related;
+					feature.context_quality = quality;
+					feature.bestCaseContext = bestCaseContext;
+					feature.embeddings_LR_similarity = embeddingsSimilarity;
+					if (candidate.getWikidataId() != null)	
+						feature.wikidata_id = candidate.getWikidataId();
+					else
+						feature.wikidata_id = "Q0"; // undefined entity
+
+					if (candidate.getWikidataP31Id() != null)
+						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
+					else
+						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+
+					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
+
+					// addition of the example is constrained by the sampling ratio
+					if ( ((feature.label == 0.0) && ((double)this.negatives / this.positives < sampling)) ||
+						 ((feature.label == 1.0) && ((double)this.negatives / this.positives >= sampling)) ) {
+						arffBuilder.append(feature.printVector()).append("\n");
+						nbInstance++;
+						if (feature.label == 0.0)
+							this.negatives++;
+						else
+							this.positives++;
+					}
+					
+/*System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 							entity.toString());
 					System.out.println("\t\t" + "commonness: " + commonness + 
 						", relatedness: " + related + 
@@ -480,14 +818,17 @@ public class NerdRanker extends NerdModel {
 		int n = 0;
 		for (Article article : testSet.getSample()) {
 			System.out.println("Evaluating on article " + (n+1) + " / " + testSet.getSample().size());
-			stats.add(evaluateArticle(article));
+			if (article instanceof CorpusArticle)
+				stats.add(evaluateCorpusArticle(article));
+			else
+				stats.add(evaluateWikipediaArticle(article));
+				
 			n++;
 		}
 		return EvaluationUtil.evaluate(testSet, stats);
 	}
 
-	private LabelStat evaluateArticle(Article article) throws Exception {
-//System.out.println(" - evaluating " + article);
+	private LabelStat evaluateWikipediaArticle(Article article) throws Exception {
 		String lang = wikipedia.getConfig().getLangCode();
 		String content = MediaWikiParser.getInstance()
 			.toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
@@ -531,12 +872,10 @@ public class NerdRanker extends NerdModel {
 
 			head = linkMatcher.end();
 			
-			//Label label = new Label(wikipedia.getEnvironment(), labelText);
-			//Label.Sense[] senses = label.getSenses();
 			if (destText.length() > 1)
 				destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
 			else {
-				// no article considered as single letter
+				// no article considered as single character
 				continue;
 			}
 			Article dest = wikipedia.getArticleByTitle(destText);
@@ -554,29 +893,31 @@ public class NerdRanker extends NerdModel {
 
 		contentText.append(content.substring(head));
 		String contentString = contentText.toString();
+		contentString = UnicodeUtil.normaliseText(contentString);
+
 		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(contentString, new Language(lang, 1.0));
 		// be sure to have the entities to be ranked
-		List<Entity> nerEntities = new ArrayList<Entity>();
+		List<Mention> nerEntities = new ArrayList<Mention>();
 		for(NerdEntity refEntity : referenceEntities) {
-			Entity localEntity = new Entity(refEntity.getRawName());
+			Mention localEntity = new Mention(refEntity.getRawName());
 			localEntity.setOffsetStart(refEntity.getOffsetStart());
 			localEntity.setOffsetEnd(refEntity.getOffsetEnd());
 			nerEntities.add(localEntity);
 		}
 		List<NerdEntity> entities = new ArrayList<NerdEntity>();
-		for (Entity entity : nerEntities) {
+		for (Mention entity : nerEntities) {
 			NerdEntity theEntity = new NerdEntity(entity);
 			entities.add(theEntity);
 		}
 		
 		// process the text for building actual context for evaluation
 		ProcessText processText = ProcessText.getInstance();
-		nerEntities = new ArrayList<Entity>();
+		nerEntities = new ArrayList<Mention>();
 		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
-			nerEntities = processText.process(contentString, language);
+			nerEntities = processText.processNER(tokens, language);
 		}
-		for(Entity entity : nerEntities) {
+		for(Mention entity : nerEntities) {
 			// we add entities only if the mention is not already present
 			NerdEntity theEntity = new NerdEntity(entity);
 			if (!entities.contains(theEntity))
@@ -584,9 +925,9 @@ public class NerdRanker extends NerdModel {
 		}
 		//System.out.println("number of NE found: " + entities.size());	
 		// add non NE terms
-		List<Entity> entities2 = processText.processBrutal(contentString, language);
+		List<Mention> entities2 = processText.processWikipedia(tokens, language);
 //System.out.println("number of non-NE found: " + entities2.size());	
-		for(Entity entity : entities2) {
+		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
 			NerdEntity theEntity = new NerdEntity(entity);
 			if (!entities.contains(theEntity))
@@ -595,7 +936,7 @@ public class NerdRanker extends NerdModel {
 
 		NerdEngine engine = NerdEngine.getInstance();
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			engine.generateCandidates(entities, wikipedia.getConfig().getLangCode());	
+			engine.generateCandidatesSimple(entities, wikipedia.getConfig().getLangCode());	
 		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false, tokens);
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -634,6 +975,12 @@ public class NerdRanker extends NerdModel {
 				stats.incrementFalseNegative();
 			}
 		}
+
+		return stats;
+	}
+
+	private LabelStat evaluateCorpusArticle(Article article) throws Exception {
+		LabelStat stats = new LabelStat();
 
 		return stats;
 	}

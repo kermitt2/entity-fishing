@@ -173,6 +173,8 @@ System.out.print("\n");*/
     }
 
     public void createAllMappings() {
+        if (isLoaded)
+            return;
         // for each page id in wikipedia we get the list of domain id
         PageIterator iterator = wikipedia.getPageIterator(Page.PageType.article);
         int p = 0;

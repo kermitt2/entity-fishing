@@ -14,6 +14,7 @@ import org.grobid.core.analyzers.GrobidAnalyzer;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.mention.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,23 +31,6 @@ import com.fasterxml.jackson.core.io.*;
  */
 public class NerdEntity implements Comparable<NerdEntity> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdEntity.class);
-	
-	// Orign of the entity definition
-	public enum Origin {
-		GROBID	("grobid"),
-		USER	("user"),
-		NERD	("nerd");
-		
-		private String name;
-
-		private Origin(String name) {
-          	this.name = name;
-		}
-
-		public String getName() {
-			return name;
-		}
-	};
 
 	// exact mention form of the entity, as appearing in the input
 	private String rawName = null;
@@ -59,6 +43,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	
 	// preferred/normalised name of the entity
     private String preferredTerm = null;
+
+    private ProcessText.MentionMethod source = null;
 	
 	// type of the entity (person, location, etc.)
 	private NERLexicon.NER_Type type = null;
@@ -105,13 +91,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	// list of freebase types for the term
 	//private List<String> freebaseTypes = null;
-
-	// method used to produce the disambiguated term 
-	public static final int GROBID = 0;
-	public static final int USER = 1;
-	public static final int NERD = 2;
-	// orign of the entity 
-	private Origin origin = null;
 	
 	// list of wikipedia categories corresponding to the disambiguated term
 	private List<com.scienceminer.nerd.kb.Category> categories = null;
@@ -147,7 +126,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		offsets = new OffsetPosition();
 	}
 
-	public NerdEntity(Entity entity) {
+	public NerdEntity(Mention entity) {
 		rawName = entity.getRawName();
 		if (entity.getNormalisedName() != null) 
 			this.normalisedRawName = entity.getNormalisedName();
@@ -165,13 +144,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		sense = entity.getSense();
 		boundingBoxes = entity.getBoundingBoxes();
 		isAcronym = entity.getIsAcronym();
-		switch(entity.getOrigin()) {
-			case GROBID : origin = Origin.GROBID;
-						break;
-			case USER : origin = Origin.USER;
-						break;
-			default: origin = Origin.NERD;
-		}
+		source = entity.getSource();
 	}
 	
 	public NerdEntity(NerdEntity entity) {
@@ -190,11 +163,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		linkProbability= entity.linkProbability;
 		ner_conf = entity.getNer_conf();
 		sense = entity.getSense();
-		origin = entity.getOrigin();
+		source = entity.getSource();
 		domains = entity.domains;
 		isAcronym = entity.getIsAcronym();
 		//freebaseTypes = entity.freebaseTypes;
 		lang = entity.getLang();
+		source = entity.getSource();
 	}
 	
     public String getRawName() {
@@ -298,12 +272,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		this.lang = lang;
 	}
 	
-	public Origin getOrigin() {
-		return origin;
+	public ProcessText.MentionMethod getSource() {
+		return source;
 	}
 	
-	public void setOrigin(Origin origin) {
-		this.origin = origin;
+	public void setSource(ProcessText.MentionMethod source) {
+		this.source = source;
 	}
 
 	public boolean getIsAcronym() {
