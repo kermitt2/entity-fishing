@@ -538,9 +538,9 @@
             <version>1.7.25</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
 
         <!-- for test only -->
@@ -673,7 +673,7 @@
         <dependency>
             <groupId>org.grobid.trainer</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.4.3-SNAPSHOT</version>
+            <version>0.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>
