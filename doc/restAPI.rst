@@ -211,7 +211,7 @@ To avoid having the server reprocessing several time the same chunk of text and 
 
 The goal is to be able to process around two requests per second, even if the typed text is very long, so that the annotations can be locally refreshed smoothly, even considering the fastest keystroke rates that a human can realize.
 
-The processSentence parameter is followed by a list of notations (number and intervals, e.g. *[1, 2-5, 7]* - note that the index starts from 0) corresponding to the sentence index will limit the disambiguation to the selected sentences, while considering the entire text and the previous annotations.
+The processSentence parameter is followed by a list of notations (only numbers in integer, e.g. *[1, 7]* - note that the index starts from 0) corresponding to the sentence index will limit the disambiguation to the selected sentences, while considering the entire text and the previous annotations.
 
 In this example only the second sentence will be processed by NERD:
 ::
