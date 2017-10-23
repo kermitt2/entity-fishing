@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -77,7 +78,7 @@ public class TestProcessText {
     @Test
     public void testAcronymsStringAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
-        
+
         Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
@@ -214,4 +215,37 @@ public class TestProcessText {
         assertThat(entities, hasSize(5));
     }*/
 
+
+    @Test 
+    public void testParagraphSegmentation() {
+        // create a dummy super long text to be segmented
+        List<LayoutToken> tokens = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            if (i == 250) {
+                tokens.add(new LayoutToken("\n"));
+            }
+            if (i == 500) {
+                tokens.add(new LayoutToken("\n"));
+                tokens.add(new LayoutToken("\n"));
+            }
+            tokens.add(new LayoutToken("blabla"));
+            tokens.add(new LayoutToken(" "));
+        }
+
+        List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
+        assertThat(segments, hasSize(5));
+    }
+
+    @Test 
+    public void testParagraphSegmentationMonolithic() {
+        // create a dummy super long text to be segmented
+        List<LayoutToken> tokens = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            tokens.add(new LayoutToken("blabla"));
+            tokens.add(new LayoutToken(" "));
+        }
+
+        List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
+        assertThat(segments, hasSize(4));
+    }
 }

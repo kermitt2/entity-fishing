@@ -55,5 +55,52 @@ Creating entity embeddings
 
 Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. For creating these entity embeddings, the process is as follow: 
 
-1. Download available word embeddings 
+1. Download available pretrained word embeddings - this could be for instance word2vec, FastText, or lexvec.
+Word embeddings need initially to be in the standard .vec format (a text format). word2vec binary format can be transformed into .vec format for instance with the simple utility convertvec https://github.com/marekrei/convertvec
 
+
+2. Quantize and compress word embeddings
+
+2.1 Quantize will simplify the vector given an acceptable quantization factor (by default the error rate for quantizing is 0.01, but it could be changed with the argument -error)
+::
+	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i wiki.en.vec -o wiki.en.quantized -hashheader"
+
+Here the FastText word embeddings wiki.en.vec given as input (-i) will be quantized and saved as wiki.en.quantized. -hashheader indicates that the first line (a header to be ignored) must be skipped.
+
+2.2 Compressing the word embeddings will significantly reduce its size:
+::
+	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EfficientWord2VecCompress -Dexec.args="wiki.en.quantized wiki.en.quantized.compressed"
+
+
+3. Create Wikidata entity description to be used for producing entity embeddings. The command for creating description is the following one:
+::
+	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityDescription -Dexec.args="entity.en.description en"
+
+The argument indicates the path to save the generated description. 
+
+
+4. Create entity embeddings from the generated description. 
+
+This step might take a lot of time and exploiting multithreading is particularly hepful. The number of threads to be used is given by the argument -thread
+::
+	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityEmbeddings -Dexec.args="-i entity.en.description -v wiki.en.quantized.compressed -o entity.en.embeddings -n 10"
+
+The following parameters are available:
+* -h: displays help
+* -in: path to an entity description data file
+* -out: path to the result entity embeddings file (not quantized nor compressed, this is to be done afterwards)
+* -n: number of threads to be used, default is 1 but it is advice to used as much as possible
+* -rho: rho negative sampling parameters, if it's < 0 use even sampling, default is -1 (must be an integer)
+* -max: maximum words per entity, if < 0 use all the words, default is -1 (must be an integer)
+* -v: the path to the word embedding file in compressed format (e.g. one originally of word2vec, faster, lexvec, etc.)
+
+5. Quantize and compress entity embeddings
+
+Similarly as the steps 2.1 and 2.2 for the entity embeddings: 
+::
+	$mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -hashheader"
+
+::
+	$mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EfficientWord2VecCompress -Dexec.args="/mnt/data/wikipedia/embeddings/wiki.en.q /mnt/data/wikipedia/embeddings/wiki.en.q.compressed"
+
+The entity embeddings are now ready to use by *entity-fishing*.

@@ -159,7 +159,7 @@ public class NerdRanker extends NerdModel {
 		feature.context_quality = quality; 
 		//feature.dice_coef = dice_coef;
 		feature.bestCaseContext = bestCaseContext;
-		feature.embeddings_LR_similarity = embeddingsSimilarity;
+		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
 		double[] features = feature.toVector(attributes);
@@ -432,7 +432,7 @@ public class NerdRanker extends NerdModel {
 					float embeddingsSimilarity = 0.0F;
 					// computed only if needed because it takes time
 					GenericRankerFeatureVector feature = getNewFeature();
-					if (feature.Add_embeddings_LR_similarity) {
+					if (feature.Add_embeddings_centroid_similarity) {
 						//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, subTokens, lang);
 						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 					}
@@ -441,7 +441,7 @@ public class NerdRanker extends NerdModel {
 					feature.relatedness = related;
 					feature.context_quality = quality;
 					feature.bestCaseContext = bestCaseContext;
-					feature.embeddings_LR_similarity = embeddingsSimilarity;
+					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 					if (candidate.getWikidataId() != null)	
 						feature.wikidata_id = candidate.getWikidataId();
 					else
@@ -763,7 +763,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					float embeddingsSimilarity = 0.0F;
 					// computed only if needed because it takes time
 					GenericRankerFeatureVector feature = getNewFeature();
-					if (feature.Add_embeddings_LR_similarity) {
+					if (feature.Add_embeddings_centroid_similarity) {
 						//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, subTokens, lang);
 						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 					}
@@ -772,7 +772,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					feature.relatedness = related;
 					feature.context_quality = quality;
 					feature.bestCaseContext = bestCaseContext;
-					feature.embeddings_LR_similarity = embeddingsSimilarity;
+					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 					if (candidate.getWikidataId() != null)	
 						feature.wikidata_id = candidate.getWikidataId();
 					else

@@ -188,6 +188,8 @@ public class NerdRestKB {
 					else {
 						response = Response.status(Status.OK).entity(json)
 							.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+							.header("Access-Control-Allow-Origin", "*")
+                    		.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 							.build();
 					}
 				}
@@ -294,6 +296,8 @@ public class NerdRestKB {
 		else {
 			response = Response.status(Status.OK).entity(json)
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+				.header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 				.build();
 		}
 		return response;
@@ -388,6 +392,8 @@ public class NerdRestKB {
 			} else {
 				response = Response.status(Status.OK).entity(json)
 					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+					.header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 					.build();
 			}
 

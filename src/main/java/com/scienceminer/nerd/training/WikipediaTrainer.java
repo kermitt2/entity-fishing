@@ -72,7 +72,7 @@ public class WikipediaTrainer {
 	private void createArticleSamples() throws IOException{
 		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
 		//List<Integer> sampleSizes = Arrays.asList(500,500,100,100,100);
-		List<Integer> sampleSizes = Arrays.asList(10000,1000,100,100,100);
+		List<Integer> sampleSizes = Arrays.asList(5000,500,100,100,100);
 		// training ranker, training selector, eval ranker, eval selector, eval end-to-end
 
 		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
@@ -141,19 +141,19 @@ public class WikipediaTrainer {
 		System.out.println("Create article sets...");
 		trainer.createArticleSamples();
 
-		/*System.out.println("Create Ranker arff files...");
+		System.out.println("Create Ranker arff files...");
 		trainer.createRankerArffFiles();
 		System.out.println("Create Ranker classifier...");
-		trainer.createRankerModel();*/
+		trainer.createRankerModel();
 
-		System.out.println("Create Selector arff files...");
+		/*System.out.println("Create Selector arff files...");
 		trainer.createSelectorArffFiles();
 		System.out.println("Create Selector classifier...");
-		trainer.createSelectorModel();
+		trainer.createSelectorModel();*/
 
 		System.out.println("Evaluate classifiers...");
 		trainer.evaluateRanker();
-		trainer.evaluateSelector();
+		//trainer.evaluateSelector();
 	}
 	
 }

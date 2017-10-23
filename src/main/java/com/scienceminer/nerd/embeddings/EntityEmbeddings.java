@@ -47,7 +47,7 @@ import com.scienceminer.nerd.main.MainArgs;
  *
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityEmbeddings 
  * -Dexec.args="-i /home/lopez/nerd/data/wikipedia/training/description.en 
- * -v /mnt/data/wikipedia/embeddings/wiki.en.quantized.compressed -o /mnt/data/wikipedia/embeddings/entity.en.embeddings"
+ * -v /mnt/data/wikipedia/embeddings/wiki.en.quantized.compressed -o /mnt/data/wikipedia/embeddings/entity.en.embeddings -n 10"
  *
  * @author roi blanco (original), with modifications patrice lopez
  */
@@ -380,8 +380,8 @@ public class EntityEmbeddings {
         help.append("-in: path to an entity description data file.\n");
         help.append("-out: path to the result entity embeddings file (not quantized nor compressed)\n");
         help.append("-n: number of threads to be used, default is 1\n");
-        help.append("-rho: rho negative sampling parameters, if it's <0 we use even sampling, default is -1 (must be an integer)\n");
-        help.append("-max: maximum words per entity, if <0 we use all the words, default is -1 (must be an integer)\n");
+        help.append("-rho: rho negative sampling parameters, if it's < 0 use even sampling, default is -1 (must be an integer)\n");
+        help.append("-max: maximum words per entity, if < 0 use all the words, default is -1 (must be an integer)\n");
         help.append("-v: the path to the word embedding file in compressed format (e.g. one originally of word2vec, faster, lexvec, etc.)\n");
         return help.toString();
     }

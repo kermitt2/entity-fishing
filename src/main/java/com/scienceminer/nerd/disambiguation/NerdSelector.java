@@ -58,7 +58,7 @@ public class NerdSelector extends NerdModel {
 	private static final Logger logger = LoggerFactory.getLogger(NerdSelector.class);
 
 	// selected feature set for this particular selector
-	private FeatureType featureType = FeatureType.SIMPLE;
+	private FeatureType featureType;
 
 	// ranker model files
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
@@ -73,7 +73,7 @@ public class NerdSelector extends NerdModel {
 
 		//model = MLModel.GRADIENT_TREE_BOOST;
 		model = MLModel.RANDOM_FOREST;
-		featureType = FeatureType.NERD;
+		featureType = FeatureType.SIMPLE;
 		
 		GenericSelectionFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
@@ -566,10 +566,11 @@ System.out.println(" - evaluating " + article);
 					result.add(nerdEntity);
 					break;
 				}
-			} else if (cands.size() > 0)
+			} else if (cands.size() > 0) {
 				Collections.sort(cands);
 				if (!producedDisamb.contains(cands.get(0).getWikipediaExternalRef()))
 					producedDisamb.add(cands.get(0).getWikipediaExternalRef());
+			}
 			
 		}
 		

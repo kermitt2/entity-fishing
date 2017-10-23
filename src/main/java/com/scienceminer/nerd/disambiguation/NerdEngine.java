@@ -227,7 +227,22 @@ System.out.println("--");*/
 System.out.println("total number of entities: " + nbEntities);
 System.out.println("total number of candidates: " + nbCandidates);
 
-		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
+		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
+
+		// if needed, segment long text into either natural paragraph (if present) or arbitary ones
+		/*List<List<LayoutToken>> subTokens = null;
+		if (tokens.size() < ProcessText.MAXIMAL_PARAGRAPH_LENGTH) {
+			subTokens = new ArrayList<>();
+			subTokens.add(tokens);
+		}
+		else {
+			// try to find "natural" paragraph segmentations
+			subTokens = ProcessText.segmentInParagraphs(tokens);
+		}
+
+		for(List<LayoutToken> subToken : subTokens) {
+			NerdContext localContext = rank(candidates, lang, context, shortTextVal, subToken);*/
+			NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
@@ -240,16 +255,16 @@ System.out.println("--");
 }*/
 
 		// reimforce with document-level context if available
-		if (context instanceof DocumentContext) {
-			//reimforce(candidates, (DocumentContext)context);
-		}
+		/*if (context instanceof DocumentContext) {
+			reimforce(candidates, (DocumentContext)context);
+		}*/
 
-		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
-		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
-		if (nerdQuery.getMinSelectorScore() != 0.0)
-			minSelectorScore = nerdQuery.getMinSelectorScore();
+			double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
+			if (nerdQuery.getMinSelectorScore() != 0.0)
+				minSelectorScore = nerdQuery.getMinSelectorScore();
 
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
+			pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
+		//}
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
 	NerdEntity entity = entry.getKey();
@@ -873,8 +888,7 @@ for(NerdCandidate cand : cands) {
 					
 					float embeddingsSimilarity = 0.0F;
 					// computed only if needed
-					if (feature.Add_embeddings_LR_similarity) {
-						//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, subTokens, lang);
+					if (feature.Add_embeddings_centroid_similarity) {
 						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 					}
 
@@ -885,12 +899,12 @@ for(NerdCandidate cand : cands) {
 					}
 
 					String wikidataId = "Q0"; // undefined entity
-					if (candidate.getWikidataId() != null)	
-						wikidataId = candidate.getWikidataId();
+					//if (candidate.getWikidataId() != null)	
+					//	wikidataId = candidate.getWikidataId();
 
 					String wikidataP31Id = "Q0"; // undefined entity
-					if (candidate.getWikidataP31Id() != null)
-						wikidataP31Id = candidate.getWikidataP31Id();
+					//if (candidate.getWikidataP31Id() != null)
+					//	wikidataP31Id = candidate.getWikidataP31Id();
 
 					score = disambiguator.getProbability(commonness, related, quality, 
 						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
@@ -985,7 +999,7 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 				float embeddingsSimilarity = 0.0F;
 				// computed only of needed
 				
-				if (feature.Add_embeddings_LR_similarity) {
+				if (feature.Add_embeddings_centroid_similarity) {
 					//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, tokens, lang);
 					embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, tokens, lang);
 				}

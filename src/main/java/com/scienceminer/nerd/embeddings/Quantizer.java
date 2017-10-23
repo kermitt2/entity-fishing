@@ -21,11 +21,11 @@ import com.scienceminer.nerd.main.MainArgs;
  * 
  * Example command:
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer 
- * -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -h"
+ * -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -hashheader"
  *
  * note: for instance binary search gives q = 5 for fastText English wikipedia word vectors, we can pass it directly as follow
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer 
- * -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -h -d 5"
+ * -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -hashheader -quantizer 5"
  *
  * @author roi blanco (original), with modifications patrice lopez
  */

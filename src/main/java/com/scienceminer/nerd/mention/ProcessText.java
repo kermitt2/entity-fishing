@@ -106,7 +106,6 @@ public class ProcessText {
 		}
 	};
 
-
 	// ClearParser components for sentence segmentation
 	private AbstractTokenizer tokenizer = null;
 	
@@ -1441,6 +1440,125 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		}
 
     	return finalResults;
+    }
+
+    public static int MINIMAL_PARAGRAPH_LENGTH = 100;
+    public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
+
+    public static List<List<LayoutToken>> segmentInParagraphs(List<LayoutToken> tokens) {
+    	// heuristics: double end of line, if not simple end of line (not aligned with 
+    	// previous line), and if still not we segment arbitrarly the monolithic block
+    	List<List<LayoutToken>> result = new ArrayList<>();
+    	result.add(tokens);
+
+    	// we recursively segment too large segments, starting with one unique segment
+    	// which is the whole text
+
+    	while(true) {
+    		result = subSsegmentInParagraphs(result);
+    		if (!containsTooLargeSegment(result))
+    			break;
+    	}
+
+    	return result;
+    }
+
+    private static boolean containsTooLargeSegment(List<List<LayoutToken>> segments) {
+    	for(List<LayoutToken> segment : segments) {
+    		if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+    			return true;
+    		}
+    	} 
+    	return false;
+    }
+
+
+    private static List<List<LayoutToken>> subSsegmentInParagraphs(List<List<LayoutToken>> segments) {
+    	List<List<LayoutToken>> result = new ArrayList<>();
+
+    	for(List<LayoutToken> segment : segments) {
+    		if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+    			// let's try to slice this guy
+    			boolean previousEOL = false;
+		    	int n = 0; // current position in the segment
+		    	List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
+		    	for(LayoutToken token : segment) {
+		    		currentParagraph.add(token);
+		    		if (token.getText().equals("\n")) {
+		    			if (previousEOL) {
+		    				if (n > MINIMAL_PARAGRAPH_LENGTH) {
+		    					// new paragraph
+		    					result.add(currentParagraph);
+		    					currentParagraph = new ArrayList<LayoutToken>();
+		    					n = 0;
+		    				}
+		    				previousEOL = false;
+		    			} else
+		    			 	previousEOL = true;
+		    		} else 
+		    			previousEOL = false;
+		    		n++;
+		    	}
+		    	result.add(currentParagraph);
+			}
+		}
+
+		if (!containsTooLargeSegment(result)) 
+			return result;
+
+		// if we fail to to slice with double EOL, let's see if we can do something
+		// with simple EOL
+		segments = result;
+		result = new ArrayList<>();
+		for(List<LayoutToken> segment : segments) {
+    		if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+    			// let's try to slice this guy
+		    	int n = 0; // current position in the segment
+		    	List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
+		    	for(LayoutToken token : segment) {
+		    		currentParagraph.add(token);
+		    		if (token.getText().equals("\n")) {
+	    				if (n > MINIMAL_PARAGRAPH_LENGTH) {
+	    					// new paragraph
+	    					result.add(currentParagraph);
+	    					currentParagraph = new ArrayList<LayoutToken>();
+	    					n = 0;
+	    				}
+		    		}
+		    		n++;
+		    	}
+		    	result.add(currentParagraph);
+			}
+		}
+
+		if (!containsTooLargeSegment(result)) 
+			return result;
+
+		segments = result;
+		result = new ArrayList<>();
+		for(List<LayoutToken> segment : segments) {
+			if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+		    	// if failure again, we arbitrarly segment
+		    	int n = 0;
+				List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
+		    	for(LayoutToken token : segment) {
+		    		currentParagraph.add(token);
+    				if (n == MAXIMAL_PARAGRAPH_LENGTH-1) {
+    					// new paragraph
+    					result.add(currentParagraph);
+    					currentParagraph = new ArrayList<LayoutToken>();
+    					n = 0;
+    				}
+		    		n++;
+		    	}
+		    	result.add(currentParagraph);
+    		} else {
+    			// no need to further segment
+    			result.add(segment);
+    		}
+    	}
+
+    	return result;
     }
 
 }

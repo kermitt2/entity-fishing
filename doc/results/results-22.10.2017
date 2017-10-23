@@ -1,0 +1,192 @@
+Ranker
+
+Wikipedia - Evaluation on 100 articles 
+
+-- Macro-average --
+precision: 0.9255
+recall: 0.961
+f1-score: 0.9415
+
+-- Micro-average --
+precision: 0.929
+recall: 0.9783
+f1-score: 0.953
+
+
+AQUAINT
+
+Evaluation on 50 documents and 727 expected entities
+
+candidate gold recall: 92.85
+
+** micro average measures **
+
+aquaint              accuracy     precision    recall       f1     
+
+prior                87.07        90.7         86.85        88.73  
+ranker               87.76        91.01        87.16        89.05  
+
+** macro average measures **
+
+aquaint              accuracy     precision    recall       f1     
+
+prior                87.07        90.43        87.07        88.72  
+ranker               87.76        91.14        87.76        89.42 
+
+
+
+MSNBC
+
+candidate gold recall: 93.9
+
+** micro average measures **
+
+msnbc                accuracy     precision    recall       f1     
+
+prior                80.18        83.54        82.34        82.94  
+ranker               82.16        85.28        84.06        84.66  
+
+** macro average measures **
+
+msnbc                accuracy     precision    recall       f1     
+
+prior                80.18        81.05        80.18        80.61  
+ranker               82.16        83.05        82.16        82.61 
+
+
+
+ACE
+
+candidate gold recall: 85.94
+
+** micro average measures **
+
+ace                  accuracy     precision    recall       f1     
+
+prior                79.69        83.2         77.34        80.16  
+ranker               79.69        82.93        77.06        79.89  
+
+** macro average measures **
+
+ace                  accuracy     precision    recall       f1     
+
+prior                79.69        86.81        79.69        83.1   
+ranker               79.69        86.81        79.69        83.1
+
+
+
+AIDA-TESTB
+
+Evaluation on 231 documents and 4480 expected entities
+
+candidate gold recall: 88.79
+
+** micro average measures **
+
+aida-testb           accuracy     precision    recall       f1     
+
+prior                69.82        72.74        72.56        72.65  
+ranker               70.22        72.13        71.94        72.03  
+
+** macro average measures **
+
+aida-testb           accuracy     precision    recall       f1     
+
+prior                69.82        70.01        69.82        69.92  
+ranker               70.22        70.41        70.22        70.32 
+
+
+--------------------------------------------------------------------------------------
+
+
+
+
+AQUAINT
+
+Evaluation on 50 documents and 727 expected entities
+
+candidate gold recall: 92.85
+
+** micro average measures **
+
+aquaint              accuracy     precision    recall       f1     
+
+prior                87.07        90.7         86.85        88.73  
+ranker               87.62        90.83        87.01        88.88  
+
+** macro average measures **
+
+aquaint              accuracy     precision    recall       f1     
+
+prior                87.07        90.43        87.07        88.72  
+ranker               87.62        91           87.62        89.28
+
+
+
+
+MSNBC
+
+Evaluation on 20 documents and 656 expected entities
+
+candidate gold recall: 95.43
+
+** micro average measures **
+
+msnbc                accuracy     precision    recall       f1     
+
+prior                81.71        84.48        83.27        83.87  
+ranker               85.82        87.52        86.31        86.91  
+
+** macro average measures **
+
+msnbc                accuracy     precision    recall       f1     
+
+prior                81.71        82.59        81.71        82.15  
+ranker               85.82        86.75        85.82        86.28 
+
+
+
+
+ACE
+
+Evaluation on 36 documents and 256 expected entities
+
+candidate gold recall: 85.94
+
+** micro average measures **
+
+ace                  accuracy     precision    recall       f1     
+
+prior                79.69        83.2         77.34        80.16  
+ranker               80.08        83.39        77.52        80.35  
+
+** macro average measures **
+
+ace                  accuracy     precision    recall       f1     
+
+prior                79.69        86.81        79.69        83.1   
+ranker               80.08        87.23        80.08        83.5
+
+
+
+
+AIDA-TESTB
+
+Evaluation on 231 documents and 4480 expected entities
+
+candidate gold recall: 88.91
+
+** micro average measures **
+
+aida-testb           accuracy     precision    recall       f1     
+
+prior                69.91        72.84        72.65        72.75  
+ranker               71.63        74.17        73.98        74.08  
+
+** macro average measures **
+
+aida-testb           accuracy     precision    recall       f1     
+
+prior                69.91        70.1         69.91        70     
+ranker               71.63        71.82        71.63        71.73 
+
