@@ -1,19 +1,23 @@
 package com.scienceminer.nerd.service;
 
-import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.mention.*;
+import com.scienceminer.nerd.disambiguation.DocumentContext;
+import com.scienceminer.nerd.disambiguation.NerdContext;
+import com.scienceminer.nerd.disambiguation.NerdEngine;
+import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
-import org.grobid.core.data.Entity;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.engines.FullTextParser;
-import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.factory.GrobidFactory;
@@ -357,7 +361,9 @@ public class NerdRestProcessFile {
 				long end = System.currentTimeMillis();
 				nerdQuery.setRuntime(end - start);
 				LOGGER.info("runtime: " + (end - start));
-				Collections.sort(nerdQuery.getEntities());
+				if(CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+					Collections.sort(nerdQuery.getEntities());
+				}
 
 				String json = nerdQuery.toJSONClean(doc);
 

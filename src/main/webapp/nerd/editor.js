@@ -426,7 +426,6 @@ console.log(sentences);
 				var entity = responseJson.entities[m];
 
 				var identifier = entity.wikipediaExternalRef;
-                var wikidataId = entity.wikidataId;
 
                 if (identifier && (conceptMap[identifier] == null)) {
                     $.ajax({
