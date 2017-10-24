@@ -193,7 +193,7 @@ public class ProcessText {
 			return null;
 		}*/
 
-		if (!isBlank(text))
+		if (isNotBlank(text))
 			return processText(nerdQuery);
 		else 
 			return processTokens(nerdQuery);
