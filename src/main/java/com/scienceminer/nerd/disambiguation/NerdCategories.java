@@ -47,10 +47,14 @@ public class NerdCategories {
 			List<NerdEntity> entities = term.getNerdEntities();
 			if (entities != null) {
 				Double weight = term.getScore();
+				if (weight == 0.0)
+					continue;
 				for(NerdEntity entity : entities) {
 					List<com.scienceminer.nerd.kb.Category> categories = entity.getCategories();
 					if (categories != null) {				
 						Double nerd_score = entity.getNerdScore();
+						if (nerd_score == 0.0)
+							continue;
 						for(Category category : categories) {
 							int wikipediaID = category.getWikiPageID();
 							Integer wikipediaInteger = new Integer(wikipediaID);
@@ -81,6 +85,10 @@ public class NerdCategories {
             Category categ = entry.getValue();
 			accumulatedWeight += categ.getWeight();
 		}
+
+		if (accumulatedWeight == 0.0)
+			return query;
+
 		// normalize, apply a threashold and select the categories
         for (Map.Entry<Integer, Category> entry : categoryMap.entrySet()) {
             Category categ = entry.getValue();
@@ -115,6 +123,8 @@ public class NerdCategories {
 				List<com.scienceminer.nerd.kb.Category> categories = entity.getCategories();
 				if (categories != null) {				
 					Double nerd_score = entity.getNerdScore();
+					if (nerd_score == 0.0)
+							continue;
 					for(Category category : categories) {
 						int wikipediaID = category.getWikiPageID();
 						Integer wikipediaInteger = new Integer(wikipediaID);
@@ -145,6 +155,10 @@ public class NerdCategories {
             Category categ = entry.getValue();
 			accumulatedWeight += categ.getWeight();
 		}
+
+		if (accumulatedWeight == 0.0)
+			return query;
+
 		// normalize, apply a threashold and select the categories
         for (Map.Entry<Integer, Category> entry : categoryMap.entrySet()) {
             Category categ = entry.getValue();

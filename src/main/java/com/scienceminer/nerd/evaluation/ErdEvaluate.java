@@ -67,20 +67,20 @@ public class ErdEvaluate {
 		String path = null;
 		String pathRef = null;
 		if (dataset.equals("trec_beta")) {
-			 path = "data/erd/corpus-short/Trec_beta.query.txt";
-			 pathRef = "data/erd/corpus-short/Trec_beta.annotation.txt";
+			 path = "data/corpus/corpus-short/Trec_beta.query.txt";
+			 pathRef = "data/corpus/corpus-short/Trec_beta.annotation.txt";
 		}
 		else if (dataset.equals("yahooL24")) {
-			path = "data/erd/corpus-short/yahoo/Webscope_L24/L24_queries.txt";
-		 	pathRef = "data/erd/corpus-short/yahoo/Webscope_L24/L24_annotations.txt";
+			path = "data/corpus/corpus-short/yahoo/Webscope_L24/L24_queries.txt";
+		 	pathRef = "data/corpus/corpus-short/yahoo/Webscope_L24/L24_annotations.txt";
 		}
 		else if (dataset.equals("trec_test")) {
-			 path = "data/erd/corpus-short/trec-test_queries.txt";
-			 pathRef = "data/erd/corpus-short/trec-test_annotations.txt";
+			 path = "data/corpus/corpus-short/trec-test_queries.txt";
+			 pathRef = "data/corpus/corpus-short/trec-test_annotations.txt";
 		}
 		else if (dataset.equals("trec_500")) {
-			 path = "data/erd/corpus-short/trec-500.queries.txt";
-			 pathRef = "data/erd/corpus-short/trec-500.annotations.txt";
+			 path = "data/corpus/corpus-short/trec-500.queries.txt";
+			 pathRef = "data/corpus/corpus-short/trec-500.annotations.txt";
 		}
 		else {
 			System.err.println("Error: unknown evaluation dataset");

@@ -36,6 +36,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 	private StatementDatabase dbStatements = null;
 	private PropertyDatabase dbProperties = null;
 
+	// index of ibliographical entities via their DOI
+	private BiblioDatabase dbBiblio = null;
+
 	// loaded only if needed, gives the statements by the tail entity
 	private StatementDatabase dbReverseStatements = null;
 
@@ -77,6 +80,12 @@ public class KBUpperEnvironment extends KBEnvironment {
 		return dbReverseStatements;
 	}
 	
+	/**
+	 * Returns the {@link DatabaseType#biblio} database
+	 */
+	public BiblioDatabase getDbBiblio() {
+		return dbBiblio;
+	}
 
 	@Override
 	protected void initDatabases() {
@@ -95,6 +104,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		dbReverseStatements = buildReverseStatementDatabase();
 		databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
+
+		dbBiblio = buildBiblioDatabase();
+		databasesByType.put(DatabaseType.biblio, dbBiblio);		
 	}
 
 	/**
@@ -138,6 +150,8 @@ public class KBUpperEnvironment extends KBEnvironment {
 		//System.out.println("Building Statement db");
 		dbStatements.loadFromFile(wikidataStatements, overwrite);
 		
+		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
+
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
 	}
 
@@ -164,6 +178,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 	private ConceptDatabase buildConceptDatabase() {
 		return new ConceptDatabase(this);
 	}
+
+	private BiblioDatabase buildBiblioDatabase() {
+		return new BiblioDatabase(this);
+	}	
 
 	public Long retrieveStatistic(StatisticName sn) {
 		throw new UnsupportedOperationException();

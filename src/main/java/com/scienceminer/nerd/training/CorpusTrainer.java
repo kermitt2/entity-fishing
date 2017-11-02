@@ -82,10 +82,10 @@ public class CorpusTrainer {
 			System.out.println("Create Ranker classifier...");
 			createRankerModel();
 
-			System.out.println("Create Selector arff files...");
+			/*System.out.println("Create Selector arff files...");
 			createSelectorArffFiles();
 			System.out.println("Create Selector classifier...");
-			createSelectorModel();
+			createSelectorModel();*/
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

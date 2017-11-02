@@ -196,6 +196,22 @@ public class TestProcessText {
     }
 
     /*@Test
+    public void testProcessSpecies2() {
+        if (processText == null) {
+            System.err.println("text processor was not properly initialised!");
+        }
+        try {
+            List<Mention> entities = processText.processSpecies("Morphological variation in hybrids between Salmo marmoratus and alien Salmo species in the Volarja stream, Soca River basin, Slovenia", 
+                new Language("en"));
+
+            assertThat(entities, hasSize(1));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
+    /*@Test
     public void testNgram() {
         if (processText == null) {
             System.err.println("text processor was not properly initialised!");

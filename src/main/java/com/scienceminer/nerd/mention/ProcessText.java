@@ -344,7 +344,8 @@ public class ProcessText {
 					localResults = processSpecies(tokens, language);
 				}
 
-				results.addAll(localResults);
+				if (localResults != null)
+					results.addAll(localResults);
 			}
 		}
 		catch(Exception e) {
@@ -607,6 +608,8 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 			return null;
 		}
 		String text = LayoutTokensUtil.toText(tokens);
+		//text = text.replace("\n", " ");
+//System.out.println(text);		
 		List<Mention> results = new ArrayList<Mention>();
 		try {
 			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
@@ -1332,7 +1335,8 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
     	if (matcher == null) {
     		ArgParser ap = new ArgParser(new String[]{});
-			ap.addProperties("internal:/resources-linnaeus/properties.conf");
+			//ap.addProperties("internal:/resources-linnaeus/properties.conf");
+			ap.addProperties("data/species/properties.conf");
 			java.util.logging.Logger logger = Loggers.getDefaultLogger(ap);
     		matcher = uk.ac.man.entitytagger.EntityTagger.getMatcher(ap, logger);
     	}
@@ -1364,7 +1368,8 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
     	if (matcher == null) {
     		ArgParser ap = new ArgParser(new String[]{});
-			ap.addProperties("internal:/resources-linnaeus/properties.conf");
+			//ap.addProperties("internal:/resources-linnaeus/properties.conf");
+			ap.addProperties("data/species/properties.conf");
 			java.util.logging.Logger logger = Loggers.getDefaultLogger(ap);
     		matcher = uk.ac.man.entitytagger.EntityTagger.getMatcher(ap, logger);
     	}

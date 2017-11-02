@@ -18,6 +18,8 @@ public abstract class TrainingSample<D> {
 	}
 
 	public int size() {
+		if (sample == null)
+			return 0;
 		return sample.size();
 	}
 

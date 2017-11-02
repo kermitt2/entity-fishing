@@ -203,7 +203,8 @@ public class NerdRanker extends NerdModel {
 
 		if (attributeDataset == null) {
 			logger.debug("Training data for nerd ranker has not been loaded or prepared");
-			throw new NerdResourceException("Training data for nerd ranker has not been loaded or prepared");
+			return;
+			//throw new NerdResourceException("Training data for nerd ranker has not been loaded or prepared");
 		}
 		logger.info("building model");
 
@@ -239,6 +240,8 @@ public class NerdRanker extends NerdModel {
 		int nbArticle = 0;
 		this.positives = 1;
 		this.negatives = 0;
+		if ( (articles.getSample() == null) || (articles.getSample().size() == 0) )
+			return;
 		for (Article article : articles.getSample()) {
 			System.out.println("Training on " + (nbArticle+1) + "  / " + articles.getSample().size());
 			if (article instanceof CorpusArticle)

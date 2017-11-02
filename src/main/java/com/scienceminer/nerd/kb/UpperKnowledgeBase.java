@@ -66,7 +66,7 @@ public class UpperKnowledgeBase {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
             LOGGER.info("\nInit Upper Knowledge base layer");
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
+            NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
 			this.env = new KBUpperEnvironment(conf);
 			this.env.buildEnvironment(conf, false);
 
@@ -74,7 +74,7 @@ public class UpperKnowledgeBase {
             wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
 
             LOGGER.info("Init English lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
+            conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
 			LowerKnowledgeBase wikipedia_en = new LowerKnowledgeBase(conf);
 
 			wikipedias.put(Language.EN, wikipedia_en);
@@ -84,13 +84,13 @@ public class UpperKnowledgeBase {
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
 			LOGGER.info("Init German lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-de.yaml"), NerdConfig.class);;
+            conf = mapper.readValue(new File("data/config/wikipedia-de.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_de = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
             LOGGER.info("Init French lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-fr.yaml"), NerdConfig.class);;
+            conf = mapper.readValue(new File("data/config/wikipedia-fr.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_fr = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
@@ -188,6 +188,10 @@ public class UpperKnowledgeBase {
 	 */
 	public void loadReverseStatementDatabase(boolean overwrite) {
 		env.loadReverseStatementDatabase(overwrite);
+	}
+
+	public String getEntityIdPerDoi(String doi) {
+		return env.getDbBiblio().retrieve(doi.toLowerCase());
 	}
 
 	public void close() {

@@ -3,6 +3,8 @@ package com.scienceminer.nerd.service;
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.utilities.Filter;
+import com.scienceminer.nerd.kb.Property;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
@@ -37,6 +39,17 @@ public class NerdRestProcessQuery {
 
             // we analyze the query object in order to determine the kind of object to be processed
             LOGGER.debug(">> set query object for stateless service...");
+
+            // tuning the species only mention selection
+            if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
+                nerdQuery.getMentions().size() == 1) {
+                nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
+                Filter speciesFilter = new Filter();
+                Property speciesProperty = new Property();
+                speciesProperty.setId("P225");
+                speciesFilter.setProperty(speciesProperty);
+                nerdQuery.setFilter(speciesFilter);
+            }
 
             switch (nerdQuery.getQueryType()) {
                 case NerdQuery.QUERY_TYPE_TEXT:

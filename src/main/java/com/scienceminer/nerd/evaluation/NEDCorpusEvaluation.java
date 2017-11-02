@@ -125,6 +125,8 @@ public class NEDCorpusEvaluation {
 		double recall = 0.0;
 		double f1 = 0.0;
 
+		long startTime = System.currentTimeMillis();
+
 		for (int i = 0; i < docs.getLength(); i++) {
 			//get the annotations of each document.
 			Element docElement = (Element)docs.item(i);
@@ -257,6 +259,8 @@ public class NEDCorpusEvaluation {
 				referenceEntities.add(ref);
 				referenceDisamb.add(new Integer(pageId));
 			}
+
+
 
 			List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(docContent, lang);
 			// be sure to have the entities to be ranked
@@ -467,8 +471,10 @@ System.out.println("--");
 			}
 		}
 
-		report.append("\nEvaluation on " + docs.getLength() + " documents and " + totalExpected + " expected entities\n");
+		long endTime = System.currentTimeMillis();
 
+		report.append("\nEvaluation on " + docs.getLength() + " documents and " + totalExpected + 
+			" expected entities, in total " + ((endTime-startTime)/1000) + " s\n");
 
 		// recall for candidate selection
 		double recallMention = totalFoundMention*1.0/totalExpected;

@@ -290,6 +290,11 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates an integer id of a concept to the language-specific mapping to article id
 		 */
-		concepts
+		concepts,
+
+		/**
+		 * Associates a DOI string to a bibliographic entity
+		 */
+		biblio
 	}
 }

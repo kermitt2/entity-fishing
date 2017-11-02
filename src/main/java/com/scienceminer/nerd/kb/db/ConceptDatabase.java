@@ -28,6 +28,10 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 		super(env, DatabaseType.concepts);
 	}
 
+	public ConceptDatabase(KBEnvironment env, DatabaseType type) {
+		super(env, type);
+	}
+
 	@Override
 	public Map<String,Integer> retrieve(String key) {
 		return super.retrieve(key);
@@ -57,16 +61,20 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 			}
 
 			String[] pieces = line.split(",");
-			if (pieces.length < 3)
+			if (pieces.length <= 1) 
 				continue;
+
 			int pos = 0;
 			String keyVal = pieces[pos];
-			if ( (keyVal == null) || (keyVal.trim().length() == 0) )
+			if ( (keyVal == null) || (keyVal.trim().length() == 0) || (!keyVal.startsWith("Q")) )
 				continue;
 			pos++;
 			Map<String,Integer> conceptMap = new HashMap<String,Integer>();
 			while(pos < pieces.length) {
-				// pieces[1]
+				if (pieces[pos].equals("m{}")) {
+					pos++;
+					continue;
+				}
 				String lang = pieces[pos].replace("m{'", "").replace("'","");
 				pos++;
 				if (pos == pieces.length)

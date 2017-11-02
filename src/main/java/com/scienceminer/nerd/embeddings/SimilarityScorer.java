@@ -73,7 +73,7 @@ public class SimilarityScorer {
 
 		for(String lang : UpperKnowledgeBase.getInstance().targetLanguages) {
 			try {
-				String path = "data/wikipedia/embeddings/"+lang+"/word."+lang+".embeddings.quantized.compressed";
+				String path = "data/embeddings/"+lang+"/word."+lang+".embeddings.quantized.compressed";
 				File wvFile = new File(path);
 				if (!wvFile.exists()) {
 					LOGGER.error("The word embeddings file for " + lang + " does not exist: " + path);
@@ -83,7 +83,7 @@ public class SimilarityScorer {
 				CompressedW2V wordVectors = new CompressedW2V(wvFile.getPath());
 				wordEmbeddings.put(lang, wordVectors);
 
-				path = "data/wikipedia/embeddings/"+lang+"/entity."+lang+".embeddings.quantized.compressed";
+				path = "data/embeddings/"+lang+"/entity."+lang+".embeddings.quantized.compressed";
 				File entityFile = new File(path);
 				if (!entityFile.exists()) {
 					LOGGER.error("The entity embeddings file for " + lang + " does not exist: " + path);

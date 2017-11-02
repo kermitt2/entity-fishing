@@ -6,6 +6,7 @@ import com.scienceminer.nerd.utilities.NerdProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
+import org.grobid.core.data.BiblioItem;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.layout.BoundingBox;
@@ -121,6 +122,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	private String lang = null;
 
 	private List<Statement> statements = null;
+
+	private BiblioItem biblio = null;
 
 	public NerdEntity() {
 		offsets = new OffsetPosition();
@@ -409,6 +412,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 						translation = translation.substring(0,ind);
 					}
 					translation = translation.replace("\\'", "'");
+					// TODO: translation is html encoded, should be decoded in a standard manner
+					translation = translation.replace("%2C", ",");
 					subTranslations.put(targetLanguage, translation);
 					if (wikipedias.get(targetLanguage) != null) {
 						Article article = wikipedias.get(targetLanguage).getArticleByTitle(translation);
@@ -562,6 +567,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		isSubTerm = sub;
 	}
 	
+	public void setBiblio(BiblioItem biblio) {
+		this.biblio = biblio;
+	}
+
+	public BiblioItem getBiblio() {
+		return biblio;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		boolean result = false;

@@ -7,10 +7,13 @@ import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.utilities.Filter;
+import com.scienceminer.nerd.kb.Property;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.BiblioItem;
+import org.grobid.core.data.BibDataSet;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
@@ -28,6 +31,7 @@ import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.LayoutTokensUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,6 +108,17 @@ public class NerdRestProcessFile {
 					originalEntities = nerdQuery.getEntities();
 				}*/
 
+				// tuning the species only mention selection
+				if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
+					nerdQuery.getMentions().size() == 1) {
+					nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
+					Filter speciesFilter = new Filter();
+					Property speciesProperty = new Property();
+					speciesProperty.setId("P225");
+					speciesFilter.setProperty(speciesProperty);
+					nerdQuery.setFilter(speciesFilter);
+				} 
+
 				//List<NerdEntity> entities = originalEntities;
 		        Document doc = null;
 		        DocumentContext documentContext = new DocumentContext();
@@ -161,7 +176,7 @@ public class NerdRestProcessFile {
 		                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
 		                    if (titleTokens != null) {
 								System.out.println("Process title... ");
-
+								//System.out.println(LayoutTokensUtil.toText(titleTokens));
 								//workingQuery.setEntities(null);
 		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
 								if (newEntities != null) {
@@ -258,7 +273,17 @@ public class NerdRestProcessFile {
 						}
 					}
 
-		            // we don't process references (although reference titles could be relevant)
+		            // we process references if required
+		            if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.grobid)) {
+			            List<BibDataSet> resCitations = engine.getParsers().getCitationParser().
+							processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), true);
+						if ( (resCitations != null) && (resCitations.size()>0) ) {
+							List<NerdEntity> newEntities = processCitations(resCitations, doc, workingQuery);
+							if (newEntities != null)
+								System.out.println(newEntities.size() + " citation entities");
+			                nerdQuery.addNerdEntities(newEntities);
+						}
+					}
 
 		            // acknowledgement
 		            documentParts = doc.getDocumentPart(SegmentationLabels.ACKNOWLEDGEMENT);
@@ -534,6 +559,12 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
                                                 NerdQuery workingQuery) {
 		List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
 		return processLayoutTokenSequence(tokenizationParts, documentContext, workingQuery);
+	}
+
+	private static List<NerdEntity> processCitations(List<BibDataSet> resCitations, 
+													Document doc, 
+													NerdQuery workingQuery) throws Exception {
+		return NerdEngine.getInstance().solveCitations(resCitations);
 	}
 
 	public static String methodLogIn() {

@@ -195,12 +195,12 @@ public class Lexicon {
             String s1 = s.substring(0, i1);
             String s2 = s.substring(i1 + 1, s.length());
             if (lang.equals(Language.DE)) {
-                if ((dictionary_de.contains(s1)) & (dictionary_de.contains(s2)))
+                if ((dictionary_de.contains(s1)) && (dictionary_de.contains(s2)))
                     return true;
                 else
                     return false;
             } else {
-                if ((dictionary_en.contains(s1)) & (dictionary_en.contains(s2)))
+                if ((dictionary_en.contains(s1)) && (dictionary_en.contains(s2)))
                     return true;
                 else
                     return false;
@@ -210,12 +210,12 @@ public class Lexicon {
             String s1 = s.substring(0, i2);
             String s2 = s.substring(i2 + 1, s.length());
             if (lang.equals(Language.DE)) {
-                if ((dictionary_de.contains(s1)) & (dictionary_de.contains(s2)))
+                if ((dictionary_de.contains(s1)) && (dictionary_de.contains(s2)))
                     return true;
                 else
                     return false;
             } else {
-                if ((dictionary_en.contains(s1)) & (dictionary_en.contains(s2)))
+                if ((dictionary_en.contains(s1)) && (dictionary_en.contains(s2)))
                     return true;
                 else
                     return false;
@@ -237,7 +237,7 @@ public class Lexicon {
             return false;
         else {
             char c = s.charAt(0);
-            if ((!Character.isLetterOrDigit(c)) & !(c == '-'))
+            if ((!Character.isLetterOrDigit(c)) && !(c == '-'))
                 return true;
         }
         return false;

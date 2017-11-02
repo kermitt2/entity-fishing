@@ -126,9 +126,9 @@ public class NerdEngine {
 		boolean shortTextVal = false;
 		
 		//TODO: these tests should be moved up in one place and one time 
-		if ((text == null) && (shortText == null)) {
+		/*if ((text == null) && (shortText == null)) {
 			LOGGER.info("Cannot parse the text, because it is null.");
-		}
+		}*/
 		
 		if ( (text == null) || (text.length() == 0) ) {
 			shortTextVal = true;
@@ -345,8 +345,12 @@ for(NerdCandidate cand : cands) {
 		}
 		Collections.sort(result);
 
+/*for (NerdEntity entity : result) {
+System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
+System.out.println("--");
+}*/
 		if (!shortTextVal && !nerdQuery.getNbest()) {
-		//if (!nerdQuery.getNbest()) {
+			//if (!nerdQuery.getNbest()) {
 			result = pruneOverlap(result, shortTextVal);
 		}
 
@@ -390,6 +394,10 @@ for(NerdCandidate cand : cands) {
 			}
 
 			String normalisedString = entity.getNormalisedName();
+			if (entity.getSource() == ProcessText.MentionMethod.species) {
+				normalisedString = entity.getRawName();
+			}	
+			
 			if (isEmpty(normalisedString))
 				continue;
 
@@ -629,8 +637,9 @@ for(NerdCandidate cand : cands) {
 	 * Heuristics for covering person name co-reference within a same candidate set. 
 	 * 
 	 * If a mention is a substring of another mentions which are either identified as a PERSON 
-	 * by the NER or whose most-likely candidate is an entity instance of (P31) human (Q5),
-	 * then the candidates of the mention is merged with those of these another mentions. 
+	 * by the NER or whose most-likely candidate is an entity instance of (P31) human (Q5) or 
+	 * if identified as a species by the species mention identifier, then the candidates of the 
+	 * mention is merged with those of these another mentions. 
 	 * 
 	 * Note: TBD global context entities (e.g. from customization) must also be considered. 
 	 * TBD other named entity type might be relevant, e.g. company
@@ -668,7 +677,10 @@ for(NerdCandidate cand : cands) {
 				continue;
 
 			// if ner type is present and contradicting a "human" type (basically person) 
-			if ( (entity.getType() != null) && (entity.getType() != NER_Type.PERSON) && (entity.getType() != NER_Type.PERSON_TYPE))
+			if ( (entity.getType() != null) && 
+				 (entity.getType() != NER_Type.PERSON) && 
+				 (entity.getType() != NER_Type.PERSON_TYPE) &&
+				 (entity.getSource() != ProcessText.MentionMethod.species))
 				continue;
 
 			if (failures.contains(entityString)) 
@@ -1091,6 +1103,10 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
 
 		for(NerdEntity entity : entities) {
+			if (entity.getSource() == ProcessText.MentionMethod.species) {
+				// dont prune such explicit mention recognition
+				continue;
+			}
 			/*if (entity.getNerdScore() < threshold) {
 				toRemove.add(entity);
 			}*/
@@ -1630,6 +1646,12 @@ System.out.println("Merging...");
 			if ( (candidates == null) || (candidates.size() == 0) ) 
 				continue;
 			NerdEntity entity = entry.getKey();
+
+			if (entity.getSource() == ProcessText.MentionMethod.species) {
+				// don't prune anything
+				continue;
+			}
+
 			boolean isNe = false;
 			if (entity.getType() != null)
 				isNe = true;
@@ -2205,569 +2227,18 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		}
 	}
 
-	/**
-	 * Based on computed candidate scores, select n-best candidates.  
-	 */
-/*	public List<NerdCandidate> select(List<NerdCandidate> terms, int nbest, int method, String text) {
-System.out.println("Selecting...");	
-System.out.println(terms.toString());	
+	public List<NerdEntity> solveCitations(List<BibDataSet> resCitations) {
+		List<NerdEntity> results = null;
 
-		if ( (terms == null) || (terms.size() == 0) ) 
-			return null;
-
-		if (method == 1) {
-			// machine learning method - a selector produces a score corresponding to the probability of
-			// valid candidate entity
-			
-			// Generate input format for classifier
-			FeatureSelectorShortVector generalFeatures = new FeatureSelectorShortVector();
-			FastVector atts = generalFeatures.setHeaderInstance();
-			Instances classifierData = new Instances("ClassifierData", atts, terms.size());
-			classifierData.setClassIndex(generalFeatures.getNumFeatures()-1);
-			
-			for (NerdCandidate candidate : terms) {
-				Vector<Article> context = erdRelatedness.collectContextTerms(terms, candidate);
-				
-				// create the data instance corresponding to the candidate
-				FeatureSelectorShortVector features = new FeatureSelectorShortVector();
-				if (features.Add_prob_c) {
-					features.prob_c = candidate.getProb_c();
-				}
-				if (features.Add_prob_i) {
-					features.prob_i = candidate.getProb_i();
-				}
-				if (features.Add_frequencyStrict) {
-					features.frequencyStrict = candidate.getFreq();
-				}
-				if (features.Add_frequencyConcept) {
-					features.frequencyConcept = 0;
-				}
-				if (features.Add_termLength) {
-					StringTokenizer st = new StringTokenizer(candidate.getRawString(), " -,");
-					features.termLength = st.countTokens();
-				}
-				double relatedness = erdRelatedness.getRelatednessTo(candidate, context);
-				candidate.setRelatednessScore(relatedness);
-				if (features.Add_relatedness) {
-					features.relatedness = relatedness;
-				}
-				if (features.Add_inDictionary) {
-					boolean inDict = false;				
-					if (Lexicon.getInstance().inDictionary(candidate.getRawString())) {
-						inDict = true;
-					}
-					else {
-						String[] toks = candidate.getRawString().split(" -,");
-						boolean allDict = false;
-						for (int i=0; i<toks.length; i++) {
-							if (!Lexicon.getInstance().inDictionary(toks[i])) {
-								allDict = false;
-								break;
-							}
-							else {
-								allDict = true;
-							}
-						}
-						if (allDict) {
-							inDict = true;
-						}
-					}
-					
-					if (inDict)
-						features.inDictionary = true;
-					else
-						features.inDictionary = false;
-				}
-				if (features.Add_isSubTerm) { 
-					boolean val = false;
-					
-					if (candidate.isSubTerm) {
-						val = true;
-					}
-					else {
-						String surface1 = candidate.getRawString();
-
-						// we check if the raw string is a substring of another NerdCandidate from the ERD method
-						for(int j=0; j<terms.size(); j++) {									
-							NerdCandidate term2 = terms.get(j);
-
-							String surface2 = term2.getRawString();
-							if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
-								val = true;
-								break;
-							}
-						}
-					}
-					
-					if (val)
-						features.isSubTerm = true;
-					else 
-						features.isSubTerm = false;
-				}
-				if (features.Add_ner_st) {
-					if (candidate.getMentionEntityType() != null) {
-						features.ner_st = true;
-					}
-				}
-				if (features.Add_ner_id) {
-					if (candidate.getEntityType() != null) {
-						features.ner_st = true;
-					}
-				}
-				if (features.Add_ner_type) {
-					if (candidate.getMentionEntityType() != null) {
-						features.ner_type = candidate.getMentionEntityType();
-					}
-					else if (candidate.getEntityType() != null) {
-						if (candidate.getEntityType().equals("person/N1"))
-							features.ner_type = "PERSON";
-						else if (candidate.getEntityType().equals("location/N1"))
-							features.ner_type = "LOCATION";	
-						else if (candidate.getEntityType().equals("organizational_unit/N1"))
-							features.ner_type = "ORGANIZATION";	
-						else
-							features.ner_type = "NotNER";	
-					}
-				}
-				if (features.Add_ner_subtype) {
-					List<String> subTypes = candidate.getEntitySubTypes();
-					if ( (subTypes != null) && (subTypes.size()>0) ) {
-						features.ner_subtype = subTypes.get(0);
-					}
-					else
-						features.ner_subtype = "NotNER";
-				}				
-				if (features.Add_NERType_relatedness) {
-									
-				}
-				if (features.Add_NERSubType_relatedness) {
-					
-				}
-				if (features.Add_occ_term) {
-					long frequency = erdRelatedness.getTermOccurrence(candidate.getRawString());
-					features.occ_term = frequency;
-				}
-				if (features.Add_rank_score) {
-					features.rank_score = candidate.getNerdScore();
-				}
-				if (features.Add_preferred_term) {
-					if (candidate.getPreferredTerm() != null) {
-						if (candidate.getPreferredTerm().toLowerCase().equals(candidate.getRawString())) {
-							features.preferred_term = true;
-						}
-					}
-				}
-				List<String> types = candidate.getFreebaseTypes();
-				if (types != null) {
-					List<String> shortTypes = new ArrayList<String>();
-					for(String type : types) {
-						int ind = type.indexOf("/", 2);
-						String subType = type.substring(0,ind);
-						if ((!shortTypes.contains(subType)) && ErdUtilities.erdHighCategories.contains(subType)) {
-							shortTypes.add(subType);
-						}
-					}
-					candidate.setFreebaseHighTypes(shortTypes);
-				}
-				if (features.Add_freebase_type) {
-					if (types != null) {
-						List<String> shortTypes = candidate.getFreebaseHighTypes();
-						if (shortTypes.size() == 0) {
-							features.freebase_type = "unk";
-						}
-						else if (shortTypes.size() == 1) {
-							features.freebase_type = shortTypes.get(0);
-						}
-						else {
-							// we need to select the most discriminant type
-							// TBD...
-							features.freebase_type = shortTypes.get(0);
-						}
-					}
-				}	
-				if (features.Add_freebase_fulltype) {
-					if (types != null) {
-						List<String> allTypes = new ArrayList<String>();
-						for(String type : types) {
-							if (ErdUtilities.erdCategories.contains(type)) {
-								allTypes.add(type);
-							}
-						}
-						
-						if (allTypes.size() == 0) {
-							features.freebase_fulltype = "unk";
-						}
-						else if (allTypes.size() == 1) {
-							features.freebase_fulltype = allTypes.get(0);
-						}
-						else {
-							// we need to select the most discriminant type
-							// TBD...
-							features.freebase_fulltype = allTypes.get(0);
-						}
-					}
-				}
-				
-				//List<Category> categories = erdRelatedness.getParentCategories(candidate.getWikipediaExternalRef());
-				
-				// convert the feature vector into a WEKA data instance
-				Instance inst = features.getFeatureValues(classifierData);
-System.out.println(candidate.toString());
-System.out.println("The instance: " + inst); 
-				
-				// Get the scores
-				try {
-					double[] probs = selector_short.distributionForInstance(inst);
-					double prob = 1.00 - probs[0];
-					//double prob = ranker_short.classifyInstance(inst);
-					
-System.out.println("The selector score: " + prob);
-					candidate.setSelectionScore(prob);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
+		for(BibDataSet bds : resCitations) {
+			BiblioItem biblio = bds.getResBib();
+			System.out.println(biblio.getDOI());
+			if (biblio.getDOI() != null) {
+				System.out.println(UpperKnowledgeBase.getInstance().getEntityIdPerDoi(biblio.getDOI()));
 			}
-			
 		}
-			
-		//if (method == 0) 
-		//{
-			// we simply use the entity score without any other processing or heuristics
-			
-			// create a map with the surface string as key for candidates
-			List<String> freebaseResults = new ArrayList<String>();
-			Map<String, List<NerdCandidate>> candidates = new HashMap<String, List<NerdCandidate>>();
-			for(NerdCandidate term : terms) {
-				String surface = term.getRawString();
-				List<NerdCandidate> theList = candidates.get(surface);
-				if (theList == null) {
-					theList = new ArrayList<NerdCandidate>();
-				}
-				theList.add(term);
-				candidates.put(surface, theList);
-			}
-			
-			List<NerdCandidate> result = new ArrayList<NerdCandidate>();
-			for (String key : candidates.keySet()) {
-			 	List<NerdCandidate> list = candidates.get(key);
-				
-				// sort according to the ranking score (aka nerd_score, it has been made for that!)
-//System.out.println("BEFORE SORT: " + list.toString());
-				//Collections.sort(list);
-//System.out.println("AFTER SORT: " + list.toString());
-				
-				// if we have candidates that all cover the whole input text, there is no disambiguation
-				// context, thus we can safely output all the corresponding candidate entities
-				if (key.length() == text.length()) {
-					int h = 0;
-					for(NerdCandidate term : list) {
-						if (term.getFreeBaseExternalRef() != null) {
-							//if (term.getPreferredTerm() != null) {
-							//	if (term.getPreferredTerm().toLowerCase().equals(text)) {
-							//		result.add(term);
-							//		continue;
-							//	}
-							//}
-							
-							//if ((term.getProb_c() > 0.001) || (term.getFreq() > 1)) 
-							if (term.getSelectionScore() > 0.001)
-							{
-								if (!freebaseResults.contains(term.getFreeBaseExternalRef())) {	
-									result.add(term);
-									freebaseResults.add(term.getFreeBaseExternalRef());
-									h++;
-								}
-							}
-						}
-						// but no more than 3
-						if (h>2) {
-							break;
-						}
-					}
-				}
-				else {
-					// otherwise we select the highest score
-					NerdCandidate theBest = null;
-					if ( (list == null) || (list.size() == 0) )
-						continue;
-					for(NerdCandidate term : list) {
-						if (theBest == null) {
-							theBest = term;
-						}
-						else if (term.getNerdScore() > theBest.getNerdScore()) {
-							theBest = term;
-						}
-					}
-					if (theBest != null) {
-						// the best candidate has also to be in the freebase snapshot
-						if (theBest.getFreeBaseExternalRef() != null) {
-							// and they have be identified as NE by the NER or is not in the dictionary
-							boolean inDict = false;
-						
-							if (Lexicon.getInstance().inDictionary(key)) {
-								inDict = true;
-							}
-							else {
-								String[] toks = key.split(" -,");
-								boolean allDict = false;
-								for (int i=0; i<toks.length; i++) {
-									if (!Lexicon.getInstance().inDictionary(toks[i])) {
-										allDict = false;
-										break;
-									}
-									else {
-										allDict = true;
-									}
-								}
-								if (allDict) {
-									inDict = true;
-								}
-							}
-							if ( (theBest.getEntityType() != null) || 
-								 (theBest.getMentionEntityType() != null) || 
-								 !inDict ||
-								( (theBest.getProb_c() > 0.90) && (theBest.getFreq() > 1000) ) 
-								|| (theBest.getSelectionScore() > 0.79) 
-								|| (theBest.getEntitySubTypes() != null)  
-								) {
-								//if (!theBest.isSubTerm)
-								if ((theBest.getProb_c() > 0.1) || (theBest.getFreq() > 1)) {
-									if (!freebaseResults.contains(theBest.getFreeBaseExternalRef())) {	
-										result.add(theBest);
-										freebaseResults.add(theBest.getFreeBaseExternalRef());
-									}
-								}
-							}
-						}
-					}
-				}
-	        }
-
-			// score-based prunning... 
-			List<NerdCandidate> finalResult = new ArrayList<NerdCandidate>();
-			int p = 0;
-			for(NerdCandidate term : result) {
-				// if it is a substring of another candidate...
-				boolean val = false;
-				double maxSelect = 0.0;
-				List<String> freebaseHighTypeGlobal = null;
-				List<String> freebaseTypeGlobal = null;
-				//if (term.isSubTerm) {
-				//	val = true;
-				//}
-				//else 
-				//
-				{
-					String surface1 = term.getRawString();
-
-					// we check if the raw string is a substring of another NerdCandidate from the ERD method
-					for(int j=0; j<result.size(); j++) {									
-						NerdCandidate term2 = result.get(j);
-
-						String surface2 = term2.getRawString();
-						if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
-							val = true;
-							if (term2.getSelectionScore() > maxSelect)
-								maxSelect = term2.getSelectionScore();
-							if ( (term2.getFreebaseHighTypes() != null) && (term2.getFreebaseHighTypes().size() > 0) ) {	
-								for (String typ : term2.getFreebaseHighTypes()) {
-									if (freebaseHighTypeGlobal == null) {
-										freebaseHighTypeGlobal = new ArrayList<String>();
-									}
-									if (!freebaseHighTypeGlobal.contains(typ))
-										freebaseHighTypeGlobal.add(typ);
-								}
-							}
-							if ( (term2.getFreebaseTypes() != null) && (term2.getFreebaseTypes().size() > 0) ) {	
-								for (String typ : term2.getFreebaseTypes()) {
-									if (freebaseTypeGlobal == null) {
-										freebaseTypeGlobal = new ArrayList<String>();
-									}
-									if (!freebaseTypeGlobal.contains(typ))
-										freebaseTypeGlobal.add(typ);
-								}
-							}
-						}
-					}
-				}
-				
-				if ( ((term.getProb_c() > 0.001) && (term.getFreq() > 1)) || 
-					 (term.getRawString().length() == text.length()) || 
-					 (term.getSelectionScore() == 1) ||
-					 (term.getEntitySubTypes() != null) ||
-					 (term.isSpecialEntityType() )
-				   ) 
-				{
-					List<NerdCandidate> contextTerms = new ArrayList<NerdCandidate>();
-					for(int j=0; j<result.size(); j++) {
-						if (j != p) {		
-							contextTerms.add(result.get(j));
-						}
-					}
-					Vector<Article> context = erdRelatedness.collectAllContextTerms(contextTerms);
-//System.out.println(contextTerms.toString());	
-//System.out.println(context.toString());
-
-					// semantic relatedness between the current sub term and the other terms
-					double localRelatedness = erdRelatedness.getRelatednessTo(term, context);
-					System.out.println("relatedness " + term.getRawString() + " / " + localRelatedness);
-					System.out.println("selection score " + term.getRawString() + " / " + term.getSelectionScore());
-					
-					if (!val) {
-						boolean skip = false;
-						if (term.getEntitySubTypes() != null) {
-							if (term.getEntitySubTypes().contains("musical_composition/N1")
-							 	&& (term.getCoarseConfidence() > 0.7)) {
-								// /music/composition is not in the ERD set
-								skip = true;
-							}
-						}
-						//if ( (term.getSelectionScore() > 0.0001) ) {
-						//if ( (term.getSelectionScore() > 0.01) ) {		
-						//	 ((term.getEntityType()!= null) || (term.getMentionEntityType()!= null) ) )
-						
-							//if ( (term.getRawString().length() > 5) || (localRelatedness > 0.2) )
-						if (!skip) {
-							if (term.getNerdScore() > 1.9) {
-								finalResult.add(term);
-							}
-							else if ( ( ( (term.getSelectionScore() > maxSelect*0.2) || (term.getSelectionScore() == 0.0) )
-								&& (term.getSelectionScore() > 0.12) )  || (term.getEntitySubTypes() != null)
-								) {
-								finalResult.add(term);
-							}
-						}
-					}
-					else {	
-						System.out.println("is subterm " + term.getRawString());
-						boolean skip = false;
-						// we remove sub-term in subterm with the same FreeBase type
-						if ( (freebaseHighTypeGlobal != null) 
-							 && (term.getFreebaseHighTypes() != null) 
-							 && (term.getFreebaseHighTypes().size() > 0) ) {
-											
-							for (String typ : term.getFreebaseHighTypes()){							
-								if (freebaseHighTypeGlobal.contains(typ)) {
-									skip = true;
-									break;
-								}
-							}
-							if (term.getFreebaseHighTypes().contains("/organization") &&
-							   (freebaseHighTypeGlobal.contains("/business") || 
-								freebaseTypeGlobal.contains("/computer/software") ) ) {
-								// remove organization as sub-term of /business/consumer_product and related
-								skip = true;
-							}
-							
-							// check consistency
-							if (term.getEntityType() != null) {
-								if (term.getEntityType().equals("institution/N2") && 
-									!term.getFreebaseHighTypes().contains("/organization") ) {
-									skip = true;	
-								}
-							}
-							
-							// do not consider typical modifiers
-							if (term.getEntitySubTypes() != null) {
- 								if (term.getEntitySubTypes().contains("state/N2") ||
-									term.getEntitySubTypes().contains("municipality/N1")) {
-									skip = true;
-								}
-								if (term.getEntitySubTypes().contains("musical_composition/N1")) {
-									// /music/composition is not in the ERD set
-									skip = true;
-								}
-								
-							}
-							
-						}
-						
-						// semantic relatedness has to be higher than a given threashold
-						if (!skip) {
-							if ( (term.getSelectionScore() > 0.011) 
-							    && (term.getSelectionScore() > maxSelect*0.9) 
-							 	&& (localRelatedness > 0.50) )
-							{
-								finalResult.add(term);
-							}
-						}
-					}
-				}
-				p++;
-			}
-			
-System.out.println("final: " + finalResult.toString());
-			// final pruning based on relatedness 
-			terms = new ArrayList<NerdCandidate>();
-			if (finalResult.size() > 1) {
-				for(NerdCandidate term : finalResult) {
-					String[] tokens = term.getRawString().split(" ");
-					if (term.getRawString().length() == text.length()) {
-						terms.add(term);
-					}
-					else if (term.getNerdScore() > 1.9) {
-						terms.add(term);
-					}
-					else if ( ((term.getEntitySubTypes() == null) || (term.getEntitySubTypes().size() == 0)  || 
-							   (term.getEntityType() == null)) 
-						&& (term.getCoarseConfidence() > 0.9) ) {
-				//		&& (term.getCoarseConfidence() > 0.7) ) {
-						continue;
-					}					
-					else if ( (tokens.length > 2) && (term.getRelatednessScore() > 0.05) ) {
-						terms.add(term);
-					}
-				//	else if ( (term.getProb_c() < 0.3) && (term.getProb_c() != 0) ) {
-				//		continue;
-				//	}
-					else if ( (term.getRelatednessScore() > 0.12) || (term.getRelatednessScore() == 0.0) ) {
-						terms.add(term);
-					}
-					
-				}
-			} 
-			else if (finalResult.size() == 1) {
-				NerdCandidate term = finalResult.get(0);
-				if (term.getNerdScore() > 1.9) {
-					terms.add(term);
-				}
-				else if ( ((term.getEntitySubTypes() == null) || (term.getEntitySubTypes().size() == 0)  || 
-						   (term.getEntityType() == null)) 
-					&& (term.getCoarseConfidence() > 0.9) ) {
-					// nothing
-				}
-				else
-					terms.add(term);
-			}
-				
-
-			// we try to re-expand the surface string of the candidates given the prefered term
-			// and the term variant, in order to have the best largest string fit
-			for(NerdCandidate concept : result) {
-				if (concept.getVariants() != null) {
-					for (Variant variant : concept.getVariants()) {
-						String variantString = variant.getTerm();
-						System.out.println("variant: " + variantString);
-						int ind = text.toLowerCase().indexOf(variantString.toLowerCase());
-						if ( (ind != -1) && (variantString.length() > concept.getRawString().length()) ) {
-							concept.setRawString(text.substring(ind, ind+variantString.length()));
-							OffsetPosition pos2 = new OffsetPosition(); 
-							pos2.start = ind;
-							pos2.end = pos2.start + variantString.length();
-							concept.setPosition(pos2);
-						}
-					}
-				}
-			}
-			// last conservative possible prunning
-			//result = prune(result);
-			
-			//return finalResult;
-		
-		
-		return terms;
-	}*/
+		return results;
+	}
 	
 }
 
