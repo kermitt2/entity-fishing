@@ -14,8 +14,8 @@ import java.util.Arrays;
 import org.grobid.core.factory.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.mock.*;
-//import org.grobid.core.main.GrobidHomeFinder;
+//import org.grobid.core.mock.*;
+import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.layout.LayoutToken;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -274,7 +274,7 @@ public class Utilities {
 		return dateFormat.format(pDate);
 	}
 
-	public static void initGrobid() {
+	/*public static void initGrobid() {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         
 		try {
@@ -295,21 +295,17 @@ public class Utilities {
 		catch(Exception e) {
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
-	}
+	}*/
 
-	/*
-	// uncomment when grobid dropwizard-service branch becomes master
-	public static void initGrobidFuture() {
+	public static void initGrobid() {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
-
-		String pGrobidHome = conf.getGrobidHome();
-		String pGrobidProperties = pGrobidHome + "/config/grobid.properties";
-
-		GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
-        GrobidProperties.getInstance(grobidHomeFinder);
 
 		try {
+	        NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
+
+			String pGrobidHome = conf.getGrobidHome();
+			String pGrobidProperties = pGrobidHome + "/config/grobid.properties";
+		
 			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
         	GrobidProperties.getInstance(grobidHomeFinder);
 	
@@ -318,7 +314,7 @@ public class Utilities {
 		catch(Exception e) {
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
-	}*/
+	}
 
 	// standard JDK serialization
 	public static byte[] serialize(Object obj) throws IOException {
