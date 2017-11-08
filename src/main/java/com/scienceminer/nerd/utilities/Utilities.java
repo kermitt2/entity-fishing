@@ -14,7 +14,6 @@ import java.util.Arrays;
 import org.grobid.core.factory.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
-//import org.grobid.core.mock.*;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.layout.LayoutToken;
 
@@ -308,7 +307,7 @@ public class Utilities {
 		
 			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
         	GrobidProperties.getInstance(grobidHomeFinder);
-	
+        	LibraryLoader.load();
 			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 		}
 		catch(Exception e) {
