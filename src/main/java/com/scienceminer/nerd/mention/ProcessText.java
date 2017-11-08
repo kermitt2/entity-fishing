@@ -2,7 +2,6 @@ package com.scienceminer.nerd.mention;
 
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
@@ -34,7 +33,6 @@ import org.grobid.core.data.Sense;
 import org.grobid.core.engines.NERParsers;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.*;
-import org.grobid.core.mock.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.layout.LayoutToken;
@@ -321,7 +319,6 @@ public class ProcessText {
 		// we process the whole text, sentence info does not apply to layout documents
 		try {
 			/*if (nerParsers == null) {
-				//Utilities.initGrobid();
 				nerParsers = new NERParsers();	
 			}
 			List<Entity> entityResults = nerParsers.extractNE(tokens, language);
@@ -380,7 +377,6 @@ public class ProcessText {
 		List<Mention> results = new ArrayList<>();
 		try {
 			if (nerParsers == null) {
-				//Utilities.initGrobid();
 				nerParsers = new NERParsers();	
 			}
 			List<Entity> entityResults = nerParsers.extractNE(text, language);
@@ -424,7 +420,6 @@ public class ProcessText {
 		List<Mention> results = new ArrayList<>();
 		try {
 			if (nerParsers == null) {
-				//Utilities.initGrobid();
 				nerParsers = new NERParsers();	
 			}
 			List<Entity> entityResults = nerParsers.extractNE(LayoutTokensUtil.toText(tokens), language);

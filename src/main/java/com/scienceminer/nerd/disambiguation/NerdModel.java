@@ -7,7 +7,6 @@ import java.text.*;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.evaluation.*;

@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.*;
 
 import org.apache.commons.io.FileUtils;

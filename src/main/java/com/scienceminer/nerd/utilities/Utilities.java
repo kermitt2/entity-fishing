@@ -9,12 +9,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.grobid.core.factory.*;
-import org.grobid.core.mock.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.mock.*;
+//import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.layout.LayoutToken;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 
@@ -270,14 +275,19 @@ public class Utilities {
 	}
 
 	public static void initGrobid() {
-		String pGrobidHome = NerdProperties.getInstance().getGrobidHome();
-		String pGrobidProperties = NerdProperties.getInstance().getGrobidProperties();
+		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        
 		try {
+			NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
+
+			String pGrobidHome = conf.getGrobidHome();
+			String pGrobidProperties = pGrobidHome + "/config/grobid.properties";
+
 			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);      
 			GrobidProperties.getInstance();
 			LibraryLoader.load();
 	
-			System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
+			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 		}
 		catch(javax.naming.NameAlreadyBoundException e) {
 			// already loaded, nothing to do
@@ -286,6 +296,29 @@ public class Utilities {
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
 	}
+
+	/*
+	// uncomment when grobid dropwizard-service branch becomes master
+	public static void initGrobidFuture() {
+		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
+
+		String pGrobidHome = conf.getGrobidHome();
+		String pGrobidProperties = pGrobidHome + "/config/grobid.properties";
+
+		GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
+        GrobidProperties.getInstance(grobidHomeFinder);
+
+		try {
+			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
+        	GrobidProperties.getInstance(grobidHomeFinder);
+	
+			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
+		}
+		catch(Exception e) {
+			throw new NerdException("Fail to initalise the grobid-ner component.", e);
+		}
+	}*/
 
 	// standard JDK serialization
 	public static byte[] serialize(Object obj) throws IOException {

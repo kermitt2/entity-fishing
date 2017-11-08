@@ -44,7 +44,7 @@ var nerd = (function($) {
 		$("#divAbout").show();
 		$("#divServices").hide();
 		$("#divDoc").hide();
-		$("#divAdmin").hide();
+		//$("#divAdmin").hide();
 		$("#nerd-text").show();
 		$("#nerd-query").hide();
 
@@ -60,14 +60,14 @@ var nerd = (function($) {
 
 		$('#submitRequest').bind('click', submitQuery);
 
-		$('#adminForm').attr("action",$(location).attr('href')+"allProperties");
+		/*$('#adminForm').attr("action",$(location).attr('href')+"allProperties");
 		$('#TabAdminProps').hide();
 		$('#adminForm').ajaxForm({
 	        beforeSubmit: adminShowRequest,
 	        success: adminSubmitSuccesful,
 	        error: adminAjaxError,
 	        dataType: "text"
-	        });
+	        });*/
 
 		$("#about").click(function() {
 			$("#about").attr('class', 'section-active');
@@ -82,7 +82,7 @@ var nerd = (function($) {
 			$("#divAbout").show();
 			$("#divServices").hide();
 			//$("#divDemo").hide();
-			$("#divAdmin").hide();
+			//$("#divAdmin").hide();
 			$("#divDoc").hide();
 
 			$("#nerd-text").hide();
@@ -102,7 +102,7 @@ var nerd = (function($) {
 			$("#divServices").show();
 			$("#divAbout").hide();
 			$("#divDoc").hide();
-			$("#divAdmin").hide();
+			//$("#divAdmin").hide();
 
 			return false;
 		});
@@ -119,11 +119,11 @@ var nerd = (function($) {
 			$("#divDoc").show();
 			$("#divAbout").hide();
 			$("#divServices").hide();
-			$("#divAdmin").hide();
+			//$("#divAdmin").hide();
 
 			return false;
 		});
-		$("#admin").click(function() {
+		/*$("#admin").click(function() {
 			$("#admin").attr('class', 'section-active');
 			$("#doc").attr('class', 'section-non-active');
 			$("#services").attr('class', 'section-non-active');
@@ -140,7 +140,7 @@ var nerd = (function($) {
 			$("#divAdmin").show();
 
 			return false;
-		});
+		});*/
 
 		// extend customisation field with the registered existing ones
 		$.ajax({
@@ -1365,7 +1365,8 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				colorLabel = entity.rawName;
 
 			var subType = entity.subtype;
-			var conf = entity.nerd_score;
+			//var conf = entity.nerd_score;
+			var conf = entity.nerd_selection_score;
 			//var definitions = entity.definitions;
 			var definitions = getDefinitions(wikipedia);
 
@@ -1544,7 +1545,8 @@ console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
 				colorLabel = entity.rawName;
 
 			var subType = entity.subtype;
-			var conf = entity.nerd_score;
+			//var conf = entity.nerd_score;
+			var conf = entity.nerd_selection_score;
 			//var definitions = entity.definitions;
 			var definitions = getDefinitions(wikipedia);
 
@@ -1905,7 +1907,7 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
         "Edmond Ludlow (vers 1617-1692) est un parlementaire anglais, plus connu pour son implication dans l'exécution de Charles Ier, et pour ses mémoires, publiés à titre posthume et qui sont devenus une source importante pour les historiens des Guerres des Trois Royaumes. Après avoir servi dans les guerres civiles anglaises, Ludlow a été élu membre du Long Parlement. Après la création du Commonwealth en 1649, il est nommé adjoint de Ireton, commandant des forces du Parlement en Irlande, avant de rompre avec Oliver Cromwell lors de la création du Protectorat. Après la Restauration, Ludlow part en exil en Suisse, où il passe une grande partie du reste de sa vie.",
 		//"Pierre-Édouard Blondin (14 décembre 1874-29 octobre 1943) fut un avocat, notaire et homme politique fédéral du Québec. Né à Saint-François-du-Lac dans la région du Centre-du-Québec, M. Blondin devint député du Parti conservateur dans la circonscription fédérale de Champlain en 1908. Réélu en 1911 et lors de l'élection partielle de 1914, il fut défait dans Laurier—Outremont par le libéral Pamphile Du Tremblay en 1917. Cette défaite fut causée par l'impopularité de la mesure de conscription au Québec. En 1918, le premier ministre Robert Laird Borden le nomma au poste de sénateur de la division des Laurentides. De 1930 à 1936, il servit en tant que président du Sénat. Il mourut en fonction en 1943. Durant son passage à la Chambre des communes, il fut ministre du Revenu intérieur de 1914 à 1915, Secrétaire d'État du Canada de 1915 à 1917, ministre des Mines de 1915 à 1917 et ministre des Postes de 1917 à 1921.",
 		//"Charlemagne, du latin Carolus Magnus, ou Charles Ier dit « le Grand », né le 2 avril 742 (voire 747 ou 748)2, mort le 28 janvier 814 à Aix-la-Chapelle, est un roi des Francs et empereur. Il appartient à la dynastie des Carolingiens, à laquelle il a donné son nom.\nFils de Pépin le Bref, il est roi des Francs à partir de 768, devient par conquête roi des Lombards en 774 et est couronné empereur à Rome par le pape Léon III le 25 décembre 800, relevant une dignité disparue depuis la chute de l'Empire romain d'Occident en 476.\nRoi guerrier, il agrandit notablement son royaume par une série de campagnes militaires, en particulier contre les Saxons païens dont la soumission fut difficile et violente (772-804), mais aussi contre les Lombards en Italie et les musulmans d'Al-Andalus.",
-		"Freiherr Manfred Albrecht von Richthofen (2. Mai 1892 in Breslau; 21. April 1918 bei Vaux-sur-Somme, Département Somme) war ein deutscher Jagdflieger im Ersten Weltkrieg. Er erzielte die höchste Zahl von Luftsiegen, die im Ersten Weltkrieg von einem einzelnen Piloten erreicht wurde. Den bekannten Beinamen \"Der Rote Baron\" erhielt von Richthofen, der einen Großteil seiner Einsätze in mehr oder weniger rot gestrichenen Flugzeugen flog, erst nach dem Krieg. Er geht vermutlich auf ein englisches Nachkriegsbuch zurück, das seinen Titel \"Freiherr\", den es im Englischen nicht gibt, mit \"Baron\" übersetzte. Im Ersten Weltkrieg wurde Richthofen auf französischer Seite « le petit rouge » (deutsch: „Der kleine Rote“) oder auch « Diable Rouge » (deutsch: „Roter Teufel“) genannt. Seine Autobiographie (1917) trägt den Titel Der rote Kampfflieger."
+		"Goethes literarisches Werk umfasst Lyrik, Dramen, Epik, autobiografische, kunst- und literaturtheoretische sowie naturwissenschaftliche Schriften. Daneben ist sein umfangreicher Briefwechsel von literarischer Bedeutung. Goethe war Vorbereiter und wichtigster Vertreter des Sturm und Drang. Sein Roman Die Leiden des jungen Werthers machte ihn in Europa berühmt. Selbst Napoleon bat ihn zu einer Audienz anlässlich des Erfurter Fürstenkongresses. Im Bunde mit Schiller und gemeinsam mit Herder und Wieland verkörperte er die Weimarer Klassik. Die Wilhelm-Meister-Romane wurden zu beispielgebenden Vorläufern deutschsprachiger Künstler- und Bildungsromane. Sein Faust errang den Ruf als die bedeutendste Schöpfung der deutschsprachigen Literatur. Im Alter wurde er auch im Ausland als Repräsentant des geistigen Deutschland angesehen."
 	];
 
 	function resetExamplesClasses() {
@@ -2440,7 +2442,7 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 
 	/** admin functions */
 
-	var selectedAdmKey="", selectedAdmValue, selectedAdmType;
+	/*var selectedAdmKey="", selectedAdmValue, selectedAdmType;
 
 	function adminShowRequest(formData, jqForm, options) {
 		$('#TabAdminProps').show();
@@ -2512,7 +2514,7 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			  success: changePropertySuccesful,
 			  error: changePropertyError
 			});
-	}
+	}*/
 
 	function fitToContainer(canvas){
 	  	// make a canvas visually fill the positioned parent
@@ -2523,13 +2525,13 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 	  	canvas.height = canvas.offsetHeight;
 	}
 
-	function changePropertySuccesful(responseText, statusText) {
+	/*function changePropertySuccesful(responseText, statusText) {
 		$("#"+selectedAdmKey).find("div").html(responseText);
 		$('#admMessage').html("<font color='green'>Property "+selectedAdmKey.split('-').join('.')+" updated with success</font>");
 	}
 
 	function changePropertyError() {
 		$('#admMessage').html("<font color='red'>An error occured while updating property"+selectedAdmKey.split('-').join('.')+"</font>");
-	}
+	}*/
 
 })(jQuery);

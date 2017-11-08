@@ -22,7 +22,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.HttpHeaders; 
 
 import com.scienceminer.nerd.utilities.NerdRestUtils;
-import com.scienceminer.nerd.utilities.NerdServiceProperties;
 
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.lang.Language;

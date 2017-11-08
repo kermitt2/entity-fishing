@@ -5,7 +5,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -20,7 +19,6 @@ public class CategoriesIntegrationTest {
 	@Before
 	public void setUp() {
 		try {
-			NerdProperties.getInstance();
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
         	wikipedia = new LowerKnowledgeBase(conf); 

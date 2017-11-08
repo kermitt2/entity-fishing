@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.kb.Customisations;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.Page;

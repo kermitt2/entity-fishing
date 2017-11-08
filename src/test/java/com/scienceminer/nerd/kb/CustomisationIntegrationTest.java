@@ -1,6 +1,5 @@
 package com.scienceminer.nerd.kb;
 
-import com.scienceminer.nerd.utilities.NerdProperties;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,7 +11,6 @@ public class CustomisationIntegrationTest {
 	
 	@Before
 	public void setUp() {
-		NerdProperties.getInstance();
 	}
 	
 	@Test

@@ -22,7 +22,6 @@ import org.grobid.core.lexicon.NERLexicon.NER_Type;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.mention.*;

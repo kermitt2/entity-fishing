@@ -2,7 +2,6 @@ package com.scienceminer.nerd.kb;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +50,7 @@ public final class Customisations {
         File home = null;
         ObjectInputStream in = null;
         try {
-            home = new File(NerdProperties.getInstance().getMapsPath() + "/" + database_name + ".obj");
+            home = new File("data/maps/" + database_name + ".obj");
         } catch (Exception e) {
             throw new NerdException(e);
         }
@@ -79,7 +78,7 @@ public final class Customisations {
     	File home = null;
         ObjectOutputStream out = null;
         try {
-            home = new File(NerdProperties.getInstance().getMapsPath() + "/" + database_name + ".obj");
+            home = new File("data/maps/" + database_name + ".obj");
         } catch (Exception e) {
             throw new NerdException(e);
         }

@@ -2,7 +2,6 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.utilities.NerdServiceProperties;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
 import org.slf4j.Logger;
@@ -42,9 +41,9 @@ public class NerdRestService implements NerdPaths {
     private static final String CUSTOMISATION = "customisation";
 
     public NerdRestService() {
-        LOGGER.info("Init Servlet NerdRestService.");
+        /*LOGGER.info("Init Servlet NerdRestService.");
         NerdServiceProperties.getInstance();
-        LOGGER.info("Init of Servlet NerdRestService finished.");
+        LOGGER.info("Init of Servlet NerdRestService finished.");*/
 
         LOGGER.info("Init lexicon.");
         Lexicon.getInstance();
@@ -171,7 +170,7 @@ public class NerdRestService implements NerdPaths {
      * Admin API
      **/
 
-    @Path(ADMIN)
+    /*@Path(ADMIN)
     @Produces(MediaType.TEXT_HTML)
     @GET
     public Response getAdmin_htmlGet(@QueryParam(SHA1) String sha1) {
@@ -201,7 +200,7 @@ public class NerdRestService implements NerdPaths {
                                    @PathParam(NAME) String propertyName,
                                    @FormDataParam(VALUE) String newValue) {
         return NerdRestProcessAdmin.changePropertyValue(sha1, propertyName, newValue);
-    }
+    }*/
 
     /**
      * KB operations

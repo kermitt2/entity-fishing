@@ -53,6 +53,12 @@ public class NerdConfig {
 	// will be pruned
 	private double minRankerScore = 0.1; 
 
+	// path to grobid-home
+	private String grobidHome = null;
+
+	// path to resources for species recognition
+	private String speciesPath = null;
+
 	public String getLangCode() {
 		return langCode;
 	}
@@ -139,6 +145,22 @@ public class NerdConfig {
 
 	public void setUseLinkOut(boolean useLinkOut) {
 		this.useLinkOut = useLinkOut;
+	}
+
+	public String getGrobidHome() {
+		return grobidHome;
+	}
+
+	public void setGrobidHome(String grobidHome) {
+		this.grobidHome = grobidHome;
+	}
+
+	public String getSpeciesPath() {
+		return speciesPath;
+	}
+
+	public void setSpeciesPath(String speciesPath) {
+		this.speciesPath = speciesPath;
 	}
 
 }

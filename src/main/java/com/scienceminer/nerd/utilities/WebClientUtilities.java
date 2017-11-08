@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
  */
 public class WebClientUtilities {
 
-	public static void setProxy() {
+	/*public static void setProxy() {
 		String host = NerdProperties.getInstance().getProxyHost();
 		String port = NerdProperties.getInstance().getProxyPort();
 	
@@ -51,7 +51,7 @@ public class WebClientUtilities {
 			System.getProperties().put("proxyHost", host);
 			System.getProperties().put("proxyPort", port);
 		}
-	}
+	}*/
 
     private static final String HMAC_SHA_ALGORITHM = "HmacSHA256";
 

@@ -1,6 +1,5 @@
 package com.scienceminer.nerd.mention;
 
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.mention.Mention;
@@ -33,8 +32,7 @@ public class TestProcessText {
 
     @Before
     public void setUp() {
-        NerdProperties.getInstance();
-        testPath = NerdProperties.getTestPath();
+        testPath = "src/test/resources/";
         try {
             Utilities.initGrobid();
             processText = ProcessText.getInstance();

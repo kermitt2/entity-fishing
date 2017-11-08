@@ -1,4 +1,4 @@
-# NERD configuration for the (upper) conceptual KB layer
+# entity-fishing configuration for the (upper) conceptual KB layer
 
 # path to the LMDB data
 dbDirectory: data/db/db-kb

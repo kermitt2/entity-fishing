@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
@@ -172,6 +171,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		//freebaseTypes = entity.freebaseTypes;
 		lang = entity.getLang();
 		source = entity.getSource();
+		nerdScore = entity.getNerdScore();
+		selectionScore = entity.getSelectionScore();
 	}
 	
     public String getRawName() {

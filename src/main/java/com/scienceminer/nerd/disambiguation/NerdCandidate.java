@@ -3,7 +3,6 @@ package com.scienceminer.nerd.disambiguation;
 import org.grobid.core.data.Entity;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.utilities.OffsetPosition;
 import com.scienceminer.nerd.kb.Definition;
