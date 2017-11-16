@@ -633,11 +633,11 @@
             <artifactId>sux4j</artifactId>
             <version>3.1.2</version>
             <exclusions>
-                <exclusion>
+                <exclusion> 
                     <groupId>org.slf4j</groupId>
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>   
         </dependency>
         <dependency>
             <groupId>it.unimi.dsi</groupId>
@@ -708,12 +708,12 @@
             <version>0.5.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.grobid</groupId>
+            <groupId>org.grobid.ner</groupId>
             <artifactId>grobid-ner</artifactId>
             <version>0.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.grobid</groupId>
+            <groupId>org.grobid.trainer</groupId>
             <artifactId>grobid-trainer</artifactId>
             <version>0.5.1-SNAPSHOT</version>
         </dependency>
@@ -722,16 +722,16 @@
             <artifactId>naming-java</artifactId>
             <version>0.8</version>
         </dependency>
-<!--        <dependency>
-            <groupId>net.sf.saxon</groupId>
-            <artifactId>Saxon-HE</artifactId>
-            <version>9.8.0-5</version>
+        <dependency>
+            <groupId>fr.limsi.wapiti</groupId>
+            <artifactId>wapiti</artifactId>
+            <version>1.5.0</version>
         </dependency>
         <dependency>
-            <groupId>net.sf.saxon</groupId>
-            <artifactId>saxon-dom</artifactId>
-            <version>9.1.0.8</version>
-        </dependency>-->
+            <groupId>org.wipo.analysers</groupId>
+            <artifactId>wipo-analysers</artifactId>
+            <version>0.0.1</version>
+        </dependency>
 
         <dependency>
             <groupId>linnaeus</groupId>
