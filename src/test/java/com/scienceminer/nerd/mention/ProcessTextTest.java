@@ -1,28 +1,20 @@
 package com.scienceminer.nerd.mention;
 
-import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
-import com.scienceminer.nerd.mention.Mention;
-import org.grobid.core.data.Entity;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.lang.Language;
 import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.hasSize;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
-public class TestProcessText {
+public class ProcessTextTest {
     private String testPath = null;
     private ProcessText processText = null;
 
@@ -31,14 +23,12 @@ public class TestProcessText {
             "which has put it and neighbouring Brazil's markets at risk.";
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         testPath = "src/test/resources/";
-        try {
-            Utilities.initGrobid();
-            processText = ProcessText.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Utilities.initGrobid();
+        processText = ProcessText.getInstance();
+
     }
 
     //@Test
@@ -64,8 +54,8 @@ public class TestProcessText {
 			tokens.add(new LayoutToken(" "));
 			tokens.add(new LayoutToken("test"));
 			List<List<LayoutToken>> pool = processText.ngrams(tokens, 2);*/
-			/*for(List<LayoutToken> cand : pool) {
-				System.out.println(LayoutTokensUtil.toText(cand));
+            /*for(List<LayoutToken> cand : pool) {
+                System.out.println(LayoutTokensUtil.toText(cand));
 			}*/
             //assertEquals(pool.size(), 3);
         } catch (Exception e) {
@@ -77,7 +67,7 @@ public class TestProcessText {
     public void testAcronymsStringAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
 
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0));
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -91,7 +81,7 @@ public class TestProcessText {
     public void testAcronymsTokensAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens);
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -105,10 +95,10 @@ public class TestProcessText {
 
     @Test
     public void testAcronymsStringMixedCase() {
-        String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
-            "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
+        String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
+                "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
 
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0)); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0));
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -121,14 +111,14 @@ public class TestProcessText {
                 assertEquals(base.getRawName(), "chronic obstructive pulmonary disease");
             }
         }
-    } 
+    }
 
     @Test
     public void testAcronymsTokensMixedCase() {
-        String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " + 
-            "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
+        String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
+                "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens); 
+        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens);
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -148,7 +138,7 @@ public class TestProcessText {
         if (processText == null) {
             System.err.println("text processor was not properly initialised!");
         }
-        
+
         String mention = "Setophaga ruticilla";
         Double dice = ProcessText.getDICECoefficient(mention, "en");
         System.out.println(mention + ": " + dice);
@@ -179,18 +169,11 @@ public class TestProcessText {
     }
 
     @Test
-    public void testProcessSpecies() {
-        if (processText == null) {
-            System.err.println("text processor was not properly initialised!");
-        }
-        try {
-            List<Mention> entities = processText.processSpecies("The mouse is here with us, beware not to be too aggressive.", 
+    public void testProcessSpecies() throws Exception {
+        List<Mention> entities = processText.processSpecies("The mouse is here with us, beware not to be too aggressive.",
                 new Language("en"));
 
-            assertThat(entities, hasSize(1));
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        assertThat(entities, hasSize(1));
     }
 
     /*@Test
@@ -230,7 +213,7 @@ public class TestProcessText {
     }*/
 
 
-    @Test 
+    @Test
     public void testParagraphSegmentation() {
         // create a dummy super long text to be segmented
         List<LayoutToken> tokens = new ArrayList<>();
@@ -250,7 +233,7 @@ public class TestProcessText {
         assertThat(segments, hasSize(5));
     }
 
-    @Test 
+    @Test
     public void testParagraphSegmentationMonolithic() {
         // create a dummy super long text to be segmented
         List<LayoutToken> tokens = new ArrayList<>();

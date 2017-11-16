@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.io.*;
 
 
-public class TestWeightedTerm {
+public class WeightedTermTest {
 	private String testPath = null;
 	
 	static final String testJson = "{ \"term\":\"computer\",\"score\":1.0 }";
