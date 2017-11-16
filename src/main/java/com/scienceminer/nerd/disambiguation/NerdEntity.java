@@ -1096,7 +1096,11 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	}
 
 	private String simpleStringNormalisation(String str) {
-		return str.replace("\n", " ").trim().replaceAll(" +", " ");
+		// dehyphenize
+		String result = TextUtilities.dehyphenize(str);
+
+		// otherwise clean
+		return result.replace("\n", " ").trim().replaceAll(" +", " ");
 	}
 
 	/**

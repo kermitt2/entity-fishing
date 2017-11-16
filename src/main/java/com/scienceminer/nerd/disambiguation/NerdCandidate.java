@@ -122,6 +122,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// the candidates originally from the first reference
 	private boolean coReference = false;
 
+	// if the actual string (with its case) matches exactly the selected label of the candidate
+	private boolean bestCaseContext = true;
+
 	public NerdCandidate(NerdEntity entity) {
 		this.entity = entity;
 	}
@@ -218,6 +221,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		domains.add(domain);
 	}
 	
+	public boolean getBestCaseContext() {
+		return bestCaseContext;
+	}
+
+	public void setBestCaseContext(boolean bestCase) {
+		this.bestCaseContext = bestCase;
+	}
+
 	public List<String> getExpandedDomains() {
 		return expandedDomains;
 	}

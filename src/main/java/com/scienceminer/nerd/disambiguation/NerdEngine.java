@@ -197,6 +197,7 @@ System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entit
 }*/
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesSimple(entities, lang);
+		//Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesMultiple(entities, lang);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
@@ -404,7 +405,6 @@ System.out.println("--");
 			if (!bestLabel.exists()) {
 //if (entity.getIsAcronym()) 
 //System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
-				//if (strict)
 				if (entity.getType() != null) {
 					result.put(entity, candidates);
 					continue;
@@ -415,6 +415,11 @@ System.out.println("--");
 //System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName() + 
 //" - " + bestLabel.getSenses().length + " senses");
 				entity.setLinkProbability(bestLabel.getLinkProbability());
+				boolean bestCaseContext = true;
+				Label localBestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
+				if (!localBestLabel.exists()) {
+					bestCaseContext = false;
+				}
 //System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
 				Label.Sense[] senses = bestLabel.getSenses();
 				if ((senses != null) && (senses.length > 0)) {				
@@ -476,6 +481,7 @@ System.out.println("--");
 						candidate.setLang(lang);
 						candidate.setLabel(bestLabel);
 						candidate.setWikidataId(sense.getWikidataId());
+						candidate.setBestCaseContext(bestCaseContext);
 						candidates.add(candidate);
 //System.out.println(candidate.toString());						
 						s++;
@@ -485,7 +491,50 @@ System.out.println("--");
 						}
 					}
 				}
+				
+				if (candidates.size() > 0) {
+					List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
+					// check in alternative labels if we get for the same entity sense better statistical 
+					// information
+//System.out.println((bestLabels.size()-1) + " alternative labels...");
+					for(int p=0; p<bestLabels.size(); p++) {
+						Label altBestLabel = bestLabels.get(p);
+						if (altBestLabel.getText().equals(bestLabel.getText()))
+							continue;
+						long countOcc = altBestLabel.getOccCount();
+						long countLinkOcc = altBestLabel.getLinkOccCount();
+						Label.Sense[] altSenses = altBestLabel.getSenses();
+						if ((altSenses != null) && (altSenses.length > 0)) {				
+							for(int i=0; i<altSenses.length; i++) {
+								Label.Sense sense = altSenses[i];	
+								long senseCountOcc = sense.getLinkOccCount();
+								for(NerdCandidate candid : candidates) {
+									if (sense.getId() == candid.getWikipediaExternalRef()) {
+										// check statistics
+										long candCountOcc = candid.getLabel().getOccCount();
+										long candLinkCountOcc = candid.getLabel().getLinkOccCount();
+										long candSenseCountOcc = candid.getWikiSense().getLinkOccCount();
+
+										if (countOcc > candCountOcc) {
+											/*System.out.println("better label for same sense is: " + altBestLabel.getText() + 
+												", " + countOcc + " countOcc vs " + candCountOcc + " candCountOcc");*/
+
+											// update candidate sense
+											candid.setWikiSense(sense);
+											candid.setLabel(altBestLabel);
+
+											// update entity
+											entity.setLinkProbability(altBestLabel.getLinkProbability());
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
 				Collections.sort(candidates);
+
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
 					result.put(entity, candidates);
 				} /*else
@@ -876,7 +925,8 @@ System.out.println("--");
 				continue;
 			
 			// get a window of layout tokens around without target tokens
-			List<LayoutToken> subTokens = com.scienceminer.nerd.utilities.Utilities.getWindow(entity, tokens, 10, lang);
+			List<LayoutToken> subTokens = com.scienceminer.nerd.utilities.Utilities.getWindow(entity, tokens, 
+				NerdRanker.EMBEDDINGS_WINDOW_SIZE, lang);
 
 			for(NerdCandidate candidate : cands) {			
 				double score = 0.0;
@@ -889,13 +939,10 @@ System.out.println("--");
 						related = relatedness.getRelatednessTo(candidate, localContext, lang);
 					}
 
-					boolean bestCaseContext = true;
-					
-					// actual label used
-					Label bestLabel = candidate.getLabel();
-					if (!entity.getNormalisedName().equals(bestLabel.getText())) {
+					boolean bestCaseContext = candidate.getBestCaseContext();
+					/*if (!entity.getNormalisedName().equals(bestLabel.getText())) {
 						bestCaseContext = false;
-					}
+					}*/
 					
 					float embeddingsSimilarity = 0.0F;
 					// computed only if needed
@@ -920,11 +967,11 @@ System.out.println("--");
 					score = disambiguator.getProbability(commonness, related, quality, 
 						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 
-					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + candidate.getNerdScore() +  " " + entity.toString());
-					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related);
+					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + score + "(ranker/nerd score) " +  " " + entity.toString());
+					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related + ", embeddingsSimilarity: " + embeddingsSimilarity);
 				}
 				catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.debug("Fail to compute ranker score.", e);
 				}
 				
 				candidate.setNerdScore(score);
@@ -1000,12 +1047,12 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 			try {
 				double commonness = candidate.getProb_c(); 
 
-				boolean bestCaseContext = true;
+				boolean bestCaseContext = candidate.getBestCaseContext();
 				// actual label used
-				Label bestLabel = candidate.getLabel();
+				/*Label bestLabel = candidate.getLabel();
 				if (!rawTerm.equals(bestLabel.getText())) {
 					bestCaseContext = false;
-				}
+				}*/
 
 				float embeddingsSimilarity = 0.0F;
 				// computed only of needed
@@ -2163,7 +2210,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 					labels.add(label);
 			}
 
-			/*label = new Label(wikipedia.getEnvironment(), WordUtils.capitalizeFully(normalisedString.toLowerCase()));
+			label = new Label(wikipedia.getEnvironment(), WordUtils.capitalizeFully(normalisedString.toLowerCase()));
 			if (label.exists())
 				labels.add(label);
 
@@ -2171,8 +2218,16 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			label = new Label(wikipedia.getEnvironment(), 
 					WordUtils.capitalizeFully(normalisedString.toLowerCase(), ProcessText.delimiters.toCharArray()));
 			if (label.exists())
-				labels.add(label);*/
+				labels.add(label);
 			
+			// only first word capitalize
+			if (normalisedString.length()>1) {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase().substring(0, 1).toUpperCase() +
+					normalisedString.toLowerCase().substring(1));
+				if (label.exists())
+					labels.add(label);
+			}
+
 			// try variant cases
 			if (ProcessText.isAllUpperCase(normalisedString)) {
 				// a usual pattern in all upper case that is missed above is a combination of 

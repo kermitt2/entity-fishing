@@ -72,6 +72,9 @@ public class NerdRanker extends NerdModel {
 
 	private LowerKnowledgeBase wikipedia = null;
 
+	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
+	// embeddings-based similiarity
+
 	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
 		this.wikipedia = wikipedia;
 
@@ -162,7 +165,13 @@ public class NerdRanker extends NerdModel {
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
 		double[] features = feature.toVector(attributes);
-		return forest.predict(features);
+		double score = forest.predict(features);
+		/*System.out.println("\t\t" + "commonness: " + commonness + 
+							", relatedness: " + relatedness + 
+							", context_quality: " + quality + 
+							", context_quality: " + bestCaseContext + 
+							", embeddingsSimilarity: " + embeddingsSimilarity);*/
+		return score;
 	}
 
 	public void saveModel() throws IOException, Exception {
@@ -408,7 +417,7 @@ public class NerdRanker extends NerdModel {
 			}
 			
 			// get a window of layout tokens around without target tokens
-			List<LayoutToken> subTokens = Utilities.getWindow(entity, tokens, 10, lang);
+			List<LayoutToken> subTokens = Utilities.getWindow(entity, tokens, NerdRanker.EMBEDDINGS_WINDOW_SIZE, lang);
 
 			for(NerdCandidate candidate : cands) {
 				try {
@@ -739,7 +748,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 			}
 			
 			// get a window of layout tokens around without target tokens
-			List<LayoutToken> subTokens = Utilities.getWindow(entity, tokens, 10, lang);
+			List<LayoutToken> subTokens = Utilities.getWindow(entity, tokens, NerdRanker.EMBEDDINGS_WINDOW_SIZE, lang);
 
 			for(NerdCandidate candidate : cands) {
 				try {
@@ -797,7 +806,6 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 						else
 							this.positives++;
 					}
-					
 /*System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 							entity.toString());
 					System.out.println("\t\t" + "commonness: " + commonness + 
@@ -824,7 +832,6 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 				stats.add(evaluateCorpusArticle(article));
 			else
 				stats.add(evaluateWikipediaArticle(article));
-				
 			n++;
 		}
 		return EvaluationUtil.evaluate(testSet, stats);

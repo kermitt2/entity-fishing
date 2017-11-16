@@ -51,7 +51,7 @@ For instance for training with the train subset of the AIDA-CONLL, use:
 
 
 Creating entity embeddings
-==========================
+**************************
 
 Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. For creating these entity embeddings, the process is as follow: 
 
@@ -86,6 +86,7 @@ This step might take a lot of time and exploiting multithreading is particularly
 	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityEmbeddings -Dexec.args="-i entity.en.description -v wiki.en.quantized.compressed -o entity.en.embeddings -n 10"
 
 The following parameters are available:
+
 * -h: displays help
 * -in: path to an entity description data file
 * -out: path to the result entity embeddings file (not quantized nor compressed, this is to be done afterwards)

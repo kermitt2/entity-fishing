@@ -81,34 +81,10 @@ public class ProcessText {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ProcessText.class);
 	
-  	private static volatile ProcessText instance;
-	
-  	// mention recognition methods
-	public enum MentionMethod {
-		wikipedia	("wikipedia"),
-		ner			("ner"),
-		wikidata	("wikidata"),
-		quantities	("quantities"),
-		grobid 		("grobid"),
-		species		("species"),
-		user 		("user");
-		
-		private String name;
-
-		MentionMethod(String name) {
-          	this.name = name;
-		}
-
-		public String getName() {
-			return name;
-		}
-	};
+  	private static volatile ProcessText instance; 	
 
 	// ClearParser components for sentence segmentation
 	private AbstractTokenizer tokenizer = null;
-	
-	// GROBID tokenizer
-	//private GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance(); 
 
 	private NERParsers nerParsers = null;
 
@@ -250,9 +226,9 @@ public class ProcessText {
 							localResults = processNER(text2tag, language);
 						} else if (mentionType == ProcessText.MentionMethod.wikipedia) {
 							localResults = processWikipedia(text2tag, language);
-						} else if (mentionType == ProcessText.MentionMethod.species) {
+						}/* else if (mentionType == ProcessText.MentionMethod.species) {
 							localResults = processSpecies(text2tag, language);
-						}
+						}*/
 
 						// we "shift" the entities offset in case only specific sentences are processed
 						if (CollectionUtils.isNotEmpty(localResults)) {
@@ -281,9 +257,9 @@ public class ProcessText {
 						localResults = processNER(text, language);
 					} else if (mentionType == ProcessText.MentionMethod.wikipedia) {
 						localResults = processWikipedia(text, language);
-					} else if (mentionType == ProcessText.MentionMethod.species) {
+					} /*else if (mentionType == ProcessText.MentionMethod.species) {
 						localResults = processSpecies(text, language);
-					}
+					}*/
 					if (CollectionUtils.isNotEmpty(localResults)) {
 						results.addAll(localResults);
 					}
@@ -318,18 +294,6 @@ public class ProcessText {
 
 		// we process the whole text, sentence info does not apply to layout documents
 		try {
-			/*if (nerParsers == null) {
-				nerParsers = new NERParsers();	
-			}
-			List<Entity> entityResults = nerParsers.extractNE(tokens, language);
-			for(Entity entityResult : entityResults) {
-				Mention mention = new Mention(entityResult);
-				mention.setSource(MentionMethod.NER);
-				if (results == null) {
-					results = new ArrayList<>();
-				}
-				results.add(mention);
-			}*/
 			for (ProcessText.MentionMethod mentionType : mentionTypes) {
 				List<Mention> localResults = null;
 
@@ -337,9 +301,9 @@ public class ProcessText {
 					localResults = processNER(tokens, language);
 				} else if (mentionType == ProcessText.MentionMethod.wikipedia) {
 					localResults = processWikipedia(tokens, language);
-				} else if (mentionType == ProcessText.MentionMethod.species) {
+				} /*else if (mentionType == ProcessText.MentionMethod.species) {
 					localResults = processSpecies(tokens, language);
-				}
+				}*/
 
 				if (localResults != null)
 					results.addAll(localResults);
@@ -441,11 +405,6 @@ public class ProcessText {
 		int lastTokenIndex = 0;
 		int lastTokenPos = 0;
 		for(Mention entity : results) {
-			/*org.grobid.core.utilities.OffsetPosition pos = 
-				new org.grobid.core.utilities.OffsetPosition();
-			pos.start = entity.getOffsetStart();
-			pos.end = entity.getOffsetEnd();
-			entity.setOffsets(pos);*/
 			// synchronize layout token with the selected ngrams
 			List<LayoutToken> entityTokens = null;
 			tokenPos = lastTokenPos;
@@ -1561,4 +1520,24 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
     	return result;
     }
 
+    // mention recognition methods
+	public enum MentionMethod {
+		wikipedia	("wikipedia"),
+		ner			("ner"),
+		wikidata	("wikidata"),
+		quantities	("quantities"),
+		grobid 		("grobid"),
+		species		("species"),
+		user 		("user");
+		
+		private String name;
+
+		MentionMethod(String name) {
+          	this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+	};
 }

@@ -17,7 +17,7 @@ public class SimpleRankerFeatureVector extends GenericRankerFeatureVector {
 		Add_relatedness = true;
 		Add_context_quality = true;
 		//Add_ner = true;
-		Add_bestCaseContext = true;
+		//Add_bestCaseContext = true;
 		target_numeric = true;
 		target_class = false;
 	}

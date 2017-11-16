@@ -93,7 +93,8 @@ public class Relatedness {
 			return 0.0;
 		}
 		for (Article contextArticle : contextArticles) {
-			if (article.getId() != contextArticle.getId()) {
+			//if (article.getId() != contextArticle.getId()) 
+			{
 				currentRelatedness = 0.0;
 				try {
 					currentRelatedness = getRelatedness(article, contextArticle, lang);

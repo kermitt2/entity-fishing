@@ -22,11 +22,20 @@ import com.fasterxml.jackson.core.io.*;
  */
 public class NerdContext {
 	
+	// the selected entities modeling the context
 	protected List<Article> contextArticles = null;
 	protected List<Integer> contextArticlesIds = null;
 	
 	// working acronyms for this context
 	protected Map<Mention, Mention> acronyms = null;
+
+	// the list of mentions encountered so far in the current "session"
+	// this is useful for future co-reference resolutions
+	protected List<Mention> mentionRepository = null;
+
+	// the list of disambiguated entities produced so far in the current "session"
+	// this can be used for adding features, reimforcement or various post-processing
+	protected List<Mention> entityRepository = null;
 
 	protected double totalWeight = 0.0;
 	protected Relatedness relatedness = Relatedness.getInstance();
