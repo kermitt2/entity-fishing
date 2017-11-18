@@ -36,8 +36,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 	private StatementDatabase dbStatements = null;
 	private PropertyDatabase dbProperties = null;
 
-	// index of ibliographical entities via their DOI
+	// index of bliographical entities via their DOI
 	private BiblioDatabase dbBiblio = null;
+
+	
 
 	// loaded only if needed, gives the statements by the tail entity
 	private StatementDatabase dbReverseStatements = null;

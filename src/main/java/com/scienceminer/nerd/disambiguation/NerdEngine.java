@@ -492,7 +492,7 @@ System.out.println("--");
 					}
 				}
 				
-				if (candidates.size() > 0) {
+/*				if (candidates.size() > 0) {
 					List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
 					// check in alternative labels if we get for the same entity sense better statistical 
 					// information
@@ -516,8 +516,8 @@ System.out.println("--");
 										long candSenseCountOcc = candid.getWikiSense().getLinkOccCount();
 
 										if (countOcc > candCountOcc) {
-											/*System.out.println("better label for same sense is: " + altBestLabel.getText() + 
-												", " + countOcc + " countOcc vs " + candCountOcc + " candCountOcc");*/
+											//System.out.println("better label for same sense is: " + altBestLabel.getText() + 
+											//	", " + countOcc + " countOcc vs " + candCountOcc + " candCountOcc");
 
 											// update candidate sense
 											candid.setWikiSense(sense);
@@ -532,7 +532,7 @@ System.out.println("--");
 						}
 					}
 				}
-
+*/
 				Collections.sort(candidates);
 
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
@@ -543,7 +543,7 @@ System.out.println("--");
 			
 		}
 
-		result = expendCoReference(entities, result);
+		//result = expendCoReference(entities, result);
 
 		return result;
 	}

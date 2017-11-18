@@ -1280,7 +1280,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		return dice;
     }
 
-    private uk.ac.man.entitytagger.matching.Matcher matcher = null;
+    /*private uk.ac.man.entitytagger.matching.Matcher matcher = null;
 
     public List<Mention> processSpecies(String text, Language language) {
     	if (!language.getLang().equals("en"))
@@ -1353,11 +1353,6 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		int lastTokenIndex = 0;
 		int lastTokenPos = 0;
 		for(Mention entity : results) {
-			/*org.grobid.core.utilities.OffsetPosition pos = 
-				new org.grobid.core.utilities.OffsetPosition();
-			pos.start = entity.getOffsetStart();
-			pos.end = entity.getOffsetEnd();
-			entity.setOffsets(pos);*/
 			// synchronize layout token with the selected ngrams
 			List<LayoutToken> entityTokens = null;
 			tokenPos = lastTokenPos;
@@ -1399,7 +1394,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		}
 
     	return finalResults;
-    }
+    }*/
 
     public static int MINIMAL_PARAGRAPH_LENGTH = 100;
     public static int MAXIMAL_PARAGRAPH_LENGTH = 600;

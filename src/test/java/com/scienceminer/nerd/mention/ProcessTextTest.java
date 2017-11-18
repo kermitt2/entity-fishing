@@ -168,13 +168,13 @@ public class ProcessTextTest {
         System.out.println(mention + ": " + dice);
     }
 
-    @Test
+    /*@Test
     public void testProcessSpecies() throws Exception {
         List<Mention> entities = processText.processSpecies("The mouse is here with us, beware not to be too aggressive.",
                 new Language("en"));
 
         assertThat(entities, hasSize(1));
-    }
+    }*/
 
     /*@Test
     public void testProcessSpecies2() {
