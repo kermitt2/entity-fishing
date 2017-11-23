@@ -103,7 +103,7 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 	            	String value = null;
 
 	            	Iterator<JsonNode> ite2 = propertyNode.elements();
-	            	if (ite2.hasNext()) {
+	            	while (ite2.hasNext()) {
 	            		JsonNode mainsnakNode = ite2.next();
 	            		JsonNode propNameNode = mainsnakNode.findPath("property");
 	            		if ((propNameNode != null) && (!propNameNode.isMissingNode())) {
@@ -132,7 +132,8 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 		            	if ((propertytId != null) && (value != null)) {
 							Statement statement = new Statement(itemId, propertytId, value);
 //System.out.println("Adding: " + statement.toString());
-							statements.add(statement);
+							if (!statements.contains(statement))
+								statements.add(statement);
 						}
 					}
 				}

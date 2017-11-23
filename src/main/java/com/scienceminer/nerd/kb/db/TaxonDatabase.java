@@ -21,23 +21,24 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BiblioDatabase extends StringRecordDatabase<String> {
-	private static final Logger logger = LoggerFactory.getLogger(BiblioDatabase.class);	
+public class TaxonDatabase extends StringRecordDatabase<List<String>> {
+	private static final Logger logger = LoggerFactory.getLogger(TaxonDatabase.class);	
 
-	public BiblioDatabase(KBEnvironment env) {
-		super(env, DatabaseType.biblio);
+	public TaxonDatabase(KBEnvironment env) {
+		super(env, DatabaseType.taxon);
 	}
 
 	@Override
-	public KBEntry<String, String> deserialiseCsvRecord(
+	public KBEntry<String, List<String>> deserialiseCsvRecord(
 			CsvRecordInput record) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * Load the bilbiographical index 
+	 * Load the taxon hierarchy index 
 	 */
-	public void fillBiblioDb(ConceptDatabase conceptDb, StatementDatabase statementDb, boolean overwrite) throws Exception {
+	public void fillTaxonDbs(ConceptDatabase conceptDb, StatementDatabase statementDb, 
+			boolean overwrite) throws Exception {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
@@ -45,16 +46,13 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
 		if (conceptDb == null)
 			throw new NerdResourceException("conceptDb not found");
 
-		if (statementDb == null)
-			throw new NerdResourceException("statementDb not found");
-
 		// iterate through concepts
 		KBIterator iter = new KBIterator(conceptDb);
 		Transaction tx = environment.createWriteTransaction();
 		try {
 			int nbToAdd = 0;
 			int n = 0; // total entities
-			int nbDoi = 0; // total doi found
+			int nbTaxon = 0; // total doi found
 			while(iter.hasNext()) {
 				if (nbToAdd > 10000) {
 					tx.commit();
@@ -68,31 +66,47 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
 				//Page p = null;
 				try {
 					String entityId = (String)KBEnvironment.deserialize(keyData);
-					// check the statements for a property P356 (DOI)
-					String doi = null;
+					// check the statements for a property P31 (instanceOf) with 
+					// value Q16521 (taxon)
+					String superType = null;
 
 					List<Statement> statements = statementDb.retrieve(entityId);
-					if ( (statements != null) && (statements.size() > 0) ) {
+					/*if ( (statements != null) && (statements.size() > 0) ) {
 						for(Statement statement : statements) {
-							if (statement.getPropertyId().equals("P356")) {
-								doi = statement.getValue();
+							if (statement.getPropertyId().equals("P31")) {
+								superType = statement.getValue();
 								//System.out.println("found DOI: " + doi);
-								if (doi.startsWith("\""))
-									doi = doi.substring(1, doi.length());
-								if (doi.endsWith("\""))
-									doi = doi.substring(0, doi.length()-1);
 							}
 						}
-					}
+					}*/
 
-					if (doi != null) {
-						KBEntry<String,String> theEntry = new KBEntry<String, String>(doi, entityId);
-						if (theEntry != null) {
+					// check the statements for a property P171 (parent taxon) 
+
+					//if ((superType != null) && (superType.equals("Q16521")) ) 
+					{
+						List<String> parentTaxons = null;
+
+						// check the statements for a property P171 (parent taxon) 
+						for(Statement statement : statements) {
+							if (statement.getPropertyId().equals("P171")) {
+								String parentTaxon = statement.getValue();
+								//System.out.println("found DOI: " + doi);
+								if (parentTaxons == null)
+									parentTaxons = new ArrayList<String>();
+								if (!parentTaxons.contains(parentTaxon))
+									parentTaxons.add(parentTaxon);
+							}
+						}
+
+						if (parentTaxons != null) {
+							// we have a taxon
+							nbTaxon++;
+							// store the parent information
 							try {
-								db.put(tx, KBEnvironment.serialize(theEntry.getKey()), 
-									KBEnvironment.serialize(theEntry.getValue()));
+								db.put(tx, KBEnvironment.serialize(entityId), 
+									KBEnvironment.serialize(parentTaxons));
 								nbToAdd++;
-								nbDoi++;
+								
 							} catch(Exception e) {
 								e.printStackTrace();
 							}
@@ -104,9 +118,9 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
 				n++;
 			}
 			System.out.println("total nb entities visited: " + n);
-			System.out.println("total nb DOI found: " + nbDoi);
+			System.out.println("total nb taxon found: " + nbTaxon);
 		} catch(Exception e) {
-			logger.error("Error when creating biblioDb", e);
+			logger.error("Error when filling taxon databases", e);
  		} finally {
 			if (iter != null)
 				iter.close();

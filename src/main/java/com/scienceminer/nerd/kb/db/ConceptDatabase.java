@@ -43,7 +43,7 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 		if (isLoaded && !overwrite)
 			return;
 		if (dataFile == null)
-			throw new NerdResourceException("Concept dump file not found");
+			throw new NerdResourceException("Concept dump file not found: " + dataFile.getPath());
 		System.out.println("Loading " + name + " database");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));

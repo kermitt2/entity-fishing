@@ -176,7 +176,7 @@ public class NerdRestProcessFile {
 		                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
 		                    if (titleTokens != null) {
 								System.out.println("Process title... ");
-System.out.println(LayoutTokensUtil.toText(titleTokens));
+//System.out.println(LayoutTokensUtil.toText(titleTokens));
 								//workingQuery.setEntities(null);
 		                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
 								if (newEntities != null) {

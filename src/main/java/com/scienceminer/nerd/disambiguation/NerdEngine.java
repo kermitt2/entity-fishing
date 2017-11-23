@@ -492,7 +492,7 @@ System.out.println("--");
 					}
 				}
 				
-/*				if (candidates.size() > 0) {
+				if (candidates.size() > 0) {
 					List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
 					// check in alternative labels if we get for the same entity sense better statistical 
 					// information
@@ -532,7 +532,7 @@ System.out.println("--");
 						}
 					}
 				}
-*/
+
 				Collections.sort(candidates);
 
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {

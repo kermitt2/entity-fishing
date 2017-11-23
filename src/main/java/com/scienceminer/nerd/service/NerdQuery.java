@@ -16,6 +16,7 @@ import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.kb.KBUtilities;
 import com.scienceminer.nerd.utilities.Filter;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -621,6 +622,8 @@ public class NerdQuery {
             buffer.append(", \"entities\": [");
             boolean first = true;
             for (NerdEntity entity : entities) {
+                //if (KBUtilities.isPlant(entity.getWikidataId()))
+                //    continue;
                 if (filter != null) {
                     List<Statement> statements = entity.getStatements();
                     if ( (statements == null) && 

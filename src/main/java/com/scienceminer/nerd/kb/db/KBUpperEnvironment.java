@@ -39,7 +39,8 @@ public class KBUpperEnvironment extends KBEnvironment {
 	// index of bliographical entities via their DOI
 	private BiblioDatabase dbBiblio = null;
 
-	
+	// index for the taxon taxonomy (aka the tree of life)
+	private TaxonDatabase dbTaxonParent = null;
 
 	// loaded only if needed, gives the statements by the tail entity
 	private StatementDatabase dbReverseStatements = null;
@@ -89,6 +90,13 @@ public class KBUpperEnvironment extends KBEnvironment {
 		return dbBiblio;
 	}
 
+	/**
+	 * Returns the {@link DatabaseType#taxon} database
+	 */
+	public TaxonDatabase getDbTaxonParent() {
+		return dbTaxonParent;
+	}
+
 	@Override
 	protected void initDatabases() {
 		System.out.println("\ninit upper level language independent environment");
@@ -108,7 +116,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 		databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
 
 		dbBiblio = buildBiblioDatabase();
-		databasesByType.put(DatabaseType.biblio, dbBiblio);		
+		databasesByType.put(DatabaseType.biblio, dbBiblio);	
+
+		dbTaxonParent = buildTaxonParentDatabase();
+		databasesByType.put(DatabaseType.taxon, dbTaxonParent);
 	}
 
 	/**
@@ -154,6 +165,8 @@ public class KBUpperEnvironment extends KBEnvironment {
 		
 		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
 
+		dbTaxonParent.fillTaxonDbs(dbConcepts, dbStatements, overwrite);
+
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
 	}
 
@@ -183,6 +196,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 	private BiblioDatabase buildBiblioDatabase() {
 		return new BiblioDatabase(this);
+	}
+
+	private TaxonDatabase buildTaxonParentDatabase() {
+		return new TaxonDatabase(this);
 	}	
 
 	public Long retrieveStatistic(StatisticName sn) {

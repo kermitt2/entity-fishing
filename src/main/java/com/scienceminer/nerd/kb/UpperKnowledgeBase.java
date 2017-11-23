@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -192,6 +194,36 @@ public class UpperKnowledgeBase {
 
 	public String getEntityIdPerDoi(String doi) {
 		return env.getDbBiblio().retrieve(doi.toLowerCase());
+	}
+
+	/**
+	 * Return the list of immediate parent taxons (P171) for a given taxon, null for empty list and non-taxon
+	 */
+	public List<String> getParentTaxons(String wikidataId) {
+		return env.getDbTaxonParent().retrieve(wikidataId);
+	}
+
+	/**
+	 * Return the full list of parent taxons (P171) for a given taxon along the taxon hierarchy, null for empty list and non-taxon
+	 */
+	public List<String> getFullParentTaxons(String wikidataId) {
+		List<String> taxons = env.getDbTaxonParent().retrieve(wikidataId);
+		if (CollectionUtils.isEmpty(taxons)) {
+			return null;
+		}
+		List<String> result = new ArrayList<String>();
+		for(String taxonId : taxons) {
+			if (!result.contains(taxonId))
+				result.add(taxonId);
+			List<String> parents = getFullParentTaxons(taxonId);
+			if (!CollectionUtils.isEmpty(parents)) {
+				for(String parentId : parents) {
+					if (!result.contains(parentId))
+						result.add(parentId);
+				}
+			}
+		}
+		return result;
 	}
 
 	public void close() {

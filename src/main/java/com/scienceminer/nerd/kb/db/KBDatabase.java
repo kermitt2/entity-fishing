@@ -295,6 +295,11 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates a DOI string to a bibliographic entity
 		 */
-		biblio
+		biblio,
+
+		/**
+		 * Associates a concept id string to a list of concept id strings following the taxon hierarchy 
+		 */
+		taxon
 	}
 }
