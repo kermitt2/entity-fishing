@@ -16,7 +16,10 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class NerdRestProcessQuery {
 
@@ -120,7 +123,7 @@ public class NerdRestProcessQuery {
             }
 
             // create an empty context for the query
-			nerdQuery.setContext(new NerdContext());
+            nerdQuery.setContext(new NerdContext());
 
             // entities originally from the query are marked as such
             List<NerdEntity> originalEntities = null;
@@ -150,7 +153,7 @@ public class NerdRestProcessQuery {
             List<Mention> entities = processText.process(nerdQuery);
             
             // inject explicit acronyms
-			entities = ProcessText.acronymCandidates(nerdQuery, entities);
+            entities = ProcessText.acronymCandidates(nerdQuery, entities);
 
             // we keep only entities not conflicting with the ones already present in the query
             List<NerdEntity> newEntities = new ArrayList<NerdEntity>();
@@ -238,6 +241,9 @@ public class NerdRestProcessQuery {
                         .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                         .build();
             }
+        } catch (QueryException qe) {
+            LOGGER.error("Bad input data. ", qe);
+            response= Response.status(Status.BAD_REQUEST).build();
         } catch (Exception e) {
             LOGGER.error("An unexpected exception occurs. ", e);
             response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
@@ -401,7 +407,7 @@ public class NerdRestProcessQuery {
             // possible entity mentions
             ProcessText processText = ProcessText.getInstance();
             /*Integer[] processSentence =  nerdQuery.getProcessSentence();
-			List<Sentence> sentences = nerdQuery.getSentences();
+            List<Sentence> sentences = nerdQuery.getSentences();
 			if ( (sentences == null) && (nerdQuery.getSentence() || (processSentence != null)) ) {
 				sentences = processText.sentenceSegmentation(nerdQuery.getText());
 				nerdQuery.setSentences(sentences);

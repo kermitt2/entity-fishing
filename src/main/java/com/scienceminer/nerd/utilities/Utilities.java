@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Some utilities methods that I don't know where to put.
- * 
+ *
  */
 public class Utilities {
 
@@ -120,7 +120,7 @@ public class Utilities {
 	 * lin-32<br>
 	 * lin-64<br>
 	 * mac-64<br>
-	 * 
+	 *
 	 * @return name of the directory corresponding to the os name and
 	 *         architecture.
 	 */
@@ -133,7 +133,7 @@ public class Utilities {
 
 	/**
 	 * Convert a string to boolean.
-	 * 
+	 *
 	 * @param value
 	 *            the value to convert
 	 * @return true if the string value is "true", false is it equals to
@@ -152,7 +152,7 @@ public class Utilities {
 
 	/**
 	 * Call a java method using the method name given in string.
-	 * 
+	 *
 	 * @param obj
 	 *            Class in which the method is.
 	 * @param args
@@ -177,7 +177,7 @@ public class Utilities {
 
 	/**
 	 * Call a java method using the method name given in string.
-	 * 
+	 *
 	 * @param obj
 	 *            Class in which the method is.
 	 * @param args
@@ -198,7 +198,7 @@ public class Utilities {
 	/**
 	 * Get the method given in string in input corresponding to the given
 	 * arguments.
-	 * 
+	 *
 	 * @param obj
 	 *            Class in which the method is.
 	 * @param paramTypes
@@ -206,7 +206,7 @@ public class Utilities {
 	 * @param methodName
 	 *            the name of the method.
 	 * @return Methood
-	 * 
+	 *
 	 * @throws NoSuchMethodException
 	 */
 	@SuppressWarnings("rawtypes")
@@ -218,7 +218,7 @@ public class Utilities {
 
 	/**
 	 * Creates a file and writes some content in it.
-	 * 
+	 *
 	 * @param file
 	 *            The file to write in.
 	 * @param content
@@ -236,7 +236,7 @@ public class Utilities {
 
 	/**
 	 * Read a file and return the content.
-	 * 
+	 *
 	 * @param pPathToFile
 	 *            path to file to read.
 	 * @return String contained in the document.
@@ -257,15 +257,13 @@ public class Utilities {
 
 		return out.toString();
 	}
-	
+
 	/**
 	 * Format a date in string using pFormat.
-	 * 
-	 * @param pDate
-	 *            the date to parse.
-	 * @param pFormat
-	 *            the format to use following SimpleDateFormat patterns.
-	 * 
+	 *
+	 * @param pDate the date to parse.
+	 * @param pFormat the format to use following SimpleDateFormat patterns.
+	 *
 	 * @return the formatted date.
 	 */
 	public static String dateToString(Date pDate, String pFormat){
@@ -273,41 +271,16 @@ public class Utilities {
 		return dateFormat.format(pDate);
 	}
 
-	/*public static void initGrobid() {
-		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        
-		try {
-			NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
-
-			String pGrobidHome = conf.getGrobidHome();
-			String pGrobidProperties = pGrobidHome + "/config/grobid.properties";
-
-			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);      
-			GrobidProperties.getInstance();
-			LibraryLoader.load();
-	
-			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
-		}
-		catch(javax.naming.NameAlreadyBoundException e) {
-			// already loaded, nothing to do
-		}
-		catch(Exception e) {
-			throw new NerdException("Fail to initalise the grobid-ner component.", e);
-		}
-	}*/
-
 	public static void initGrobid() {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
 		try {
 	        NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
-
 			String pGrobidHome = conf.getGrobidHome();
-			String pGrobidProperties = pGrobidHome + "/config/grobid.properties";
-		
+
 			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
         	GrobidProperties.getInstance(grobidHomeFinder);
-        	LibraryLoader.load();
+            LibraryLoader.load();
 			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 		}
 		catch(Exception e) {
@@ -330,7 +303,7 @@ public class Utilities {
 		return is.readObject();
 	}
 
-	public static List<LayoutToken> getWindow(NerdEntity entity, List<LayoutToken> tokens, int size, String lang) {		
+	public static List<LayoutToken> getWindow(NerdEntity entity, List<LayoutToken> tokens, int size, String lang) {
 		int start = entity.getOffsetStart();
 		int end = entity.getOffsetEnd();
 
@@ -343,7 +316,7 @@ public class Utilities {
 		// first locate the entity in the token list
 		int pos = 0;
 		for(LayoutToken token : tokens) {
-			if ( (token.getOffset() >= start) && ((token.getOffset()+token.getText().length()) <= end) ) 
+			if ( (token.getOffset() >= start) && ((token.getOffset()+token.getText().length()) <= end) )
 				break;
 			pos++;
 		}
@@ -356,7 +329,7 @@ public class Utilities {
 			posEnd = tokens.size()-1;
 
 		for(int p = posStart; p <= posEnd; p++) {
-			if (p != pos) { 
+			if (p != pos) {
 				subTokens.add(tokens.get(p));
 			}
 		}
@@ -364,6 +337,6 @@ public class Utilities {
 		return subTokens;
 	}
 
-	
+
 
 }

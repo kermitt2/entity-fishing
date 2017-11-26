@@ -442,7 +442,7 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities in workin
 		return response;
 	}
 
-	private static Language identifyLanguage(BiblioItem resHeader, Document doc) {
+	public static Language identifyLanguage(BiblioItem resHeader, Document doc) {
 
 		String contentSample = "";
 		if (resHeader.getTitle() != null)
