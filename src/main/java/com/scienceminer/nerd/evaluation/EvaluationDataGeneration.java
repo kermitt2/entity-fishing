@@ -63,10 +63,6 @@ public class EvaluationDataGeneration {
                         new SuffixFileFilter(".pdf", IOCase.INSENSITIVE), null);
             }
 
-            final StringBuilder sbEntities = new StringBuilder();
-            sbEntities.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
-            sbEntities.append("<" + corpus + ".entityAnnotation>").append("\n");
-
             for (File evalFile : evalFiles) {
                 final Map<String, String> output = extractPDFContent(evalFile);
                 String fileContent = output.get("TEXT");
@@ -85,46 +81,71 @@ public class EvaluationDataGeneration {
                         throw new NerdException("Cannot write file " + outputFile.getAbsolutePath(), e);
                     }
                 }
-
-                // here we process starting from the TXT files.
-                ProcessText textProcessor = ProcessText.getInstance();
-                List<NerdEntity> entities = new ArrayList<>();
-
-                List<Mention> nerMentions = textProcessor.processNER(fileContent, new Language(lang));
-                nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
-
-                List<Mention> wikipediaMentions = textProcessor.processWikipedia(fileContent, new Language(lang));
-                wikipediaMentions.stream().forEach(wm -> {
-                    final NerdEntity nerdEntity = new NerdEntity(wm);
-                    if (entities.contains(nerdEntity)) {
-                        entities.add(nerdEntity);
-                    }
-                });
-
-                sbEntities.append("\t").append("<document docName=\"" + outputFile.getName().toString() + "\">").append("\n");
-
-                entities.stream().forEach(e -> {
-                    sbEntities.append("\t\t").append("<annotation>").append("\n");
-                    sbEntities.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
-                    sbEntities.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
-                    sbEntities.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
-                    sbEntities.append("\t\t\t").append("<wikipediaId>").append(e.getWikipediaExternalRef()).append("</wikipediaId>").append("\n");
-                    sbEntities.append("\t\t\t").append("<offset>").append(e.getOffsetStart()).append("</offset>").append("\n");
-                    sbEntities.append("\t\t\t").append("<length>").append(e.getRawName().length()).append("</length>").append("\n");
-                    sbEntities.append("\t\t").append("</annotation>").append("\n");
-                });
-
-                sbEntities.append("\t").append("</document>").append("\n");
             }
 
-            sbEntities.append("</" + corpus + ".entityAnnotation>").append("\n");
-            try {
-                LOGGER.info("Writing: " + corpusRefFile);
-                FileUtils.writeStringToFile(corpusRefFile, sbEntities.toString(), UTF_8);
-            } catch (IOException e) {
-                throw new NerdException("Cannot write file " + corpusRefFile, e);
-            }
         }
+
+        // Fetch the txt files and create the XML file  with annotations
+        Collection<File> evalTxtFiles = FileUtils.listFiles(new File(corpusPathRawTexts),
+                new SuffixFileFilter(".txt", IOCase.INSENSITIVE), null);
+
+        final StringBuilder sbEntities = new StringBuilder();
+        sbEntities.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
+        sbEntities.append("<" + corpus + ".entityAnnotation>").append("\n");
+
+
+        for (File evalTxtFile : evalTxtFiles) {
+            ProcessText textProcessor = ProcessText.getInstance();
+            List<NerdEntity> entities = new ArrayList<>();
+
+            String filename = FilenameUtils.removeExtension(evalTxtFile.getName());
+
+            final String[] split = filename.split("\\.");
+            final Language language = new Language(split[split.length - 1]);
+
+            String text = null;
+            try {
+                text = FileUtils.readFileToString(evalTxtFile, UTF_8);
+            } catch (IOException e) {
+                LOGGER.warn("cannot read file " + evalTxtFile + ". Skipping it.", e);
+                continue;
+            }
+            List<Mention> nerMentions = textProcessor.processNER(text, language);
+            nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
+
+            List<Mention> wikipediaMentions = textProcessor.processWikipedia(text, language);
+            wikipediaMentions.stream().forEach(wm -> {
+                final NerdEntity nerdEntity = new NerdEntity(wm);
+                if (entities.contains(nerdEntity)) {
+                    entities.add(nerdEntity);
+                }
+            });
+
+            sbEntities.append("\t").append("<document docName=\"" + evalTxtFile.getName().toString() + "\">").append("\n");
+
+            entities.stream().forEach(e -> {
+                sbEntities.append("\t\t").append("<annotation>").append("\n");
+                sbEntities.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
+                sbEntities.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
+                sbEntities.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
+                sbEntities.append("\t\t\t").append("<wikipediaId>").append(e.getWikipediaExternalRef()).append("</wikipediaId>").append("\n");
+                sbEntities.append("\t\t\t").append("<offset>").append(e.getOffsetStart()).append("</offset>").append("\n");
+                sbEntities.append("\t\t\t").append("<length>").append(e.getRawName().length()).append("</length>").append("\n");
+                sbEntities.append("\t\t").append("</annotation>").append("\n");
+            });
+
+            sbEntities.append("\t").append("</document>").append("\n");
+        }
+
+        sbEntities.append("</" + corpus + ".entityAnnotation>").append("\n");
+        try {
+            LOGGER.info("Writing: " + corpusRefFile);
+            FileUtils.writeStringToFile(corpusRefFile, sbEntities.toString(), UTF_8);
+        } catch (IOException e) {
+            throw new NerdException("Cannot write file " + corpusRefFile, e);
+        }
+
+
     }
 
     /**
