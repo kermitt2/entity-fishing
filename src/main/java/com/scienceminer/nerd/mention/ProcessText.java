@@ -1,87 +1,67 @@
 package com.scienceminer.nerd.mention;
 
+import com.googlecode.clearnlp.engine.EngineGetter;
+import com.googlecode.clearnlp.reader.AbstractReader;
+import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
+import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
+import com.scienceminer.nerd.disambiguation.NerdContext;
+import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.service.NerdQuery;
-import com.scienceminer.nerd.utilities.StringPos;
-import com.scienceminer.nerd.utilities.Utilities;
+import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Label;
-
+import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.utilities.Stopwords;
+import com.scienceminer.nerd.utilities.StringPos;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-
+import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.data.Entity;
+import org.grobid.core.engines.NERParsers;
+import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.*;
-
-import com.googlecode.clearnlp.component.AbstractComponent;
-import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
-import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.reader.AbstractReader;
-import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
-
-import org.grobid.core.analyzers.GrobidAnalyzer;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
-import org.grobid.core.data.Sense;
-import org.grobid.core.engines.NERParsers;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.factory.*;
-import org.grobid.core.main.*;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.BoundingBoxCalculator;
-import org.grobid.core.lang.Language;
-import org.grobid.core.layout.BoundingBox;
-import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.UnicodeUtil;
-
-import com.scienceminer.nerd.utilities.Stopwords;
-
-// linnaeus
-import uk.ac.man.documentparser.dataholders.Document;
-import uk.ac.man.documentparser.input.DocumentIterator;
-import uk.ac.man.documentparser.input.TextFile;
-import uk.ac.man.entitytagger.doc.TaggedDocument;
-import uk.ac.man.entitytagger.matching.MatchOperations;
-import martin.common.ArgParser;
-import martin.common.Loggers;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+// linnaeus
+
 /**
- * 
- * Everything we need to get the mentions and names entities from a text. From a text or a 
- * NerdQuery object, we generate a list of Mention objects corresponding to the potential 
- * mentions of entity to be considred by the further disambiguation stage. 
- * 
+ *
+ * Everything we need to get the mentions and names entities from a text. From a text or a
+ * NerdQuery object, we generate a list of Mention objects corresponding to the potential
+ * mentions of entity to be considred by the further disambiguation stage.
+ *
  * For producing these mentions, different recognition modules/algorithms can be used, the
  * default one being wikipedia via the Wikipedia anchors and titles. Other additional
- * possibilities are named entity (NER) or spcialised recognizers like species names, 
+ * possibilities are named entity (NER) or spcialised recognizers like species names,
  * quantities, biomedical substances, physical formula, etc.
  *
  * The list of possible mention recognition methods are given by a list of MentionMethod
- * attributes. When processing a text, mentions will be produced sequentially by the 
+ * attributes. When processing a text, mentions will be produced sequentially by the
  * application of each of these modules, resulting in a list of Mention objects associated
- * with the MentionMethod that produced it and usual mention data (position offset, 
+ * with the MentionMethod that produced it and usual mention data (position offset,
  * raw text, normalized text, ...).
  */
 public class ProcessText {
 	public final String language = AbstractReader.LANG_EN;
-	
+
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ProcessText.class);
-	
-  	private static volatile ProcessText instance; 	
+
+  	private static volatile ProcessText instance;
+
+
 
 	// ClearParser components for sentence segmentation
 	private AbstractTokenizer tokenizer = null;
@@ -89,13 +69,13 @@ public class ProcessText {
 	private NERParsers nerParsers = null;
 
 	private Stopwords stopwords = Stopwords.getInstance();
-	
+
 	public static final int NGRAM_LENGTH = 6;
 
 	// default indo-european delimiters, should be moved to language specific analysers
 	public static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
 
-	public static ProcessText getInstance() throws Exception {
+	public static ProcessText getInstance() {
         if (instance == null)
 			getNewInstance();
         return instance;
@@ -104,32 +84,38 @@ public class ProcessText {
     /**
      * Creates a new instance.
      */
-	private static synchronized void getNewInstance() throws Exception {
+	private static synchronized void getNewInstance() {
 		LOGGER.debug("Get new instance of ProcessText");
-		instance = new ProcessText();
+
+        instance = new ProcessText();
 	}
-	
+
 	/**
-     * Hidden constructor 
+     * Hidden constructor
      */
-    private ProcessText() throws Exception {	
+    private ProcessText() {
 		String dictionaryFile = "data/clearNLP/dictionary-1.3.1.zip";
-		tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));	
-	}
-	
+
+		try {
+			tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));
+		} catch (FileNotFoundException e) {
+			throw new NerdException("Cannot initialise tokeniser ", e);
+        }
+    }
+
 	/**
-	 *  Case context where a token appears 
+	 *  Case context where a token appears
 	 */
-	public enum CaseContext { 
+	public enum CaseContext {
 		/* token is found in lower cased text */
-		lower, 
-		
+		lower,
+
 		/* token is found in UPPER CASED TEXT */
-		upper, 
-		
+		upper,
+
 		/* token is found in Text Where Every Word Starts With A Capital Letter */
-		upperFirst, 
-		
+		upperFirst,
+
 		/* token is found in text with a Healthy mixture of capitalization (probably normal text) */
 		mixed
 	}
@@ -149,16 +135,16 @@ public class ProcessText {
     }
 
     /**
-	 * This is the entry point for a NerdQuery to have its textual content processed. 
+	 * This is the entry point for a NerdQuery to have its textual content processed.
 	 * The mthod will generate a list of recognized named entities produced by a list
-	 * of mention recognition modules specified in the list field 'mention' of the NerdQuery 
-	 * object. Each mention recognition method will be applied sequencially in the order 
+	 * of mention recognition modules specified in the list field 'mention' of the NerdQuery
+	 * object. Each mention recognition method will be applied sequencially in the order
 	 * given in the list field 'mention'.
 	 *
 	 * @param nerdQuery the NERD query to be processed
 	 * @return the list of identified mentions
 	 */
-	public List<Mention> process(NerdQuery nerdQuery) throws NerdException { 
+	public List<Mention> process(NerdQuery nerdQuery) throws NerdException {
 		String text = nerdQuery.getText();
 
 		if (text == null) {
@@ -166,24 +152,24 @@ public class ProcessText {
 		}
 
 		List<LayoutToken> tokens = nerdQuery.getTokens();
-		
+
 		if (isBlank(text) && CollectionUtils.isEmpty(tokens)) {
 			LOGGER.warn("No content to process.");
 			return null;
-		} 
+		}
 
 		if (isNotBlank(text))
 			return processText(nerdQuery);
-		else 
+		else
 			return processTokens(nerdQuery);
 	}
 
 
 	/**
-	 *  Precondition: text in the query object is not empty and 
+	 *  Precondition: text in the query object is not empty and
 	 *  we assume here that the text has been dehyphenized before calling this method.
 	 */
-	private List<Mention> processText(NerdQuery nerdQuery) throws NerdException { 
+	private List<Mention> processText(NerdQuery nerdQuery) throws NerdException {
 		String text = nerdQuery.getText();
 		if (text == null)
 			text = nerdQuery.getShortText();
@@ -191,25 +177,25 @@ public class ProcessText {
 		text = UnicodeUtil.normaliseText(text);
 
 		List<Mention> results = new ArrayList<>();
-		
+
 		Language language = nerdQuery.getLanguage();
 		String lang = null;
 		if (language != null)
 			lang = language.getLang();
-		
+
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
 
 		// get the list of requested mention types
 		List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
-		
+
 		// do we need to process the whole text only a sentence?
 		if (ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences) ) {
 			// we process only the indicated sentences
 			String text2tag = null;
 			for(int i=0; i<processSentence.length; i++) {
 				Integer index = processSentence[i];
-				
+
 				// for robustness, we have to consider index out of the current sentences range
 				// here we ignore it, but we might better raise an exception and return an error
 				// message to the client
@@ -217,7 +203,12 @@ public class ProcessText {
 					continue;
 
 				Sentence sentence = sentences.get(index.intValue());
-				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
+				try {
+					text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
+				}catch(StringIndexOutOfBoundsException sioobe){
+					throw new QueryException("The sentence offsets are not correct", sioobe);
+				}
+
 				try {
 					for (ProcessText.MentionMethod mentionType : mentionTypes) {
 						List<Mention> localResults = null;
@@ -269,18 +260,18 @@ public class ProcessText {
 				throw new NerdException("NERD error when processing text.", e);
 			}
 		}
-		
+
 		return results;
 	}
 
 	/**
 	 *  Precondition: list of LayoutToken in the query object is not empty
 	 */
-	private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException { 
+	private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException {
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
 		List<Mention> results = new ArrayList<>();
-		
+
 		Language language = nerdQuery.getLanguage();
 		String lang = null;
 		if (language != null)
@@ -288,7 +279,7 @@ public class ProcessText {
 
 		if (!lang.equals("en") && !lang.equals("fr"))
 			return results;
-		
+
 		// get the list of requested mention types
 		List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
 
@@ -313,19 +304,19 @@ public class ProcessText {
 			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
-		
+
 		return results;
 	}
-	
-		/**
+
+    /**
 	 * NER processing of some raw text. Generate list of named entity mentions.
 	 *
-	 * @param text 
+	 * @param text
 	 *		the raw text to be parsed
-	 * @return 
+	 * @return
 	 * 		the list of identified mentions
 	 */
-	public List<Mention> processNER(String text, Language language) throws NerdException { 
+	public List<Mention> processNER(String text, Language language) throws NerdException {
 		if (text == null) {
 			throw new NerdException("Cannot parse the sentence, because it is null.");
 		}
@@ -341,7 +332,8 @@ public class ProcessText {
 		List<Mention> results = new ArrayList<>();
 		try {
 			if (nerParsers == null) {
-				nerParsers = new NERParsers();	
+				//Utilities.initGrobid();
+				nerParsers = new NERParsers();
 			}
 			List<Entity> entityResults = nerParsers.extractNE(text, language);
 			for(Entity entityResult : entityResults) {
@@ -354,21 +346,21 @@ public class ProcessText {
 			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
-		
+
 		return results;
 	}
 
 
 	/**
-	 * NER processing of a sequence of LayoutTokens. Generate list of named entity 
+	 * NER processing of a sequence of LayoutTokens. Generate list of named entity
 	 * mentions.
 	 *
-	 * @param tokens 
+	 * @param tokens
 	 *		the sequence of LayoutToken objects
-	 * @return 
+	 * @return
 	 * 		the list of identified mentions
 	 */
-	public List<Mention> processNER(List<LayoutToken> tokens, Language language) throws NerdException { 
+	public List<Mention> processNER(List<LayoutToken> tokens, Language language) throws NerdException {
 		if (tokens == null) {
 			throw new NerdException("Cannot parse the sequence, because it is null.");
 		}
@@ -384,7 +376,8 @@ public class ProcessText {
 		List<Mention> results = new ArrayList<>();
 		try {
 			if (nerParsers == null) {
-				nerParsers = new NERParsers();	
+				//Utilities.initGrobid();
+				nerParsers = new NERParsers();
 			}
 			List<Entity> entityResults = nerParsers.extractNE(LayoutTokensUtil.toText(tokens), language);
 			for(Entity entityResult : entityResults) {
@@ -397,8 +390,8 @@ public class ProcessText {
 			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
-		
-		// associate bounding boxes to identified mentions 
+
+		// associate bounding boxes to identified mentions
     	List<Mention> finalResults = new ArrayList<>();
     	Collections.sort(results);
     	int tokenPos = 0;
@@ -429,13 +422,13 @@ public class ProcessText {
 						lastTokenPos = tokenPos;
 					}
 					entityTokens.add(tokens.get(j));
-				} 
+				}
 
 				tokenPos += tokens.get(j).getText().length();
 			}
 			if (entityTokens != null)
 				entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
-			else 
+			else
 				LOGGER.warn("LayoutToken sequence not found for mention: " + entity.getRawName(
 					));
 			// we have an additional check of validy based on language
@@ -450,17 +443,17 @@ public class ProcessText {
 
 
 	/**
-	 * Processing of some raw text by extracting all non-trivial ngrams. 
-	 * Generate a list of entity mentions that will be instanciated by 
-	 * Wikipedia labels (anchors and titles). 
+	 * Processing of some raw text by extracting all non-trivial ngrams.
+	 * Generate a list of entity mentions that will be instanciated by
+	 * Wikipedia labels (anchors and titles).
 	 * We assume here that the text has been dehyphenized before calling this method.
 	 *
-	 * @param text 
+	 * @param text
 	 *		the raw text to be parsed
-	 * @return 
+	 * @return
 	 * 		the list of identified entities.
 	 */
-	public List<Mention> processWikipedia(String text, Language lang) throws NerdException { 
+	public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
 		if (text == null) {
 			throw new NerdException("Cannot parse the text, because it is null.");
 		}
@@ -469,15 +462,15 @@ public class ProcessText {
 			LOGGER.error("The length of the text to be parsed is 0.");
 			return null;
 		}
-		
+
 		List<Mention> results = new ArrayList<Mention>();
 		try {
 			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
 
-			// candidates which start and end with a stop word are removed. 
+			// candidates which start and end with a stop word are removed.
 			// beware not to be too aggressive.
 			List<Integer> toRemove = new ArrayList<Integer>();
-			
+
 			for(int i=0; i<pool.size(); i++) {
 				StringPos termPosition = pool.get(i);
 				String termValue = termPosition.string;
@@ -497,7 +490,7 @@ public class ProcessText {
 					) {
 						toRemove.add(new Integer(i));
 						continue;
-					} 
+					}
 				}
 
 				// remove term ending with a separator (conservative it should never be the case)
@@ -524,8 +517,8 @@ public class ProcessText {
 			// Calculating the positions
 			for(StringPos candidate : subPool) {
 				Mention entity = new Mention(candidate.string, MentionMethod.wikipedia);
-				
-				org.grobid.core.utilities.OffsetPosition pos = 
+
+				org.grobid.core.utilities.OffsetPosition pos =
 					new org.grobid.core.utilities.OffsetPosition();
 				pos.start = candidate.pos;
 				pos.end = pos.start + candidate.string.length();
@@ -537,25 +530,25 @@ public class ProcessText {
 				}
 
 if (pos.start == -1)
-System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawName());	
+System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawName());
 			}
 		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
 		}
 		return results;
 	}
-	
+
 	/**
-	 * Processing of some raw text by extracting all non-trivial ngrams. 
-	 * Generate a list of entity mentions that will be instanciated by 
-	 * Wikipedia labels (anchors and titles). 
+	 * Processing of some raw text by extracting all non-trivial ngrams.
+	 * Generate a list of entity mentions that will be instanciated by
+	 * Wikipedia labels (anchors and titles).
 	 *
-	 * @param tokens 
+	 * @param tokens
 	 *		the sequence of tokens to be parsed
-	 * @return 
+	 * @return
 	 * 		the list of identified entities.
 	 */
-	public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException { 
+	public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException {
 		if ( (tokens == null) || (tokens.size() == 0) ) {
 			//System.out.println("Content to be processed is empty.");
 			LOGGER.error("Content to be processed is empty.");
@@ -567,11 +560,11 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 		List<Mention> results = new ArrayList<Mention>();
 		try {
 			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
-		
-			// candidates which start and end with a stop word are removed. 
-			// beware not to be too agressive. 
+
+			// candidates which start and end with a stop word are removed.
+			// beware not to be too agressive.
 			List<Integer> toRemove = new ArrayList<Integer>();
-			
+
 			for(int i=0; i<pool.size(); i++) {
 				StringPos term1 = pool.get(i);
 				String term = term1.string;
@@ -586,11 +579,11 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 				if (stopwords != null) {
 					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
 						 stopwords.startsWithStopword(termLow, lang.getLang()) ||
-						 stopwords.endsWithStopword(termLow, lang.getLang()) 
+						 stopwords.endsWithStopword(termLow, lang.getLang())
 					) {
 						toRemove.add(new Integer(i));
 						continue;
-					} 
+					}
 				}
 
 				while (delimiters.indexOf(termLow.charAt(termLow.length()-1)) != -1) {
@@ -619,8 +612,8 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 
 			Collections.sort(subPool);
 			for(StringPos candidate : subPool) {
-				Mention entity = new Mention(candidate.string, MentionMethod.wikipedia);				
-				org.grobid.core.utilities.OffsetPosition pos = 
+				Mention entity = new Mention(candidate.string, MentionMethod.wikipedia);
+				org.grobid.core.utilities.OffsetPosition pos =
 					new org.grobid.core.utilities.OffsetPosition();
 				pos.start = candidate.pos;
 				pos.end = pos.start + candidate.string.length();
@@ -649,13 +642,13 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 							lastTokenPos = tokenPos;
 						}
 						entityTokens.add(tokens.get(j));
-					} 
+					}
 
 					tokenPos += tokens.get(j).getText().length();
 				}
 				if (entityTokens != null)
 					entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
-				else 
+				else
 					LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
 				// we have an additional check of validy based on language
 				if (validEntity(entity, lang.getLang()))
@@ -667,20 +660,20 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
-		
+
 		return results;
 	}
 
 	/**
-	 * Processing of a vector of weighted terms. We do not control here the textual 
-	 * mentions by a NER. 
+	 * Processing of a vector of weighted terms. We do not control here the textual
+	 * mentions by a NER.
 	 *
-	 * @param terms 
+	 * @param terms
 	 *		a list of weighted terms
-	 * @return 
+	 * @return
 	 * 		the list of identified entities.
 	 */
-	/*public List<Mention> processWeightedTerms(List<WeightedTerm> terms) throws NerdException { 
+	/*public List<Mention> processWeightedTerms(List<WeightedTerm> terms) throws NerdException {
 		if (terms == null) {
 			throw new NerdException("Cannot parse the weighted terms, because it is null.");
 		}
@@ -744,18 +737,16 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 		
 		return results;
 	}*/
-	
+
 	/**
-	 * Processing of some raw text by extracting all non-trivial ngrams. 
-	 * Generate a list of entity mentions that will be instanciated by 
-	 * Wikipedia labels (anchors and titles). 
+	 * Processing of some raw text by extracting all non-trivial ngrams.
+	 * Generate a list of entity mentions that will be instanciated by
+	 * Wikipedia labels (anchors and titles).
 	 *
-	 * @param nerdQuery 
-	 *		the NERD query to be processed
-	 * @return 
-	 * 		the list of identified entities.
+	 * @param nerdQuery the NERD query to be processed
+	 * @return the list of identified entities.
 	 */
-	/*public List<Mention> processWikipedia(NerdQuery nerdQuery) throws NerdException { 
+	/*public List<Mention> processWikipedia(NerdQuery nerdQuery) throws NerdException {
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
 		List<LayoutToken> tokens = nerdQuery.getTokens();
@@ -855,7 +846,7 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 		}
 		return results;
 	}*/
-	
+
 	public List<Sentence> sentenceSegmentation(String text) {
 		AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
 		// convert String into InputStream
@@ -864,7 +855,7 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		List<List<String>> sentences = segmenter.getSentences(br);
 		List<Sentence> results = new ArrayList<Sentence>();
-		
+
 		if ( (sentences == null) || (sentences.size() == 0) ) {
 			// there is some text but not in a state so that a sentence at least can be
 			// identified by the sentence segmenter, so we parse it as a single sentence
@@ -874,22 +865,22 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 			pos.end = text.length();
 			sentence.setOffsets(pos);
 			results.add(sentence);
-			return results; 
+			return results;
 		}
-		
-		// we need to realign with the original sentences, so we have to match it from the text 
+
+		// we need to realign with the original sentences, so we have to match it from the text
 		// to be parsed based on the tokenization
-		int offSetSentence = 0;  
+		int offSetSentence = 0;
 	   	//List<List<String>> trueSentences = new ArrayList<List<String>>();
-		for(List<String> theSentence : sentences) {  
+		for(List<String> theSentence : sentences) {
 			int next = offSetSentence;
-			for(String token : theSentence) { 					
+			for(String token : theSentence) {
 				next = text.indexOf(token, next);
 				next = next+token.length();
-			} 
-			List<String> dummy = new ArrayList<String>();                    
-			//dummy.add(text.substring(offSetSentence, next));   
-			//trueSentences.add(dummy);   
+			}
+			List<String> dummy = new ArrayList<String>();
+			//dummy.add(text.substring(offSetSentence, next));
+			//trueSentences.add(dummy);
 			Sentence sentence = new Sentence();
 			OffsetPosition pos = new OffsetPosition();
 			pos.start = offSetSentence;
@@ -897,8 +888,8 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 			sentence.setOffsets(pos);
 			results.add(sentence);
 			offSetSentence = next;
-		} 
-		return results; 
+		}
+		return results;
 	}
 
 	public static List<StringPos> ngrams(String str, int ngram, Language lang) {
@@ -940,12 +931,12 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
     	if ( (entity == null) || (entity.getRawName() == null) )
     		return false;
     	if (lang.equals("fr")) {
-    		// given the French Wikipedia, we need to remove 
+    		// given the French Wikipedia, we need to remove
     		// * one letter tokens
     		// * numerical tokens
     		if ( (entity.getRawName().length() <= 1) || TextUtilities.test_digit(entity.getRawName()) )
     			return false;
-    		else 
+    		else
     			return true;
     	}
 
@@ -957,7 +948,7 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
     *  the list of mentions accordingly.
     *  @param nerdQuery the NERD query
     *  @param entities the current list of mentions to complete with acronyms
-    *  @return the updated list of Entity 
+    *  @return the updated list of Entity
     */
    	public static List<Mention> acronymCandidates(NerdQuery nerdQuery, List<Mention> entities) {
    		if (entities == null)
@@ -976,12 +967,12 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 			}
 		}
 
-		// source language 
+		// source language
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
-		if (language != null) 
+		if (language != null)
 			lang = language.getLang();
-		
+
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
 			// let's do it
@@ -996,15 +987,15 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
 				LOGGER.debug("exception language identifier for: " + text);
 			}
 		}
-		
+
 		if (lang == null) {
 			// default - it might be better to raise an exception?
 			lang = "en";
 			language = new Language(lang, 1.0);
 		}
-		
+
 		Map<Mention, Mention> acronyms = null;
-		if (CollectionUtils.isNotEmpty(tokens) ) 
+		if (CollectionUtils.isNotEmpty(tokens) )
 			acronyms = acronymCandidates(tokens);
 		else
 			acronyms = acronymCandidates(text, language);
@@ -1017,7 +1008,7 @@ System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawN
         		Mention base = entry.getValue();
         		Mention acronym = entry.getKey();
 System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
-				
+
 				Mention localEntity = new Mention();
 				localEntity.setRawName(acronym.getRawName());
 				localEntity.setOffsetStart(acronym.getOffsetStart());
@@ -1104,7 +1095,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
 							if ( (tok.toLowerCase().charAt(0) == c) || numericMatch) {
 								if (k == 0) {
-									if (acronyms == null) 
+									if (acronyms == null)
 										acronyms = new HashMap<Mention,Mention>();
 									StringBuilder builder = new StringBuilder();
 									for(int l = j; l < posParenthesis; l++) {
@@ -1122,7 +1113,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 									entityBase.setOffsetStart(tokens.get(j).getOffset());
 									entityBase.setOffsetEnd(tokens.get(j).getOffset() + entityBase.getRawName().length());
 
-									acronyms.put(entityAcronym, entityBase); 
+									acronyms.put(entityAcronym, entityBase);
 									stop = true;
 								} else
 									break;
@@ -1134,13 +1125,13 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 				}
 				acronym = null;
 				posParenthesis = -1;
-			} 
+			}
     		i++;
     	}
 
     	return acronyms;
     }
-    
+
     /**
      * Add entities corresponding to acronym defintions to a query
      */
@@ -1172,7 +1163,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention acronym = entry.getKey();
             Mention base = entry.getValue();
-			Pattern linkPattern = Pattern.compile(acronym.getRawName()); 
+			Pattern linkPattern = Pattern.compile(acronym.getRawName());
 			Matcher linkMatcher = linkPattern.matcher(text);
 			while (linkMatcher.find()) {
 				// we need to ignore the current acronym to avoid having it twice
@@ -1204,8 +1195,8 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
     /**
      * Compute modified generalized DICE coefficient of a term given global Wikipedia frequencies,
      * in order to capture lexical cohesion of the term.
-     * see [Park and al., 2002] for formula of Generalized DICE coefficients, 
-     * http://aclweb.org/anthology/C02-1142 
+     * see [Park and al., 2002] for formula of Generalized DICE coefficients,
+     * http://aclweb.org/anthology/C02-1142
      */
     public static double getDICECoefficient(String term, String lang) {
 		// term frequency
@@ -1233,9 +1224,9 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
 		// The modification with respect to Generalized DICE coefficient is here - we take the min rather
 		// the sum of component frequencies, the idea is to better capture terms where one component is
-		// very frequent and the second appear only with the first component (component frequency then 
+		// very frequent and the second appear only with the first component (component frequency then
 		// equals full term frequency) which mean normally a very high lexical cohesion for the term.
-		
+
 		for(String component : tokens) {
 			Label labelComponent = NerdEngine.bestLabel(component, wikipedia);
 			if (labelComponent.getOccCount() < avFreqTerm) {
@@ -1249,21 +1240,21 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
 //System.out.println(component + " - labelComponent.getOccCount(): " + labelComponent.getOccCount() );
 		}
-				
+
 		// compute generalized DICE coef.
 		double dice = 0.0;
-		
+
 		if (avFreqTerm == 0.0)
 			dice = 0.0;
 		else if ( (avFreqTerm <= 1.0) & (termLength > 1) ) {
 			// we don't want to have dice == 0 when only 1 occurence, but at least a very small value
-			dice = (Math.log10(1.1) * termLength) / avFreqComponent; 
+			dice = (Math.log10(1.1) * termLength) / avFreqComponent;
 		}
 		else {
 			// get the default generalized DICE's coef.
 			dice = (avFreqTerm * Math.log10((double)avFreqTerm) * termLength) / avFreqComponent;
 		}
-		
+
 		// single word needs to be reduced (see [Park & al., 2002])
 		if ( (termLength == 1) && (avFreqTerm != 0.0) ) {
 			dice = dice / avFreqTerm;
@@ -1273,7 +1264,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 //System.out.println("avFreqTerm: " + avFreqTerm);
 //System.out.println("avFreqComponent: " + avFreqComponent);
 //System.out.println("termLength: " + termLength);
-	
+
 		if (dice > 1.0)
 			dice = 1.0;
 
@@ -1296,9 +1287,9 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
     	}
 
     	DocumentIterator doc = new TextFile(text);
-    	TaggedDocument taggedDocument = MatchOperations.matchDocument(matcher, doc.next()); 
+    	TaggedDocument taggedDocument = MatchOperations.matchDocument(matcher, doc.next());
 
-    	ArrayList<uk.ac.man.entitytagger.Mention> mentions = taggedDocument.getAllMatches(); 
+    	ArrayList<uk.ac.man.entitytagger.Mention> mentions = taggedDocument.getAllMatches();
     	if (mentions != null) {
 	    	for(uk.ac.man.entitytagger.Mention mention : mentions) {
 	    		int start = mention.getStart();
@@ -1315,7 +1306,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
     	return results;
     }
 
-    public List<Mention> processSpecies(List<LayoutToken> tokens, Language language) {	
+    public List<Mention> processSpecies(List<LayoutToken> tokens, Language language) {
     	if (!language.getLang().equals("en"))
     		return null;
     	List<Mention> results = new ArrayList<>();
@@ -1330,9 +1321,9 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 
     	String text = LayoutTokensUtil.toText(tokens);
     	DocumentIterator doc = new TextFile(text);
-    	TaggedDocument taggedDocument = MatchOperations.matchDocument(matcher, doc.next()); 
+    	TaggedDocument taggedDocument = MatchOperations.matchDocument(matcher, doc.next());
 
-    	ArrayList<uk.ac.man.entitytagger.Mention> mentions = taggedDocument.getAllMatches(); 
+    	ArrayList<uk.ac.man.entitytagger.Mention> mentions = taggedDocument.getAllMatches();
     	if (mentions != null) {
 	    	for(uk.ac.man.entitytagger.Mention mention : mentions) {
 	    		int start = mention.getStart();
@@ -1346,7 +1337,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 	    	}
 	    }
 
-    	// associate bounding boxes to identified mentions 
+    	// associate bounding boxes to identified mentions
     	List<Mention> finalResults = new ArrayList<>();
     	Collections.sort(results);
     	int tokenPos = 0;
@@ -1377,13 +1368,13 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 						lastTokenPos = tokenPos;
 					}
 					entityTokens.add(tokens.get(j));
-				} 
+				}
 
 				tokenPos += tokens.get(j).getText().length();
 			}
 			if (entityTokens != null)
 				entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
-			else 
+			else
 				LOGGER.warn("LayoutToken sequence not found for mention: " + entity.getRawName(
 					));
 			// we have an additional check of validy based on language
@@ -1400,7 +1391,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
     public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
 
     public static List<List<LayoutToken>> segmentInParagraphs(List<LayoutToken> tokens) {
-    	// heuristics: double end of line, if not simple end of line (not aligned with 
+    	// heuristics: double end of line, if not simple end of line (not aligned with
     	// previous line), and if still not we segment arbitrarly the monolithic block
     	List<List<LayoutToken>> result = new ArrayList<>();
     	result.add(tokens);
@@ -1422,7 +1413,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
     		if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
     			return true;
     		}
-    	} 
+    	}
     	return false;
     }
 
@@ -1449,7 +1440,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		    				previousEOL = false;
 		    			} else
 		    			 	previousEOL = true;
-		    		} else 
+		    		} else
 		    			previousEOL = false;
 		    		n++;
 		    	}
@@ -1457,7 +1448,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 			}
 		}
 
-		if (!containsTooLargeSegment(result)) 
+		if (!containsTooLargeSegment(result))
 			return result;
 
 		// if we fail to to slice with double EOL, let's see if we can do something
@@ -1485,7 +1476,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 			}
 		}
 
-		if (!containsTooLargeSegment(result)) 
+		if (!containsTooLargeSegment(result))
 			return result;
 
 		segments = result;
@@ -1524,7 +1515,7 @@ System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOff
 		grobid 		("grobid"),
 		species		("species"),
 		user 		("user");
-		
+
 		private String name;
 
 		MentionMethod(String name) {

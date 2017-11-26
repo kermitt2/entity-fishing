@@ -1,6 +1,9 @@
 package com.scienceminer.nerd.evaluation;
 
+import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.NerdException;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -60,32 +63,75 @@ public class EvaluationDataGeneration {
                         new SuffixFileFilter(".pdf", IOCase.INSENSITIVE), null);
             }
 
+            final StringBuilder sbEntities = new StringBuilder();
+            sbEntities.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
+            sbEntities.append("<" + corpus + ".entityAnnotation>").append("\n");
+
             for (File evalFile : evalFiles) {
-                String fileContent = extractPDFContent(evalFile).get("TEXT");
-                String lang = extractPDFContent(evalFile).get("LANG");
+                final Map<String, String> output = extractPDFContent(evalFile);
+                String fileContent = output.get("TEXT");
+                String lang = output.get("LANG");
 
                 final String outputPath = corpusPathRawTexts + File.separator
                         + FilenameUtils.removeExtension(evalFile.getName()) + "." + lang + ".txt";
                 File outputFile = new File(outputPath);
                 if (outputFile.exists()) {
                     LOGGER.warn("The file " + outputPath + " exists. Skipping it.");
-                    continue;
+                } else {
+                    try {
+                        LOGGER.info("Writing: " + outputFile.getAbsolutePath());
+                        FileUtils.writeStringToFile(outputFile, fileContent, UTF_8);
+                    } catch (IOException e) {
+                        throw new NerdException("Cannot write file " + outputFile.getAbsolutePath(), e);
+                    }
                 }
 
-                try {
-                    LOGGER.info("Writing: " + outputFile.getAbsolutePath());
-                    FileUtils.writeStringToFile(outputFile, fileContent, UTF_8);
-                } catch (IOException e) {
-                    throw new NerdException("Cannot write file " + outputFile.getAbsolutePath(), e);
-                }
+                // here we process starting from the TXT files.
+                ProcessText textProcessor = ProcessText.getInstance();
+                List<NerdEntity> entities = new ArrayList<>();
+
+                List<Mention> nerMentions = textProcessor.processNER(fileContent, new Language(lang));
+                nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
+
+                List<Mention> wikipediaMentions = textProcessor.processWikipedia(fileContent, new Language(lang));
+                wikipediaMentions.stream().forEach(wm -> {
+                    final NerdEntity nerdEntity = new NerdEntity(wm);
+                    if (entities.contains(nerdEntity)) {
+                        entities.add(nerdEntity);
+                    }
+                });
+
+                sbEntities.append("\t").append("<document docName=\"" + outputFile.getName().toString() + "\">").append("\n");
+
+                entities.stream().forEach(e -> {
+                    sbEntities.append("\t\t").append("<annotation>").append("\n");
+                    sbEntities.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
+                    sbEntities.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
+                    sbEntities.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
+                    sbEntities.append("\t\t\t").append("<wikipediaId>").append(e.getWikipediaExternalRef()).append("</wikipediaId>").append("\n");
+                    sbEntities.append("\t\t\t").append("<offset>").append(e.getOffsetStart()).append("</offset>").append("\n");
+                    sbEntities.append("\t\t\t").append("<length>").append(e.getRawName().length()).append("</length>").append("\n");
+                    sbEntities.append("\t\t").append("</annotation>").append("\n");
+                });
+
+                sbEntities.append("\t").append("</document>").append("\n");
             }
 
-
+            sbEntities.append("</" + corpus + ".entityAnnotation>").append("\n");
+            try {
+                LOGGER.info("Writing: " + corpusRefFile);
+                FileUtils.writeStringToFile(corpusRefFile, sbEntities.toString(), UTF_8);
+            } catch (IOException e) {
+                throw new NerdException("Cannot write file " + corpusRefFile, e);
+            }
         }
-        // here we process starting from the TXT files.
-
     }
 
+    /**
+     * This method returns a map with two items inside,
+     * LANG -> the language of the PDF
+     * TEXT -> the content of the PDF
+     */
     public Map<String, String> extractPDFContent(File originFile) {
 
         LOGGER.info("Processing " + originFile.getAbsolutePath());
@@ -146,7 +192,7 @@ public class EvaluationDataGeneration {
                     if (titleTokens != null) {
                         LOGGER.info("Process title... ");
 
-                        sb.append(LayoutTokensUtil.toText(titleTokens));
+                        sb.append(LayoutTokensUtil.normalizeDehyphenizeText(titleTokens));
                         sb.append("\n");
 
                     }
@@ -156,7 +202,7 @@ public class EvaluationDataGeneration {
                     if (abstractTokens != null) {
                         LOGGER.info("Process abstract...");
 
-                        sb.append(LayoutTokensUtil.toText(abstractTokens));
+                        sb.append(LayoutTokensUtil.normalizeDehyphenizeText(abstractTokens));
                         sb.append("\n");
                     }
                 }
@@ -190,7 +236,7 @@ public class EvaluationDataGeneration {
                     if (documentBodyTokens != null) {
                         for (LayoutTokenization layoutTokenization : documentBodyTokens) {
                             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
-                            sb.append(LayoutTokensUtil.toText(layoutTokens));
+                            sb.append(LayoutTokensUtil.normalizeDehyphenizeText(layoutTokens));
                         }
                         sb.append("\n");
                     }

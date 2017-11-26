@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<hirmeos.entityAnnotation>
+	<document docName="OB-oep-1820.fr.txt">
+		<annotation>
+			<mention>FINANCER</mention>
+			<wikiName>FINANCER</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>97</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>FINANCER</mention>
+			<wikiName>FINANCER</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>97</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="OB-oep-1810.fr.txt">
+		<annotation>
+			<mention>Facebook</mention>
+			<wikiName>Facebook</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>891</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Arash Payan</mention>
+			<wikiName>Arash Payan</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>2178</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles</mention>
+			<wikiName>Los Angeles</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>2225</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Payan</mention>
+			<wikiName>Payan</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>2273</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Facebook</mention>
+			<wikiName>Facebook</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>891</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Payan</mention>
+			<wikiName>Payan</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>2273</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Arash Payan</mention>
+			<wikiName>Arash Payan</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>2178</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles</mention>
+			<wikiName>Los Angeles</wikiName>
+			<wikidataId>null</wikidataId>
+			<wikipediaId>-1</wikipediaId>
+			<offset>2225</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+</hirmeos.entityAnnotation>
