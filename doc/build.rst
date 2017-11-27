@@ -6,7 +6,7 @@ Install, build and run
 *entity-fishing* requires JDK 1.8 and maven 3. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. 
 
 Running the service requires at least 2GB of RAM, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities).
-After decompressing all the index data, 34 GB of disk space will be used - be sure to have enough free space. SSD is recommended for best performance and experience.
+After decompressing all the index data, 40 GB of disk space will be used - be sure to have enough free space. SSD is recommended for best performance and experience.
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
@@ -34,15 +34,19 @@ Then install the compiled indexed data:
 
         - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-de.zip (2.0 GB)
 
+        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/embeddings.zip (1.6 GB)
+
     **Max OSX**
 
         
 
 
-#. Unzip the 4 (or 5) archives files under ``data/db/``.
+#. Unzip the 4 db archives files under ``data/db/``.
 
     This will install four sub-directories ``data/db/db-kb/``, ``data/db/db-en/``, ``data/db/db-de/`` and ``data/db/db-fr/``.
     The uncompressed data is about 40 GB.
+
+#. Unzip the embeddings archives files (``embeddings.zip``) under ``data/embeddings/``.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
