@@ -10,10 +10,10 @@ After decompressing all the index data, 34 GB of disk space will be used - be su
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
-The path to grobid-home shall indicated in the file `src/main/resource/nerd.properties`, for instance:
+The path to grobid-home shall indicated in the file ``data/config/mention.yaml``, for instance:
 ::
-   com.scienceminer.nerd.grobid_home=../grobid/grobid-home/
-   com.scienceminer.nerd.grobid_properties=../grobid/grobid-home/config/grobid.properties
+   # path to the GROBID home (for grobid-ner, grobid, etc.)
+   grobidHome: ../grobid/grobid-home/
 
 Install *entity-fishing*:
 ::
@@ -39,7 +39,7 @@ Then install the compiled indexed data:
         
 
 
-#. Unzip the 4 (or 5) archives files under ``data/wikipedia/``.
+#. Unzip the 4 (or 5) archives files under ``data/db/``.
 
     This will install four sub-directories ``data/db/db-kb/``, ``data/db/db-en/``, ``data/db/db-de/`` and ``data/db/db-fr/``.
     The uncompressed data is about 40 GB.
