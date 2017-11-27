@@ -12,17 +12,17 @@ Currently a random sample of Wikipedia articles is used for training. The full a
 
 The following command will build the two models used in *entity-fishing*, the `ranker` and the `selector` model (both being a Random Forest) and preliminary build the full article content database the first time for the English Wikipedia:
 
-```bash
-> mvn compile exec:exec -Ptrain_annotate_en
-```
+::
+	> mvn compile exec:exec -Ptrain_annotate_en
+
 
 For other languages, replace the ending language code (`en`) by the desired one (`fr` or `de` only supported for the moment), e.g.:
 
 
-```bash
-> mvn compile exec:exec -Ptrain_annotate_de
-> mvn compile exec:exec -Ptrain_annotate_fr
-```
+::
+	> mvn compile exec:exec -Ptrain_annotate_de
+	> mvn compile exec:exec -Ptrain_annotate_fr
+
 
 Models will be saved under `data/models`. `ARFF` training data files used to build the model are saved under `data/wikipedia/training/`.
 

@@ -1,4 +1,4 @@
-.. topic:: Build and install NERD.
+`.. topic:: Build and install NERD.
 
 Install, build and run
 ======================
@@ -22,35 +22,27 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment (warning: total around 10 GB) at the following address:
+#. Download the zipped data files corresponding to your environment (warning: total around 13 GB) at the following address:
 
     **Linux**
 
-        - https://grobid.s3.amazonaws.com/nerd/db-kb.zip (1.9 GB)
+        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-kb.zip (4.1 GB)
 
-        - https://grobid.s3.amazonaws.com/nerd/db-en1.zip (2.5 GB)
+        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-en.zip (5.4 GB)
 
-        - https://grobid.s3.amazonaws.com/nerd/db-en2.zip (2.9 GB)
+        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-fr.zip (1.8 GB)
 
-        - https://grobid.s3.amazonaws.com/nerd/db-fr.zip (1.8 GB)
-
-        - https://grobid.s3.amazonaws.com/nerd/db-de.zip (2.0 GB)
+        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-de.zip (2.0 GB)
 
     **Max OSX**
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-kb.osx.zip (1.8 GB)
-
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-en.osx.zip (5.3 GB)
-
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-fr.osx.zip (1.8 GB)
-
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/lmdb/db-de.osx.zip (2 GB)
+        
 
 
 #. Unzip the 4 (or 5) archives files under ``data/wikipedia/``.
 
-    This will install four sub-directories ``data/wikipedia/db-kb/``, ``data/wikipedia/db-en/``, ``data/wikipedia/db-de/`` and ``data/wikipedia/db-fr/``.
-    The uncompressed data is about 34 GB.
+    This will install four sub-directories ``data/db/db-kb/``, ``data/db/db-en/``, ``data/db/db-de/`` and ``data/db/db-fr/``.
+    The uncompressed data is about 40 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
