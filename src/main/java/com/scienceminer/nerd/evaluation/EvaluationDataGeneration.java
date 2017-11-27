@@ -116,7 +116,7 @@ public class EvaluationDataGeneration {
             List<Mention> wikipediaMentions = textProcessor.processWikipedia(text, language);
             wikipediaMentions.stream().forEach(wm -> {
                 final NerdEntity nerdEntity = new NerdEntity(wm);
-                if (entities.contains(nerdEntity)) {
+                if (!entities.contains(nerdEntity)) {
                     entities.add(nerdEntity);
                 }
             });
