@@ -477,7 +477,7 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities in workin
 														NerdContext documentContext,
                                                   		NerdQuery workingQuery) {
 		// text of the selected segment
-		List<NerdEntity> resultingEntities = new ArrayList<NerdEntity>();
+		List<NerdEntity> resultingEntities = new ArrayList<>();
 		for(LayoutTokenization layoutTokenization : layoutTokenizations) {
 			List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
 

@@ -72,7 +72,7 @@ public class NerdEngine {
 	static public double minSenseProbability = 0.01;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
 
-	public static NerdEngine getInstance() throws Exception {
+	public static NerdEngine getInstance() {
 	    if (instance == null) {
 			getNewInstance();
 	    }
@@ -82,7 +82,7 @@ public class NerdEngine {
 	/**
 	 * Creates a new instance.
 	 */
-	private static synchronized void getNewInstance() throws Exception {
+	private static synchronized void getNewInstance() {
 		LOGGER.debug("Get new instance of Engine");		
 		instance = new NerdEngine();
 	}
@@ -90,7 +90,7 @@ public class NerdEngine {
 	/**
 	 * Hidden constructor
 	 */
-	private NerdEngine() throws Exception {			
+	private NerdEngine() {
 		try {
 			UpperKnowledgeBase.getInstance();
 			parsers = new EngineParsers();

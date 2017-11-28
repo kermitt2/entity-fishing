@@ -301,7 +301,6 @@ public class ProcessText {
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
 
@@ -343,7 +342,6 @@ public class ProcessText {
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
 
@@ -387,7 +385,6 @@ public class ProcessText {
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
 
@@ -448,10 +445,8 @@ public class ProcessText {
 	 * Wikipedia labels (anchors and titles).
 	 * We assume here that the text has been dehyphenized before calling this method.
 	 *
-	 * @param text
-	 *		the raw text to be parsed
-	 * @return
-	 * 		the list of identified entities.
+	 * @param text the raw text to be parsed
+	 * @return the list of identified entities.
 	 */
 	public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
 		if (text == null) {

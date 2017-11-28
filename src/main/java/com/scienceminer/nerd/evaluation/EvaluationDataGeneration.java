@@ -1,15 +1,19 @@
 package com.scienceminer.nerd.evaluation;
 
+import com.scienceminer.nerd.disambiguation.NerdCandidate;
+import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
@@ -110,6 +114,7 @@ public class EvaluationDataGeneration {
                 LOGGER.warn("cannot read file " + evalTxtFile + ". Skipping it.", e);
                 continue;
             }
+            List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
             List<Mention> nerMentions = textProcessor.processNER(text, language);
             nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
 
@@ -121,9 +126,19 @@ public class EvaluationDataGeneration {
                 }
             });
 
+            NerdQuery query = new NerdQuery();
+            query.setText(text);
+            query.setEntities(entities);
+            query.setLanguage(language);
+
+            NerdEngine engine = NerdEngine.getInstance();
+            engine.disambiguate(query);
+
+            final List<NerdEntity> processedEntities = query.getEntities();
+
             sbEntities.append("\t").append("<document docName=\"" + evalTxtFile.getName().toString() + "\">").append("\n");
 
-            entities.stream().forEach(e -> {
+            processedEntities.stream().forEach(e -> {
                 sbEntities.append("\t\t").append("<annotation>").append("\n");
                 sbEntities.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
                 sbEntities.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
@@ -144,8 +159,6 @@ public class EvaluationDataGeneration {
         } catch (IOException e) {
             throw new NerdException("Cannot write file " + corpusRefFile, e);
         }
-
-
     }
 
     /**
