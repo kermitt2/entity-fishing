@@ -30,7 +30,7 @@ Times, and the Associated Press.
 
 - ```wikipedia```: similarly as the Clueweb dataset, this set has been created automatically by [6] from Wikipedia, thus also clearly less reliable.
 
-- ```hirmeos```: manually created dataset using open accessible books (licence CC-BY), financed from the European project H2020 Hirmeos
+- ```hirmeos```: manually created dataset using open accessible books (licence CC-BY), financed from the European project H2020 Hirmeos.
 
 All these reference datasets are located under `data/corpus/corpus-long`.
 
@@ -50,17 +50,19 @@ The evaluation process will provide standard metrics (accuracy, precision, recal
 The recall of the candidate selection with respect to the gold annotations is also provided (e.g. the proportion of candidate sets containing the expected answer before the ranking).
 
 
-Evaluation annotation generation
-********************************
+Generation of pre-annotated training/evaluation data
+****************************************************
 
-In case there there is need of creating a new corpus, it's possible to automatically generate annotations xml file from text or pdf files.
-They can be then manually corrected by humans.
-If there is a directory called `pdf` or `PDF` the process will extract information (title, abstract, body) from each pdf and save it as `pdfFileName.lang.txt` inside the `RawText` directory.
-The tool will look into `RawText` and process the files `*.txt` found inside. If the files name is in the form `filename.lang.txt` then the lang will be used as reference, otherwise `en` will be the default choice.
+In case a new corpus needs to be created, *entity-fishing* includes the possibility to automatically generate an XML file of entity annotations from text or pdf files in the same format as the other existing corpus. These generated files can then be corrected manually and used as gold training or evaluation data, or they can be used for semi-supervised training. 
+
+For a given new corpus to be created, for instance the corpus *toto*, the following directory must be created: ``data/corpus/corpus-long/toto/``
+The documents part of this corpus must be placed under the subdirectories ``RawText`` and/or ``pdf``.
+
+If there is a directory called ``pdf`` or ``PDF``, the process will extract information (title, abstract, body) from each pdf and save it as ``pdfFileName.lang.txt`` inside the ``RawText`` directory. The tool will then look into the subdirectory ``RawText`` and process the files ``*.txt`` found inside. If the files name is in the form ``filename.lang.txt`` then the lang will be used as reference, otherwise ``en`` will be the default choice.
 
 Use the following maven command with the above dataset identifier for generating the annotation xml file:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.EvaluationDataGeneration -Dexec.args="hirmeos"
+	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.EvaluationDataGeneration -Dexec.args="toto"
 
 References
 **********

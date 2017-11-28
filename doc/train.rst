@@ -33,7 +33,7 @@ Note that the ratio of disambiguated mentions in a Wikipedia article is low. As 
 For an evaluation of the NED aspect (ranker in our framework) with well-known datasets, which is much more standard and allows comparison with other similar works, see the evaluation section.
 
 Training with an annotated corpus
-******************************
+*********************************
 
 It is possible to train the entity-fishing models with several well-known available datasets. For convenience, the datasets indicated here :doc:`evaluation` are present in the *entity-fishing* distribution.
 
@@ -45,7 +45,7 @@ For instance for training with the train subset of the AIDA-CONLL, use:
 ::
 	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aida-train en"
 
-
+*entity-fishing* also included the possibility to generate additional pre-annotated corpus, for instance to be further corrected manually. See :doc:`evaluation` for the explanations.
 
 Creating entity embeddings
 **************************
