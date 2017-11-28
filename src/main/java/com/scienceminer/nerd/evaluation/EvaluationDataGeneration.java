@@ -114,7 +114,6 @@ public class EvaluationDataGeneration {
                 LOGGER.warn("cannot read file " + evalTxtFile + ". Skipping it.", e);
                 continue;
             }
-            List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
             List<Mention> nerMentions = textProcessor.processNER(text, language);
             nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
 
@@ -132,9 +131,7 @@ public class EvaluationDataGeneration {
             query.setLanguage(language);
 
             NerdEngine engine = NerdEngine.getInstance();
-            engine.disambiguate(query);
-
-            final List<NerdEntity> processedEntities = query.getEntities();
+            final List<NerdEntity> processedEntities = engine.disambiguate(query);
 
             sbEntities.append("\t").append("<document docName=\"" + evalTxtFile.getName().toString() + "\">").append("\n");
 
