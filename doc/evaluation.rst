@@ -11,26 +11,27 @@ It is possible to evaluate *entity-fishing* entity disambiguation models with se
 - ```ace```: this is a subset of the documents used in the ACE 2004 Coreference documents with 36 articles and 256 mentions, annotated through crowdsourcing, see [1].
 
 - ```aida```: AIDA-CONLL is a manually annotated dataset based on the CoNLL 2003 dataset, with 13881 Reuters news articlesand 27817 mentions, see [2]. Note that the raw texts of this dataset are not included in *entity-fishing*, they have to be obtained from NIST (free for research purpose).
-AIDA-CONLL dataset can be considered as the most significant gold data for entity disambiguation both in term of size, ambiguity rate and annotation quality. 
+AIDA-CONLL dataset can be considered as the most significant gold data for entity disambiguation both in term of size, ambiguity rate and annotation quality.
 
 In addition to the complete AIDA-CONLL dataset, this corpus is divided into tree subsets that can be used for evaluation separately: 
 
 - ```aida-train```: corresponds to the training subset of the CoNLL 2003 dataset
+
 - ```aida-testa```: corresponds to the validation subset of the CoNLL 2003 dataset
+
 - ```aida-testb```: corresponds to the test subset of the CoNLL 2003 dataset
 
-- ```aquaint```: this dataset has been created by Milne and Witten [3], with 50 documents and 727 mentions from a news corpus from the Xinhua News Service, the New York
-Times, and the Associated Press.
+- ```aquaint```: this dataset has been created by Milne and Witten [3], with 50 documents and 727 mentions from a news corpus from the Xinhua News Service, the New York Times, and the Associated Press.
 
-- ```iitb```: manually created dataset by [4] with 50 documents collected from online news sources. 
+- ```iitb```: manually created dataset by [4] with 50 documents collected from online news sources.
 
 - ```msnbc```: this dataset is based on 20 news articles from 10 different topics (two articles per topic) and contains a total of 656 mentions, see [5].
 
-- ```clueweb```: WNED-Clueweb 12 dataset is a large dataset created by [6] from the Clueweb corpura automatically - it is this far less reliable than the previous ones. 
+- ```clueweb```: WNED-Clueweb 12 dataset is a large dataset created by [6] from the Clueweb corpura automatically - it is this far less reliable than the previous ones.
 
 - ```wikipedia```: similarly as the Clueweb dataset, this set has been created automatically by [6] from Wikipedia, thus also clearly less reliable.
 
-- ```hirmeos```: manually created dataset using open accessible books (licence CC-BY), financed from the European project H2020 Hirmeos.
+- ```hirmeos```: manually created dataset using open accessible books (licence CC-BY), financed from the European project H2020 Hirmeos [7].
 
 All these reference datasets are located under `data/corpus/corpus-long`.
 

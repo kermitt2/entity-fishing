@@ -1,6 +1,5 @@
 package com.scienceminer.nerd.evaluation;
 
-import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.NerdException;
@@ -11,9 +10,9 @@ import com.scienceminer.nerd.utilities.Utilities;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang3.StringUtils;
-import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
@@ -35,6 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -93,74 +93,84 @@ public class EvaluationDataGeneration {
         Collection<File> evalTxtFiles = FileUtils.listFiles(new File(corpusPathRawTexts),
                 new SuffixFileFilter(".txt", IOCase.INSENSITIVE), null);
 
-        final StringBuilder sbEntities = new StringBuilder();
-        sbEntities.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
-        sbEntities.append("<" + corpus + ".entityAnnotation>").append("\n");
-
-
-        for (File evalTxtFile : evalTxtFiles) {
-            ProcessText textProcessor = ProcessText.getInstance();
-            List<NerdEntity> entities = new ArrayList<>();
-
-            String filename = FilenameUtils.removeExtension(evalTxtFile.getName());
-
-            Language language = new Language("en");
-            final String[] split = filename.split("\\.");
-            try {
-                final String langId = split[split.length - 1];
-                language.setLang(langId);
-            } catch (ArrayIndexOutOfBoundsException aio) {
-                LOGGER.warn("No language specified in filename, defaulting to EN");
-            }
-
-            String text = null;
-            try {
-                text = FileUtils.readFileToString(evalTxtFile, UTF_8);
-            } catch (IOException e) {
-                LOGGER.warn("cannot read file " + evalTxtFile + ". Skipping it.", e);
-                continue;
-            }
-            List<Mention> nerMentions = textProcessor.processNER(text, language);
-            nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
-
-            List<Mention> wikipediaMentions = textProcessor.processWikipedia(text, language);
-            wikipediaMentions.stream().forEach(wm -> {
-                final NerdEntity nerdEntity = new NerdEntity(wm);
-                if (!entities.contains(nerdEntity)) {
-                    entities.add(nerdEntity);
-                }
-            });
-
-            NerdQuery query = new NerdQuery();
-            query.setText(text);
-            query.setEntities(entities);
-            query.setLanguage(language);
-
-            NerdEngine engine = NerdEngine.getInstance();
-            final List<NerdEntity> processedEntities = engine.disambiguate(query);
-
-            sbEntities.append("\t").append("<document docName=\"" + evalTxtFile.getName().toString() + "\">").append("\n");
-
-            processedEntities.stream().forEach(e -> {
-                sbEntities.append("\t\t").append("<annotation>").append("\n");
-                sbEntities.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
-                sbEntities.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
-                sbEntities.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
-                sbEntities.append("\t\t\t").append("<wikipediaId>").append(e.getWikipediaExternalRef()).append("</wikipediaId>").append("\n");
-                sbEntities.append("\t\t\t").append("<offset>").append(e.getOffsetStart()).append("</offset>").append("\n");
-                sbEntities.append("\t\t\t").append("<length>").append(e.getRawName().length()).append("</length>").append("\n");
-                sbEntities.append("\t\t").append("</annotation>").append("\n");
-            });
-
-            sbEntities.append("\t").append("</document>").append("\n");
-        }
-
-        sbEntities.append("</" + corpus + ".entityAnnotation>").append("\n");
+        LOGGER.info("Writing: " + corpusRefFile);
+        FileWriter corpusRefWriter = null;
         try {
-            LOGGER.info("Writing: " + corpusRefFile);
-            FileUtils.writeStringToFile(corpusRefFile, sbEntities.toString(), UTF_8);
+            corpusRefWriter = new FileWriter(corpusRefFile);
+            corpusRefWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
+            corpusRefWriter.append("<" + corpus + ".entityAnnotation>").append("\n");
+
+            for (File evalTxtFile : evalTxtFiles) {
+                ProcessText textProcessor = ProcessText.getInstance();
+                List<NerdEntity> entities = new ArrayList<>();
+
+                String filename = FilenameUtils.removeExtension(evalTxtFile.getName());
+
+                Language language = new Language("en");
+                final String[] split = filename.split("\\.");
+                try {
+                    final String langId = split[split.length - 1];
+                    language.setLang(langId);
+                } catch (ArrayIndexOutOfBoundsException aio) {
+                    LOGGER.warn("No language specified in filename, defaulting to EN");
+                }
+
+                String text = null;
+                try {
+                    text = FileUtils.readFileToString(evalTxtFile, UTF_8);
+                } catch (IOException e) {
+                    LOGGER.warn("cannot read file " + evalTxtFile + ". Skipping it.", e);
+                    continue;
+                }
+                List<Mention> nerMentions = textProcessor.processNER(text, language);
+                nerMentions.stream().forEach(m -> entities.add(new NerdEntity(m)));
+
+                List<Mention> wikipediaMentions = textProcessor.processWikipedia(text, language);
+                wikipediaMentions.stream().forEach(wm -> {
+                    final NerdEntity nerdEntity = new NerdEntity(wm);
+                    if (!entities.contains(nerdEntity)) {
+                        entities.add(nerdEntity);
+                    }
+                });
+
+                NerdQuery query = new NerdQuery();
+                query.setText(text);
+                query.setEntities(entities);
+                query.setLanguage(language);
+
+                NerdEngine engine = NerdEngine.getInstance();
+                final List<NerdEntity> processedEntities = engine.disambiguate(query);
+                final String docName = evalTxtFile.getName().toString();
+
+                try {
+                    corpusRefWriter.append("\t").append("<document docName=\"" + docName + "\">").append("\n");
+                    final StringBuilder sbDocument = new StringBuilder();
+                    processedEntities.stream().forEach(e -> {
+                        sbDocument.append("\t\t").append("<annotation>").append("\n");
+                        sbDocument.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
+                        sbDocument.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
+                        sbDocument.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
+                        sbDocument.append("\t\t\t").append("<wikipediaId>").append(String.valueOf(e.getWikipediaExternalRef())).append("</wikipediaId>").append("\n");
+                        sbDocument.append("\t\t\t").append("<offset>").append(String.valueOf(e.getOffsetStart())).append("</offset>").append("\n");
+                        sbDocument.append("\t\t\t").append("<length>").append(String.valueOf(e.getRawName().length())).append("</length>").append("\n");
+                        sbDocument.append("\t\t").append("</annotation>").append("\n");
+                    });
+
+                    corpusRefWriter.append(sbDocument.toString());
+                    corpusRefWriter.append("\t").append("</document>").append("\n");
+                    corpusRefWriter.flush();
+                } catch (IOException ioe) {
+                    LOGGER.warn("Writing error. Skipping document: " + docName);
+                }
+
+            }
+
+            corpusRefWriter.append("</" + corpus + ".entityAnnotation>").append("\n");
+
         } catch (IOException e) {
             throw new NerdException("Cannot write file " + corpusRefFile, e);
+        } finally {
+            IOUtils.closeQuietly(corpusRefWriter);
         }
     }
 
