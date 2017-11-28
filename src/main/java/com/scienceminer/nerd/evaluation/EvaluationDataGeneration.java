@@ -104,8 +104,14 @@ public class EvaluationDataGeneration {
 
             String filename = FilenameUtils.removeExtension(evalTxtFile.getName());
 
+            Language language = new Language("en");
             final String[] split = filename.split("\\.");
-            final Language language = new Language(split[split.length - 1]);
+            try {
+                final String langId = split[split.length - 1];
+                language.setLang(langId);
+            } catch (ArrayIndexOutOfBoundsException aio) {
+                LOGGER.warn("No language specified in filename, defaulting to EN");
+            }
 
             String text = null;
             try {

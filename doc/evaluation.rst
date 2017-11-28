@@ -30,6 +30,8 @@ Times, and the Associated Press.
 
 - ```wikipedia```: similarly as the Clueweb dataset, this set has been created automatically by [6] from Wikipedia, thus also clearly less reliable.
 
+- ```hirmeos```: manually created dataset using open accessible books (licence CC-BY), financed from the European project H2020 Hirmeos
+
 All these reference datasets are located under `data/corpus/corpus-long`.
 
 Evaluation commands
@@ -45,7 +47,20 @@ For instance for evaluating against the testb subset of the AIDA-CONLL, use:
 
 The evaluation process will provide standard metrics (accuracy, precision, recall. f1) for micro- and macro-averages for the entity disambiguation algorithm selected as ranker and for priors (as baseline). 
 
-The recall of the candidate selection with respect to the gold annotations is also provided (e.g. the proportion of candidate sets containing the expected answer before the ranking).  
+The recall of the candidate selection with respect to the gold annotations is also provided (e.g. the proportion of candidate sets containing the expected answer before the ranking).
+
+
+Evaluation annotation generation
+********************************
+
+In case there there is need of creating a new corpus, it's possible to automatically generate annotations xml file from text or pdf files.
+They can be then manually corrected by humans.
+If there is a directory called `pdf` or `PDF` the process will extract information (title, abstract, body) from each pdf and save it as `pdfFileName.lang.txt` inside the `RawText` directory.
+The tool will look into `RawText` and process the files `*.txt` found inside. If the files name is in the form `filename.lang.txt` then the lang will be used as reference, otherwise `en` will be the default choice.
+
+Use the following maven command with the above dataset identifier for generating the annotation xml file:
+::
+	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.EvaluationDataGeneration -Dexec.args="hirmeos"
 
 References
 **********
@@ -61,3 +76,5 @@ References
 **[5]** Silviu Cucerzan. Large-scale named entity disambiguation based on Wikipedia data. In Jason Eisner, editor, EMNLP-CoNLL 2007, Proceedings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning, June 28-30, 2007, Prague, Czech Republic, pages 708–716. ACL. <http://www.aclweb.org/anthology/D07-1074>.
 
 **[6]** Zhe Cao, Tao Qin, Tie-Yan Liu, Ming-Feng Tsai, and Hang Li. Learning to rank: from pairwise approach to listwise approach. In Zoubin Ghahramani, editor, Machine Learning, Proceedings of the Twenty-Fourth International Conference (ICML 2007), Corvallis, Oregon, USA, June 20-24, 2007, volume 227 of ACM International Conference Proceeding Series, pages 129–136. ACM. DOI <https://doi.org/10.1145/1273496.1273513>.
+
+**[7]** HIRMEOS H2020 project. More information `here <http://www.hirmeos.eu>`_.
