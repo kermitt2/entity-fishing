@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.scienceminer.nerd.service.NerdRestProcessFile.identifyLanguage;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -93,14 +94,20 @@ public class EvaluationDataGeneration {
         Collection<File> evalTxtFiles = FileUtils.listFiles(new File(corpusPathRawTexts),
                 new SuffixFileFilter(".txt", IOCase.INSENSITIVE), null);
 
+        Collection<File> orderedEvalTxtFiles = evalTxtFiles.stream()
+                .sorted(Comparator.comparing(o -> o.getName()))
+                .collect(Collectors.toList());
+
         LOGGER.info("Writing: " + corpusRefFile);
         FileWriter corpusRefWriter = null;
-        try {
+        try
+
+        {
             corpusRefWriter = new FileWriter(corpusRefFile);
             corpusRefWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
             corpusRefWriter.append("<" + corpus + ".entityAnnotation>").append("\n");
 
-            for (File evalTxtFile : evalTxtFiles) {
+            for (File evalTxtFile : orderedEvalTxtFiles) {
                 ProcessText textProcessor = ProcessText.getInstance();
                 List<NerdEntity> entities = new ArrayList<>();
 
@@ -172,6 +179,7 @@ public class EvaluationDataGeneration {
         } finally {
             IOUtils.closeQuietly(corpusRefWriter);
         }
+
     }
 
     /**
