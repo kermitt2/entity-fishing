@@ -7,12 +7,14 @@ import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.Utilities;
+import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.GrobidModels;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
@@ -28,20 +30,23 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.tokenization.TaggingTokenCluster;
+import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.scienceminer.nerd.service.NerdRestProcessFile.identifyLanguage;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.text.StringEscapeUtils.escapeHtml4;
+import static org.apache.commons.text.StringEscapeUtils.escapeXml11;
+import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
+import static org.grobid.core.engines.label.TaggingLabels.CITATION_MARKER;
 
 public class EvaluationDataGeneration {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
@@ -155,8 +160,8 @@ public class EvaluationDataGeneration {
                     final StringBuilder sbDocument = new StringBuilder();
                     processedEntities.stream().forEach(e -> {
                         sbDocument.append("\t\t").append("<annotation>").append("\n");
-                        sbDocument.append("\t\t\t").append("<mention>").append(escapeHtml4(e.getRawName())).append("</mention>").append("\n");
-                        sbDocument.append("\t\t\t").append("<wikiName>").append(escapeHtml4(e.getNormalisedName())).append("</wikiName>").append("\n");
+                        sbDocument.append("\t\t\t").append("<mention>").append(escapeXml11(e.getRawName())).append("</mention>").append("\n");
+                        sbDocument.append("\t\t\t").append("<wikiName>").append(escapeXml11(e.getNormalisedName())).append("</wikiName>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikipediaId>").append(String.valueOf(e.getWikipediaExternalRef())).append("</wikipediaId>").append("\n");
                         sbDocument.append("\t\t\t").append("<offset>").append(String.valueOf(e.getOffsetStart())).append("</offset>").append("\n");
@@ -250,7 +255,7 @@ public class EvaluationDataGeneration {
 
                         sb.append(LayoutTokensUtil.normalizeDehyphenizeText(titleTokens));
                         sb.append("\n");
-
+                        sb.append("\n");
                     }
 
                     // abstract
@@ -259,6 +264,7 @@ public class EvaluationDataGeneration {
                         LOGGER.info("Process abstract...");
 
                         sb.append(LayoutTokensUtil.normalizeDehyphenizeText(abstractTokens));
+                        sb.append("\n");
                         sb.append("\n");
                     }
                 }
@@ -286,15 +292,39 @@ public class EvaluationDataGeneration {
                     // limit to text only
                     List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
                             TaggingLabels.SECTION);
-                    List<LayoutTokenization> documentBodyTokens =
-                            FullTextParser.getDocumentFullTextTokens(toProcess, labeledResult, tokenizationBody.getTokenization());
 
-                    if (documentBodyTokens != null) {
-                        for (LayoutTokenization layoutTokenization : documentBodyTokens) {
-                            List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
-                            sb.append(LayoutTokensUtil.normalizeDehyphenizeText(layoutTokens));
+                    //Labels to be ignored but their encountering doesn't means the end of the current label.
+                    // e.g. a citation marker within a paragraph doesn't means there is a new paragraph
+                    List<TaggingLabel> interruptingLabels = Arrays.asList(TaggingLabels.CITATION_MARKER);
+
+                    TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, labeledResult, tokenizationBody.getTokenization());
+                    List<TaggingTokenCluster> clusters = clusteror.cluster();
+                    TaggingLabel previousLabel = null;
+
+                    int nbWords = 0;
+
+                    for (TaggingTokenCluster cluster : clusters) {
+                        if (cluster == null) {
+                            continue;
                         }
-                        sb.append("\n");
+
+                        TaggingLabel clusterLabel = cluster.getTaggingLabel();
+                        String clusterContent = LayoutTokensUtil.normalizeDehyphenizeText(cluster.concatTokens());
+
+                        nbWords += cluster.getLabeledTokensContainers().size();
+
+                        if (toProcess.contains(clusterLabel)) {
+
+                            if (clusterContent.length() > 10) {
+                                if (previousLabel != null && !interruptingLabels.contains(previousLabel)) {
+                                    sb.append("\n");
+                                    sb.append("\n");
+                                }
+
+                                sb.append(clusterContent);
+                            }
+                        }
+                        previousLabel = clusterLabel;
                     }
                 }
             }

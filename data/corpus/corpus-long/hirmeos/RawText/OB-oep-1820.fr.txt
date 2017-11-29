@@ -1,7 +1,9 @@
 Sur quoi reposent nos infrastructures numériques ?
 
 POURQUOI CES PROJETS SONT-ILS SI DIFFICILES À FINANCER ?
-Aujourd'hui, le travail sur les infrastructures numériques est efectué par des développeurs freelance ou ayant un « job alimentaire ». Leur temps libre est consacré aux projets open source, et ils exercent par ailleurs un travail rémunéré sans rapport avec eux. C'est une solution viable pour inancer son quotidien, mais qui ne permet pas d'apprécier à sa juste valeur l'apport social de ces projets.
-Étonnamment, bien que tout le monde soit d'accord pour reconnaître qu'il y a un problème (qu'on le qualiie de « burnout du bénévole », de mauvaise gestion de la communauté ou de inancement insuisant), la discussion ne dépasse pas le stade de maigres solutions à court terme comme les « pourboires » ou le crowdfunding.
-Discutez avec des développeurs qui ont trouvé un moyen d'être inancièrement autonomes et vous entendrez à tout bout
 
+Aujourd'hui, le travail sur les infrastructures numériques est efectué par des développeurs freelance ou ayant un « job alimentaire ». Leur temps libre est consacré aux projets open source, et ils exercent par ailleurs un travail rémunéré sans rapport avec eux. C'est une solution viable pour inancer son quotidien, mais qui ne permet pas d'apprécier à sa juste valeur l'apport social de ces projets.
+
+Étonnamment, bien que tout le monde soit d'accord pour reconnaître qu'il y a un problème (qu'on le qualiie de « burnout du bénévole », de mauvaise gestion de la communauté ou de inancement insuisant), la discussion ne dépasse pas le stade de maigres solutions à court terme comme les « pourboires » ou le crowdfunding.
+
+Discutez avec des développeurs qui ont trouvé un moyen d'être inancièrement autonomes et vous entendrez à tout bout

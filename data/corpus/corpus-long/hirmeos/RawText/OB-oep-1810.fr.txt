@@ -1,12 +1,19 @@
 Sur quoi reposent nos infrastructures numériques ?
 
 DE QUOI SONT FAITS LES LOGICIELS
-Les sites web ou applications mobiles que nous utilisons, même les plus simples, sont constitués de multiples composants plus petits, tout comme un immeuble est fait de briques et de ciment.
-Imaginez par exemple que vous désiriez poster une photo sur Facebook. Vous ouvrez votre appli mobile Facebook, ce qui déclenche le logiciel pour aicher votre il d'actualités.
-Vous téléchargez une photo depuis votre téléphone, ajoutez un commentaire, puis vous cliquez sur « Envoyer ». Une autre partie du logiciel de Facebook, en charge du stockage des données, se souvient de votre identité et poste la photo sur votre proil. Finalement, une troisième partie de ce logiciel happe le message que vous avez saisi sur votre téléphone et le montre à tous vos amis à travers le monde.
-Bien que ces opérations aient lieu sur Facebook, en réalité, ce n'est pas Facebook qui a développé toutes les briques nécessaires pour vous permettre de publier sur son application. Ses développeurs ont plutôt utilisé du code libre, public, mis à disposition de tous sur Internet par des bénévoles. Facebook ne publie pas la liste des projets qu'ils utilisent, mais une de ses iliales, Instagram, le fait et remercie certains de ces projets sur sa page d'accueil
-Il est plus diicile de faire payer d'autres types d'outils de développement, tels que les frameworks, de nombreuses bibliothèques et langages de programmation, qui sont souvent créés et maintenus par des bénévoles.
-Ce type d'outils ressemble plus à des ressources qu'à des services qui peuvent être activés ou désactivés : les rendre payants limiterait fortement leur adoption. C'est pourquoi n'importe qui, que ce soit une entreprise milliardaire ou un adolescent apprenti développeur, peut utiliser gratuitement ces composants pour créer ses propres logiciels.
-Par exemple, selon la page d'accueil d'Instagram, l'une des bibliothèques utilisées par l'entreprise est Appirater. Il s'agit d'une bibliothèque qui facilite les fonctions de rappels automatiques pour l'évaluation d'une application, à destination des utilisateurs d'iPhone. Elle a été créée en 2009 par Arash Payan, un développeur indépendant basé à Los Angeles. Le projet n'apporte aucun revenu à Payan.
-C'est comme si des scieries, des centrales à béton et des magasins de matériaux fournissaient la base à une entreprise du bâtiment, puis continuaient à l'approvisionner.
 
+Les sites web ou applications mobiles que nous utilisons, même les plus simples, sont constitués de multiples composants plus petits, tout comme un immeuble est fait de briques et de ciment.
+
+Imaginez par exemple que vous désiriez poster une photo sur Facebook. Vous ouvrez votre appli mobile Facebook, ce qui déclenche le logiciel pour aicher votre il d'actualités.
+
+Vous téléchargez une photo depuis votre téléphone, ajoutez un commentaire, puis vous cliquez sur « Envoyer ». Une autre partie du logiciel de Facebook, en charge du stockage des données, se souvient de votre identité et poste la photo sur votre proil. Finalement, une troisième partie de ce logiciel happe le message que vous avez saisi sur votre téléphone et le montre à tous vos amis à travers le monde.
+
+Bien que ces opérations aient lieu sur Facebook, en réalité, ce n'est pas Facebook qui a développé toutes les briques nécessaires pour vous permettre de publier sur son application. Ses développeurs ont plutôt utilisé du code libre, public, mis à disposition de tous sur Internet par des bénévoles. Facebook ne publie pas la liste des projets qu'ils utilisent, mais une de ses iliales, Instagram, le fait et remercie certains de ces projets sur sa page d'accueil
+
+Il est plus diicile de faire payer d'autres types d'outils de développement, tels que les frameworks, de nombreuses bibliothèques et langages de programmation, qui sont souvent créés et maintenus par des bénévoles.
+
+Ce type d'outils ressemble plus à des ressources qu'à des services qui peuvent être activés ou désactivés : les rendre payants limiterait fortement leur adoption. C'est pourquoi n'importe qui, que ce soit une entreprise milliardaire ou un adolescent apprenti développeur, peut utiliser gratuitement ces composants pour créer ses propres logiciels.
+
+Par exemple, selon la page d'accueil d'Instagram, l'une des bibliothèques utilisées par l'entreprise est Appirater. Il s'agit d'une bibliothèque qui facilite les fonctions de rappels automatiques pour l'évaluation d'une application, à destination des utilisateurs d'iPhone. Elle a été créée en 2009 par Arash Payan, un développeur indépendant basé à Los Angeles. Le projet n'apporte aucun revenu à Payan.
+
+C'est comme si des scieries, des centrales à béton et des magasins de matériaux fournissaient la base à une entreprise du bâtiment, puis continuaient à l'approvisionner.
