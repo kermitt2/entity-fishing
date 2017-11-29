@@ -3,6 +3,7 @@ package com.scienceminer.nerd.disambiguation;
 import java.util.*;
 import java.io.*;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
@@ -39,6 +40,7 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 import org.apache.commons.text.WordUtils;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
@@ -129,22 +131,24 @@ public class NerdEngine {
 			LOGGER.info("Cannot parse the text, because it is null.");
 		}*/
 		
-		if ( (text == null) || (text.length() == 0) ) {
+		if (isEmpty(text) && isNotEmpty(shortText) ) {
 			shortTextVal = true;
 			text = shortText;
 		}
 
-		List<LayoutToken> tokens = null;
-		if ( (text == null) || (text.length() == 0) ) {
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+		if (isEmpty(text) && tokens != null) {
 			// we might have an input as a list of LayoutToken
-			tokens = nerdQuery.getTokens();
 			text = LayoutTokensUtil.toText(tokens);
 			shortTextVal = false;
 		}
-		
-		if ( (text == null) || (text.length() == 0) ) {
+
+		//if the text is null, then better return the same entities provided in input,
+		// AFAIK here is no difference from before.
+		List<NerdEntity> entities = nerdQuery.getEntities();
+		if ( isEmpty(text) ) {
 			LOGGER.info("The length of the text to be parsed is 0.");
-			return null;
+			return entities;
 		}
 
 		// source language 
@@ -183,7 +187,7 @@ public class NerdEngine {
 		// language for the results!)
 		List<String> targetLanguages = nerdQuery.getResultLanguages();
 		
-		List<NerdEntity> entities = nerdQuery.getEntities();
+
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		
 		NerdContext context = nerdQuery.getContext();

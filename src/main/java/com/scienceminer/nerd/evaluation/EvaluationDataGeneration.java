@@ -41,6 +41,7 @@ import java.util.stream.Collectors;
 
 import static com.scienceminer.nerd.service.NerdRestProcessFile.identifyLanguage;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.text.StringEscapeUtils.escapeHtml4;
 
 public class EvaluationDataGeneration {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
@@ -154,8 +155,8 @@ public class EvaluationDataGeneration {
                     final StringBuilder sbDocument = new StringBuilder();
                     processedEntities.stream().forEach(e -> {
                         sbDocument.append("\t\t").append("<annotation>").append("\n");
-                        sbDocument.append("\t\t\t").append("<mention>").append(e.getRawName()).append("</mention>").append("\n");
-                        sbDocument.append("\t\t\t").append("<wikiName>").append(e.getNormalisedName()).append("</wikiName>").append("\n");
+                        sbDocument.append("\t\t\t").append("<mention>").append(escapeHtml4(e.getRawName())).append("</mention>").append("\n");
+                        sbDocument.append("\t\t\t").append("<wikiName>").append(escapeHtml4(e.getNormalisedName())).append("</wikiName>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikipediaId>").append(String.valueOf(e.getWikipediaExternalRef())).append("</wikipediaId>").append("\n");
                         sbDocument.append("\t\t\t").append("<offset>").append(String.valueOf(e.getOffsetStart())).append("</offset>").append("\n");

@@ -316,19 +316,19 @@ public class ProcessText {
 	 * 		the list of identified mentions
 	 */
 	public List<Mention> processNER(String text, Language language) throws NerdException {
+		List<Mention> results = new ArrayList<>();
 		if (text == null) {
 			throw new NerdException("Cannot parse the sentence, because it is null.");
 		}
 		else if (text.length() == 0) {
 			//System.out.println("The length of the text to be processed is 0.");
 			LOGGER.error("The length of the text to be parsed is 0.");
-			return null;
+			return results;
 		}
 		String lang = language.getLang();
 		if (!lang.equals("en") && !lang.equals("fr"))
-			return null;
+			return results;
 
-		List<Mention> results = new ArrayList<>();
 		try {
 			if (nerParsers == null) {
 				//Utilities.initGrobid();
@@ -449,16 +449,16 @@ public class ProcessText {
 	 * @return the list of identified entities.
 	 */
 	public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
+		List<Mention> results = new ArrayList<Mention>();
 		if (text == null) {
 			throw new NerdException("Cannot parse the text, because it is null.");
 		}
 		else if (text.length() == 0) {
 			//System.out.println("The length of the text to be processed is 0.");
 			LOGGER.error("The length of the text to be parsed is 0.");
-			return null;
+			return results;
 		}
 
-		List<Mention> results = new ArrayList<Mention>();
 		try {
 			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
 
@@ -524,8 +524,8 @@ public class ProcessText {
 						results.add(entity);
 				}
 
-if (pos.start == -1)
-System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawName());
+				if (pos.start == -1)
+					System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawName());
 			}
 		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
