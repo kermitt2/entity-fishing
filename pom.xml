@@ -483,7 +483,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <version>2.6</version>
-                        
+
                         <!--<executions>
                             <execution>
                                 <id>assembly-data</id>
@@ -633,7 +633,7 @@
             <artifactId>sux4j</artifactId>
             <version>3.1.2</version>
             <exclusions>
-                <exclusion> 
+                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
@@ -692,6 +692,13 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+        <!-- it's handy for parsing JSON but it's used only for tests, so for the moment its scope is limited --> 
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- avro hadoop serialization - to be removed at some point! -->
