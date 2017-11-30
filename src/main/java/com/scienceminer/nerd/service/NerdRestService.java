@@ -15,7 +15,7 @@ import javax.ws.rs.core.UriInfo;
 import java.io.InputStream;
 
 /**
- * RESTful service for the NERD system.
+ * RESTFul service for the NERD system.
  */
 @Singleton
 @Path(NerdPaths.ROOT)

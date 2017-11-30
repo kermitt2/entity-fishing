@@ -7,7 +7,6 @@ import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.Utilities;
-import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
@@ -20,7 +19,6 @@ import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.Engine;
-import org.grobid.core.engines.FullTextParser;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -37,16 +35,15 @@ import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.scienceminer.nerd.service.NerdRestProcessFile.identifyLanguage;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.apache.commons.text.StringEscapeUtils.escapeHtml4;
 import static org.apache.commons.text.StringEscapeUtils.escapeXml11;
-import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
-import static org.grobid.core.engines.label.TaggingLabels.CITATION_MARKER;
 
 public class EvaluationDataGeneration {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
