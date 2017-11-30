@@ -3,9 +3,13 @@ package com.scienceminer.nerd.evaluation;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.NerdException;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.utilities.StringProcessor;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -48,6 +52,8 @@ import static org.apache.commons.text.StringEscapeUtils.escapeXml11;
 public class EvaluationDataGeneration {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
 
+    LowerKnowledgeBase lowerKnowledgeBase = null;
+
     public EvaluationDataGeneration() {
         Utilities.initGrobid();
         LibraryLoader.load();
@@ -72,22 +78,28 @@ public class EvaluationDataGeneration {
             }
 
             for (File evalFile : evalFiles) {
-                final Map<String, String> output = extractPDFContent(evalFile);
-                String fileContent = output.get("TEXT");
-                String lang = output.get("LANG");
+                final Pair<String, List<String>> output = extractPDFContent(evalFile);
+                List<String> fileContent = output.b;
+                String lang = output.a;
+                final String outputPathPrefix = corpusPathRawTexts + File.separator
+                        + FilenameUtils.removeExtension(evalFile.getName());
 
-                final String outputPath = corpusPathRawTexts + File.separator
-                        + FilenameUtils.removeExtension(evalFile.getName()) + "." + lang + ".txt";
-                File outputFile = new File(outputPath);
-                if (outputFile.exists()) {
-                    LOGGER.warn("The file " + outputPath + " exists. Skipping it.");
-                } else {
-                    try {
-                        LOGGER.info("Writing: " + outputFile.getAbsolutePath());
-                        FileUtils.writeStringToFile(outputFile, fileContent, UTF_8);
-                    } catch (IOException e) {
-                        throw new NerdException("Cannot write file " + outputFile.getAbsolutePath(), e);
+                int idx = 0;
+                for (String singleFile : fileContent) {
+                    String outputPath = outputPathPrefix + "." + idx + "." + lang + ".txt";
+
+                    File outputFile = new File(outputPath);
+                    if (outputFile.exists()) {
+                        LOGGER.warn("The fSile " + outputPath + " exists. Skipping it.");
+                    } else {
+                        try {
+                            LOGGER.info("Writing: " + outputFile.getAbsolutePath());
+                            FileUtils.writeStringToFile(outputFile, singleFile, UTF_8);
+                        } catch (IOException e) {
+                            throw new NerdException("Cannot write file " + outputFile.getAbsolutePath(), e);
+                        }
                     }
+                    idx++;
                 }
             }
 
@@ -125,6 +137,8 @@ public class EvaluationDataGeneration {
                     LOGGER.warn("No language specified in filename, defaulting to EN");
                 }
 
+                lowerKnowledgeBase = UpperKnowledgeBase.getInstance().getWikipediaConf(language.getLang());
+
                 String text = null;
                 try {
                     text = FileUtils.readFileToString(evalTxtFile, UTF_8);
@@ -158,9 +172,18 @@ public class EvaluationDataGeneration {
                     processedEntities.stream().forEach(e -> {
                         sbDocument.append("\t\t").append("<annotation>").append("\n");
                         sbDocument.append("\t\t\t").append("<mention>").append(escapeXml11(e.getRawName())).append("</mention>").append("\n");
-                        sbDocument.append("\t\t\t").append("<wikiName>").append(escapeXml11(e.getNormalisedName())).append("</wikiName>").append("\n");
+                        
+                        final int wikipediaExternalRef = e.getWikipediaExternalRef();
+
+                        String title = null;
+                        final Page page = lowerKnowledgeBase.getPageById(wikipediaExternalRef);
+                        if(page.getId() != -1) {
+                            title = page.getTitle();
+                        }
+
+                        sbDocument.append("\t\t\t").append("<wikiName>").append(escapeXml11(title)).append("</wikiName>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
-                        sbDocument.append("\t\t\t").append("<wikipediaId>").append(String.valueOf(e.getWikipediaExternalRef())).append("</wikipediaId>").append("\n");
+                        sbDocument.append("\t\t\t").append("<wikipediaId>").append(String.valueOf(wikipediaExternalRef)).append("</wikipediaId>").append("\n");
                         sbDocument.append("\t\t\t").append("<offset>").append(String.valueOf(e.getOffsetStart())).append("</offset>").append("\n");
                         sbDocument.append("\t\t\t").append("<length>").append(String.valueOf(e.getRawName().length())).append("</length>").append("\n");
                         sbDocument.append("\t\t").append("</annotation>").append("\n");
@@ -187,16 +210,16 @@ public class EvaluationDataGeneration {
 
     /**
      * This method returns a map with two items inside,
-     * LANG -> the language of the PDF
-     * TEXT -> the content of the PDF
+     * Pair.a -> the language of the PDF
+     * Pair.b -> the content of the PDF
      */
-    public Map<String, String> extractPDFContent(File originFile) {
+    public Pair<String, List<String>> extractPDFContent(File originFile) {
 
         LOGGER.info("Processing " + originFile.getAbsolutePath());
+        List<String> resultingDocuments = new ArrayList<>();
 
         //It's crappy... I know but it's the quicker way to get the language and the text out
-        Map<String, String> result = new HashMap<>();
-        result.put("LANG", "en"); // default language
+        String language = "en";
 
         StringBuilder sb = new StringBuilder();
         Engine engine = GrobidFactory.getInstance().getEngine();
@@ -240,7 +263,7 @@ public class EvaluationDataGeneration {
 
                     Language lang = identifyLanguage(resHeaderLangIdentification, doc);
                     if (lang != null) {
-                        result.put("LANG", lang.getLang());
+                        language = lang.getLang();
                     } else {
                         LOGGER.error("Language was not specified and there was not enough text to identify it. The process might fail. ");
                     }
@@ -297,8 +320,8 @@ public class EvaluationDataGeneration {
                     TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, labeledResult, tokenizationBody.getTokenization());
                     List<TaggingTokenCluster> clusters = clusteror.cluster();
                     TaggingLabel previousLabel = null;
-
-                    int nbWords = 0;
+                    int wordsCounter = 0;
+                    boolean newData = false; 
 
                     for (TaggingTokenCluster cluster : clusters) {
                         if (cluster == null) {
@@ -308,7 +331,7 @@ public class EvaluationDataGeneration {
                         TaggingLabel clusterLabel = cluster.getTaggingLabel();
                         String clusterContent = LayoutTokensUtil.normalizeDehyphenizeText(cluster.concatTokens());
 
-                        nbWords += cluster.getLabeledTokensContainers().size();
+                        wordsCounter += cluster.getLabeledTokensContainers().size();
 
                         if (toProcess.contains(clusterLabel)) {
 
@@ -317,19 +340,29 @@ public class EvaluationDataGeneration {
                                     sb.append("\n");
                                     sb.append("\n");
                                 }
-
                                 sb.append(clusterContent);
+                                newData = true;
                             }
                         }
                         previousLabel = clusterLabel;
+
+                        if (wordsCounter > 1000) {
+                            resultingDocuments.add(sb.toString());
+                            sb = new StringBuilder();
+                            wordsCounter = 0;
+                            newData = false;
+                        }
                     }
+                    if(newData)
+                        resultingDocuments.add(StringProcessor.removeInvalidUtf8Chars(sb.toString()));
                 }
             }
         } catch (Exception e) {
             throw new NerdException("Something is wrong. ", e);
         }
 
-        result.put("TEXT", sb.toString());
+        Pair<String, List<String>> result = new Pair(language, resultingDocuments);
+//        result.put("LENGTH", String.valueOf(wordsCounter));
 
         return result;
     }
