@@ -1,0 +1,27 @@
+
+
+(7) If (apparent) disunity of there being N distinct kinds of particle or distinct fields has emerged as a result of cosmic spontaneous symmetry-breaking events, there being manifest unity before these occurred, then the relevant theory, T, is unified. If current (apparent) disunity has not emerged from unity in this way, as a result of spontaneous symmetry-breaking, then the relevant theory, T, is disunified.
+
+Example: Weinberg's and Salam's electroweak theory, according to which at very high energies, such as those that existed soon after the big bang, the electroweak force has the form of two forces, one with three associated massless particles, two charged, W-and W + , and one neutral, W o , and the other with one neutral massless particle, V o. According to the theory, the two neutral particles, W o and V o , are intermingled in two different ways, to form two new neutral particles, the photon, γ, and another neutral massless particle, Z o. As energy decreases, the W + , W-and Z o particles acquire mass, due to the mechanism known as spontaneous symmetry-breaking (involving the Higgs particle), while the photon, γ, retains its zero mass. This theory unifies the weak and electro magnetic forces as a result of exhibiting the symmetry of local gauge invariance; this unification is only partial, however, because the symmetry group is a direct product of two groups, U(1) associated with V o , and SU(2) associated with W-, W + and W o .(8) According to GR, Newton's force of gravitation is merely an aspect of the curvature of space-time. As a result of a change in our ideas about the nature of space-time, so that its geometric properties become dynamic, a physical force disappears, or becomes unified with space-time. This suggests the following requirement for unity: space-time on the one hand, and physical "particles-and-forces" on the other, must be unified into a single self-interacting entity, U. If T postulates space-time and physical particles-and-forces as two fundamentally distinct kinds of entity, then T is not unified in this respect.
+
+Example: one might imagine that the quantization of spacetime leads to the appearance of particles and forces as only apparently distinct from empty space-time. Here, N = 1 in a type (8) way: there is just the one self-interacting entity, empty space-time.
+
+For unity, in each case, as I have said, we require N = 1. As we go from (1) to (5), the requirements for unity are intended to be accumulative: each presupposes that N = 1 for previous requirements. As far as (6) and
+
+are concerned, if there are N distinct kinds of entity which are not unified by a symmetry, whether broken or not, then the degree of disunity is the same as that for
+
+, depending on whether there are N distinct forces, or one force but N distinct kinds of entity between which the force acts.
+
+(8) does not introduce a new kind of unity, but rather a new, more severe way of counting different kinds of entity.
+
+require, for unity, that there is one kind of self-interacting physical entity evolving in a distinct space-time, the way this entity evolves being specified, of course, by a consistent physical theory. According to (1) to
+
+, even though there are, in a sense, two kinds of entity, matter (or particlesand-forces) on the one hand, and space-time on the other, nevertheless N = 1. According to, this would yield N = 2. For N = 1, (8) requires that matter and space-time are no more than aspects of one basic entity (unified by means of a spontaneously broken symmetry, perhaps).
+
+As we go from (1) to (8), then, requirements for unity become increasingly demanding, with (6) and
+
+being at least as demanding as
+
+, as explained above.
+
+(1) to (8) may seem very different requirements for unity. In fact they all exemplify the same basic idea: disunity arises when different dynamical laws govern the evolution of physical states in different regions of the space, S, of all possible physical states. For example, if a theory postulates more than one force, or kind of particle, not unified by symmetry, then in different regions of S different force laws will operate. If (8) is not satisfied, there is a region of S where only empty space exists, the laws being merely those which specify the nature of empty space or space-time. The eight distinct facets of unity, (1) to (8), arise, as I have said, because of the eight different ways in which content can vary from one region of S to another. 8

@@ -1,0 +1,17 @@
+
+
+Here, a, b and c are spinless particles, and (bc) is the bound system. Let the state of the entire system be Ψ(t), and let the asymptotic states of the two channels (A))and (B))be Ψ A (t) and Ψ B (t) respectively. Asymptotic states associated with inelastic interactions are fictional states towards which, according to OQT, the real state of the system evolves as t 񮽙 + 񮽙.
+
+Each outcome channel has its associated asymptotic state, which evolves as if forces between particles are zero, except where forces hold bound systems together.
+
+According to OQT, in connection with the toy interaction above, there are states 񮽙 A (t) and 񮽙 B (t), suchhthat:
+
+(1) For all t, 񮽙(t))==c A 񮽙 A (t) + c B 񮽙 B (t), with |c A | 2 + |c B | 2 񮽙==1; (2) as t 񮽙 + 񮽙, 񮽙 A (t) 񮽙 񮽙 A (t) and 񮽙 B (t) 񮽙񮽙񮽙 B (t).
+
+The idea is that at the first instant t for which 񮽙 A (t) is very nearly the same as the asymptotic state 񮽙 A (t), or 񮽙 B (t) is very nearly the same as 񮽙 B (t), then the state of the system, 񮽙(t), collapses spontaneously either into񮽙 A (t) with probability |c A | 2 , or into 񮽙 B (t) with probability |c B | 2. Or, more precisely:
+
+Postulate 1B: At the first instant for which | A (t)|񮽙 A (t)񮽙 | 2 > 1-񮽙 or | B (t)|񮽙 B (t)񮽙| 2 > 1-񮽙, the state of the system collapses spontaneously into 񮽙 A (t) with probability |c A | 2 , or into 񮽙 B (t) with probability |c B | 2 , 񮽙 being a universal constant, a positive real number very nearly equal tozero.
+
+Here, m a , m b and m c are the masses of "particles" a, b and c respectively, and 񮽙񮽙==h/2񮽙 where h is Planck's constant. The condition for probabilistic collapse, formulated above, can readily be generalized to apply to more complicated and realistic inelastic interactions between "particles".
+
+According to the micro-realistic, fundamentally probabilistic version of quantum theory, indicated above, the state function, 񮽙(t), describes the actual physical state of the quantum system, from moment to moment. Quantum systems may be called "propensitons". The physical (quantum) state of the propensiton evolves in accordance with Schrödinger's time-dependent equation as long as the condition for a probabilistic transition to occur does not obtain. The moment it does obtain, the state jumps instantaneously and probabilistically, in the manner indicated above, into a new state. (All but one of a superposition of states, each with distinct "particles" associated with them, vanish.) The new state then continues to evolve in accordance with Schrödinger's equation until conditions for a new probabilistic transitionnarise.
