@@ -1,0 +1,51 @@
+Indexing of P arguments is also a prominent feature of verbs in Trans-New Guinea languages. Verbs with P arguments indexed via prefixes are found for example in the Finisterre-Huon family, and P-marking prefixes can be reconstructed at the level of pTNG (Suter 2012). Indexing of P arguments is illustrated in (11) with data from Fore, where the first person singular object is indicated with a verbal prefix.
+
+In contrast to both TAP and NH languages, pTNG indexed subjects (both A and S) via suffixes, not prefixes (Foley 2000). However, subject prefixes are not unknown in TNG languages. Foley cites Marind as an example of a Papuan language with both subject and object prefixes, noting that "Marind is the only Papuan language I know which consistently exhibits A-U-V order"
+
+(12) Marind (TNG;A-na-kipraud. 3sg.subj-1sg.obj-tie 'He ties me. ' 156 4
+
+The linguistic position of the Timor-Alor-Pantar languages
+
+While the Marind example in (12) may not be typical for TNG languages, it certainly shows much affinity with pronominal indexing patterns in both TAP and NH languages.
+
+The TAP languages exhibit preposed possessor constructions, a typically Papuan feature, at least for East NusantaraThe possessor precedes the possessum, whether the possessor is expressed as a full noun phraseor just with a pronoun
+
+The order possessor-possessum is also found widely among TNG languages, as illustrated by the Enga and Mian examples below.
+
+The order possessum-possessor is also found in many TNG languages, particularly with inalienable nouns, as illustrated by the following examples from Fore and Barai.
+
+A distinction between alienable and inalienable possession is considered a typical Papuan feature, and TAP languages share this feature. While TAP languages vary in exactly how they realize this distinction, Western Pantar is typical in realizing this distinction in the possessive pronouns. In Western Pantar the third person singular inalienable form is ga-rather than gai-, as in (21).
+
+(21) Western Pantar (AP; Holton fieldnotes)
+
+ga-uta 3sg.inal-foot
+
+'his/her/its foot'
+
+Many of the TNG languages also share this distinction. In Inanwatan, alienably possessed nouns take independent pronouns, like tigáeso in, while inalienably possessed nouns take pronominal prefixes, like na-in (23).The acute accent indicates lexical stress, which is distinctive in Inanwatan.
+
+4 The linguistic position of the Timor-Alor-Pantar languages
+
+While NH languages also have obligatorily possessed nouns, these languages lack a distinct inalienable possession construction. In particular, in NH languages the same possessive construction is used regardless of whether the noun is obligatorily possessed or not. In Tobelo obligatorily possessed nouns such as lako 'eye' (24) use the same possessive strategy as non-obligatorily possessed nouns such as tau 'house' (16).
+
+The morphological features for TAP, TNG, and NH are summarized in
+
+The TAP languages, like most NH and TNG (Foley 2000) languages, are rightheaded and verb-final.
+
+Gary Holton & Laura C. Robinson
+
+In many TAP languages, however, the postpositions display verbal properties, as in, where the postposition/verb mi '(be) in' is modified by an aspectual marker.
+
+Another typically Papuan feature in East Nusantara languages is the presence of clause-final negationThis feature is indeed found in TAP languages (30), though in NH languages the negator morpheme just follows the verb root rather than occurring in absolute final position
+
+One notable syntactic feature absent from TAP is clause-chaining, which is one of the most distinctive features of Papuan languages in general and is particularly associated with TNG languagesClause-chaining is also absent from NH languages. However, while clause-chaining may be one of the key distinguishing features of Papuan languages, it is important to note that this feature is completely absent from some TNG languages, such as Marind.
+
+In general, syntactic features do not distinguish the TAP languages from TNG or NH
+
+While the TAP languages share a number of morphological and syntactic features with TNG and NH languages, these features are typologically common, may be interrelated (such as verb-final syntax and postpositions), and they may be indicative of a linguistic areaWe therefore do not find the typological evidence convincing of genealogical relationship.
+
+3 Pronominal evidence
+
+When combined with other lines of evidence, homologous pronominal paradigms can provide strong support for proposals of genealogical relatedness. However, 161 the use of pronominal paradigms as the sole evidence for genealogical relatedness has been repeatedly questioned in the literature (cf.Pronominal paradigms were an important basis for the development of the TransNew Guinea hypothesis, and pronouns have continued to play a starring role in attempts to subgroup the TNG languagesIn this section we consider the strength of the pronominal evidence in evaluating the Trans-New Guinea and North Halmaheran hypotheses.
+
+Since the full pronominal paradigm has not been reconstructed for pTAP, we consider the reconstructed pAP pronouns here. They are shown in

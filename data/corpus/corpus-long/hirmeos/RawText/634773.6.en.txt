@@ -1,0 +1,27 @@
+ Do communicate the scientific facts, but without any 'spin'. People tend to react negatively if it seems that you are telling them how they should feel about a certain result.
+
+ Do speak or write in concise sentences that can be used as 'sound bites' for radio, or quotes in print.
+
+ Do remember that context is key. For example, a statement such as 'CryoSat-2 measurements showed that the volume of summertime Arctic sea ice increased by 40% in 2013' relating to a paper 39 is highly ambiguous. Without any timeframe, it is not clear if this increase is relative to the last few months, years, decades or perhaps even longer. A much better way to communicate the same result would be to say 'CryoSat-2 measurements showed that in summer 2013, the volume of Arctic sea ice increased by 40% compared to the previous year'. This statement is far more difficult to misinterpret, and shows that although the increase in volume was large, it did not offset the loss observed over the past few decades.
+
+ Don't use any 'jargon'. Although everyone is an expert in what they choose to do, we are not all experts in the same thing. For example, at a conference one might say 'I use a 13.5 GHz satellite radar altimeter to measure the freeboard of Arctic sea ice' while for a non-expert audience this could be changed to 'I use a satellite to measure the difference in height between the Arctic sea ice surface and the water in the cracks'.
+
+ Don't try and answer a question if you're not sure of the answer to it. It is acceptable to admit that you don't know, or that someone else may be better placed to answer.
+
+ Don't be afraid of silence. Take time to consider the best way to frame your answer.
+
+The UK Polar Network regularly advertises opportunities for Polar Researchers to present their work and share their experiences with local school children.Another common practice nowadays is to use social media to publicise one's research. The latest scientific results are often announced on Twitter within hours or days after a publication is released into the public domain. At universities, seminars and lecture series are another popular way for work to be disseminated publicly. An excellent example of this method was delivered by the late Dr Katharine Giles in 2012. It can be viewed on the YouTube archiveand contrasted with her original scientific publication. 42
+
+Conclusions and outlook
+
+Radar technology has already allowed us to investigate vast areas that would otherwise be unreachable for humans, whether it be within an ice sheet or on the most remote Arctic ice floe. The amount of information that can be extracted from radar data is still in a nascent stage, and further advances in radar signal processing and data interpretation will help to unlock more insights from within and beneath the ice. The different radar observation methods described in this chapter complement one another, as well as other geophysical measurement techniques described in the literature. Data storage and processing requirements will undoubtedly increase, along with improvements in computational power. It is now common practice for large volumes of raw datasets to be curated in digital format for independent validation and future (open) access. There is significant potential for improvement in battery and fuel technologies, in terms of their efficiency and weight, and future radar instruments can stand to benefit from advances in these areas.
+
+As scientists who hail from outside of the Arctic, it is the remoteness of the regions studied and the nature with which they form, change and adapt under a changing climate that embodies scientific 'Arcticness'. But emotionally the Arctic is so much more-and is not necessarily remote. The beauty of the Arctic cannot and should not be described by science alone. And so the mystery of its scientifically unexplored and most remote regions continues to entice scientists, not just to study it from a distance, but also to visit the Arctic and to dispel all logic to embrace its magic and its peoples.
+
+Arcticness: In the making of the beholder
+
+Patrizia Isabelle Duda
+
+Over the past 20 years, the Arctic has re-emerged as a space that is of geopolitical interest to regional and global actors alike. This development is particularly attributed to the Arctic being at the forefront of environmental concerns and therefore featuring prominently in international scientific, political and popular discourse. But the iconised melting of the Arctic is also portrayed in the light of alleged new opportunities. Extractive industries look to the potential profits to be realised by tapping into Arctic mineral resources; shorter Arctic shipping routes, which promise to cut time and costs, are tempting international shipping conglomerates; and the tourist industry promotes the Arctic as Earth's last frontier, making it accessible to 'ordinary adventure' travellers, who wish to experience it 'before it's too late'.
+
+Alongside these developments, a vague notion of 'Arcticness' is appearing throughout academic and political discourse. While Arctic national strategies make direct or indirect references to their (sense of) Arcticness, others wonder whether Arctic nations and states have successfully shown their Arcticness.

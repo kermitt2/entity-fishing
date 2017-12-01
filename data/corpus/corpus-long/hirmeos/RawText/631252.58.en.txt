@@ -1,0 +1,23 @@
+7 Numeral systems in the Alor-Pantar languages Numeral systems typically make use of a base to construct their numeral expressions. 1 A "base" in a numeral system is a numerical value n which is used repeatedly in numeral expressions thus: xn ±/xy, that is, numeral x is multiplied by the base n plus, minus or multiplied by numeral yMany languages have multiple bases. For instance, Dutch numerals have five different bases: tien '10', honderd '100', duizend '1000', miljoen '100,000', miljard '1,000,000'. These bases are all powers of ten (10, 10 2 , 10 3 , 10 6 , 10 9 ). However, the higher powers are not typically considered important in defining a numeral system type; the lowest base gives its name to the whole system, that is, Dutch would be characterized as a "decimal" or "base-10" numeral system.
+
+In this chapter we deal with several "mixed numeral systems". We define a "mixed numeral system" as a numeral system in which there are multiple bases that are not simply powers of the lowest base. So, we do not consider Dutch to have a mixed numeral system, since all its higher bases are powers of its lowest base, tien '10'. By contrast, a language such as Ilongotwould be considered to have a mixed quinary-decimal system because: (i) it uses a quinary base to form numerals 'six' to 'nine', and (ii) a decimal base to form numerals 'ten' and higher. 'Ten' is not a power of 'five' and therefore the language can be considered to "mix" numeral bases.
+
+It is important to note that isolated cases of a particular mathematical procedure being used in the formation of a numeral do not constitute an instance of another 'base' in a numeral system. For instance, Ujir) forms 'seven' by means of the addition of 'six' and 'one'. Yet 'six' is not a base in Ujir, since there are no other numerals in the language formed with additions involving 'six'. Similarly, 'two' and 'four' are not bases in Ujir, because neither is used recursively in forming numerals. The formation of 'eight' through the multiplication of 'two' and 'four' is a procedure limited to 'eight'.
+
+In this chapter, we are concerned with the internal composition of cardinal numerals, that is, if and how they are made up out of other numeral expressions. We call a monomorphemic cardinal a "simplex numeral", and one that is composed of more than one numeral expressions a "complex numeral". To describe (i) the arithmetic relation between component elements in a complex numeral,Notable exceptions, i.e., numeral systems without bases, are the body-tally systems mentioned above, and the languages discussed inWe do not adopt the notion of 'base' ofwhere 'base' is defined as a serialized multiplicand upon which the recursive structure of all higher complex numerals is constructed. That is, even where a language has for instance a small sequence of numerals formed on a nondecimal pattern (e.g., '5 2' for 'seven', '5 3' for 'eight', and '5 4' for 'nine'), if '10' is the higher, more productive base, then the language is classed as having a decimal system only.
+
+Antoinette Schapper & Marian Klamer
+
+and (ii) the role of component elements in arithmetic operations, the following terms are used:
+
+ "additive numeral": a numeral where the relation between components parts of a complex numeral is one of addition. The component parts are "augend" and "addend". So, for example, in the equation 5 + 2 = 7, the augend is 5 and the addend is 2.
+
+ "subtractive numeral": a numeral where the relation between component parts of a complex numeral is one of subtraction. The component parts are "subtrahend" and "minuend". So, for example, in the equation 10-2 = 8, the subtrahend is 2 and the minuend is 10.
+
+ "multiplicative numeral": a numeral where the relation between components parts of a complex numeral is one of multiplication. The component 280 7 Numeral systems in the Alor-Pantar languages parts are "multiplier" and "multiplicand". So, for example, in the equation 3 x 2 = 6, the multiplier is 3 and the multiplicand is 2.
+
+Throughout this chapter we rely on the definitions made in this section, and the reader is referred to this section for clarification of terminology.
+
+3 A brief note on sound changes and numerals
+
+In this chapter we posit reconstructions of numerals to proto-Alor-Pantar (pAP) and several lower subgroups within the AP group. Many of the sound correspondences on which these reconstructions are based are part of regular correspondence sets discussed in

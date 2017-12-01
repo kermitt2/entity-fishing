@@ -1,0 +1,29 @@
+PTAP *R is reflected in pAP as *r and in pTIM as *l. Like pTAP *r, *R does not appear in word-initial positions and is sporadically lost word-finally in polysyllabic words. The sets supporting the reconstruction of *Rare also fewer and less robust than for pTAP *r.
+
+The three pTIM cognates listed inare based on Bunaq only, in which pTIM *r and *R are merged. We have thus no means of determining whether these forms are to be reconstructed to pTAP with *r or with *R.
+
+Cognate sets for pTAP *l are relatively infrequent in both pAP and pTIM (Table 16).Cognates reflecting initial pTAP *l with pAP *l and pTIM *l (i.e., 'bark', 'new place' and 'crouch') have only a low degree of certainty. Based on the data available, there also appears to be a tendency to lose pTAP initial *l in pTIM, as in 'far', 'tongue' and 'green', but a clear conditioning environment for this is not yet obvious. Word-finally in polysyllabic words, pTAP *l is regularly lost in pTIM, as in 'banana', 'bat', 'bird' and 'taboo', However, it is retained in 'walk 2' and 'six', Antoinette Schapper, Juliette Huber & Aone van EngelenhovenThe relatedness of Timor-Kisar and Alor-Pantar languages
+
+The relatedness of Timor-Kisar and Alor-Pantar languages
+
+Antoinette Schapper, Juliette Huber & Aone van EngelenhovenThe relatedness of Timor-Kisar and Alor-Pantar languages apparently due to nasal-liquid metathesis, and in 'child' due to the loss of the item's medial syllable with *q prior to the application of the final polysyllabic deletion rule in pTIM.
+
+Finally, there are several cases in which the appearance of liquids in AP and TK languages can be reconciled with none of the three sets we have identified here.lists these problematic instances (the relevant segments are bolded). These sets pointedly express that we are still a long way away from a complete understanding of liquids in pTAP.
+
+2.7 Reconstruction of nasals
+
+Two nasals can be reconstructed to pTAP, *m and *n. For the most part, they are relatively stable and unchanging in both pAP and pTIM.presents a selection of the many cognate sets for pTAP *m. In wordinitial position, pTAP *m corresponds unproblematically to pAP *m and pTIM *m. Identifying non-initial instances of pTAP *m is somewhat more difficult, with *hami 'breast' being the only straightforward case. Word-final *m in pAP has only non-final reflexes in pTIM, apparently because, as in the modern TK languages, word-final *m was not permitted. This issue is resolved in pTIM through metathesis of the nasal out of the final position, as in 'sea' and 'six'. Other instances of medial pTIM *m correspond to root-initial *m in pAP (as in 'garden' and 'die').presents the many cognate sets for pTAP *n. Initial and medial correspondences are abundant, but final correspondences are difficult to identify. PTIM *n did not appear to occur in final position; all instances of pAP final *n are either followed by a vowel or are lost in pTIM.
+
+Antoinette Schapper, Juliette Huber & Aone van Engelenhoven
+
+The relatedness of Timor-Kisar and Alor-Pantar languages
+
+3 Summary of correspondences and reconstructed phonemes
+
+For the first time since the start of TAP studies some sixty years ago (see Schapper & Huber 2012 for a historical perspective on TAP studies), we have rigorously shown in this chapter that the TAP languages form a family: the regularity of sound correspondences in cognate vocabulary demonstrates that the AP and TK Papuan languages are indeed genetically related to one another., we provide an overview of the consonant correspondences we observed in cognate vocabulary between pAP and pTIM and their reconstruction in their ancestral language pTAP. In this table, we indicate whether the correspondence applies in initial (#_ ), medial (V_V), or final ( _#) position. An empty slot means that there is no particular conditioning environment for the correspondence. The symbol 'Ø' in a column indicates that a pTAP sound is lost in the daughter language in question.
+
+4 Discussion
+
+Whilst we have been able to show clearly that AP and TK languages are related to one another, the comparative data presented here draws into question a number of aspects of the existing reconstructions of pAP and pTIM and necessitates revisions to these. In this final section, we will draw attention to the issues, provide a general discussion of them and suggest some possible solutions.
+
+A major issue for the current pAP reconstruction is the apparent invalidity of many word-final consonant reconstructions. It is argued in) that the gemination of medial stops in modern Western Pantar can be used as a diagnostic for determining whether a given pAP root was consonant-final or vowel-final. Specifically, the authors claim that geminate medial stops in modern Western Pantar reflect pAP medial stops, whereas non-geminate medial stops in Western Pantar reflect an original consonant-final form, or perhaps a borrowing from another AP language. However, this argument cannot be sustained on closer inspection of the comparative evidence. Consider the items in

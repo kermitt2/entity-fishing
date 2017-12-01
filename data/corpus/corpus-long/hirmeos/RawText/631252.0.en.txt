@@ -1,0 +1,33 @@
+The Alor-Pantar languages: Linguistic context, history and typology
+
+This chapter presents an introduction to the Alor-Pantar languages, and to the chapters of the volume. It discusses the current linguistic ecology of Alor and Pantar, the history of research on the languages, presents an overview of the history of research in the area and describes the state of the art of the (pre-)history of speaker groups on the islands. A typological overview of the family is presented, followed by a discussion of specific sets of lexical items. Throughout the chapter I provide pointers to individual chapters of the volume that contain more detailed information or references.
+
+1 Introduction
+
+The languages of the Alor-Pantar (AP) family constitute a group of twenty Papuan languages spoken on the islands of Alor and Pantar, located just north of Timor, at the end of the Lesser Sunda island chain, roughly the islands east of Bali and west of New Guinea, seeThis outlier "Papuan" group is located some 1000 kilometers west of the New Guinea mainland. The term Papuan is used here as a cover term for the hundreds of languages spoken in New Guinea and its vicinity that are not Austronesian, and it is considered synonymous with non-Austronesian. The label Papuan says nothing about the genealogical ties between the languages.
+
+The Alor-Pantar languages form a family that is clearly distinct from the Austronesian languages spoken on the islands surrounding Alor and Pantar, but much is still unknown about their history: Where did they originally come from? Are they related to other languages or language groups, and if so, to which ones? Typologically, the AP languages are also very different from their Austronesian neighbours, as their syntax is head-final rather than head-initial. They
+
+show an interesting variety of alignment patterns, and the family has some crosslinguistically rare features.
+
+This volume studies the history and typology of the AP languages. Each chapter compares a set of AP languages by their lexicon, syntax or morphology, with the aim to uncover linguistic history and discover typological patterns that inform linguistic theory.
+
+As an introduction to the volume, this chapter places the AP languages in their current linguistic context ( § 2), followed by an overview of the history of research in the area ( § 3). Then I describe the state of the art of the (pre-)history of speaker groups on Alor and Pantar ( § 4). A typological overview of the family is presented in § 5, followed by information on the lexicon in § 6. In § 7, I summarize the chapter and outline challenges for future research in the area. The chapter ends with a description of the empirical basis for the research that is reported in this volumeThroughout this introduction, cross-references to the chapters will be given, to enable the reader to focus on those chapters that s/he is most interested in.1 The Alor-Pantar languages: Linguistic context, history and typology
+
+2 Current linguistic situation on Alor and Pantar
+
+There are approximately 20 indigenous Papuan languages spoken in the AlorPantar archipelago ( § 2.1) alongside one large indigenous Austronesian language commonly referred to as Alorese ( § 2.2). Virtually all speakers of these indigenous languages also speak the local Malay variety and/or the national language Indonesian on a regular basis for trade, education and governmental business ( § 2.3).
+
+2.1 The Papuan languages of Alor and Pantar
+
+The Papuan languages of Alor and Pantar as they are currently known are listed alphabetically in, and presented geographically onTogether they form the Alor-Pantar family. The Alor-Pantar family forms a higher-order family grouping with the five Papuan languages spoken on Timor and Kisar, listed inand presented geographically on; together these languages constitute the Timor-Alor-Pantar family.
+
+The language list inis a preliminary one. In particular, it is likely that the central-eastern part of Alor, where Abui and Kamang are spoken, is linguistically richer than suggested byHowever, until a more principled survey of the area has been done, we stick with the labels Abui and Kamang, while acknowledging that there may be multiple languages within each of these regions.
+
+Some of the language names of earlier works (e.g.) do not agree with what is presented here Marian KlamerPopulation estimates from fieldworker and/or from the published source given; starred (*) estimates from Lewis,; an empty cell indicates that no number has been reported.  This figure is from census data (Badan Pusat Statistik 2005).1 The Alor-Pantar languages: Linguistic context, history and typologyPopulation estimates from fieldworker and/or from the published source given; starred (*) estimates from Lewis,
+
+Marian Klamer (see also § 3). One reason may be that a language variety may either be referred to by the name of the village where it is spoken, or by the name of the ancestor village of the major clan that speaks the language, or by the clan name. The list inaims toward more "lumping" than "splitting". The traditional criterion of mutual intelligibility is extremely difficult to apply, as speakers of the languages have been in contact for extended periods of time, and being multi-lingual is the norm in this region. For those languages which have been the subject of recent investigation a reference is included in the table to a grammar or grammatical sketch that is published, or is about to be published. Further references to published work on the languages are presented in § 3.
+
+2.2 Indigenous Austronesian languages on Alor and Pantar
+
+The major indigenous Austronesian language spoken on Alor and Pantar is Alorese, also referred to as Bahasa Alor, "Alor", or "Coastal Alorese". Klamer (2011) is a sketch of the language. Alorese has 25,000 speakers, who live in pockets along the coasts of western Pantar and the Kabola peninsula of Alor island, as well as on the islets Ternate and Buaya

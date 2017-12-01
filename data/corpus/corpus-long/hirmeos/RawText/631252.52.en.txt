@@ -1,0 +1,29 @@
+6 Elevation in the spatial deictic systems of Alor-Pantar languages
+
+The derived demonstratives (basic and collective) occur marking the righthand periphery of the NP either withor without a noun head
+
+The derived manner adverbs occur in one of two positions: (i) preceding the subject (16), or (ii) following the predicate (17).
+
+Adang has 22 elevation-marked terms occurring in a paradigm with unelevated terms). Elevation terms are divided across three word classes: locationals, demonstratives and elevational motion verbs. These are described below. Elevational motion verbs follow the simple 6-term pattern that we have seen for all AP discussed thus far. Elevated demonstratives have a three-way elevational contrast marked by m 'level', t 'high' and p 'low', while their unelevated counterparts are essentially characterizable by the absence of these morphemes. The largest elevational word class is the elevated locationals, or 250 6 Elevation in the spatial deictic systems of Alor-Pantar languages elevationals. These divide into two sets, basic and directional, that are distinguished from one another both formally and semantically. The basic set has the elevation-marking morphemes we saw in the elevated demonstratives marked with- and occurs in a paradigm with an unelevated term. The directional set of elevationals differs from the basic set in that they are derived from other roots with the suffix-l and do not have unelevated counterparts.
+
+Semantically, the contrast between the basic and directional elevationals is in the first place the type of elevation they reference. Basic elevationals refer to global elevation. In the directional set, different terms have different elevational reference. InI set out the elevational reference and the sources of roots of the directional elevationals. The two geophysical elevationals in Adang reference a trajectory between the inland mountains where Adang villages are traditionally located and the coastal lowlands away from Adang villages. The two vertical elevationals reference a location that is vertically high in relation to the dc. The difference between ta l and tal appears to be one of the contact relationship between the dc and the referent location. Ta l references a location straight up from the dc without being in contact with the dc, while tal references a location that is directly on top of and in contact with the dc. Finally, the directional elevationals with global elevational reference are built from elevation-marked motion verbs. They differ referentially from the basic set which also refers to elevation globally with reference to location as being towards ('wards') or away ('away') from the dc, according to what elevational motion verb is the root (see
+
+Despite the formal and semantic differences between basic and directional elevationals, they have the same syntactic distributional properties and cannot cooccur in the clause. This indicates that they are of one and the same word class. They occur in three positions.
+
+First, an elevational can occur as an independent clausal predicate. This is seen inwith the basic elevational t 'high' and in (21) with the directional elevational ipl 'low-away'.
+
+Second, elevationals can occur adverbially before a predicate and its (if any) adjunct. In (22) the basic elevational m 'level' indicates the locational setting for the verbal predicate tuf 'stand' and its adjunct bana mi 'in the forest'. In (23) the directional elevational ipl 'low.dc-away' modifies the simple verbal predicate tar 'lie down'.
+
+Finally, elevationals can also occur with an NP. Where an elevated demonstrative also occurs in the NP, then the elevational and demonstrative must match in elevational marking. The NP headed by bel 'dog' is modified by the basic level elevational and the level demonstrative in (24) and by a directional low elevational and the low demonstrative in (25).
+
+6 Elevation in the spatial deictic systems of Alor-Pantar languagessummarizes the permitted combinations of demonstrative and elevationals. Note that the only exception to the matching of elevations between demonstratives and elevationals within an NP is with tal 'on.vertical'. This elevational refers to the location of another entity on the NP referent. Thus, the NP referent may be specified with a demonstrative as being high, low or level in relation to the speaker as dc, and then also be located on another entity by means of tal. The possibility of these combinatorics is illustrated in
+
+3.6 Western Pantar
+
+Western Pantar has a total of 26 elevation-marked terms, occurring in paradigms with speech participant-anchored terms). As in Blagar and Adang, elevation marking is repeated across multiple paradigms of different word classes in Western Pantar. These are: locationals, demonstratives and elevational motion verbs.
+
+The number of elevational motion verbs is higher than in the AP languages looked at thus far. This is due to an extra distinction between steep versus nonsteep appearing in the verbs denoting motion away from the deictic centre. The
+
+Antoinette Schapper
+
+high number of elevation-marked terms found in the three elevation-marked word classes is, however, chiefly due to the existence of multiple paradigms of locationals and demonstratives in Western Pantar. Locationals and demonstratives have distinct paradigms for specific versus non-specific reference, and demonstratives further have separate paradigms for visible versus non-visible referents. Across the locational and demonstrative paradigms, marking for location has the same forms derived from the basic (i.e., non-specific) locationals. These are the three elevationals, mau 'level', dau 'high' and pau 'low' (bolded in

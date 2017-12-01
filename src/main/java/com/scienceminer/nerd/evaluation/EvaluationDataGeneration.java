@@ -161,6 +161,7 @@ public class EvaluationDataGeneration {
                 query.setText(text);
                 query.setEntities(entities);
                 query.setLanguage(language);
+                query.setMinRankerScore(0.2);
 
                 NerdEngine engine = NerdEngine.getInstance();
                 final List<NerdEntity> processedEntities = engine.disambiguate(query);
@@ -172,12 +173,12 @@ public class EvaluationDataGeneration {
                     processedEntities.stream().forEach(e -> {
                         sbDocument.append("\t\t").append("<annotation>").append("\n");
                         sbDocument.append("\t\t\t").append("<mention>").append(escapeXml11(e.getRawName())).append("</mention>").append("\n");
-                        
+
                         final int wikipediaExternalRef = e.getWikipediaExternalRef();
 
                         String title = null;
                         final Page page = lowerKnowledgeBase.getPageById(wikipediaExternalRef);
-                        if(page.getId() != -1) {
+                        if (page.getId() != -1) {
                             title = page.getTitle();
                         }
 
@@ -273,7 +274,7 @@ public class EvaluationDataGeneration {
                     if (titleTokens != null) {
                         LOGGER.info("Process title... ");
 
-                        sb.append(LayoutTokensUtil.normalizeDehyphenizeText(titleTokens));
+                        sb.append(StringProcessor.removeInvalidUtf8Chars(LayoutTokensUtil.normalizeDehyphenizeText(titleTokens)));
                         sb.append("\n");
                         sb.append("\n");
                     }
@@ -283,7 +284,7 @@ public class EvaluationDataGeneration {
                     if (abstractTokens != null) {
                         LOGGER.info("Process abstract...");
 
-                        sb.append(LayoutTokensUtil.normalizeDehyphenizeText(abstractTokens));
+                        sb.append(StringProcessor.removeInvalidUtf8Chars(LayoutTokensUtil.normalizeDehyphenizeText(abstractTokens)));
                         sb.append("\n");
                         sb.append("\n");
                     }
@@ -313,15 +314,20 @@ public class EvaluationDataGeneration {
                     List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
                             TaggingLabels.SECTION);
 
+                    List<TaggingLabel> ignoredLabels = Arrays.asList(TaggingLabels.EQUATION_LABEL, TaggingLabels.FIGURE,
+                            TaggingLabels.TABLE);
+
                     //Labels to be ignored but their encountering doesn't means the end of the current label.
                     // e.g. a citation marker within a paragraph doesn't means there is a new paragraph
-                    List<TaggingLabel> interruptingLabels = Arrays.asList(TaggingLabels.CITATION_MARKER);
+                    List<TaggingLabel> interruptingLabels = Arrays.asList(TaggingLabels.CITATION_MARKER,
+                            TaggingLabels.FIGURE_MARKER, TaggingLabels.TABLE_MARKER,
+                            TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL);
 
                     TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, labeledResult, tokenizationBody.getTokenization());
                     List<TaggingTokenCluster> clusters = clusteror.cluster();
                     TaggingLabel previousLabel = null;
                     int wordsCounter = 0;
-                    boolean newData = false; 
+                    boolean newData = false;
 
                     for (TaggingTokenCluster cluster : clusters) {
                         if (cluster == null) {
@@ -331,30 +337,32 @@ public class EvaluationDataGeneration {
                         TaggingLabel clusterLabel = cluster.getTaggingLabel();
                         String clusterContent = LayoutTokensUtil.normalizeDehyphenizeText(cluster.concatTokens());
 
-                        wordsCounter += cluster.getLabeledTokensContainers().size();
-
                         if (toProcess.contains(clusterLabel)) {
+                            wordsCounter += cluster.getLabeledTokensContainers().size();
 
                             if (clusterContent.length() > 10) {
                                 if (previousLabel != null && !interruptingLabels.contains(previousLabel)) {
                                     sb.append("\n");
                                     sb.append("\n");
                                 }
-                                sb.append(clusterContent);
+                                sb.append(postProcess(clusterContent));
+//                                sb.append(clusterContent);
+
                                 newData = true;
                             }
                         }
                         previousLabel = clusterLabel;
 
                         if (wordsCounter > 1000) {
-                            resultingDocuments.add(sb.toString());
+                            resultingDocuments.add(StringProcessor.removeInvalidUtf8Chars(StringUtils.trim(sb.toString())));
                             sb = new StringBuilder();
+                            previousLabel = null;
                             wordsCounter = 0;
                             newData = false;
                         }
                     }
-                    if(newData)
-                        resultingDocuments.add(StringProcessor.removeInvalidUtf8Chars(sb.toString()));
+                    if (newData)
+                        resultingDocuments.add(StringProcessor.removeInvalidUtf8Chars(StringUtils.trim(sb.toString())));
                 }
             }
         } catch (Exception e) {
@@ -362,9 +370,12 @@ public class EvaluationDataGeneration {
         }
 
         Pair<String, List<String>> result = new Pair(language, resultingDocuments);
-//        result.put("LENGTH", String.valueOf(wordsCounter));
 
         return result;
+    }
+
+    protected String postProcess(String string) {
+        return StringUtils.trim(StringUtils.replaceAll(string, "^\\.", ""));
     }
 
 
