@@ -1,7 +1,7 @@
 <document docName="OB-obp-1522.0.en.txt">
     <annotation>
         <mention>Grégory Delaplace</mention>
-        <wikiName>null</wikiName>
+        <wikiName>Grégory Delaplace</wikiName>
         <wikidataId>null</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>0</offset>
@@ -16,20 +16,36 @@
         <length>21</length>
     </annotation>
     <annotation>
-        <mention>Paris</mention>
-        <wikiName>Paris</wikiName>
-        <wikidataId>Q90</wikidataId>
-        <wikipediaId>22989</wikipediaId>
-        <offset>86</offset>
-        <length>5</length>
+        <mention>lecturer</mention>
+        <wikiName>Lecturer</wikiName>
+        <wikidataId>Q9379869</wikidataId>
+        <wikipediaId>366338</wikipediaId>
+        <offset>59</offset>
+        <length>8</length>
     </annotation>
     <annotation>
-        <mention>Nanterre</mention>
-        <wikiName>Nanterre</wikiName>
-        <wikidataId>Q170507</wikidataId>
-        <wikipediaId>986022</wikipediaId>
-        <offset>98</offset>
+        <mention>Université Paris Ouest Nanterre</mention>
+        <wikiName>Paris Nanterre University</wikiName>
+        <wikidataId>Q1394262</wikidataId>
+        <wikipediaId>2396225</wikipediaId>
+        <offset>75</offset>
+        <length>31</length>
+    </annotation>
+    <annotation>
+        <mention>research</mention>
+        <wikiName>Research</wikiName>
+        <wikidataId>Q42240</wikidataId>
+        <wikipediaId>23490</wikipediaId>
+        <offset>124</offset>
         <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>invisible</mention>
+        <wikiName>Invisibility</wikiName>
+        <wikidataId>Q762018</wikidataId>
+        <wikipediaId>153911</wikipediaId>
+        <offset>174</offset>
+        <length>9</length>
     </annotation>
     <annotation>
         <mention>Mongolia</mention>
@@ -40,28 +56,116 @@
         <length>8</length>
     </annotation>
     <annotation>
-        <mention>morts. Sépultures</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
-        <wikipediaId>-1</wikipediaId>
-        <offset>382</offset>
-        <length>17</length>
+        <mention>politics</mention>
+        <wikiName>Politics</wikiName>
+        <wikidataId>Q7163</wikidataId>
+        <wikipediaId>22986</wikipediaId>
+        <offset>233</offset>
+        <length>8</length>
     </annotation>
     <annotation>
-        <mention>photographie en Mongolie contemporaine</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <mention>ghosts</mention>
+        <wikiName>Ghost</wikiName>
+        <wikidataId>Q45529</wikidataId>
+        <wikipediaId>12514</wikipediaId>
+        <offset>252</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>spirits</mention>
+        <wikiName>Spirit</wikiName>
+        <wikidataId>Q193291</wikidataId>
+        <wikipediaId>1638128</wikipediaId>
+        <offset>263</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>postsocialist</mention>
+        <wikiName>Post-communism</wikiName>
+        <wikidataId>Q969021</wikidataId>
+        <wikipediaId>23346</wikipediaId>
+        <offset>302</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>nation</mention>
+        <wikiName>Nation</wikiName>
+        <wikidataId>Q6266</wikidataId>
+        <wikipediaId>21754</wikipediaId>
+        <offset>316</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>publications</mention>
+        <wikiName>Publication</wikiName>
+        <wikidataId>Q732577</wikidataId>
+        <wikipediaId>226691</wikipediaId>
+        <offset>345</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Sépultures</mention>
+        <wikiName>Tombe</wikiName>
+        <wikidataId>Q173387</wikidataId>
+        <wikipediaId>198607</wikipediaId>
+        <offset>389</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>fantômes</mention>
+        <wikiName>Fantôme</wikiName>
+        <wikidataId>Q45529</wikidataId>
+        <wikipediaId>150415</wikipediaId>
+        <offset>401</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>photographie</mention>
+        <wikiName>Photographie</wikiName>
+        <wikidataId>Q11633</wikidataId>
+        <wikipediaId>2389</wikipediaId>
         <offset>413</offset>
-        <length>38</length>
+        <length>12</length>
     </annotation>
     <annotation>
-        <mention>Parasitic Chinese, Vengeful Russians: Strangers, Ghosts</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
-        <wikipediaId>-1</wikipediaId>
-        <offset>458</offset>
-        <length>55</length>
+        <mention>Mongolie</mention>
+        <wikiName>Mongolie</wikiName>
+        <wikidataId>Q711</wikidataId>
+        <wikipediaId>80597</wikipediaId>
+        <offset>429</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>contemporaine</mention>
+        <wikiName>Époque contemporaine</wikiName>
+        <wikidataId>Q6495391</wikidataId>
+        <wikipediaId>1191278</wikipediaId>
+        <offset>438</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>Chinese</mention>
+        <wikiName>Chinese people</wikiName>
+        <wikidataId>Q6501380</wikidataId>
+        <wikipediaId>372983</wikipediaId>
+        <offset>468</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Russians</mention>
+        <wikiName>Russians</wikiName>
+        <wikidataId>Q49542</wikidataId>
+        <wikipediaId>59510</wikipediaId>
+        <offset>486</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>Ghosts</mention>
+        <wikiName>Ghost</wikiName>
+        <wikidataId>Q45529</wikidataId>
+        <wikipediaId>12514</wikipediaId>
+        <offset>507</offset>
+        <length>6</length>
     </annotation>
     <annotation>
         <mention>Mongolia</mention>
@@ -80,12 +184,12 @@
         <length>17</length>
     </annotation>
     <annotation>
-        <mention>gregory.delaplace@ mae</mention>
+        <mention>gregory.delaplace@ mae.u-paris10.fr</mention>
         <wikiName>null</wikiName>
         <wikidataId>null</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>581</offset>
-        <length>22</length>
+        <length>35</length>
     </annotation>
     <annotation>
         <mention>Caroline Humphrey</mention>
@@ -168,12 +272,12 @@
         <length>6</length>
     </annotation>
     <annotation>
-        <mention>Soviet</mention>
-        <wikiName>Soviet Union</wikiName>
+        <mention>post-Soviet</mention>
+        <wikiName>Post-Soviet states</wikiName>
         <wikidataId>Q15180</wikidataId>
         <wikipediaId>26779</wikipediaId>
-        <offset>832</offset>
-        <length>6</length>
+        <offset>827</offset>
+        <length>11</length>
     </annotation>
     <annotation>
         <mention>Buryat</mention>
@@ -237,6 +341,22 @@
         <wikidataId>Q41079</wikidataId>
         <wikipediaId>55064</wikipediaId>
         <offset>1070</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>research</mention>
+        <wikiName>Research</wikiName>
+        <wikidataId>Q42240</wikidataId>
+        <wikipediaId>23490</wikipediaId>
+        <offset>1097</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>post-Socialist</mention>
+        <wikiName>Post-communism</wikiName>
+        <wikidataId>Q969021</wikidataId>
+        <wikipediaId>23346</wikipediaId>
+        <offset>1145</offset>
         <length>14</length>
     </annotation>
     <annotation>
