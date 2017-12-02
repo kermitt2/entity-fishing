@@ -58,7 +58,7 @@ public class EvaluationDataGenerationTest {
         assertThat(output.b.get(0).split("\n")[1], is(""));
     }
 
-    //@Test
+    @Test
     public void testExtractionPdfData_3() throws Exception {
         File input = new File(this.getClass().getResource("OB-obp-1523.pdf").getPath());
 
