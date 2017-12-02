@@ -29,6 +29,9 @@ import org.slf4j.LoggerFactory;
  * been both quantized and compressed.
  */
 public class SimilarityScorer {
+	/**
+	 * The class Logger.
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(SimilarityScorer.class);
 
 	private static volatile SimilarityScorer instance = null;
@@ -117,7 +120,8 @@ public class SimilarityScorer {
 		CentroidEntityScorer scorer = centroidScorers.get(lang);
 		if (scorer != null) {
 			List<String> terms = toStringEmbeddings(tokens, lang);
-
+//System.out.println(candidate.toString());
+//System.out.println(terms.toString());
 			float score = scorer.score(candidate.getWikidataId(), terms);
 			if (score < 0.0F)
 				score = 0.0F;
