@@ -923,7 +923,7 @@ var nerd = (function($) {
         // clickable wikipedia icon
         piece += '<td style="align:center;">';
         if (wikipedia) {
-            piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
+            piece += '<a href="http://'+lang+'.wikipedia.org/wiki?curid=' +
                     wikipedia +
                     '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
         }
@@ -1009,7 +1009,7 @@ var nerd = (function($) {
 	            piece += '<table><tr><td>';
 
 	            if (wikipedia) {
-	                piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
+	                piece += '<a href="http://'+lang+'.wikipedia.org/wiki?curid=' +
 	                        wikipedia +
 	                        '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
 	            }
@@ -1075,7 +1075,7 @@ var nerd = (function($) {
 	            piece += '<table><tr><td>';
 
 	            if (wikipedia) {
-	                piece += '<a href="http://en.wikipedia.org/wiki?curid=' +
+	                piece += '<a href="http://'+lang+'.wikipedia.org/wiki?curid=' +
 	                        wikipedia +
 	                        '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/wikipedia.png"/></a>';
 	            }
