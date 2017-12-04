@@ -31,7 +31,7 @@ public class EvaluationDataGenerationTest {
         assertThat(output.b, hasSize(3));
 
         output.b.stream().forEach(s -> {
-            System.out.println(s);
+            //System.out.println(s);
             assertThat(s, not(startsWith("\n")));
         });
 
@@ -50,7 +50,7 @@ public class EvaluationDataGenerationTest {
         assertThat(output.a, is("fr"));
 
         assertThat(output.b, hasSize(1));
-        output.b.stream().forEach(System.out::println);
+        //output.b.stream().forEach(System.out::println);
         output.b.stream().forEach(s -> assertThat(s, not(startsWith("\n"))));
 
         assertThat(output.b.get(0).split("\n").length, is(3));
