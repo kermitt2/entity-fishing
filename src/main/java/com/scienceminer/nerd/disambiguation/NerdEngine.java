@@ -122,14 +122,10 @@ public class NerdEngine {
 	 *         the enriched and disambiguated query
 	 */
 	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
+		// Validation //TODO we should find a way to move this out of here.
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
 		boolean shortTextVal = false;
-		
-		//TODO: these tests should be moved up in one place and one time 
-		/*if ((text == null) && (shortText == null)) {
-			LOGGER.info("Cannot parse the text, because it is null.");
-		}*/
 		
 		if (isEmpty(text) && isNotEmpty(shortText) ) {
 			shortTextVal = true;
@@ -168,14 +164,14 @@ public class NerdEngine {
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {
-				LOGGER.debug("exception language identifier for: " + text);
-				//e.printStackTrace();
+				LOGGER.debug("exception language identifier for: " + text,e);
 			}
 		}
 		
 		if (lang == null) {
 			// default - it might be better to raise an exception?
-			lang = "en";
+			lang = Language.EN;
+			LOGGER.warn("No language specified, defaulting to EN. ");
 		}
 		
 		// get the LayoutToken ready if not already the case
@@ -186,9 +182,6 @@ public class NerdEngine {
 		// additional target languages for translations (source language is always the default target 
 		// language for the results!)
 		List<String> targetLanguages = nerdQuery.getResultLanguages();
-		
-
-		Integer[] processSentence = nerdQuery.getProcessSentence();
 		
 		NerdContext context = nerdQuery.getContext();
 		if (context == null) {
@@ -213,23 +206,23 @@ for(NerdCandidate cand : cands) {
 System.out.println("--");
 }*/
 
-int nbEntities = 0;
-int nbCandidates = 0;
-for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-	nbEntities += 1;
-	if (cands != null)
-		nbCandidates += cands.size();
+		int nbEntities = 0;
+		int nbCandidates = 0;
+		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+			nbEntities += 1;
+			if (cands != null)
+				nbCandidates += cands.size();
 
 /*System.out.println(entity.toString());
 for(NerdCandidate cand : cands) {
 System.out.println(cand.toString());
 }
 System.out.println("--");*/
-}
-System.out.println("total number of entities: " + nbEntities);
-System.out.println("total number of candidates: " + nbCandidates);
+		}
+		System.out.println("total number of entities: " + nbEntities);
+		System.out.println("total number of candidates: " + nbCandidates);
 
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
@@ -246,7 +239,7 @@ System.out.println("total number of candidates: " + nbCandidates);
 
 		for(List<LayoutToken> subToken : subTokens) {
 			NerdContext localContext = rank(candidates, lang, context, shortTextVal, subToken);*/
-			NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
+		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
 
 /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 	List<NerdCandidate> cands = entry.getValue();
@@ -407,7 +400,7 @@ System.out.println("--");
 
 			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
 			if (!bestLabel.exists()) {
-//if (entity.getIsAcronym()) 
+//if (entity.getIsAcronym())
 //System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
 				if (entity.getType() != null) {
 					result.put(entity, candidates);
@@ -415,8 +408,8 @@ System.out.println("--");
 				}
 			}
 			else {
-//if (entity.getIsAcronym()) 
-//System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName() + 
+//if (entity.getIsAcronym())
+//System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName() +
 //" - " + bestLabel.getSenses().length + " senses");
 				entity.setLinkProbability(bestLabel.getLinkProbability());
 				boolean bestCaseContext = true;
@@ -1911,7 +1904,7 @@ System.out.println("--");*/
 			List<NerdCandidate> candidates = null;
 			List<NerdEntity> entities = term.getNerdEntities();
 			if (entities == null)
-				candidates = new ArrayList<NerdCandidate>();
+				candidates = new ArrayList<>();
 			else {
 				result.add(null);
 				n++;
@@ -1974,7 +1967,7 @@ System.out.println("--");*/
 	}	
 	
 	/**
-	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
+	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and extended forms in the complete
 	 *  sequence / document.
 	 */
 	public void reconciliateAcronyms(NerdQuery nerdQuery) {
@@ -2264,7 +2257,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 	 * Exploit a document-level context to reimforce candidates based on previous 
 	 * disambiguation
 	 */
-	private void reimforce(Map<NerdEntity, List<NerdCandidate>> candidates, DocumentContext context) {
+	private void reinforce(Map<NerdEntity, List<NerdCandidate>> candidates, DocumentContext context) {
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();

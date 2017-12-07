@@ -31,7 +31,6 @@ import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.Pair;
-import org.grobid.core.utilities.LayoutTokensUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,15 +108,7 @@ public class NerdRestProcessFile {
 				}*/
 
 				// tuning the species only mention selection
-				if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
-					nerdQuery.getMentions().size() == 1) {
-					nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
-					Filter speciesFilter = new Filter();
-					Property speciesProperty = new Property();
-					speciesProperty.setId("P225");
-					speciesFilter.setProperty(speciesProperty);
-					nerdQuery.setFilter(speciesFilter);
-				} 
+				tuneSpeciesMentions(nerdQuery);
 
 				//List<NerdEntity> entities = originalEntities;
 		        Document doc = null;
@@ -440,6 +431,20 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities in workin
 
 		LOGGER.debug(methodLogOut());
 		return response;
+	}
+
+
+	//TODO: we should move it downstream
+	public static void tuneSpeciesMentions(NerdQuery nerdQuery) {
+		if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
+            nerdQuery.getMentions().size() == 1) {
+            nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
+            Filter speciesFilter = new Filter();
+            Property speciesProperty = new Property();
+            speciesProperty.setId("P225");
+            speciesFilter.setProperty(speciesProperty);
+            nerdQuery.setFilter(speciesFilter);
+        }
 	}
 
 	public static Language identifyLanguage(BiblioItem resHeader, Document doc) {

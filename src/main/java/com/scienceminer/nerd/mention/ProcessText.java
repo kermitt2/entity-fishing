@@ -145,24 +145,20 @@ public class ProcessText {
 	 * @return the list of identified mentions
 	 */
 	public List<Mention> process(NerdQuery nerdQuery) throws NerdException {
-		String text = nerdQuery.getText();
-
-		if (text == null) {
-			text = nerdQuery.getShortText();
-		}
+		String text =  nerdQuery.getTextOrShortText();
 
 		List<LayoutToken> tokens = nerdQuery.getTokens();
 
 		if (isBlank(text) && CollectionUtils.isEmpty(tokens)) {
 			LOGGER.warn("No content to process.");
-			return null;
+			return new ArrayList<>();
 		}
 
 		if (isNotBlank(text))
 			return processText(nerdQuery);
 		else
 			return processTokens(nerdQuery);
-	}
+		}
 
 
 	/**
@@ -170,18 +166,12 @@ public class ProcessText {
 	 *  we assume here that the text has been dehyphenized before calling this method.
 	 */
 	private List<Mention> processText(NerdQuery nerdQuery) throws NerdException {
-		String text = nerdQuery.getText();
-		if (text == null)
-			text = nerdQuery.getShortText();
-
+		String text = nerdQuery.getTextOrShortText();
 		text = UnicodeUtil.normaliseText(text);
 
 		List<Mention> results = new ArrayList<>();
 
 		Language language = nerdQuery.getLanguage();
-		String lang = null;
-		if (language != null)
-			lang = language.getLang();
 
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
@@ -199,10 +189,10 @@ public class ProcessText {
 				// for robustness, we have to consider index out of the current sentences range
 				// here we ignore it, but we might better raise an exception and return an error
 				// message to the client
-				if (index.intValue() >= sentences.size())
+				if (index >= sentences.size())
 					continue;
 
-				Sentence sentence = sentences.get(index.intValue());
+				Sentence sentence = sentences.get(index);
 				try {
 					text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
 				}catch(StringIndexOutOfBoundsException sioobe){
@@ -211,15 +201,7 @@ public class ProcessText {
 
 				try {
 					for (ProcessText.MentionMethod mentionType : mentionTypes) {
-						List<Mention> localResults = null;
-
-						if (mentionType == ProcessText.MentionMethod.ner) {
-							localResults = processNER(text2tag, language);
-						} else if (mentionType == ProcessText.MentionMethod.wikipedia) {
-							localResults = processWikipedia(text2tag, language);
-						}/* else if (mentionType == ProcessText.MentionMethod.species) {
-							localResults = processSpecies(text2tag, language);
-						}*/
+						List<Mention> localResults = getMentions(text2tag, language, mentionType);
 
 						// we "shift" the entities offset in case only specific sentences are processed
 						if (CollectionUtils.isNotEmpty(localResults)) {
@@ -242,15 +224,7 @@ public class ProcessText {
 			// we process the whole text
 			try {
 				for (ProcessText.MentionMethod mentionType : mentionTypes) {
-					List<Mention> localResults = null;
-
-					if (mentionType == ProcessText.MentionMethod.ner) {
-						localResults = processNER(text, language);
-					} else if (mentionType == ProcessText.MentionMethod.wikipedia) {
-						localResults = processWikipedia(text, language);
-					} /*else if (mentionType == ProcessText.MentionMethod.species) {
-						localResults = processSpecies(text, language);
-					}*/
+					List<Mention> localResults = getMentions(text, language, mentionType);
 					if (CollectionUtils.isNotEmpty(localResults)) {
 						results.addAll(localResults);
 					}
@@ -269,7 +243,6 @@ public class ProcessText {
 	 */
 	private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException {
 		List<LayoutToken> tokens = nerdQuery.getTokens();
-
 		List<Mention> results = new ArrayList<>();
 
 		Language language = nerdQuery.getLanguage();
@@ -286,15 +259,7 @@ public class ProcessText {
 		// we process the whole text, sentence info does not apply to layout documents
 		try {
 			for (ProcessText.MentionMethod mentionType : mentionTypes) {
-				List<Mention> localResults = null;
-
-				if (mentionType == ProcessText.MentionMethod.ner) {
-					localResults = processNER(tokens, language);
-				} else if (mentionType == ProcessText.MentionMethod.wikipedia) {
-					localResults = processWikipedia(tokens, language);
-				} /*else if (mentionType == ProcessText.MentionMethod.species) {
-					localResults = processSpecies(tokens, language);
-				}*/
+				List<Mention> localResults = getMentions(tokens, language, mentionType);
 
 				if (localResults != null)
 					results.addAll(localResults);
@@ -307,41 +272,70 @@ public class ProcessText {
 		return results;
 	}
 
-    /**
+	private List<Mention> getMentions(String text, Language language, MentionMethod mentionType) {
+		List<Mention> localResults = null;
+
+		if (mentionType == MentionMethod.ner) {
+            localResults = processNER(text, language);
+        } else if (mentionType == MentionMethod.wikipedia) {
+            localResults = processWikipedia(text, language);
+        } /*else if (mentionType == ProcessText.MentionMethod.species) {
+            localResults = processSpecies(text, language);
+        }*/
+		return localResults;
+	}
+
+	private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType) {
+		List<Mention> localResults = null;
+
+		if (mentionType == MentionMethod.ner) {
+            localResults = processNER(tokens, language);
+        } else if (mentionType == MentionMethod.wikipedia) {
+            localResults = processWikipedia(tokens, language);
+        } /*else if (mentionType == ProcessText.MentionMethod.species) {
+            localResults = processSpecies(tokens, language);
+        }*/
+		return localResults;
+	}
+
+	/**
 	 * NER processing of some raw text. Generate list of named entity mentions.
 	 *
-	 * @param text
-	 *		the raw text to be parsed
-	 * @return
-	 * 		the list of identified mentions
+	 * @param text the raw text to be parsed
+	 * @return the list of identified mentions
 	 */
 	public List<Mention> processNER(String text, Language language) throws NerdException {
-		List<Mention> results = new ArrayList<>();
-		if (text == null) {
-			throw new NerdException("Cannot parse the sentence, because it is null.");
+		final List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
+
+		return extractNER(tokens, language);
+	}
+
+	/** Utility method to process a list of layout tokens and return the NER mentions **/
+	private List<Mention> extractNER(List<LayoutToken> tokens, Language language) {
+        List<Mention> results = new ArrayList<>();
+
+        if (CollectionUtils.isEmpty(tokens)) {
+            LOGGER.warn("Trying to extract NE mention from empty content. Returning empty list. ");
+            return results;
 		}
-		else if (text.length() == 0) {
-			//System.out.println("The length of the text to be processed is 0.");
-			LOGGER.error("The length of the text to be parsed is 0.");
-			return results;
-		}
+
 		String lang = language.getLang();
 		if (!lang.equals("en") && !lang.equals("fr"))
-			return results;
+			return new ArrayList<>();
+
 
 		try {
 			if (nerParsers == null) {
 				//Utilities.initGrobid();
 				nerParsers = new NERParsers();
 			}
-			List<Entity> entityResults = nerParsers.extractNE(text, language);
+			List<Entity> entityResults = nerParsers.extractNE(tokens, language);
 			for(Entity entityResult : entityResults) {
 				Mention mention = new Mention(entityResult);
 				mention.setSource(MentionMethod.ner);
 				results.add(mention);
 			}
-		}
-		catch(Exception e) {
+		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
 		}
 
@@ -353,44 +347,17 @@ public class ProcessText {
 	 * NER processing of a sequence of LayoutTokens. Generate list of named entity
 	 * mentions.
 	 *
-	 * @param tokens
-	 *		the sequence of LayoutToken objects
-	 * @return
-	 * 		the list of identified mentions
+	 * @param tokens the sequence of LayoutToken objects
+	 * @return the list of identified mentions
 	 */
 	public List<Mention> processNER(List<LayoutToken> tokens, Language language) throws NerdException {
-		if (tokens == null) {
-			throw new NerdException("Cannot parse the sequence, because it is null.");
-		}
-		else if (tokens.size() == 0) {
-			//System.out.println("The length of the text to be processed is 0.");
-			LOGGER.error("The size of the sequence to be parsed is 0.");
-			return null;
-		}
-		String lang = language.getLang();
-		if (!lang.equals("en") && !lang.equals("fr"))
-			return null;
+		List<Mention> results = extractNER(tokens, language);
 
-		List<Mention> results = new ArrayList<>();
-		try {
-			if (nerParsers == null) {
-				//Utilities.initGrobid();
-				nerParsers = new NERParsers();
-			}
-			List<Entity> entityResults = nerParsers.extractNE(LayoutTokensUtil.toText(tokens), language);
-			for(Entity entityResult : entityResults) {
-				Mention mention = new Mention(entityResult);
-				mention.setSource(MentionMethod.ner);
-				results.add(mention);
-			}
-		}
-		catch(Exception e) {
-			throw new NerdException("NERD error when processing text.", e);
-		}
+		Collections.sort(results);
 
 		// associate bounding boxes to identified mentions
     	List<Mention> finalResults = new ArrayList<>();
-    	Collections.sort(results);
+
     	int tokenPos = 0;
 		int lastTokenIndex = 0;
 		int lastTokenPos = 0;
@@ -449,65 +416,14 @@ public class ProcessText {
 	 * @return the list of identified entities.
 	 */
 	public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
-		List<Mention> results = new ArrayList<Mention>();
-		if (text == null) {
-			throw new NerdException("Cannot parse the text, because it is null.");
-		}
-		else if (text.length() == 0) {
-			//System.out.println("The length of the text to be processed is 0.");
-			LOGGER.error("The length of the text to be parsed is 0.");
-			return results;
-		}
+		List<Mention> results = new ArrayList<>();
+        if(StringUtils.isBlank(text)) {
+            LOGGER.warn("Trying to extract Wikipedia mentions from empty content. Returning empty list. ");
+            return results;
+        }
 
 		try {
-			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
-
-			// candidates which start and end with a stop word are removed.
-			// beware not to be too aggressive.
-			List<Integer> toRemove = new ArrayList<Integer>();
-
-			for(int i=0; i<pool.size(); i++) {
-				StringPos termPosition = pool.get(i);
-				String termValue = termPosition.string;
-				String termValueLowercase = termValue.toLowerCase();
-
-				/*if (termValueLowercase.indexOf("\n") != -1) {
-					toRemove.add(new Integer(i));
-					continue;
-				}*/
-
-				// remove term starting or ending with a stopword, and term starting with a separator (conservative
-				// it should never be the case)
-				if (stopwords != null) {
-					if ( (delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
-						 stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
-						 stopwords.endsWithStopword(termValueLowercase, lang.getLang())
-					) {
-						toRemove.add(new Integer(i));
-						continue;
-					}
-				}
-
-				// remove term ending with a separator (conservative it should never be the case)
-				while (delimiters.indexOf(termValueLowercase.charAt(termValueLowercase.length()-1)) != -1) {
-					termPosition.string = termPosition.string.substring(0,termPosition.string.length()-1);
-					termValueLowercase = termValueLowercase.substring(0,termValueLowercase.length()-1);
-					if (termValueLowercase.length() == 0) {
-						toRemove.add(new Integer(i));
-						continue;
-					}
-				}
-			}
-
-			List<StringPos> subPool = new ArrayList<StringPos>();
-			for(int i=0; i<pool.size(); i++) {
-				if (toRemove.contains(new Integer(i))) {
-					continue;
-				}
-				else {
-					subPool.add(pool.get(i));
-				}
-			}
+			List<StringPos> subPool = extractMentionsWikipedia(text, lang);
 
 			// Calculating the positions
 			for(StringPos candidate : subPool) {
@@ -524,8 +440,9 @@ public class ProcessText {
 						results.add(entity);
 				}
 
-				if (pos.start == -1)
-					System.out.println("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawName());
+				if (pos.start == -1) {
+					LOGGER.error("!!!!!!!!!!!!!!!!!!!!! start pos is -1 for " + entity.getRawName());
+				}
 			}
 		} catch(Exception e) {
 			throw new NerdException("NERD error when processing text.", e);
@@ -533,15 +450,66 @@ public class ProcessText {
 		return results;
 	}
 
+	private List<StringPos> extractMentionsWikipedia(String text, Language lang) {
+		List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
+
+		// candidates which start and end with a stop word are removed.
+		// beware not to be too aggressive.
+		List<Integer> toRemove = new ArrayList<Integer>();
+
+		for(int i=0; i<pool.size(); i++) {
+            StringPos termPosition = pool.get(i);
+            String termValue = termPosition.string;
+            //term = term.replace("\n", " ");
+            String termValueLowercase = termValue.toLowerCase();
+
+            /*if (termValueLowercase.indexOf("\n") != -1) {
+                toRemove.add(new Integer(i));
+                continue;
+            }*/
+
+            // remove term starting or ending with a stopword, and term starting with a separator (conservative
+            // it should never be the case)
+            if (stopwords != null) {
+                if ( (delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
+                     stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
+                     stopwords.endsWithStopword(termValueLowercase, lang.getLang())
+                ) {
+                    toRemove.add(new Integer(i));
+                    continue;
+                }
+            }
+
+            // remove term ending with a separator (conservative it should never be the case)
+            while (delimiters.indexOf(termValueLowercase.charAt(termValueLowercase.length()-1)) != -1) {
+                termPosition.string = termPosition.string.substring(0,termPosition.string.length()-1);
+                termValueLowercase = termValueLowercase.substring(0,termValueLowercase.length()-1);
+                if (termValueLowercase.length() == 0) {
+                    toRemove.add(new Integer(i));
+                    continue;
+                }
+            }
+        }
+
+		List<StringPos> subPool = new ArrayList<StringPos>();
+		for(int i=0; i<pool.size(); i++) {
+            if (toRemove.contains(new Integer(i))) {
+                continue;
+            }
+            else {
+                subPool.add(pool.get(i));
+            }
+        }
+		return subPool;
+	}
+
 	/**
 	 * Processing of some raw text by extracting all non-trivial ngrams.
 	 * Generate a list of entity mentions that will be instanciated by
 	 * Wikipedia labels (anchors and titles).
 	 *
-	 * @param tokens
-	 *		the sequence of tokens to be parsed
-	 * @return
-	 * 		the list of identified entities.
+	 * @param tokens the sequence of tokens to be parsed
+	 * @return the list of identified entities.
 	 */
 	public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException {
 		if ( (tokens == null) || (tokens.size() == 0) ) {
@@ -551,55 +519,10 @@ public class ProcessText {
 		}
 		String text = LayoutTokensUtil.toText(tokens);
 		//text = text.replace("\n", " ");
-//System.out.println(text);		
+		//System.out.println(text);
 		List<Mention> results = new ArrayList<Mention>();
 		try {
-			List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
-
-			// candidates which start and end with a stop word are removed.
-			// beware not to be too agressive.
-			List<Integer> toRemove = new ArrayList<Integer>();
-
-			for(int i=0; i<pool.size(); i++) {
-				StringPos term1 = pool.get(i);
-				String term = term1.string;
-				term = term.replace("\n", " ");
-				String termLow = term.toLowerCase();
-
-				/*if (termLow.indexOf("\n") != -1) {
-					toRemove.add(new Integer(i));
-					continue;
-				} */
-
-				if (stopwords != null) {
-					if ( (delimiters.indexOf(termLow.charAt(0)) != -1) ||
-						 stopwords.startsWithStopword(termLow, lang.getLang()) ||
-						 stopwords.endsWithStopword(termLow, lang.getLang())
-					) {
-						toRemove.add(new Integer(i));
-						continue;
-					}
-				}
-
-				while (delimiters.indexOf(termLow.charAt(termLow.length()-1)) != -1) {
-					term1.string = term1.string.substring(0,term1.string.length()-1);
-					termLow = termLow.substring(0,termLow.length()-1);
-					if (termLow.length() == 0) {
-						toRemove.add(new Integer(i));
-						continue;
-					}
-				}
-			}
-
-			List<StringPos> subPool = new ArrayList<StringPos>();
-			for(int i=0; i<pool.size(); i++) {
-				if (toRemove.contains(new Integer(i))) {
-					continue;
-				}
-				else {
-					subPool.add(pool.get(i));
-				}
-			}
+			List<StringPos> subPool = extractMentionsWikipedia(text, lang);
 
 			int tokenPos = 0;
 			int lastTokenIndex = 0;
@@ -652,7 +575,6 @@ public class ProcessText {
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
 
