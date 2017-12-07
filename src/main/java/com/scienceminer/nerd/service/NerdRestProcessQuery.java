@@ -44,15 +44,7 @@ public class NerdRestProcessQuery {
             LOGGER.debug(">> set query object for stateless service...");
 
             // tuning the species only mention selection
-            if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
-                nerdQuery.getMentions().size() == 1) {
-                nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
-                Filter speciesFilter = new Filter();
-                Property speciesProperty = new Property();
-                speciesProperty.setId("P225");
-                speciesFilter.setProperty(speciesProperty);
-                nerdQuery.setFilter(speciesFilter);
-            }
+            NerdRestProcessFile.tuneSpeciesMentions(nerdQuery);
 
             switch (nerdQuery.getQueryType()) {
                 case NerdQuery.QUERY_TYPE_TEXT:
@@ -109,19 +101,12 @@ public class NerdRestProcessQuery {
                 LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
             }
 
-            if ((lang == null) || (lang.getLang() == null)) {
+            if(!nerdQuery.hasValidLanguage()) {
                 response = Response.status(Status.NOT_ACCEPTABLE).build();
                 LOGGER.debug(methodLogOut());
                 return response;
-            } else {
-                String theLang = lang.getLang();
-                if (!theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr")) {
-                    response = Response.status(Status.NOT_ACCEPTABLE).build();
-                    LOGGER.debug(methodLogOut());
-                    return response;
-                }
             }
-
+            
             // create an empty context for the query
             nerdQuery.setContext(new NerdContext());
 
@@ -156,7 +141,7 @@ public class NerdRestProcessQuery {
             entities = ProcessText.acronymCandidates(nerdQuery, entities);
 
             // we keep only entities not conflicting with the ones already present in the query
-            List<NerdEntity> newEntities = new ArrayList<NerdEntity>();
+            List<NerdEntity> newEntities = new ArrayList<>();
             if (entities != null) {
                 int offsetPos = 0;
                 int ind = 0;

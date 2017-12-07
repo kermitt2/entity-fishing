@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -844,7 +845,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (CollectionUtils.isNotEmpty(definitions)) {
 			buffer.append(", \"definitions\" : [ ");
 			for(Definition definition : definitions) {
-				if (isNotBlank(definition.getDefinition()) )
+				if (isBlank(definition.getDefinition()) )
 					continue;
 				byte[] encoded = encoder.quoteAsUTF8(definition.getDefinition());
 				String output = new String(encoded);
