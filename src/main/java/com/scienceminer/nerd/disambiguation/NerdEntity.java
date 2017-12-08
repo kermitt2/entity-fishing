@@ -130,25 +130,32 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		offsets = new OffsetPosition();
 	}
 
-	public NerdEntity(Mention entity) {
-		rawName = entity.getRawName();
-		if (entity.getNormalisedName() != null)
-			this.normalisedRawName = entity.getNormalisedName();
+	public NerdEntity(String rawName, int start, int end) {
+		this();
+		this.rawName = rawName;
+		this.setOffsetStart(start);
+		this.setOffsetEnd(end);
+	}
+
+	public NerdEntity(Mention mention) {
+		rawName = mention.getRawName();
+		if (mention.getNormalisedName() != null)
+			this.normalisedRawName = mention.getNormalisedName();
 		else if (rawName != null) {
 	        this.normalisedRawName = simpleStringNormalisation(rawName);
 		}
-		preferredTerm = entity.getNormalisedName();
-		type = entity.getType();
-		subTypes = entity.getSubTypes();
+		preferredTerm = mention.getNormalisedName();
+		type = mention.getType();
+		subTypes = mention.getSubTypes();
 		offsets = new OffsetPosition();
-		offsets.start = entity.getOffsetStart();
-		offsets.end = entity.getOffsetEnd();
-		prob = entity.getProb();
-		ner_conf = entity.getConf();
-		sense = entity.getSense();
-		boundingBoxes = entity.getBoundingBoxes();
-		isAcronym = entity.getIsAcronym();
-		source = entity.getSource();
+		offsets.start = mention.getOffsetStart();
+		offsets.end = mention.getOffsetEnd();
+		prob = mention.getProb();
+		ner_conf = mention.getConf();
+		sense = mention.getSense();
+		boundingBoxes = mention.getBoundingBoxes();
+		isAcronym = mention.getIsAcronym();
+		source = mention.getSource();
 	}
 
 	public NerdEntity(NerdEntity entity) {

@@ -158,7 +158,7 @@ public class ProcessText {
 			return processText(nerdQuery);
 		else
 			return processTokens(nerdQuery);
-		}
+	}
 
 
 	/**
