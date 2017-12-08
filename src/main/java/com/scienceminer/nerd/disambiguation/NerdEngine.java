@@ -896,6 +896,11 @@ System.out.println("--");
 			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
 				disambiguator = new NerdRanker(wikipedia);
+
+				if(lang.equals(Language.FR) || lang.equals(Language.DE)) {
+					disambiguator.model = NerdModel.MLModel.RANDOM_FOREST;
+				}
+
 				rankers.put(lang, disambiguator);
 			}
 			catch(Exception e) {

@@ -924,7 +924,7 @@ public class ProcessText {
     		for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
         		Mention base = entry.getValue();
         		Mention acronym = entry.getKey();
-System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
+				System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
 
 				Mention localEntity = new Mention();
 				localEntity.setRawName(acronym.getRawName());
