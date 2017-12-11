@@ -26,7 +26,7 @@ public class Stopwords {
     //private Map<String, FastMatcher> allMatcherSuffix = null;
 
     // list of languages coming with a stopword list
-    private List<String> languages = Arrays.asList("en", "fr", "de");
+    private List<String> languages = Arrays.asList("en", "fr", "de", "es", "it");
 
     public static Stopwords getInstance() {
         if (instance == null) {
