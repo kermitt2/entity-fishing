@@ -542,8 +542,9 @@ public class EntityDescription {
             System.exit(-1);
         }
         EntityDescription entityDescription = new EntityDescription();
-        //entityDescription.generateDescriptionSummaries(args[0], lang, true);
-        entityDescription.generateDescriptionMentionContexts(args[0], lang);
+        entityDescription.generateDescriptionSummaries(args[0], lang, true);
+
+        //entityDescription.generateDescriptionMentionContexts(args[0], lang);
         //entityDescription.generateDescriptionGraphRelations(args[0], lang);
         //entityDescription.convertIdentifierEmbeddings(args[0], lang);
 	}

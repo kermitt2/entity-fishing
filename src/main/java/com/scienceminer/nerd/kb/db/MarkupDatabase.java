@@ -169,7 +169,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								tx.close();
 								nbToAdd = 0;
 								tx = environment.createWriteTransaction();
-System.out.println(totalAdded + " / " + currId);
+								System.out.println(totalAdded + " / " + currId);
 							}
 							if (full && isArticle) {
 								// we store the complete text if we have an article

@@ -73,7 +73,7 @@ Here the FastText word embeddings wiki.en.vec given as input (-i) will be quanti
 ::
 	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityDescription -Dexec.args="entity.en.description en"
 
-The argument indicates the path to save the generated description. 
+The argument indicates the directory where to save the generated description. 
 
 
 4. Create entity embeddings from the generated description. 

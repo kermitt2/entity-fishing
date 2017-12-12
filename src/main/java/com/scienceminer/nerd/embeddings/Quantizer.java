@@ -16,8 +16,8 @@ import com.scienceminer.nerd.main.MainArgs;
  * Quantizes a word2vec-like vector file given a quantization factor, or 
  * it will binary search for the optimum one (given a reconstruction error target)
  * 
- * From the origianl FEL version, replace command argument processing which was 
- * relying on a library not comatible with Apache 2 license.
+ * From the original FEL version, replace command argument processing which was
+ * relying on a library not compatible with Apache 2 license.
  * 
  * Example command:
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer 
@@ -352,7 +352,6 @@ public class Quantizer {
      * Main class for quantizing word vectors
      * @param args command line arguments (see --help)
      * @throws IOException
-     * @throws JSAPException
      */
     public static void main(String args[]) throws IOException {
         gbdArgs = new MainArgs();
