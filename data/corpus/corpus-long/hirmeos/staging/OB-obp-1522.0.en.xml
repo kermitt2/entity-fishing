@@ -1,8 +1,8 @@
 <document docName="OB-obp-1522.0.en.txt">
     <annotation>
         <mention>Grégory Delaplace</mention>
-        <wikiName>Grégory Delaplace</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>0</offset>
         <length>17</length>
@@ -113,41 +113,41 @@
     </annotation>
     <annotation>
         <mention>Sépultures</mention>
-        <wikiName>Tombe</wikiName>
+        <wikiName>Grave</wikiName>
         <wikidataId>Q173387</wikidataId>
-        <wikipediaId>198607</wikipediaId>
+        <wikipediaId>323679</wikipediaId>
         <offset>389</offset>
         <length>10</length>
     </annotation>
     <annotation>
         <mention>fantômes</mention>
-        <wikiName>Fantôme</wikiName>
+        <wikiName>Ghost</wikiName>
         <wikidataId>Q45529</wikidataId>
-        <wikipediaId>150415</wikipediaId>
+        <wikipediaId>12514</wikipediaId>
         <offset>401</offset>
         <length>8</length>
     </annotation>
     <annotation>
         <mention>photographie</mention>
-        <wikiName>Photographie</wikiName>
+        <wikiName>Photography</wikiName>
         <wikidataId>Q11633</wikidataId>
-        <wikipediaId>2389</wikipediaId>
+        <wikipediaId>23604</wikipediaId>
         <offset>413</offset>
         <length>12</length>
     </annotation>
     <annotation>
         <mention>Mongolie</mention>
-        <wikiName>Mongolie</wikiName>
+        <wikiName>Mongolia</wikiName>
         <wikidataId>Q711</wikidataId>
-        <wikipediaId>80597</wikipediaId>
+        <wikipediaId>19271</wikipediaId>
         <offset>429</offset>
         <length>8</length>
     </annotation>
     <annotation>
         <mention>contemporaine</mention>
-        <wikiName>Époque contemporaine</wikiName>
-        <wikidataId>Q6495391</wikidataId>
-        <wikipediaId>1191278</wikipediaId>
+        <wikiName>Modern history</wikiName>
+        <wikidataId>Q3281534</wikidataId>
+        <wikipediaId>885795</wikipediaId>
         <offset>438</offset>
         <length>13</length>
     </annotation>
@@ -185,16 +185,16 @@
     </annotation>
     <annotation>
         <mention>Grégory Delaplace</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>543</offset>
         <length>17</length>
     </annotation>
     <annotation>
         <mention>gregory.delaplace@ mae.u-paris10.fr</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>581</offset>
         <length>35</length>
@@ -409,16 +409,16 @@
     </annotation>
     <annotation>
         <mention>chhhhhh@hermes.cam.ac.uk</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>1206</offset>
         <length>24</length>
     </annotation>
     <annotation>
         <mention>Valentin Sergeevich Batomunkuev</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>1233</offset>
         <length>31</length>
@@ -537,16 +537,16 @@
     </annotation>
     <annotation>
         <mention>bvalentins@yandex.ru</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>1711</offset>
         <length>20</length>
     </annotation>
     <annotation>
         <mention>Uradyn E. Bulag</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>1734</offset>
         <length>15</length>
@@ -609,16 +609,16 @@
     </annotation>
     <annotation>
         <mention>dyatlov@irk.ru</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>1993</offset>
         <length>14</length>
     </annotation>
     <annotation>
         <mention>Gaëlle Lacaze</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>2010</offset>
         <length>13</length>
@@ -677,7 +677,7 @@
         <wikidataId>Q83328</wikidataId>
         <wikipediaId>44740</wikipediaId>
         <offset>2200</offset>
-        <length>6</length>
+        <length>18</length>
     </annotation>
     <annotation>
         <mention>Kazakhs</mention>
@@ -713,9 +713,9 @@
     </annotation>
     <annotation>
         <mention>corps</mention>
-        <wikiName>Corps humain</wikiName>
+        <wikiName>Human body</wikiName>
         <wikidataId>Q23852</wikidataId>
-        <wikipediaId>3429832</wikipediaId>
+        <wikipediaId>54176</wikipediaId>
         <offset>2357</offset>
         <length>5</length>
     </annotation>
@@ -729,17 +729,17 @@
     </annotation>
     <annotation>
         <mention>nomades</mention>
-        <wikiName>Nomadisme</wikiName>
+        <wikiName>Nomad</wikiName>
         <wikidataId>Q128393</wikidataId>
-        <wikipediaId>187410</wikipediaId>
+        <wikipediaId>89908</wikipediaId>
         <offset>2397</offset>
         <length>7</length>
     </annotation>
     <annotation>
         <mention>corps</mention>
-        <wikiName>Corps humain</wikiName>
+        <wikiName>Human body</wikiName>
         <wikidataId>Q23852</wikidataId>
-        <wikipediaId>3429832</wikipediaId>
+        <wikipediaId>54176</wikipediaId>
         <offset>2408</offset>
         <length>5</length>
     </annotation>
@@ -752,7 +752,7 @@
         <length>10</length>
     </annotation>
     <annotation>
-        <mention>Central "sia</mention>
+        <mention>Central Asia</mention>
         <wikiName>Central Asia</wikiName>
         <wikidataId>Q27275</wikidataId>
         <wikipediaId>6742</wikipediaId>
@@ -772,29 +772,29 @@
         <wikiName>Revue</wikiName>
         <wikidataId>Q685935</wikidataId>
         <wikipediaId>896326</wikipediaId>
-        <offset>2471</offset>
+        <offset>2470</offset>
         <length>5</length>
     </annotation>
     <annotation>
         <mention>migrations internationales</mention>
-        <wikiName>Migration humaine</wikiName>
+        <wikiName>Human migration</wikiName>
         <wikidataId>Q177626</wikidataId>
-        <wikipediaId>174448</wikipediaId>
+        <wikipediaId>221773</wikipediaId>
         <offset>2491</offset>
         <length>26</length>
     </annotation>
     <annotation>
         <mention>gaelle.lacaze@misha.fr</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>2591</offset>
         <length>22</length>
     </annotation>
     <annotation>
         <mention>Sayana Namsaraeva</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>2616</offset>
         <length>17</length>
@@ -808,12 +808,12 @@
         <length>18</length>
     </annotation>
     <annotation>
-        <mention>Social  Anthropology</mention>
+        <mention>Social Anthropology</mention>
         <wikiName>Social anthropology</wikiName>
         <wikidataId>Q29051</wikidataId>
         <wikipediaId>33661613</wikipediaId>
         <offset>2677</offset>
-        <length>20</length>
+        <length>19</length>
     </annotation>
     <annotation>
         <mention>Mongolia</mention>
@@ -944,25 +944,25 @@
         <length>4</length>
     </annotation>
     <annotation>
-        <mention>Inner &quot;sia</mention>
+        <mention>Inner Asia</mention>
         <wikiName>Inner Asia</wikiName>
         <wikidataId>Q11212956</wikidataId>
         <wikipediaId>426875</wikipediaId>
         <offset>3266</offset>
-        <length>15</length>
+        <length>10</length>
     </annotation>
     <annotation>
         <mention>namsaraeva@gmail.com</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>3302</offset>
         <length>20</length>
     </annotation>
     <annotation>
         <mention>Ivan Peshkov</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>3325</offset>
         <length>12</length>
@@ -1073,16 +1073,16 @@
     </annotation>
     <annotation>
         <mention>i.peshkov@wp.pl</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>3761</offset>
         <length>15</length>
     </annotation>
     <annotation>
         <mention>Natalia Ryzhova</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>3779</offset>
         <length>15</length>
@@ -1100,8 +1100,8 @@
         <wikiName>Social studies</wikiName>
         <wikidataId>Q14565700</wikidataId>
         <wikipediaId>201517</wikipediaId>
-        <offset>3818</offset>
-        <length>47</length>
+        <offset>3851</offset>
+        <length>14</length>
     </annotation>
     <annotation>
         <mention>Economic</mention>
@@ -1273,8 +1273,8 @@
     </annotation>
     <annotation>
         <mention>n.p.ryzhova@gmail.com</mention>
-        <wikiName>null</wikiName>
-        <wikidataId>null</wikidataId>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
         <wikipediaId>-1</wikipediaId>
         <offset>4668</offset>
         <length>21</length>

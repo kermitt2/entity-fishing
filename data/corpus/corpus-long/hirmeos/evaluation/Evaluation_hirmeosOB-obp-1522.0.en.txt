@@ -1,40 +1,3 @@
-[INFO] ------------------------------------------------------------------------
-[INFO] Building entity-fishing 0.0.3
-[INFO] ------------------------------------------------------------------------
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/org/grobid/grobid-core/0.5.1-SNAPSHOT/maven-metadata.xml
-Downloading: https://oss.sonatype.org/content/groups/public/org/grobid/grobid-core/0.5.1-SNAPSHOT/maven-metadata.xml
-Downloading: http://download.java.net/maven/2/org/grobid/grobid-core/0.5.1-SNAPSHOT/maven-metadata.xml
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/org/grobid/grobid-core/0.5.1-SNAPSHOT/grobid-core-0.5.1-SNAPSHOT.pom
-Downloading: http://download.java.net/maven/2/org/grobid/grobid-core/0.5.1-SNAPSHOT/grobid-core-0.5.1-SNAPSHOT.pom
-Downloading: https://oss.sonatype.org/content/groups/public/org/grobid/grobid-core/0.5.1-SNAPSHOT/grobid-core-0.5.1-SNAPSHOT.pom
-[WARNING] The POM for org.grobid:grobid-core:jar:0.5.1-SNAPSHOT is missing, no dependency information available
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/org/grobid/ner/grobid-ner/0.5.0-SNAPSHOT/maven-metadata.xml
-Downloading: http://download.java.net/maven/2/org/grobid/ner/grobid-ner/0.5.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://oss.sonatype.org/content/groups/public/org/grobid/ner/grobid-ner/0.5.0-SNAPSHOT/maven-metadata.xml
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/org/grobid/ner/grobid-ner/0.5.0-SNAPSHOT/grobid-ner-0.5.0-SNAPSHOT.pom
-Downloading: http://download.java.net/maven/2/org/grobid/ner/grobid-ner/0.5.0-SNAPSHOT/grobid-ner-0.5.0-SNAPSHOT.pom
-Downloading: https://oss.sonatype.org/content/groups/public/org/grobid/ner/grobid-ner/0.5.0-SNAPSHOT/grobid-ner-0.5.0-SNAPSHOT.pom
-[WARNING] The POM for org.grobid.ner:grobid-ner:jar:0.5.0-SNAPSHOT is missing, no dependency information available
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/org/grobid/trainer/grobid-trainer/0.5.1-SNAPSHOT/maven-metadata.xml
-Downloading: http://download.java.net/maven/2/org/grobid/trainer/grobid-trainer/0.5.1-SNAPSHOT/maven-metadata.xml
-Downloading: https://oss.sonatype.org/content/groups/public/org/grobid/trainer/grobid-trainer/0.5.1-SNAPSHOT/maven-metadata.xml
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/org/grobid/trainer/grobid-trainer/0.5.1-SNAPSHOT/grobid-trainer-0.5.1-SNAPSHOT.pom
-Downloading: http://download.java.net/maven/2/org/grobid/trainer/grobid-trainer/0.5.1-SNAPSHOT/grobid-trainer-0.5.1-SNAPSHOT.pom
-Downloading: https://oss.sonatype.org/content/groups/public/org/grobid/trainer/grobid-trainer/0.5.1-SNAPSHOT/grobid-trainer-0.5.1-SNAPSHOT.pom
-[WARNING] The POM for org.grobid.trainer:grobid-trainer:jar:0.5.1-SNAPSHOT is missing, no dependency information available
-Downloading: file:////home/tanti/Desktop/Tanti/nerd/lib/linnaeus/linnaeus/2.0/linnaeus-2.0.pom
-Downloading: http://download.java.net/maven/2/linnaeus/linnaeus/2.0/linnaeus-2.0.pom
-Downloading: https://oss.sonatype.org/content/groups/public/linnaeus/linnaeus/2.0/linnaeus-2.0.pom
-Downloading: https://repo.maven.apache.org/maven2/linnaeus/linnaeus/2.0/linnaeus-2.0.pom
-[WARNING] The POM for linnaeus:linnaeus:jar:2.0 is missing, no dependency information available
-[INFO]
-[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ nerd ---
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/home/tanti/.m2/repository/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/home/tanti/.m2/repository/ch/qos/logback/logback-classic/1.1.2/logback-classic-1.1.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
-
 init upper level language independent environment
 building Environment for upper knowledge base
 Environment built - 9155139 concepts.
@@ -53,75 +16,56 @@ init Environment for language fr
 building Environment for language fr
 isLoaded: true
 Environment built - 3631810 pages.
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Grégory Delaplace
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Tombe
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Fantôme
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Photographie
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Mongolie
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Époque contemporaine
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
+init Environment for language es
+building Environment for language es
+isLoaded: true
+Environment built - 0 pages.
+init Environment for language it
+building Environment for language it
+isLoaded: true
+Environment built - 0 pages.
 OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: nature management
 OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: nature management
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-data/corpus/corpus-long/hirmeos/RawText/OB-obp-1522.0.en.txt: Turkic populations =/= Turkic
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Corps humain
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Nomadisme
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Corps humain
-data/corpus/corpus-long/hirmeos/RawText/OB-obp-1522.0.en.txt: Revue =/= evue
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Migration humaine
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-data/corpus/corpus-long/hirmeos/RawText/OB-obp-1522.0.en.txt: Social  Anthropology =/= Social
-
-Anthropology
-data/corpus/corpus-long/hirmeos/RawText/OB-obp-1522.0.en.txt: Inner "sia =/= Inner "sia. She
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
-data/corpus/corpus-long/hirmeos/RawText/OB-obp-1522.0.en.txt: Social Studies =/= Amur Laboratory for Economic and Social Studies
 OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: Eastern Mongolia
-OB-obp-1522.0.en.txt: Invalid article name - article not found in Wikipedia: null
 [Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
 Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
 [Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
 Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
 found no candidate for mention: Université Paris Ouest Nanterre
 found no candidate for mention: postsocialist
+found no candidate for mention: Sépultures
+found no candidate for mention: fantômes
+found no candidate for mention: photographie
+found no candidate for mention: Mongolie
+found no candidate for mention: contemporaine
 found no candidate for mention: East of Russia
-found no candidate for mention: Central "sia
+found no candidate for mention: nomades
+found no candidate for mention: migrations internationales
 found no candidate for mention: Zabaikal'sk
-found no candidate for mention: Inner "sia
-relatedness - comparisons: 29235 - cache proportion: 0.40975166565717747
+relatedness - comparisons: 29415 - cache proportion: 0.40683605565638237
 
-Evaluation on 1 documents and 132 expected entities, in total 270 s
+Evaluation on 1 documents and 141 expected entities, in total 44 s
 
-candidate gold recall: 93.18
+candidate gold recall: 88.65
 
 ** micro average measures **
 
 hirmeos              accuracy     precision    recall       f1
 
-prior                83.33        87.3         83.33        85.27
-ranker               84.09        88.1         84.09        86.05
+prior                79.43        86.15        79.43        82.66
+ranker               79.43        86.15        79.43        82.66
 
 ** macro average measures **
 
 hirmeos              accuracy     precision    recall       f1
 
-prior                83.33        87.3         83.33        85.27
-ranker               84.09        88.1         84.09        86.05
+prior                79.43        86.15        79.43        82.66
+ranker               79.43        86.15        79.43        82.66
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 04:54 min
-[INFO] Finished at: 2017-12-12T11:07:39+01:00
-[INFO] Final Memory: 386M/1089M
+[INFO] Total time: 52.698 s
+[INFO] Finished at: 2017-12-12T17:22:31+01:00
+[INFO] Final Memory: 387M/1029M
 [INFO] ------------------------------------------------------------------------
