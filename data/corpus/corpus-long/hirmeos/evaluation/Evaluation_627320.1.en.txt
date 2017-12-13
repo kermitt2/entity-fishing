@@ -1,0 +1,72 @@
+init upper level language independent environment
+building Environment for upper knowledge base
+Environment built - 9155139 concepts.
+init Environment for language en
+building Environment for language en
+isLoaded: true
+Environment built - 14651883 pages.
+domains en / isLoaded: true
+Warning: Orthopedic surgery is not a category found in Wikipedia.
+Warning: Environment is not a category found in Wikipedia.
+init Environment for language de
+building Environment for language de
+isLoaded: true
+Environment built - 3523959 pages.
+init Environment for language fr
+building Environment for language fr
+isLoaded: true
+Environment built - 3631810 pages.
+init Environment for language es
+building Environment for language es
+isLoaded: true
+Environment built - 0 pages.
+init Environment for language it
+building Environment for language it
+isLoaded: true
+Environment built - 0 pages.
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.1.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+found no candidate for mention: South Cameroon
+found no candidate for mention: An. nili
+found no candidate for mention: An. nili
+found no candidate for mention: South Cameroon
+found no candidate for mention: An. nili
+found no candidate for mention: hydrographic networks
+found no candidate for mention: An. nili
+relatedness - comparisons: 31175 - cache proportion: 0.4380554103502352
+
+Evaluation on 1 documents and 143 expected entities, in total 191 s
+
+candidate gold recall: 93.71
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                89.51        94.12        89.51        91.76
+ranker               91.61        96.32        91.61        93.91
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                89.51        94.12        89.51        91.76
+ranker               91.61        96.32        91.61        93.91
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 03:18 min
+[INFO] Finished at: 2017-12-13T18:01:24+01:00
+[INFO] Final Memory: 385M/1006M
+[INFO] ------------------------------------------------------------------------

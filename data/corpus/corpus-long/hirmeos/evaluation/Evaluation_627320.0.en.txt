@@ -1,0 +1,95 @@
+init upper level language independent environment
+building Environment for upper knowledge base
+Environment built - 9155139 concepts.
+init Environment for language en
+building Environment for language en
+isLoaded: true
+Environment built - 14651883 pages.
+domains en / isLoaded: true
+Warning: Orthopedic surgery is not a category found in Wikipedia.
+Warning: Environment is not a category found in Wikipedia.
+init Environment for language de
+building Environment for language de
+isLoaded: true
+Environment built - 3523959 pages.
+init Environment for language fr
+building Environment for language fr
+isLoaded: true
+Environment built - 3631810 pages.
+init Environment for language es
+building Environment for language es
+isLoaded: true
+Environment built - 0 pages.
+init Environment for language it
+building Environment for language it
+isLoaded: true
+Environment built - 0 pages.
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles arabiensis
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles funestus
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles marshallii
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles marshallii
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles bervoetsi
+627320.0.en.txt: Invalid article name - article not found in Wikipedia: Anopheles moucheti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+found no candidate for mention: Anopheles niliare
+found no candidate for mention: equatorial forest region
+found no candidate for mention: south Cameroun
+found no candidate for mention: South Cameroon
+relatedness - comparisons: 30855 - cache proportion: 0.41228571428571426
+
+Evaluation on 1 documents and 147 expected entities, in total 193 s
+
+candidate gold recall: 97.28
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                87.76        90.21        87.76        88.97
+ranker               91.84        94.41        91.84        93.1
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                87.76        90.21        87.76        88.97
+ranker               91.84        94.41        91.84        93.1
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 03:30 min
+[INFO] Finished at: 2017-12-13T16:04:27+01:00
+[INFO] Final Memory: 389M/1052M
+[INFO] ------------------------------------------------------------------------
