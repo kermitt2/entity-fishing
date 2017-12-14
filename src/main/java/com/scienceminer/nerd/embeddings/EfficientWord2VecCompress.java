@@ -31,18 +31,18 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Compressed word2vec-like format word vectors (previously quantized with Quantizer class).  
+ * Compressed word2vec-like format word vectors (previously quantized with Quantizer class).
  * This class performs several passes through the input data, because the original
  * Word2VecCompress implementation doesn't scale for many million entries.
  * Word strings are hashed and quantized vectors are golomb coded.
- *
- * From the origianl FEL version, refactoring and replace command argument processing which was 
+ * <p>
+ * From the origianl FEL version, refactoring and replace command argument processing which was
  * relying on a library not comatible with Apache 2 license.
- * 
+ * <p>
  * Example command:
- * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EfficientWord2VecCompress 
+ * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EfficientWord2VecCompress
  * -Dexec.args="/mnt/data/wikipedia/embeddings/wiki.en.q /mnt/data/wikipedia/embeddings/wiki.en.q.compressed"
- * 
+ *
  * @author roi blanco (original), with modifications patrice lopez
  */
 public class EfficientWord2VecCompress extends Word2VecCompress {
@@ -57,7 +57,7 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
 
         ProgressLogger pl = new ProgressLogger(logger);
 
-        try(final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
+        try (final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
 
             String[] header = lines.readLine().split("\t");
             numWords = Integer.parseInt(header[0]);
@@ -70,21 +70,21 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
 
             ObjectOpenHashSet<String> stringSet = new ObjectOpenHashSet<String>();
             Random r = new Random();
-            for(int i = 0; i < numWords; ++i) {
+            for (int i = 0; i < numWords; ++i) {
                 pl.lightUpdate();
                 String s = lines.readLine();
-                if(s.length() > 0) {
-                    if(s.charAt(s.length() - 1) == '\n') {
+                if (s.length() > 0) {
+                    if (s.charAt(s.length() - 1) == '\n') {
                         s = s.substring(0, s.length() - 2);
                     }
-                    if(!stringSet.contains(s)) {
+                    if (!stringSet.contains(s)) {
                         indexToWord.add(s);
                         stringSet.add(s);
                     } else {
                         System.out.println("dup <" + s + "> line " + i);
                         indexToWord.add(s + r.nextDouble());
                     }
-                }else{
+                } else {
                     indexToWord.add("<<<<<<VOID>>>>>" + r.nextDouble());
                 }
             }
@@ -94,30 +94,33 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
             pl.expectedUpdates = numWords;
             pl.start("Reading the vectors");
             String preLin = "";
-            for(int i = 0; i < numWords; ++i) {
+            for (int i = 0; i < numWords; ++i) {
                 pl.lightUpdate();
                 String line = lines.readLine();
                 try {
                     String[] lineEntries = line.split(" ");
-                    for(int col = 0; col < vectorSize; ++col) {
+                    if (lineEntries.length < vectorSize) {
+                        System.err.println("The line " + i + " has a lower amount of elements (" + lineEntries.length + ") than the expected vector size (" + vectorSize + "), " + line + " word " + indexToWord.get(i) + ". Ignoring it.");
+                        continue;
+                    }
+                    for (int col = 0; col < vectorSize; ++col) {
                         int entry = Integer.parseInt(lineEntries[col]);
                         columnAbsSum[col] += Fast.int2nat(entry) + 1;
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     System.err.println("[ERROR] at line " + i + " : " + line + " word " + indexToWord.get(i));
                     e.printStackTrace();
                     System.exit(-1);
                 }
-
             }
             pl.done();
 
         }
 
         int[] golombModuli = new int[vectorSize];
-        for(int col = 0; col < vectorSize; ++col) {
+        for (int col = 0; col < vectorSize; ++col) {
             int m = 0;
-            if(columnAbsSum[col] > numWords) {
+            if (columnAbsSum[col] > numWords) {
                 double f = ((double) numWords) / columnAbsSum[col];
                 m = (int) Math.ceil(Math.log(2.0 - f) / -Math.log(1.0 - f));
             }
@@ -129,7 +132,7 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
                 TransformationStrategies.utf16()).build());
 
         int[] permutation = new int[numWords];
-        for(int i = 0; i < numWords; ++i) {
+        for (int i = 0; i < numWords; ++i) {
             int newPos = dictionaryHash.get(indexToWord.get(i)).intValue();
             permutation[newPos] = i;
         }
@@ -140,19 +143,19 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
 
         pl.expectedUpdates = numWords;
         pl.start("First-pass compressing the vectors");
-        try(final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
+        try (final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
             lines.readLine();//header
-            for(int i = 0; i < numWords; ++i) {
+            for (int i = 0; i < numWords; ++i) {
                 lines.readLine(); //skip all the words
             }
 
-            for(int i = 0; i < numWords; ++i) {
+            for (int i = 0; i < numWords; ++i) {
                 pl.lightUpdate();
                 endpoints.add(obs.writtenBits());
                 //int rowStart = permutation[i] * vectorSize;
                 String line = lines.readLine();
                 String[] lineEntries = line.split(" ");
-                for(int col = 0; col < vectorSize; ++col) {
+                for (int col = 0; col < vectorSize; ++col) {
                     int entry = Integer.parseInt(lineEntries[col]);
                     //int entry = entries[rowStart + col];
                     //int entry = IntBigArrays.get(entries, rowStart + col);
@@ -162,7 +165,7 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
             pl.done();
 
             obs.close();
-            while(oa.length() % 4 != 0) {
+            while (oa.length() % 4 != 0) {
                 oa.write(0); // pad to int for FastInputBitStream
             }
             oa.trim();
@@ -179,19 +182,19 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
 
         final LongArrayList nendpoints = new LongArrayList();
         FastInputBitStream ibs = new FastInputBitStream(oa.array);
-        for(int i = 0; i < numWords; i++) { //re-code
+        for (int i = 0; i < numWords; i++) { //re-code
             pl.lightUpdate();
             nendpoints.add(nobs.writtenBits());
             long endpoint = endpoints.get(permutation[i]);
             ibs.position(endpoint);
-            for(int col = 0; col < vectorSize; ++col) {
+            for (int col = 0; col < vectorSize; ++col) {
                 int val = Fast.nat2int(ibs.readGolomb(golombModuli[col]));
                 nobs.writeGolomb(Fast.int2nat(val), golombModuli[col]);
             }
         }
         pl.done();
         nobs.close();
-        while(noa.length() % 4 != 0) {
+        while (noa.length() % 4 != 0) {
             noa.write(0); // pad to int for FastInputBitStream
         }
         noa.trim();
@@ -200,7 +203,7 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
 
         EliasFanoMonotoneLongBigList efEndpoints = new EliasFanoMonotoneLongBigList(endpoints);
         Word2VecCompress word2vec = new Word2VecCompress(numWords, vectorSize, quantizationFactor, oa.array, efEndpoints, dictionaryHash, golombModuli);
-        if(output_filename != null) {
+        if (output_filename != null) {
             BinIO.storeObject(word2vec, output_filename);
         }
 
@@ -208,20 +211,20 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
             pl.expectedUpdates = numWords;
             pl.start("Checking the output");
 
-            try(final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
+            try (final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
                 lines.readLine();//header
-                for(int i = 0; i < numWords; ++i) {
+                for (int i = 0; i < numWords; ++i) {
                     lines.readLine(); //skip all the words
                 }
-                for(int i = 0; i < numWords; ++i) {
+                for (int i = 0; i < numWords; ++i) {
                     pl.lightUpdate();
                     int[] vec = word2vec.getInt(indexToWord.get(i));
                     String line = lines.readLine();
                     String[] lineEntries = line.split(" ");
-                    for(int col = 0; col < vectorSize; ++col) {
+                    for (int col = 0; col < vectorSize; ++col) {
                         int expected = Integer.parseInt(lineEntries[col]);
                         int got = vec[col];
-                        if(expected != got) {
+                        if (expected != got) {
                             logger.error("Row {}, Column {}: Expected {}, got {}", i, col, expected, got);
                             System.exit(1);
                         }
@@ -236,9 +239,9 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
         if (args.length != 2) {
             System.err.println("Usage: [path to input quantized vec file] [path to output compressed vec file]");
         }
-        try {  
+        try {
             EfficientWord2VecCompress.compress(args[0], args[1]);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
