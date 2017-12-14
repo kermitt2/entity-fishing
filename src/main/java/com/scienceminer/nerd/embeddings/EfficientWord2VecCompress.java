@@ -100,7 +100,7 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
                 try {
                     String[] lineEntries = line.split(" ");
                     if (lineEntries.length < vectorSize) {
-                        System.err.println("The line " + i + " has a lower amount of elements (" + lineEntries.length + ") than the expected vector size (" + vectorSize + "), " + line + " word " + indexToWord.get(i) + ". Ignoring it.");
+                        System.err.println("The line " + i + " has a lower amount of elements (" + lineEntries.length + ") than the expected vector size (" + vectorSize + "), " + line + ". Ignoring it.");
                         continue;
                     }
                     for (int col = 0; col < vectorSize; ++col) {
@@ -155,6 +155,10 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
                 //int rowStart = permutation[i] * vectorSize;
                 String line = lines.readLine();
                 String[] lineEntries = line.split(" ");
+                if (lineEntries.length < vectorSize) {
+                    System.err.println("The line " + i + " has a lower amount of elements (" + lineEntries.length + ") than the expected vector size (" + vectorSize + "), " + line + ". Ignoring it.");
+                    continue;
+                }
                 for (int col = 0; col < vectorSize; ++col) {
                     int entry = Integer.parseInt(lineEntries[col]);
                     //int entry = entries[rowStart + col];
@@ -173,7 +177,6 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
         //double bps = 8.0 * oa.array.length / entries.length;
         double bps = 8.0 * oa.array.length / size;
         logger.info("Overall vector bit streams: {} bytes, {} bps", oa.array.length, bps);
-
 
         FastByteArrayOutputStream noa = new FastByteArrayOutputStream();
         OutputBitStream nobs = new OutputBitStream(noa, 0);
@@ -207,31 +210,33 @@ public class EfficientWord2VecCompress extends Word2VecCompress {
             BinIO.storeObject(word2vec, output_filename);
         }
 
-        {
-            pl.expectedUpdates = numWords;
-            pl.start("Checking the output");
+        pl.expectedUpdates = numWords;
+        pl.start("Checking the output");
 
-            try (final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
-                lines.readLine();//header
-                for (int i = 0; i < numWords; ++i) {
-                    lines.readLine(); //skip all the words
-                }
-                for (int i = 0; i < numWords; ++i) {
-                    pl.lightUpdate();
-                    int[] vec = word2vec.getInt(indexToWord.get(i));
-                    String line = lines.readLine();
-                    String[] lineEntries = line.split(" ");
-                    for (int col = 0; col < vectorSize; ++col) {
-                        int expected = Integer.parseInt(lineEntries[col]);
-                        int got = vec[col];
-                        if (expected != got) {
-                            logger.error("Row {}, Column {}: Expected {}, got {}", i, col, expected, got);
-                            System.exit(1);
-                        }
+        try (final BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(input_filename), "UTF-8"))) {
+            lines.readLine();//header
+            for (int i = 0; i < numWords; ++i) {
+                lines.readLine(); //skip all the words
+            }
+            for (int i = 0; i < numWords; ++i) {
+                pl.lightUpdate();
+                int[] vec = word2vec.getInt(indexToWord.get(i));
+                String line = lines.readLine();
+                String[] lineEntries = line.split(" ");
+                for (int col = 0; col < vectorSize; ++col) {
+                    if (lineEntries.length < vectorSize) {
+                        System.err.println("The line " + i + " has a lower amount of elements (" + lineEntries.length + ") than the expected vector size (" + vectorSize + "), " + line + ". Ignoring it.");
+                        continue;
+                    }
+                    int expected = Integer.parseInt(lineEntries[col]);
+                    int got = vec[col];
+                    if (expected != got) {
+                        logger.error("Row {}, Column {}: Expected {}, got {}", i, col, expected, got);
+                        System.exit(1);
                     }
                 }
-                pl.done();
             }
+            pl.done();
         }
     }
 
