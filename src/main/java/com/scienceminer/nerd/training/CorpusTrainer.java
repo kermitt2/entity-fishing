@@ -2,18 +2,15 @@ package com.scienceminer.nerd.training;
 
 import com.scienceminer.nerd.disambiguation.NerdRanker;
 import com.scienceminer.nerd.disambiguation.NerdSelector;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.evaluation.NEDCorpusEvaluation;
 
-import org.grobid.trainer.LabelStat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -125,7 +122,7 @@ public class CorpusTrainer {
 		if (args.length != 2) {
 			System.err.println("Usage: command [name_of_corpus] [lang]");
 			System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
-			System.err.println("lang must be one of: " + UpperKnowledgeBase.targetLanguages.toString());
+			System.err.println("lang must be one of: " + UpperKnowledgeBase.TARGET_LANGUAGES.toString());
 			System.exit(-1);
 		}
 		String corpus = args[0].toLowerCase();
@@ -134,8 +131,8 @@ public class CorpusTrainer {
 			System.exit(-1);
 		}
 		String lang = args[1].toLowerCase();
-		if (!UpperKnowledgeBase.targetLanguages.contains(lang)) {
-			System.err.println("lang must be one of: " + UpperKnowledgeBase.targetLanguages.toString());
+		if (!UpperKnowledgeBase.TARGET_LANGUAGES.contains(lang)) {
+			System.err.println("lang must be one of: " + UpperKnowledgeBase.TARGET_LANGUAGES.toString());
 			System.exit(-1);
 		}
 

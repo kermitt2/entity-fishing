@@ -1,7 +1,5 @@
 package com.scienceminer.nerd.utilities;
 
-import java.util.Map;
-
 /**
  * This class is a bean for the YAML configuation data associated to a 
  * language specific NERD.  
@@ -15,6 +13,9 @@ public class NerdConfig {
 
 	// path to the LMDB data
 	private String dbDirectory;
+
+	// path to the embeddings data
+	private String embeddingsDirectory;
 
 	// path to the compiled CSV wikipedia files
 	private String dataDirectory;
@@ -163,4 +164,11 @@ public class NerdConfig {
 		this.speciesPath = speciesPath;
 	}
 
+	public String getEmbeddingsDirectory() {
+		return embeddingsDirectory;
+	}
+
+	public void setEmbeddingsDirectory(String embeddingsDirectory) {
+		this.embeddingsDirectory = embeddingsDirectory;
+	}
 }

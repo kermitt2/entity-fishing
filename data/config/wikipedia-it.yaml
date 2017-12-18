@@ -6,6 +6,9 @@ langCode: it
 # path to the LMDB data
 dbDirectory: data/db/db-it
 
+# path to the embeddings
+embeddingsDirectory: data/embeddings/it
+
 # path to the compiled CSV wikipedia, infobox, wikidata files
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used

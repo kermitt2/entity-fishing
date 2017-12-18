@@ -39,7 +39,8 @@ public class UpperKnowledgeBase {
 	private long conceptCount = -1;
 
 	// this is the list of supported languages 
-  	public static List<String> targetLanguages = Arrays.asList(Language.EN, Language.FR, Language.DE); //, Language.IT, Language.ES);
+  	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES);
  
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
@@ -72,8 +73,8 @@ public class UpperKnowledgeBase {
 			this.env = new KBUpperEnvironment(conf);
 			this.env.buildEnvironment(conf, false);
 
-			wikipedias = new HashMap<String, LowerKnowledgeBase>(); 
-            wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
+			wikipedias = new HashMap<>();
+            wikipediaDomainMaps = new HashMap<>();
 
             LOGGER.info("Init English lower Knowledge base layer");
             conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
