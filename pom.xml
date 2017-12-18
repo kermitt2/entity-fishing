@@ -341,6 +341,70 @@
 
         <profile>
             <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
+            <id>train_annotate_it</id>
+            <activation>
+                <property>
+                    <name>train_annotate_it</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
+                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
+                                <argument>data/wikipedia/training/</argument>
+                                <argument>it</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
+            <id>train_annotate_es</id>
+            <activation>
+                <property>
+                    <name>train_annotate_es</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
+                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
+                                <argument>data/wikipedia/training/</argument>
+                                <argument>es</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
             <id>generate_entity_description</id>
             <activation>
                 <property>
