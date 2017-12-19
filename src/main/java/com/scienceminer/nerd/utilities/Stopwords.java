@@ -29,7 +29,7 @@ public class Stopwords {
     // list of languages coming with a stopword list
     private List<String> languages = Arrays.asList("en", "fr", "de");
 
-    public static Stopwords getInstance() throws Exception {
+    public static Stopwords getInstance() {
         if (instance == null) {
             //double check idiom
             // synchronized (instanceController) {
@@ -43,7 +43,7 @@ public class Stopwords {
     /**
      * Creates a new instance.
      */
-    private static synchronized void getNewInstance() throws Exception {
+    private static synchronized void getNewInstance() {
         LOGGER.debug("Get new instance of Stopwords");
         instance = new Stopwords();
     }
@@ -51,7 +51,7 @@ public class Stopwords {
     /**
      * Hidden constructor 
      */
-    private Stopwords() throws Exception {    
+    private Stopwords() {
         loadStopWords();        
     }
 

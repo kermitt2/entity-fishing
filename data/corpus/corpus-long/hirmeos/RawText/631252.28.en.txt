@@ -1,0 +1,39 @@
+On the other hand, we feel that a volume on the AlorPantar languages would not be complete without a discussion of how the typological profile of the family relates to those of the surrounding Papuan languages. Nonetheless, we find little evidence for shared typological features between TAP and either the NH or TNG families. In this section we provide examples contrasting the typological profiles of these families, considering phonology ( § 2.1), morphology ( § 2.2), and syntax ( § 2.3).
+
+Gary Holton & Laura C. Robinson
+
+2.1 Phonology
+
+Foley (1998) suggests two typically Papuan phonological features: the presence of a single liquid phoneme and the presence of pre-nasalized stops. Neither of these putative Papuan phonological features is found in proto-Timor-AlorPantar (pTAP), which had at least two liquids and lacks pre-nasalized stops. The pTAP consonant inventory (based on Chapter 3), is shown in
+
+Nor are these features present in proto-North Halmahera (pNH), shown in
+
+On the other hand, both pre-nasalized stops and a single liquid phoneme are found in pTNG. Additionally, in contrast to either pTAP or pNH, pTNG contains only a single fricative
+
+In many respects, these three consonant inventories are similar. Each contains two sets of stops. In pTAP and pNH, the distinction between the two sets is voicing, with one voiced set and one voiceless set. In pTNG the distinction is between oral and pre-nasalized. It is plausible that the pTNG pre-nasalized stops developed into the pTAP voiced stops. Nevertheless, considering just the four phonological features discussed above we find greater similarity between TAP and NH than between TAP and TNG, as summarized inSchapper, Huber & Engelenhoven (this volume) note that there are three correspondence sets between AP on the one hand, and Timor-Kisar, on the other, and so they reconstruct a third liquid *R, but they do not speculate about the phonetic value of *R. Since none of the modern TAP languages has more than two liquids, we believe that the proto-language had just two liquids, and that the third correspondence set should be attributed to either *r or *l, with some as yet to be identified conditioning.Note that the pTNG apical stop *t may have had a flap or trill allophone
+
+4 The linguistic position of the Timor-Alor-Pantar languages
+
+Gary Holton & Laura C. Robinson
+
+2.2 Morphology
+
+Among the few typologically distinctive morphological features of the TAP languages is the presence of pronominal indexing of the patient-like argument of a transitive verb (P) via a pronominal prefix (see Chapter 10). Reflexes of a P prefix are widely distributed across the family and can be reconstructed to pTAP. These prefixes generally have the same form as those which index possessors on nouns, as in the Teiwa example in, where the third singular prefix on the verb indexes the third singular P argument, while the first singular prefix on the noun 'child' indexes the possessor.
+
+In the AP language Abui, alignment is semantic, and most non-volitional arguments are marked with pronominal prefixes, including non-volitional S arguments (: Chapter 10). In (4) the sole argument is volitional, so there is no marking on the verb. In (5) the first person undergoer is non-volitional and is indexed on the verb with the prefix no-. Likewise, in (6) the verb wel 'pour' takes the third person prefix ha-because the undergoer Simon is non-volitional.
+
+4 The linguistic position of the Timor-Alor-Pantar languages Finally, we see in (7) that even the sole argument of the verb can be indexed with a prefix if it is non-volitional.
+
+Simon Simon ha-wel.
+
+3-pour 'I washed Simon. '
+
+A few TAP languages also permit indexing of both A and P arguments via pronominal prefixes. In such cases, the prefix paradigms for each argument are identical.
+
+(8) Western Pantar (AP; Holton 2010)
+
+Ke'e fish pi-ga-ussar. 1pl-3sg-catch 'We're catching fish. '
+
+The North Halmaheran languages also index P arguments on the verb, and as in TAP, the conditions on pronominal indexing vary considerably across different languages in the familyHowever, pronominal indexing in NH languages differs in several respects from that found in TAP. First, not just P but also A is referenced on the verb in NH. Second, for most NH languages pronominal indexing is obligatory. Third, unlike TAP languages, the forms of A and P pronominal prefixes differ from each other in NH. That is, A and P arguments are marked by distinct paradigms, and this holds for both pronominal 155 Gary Holton & Laura C. Robinson prefixes as well as independent pronouns. The Tobelo example in (9) illustrates these properties.
+
+Moreover, in NH languages the order of verbal referents is fixed as actorundergoer, while for TAP languages which permit two pronominal prefixes, the order may in some cases be reversed as undergoer-actor, as in (10).

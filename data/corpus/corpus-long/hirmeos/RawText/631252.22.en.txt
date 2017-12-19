@@ -1,0 +1,35 @@
+Our most consistent correspondence is pTIM *t to pAP *t and *sInitially, we find a steady and unchanging correspondence of pAP *t and pTIM *t, supported by a sizeable number of cognates. Only Bunaq shows a change of *t to /t/ before a high front vowel. Non-initially, we find fewer cognates, but nevertheless a steady and unchanging correspondence. In two cognate sets ('sit' and 'mat'), pAP final *s preceded by *i corresponds to pTIM *t.
+
+The reconstruction of pTAP *d is supported by only a small number of cognate setsand therefore still needs confirmation. In these sets, initial pAP *d corresponds to pTIM *D, while non-initial pAP *d corresponds with pTIM *T. This is consistent with what we observed with the bilabial stops, where a medial voiced stop in pAP corresponds to a voiceless stop in pTIM. Note that the cognate set for 'bird' is listed under the heading of initial *d, even though its pTIM and (arguably) pAP reflexes are in medial position. We place it there due to the fact that the sound correspondence is parallel to that for 'rat'. However, more sets supporting this reconstruction are clearly needed before we can be certain of it.
+
+Furthermore, there are a range of cognate sets which show as yet unexplained correspondences). In these, we find coronal correspondences between pAP and pTIM and between TK languages (especially in Bunaq and Fataluku) that don't fit well in the above given sets. More work is needed to clarify the history of the coronals in TAP.
+
+3 The relatedness of Timor-Kisar and Alor-Pantar languages
+
+The bracketed rae/r/rai element appears to be an innovation in the Eastern Timor languages, presumably a lexical doublet or a derivational morpheme related to the nominalizing-r formative found in Makalero. We have no evidence for reconstructing this element higher than Proto-Eastern Timor.
+
+This would have originally been *tawo in pre-Bunaq, but in the modern language medial /w/ is not preserved before back vowels.
+
+Antoinette Schapper, Juliette Huber & Aone van Engelenhoven
+
+The Bunaq form reflects the second half of the pTIM doublet that is not found in AP languages.
+
+The cognate set for this item is given in Holton et al., but no pAP reconstruction is given.
+
+The reflex of the relevant bilabial has been lost in Makalero due to apocope.
+
+The cognate set for this item is given in Holton et al., but no pAP reconstruction is given.
+
+This form shows liquid-stop metathesis. There is no evidence of *b occurring word-finally in pTIM.
+
+3 The relatedness of Timor-Kisar and Alor-Pantar languages
+
+3 The relatedness of Timor-Kisar and Alor-Pantar languages
+
+Antoinette Schapper, Juliette Huber & Aone van Engelenhoven
+
+2.3 Reconstruction of velar stops
+
+We reconstruct two velar stops for pTAP, *k and *g. We find insufficient evidence, however, for the uvular stop reconstructed for pAP inPTAP *k and *g are retained as *k and *g in pAP, but merged to *g in pTIM. Note that, based on the comparative TAP evidence and the additional pTAP reconstructions in this chapter, we have to substantially revise Schapper, Huber & Engelenhoven's (2012) pTIM reconstructions with regard to velar stops. Concretely, we can trace only one pTIM velar back to pTAP. We find no pAP reflexes for any of the small sets of roots reconstructed for pTIM with initial *k and medial *g; those for pTIM medial *g, in particular, are rather tenuous, as noted in Schapper,The cognate sets that we can trace back to pTAP involve Schapper, Huber & Engelenhoven's initial *g and medial *k, and the comparative evidence is consistent with these being differential realizations of a single pTIM segment *g: initially, pTIM *g is reflected as /g/ in Bunaq and Makasae, and as /k/ in Makalero and Fataluku. We currently have no evidence for Oirata. In non-initial position, *g is reflected in Bunaq as /g/ medially and as /k/ finally, consistent with Bunaq phonotactic rules, which prohibit voiced stops from codas; in Makasae, Makalero and Fataluku, *g is reflected in non-initial position as //, and variably as // and Ø in Oirata.
+
+The cognate sets that support the reconstruction of pTAP *k are given in Table 6. As in both pTIM) and pAP (, the reconstruction of initial *g in pTAP hinges on third person markers. Two forms are reconstructable: a prefix *ga '3' occurring on verbs and inalienably possessed nouns, and a free form *gie '3.poss' encoding 3 rd person alienable possessors. Number marking was lost in TK languages, so the correspondence we observe is between pAP third person singular forms and pTIM third person forms which are unmarked for number (i.e., can be used in singular and plural contexts). The zero correspondence that we observe in Fataluku and Oirata is the result of the stripping off of the *g marking 3 rd person (as set out in

@@ -1,0 +1,39 @@
+In all AP languages, possessive structures with alienable nouns are distinguished from possessive constructions with inalienable nouns. For example, in Abui, distinct possessive prefixes are used to encode alienable and inalienable possession,In Abui, inalienable possessive prefixes have the theme vowel a, and alienable possessive prefixes have the theme vowel e.
+
+Prefixes with the vowel a reflect the proto-AP P-indexing morpheme) while prefixes with the vowel e reflect the pAP genitive prefix (cf. the prefixes with theme vowels e in Klon
+
+In Teiwa, the difference between alienable and inalienable possession is expressed in a different manner: by optional versus obligatory use of the same (a-vowel) prefix, (21):
+
+Marian Klamer
+
+The variation in the treatment of the alienable-inalienable distinction across the AP family is summarized in
+
+5.5 Plural number words
+
+The Alor-Pantar languages exhibit a typologically unusual pattern (Dryer 2011) whereby nominal plurality is indicated via a separate number word; 'A mor
+
+1 The Alor-Pantar languages: Linguistic context, history and typology pheme whose meaning and function is similar to that of plural affixes in other languages'). An illustration is Teiwa non in (22b).
+
+Plural number words are found across Alor-Pantar and the cognates found across the family suggest that pAP had a plural number word *non. Across the AP family, there is significant variation in form, syntax and semantics of the plural number word as described in Klamer,
+
+5.6 Serial verb constructions
+
+Serial verb constructions (SVCs) are analyzed here as two or more verbs that occur together in a single clause under a single intonation contour. They share minimally one argument, and their shared argument(s) is (are) expressed maximally once. SVCs are distinguished from bi-clausal constructions by the presence of a clause boundary marker in between the clauses in the latter (a conjunctionlike element, an intonational break, or a pause). The verbs in a SVC share aspect marking.
+
+The semantic contrast between a mono-clausal construction with an SVC and a biclausal construction is illustrated by the minimally contrasting pair of Teiwa sentences in (23). Monoclausal (23a) expresses through an SVC the intransitive event of someone who died because he fell down (e.g. from a coconut tree). The biclausal construction in (23b) describes two events in clauses that are linked by the conjunction ba: someone is dying (e.g. because of a heart attack) and is falling down (e.g. out of a tree) as a result of this. No such conjunction-like element would occur between the verbs constituting an SVC.
+
+5.7 Postpositions
+
+Adpositions in AP languages follow their complement, i.e. they are postpositions. Many AP languages have adpositions encoding locations that are similar in form to (defective) locative verbs, suggesting a historical relation between items in both these word classes (Klamer to appear). For example, the Kaera postpositions mi 'in, on, at, into' (glossed as 'loc') is related to the locative verbs ming 'be at' (see (28a-b)), while ta 'on' is related to the locative verb tang 'be on'.
+
+Marian Klamer
+
+There are also AP languages that lack adpositions altogether, Teiwa being a case in point
+
+5.8 Morphological typology
+
+Nominal morphology in AP languages is sparse. Nominal inflection is typically limited to possessive prefixing, and the nominal word-formation most frequently attested is compounding. Morphologically, verbs are the most complex word class of the AP languages. Prefixation to index arguments on verbs is very common ( § 5.3). Broadly speaking, the languages of Pantar are less agglutinative than those of central and east Alor. For example, while Teiwa (Pantar) has only one person prefix paradigm, Kamang (central Alor) has six person prefix paradigms, compare
+
+The Alor-Pantar languages: Linguistic context, history and typology AP languages do not commonly have much derivational morphology. Some AP languages have verbal prefixes that increase valency, including a causative and/or an applicative (e.g. Blagar, Adang, Klon); but in other languages such derivations are either unproductive (Teiwa), or absent altogether (Western Pantar). In the absence of verbal derivation, serial verb constructions are often employed to introduce beneficiary or instrumental participants, or to express analytical causatives (Abui). Indeed, there is evidence that certain verbal affixes may have developed out of verbs that were originally part of serial verb constructions: in Sawila, for instance, applicative prefixes found on verbs are grammaticalized forms of verbs (cf. Klamer to appear. An illustration is the applicative prefix liin li-ilo shine for someone / at something' (31b), which is related to the locative verb li 'be.dist'
+
+Tense inflections are often lacking on verbs in AP languages, and inflections for aspect and mood remain rather limited. The languages show very little similarity in tense-aspect-mood inflections: not only are the forms different, but the values they express, and the position the morphemes take with respect to the verbal stem also show much variation. For example,

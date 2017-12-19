@@ -1,0 +1,35 @@
+In the case of the alienable possessive marker, this means we are left with reflexes of the pTIM possessive root *-ie 'poss' alone.
+
+In non-initial positions, we find numerous cognates reflecting pTAP *g, corresponding to pAP *g and pTIM *g as set out in
+
+Finally, there is as yet an insufficient number of reconstructions of pAP *q with cognates in TK languages to allow for a higher-level pTAP reconstruction. Currently, we have only Bunaq-ol 'child' (presumably reflecting pTIM *-al) as 100 3 The relatedness of Timor-Kisar and Alor-Pantar languages
+
+The bracketed initial segments in these forms reflect different inflectional prefixes which have fossilized on these verbs.
+
+The initial bracketed syllable is a fossilized reduplicated CV. This item also has the variant pronunciation cikie.
+
+This form represents a different root from the 'itchy' root given in
+
+Antoinette Schapper, Juliette Huber & Aone van Engelenhoven
+
+2.4 Reconstruction of fricatives
+
+Two fricatives *s and *h can be reconstructed to pTAP. The number of cognates is still small for both phonemes, but the correspondences are relatively wellbehaved.sets out the cognate sets for pTAP *s. Initial pTAP *s is supported by several cognate sets and has been maintained without change in pAP and pTIM. Non-initial cognates of pAP *s are difficult to find in TK languages, as many instances of reconstructed word-final *s in pAP correspond to pTIM *t (e.g., pAP *mis 'sit', *bis 'mat' and *has 'excrement').
+
+PTAP *h can be reconstructed as a word-initial segment, but not in other positions. The segment corresponds to pTIM *h and pAP *h except before back vowels). Based on the cognate sets available, pAP *h did not occur before back vowels. In this environment, pTAP *h changed either to *w (as in pAP *wur 'moon') or was lost (as in pAP *tei 'tree') in pAP (cf.for the items and vocalic environments in which pAP *w is attested). The reconstruction of pTIM *h hinges on Bunaq, which retains it as /h/, while the eastern Timor languages have all lost pTIM *h (which, in turn, reflects pTAP *h). This means that where we have no Bunaq reflex (as in the 'fish' and 'breast' sets) we have no modern language attesting pTIM *h, and the presence of the phoneme can only be inferred from the fact that *h is reconstructed for the pAP cognate.
+
+2.5 Reconstruction of glides
+
+Two glides can be reconstructed to pTAP, *w and *j. Both appear to have only occurred in initial position. It is unclear whether the reconstructed glides could occur before all vowel qualities. Nevertheless, the cognate sets supporting these proto-phonemes are robust and show little irregularity.
+
+The pTAP glide *w shows a stable and unchanging correspondence of *w in pAP and pTIM for the most part). The major change is that pTAP *w is vocalized in pAP to *u root-initially on inalienably possessed nouns. In TK languages, Bunaq shows conditioned reflexes of pTAP *w, maintaining it as /w/ before front vowels, but changing it to /h/ before non-front vowels. Fataluku shows a change of *w to //, though we note that this is an allophone of /w/ in many languages.
+
+3 The relatedness of Timor-Kisar and Alor-Pantar languages
+
+3 The relatedness of Timor-Kisar and Alor-Pantar languagesgives the four clear cognate sets that we have across TAP languages for pTAP *j. We see that pTAP *j is maintained as *j in pAP, but is variably lost or maintained as *j in pTIM. It may be that differing vocalic environments in pTAP conditioned the different reflexes in pTIM, but we don't have enough understanding of the history of vowels yet to determine this. There is no direct evidence for pTIM *j, that is, no TK language still reflects the proto-phoneme as /j/, but the sound correspondences between TK languages make it differentiable form sets reflecting pTIM *h (see
+
+2.6 Reconstruction of liquids
+
+We identify three robust liquid correspondence sets between pAP and pTIM and as such reconstruct three pTAP liquids: *r, *R, and *l.
+
+The most robust set is that for pTAP *r, which is reflected as *r in both pAP and pTIMPTAP *r is only found in non-initial positions, as are its reflexes in the daughter languages pAP and pTIM. Word-finally in polysyllabic words pTAP *r is particularly susceptible to sporadic loss, as is attested by the various irregular forms inIn one instance (pTAP *(t, s)iba(r) 'new'), the occurrence of a reflex of final *r is so erratic in both primary subgroups that we perhaps must consider it already partly lost in pTAP's daughter languages.

@@ -1,0 +1,31 @@
+In the Inanwatan vocabulary, five forms stand out as potentially cognate with TAP.
+
+If the suspected Austronesian loans are omitted from the list above, the number of lexical similarities between TAP and Kokoda is reduced by half to only two items.
+
+The Dani family is here represented by Lower Grand Valley Dani (ISO 639-3 dni) for the pronouns and Western Dani (ISO 693-3 dnw) for the vocabulary. The Dani pronouns are given in(with pAP for comparison since pTAP reconstructions are not yet available). Like the pAP and pTNG pronouns, they have the paradigmatic vowels /a/ for singulars and /i/ for plurals, plus the use of /n/ for first person, which is why Ross (2005) suggested they might be related to the TAP languages. The Dani pronouns more closely match the reconstructed pAP pronouns than either match the pTNG pronouns, in that Dani also lacks a velar consonant in the second person forms (cf.As with pAP, the Dani pronouns could be explained by positing a flip between the second and third person pronouns. If AP were indeed TNG, then this flip could constitute evidence of shared innovation in the AP and Dani group.
+
+Curiously, Dani shows an for the independent pronoun and n(a)-for the pronominal prefix. The pAP 1sg pronouns (both the reconstructed prefix, and the various derived independent pronouns found in individual AP languages) reflect *na-, like the pTNG *na. The Timor languages, in contrast, reflect *an in the 1sg. Donohue (p.c.) suggests that perhaps the pTNG reconstruction should instead be *an, and that many TNG languages have independently leveled the pronominal paradigm so that all the singulars are of the shape Ca. Donohue suggests that
+
+this is a simpler explanation for the pronominal distributions than claiming independent changes of *na > *an. On the other hand, the fact that the bound 1sg TNG pronoun reconstructs as *na-suggests that the CV form is older.
+
+In the vocabulary, Western Dani shares a handful of look-alikes with the TAP languages. These are given below.
+
+Terms for 'water' and 'banana' are reconstructable to pTAP, but the other lookalikes occur only in the restricted geographic subset of the TAP languages, significantly increasing the probability of chance resemblance due to researcher bias. That is, with some 30 languages, there are bound to be chance resemblances with individual languages, so methodologically, we should restrict ourselves to comparing proto-language with proto-language, rather than comparing to individual daughter languages within TAP.
+
+5.3 Wissel Lakes
+
+The Wissel Lakes family is here represented by EkariThe Ekari pronouns are listed in(with pAP for comparison). As in pAP and pTNG, 176The linguistic position of the Timor-Alor-Pantar languages Ekari pronouns have the paradigmatic vowels /a/ for singulars and /i/ for plurals, plus the use of /n/ for first person. Like the Dani pronouns and the Timor pronouns, the Ekari pronouns show ani in the independent pronouns and nain the prefixes. Unlike TAP and Dani, however, the Ekari pronouns show velar consonants in the second person, suggesting a straightforward inheritance from the prenasalized velars of pTNG.
+
+We identified five potential cognates in the vocabulary; these are listed in (59) below.
+
+Of these potential cognates, only 'eat' and 'give' are reconstructed to pTAP, though 'give' only matches in a subset of phonemes. As mentioned before, it is likely that both Ekari and AP borrowed 'come' from Austronesian sources (see discussion in § 4). The forms for 'house' are only found in a geographical subset of the TAP languages, leaving only 'eat, drink' and 'land' as solid-looking potential cognates.
+
+5.4 West Bomberai
+
+In the West Bomberai languages, stronger lexical similarities to TAP languages emerge, and we can posit tentative sound correspondences. The West Bomberai family is composed of three languages: Iha (ISO 639-3 ihp), Baham (bdw) and Karas (kgv), with the latter of these thought to be more distantly related to the other two. The Iha pronouns are given in
+
+We identified thirteen potential TAP cognates in the Iha vocabulary (Donohue, p.c.), although some do not reconstruct to the level of pTAP and instead show similarities with the reconstructed pAP or forms in individual languages. The form 'eat, drink' has been reconstructed as pTNG *na-'eat, drink'. As mentioned in § 3, the term for older sibling has been reconstructed as pTNG *nan(a,i), although this could be a nursery form.
+
+Based on these thirteen potential cognates in the lexicon, plus the potential cognates in the pronouns, we can suggest possible sound correspondences (Table 16).
+
+But some of these correspondences conflict with each other. Note, for example that the h:s correspondence of 'man' and the :s correspondence of 'fruit' conflict with :t correspondence of 'sit'. Without more examples, it is difficult to determine whether these conflicts are due to conditioned sound change or false cognates. We posit only one conditioned correspondence, that of w:Ø before a back rounded vowel and w:w elsewhere.

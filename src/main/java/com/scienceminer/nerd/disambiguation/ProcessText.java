@@ -1,50 +1,32 @@
 package com.scienceminer.nerd.disambiguation;
 
+import com.googlecode.clearnlp.engine.EngineGetter;
+import com.googlecode.clearnlp.reader.AbstractReader;
+import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
+import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
-import com.scienceminer.nerd.service.NerdQuery;
-import com.scienceminer.nerd.utilities.StringPos;
-import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Label;
-
+import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.utilities.Stopwords;
+import com.scienceminer.nerd.utilities.StringPos;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-
+import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.data.Entity;
+import org.grobid.core.engines.NERParsers;
+import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.*;
-
-import com.googlecode.clearnlp.component.AbstractComponent;
-import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
-import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.reader.AbstractReader;
-import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
-
-import org.grobid.core.analyzers.GrobidAnalyzer;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
-import org.grobid.core.data.Sense;
-import org.grobid.core.engines.NERParsers;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.factory.*;
-import org.grobid.core.mock.*;
-import org.grobid.core.main.*;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.BoundingBoxCalculator;
-import org.grobid.core.lang.Language;
-import org.grobid.core.layout.BoundingBox;
-import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.utilities.TextUtilities;
-
-import com.scienceminer.nerd.utilities.Stopwords;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -78,7 +60,7 @@ public class ProcessText {
 	// default indo-european delimiters, should be moved to language specific analysers
 	private static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
 
-	public static ProcessText getInstance() throws Exception {
+	public static ProcessText getInstance() {
         if (instance == null)
 			getNewInstance();
         return instance;
@@ -87,7 +69,7 @@ public class ProcessText {
     /**
      * Creates a new instance.
      */
-	private static synchronized void getNewInstance() throws Exception {
+	private static synchronized void getNewInstance() {
 		LOGGER.debug("Get new instance of ProcessText");
 		instance = new ProcessText();
 	}
@@ -95,9 +77,14 @@ public class ProcessText {
 	/**
      * Hidden constructor 
      */
-    private ProcessText() throws Exception {	
+    private ProcessText() {
 		String dictionaryFile = "data/clearNLP/dictionary-1.3.1.zip";
-		tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));	
+
+		try {
+			tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));
+		} catch (FileNotFoundException e) {
+			throw new NerdException("Cannot initialise tokeniser ", e);
+		}
 	}
 	
 	/**

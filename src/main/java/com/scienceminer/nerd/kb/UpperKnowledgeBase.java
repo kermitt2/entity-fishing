@@ -36,6 +36,9 @@ public class UpperKnowledgeBase {
 
 	private long conceptCount = -1;
 
+	// this is the list of supported languages
+  	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
+  			Language.EN, Language.FR, Language.DE);
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
 			getNewInstance();

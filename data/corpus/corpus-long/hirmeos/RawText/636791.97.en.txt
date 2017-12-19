@@ -1,0 +1,27 @@
+The crucial questions that need to be answered to specify precisely the probabilistic propertiess-or propensitiess-of quantum systems areethese:
+
+(a) What is the precise quantum mechanical condition for a probabilistic transition toooccur?
+
+(b) Given the quantum state, , at the instant before the probabilistic transition, how does this determine what the possible outcome states are,  1 ,  2 ,   N ? (c) How does  determine the probability, p r , that the outcome of the probabilistic transition will be  r , for r = 1, 2,  N? (d) How can (a) to (c) be answered so that the resulting fundamentally probabilistic version of quantum theory reproduces all the empirical success of OQT?
+
+A number of different answers can be given to (a) to (d).
+
+One possibility is the proposal of Ghirardi, Rimini and Weber (see, according to which the quantum state of a system such as an electron collapses spontaneously, on average after the passage of millions of years, into a highly localized state. When a measurement is performed on the quantum system, it becomes quantum entangled with millions upon millions of quantum systems that go to make up the measuring apparatus. In a very short time there is a high probability that one of these quantum systems will spontaneously collapse, causing all the other quantum entangled systems, including the electron, to collapse as well. At the micro level, it is almost impossible to detect collapse, but at the macro level, associated with measurement, collapse occurs very rapidly all the time.
+
+Another possibility is the proposal of), according to which collapse occurs when the state of a system evolves into a superposition of two or more states, each state having associated with it a sufficiently large mass located at a distinct region of space. The idea is that general relativity imposes a restriction on the extent to which such superpositions can develop, in that it does not permit such superpositions to evolve to such an extent that each state of the superposition has a substantially distinct space-time curvature associated with it.
+
+The possibility that I favour, put forward before either Ghirardi, Rimini and Weber's proposal, or Penrose's proposal, is that probabilistic transitions occur whenever, as a result of inelastic interactions between quantum systems, new "particles", new bound or stationary systems, are createdA little more precisely:
+
+Postulate 1A: Whenever, as a result of an inelastic interaction, a system of interacting "particles" creates new "particles", bound or stationary systems, so that the state of the system goes into a superposition of states, each state having associated with it diierent particles or bound or stationary systems, then, when the interaction is nearly at an end, spontaneously and probabilistically, entirely in the absence of measurement, the superposition collapses into one or otherrstate.
+
+Here e-, e + , H, H*, , p and (e + /e-) stand for electron, positron, hydrogen atom, excited hydrogen atom, photon, proton and bound system of electron and positron, respectively. What exactly does it mean to say that the "interaction is very nearly at an end" in the above postulate? My suggestion, here, is that it means that forces between the "particles" are very nearly zero, except for forces holding bound systems together. In order to indicate how this can be formulated precisely, consider the toy interaction:
+
+Here, a, b and c are spinless particles, and (bc) is the bound system. Let the state of the entire system be (t), and let the asymptotic states of the two channels (A))and (B))be  A (t) and  B (t) respectively. Asymptotic states associated with inelastic interactions are fictional states towards which, according to OQT, the real state of the system evolves as t  + .
+
+Each outcome channel has its associated asymptotic state, which evolves as if forces between particles are zero, except where forces hold bound systems together.
+
+According to OQT, in connection with the toy interaction above, there are states  A (t) and  B (t), suchhthat:
+
+(1) For all t, (t))==c A  A (t) + c B  B (t), with |c A | 2 + |c B | 2 ==1; (2) as t  + ,  A (t)   A (t) and  B (t)  B (t).
+
+The idea is that at the first instant t for which  A (t) is very nearly the same as the asymptotic state  A (t), or  B (t) is very nearly the same as  B (t), then the state of the system, (t), collapses spontaneously either into A (t) with probability |c A | 2 , or into  B (t) with probability |c B | 2. Or, more precisely:
