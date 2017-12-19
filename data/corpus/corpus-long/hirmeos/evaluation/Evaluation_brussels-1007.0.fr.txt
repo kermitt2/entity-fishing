@@ -1,0 +1,158 @@
+init upper level language independent environment
+building Environment for upper knowledge base
+Environment built - 9155139 concepts.
+init Environment for language en
+building Environment for language en
+isLoaded: true
+Environment built - 14651883 pages.
+domains en / isLoaded: true
+Warning: Orthopedic surgery is not a category found in Wikipedia.
+Warning: Environment is not a category found in Wikipedia.
+init Environment for language de
+building Environment for language de
+isLoaded: true
+Environment built - 3523959 pages.
+init Environment for language fr
+building Environment for language fr
+isLoaded: true
+Environment built - 3631810 pages.
+init Environment for language es
+building Environment for language es
+isLoaded: true
+Environment built - 0 pages.
+init Environment for language it
+building Environment for language it
+isLoaded: true
+Environment built - 0 pages.
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revue scientifique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Journal en ligne
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Mondialisation
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Décennie
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Essence (concept)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Service (économie)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Essence (concept)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Administration publique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Investissement direct à l'étranger
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Entreprise
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Emploi
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Produit intérieur brut
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Championnats panaméricains de cyclisme sur piste
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Arrondissement administratif de Hal-Vilvorde
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Flandre (Belgique)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Arrondissement administratif de Hal-Vilvorde
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Nationalité
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Origine
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Nationalité belge
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Flandre (Belgique)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Seconde Guerre mondiale
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Nationalité
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Élargissement de l'Union européenne
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Peuple
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Fonction publique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Agent économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Dirigeant
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Cadre d'entreprise
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Multinationale
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Service (économie)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Entreprise
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie mondiale
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revue scientifique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Recherche scientifique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Migration de travail
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Enfant
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Stratification sociale
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Crise économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Un demi
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1970
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1980
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1990
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Migration humaine
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Monde (univers)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Immigration illégale
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie informelle
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Secteur économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Mécanisation
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Délocalisation
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Main-d'œuvre
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Bureau (immobilier)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Tourisme
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Intellectuel
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Polarisation (optique)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Société ouverte
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Socioéconomie
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Polarisation (optique)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Richesse
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Prospérité
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Socioéconomie
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Taux de chômage
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Famille
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Énergie solaire en France
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Gentilé
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Seuil de pauvreté
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Transnationalité
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Rémunération
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Pouvoir d'achat
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Pauvreté
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Impôt sur le revenu (France)
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Décile
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1980
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Peuple
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Pouvoir d'achat
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1980
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Fraude fiscale
+brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie informelle
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+found no candidate for mention: Bruxellois
+found no candidate for mention: bruxellois
+found no candidate for mention: européens
+found no candidate for mention: belges
+found no candidate for mention: entretien
+found no candidate for mention: législation
+relatedness - comparisons: 14256 - cache proportion: 0.6097560975609756
+
+Evaluation on 1 documents and 51 expected entities, in total 202 s
+
+candidate gold recall: 78.43
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                76.47        86.67        76.47        81.25
+ranker               74.51        84.44        74.51        79.17
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                76.47        86.67        76.47        81.25
+ranker               74.51        84.44        74.51        79.17
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 03:29 min
+[INFO] Finished at: 2017-12-19T18:38:35+01:00
+[INFO] Final Memory: 384M/1063M
+[INFO] ------------------------------------------------------------------------
