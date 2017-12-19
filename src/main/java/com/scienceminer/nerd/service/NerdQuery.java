@@ -35,9 +35,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Arrays;
 
+import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.grobid.core.lang.Language.*;
@@ -727,7 +729,7 @@ public class NerdQuery {
      */
     public boolean hasValidLanguage() {
         return (language != null && language.getLang() != null)
-                && (language.getLang().equals(EN) || language.getLang().equals(DE) || language.getLang().equals(FR));
+                && TARGET_LANGUAGES.stream().filter(s -> s.equals(language.getLang())).count() > 0;
     }
 
     public static NerdQuery fromJson(String theQuery) throws QueryException {

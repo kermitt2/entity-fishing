@@ -26,7 +26,7 @@ One and only one input type is mandatory in a query, otherwise an HTTP error 400
 Supported languages
 -------------------
 
-In the current version, only English, French and German are supported. We plan to extend the support to with Spanish and Italian in the next iterations.
+In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support at every new release.
 
 The service returns an HTTP error 406 if the language of the text to be processed is not supported, see below.
 
@@ -161,7 +161,7 @@ When the source language (parameters language) is pre-set the language is consid
 ..(5) resultLanguages
 .."""""""""""""""""""
 ..The additional parameter resultLanguages providing a list of language codes, permits to get the wikipedia pages, if they exist, of such additional languages.
-..Currently only English, German and French wikipedia are supported.
+..Currently only English, German, French, Italian and Spanish wikipedia are supported.
 
 (5) mentions
 """"""""""""

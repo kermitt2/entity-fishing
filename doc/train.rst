@@ -15,10 +15,12 @@ The following command will build the two models used in *entity-fishing*, the `r
 	$ mvn compile exec:exec -Ptrain_annotate_en
 
 
-For other languages, replace the ending language code (`en`) by the desired one (`fr` or `de` only supported for the moment), e.g.:
+For other languages, replace the ending language code (`en`) by the desired one (`fr`, `de`, `it` and `es` are supported), e.g.:
 ::
 	$ mvn compile exec:exec -Ptrain_annotate_de
 	$ mvn compile exec:exec -Ptrain_annotate_fr
+	$ mvn compile exec:exec -Ptrain_annotate_es
+	$ mvn compile exec:exec -Ptrain_annotate_it
 
 
 Models will be saved under `data/models`. `ARFF` training data files used to build the model are saved under `data/wikipedia/training/`.
@@ -94,11 +96,13 @@ The following parameters are available:
 
 5. Quantize and compress entity embeddings
 
-Similarly as the steps 2.1 and 2.2 for the entity embeddings: 
+Similarly as the steps 2.1 and 2.2 for the entity embeddings, the quantization:
 ::
 	$mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -hashheader"
 
+and the compression:
 ::
 	$mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EfficientWord2VecCompress -Dexec.args="/mnt/data/wikipedia/embeddings/wiki.en.q /mnt/data/wikipedia/embeddings/wiki.en.q.compressed"
+
 
 The entity embeddings are now ready to use by *entity-fishing*.

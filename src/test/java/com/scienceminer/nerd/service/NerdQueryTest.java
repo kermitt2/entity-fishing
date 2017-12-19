@@ -27,7 +27,7 @@ public class NerdQueryTest {
 
     @Test
     public void testHasValidLanguage_notSupportedLanguage_false() {
-        target.setLanguage(new Language("it", 0.0));
+        target.setLanguage(new Language("jp", 0.0));
         assertThat(target.hasValidLanguage(), is(false));
     }
 
@@ -47,6 +47,12 @@ public class NerdQueryTest {
         assertThat(target.hasValidLanguage(), is(true));
 
         target.setLanguage(new Language(Language.FR, 0.0));
+        assertThat(target.hasValidLanguage(), is(true));
+
+        target.setLanguage(new Language(Language.ES, 0.0));
+        assertThat(target.hasValidLanguage(), is(true));
+
+        target.setLanguage(new Language(Language.IT, 0.0));
         assertThat(target.hasValidLanguage(), is(true));
     }
 
