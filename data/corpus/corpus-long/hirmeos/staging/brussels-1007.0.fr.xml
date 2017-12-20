@@ -332,7 +332,7 @@
         <wikiName>Nationalité</wikiName>
         <wikidataId>Q231002</wikidataId>
         <wikipediaId>108495</wikipediaId>
-        <offset>1273</offset>
+        <offset>1272</offset>
         <length>11</length>
     </annotation>
     <annotation>
@@ -685,7 +685,7 @@
         <wikidataId>Q290178</wikidataId>
         <wikipediaId>80433</wikipediaId>
         <offset>2665</offset>
-        <length>15</length>
+        <length>5</length>
     </annotation>
     <annotation>
         <mention>moitié</mention>
@@ -716,7 +716,7 @@
         <wikiName>Années 1990</wikiName>
         <wikidataId>Q34653</wikidataId>
         <wikipediaId>7103</wikipediaId>
-        <offset>2747</offset>
+        <offset>2746</offset>
         <length>11</length>
     </annotation>
     <annotation>
@@ -748,7 +748,7 @@
         <wikiName>Revenu</wikiName>
         <wikidataId>Q1527264</wikidataId>
         <wikipediaId>27946</wikipediaId>
-        <offset>2942</offset>
+        <offset>2941</offset>
         <length>6</length>
     </annotation>
     <annotation>

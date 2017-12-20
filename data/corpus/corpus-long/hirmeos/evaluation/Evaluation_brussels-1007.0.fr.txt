@@ -24,135 +24,38 @@ init Environment for language it
 building Environment for language it
 isLoaded: true
 Environment built - 0 pages.
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revue scientifique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Journal en ligne
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Mondialisation
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Décennie
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Essence (concept)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Service (économie)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Essence (concept)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Administration publique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Investissement direct à l'étranger
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Entreprise
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Emploi
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Produit intérieur brut
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Championnats panaméricains de cyclisme sur piste
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Arrondissement administratif de Hal-Vilvorde
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Flandre (Belgique)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Arrondissement administratif de Hal-Vilvorde
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Nationalité
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Origine
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Nationalité belge
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Flandre (Belgique)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Étranger
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Seconde Guerre mondiale
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Nationalité
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Élargissement de l'Union européenne
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Peuple
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Fonction publique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Agent économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Dirigeant
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Cadre d'entreprise
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Multinationale
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Service (économie)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Entreprise
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie mondiale
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revue scientifique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Recherche scientifique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Migration de travail
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Enfant
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Stratification sociale
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Crise économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Un demi
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1970
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1980
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1990
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Migration humaine
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Monde (univers)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Immigration illégale
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie informelle
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Secteur économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Mécanisation
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Délocalisation
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Main-d'œuvre
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Bureau (immobilier)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Tourisme
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Intellectuel
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Polarisation (optique)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Société ouverte
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Socioéconomie
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Polarisation (optique)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Richesse
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Prospérité
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Socioéconomie
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Taux de chômage
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Famille
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Croissance économique
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Énergie solaire en France
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Gentilé
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Seuil de pauvreté
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Transnationalité
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Rémunération
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Pouvoir d'achat
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Pauvreté
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Impôt sur le revenu (France)
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Décile
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1980
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Peuple
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Revenu
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Pouvoir d'achat
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Années 1980
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Fraude fiscale
-brussels-1007.0.fr.txt: Invalid article name - article not found in Wikipedia: Économie informelle
 [Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
 Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
 [Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
 Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
-found no candidate for mention: Bruxellois
-found no candidate for mention: bruxellois
-found no candidate for mention: européens
-found no candidate for mention: belges
-found no candidate for mention: entretien
-found no candidate for mention: législation
-relatedness - comparisons: 13741 - cache proportion: 0.6090976331360947
+found no candidate for mention: e-journal
+found no candidate for mention: arrondissements de Hal-Vilvorde
+found no candidate for mention: Halle-Vilvorde
+found no candidate for mention: croissance de l'économie
+relatedness - comparisons: 28365 - cache proportion: 0.42452830188679247
 
-Evaluation on 1 documents and 57 expected entities, in total 230 s
+Evaluation on 1 documents and 152 expected entities, in total 152 s
 
-candidate gold recall: 80.7
+candidate gold recall: 96.71
 
 ** micro average measures **
 
 hirmeos              accuracy     precision    recall       f1
 
-prior                78.95        88.24        78.95        83.33
-ranker               73.68        82.35        73.68        77.78
+prior                87.5         89.86        87.5         88.67
+ranker               83.55        85.81        83.55        84.67
 
 ** macro average measures **
 
 hirmeos              accuracy     precision    recall       f1
 
-prior                78.95        88.24        78.95        83.33
-ranker               73.68        82.35        73.68        77.78
+prior                87.5         89.86        87.5         88.67
+ranker               83.55        85.81        83.55        84.67
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 03:54 min
-[INFO] Finished at: 2017-12-20T12:15:01+01:00
-[INFO] Final Memory: 387M/1045M
+[INFO] Total time: 02:41 min
+[INFO] Finished at: 2017-12-20T15:13:44+01:00
+[INFO] Final Memory: 386M/991M
 [INFO] ------------------------------------------------------------------------
