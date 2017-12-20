@@ -49,9 +49,9 @@
     </annotation>
     <annotation>
         <mention>2016</mention>
-        <wikiName>NIL</wikiName>
-        <wikidataId>NIL</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <wikiName>2016</wikiName>
+        <wikidataId>Q25245</wikidataId>
+        <wikipediaId>111846</wikipediaId>
         <offset>213</offset>
         <length>4</length>
     </annotation>
@@ -233,17 +233,17 @@
     </annotation>
     <annotation>
         <mention>1995</mention>
-        <wikiName>NIL</wikiName>
-        <wikidataId>NIL</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <wikiName>1995</wikiName>
+        <wikidataId>Q2068</wikidataId>
+        <wikipediaId>3401</wikipediaId>
         <offset>911</offset>
         <length>4</length>
     </annotation>
     <annotation>
         <mention>2005</mention>
-        <wikiName>NIL</wikiName>
-        <wikidataId>NIL</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <wikiName>2005</wikiName>
+        <wikidataId>Q2019</wikidataId>
+        <wikipediaId>50912</wikipediaId>
         <offset>916</offset>
         <length>4</length>
     </annotation>
@@ -409,9 +409,9 @@
     </annotation>
     <annotation>
         <mention>1960</mention>
-        <wikiName>NIL</wikiName>
-        <wikidataId>NIL</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <wikiName>1960</wikiName>
+        <wikidataId>Q3754</wikidataId>
+        <wikipediaId>3490</wikipediaId>
         <offset>1553</offset>
         <length>4</length>
     </annotation>
@@ -633,17 +633,17 @@
     </annotation>
     <annotation>
         <mention>1960</mention>
-        <wikiName>NIL</wikiName>
-        <wikidataId>NIL</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <wikiName>1960</wikiName>
+        <wikidataId>Q3754</wikidataId>
+        <wikipediaId>3490</wikipediaId>
         <offset>2477</offset>
         <length>4</length>
     </annotation>
     <annotation>
         <mention>1970</mention>
-        <wikiName>NIL</wikiName>
-        <wikidataId>NIL</wikidataId>
-        <wikipediaId>-1</wikipediaId>
+        <wikiName>1970</wikiName>
+        <wikidataId>Q2474</wikidataId>
+        <wikipediaId>3463</wikipediaId>
         <offset>2485</offset>
         <length>4</length>
     </annotation>

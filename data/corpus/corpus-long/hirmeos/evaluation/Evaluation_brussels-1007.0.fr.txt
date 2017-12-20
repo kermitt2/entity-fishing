@@ -129,30 +129,30 @@ found no candidate for mention: européens
 found no candidate for mention: belges
 found no candidate for mention: entretien
 found no candidate for mention: législation
-relatedness - comparisons: 14256 - cache proportion: 0.6097560975609756
+relatedness - comparisons: 13741 - cache proportion: 0.6090976331360947
 
-Evaluation on 1 documents and 51 expected entities, in total 202 s
+Evaluation on 1 documents and 57 expected entities, in total 230 s
 
-candidate gold recall: 78.43
+candidate gold recall: 80.7
 
 ** micro average measures **
 
 hirmeos              accuracy     precision    recall       f1
 
-prior                76.47        86.67        76.47        81.25
-ranker               74.51        84.44        74.51        79.17
+prior                78.95        88.24        78.95        83.33
+ranker               73.68        82.35        73.68        77.78
 
 ** macro average measures **
 
 hirmeos              accuracy     precision    recall       f1
 
-prior                76.47        86.67        76.47        81.25
-ranker               74.51        84.44        74.51        79.17
+prior                78.95        88.24        78.95        83.33
+ranker               73.68        82.35        73.68        77.78
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 03:29 min
-[INFO] Finished at: 2017-12-19T18:38:35+01:00
-[INFO] Final Memory: 384M/1063M
+[INFO] Total time: 03:54 min
+[INFO] Finished at: 2017-12-20T12:15:01+01:00
+[INFO] Final Memory: 387M/1045M
 [INFO] ------------------------------------------------------------------------
