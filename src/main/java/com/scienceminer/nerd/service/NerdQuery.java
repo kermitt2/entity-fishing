@@ -152,6 +152,7 @@ public class NerdQuery {
         this.globalCategories = query.getGlobalCategories();
 
         this.filter = filter;
+        this.context = query.getContext();
     }
 
     /**
@@ -728,8 +729,8 @@ public class NerdQuery {
      * Check that language has been correctly set
      */
     public boolean hasValidLanguage() {
-        return (language != null && language.getLang() != null)
-                && TARGET_LANGUAGES.stream().filter(s -> s.equals(language.getLang())).count() > 0;
+        return language != null && language.getLang() != null
+                && TARGET_LANGUAGES.contains(language.getLang());
     }
 
     public static NerdQuery fromJson(String theQuery) throws QueryException {
@@ -762,7 +763,7 @@ public class NerdQuery {
             return QUERY_TYPE_SHORT_TEXT;
         } else if (CollectionUtils.isNotEmpty(termVector)) {
             return QUERY_TYPE_TERM_VECTOR;
-        } else if (isNotBlank(text) && (CollectionUtils.isNotEmpty(getTokens()))) {     // We could have text and tokens 
+        } else if (isNotBlank(text) && (CollectionUtils.isNotEmpty(getTokens()))) {     // We could have text and tokens
             return QUERY_TYPE_LAYOUT_TOKENS;
         } else {
             return QUERY_TYPE_INVALID;

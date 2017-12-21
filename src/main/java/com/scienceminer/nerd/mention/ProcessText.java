@@ -305,18 +305,17 @@ public class ProcessText {
 	 * @return the list of identified mentions
 	 */
 	public List<Mention> processNER(String text, Language language) throws NerdException {
-		final List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
+		final List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken (text , language) ;
 
 		return extractNER(tokens, language);
-	}
-
-	/** Utility method to process a list of layout tokens and return the NER mentions **/
+		}
+			/** Utility method to process a list of layout tokens and returnthe NER mentions **/
 	private List<Mention> extractNER(List<LayoutToken> tokens, Language language) {
         List<Mention> results = new ArrayList<>();
 
         if (CollectionUtils.isEmpty(tokens)) {
-            LOGGER.warn("Trying to extract NE mention from empty content. Returning empty list. ");
-            return results;
+			LOGGER.warn("Trying to extract NE mention from empty content. Returning empty list.");
+			return results;
 		}
 
 		String lang = language.getLang();

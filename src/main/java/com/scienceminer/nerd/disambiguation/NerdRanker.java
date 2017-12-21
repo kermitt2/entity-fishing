@@ -935,7 +935,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 		//System.out.println("number of NE found: " + entities.size());	
 		// add non NE terms
 		List<Mention> entities2 = processText.processWikipedia(tokens, language);
-//System.out.println("number of non-NE found: " + entities2.size());	
+		//System.out.println("number of non-NE found: " + entities2.size());
 		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
 			NerdEntity theEntity = new NerdEntity(entity);

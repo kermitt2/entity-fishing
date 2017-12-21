@@ -63,13 +63,8 @@ public class NerdRestKB {
 	 *  @return a response object containing the information related to the identified concept.
 	 */
 	public static Response getConceptInfo(String id, String lang) {
-		//LOGGER.debug(methodLogIn());       
-
 		Response response = null;
-		String retVal = null;
 		try {
-			//LOGGER.debug(">> set raw text for stateless service'...");
-			
 			if (id.startsWith("Q")) {
 				// we have a concept
 				response = getWikidataConceptInfo(id);
@@ -89,7 +84,6 @@ public class NerdRestKB {
 			LOGGER.error("An unexpected exception occurs. ", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		//LOGGER.debug(methodLogOut());
 		
 		return response;
 	}

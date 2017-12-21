@@ -110,6 +110,9 @@ public class NerdRestProcessFile {
 				// tuning the species only mention selection
 				tuneSpeciesMentions(nerdQuery);
 
+				//checking customisation
+				NerdRestProcessQuery.processCustomisation(nerdQuery);
+
 				//List<NerdEntity> entities = originalEntities;
 		        Document doc = null;
 		        DocumentContext documentContext = new DocumentContext();
@@ -158,6 +161,7 @@ public class NerdRestProcessFile {
 								lang = identifyLanguage(resHeaderLangIdentification, doc);
 								if (lang != null) {
 									workingQuery.setLanguage(lang);
+									nerdQuery.setLanguage(lang);
 								} else {
 									LOGGER.error("Language was not specified and there was not enough text to identify it. The process might fail. ");
 								}
@@ -278,8 +282,8 @@ public class NerdRestProcessFile {
 		                		LOGGER.debug("no body part?!?");
 						}
 					}
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+					//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+					//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
 		            // we process references if required
 		            if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.grobid)) {
 			            List<BibDataSet> resCitations = engine.getParsers().getCitationParser().
@@ -291,8 +295,8 @@ public class NerdRestProcessFile {
 			                nerdQuery.addNerdEntities(newEntities);
 						}
 					}
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+					//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+					//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
 		            // acknowledgement
 		            documentParts = doc.getDocumentPart(SegmentationLabels.ACKNOWLEDGEMENT);
 		            if (documentParts != null) {
@@ -303,8 +307,8 @@ public class NerdRestProcessFile {
 							System.out.println(newEntities.size() + " nerd entities");
 		                nerdQuery.addNerdEntities(newEntities);
 		            }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+					//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+					//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
 		            // we can process annexes
 		            documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
 		            if (documentParts != null) {
@@ -315,8 +319,8 @@ public class NerdRestProcessFile {
 							System.out.println(newEntities.size() + " nerd entities");
 		                nerdQuery.addNerdEntities(newEntities);
 		            }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+					//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+					//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
 		            // footnotes are also relevant
 		            documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
 		            if (documentParts != null) {
@@ -392,8 +396,8 @@ public class NerdRestProcessFile {
 		        nerdQuery.setText(null);
 		        nerdQuery.setShortText(null);
 		        nerdQuery.setTokens(null);
-System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+				System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+				System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
 				long end = System.currentTimeMillis();
 				nerdQuery.setRuntime(end - start);
 				LOGGER.info("runtime: " + (end - start));
@@ -403,8 +407,8 @@ System.out.println(workingQuery.getEntities().size() + " nerd entities in workin
 
 				String json = nerdQuery.toJSONClean(doc);
 
-System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+				System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+				System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
 				// TBD: output in the resulting json also page info from the doc object as in GROBID
 				if (json == null) {
 					response = Response.status(Status.INTERNAL_SERVER_ERROR).build();

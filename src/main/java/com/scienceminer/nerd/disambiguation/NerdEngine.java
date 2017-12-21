@@ -103,8 +103,8 @@ public class NerdEngine {
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		try {
 			relatedness = Relatedness.getInstance();
-			rankers = new HashMap<String, NerdRanker>();
-			selectors = new HashMap<String, NerdSelector>();
+			rankers = new HashMap<>();
+			selectors = new HashMap<>();
 			wikipediaDomainMaps = UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 
 			
@@ -142,7 +142,7 @@ public class NerdEngine {
 		//if the text is null, then better return the same entities provided in input,
 		// AFAIK here is no difference from before.
 		List<NerdEntity> entities = nerdQuery.getEntities();
-		if ( isEmpty(text) ) {
+		if (isEmpty(text) ) {
 			LOGGER.info("The length of the text to be parsed is 0.");
 			return entities;
 		}
@@ -189,22 +189,22 @@ public class NerdEngine {
 			nerdQuery.setContext(context);
 		}
 
-/*for(NerdEntity entity : entities) {
-System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());	
-}*/
+		/*for(NerdEntity entity : entities) {
+		System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
+		}*/
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesSimple(entities, lang);
 		//Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesMultiple(entities, lang);
 
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());	
-for(NerdCandidate cand : cands) {
-	System.out.println("generated candidates: " + cand.toString());
-}
-System.out.println("--");
-}*/
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
+		for(NerdCandidate cand : cands) {
+			System.out.println("generated candidates: " + cand.toString());
+		}
+		System.out.println("--");
+		}*/
 
 		int nbEntities = 0;
 		int nbCandidates = 0;
@@ -215,11 +215,11 @@ System.out.println("--");
 			if (cands != null)
 				nbCandidates += cands.size();
 
-/*System.out.println(entity.toString());
-for(NerdCandidate cand : cands) {
-System.out.println(cand.toString());
-}
-System.out.println("--");*/
+			/*System.out.println(entity.toString());
+			for(NerdCandidate cand : cands) {
+			System.out.println(cand.toString());
+			}
+			System.out.println("--");*/
 		}
 		System.out.println("total number of entities: " + nbEntities);
 		System.out.println("total number of candidates: " + nbCandidates);
@@ -241,15 +241,15 @@ System.out.println("--");*/
 			NerdContext localContext = rank(candidates, lang, context, shortTextVal, subToken);*/
 		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
 
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-System.out.println("Surface: " + entity.getRawName());	
-for(NerdCandidate cand : cands) {
-	System.out.println("rank: " + cand.toString());
-}
-System.out.println("--");
-}*/
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		System.out.println("Surface: " + entity.getRawName());
+		for(NerdCandidate cand : cands) {
+			System.out.println("rank: " + cand.toString());
+		}
+		System.out.println("--");
+		}*/
 
 		// reimforce with document-level context if available
 		/*if (context instanceof DocumentContext) {
@@ -262,33 +262,33 @@ System.out.println("--");
 
 			pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
 		//}
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-System.out.println("Surface: " + entity.getRawName());	
-for(NerdCandidate cand : cands) {
-	System.out.println("select: " + cand.toString());
-}
-System.out.println("--");
-}*/
-		//prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-for(NerdCandidate cand : cands) {
-	System.out.println(cand.toString());
-}
-}*/
-		//impactOverlap(candidates);
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-for(NerdCandidate cand : cands) {
-	System.out.println(cand.toString());
-}
-}*/
-		//if (!shortText && !nerdQuery.getNbest())
-//			prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		System.out.println("Surface: " + entity.getRawName());
+		for(NerdCandidate cand : cands) {
+			System.out.println("select: " + cand.toString());
+		}
+		System.out.println("--");
+		}*/
+				//prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		for(NerdCandidate cand : cands) {
+			System.out.println(cand.toString());
+		}
+		}*/
+				//impactOverlap(candidates);
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		for(NerdCandidate cand : cands) {
+			System.out.println(cand.toString());
+		}
+		}*/
+				//if (!shortText && !nerdQuery.getNbest())
+		//			prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
 
 
 		// reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
@@ -342,10 +342,11 @@ for(NerdCandidate cand : cands) {
 		}
 		Collections.sort(result);
 
-/*for (NerdEntity entity : result) {
-System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
-System.out.println("--");
-}*/
+		/*for (NerdEntity entity : result) {
+		System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
+		System.out.println("--");
+		}*/
+		
 		if (!shortTextVal && !nerdQuery.getNbest()) {
 			//if (!nerdQuery.getNbest()) {
 			result = pruneOverlap(result, shortTextVal);
@@ -480,7 +481,7 @@ System.out.println("--");
 						candidate.setWikidataId(sense.getWikidataId());
 						candidate.setBestCaseContext(bestCaseContext);
 						candidates.add(candidate);
-//System.out.println(candidate.toString());						
+						//System.out.println(candidate.toString());
 						s++;
 						if (s == MAX_SENSES) {
 							// max. sense alternative has been reach
@@ -493,7 +494,7 @@ System.out.println("--");
 					List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
 					// check in alternative labels if we get for the same entity sense better statistical 
 					// information
-//System.out.println((bestLabels.size()-1) + " alternative labels...");
+					//System.out.println((bestLabels.size()-1) + " alternative labels...");
 					for(int p=0; p<bestLabels.size(); p++) {
 						Label altBestLabel = bestLabels.get(p);
 						if (altBestLabel.getText().equals(bestLabel.getText()))
@@ -580,8 +581,8 @@ System.out.println("--");
 			List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
 			//if (!bestLabel.exists()) {
 			if (bestLabels == null || bestLabels.size() == 0) {
-//if (entity.getIsAcronym()) 
-//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
+				//if (entity.getIsAcronym())
+				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
 				//if (strict)
 				if (entity.getType() != null) {
 					result.put(entity, candidates);
@@ -594,17 +595,17 @@ System.out.println("--");
 					Label bestLabel = bestLabels.get(p);
 
 					entity.setLinkProbability(bestLabel.getLinkProbability());
-	//System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
+					//System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
 					Label.Sense[] senses = bestLabel.getSenses();
 					if ((senses != null) && (senses.length > 0)) {				
 						for(int i=0; i<senses.length; i++) {
 							Label.Sense sense = senses[i];	
 							
 							PageType pageType = sense.getType();
-	//System.out.println("pageType:" + pageType);
+							//System.out.println("pageType:" + pageType);
 							if (pageType != PageType.article)
 								continue;
-	//System.out.println("prior prob:" + sense.getPriorProbability());
+							//System.out.println("prior prob:" + sense.getPriorProbability());
 							if ( (sense.getPriorProbability() < minSenseProbability) && (sense.getPriorProbability() != 0.0) ) {
 								// senses are sorted by prior prob.
 								//continue;
@@ -619,7 +620,7 @@ System.out.println("--");
 							NerdCandidate candidate = new NerdCandidate(entity);
 
 							boolean invalid = false;
-	//System.out.println("check categories for " + sense.getId());							
+							//System.out.println("check categories for " + sense.getId());
 							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
 							if ( (parentCategories != null) && (parentCategories.length > 0) ) {
 								for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
@@ -866,7 +867,7 @@ System.out.println("--");
 	public NerdContext rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, 
 		NerdContext context, boolean shortText, List<LayoutToken> tokens) {
 		// we rank candidates for each entity mention
-//relatedness.resetCache(lang);
+		//relatedness.resetCache(lang);
 
 		// first pass to get the "certain" entities 
 		List<NerdEntity> userEntities = new ArrayList<NerdEntity>();
@@ -885,8 +886,8 @@ System.out.println("--");
 			 if (context != null) {
 			 	context.merge(localContext);
 			 } 
-//System.out.println("size of context: " + context.getSenseNumber());
-//System.out.println(context.toString());
+		//System.out.println("size of context: " + context.getSenseNumber());
+		//System.out.println(context.toString());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -981,8 +982,8 @@ System.out.println("--");
 			Collections.sort(cands);
 		}
 
-//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
-System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCalculated() 
+		//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
+		System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCalculated()
 		+ " - cache proportion: " + relatedness.getCachedProportion());
 
 		return localContext;
@@ -2256,8 +2257,6 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		return labels;
 	}
 
-
-
 	/**
 	 * Exploit a document-level context to reimforce candidates based on previous 
 	 * disambiguation
@@ -2297,5 +2296,3 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 	}
 	
 }
-
-

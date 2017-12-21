@@ -225,19 +225,18 @@ public class NerdRestService implements NerdPaths {
     /**
      * Customisation API
      **/
-
     @GET
     @Path(CUSTOMISATIONS)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomisations() {
-        return NerdRestCustomisation.processNerdCustomisations();
+        return NerdRestCustomisation.getCustomisations();
     }
 
     @GET
     @Path(CUSTOMISATION + "/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomisation(@PathParam(NAME) String name) {
-        return NerdRestCustomisation.processNerdCustomisation(name);
+        return NerdRestCustomisation.getCustomisation(name);
     }
 
     @PUT
@@ -253,7 +252,7 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response addCustomisation(@FormDataParam(NAME) String name, @FormDataParam(VALUE) String content) {
-        return NerdRestCustomisation.createNewCustomisation(name, content);
+        return NerdRestCustomisation.createCustomisation(name, content);
     }
 
 

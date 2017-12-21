@@ -1,19 +1,12 @@
 package com.scienceminer.nerd.disambiguation;
 
-import com.scienceminer.nerd.exceptions.NerdException;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.mention.Mention;
 
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Sense;
-
-import java.util.*; 
-import java.text.*;
-import java.text.*;
-
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.model.*;
-
-import com.fasterxml.jackson.core.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * This class represents a context to be exploited for performing a disambiguation. 

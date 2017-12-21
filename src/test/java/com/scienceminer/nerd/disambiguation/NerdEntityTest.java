@@ -59,7 +59,6 @@ public class NerdEntityTest {
 //        System.out.println(json);
 
         JSONParser parser = new JSONParser();
-
         JSONObject object = (JSONObject) parser.parse(json);
 
         assertThat(object.get("rawName"), is(""));
@@ -79,7 +78,6 @@ public class NerdEntityTest {
         target.setOffsetEnd(15);
 
         String json = target.toJsonFull();
-//        System.out.println(json);
 
         JSONParser parser = new JSONParser();
 

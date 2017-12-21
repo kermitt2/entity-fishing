@@ -1,12 +1,15 @@
 package com.scienceminer.nerd.kb;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scienceminer.nerd.exceptions.CustomisationException;
 import com.scienceminer.nerd.exceptions.NerdException;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,183 +17,161 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * Class for managing the NERD customisation which are contexts for particular domains.
- *
  */
 public final class Customisations {
-	
-	protected static final Logger LOGGER = LoggerFactory.getLogger(Customisations.class);
-	private static volatile Customisations instance;
-	private ObjectMapper mapper = new ObjectMapper();
 
-	private String database_path = null;
-    private String database_name = "customisations";
+    protected static final Logger LOGGER = LoggerFactory.getLogger(Customisations.class);
+    private static volatile Customisations instance;
+
+    private String databaseName = "customisations";
+    private File customisationFile;
 
     // map a customisation id to the json definition
-    private ConcurrentMap<String, String> cDB = null;
+    private ConcurrentMap<String, String> customisationDatabase = null;
 
-	public static Customisations getInstance() {
+    public static Customisations getInstance() {
         if (instance == null) {
-			getNewInstance();
+            getNewInstance();
         }
         return instance;
     }
 
-	private static synchronized void getNewInstance() {
-		LOGGER.debug("Get new instance of Customisation");		
-		instance = new Customisations();
-	}
-	
-    public Customisations() {
-	}
+    private static synchronized void getNewInstance() {
+        LOGGER.debug("Get new instance of Customisation");
+        instance = new Customisations();
+    }
 
-	/**
+    public Customisations() {
+        customisationFile = new File("data/maps/" + databaseName + ".obj");
+    }
+
+    /**
      * Open index for customisations
      */
     public void open() {
-        File home = null;
         ObjectInputStream in = null;
         try {
-            home = new File("data/maps/" + database_name + ".obj");
+
+            if (customisationDatabase != null) {
+                return;
+            }
+
+            if (customisationFile.exists() && Files.size(Paths.get(customisationFile.getAbsolutePath())) > 0) {
+                FileInputStream fileIn = new FileInputStream(customisationFile);
+                in = new ObjectInputStream(fileIn);
+                customisationDatabase = (ConcurrentMap<String, String>) in.readObject();
+                LOGGER.debug("Opening customisation database:  " + customisationFile.getAbsolutePath());
+            } else if (customisationDatabase == null) {
+                customisationDatabase = new ConcurrentHashMap<>();
+                LOGGER.debug("Cannot find customisation database, creating a new one:  " + customisationFile.getAbsolutePath());
+            }
         } catch (Exception e) {
-            throw new NerdException(e);
-        }
-        try {
-        	if (home.exists()) {
-        		FileInputStream fileIn = new FileInputStream(home);
-         	 	in = new ObjectInputStream(fileIn);
-	 			cDB = (ConcurrentMap<String, String>)in.readObject();
-	 		} else if (cDB == null) {
- 				cDB = new ConcurrentHashMap<>();
- 			}
-        } catch (Exception dbe) {
-            throw new NerdException("Error when opening the customization map.", dbe);
+            throw new CustomisationException("Error when opening the customization map.", e);
         } finally {
-			IOUtils.closeQuietly(in);
-		}
+            IOUtils.closeQuietly(in);
+        }
     }
-	
+
     /**
-     * Close index for customisations
+     * Close and save index for customisations
      */
     public void save() {
-    	if (cDB == null)
-    		return;
-    	File home = null;
+        if (customisationDatabase == null) {
+            return;
+        }
+
         ObjectOutputStream out = null;
         try {
-            home = new File("data/maps/" + database_name + ".obj");
-        } catch (Exception e) {
-            throw new NerdException(e);
+            customisationFile = new File("data/maps/" + databaseName + ".obj");
+
+            if (customisationFile != null) {
+                LOGGER.debug("Cannot find customisation database, creating new one and saving: "
+                        + customisationFile.getAbsolutePath());
+                FileOutputStream fileOut = new FileOutputStream(customisationFile);
+                out = new ObjectOutputStream(fileOut);
+                out.writeObject(customisationDatabase);
+            }
+        } catch (IOException e) {
+            throw new CustomisationException("Error when saving the customization map.", e);
+        } finally {
+            IOUtils.closeQuietly(out);
         }
-    	try {
-	    	if (home != null) {
-        		FileOutputStream fileOut = new FileOutputStream(home);
-		        out = new ObjectOutputStream(fileOut);
-		    	out.writeObject(cDB);
-		    }
-		} catch(IOException e) {
-            throw new NerdException("Error when saving the customization map.", e);
-		} finally {
-			IOUtils.closeQuietly(out);
-		}
     }
 
-	public List<String> getCustomisations() {
-		List<String> results = null;
-		try {
-			if (cDB == null)
-				open();
-			results = new ArrayList<String>();
-			for(String key : cDB.keySet()) {
-				results.add(key);
-			}
-		} catch(Exception e) {
-			LOGGER.debug("Error when opening MapDB.");
-            throw new NerdException(e);
-		} 
-		return results;
-	}
-	
-	public String getCustomisation(String name) {
-		String message = null;
-		try {
-			if (cDB == null)
-				open();
-			String doc = cDB.get(name);
-			if (doc == null) {
-				message = "Resource was not found";
-			}
-			else {
-				message = doc;
-			}
-		}
-		catch(Exception e) {
-			LOGGER.debug("error, invalid retrieved DBObject.", e );
-			message = "Server error";
-		} 
-		return message;
-	}
-	
-	public String createCustomisation(String name, String profile) {
-		String message = null;
-		
-		try {
-			if (cDB == null) {
-				open();
-			}
-
-			if (cDB.get(name) == null) {
-                cDB.put(name, profile);
-                message = "OK";
-            } else {
-				message = "Customisation already created.";
-            }
-		} catch (Exception e) {
-            LOGGER.debug("Cannot create customisation.", e);
-			message = "Server error";
-        } finally {
-        	save();
-        }
-		return message;
-	}
-
-	public String updateCustomisation(String name, String profile) {
-		String message = null;
-		try {
-			if (cDB == null)
-				open();
-
-			if(cDB.get(name) == null) {
-				message = "The Customisation " + name + "doesn't exists.";
-			} else {
-				cDB.put(name, profile);
-				message = "OK";
-			}
-
-		} catch(Exception e) {
-			LOGGER.debug("Cannot extend customisation.");
-			message = "Server error";
-		} finally {
-			save();
-		}
-		return message;
-	}
-	
-	public String deleteCustomisation(String name) {
-		String message = null;
-		try {
-			if (cDB == null)
-				open();
-            // Delete the record(s) for the given key
-            cDB.remove(name);
-            message = "OK";
+    public List<String> getCustomisations() throws CustomisationException {
+        List<String> results = new ArrayList<>();
+        try {
+            open();
+            results.addAll(customisationDatabase.keySet());
         } catch (Exception e) {
-            throw new NerdException(e);
-        } finally {
-			save();
-		}
+            throw new CustomisationException("Error when opening the customisation database. ", e);
+        }
+        return results;
+    }
 
-		return message;
-	}
-	
+    public String getCustomisation(String name) {
+        try {
+            open();
+            return customisationDatabase.get(name);
+        } catch (Exception e) {
+            throw new CustomisationException("Error when fetching the customisation " + name);
+        }
+    }
+
+    public boolean createCustomisation(String name, String profile) {
+        try {
+            open();
+
+            if (customisationDatabase.get(name) == null) {
+                customisationDatabase.put(name, profile);
+            } else {
+                throw new CustomisationException("The customisation " + name + " has been already created.");
+            }
+        } catch (Exception e) {
+            LOGGER.debug("Cannot create customisation.", e);
+        } finally {
+            save();
+        }
+        return true;
+    }
+
+    /**
+     * Update the customisation only if it's already existing
+     **/
+    public boolean updateCustomisation(String name, String profile) {
+        try {
+            open();
+
+            if (customisationDatabase.get(name) == null) {
+                return false;
+            }
+            customisationDatabase.put(name, profile);
+
+        } catch (Exception e) {
+            throw new CustomisationException("Cannot update customisation", e);
+        } finally {
+            save();
+        }
+        return true;
+    }
+
+    /**
+     * delete customisation, if it doesn't exists it's ignoring the request
+     **/
+    public boolean deleteCustomisation(String name) {
+        try {
+            open();
+            customisationDatabase.remove(name);
+        } catch (Exception e) {
+            throw new NerdException("Cannot delete customisation", e);
+        } finally {
+            save();
+        }
+
+        return true;
+    }
+
+    public void setCustomisationFile(File customisationFile) {
+        this.customisationFile = customisationFile;
+    }
 }

@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.kb.Customisations;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
+import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class NerdRestProcessQuery {
 
@@ -43,6 +47,9 @@ public class NerdRestProcessQuery {
 
             // tuning the species only mention selection
             NerdRestProcessFile.tuneSpeciesMentions(nerdQuery);
+
+            //checking customisation
+            processCustomisation(nerdQuery);
 
             switch (nerdQuery.getQueryType()) {
                 case NerdQuery.QUERY_TYPE_TEXT:
@@ -76,6 +83,30 @@ public class NerdRestProcessQuery {
     }
 
     /**
+     * Validate and create a new context based on the customisation provided
+     **/
+    public static void processCustomisation(NerdQuery nerdQuery) {
+
+        final String customisation = nerdQuery.getCustomisation();
+
+        if (isEmpty(customisation) || StringUtils.equals(customisation, GENERIC_CUSTOMISATION)) {
+            return;
+        }
+
+        Customisations customisations = Customisations.getInstance();
+        final String customisationData = customisations.getCustomisation(customisation);
+
+        if (customisationData == null) {
+            throw new QueryException("The specified customisation in the query " + customisation + " doesn't exists");
+        }
+
+        NerdCustomisation customisationObj = new NerdCustomisation();
+        customisationObj.createNerdCustomisation(customisation, customisationData);
+
+        nerdQuery.setContext(customisationObj);
+    }
+
+    /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
      *
      * @param nerdQuery POJO query object
@@ -104,9 +135,6 @@ public class NerdRestProcessQuery {
                 LOGGER.debug(methodLogOut());
                 return response;
             }
-
-            // create an empty context for the query
-            nerdQuery.setContext(new NerdContext());
 
             // entities originally from the query are marked as such
             List<NerdEntity> originalEntities = null;
@@ -152,12 +180,12 @@ public class NerdRestProcessQuery {
             if (mentions != null) {
                 // disambiguate and solve entity mentions
                 //if (!nerdQuery.getOnlyNER()) 
-                {
+//                {
                     NerdEngine disambiguator = NerdEngine.getInstance();
                     List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
                     nerdQuery.setEntities(disambiguatedEntities);
                     nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-                } /*else {
+                /*} else {
                     for (NerdEntity entity : nerdQuery.getEntities()) {
                         entity.setNerdScore(entity.getNer_conf());
                     }
@@ -285,17 +313,10 @@ public class NerdRestProcessQuery {
                 LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
             }
 
-            if ((lang == null) || (lang.getLang() == null)) {
+            if (!nerdQuery.hasValidLanguage()) {
                 response = Response.status(Status.NOT_ACCEPTABLE).build();
                 LOGGER.debug(methodLogOut());
                 return response;
-            } else {
-                String theLang = lang.getLang();
-                if (!theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr")) {
-                    response = Response.status(Status.NOT_ACCEPTABLE).build();
-                    LOGGER.debug(methodLogOut());
-                    return response;
-                }
             }
 
             NerdEngine disambiguator = NerdEngine.getInstance();
@@ -412,7 +433,7 @@ public class NerdRestProcessQuery {
                 List<NerdEntity> selectedMentions = selectEntities(originalEntities, entities);
                 nerdQuery.setEntities(selectedMentions);
             }
-            
+
             // sort the entities
             if (CollectionUtils.isNotEmpty(nerdQuery.getEntities()))
                 Collections.sort(nerdQuery.getEntities());
