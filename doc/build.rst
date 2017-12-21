@@ -34,7 +34,11 @@ Then install the compiled indexed data:
 
         - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-de.zip (2.0 GB)
 
-        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/embeddings.zip (1.6 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-es.zip (2.6 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-it.zip (2.3 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/embeddings/embeddings.zip (4.0 GB)
 
     **Max OSX**
 
@@ -43,8 +47,8 @@ Then install the compiled indexed data:
 
 #. Unzip the 4 db archives files under ``data/db/``.
 
-    This will install four sub-directories ``data/db/db-kb/``, ``data/db/db-en/``, ``data/db/db-de/`` and ``data/db/db-fr/``.
-    The uncompressed data is about 40 GB.
+    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
+    The uncompressed data is about 60 GB.
 
 #. Unzip the embeddings archives files (``embeddings.zip``) under ``data/embeddings/``.
 
