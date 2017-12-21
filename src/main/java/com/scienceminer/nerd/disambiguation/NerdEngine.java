@@ -893,21 +893,7 @@ public class NerdEngine {
 		}
 
 		NerdRanker disambiguator = rankers.get(lang);
-		if (disambiguator == null) {
-			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
-			try {
-				disambiguator = new NerdRanker(wikipedia);
-
-				if(lang.equals(Language.FR) || lang.equals(Language.DE)) {
-					disambiguator.model = NerdModel.MLModel.RANDOM_FOREST;
-				}
-
-				rankers.put(lang, disambiguator);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			} 
-		}
+		disambiguator = instantiateDisambiguator(lang, disambiguator);
 
 		GenericRankerFeatureVector feature = disambiguator.getNewFeature();
 		
@@ -989,6 +975,20 @@ public class NerdEngine {
 		return localContext;
 	}
 
+	private NerdRanker instantiateDisambiguator(String lang, NerdRanker disambiguator) {
+		if (disambiguator == null) {
+			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+			try {
+				disambiguator = new NerdRanker(wikipedia);
+				rankers.put(lang, disambiguator);
+			}
+			catch(Exception e) {
+				LOGGER.error("Cannot load disambiguator for language " + lang, e);
+			}
+		}
+		return disambiguator;
+	}
+
 	/**
 	 * Ranking of candidates for a term rawTerm in a vector of weighted terms.
 	 * Optionally a contextual text is given, where the terms of the vector might occur (or not). 
@@ -1000,17 +1000,8 @@ public class NerdEngine {
 
 		// get the disambiguator for this language
 		NerdRanker disambiguator = rankers.get(lang);
-		if (disambiguator == null) {
-			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
-			try {
-				disambiguator = new NerdRanker(wikipedia);
-				rankers.put(lang, disambiguator);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			} 
-		}
-		
+		disambiguator = instantiateDisambiguator(lang, disambiguator);
+
 		// for the embeddings similiarity we need a textual context as a list of LayoutToken
 		List<LayoutToken> tokens = new ArrayList<LayoutToken>();
 		for(WeightedTerm term : terms) {
