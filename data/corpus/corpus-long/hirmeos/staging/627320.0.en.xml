@@ -1,0 +1,1570 @@
+<document docName="627320.0.en.txt">
+    <annotation>
+        <mention>Anopheles nili</mention>
+        <wikiName>Anopheles nili</wikiName>
+        <wikidataId>Q13853830</wikidataId>
+        <wikipediaId>48596255</wikipediaId>
+        <offset>14</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles</mention>
+        <wikiName>Anopheles</wikiName>
+        <wikidataId>Q158597</wikidataId>
+        <wikipediaId>542071</wikipediaId>
+        <offset>33</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>Malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>53</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Vectors</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>61</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Africa</mention>
+        <wikiName>Africa</wikiName>
+        <wikidataId>Q15</wikidataId>
+        <wikipediaId>5334607</wikipediaId>
+        <offset>72</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles niliare</mention>
+        <wikiName>Anopheles nili</wikiName>
+        <wikidataId>Q13853830</wikidataId>
+        <wikipediaId>48596255</wikipediaId>
+        <offset>97</offset>
+        <length>17</length>
+    </annotation>
+    <annotation>
+        <mention>human malaria</mention>
+        <wikiName>Plasmodium falciparum</wikiName>
+        <wikidataId>Q311383</wikidataId>
+        <wikipediaId>544177</wikipediaId>
+        <offset>121</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>vectors</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>135</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>savannah</mention>
+        <wikiName>Savanna</wikiName>
+        <wikidataId>Q42320</wikidataId>
+        <wikipediaId>198843</wikipediaId>
+        <offset>165</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>West</mention>
+        <wikiName>West Africa</wikiName>
+        <wikidataId>Q4412</wikidataId>
+        <wikipediaId>67393</wikipediaId>
+        <offset>183</offset>
+        <length>4</length>
+    </annotation>
+    <annotation>
+        <mention>Central Africa</mention>
+        <wikiName>Central Africa</wikiName>
+        <wikidataId>Q27433</wikidataId>
+        <wikipediaId>539606</wikipediaId>
+        <offset>192</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>biology</mention>
+        <wikiName>Biology</wikiName>
+        <wikidataId>Q420</wikidataId>
+        <wikipediaId>9127632</wikipediaId>
+        <offset>276</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>ecology</mention>
+        <wikiName>Ecology</wikiName>
+        <wikidataId>Q7150</wikidataId>
+        <wikipediaId>9630</wikipediaId>
+        <offset>285</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>genetics</mention>
+        <wikiName>Genetics</wikiName>
+        <wikidataId>Q7162</wikidataId>
+        <wikipediaId>12266</wikipediaId>
+        <offset>297</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>359</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>vectors</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>367</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>An. gambiae</mention>
+        <wikiName>Anopheles gambiae</wikiName>
+        <wikidataId>Q135237</wikidataId>
+        <wikipediaId>4119009</wikipediaId>
+        <offset>391</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>An. arabiensis</mention>
+        <wikiName>Anopheles arabiensis</wikiName>
+        <wikidataId>Q13853909</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>404</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>An. funestus</mention>
+        <wikiName>Anopheles funestus</wikiName>
+        <wikidataId>Q13853899</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>424</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>molecular</mention>
+        <wikiName>Molecular biology</wikiName>
+        <wikidataId>Q7202</wikidataId>
+        <wikipediaId>19200</wikipediaId>
+        <offset>455</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>cytogenetic</mention>
+        <wikiName>Cytogenetics</wikiName>
+        <wikidataId>Q246128</wikidataId>
+        <wikipediaId>344879</wikipediaId>
+        <offset>469</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>population structure</mention>
+        <wikiName>Population stratification</wikiName>
+        <wikidataId>Q7229824</wikidataId>
+        <wikipediaId>17985779</wikipediaId>
+        <offset>506</offset>
+        <length>20</length>
+    </annotation>
+    <annotation>
+        <mention>ecological</mention>
+        <wikiName>Ecology</wikiName>
+        <wikidataId>Q7150</wikidataId>
+        <wikipediaId>9630</wikipediaId>
+        <offset>528</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>taxonomic status</mention>
+        <wikiName>Taxonomy (biology)</wikiName>
+        <wikidataId>Q8269924</wikidataId>
+        <wikipediaId>30463</wikipediaId>
+        <offset>555</offset>
+        <length>16</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>581</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>laboratory</mention>
+        <wikiName>Laboratory</wikiName>
+        <wikidataId>Q483242</wikidataId>
+        <wikipediaId>173351</wikipediaId>
+        <offset>635</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>colony</mention>
+        <wikiName>Colony (biology)</wikiName>
+        <wikidataId>Q354341</wikidataId>
+        <wikipediaId>161296</wikipediaId>
+        <offset>646</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>experimental work</mention>
+        <wikiName>Experiment</wikiName>
+        <wikidataId>Q101965</wikidataId>
+        <wikipediaId>59861</wikipediaId>
+        <offset>670</offset>
+        <length>17</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>714</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>822</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Afrotropical region</mention>
+        <wikiName>Afrotropical realm</wikiName>
+        <wikidataId>Q388614</wikidataId>
+        <wikipediaId>201208</wikipediaId>
+        <offset>865</offset>
+        <length>19</length>
+    </annotation>
+    <annotation>
+        <mention>ecological</mention>
+        <wikiName>Ecology</wikiName>
+        <wikidataId>Q7150</wikidataId>
+        <wikipediaId>9630</wikipediaId>
+        <offset>886</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>genetic</mention>
+        <wikiName>Genetics</wikiName>
+        <wikidataId>Q7162</wikidataId>
+        <wikipediaId>12266</wikipediaId>
+        <offset>901</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>943</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>990</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>vectors</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>998</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>research</mention>
+        <wikiName>Research</wikiName>
+        <wikidataId>Q42240</wikidataId>
+        <wikipediaId>25524</wikipediaId>
+        <offset>1043</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>vector biology</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>1076</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1108</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>1147</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1156</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles marshallii</mention>
+        <wikiName>Anopheles marshallii</wikiName>
+        <wikidataId>Q13854011</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1228</offset>
+        <length>20</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>1296</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1333</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>An. marshallii</mention>
+        <wikiName>Anopheles marshallii</wikiName>
+        <wikidataId>Q13854011</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1386</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>1442</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>1466</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>taxonomic status</mention>
+        <wikiName>Taxonomy (biology)</wikiName>
+        <wikidataId>Q8269924</wikidataId>
+        <wikipediaId>30463</wikipediaId>
+        <offset>1516</offset>
+        <length>16</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>1627</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1536</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>decades</mention>
+        <wikiName>Decade</wikiName>
+        <wikidataId>Q39911</wikidataId>
+        <wikipediaId>695530</wikipediaId>
+        <offset>1609</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>1627</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>An. bervoetsi</mention>
+        <wikiName>Anopheles bervoetsi</wikiName>
+        <wikidataId>Q13854160</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1662</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1680</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1706</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>Brunhes et al.</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1749</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>1794</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1822</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti bervoetsi</mention>
+        <wikiName>Anopheles bervoetsi</wikiName>
+        <wikidataId>Q13854160</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1876</offset>
+        <length>22</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>1903</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>morphological characters</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>1954</offset>
+        <length>24</length>
+    </annotation>
+    <annotation>
+        <mention>larval</mention>
+        <wikiName>Larva</wikiName>
+        <wikidataId>Q129270</wikidataId>
+        <wikipediaId>50357</wikipediaId>
+        <offset>2014</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>classification</mention>
+        <wikiName>Taxonomy (biology)</wikiName>
+        <wikidataId>Q8269924</wikidataId>
+        <wikipediaId>30463</wikipediaId>
+        <offset>2036</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>Brunhes et al.</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2052</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>An. bervoetsi</mention>
+        <wikiName>Anopheles bervoetsi</wikiName>
+        <wikidataId>Q13854160</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2078</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>subspecies</mention>
+        <wikiName>Subspecies</wikiName>
+        <wikidataId>Q68947</wikidataId>
+        <wikipediaId>185901</wikipediaId>
+        <offset>2097</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2111</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>synonymy</mention>
+        <wikiName>Synonym (taxonomy)</wikiName>
+        <wikidataId>Q1040689</wikidataId>
+        <wikipediaId>8166296</wikipediaId>
+        <offset>2155</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>An. m.</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2164</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>Genetic analysis</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q5532877</wikidataId>
+        <wikipediaId>4087965</wikipediaId>
+        <offset>2164</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>taxonomic</mention>
+        <wikiName>Taxonomy (biology)</wikiName>
+        <wikidataId>Q8269924</wikidataId>
+        <wikipediaId>30463</wikipediaId>
+        <offset>2273</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>2298</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>classification</mention>
+        <wikiName>Taxonomy (biology)</wikiName>
+        <wikidataId>Q8269924</wikidataId>
+        <wikipediaId>30463</wikipediaId>
+        <offset>2312</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>classification</mention>
+        <wikiName>Taxonomy (biology)</wikiName>
+        <wikidataId>Q8269924</wikidataId>
+        <wikipediaId>30463</wikipediaId>
+        <offset>2333</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>Harbach</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2351</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2369</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>An. bervoetsi</mention>
+        <wikiName>Anopheles bervoetsi</wikiName>
+        <wikidataId>Q13854160</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2386</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>2410</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>An. m.</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2424</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>morphological</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>2462</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>variant</mention>
+        <wikiName>Polymorphism (biology)</wikiName>
+        <wikidataId>Q485680</wikidataId>
+        <wikipediaId>498831</wikipediaId>
+        <offset>2476</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2491</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2506</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>widely distributed</mention>
+        <wikiName>Cosmopolitan distribution</wikiName>
+        <wikidataId>Q215402</wikidataId>
+        <wikipediaId>4561442</wikipediaId>
+        <offset>2528</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>West</mention>
+        <wikiName>West Africa</wikiName>
+        <wikidataId>Q4412</wikidataId>
+        <wikipediaId>67393</wikipediaId>
+        <offset>2554</offset>
+        <length>4</length>
+    </annotation>
+    <annotation>
+        <mention>Central Africa</mention>
+        <wikiName>Central Africa</wikiName>
+        <wikidataId>Q27433</wikidataId>
+        <wikipediaId>539606</wikipediaId>
+        <offset>2563</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>taxa</mention>
+        <wikiName>Taxon</wikiName>
+        <wikidataId>Q16521</wikidataId>
+        <wikipediaId>199556</wikipediaId>
+        <offset>2601</offset>
+        <length>4</length>
+    </annotation>
+    <annotation>
+        <mention>type locality</mention>
+        <wikiName>Type (biology)</wikiName>
+        <wikidataId>Q3707858</wikidataId>
+        <wikipediaId>533069</wikipediaId>
+        <offset>2648</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>Nigeria</mention>
+        <wikiName>Nigeria</wikiName>
+        <wikidataId>Q1033</wikidataId>
+        <wikipediaId>21383</wikipediaId>
+        <offset>2665</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Lagos</mention>
+        <wikiName>Lagos</wikiName>
+        <wikidataId>Q8673</wikidataId>
+        <wikipediaId>85232</wikipediaId>
+        <offset>2678</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2707</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Tsakalakuku</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2739</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>Democratic Republic of Congo</mention>
+        <wikiName>Democratic Republic of the Congo</wikiName>
+        <wikidataId>Q974</wikidataId>
+        <wikipediaId>76762</wikipediaId>
+        <offset>2777</offset>
+        <length>28</length>
+    </annotation>
+    <annotation>
+        <mention>DRC</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2807</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>An. bervoetsi</mention>
+        <wikiName>Anopheles bervoetsi</wikiName>
+        <wikidataId>Q13854160</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2816</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>2831</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>human malaria</mention>
+        <wikiName>Plasmodium falciparum</wikiName>
+        <wikidataId>Q311383</wikidataId>
+        <wikipediaId>544177</wikipediaId>
+        <offset>2878</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>vectors</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>2892</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>equatorial forest region</mention>
+        <wikiName>Congolese rainforests</wikiName>
+        <wikidataId>Q199403</wikidataId>
+        <wikipediaId>4605010</wikipediaId>
+        <offset>2907</offset>
+        <length>24</length>
+    </annotation>
+    <annotation>
+        <mention>Africa</mention>
+        <wikiName>Africa</wikiName>
+        <wikidataId>Q15</wikidataId>
+        <wikipediaId>5334607</wikipediaId>
+        <offset>2935</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>villages</mention>
+        <wikiName>Village</wikiName>
+        <wikidataId>Q532</wikidataId>
+        <wikipediaId>53509</wikipediaId>
+        <offset>2959</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>streams</mention>
+        <wikiName>Stream</wikiName>
+        <wikidataId>Q47521</wikidataId>
+        <wikipediaId>18842308</wikipediaId>
+        <offset>3005</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>larvae</mention>
+        <wikiName>Larva</wikiName>
+        <wikidataId>Q129270</wikidataId>
+        <wikipediaId>50357</wikipediaId>
+        <offset>3023</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>vegetation</mention>
+        <wikiName>Vegetation</wikiName>
+        <wikidataId>Q187997</wikidataId>
+        <wikipediaId>216226</wikipediaId>
+        <offset>3061</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>debris</mention>
+        <wikiName>Marine debris</wikiName>
+        <wikidataId>Q463960</wikidataId>
+        <wikipediaId>1827851</wikipediaId>
+        <offset>3076</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>Larval</mention>
+        <wikiName>Larva</wikiName>
+        <wikidataId>Q129270</wikidataId>
+        <wikipediaId>50357</wikipediaId>
+        <offset>3082</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>ecological</mention>
+        <wikiName>Ecology</wikiName>
+        <wikidataId>Q7150</wikidataId>
+        <wikipediaId>9630</wikipediaId>
+        <offset>3111</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3142</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>river networks</mention>
+        <wikiName>River</wikiName>
+        <wikidataId>Q4022</wikidataId>
+        <wikipediaId>18842395</wikipediaId>
+        <offset>3175</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>south Cameroun</mention>
+        <wikiName>South Cameroon Plateau</wikiName>
+        <wikidataId>Q7566490</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3193</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3220</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>larvae</mention>
+        <wikiName>Larva</wikiName>
+        <wikidataId>Q129270</wikidataId>
+        <wikipediaId>50357</wikipediaId>
+        <offset>3233</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>lentic</mention>
+        <wikiName>Lake ecosystem</wikiName>
+        <wikidataId>Q3229532</wikidataId>
+        <wikipediaId>4479734</wikipediaId>
+        <offset>3271</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>aquatic vegetation</mention>
+        <wikiName>Aquatic plant</wikiName>
+        <wikidataId>Q186101</wikidataId>
+        <wikipediaId>151922</wikipediaId>
+        <offset>3324</offset>
+        <length>18</length>
+    </annotation>
+    <annotation>
+        <mention>river</mention>
+        <wikiName>River</wikiName>
+        <wikidataId>Q4022</wikidataId>
+        <wikipediaId>18842395</wikipediaId>
+        <offset>3362</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>urbanization</mention>
+        <wikiName>Urbanization</wikiName>
+        <wikidataId>Q161078</wikidataId>
+        <wikipediaId>56114</wikipediaId>
+        <offset>3377</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>deforestation</mention>
+        <wikiName>Deforestation</wikiName>
+        <wikidataId>Q169940</wikidataId>
+        <wikipediaId>8103</wikipediaId>
+        <offset>3394</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>landscape</mention>
+        <wikiName>Landscape</wikiName>
+        <wikidataId>Q107425</wikidataId>
+        <wikipediaId>205135</wikipediaId>
+        <offset>3431</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>river banks</mention>
+        <wikiName>Bank (geography)</wikiName>
+        <wikidataId>Q2897058</wikidataId>
+        <wikipediaId>1637752</wikipediaId>
+        <offset>3462</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>gardening</mention>
+        <wikiName>Gardening</wikiName>
+        <wikidataId>Q124946</wikidataId>
+        <wikipediaId>11984</wikipediaId>
+        <offset>3487</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>recreational</mention>
+        <wikiName>Recreation</wikiName>
+        <wikidataId>Q184872</wikidataId>
+        <wikipediaId>25381</wikipediaId>
+        <offset>3504</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>3569</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>3603</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>vector</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>3611</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>An. gambiae</mention>
+        <wikiName>Anopheles gambiae</wikiName>
+        <wikidataId>Q135237</wikidataId>
+        <wikipediaId>4119009</wikipediaId>
+        <offset>3665</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3669</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Insecticide</mention>
+        <wikiName>Insecticide</wikiName>
+        <wikidataId>Q181322</wikidataId>
+        <wikipediaId>149463</wikipediaId>
+        <offset>3711</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>populations</mention>
+        <wikiName>Population</wikiName>
+        <wikidataId>Q33829</wikidataId>
+        <wikipediaId>22949</wikipediaId>
+        <offset>3765</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>South Cameroon</mention>
+        <wikiName>South Cameroon Plateau</wikiName>
+        <wikidataId>Q7566490</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3782</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>2007</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3800</offset>
+        <length>4</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3820</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>DDT</mention>
+        <wikiName>Dichlorodiphenyltrichloroethane</wikiName>
+        <wikidataId>Q163648</wikidataId>
+        <wikipediaId>8494</wikipediaId>
+        <offset>3857</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>permethrin</mention>
+        <wikiName>Permethrin</wikiName>
+        <wikidataId>Q411635</wikidataId>
+        <wikipediaId>656936</wikipediaId>
+        <offset>3862</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>deltamethrin</mention>
+        <wikiName>Deltamethrin</wikiName>
+        <wikidataId>Q422257</wikidataId>
+        <wikipediaId>3586631</wikipediaId>
+        <offset>3877</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Etang et al.</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3891</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>rural villages</mention>
+        <wikiName>Village</wikiName>
+        <wikidataId>Q532</wikidataId>
+        <wikipediaId>53509</wikipediaId>
+        <offset>3928</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>deep forest</mention>
+        <wikiName>Deep Forest</wikiName>
+        <wikidataId>Q1133600</wikidataId>
+        <wikipediaId>1038760</wikipediaId>
+        <offset>3955</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>3974</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>vector</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>4008</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>Plasmodium</mention>
+        <wikiName>Plasmodium</wikiName>
+        <wikidataId>Q130948</wikidataId>
+        <wikipediaId>287207</wikipediaId>
+        <offset>4018</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>4087</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>endemicity</mention>
+        <wikiName>Endemism</wikiName>
+        <wikidataId>Q123452</wikidataId>
+        <wikipediaId>937971</wikipediaId>
+        <offset>4095</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>humans</mention>
+        <wikiName>Human</wikiName>
+        <wikidataId>Q5</wikidataId>
+        <wikipediaId>682482</wikipediaId>
+        <offset>4109</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>infection</mention>
+        <wikiName>Infection</wikiName>
+        <wikidataId>Q166231</wikidataId>
+        <wikipediaId>37220</wikipediaId>
+        <offset>4125</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>1-3%</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4154</offset>
+        <length>4</length>
+    </annotation>
+    <annotation>
+        <mention>females</mention>
+        <wikiName>Female</wikiName>
+        <wikidataId>Q43445</wikidataId>
+        <wikipediaId>20913864</wikipediaId>
+        <offset>4189</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>entomological</mention>
+        <wikiName>Entomology</wikiName>
+        <wikidataId>Q39286</wikidataId>
+        <wikipediaId>59238</wikipediaId>
+        <offset>4216</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>inoculation</mention>
+        <wikiName>Inoculation</wikiName>
+        <wikidataId>Q1664296</wikidataId>
+        <wikipediaId>46438704</wikipediaId>
+        <offset>4230</offset>
+        <length>11</length>
+    </annotation>
+    <annotation>
+        <mention>EIR</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4249</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>300</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4269</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>infective</mention>
+        <wikiName>Infection</wikiName>
+        <wikidataId>Q166231</wikidataId>
+        <wikipediaId>37220</wikipediaId>
+        <offset>4273</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>human</mention>
+        <wikiName>Human</wikiName>
+        <wikidataId>Q5</wikidataId>
+        <wikipediaId>682482</wikipediaId>
+        <offset>4290</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>species</mention>
+        <wikiName>Species</wikiName>
+        <wikidataId>Q7432</wikidataId>
+        <wikipediaId>21780446</wikipediaId>
+        <offset>4313</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>malaria transmission</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>4346</offset>
+        <length>20</length>
+    </annotation>
+    <annotation>
+        <mention>Central Africa</mention>
+        <wikiName>Central Africa</wikiName>
+        <wikidataId>Q27433</wikidataId>
+        <wikipediaId>539606</wikipediaId>
+        <offset>4395</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>Nigeria</mention>
+        <wikiName>Nigeria</wikiName>
+        <wikidataId>Q1033</wikidataId>
+        <wikipediaId>21383</wikipediaId>
+        <offset>4421</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Equatorial Guinea</mention>
+        <wikiName>Equatorial Guinea</wikiName>
+        <wikidataId>Q983</wikidataId>
+        <wikipediaId>9366</wikipediaId>
+        <offset>4430</offset>
+        <length>17</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4466</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>95%</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4583</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>anthropophily</mention>
+        <wikiName>Anthropophilia</wikiName>
+        <wikidataId>Q4773923</wikidataId>
+        <wikipediaId>26537401</wikipediaId>
+        <offset>4654</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>mosquito</mention>
+        <wikiName>Mosquito</wikiName>
+        <wikidataId>Q7367</wikidataId>
+        <wikipediaId>37789</wikipediaId>
+        <offset>4683</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>human settlements</mention>
+        <wikiName>Human settlement</wikiName>
+        <wikidataId>Q486972</wikidataId>
+        <wikipediaId>6084894</wikipediaId>
+        <offset>4739</offset>
+        <length>17</length>
+    </annotation>
+    <annotation>
+        <mention>zoophilic</mention>
+        <wikiName>Zoophily</wikiName>
+        <wikidataId>Q220319</wikidataId>
+        <wikipediaId>2394731</wikipediaId>
+        <offset>4780</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>forest</mention>
+        <wikiName>Forest</wikiName>
+        <wikidataId>Q4421</wikidataId>
+        <wikipediaId>11090</wikipediaId>
+        <offset>4808</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles bervoetsi</mention>
+        <wikiName>Anopheles bervoetsi</wikiName>
+        <wikidataId>Q13854160</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4828</offset>
+        <length>19</length>
+    </annotation>
+    <annotation>
+        <mention>type locality</mention>
+        <wikiName>Type locality (geology)</wikiName>
+        <wikidataId>Q1973416</wikidataId>
+        <wikipediaId>5030515</wikipediaId>
+        <offset>4887</offset>
+        <length>13</length>
+    </annotation>
+    <annotation>
+        <mention>villages</mention>
+        <wikiName>Village</wikiName>
+        <wikidataId>Q532</wikidataId>
+        <wikipediaId>53509</wikipediaId>
+        <offset>4917</offset>
+        <length>8</length>
+    </annotation>
+    <annotation>
+        <mention>DRC</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>4933</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>Larvae</mention>
+        <wikiName>Larva</wikiName>
+        <wikidataId>Q129270</wikidataId>
+        <wikipediaId>50357</wikipediaId>
+        <offset>4938</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>small rivers</mention>
+        <wikiName>Stream</wikiName>
+        <wikidataId>Q47521</wikidataId>
+        <wikipediaId>18842308</wikipediaId>
+        <offset>4958</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>forest</mention>
+        <wikiName>Forest</wikiName>
+        <wikidataId>Q4421</wikidataId>
+        <wikipediaId>11090</wikipediaId>
+        <offset>4984</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>valleys</mention>
+        <wikiName>Valley</wikiName>
+        <wikidataId>Q39816</wikidataId>
+        <wikipediaId>32416</wikipediaId>
+        <offset>5023</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>landscape</mention>
+        <wikiName>Landscape</wikiName>
+        <wikidataId>Q107425</wikidataId>
+        <wikipediaId>205135</wikipediaId>
+        <offset>5042</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>Adults</mention>
+        <wikiName>Adult</wikiName>
+        <wikidataId>Q80994</wikidataId>
+        <wikipediaId>167334</wikipediaId>
+        <offset>5053</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>anthropophilic</mention>
+        <wikiName>Anthropophilia</wikiName>
+        <wikidataId>Q4773923</wikidataId>
+        <wikipediaId>26537401</wikipediaId>
+        <offset>5071</offset>
+        <length>14</length>
+    </annotation>
+    <annotation>
+        <mention>rainy season</mention>
+        <wikiName>Wet season</wikiName>
+        <wikidataId>Q3117517</wikidataId>
+        <wikipediaId>1228152</wikipediaId>
+        <offset>5218</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>Antonio-Nkondjio</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>5232</offset>
+        <length>16</length>
+    </annotation>
+    <annotation>
+        <mention>Biting</mention>
+        <wikiName>Biting</wikiName>
+        <wikidataId>Q4918888</wikidataId>
+        <wikipediaId>2933392</wikipediaId>
+        <offset>5275</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>night</mention>
+        <wikiName>Night</wikiName>
+        <wikidataId>Q575</wikidataId>
+        <wikipediaId>206119</wikipediaId>
+        <offset>5292</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>night</mention>
+        <wikiName>Night</wikiName>
+        <wikidataId>Q575</wikidataId>
+        <wikipediaId>206119</wikipediaId>
+        <offset>5365</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>study</mention>
+        <wikiName>Research</wikiName>
+        <wikidataId>Q42240</wikidataId>
+        <wikipediaId>25524</wikipediaId>
+        <offset>5381</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>specimens</mention>
+        <wikiName>Biological specimen</wikiName>
+        <wikidataId>Q2075980</wikidataId>
+        <wikipediaId>33855225</wikipediaId>
+        <offset>5402</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>Plasmodium falciparum</mention>
+        <wikiName>Plasmodium falciparum</wikiName>
+        <wikidataId>Q311383</wikidataId>
+        <wikipediaId>544177</wikipediaId>
+        <offset>5430</offset>
+        <length>21</length>
+    </annotation>
+    <annotation>
+        <mention>237</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>5459</offset>
+        <length>3</length>
+    </annotation>
+    <annotation>
+        <mention>ELISA</mention>
+        <wikiName>NIL</wikiName>
+        <wikidataId>NIL</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>5473</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>malaria parasites</mention>
+        <wikiName>Plasmodium</wikiName>
+        <wikidataId>Q130948</wikidataId>
+        <wikipediaId>287207</wikipediaId>
+        <offset>5503</offset>
+        <length>17</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles</mention>
+        <wikiName>Anopheles</wikiName>
+        <wikidataId>Q158597</wikidataId>
+        <wikipediaId>542071</wikipediaId>
+        <offset>5535</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>mosquitoes</mention>
+        <wikiName>Mosquito</wikiName>
+        <wikidataId>Q7367</wikidataId>
+        <wikipediaId>37789</wikipediaId>
+        <offset>5545</offset>
+        <length>10</length>
+    </annotation>
+    <annotation>
+        <mention>malaria</mention>
+        <wikiName>Malaria</wikiName>
+        <wikidataId>Q12156</wikidataId>
+        <wikipediaId>20423</wikipediaId>
+        <offset>5574</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>vectors</mention>
+        <wikiName>Vector (epidemiology)</wikiName>
+        <wikidataId>Q107994</wikidataId>
+        <wikipediaId>13865571</wikipediaId>
+        <offset>5582</offset>
+        <length>7</length>
+    </annotation>
+    <annotation>
+        <mention>Anopheles</mention>
+        <wikiName>Anopheles</wikiName>
+        <wikidataId>Q158597</wikidataId>
+        <wikipediaId>542071</wikipediaId>
+        <offset>5591</offset>
+        <length>9</length>
+    </annotation>
+    <annotation>
+        <mention>An. moucheti</mention>
+        <wikiName>Anopheles moucheti</wikiName>
+        <wikidataId>Q13853963</wikidataId>
+        <wikipediaId>-1</wikipediaId>
+        <offset>5646</offset>
+        <length>12</length>
+    </annotation>
+    <annotation>
+        <mention>morphological differences</mention>
+        <wikiName>Morphology (biology)</wikiName>
+        <wikidataId>Q183252</wikidataId>
+        <wikipediaId>1099348</wikipediaId>
+        <offset>5691</offset>
+        <length>25</length>
+    </annotation>
+    <annotation>
+        <mention>adult</mention>
+        <wikiName>Adult</wikiName>
+        <wikidataId>Q80994</wikidataId>
+        <wikipediaId>167334</wikipediaId>
+        <offset>5724</offset>
+        <length>5</length>
+    </annotation>
+    <annotation>
+        <mention>larval</mention>
+        <wikiName>Larva</wikiName>
+        <wikidataId>Q129270</wikidataId>
+        <wikipediaId>50357</wikipediaId>
+        <offset>5734</offset>
+        <length>6</length>
+    </annotation>
+    <annotation>
+        <mention>morphs</mention>
+        <wikiName>Polymorphism (biology)</wikiName>
+        <wikidataId>Q485680</wikidataId>
+        <wikipediaId>498831</wikipediaId>
+        <offset>5764</offset>
+        <length>6</length>
+    </annotation>
+</document>

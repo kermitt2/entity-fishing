@@ -1,0 +1,4487 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<msnbc.entityAnnotation>
+	<document docName="3683270">
+		<annotation>
+			<mention>NEW YORK</mention>
+			<wikiName>New York City</wikiName>
+			<offset>46</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>New York Stock Exchange</mention>
+			<wikiName>New York Stock Exchange</wikiName>
+			<offset>311</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>Nasdaq Stock Market</mention>
+			<wikiName>NASDAQ</wikiName>
+			<offset>343</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>642</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot Inc.</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>1102</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Saks Inc.</mention>
+			<wikiName>Saks Incorporated</wikiName>
+			<offset>1119</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Target Corp.</mention>
+			<wikiName>Target Corporation</wikiName>
+			<offset>1133</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Uri Landesman</mention>
+			<wikiName/>
+			<offset>1390</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>ING Investment Management</mention>
+			<wikiName>ING Group</wikiName>
+			<offset>1461</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York City</wikiName>
+			<offset>1490</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>The Fed</mention>
+			<wikiName>Federal Reserve System</wikiName>
+			<offset>1874</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Thomson Reuters</mention>
+			<wikiName>Thomson Reuters</wikiName>
+			<offset>2030</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Labor Department</mention>
+			<wikiName>United States Department of Labor</wikiName>
+			<offset>2129</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Producer Price Index</mention>
+			<wikiName>Producer price index</wikiName>
+			<offset>2148</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Tim Courtney</mention>
+			<wikiName/>
+			<offset>2373</offset>
+			<length>12</length>
+		    </annotation>
+		<annotation>
+			<mention>Oklahoma City</mention>
+			<wikiName>Oklahoma City</wikiName>
+			<offset>2415</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Burns Advisory Group</mention>
+			<wikiName/>
+			<offset>2435</offset>
+			<length>20</length>
+		    </annotation>
+		<annotation>
+			<mention>Dow Jones industrial average</mention>
+			<wikiName>Dow Jones Industrial Average</wikiName>
+			<offset>2517</offset>
+			<length>28</length>
+		</annotation>
+		<annotation>
+			<mention>Dow</mention>
+			<wikiName>Dow Jones Industrial Average</wikiName>
+			<offset>2629</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Standard &amp; Poor's 500</mention>
+			<wikiName>S&amp;P 500</wikiName>
+			<offset>2779</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Nasdaq</mention>
+			<wikiName>NASDAQ</wikiName>
+			<offset>2857</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>NYSE</mention>
+			<wikiName>New York Stock Exchange</wikiName>
+			<offset>2974</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Dow</mention>
+			<wikiName>Dow Jones Industrial Average</wikiName>
+			<offset>3058</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>New York Mercantile Exchange</mention>
+			<wikiName>New York Mercantile Exchange</wikiName>
+			<offset>3420</offset>
+			<length>28</length>
+		</annotation>
+		<annotation>
+			<mention>Exxon Mobil Corp.</mention>
+			<wikiName>ExxonMobil</wikiName>
+			<offset>3775</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>United States Steel Corp.</mention>
+			<wikiName>U.S. Steel</wikiName>
+			<offset>3824</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>3892</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Saks</mention>
+			<wikiName>Saks Incorporated</wikiName>
+			<offset>3951</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Target</mention>
+			<wikiName>Target Corporation</wikiName>
+			<offset>3997</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Pacific Sunwear of California Inc.</mention>
+			<wikiName>PacSun</wikiName>
+			<offset>4041</offset>
+			<length>34</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>Russell 2000 index</mention>
+			<wikiName>Russell 2000</wikiName>
+			<offset>4174</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Japan</mention>
+			<wikiName>Japan</wikiName>
+			<offset>4265</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Nikkei stock average</mention>
+			<wikiName>Nikkei 225</wikiName>
+			<offset>4273</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Britain</mention>
+			<wikiName>Great Britain</wikiName>
+			<offset>4312</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>FTSE 100</mention>
+			<wikiName>FTSE 100 Index</wikiName>
+			<offset>4322</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Germany</mention>
+			<wikiName>Germany</wikiName>
+			<offset>4349</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>DAX</mention>
+			<wikiName>DAX</wikiName>
+			<offset>4359</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>France</mention>
+			<wikiName>France</wikiName>
+			<offset>4391</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>CAC-40</mention>
+			<wikiName>CAC 40</wikiName>
+			<offset>4400</offset>
+			<length>6</length>
+		<entity/>
+		</annotation>
+	</document>
+	<document docName="16451112">
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>0</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>15</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>ATLANTA</mention>
+			<wikiName>Atlanta</wikiName>
+			<offset>103</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Bob Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>113</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>The Home Depot Inc.</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>288</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>359</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Atlanta</mention>
+			<wikiName>Atlanta</wikiName>
+			<offset>561</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>588</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Barney Frank</mention>
+			<wikiName>Barney Frank</wikiName>
+			<offset>815</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>House Financial Services Committee</mention>
+			<wikiName>United States House Committee on Financial Services</wikiName>
+			<offset>867</offset>
+			<length>34</length>
+		</annotation>
+		<annotation>
+			<mention>Frank</mention>
+			<wikiName>Barney Frank</wikiName>
+			<offset>984</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>1144</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>1318</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>1484</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>1664</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>1813</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Canada</mention>
+			<wikiName>Canada</wikiName>
+			<offset>1828</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Mexico</mention>
+			<wikiName>Mexico</wikiName>
+			<offset>1836</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>1847</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>1854</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>1870</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Frank Blake</mention>
+			<wikiName>Frank Blake</wikiName>
+			<offset>1901</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>1956</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Bernie Marcus</mention>
+			<wikiName>Bernard Marcus</wikiName>
+			<offset>1978</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>2018</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>2077</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Blake</mention>
+			<wikiName>Frank Blake</wikiName>
+			<offset>2091</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Marcus</mention>
+			<wikiName>Bernard Marcus</wikiName>
+			<offset>2178</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>2210</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Marcus</mention>
+			<wikiName>Bernard Marcus</wikiName>
+			<offset>2346</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Marcus</mention>
+			<wikiName>Bernard Marcus</wikiName>
+			<offset>2529</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>2542</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>2600</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>General Electric Co.</mention>
+			<wikiName>General Electric</wikiName>
+			<offset>2671</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>2699</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Blake</mention>
+			<wikiName>Frank Blake</wikiName>
+			<offset>2737</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>2771</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Jerry Shields</mention>
+			<wikiName/>
+			<offset>2792</offset>
+			<length>13</length>
+		    </annotation>
+		<annotation>
+			<mention>Blake</mention>
+			<wikiName>Frank Blake</wikiName>
+			<offset>2841</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>2892</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>2980</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>New York Stock Exchange</mention>
+			<wikiName>New York Stock Exchange</wikiName>
+			<offset>3055</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>3168</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>3253</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>The Associated Press</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>3330</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>3467</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles</mention>
+			<wikiName>Los Angeles</wikiName>
+			<offset>3618</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>3726</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>3738</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>3883</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Marcus</mention>
+			<wikiName>Bernard Marcus</wikiName>
+			<offset>3930</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>3957</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>4081</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Marcus</mention>
+			<wikiName>Bernard Marcus</wikiName>
+			<offset>4113</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>4126</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>4142</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>4201</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Bob</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>4238</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>The Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>4271</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>4352</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Home Depot</mention>
+			<wikiName>The Home Depot</wikiName>
+			<offset>4432</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Nardelli</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>4716</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Blake</mention>
+			<wikiName>Frank Blake</wikiName>
+			<offset>4932</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>James Senn</mention>
+			<wikiName/>
+			<offset>5040</offset>
+			<length>10</length>
+		    </annotation>
+		<annotation>
+			<mention>Georgia State University</mention>
+			<wikiName>Georgia State University</wikiName>
+			<offset>5124</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Bob</mention>
+			<wikiName>Robert Nardelli</wikiName>
+			<offset>5238</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Edward Jones</mention>
+			<wikiName>Edward Jones Investments</wikiName>
+			<offset>5302</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Stephanie Hoff</mention>
+			<wikiName/>
+			<offset>5323</offset>
+			<length>14</length>
+		    </annotation>
+	</document>
+	<document docName="16444023">
+		<annotation>
+			<mention>Timberlake</mention>
+			<wikiName>Justin Timberlake</wikiName>
+			<offset>0</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Diaz</mention>
+			<wikiName>Cameron Diaz</wikiName>
+			<offset>12</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>N' Sync</mention>
+			<wikiName>'N Sync</wikiName>
+			<offset>44</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Justin Timberlake</mention>
+			<wikiName>Justin Timberlake</wikiName>
+			<offset>97</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Cameron Diaz</mention>
+			<wikiName>Cameron Diaz</wikiName>
+			<offset>119</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Star magazine</mention>
+			<wikiName>Star (magazine)</wikiName>
+			<offset>179</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Star</mention>
+			<wikiName>Star (magazine)</wikiName>
+			<offset>207</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Diaz</mention>
+			<wikiName>Cameron Diaz</wikiName>
+			<offset>213</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Christmas</mention>
+			<wikiName>Christmas</wikiName>
+			<offset>229</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Vail</mention>
+			<wikiName>Vail, Colorado</wikiName>
+			<offset>258</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Colo.</mention>
+			<wikiName>Colorado</wikiName>
+			<offset>264</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Timberlake</mention>
+			<wikiName>Justin Timberlake</wikiName>
+			<offset>277</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Memphis</mention>
+			<wikiName>Memphis, Tennessee</wikiName>
+			<offset>318</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>N' Sync</mention>
+			<wikiName>'N Sync</wikiName>
+			<offset>376</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Saturday Night Live</mention>
+			<wikiName>Saturday Night Live</wikiName>
+			<offset>537</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Diaz</mention>
+			<wikiName>Cameron Diaz</wikiName>
+			<offset>559</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Timberlake</mention>
+			<wikiName>Justin Timberlake</wikiName>
+			<offset>568</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Kids' Choice Awards</mention>
+			<wikiName>Nickelodeon Kids' Choice Awards</wikiName>
+			<offset>640</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Timberlake</mention>
+			<wikiName>Justin Timberlake</wikiName>
+			<offset>693</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Veronica Finn</mention>
+			<wikiName>Innosense</wikiName>
+			<offset>739</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Britney Spears</mention>
+			<wikiName>Britney Spears</wikiName>
+			<offset>809</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Finn</mention>
+			<wikiName>Innosense</wikiName>
+			<offset>825</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Spears</mention>
+			<wikiName>Britney Spears</wikiName>
+			<offset>834</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Innosense</mention>
+			<wikiName>Innosense</wikiName>
+			<offset>886</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Lou Pearlman</mention>
+			<wikiName>Lou Pearlman</wikiName>
+			<offset>927</offset>
+			<length>12</length>
+		</annotation>
+	</document>
+	<document docName="16453733">
+		<annotation>
+			<mention>Barbara Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>0</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Rosie O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>26</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>61</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>NEW YORK</mention>
+			<wikiName>New York City</wikiName>
+			<offset>112</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Barbara Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>123</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Rosie O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>185</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Donald Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>236</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>250</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>ABC</mention>
+			<wikiName>American Broadcasting Company</wikiName>
+			<offset>270</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>The View</mention>
+			<wikiName>The View (U.S. TV series)</wikiName>
+			<offset>277</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>348</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>370</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>537</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>553</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>612</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>673</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>The Donald</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>727</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>765</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>The View</mention>
+			<wikiName>The View (U.S. TV series)</wikiName>
+			<offset>784</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>ABC</mention>
+			<wikiName>American Broadcasting Company</wikiName>
+			<offset>838</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Donald Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>910</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>1068</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>The Associated Press</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>1108</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>1130</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Walters</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>1161</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Barbara</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>1256</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Barbara</mention>
+			<wikiName>Barbara Walters</wikiName>
+			<offset>1287</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Rosie</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>1472</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>1488</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>1502</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Miss USA</mention>
+			<wikiName>Miss USA</wikiName>
+			<offset>1561</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Tara Conner</mention>
+			<wikiName>Tara Conner</wikiName>
+			<offset>1570</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>1668</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Miss Universe Organization</mention>
+			<wikiName>Miss Universe Organization</wikiName>
+			<offset>1694</offset>
+			<length>26</length>
+		</annotation>
+		<annotation>
+			<mention>Miss USA</mention>
+			<wikiName>Miss USA</wikiName>
+			<offset>1737</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Miss Teen USA</mention>
+			<wikiName>Miss Teen USA</wikiName>
+			<offset>1750</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>The View</mention>
+			<wikiName>The View (U.S. TV series)</wikiName>
+			<offset>1805</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>1855</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Conner</mention>
+			<wikiName>Tara Conner</wikiName>
+			<offset>1884</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>America</mention>
+			<wikiName>United States</wikiName>
+			<offset>2038</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Trump</mention>
+			<wikiName>Donald Trump</wikiName>
+			<offset>2048</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>O'Donnell</mention>
+			<wikiName>Rosie O'Donnell</wikiName>
+			<offset>2074</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>NBC</mention>
+			<wikiName>NBC</wikiName>
+			<offset>2177</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>The Apprentice</mention>
+			<wikiName>The Apprentice (U.S. TV series)</wikiName>
+			<offset>2184</offset>
+			<length>14</length>
+		</annotation>
+	</document>
+	<document docName="16384904">
+		<annotation>
+			<mention>Santa Baby</mention>
+			<wikiName>Santa Baby</wikiName>
+			<offset>449</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Mayo Clinic</mention>
+			<wikiName>Mayo Clinic</wikiName>
+			<offset>803</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Mayo Clinic</mention>
+			<wikiName>Mayo Clinic</wikiName>
+			<offset>1190</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Stony Brook University</mention>
+			<wikiName>Stony Brook University</wikiName>
+			<offset>1517</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York City</wikiName>
+			<offset>1543</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Goteborg University</mention>
+			<wikiName>University of Gothenburg</wikiName>
+			<offset>2019</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Sweden</mention>
+			<wikiName>Sweden</wikiName>
+			<offset>2042</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>London</mention>
+			<wikiName>London</wikiName>
+			<offset>2392</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Hodgkin's lymphoma</mention>
+			<wikiName>Hodgkin's lymphoma</wikiName>
+			<offset>2484</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Ohio State University</mention>
+			<wikiName>Ohio State University</wikiName>
+			<offset>2584</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>University of Missouri</mention>
+			<wikiName>University of Missouri</wikiName>
+			<offset>2748</offset>
+			<length>22</length>
+		</annotation>
+	</document>
+	<document docName="16451212">
+		<annotation>
+			<mention>BIRMINGHAM</mention>
+			<wikiName>Birmingham, Alabama</wikiName>
+			<offset>117</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Ala.</mention>
+			<wikiName>Alabama</wikiName>
+			<offset>129</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Al Rohling</mention>
+			<wikiName/>
+			<offset>147</offset>
+			<length>10</length>
+		    </annotation>
+		<annotation>
+			<mention>U.S. government</mention>
+			<wikiName>Federal government of the United States</wikiName>
+			<offset>287</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Rohling</mention>
+			<wikiName/>
+			<offset>317</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>Alabama</wikiName>
+			<offset>339</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Rohling</mention>
+			<wikiName/>
+			<offset>620</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>Rohling</mention>
+			<wikiName/>
+			<offset>629</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>Child Caring Foundation</mention>
+			<wikiName/>
+			<offset>677</offset>
+			<length>23</length>
+		    </annotation>
+		<annotation>
+			<mention>Blue Cross and Blue Shield of Alabama</mention>
+			<wikiName>Blue Cross and Blue Shield of Alabama</wikiName>
+			<offset>764</offset>
+			<length>37</length>
+		</annotation>
+		<annotation>
+			<mention>Medicaid</mention>
+			<wikiName>Medicaid</wikiName>
+			<offset>901</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>1086</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>1117</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Jennifer Tolbert</mention>
+			<wikiName/>
+			<offset>1406</offset>
+			<length>16</length>
+		    </annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>1502</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Tolbert</mention>
+			<wikiName/>
+			<offset>1531</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>U.S. Congress</mention>
+			<wikiName>United States Congress</wikiName>
+			<offset>1564</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>State Children's Health Insurance Program</mention>
+			<wikiName>State Children's Health Insurance Program</wikiName>
+			<offset>1610</offset>
+			<length>41</length>
+		</annotation>
+		<annotation>
+			<mention>SCHIP</mention>
+			<wikiName>State Children's Health Insurance Program</wikiName>
+			<offset>1653</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>Alabama</wikiName>
+			<offset>2071</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Child Caring Foundation</mention>
+			<wikiName/>
+			<offset>2192</offset>
+			<length>23</length>
+		    </annotation>
+		<annotation>
+			<mention>Jody Sharp</mention>
+			<wikiName/>
+			<offset>2236</offset>
+			<length>10</length>
+		    </annotation>
+		<annotation>
+			<mention>Sharp</mention>
+			<wikiName/>
+			<offset>2477</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Sharp</mention>
+			<wikiName/>
+			<offset>2546</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Sharp</mention>
+			<wikiName/>
+			<offset>2761</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Reuters</mention>
+			<wikiName>Reuters</wikiName>
+			<offset>2772</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama Blue Cross Blue Shield</mention>
+			<wikiName>Blue Cross and Blue Shield of Alabama</wikiName>
+			<offset>2811</offset>
+			<length>30</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>Sharp</mention>
+			<wikiName/>
+			<offset>2851</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Sharp</mention>
+			<wikiName/>
+			<offset>3321</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Rohling</mention>
+			<wikiName/>
+			<offset>3360</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>University of Alabama at Birmingham</mention>
+			<wikiName>University of Alabama at Birmingham</wikiName>
+			<offset>3461</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>School of Nursing</mention>
+			<wikiName>Nursing school</wikiName>
+			<offset>3497</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Pittsburgh</mention>
+			<wikiName>Pittsburgh</wikiName>
+			<offset>3821</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Highmark Blue Cross Blue Shield</mention>
+			<wikiName>Highmark</wikiName>
+			<offset>3845</offset>
+			<length>31</length>
+		</annotation>
+		<annotation>
+			<mention>Western Pennsylvania</mention>
+			<wikiName>Western Pennsylvania</wikiName>
+			<offset>3880</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Denise Grabner</mention>
+			<wikiName/>
+			<offset>4116</offset>
+			<length>14</length>
+		    </annotation>
+		<annotation>
+			<mention>Highmark</mention>
+			<wikiName>Highmark</wikiName>
+			<offset>4134</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Congress</mention>
+			<wikiName>United States Congress</wikiName>
+			<offset>4219</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>SCHIP</mention>
+			<wikiName>State Children's Health Insurance Program</wikiName>
+			<offset>4240</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>Alabama</wikiName>
+			<offset>4279</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>All Kids</mention>
+			<wikiName/>
+			<offset>4343</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Medicaid</mention>
+			<wikiName>Medicaid</wikiName>
+			<offset>4510</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Rohling</mention>
+			<wikiName/>
+			<offset>4691</offset>
+			<length>7</length>
+		    </annotation>
+	</document>
+	<document docName="16417540">
+		<annotation>
+			<mention>TUSCALOOSA</mention>
+			<wikiName>Tuscaloosa, Alabama</wikiName>
+			<offset>0</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Ala.</mention>
+			<wikiName>Alabama</wikiName>
+			<offset>12</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Nick Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>19</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>84</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>University of Alabama</wikiName>
+			<offset>108</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Miami Dolphins</mention>
+			<wikiName>Miami Dolphins</wikiName>
+			<offset>260</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Crimson Tide</mention>
+			<wikiName>Alabama Crimson Tide</wikiName>
+			<offset>311</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Bear Bryant</mention>
+			<wikiName>Bear Bryant</wikiName>
+			<offset>603</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>646</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>Alabama</wikiName>
+			<offset>749</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Mal Moore</mention>
+			<wikiName>Mal Moore</wikiName>
+			<offset>851</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Tide</mention>
+			<wikiName>Alabama Crimson Tide</wikiName>
+			<offset>882</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>1063</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>1223</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>University of Alabama</wikiName>
+			<offset>1233</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>LSU</mention>
+			<wikiName>Louisiana State University</wikiName>
+			<offset>1258</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>SEC</mention>
+			<wikiName>Southeastern Conference</wikiName>
+			<offset>1298</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Miami</mention>
+			<wikiName>Miami Dolphins</wikiName>
+			<offset>1334</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>University of Alabama</wikiName>
+			<offset>1341</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Mike DuBose</mention>
+			<wikiName>Mike DuBose</wikiName>
+			<offset>1417</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Tide</mention>
+			<wikiName>Alabama Crimson Tide</wikiName>
+			<offset>1434</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Gene Stallings</mention>
+			<wikiName>Gene Stallings</wikiName>
+			<offset>1496</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>University of Alabama</wikiName>
+			<offset>1512</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Moore</mention>
+			<wikiName>Mal Moore</wikiName>
+			<offset>1726</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Bryant</mention>
+			<wikiName>Bear Bryant</wikiName>
+			<offset>1762</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>1777</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Moore</mention>
+			<wikiName>Mal Moore</wikiName>
+			<offset>1854</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Alabama</mention>
+			<wikiName>University of Alabama</wikiName>
+			<offset>1960</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Richard Lindsey</mention>
+			<wikiName/>
+			<offset>2139</offset>
+			<length>15</length>
+		    </annotation>
+		<annotation>
+			<mention>John Vincent</mention>
+			<wikiName/>
+			<offset>2333</offset>
+			<length>12</length>
+		    </annotation>
+		<annotation>
+			<mention>Vincent</mention>
+			<wikiName/>
+			<offset>2624</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>2670</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>University of Alabama</mention>
+			<wikiName>University of Alabama</wikiName>
+			<offset>2710</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>2797</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Tide</mention>
+			<wikiName>Alabama Crimson Tide</wikiName>
+			<offset>2881</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Florida State</mention>
+			<wikiName>Florida State University</wikiName>
+			<offset>2927</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Kevin Steele</mention>
+			<wikiName>Kevin Steele</wikiName>
+			<offset>2951</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Seminoles</mention>
+			<wikiName>Florida State Seminoles football</wikiName>
+			<offset>3010</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Bobby Bowden</mention>
+			<wikiName>Bobby Bowden</wikiName>
+			<offset>3026</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>3040</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Quarterback</mention>
+			<wikiName>Quarterback</wikiName>
+			<offset>3096</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>JaMarcus Russell</mention>
+			<wikiName>JaMarcus Russell</wikiName>
+			<offset>3108</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Early Doucet</mention>
+			<wikiName>Early Doucet</wikiName>
+			<offset>3135</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>LaRon Landry</mention>
+			<wikiName>LaRon Landry</wikiName>
+			<offset>3159</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>LSU</mention>
+			<wikiName>Louisiana State University</wikiName>
+			<offset>3202</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Sugar Bowl</mention>
+			<wikiName>Sugar Bowl</wikiName>
+			<offset>3214</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Notre Dame</mention>
+			<wikiName>Notre Dame Fighting Irish football</wikiName>
+			<offset>3238</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Baton Rouge</mention>
+			<wikiName>Baton Rouge, Louisiana</wikiName>
+			<offset>3303</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>3316</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Terry</mention>
+			<wikiName/>
+			<offset>3330</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Tuscaloosa</mention>
+			<wikiName>Tuscaloosa, Alabama</wikiName>
+			<offset>3360</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>3536</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>LSU</mention>
+			<wikiName>Louisiana State University</wikiName>
+			<offset>3566</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Michigan State</mention>
+			<wikiName>Michigan State Spartans football</wikiName>
+			<offset>3575</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Terry Saban</mention>
+			<wikiName/>
+			<offset>3830</offset>
+			<length>11</length>
+		    </annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>3866</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Lake Burton</mention>
+			<wikiName>Lake Burton (Georgia)</wikiName>
+			<offset>3951</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Georgia</mention>
+			<wikiName>Georgia (U.S. state)</wikiName>
+			<offset>3972</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Saban</mention>
+			<wikiName>Nick Saban</wikiName>
+			<offset>4069</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="16455207">
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>0</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>MIAMI</mention>
+			<wikiName>Miami</wikiName>
+			<offset>36</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Pat Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>44</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Miami Heat</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>129</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Ron Rothstein</mention>
+			<wikiName>Ron Rothstein</wikiName>
+			<offset>246</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>298</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Miami</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>588</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles Clippers</mention>
+			<wikiName>Los Angeles Clippers</wikiName>
+			<offset>657</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Heat</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>704</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Shaquille O'Neal</mention>
+			<wikiName>Shaquille O'Neal</wikiName>
+			<offset>719</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Dwyane Wade</mention>
+			<wikiName>Dwyane Wade</wikiName>
+			<offset>737</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Jason Williams</mention>
+			<wikiName>Jason Williams (basketball, born 1975)</wikiName>
+			<offset>753</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>879</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>993</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>1061</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Heat</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>1084</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Stan Van Gundy</mention>
+			<wikiName>Stan Van Gundy</wikiName>
+			<offset>1208</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>1332</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>1498</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>1510</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Chicago</mention>
+			<wikiName>Chicago</wikiName>
+			<offset>1660</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>1736</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Heat</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>1748</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Alonzo Mourning</mention>
+			<wikiName>Alonzo Mourning</wikiName>
+			<offset>1760</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>1813</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Mourning</mention>
+			<wikiName>Alonzo Mourning</wikiName>
+			<offset>1855</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Rothstein</mention>
+			<wikiName>Ron Rothstein</wikiName>
+			<offset>1946</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Detroit Pistons</mention>
+			<wikiName>Detroit Pistons</wikiName>
+			<offset>2157</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>2231</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Rothstein</mention>
+			<wikiName>Ron Rothstein</wikiName>
+			<offset>2395</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>WNBA</mention>
+			<wikiName>Women's National Basketball Association</wikiName>
+			<offset>2427</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Miami Sol</mention>
+			<wikiName>Miami Sol</wikiName>
+			<offset>2434</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>WNBA</mention>
+			<wikiName>Women's National Basketball Association</wikiName>
+			<offset>2477</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>2642</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Heat</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>2679</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Antoine Walker</mention>
+			<wikiName>Antoine Walker</wikiName>
+			<offset>2783</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>James Posey</mention>
+			<wikiName>James Posey</wikiName>
+			<offset>2802</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>3064</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Shaq</mention>
+			<wikiName>Shaquille O'Neal</wikiName>
+			<offset>3121</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Dwyane</mention>
+			<wikiName>Dwyane Wade</wikiName>
+			<offset>3130</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Heat</mention>
+			<wikiName>Miami Heat</wikiName>
+			<offset>3295</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>O'Neal</mention>
+			<wikiName>Shaquille O'Neal</wikiName>
+			<offset>3503</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Wade</mention>
+			<wikiName>Dwyane Wade</wikiName>
+			<offset>3652</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>MVP</mention>
+			<wikiName>Most Valuable Player</wikiName>
+			<offset>3679</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Phoenix</mention>
+			<wikiName>Phoenix, Arizona</wikiName>
+			<offset>3810</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>O'Neal</mention>
+			<wikiName>Shaquille O'Neal</wikiName>
+			<offset>3844</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>3924</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>4045</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>4183</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>4269</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles Lakers</mention>
+			<wikiName>Los Angeles Lakers</wikiName>
+			<offset>4363</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Larry Brown</mention>
+			<wikiName>Larry Brown (basketball)</wikiName>
+			<offset>4437</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Pistons</mention>
+			<wikiName>Detroit Pistons</wikiName>
+			<offset>4474</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Lakers</mention>
+			<wikiName>Los Angeles Lakers</wikiName>
+			<offset>4525</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Phil Jackson</mention>
+			<wikiName>Phil Jackson</wikiName>
+			<offset>4538</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Riley</mention>
+			<wikiName>Pat Riley</wikiName>
+			<offset>4624</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="16451635">
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>22</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>BEIJING</mention>
+			<wikiName>Beijing</wikiName>
+			<offset>92</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>185</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Cao Qingyao</mention>
+			<wikiName/>
+			<offset>353</offset>
+			<length>11</length>
+		    </annotation>
+		<annotation>
+			<mention>State Forestry Administration</mention>
+			<wikiName>State Forestry Administration of the People's Republic of China</wikiName>
+			<offset>386</offset>
+			<length>29</length>
+		</annotation>
+		<annotation>
+			<mention>Xinhua News Agency</mention>
+			<wikiName>Xinhua News Agency</wikiName>
+			<offset>445</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>516</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>559</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Sichuan</mention>
+			<wikiName>Sichuan</wikiName>
+			<offset>708</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Chengdu Research Base</mention>
+			<wikiName/>
+			<offset>816</offset>
+			<length>21</length>
+		    </annotation>
+		<annotation>
+			<mention>Chongqing</mention>
+			<wikiName>Chongqing</wikiName>
+			<offset>904</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>1002</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Sichuan</mention>
+			<wikiName>Sichuan</wikiName>
+			<offset>1019</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Shaanxi</mention>
+			<wikiName>Shaanxi</wikiName>
+			<offset>1055</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Giant pandas</mention>
+			<wikiName>Giant panda</wikiName>
+			<offset>1064</offset>
+			<length>12</length>
+		</annotation>
+	</document>
+	<document docName="16454435">
+		<annotation>
+			<mention>Mars rovers</mention>
+			<wikiName>Mars rover</wikiName>
+			<offset>20</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>LOS ANGELES</mention>
+			<wikiName>Los Angeles</wikiName>
+			<offset>108</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Mars rovers</mention>
+			<wikiName>Mars rover</wikiName>
+			<offset>131</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Red Planet</mention>
+			<wikiName>Mars</wikiName>
+			<offset>413</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>John Callas</mention>
+			<wikiName/>
+			<offset>497</offset>
+			<length>11</length>
+		    </annotation>
+		<annotation>
+			<mention>Jet Propulsion Laboratory</mention>
+			<wikiName>Jet Propulsion Laboratory</wikiName>
+			<offset>547</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>NASA</mention>
+			<wikiName>NASA</wikiName>
+			<offset>578</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Earth</mention>
+			<wikiName>Earth</wikiName>
+			<offset>702</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Earth</mention>
+			<wikiName>Earth</wikiName>
+			<offset>1127</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Mars</mention>
+			<wikiName>Mars</wikiName>
+			<offset>1274</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Spirit</mention>
+			<wikiName>Spirit (rover)</wikiName>
+			<offset>1289</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Opportunity</mention>
+			<wikiName>Opportunity (rover)</wikiName>
+			<offset>1300</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Callas</mention>
+			<wikiName/>
+			<offset>1511</offset>
+			<length>6</length>
+		    </annotation>
+		<annotation>
+			<mention>Spirit</mention>
+			<wikiName>Spirit (rover)</wikiName>
+			<offset>1591</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Opportunity</mention>
+			<wikiName>Opportunity (rover)</wikiName>
+			<offset>1635</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Mars</mention>
+			<wikiName>Mars</wikiName>
+			<offset>2012</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Spirit</mention>
+			<wikiName>Spirit (rover)</wikiName>
+			<offset>2018</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Martian</mention>
+			<wikiName>Martian</wikiName>
+			<offset>2077</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Opportunity</mention>
+			<wikiName>Opportunity (rover)</wikiName>
+			<offset>2097</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+	<document docName="16444229">
+		<annotation>
+			<mention>Texas</mention>
+			<wikiName>Texas</wikiName>
+			<offset>13</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>HOUSTON</mention>
+			<wikiName>Houston</wikiName>
+			<offset>117</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>George Bush Intercontinental Airport</mention>
+			<wikiName>George Bush Intercontinental Airport</wikiName>
+			<offset>237</offset>
+			<length>36</length>
+		</annotation>
+		<annotation>
+			<mention>Houston</mention>
+			<wikiName>Houston</wikiName>
+			<offset>347</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Police</mention>
+			<wikiName>Police</wikiName>
+			<offset>389</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Rick Bownds</mention>
+			<wikiName/>
+			<offset>591</offset>
+			<length>11</length>
+		    </annotation>
+		<annotation>
+			<mention>Manuel</mention>
+			<wikiName/>
+			<offset>681</offset>
+			<length>6</length>
+		    </annotation>
+		<annotation>
+			<mention>Ricardo Aguilar</mention>
+			<wikiName/>
+			<offset>692</offset>
+			<length>15</length>
+		    </annotation>
+		<annotation>
+			<mention>Carlos Osorio</mention>
+			<wikiName/>
+			<offset>713</offset>
+			<length>13</length>
+		    </annotation>
+		<annotation>
+			<mention>Erick Perez</mention>
+			<wikiName/>
+			<offset>732</offset>
+			<length>11</length>
+		    </annotation>
+		<annotation>
+			<mention>Daniel Venegas</mention>
+			<wikiName/>
+			<offset>753</offset>
+			<length>14</length>
+		    </annotation>
+		<annotation>
+			<mention>Osorio</mention>
+			<wikiName/>
+			<offset>815</offset>
+			<length>6</length>
+		    </annotation>
+		<annotation>
+			<mention>Perez</mention>
+			<wikiName/>
+			<offset>826</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Harris County Jail</mention>
+			<wikiName/>
+			<offset>855</offset>
+			<length>18</length>
+		    </annotation>
+		<annotation>
+			<mention>Venegas</mention>
+			<wikiName/>
+			<offset>925</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>Bownds</mention>
+			<wikiName/>
+			<offset>1001</offset>
+			<length>6</length>
+		    </annotation>
+		<annotation>
+			<mention>Menzies Aviation Group</mention>
+			<wikiName/>
+			<offset>1032</offset>
+			<length>22</length>
+		    </annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>1121</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>London</mention>
+			<wikiName>London</wikiName>
+			<offset>1245</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Bownds</mention>
+			<wikiName/>
+			<offset>1426</offset>
+			<length>6</length>
+		    </annotation>
+	</document>
+	<document docName="16454203">
+		<annotation>
+			<mention>London's Heathrow Airport</mention>
+			<wikiName>London Heathrow Airport</wikiName>
+			<offset>72</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>LONDON</mention>
+			<wikiName>London</wikiName>
+			<offset>120</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>London's Heathrow Airport</mention>
+			<wikiName>London Heathrow Airport</wikiName>
+			<offset>230</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>Heathrow</mention>
+			<wikiName>London Heathrow Airport</wikiName>
+			<offset>376</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>British Airways</mention>
+			<wikiName>British Airways</wikiName>
+			<offset>404</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>BA</mention>
+			<wikiName>British Airways</wikiName>
+			<offset>458</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>Heathrow</mention>
+			<wikiName>London Heathrow Airport</wikiName>
+			<offset>585</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>BA</mention>
+			<wikiName>British Airways</wikiName>
+			<offset>627</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>Christmas holiday</mention>
+			<wikiName>Christmas Holiday</wikiName>
+			<offset>735</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>BA</mention>
+			<wikiName>British Airways</wikiName>
+			<offset>801</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>Heathrow</mention>
+			<wikiName>Heathrow, London</wikiName>
+			<offset>939</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Heathrow</mention>
+			<wikiName>Heathrow, London</wikiName>
+			<offset>1183</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>BA</mention>
+			<wikiName>British Airways</wikiName>
+			<offset>1320</offset>
+			<length>2</length>
+		</annotation>
+	</document>
+	<document docName="16442287">
+		<annotation>
+			<mention>Joy Bauer</mention>
+			<wikiName>Joy Bauer</wikiName>
+			<offset>54</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>New Year's resolution</mention>
+			<wikiName>New Year's resolution</wikiName>
+			<offset>116</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Nutritionist</mention>
+			<wikiName>Nutritionist</wikiName>
+			<offset>186</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Joy Bauer</mention>
+			<wikiName>Joy Bauer</wikiName>
+			<offset>199</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Joy</mention>
+			<wikiName>Joy Bauer</wikiName>
+			<offset>313</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>New Year</mention>
+			<wikiName>New Year</wikiName>
+			<offset>488</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>LDL-Cholesterol</mention>
+			<wikiName>Low-density lipoprotein</wikiName>
+			<offset>813</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>HDL-Cholesterol</mention>
+			<wikiName>High-density lipoprotein</wikiName>
+			<offset>845</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Triglycerides</mention>
+			<wikiName>Triglyceride</wikiName>
+			<offset>914</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Blood Sugars</mention>
+			<wikiName>Blood sugar</wikiName>
+			<offset>944</offset>
+			<length>12</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>American Journal of Clinical Nutrition</mention>
+			<wikiName>The American Journal of Clinical Nutrition</wikiName>
+			<offset>1244</offset>
+			<length>38</length>
+		</annotation>
+		<annotation>
+			<mention>Blackberries</mention>
+			<wikiName>Blackberry</wikiName>
+			<offset>1418</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Walnuts</mention>
+			<wikiName>Walnut</wikiName>
+			<offset>1434</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Strawberries</mention>
+			<wikiName>Strawberry</wikiName>
+			<offset>1445</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Artichokes</mention>
+			<wikiName>Artichoke</wikiName>
+			<offset>1461</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Cranberries</mention>
+			<wikiName>Cranberry</wikiName>
+			<offset>1476</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Raspberries</mention>
+			<wikiName>Raspberry</wikiName>
+			<offset>1491</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Blueberries</mention>
+			<wikiName>Blueberry</wikiName>
+			<offset>1506</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Sara Lee Food &amp; Beverage</mention>
+			<wikiName/>
+			<offset>1887</offset>
+			<length>28</length>
+		    </annotation>
+		<annotation>
+			<mention>Whole Wheat</mention>
+			<wikiName>Whole grain</wikiName>
+			<offset>2196</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Whole Grain</mention>
+			<wikiName>Whole grain</wikiName>
+			<offset>2216</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Annual Scientific Meeting</mention>
+			<wikiName/>
+			<offset>2400</offset>
+			<length>25</length>
+		    </annotation>
+		<annotation>
+			<mention>NAASO</mention>
+			<wikiName/>
+			<offset>2428</offset>
+			<length>5</length>
+		    </annotation>
+		<annotation>
+			<mention>Joy Bauer</mention>
+			<wikiName>Joy Bauer</wikiName>
+			<offset>3229</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="16442342">
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>0</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Sago Mine accident</mention>
+			<wikiName>Sago Mine disaster</wikiName>
+			<offset>61</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>BUCKHANNON</mention>
+			<wikiName>Buckhannon, West Virginia</wikiName>
+			<offset>114</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>W. Va</mention>
+			<wikiName>West Virginia</wikiName>
+			<offset>126</offset>
+			<length>5</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>Sago Mine</mention>
+			<wikiName>Sago Mine disaster</wikiName>
+			<offset>238</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Buckhannon</mention>
+			<wikiName>Buckhannon, West Virginia</wikiName>
+			<offset>253</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>W. Va</mention>
+			<wikiName>West Virginia</wikiName>
+			<offset>265</offset>
+			<length>5</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>West Virginia</mention>
+			<wikiName>West Virginia</wikiName>
+			<offset>338</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Randal McCloy</mention>
+			<wikiName>Sago Mine disaster</wikiName>
+			<offset>361</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Debbie Hamner</mention>
+			<wikiName/>
+			<offset>622</offset>
+			<length>13</length>
+		    </annotation>
+		<annotation>
+			<mention>Sago</mention>
+			<wikiName>Sago Mine disaster</wikiName>
+			<offset>674</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>West Virginia</mention>
+			<wikiName>West Virginia</wikiName>
+			<offset>685</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Davitt McAteer</mention>
+			<wikiName/>
+			<offset>1146</offset>
+			<length>14</length>
+		    </annotation>
+		<annotation>
+			<mention>Mine Safety and Health Administration</mention>
+			<wikiName>Mine Safety and Health Administration</wikiName>
+			<offset>1215</offset>
+			<length>37</length>
+		</annotation>
+		<annotation>
+			<mention>West Virginia</mention>
+			<wikiName>West Virginia</wikiName>
+			<offset>1261</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Sago Mine</mention>
+			<wikiName>Sago Mine disaster</wikiName>
+			<offset>1277</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>McAteer</mention>
+			<wikiName/>
+			<offset>1362</offset>
+			<length>7</length>
+		    </annotation>
+		<annotation>
+			<mention>Sago</mention>
+			<wikiName>Sago Mine disaster</wikiName>
+			<offset>1603</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Dennis O'Dell</mention>
+			<wikiName/>
+			<offset>2142</offset>
+			<length>13</length>
+		    </annotation>
+		<annotation>
+			<mention>United Mine Workers of America</mention>
+			<wikiName>United Mine Workers</wikiName>
+			<offset>2159</offset>
+			<length>30</length>
+		</annotation>
+	</document>
+	<document docName="16443053">
+		<annotation>
+			<mention>Chertoff</mention>
+			<wikiName>Michael Chertoff</wikiName>
+			<offset>0</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>WASHINGTON</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>115</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Homeland Security</mention>
+			<wikiName>United States Department of Homeland Security</wikiName>
+			<offset>420</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Michael Chertoff</mention>
+			<wikiName>Michael Chertoff</wikiName>
+			<offset>448</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Democrats</mention>
+			<wikiName>Democratic Party (United States)</wikiName>
+			<offset>656</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Congress</mention>
+			<wikiName>United States Congress</wikiName>
+			<offset>683</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Chertoff</mention>
+			<wikiName>Michael Chertoff</wikiName>
+			<offset>798</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>844</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>The Associated Press</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>1205</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Chertoff</mention>
+			<wikiName>Michael Chertoff</wikiName>
+			<offset>1263</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Chertoff</mention>
+			<wikiName>Michael Chertoff</wikiName>
+			<offset>1587</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>1989</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>D.C.</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>2001</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>San Diego</mention>
+			<wikiName>San Diego</wikiName>
+			<offset>2013</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Minneapolis-St. Paul</mention>
+			<wikiName>Minneapolis–Saint Paul</wikiName>
+			<offset>2024</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Columbus</mention>
+			<wikiName>Columbus, Ohio</wikiName>
+			<offset>2046</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Ohio</mention>
+			<wikiName>Ohio</wikiName>
+			<offset>2056</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Sioux Falls</mention>
+			<wikiName>Sioux Falls, South Dakota</wikiName>
+			<offset>2062</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>S.D.</mention>
+			<wikiName>South Dakota</wikiName>
+			<offset>2075</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Laramie County</mention>
+			<wikiName>Laramie County, Wyoming</wikiName>
+			<offset>2085</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Wyo.</mention>
+			<wikiName>Wyoming</wikiName>
+			<offset>2101</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Chicago</mention>
+			<wikiName>Chicago</wikiName>
+			<offset>2132</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Cleveland</mention>
+			<wikiName>Cleveland</wikiName>
+			<offset>2141</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Baton Rouge</mention>
+			<wikiName>Baton Rouge, Louisiana</wikiName>
+			<offset>2152</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>La.</mention>
+			<wikiName>Louisiana</wikiName>
+			<offset>2165</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Mandan</mention>
+			<wikiName>Mandan, North Dakota</wikiName>
+			<offset>2170</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>N.D.</mention>
+			<wikiName>North Dakota</wikiName>
+			<offset>2178</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>American Samoa</mention>
+			<wikiName>American Samoa</wikiName>
+			<offset>2188</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>U.S. territories</mention>
+			<wikiName>Territories of the United States</wikiName>
+			<offset>2277</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Congress</mention>
+			<wikiName>United States Congress</wikiName>
+			<offset>2582</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Democrats</mention>
+			<wikiName>Democratic Party (United States)</wikiName>
+			<offset>2602</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Charles Schumer</mention>
+			<wikiName>Chuck Schumer</wikiName>
+			<offset>3024</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>World Trade Center</mention>
+			<!--wikiName>World Trade Center</wikiName-->
+			<!-- PL corrected for 2017/09 Wikipedia -->
+			<wikiName>World Trade Center (1973-2001)</wikiName>
+			<offset>3305</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York City</wikiName>
+			<offset>3458</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>3585</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York City</wikiName>
+			<offset>3615</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Chicago</mention>
+			<wikiName>Chicago</wikiName>
+			<offset>4271</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Tammy Lapp</mention>
+			<wikiName/>
+			<offset>4532</offset>
+			<length>10</length>
+		    </annotation>
+		<annotation>
+			<mention>Mandan</mention>
+			<wikiName>Mandan, North Dakota</wikiName>
+			<offset>4574</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Morton County</mention>
+			<wikiName>Morton County, North Dakota</wikiName>
+			<offset>4585</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>N.D.</mention>
+			<wikiName>North Dakota</wikiName>
+			<offset>4600</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="16444287">
+		<annotation>
+			<mention>Muslim</mention>
+			<wikiName>Muslim</wikiName>
+			<offset>0</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>12</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Syrian</mention>
+			<wikiName>Syrian people</wikiName>
+			<offset>79</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Las Vegas</mention>
+			<wikiName>Las Vegas</wikiName>
+			<offset>111</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>FRESNO</mention>
+			<wikiName>Fresno, California</wikiName>
+			<offset>121</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Calif.</mention>
+			<wikiName>California</wikiName>
+			<offset>129</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Syrian</mention>
+			<wikiName>Syrian people</wikiName>
+			<offset>162</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Las Vegas</mention>
+			<wikiName>Las Vegas</wikiName>
+			<offset>266</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>370</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Majed Shehadeh</mention>
+			<wikiName/>
+			<offset>401</offset>
+			<length>14</length>
+		    </annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>454</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Frankfurt</mention>
+			<wikiName>Frankfurt</wikiName>
+			<offset>478</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Las Vegas</mention>
+			<wikiName>Las Vegas</wikiName>
+			<offset>491</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Bakersfield</mention>
+			<wikiName>Bakersfield, California</wikiName>
+			<offset>558</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>California</mention>
+			<wikiName>California</wikiName>
+			<offset>571</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>California</mention>
+			<wikiName>California</wikiName>
+			<offset>656</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Roxanne Hercules</mention>
+			<wikiName/>
+			<offset>794</offset>
+			<length>16</length>
+		    </annotation>
+		<annotation>
+			<mention>U.S. Customs and Border Protection</mention>
+			<wikiName>U.S. Customs and Border Protection</wikiName>
+			<offset>830</offset>
+			<length>34</length>
+		</annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>889</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>970</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Council on American-Islamic Relations</mention>
+			<wikiName>Council on American–Islamic Relations</wikiName>
+			<offset>1191</offset>
+			<length>37</length>
+		</annotation>
+		<annotation>
+			<mention>Islamic scholar</mention>
+			<wikiName>Ulama</wikiName>
+			<offset>1245</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>South Africa</mention>
+			<wikiName>South Africa</wikiName>
+			<offset>1266</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>San Francisco International Airport</mention>
+			<wikiName>San Francisco International Airport</wikiName>
+			<offset>1299</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>US Airways</mention>
+			<wikiName>US Airways</wikiName>
+			<offset>1378</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Minneapolis</mention>
+			<wikiName>Minneapolis</wikiName>
+			<offset>1401</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Phoenix</mention>
+			<wikiName>Phoenix, Arizona</wikiName>
+			<offset>1416</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>U.S. war</mention>
+			<wikiName>United States military casualties of war</wikiName>
+			<offset>1482</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>1494</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Affad Shaikh</mention>
+			<wikiName/>
+			<offset>1631</offset>
+			<length>12</length>
+		    </annotation>
+		<annotation>
+			<mention>CAIR</mention>
+			<wikiName>Council on American–Islamic Relations</wikiName>
+			<offset>1676</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>1712</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Condor Airlines</mention>
+			<wikiName>Condor Flugdienst</wikiName>
+			<offset>1765</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>McCarran International Airport</mention>
+			<wikiName>McCarran International Airport</wikiName>
+			<offset>1791</offset>
+			<length>30</length>
+		</annotation>
+		<annotation>
+			<mention>Las Vegas</mention>
+			<wikiName>Las Vegas</wikiName>
+			<offset>1921</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>New Year</mention>
+			<wikiName>New Year</wikiName>
+			<offset>1978</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Central California</mention>
+			<wikiName>Central California</wikiName>
+			<offset>2030</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>2207</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Alzenau</mention>
+			<wikiName>Alzenau</wikiName>
+			<offset>2267</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Federal government of the United States</wikiName>
+			<offset>2419</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Border Protection</mention>
+			<wikiName/>
+			<offset>2460</offset>
+			<length>17</length>
+		    </annotation>
+		<annotation>
+			<mention>FBI</mention>
+			<wikiName>Federal Bureau of Investigation</wikiName>
+			<offset>2482</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>2532</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>North Las Vegas</mention>
+			<wikiName>North Las Vegas, Nevada</wikiName>
+			<offset>2611</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>2679</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>2755</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Joanne Mulligan</mention>
+			<wikiName/>
+			<offset>2804</offset>
+			<length>15</length>
+		    </annotation>
+		<annotation>
+			<mention>U.S. Immigration and Customs Enforcement</mention>
+			<wikiName>U.S. Immigration and Customs Enforcement</wikiName>
+			<offset>2836</offset>
+			<length>40</length>
+		</annotation>
+		<annotation>
+			<mention>FBI</mention>
+			<wikiName>Federal Bureau of Investigation</wikiName>
+			<offset>2933</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Las Vegas</mention>
+			<wikiName>Las Vegas</wikiName>
+			<offset>2962</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>3090</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>3530</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>3852</offset>
+			<length>8</length>
+		    </annotation>
+		<annotation>
+			<mention>Shehadeh</mention>
+			<wikiName/>
+			<offset>3879</offset>
+			<length>8</length>
+		    </annotation>
+	</document>
+	<document docName="16447720">
+		<annotation>
+			<mention>Gerald Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>0</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Michigan</mention>
+			<wikiName>Michigan</wikiName>
+			<offset>28</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>GRAND RAPIDS</mention>
+			<wikiName>Grand Rapids, Michigan</wikiName>
+			<offset>105</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Mich.</mention>
+			<wikiName>Michigan</wikiName>
+			<offset>119</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Gerald R. Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>127</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>California desert</mention>
+			<wikiName>Deserts of California</wikiName>
+			<offset>291</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>345</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Vice President</mention>
+			<wikiName>Vice President of the United States</wikiName>
+			<offset>599</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Dick Cheney</mention>
+			<wikiName>Dick Cheney</wikiName>
+			<offset>614</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Betty Ford</mention>
+			<wikiName>Betty Ford</wikiName>
+			<offset>654</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>American flag</mention>
+			<wikiName>Flag of the United States</wikiName>
+			<offset>674</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>740</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Grace Episcopal Church</mention>
+			<wikiName/>
+			<offset>990</offset>
+			<length>22</length>
+		    </annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1020</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Donald Rumsfeld</mention>
+			<wikiName>Donald Rumsfeld</wikiName>
+			<offset>1046</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1067</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Jimmy Carter</mention>
+			<wikiName>Jimmy Carter</wikiName>
+			<offset>1085</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Rumsfeld</mention>
+			<wikiName>Donald Rumsfeld</wikiName>
+			<offset>1128</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Jack Nicklaus</mention>
+			<wikiName>Jack Nicklaus</wikiName>
+			<offset>1302</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Rumsfeld</mention>
+			<wikiName>Donald Rumsfeld</wikiName>
+			<offset>1337</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Rumsfeld</mention>
+			<wikiName>Donald Rumsfeld</wikiName>
+			<offset>1436</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>President Bush</mention>
+			<wikiName>George W. Bush</wikiName>
+			<offset>1476</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1523</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Watergate</mention>
+			<wikiName>Watergate scandal</wikiName>
+			<offset>1590</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Rumsfeld</mention>
+			<wikiName>Donald Rumsfeld</wikiName>
+			<offset>1601</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Navy</mention>
+			<wikiName>United States Navy</wikiName>
+			<offset>1619</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1675</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Gerald R. Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1777</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1945</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Carter</mention>
+			<wikiName>Jimmy Carter</wikiName>
+			<offset>2007</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Rosalynn</mention>
+			<wikiName>Rosalynn Carter</wikiName>
+			<offset>2032</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>2208</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Grand Rapids</mention>
+			<wikiName>Grand Rapids, Michigan</wikiName>
+			<offset>2275</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Philip Bareham</mention>
+			<wikiName/>
+			<offset>2622</offset>
+			<length>14</length>
+		    </annotation>
+		<annotation>
+			<mention>Lansing</mention>
+			<wikiName>Lansing, Michigan</wikiName>
+			<offset>2640</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>2721</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>2825</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Grand Rapids</mention>
+			<wikiName>Grand Rapids, Michigan</wikiName>
+			<offset>2842</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Congress</mention>
+			<wikiName>United States Congress</wikiName>
+			<offset>2858</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Grace Episcopal Church</mention>
+			<wikiName/>
+			<offset>2909</offset>
+			<length>22</length>
+		    </annotation>
+		<annotation>
+			<mention>Richard Norton Smith</mention>
+			<wikiName>Richard Norton Smith</wikiName>
+			<offset>2955</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>3034</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>3093</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Grand Rapids</mention>
+			<wikiName>Grand Rapids, Michigan</wikiName>
+			<offset>3122</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Smith</mention>
+			<wikiName>Richard Norton Smith</wikiName>
+			<offset>3360</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>3488</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>University of Michigan</mention>
+			<wikiName>University of Michigan</wikiName>
+			<offset>3511</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>Michigan</mention>
+			<wikiName>Michigan</wikiName>
+			<offset>3714</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>3759</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Richard Nixon</mention>
+			<wikiName>Richard Nixon</wikiName>
+			<offset>3792</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Rancho Mirage</mention>
+			<wikiName>Rancho Mirage, California</wikiName>
+			<offset>3844</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Calif.</mention>
+			<wikiName>California</wikiName>
+			<offset>3859</offset>
+			<length>6</length>
+		</annotation>
+	</document>
+	<document docName="16452612">
+		<annotation>
+			<mention>WASHINGTON</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>89</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>President George W. Bush</mention>
+			<wikiName>George W. Bush</wikiName>
+			<offset>443</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>726</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Bush</mention>
+			<wikiName>George W. Bush</wikiName>
+			<offset>837</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>867</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Gerald Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1174</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Richard Nixon</mention>
+			<wikiName>Richard Nixon</wikiName>
+			<offset>1229</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Ford</mention>
+			<wikiName>Gerald Ford</wikiName>
+			<offset>1272</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Nixon</mention>
+			<wikiName>Richard Nixon</wikiName>
+			<offset>1286</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Jimmy Carter</mention>
+			<wikiName>Jimmy Carter</wikiName>
+			<offset>1350</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>1404</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>American people</mention>
+			<wikiName>Americans</wikiName>
+			<offset>1453</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.c.</wikiName>
+			<offset>1662</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.c.</wikiName>
+			<offset>1738</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Evan Bayh</mention>
+			<wikiName>Evan Bayh</wikiName>
+			<offset>1875</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Indiana</mention>
+			<wikiName>Indiana</wikiName>
+			<offset>2042</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Senate</mention>
+			<wikiName>United States Senate</wikiName>
+			<offset>2070</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Bayh</mention>
+			<wikiName>Evan Bayh</wikiName>
+			<offset>2190</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>2218</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Dan Pfeiffer</mention>
+			<wikiName>Daniel Pfeiffer</wikiName>
+			<offset>2259</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Bayh</mention>
+			<wikiName>Evan Bayh</wikiName>
+			<offset>2288</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Pfeiffer</mention>
+			<wikiName>Daniel Pfeiffer</wikiName>
+			<offset>2574</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Boomer</mention>
+			<wikiName/>
+			<offset>2653</offset>
+			<length>6</length>
+		    </annotation>
+		<annotation>
+			<mention>Vietnam</mention>
+			<wikiName>Vietnam War</wikiName>
+			<offset>2759</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Pfeiffer</mention>
+			<wikiName>Daniel Pfeiffer</wikiName>
+			<offset>2774</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Bush campaign</mention>
+			<wikiName>George W. Bush presidential campaign, 2004</wikiName>
+			<offset>2801</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>John Kerry</mention>
+			<wikiName>John Kerry</wikiName>
+			<offset>2828</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Bush</mention>
+			<wikiName>George W. Bush</wikiName>
+			<offset>2849</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Bill Clinton</mention>
+			<wikiName>Bill Clinton</wikiName>
+			<offset>2918</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Pfeiffer</mention>
+			<wikiName>Daniel Pfeiffer</wikiName>
+			<offset>2986</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Positively American</mention>
+			<wikiName/>
+			<offset>3403</offset>
+			<length>19</length>
+		    </annotation>
+		<annotation>
+			<mention>Charles Schumer</mention>
+			<wikiName>Chuck Schumer</wikiName>
+			<offset>3429</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York</wikiName>
+			<offset>3448</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Schumer</mention>
+			<wikiName>Chuck Schumer</wikiName>
+			<offset>3620</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="13259309">
+		<annotation>
+			<mention>Al-Maliki</mention>
+			<wikiName>Nouri al-Maliki</wikiName>
+			<offset>0</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>BAGHDAD</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>76</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>85</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>92</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>NBC News</mention>
+			<wikiName>NBC News</wikiName>
+			<offset>130</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam Hussein</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>224</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam Hussein</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>362</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Mowaffak al-Rubaie</mention>
+			<wikiName>Mowaffak al-Rubaie</wikiName>
+			<offset>416</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>544</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Iraqi forces</mention>
+			<wikiName>Iraqi Army</wikiName>
+			<offset>858</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>920</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Al-Jazeera</mention>
+			<wikiName>Al Jazeera</wikiName>
+			<offset>1044</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Internet</mention>
+			<wikiName>Internet</wikiName>
+			<offset>1074</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>1106</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Associated Press</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>1129</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Nouri al-Maliki</mention>
+			<wikiName>Nouri al-Maliki</wikiName>
+			<offset>1195</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Al-Maliki</mention>
+			<wikiName>Nouri al-Maliki</wikiName>
+			<offset>1286</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>1419</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>U.S. military</mention>
+			<wikiName>United States Armed Forces</wikiName>
+			<offset>1463</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>1508</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>al-Rubaie</mention>
+			<wikiName>Mowaffak al-Rubaie</wikiName>
+			<offset>1760</offset>
+			<length>9</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>Mowaffak al-Rubaie</mention>
+			<wikiName>Mowaffak al-Rubaie</wikiName>
+			<offset>1838</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Munqith al-Faroon</mention>
+			<wikiName/>
+			<offset>1898</offset>
+			<length>17</length>
+		    </annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>1952</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>The Associated Press</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>1980</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>al-Faroon</mention>
+			<wikiName/>
+			<offset>2295</offset>
+			<length>9</length>
+		    </annotation>
+		<annotation>
+			<mention>Al-Jazeera</mention>
+			<wikiName>Al Jazeera</wikiName>
+			<offset>2458</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Web site</mention>
+			<wikiName>Website</wikiName>
+			<offset>2485</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>2510</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>New York Times</mention>
+			<wikiName>The New York Times</wikiName>
+			<offset>2534</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>al-Faroon</mention>
+			<wikiName/>
+			<offset>2576</offset>
+			<length>9</length>
+		    </annotation>
+		<annotation>
+			<mention>Hussein</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>2690</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Mowaffak al-Rubaie</mention>
+			<wikiName>Mowaffak al-Rubaie</wikiName>
+			<offset>2777</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Maliki</mention>
+			<wikiName>Nouri al-Maliki</wikiName>
+			<offset>2801</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Times</mention>
+			<wikiName>The New York Times</wikiName>
+			<offset>2842</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>al-Rubaie</mention>
+			<wikiName>Mowaffak al-Rubaie</wikiName>
+			<offset>2881</offset>
+			<length>9</length>
+		<entity/>
+		</annotation>
+		<annotation>
+			<mention>AP</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>2904</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>al-Maliki</mention>
+			<wikiName>Nouri al-Maliki</wikiName>
+			<offset>3000</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Najaf</mention>
+			<wikiName>Najaf</wikiName>
+			<offset>3018</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Al-Faroon</mention>
+			<wikiName/>
+			<offset>3078</offset>
+			<length>9</length>
+		    </annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>3327</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Al-Arabiya</mention>
+			<wikiName>Al Arabiya</wikiName>
+			<offset>3659</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>MSNBC</mention>
+			<wikiName>MSNBC</wikiName>
+			<offset>3796</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>3939</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Muqtada</mention>
+			<wikiName>Muqtada al-Sadr</wikiName>
+			<offset>4012</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Muqtada</mention>
+			<wikiName>Muqtada al-Sadr</wikiName>
+			<offset>4021</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Muqtada</mention>
+			<wikiName>Muqtada al-Sadr</wikiName>
+			<offset>4030</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Muqtada al-Sadr</mention>
+			<wikiName>Muqtada al-Sadr</wikiName>
+			<offset>4055</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Mahdi Army</mention>
+			<wikiName>Mahdi Army</wikiName>
+			<offset>4119</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Sunnis</mention>
+			<wikiName>Sunni Islam</wikiName>
+			<offset>4199</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Al-Sadr</mention>
+			<wikiName>Muqtada al-Sadr</wikiName>
+			<offset>4240</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>4271</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>al-Maliki</mention>
+			<wikiName>Nouri al-Maliki</wikiName>
+			<offset>4308</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>4326</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>William Caldwell</mention>
+			<wikiName>William B. Caldwell</wikiName>
+			<offset>4350</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>U.S. military</mention>
+			<wikiName>United States Armed Forces</wikiName>
+			<offset>4370</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>U.S. forces</mention>
+			<wikiName>United States Armed Forces</wikiName>
+			<offset>4479</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>4645</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Caldwell</mention>
+			<wikiName>William B. Caldwell</wikiName>
+			<offset>4663</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>4692</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>US military</mention>
+			<wikiName>United States Armed Forces</wikiName>
+			<offset>4758</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Caldwell</mention>
+			<wikiName>William B. Caldwell</wikiName>
+			<offset>4997</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="16447201">
+		<annotation>
+			<mention>Hindus</mention>
+			<wikiName>Hindu</wikiName>
+			<offset>0</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Ganges</mention>
+			<wikiName>Ganges</wikiName>
+			<offset>17</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Pilgrims</mention>
+			<wikiName>Pilgrim</wikiName>
+			<offset>45</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>ALLAHABAD</mention>
+			<wikiName>Allahabad</wikiName>
+			<offset>120</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>India</mention>
+			<wikiName>India</wikiName>
+			<offset>131</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Hindus</mention>
+			<wikiName>Hindu</wikiName>
+			<offset>161</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Ganges river</mention>
+			<wikiName>Ganges</wikiName>
+			<offset>251</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>northern India</mention>
+			<wikiName>North India</wikiName>
+			<offset>267</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>India</mention>
+			<wikiName>India</wikiName>
+			<offset>368</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Ardh Kumbh Mela</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>414</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Half Pitcher Festival</mention>
+			<wikiName/>
+			<offset>434</offset>
+			<length>21</length>
+		    </annotation>
+		<annotation>
+			<mention>Ganges</mention>
+			<wikiName>Ganges</wikiName>
+			<offset>598</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Yamuna</mention>
+			<wikiName>Yamuna</wikiName>
+			<offset>610</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Allahabad</mention>
+			<wikiName>Allahabad</wikiName>
+			<offset>647</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Hindu scriptures</mention>
+			<wikiName>Hindu texts</wikiName>
+			<offset>795</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Maha Kumbh Mela</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>976</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Great Pitcher Festival</mention>
+			<wikiName/>
+			<offset>1000</offset>
+			<length>22</length>
+		    </annotation>
+		<annotation>
+			<mention>Ganges</mention>
+			<wikiName>Ganges</wikiName>
+			<offset>1091</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Kumbh Mela</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>1476</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Naba Kumar Ghosh</mention>
+			<wikiName/>
+			<offset>1494</offset>
+			<length>16</length>
+		    </annotation>
+		<annotation>
+			<mention>West Bengal</mention>
+			<wikiName>West Bengal</wikiName>
+			<offset>1568</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Madhya Pradesh</mention>
+			<wikiName>Madhya Pradesh</wikiName>
+			<offset>1784</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Ganges</mention>
+			<wikiName>Ganges</wikiName>
+			<offset>1815</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Kumbh Mela</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>1853</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Kumbh</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>2020</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Rama Devi</mention>
+			<wikiName/>
+			<offset>2033</offset>
+			<length>9</length>
+		    </annotation>
+		<annotation>
+			<mention>Allahabad</mention>
+			<wikiName>Allahabad</wikiName>
+			<offset>2062</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Kumbh</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>2128</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Indian army</mention>
+			<wikiName>Indian Army</wikiName>
+			<offset>2273</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Allahabad</mention>
+			<wikiName>Allahabad</wikiName>
+			<offset>2377</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Hindi</mention>
+			<wikiName>Hindi</wikiName>
+			<offset>2395</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Uttar Pradesh</mention>
+			<wikiName>Uttar Pradesh</wikiName>
+			<offset>2420</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Garuda</mention>
+			<wikiName>Garuda</wikiName>
+			<offset>2462</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Hindu god</mention>
+			<wikiName>Hindu deities</wikiName>
+			<offset>2490</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Vishnu</mention>
+			<wikiName>Vishnu</wikiName>
+			<offset>2500</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Garuda</mention>
+			<wikiName>Garuda</wikiName>
+			<offset>2615</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Maha Kumbh Mela</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>2708</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Maha Kumbh</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>2897</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Maha Kumbh Mela</mention>
+			<wikiName>Kumbh Mela</wikiName>
+			<offset>2915</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Guinness Book of Records</mention>
+			<wikiName>Guinness World Records</wikiName>
+			<offset>2978</offset>
+			<length>24</length>
+		</annotation>
+	</document>
+</msnbc.entityAnnotation>

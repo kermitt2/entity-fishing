@@ -1,0 +1,27 @@
+Physicists Find A New, Striking Difference Between Matter And Antimatter
+
+ScienceDaily (July 13, 2001) — An international collaboration of physicists conducting experiments at the Department of Energy's Stanford Linear Accelerator Center (SLAC) has discovered a second fundamental difference between the behavior of matter and that of antimatter. They observed this intriguing phenomenon -- known as charge-parity (CP) violation and first seen decades ago in experiments with another particle -- in disintegrations of heavy, short-lived subatomic particles called B mesons. The collaboration reported its result in a paper submitted July 5 for publication in Physical Review Letters, a leading scientific journal.
+
+"After 37 years of searching for further examples of CP violation, physicists now know that there are at least two kinds of subatomic particles that exhibit this puzzling phenomenon, thought to be responsible for the great preponderance of matter in the Universe," said Princeton University physicist Stewart Smith, spokesman of the collaboration. "We are poised for further discoveries that should open up new directions for particle physics."
+
+The international collaboration includes more than 600 scientists and engineers from 73 institutions in Canada, China, France, Germany, Great Britain, Italy, Norway, Russia and the United States. They built and have been operating the sophisticated 1,200-ton detector, named BABAR, which was used to make the discovery.
+
+The detector records subtle distinctions between decays of B mesons and those of their antimatter counterparts, called anti-B mesons. Both are more than five times heavier than protons and survive just over a trillionth of a second. Physicists employed the detector to observe an unmistakable difference, or asymmetry, between the rates at which B and anti-B mesons decay into a special set of specific final states.
+
+From these measurements, they calculated a parameter called sin 2b (sine two beta), which expresses the degree of asymmetry between matter and antimatter. A non-zero value of this parameter is clear evidence for CP violation among B mesons.
+
+In the paper just submitted, the BABAR collaboration reported measuring a value of sin 2b = 0.59 ± 0.14, which is substantially different from zero. There are now fewer than 3 chances in 100,000 that the actual, physical asymmetry could be consistent with zero.
+
+This BABAR result is easily the most precise measurement of sin 2b reported to date. Earlier measurements made at Fermi National Accelerator Laboratory, the Japanese National Laboratory for High-Energy Accelerator Research (KEK), and at SLAC by the BABAR collaboration are consistent with the present result but not as accurate. The value just reported agrees with expectations based on the Standard Model, today's dominant theory of particle physics.
+
+The precision of the BABAR result was made possible by the outstanding performance of the PEP-II B Factory at SLAC. Built in collaboration with the Energy Department's Lawrence Berkeley and Lawrence Livermore National Laboratories, this pair of 2.2-kilometer storage rings collides unequal-energy beams of electrons and their antimatter counterparts, called positrons. Piermaria Oddone, now deputy director of the Berkeley lab, first proposed this innovative experimental approach, which greatly enhances the accuracy of many B meson measurements.
+
+"The B Factory has performed beyond expectations, permitting the BABAR collaboration to make the world-class measurements on B mesons," said SLAC Director Jonathan Dorfan, who played a pivotal role in designing and building this particle collider. Since it began operating in June 1999, the B Factory has produced more than 32 million pairs of B mesons, from which data the present BABAR result was extracted.
+
+The mysterious phenomenon of CP violation was first discovered in a 1964 experiment led by James Cronin and Val Fitch at the Brookhaven National Laboratory. Their group observed this behavior in decays of subatomic particles called K mesons, which are about one tenth as heavy as B mesons and live much longer; the two physicists shared a Nobel Prize for the discovery.
+
+Several observations of CP violation have since occurred in experiments with K mesons. But until the recent BABAR discovery, no other subatomic particles had clearly exhibited this exceedingly rare phenomenon. Having this second striking example of CP violation should aid theorists trying to understand what causes it.
+
+Scientists are interested in this puzzling behavior because it can help explain the abundance of matter in the Universe. In 1967, Russian theorist Andrei Sakharov used CP violation to suggest how the present matter-dominated Universe could have emerged from one that contained exactly equal amounts of matter and antimatter during the earliest moments of the Big Bang.
+
+The Stanford Linear Accelerator Center is a national laboratory for high-energy physics and synchrotron-radiation research operated by Stanford University on behalf of the U.S. Department of Energy. The Department's Office of Science funded the construction of the B Factory at $177 million and contributed about 60 percent of the cost of the BABAR detector, with the remainder coming from foreign sources. "The foreign contributions to this experiment, both monetary and scientific, have been absolutely crucial to its success," noted former BABAR spokesman David Hitlin of the California Institute of Technology. 

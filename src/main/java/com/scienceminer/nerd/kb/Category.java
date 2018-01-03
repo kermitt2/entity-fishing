@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.kb;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

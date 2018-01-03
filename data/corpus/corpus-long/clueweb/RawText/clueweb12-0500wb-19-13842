@@ -1,0 +1,284 @@
+X-Pad: avoid browser bug
+Main lectures 42 microsymposium
+Main lectures
+1 2 3
+4 5 6 7 8 9 10
+ML01
+CHEMILUMINESCENCE COMBINED WITH THERMAL ANALYSIS FOR
+STUDYING POLYMER OXIDATION
+N.C. BILLINGHAMa, P.K. FEARONa,
+M.N. GRIGGa, S.W. BIGGERb
+aDepartment of Chemistry, University of Sussex,
+Brighton, BN1 9QJ, UK
+bVictoria University of Technology, P.O. Box 14428,
+Melbourne 8001, Australia
+Because of the effectiveness of modern stabilisers,
+accelerated ageing tests must be used to evaluate their
+performance. Oven ageing testing is the most reliable but is time
+consuming. Differential Scanning Calorimetry (DSC) has been
+widely used for measuring oxidation induction times (OIT) but is
+usually (mis)used at temperatures above the melting point of the
+polymer.
+Many polymers emit light (chemiluminescence, CL) during
+oxidation. CL offers an alternative method to monitor oxidation,
+its advantage being very high sensitivity. CL imaging of
+oxidative degradation has recently been made possible by the
+development of low noise, high sensitivity cameras, which allow
+multiple sampling, reducing experimental times and cost. Imaging
+also allows study of inhomogeneity.
+In collaboration with Mettler Toledo, we have combined CL
+measurement with DSC in a single instrument. The combination has
+obvious advantages where oxidation occurs simultaneously with
+other thermal events, e.g. melting, since the CL is sensitive
+only to oxidation. CL in inert atmospheres can easily detect the
+presence of peroxides at concentrations well below those
+detectable by DSC.
+Measurements on unstabilised samples of polypropylene show
+good correlation of CL with heat flow data, with kinetics
+consistent with the Russell mechanism for CL. Studies of the
+formation of carbonyl groups show that the relation of CL to C=O
+content is also consistent with the Russell mechanism.
+For stabilised samples OITs measured by both CL and DSC are
+similar. It is easier to operate the CL at very high sensitivity
+and CL can easily detect OITs above 70 h. Increased oxygen
+pressures allow analysis by CL under conditions where DSC signals
+are noisy. There is good correlation between CL values measured
+by single-sample CL and imaging detection.
+Multiple detection needs some care in order to avoid cross
+sample contamination but allows major economy of equipment time.
+Some applications of the DSC/CL method will be discussed,
+including the assessment of stabiliser performance and the
+correlation of OIT and oven ageing.
+ML02
+RADIATION AGEING OF POLYMER MATERIALS
+J.L. GARDETTE, A. RIVATON
+Laboratoire de Photochimie Moléculaire et Macromoléculaire,
+UMR CNRS 6505, Université Blaise Pascal, 63177 Aubière cedex
+France
+The modifications of structure and properties of polymeric
+materials resulting of the ageing initiated by ionising
+radiations have been a subject of interest as soon as nuclear
+programs began. Exposure of polymers to radiative environments
+causes indeed a deterioration of their properties. It has been
+approximately 50 years since researchers first began studying the
+effects of ionising radiations on polymers. The main
+radiation-induced changes consist in scissions and/or
+crosslinking of the macromolecular chains, formation of gaseous
+products such as hydrogen or low molecular weight hydrocarbons,
+accumulation of oxidation products, loss and/or formation of
+unsaturations.
+Among the numerous studies devoted to the radiochemical ageing
+of polymers, many of them report on the mechanism of the -initiated degradation of polyolefins.
+This presentation concerns the behaviour of EPDM copolymers,
+which are composed of ethylene (PE), propylene (PP) and diene
+monomer (5-ethylidene 2-norbornene (ENB) in this study). These
+polymers find numerous applications and are often used as wire
+insulators or joints. If the mechanisms of photo- and
+thermo-oxidations of EPDM can be considered as well known, the
+radiation induced degradation of these polymers has only received
+little attention.
+On the basis of a recent study involving the identification of
+the various products that are formed, a mechanism accounting for
+the radiochemical degradation of EPDM has been proposed, with a
+peculiar attention given to the role played by oxygen and by the
+ENB termonomer. Two main processes are involved in the
+radiooxidation of EPDM. The random -radiolysis
+of the polymer provides a constant source of macroalkyl radicals
+mainly formed on ethylene units. The secondary radicals so formed
+are likely to initiate a selective oxidation of the polymer
+through free-radicals reactions involving the abstraction of
+labile hydrogen atoms. In particular, the decomposition of
+hydroperoxydes and the degradation of the ENB moieties, this
+latter being the most oxidisable site and the source of
+crosslinking, may result from hydrogen abstraction by radicalar
+species.4
+ML03
+OVERVIEW AND PARTICULARITIES IN DEGRADATION OF POLYOLEFINS
+DERIVED FROM FISCHER-TROPSCH SYNTHESIS
+I. TINCUL
+Sasol Technology, PO Box 1, Sasolburg, 1947, South Africa
+Polyolefins are without doubt the largest volume family of
+commercially polymers and a vast literature is dedicated to this
+field in the last half of century. The most complex pool of
+monomers is available from the Fischer Tropsch process that is
+gaining momentum as a major market source. When compared with
+ethylene oligomerization processes the main advantage of the
+Fischer Tropsch process is the production of odd carbon number
+linear and branched olefins that showed new application
+possibilities in both the polyethylene and polypropylene
+families. We prepared a large number of new polyolefins with
+Fischer Tropsch derived alpha olefins that have particular
+microstructures and morphology according to the type of branch,
+length of branch and number of branches / 1000 carbons.
+It is known that steric factors may play an important role in
+polyolefin degradation and that tertiary carbon is labile to
+oxidative attack. A decrease in crystallinity with the increase
+of comonomer content may favour auto-oxidation due to higher
+oxygen absorbtion. Very little literature on degradation of
+polyolefins prepared with Fisher Tropsch derived olefins is
+available. In this paper is presented and discussed some
+particularities on the degradation of polyolefins Fischer Tropsch
+derived.
+The manifestation of oxidation weather by temperature or aging
+concerning polymer appearance as discoloration, loss of optical
+properties, loss of mechanical properties and surface cracks were
+observed. This behaviour was similar to known polyolefins.
+Oxidation induction time as measured by DSC varies with the
+number of branch and length of branch introduced in the polymer
+chain by a certain comonomer. The thermal stability was measured
+also by thermogravimetry and compared with the polymer structure
+and thermal behaviour. The degradation temperature increases with
+an increase of carbon number of the comonomer. Investigation for
+a series of ethylene co-polymers and ter-polymers with linear and
+branched alpha olefins showed an increase of pre-exponential
+factor as a function of carbon number in an Arrhenius type
+equation. A decomposition kinetic study showed that the
+activation and the rate constant is also related to the size and
+type of branch. Rheological investigation showed a similar
+pattern. It was concluded that while polyolefins obtained with
+Fischer Tropsch derived olefins showed a behaviour similar with
+known polyolefins, particularities in degradation does exist and
+are related to the number and type of branch.
+ML04
+ESSENTIAL CRITERIA FOR THE SUCCESSFUL RECOVERY OF PLASTICS
+N. MAYNE
+Association of Plastics Manufacturers in Europe, Avenue E. Van
+Nieuwenhuyse 4, Box 3, B – 1160 Brussels
+E-mail address: neil.mayne apme.org
+Of the many options for recovery of plastics at the
+end-of-life, mechanical recycling is in principle the preferred
+route. There is an increasing understanding of the mechanisms,
+which affect the degradation of polymers or physical property
+enhancement by increasing their compatibility with other
+polymers. While many laboratory scale experiments demonstrate the
+potential for high levels of recycling, in practice the levels
+achieved on an industrial scale with post-consumer plastics can
+be viewed as disappointingly low. In addition to economic
+considerations, this is because there are a limited number of
+applications allowing closed loop recycling and there is a
+mismatch between the supply of recyclate and demand from the
+market. New developments will increase the potential, but such
+recycling will nevertheless remain limited.
+Feedstock recycling technologies offer versatility and many
+large scale processes have been developed and demonstrated.
+Logistics and supply commitments are key factors in determining
+viability. To date, fully commercial plants are only operational
+in Germany and Japan. A number of active developments are,
+however, currently underway in a number of European countries.
+Energy recovery will become an increasingly important recovery
+option as it is also being stimulated by restrictions on the
+landfilling of waste. Even if the full potential of mechanical
+recycling were to be realized, the major part of total plastics
+waste would still be available for use as an alternative fuel.
+This means that with the expected growth of plastics, this
+represents an increasingly important source of energy, equivalent
+to millions of tonnes of imported oil each year.
+The challenge for the successful recovery of plastics is to
+identify and use the optimum combination of options, underpinned
+by continuing innovation in process, product and recovery
+technologies in order to increase the resource efficiency of
+products throughout their whole life-cycle.
+ML05
+OPTIMISAZION OF PROCESSING CONDITIONS IN THE RECYCLING OF
+POLYCONDENSATION POLYMERS
+F.P. LA MANTIA, R. SCAFFARO
+Dipartimento di Ingegneria Chimica dei Processi e dei
+Materiali
+Università di Palermo, Viale delle Scienze, 90128, Palermo,
+Italy
+Mechanical recycling of polymers is a very complex and
+difficult process because repetitive melt processing can lead to
+severe degradation of these materials with subsequent
+deterioration of all the properties. For condensation polymers,
+the degradation rate is much faster in the presence of water that
+induces depolymerization reactions, having also a synergistic
+effect with thermomechanical degradation and exalting the loss of
+properties. Indeed, a careful drying prior to processing can
+drastically reduce the degradation phenomena but increasing the
+complexity of the process and its cost.
+The aim of this work is to study the effect of the
+reprocessing of some polycondensation polymers with and in
+absence of water. Moreover, the possibility to process wet
+polymer in the presence of proper stabilisers to avoid the drying
+step has been studied too.
+The materials chosen for the study have been polyamide 6,
+polycarbonate and polyethyleneterephtalate.
+The results indicate that for the three different systems
+considered, the wet processing causes, as expected, a strong
+reduction of the mechanical properties and of the molecular
+weight, as evidenced by rheological and thermal measurements.
+If a degassing stage is added to the processing apparatus, a
+certain improvement of the properties is observed. This can be
+explained in terms of humidity removing with consequent reduction
+of the hydrolytic chain scission.
+When nitrogen flow is added to the degassing, both humidity
+and oxygen are practically eliminated from the system, and a
+further improvement of the properties is observed. This can be
+explained with the further reduction of the humidity but it also
+suggests that degradation mechanism involves reactions.
+The presence small amounts (500 ppm) of a particular
+antioxidant has a positive effect in all the cases. In
+particular, the adding of antioxidant can substitute the drying
+stage as it is able to protect the macromolecules from
+hydrolysis. This behaviour can be explained considering that this
+antioxidant is more prone to hydrolysis than the polymer, thus
+removing the water from the melt and decreasing the degradation
+rate. Such consideration has been proved using different
+antioxidants with different tendency to hydrolysis: using
+antioxidants with theoretical reduced hydrolysis tendency caused
+a parallel reduction of the protection with consequent loss of
+properties.
+The positive effect of the presence of the antioxidant has
+been also verified for several reprocessing steps (up to five).
+The results indicate that the presence of the antioxidant still
+have positive effects also after several recycling operation.
+It can be concluded that the mechanical recycling of
+condensation polymers can be effectuated with practically any
+loss of properties if an adequate removal of humidity from the
+system is performed. A valid alternative to the complex and
+expensive pre-drying operation can be the adding of antioxidants
+that undergo hydrolysis in vice of the polymers.
+ML06
+FEEDSTOCK RECYCLING OF PLASTICS IN JAPAN
+A.OKUWAKI
+Tohoku University, Graduate School of Environmental Studies,07
+Aoba, Sendai, 980-8579
+Various commercial plants for feedstock recycling of waste
+plastics have started up in Japan. In 1999, only Niigata
+liquefaction plant was operated. Now they are liquefaction at
+Sapporo, and Mikasa, Blast Furnace application by NKK, Coke Oven
+application by Nippon Steel Corp., Gasification by EBARA-UBE, and
+Glycolysis of PET bottles by Teijin. Separated PET bottles are
+now used as raw material for polyester fibers, 30,000t/y in
+capacity from April, 2002, and the two commercial plants for the
+Bottle to Bottle recycling are under construction for the first
+time in the world.
+Clearly this is related to the practical implementation of the
+Containers and Packaging Recycling Law carried out in 1997 for
+PET bottles and in 2000 for the other plastics. This law affords
+allocating the cost for feedstock recycling of waste plastics
+separated only in homes. It has created attractive markets and
+thus, they say that the separated waste plastics are even in
+short supply in Japan. Recovery of PET bottles increases
+successfully since 1997, but that of plastics increases
+dramatically since 2000 when the law has carried out.
+On the other hand, their cost for recycling decreases
+gradually. At present, their recycling fees are quite expensive
+compared to the cost for treatment of industrial waste plastics.
+However, it is expected that the cost will continue to drop. This
+trend suggests that the active competitions among various
+techniques proceed including the improvement of collection
+system. This situation creates big chances for the world
+recycling technologies in the Japanese market and refine
+necessarily both techniques and logistic systems.
+The Home Appliances Recycling Law came into full force in
+April 2001 is to be revised within a few years. In such process,
+they say, not only the recycling of their plastics cases, but
+also that of printed circuit boards are introduced to elevate the
+recycling degree.
+In addition, the Law for Recycling of End-of-Life Vehicles has
+passed through the Parliament, July 2002. They say, an average
+cost per car will be 20,000 Yen, namely 151Euro. Clearly this law
+should proceed the recycling of automotive shredder residue.
+These environmental policy of Japanese Government are sure to
+promote more the recycling of waste plastics in Japan

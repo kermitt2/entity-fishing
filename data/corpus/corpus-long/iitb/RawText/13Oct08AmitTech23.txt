@@ -1,0 +1,27 @@
+Android Has Arrived
+
+At a press conference in New York yesterday, Google and T-Mobile showed off the long-anticipated G1, a powerful smartphone that runs Google's Android operating system for mobile devices.
+
+The handset, priced at $179, will be available from T-Mobile on October 22. It boasts features to rank it at the top end of the smartphone market, and its software offers some neat surprises and tricks. At the same time, the G1 undoubtedly lacks the sparkle of the iPhone, probably its closest competitor. Furthermore, some experts question whether Google's scheme for delivering new applications for the phone--an online store called Android Market--could run into problems that slow down mass adoption.
+
+As expected, the G1 has a touch screen and a pullout QWERTY keypad, which make it thicker than the iPhone and some other smartphones. It can make use of T-Mobile's faster 3G mobile network, and it has GPS and Wi-Fi capabilities built in. The G1 comes equipped with a 3.1 megapixel camera (but no video camera), an accelerometer to measure motion of the device and orientation of the screen, and a Bluetooth receiver for hands-free devices. The G1 also has one unusual hardware feature: a built-in compass that can determine the direction in which the phone is pointed.
+
+While the G1's hardware doesn't make it stand out from the crowd, its software is already causing excitement. Android is designed to enable easy access to Google's Web applications--including its calendar, e-mail, and mapping services--and to instant messaging applications like Google Talk and AOL's Instant Messenger. The G1's Web browser, based on the same software used to make Google's recently released desktop browser, produces scaled-down Web pages that look, for the most part, as they do on a normal computer screen. And the phone's built-in compass has been integrated into Google Maps Street View to let users pan around a streetscape by moving the handset in the corresponding direction.
+
+These applications come as standard, but Google and T-Mobile representatives say that third-party applications could take the device well beyond these basics. A slew of applications have already been released, and some have won funding via Google's Android Challenge, a competition to encourage software engineers to develop for the platform. Locale changes the phone's settings based on the time of day, the phone's location, and the owner's calendar, automatically turning the ringer off during meetings, for example. Another downloadable application, Shop Savvy, lets users take a picture of a product's barcode with the built-in camera and instantly compare prices from around the Web.
+
+"Several years ago all phones were controlled by handset [makers] with requirements coming from carriers," says Rich Miner, vice president of mobile at Google. "First with Microsoft, then Apple, and now Google, you have people who really understand software and the user experience on these devices. You combine that with higher speed networks and better screen resolution, and all of a sudden, the mobile Internet is here."
+
+Software apps will be available through Android Market, an online store that can be accessed via the phone. Android Market is similar to Apple's iPhone App Store, in that it is the main method of application distribution. But, crucially, Google will play no central role in vetting applications before they are posted. Instead, developers and users can vote and comment to let others know if an application works as promised or if it drains the phone's battery or makes it crash. According to some experts, this free-for-all approach might lead to quality-control issues in the near future.
+
+"I'm totally cheering Android on," says Jonathan Zittrain, a professor of law at Harvard University. "But from what I can tell, [Android Market] is banking on a ratings/reputations systems and common sense for people to know what's okay and what's not."
+
+Zittrain says the approach might even hinder Android's progress. "I think [Android Market] may work," he says, "but if there are a couple of well-publicized incidences of code run amok, that can really scare people away from the platform and into Apple's waiting arms."
+
+Zittrain says a novel solution to quality control could come in the form of an application that warns users automatically. "I'd love to see an app that reports each phone's vital signs. We need some sense of a nervous system for this thing," he says, so that less tech-savvy people feel comfortable trying out different applications.
+
+Miner is confident that the Android Market approach will pay off. "Look at YouTube," he says. "Good things bubble to the top, and if the apps are bad, they will float down to the bottom."
+
+Miner adds that the Android platform has built-in security features to limit access to certain types of data and certain functions on the phone. "With Android, our philosophy was [to] make it easy for people to put apps up, but make it so when an app is on a platform, the user knows what functions it's going to be accessing."
+
+The first Android phone may not surpass the iPhone in popularity, but its applications will play a vital role in the future of the platform. Within the next two years, says Zittrain, it should be clear whether or not Google's gamble has paid off.

@@ -1,0 +1,147 @@
+Date: Thu, 01 Mar 2012 17:53:04 GMT
+Connection: close
+MCSA/MCSE Self-Paced Training Kit Microsoft Windows 2000 Network Infrastructure Administration Second Edition Comments and Corrections
+Immediate
+Expert
+Service
+Home
+Download
+How It Works
+Live Support
+Forum
+Other Tools
+Company
+Search Knowledge Base:
+Article ID: 328954 - Last Review: August 8, 2003 - Revision: 5.0MCSA/MCSE Self-Paced Training Kit Microsoft Windows 2000 Network Infrastructure Administration Second Edition Comments and CorrectionsView products that this article applies to.This article was previously published under Q328954On This PageSUMMARY
+This article contains comments, corrections, and
+information about known errors relating to the Microsoft Press book MCSA/MCSE
+Self-Paced Training Kit Microsoft Windows 2000 Network Infrastructure
+Administration 2nd Edition, ISBN 0-7356-1772-4. The following topics
+are covered:Multiple Pages: Spell-Out Of MTA Is IncorrectPage 50: 65,524 Should Be 65,534Page 51: 192 Should Be 1Page 52: Class C Should Be Class BPage 53: Correction To TipPage 53: Error In TipPage 57: Incorrect IP Address Page 99: Incorrect Statement About WinipcfgPage 119: Do Should Be Do NotPage 163: Corrections To Steps 5 and 9Page 201: Missing Text In Figure 6.5Pages 212 and 213: Corrections To Steps 9 And 10Page 279:
+"SVR resource record" Should Be "SRV resource record"Page 290: "DHCP console" Should Be "DNS console"Page 295: NSDNAME Should Be DNSNAMEPage 304: IFXR Should Be IXFRPage 351: DHCP Should Be WINSPage 370: Incorrect Step ReferencesPage 373: TCP Should Be UDPPage 407: IP Should Be ICMPPage 412: 129-Kbps Should be 128-KbpsPage 444: Correction To Remote Access Policy
+EvaluationPage 468: 207 Should Be 206Page 500: "Authorized" Should Be "Unauthorized"Page 515: Incorrect Spell-Out Of MMC ConsolePage 518: Incorrect Explanation Of Figure 13.12Page 656: Incorrect Answers To Question
+70-216.04.01.002Page 699: Correction To Question 70-216.05.01.003's
+AnswersMORE INFORMATION
+Multiple Pages: Spell-Out Of MTA Is IncorrectOn multiple pages, the spell out of MTA is
+incorrect.Change all instances of:"maximum transfer
+unit"To:"maximum transmission unit"Page 50: 65,524 Should Be 65,534 On page 50, in Table 2.2, the Number of Hosts for Class B should
+be 65,534, not 65,524.Page 51: 192 Should Be 1 On page 51, in the paragraph above "Private Network
+Addresses", Change: "or 192 to 254" To: "or 1 to
+254"Page 52: Class C Should Be Class B On page 52, in the second paragraph, change: "if you
+take a standard Class C network address such as 172.16.0.0," To:
+"if you take a standard Class B network address such as 172.16.0.0,"Page 53: Correction To TipOn page 53, in the the Tip paragraph,Remove:"However, when taking the MCSE exam, no such calculator is available, so you better know how to do it by hand."Page 53: Error In Tip On page 53, in the Tip, the equation near the bottom of the page
+is represented incorrectly.
+Change: "128 +64 +32 +16 +8 +4 +2
++1 =240" To: "128 +64 +32 +16 +0 +0 +0 +0 =240"Page 57: Incorrect IP Address On page 57, in the next to the last paragraph, in the final
+sentence,
+Change: "Once again, you omit 172.21.8.0 and 172.21
+15.255, because these have..." To: "Once again, you omit
+172.21.8.0 and 172.21.15.255, because these have..."Page 99: Incorrect Statement About Winipcfg On page 99, in the last paragraph, remove the following
+phrase: "(which you must do by finding the file in the \Windows
+directory and executing it, as there is no shortcut on the Start menu)"Page 119: Do Should Be Do NotOn page 119, in the third paragraph,
+Change:
+"However, Windows CSNW and GSNW do work with TCP/IP"
+To:
+"However, Windows CSNW and GSNW do not work with TCP/IP"Page 163: Corrections To Steps 5 and 9On page 163, in step 5,Change:"step 8"To:"step 7"In step 9,Change:"003 DNS Servers"To:"006 DNS Servers"Page 201: Missing Text In Figure 6.5 In the three (shaded) boxes on the right side of this figure,
+there is missing text.
+In the top box, Change:
+"IP
+transmits the datagram to the designated gateway"
+To: "IP
+transmits the datagram to the designated gateway for the host address"
+In the middle box,
+Change:
+"IP transmits the
+datagram to the designated gateway for"
+To:
+"IP transmits the
+datagram to the designated gateway for the network address"
+Change:"IP locates a host address entry matching the Destination
+IP"To:"IP locates a host address entry matching the Destination
+IP address"In the bottom box,
+Change:
+"IP
+transmits the datagram to the default gateway"
+To:
+"IP
+transmits the datagram to the default gateway address"
+Change:"IP locates a network address entry matching the
+Destination IP"To:"IP locates a network address entry matching
+the Destination IP address"Pages 212 and 213: Corrections To Steps 9 And 10 On page 213, Change: "10. Type the telephone
+number of the remote access server or router on the re-mote network in the
+Phone Number Or Address box and click Next to proceed to the Protocols And
+Security page (see Figure 6.15). If more than one communications
+device is available on the computer, a Select A Device page appears, enabling
+you to choose one." To: "10. Type the telephone number of the
+remote access server or router on the re-mote network in the Phone Number Or
+Address box and click Next to proceed to the Protocols And Security page (see
+Figure 6.15)." And on page 212, in step 9, Change: "9.
+Click the Connect Using A Modem, ISDN Adapter, Or Other Physical Device option
+button and click Next to proceed to the Phone Number page (see Figure
+6.14). Click Connect Using Virtual Private Networking to configure a
+virtual private network (VPN) link to the remote network, using either the
+Point-to-Point Tunneling Protocol (PPTP) or the Layer 2 Tunneling Protocol
+(L2TP). For information on VPN's, see Chapter 11, 'Using the Remote Access Service'." To: "9. Click the Connect Using A Modem, ISDN
+Adapter, Or Other Physical Device option button and click Next to proceed to
+the Phone Number page (see Figure 6.14). If more than one
+communications device is available on the computer, a Select A Device page
+appears, enabling you to choose one. Click Connect Using Virtual
+Private Networking to configure a virtual private network (VPN) link to the
+remote network, using either the Point-to-Point Tunneling Protocol (PPTP) or
+the Layer 2 Tunneling Protocol (L2TP). For information on VPN's, see Chapter 11,
+'Using the Remote Access Service.'Page 279:
+"SVR resource record" Should Be "SRV resource record"On page 279, in the third bullet,Change:"SVR resource record"To:"SRV resource record"
+Page 290: "DHCP console" Should Be "DNS console"On page 290, in step 1,Change:"DHCP console"To:"DNS console"Page 295: NSDNAME Should Be DNSNAME On page 295, in the section Name Server (NS) in the middle of
+that page,
+Change: "The RDATA field for this resource record
+consists of a single NSDNAME subfield containing the name of a DNS name
+server." To: "The RDATA field for this resource record consists
+of a single DNSNAME subfield containing the name of a DNS name server."Page 304: IFXR Should Be IXFR On page 304, in the first paragraph,Change:"IFXR
+enables the secondary..."To:"IXFR enables the secondary..."Page 351: DHCP Should Be WINS On the top of page 351, Change: "5. Restart the
+DHCP Server service by typing net start wins at the command prompt."
+To: "5. Restart the WINS Server service by typing net start wins at the
+command prompt."Page 370: Incorrect Step References On page 370, in steps 10 and 11, the wrong steps are
+referenced. Change: "10. Repeat steps 8 through 10 to add TCP
+port numbers to the filter. 11. To create a packet filter based on
+UDP port numbers, click the Permit Only option button to activate the UDP Ports
+list and repeat steps 8 through 11."
+To: "10. Repeat steps 8
+and 9 to add TCP port numbers to the filter. 11. To create a packet
+filter based on UDP port numbers, click the Permit Only option button to
+activate the UDP Ports list and repeat steps 8 and 9."Page 373: TCP Should Be UDP On page 373, in the last bullet,Change:"Select this option to filter TCP traffic..."To:"Select this option to filter UDP traffic..."Page 407: IP Should Be ICMP On page 407, in step 9,Change:"...click ALL IP
+Traffic"To:"...click ALL ICMP Traffic"Page 412: 129-Kbps Should be 128-Kbps On page 412, in the first paragraph,Change:"It is
+possible to combine the two B channels into one 129-Kbps data
+pipe"To:"It is possible to combine the two B channels into one
+128-Kbps data pipe"Page 444:
+Correction To Remote Access Policy Evaluation On page 444, in the first paragraph,Remove:"A
+connection must be passed by all the listed policies in order to granted access
+to the server" Page 468: 207 Should Be 206 On page 468, in the second paragraph,Change:"the NAT server can map all the private IP addresses on the network 192.168.0.0 to the public IP address 207.73.118.54."To:"the NAT server can map all the private IP addresses on the network 192.168.0.0 to the public IP address 206.73.118.54."Page 500: "Authorized" Should Be "Unauthorized" In the last paragraph on page 500,Change:"stolen
+by an authorized person,"To:"stolen by an unauthorized
+person,"Page 515: Incorrect Spell-Out Of MMC Console On page 515, in the paragraph right after the bullet points at
+the top of the page,Change:"As with most Microsoft Certificate
+Services (MMC) consoles,"To:"As with most Microsoft Management Console (MMC) consoles,"Page 518: Incorrect Explanation Of Figure 13.12 In the first paragraph on page 518,Change:"where
+you elected to store the certificate database and the certificate database
+log."To:"where you elected to store the certificate database and
+the request log."Page 656:
+Incorrect Answers To Question 70-216.04.01.002 On page 656, under question 70-216.04.01.002, the answers should
+be A and B, not A.Change:"Correct Answers: A...B.
+Incorrect: The correct option to set is Obtain An IP Address Automatically.
+When selected, this causes a DNS server to be assigned along with the other
+required TCP/IP values."To:"Correct Answers: A and
+B...B. Correct: When you select the Obtain DNS Server Address
+Automatically option, the Windows client computers use DNS configuration
+information provided by the DHCP server." Page 699:
+Correction To Question 70-216.05.01.003's Answers On page 699, under question 70-216.05.01.003, the correct answer
+is none, instead of A and B.Change:"Correct Answers: A and
+BA. Correct: Manually add the name and IP addresses of non-WINS computers
+to the WINS database of static maps.B. Correct: As an alternative to
+manually entering each non-WINS client, you can import the static map values
+from an LMHOSTS file. Ultimately, because the non-WINS client cannot register
+their information in the WINS database, you need to add this information as a
+static map."To:"Correct Answers: NoneA. Incorrect: Adding
+static mappings in WINS database enables WINS clients to resolve NetBIOS names
+of the non-WINS clients, but it does not resolve the issue of the non-WINS
+clients not able to communicate with the WINS server.B. Incorrect: Adding
+static mappings in the LMHOST file enables WINS clients to resolve NetBIOS
+names of the non-WINS clients, but it does not resolve the issue of the
+non-WINS clients not able to communicate with the WINS server." Microsoft Press

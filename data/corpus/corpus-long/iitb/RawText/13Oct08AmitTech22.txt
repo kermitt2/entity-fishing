@@ -1,0 +1,21 @@
+Purifying Water with Nano-particles 
+
+Adding nanoparticles to a water purifying membrane can double its efficiency, according to a startup company based in Los Angeles. With global water usage on the increase and fresh water in limited supply, the company, NanoH2O, says its novel approach could make such purification technology a viable solution to a growing problem.
+
+Reverse osmosis--feeding water through a semipermeable membrane to filter out impurities--is widely considered to be the most effective way to desalinate water. But it is very energy-intensive, and therefore expensive, because water has to be forced through the membrane under pressure. A key way to reduce the costs involved is to increase the water throughput for the same pressure. But for many years, improvements in membrane technology have been incremental at best, says Jeff Green, NanoH2O founder and CEO.
+
+NanoH2O has found that adding porous nanoparticles to membranes can dramatically increase the efficiency with which water can be filtered. "Under similar pressure, twice as much water goes through," says Green. In a desalination plant, this increased permeability would reduce energy requirements by 20 percent, or increase water productivity by 70 percent for the same cost, he adds.
+
+"The concept is good," says Benito Mariñas, an environmental engineer at the University of Illinois at Urbana-Champaign. Membrane-based desalination is usually considered only when freshwater supplies fail to meet demand. But with demand on the increase and only 1 percent of global freshwater available for human use, Mariñas says such technologies will become more important. "Right now we are not using membranes for sea water desalination as much as we could," he says, largely due to the amount of energy required.
+
+The material used for reverse osmosis is usually an organic thin-film membrane, typically a polymide material perforated with tiny holes. These holes are small enough to let water pass through, but they block salt and other contaminants. NanoH2O's approach, based on research carried out by Eric Hoek, an environmental engineer at the University of California, Los Angeles, is to embed cage-like nanoparticles made out of aluminosilicate minerals, called zeolites, into the membrane. These particles have a diameter of no more than 200 nanometres--roughly equivalent to the thickness of the membrane.
+
+Embedding the nanoparticles changes the properties of the membrane, making it hydrophilic, or water-attracting, so that water passes through more easily. Crucially, however, the membrane retains its ability to filter out contaminants, Green says.
+
+NanoH2O has been in a research phase since the company was set up in 2005. But earlier this month, it secured $15 million in funding to commercialize its technology. According to Green, the company will now scale up production with the aim of bringing its technology to market by 2010.
+
+Mariñas says there's been plenty of interest in using inorganic hydrophilic materials for reverse osmosis, but no other design has been commercialized. One reason for this, he says, is that most hydrophilic materials tend to be bad at filtering out impurities. "The fact that this company is producing a hybrid that's not made exclusively out of hydrophilic material is very interesting," he says.
+
+Another key advantage, says Green, is that the nanoparticles developed by NanoH2O have a three-dimensional porous structure. This means that unlike some other porous hydrophilic materials being investigated, there is no need to worry about how they are oriented within the membrane in order to pass water.
+
+NanoH2O's embedded approach is also compatible with existing manufacturing processes, Green says, adding just 5 percent to production costs. 

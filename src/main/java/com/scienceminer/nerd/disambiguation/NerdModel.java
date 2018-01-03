@@ -7,7 +7,6 @@ import java.text.*;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.evaluation.*;
@@ -48,13 +47,23 @@ import com.thoughtworks.xstream.*;
  */
 public class NerdModel {
 
+	public enum FeatureType {
+		BASELINE, 		// only use conditional prob.
+		MILNE_WITTEN, 	// Milne and Witten features
+		MILNE_WITTEN_RELATEDNESS, // only Milne and Witten relatedness measure
+		SIMPLE, 		// basic features in addition to Milne&Witten relatedness
+		EMBEDDINGS, 	// only entity embeddings similarity
+		NERD, 			// basic features with Milne&Witten and entity embeddings 
+		WIKIDATA		// basic features with Milne&Witten, entity embeddings and wikidata stuff
+	}
+
 	public enum MLModel {
     	RANDOM_FOREST, GRADIENT_TREE_BOOST
 	}
 
 	// default model type
 	protected MLModel model = MLModel.RANDOM_FOREST;
-	
+
 	// regression model
 	protected Regression<double[]> forest = null;
 

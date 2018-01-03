@@ -1,0 +1,28 @@
+Ever since the discovery that a pregnant woman's blood contains traces of her baby's DNA, researchers have been looking for ways to screen that DNA for genetic abnormalities. A new test developed by Stephen Quake and his colleagues at Stanford University takes us one step closer to a noninvasive blood test to diagnose disorders like Down syndrome in a fetus.
+
+The new test uses powerful DNA sequencing techniques to amplify short fragments of a baby's DNA from its mother's blood, and to map the chromosomes. The method reveals the extra copies of chromosomes--aneuploidy--characteristic of certain genetic disorders, including Down syndrome, in which there are three copies of chromosome 21 rather than two.
+
+"Now we're getting closer to the time when there will be not a screening test but a definitive noninvasive test," says Joe Leigh Simpson of Florida International University. Simpson wasn't involved in Quake's work.
+
+The test picked up all nine cases of Down syndrome among 18 women in a study reported today in the Proceedings of the National Academy of Sciences. It also detected two cases of Edward syndrome, in which there is an extra copy of chromosome 18, and one instance of Patau syndrome, characterized by three copies of chromosome 13.
+
+"This is very exciting," says Farideh Bischoff, a cytogeneticist with Biocept, a biotech company based in San Diego. "It's powerful." Bischoff wasn't involved in Quake's work.
+
+Currently, the gold standard for prenatal diagnosis of Down syndrome is amniocentesis, "which requires a big needle to be stuck into the mom right next to the baby" to extract a sample of amniotic fluid, explains Quake, who is also an investigator for the Howard Hughes Medical Institute. There's an attendant risk of miscarriage, infection, or damage to the fetus. A diagnosis may also be made by chorionic villus sampling, which uses tissue from the placenta but has a higher risk of miscarriage than amniocentesis. The samples of amniotic fluid or placenta are examined to see if the fetus has three copies of chromosome 21.
+
+Quake's technique takes advantage of the fact that small amounts of DNA from a fetus circulate in its mother's blood. Some DNA is within intact fetal cells, but about a decade ago, researchers discovered that a pregnant woman's blood also carries free-floating fetal DNA. Unlike intact cells, cell-free fetal DNA doesn't linger from one pregnancy to another. It's also more abundant than that from intact cells, but still rare enough to make it difficult to detect. 
+
+Quake and his colleagues took blood samples from pregnant women who were considered at high risk of carrying a baby with aneuploidy and used high-throughput sequencing to amplify fragments of DNA from both the mother and fetus and to map its chromosomes. They then looked at the amount of material from each chromosome. An overabundance of any particular chromosome pointed to a genetic disorder. The results, Quake says, "can be as precise as you want simply by sequencing more fragments."
+
+"It's a step forward," adds James Egan, chairman of the Department of Obstetrics and Gynecology at the University of Connecticut Health Center. "It has great potential, but it's not ready for prime time yet." Egan did not contribute to the Stanford study. Quake's team is now planning a larger study of several hundred pregnant women.
+
+The cost of the sequencing used in the study was $700 per sample, but Quake says that it has since slipped to $300, as the cost of the technology continues to drop. "If it truly can be performed for $700, it could revolutionize the field," Simpson says.
+
+Quake's team tested women in their second trimester of pregnancy, although he believes that the test could be used as early as 10 weeks into a pregnancy. A first-trimester test for Down syndrome would be preferable, so that parents have more time to decide if they wish to terminate the pregnancy, or to prepare for the birth of a baby with the disorder.
+
+Quake's method is one of several different approaches to the problem of using fetal DNA in a noninvasive diagnostic test for genetic disorders like Down syndrome.
+
+Sequenom, based in San Diego, is developing a test based on genes on chromosome 21 that code for fetal-specific RNA. Those markers can be used to count copies of the chromosome."There are thousands of genetic disorders that can easily be diagnosed with genetic screening," says Ravinder Dhallan, founder and CEO of Ravgen, a Columbia, MD-based biotech company that's developing diagnostic tests using fetal DNA. "Some are treatable today and many more may be treatable in the future.
+
+It's not yet clear which method--or methods--will ultimately pay off. "It's like CDs or DVDs or thumb drives," says the University of Connecticut's Egan. "They're all different ways of approaching a problem. One or all will catch the imagination of the medical community and become a very useful clinical tool."
+

@@ -1,0 +1,34 @@
+Why Is The Universe More Partial To Matter Than Antimatter?
+
+ScienceDaily (June 24, 2006) — B factory experiments at the Stanford Linear Accelerator Center (SLAC) in the USA and at the High Energy Accelerator Research Organization (KEK) in Japan have reached a new milestone in the quest to understand the matter-antimatter imbalance in our universe. These experiments are used by scientists from around the world, including the UK, to probe such fundamental questions.
+
+
+Experimenters have leaped from inference to direct knowledge of the proportions of the B unitarity triangle. Not just a simple geometric shape, this triangle summarizes knowledge of the rare processes that contribute to the universes partiality for matter over antimatter. Understanding the difference between matter and anti-matter is fundamental to understanding why our Universe looks the way it does.
+
+The area of the triangle visually depicts the amount of difference, or asymmetry, between the decays of B particles and their antimatter counterparts, anti-B particles. The B meson is a sub-atomic particle that is short lived and particularly useful for studying the difference between matter and anti-matter.
+
+Thanks to the accumulation of hundreds of millions of B and anti-B particles produced at the two laboratories, scientists have been able to measure all three angles of the triangle from measurements of matter-antimatter differences.
+
+Based on these asymmetry measurements alone, we now know for the first time that the B unitarity triangle really does have finite area, said David MacFarlane, spokesperson for the BaBar experiment at SLAC.
+
+This is an important jump forward because until now physicists have relied on measurements of the sides of the triangle. Proving that the sides really form a triangle requires the matter-antimatter measurements.
+
+The direct measurement of the unitarity triangle's angles generates an area that is consistent with the area predicted by measurements of the sides.
+
+"Such a confrontation between prediction and direct measurement is the very essence of science and has been a major goal for the two experiments, MacFarlane said. Once again, we have seen the power of precision measurements to peer into the future and infer solutions that could not have been experimentally determined at the time."
+
+A number of measurements made over the past 50 years painted an increasingly precise picture of what the unitarity triangle should look like. Once the B factories had accumulated enough data, physicists could satisfy their hunger to know if the inferred size and shape of the triangle held up. In other words, did they really understand the unitarity triangle and what it said about the origin of the asymmetry between matter and antimatter?
+
+The answer is yes: the new triangle matches the indirectly pieced-together knowledge of the triangle. Drawing the triangle directly, by using only measurements of matter-antimatter asymmetry in B decays, confirms the Standard Model, which predicts rates of particle decays.
+
+"It's a real milestone and an elegant culmination of a 50-year investigation across an array of very different experiments," said Steve Olsen, co-spokesperson for the Belle experiment in Japan.
+
+Taken together, the three angles of the triangle are now known with enough precision for physicists to confidently pin down the triangle's area. It's an outstanding feat: the asymmetry in B particle decays was discovered only five years ago and now physicists have made enough measurements to determine the angle called beta to better than 5 percent precision.
+
+To measure the angle alpha with much greater accuracy than previously possible, the BaBar team found a way to use a particular decay mode that initially was thought to be too difficult to measure. The alpha angle is currently measured with a 15 percent precision.
+
+"It was during a coffee break at the BABAR collaboration meeting at Imperial College in 2002 that we agreed with colleagues from Saclay to try this approach. We thought it was a very long shot, but it proved to be the best method. It has improved precision in alpha three-fold compared to the best previous results," said Christos Touramanis of the University of Liverpool.
+
+An innovative analysis approach introduced by Belle experimenters opened up the possibility for measuring gamma as well, saving the B factory experiments from many years of additional data accumulation. Although gamma is the least-known angle, physicists have achieved enough precision to verify a closed triangle.
+
+The outstanding agreement between the asymmetry measurements and the knowledge of the triangle's sides still leaves researchers with a real puzzle. The amount of asymmetry found experimentally is still far too small to explain why we live in a universe of matter rather than antimatter. It may take new kinds of physics to explain the missing antimatter. A much deeper understanding of nature and matter-antimatter asymmetry is expected with further studies of B mesons. The LHCb experiment at CERN in Geneva will start taking data in 2008 and scientists are looking into the possibility of an electron-positron Super B factory with 100 times higher performance than the current experiments.

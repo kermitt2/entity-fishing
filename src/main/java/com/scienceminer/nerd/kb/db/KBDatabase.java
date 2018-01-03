@@ -271,10 +271,16 @@ public abstract class KBDatabase<K,V> {
 		conceptByPageId,
 
 		/**
-		 * Associates one concept id (the subject of the statetement) to a property and values (litteral values 
+		 * Associates one concept id (the head of the statement relation) to a property / value (litteral values 
 		 * and/or other concept identifiers)
 		 */
 		statements,
+
+		/**
+		 * Associates one concept id (the tail of the statetement relation) to property / value (always another
+		 * concept identifier as value)
+		 */
+		reverseStatements,
 
 		/**
 		 * Associates the string identifier of a property to a property description
@@ -284,6 +290,16 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates an integer id of a concept to the language-specific mapping to article id
 		 */
-		concepts
+		concepts,
+
+		/**
+		 * Associates a DOI string to a bibliographic entity
+		 */
+		biblio,
+
+		/**
+		 * Associates a concept id string to a list of concept id strings following the taxon hierarchy 
+		 */
+		taxon
 	}
 }

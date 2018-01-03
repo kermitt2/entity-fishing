@@ -1,0 +1,25 @@
+In sum, cardinal numerals in the Alor-Pantar languages are fertile ground for understanding how diverse numeral systems can evolve in related languages. In particular, Alor-Pantar languages provide us with unique, typological insights into the historical changes and influences that can complicate and prompt reorganizations of patterns of numeral formation and borrowings into the numeral paradigm.
+
+(pEA) and proto-East Alor Montane (pEAM) can be taken to represent a chronological sequence, since pEA forms a subgroup of pCEA, and pEAM a subgroup of pEA.
+
+7 Numeral systems in the Alor-Pantar languages
+
+1 Introduction
+
+Numeral systems are more endangered than languages. Cultural or commercial superiority of one group over another often results in borrowing of numerals, or replacements of parts or all of a numeral system, even in a language that itself is not endangered
+
+this will inevitably lead to the replacement of the numerals and the arithmetic expressions with Indonesian equivalents. It is therefore crucial to keep a record of the forms and patterns as they are currently used for future reference, and this chapter aims to be such a documentary record. The patterns described in this chapter fall into two broad classes, pertaining to two distinct linguistic levels: the word ( § 2) and the clause or sentence ( § 3). At the word level we describe how numeral words are created, discussing the structure of cardinals ( § 2.1), ordinals ( § 2.2) and distributives ( § 2.3). At the clause and sentence level, we describe the constructions that contain numerals and function to express the arithmetic of addition (3.1), subtraction ( § 3.2), multiplication ( § 3.3), division ( § 3.4), and fractions ( § 3.5). § 4 presents a summary and conclusions. Details on the data on which this chapter is based are given in the Sources section at the end of this chapter. Adang, Blagar, Kamang and Abui are each very diverse internally. The data presented in this chapter are from the Dolap dialect of Blagar, the Takailubui dialect of Kamang, the Lawahing dialect of Adang, and the Takalelang dialect of Abui. These dialect names refer to the place where the variety is spoken.
+
+2 Operations to create numeral words
+
+Most of the cardinals in AP languages are historically morphologically complex forms. Within and across the languages we find variation in choice of numeral base, the type of operations invoked for the interpretation of the composite elements, and the ways in which these operations are expressed ( § 2.1). Ordinals in AP languages are possessive constructions that are derived from cardinals, where the ordered entity is the grammatical possessor of the cardinal ( § 2.2). Distributive numerals in AP languages are also derived from the cardinal, by reduplicating it partially or fully. When the cardinal contains more than one morpheme, generally only the right-most formative is reduplicated (section 2.3.3). In all cases, the numeral words follow the noun they quantify. Cardinals may be preceded by a classifier, if the language has them.
+
+2.1 Cardinal numerals
+
+By cardinal numerals, we understand the set of numerals used in attributive quantification of nouns (e.g., 'three dogs'). In enumeration, the numeral follows the noun in all AP languages (N NUM), as in Teiwa yaf haraq 'house two' > 'two8 Numeral words and arithmetic operations in the Alor-Pantar languages houses'. If a language uses a sortal or mensural classifier, the classifier occurs between the noun and the numeral (N CLF NUM). The same cardinals that are used in enumeration are also used for non-referential counting (one, two, three, four, five, etc.), and all the AP languages use the same numeral forms to count small animates (ants, flies, bees, or house lizards), large animates (children, dogs, or pigs), and inanimates (houses, rocks, stars, or coconut trees).
+
+In all the AP languages we surveyed, the cardinal numbers 'one' to 'five' are morphologically simple forms, as illustrated inThe composition of 'six' varies. Most of the AP languages have a monomorphemic 'six', an example is Teiwa tiaam. Bi-morphemic forms for 'six' are composed of (reflexes) of 'five' and 'one', e.g., Kula yawaten sona. The cardinals 'seven' and higher consist of minimally two formatives in all AP languages. Often, these forms involve reflexes of 'five', 'one', 'two', 'three' and 'four', as illustrated in, though other patterns are also attested
+
+From the above it can be inferred that the AP languages have at most six monomorphemic numerals. This number is significantly fewer than the number we find in many European languages. Present-day English, for example, has twelve mono-morphemic cardinal numerals
+
+Both within and across the AP languages we find variation in the way cardinals are composed (cf.

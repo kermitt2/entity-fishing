@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.*;
 
 import org.apache.commons.io.FileUtils;
@@ -173,6 +172,8 @@ System.out.print("\n");*/
     }
 
     public void createAllMappings() {
+        if (isLoaded)
+            return;
         // for each page id in wikipedia we get the list of domain id
         PageIterator iterator = wikipedia.getPageIterator(Page.PageType.article);
         int p = 0;

@@ -8,7 +8,6 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.io.*;
 
 import org.apache.commons.io.FileUtils;
@@ -18,8 +17,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.Ignore; 
 
-import com.scienceminer.nerd.utilities.NerdProperties;
-import com.scienceminer.nerd.utilities.NerdPropertyKeys;
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
@@ -37,8 +34,7 @@ public class TestQueryParser {
 
 	@Before
 	public void setUp() {
-		NerdProperties.getInstance();
-		testPath = NerdProperties.getTestPath();
+		testPath = "src/test/resources/";
 	}
 
 	@Test

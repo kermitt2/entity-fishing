@@ -1,7 +1,5 @@
 package com.scienceminer.nerd.utilities;
 
-import java.util.Map;
-
 /**
  * This class is a bean for the YAML configuation data associated to a 
  * language specific NERD.  
@@ -15,6 +13,9 @@ public class NerdConfig {
 
 	// path to the LMDB data
 	private String dbDirectory;
+
+	// path to the embeddings data
+	private String embeddingsDirectory;
 
 	// path to the compiled CSV wikipedia files
 	private String dataDirectory;
@@ -52,6 +53,12 @@ public class NerdConfig {
 	// minimum score produced by the ranker model under which the entity 
 	// will be pruned
 	private double minRankerScore = 0.1; 
+
+	// path to grobid-home
+	private String grobidHome = null;
+
+	// path to resources for species recognition
+	private String speciesPath = null;
 
 	public String getLangCode() {
 		return langCode;
@@ -141,4 +148,27 @@ public class NerdConfig {
 		this.useLinkOut = useLinkOut;
 	}
 
+	public String getGrobidHome() {
+		return grobidHome;
+	}
+
+	public void setGrobidHome(String grobidHome) {
+		this.grobidHome = grobidHome;
+	}
+
+	public String getSpeciesPath() {
+		return speciesPath;
+	}
+
+	public void setSpeciesPath(String speciesPath) {
+		this.speciesPath = speciesPath;
+	}
+
+	public String getEmbeddingsDirectory() {
+		return embeddingsDirectory;
+	}
+
+	public void setEmbeddingsDirectory(String embeddingsDirectory) {
+		this.embeddingsDirectory = embeddingsDirectory;
+	}
 }

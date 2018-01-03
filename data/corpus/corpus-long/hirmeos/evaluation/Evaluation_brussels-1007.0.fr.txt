@@ -1,0 +1,61 @@
+init upper level language independent environment
+building Environment for upper knowledge base
+Environment built - 9155139 concepts.
+init Environment for language en
+building Environment for language en
+isLoaded: true
+Environment built - 14651883 pages.
+domains en / isLoaded: true
+Warning: Orthopedic surgery is not a category found in Wikipedia.
+Warning: Environment is not a category found in Wikipedia.
+init Environment for language de
+building Environment for language de
+isLoaded: true
+Environment built - 3523959 pages.
+init Environment for language fr
+building Environment for language fr
+isLoaded: true
+Environment built - 3631810 pages.
+init Environment for language es
+building Environment for language es
+isLoaded: true
+Environment built - 0 pages.
+init Environment for language it
+building Environment for language it
+isLoaded: true
+Environment built - 0 pages.
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+found no candidate for mention: e-journal
+found no candidate for mention: arrondissements de Hal-Vilvorde
+found no candidate for mention: Halle-Vilvorde
+found no candidate for mention: croissance de l'économie
+relatedness - comparisons: 28365 - cache proportion: 0.42452830188679247
+
+Evaluation on 1 documents and 152 expected entities, in total 152 s
+
+candidate gold recall: 96.71
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                87.5         89.86        87.5         88.67
+ranker               83.55        85.81        83.55        84.67
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                87.5         89.86        87.5         88.67
+ranker               83.55        85.81        83.55        84.67
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 02:41 min
+[INFO] Finished at: 2017-12-20T15:13:44+01:00
+[INFO] Final Memory: 386M/991M
+[INFO] ------------------------------------------------------------------------

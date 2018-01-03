@@ -1,0 +1,78 @@
+13Oct08AmitSport1.txt	http://www.espnstar.com/cricket/international-cricket/news/detail/item135428/India-battle-to-a-draw-in-Bangalore/ 
+13Oct08AmitSport2.txt	http://www.espnstar.com/cricket/cl-t20/news/detail/item135334/Sialkot-will-be-the-unknown-package/
+13Oct08AmitSport3.txt	http://www.espnstar.com/football/world-cup/news/detail/item135354/Capello-awaitsTerry-fitness-report/
+13Oct08AmitSport4.txt	http://www.espnstar.com/football/world-cup/news/detail/item135457/Kuyt-hails-great-Oranje-start/
+13Oct08AmitSport5.txt	http://www.espnstar.com/football/premier-league/news/detail/item134955/Schuster-retains-hope-of-Ronaldo-deal/
+13Oct08AmitSport6.txt	http://www.espnstar.com/motorsport/f1/news/detail/item135373/Lewis:-Collision-was-%27deliberate%27/
+13Oct08AmitSport7.txt	http://www.espnstar.com/motorsport/f1/news/detail/item135288/Alonso-surprised-by-double-success/
+13Oct08AmitSport8.txt	http://www.espnstar.com/home/news/detail/item133592/Holyfield-to-learn-fate-next-week/
+13Oct08AmitSport9.txt	http://www.espnstar.com/home/news/detail/item133583/Schumacher%27s-men-slam-tests/
+13Oct08AmitSport10.txt	http://www.espnstar.com/golf/news/detail/item134977/Liang-lands-Indian-Open-title/
+13Oct08AmitSport11.txt	http://www.espnstar.com/golf/news/detail/item134950/Zhou-wins-Omega-Championship/
+13Oct08AmitSport12.txt	http://www.fannation.com/truth_and_rumors/nba
+13Oct08AmitSport13.txt	http://www.fannation.com/truth_and_rumors/view/73596
+13Oct08AmitSport14.txt	http://news.bbc.co.uk/sport2/hi/football/internationals/7667159.stm
+13Oct08AmitSport15.txt	http://news.bbc.co.uk/sport2/hi/football/teams/n/newcastle_united/7668378.stm
+13Oct08AmitSport16.txt	http://news.bbc.co.uk/sport2/hi/other_sports/cycling/7668224.stm
+13Oct08AmitSport17.txt	http://www.bbc.co.uk/dna/606/A42153419
+13Oct08AmitSport18.txt	http://news.bbc.co.uk/sport2/hi/olympics/athletics/7572131.stm
+13Oct08AmitSport19.txt	http://www.espnstar.com/tennis/news/detail/item135558/Tired-Federer-remains-competitve/
+13Oct08AmitSport20.txt	http://www.espnstar.com/us-sports/mlb/news/detail/item135596/Dodgers-crush-Phillies/
+
+
+
+
+13Oct08AmitTech1.txt	http://www.tomsguide.com/us/T-Mobile-G1-Presales-1-5,news-2748.html
+13Oct08AmitTech2.txt	http://in.news.yahoo.com/forbes/20080414/r_t_frbs_tc_internet/ttc-4886743-3930170.html
+13Oct08AmitTech3.txt	http://www.sciam.com/article.cfm?id=civilian-astronaut-ready-to-rocket
+13Oct08AmitTech4.txt	http://www.technologyreview.com/computing/21507/?a=f
+13Oct08AmitTech5.txt	http://www.technologyreview.com/communications/21508/?a=f
+13Oct08AmitTech6.txt	http://www.technologyreview.com/energy/21473/
+13Oct08AmitTech7.txt	http://www.technologyreview.com/web/21509/?a=f
+13Oct08AmitTech8.txt	http://seekingalpha.com/article/99213-new-technology-makes-natural-gas-a-viable-replacement-for-oil?source=feed
+13Oct08AmitTech9.txt	http://blogs.edmunds.com/greencaradvisor/2008/10/mazda-says-it-will-begin-mass-producing-hydrogen-rotary-engines-as-early-as-2013.html
+13Oct08AmitTech10.txt	http://www.technologyreview.com/biomedicine/21475/
+13Oct08AmitTech11.txt	http://www.technologyreview.com/computing/21476/?a=f
+13Oct08AmitTech12.txt	http://www.technologyreview.com/biomedicine/21474/
+13Oct08AmitTech13.txt	http://www.technologyreview.com/energy/21467/
+13Oct08AmitTech14.txt	http://www.technologyreview.com/business/21463/page2/
+13Oct08AmitTech15.txt	http://www.technologyreview.com/communications/21464/page2/
+13Oct08AmitTech16.txt	http://www.technologyreview.com/computing/21452/page2/
+13Oct08AmitTech17.txt	http://www.technologyreview.com/biomedicine/21453/
+13Oct08AmitTech18.txt	http://www.technologyreview.com/biomedicine/21486/page2/
+13Oct08AmitTech19.txt	http://www.technologyreview.com/biomedicine/21487/page2/
+13Oct08AmitTech20.txt	http://www.technologyreview.com/read_article.aspx?ch=specialsections&sc=storage&id=19015
+13Oct08AmitTech21.txt	http://www.technologyreview.com/web/21519/page2/
+13Oct08AmitTech22.txt	http://www.technologyreview.com/business/21436/
+13Oct08AmitTech23.txt	http://www.technologyreview.com/communications/21413/page2/
+13Oct08AmitTech24.txt	http://www.technologyreview.com/read_article.aspx?ch=specialsections&sc=storage&id=19015
+13Oct08AmitTech25.txt	http://www.technologyreview.com/read_article.aspx?ch=specialsections&sc=storage&id=19015
+13Oct08AmitTech26.txt	http://www.technologyreview.com/business/21376/page2/
+
+
+13Oct08AmitHealth1.txt	http://www.bodybuilding.com/fun/mma_post_workout_nutrition.htm
+13Oct08AmitHealth2.txt	http://www.bodybuilding.com/fun/galanis7.htm
+13Oct08AmitHealth3.txt	http://ayurveda-foryou.com/health_articles/careofRA.html
+13Oct08AmitHealth4.txt	http://ayurveda-foryou.com/health_articles/greentea.html
+13Oct08AmitHealth5.txt	http://www.123oye.com/job-articles/health-nutrition/kalaazar.htm
+13Oct08AmitHealth6.txt http://www.123oye.com/job-articles/health-nutrition/yoga-meditation.htm
+13Oct08AmitHealth7.txt http://www.123oye.com/job-articles/health-nutrition/polio-us.htm
+13Oct08AmitHealth8.txt http://in.news.yahoo.com/139/20080717/936/thl-magnetic-nanoparticles-flush-cancer.html
+13Oct08AmitHealth9.txt http://in.news.yahoo.com/139/20080717/936/thl-killing-mosquitoes-may-up-prevalence.html
+13Oct08AmitHealth10.txt http://in.news.yahoo.com/139/20080717/936/thl-scientists-try-to-trace-the-history.html
+13Oct08AmitHealth11.txt http://in.news.yahoo.com/139/20080717/936/thl-why-some-people-may-naturally-be-res.html
+13Oct08AmitHealth12.txt http://ayurveda-foryou.com/health_articles/pervasive_diabetes.html
+13Oct08AmitHealth13.txt http://ayurveda-foryou.com/health_articles/vitamins4heart.html
+13Oct08AmitHealth14.txt http://lifestyle.in.msn.com/Health/article.aspx?cp-documentid=1199644
+13Oct08AmitHealth15.txt http://www.health.com/health/condition-article/0,,20232660_2,00.html
+13Oct08AmitHealth16.txt http://www.sciencenews.org/view/generic/id/37255/title/Nobel_Prize_in_medicine_given_for_HIV%2C_HPV_discoveries
+13Oct08AmitHealth17.txt http://www.sciam.com/article.cfm?id=new-hope-for-progeria-drug-for-rare-aging-disease
+13Oct08AmitHealth18.txt http://www.askmen.com/sports/health/20b_mens_health.html
+13Oct08AmitHealth19.txt http://www.askmen.com/sports/bodybuilding_200/241b_fitness_tip.html
+13Oct08AmitHealth20.txt http://curetoday.com/currentissue/departments/sidenote/index.html
+13Oct08AmitHealth21.txt http://www.spectrum.ieee.org/oct08/6791
+
+
+
+
+

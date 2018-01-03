@@ -5,6 +5,9 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
 import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 /**
@@ -13,6 +16,7 @@ import java.util.*;
  * -> to be replaced
  */
 public class Label {
+	private static final Logger LOGGER = LoggerFactory.getLogger(Label.class);	
 	
 	private final String text;
 	private long linkDocCount = 0;
@@ -169,7 +173,7 @@ public class Label {
 		 */
 		public double getPriorProbability() {
 			if (linkOccCount == 0)
-				return 0;
+				return 0.0;
 			else {
 				return ((double)sLinkOccCount) / linkOccCount;
 			}
@@ -209,12 +213,21 @@ public class Label {
 		for (DbSenseForLabel dbs : lbl.getSenses()) {
 			Page page = Page.createPage(env, dbs.getId());
 			PageType pageType = page.getType();
+
 			// solve possible redirect
 			if (pageType == PageType.redirect) {
 				Article article = ((Redirect)page).getTarget();
-				dbs.setId(article.getId());
-				dbs.setFromRedirect(true);
-				dbs.setFromTitle(false);
+				if (article != null) {
+					dbs.setId(article.getId());
+					dbs.setFromRedirect(true);
+					dbs.setFromTitle(false);
+				} else {
+					//LOGGER.warn("Page " + page.getId() + " is of type redirect but its target is null, it will be ignored");
+					// this is cases like this one: 
+					// https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=1487195&inprop=url
+ 					// quite frequent, redirect is empty, still we get redirected to category pages
+					continue;
+				} 
 			} else {
 				// no redirect
 				dbs.setFromTitle(true);

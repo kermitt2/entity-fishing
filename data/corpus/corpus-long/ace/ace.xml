@@ -1,0 +1,1911 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ACE2004.entityAnnotation>
+	<document docName="20001115_AFP_ARB.0093.eng">
+		<annotation>
+			<mention>Bandar Seri Begawan</mention>
+			<wikiName>Bandar Seri Begawan</wikiName>
+			<offset>2</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>29</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>41</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>James Stewart</mention>
+			<wikiName>NIL</wikiName>
+			<offset>335</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>White House</mention>
+			<wikiName>White House</wikiName>
+			<offset>354</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Palestinian Superior Security Council</mention>
+			<wikiName>Palestinian National Council</wikiName>
+			<offset>1200</offset>
+			<length>37</length>
+		</annotation>
+		<annotation>
+			<mention>area "A</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1307</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="PRI20001128.2000.0055">
+		<annotation>
+			<mention>NPR news</mention>
+			<wikiName>NPR</wikiName>
+			<offset>18</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>30</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Steve Inski</mention>
+			<wikiName>NIL</wikiName>
+			<offset>288</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Miami Dade County</mention>
+			<wikiName>Miami-Dade County, Florida</wikiName>
+			<offset>513</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Democrats</mention>
+			<wikiName>Democratic Party (United States)</wikiName>
+			<offset>600</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Palm Beach County</mention>
+			<wikiName>Palm Beach County, Florida</wikiName>
+			<offset>667</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Al Gore</mention>
+			<wikiName>Al Gore</wikiName>
+			<offset>863</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Washington State</mention>
+			<wikiName>Washington (state)</wikiName>
+			<offset>1925</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Jennifer Nesan</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2022</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Seattle</mention>
+			<wikiName>Seattle</wikiName>
+			<offset>2073</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0072.eng">
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>2</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>17</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>128</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0210.eng">
+		<annotation>
+			<mention>Tallahassee</mention>
+			<wikiName>Tallahassee, Florida</wikiName>
+			<offset>2</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>15</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>37</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Supreme Court</mention>
+			<wikiName>Supreme Court of Florida</wikiName>
+			<offset>49</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Florida</mention>
+			<wikiName>Florida</wikiName>
+			<offset>66</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="20000815_AFP_ARB.0071.eng">
+		<annotation>
+			<mention>Beirut</mention>
+			<wikiName>Beirut</wikiName>
+			<offset>2</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>15</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Lebanon</mention>
+			<wikiName>Lebanon</wikiName>
+			<offset>23</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Israel</mention>
+			<wikiName>Israel</wikiName>
+			<offset>140</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Abbad sector</mention>
+			<wikiName>NIL</wikiName>
+			<offset>719</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Wadi Marjayoun</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1501</offset>
+			<length>14</length>
+		</annotation>
+	</document>
+	<document docName="VOA20001020.2100.1853">
+		<annotation>
+			<mention>navy</mention>
+			<wikiName>United States Navy</wikiName>
+			<offset>8</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>USS Cole</mention>
+			<wikiName>USS Cole (DDG-67)</wikiName>
+			<offset>26</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Yemen</mention>
+			<wikiName>Yemen</wikiName>
+			<offset>93</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0184.eng">
+		<annotation>
+			<mention>Jerusalem</mention>
+			<wikiName>Jerusalem</wikiName>
+			<offset>2</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>19</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Hussein Abiyat</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1408</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>West Bank</mention>
+			<wikiName>West Bank</wikiName>
+			<offset>1607</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="PRI20001122.2000.0320">
+		<annotation>
+			<mention>Yasser Arafat</mention>
+			<wikiName>Yasser Arafat</wikiName>
+			<offset>35</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Corey Flintoff</mention>
+			<wikiName>Corey Flintoff</wikiName>
+			<offset>332</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>NPR news</mention>
+			<wikiName>NPR</wikiName>
+			<offset>348</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>358</offset>
+			<length>10</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0061.eng">
+		<annotation>
+			<mention>Gaza</mention>
+			<wikiName>Gaza</wikiName>
+			<offset>2</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>14</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Palestinian Superior Security Council</mention>
+			<wikiName>NIL</wikiName>
+			<offset>84</offset>
+			<length>37</length>
+		</annotation>
+		<annotation>
+			<mention>area "A"</mention>
+			<wikiName>NIL</wikiName>
+			<offset>191</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="20000715_AFP_ARB.0072.eng">
+		<annotation>
+			<mention>Jerusalem</mention>
+			<wikiName>Jerusalem</wikiName>
+			<offset>2</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>18</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>106</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Moscow</mention>
+			<wikiName>Moscow</wikiName>
+			<offset>877</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Ministry of Defense</mention>
+			<wikiName>Ministry of Defense and Armed Forces Logistics (Iran)</wikiName>
+			<offset>2212</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Tehran Radio</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2237</offset>
+			<length>12</length>
+		</annotation>
+	</document>
+	<document docName="20001015_AFP_ARB.0053.eng">
+		<annotation>
+			<mention>Beirut</mention>
+			<wikiName>Beirut</wikiName>
+			<offset>2</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>16</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Saudi Soccer Federation</mention>
+			<wikiName>NIL</wikiName>
+			<offset>28</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>Youth and Sports Bureau</mention>
+			<wikiName>NIL</wikiName>
+			<offset>341</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>Lebanon</mention>
+			<wikiName>Lebanon</wikiName>
+			<offset>1089</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Emirates</mention>
+			<wikiName>United Arab Emirates</wikiName>
+			<offset>1231</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Mexico</mention>
+			<wikiName>Mexico</wikiName>
+			<offset>1362</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Bangkok</mention>
+			<wikiName>Bangkok</wikiName>
+			<offset>1700</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="VOA20001220.2000.0060">
+		<annotation>
+			<mention>VOA News</mention>
+			<wikiName>Voice of America</wikiName>
+			<offset>19</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>America</mention>
+			<wikiName>United States</wikiName>
+			<offset>394</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Texas</mention>
+			<wikiName>Texas</wikiName>
+			<offset>888</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="chtb_165.eng">
+		<annotation>
+			<mention>Xinhua News Agency</mention>
+			<wikiName>Xinhua News Agency</wikiName>
+			<offset>2</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Shanghai</mention>
+			<wikiName>Shanghai</wikiName>
+			<offset>22</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>HSBC</mention>
+			<wikiName>HSBC</wikiName>
+			<offset>79</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>China Shipping Mansion</mention>
+			<wikiName>International Ocean Shipping Building</wikiName>
+			<offset>121</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>Pudong Lujiazui financial trading district</mention>
+			<wikiName>Lujaizui</wikiName>
+			<offset>151</offset>
+			<length>42</length>
+		</annotation>
+		<annotation>
+			<mention>Pudong</mention>
+			<wikiName>Pudong</wikiName>
+			<offset>287</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>US</mention>
+			<wikiName>United States</wikiName>
+			<offset>404</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>Citibank</mention>
+			<wikiName>Citibank</wikiName>
+			<offset>409</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Hong Kong</mention>
+			<wikiName>Hong Kong</wikiName>
+			<offset>419</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Japan</mention>
+			<wikiName>Japan</wikiName>
+			<offset>437</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Tokyo Mitsubishi Bank</mention>
+			<wikiName>The Bank of Tokyo-Mitsubishi UFJ</wikiName>
+			<offset>445</offset>
+			<length>21</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0089.eng">
+		<annotation>
+			<mention>Albus</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Lebanon</mention>
+			<wikiName>Lebanon</wikiName>
+			<offset>9</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>25</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Palestinian National Council</mention>
+			<wikiName>Palestinian National Council</wikiName>
+			<offset>198</offset>
+			<length>28</length>
+		</annotation>
+		<annotation>
+			<mention>Algeria</mention>
+			<wikiName>Algeria</wikiName>
+			<offset>230</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Albus Camp</mention>
+			<wikiName>NIL</wikiName>
+			<offset>292</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Souer</mention>
+			<wikiName>Tyre, Lebanon</wikiName>
+			<offset>308</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Beirut</mention>
+			<wikiName>Beirut</wikiName>
+			<offset>330</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Mohamed al-Dura</mention>
+			<wikiName>Muhammad al-Durrah incident</wikiName>
+			<offset>448</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Saida</mention>
+			<wikiName>Sidon</wikiName>
+			<offset>708</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Lebanon</mention>
+			<wikiName>Lebanon</wikiName>
+			<offset>731</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Khalid Arif</mention>
+			<wikiName>NIL</wikiName>
+			<offset>966</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Jerusalem</mention>
+			<wikiName>Jerusalem</wikiName>
+			<offset>1318</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="PRI20001201.2000.1828">
+		<annotation>
+			<mention>BBC News</mention>
+			<wikiName>BBC News</wikiName>
+			<offset>6</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>London</mention>
+			<wikiName>London</wikiName>
+			<offset>18</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>US Supreme Court</mention>
+			<wikiName>Supreme Court of the United States</wikiName>
+			<offset>63</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Judith Spencer</mention>
+			<wikiName>NIL</wikiName>
+			<offset>185</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Ruth Bater Ginsburg</mention>
+			<wikiName>Ruth Bader Ginsburg</wikiName>
+			<offset>437</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Florida Supreme Court</mention>
+			<wikiName>Supreme Court of Florida</wikiName>
+			<offset>541</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Sandra Day O'Connor</mention>
+			<wikiName>Sandra Day O'Connor</wikiName>
+			<offset>776</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>1115</offset>
+			<length>10</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0060.eng">
+		<annotation>
+			<mention>Bandar Seri Begawan</mention>
+			<wikiName>Bandar Seri Begawan</wikiName>
+			<offset>2</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>29</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Sultanate of Brunei</mention>
+			<wikiName>Brunei</wikiName>
+			<offset>751</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>2438</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001124.2050.0257">
+		<annotation>
+			<mention>HONG KONG</mention>
+			<wikiName>Hong Kong</wikiName>
+			<offset>112</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Asia</mention>
+			<wikiName>Asia</wikiName>
+			<offset>147</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>International Monetary Fund</mention>
+			<wikiName>International Monetary Fund</wikiName>
+			<offset>552</offset>
+			<length>27</length>
+		</annotation>
+		<annotation>
+			<mention>David Robinson</mention>
+			<wikiName>NIL</wikiName>
+			<offset>883</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Philippines</mention>
+			<wikiName>Philippines</wikiName>
+			<offset>1076</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Taiwan</mention>
+			<wikiName>Taiwan</wikiName>
+			<offset>1089</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Indonesia</mention>
+			<wikiName>Indonesia</wikiName>
+			<offset>1101</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Chen Shui-bian</mention>
+			<wikiName>Chen Shui-bian</wikiName>
+			<offset>1242</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Malaysia</mention>
+			<wikiName>Malaysia</wikiName>
+			<offset>1358</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>South Korea</mention>
+			<wikiName>South Korea</wikiName>
+			<offset>1371</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Singapore</mention>
+			<wikiName>Singapore</wikiName>
+			<offset>1969</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Bloomberg News</mention>
+			<wikiName>Bloomberg News</wikiName>
+			<offset>2128</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>2264</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>2428</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Ian Perkin</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2638</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Hong Kong General Chamber of Commerce</mention>
+			<wikiName>Hong Kong General Chamber of Commerce</wikiName>
+			<offset>2673</offset>
+			<length>37</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0217.eng">
+		<annotation>
+			<mention>Bandar Seri Begawan</mention>
+			<wikiName>Bandar Seri Begawan</wikiName>
+			<offset>2</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>29</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Russia</mention>
+			<wikiName>Russia</wikiName>
+			<offset>98</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Coral Islands</mention>
+			<wikiName>NIL</wikiName>
+			<offset>221</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Brunei</mention>
+			<wikiName>Brunei</wikiName>
+			<offset>553</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Irkotsik</mention>
+			<wikiName>Irkutsk</wikiName>
+			<offset>636</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="chtb_267.eng">
+		<annotation>
+			<mention>Xinhua News Agency</mention>
+			<wikiName>Xinhua News Agency</wikiName>
+			<offset>2</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Beijing</mention>
+			<wikiName>Beijing</wikiName>
+			<offset>22</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Weir Group</mention>
+			<wikiName>Weir Group</wikiName>
+			<offset>74</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>US</mention>
+			<wikiName>United States</wikiName>
+			<offset>92</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>Jiangsu Province</mention>
+			<wikiName>Jiangsu</wikiName>
+			<offset>155</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Electric Power Department</mention>
+			<wikiName>NIL</wikiName>
+			<offset>174</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>China</mention>
+			<wikiName>China</wikiName>
+			<offset>209</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Aixing Dan</mention>
+			<wikiName>NIL</wikiName>
+			<offset>288</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>International Co-operation Department</mention>
+			<wikiName>NIL</wikiName>
+			<offset>316</offset>
+			<length>37</length>
+		</annotation>
+		<annotation>
+			<mention>Electric Power Industry Ministry</mention>
+			<wikiName>NIL</wikiName>
+			<offset>361</offset>
+			<length>32</length>
+		</annotation>
+		<annotation>
+			<mention>Yizhong Company</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1700</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Rudong</mention>
+			<wikiName>Rudong County</wikiName>
+			<offset>1927</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Renzu Luo</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2280</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Japan</mention>
+			<wikiName>Japan</wikiName>
+			<offset>2704</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>South Korea</mention>
+			<wikiName>South Korea</wikiName>
+			<offset>2711</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Taiwan</mention>
+			<wikiName>Taiwan</wikiName>
+			<offset>2727</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>John Weir</mention>
+			<wikiName>NIL</wikiName>
+			<offset>3100</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Brown</mention>
+			<wikiName>NIL</wikiName>
+			<offset>3174</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="20001015_AFP_ARB.0229.eng">
+		<annotation>
+			<mention>London</mention>
+			<wikiName>London</wikiName>
+			<offset>2</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>16</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>123</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Riyadh</mention>
+			<wikiName>Riyadh</wikiName>
+			<offset>164</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Riyadh International Airport</mention>
+			<wikiName>King Khalid International Airport</wikiName>
+			<offset>370</offset>
+			<length>28</length>
+		</annotation>
+	</document>
+	<document docName="chtb_227.eng">
+		<annotation>
+			<mention>International Correspondence Communication News Agency</mention>
+			<wikiName>NIL</wikiName>
+			<offset>841</offset>
+			<length>54</length>
+		</annotation>
+		<annotation>
+			<mention>Klelov</mention>
+			<wikiName>NIL</wikiName>
+			<offset>909</offset>
+			<length>6</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001129.2040.0383">
+		<annotation>
+			<mention>TALLAHASSEE</mention>
+			<wikiName>Tallahassee, Florida</wikiName>
+			<offset>323</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Fla.</mention>
+			<wikiName>Florida</wikiName>
+			<offset>336</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Supreme Court</mention>
+			<wikiName>Supreme Court of Florida</wikiName>
+			<offset>593</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>District Court of Appeal</mention>
+			<wikiName>Florida District Courts of Appeal</wikiName>
+			<offset>679</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Barry Richard</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1591</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Electoral College</mention>
+			<wikiName>Electoral College (United States)</wikiName>
+			<offset>2896</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Kendall Coffey</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2978</offset>
+			<length>14</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001217.2241.0165">
+		<annotation>
+			<mention>Chicago O'Hare</mention>
+			<wikiName>O'Hare International Airport</wikiName>
+			<offset>539</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>La Guardia</mention>
+			<wikiName>LaGuardia Airport</wikiName>
+			<offset>558</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York City</wikiName>
+			<offset>572</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>South</mention>
+			<wikiName>Southern United States</wikiName>
+			<offset>679</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Transportation Department</mention>
+			<wikiName>United States Department of Transportation</wikiName>
+			<offset>1018</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles International</mention>
+			<wikiName>Los Angeles International Airport</wikiName>
+			<offset>1664</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>Burbank</mention>
+			<wikiName>Bob Hope Airport</wikiName>
+			<offset>1725</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>John Wayne Airport</mention>
+			<wikiName>John Wayne Airport</wikiName>
+			<offset>1736</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Orange County</mention>
+			<wikiName>Orange County, California</wikiName>
+			<offset>1758</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Calif</mention>
+			<wikiName>California</wikiName>
+			<offset>1773</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Westchester County Airport</mention>
+			<wikiName>Westchester County Airport</wikiName>
+			<offset>1788</offset>
+			<length>26</length>
+		</annotation>
+		<annotation>
+			<mention>JFK</mention>
+			<wikiName>John F. Kennedy International Airport</wikiName>
+			<offset>1826</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Federal Aviation Administration</mention>
+			<wikiName>Federal Aviation Administration</wikiName>
+			<offset>2704</offset>
+			<length>31</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>4586</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Aviation Consumer Protection Div</mention>
+			<wikiName>Airline complaints</wikiName>
+			<offset>4785</offset>
+			<length>32</length>
+		</annotation>
+		<annotation>
+			<mention>400 Seventh St. S.W.</mention>
+			<wikiName>NIL</wikiName>
+			<offset>4859</offset>
+			<length>20</length>
+		</annotation>
+	</document>
+	<document docName="APW20001001.2021.0521">
+		<annotation>
+			<mention>CAIRO</mention>
+			<wikiName>Cairo</wikiName>
+			<offset>2</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Egypt</mention>
+			<wikiName>Egypt</wikiName>
+			<offset>9</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>AP</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>16</offset>
+			<length>2</length>
+		</annotation>
+		<annotation>
+			<mention>Syria</mention>
+			<wikiName>Syria</wikiName>
+			<offset>53</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>President</mention>
+			<wikiName>President of Egypt</wikiName>
+			<offset>110</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>317</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>West Bank</mention>
+			<wikiName>West Bank</wikiName>
+			<offset>474</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Gaza Strip</mention>
+			<wikiName>Gaza Strip</wikiName>
+			<offset>485</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Jerusalem</mention>
+			<wikiName>Jerusalem</wikiName>
+			<offset>500</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0212.eng">
+		<annotation>
+			<mention>Stewart Talbot</mention>
+			<wikiName>NIL</wikiName>
+			<offset>28</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>America</mention>
+			<wikiName>United States</wikiName>
+			<offset>44</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>State</mention>
+			<wikiName>NIL</wikiName>
+			<offset>77</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Madeleine Albright</mention>
+			<wikiName>Madeleine Albright</wikiName>
+			<offset>136</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Yale University</mention>
+			<wikiName>Yale University</wikiName>
+			<offset>236</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>northeast</mention>
+			<wikiName>NIL</wikiName>
+			<offset>281</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Richard Levin</mention>
+			<wikiName>Rick Levin</wikiName>
+			<offset>295</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Globalization Studies Center</mention>
+			<wikiName>Yale Center for the Study of Globalization</wikiName>
+			<offset>384</offset>
+			<length>28</length>
+		</annotation>
+		<annotation>
+			<mention>Middle East</mention>
+			<wikiName>Middle East</wikiName>
+			<offset>670</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Time magazine</mention>
+			<wikiName>Time (magazine)</wikiName>
+			<offset>902</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0065.eng">
+		<annotation>
+			<mention>Camp Zeist</mention>
+			<wikiName>Zeist</wikiName>
+			<offset>2</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Holland</mention>
+			<wikiName>Holland</wikiName>
+			<offset>14</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>30</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Soviet Union</mention>
+			<wikiName>Soviet Union</wikiName>
+			<offset>574</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Sweden</mention>
+			<wikiName>Sweden</wikiName>
+			<offset>841</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Amsterdam</mention>
+			<wikiName>Amsterdam</wikiName>
+			<offset>870</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Copenhagen</mention>
+			<wikiName>Copenhagen</wikiName>
+			<offset>881</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Stockholm</mention>
+			<wikiName>Stockholm</wikiName>
+			<offset>896</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Alameen Khalifa Fahima</mention>
+			<wikiName>Lamin Khalifah Fhimah</wikiName>
+			<offset>1825</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>Abdulbasit al-Maqrahi</mention>
+			<wikiName>Abdelbaset al-Megrahi</wikiName>
+			<offset>1852</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Malta</mention>
+			<wikiName>Malta</wikiName>
+			<offset>1912</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001125.1558.0117">
+		<annotation>
+			<mention>GROSSE POINTE PARK</mention>
+			<wikiName>Grosse Pointe Park, Michigan</wikiName>
+			<offset>55</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Mich.</mention>
+			<wikiName>Michigan</wikiName>
+			<offset>75</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York</wikiName>
+			<offset>640</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Pennsylvania</mention>
+			<wikiName>Pennsylvania</wikiName>
+			<offset>653</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Department of Natural Resources</mention>
+			<wikiName>Michigan Department of Natural Resources</wikiName>
+			<offset>904</offset>
+			<length>31</length>
+		</annotation>
+		<annotation>
+			<mention>Rob Williams</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2330</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Detroit</mention>
+			<wikiName>Detroit</wikiName>
+			<offset>2481</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Peter Thompson</mention>
+			<wikiName>NIL</wikiName>
+			<offset>3719</offset>
+			<length>14</length>
+		</annotation>
+	</document>
+	<document docName="VOA20001129.2000.0364">
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>59</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Supreme Court</mention>
+			<wikiName>Supreme Court of the United States</wikiName>
+			<offset>171</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Joe O'Grossman</mention>
+			<wikiName>Joel Grossman</wikiName>
+			<offset>345</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Baltimore</mention>
+			<wikiName>Baltimore</wikiName>
+			<offset>400</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Johns Hopkins University</mention>
+			<wikiName>Johns Hopkins University</wikiName>
+			<offset>412</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Lawrence Tribe</mention>
+			<wikiName>Laurence Tribe</wikiName>
+			<offset>770</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Gore</mention>
+			<wikiName>Al Gore</wikiName>
+			<offset>838</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>legislature</mention>
+			<wikiName>Florida Legislature</wikiName>
+			<offset>2981</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Congress</mention>
+			<wikiName>United States Congress</wikiName>
+			<offset>3237</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0030.eng">
+		<annotation>
+			<mention>Gaza</mention>
+			<wikiName>Gaza</wikiName>
+			<offset>2</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>14</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Egypt</mention>
+			<wikiName>Egypt</wikiName>
+			<offset>490</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Nitsarim</mention>
+			<wikiName>Netzarim (settlement)</wikiName>
+			<offset>1026</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001101.2212.0429">
+		<annotation>
+			<mention>Time Warner</mention>
+			<wikiName>Time Warner</wikiName>
+			<offset>508</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Larry Haverty</mention>
+			<wikiName>NIL</wikiName>
+			<offset>820</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>State Street Research</mention>
+			<wikiName>State Street Corporation</wikiName>
+			<offset>862</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Boston</mention>
+			<wikiName>Boston</wikiName>
+			<offset>887</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Tom Wolzien</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1577</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Sanford C. Bernstein</mention>
+			<wikiName>Sanford Bernstein</wikiName>
+			<offset>1592</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Disney</mention>
+			<wikiName>The Walt Disney Company</wikiName>
+			<offset>1883</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Capital Cities/ABC</mention>
+			<wikiName>Capital Cities Communications</wikiName>
+			<offset>1921</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Time</mention>
+			<wikiName>Time Inc.</wikiName>
+			<offset>2036</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Warner</mention>
+			<wikiName>Warner Communications</wikiName>
+			<offset>2045</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Roger McNamee</mention>
+			<wikiName>Roger McNamee</wikiName>
+			<offset>2128</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Integral Capital</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2145</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Jessica Reif</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2449</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Merrill Lynch</mention>
+			<wikiName>Merrill Lynch</wikiName>
+			<offset>2465</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>NBC</mention>
+			<wikiName>NBC</wikiName>
+			<offset>2665</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>2682</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>John Schreiber</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2698</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Janus Capital</mention>
+			<wikiName>Janus Capital Group</wikiName>
+			<offset>2748</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Comcast</mention>
+			<wikiName>Comcast</wikiName>
+			<offset>3974</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="20001115_AFP_ARB.0013.eng">
+		<annotation>
+			<mention>Bandar Seri Begawan</mention>
+			<wikiName>Bandar Seri Begawan</wikiName>
+			<offset>2</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>AFP</mention>
+			<wikiName>Agence France-Presse</wikiName>
+			<offset>29</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>State of Florida</mention>
+			<wikiName>Florida</wikiName>
+			<offset>333</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Brunei</mention>
+			<wikiName>Brunei</wikiName>
+			<offset>456</offset>
+			<length>6</length>
+		</annotation>
+	</document>
+	<document docName="PRI20001031.2000.1824">
+		<annotation>
+			<mention>BBC News</mention>
+			<wikiName>BBC News</wikiName>
+			<offset>6</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>London</mention>
+			<wikiName>London</wikiName>
+			<offset>18</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Taiwan</mention>
+			<wikiName>Taiwan</wikiName>
+			<offset>97</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Los Angeles</mention>
+			<wikiName>Los Angeles</wikiName>
+			<offset>107</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>David Chezan</mention>
+			<wikiName>NIL</wikiName>
+			<offset>330</offset>
+			<length>12</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001106.1705.0187">
+		<annotation>
+			<mention>CHATTANOOGA</mention>
+			<wikiName>Chattanooga, Tennessee</wikiName>
+			<offset>317</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Tenn.</mention>
+			<wikiName>Tennessee</wikiName>
+			<offset>330</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>544</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Arkansas</mention>
+			<wikiName>Arkansas</wikiName>
+			<offset>881</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>White House</mention>
+			<wikiName>White House</wikiName>
+			<offset>1175</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Wisconsin</mention>
+			<wikiName>Wisconsin</wikiName>
+			<offset>2196</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Iowa</mention>
+			<wikiName>Iowa</wikiName>
+			<offset>2210</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Michigan</mention>
+			<wikiName>Michigan</wikiName>
+			<offset>2365</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Pennsylvania</mention>
+			<wikiName>Pennsylvania</wikiName>
+			<offset>2378</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Green Bay</mention>
+			<wikiName>Green Bay, Wisconsin</wikiName>
+			<offset>3041</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>D.C.</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>3951</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001109.1946.0315">
+		<annotation>
+			<mention>WASHINGTON</mention>
+			<wikiName>Washington, D.C.</wikiName>
+			<offset>88</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Ralph Nader</mention>
+			<wikiName>Ralph Nader</wikiName>
+			<offset>101</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>America</mention>
+			<wikiName>United States</wikiName>
+			<offset>469</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Noni</mention>
+			<wikiName>NIL</wikiName>
+			<offset>815</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>White House</mention>
+			<wikiName>White House</wikiName>
+			<offset>1081</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Florida</mention>
+			<wikiName>Florida</wikiName>
+			<offset>1390</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>John Ruth</mention>
+			<wikiName>NIL</wikiName>
+			<offset>1636</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Oregon</mention>
+			<wikiName>Oregon</wikiName>
+			<offset>2068</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Julie Quastler</mention>
+			<wikiName>NIL</wikiName>
+			<offset>2243</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Portland</mention>
+			<wikiName>Portland, Oregon</wikiName>
+			<offset>2286</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Dorothy Byrne</mention>
+			<wikiName>NIL</wikiName>
+			<offset>3463</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Green Party</mention>
+			<wikiName>Green Party of Florida</wikiName>
+			<offset>3514</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Barbara Lange</mention>
+			<wikiName>NIL</wikiName>
+			<offset>3931</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Sierra Club</mention>
+			<wikiName>Sierra Club</wikiName>
+			<offset>4003</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Patricia Newell</mention>
+			<wikiName>NIL</wikiName>
+			<offset>4242</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>University of Florida</mention>
+			<wikiName>University of Florida</wikiName>
+			<offset>4289</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Gainesville</mention>
+			<wikiName>Gainesville, Florida</wikiName>
+			<offset>4314</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+	<document docName="NYT20001123.1511.0062">
+		<annotation>
+			<mention>ABC</mention>
+			<wikiName>American Broadcasting Company</wikiName>
+			<offset>285</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Fox Sports</mention>
+			<wikiName>Fox Sports (United States)</wikiName>
+			<offset>766</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Sun Microsystems</mention>
+			<wikiName>Sun Microsystems</wikiName>
+			<offset>790</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Fidelity Investments</mention>
+			<wikiName>Fidelity Investments</wikiName>
+			<offset>932</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Ocean Spray Cranberries</mention>
+			<wikiName>Ocean Spray (cooperative)</wikiName>
+			<offset>1435</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>In Style Entertaining 2000 magazine</mention>
+			<wikiName>InStyle</wikiName>
+			<offset>1729</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>PepsiCo</mention>
+			<wikiName>PepsiCo</wikiName>
+			<offset>1985</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Jack Nicholson</mention>
+			<wikiName>Jack Nicholson</wikiName>
+			<offset>2127</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Helen Hunt</mention>
+			<wikiName>Helen Hunt</wikiName>
+			<offset>2143</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Greg Kinnear</mention>
+			<wikiName>Greg Kinnear</wikiName>
+			<offset>2155</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>James L. Brooks</mention>
+			<wikiName>James L. Brooks</wikiName>
+			<offset>2172</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Campbell Soup Co</mention>
+			<wikiName>Campbell Soup Company</wikiName>
+			<offset>2214</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Roundabout Theater Company</mention>
+			<wikiName>Roundabout Theatre Company</wikiName>
+			<offset>2346</offset>
+			<length>26</length>
+		</annotation>
+		<annotation>
+			<mention>Times Square</mention>
+			<wikiName>Times Square</wikiName>
+			<offset>2404</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Reader's Digest Association</mention>
+			<wikiName>Reader's Digest Association</wikiName>
+			<offset>2519</offset>
+			<length>27</length>
+		</annotation>
+		<annotation>
+			<mention>Reader's Digest magazine</mention>
+			<wikiName>Reader's Digest</wikiName>
+			<offset>2692</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Levi</mention>
+			<wikiName>Levi Strauss &amp; Co.</wikiName>
+			<offset>2793</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Empire Blue Cross Blue Shield</mention>
+			<wikiName>Blue Cross Blue Shield Association</wikiName>
+			<offset>3075</offset>
+			<length>29</length>
+		</annotation>
+		<annotation>
+			<mention>MSN network</mention>
+			<wikiName>MSN</wikiName>
+			<offset>3113</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Microsoft</mention>
+			<wikiName>Microsoft</wikiName>
+			<offset>3128</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Land Rover</mention>
+			<wikiName>Land Rover</wikiName>
+			<offset>3278</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Volvo</mention>
+			<wikiName>Volvo</wikiName>
+			<offset>3293</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Sprint Communications Co</mention>
+			<wikiName>Sprint Nextel</wikiName>
+			<offset>3698</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>John Corbett</mention>
+			<wikiName>John Corbett (actor)</wikiName>
+			<offset>3879</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Houston Grand Opera</mention>
+			<wikiName>Houston Grand Opera</wikiName>
+			<offset>4040</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>CBS</mention>
+			<wikiName>CBS</wikiName>
+			<offset>4238</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Brooklyn</mention>
+			<wikiName>Brooklyn</wikiName>
+			<offset>4633</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="VOA20001223.2000.0139">
+		<annotation>
+			<mention>Democratic opposition</mention>
+			<wikiName>Democratic Opposition of Serbia</wikiName>
+			<offset>138</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Slobodan Milosevic</mention>
+			<wikiName>Slobodan Milošević</wikiName>
+			<offset>325</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Socialist Party</mention>
+			<wikiName>Socialist Party of Serbia</wikiName>
+			<offset>372</offset>
+			<length>15</length>
+		</annotation>
+	</document>
+</ACE2004.entityAnnotation>

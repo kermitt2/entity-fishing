@@ -22,7 +22,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.HttpHeaders; 
 
 import com.scienceminer.nerd.utilities.NerdRestUtils;
-import com.scienceminer.nerd.utilities.NerdServiceProperties;
 
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.lang.Language;
@@ -64,13 +63,8 @@ public class NerdRestKB {
 	 *  @return a response object containing the information related to the identified concept.
 	 */
 	public static Response getConceptInfo(String id, String lang) {
-		//LOGGER.debug(methodLogIn());       
-
 		Response response = null;
-		String retVal = null;
 		try {
-			//LOGGER.debug(">> set raw text for stateless service'...");
-			
 			if (id.startsWith("Q")) {
 				// we have a concept
 				response = getWikidataConceptInfo(id);
@@ -90,7 +84,6 @@ public class NerdRestKB {
 			LOGGER.error("An unexpected exception occurs. ", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		//LOGGER.debug(methodLogOut());
 		
 		return response;
 	}
@@ -188,6 +181,8 @@ public class NerdRestKB {
 					else {
 						response = Response.status(Status.OK).entity(json)
 							.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+							.header("Access-Control-Allow-Origin", "*")
+                    		.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 							.build();
 					}
 				}
@@ -294,6 +289,8 @@ public class NerdRestKB {
 		else {
 			response = Response.status(Status.OK).entity(json)
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+				.header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 				.build();
 		}
 		return response;
@@ -334,7 +331,6 @@ public class NerdRestKB {
 						boolean first = true;
 						for(int i=0; i<senses.length; i++) {
 							Label.Sense sense = senses[i];
-							//PageType pageType = PageType.values()[sense.getType()];
 							PageType pageType = sense.getType();
 							if (pageType != PageType.article)
 								continue;
@@ -389,6 +385,8 @@ public class NerdRestKB {
 			} else {
 				response = Response.status(Status.OK).entity(json)
 					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+					.header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 					.build();
 			}
 

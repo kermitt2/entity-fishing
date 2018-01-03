@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
@@ -15,6 +14,7 @@ import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.mention.Mention;
 
 import com.fasterxml.jackson.core.io.*;
 
@@ -137,14 +137,14 @@ public class DocumentContext extends NerdContext {
 
 		// update acronyms
 		if (nerdQuery.getContext() != null) {
-			Map<Entity,Entity> localAcronyms = nerdQuery.getContext().getAcronyms();
+			Map<Mention,Mention> localAcronyms = nerdQuery.getContext().getAcronyms();
 			if (localAcronyms != null) {
-				for (Map.Entry<Entity, Entity> entry : localAcronyms.entrySet()) {
-	        		Entity base = entry.getValue();
-	        		Entity acronym = entry.getKey();
+				for (Map.Entry<Mention, Mention> entry : localAcronyms.entrySet()) {
+	        		Mention base = entry.getValue();
+	        		Mention acronym = entry.getKey();
 
 	        		if (acronyms == null)
-	        			acronyms = new HashMap<Entity, Entity>();
+	        			acronyms = new HashMap<Mention, Mention>();
 
 	        		if (acronyms.get(acronym) == null) {
 	        			acronyms.put(acronym, base);

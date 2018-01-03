@@ -41,7 +41,7 @@ public class Page implements Comparable<Page> {
 		template,
 
 		/**
-		 * A type of page that we don't currently deal with (e.g templates)
+		 * A type of page that we don't currently deal with 
 		 */
 		invalid
 	};
@@ -50,7 +50,7 @@ public class Page implements Comparable<Page> {
 	protected String wikidataId = null;
 	protected String title = null;
 	protected PageType type;
-	protected int depth;
+	//protected int depth;
 	protected Double weight = null;
 
 	protected KBLowerEnvironment env = null;
@@ -194,9 +194,9 @@ public class Page implements Comparable<Page> {
 		return p;
 	}
 
-	private void setDetails()  {
+	private void setDetails() {
 		DbPage pd = env.getDbPage().retrieve(id);
-		if (pd == null) {
+		if (pd == null) {			
 			title = null;
 			type = PageType.invalid;
 		} else {
@@ -207,7 +207,7 @@ public class Page implements Comparable<Page> {
 	private void setDetails(DbPage pd)  {
 		title = pd.getTitle();
 		type = PageType.values()[pd.getType()];
-		depth = pd.getDepth();
+		//depth = pd.getDepth();
 		wikidataId = env.getDbConceptByPageId().retrieve(id);
 		detailsSet = true;
 	}

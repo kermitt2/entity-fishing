@@ -1,0 +1,20 @@
+Hubble’s Infrared Eyes Home In On Suspected Extrasolar Planet
+
+ScienceDaily (Jan. 11, 2005) — Unique follow up observations carried out with the NASA/ESA Hubble Space Telescope are providing important supporting evidence for the existence of a candidate planetary companion to a relatively bright young brown dwarf star located 225 light-years away in the southern constellation Hydra.
+Astronomers at the European Southern Observatory’s Very Large Telescope (VLT) in Chile detected a planet candidate in April 2004 with infrared observations using adaptive optics to sharpen their view. The VLT astronomers spotted a faint companion object to the brown dwarf star 2MASSWJ 1207334-393254 (aka 2M1207). The object is a candidate planet because it is only one-hundredth the brightness of the brown dwarf (at the longer-than-Hubble wavelengths observed with the VLT) and glimmers at barely 1000 degrees Celsius, which is cooler than a light bulb filament.
+
+Because an extrasolar planet has never been directly imaged before, this remarkable observation required Hubble’s unique abilities to do follow-up observations to test and validate if it is indeed a planet. Hubble’s Near Infrared Camera and Multi-Object Spectrometer (NICMOS) camera conducted complementary observations taken at shorter infrared wavelength observations unobtainable from the ground. This wavelength coverage is important because it is needed to characterize the object’s physical nature.
+
+Very high precision measurements of the relative position between the dwarf and companion were obtained with NICMOS in August 2004. The Hubble images were compared to the earlier VLT observations to try and see if the two objects are really gravitationally bound and hence move across the sky together. Despite the four months between the VLT and NICMOS observations, astronomers say they can almost rule out the probability that the suspected planet is a background object, because there was no noticeable change in its position relative to the dwarf.
+
+If the two objects are indeed gravitationally bound together they are at least 8 billion kilometres apart, about 30 percent farther apart than Pluto is from the Sun. Given the mass of 2M1207, inferred from its spectrum, the companion object would take a sluggish 2,500 years to complete one orbit. Therefore, any relative motion seen between the two on much shorter time scales would reveal the candidate planet to be a background interloper and not a gravitationally bound planet.
+
+”The NICMOS photometry supports the conjecture that the planet candidate is about five times the mass of Jupiter if it indeed orbits the brown dwarf,” says Glenn Schneider of the University of Arizona, USA. “The NICMOS position measurements, relative to VLT's, indicate the object is a true (and thus orbiting) companion at a 99 percent level of confidence – but further planned Hubble observations are required to eliminate the 1 percent chance that it is a coincidental background object which is not orbiting the dwarf.”
+
+Schneider is presenting these latest Hubble observations today at the meeting of the American Astronomical Society in San Diego, USA.
+
+The candidate planet and dwarf are in the nearby TW Hydrae association of young stars that are estimated to be no older than 8 million years. The Hubble NICMOS observations found the object to be extremely red and relatively much brighter at longer wavelengths. The colours match theoretical expectations for an approximately 8 million-year-old object that is about five times as massive as Jupiter.
+
+Further Hubble observations by the NICMOS team are planned in April 2005.
+
+The Hubble Space Telescope is a project of international cooperation between ESA and NASA.

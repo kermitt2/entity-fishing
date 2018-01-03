@@ -1,0 +1,28 @@
+
+ScienceDaily: Your source for the latest research news and science breakthroughs -- updated daily
+Science News
+Share   Blog   Cite
+Print   Email   Bookmark
+Physics Experiment Produces Highest-Energy Electrons And Positrons Ever Created In Man-Made Accelerator
+
+ScienceDaily (June 5, 1998) — Physicists at the European Laboratory for Particle Physics (CERN) in Geneva have created the highest-energy electrons and positrons, the anti-matter counterparts of electrons, ever produced in a man-made particle accelerator. A team from the University of Washington physics department is participating in one of the four experiments studying the collisions of these elementary particles.
+
+The total energy in each electron-positron collision was 189 billion electron-volts. That result on May 23 surpassed the previous high of 184 billion electron-volts established last year. An electron-volt is the energy an electron acquires as it accelerates across one volt. By comparison, the electrons used to illuminate the typical television screen or computer display have an energy of 20,000 electron-volts.
+
+The greater the energy of the colliding particles, the greater the chance of observing particles that have been conjectured by physicists but not yet seen, said UW Physics Professor Joseph Rothberg, who has been part of the ALEPH experiment at CERN since 1988. ALEPH is a high-energy physics experiment that uses a complex and sensitive detector to observe particles.
+
+Gaining more information about particles' properties, such as their masses and what is produced when they decay, will lead to greater understanding of the nature of matter.
+
+Physicists are trying to identify elementary particles--those with no subcomponents. Protons and neutrons, though parts of an atom, are not strictly considered elementary particles because they are composed of gluons and quarks.
+
+So-called "supersymmetric" theories have hypothesized that each of the known particles has a counterpart that is more massive but otherwise is nearly symmetrical in its properties. Since the Large Electron-Positron Collider (LEP), the largest collider in the world, began operating in 1989, it has produced precise measurements of particle interactions, though it has not revealed the existence of any new particles.
+
+However, by continuing to increase the energy of the colliding particles, it is possible the experiments will detect new higher-mass particles, said UW Research Assistant Professor Steven Wasserbaech. He has worked on the ALEPH project since 1989.
+
+Particles accelerated in the LEP Collider travel nearly at the speed of light through the narrow tubes of the circular 17-mile-long underground machine that straddles the French-Swiss border near Geneva. Groups of electrons and positrons, guided by electromagnets and propelled by intense electric fields, travel the ring in opposite directions and are focused to a point no larger than a cross-section of human hair. Groups containing billions of particles pass through each other 100,000 times a second, but only a handful of electron-positron collisions take place each second. In some cases, both particles in a collision disappear and jets of other particles emerge, Wasserbaech said. The reactions that are possible depend on the energies of the colliding particles.
+
+Physicists have used similar experiments in recent decades to study and characterize the particles and the forces that exist in nature. Those studies have produced a Standard Model of particle physics that correctly predicted all interactions that have been observed so far. But the model is believed to be incomplete and doesn't answer some fundamental questions.
+
+A key element of the LEP program is the search for the Higgs boson, a particle theorized in the Standard Model. Interactions involving the Higgs boson could be the very reason objects have mass. If the Higgs boson or other elusive particles are discovered, that could mean profound advances in understanding the nature of all matter in the universe. There are indications, both in theory and through experiments, that the LEP energy might be high enough to reveal those new phenomena.
+
+"The particles we're trying to find were presumably produced in the Big Bang. In a sense we're trying to work our way back," Rothberg said. 

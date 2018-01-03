@@ -1,0 +1,22 @@
+Cheap, Off-Grid Cooling
+A hybrid refrigerator will bring efficient, cheap cooling to Indi
+
+A startup based in Cambridge, MA, has developed a new solar-powered refrigeration system for food storage in Indian villages that are off the grid. Promethean Power Systems' design is a hybrid of conventional compressor-based refrigeration and thermoelectric materials--semiconductors that convert electricity into cooling and vice versa.
+
+The chilling units will be cheaper than what is currently used in Indian villages, most of which are off the grid. In such villages, food distributors and processors store raw food products in traditional compressor-based cooling units that run on diesel generators. These cost about $12,000, says the company's cofounder Sorin Grama. And that cost, says Grama, doesn't include the escalating cost of diesel needed to run the units. During a month spent in India a year ago, Grama and his cofounder, Sam White, identified a crucial niche. "Customers kept asking for a cooling system that has low maintenance and operation cost," White says.
+
+Grama says that even including the expense of the photovoltaic (PV) panels, his design would cost about the same as or slightly less than the diesel-powered refrigeration units. More important, it would have no fuel costs, and almost no maintenance costs. According to the company's initial calculations, using a compressor combined with thermoelectric modules would use 20 percent less power to generate the same cooling as a compressor alone.
+
+The design uses off-the-shelf components: silicon PV panels, thermoelectric modules, and a compressor-based refrigeration unit. The company's control system directs the two cooling components to work together so that they squeeze as much juice out of the solar panels as possible, Grama explains. Early in the morning and late in the afternoon, when the amount of sunlight is low, the solar panels won't generate enough power to run the compressor. But there will be enough solar power to run the thermoelectric modules, which would generate cooling until the compressor kicks in. Around midday, when the solar panels are working full throttle, the thermoelectric modules will use the extra juice that the compressor doesn't need to provide additional cooling.
+
+Since Promethean was founded in 2007, it has built a laboratory-scale 60-liter chiller. Last week, the company secured funding with which it plans to build a 500-liter prototype that it hopes to test in India in 2009.
+
+
+The company had toyed with the idea of using only thermoelectric modules hooked up to PV panels. In a thermoelectric module, voltage applied across a thermoelectric material sandwiched between two ceramic plates makes one side hot and the other cold. However, existing thermoelectrics (which are used in temperature-controlled car seats, lasers, and portable picnic coolers), typically bismuth or lead telluride, are not efficient enough for large refrigerators.
+
+Gang Chen, a professor of mechanical engineering at MIT, says that the efficiency of a cooling unit depends on its size. "As you shrink the size to a hotel refrigerator, the compressor itself becomes less efficient," he says. "In those cases, thermoelectric becomes increasingly more attractive." Promethean's approach to combining thermoelectrics with compressors sounds like a logical argument to increase cooling efficiency in commercial-scale systems, Chen says.
+
+The company's 60-liter prototype used bismuth-telluride modules from Dallas-based Marlow Industries. That is the most efficient cooling material known so far, says Boston College physics professor Zhifeng Ren. But there is still room for improvement, and Grama says that the company is on the lookout for new, possibly more-efficient materials.
+
+The startup company might be in luck. Many advances in thermoelectric materials have come out of laboratories recently. MIT's Chen, for one, has increased the efficiency of bismuth antimony telluride by 40 percent by using nanocrystalline materials. Researchers are also tinkering with lead telluride and are starting to use silicon nanowires and silicon-germanium composites. Chen and Ren have founded a company called GMZ Energy, headquartered in Newton, MA, to commercialize their nanocomposite material, and they're expecting commercial thermoelectric modules within one year.
+

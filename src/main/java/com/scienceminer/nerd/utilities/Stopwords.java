@@ -1,13 +1,12 @@
 package com.scienceminer.nerd.utilities;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-
-import java.io.*;
-import java.text.DecimalFormat;
-import java.util.*;
-
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * Class for managing stopword lists in several languages and associated methods.
@@ -27,9 +26,9 @@ public class Stopwords {
     //private Map<String, FastMatcher> allMatcherSuffix = null;
 
     // list of languages coming with a stopword list
-    private List<String> languages = Arrays.asList("en", "fr", "de");
+    private List<String> languages = Arrays.asList("en", "fr", "de", "es", "it");
 
-    public static Stopwords getInstance() throws Exception {
+    public static Stopwords getInstance() {
         if (instance == null) {
             //double check idiom
             // synchronized (instanceController) {
@@ -43,7 +42,7 @@ public class Stopwords {
     /**
      * Creates a new instance.
      */
-    private static synchronized void getNewInstance() throws Exception {
+    private static synchronized void getNewInstance()  {
         LOGGER.debug("Get new instance of Stopwords");
         instance = new Stopwords();
     }
@@ -51,7 +50,7 @@ public class Stopwords {
     /**
      * Hidden constructor 
      */
-    private Stopwords() throws Exception {    
+    private Stopwords()  {
         loadStopWords();        
     }
 

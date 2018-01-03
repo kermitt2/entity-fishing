@@ -42,6 +42,12 @@ public class GenericRankerFeatureVector {
 
 	public boolean Add_bestCaseContext = false; // indicate if the actual case context matches the sense best term case
 
+	public boolean Add_embeddings_LR_similarity = false; // entity/term context LR score similarity
+	public boolean Add_embeddings_centroid_similarity = false; // entity/term context centroid score similarity
+
+	public boolean Add_wikidata_id = false; // add the wikidata id as arbitrary string feature
+	public boolean Add_wikidata_P31_entity_id = false; // add the wikidata id in relation to the current entity via P31 (instance of) relation
+
 	// relateness with the context:
 	// - with context terms
 	// - with all other candidates (average)
@@ -87,6 +93,12 @@ public class GenericRankerFeatureVector {
 
 	public boolean bestCaseContext = false; // true if the actual case context matches the sense best term case
 
+	public float embeddings_LR_similarity = 0.0F;
+	public float embeddings_centroid_similarity = 0.0F;
+
+	public String wikidata_id = "Q0"; // Q0 means undefined entity here
+	public String wikidata_P31_entity_id = "Q0"; // Q0 means undefined entity here
+
 	/**
 	 *  Write header of ARFF files.
 	 */
@@ -127,7 +139,7 @@ public class GenericRankerFeatureVector {
 		if (Add_ner_type)
 			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION}\n");
 		if (Add_ner_subtype)	
-			header.append("@attribute ner_subtype string\n");
+			header.append("@attribute ner_subtype STRING\n");
 		if (Add_NERType_relatedness)
 			header.append("@attribute NERType_relatedness REAL\n");
 		if (Add_NERSubType_relatedness)
@@ -137,7 +149,15 @@ public class GenericRankerFeatureVector {
 		if (Add_dice_coef) 
 			header.append("@attribute dice_coef REAL\n");
 		if (Add_bestCaseContext) 
-			header.append("@attribute bestCaseContext {false, true}\n");				
+			header.append("@attribute bestCaseContext {false, true}\n");
+		if (Add_embeddings_LR_similarity) 
+			header.append("@attribute embeddings_LR_similarity REAL\n");
+		if (Add_embeddings_centroid_similarity) 
+			header.append("@attribute embeddings_centroid_similarity REAL\n");
+		if (Add_wikidata_id)
+			header.append("@attribute wikidata_id STRING\n");
+		if (Add_wikidata_P31_entity_id)
+			header.append("@attribute wikidata_P31_entity_id STRING\n");
 		
 		if (target_numeric)
 			header.append("@attribute entity? REAL\n\n"); // target variable for regression
@@ -181,7 +201,15 @@ public class GenericRankerFeatureVector {
 			num++;
 		if (Add_dice_coef) 
 			num++;
-		if (Add_bestCaseContext)
+		if (Add_bestCaseContext) 
+			num++;
+		if (Add_embeddings_LR_similarity)
+			num++;
+		if (Add_embeddings_centroid_similarity)
+			num++;
+		if (Add_wikidata_id)
+			num++;
+		if (Add_wikidata_P31_entity_id)
 			num++;
 		// class
 		num++;	
@@ -261,7 +289,12 @@ public class GenericRankerFeatureVector {
 		}
 
 		if (Add_context_quality) {
-			res.append(","+context_quality);
+			if (first) {
+				res.append(context_quality);
+				first = false;
+			}
+			else
+				res.append(","+context_quality);
 		}
 		
 		if (Add_isSubTerm) {
@@ -300,7 +333,26 @@ public class GenericRankerFeatureVector {
 			else 
 				res.append(",false");
 		}
-		
+		if (Add_embeddings_LR_similarity) {
+			if (first) {
+				res.append(embeddings_LR_similarity);
+				first = false;
+			} else
+				res.append("," + embeddings_LR_similarity);
+		}
+		if (Add_embeddings_centroid_similarity) {
+			if (first) {
+				res.append(embeddings_centroid_similarity);
+				first = false;
+			} else
+				res.append("," + embeddings_centroid_similarity);
+		}
+		if (Add_wikidata_id) 
+			res.append("," + wikidata_id);
+		if (Add_wikidata_P31_entity_id)
+			res.append(",'" + wikidata_P31_entity_id+"'");
+
+
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
 		if (target_numeric)
 			res.append("," + label);
@@ -445,7 +497,37 @@ public class GenericRankerFeatureVector {
 			i++;
 
 		}
+		if (Add_embeddings_LR_similarity) {
+			result[i] = embeddings_LR_similarity;
+			i++;
+		}
 
+		if (Add_embeddings_centroid_similarity) {
+			result[i] = embeddings_centroid_similarity;
+			i++;
+		}
+		if (Add_wikidata_id) {
+			Attribute att = attributes[i];
+			double val = 0.0;
+			try {
+				val = att.valueOf(wikidata_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result[i] = val;
+			i++;
+		}
+		if (Add_wikidata_P31_entity_id) {
+			Attribute att = attributes[i];
+			double val = 0.0;
+			try {
+				val = att.valueOf(wikidata_P31_entity_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result[i] = val;
+			i++;
+		}
 		return result;
 	}
 }

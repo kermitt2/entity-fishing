@@ -26,7 +26,7 @@ One and only one input type is mandatory in a query, otherwise an HTTP error 400
 Supported languages
 -------------------
 
-In the current version, only English, French and German are supported. We plan to extend the support to with Spanish and Italian in the next iterations.
+In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support at every new release.
 
 The service returns an HTTP error 406 if the language of the text to be processed is not supported, see below.
 
@@ -126,11 +126,12 @@ The JSON format for the query parameter to be sent to the service is identical t
            "lang": "en"
        },
        "entities": [],
-       "resultLanguages": [
-           "fr",
-           "de"
-       ],
-       "onlyNER": false,
+..       "resultLanguages": [
+..           "fr",
+..           "de"
+..       ],
+..       "onlyNER": false,
+       "mentions": ["ner","wikipedia"],
        "nbest": 0,
        "sentence": false,
        "customisation": "generic",
@@ -153,14 +154,18 @@ Provides a search query to be processed.
 """"""""""""""
 Provides a list of terms, each term being associated to a weight indicating the importance of the term as compared to the other terms.
 
-(4) resultLanguages
-"""""""""""""""""""
-The additional parameter resultLanguages providing a list of language codes, permits to get the wikipedia pages, if they exist, of such additional languages.
-Currently only English, German and French wikipedia are supported.
-
-(5) language
+(4) language
 """"""""""""
 When the source language (parameters language) is pre-set the language is considered certain, and the language identifier is not used.
+
+..(5) resultLanguages
+.."""""""""""""""""""
+..The additional parameter resultLanguages providing a list of language codes, permits to get the wikipedia pages, if they exist, of such additional languages.
+..Currently only English, German, French, Italian and Spanish wikipedia are supported.
+
+(5) mentions
+""""""""""""
+Provides the methods to be used to identify mentions to be disambiguated, by default mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed) and with all the labels of Wikipedia for the appropraite language (all the anchors and titles used to refer to a Wikipedia page).
 
 (6) entities
 """"""""""""
@@ -271,8 +276,8 @@ The JSON format for the query parameter to be sent to the service is identical t
          "lang": "en"
       },
       "entities": [],
-      "resultLanguages" : ["fr", "de"],
-      "onlyNER": false,
+..      "resultLanguages" : ["fr", "de"],
+..      "onlyNER": false,
       "nbest": 0,
       "sentence": false,
       "customisation": "generic"
@@ -280,7 +285,7 @@ The JSON format for the query parameter to be sent to the service is identical t
 
 **Example using CURL** (using the query above):
 ::
-   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'onlyNER': false, 'resultLanguages': ['de','fr'],'nbest': false, 'sentence': false, 'customisation': 'generic'}" -F"file=@PATH_FILENAME.pdf"
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'customisation': 'generic'}" -F"file=@PATH_FILENAME.pdf"
 
 
 Weighted term disambiguation
@@ -311,7 +316,8 @@ Example request
    }
 
 
-The termVector field is required for having a well-formed query. resultLanguages can be set to get wikipedia pages for languages in addition to the language of the input terms.
+The termVector field is required for having a well-formed query. 
+The additional parameter *resultLanguages* provides a list of language codes in addition to the language of the input terms. It will allow to get back the wikipedia pages, if they exist, of such additional languages. Currently only English, German and French wikipedia are supported.
 
 **Example using CURL** (using the query above):
 ::
@@ -364,7 +370,7 @@ If the textual content to be processed is provided as a PDF document, the identi
 ::
    {
       "runtime": 223,
-      "onlyNER": false,
+..      "onlyNER": false,
       "nbest": false,
       "text": "Austria was attaching Serbia.",
       "language": {
@@ -400,7 +406,7 @@ In the example above, the root layer of JSON values correspond to:
 
 - runtime: the amount of time in milliseconds to process the request on server side,
 
-- onlyNER: as provided in the query - when true the disambiguation against wikipedia is skipped,
+..- onlyNER: as provided in the query - when true the disambiguation against wikipedia is skipped,
 
 - nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
 
@@ -408,7 +414,7 @@ In the example above, the root layer of JSON values correspond to:
 
 - language: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
 
-- entities: list of named entities recognised in the text (with possibly entities provided in the query, considered then as certain),
+- entities: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
 
 - global_categories: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
@@ -435,7 +441,7 @@ The type of recognised entities are restricted to a set of 26 classes of named e
 ::
    {
       "runtime": 146,
-      "onlyNER": false,
+..      "onlyNER": false,
       "nbest": false,
       "shortText": "concrete pump sensor",
       "language": {
@@ -496,7 +502,7 @@ The type of recognised entities are restricted to a set of 26 classes of named e
 ::
    {
       "runtime": 870,
-      "onlyNER": false,
+..      "onlyNER": false,
       "nbest": false,
       "termVector": [
          {
@@ -536,7 +542,7 @@ The type of recognised entities are restricted to a set of 26 classes of named e
 ::
    {
       "runtime": 2823,
-      "onlyNER": false,
+..      "onlyNER": false,
       "nbest": false,
       "file”: "filename.pdf",
       “pages”: 10,
@@ -705,6 +711,7 @@ GET /kb/concept/{id}
      ],
      "multilingual": [
        {
+         "lang": "de",
          "term": "Österreich",
          "page_id": 1188788
        },
@@ -735,7 +742,7 @@ The elements present in this response are:
 
  - lang: the language of the definition
 
-- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated Named Entity. Each category is characterised by the following properties:
+- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated entity. Each category is characterised by the following properties:
 
  - category: The category name
 

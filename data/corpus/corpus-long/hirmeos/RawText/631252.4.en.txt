@@ -1,0 +1,39 @@
+1 The Alor-Pantar languages: Linguistic context, history and typology
+
+5.2 Constituent order
+
+Overall, the AP languages are syntactically right-headed (see also chapter 4). Basic transitive clauses are verb-final, with Agent-Patient-Verb (APV) and SubjectVerb (SV) order. A refers to the more agent-like argument of a transitive verb, P to the more patient-like argument of a transitive verb, and S to the single argument of an intransitive verb.(1) shows an intransitive clause followed by a transitive one. PAV is a pragmatically motivated variant in many of the AlorPantar languages.
+
+In nominal phrases, determiners such as articles and demonstratives follow the noun (seeAll AP languages have clause-final conjunctions; often these are combined with clause-initial ones, as shown in, where clause final a 'and' combines with clause-initial xabi 'then':
+
+'He takes that hat of his and then takes three mangoes to give to the boys. ' In AP languages, the use of these different pronominal sets is not so much determined by the grammatical role of their referent (e.g. being an object or a subject), but is mostly triggered by semantic factors. Most Alor-Pantar languages
+
+One of the factors determining the indexing of P is animacy. For instance, when the P of the Teiwa verb mar 'take' is inanimate, it is not indexed on the Marian Klamer verb, (5a), but when it is animate, it is indexed (5b). That is, while a verbal prefix in an Alor-Pantar language typically indexes P, not every P is always indexed on a verb.
+
+In Abui, the different prefixes roughly correspond to semantically different P's. For example, in (6)-(10) the P is a patient, location, recipient, benefactive and goal, and the shape of the prefix varies accordingly.
+
+(6) Abui (Kratochvíl 2007: 592)
+
+a-ruidi 2sg.pat-wake.up 'I woke you up. '
+
+ee-bol. 2sg.ben-hit 'Let me hit instead of (i.e. for) you.1 The Alor-Pantar languages: Linguistic context, history and typology In some AP languages (for instance, Abui, Kamang, and Klon) S arguments are also indexed on the verbs. Such arguments are usually more affected and less volitional, although individual languages differ in which semantic factors apply). Also, lexical verb classes often play a role in the indexing of arguments.
+
+Apart from the multiple ways to index P (the possible evolution of which is sketched in, there is also variation in the morphological alignment type of AP languages. Alignment in the AP languages is defined here relative to pronominal indexing.
+
+The prefixes are either used in a syntactic (accusative) alignment system, or in a semantic alignment ('Split-S') system. Accusative alignment is defined here as the alignment where S and A are treated alike as opposed to P. Teiwa, Kaera, Blagar and Adang have accusative alignment, only indexing P, while S and A are free forms. An illustration is Blagar, where the same pronoun  ana '3sg' can encode A (11) or S (12), and P is prefixed on the verb (11).
+
+In Klon, however, the P prefix can also be used to index S, depending on the class the verb belongs to: one class of verbs always aligns S with A (resulting in accusative alignment), another class always aligns S with P, and a third class of verbs encodes S either as A (free pronoun) or as P (prefix), depending on its affectedness: compare (13a) and (13b).
+
+Marian Klamer
+
+Western Pantar also allows its P-prefix to index S, compareSome verbs, such as diti 'stab' in (16)-(17) allow an alternation in the coding of a P or S with either a prefix or a free pronoun, with a difference in the degree of affectedness resulting.
+
+Abui and Kamang are often found to index S by use of a prefix. The choice of prefix is determined by a mix of factors, such as the level of affectedness or volitionality of the argument
+
+A pattern where two arguments are indexed on a transitive verb is found in Abui, illustrated in (18)Unlike what would be expected, these are not transitive constructions expressing actions involving an affix for A and for P, but rather experience constructions where both affixes encode a P.
+
+In sum, free pronouns exist alongside verbal affixes that index person and number of verbal arguments. There is significant variation in the choice of participant that is indexed on the verb. The Alor-Pantar languages are typologically unusual in that they index P but not A, and some of them have rich inventories of prefixes differentiating different types of P.
+
+5.4 Possession
+
+Possession is marked by prefixes on nouns. There are parallels with the argument indexing on verbs, particularly because inalienable possession usually involves possessors linearly preceding the possessed noun in the same way that arguments linearly precede the verb.

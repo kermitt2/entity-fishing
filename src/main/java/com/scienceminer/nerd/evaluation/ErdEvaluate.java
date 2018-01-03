@@ -12,7 +12,8 @@ import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.erd.ErdAnnotationShort;
 import com.scienceminer.nerd.erd.ErdUtilities;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
-import com.scienceminer.nerd.disambiguation.ProcessText;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.NerdConfig;
@@ -66,20 +67,20 @@ public class ErdEvaluate {
 		String path = null;
 		String pathRef = null;
 		if (dataset.equals("trec_beta")) {
-			 path = "data/erd/corpus-short/Trec_beta.query.txt";
-			 pathRef = "data/erd/corpus-short/Trec_beta.annotation.txt";
+			 path = "data/corpus/corpus-short/Trec_beta.query.txt";
+			 pathRef = "data/corpus/corpus-short/Trec_beta.annotation.txt";
 		}
 		else if (dataset.equals("yahooL24")) {
-			path = "data/erd/corpus-short/yahoo/Webscope_L24/L24_queries.txt";
-		 	pathRef = "data/erd/corpus-short/yahoo/Webscope_L24/L24_annotations.txt";
+			path = "data/corpus/corpus-short/yahoo/Webscope_L24/L24_queries.txt";
+		 	pathRef = "data/corpus/corpus-short/yahoo/Webscope_L24/L24_annotations.txt";
 		}
 		else if (dataset.equals("trec_test")) {
-			 path = "data/erd/corpus-short/trec-test_queries.txt";
-			 pathRef = "data/erd/corpus-short/trec-test_annotations.txt";
+			 path = "data/corpus/corpus-short/trec-test_queries.txt";
+			 pathRef = "data/corpus/corpus-short/trec-test_annotations.txt";
 		}
 		else if (dataset.equals("trec_500")) {
-			 path = "data/erd/corpus-short/trec-500.queries.txt";
-			 pathRef = "data/erd/corpus-short/trec-500.annotations.txt";
+			 path = "data/corpus/corpus-short/trec-500.queries.txt";
+			 pathRef = "data/corpus/corpus-short/trec-500.annotations.txt";
 		}
 		else {
 			System.err.println("Error: unknown evaluation dataset");
@@ -107,17 +108,18 @@ public class ErdEvaluate {
 				String text = tokens[1];
 				try {
 					NerdQuery nerdQuery = new NerdQuery();
-					nerdQuery.setOnlyNER(false);
+					//nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
 					nerdQuery.setShortText(text);
+					nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
 
 					ProcessText processText = ProcessText.getInstance();
-					List<Entity> entities = processText.processBrutal(nerdQuery);
+					List<Mention> entities = processText.process(nerdQuery);
 					List<NerdEntity> disambiguatedEntities = new ArrayList<NerdEntity>();
 
 					if (entities != null) {
-						for (Entity entity : entities) {
+						for (Mention entity : entities) {
 							NerdEntity nerdEntity = new NerdEntity(entity);
 							disambiguatedEntities.add(nerdEntity);
 						}

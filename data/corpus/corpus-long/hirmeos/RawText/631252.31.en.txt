@@ -1,0 +1,27 @@
+Capell did not include data from Pantar languages and hence refers to this family as AlorTimor. In many cases Capell's proposed Alor-Timor forms differ from the pTAP reconstructions in Chapter 3. This may be due in some cases to excessive reliance on Timor forms. Inwe list Capell's Alor-Timor alongside updated pTAP forms. Where available, we use pTAP reconstructions (Chapter 3), but if no pTAP reconstruction exists, then we show lower-level reconstructions or forms from individual languages. In two cases Capell's 'Alor-Timor' form is quite different from the updated TAP form. Capell's hele 'stone' differs from pTAP *war but compares to Bunaq (Timor) hol. We have no reconstruction for 'cut' in pTAP, but Capell's form uti compares with Makalero (Timor) teri. Three of Capell's NH reconstructions are also problematic; we have noted these problems in the last column in
+
+4 The linguistic position of the Timor-Alor-Pantar languages
+
+Even allowing for problematic forms in, it is difficult to infer much about regular sound correspondences from this list, since few of the correspondences repeat. A correspondence *m:*m is found in 'bitter' and 'smell'; however, the forms for 'cold' reflect a different correspondence *p:*m.
+
+Careful inspection of Capell's proposed correspondence reveals little or no evidence for a relationship between TAP and NH languages.lists two proposed lexical correspondences between pTAP and pNH. One of these, 'tree', is also found in Capell's list, though Donohue reconstructs pTAP *aDa. The other, pTAP *jar, pNH *aker 'water' supports a correspondence between pTAP *r and pNH *r.As with Capell's similar forms, it is difficult to infer anything about sound correspondences from these two forms. Chance resemblance remains the most economical explanation, though some similarities may also be due to loans from a common source.
+
+The lack of lexical correspondences in the data cited by Capell and by Donohue may be due in part to the unavailability of extensive lexical data for TAP. Thanks to recent work, we now have available a number of pTAP and lower-level reconstructions (see Chapters 2 and 3, and Schapper, Huber & Engelenhoven 2012). Examining the pTAP reconstructions (excluding pronouns), and drawing on pAP forms where no pTAP form is found, 63 have glosses which can also be found inpNH reconstructions or can be easily reconstructed based on existing NH data. These 63 forms are compared in
+
+Of these 61 forms, only 5 items (highlighted grey inshow some kind of plausible correspondence: *b:*m, *t:*t, and *k:*q. Again, with so few items it is impossible to infer anything about regular sound correspondences. And with only 8% of these basic vocabulary items showing potential cognacy, there is no clear lexical evidence for a genealogical connection between TAP and NH languages.
+
+4 The linguistic position of the Timor-Alor-Pantar languages
+
+4.2 Lexical evidence for the TNG hypothesis
+
+In this section we consider the lexical evidence for the TNG hypothesis as reflected in regular sound correspondences. For this purpose we use the rather broad formulation of TNG in, which includes both TAP and South Bird's Head. While no bottom-up reconstruction of proto-TNG has been completed, a set of top-down lexical reconstructions with extensive reflexes has been widely circulated as Pawley (n.d.). Some of these forms were included as support for the reconstruction of pTNG obstruentsand in other discussions of pTNG
+
+The correspondences which emerge from this set are not striking, but they are regular. Most interesting is the correspondence between the pTNG prenasalized stop and the pTAP voiced stop. Note that a correspondence between a prenasalized stop in pTNG and a voiced stop in pTAP (also a voiced stop in pAP) supports a hypothesis that pAP reflects a flip of the pTNG second person pronouns *ga '2sg', *gi '2pl' to pAP third person pronouns *ga '3sg', *gi '3pl', respectively, although the correspondence here is velar rather than the expected alveolar, as in
+
+Two more forms might be included in the thirteen above, but they are somewhat problematic. The correspondence of 'neck' is based on two nasal phonemes and reflexes in just three of the nearly thirty TAP languages.The linguistic position of the Timor-Alor-Pantar languages
+
+The form for 'lightning' likewise has a very limited distribution, with similarlooking forms occurring in just three closely related AP languages. Moreover, the vowels in the pTNG reconstruction were determined in part on the basis of the Blagar, possibly making the pTNG artificially more similar to the AP languages than otherwise warranted.
+
+The pTNG form for 'older sibling' shows a striking correspondence with TAP languages, but this is a nursery form, and should be excluded from determinations of genealogical similarity.
+
+(50) pTNG *nan(a,i), pAP *nan(a), Bunaq (Tim) nana 'older sibling'

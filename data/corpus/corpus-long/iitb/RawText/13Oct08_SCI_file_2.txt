@@ -1,0 +1,27 @@
+Planet Or Failed Star? One Of Smallest Stellar Companions Seen By Hubble
+
+ScienceDaily (Sep. 8, 2006) — Astronomers using the NASA/ESA Hubble Space Telescope have photographed one of the smallest objects ever seen around a normal star beyond our Sun. Weighing in at 12 times the mass of Jupiter, the object is small enough to be a planet. The riddle is that it is also large enough to be a brown dwarf, a failed star.
+The Hubble observation of the diminutive companion to the low-mass red dwarf star CHRX 73 is a dramatic reminder that astronomers do not have a consensus in deciding which objects orbiting other stars are truly planets - even though they have recently provided the definition of 'planet' for objects inside our Solar System.
+
+Kevin Luhman of Penn State University, USA, leader of the international team that found the object (called CHRX 73 'B') is casting his vote for a brown dwarf. "New, more sensitive telescopes are finding smaller and smaller objects of planetary-mass size," said Luhman. "These discoveries have prompted astronomers to ask the question, are planetary-mass companions always planets?"
+
+Some astronomers suggest that an extra-solar object's mass determines whether it is a planet. Luhman and others advocate that an object is only a planet if it formed from the disk of gas and dust that commonly encircles a newborn star. Our Solar System planets formed 4.6 thousand million years ago out of a dust disk around our Sun.
+
+Brown dwarfs, by contrast, form just like stars: from the gravitational collapse of large, diffuse clouds of hydrogen gas. Unlike stars, brown dwarfs do not have quite enough mass to ignite hydrogen fusion reactions in their cores, which power stars such as our Sun.
+
+CHXR 73 B is 31.2 thousand million kilometres from its red dwarf sun. This is roughly 200 times farther than Earth is from our Sun. Being about two million years old, the star is very young when compared with our middle-aged 4.6-thousand-million-year-old Sun.
+
+"The object is so far away from its star that it is unlikely to have formed in a circumstellar disk," Luhman explained. Disks around low-mass stars are about 8 to 16 thousand million kilometres in diameter. There isn't enough material at that distance from the red dwarf to create a planet. Theoretical models show that giant planets like Jupiter form no more than about 5 thousand million kilometres from their stars.
+
+Hubble's Advanced Camera for Surveys discovered the object while conducting a survey of free-floating brown dwarfs. Astronomers have found hundreds of brown dwarfs in our galaxy since the first brown dwarfs were spied about a decade ago. Most of them are floating through space and not orbiting stars.
+
+"The study of sub-stellar objects in orbit around a star allows us to determine the age, and over time also the mass of the companion. Such studies help us to improve our understanding of the formation and inner structure of brown dwarfs and planets," says Wolfgang Brandner of the Max-Planck-Institute for Astronomy in Heidelberg, Germany.
+
+One way to further settle the uncertainty would be if a disk of dust could be observed around CHRX 73's companion. Like stars, brown dwarfs have circumstellar disks, too. They would be no more than about 4 thousand million kilometres in diameter.
+
+NASA's Spitzer Space Telescope has detected disks around several free-floating brown dwarfs. But CHRX 73 B is too close to its star for Spitzer to detect the disk. So astronomers will have to wait for the launch of the NASA/ESA/CSA James Webb Space Telescope in 2013 to determine if this companion has a disk. The Webb telescope will combine Hubble's sharpness, which is needed for detecting close companions, and Spitzer's infrared sensitivity, which is necessary for seeing cool, dusty disks.
+There is also a roughly 0.1 percent probability that CHRX 73 B is a background object that by chance happens to align with CHRX 73.
+
+The team's results will appear in the 20 September 2006 issue of the Astrophysical Journal.
+
+Members of the research team are K. L. Luhman, Penn State University, USA; J. C. Wilson, M. F. Skrutskie, M. J. Nelson, and D. E. Peterson, University of Virginia, USA; W. Brandner, Max-Planck Institute for Astronomy, Germany; and J. D. Smith, M. C. Cushing, and E. Young, University of Arizona, USA.

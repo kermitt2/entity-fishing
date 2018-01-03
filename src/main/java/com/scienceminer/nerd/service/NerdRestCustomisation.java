@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.exceptions.CustomisationException;
 import com.scienceminer.nerd.kb.Customisations;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,7 +13,6 @@ import java.util.List;
 
 /**
  * Class for implemeting the services to manage the customization in NERD.
- *
  */
 public class NerdRestCustomisation {
 
@@ -21,69 +21,81 @@ public class NerdRestCustomisation {
     /**
      * Return the list of existing customisations.
      */
-    public static Response processNerdCustomisations() {
-        LOGGER.debug(">> processNerdCustomisations");
+    public static Response getCustomisations() {
+        LOGGER.debug(">> getCustomisations");
         Response response = null;
         try {
             Customisations customisations = Customisations.getInstance();
             List<String> names = customisations.getCustomisations();
-            StringBuffer res = new StringBuffer();
-            res.append("[");
-            boolean begin = true;
-            for (String name : names) {
-                if (begin)
-                    begin = false;
-                else
-                    res.append(", ");
-                res.append("\"" + name + "\"");
-            }
-            res.append("]");
-            response = Response.status(Status.OK).entity(res.toString()).type(MediaType.APPLICATION_JSON).build();
+
+            String output = buildJsonRepresentation(names);
+
+            response = Response.status(Status.OK).entity(output).type(MediaType.APPLICATION_JSON).build();
         } catch (Exception exp) {
-            LOGGER.error("Error when accessing the list of existing customisations. ", exp);
+            LOGGER.error("General error when accessing the list of existing customisations. ", exp);
             response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
-        LOGGER.debug("<< processNerdCustomisations");
+        LOGGER.debug("<< getCustomisations");
         return response;
+    }
+
+    private static String buildJsonRepresentation(List<String> names) {
+        StringBuffer res = new StringBuffer();
+        res.append("[");
+        boolean begin = true;
+        for (String name : names) {
+            if (begin) {
+                begin = false;
+            } else {
+                res.append(", ");
+            }
+            res.append("\"" + name + "\"");
+        }
+        res.append("]");
+
+        return res.toString();
     }
 
     /**
      * Return the data of an existing customisation.
      */
-    public static Response processNerdCustomisation(String name) {
+    public static Response getCustomisation(String name) {
         Response response = null;
         try {
             Customisations customisations = Customisations.getInstance();
             String info = customisations.getCustomisation(name);
-            if (info.startsWith("Resource was not found"))
+            if (info == null) {
                 response = Response.status(Status.NOT_FOUND).build();
-            else if (info.startsWith("Server error"))
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-            else
-                response = Response.status(Status.OK).entity(info).type(MediaType.APPLICATION_JSON).build();
+            } else {
+                response = Response.status(Status.OK).entity(info)
+                        .type(MediaType.APPLICATION_JSON).build();
+            }
+        } catch (CustomisationException ce) {
+            response = Response.status(Status.INTERNAL_SERVER_ERROR)
+                    .entity(ce.getMessage())
+                    .build();
         } catch (Exception exp) {
-            LOGGER.error("Error when accessing the list of existing customisations. ", exp);
+            LOGGER.error("Error when accessing the customisation " + name, exp);
             response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
         return response;
     }
 
-    public static Response createNewCustomisation(String name, String profile) {
+    public static Response createCustomisation(String name, String value) {
         Response response = null;
 
-        if (StringUtils.isBlank(name) || StringUtils.isBlank(profile)) {
+        if (StringUtils.isBlank(name) || StringUtils.isBlank(value)) {
             return Response.status(Status.BAD_REQUEST).build();
         }
 
         Customisations customisations = Customisations.getInstance();
-        String message = customisations.createCustomisation(name, profile);
-        if (message.equals("OK")) {
-            response = Response.status(Status.OK).build();
-        } else if (message.startsWith("Invalid request")) {
-            response = Response.status(Status.BAD_REQUEST).entity("{\"status\": \"" + message + "\"}").build();
-        } else if (message.startsWith("Customisation already created")) {
-            response = Response.status(Status.BAD_REQUEST).entity("{\"status\": \"" + message + "\"}").build();
-        } else {
+        try {
+            customisations.createCustomisation(name, value);
+        } catch (CustomisationException ce) {
+            response = Response.status(Status.BAD_REQUEST)
+                    .entity("{\"status\": \"" + ce.getMessage() + "\"}")
+                    .build();
+        }  catch (Exception e) {
             response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
 
@@ -91,28 +103,26 @@ public class NerdRestCustomisation {
 
     }
 
-    public static Response updateCustomisation(String name, String profile) {
+    public static Response updateCustomisation(String name, String value) {
         Response response = null;
 
 
-        if (StringUtils.isBlank(name) || StringUtils.isBlank(profile)) {
+        if (StringUtils.isBlank(name) || StringUtils.isBlank(value)) {
             return Response.status(Status.BAD_REQUEST).build();
         }
 
         Customisations customisations = Customisations.getInstance();
-        String message = customisations.updateCustomisation(name, profile);
-        if (message.equals("OK")) {
-            response = Response.status(Status.OK).build();
-        } else if (message.startsWith("Invalid request")) {
+
+        try {
+            customisations.updateCustomisation(name, value);
+        } catch (CustomisationException ce) {
             response = Response.status(Status.BAD_REQUEST)
-                    .entity("{\"status\": \"" + message + "\"}").build();
-        } else if (message.startsWith("Customisation already created")) {
-            response = Response.status(Status.BAD_REQUEST)
-                    .entity("{\"status\": \"" + message + "\"}").build();
-        } else {
+                    .entity("{\"status\": \"" + ce.getMessage() + "\"}")
+                    .build();
+        }  catch (Exception e) {
             response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
-
+        
         return response;
     }
 
@@ -122,15 +132,12 @@ public class NerdRestCustomisation {
         Response response = null;
         try {
             Customisations customisations = Customisations.getInstance();
-            String message = customisations.deleteCustomisation(name);
-            if (message.equals("OK"))
-                response = Response.status(Status.OK).build();
-            else if (message.startsWith("Resource was not found"))
-                response = Response.status(Status.NOT_FOUND).build();
-            else
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-        } catch (Exception exp) {
-            LOGGER.error("Error deleting customisation: " + name, exp);
+            customisations.deleteCustomisation(name);
+        } catch (CustomisationException ce) {
+            response = Response.status(Status.BAD_REQUEST)
+                    .entity("{\"status\": \"" + ce.getMessage() + "\"}")
+                    .build();
+        }  catch (Exception e) {
             response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
 

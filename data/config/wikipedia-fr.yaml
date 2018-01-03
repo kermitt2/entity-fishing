@@ -1,0 +1,47 @@
+# entity-fishing configuration for the French Wikipedia
+
+# ISO 2-digit language code 
+langCode: fr
+
+# path to the LMDB data
+dbDirectory: data/db/db-fr
+
+# path to the embeddings
+embeddingsDirectory: data/embeddings/fr
+
+# path to the compiled CSV wikipedia, infobox, wikidata files
+# note that these files are only used when creating the LMDB data,
+# if the LMDB data are already provided, these files will not be used
+dataDirectory: /mnt/data/wikipedia/latest/fr/
+#dataDirectory: /home/lopez/resources/wikipedia/fr/
+
+# path to the stopwords file to consider for the target language
+# the file is a text file with one stopword per line
+stopwords: data/stopwords/fr.txt
+
+# path to the nerd ranker model  
+rankerModel: data/models/ranker-long-fr.model
+
+# path to the nerd selector model
+selectorModel: data/models/selector-long-fr.model
+
+# minimum of inverse probability (e.g. probability of a string to realize a given 
+# entity considering all the possible strings that can realize this entity)
+minLinkProbability: 0.005
+
+# minimum conditional probability of a sense for being an entity candidate 
+# (e.g. min probability of an entity to be realized by a given string, given all possible 
+# entities that can be realized by this string)
+minSenseProbability: 0.01
+
+# minimum score produced by the selector model under which the entity 
+# will be pruned
+minSelectorScore: 0.35
+
+# minimum score produced by the ranker model under which the entity 
+# will be pruned
+minRankerScore: 0.2 
+
+# if true, use links out for computing relatedness between two entities in addition to
+# the links in (slower but more precise in principle)
+useLinkOut : true

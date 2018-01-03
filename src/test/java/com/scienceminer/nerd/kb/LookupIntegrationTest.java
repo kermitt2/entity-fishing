@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.kb;
 
 import com.scienceminer.nerd.kb.model.Page;
-import com.scienceminer.nerd.utilities.NerdProperties;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,7 +12,7 @@ public class LookupIntegrationTest {
 	@Before
 	public void setUp() {
 		try {
-			NerdProperties.getInstance();
+			//NerdProperties.getInstance();
 			/*ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			
 			NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);

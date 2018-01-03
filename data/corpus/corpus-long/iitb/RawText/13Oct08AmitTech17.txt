@@ -1,0 +1,20 @@
+Stopping Pandemic Bird Flu
+A broad-acting vaccine might be key. 
+
+Bird flu tops the list of the world's next "potential pandemic"--virulent influenza strains that spread rapidly across the globe--but figuring out how to fight it has been far less clear-cut. So far, the U.S. Food and Drug Administration has approved a few vaccines that may be able to fend off the virus, but all of those are grown in chicken eggs, take up to six months to produce, and are each effective against only one strain of the virus. A brand-new DNA vaccine, which scientists hope to soon test in humans, may provide much broader protection.
+
+Avian influenza, caused by a variant of the H5N1 virus, has afflicted hundreds of millions of birds worldwide. The virus mutates quickly: some of the mutations, upon making the jump to humans, have proved fatal. So far, bird flu has killed at least 250 people.
+
+"Everyone fears that the virus only needs to make a few mutations to become virulent and transmissible human to human, so this is certainly one of the biggest pandemic threats that we face," says David Ho, a professor at Rockefeller University and the scientific director of the Aaron Diamond AIDS Research Center, in New York. "It obviously continues to be a threat, even though it's no longer on everyone's radar screen."
+
+The bird flu's rapid mutations are precisely what make the virus so difficult to fight. The few vaccines that are currently approved to treat it were created using existing viruses, and therefore, each immunizes against only a single virulent mutation. To develop a more broadly acting vaccine, Ho and his colleagues at Taiwan's Academia Sinica took a DNA-based approach. DNA-based vaccines are made up of DNA that's been genetically modified to elicit a specific immune response and thus allow a greater level of control over design than do traditional vaccines.
+
+Ho and his colleagues focused on the gene for hemagglutinin, which produces the virus's outer protein and the one against which human immune systems respond. They created a DNA sequence for the gene that produces hemagglutinin, using pieces of the gene that are shared among different strains of H5N1, rather than a sequence obtained from a single strain of the virus.
+
+DNA vaccines have many benefits: they are long-lived, stable, require no refrigeration, can be hastily modified, and can be cheaply and quickly manufactured. But they do have one drawback: injections into muscle tissue result in very inefficient DNA uptake. To address this, Ho and his collaborators turned to a technique called electroporation, a method that has shown promise in preliminary studies. In electroporation, the vaccine is combined with small electrical stimuli at the injection site; the resulting electrical field enhances DNA uptake by the muscle cells.
+
+The study results, published in a recent edition of the Proceedings of the National Academy of Sciences, "show that when you use the consensus sequence to immunize mice, the mice will mount an antibody response that's pretty broadly neutralizing for viruses in different branches of the H5N1 tree," Ho says. And when the researchers exposed the mice to different strains of the virus, they found that the protection had breadth as well.
+
+"This is a very interesting, imaginative, and novel approach," says virologist Peter Palese, head of the microbiology department at the Mount Sinai School of Medicine, in New York. "It takes advantage of several technological advances, and should be given a chance to be tested in humans."
+
+Part of what makes the approach so appealing, he notes, is the vaccine's ability to stimulate immunity to multiple virus strains. "The present vaccines are very limited to a particular variant, and if the circulating variant is very different, then we have a problem," says Palese. "The new vaccine will cover more variants around the original strain."

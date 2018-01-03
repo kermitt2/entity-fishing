@@ -73,10 +73,14 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 
 	private List<Integer> toKeep = null;
 
+	// to lazy to create an enum
 	public static int INTERNAL_LINKS = 0;
 	public static int BOLD = 1;
 	public static int ITALICS = 2;
 	public static int INTERNAL_LINKS_ARTICLES = 3;
+	public static int CATEGORY_LINKS = 4;
+
+	public static int CATEGORY_KEY = 14;
 
 	/**
 	 * Becomes true if we are no longer at the Beginning Of the whole Document.
@@ -218,10 +222,9 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtInternalLink link) {
-		if(!isCategory(link)) {
+		if (!isCategory(link)) {
 			if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
 				if (StringUtils.isBlank(link.getPrefix())) {
-
 					// this is an article so we preserve the link - there is no prefix
 					write("[[");
 					iterate(link.getTarget());
@@ -263,11 +266,31 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 				}
 				//write(link.getPostfix()); // ? what is a postfix?
 			}
-		}
+		} else if ((toKeep != null) && (toKeep.contains(new Integer(CATEGORY_LINKS)))) {
+			write("[[");
+			write(link.getPrefix());
+			iterate(link.getTarget());
+			if (link.hasTitle()) {
+				write("|");
+				iterate(link.getTitle());
+			}
+			write("]]");
+		} 
 	}
 
+	/**
+	 *  Return true if the given link is a link to a category page
+	 */
 	private boolean isCategory(WtInternalLink link) {
-		return link.getTarget().getAsString().startsWith("Category");
+		// Use config name!
+		String categoryCanonical = "Category";
+		String categoryNameSpace = "Category";
+		if (config.getNamespace(CATEGORY_KEY) != null) {
+			categoryNameSpace = config.getNamespace(14).getName();
+			categoryCanonical = config.getNamespace(14).getCanonical();
+		}
+		return link.getTarget().getAsString().startsWith(categoryNameSpace) || 
+			   link.getTarget().getAsString().startsWith(categoryCanonical);
 	}
 
 	public void visit(WtSection s) {

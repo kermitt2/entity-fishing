@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.scienceminer.nerd.utilities.NerdProperties;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.kb.*;
 
@@ -94,7 +93,8 @@ public class Relatedness {
 			return 0.0;
 		}
 		for (Article contextArticle : contextArticles) {
-			if (article.getId() != contextArticle.getId()) {
+			//if (article.getId() != contextArticle.getId()) 
+			{
 				currentRelatedness = 0.0;
 				try {
 					currentRelatedness = getRelatedness(article, contextArticle, lang);

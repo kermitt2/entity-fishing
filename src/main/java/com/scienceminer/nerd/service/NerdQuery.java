@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
@@ -9,14 +10,17 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.disambiguation.Sentence;
+import com.scienceminer.nerd.mention.Sentence;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.kb.KBUtilities;
 import com.scienceminer.nerd.utilities.Filter;
 import com.scienceminer.nerd.utilities.NerdRestUtils;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Entity;
@@ -25,13 +29,17 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.Page;
 import org.grobid.core.utilities.KeyGen;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Arrays;
 
+import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.grobid.core.lang.Language.*;
@@ -48,8 +56,9 @@ public class NerdQuery {
 
     public static final String QUERY_TYPE_TEXT = "text";
     public static final String QUERY_TYPE_SHORT_TEXT = "shortText";
-    public static final String QUERY_TYPE_TERM_VECTOR= "termVector";
-    public static final String QUERY_TYPE_INVALID= "invalid";
+    public static final String QUERY_TYPE_TERM_VECTOR = "termVector";
+    public static final String QUERY_TYPE_LAYOUT_TOKENS = "layoutToken";
+    public static final String QUERY_TYPE_INVALID = "invalid";
 
     // main text component
     private String text = null;
@@ -66,45 +75,48 @@ public class NerdQuery {
     private Language language = null;
 
     // the result of the query disambiguation and enrichment for each identified entities
-	private List<NerdEntity> entities = null;
+    private List<NerdEntity> entities = null;
 
     // the sentence position if such segmentation is to be realized
-	private List<Sentence> sentences = null;
+    private List<Sentence> sentences = null;
 
     // a list of optional language codes for having multilingual Wikipedia sense correspondences
     // note that the source language is by default the language of results, here ae additional
     // result correspondences in target languages for each entities
-	private List<String> resultLanguages = null;
+    private List<String> resultLanguages = null;
 
     // runtime in ms of the last processing
     private long runtime = 0;
 
     // mode indicating if we disambiguate or not
-    private boolean onlyNER = false;
+    //private boolean onlyNER = false;
+
+    private List<ProcessText.MentionMethod> mentions =
+            Arrays.asList(ProcessText.MentionMethod.ner, ProcessText.MentionMethod.wikipedia);
+
     private boolean nbest = false;
     private boolean sentence = false;
-    private NerdRestUtils.Format format = NerdRestUtils.Format.valueOf("JSON");
     private String customisation = "generic";
 
     // list of sentences to be processed
     private Integer[] processSentence = null;
 
     // weighted vector to be disambiguated
-	private List<WeightedTerm> termVector = null;
+    private List<WeightedTerm> termVector = null;
 
     // distribution of (Wikipedia) categories corresponding to the disambiguated object
     // (text, term vector or search query)
-	private List<Category> globalCategories = null;
+    private List<Category> globalCategories = null;
 
     // in case the input to be processed is a list of LayoutToken (text then ust be null)
-	private List<LayoutToken> tokens = null;
+    private List<LayoutToken> tokens = null;
 
     private NerdContext context = null;
 
-	// only the entities fullfilling the constraints expressed in the filter will be 
-	// disambiguated and outputed
-	private Filter filter = null;
- 
+    // only the entities fullfilling the constraints expressed in the filter will be
+    // disambiguated and outputed
+    private Filter filter = null;
+
     // indicate if the full description of the entities should be included in the result
     private boolean full = false;
 
@@ -112,8 +124,8 @@ public class NerdQuery {
     private double minSelectorScore;
     private double minRankerScore;
 
-	public NerdQuery() {
-	}
+    public NerdQuery() {
+    }
 
     public NerdQuery(NerdQuery query) {
         this.text = query.getText();
@@ -129,10 +141,10 @@ public class NerdQuery {
         this.sentences = query.getSentences();
         this.resultLanguages = query.getResultLanguages();
 
-        this.onlyNER = query.getOnlyNER();
+        //this.onlyNER = query.getOnlyNER();
+        this.mentions = query.getMentions();
         this.nbest = query.getNbest();
         this.sentence = query.getSentence();
-        this.format = query.getFormat();
         this.customisation = query.getCustomisation();
         this.processSentence = query.getProcessSentence();
 
@@ -140,6 +152,20 @@ public class NerdQuery {
         this.globalCategories = query.getGlobalCategories();
 
         this.filter = filter;
+        this.context = query.getContext();
+    }
+
+    /**
+     * Shortcut to fetch either text or shortText, this logic is the first approach to accessing the content of the
+     * query text. The method getQueryType() shall be synchronised with the type of result of this method.
+     */
+    @JsonIgnore
+    public String getTextOrShortText() {
+        if (text == null) {
+            return shortText;
+        }
+
+        return text;
     }
 
     public String getText() {
@@ -187,7 +213,21 @@ public class NerdQuery {
     }
 
     public List<String> getResultLanguages() {
-        return resultLanguages;
+        return this.resultLanguages;
+    }
+
+    public List<ProcessText.MentionMethod> getMentions() {
+        return this.mentions;
+    }
+
+    public void setMentions(List<ProcessText.MentionMethod> mentions) {
+        this.mentions = mentions;
+    }
+
+    public void addMention(ProcessText.MentionMethod mention) {
+        if (this.mentions == null)
+            mentions = new ArrayList<ProcessText.MentionMethod>();
+        mentions.add(mention);
     }
 
     public void setRuntime(long tim) {
@@ -210,28 +250,28 @@ public class NerdQuery {
         return entities;
     }
 
-    public void setAllEntities(List<Entity> nerEntities) {
-		if (nerEntities != null) {
-			this.entities = new ArrayList<NerdEntity>();
-            for (Entity entity : nerEntities) {
+    public void setAllEntities(List<Mention> nerEntities) {
+        if (nerEntities != null) {
+            this.entities = new ArrayList<NerdEntity>();
+            for (Mention entity : nerEntities) {
                 this.entities.add(new NerdEntity(entity));
             }
         }
-	}
+    }
 
     public void setEntities(List<NerdEntity> entities) {
         this.entities = entities;
     }
 
     public void addNerdEntities(List<NerdEntity> theEntities) {
-		if (theEntities != null) {
-	 		if (this.entities == null) {
-				this.entities = new ArrayList<NerdEntity>();
-			}
-			for(NerdEntity entity : theEntities) {
-				this.entities.add(entity);
-			}
-		}
+        if (theEntities != null) {
+            if (this.entities == null) {
+                this.entities = new ArrayList<NerdEntity>();
+            }
+            for (NerdEntity entity : theEntities) {
+                this.entities.add(entity);
+            }
+        }
     }
 
     public List<Sentence> getSentences() {
@@ -242,13 +282,13 @@ public class NerdQuery {
         this.sentences = sentences;
     }
 
-    public boolean getOnlyNER() {
+    /*public boolean getOnlyNER() {
         return onlyNER;
     }
 
     public void setOnlyNER(boolean onlyNER) {
         this.onlyNER = onlyNER;
-    }
+    }*/
 
     public String getShortText() {
         return shortText;
@@ -290,30 +330,22 @@ public class NerdQuery {
         this.processSentence = processSentence;
     }
 
-    public NerdRestUtils.Format getFormat() {
-        return format;
-    }
-
-    public void setFormat(NerdRestUtils.Format format) {
-        this.format = format;
-    }
-
     public void addEntities(List<NerdEntity> newEntities) {
-		if (entities == null) {
-			entities = new ArrayList<>();
-		}
-		if (newEntities.size() == 0) {
-			return;
-		}
-		for(NerdEntity entity : newEntities) {
-			entities.add(entity);
-		}
+        if (entities == null) {
+            entities = new ArrayList<>();
+        }
+        if (newEntities.size() == 0) {
+            return;
+        }
+        for (NerdEntity entity : newEntities) {
+            entities.add(entity);
+        }
     }
 
     public void addEntity(NerdEntity entity) {
-		if (entities == null) {
-			entities = new ArrayList<NerdEntity>();
-		}
+        if (entities == null) {
+            entities = new ArrayList<>();
+        }
         entities.add(entity);
     }
 
@@ -326,9 +358,9 @@ public class NerdQuery {
     }
 
     public void addGlobalCategory(Category category) {
-		if (globalCategories == null) {
-			globalCategories = new ArrayList<Category>();
-		}
+        if (globalCategories == null) {
+            globalCategories = new ArrayList<Category>();
+        }
         globalCategories.add(category);
     }
 
@@ -382,12 +414,18 @@ public class NerdQuery {
 
     public String toJSON() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.enable(JsonParser.Feature.ALLOW_SINGLE_QUOTES);
+        mapper.enable(JsonParser.Feature.IGNORE_UNDEFINED);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+
         String json = null;
         try {
             json = mapper.writeValueAsString(this);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new QueryException("Cannot serialise the nerd query to JSON", e);
         }
         return json;
     }
@@ -517,6 +555,10 @@ public class NerdQuery {
         return buffer.toString();
     }*/
 
+    public String toJSONClean() {
+        return toJSONClean(null);
+    }
+
     public String toJSONClean(Document doc) {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder buffer = new StringBuilder();
@@ -526,7 +568,7 @@ public class NerdQuery {
         buffer.append("\"runtime\": " + runtime);
 
         // parameters
-        buffer.append(", \"onlyNER\": " + onlyNER);
+        //buffer.append(", \"onlyNER\": " + onlyNER);
         buffer.append(", \"nbest\": " + nbest);
 
         // parameters
@@ -598,10 +640,12 @@ public class NerdQuery {
             buffer.append(", \"entities\": [");
             boolean first = true;
             for (NerdEntity entity : entities) {
+                //if (KBUtilities.isPlant(entity.getWikidataId()))
+                //    continue;
                 if (filter != null) {
                     List<Statement> statements = entity.getStatements();
-                    if ( (statements == null) && 
-                         ( (filter.getValueMustNotMatch() == null) || (filter.getValueMustMatch() != null) ) )
+                    if ((statements == null) &&
+                            ((filter.getValueMustNotMatch() == null) || (filter.getValueMustMatch() != null)))
                         continue;
                     if (statements != null) {
                         if (!filter.valid(statements))
@@ -615,7 +659,7 @@ public class NerdQuery {
                     buffer.append(", ");
                 if (this.full)
                     buffer.append(entity.toJsonFull());
-                else   
+                else
                     buffer.append(entity.toJsonCompact());
             }
             buffer.append("]");
@@ -685,12 +729,12 @@ public class NerdQuery {
      * Check that language has been correctly set
      */
     public boolean hasValidLanguage() {
-        return (language != null && language.getLang() != null)
-                && (language.getLang().equals(EN) || language.getLang().equals(DE) || language.getLang().equals(FR)) ;
+        return language != null && language.getLang() != null
+                && TARGET_LANGUAGES.contains(language.getLang());
     }
 
     public static NerdQuery fromJson(String theQuery) throws QueryException {
-        if(StringUtils.isEmpty(theQuery)) {
+        if (StringUtils.isEmpty(theQuery)) {
             throw new QueryException("The query cannot be null:\n " + theQuery);
         }
 
@@ -699,9 +743,9 @@ public class NerdQuery {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             return mapper.readValue(theQuery, NerdQuery.class);
-        } catch(JsonGenerationException | JsonMappingException e) {
+        } catch (JsonGenerationException | JsonMappingException e) {
             throw new QueryException("JSON cannot be processed:\n " + theQuery + "\n ", e);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new QueryException("Some serious error when deserialize the JSON object: \n" + theQuery, e);
         }
     }
@@ -711,7 +755,7 @@ public class NerdQuery {
      */
     @JsonIgnore
     public String getQueryType() {
-        if (isNotBlank(text) && (text.trim().length() > 1)) {
+        if (isNotBlank(text) && text.trim().length() > 1) {
             shortText = null;
             return QUERY_TYPE_TEXT;
         } else if (isNotEmpty(shortText)) {
@@ -719,6 +763,8 @@ public class NerdQuery {
             return QUERY_TYPE_SHORT_TEXT;
         } else if (CollectionUtils.isNotEmpty(termVector)) {
             return QUERY_TYPE_TERM_VECTOR;
+        } else if (isNotBlank(text) && (CollectionUtils.isNotEmpty(getTokens()))) {     // We could have text and tokens
+            return QUERY_TYPE_LAYOUT_TOKENS;
         } else {
             return QUERY_TYPE_INVALID;
         }

@@ -1,0 +1,4469 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AQUAINT.entityAnnotation>
+	<document docName="APW19981109_0464.htm">
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>29</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>the Hague</mention>
+			<wikiName>The Hague</wikiName>
+			<offset>91</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Radio Free Europe</mention>
+			<wikiName>Radio Free Europe/Radio Liberty</wikiName>
+			<offset>150</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Foreign Minister</mention>
+			<wikiName>Foreign minister</wikiName>
+			<offset>217</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Kamal Kharrazi</mention>
+			<wikiName>Kamal Kharazi</wikiName>
+			<offset>237</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>ICJ</mention>
+			<wikiName>International Court of Justice</wikiName>
+			<offset>478</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>the Netherlands</mention>
+			<wikiName>Netherlands</wikiName>
+			<offset>488</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Prague</mention>
+			<wikiName>Prague</wikiName>
+			<offset>557</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Czech</mention>
+			<wikiName>Czech Republic</wikiName>
+			<offset>582</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>786</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Farsi</mention>
+			<wikiName>Persian language</wikiName>
+			<offset>921</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Munich, Germany</mention>
+			<wikiName>Munich</wikiName>
+			<offset>1048</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Soviet</mention>
+			<wikiName>Soviet Union</wikiName>
+			<offset>1106</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Iron Curtain</mention>
+			<wikiName>Iron Curtain</wikiName>
+			<offset>1148</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Cold War</mention>
+			<wikiName>Cold War</wikiName>
+			<offset>1175</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Communist</mention>
+			<wikiName>Communism</wikiName>
+			<offset>1212</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="APW20000312_0050.htm">
+		<annotation>
+			<mention>Nicaragua</mention>
+			<wikiName>Nicaragua</wikiName>
+			<offset>49</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>civil war</mention>
+			<wikiName>Civil war</wikiName>
+			<offset>165</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Managua</mention>
+			<wikiName>Managua</wikiName>
+			<offset>224</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Radio Nicaragua</mention>
+			<wikiName>List of radio stations in Nicaragua</wikiName>
+			<offset>350</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>short-wave</mention>
+			<wikiName>Shortwave radio</wikiName>
+			<offset>395</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Sandinista</mention>
+			<wikiName>Sandinista National Liberation Front</wikiName>
+			<offset>549</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Contra</mention>
+			<wikiName>Contras</wikiName>
+			<offset>578</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>volcanic eruptions</mention>
+			<wikiName>Types of volcanic eruptions</wikiName>
+			<offset>744</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Pope John Paul II</mention>
+			<wikiName>Pope John Paul II</wikiName>
+			<offset>785</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Hurricane Mitch</mention>
+			<wikiName>Hurricane Mitch</wikiName>
+			<offset>825</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Mexico</mention>
+			<wikiName>Mexico</wikiName>
+			<offset>1089</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Central America</mention>
+			<wikiName>Central America</wikiName>
+			<offset>1103</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>National Autonomous University of Nicaragua</mention>
+			<wikiName>National Autonomous University of Nicaragua</wikiName>
+			<offset>1211</offset>
+			<length>43</length>
+		</annotation>
+		<annotation>
+			<mention>diabetes</mention>
+			<wikiName>Diabetes mellitus</wikiName>
+			<offset>1321</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>cancer</mention>
+			<wikiName>Cancer</wikiName>
+			<offset>1337</offset>
+			<length>6</length>
+		</annotation>
+	</document>
+	<document docName="APW19980627_0596.htm">
+		<annotation>
+			<mention>India</mention>
+			<wikiName>India</wikiName>
+			<offset>98</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>journalist</mention>
+			<wikiName>Journalist</wikiName>
+			<offset>120</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>brain cancer</mention>
+			<wikiName>Brain tumor</wikiName>
+			<offset>191</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Politics</mention>
+			<wikiName>Politics</wikiName>
+			<offset>261</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Indian newspapers</mention>
+			<wikiName>List of newspapers in India</wikiName>
+			<offset>323</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Prasar Bharati</mention>
+			<wikiName>Prasar Bharati</wikiName>
+			<offset>529</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>corporation</mention>
+			<wikiName>Corporation</wikiName>
+			<offset>562</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Calcutta University</mention>
+			<wikiName>University of Calcutta</wikiName>
+			<offset>788</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Oxford University's Merton College</mention>
+			<wikiName>Merton College, Oxford</wikiName>
+			<offset>826</offset>
+			<length>34</length>
+		</annotation>
+		<annotation>
+			<mention>journalism</mention>
+			<wikiName>Journalism</wikiName>
+			<offset>959</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Communist Party of India</mention>
+			<wikiName>Communist Party of India</wikiName>
+			<offset>1021</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Indira Gandhi</mention>
+			<wikiName>Indira Gandhi</wikiName>
+			<offset>1178</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19981109_1172.htm">
+		<annotation>
+			<mention>Courtney Walsh</mention>
+			<wikiName>Courtney Walsh</wikiName>
+			<offset>76</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>West Indies</mention>
+			<wikiName>West Indies cricket team</wikiName>
+			<offset>107</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Caribbean News Agency</mention>
+			<wikiName>Caribbean News Agency</wikiName>
+			<offset>152</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Lara</mention>
+			<wikiName>Brian Lara</wikiName>
+			<offset>182</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Hooper</mention>
+			<wikiName>Carl Hooper</wikiName>
+			<offset>194</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>West Indies Cricket Board</mention>
+			<wikiName>West Indies Cricket Board</wikiName>
+			<offset>307</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>batsman</mention>
+			<wikiName>Batting (cricket)</wikiName>
+			<offset>352</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>treasurer</mention>
+			<wikiName>Treasurer</wikiName>
+			<offset>611</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>negotiated</mention>
+			<wikiName>Negotiation</wikiName>
+			<offset>652</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Ali Bacher</mention>
+			<wikiName>Ali Bacher</wikiName>
+			<offset>716</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>South African cricket</mention>
+			<wikiName>Cricket South Africa</wikiName>
+			<offset>739</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Clive Lloyd</mention>
+			<wikiName>Clive Lloyd</wikiName>
+			<offset>877</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Joel Garner</mention>
+			<wikiName>Joel Garner</wikiName>
+			<offset>908</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>sponsorship</mention>
+			<wikiName>Sponsor (commercial)</wikiName>
+			<offset>1044</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>wicketkeeper</mention>
+			<wikiName>Wicket-keeper</wikiName>
+			<offset>1096</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>David Richardson</mention>
+			<wikiName>Dave Richardson</wikiName>
+			<offset>1112</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>marketing</mention>
+			<wikiName>Marketing</wikiName>
+			<offset>1151</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Johannesburg</mention>
+			<wikiName>Johannesburg</wikiName>
+			<offset>1172</offset>
+			<length>12</length>
+		</annotation>
+	</document>
+	<document docName="APW19980614_0031.htm">
+		<annotation>
+			<mention>Thailand</mention>
+			<wikiName>Thailand</wikiName>
+			<offset>166</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>auction</mention>
+			<wikiName>Auction</wikiName>
+			<offset>184</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>financial firms</mention>
+			<wikiName>Financial institution</wikiName>
+			<offset>218</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>baht</mention>
+			<wikiName>Thai baht</wikiName>
+			<offset>406</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>liquidate</mention>
+			<wikiName>Liquidation</wikiName>
+			<offset>580</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>International Monetary Fund</mention>
+			<wikiName>International Monetary Fund</wikiName>
+			<offset>697</offset>
+			<length>27</length>
+		</annotation>
+		<annotation>
+			<mention>Thai economy</mention>
+			<wikiName>Economy of Thailand</wikiName>
+			<offset>795</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Bangkok Post</mention>
+			<wikiName>Bangkok Post</wikiName>
+			<offset>1040</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Chuan Leekpai</mention>
+			<wikiName>Chuan Leekpai</wikiName>
+			<offset>1247</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Christies</mention>
+			<wikiName>Christie's</wikiName>
+			<offset>1329</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Queen Sirikit Natoinal Convention Center</mention>
+			<wikiName>Queen Sirikit National Convention Center</wikiName>
+			<offset>1395</offset>
+			<length>40</length>
+		</annotation>
+	</document>
+	<document docName="APW19981120_1056.htm">
+		<annotation>
+			<mention>prosecutor</mention>
+			<wikiName>Prosecutor</wikiName>
+			<offset>48</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>P.W. Botha</mention>
+			<wikiName>P. W. Botha</wikiName>
+			<offset>130</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>white rule</mention>
+			<wikiName>Dominant minority</wikiName>
+			<offset>194</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Truth and Reconciliation Commission (South Africa)</mention>
+			<wikiName>Truth and Reconciliation Commission (South Africa)</wikiName>
+			<offset>340</offset>
+			<length>50</length>
+		</annotation>
+		<annotation>
+			<mention>African National Congress</mention>
+			<wikiName>African National Congress</wikiName>
+			<offset>645</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>Johannesburg</mention>
+			<wikiName>Johannesburg</wikiName>
+			<offset>721</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>amnesty</mention>
+			<wikiName>Amnesty</wikiName>
+			<offset>940</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>contempt of court</mention>
+			<wikiName>Contempt of court</wikiName>
+			<offset>1152</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>rand</mention>
+			<wikiName>South African rand</wikiName>
+			<offset>1282</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="APW19980620_0458.htm">
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>74</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>prisoner of war</mention>
+			<wikiName>Prisoner of war</wikiName>
+			<offset>84</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Iraqi Cabinet ministers</mention>
+			<wikiName>Cabinet of Iraq</wikiName>
+			<offset>127</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>Iraqi News Agency</mention>
+			<wikiName>National Iraqi News Agency</wikiName>
+			<offset>257</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Mohammed Saeed al-Sahhaf</mention>
+			<wikiName>Muhammad Saeed al-Sahhaf</wikiName>
+			<offset>314</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Missing-In-Action</mention>
+			<wikiName>Missing in action</wikiName>
+			<offset>451</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Iran-Iraq War</mention>
+			<wikiName>Iran–Iraq War</wikiName>
+			<offset>704</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>International Committee of the Red Cross</mention>
+			<wikiName>International Committee of the Red Cross</wikiName>
+			<offset>798</offset>
+			<length>40</length>
+		</annotation>
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>891</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Associated Press</mention>
+			<wikiName>Associated Press</wikiName>
+			<offset>928</offset>
+			<length>16</length>
+		</annotation>
+	</document>
+	<document docName="APW19990120_0179.htm">
+		<annotation>
+			<mention>Beanie Babies</mention>
+			<wikiName>Beanie Babies</wikiName>
+			<offset>96</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Rembrandt</mention>
+			<wikiName>Rembrandt</wikiName>
+			<offset>165</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Sotheby</mention>
+			<wikiName>Sotheby's</wikiName>
+			<offset>194</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>New York</mention>
+			<wikiName>New York City</wikiName>
+			<offset>212</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>auction house</mention>
+			<wikiName>Auction</wikiName>
+			<offset>224</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>antiques</mention>
+			<wikiName>Antique</wikiName>
+			<offset>367</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>sports memorabilia</mention>
+			<wikiName>Sports memorabilia</wikiName>
+			<offset>394</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>collectibles</mention>
+			<wikiName>Collectable</wikiName>
+			<offset>426</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>online auction</mention>
+			<wikiName>Online auction</wikiName>
+			<offset>810</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>baseball</mention>
+			<wikiName>Baseball</wikiName>
+			<offset>860</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>charge card</mention>
+			<wikiName>Charge card</wikiName>
+			<offset>1278</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Christie</mention>
+			<wikiName>Christie's</wikiName>
+			<offset>1332</offset>
+			<length>8</length>
+		</annotation>
+	</document>
+	<document docName="APW19980713_0449.htm">
+		<annotation>
+			<mention>German railway</mention>
+			<wikiName>Rail transport in Germany</wikiName>
+			<offset>15</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>planes</mention>
+			<wikiName>Fixed-wing aircraft</wikiName>
+			<offset>104</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>trains</mention>
+			<wikiName>Train</wikiName>
+			<offset>117</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Germany</mention>
+			<wikiName>Germany</wikiName>
+			<offset>128</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Lufthansa</mention>
+			<wikiName>Lufthansa</wikiName>
+			<offset>155</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>main hub</mention>
+			<wikiName>Airline hub</wikiName>
+			<offset>340</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Frankfurt</mention>
+			<wikiName>Frankfurt</wikiName>
+			<offset>355</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Cologne</mention>
+			<wikiName>Cologne</wikiName>
+			<offset>500</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>landing slots</mention>
+			<wikiName>Landing slot</wikiName>
+			<offset>554</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Deutsche Bahn</mention>
+			<wikiName>Deutsche Bahn</wikiName>
+			<offset>641</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Bonn</mention>
+			<wikiName>Bonn</wikiName>
+			<offset>993</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Wuerzburg</mention>
+			<wikiName>Würzburg</wikiName>
+			<offset>1002</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>United</mention>
+			<wikiName>United Airlines</wikiName>
+			<offset>1073</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>SAS</mention>
+			<wikiName>Scandinavian Airlines</wikiName>
+			<offset>1087</offset>
+			<length>3</length>
+		</annotation>
+	</document>
+	<document docName="APW19981109_0152.htm">
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>27</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>65</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>the Hague</mention>
+			<wikiName>The Hague</wikiName>
+			<offset>127</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Radio Free Europe</mention>
+			<wikiName>Radio Free Europe/Radio Liberty</wikiName>
+			<offset>186</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Kamal Kharrazi</mention>
+			<wikiName>Kamal Kharazi</wikiName>
+			<offset>270</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>ICJ</mention>
+			<wikiName>International Court of Justice</wikiName>
+			<offset>511</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>the Netherlands</mention>
+			<wikiName>Netherlands</wikiName>
+			<offset>521</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Prague</mention>
+			<wikiName>Prague</wikiName>
+			<offset>590</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Czech</mention>
+			<wikiName>Czech Republic</wikiName>
+			<offset>615</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>819</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Farsi</mention>
+			<wikiName>Persian language</wikiName>
+			<offset>954</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Czech government</mention>
+			<wikiName>Politics of the Czech Republic</wikiName>
+			<offset>1008</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Munich, Germany</mention>
+			<wikiName>Munich</wikiName>
+			<offset>1084</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Soviet</mention>
+			<wikiName>Soviet Union</wikiName>
+			<offset>1142</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Iron Curtain</mention>
+			<wikiName>Iron Curtain</wikiName>
+			<offset>1184</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Cold War</mention>
+			<wikiName>Cold War</wikiName>
+			<offset>1211</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Communist</mention>
+			<wikiName>Communism</wikiName>
+			<offset>1248</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="APW19990827_0137.htm">
+		<annotation>
+			<mention>First Union</mention>
+			<wikiName>First Union</wikiName>
+			<offset>59</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>pornographic</mention>
+			<wikiName>Pornography</wikiName>
+			<offset>147</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>e-mail</mention>
+			<wikiName>Email</wikiName>
+			<offset>187</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>hostile environment</mention>
+			<wikiName>Hostile environment sexual harassment</wikiName>
+			<offset>485</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>The Charlotte Observer</mention>
+			<wikiName>The Charlotte Observer</wikiName>
+			<offset>528</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>server</mention>
+			<wikiName>Server (computing)</wikiName>
+			<offset>819</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>home-equity</mention>
+			<wikiName>Home equity</wikiName>
+			<offset>892</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Fortune 100</mention>
+			<wikiName>Fortune 500</wikiName>
+			<offset>1043</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>legal claims</mention>
+			<wikiName>Cause of action</wikiName>
+			<offset>1226</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>sexual harassment</mention>
+			<wikiName>Sexual harassment</wikiName>
+			<offset>1324</offset>
+			<length>17</length>
+		</annotation>
+	</document>
+	<document docName="APW19981210_0433.htm">
+		<annotation>
+			<mention>Syria</mention>
+			<wikiName>Syria</wikiName>
+			<offset>60</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>93</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Britain</mention>
+			<wikiName>United Kingdom</wikiName>
+			<offset>114</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Iraqi</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>138</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Saddam Hussein</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>154</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Abdul-Halim Khaddam</mention>
+			<wikiName>Abdul Halim Khaddam</wikiName>
+			<offset>195</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Israel</mention>
+			<wikiName>Israel</wikiName>
+			<offset>260</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Arab</mention>
+			<wikiName>Arab people</wikiName>
+			<offset>299</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Islamic</mention>
+			<wikiName>Islam</wikiName>
+			<offset>311</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Hassan Habibi</mention>
+			<wikiName>Hassan Habibi</wikiName>
+			<offset>385</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Damascus airport</mention>
+			<wikiName>Damascus International Airport</wikiName>
+			<offset>406</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>London</mention>
+			<wikiName>London</wikiName>
+			<offset>554</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Palestinian</mention>
+			<wikiName>Palestinian people</wikiName>
+			<offset>827</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Iranian Foreign Minister Kamal Kharrazi</mention>
+			<wikiName>Kamal Kharazi</wikiName>
+			<offset>1291</offset>
+			<length>39</length>
+		</annotation>
+		<annotation>
+			<mention>Hafez Assad</mention>
+			<wikiName>Hafez al-Assad</wikiName>
+			<offset>1372</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Iran-Iraq war</mention>
+			<wikiName>Iran–Iraq War</wikiName>
+			<offset>1503</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19981010_0354.htm">
+		<annotation>
+			<mention>Gulf</mention>
+			<wikiName>Persian Gulf</wikiName>
+			<offset>37</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>William Cohen</mention>
+			<wikiName>William Cohen</wikiName>
+			<offset>83</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>146</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>ballistic missile defense system</mention>
+			<wikiName>United States national missile defense</wikiName>
+			<offset>186</offset>
+			<length>32</length>
+		</annotation>
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>286</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>298</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Bahrain</mention>
+			<wikiName>Bahrain</wikiName>
+			<offset>450</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Qatar</mention>
+			<wikiName>Qatar</wikiName>
+			<offset>540</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>United Arab Emirates</mention>
+			<wikiName>United Arab Emirates</wikiName>
+			<offset>612</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Oman</mention>
+			<wikiName>Oman</wikiName>
+			<offset>637</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Saudi Arabia</mention>
+			<wikiName>Saudi Arabia</wikiName>
+			<offset>657</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>U.N.</mention>
+			<wikiName>United Nations</wikiName>
+			<offset>1203</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>sanctions</mention>
+			<wikiName>International sanctions</wikiName>
+			<offset>1211</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="APW19980611_0774.htm">
+		<annotation>
+			<mention>illegal art traffic</mention>
+			<wikiName>Art theft</wikiName>
+			<offset>40</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Budapest</mention>
+			<wikiName>Budapest</wikiName>
+			<offset>110</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>illegal traffic</mention>
+			<wikiName>Smuggling</wikiName>
+			<offset>160</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Interpol</mention>
+			<wikiName>Interpol</wikiName>
+			<offset>260</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>International Police</mention>
+			<wikiName>United Nations Police</wikiName>
+			<offset>277</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>East European</mention>
+			<wikiName>Eastern Europe</wikiName>
+			<offset>408</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>France</mention>
+			<wikiName>France</wikiName>
+			<offset>559</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Hungarian</mention>
+			<wikiName>Hungarian people</wikiName>
+			<offset>647</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>communism</mention>
+			<wikiName>Communism</wikiName>
+			<offset>762</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>forints</mention>
+			<wikiName>Hungarian forint</wikiName>
+			<offset>889</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>data base</mention>
+			<wikiName>Database</wikiName>
+			<offset>1417</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>network</mention>
+			<wikiName>Entrepreneurial network</wikiName>
+			<offset>1436</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>art dealers</mention>
+			<wikiName>Art dealer</wikiName>
+			<offset>1465</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>auctioneers</mention>
+			<wikiName>Auction</wikiName>
+			<offset>1481</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+	<document docName="APW19981020_1367.htm">
+		<annotation>
+			<mention>Alan Shepard</mention>
+			<wikiName>Alan Shepard</wikiName>
+			<offset>65</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>John Glenn</mention>
+			<wikiName>John Glenn</wikiName>
+			<offset>132</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>orbit</mention>
+			<wikiName>Orbit</wikiName>
+			<offset>172</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Gus Grissom</mention>
+			<wikiName>Gus Grissom</wikiName>
+			<offset>200</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Edward White</mention>
+			<wikiName>Edward Higgins White</wikiName>
+			<offset>216</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Roger Chaffee</mention>
+			<wikiName>Roger B. Chaffee</wikiName>
+			<offset>239</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Apollo 1</mention>
+			<wikiName>Apollo 1</wikiName>
+			<offset>263</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>spacecraft</mention>
+			<wikiName>Spacecraft</wikiName>
+			<offset>275</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>launch pad</mention>
+			<wikiName>Launch pad</wikiName>
+			<offset>297</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Apollo 11</mention>
+			<wikiName>Apollo 11</wikiName>
+			<offset>330</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Neil Armstrong</mention>
+			<wikiName>Neil Armstrong</wikiName>
+			<offset>345</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Buzz Aldrin</mention>
+			<wikiName>Buzz Aldrin</wikiName>
+			<offset>367</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>moon</mention>
+			<wikiName>Moon</wikiName>
+			<offset>390</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Soyuz spacecraft</mention>
+						<wikiName>Soyuz (spacecraft)</wikiName>
+			<offset>444</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Columbia</mention>
+			<wikiName>Space Shuttle Columbia</wikiName>
+			<offset>498</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>space shuttle</mention>
+			<wikiName>Space Shuttle</wikiName>
+			<offset>525</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Sally Ride</mention>
+			<wikiName>Sally Ride</wikiName>
+			<offset>568</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Challenger</mention>
+			<wikiName>Space Shuttle Challenger</wikiName>
+			<offset>639</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Hubble Space Telescope</mention>
+			<wikiName>Hubble Space Telescope</wikiName>
+			<offset>710</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>Norman Thagard</mention>
+			<wikiName>Norman Thagard</wikiName>
+			<offset>837</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>rocket</mention>
+			<wikiName>Rocket</wikiName>
+			<offset>901</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Mir</mention>
+			<wikiName>Mir</wikiName>
+			<offset>963</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Atlantis</mention>
+			<wikiName>Space Shuttle Atlantis</wikiName>
+			<offset>989</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Shannon Lucid</mention>
+			<wikiName>Shannon Lucid</wikiName>
+			<offset>1068</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Story Musgrave</mention>
+			<wikiName>Story Musgrave</wikiName>
+			<offset>1207</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Discovery</mention>
+			<wikiName>Space Shuttle Discovery</wikiName>
+			<offset>1284</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="APW19980624_0436.htm">
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>48</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>60</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>prisoners of war</mention>
+			<wikiName>Prisoner of war</wikiName>
+			<offset>147</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>226</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>delegation</mention>
+			<wikiName>Delegation</wikiName>
+			<offset>291</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Iraqi News Agency</mention>
+			<wikiName>National Iraqi News Agency</wikiName>
+			<offset>379</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Tehran</mention>
+			<wikiName>Tehran</wikiName>
+			<offset>612</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>detainees</mention>
+			<wikiName>Detention (imprisonment)</wikiName>
+			<offset>882</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>repatriation</mention>
+			<wikiName>Repatriation</wikiName>
+			<offset>918</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>International Committee of the Red Cross</mention>
+			<wikiName>International Committee of the Red Cross</wikiName>
+			<offset>981</offset>
+			<length>40</length>
+		</annotation>
+		<annotation>
+			<mention>Iran-Iraq war</mention>
+			<wikiName>Iran–Iraq War</wikiName>
+			<offset>1174</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19981106_0920.htm">
+		<annotation>
+			<mention>Norsk Hydro ASA</mention>
+			<wikiName>Norsk Hydro</wikiName>
+			<offset>63</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>hydrogen</mention>
+			<wikiName>Hydrogen</wikiName>
+			<offset>124</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>power plant</mention>
+			<wikiName>Power station</wikiName>
+			<offset>144</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>electricity</mention>
+			<wikiName>Electricity</wikiName>
+			<offset>185</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>emissions</mention>
+			<wikiName>Air pollution</wikiName>
+			<offset>235</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>state-owned company</mention>
+			<wikiName>Government-owned corporation</wikiName>
+			<offset>267</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Norwegian Water Resources and Energy Directorate</mention>
+			<wikiName>Norwegian Water Resources and Energy Directorate</wikiName>
+			<offset>303</offset>
+			<length>48</length>
+		</annotation>
+		<annotation>
+			<mention>natural gas</mention>
+			<wikiName>Natural gas</wikiName>
+			<offset>809</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>petroleum</mention>
+			<wikiName>Petroleum</wikiName>
+			<offset>849</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>carbon dioxide</mention>
+			<wikiName>Carbon dioxide</wikiName>
+			<offset>965</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Norway</mention>
+			<wikiName>Norway</wikiName>
+			<offset>1053</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>hydroelectric plants</mention>
+			<wikiName>Hydroelectricity</wikiName>
+			<offset>1237</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>nitrogen</mention>
+			<wikiName>Nitrogen</wikiName>
+			<offset>1355</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Oslo</mention>
+			<wikiName>Oslo</wikiName>
+			<offset>1490</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="APW19981022_0630.htm">
+		<annotation>
+			<mention>strategy</mention>
+			<wikiName>Strategy</wikiName>
+			<offset>29</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Interpol</mention>
+			<wikiName>Interpol</wikiName>
+			<offset>68</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>crime syndicates</mention>
+			<wikiName>Organized crime</wikiName>
+			<offset>155</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>organized crime</mention>
+			<wikiName>Organized crime</wikiName>
+			<offset>574</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>terrorism</mention>
+			<wikiName>Terrorism</wikiName>
+			<offset>819</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>illegal drug trade</mention>
+			<wikiName>Illegal drug trade</wikiName>
+			<offset>904</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>money laundering</mention>
+			<wikiName>Money laundering</wikiName>
+			<offset>930</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>evidence</mention>
+			<wikiName>Evidence</wikiName>
+			<offset>1069</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>strategic development plan</mention>
+			<wikiName>Strategic planning</wikiName>
+			<offset>1239</offset>
+			<length>26</length>
+		</annotation>
+	</document>
+	<document docName="APW19990526_0131.htm">
+		<annotation>
+			<mention>Bear</mention>
+			<wikiName>Bear</wikiName>
+			<offset>27</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>ANCHORAGE</mention>
+			<wikiName>Anchorage, Alaska</wikiName>
+			<offset>37</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Alaska</mention>
+			<wikiName>Alaska</wikiName>
+			<offset>51</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Alaska State Troopers</mention>
+			<wikiName>Alaska State Troopers</wikiName>
+			<offset>142</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Kenai National Wildlife Refuge</mention>
+			<wikiName>Kenai National Wildlife Refuge</wikiName>
+			<offset>285</offset>
+			<length>30</length>
+		</annotation>
+		<annotation>
+			<mention>Soldotna</mention>
+			<wikiName>Soldotna, Alaska</wikiName>
+			<offset>340</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>rifle</mention>
+			<wikiName>Rifle</wikiName>
+			<offset>876</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Audelio Luis Cortes</mention>
+			<wikiName>List of fatal bear attacks in North America by decade</wikiName>
+			<offset>1215</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>seismic</mention>
+			<wikiName>Seismology</wikiName>
+			<offset>1273</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Swanson River</mention>
+			<wikiName>Swanson River</wikiName>
+			<offset>1296</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>oil field</mention>
+			<wikiName>Oil field</wikiName>
+			<offset>1313</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Kenai</mention>
+			<wikiName>Kenai, Alaska</wikiName>
+			<offset>1331</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="APW19980808_0196.htm">
+		<annotation>
+			<mention>Saddam Hussein</mention>
+			<wikiName>Saddam Hussein</wikiName>
+			<offset>81</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>117</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>214</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iran-Iraq war</mention>
+			<wikiName>Iran–Iraq War</wikiName>
+			<offset>312</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>U.N.</mention>
+			<wikiName>United Nations</wikiName>
+			<offset>464</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>allies</mention>
+			<wikiName>Allies of World War II</wikiName>
+			<offset>527</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Iranian government</mention>
+			<wikiName>Politics of Iran</wikiName>
+			<offset>633</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Ayatollah Ruhollah Khomeini</mention>
+			<wikiName>Ruhollah Khomeini</wikiName>
+			<offset>670</offset>
+			<length>27</length>
+		</annotation>
+		<annotation>
+			<mention>embargo</mention>
+			<wikiName>Embargo</wikiName>
+			<offset>818</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>sanctions</mention>
+			<wikiName>International sanctions</wikiName>
+			<offset>891</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Kuwait</mention>
+			<wikiName>Kuwait</wikiName>
+			<offset>961</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>artillery</mention>
+			<wikiName>Artillery</wikiName>
+			<offset>1232</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>1276</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>patriotic</mention>
+			<wikiName>Patriotism</wikiName>
+			<offset>1346</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="APW19980624_0607.htm">
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>48</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>60</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>prisoners of war</mention>
+			<wikiName>Prisoner of war</wikiName>
+			<offset>147</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>226</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Iraqi News Agency</mention>
+			<wikiName>National Iraqi News Agency</wikiName>
+			<offset>376</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Tehran</mention>
+			<wikiName>Tehran</wikiName>
+			<offset>609</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>repatriation</mention>
+			<wikiName>Repatriation</wikiName>
+			<offset>912</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>International Committee of the Red Cross</mention>
+			<wikiName>International Committee of the Red Cross</wikiName>
+			<offset>975</offset>
+			<length>40</length>
+		</annotation>
+		<annotation>
+			<mention>Iran-Iraq war</mention>
+			<wikiName>Iran–Iraq War</wikiName>
+			<offset>1168</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19980917_0818.htm">
+		<annotation>
+			<mention>guru</mention>
+			<wikiName>Guru</wikiName>
+			<offset>9</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>cult</mention>
+			<wikiName>Cult</wikiName>
+			<offset>72</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>nerve gas</mention>
+			<wikiName>Nerve agent</wikiName>
+			<offset>110</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Tokyo</mention>
+			<wikiName>Tokyo</wikiName>
+			<offset>133</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Shoko Asahara</mention>
+			<wikiName>Shoko Asahara</wikiName>
+			<offset>292</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Aum Shinri Kyo</mention>
+			<wikiName>Aum Shinrikyo</wikiName>
+			<offset>328</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>sarin attack</mention>
+			<wikiName>Sarin gas attack on the Tokyo subway</wikiName>
+			<offset>400</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>gassing</mention>
+			<wikiName>Gas chamber</wikiName>
+			<offset>514</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>defense</mention>
+			<wikiName>Defense (legal)</wikiName>
+			<offset>590</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Tokyo District Court</mention>
+			<wikiName>Tokyo District Court</wikiName>
+			<offset>781</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>prosecution</mention>
+			<wikiName>Prosecutor</wikiName>
+			<offset>1049</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+	<document docName="APW19980603_1617.htm">
+		<annotation>
+			<mention>MALAYSIA</mention>
+			<wikiName>Malaysia</wikiName>
+			<offset>4</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Federal</mention>
+			<wikiName>Federal Government</wikiName>
+			<offset>40</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>State</mention>
+			<!--wikiName>Federated State</wikiName-->
+			<!-- corrected PL for 2017-09 Wikipedia -->
+			<wikiName>Federated state</wikiName>
+			<offset>55</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Government agencies</mention>
+			<wikiName>Government agency</wikiName>
+			<offset>64</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>economic</mention>
+			<wikiName>Economy</wikiName>
+			<offset>116</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>implementation</mention>
+			<wikiName>Implementation</wikiName>
+			<offset>228</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Rural</mention>
+			<wikiName>Rural area</wikiName>
+			<offset>250</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>allocation</mention>
+			<wikiName>Resource allocation</wikiName>
+			<offset>409</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>ministry</mention>
+			<wikiName>Ministry (government department)</wikiName>
+			<offset>439</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>poor</mention>
+			<wikiName>Poverty</wikiName>
+			<offset>472</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>minister</mention>
+			<wikiName>Minister (government)</wikiName>
+			<offset>819</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>mussel</mention>
+			<wikiName>Mussel</wikiName>
+			<offset>1064</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Lukut</mention>
+			<wikiName>Lukut</wikiName>
+			<offset>1099</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Negri Sembilan</mention>
+			<wikiName>Negeri Sembilan</wikiName>
+			<offset>1172</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Port Dickson</mention>
+			<wikiName>Port Dickson</wikiName>
+			<offset>1246</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>studies</mention>
+			<wikiName>Research</wikiName>
+			<offset>1383</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="APW19980824_0827.htm">
+		<annotation>
+			<mention>security</mention>
+			<wikiName>Security</wikiName>
+			<offset>21</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Israel</mention>
+			<wikiName>Israel</wikiName>
+			<offset>65</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>international airport</mention>
+			<wikiName>International airport</wikiName>
+			<offset>111</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Islamic militants</mention>
+			<wikiName>Islamic terrorism</wikiName>
+			<offset>162</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>U.S.</mention>
+			<wikiName>United States</wikiName>
+			<offset>205</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Benjamin Netanyahu</mention>
+			<wikiName>Benjamin Netanyahu</wikiName>
+			<offset>283</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>David Bar-Illan</mention>
+			<wikiName>David Bar-Illan</wikiName>
+			<offset>323</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>terrorism</mention>
+			<wikiName>Terrorism</wikiName>
+			<offset>407</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>pre-emptive strikes</mention>
+			<wikiName>Preemptive war</wikiName>
+			<offset>452</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>air strikes</mention>
+			<wikiName>Airstrike</wikiName>
+			<offset>680</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Sudan</mention>
+			<wikiName>Sudan</wikiName>
+			<offset>698</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Afghanistan</mention>
+			<wikiName>Afghanistan</wikiName>
+			<offset>711</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Osama bin Laden</mention>
+			<wikiName>Osama bin Laden</wikiName>
+			<offset>745</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Saudi</mention>
+			<wikiName>Saudi Arabia</wikiName>
+			<offset>767</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>embassies</mention>
+			<wikiName>Diplomatic mission</wikiName>
+			<offset>844</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>East Africa</mention>
+			<wikiName>East Africa</wikiName>
+			<offset>860</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Muslim</mention>
+			<wikiName>Muslim</wikiName>
+			<offset>911</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>activist</mention>
+			<wikiName>Activism</wikiName>
+			<offset>921</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>strategic</mention>
+			<wikiName>Strategy</wikiName>
+			<offset>1052</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>University of Connecticut</mention>
+			<wikiName>University of Connecticut</wikiName>
+			<offset>1121</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>security guards</mention>
+			<wikiName>Security guard</wikiName>
+			<offset>1229</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>administration</mention>
+			<wikiName>Academic administration</wikiName>
+			<offset>1285</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>tour operator</mention>
+			<wikiName>Tour operator</wikiName>
+			<offset>1397</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19981113_0500.htm">
+		<annotation>
+			<mention>Palestinian</mention>
+			<wikiName>Palestinian people</wikiName>
+			<offset>79</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>airport</mention>
+			<wikiName>Airport</wikiName>
+			<offset>94</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Civil Aviation</mention>
+			<wikiName>Civil aviation</wikiName>
+			<offset>197</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Israeli</mention>
+			<wikiName>Israelis</wikiName>
+			<offset>268</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Yasser Arafat International Airport</mention>
+			<wikiName>Yasser Arafat International Airport</wikiName>
+			<offset>293</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>Gaza Strip</mention>
+			<wikiName>Gaza Strip</wikiName>
+			<offset>348</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Israeli-Palestinian peace agreement</mention>
+			<wikiName>Israeli-Palestinian conflict</wikiName>
+			<offset>406</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>Civil Aviation Authority</mention>
+			<wikiName>National aviation authority</wikiName>
+			<offset>782</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Israelis</mention>
+			<wikiName>Israelis</wikiName>
+			<offset>861</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>security</mention>
+			<wikiName>Security</wikiName>
+			<offset>888</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>bus</mention>
+			<wikiName>Bus</wikiName>
+			<offset>1011</offset>
+			<length>3</length>
+		</annotation>
+	</document>
+	<document docName="APW19980604_0787.htm">
+		<annotation>
+			<mention>Viravaidya</mention>
+			<wikiName>Mechai Viravaidya</wikiName>
+			<offset>14</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>SET</mention>
+			<wikiName>SET Index</wikiName>
+			<offset>75</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>corporate ethics</mention>
+			<wikiName>Business ethics</wikiName>
+			<offset>129</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>lifestyle</mention>
+			<wikiName>Lifestyle (sociology)</wikiName>
+			<offset>354</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>executives</mention>
+			<wikiName>Chief executive officer</wikiName>
+			<offset>377</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>banks</mention>
+			<wikiName>Bank</wikiName>
+			<offset>405</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>finance</mention>
+			<wikiName>Finance</wikiName>
+			<offset>418</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Bank of Thailand</mention>
+			<wikiName>Bank of Thailand</wikiName>
+			<offset>543</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>justice system</mention>
+			<wikiName>List of national legal systems</wikiName>
+			<offset>610</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Thai people</mention>
+			<wikiName>Thai people</wikiName>
+			<offset>766</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>newspapers</mention>
+			<wikiName>Newspaper</wikiName>
+			<offset>844</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>TV stations</mention>
+			<wikiName>Television channel</wikiName>
+			<offset>862</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+	<document docName="APW19981109_0440.htm">
+		<annotation>
+			<mention>Iran</mention>
+			<wikiName>Iran</wikiName>
+			<offset>29</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>the Hague</mention>
+			<wikiName>The Hague</wikiName>
+			<offset>91</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Radio Free Europe</mention>
+			<wikiName>Radio Free Europe/Radio Liberty</wikiName>
+			<offset>150</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Kamal Kharrazi</mention>
+			<wikiName>Kamal Kharazi</wikiName>
+			<offset>234</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>ICJ</mention>
+			<wikiName>International Court of Justice</wikiName>
+			<offset>475</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>the Netherlands</mention>
+			<wikiName>Netherlands</wikiName>
+			<offset>485</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>ambassador</mention>
+			<wikiName>Ambassador</wikiName>
+			<offset>538</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Prague</mention>
+			<wikiName>Prague</wikiName>
+			<offset>557</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Czech</mention>
+			<wikiName>Czech Republic</wikiName>
+			<offset>582</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>broadcast</mention>
+			<wikiName>Broadcasting</wikiName>
+			<offset>763</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>789</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Farsi</mention>
+			<wikiName>Persian language</wikiName>
+			<offset>924</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Czech government</mention>
+			<wikiName>Politics of the Czech Republic</wikiName>
+			<offset>978</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Munich, Germany</mention>
+			<wikiName>Munich</wikiName>
+			<offset>1054</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Soviet</mention>
+			<wikiName>Soviet Union</wikiName>
+			<offset>1112</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Iron Curtain</mention>
+			<wikiName>Iron Curtain</wikiName>
+			<offset>1154</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Cold War</mention>
+			<wikiName>Cold War</wikiName>
+			<offset>1181</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Communist</mention>
+			<wikiName>Communism</wikiName>
+			<offset>1218</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>collapse of communism</mention>
+			<wikiName>Revolutions of 1989</wikiName>
+			<offset>1298</offset>
+			<length>21</length>
+		</annotation>
+	</document>
+	<document docName="APW19981109_0140.htm">
+		<annotation>
+			<mention>the Hague</mention>
+			<wikiName>The Hague</wikiName>
+			<offset>121</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Radio Free Europe</mention>
+			<wikiName>Radio Free Europe/Radio Liberty</wikiName>
+			<offset>180</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Kamal Kharrazi</mention>
+			<wikiName>Kamal Kharazi</wikiName>
+			<offset>264</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>ICJ</mention>
+			<wikiName>International Court of Justice</wikiName>
+			<offset>505</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>the Netherlands</mention>
+			<wikiName>Netherlands</wikiName>
+			<offset>515</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>ambassador</mention>
+			<wikiName>Ambassador</wikiName>
+			<offset>568</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Prague</mention>
+			<wikiName>Prague</wikiName>
+			<offset>587</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Czech</mention>
+			<wikiName>Czech Republic</wikiName>
+			<offset>612</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>economic</mention>
+			<wikiName>Economy</wikiName>
+			<offset>700</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>political</mention>
+			<wikiName>Politics</wikiName>
+			<offset>716</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>822</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Farsi</mention>
+			<wikiName>Persian language</wikiName>
+			<offset>957</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Munich, Germany</mention>
+			<wikiName>Munich</wikiName>
+			<offset>1084</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>censored</mention>
+			<wikiName>Censorship</wikiName>
+			<offset>1125</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Soviet</mention>
+			<wikiName>Soviet Union</wikiName>
+			<offset>1145</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Iron Curtain</mention>
+			<wikiName>Iron Curtain</wikiName>
+			<offset>1187</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Cold War</mention>
+			<wikiName>Cold War</wikiName>
+			<offset>1214</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>West</mention>
+			<wikiName>Western world</wikiName>
+			<offset>1238</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Communist</mention>
+			<wikiName>Communism</wikiName>
+			<offset>1254</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>/Radio Liberty
+			<mention>East</mention>
+			<wikiName>Eastern world</wikiName>
+			<offset>1267</offset>
+			<length>4</length>
+		</annotation>
+	</document>
+	<document docName="APW19980610_0111.htm">
+		<annotation>
+			<mention>Russian</mention>
+			<wikiName>Russians</wikiName>
+			<offset>44</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>organized crime</mention>
+			<wikiName>Organized crime</wikiName>
+			<offset>159</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Sibneft</mention>
+			<wikiName>Gazprom Neft</wikiName>
+			<offset>241</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Kemerovo</mention>
+			<wikiName>Kemerovo</wikiName>
+			<offset>364</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Siberia</mention>
+			<wikiName>Siberia</wikiName>
+			<offset>394</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Russia</mention>
+			<wikiName>Russia</wikiName>
+			<offset>506</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>mogul</mention>
+			<wikiName>Business magnate</wikiName>
+			<offset>587</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Boris Berezovsky</mention>
+			<wikiName>Boris Berezovsky (businessman)</wikiName>
+			<offset>596</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>oil products</mention>
+			<wikiName>Oil</wikiName>
+			<offset>721</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>coal</mention>
+			<wikiName>Coal</wikiName>
+			<offset>741</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>coal-mining</mention>
+			<wikiName>Coal mining</wikiName>
+			<offset>783</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>contract murder</mention>
+			<wikiName>Contract killing</wikiName>
+			<offset>948</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>mobsters</mention>
+			<wikiName>Mobsters</wikiName>
+			<offset>992</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Leninsk-Kuznetsky</mention>
+			<wikiName>Leninsk-Kuznetsky (city)</wikiName>
+			<offset>1123</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>mayor</mention>
+			<wikiName>Mayor</wikiName>
+			<offset>1193</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>tax fraud</mention>
+			<wikiName>Tax evasion</wikiName>
+			<offset>1218</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>embezzlement</mention>
+			<wikiName>Embezzlement</wikiName>
+			<offset>1235</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Gennady Konyakhin</mention>
+			<wikiName>Gennady Konyakhin</wikiName>
+			<offset>1266</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>mob</mention>
+			<wikiName>Russian mafia</wikiName>
+			<offset>1324</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>trial</mention>
+			<wikiName>Trial</wikiName>
+			<offset>1355</offset>
+			<length>5</length>
+		</annotation>
+	</document>
+	<document docName="APW19981119_0585.htm">
+		<annotation>
+			<mention>cattle</mention>
+			<wikiName>Cattle</wikiName>
+			<offset>26</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>bear</mention>
+			<wikiName>Bear</wikiName>
+			<offset>61</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>peasants</mention>
+			<wikiName>Peasant</wikiName>
+			<offset>75</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Romania</mention>
+			<wikiName>Romania</wikiName>
+			<offset>145</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>sheep</mention>
+			<wikiName>Sheep</wikiName>
+			<offset>192</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>livestock</mention>
+			<wikiName>Livestock</wikiName>
+			<offset>247</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>reserves</mention>
+			<wikiName>Game reserve</wikiName>
+			<offset>408</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Dracula</mention>
+			<wikiName>Dracula</wikiName>
+			<offset>443</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Transylvania</mention>
+			<wikiName>Transylvania</wikiName>
+			<offset>474</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>vampire</mention>
+			<wikiName>Vampire</wikiName>
+			<offset>491</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>kilograms</mention>
+			<wikiName>Kilogram</wikiName>
+			<offset>598</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>hibernate</mention>
+			<wikiName>Hibernation</wikiName>
+			<offset>753</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>omnivorous</mention>
+			<wikiName>Omnivore</wikiName>
+			<offset>866</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>weaned</mention>
+			<wikiName>Weaning</wikiName>
+			<offset>913</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Nicolae Ceausescu</mention>
+			<wikiName>Nicolae Ceaușescu</wikiName>
+			<offset>945</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>communist</mention>
+			<wikiName>Communism</wikiName>
+			<offset>971</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>dictator</mention>
+			<wikiName>Dictator</wikiName>
+			<offset>984</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>rangers</mention>
+			<wikiName>Park ranger</wikiName>
+			<offset>1177</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Apuseni Mountains</mention>
+			<wikiName>Apuseni Mountains</wikiName>
+			<offset>1218</offset>
+			<length>17</length>
+		</annotation>
+	</document>
+	<document docName="APW19980930_0522.htm">
+		<annotation>
+			<mention>trade fair</mention>
+			<wikiName>Trade fair</wikiName>
+			<offset>45</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Iraq</mention>
+			<wikiName>Iraq</wikiName>
+			<offset>61</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Iranian</mention>
+			<wikiName>Iran</wikiName>
+			<offset>172</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>delegation</mention>
+			<wikiName>Delegation</wikiName>
+			<offset>284</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Kermanshah province</mention>
+			<wikiName>Kermanshah Province</wikiName>
+			<offset>381</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>Mohammad Shariat-Madari</mention>
+			<wikiName>Mohammad Shariatmadari</wikiName>
+			<offset>514</offset>
+			<length>23</length>
+		</annotation>
+		<annotation>
+			<mention>commercial</mention>
+			<wikiName>Commerce</wikiName>
+			<offset>559</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Tehran</mention>
+			<wikiName>Tehran</wikiName>
+			<offset>712</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>eight-year war</mention>
+			<wikiName>Iran–Iraq War</wikiName>
+			<offset>872</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>U.N.</mention>
+			<wikiName>United Nations</wikiName>
+			<offset>909</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>prisoners of war</mention>
+			<wikiName>Prisoner of war</wikiName>
+			<offset>976</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Baghdad</mention>
+			<wikiName>Baghdad</wikiName>
+			<offset>1158</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>acts of sabotage</mention>
+			<wikiName>Sabotage</wikiName>
+			<offset>1301</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Taha Yassin Ramadan</mention>
+			<wikiName>Taha Yassin Ramadan</wikiName>
+			<offset>1359</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>1991 Gulf War</mention>
+			<wikiName>Gulf War</wikiName>
+			<offset>1441</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Organization of the Islamic Conference</mention>
+			<wikiName>Organisation of Islamic Cooperation</wikiName>
+			<offset>1479</offset>
+			<length>38</length>
+		</annotation>
+	</document>
+	<document docName="APW19990203_0315.htm">
+		<annotation>
+			<mention>LOS ANGELES</mention>
+			<wikiName>Los Angeles</wikiName>
+			<offset>38</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>The J. Paul Getty Museum</mention>
+			<wikiName>J. Paul Getty Museum</wikiName>
+			<offset>61</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>works of art</mention>
+			<wikiName>Work of art</wikiName>
+			<offset>116</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Italy</mention>
+			<wikiName>Italy</wikiName>
+			<offset>135</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>sculpture</mention>
+			<wikiName>Sculpture</wikiName>
+			<offset>190</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>collection</mention>
+			<wikiName>Collection (artwork)</wikiName>
+			<offset>214</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>antiquities</mention>
+			<wikiName>Antiquities</wikiName>
+			<offset>344</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>B.C.</mention>
+			<wikiName>Anno Domini</wikiName>
+			<offset>487</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>excavated</mention>
+			<wikiName>Excavation (archaeology)</wikiName>
+			<offset>525</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>archaeological site</mention>
+			<wikiName>Archaeological site</wikiName>
+			<offset>546</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>torso</mention>
+			<wikiName>Trunk (anatomy)</wikiName>
+			<offset>572</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Mithras</mention>
+			<wikiName>Mithraic mysteries</wikiName>
+			<offset>592</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>2nd century</mention>
+			<wikiName>2nd century</wikiName>
+			<offset>612</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Roman</mention>
+			<wikiName>Ancient Rome</wikiName>
+			<offset>750</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Greek</mention>
+			<wikiName>Ancient Greece</wikiName>
+			<offset>778</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>thefts</mention>
+			<wikiName>Theft</wikiName>
+			<offset>1176</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>looting</mention>
+			<wikiName>Looting</wikiName>
+			<offset>1228</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Brentwood</mention>
+			<wikiName>Brentwood, Los Angeles</wikiName>
+			<offset>1322</offset>
+			<length>9</length>
+		</annotation>
+	</document>
+	<document docName="APW19980930_0284.htm">
+		<annotation>
+			<mention>curator</mention>
+			<wikiName>Curator</wikiName>
+			<offset>39</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Impressionist</mention>
+			<wikiName>Impressionism</wikiName>
+			<offset>103</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>heist</mention>
+			<wikiName>Robbery</wikiName>
+			<offset>187</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Monet</mention>
+			<wikiName>Claude Monet</wikiName>
+			<offset>400</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Nice</mention>
+			<wikiName>Nice</wikiName>
+			<offset>449</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Alfred Sisley</mention>
+			<wikiName>Alfred Sisley</wikiName>
+			<offset>630</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Riviera</mention>
+			<wikiName>French Riviera</wikiName>
+			<offset>736</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Saint Laurent du Var</mention>
+			<wikiName>Saint-Laurent-du-Var</wikiName>
+			<offset>755</offset>
+			<length>20</length>
+		</annotation>
+	</document>
+	<document docName="APW19981215_1083.htm">
+		<annotation>
+			<mention>Dresden</mention>
+			<wikiName>Dresden</wikiName>
+			<offset>72</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Zoo</mention>
+			<wikiName>Zoo</wikiName>
+			<offset>83</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>Environment Minister Juergen Trittin's</mention>
+			<wikiName>Jürgen Trittin</wikiName>
+			<offset>125</offset>
+			<length>38</length>
+		</annotation>
+		<annotation>
+			<mention>elephants</mention>
+			<wikiName>Elephant</wikiName>
+			<offset>208</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Africa</mention>
+			<wikiName>Africa</wikiName>
+			<offset>244</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Cologne</mention>
+			<wikiName>Cologne</wikiName>
+			<offset>358</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Erfurt</mention>
+			<wikiName>Erfurt</wikiName>
+			<offset>440</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Germany</mention>
+			<wikiName>Germany</wikiName>
+			<offset>466</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Botswana</mention>
+			<wikiName>Botswana</wikiName>
+			<offset>554</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>South African</mention>
+			<wikiName>South Africa</wikiName>
+			<offset>581</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>National Society for the Prevention of Cruelty to Animals</mention>
+			<wikiName>Humane Society</wikiName>
+			<offset>756</offset>
+			<length>57</length>
+		</annotation>
+		<annotation>
+			<mention>Switzerland</mention>
+			<wikiName>Switzerland</wikiName>
+			<offset>908</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>parliament</mention>
+			<wikiName>Bundestag</wikiName>
+			<offset>1169</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>put to sleep</mention>
+			<wikiName>Animal euthanasia</wikiName>
+			<offset>1249</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Saxony</mention>
+			<wikiName>Saxony</wikiName>
+			<offset>1323</offset>
+			<length>6</length>
+		</annotation>
+	</document>
+	<document docName="APW19980811_0512.htm">
+		<annotation>
+			<mention>tea</mention>
+			<wikiName>Tea</wikiName>
+			<offset>33</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>toxic</mention>
+			<wikiName>Toxicity</wikiName>
+			<offset>170</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>sodium compound</mention>
+			<wikiName>Sodium</wikiName>
+			<offset>179</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>central nervous system</mention>
+			<wikiName>Central nervous system</wikiName>
+			<offset>215</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>police</mention>
+			<wikiName>Police</wikiName>
+			<offset>242</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>wood preservative</mention>
+			<wikiName>Wood preservation</wikiName>
+			<offset>455</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Niigata</mention>
+			<wikiName>Niigata, Niigata</wikiName>
+			<offset>487</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Tokyo</mention>
+			<wikiName>Tokyo</wikiName>
+			<offset>539</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>nausea</mention>
+			<wikiName>Nausea</wikiName>
+			<offset>590</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>numbness</mention>
+			<wikiName>Paresthesia</wikiName>
+			<offset>604</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>curry</mention>
+			<wikiName>Curry</wikiName>
+			<offset>701</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>cyanide</mention>
+			<wikiName>Cyanide</wikiName>
+			<offset>721</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>arsenic</mention>
+			<wikiName>Arsenic</wikiName>
+			<offset>736</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>copycat</mention>
+			<wikiName>Copycat crime</wikiName>
+			<offset>827</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>sodium azide</mention>
+			<wikiName>Sodium azide</wikiName>
+			<offset>890</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>air-bag</mention>
+			<wikiName>Airbag</wikiName>
+			<offset>962</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>liver disorders</mention>
+			<wikiName>Liver disease</wikiName>
+			<offset>1103</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Niigata City</mention>
+			<wikiName>Niigata, Niigata</wikiName>
+			<offset>1169</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>March 1995</mention>
+			<wikiName>1995</wikiName>
+			<offset>1202</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>nerve gas</mention>
+			<wikiName>Nerve agent</wikiName>
+			<offset>1216</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Aum Shinri Kyo</mention>
+			<wikiName>Aum Shinrikyo</wikiName>
+			<offset>1272</offset>
+			<length>14</length>
+		</annotation>
+	</document>
+	<document docName="APW19990827_0184.htm">
+		<annotation>
+			<mention>United Airlines</mention>
+			<wikiName>United Airlines</wikiName>
+			<offset>58</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>terminal</mention>
+			<wikiName>Airport terminal</wikiName>
+			<offset>89</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>security</mention>
+			<wikiName>Airport security</wikiName>
+			<offset>170</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>O'Hare International Airport</mention>
+			<wikiName>O'Hare International Airport</wikiName>
+			<offset>227</offset>
+			<length>28</length>
+		</annotation>
+		<annotation>
+			<mention>concourse</mention>
+			<wikiName>Concourse</wikiName>
+			<offset>831</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>baggage claim</mention>
+			<wikiName>Baggage claim</wikiName>
+			<offset>867</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19981130_0743.htm">
+		<annotation>
+			<mention>Portugal</mention>
+			<wikiName>Portugal</wikiName>
+			<offset>66</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Spain</mention>
+			<wikiName>Spain</wikiName>
+			<offset>82</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>water resources</mention>
+			<wikiName>Water resources</wikiName>
+			<offset>134</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Iberian peninsula</mention>
+			<wikiName>Iberian Peninsula</wikiName>
+			<offset>160</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Prime Minister</mention>
+			<wikiName>Prime minister</wikiName>
+			<offset>330</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Antonio Guterres</mention>
+			<wikiName>António Guterres</wikiName>
+			<offset>348</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Lisbon</mention>
+			<wikiName>Lisbon</wikiName>
+			<offset>454</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>volume</mention>
+			<wikiName>Volume</wikiName>
+			<offset>538</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Jose Maria Aznar</mention>
+			<wikiName>José María Aznar</wikiName>
+			<offset>610</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Water supply</mention>
+			<wikiName>Water supply</wikiName>
+			<offset>735</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>hydroelectric</mention>
+			<wikiName>Hydroelectricity</wikiName>
+			<offset>933</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>European Union</mention>
+			<wikiName>European Union</wikiName>
+			<offset>1232</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>illegal immigration</mention>
+			<wikiName>Illegal immigration</wikiName>
+			<offset>1469</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>drug trafficking</mention>
+			<wikiName>Illegal drug trade</wikiName>
+			<offset>1496</offset>
+			<length>16</length>
+		</annotation>
+	</document>
+	<document docName="APW19981022_0710.htm">
+		<annotation>
+			<mention>Swiss</mention>
+			<wikiName>Switzerland</wikiName>
+			<offset>4</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>nuclear power</mention>
+			<wikiName>Nuclear power</wikiName>
+			<offset>159</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>hydroelectric plants</mention>
+			<wikiName>Hydroelectricity</wikiName>
+			<offset>212</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>environmental campaigners</mention>
+			<wikiName>Environmentalism</wikiName>
+			<offset>244</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>four nuclear power plants</mention>
+			<wikiName>Nuclear power in Switzerland</wikiName>
+			<offset>334</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>power industry</mention>
+			<wikiName>Electric power industry</wikiName>
+			<offset>426</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>nuclear waste</mention>
+			<wikiName>Radioactive waste</wikiName>
+			<offset>526</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>power stations</mention>
+			<wikiName>Power station</wikiName>
+			<offset>605</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>cabinet</mention>
+			<wikiName>Cabinet (government)</wikiName>
+			<offset>784</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Moritz Leuenberger</mention>
+			<wikiName>Moritz Leuenberger</wikiName>
+			<offset>907</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>electricity</mention>
+			<wikiName>Electricity</wikiName>
+			<offset>1102</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>infrastructure</mention>
+			<wikiName>Infrastructure</wikiName>
+			<offset>1205</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>liberalization</mention>
+			<wikiName>Liberalization</wikiName>
+			<offset>1256</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>tax breaks</mention>
+			<wikiName>Tax break</wikiName>
+			<offset>1454</offset>
+			<length>10</length>
+		</annotation>
+	</document>
+	<document docName="APW20000303_0067.htm">
+		<annotation>
+			<mention>Severe thunderstorms</mention>
+			<wikiName>Thunderstorm</wikiName>
+			<offset>27</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Gulf Coast</mention>
+			<wikiName>Gulf Coast of the United States</wikiName>
+			<offset>81</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Louisiana</mention>
+			<wikiName>Louisiana</wikiName>
+			<offset>101</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Georgia</mention>
+			<wikiName>Georgia (U.S. state)</wikiName>
+			<offset>117</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Tennessee</mention>
+			<wikiName>Tennessee</wikiName>
+			<offset>145</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Rain</mention>
+			<wikiName>Rain</wikiName>
+			<offset>159</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>the Carolinas</mention>
+			<wikiName>The Carolinas</wikiName>
+			<offset>183</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Lightning</mention>
+			<wikiName>Lightning</wikiName>
+			<offset>215</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>hail</mention>
+			<wikiName>Hail</wikiName>
+			<offset>235</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>wind</mention>
+			<wikiName>Wind</wikiName>
+			<offset>244</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Ohio Valley</mention>
+			<wikiName>Ohio River</wikiName>
+			<offset>345</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Oklahoma</mention>
+			<wikiName>Oklahoma</wikiName>
+			<offset>411</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Dallas-Fort Worth International Airport</mention>
+			<wikiName>Dallas/Fort Worth International Airport</wikiName>
+			<offset>498</offset>
+			<length>39</length>
+		</annotation>
+		<annotation>
+			<mention>Northeast</mention>
+			<wikiName>Northeastern United States</wikiName>
+			<offset>583</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Adirondack</mention>
+			<wikiName>Adirondack Mountains</wikiName>
+			<offset>649</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Green Mountains</mention>
+			<wikiName>Green Mountains</wikiName>
+			<offset>667</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Pennsylvania</mention>
+			<wikiName>Pennsylvania</wikiName>
+			<offset>728</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Maine</mention>
+			<wikiName>Maine</wikiName>
+			<offset>749</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>wind-chill</mention>
+			<wikiName>Wind chill</wikiName>
+			<offset>793</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>freezing</mention>
+			<wikiName>Freezing</wikiName>
+			<offset>827</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>the West</mention>
+			<wikiName>Western United States</wikiName>
+			<offset>885</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Rockies</mention>
+			<wikiName>Rocky Mountains</wikiName>
+			<offset>898</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Southeast</mention>
+			<wikiName>Southeastern United States</wikiName>
+			<offset>910</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Plains</mention>
+			<wikiName>Great Plains</wikiName>
+			<offset>938</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Califorainia</mention>
+			<wikiName>California</wikiName>
+			<offset>995</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Washington</mention>
+			<wikiName>Washington (state)</wikiName>
+			<offset>1035</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Oregon</mention>
+			<wikiName>Oregon</wikiName>
+			<offset>1053</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Midwest</mention>
+			<wikiName>Midwestern United States</wikiName>
+			<offset>1152</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Great Lakes</mention>
+			<wikiName>Great Lakes</wikiName>
+			<offset>1164</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Northwest</mention>
+			<wikiName>Pacific Northwest</wikiName>
+			<offset>1214</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>mid-Atlantic states</mention>
+			<wikiName>Mid-Atlantic states</wikiName>
+			<offset>1228</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>temperature</mention>
+			<wikiName>Temperature</wikiName>
+			<offset>1365</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Cotulla</mention>
+			<wikiName>Cotulla, Texas</wikiName>
+			<offset>1477</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Alice</mention>
+			<wikiName>Alice, Texas</wikiName>
+			<offset>1492</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Grand Marais, Minn</mention>
+			<wikiName>Grand Marais, Minnesota</wikiName>
+			<offset>1525</offset>
+			<length>18</length>
+		</annotation>
+	</document>
+	<document docName="APW19980903_1073.htm">
+		<annotation>
+			<mention>stolen art</mention>
+			<wikiName>Art theft</wikiName>
+			<offset>60</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Austria</mention>
+			<wikiName>Austria</wikiName>
+			<offset>76</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Secretary of State</mention>
+			<wikiName>Secretary of State</wikiName>
+			<offset>104</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Madeleine Albright</mention>
+			<wikiName>Madeleine Albright</wikiName>
+			<offset>126</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Holocaust</mention>
+			<wikiName>The Holocaust</wikiName>
+			<offset>248</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Nazis</mention>
+			<wikiName>Nazism</wikiName>
+			<offset>276</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Thomas Klestil</mention>
+			<wikiName>Thomas Klestil</wikiName>
+			<offset>323</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Moscow</mention>
+			<wikiName>Moscow</wikiName>
+			<offset>401</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>United States</mention>
+			<wikiName>United States</wikiName>
+			<offset>607</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Viktor Klima</mention>
+			<wikiName>Viktor Klima</wikiName>
+			<offset>664</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Wolfgang Schuessel</mention>
+			<wikiName>Wolfgang Schüssel</wikiName>
+			<offset>701</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>World Jewish Congress</mention>
+			<wikiName>World Jewish Congress</wikiName>
+			<offset>898</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Association of Art Museum Directors</mention>
+			<wikiName>Association of Art Museum Directors</wikiName>
+			<offset>1030</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>Adolf Hitler</mention>
+			<wikiName>Adolf Hitler</wikiName>
+			<offset>1284</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Germany</mention>
+			<wikiName>Germany</wikiName>
+			<offset>1302</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="APW19981001_0866.htm">
+		<annotation>
+			<mention>Hungarian</mention>
+			<wikiName>Hungary</wikiName>
+			<offset>76</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Hungarian Jewish</mention>
+			<wikiName>History of the Jews in Hungary</wikiName>
+			<offset>122</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>communist</mention>
+			<wikiName>Communism</wikiName>
+			<offset>214</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>MTI</mention>
+			<wikiName>Magyar Távirati Iroda</wikiName>
+			<offset>268</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>nationalization</mention>
+			<wikiName>Nationalization</wikiName>
+			<offset>398</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>forints</mention>
+			<wikiName>Hungarian forint</wikiName>
+			<offset>568</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>social welfare</mention>
+			<wikiName>Welfare</wikiName>
+			<offset>824</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>the Holocaust</mention>
+			<wikiName>The Holocaust</wikiName>
+			<offset>1024</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Vatican</mention>
+			<wikiName>Holy See</wikiName>
+			<offset>1302</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="APW19981113_0729.htm">
+		<annotation>
+			<mention>Palestinian</mention>
+			<wikiName>Palestinian people</wikiName>
+			<offset>79</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>airport</mention>
+			<wikiName>Airport</wikiName>
+			<offset>94</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>independence</mention>
+			<wikiName>Independence</wikiName>
+			<offset>137</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Civil Aviation</mention>
+			<wikiName>Civil aviation</wikiName>
+			<offset>200</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Israeli</mention>
+			<wikiName>Israelis</wikiName>
+			<offset>271</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Yasser Arafat International Airport</mention>
+			<wikiName>Yasser Arafat International Airport</wikiName>
+			<offset>296</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>Gaza Strip</mention>
+			<wikiName>Gaza Strip</wikiName>
+			<offset>351</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Israeli-Palestinian peace agreement</mention>
+			<wikiName>Peace process in the Israeli-Palestinian conflict</wikiName>
+			<offset>409</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>Cabinet</mention>
+			<wikiName>Cabinet of Israel</wikiName>
+			<offset>502</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>ratification</mention>
+			<wikiName>Ratification</wikiName>
+			<offset>513</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>Benjamin Netanyahu</mention>
+			<wikiName>Benjamin Netanyahu</wikiName>
+			<offset>575</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Civil Aviation Authority</mention>
+			<wikiName>National aviation authority</wikiName>
+			<offset>794</offset>
+			<length>24</length>
+		</annotation>
+		<annotation>
+			<mention>Israelis</mention>
+			<wikiName>Israelis</wikiName>
+			<offset>873</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>passport</mention>
+			<wikiName>Passport</wikiName>
+			<offset>1105</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>customs</mention>
+			<wikiName>Customs</wikiName>
+			<offset>1135</offset>
+			<length>7</length>
+		</annotation>
+	</document>
+	<document docName="APW19980709_0263.htm">
+		<annotation>
+			<mention>monopoly</mention>
+			<wikiName>Monopoly</wikiName>
+			<offset>59</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Prime Minister</mention>
+			<wikiName>Prime minister</wikiName>
+			<offset>73</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>Phan Van Khai</mention>
+			<wikiName>Phan Văn Khải</wikiName>
+			<offset>91</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>electricity</mention>
+			<wikiName>Electricity</wikiName>
+			<offset>128</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>bureaucracy</mention>
+			<wikiName>Bureaucracy</wikiName>
+			<offset>193</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Vietnam</mention>
+			<wikiName>Vietnam</wikiName>
+			<offset>348</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>self-criticisms</mention>
+			<wikiName>Self-criticism</wikiName>
+			<offset>536</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>tender</mention>
+			<!--wikiName>Tender</wikiName-->
+			<!-- corrected PL for 2017-09 Wikipedia -->
+			<wikiName>Request for tender</wikiName>
+			<offset>625</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>project accounting</mention>
+			<wikiName>Project accounting</wikiName>
+			<offset>647</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Le Duc Anh</mention>
+			<wikiName>Le Duc Anh</wikiName>
+			<offset>784</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>rotating power cuts</mention>
+			<wikiName>Power outage</wikiName>
+			<offset>1234</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>drought</mention>
+			<wikiName>Drought</wikiName>
+			<offset>1288</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>reservoir</mention>
+			<wikiName>Reservoir</wikiName>
+			<offset>1359</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>hydroelectric</mention>
+			<wikiName>Hydroelectricity</wikiName>
+			<offset>1387</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19990519_0141.htm">
+		<annotation>
+			<mention>Astronomers</mention>
+			<wikiName>Astronomer</wikiName>
+			<offset>4</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>cyclone</mention>
+			<wikiName>Cyclone</wikiName>
+			<offset>61</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Texas</mention>
+			<wikiName>Texas</wikiName>
+			<offset>95</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Mars</mention>
+			<wikiName>Mars</wikiName>
+			<offset>157</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>space telescope</mention>
+			<wikiName>Space observatory</wikiName>
+			<offset>190</offset>
+			<length>15</length>
+		</annotation>
+		<annotation>
+			<mention>Space Telescope Science Institute</mention>
+			<wikiName>Space Telescope Science Institute</wikiName>
+			<offset>244</offset>
+			<length>33</length>
+		</annotation>
+		<annotation>
+			<mention>Hubble Space Telescope</mention>
+			<wikiName>Hubble Space Telescope</wikiName>
+			<offset>306</offset>
+			<length>22</length>
+		</annotation>
+		<annotation>
+			<mention>Martian</mention>
+			<wikiName>Martian</wikiName>
+			<offset>363</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>ice</mention>
+			<wikiName>Ice</wikiName>
+			<offset>404</offset>
+			<length>3</length>
+		</annotation>
+		<annotation>
+			<mention>hurricanes</mention>
+			<wikiName>Tropical cyclone</wikiName>
+			<offset>600</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Earth</mention>
+			<wikiName>Earth</wikiName>
+			<offset>617</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>evaporated</mention>
+			<wikiName>Evaporation</wikiName>
+			<offset>749</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>carbon dioxide</mention>
+			<wikiName>Carbon dioxide</wikiName>
+			<offset>767</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>ice sheet</mention>
+			<wikiName>Ice sheet</wikiName>
+			<offset>785</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Martian north pole</mention>
+			<wikiName>Planum Boreum</wikiName>
+			<offset>812</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Viking Orbiter</mention>
+			<wikiName>Viking program</wikiName>
+			<offset>954</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>wide field planetary camera</mention>
+			<wikiName>Wide Field and Planetary Camera</wikiName>
+			<offset>1009</offset>
+			<length>27</length>
+		</annotation>
+		<annotation>
+			<mention>phenomenon</mention>
+			<wikiName>Phenomenon</wikiName>
+			<offset>1441</offset>
+			<length>10</length>
+		</annotation>
+	</document>
+	<document docName="APW19980625_1136.htm">
+		<annotation>
+			<mention>Air Afrique</mention>
+			<wikiName>Air Afrique</wikiName>
+			<offset>60</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Boeing</mention>
+			<wikiName>Boeing</wikiName>
+			<offset>75</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Nigeria's largest international airport</mention>
+			<wikiName>Murtala Mohammed International Airport</wikiName>
+			<offset>191</offset>
+			<length>39</length>
+		</annotation>
+		<annotation>
+			<mention>Lagos</mention>
+			<wikiName>Lagos</wikiName>
+			<offset>239</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>Guardian newspaper</mention>
+			<wikiName>The Guardian (Nigeria)</wikiName>
+			<offset>248</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>distress call</mention>
+			<wikiName>Distress signal</wikiName>
+			<offset>707</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Security</mention>
+			<wikiName>Airport security</wikiName>
+			<offset>767</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>Cameroon Airlines</mention>
+			<wikiName>Cameroon Airlines</wikiName>
+			<offset>1132</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>tarmac</mention>
+			<wikiName>Tarmac</wikiName>
+			<offset>1230</offset>
+			<length>6</length>
+		</annotation>
+		<annotation>
+			<mention>Nigeria</mention>
+			<wikiName>Nigeria</wikiName>
+			<offset>1367</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>violent crime</mention>
+			<wikiName>Violent crime</wikiName>
+			<offset>1442</offset>
+			<length>13</length>
+		</annotation>
+	</document>
+	<document docName="APW19981026_0096.htm">
+		<annotation>
+			<mention>South Africa</mention>
+			<wikiName>South Africa</wikiName>
+			<offset>12</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>apartheid</mention>
+			<wikiName>Apartheid in South Africa</wikiName>
+			<offset>74</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>African National Congress</mention>
+			<wikiName>African National Congress</wikiName>
+			<offset>114</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>human rights</mention>
+			<wikiName>Human rights</wikiName>
+			<offset>146</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>torture</mention>
+			<wikiName>Torture</wikiName>
+			<offset>184</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>bomb</mention>
+			<wikiName>Bomb</wikiName>
+			<offset>199</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>broadcaster</mention>
+			<wikiName>Broadcasting</wikiName>
+			<offset>226</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>white rule</mention>
+			<wikiName>Dominant minority</wikiName>
+			<offset>297</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Truth and Reconciliation Commission</mention>
+			<wikiName>Truth and Reconciliation Commission (South Africa)</wikiName>
+			<offset>422</offset>
+			<length>35</length>
+		</annotation>
+		<annotation>
+			<mention>South African Broadcasting Corp.</mention>
+			<wikiName>South African Broadcasting Corporation</wikiName>
+			<offset>669</offset>
+			<length>32</length>
+		</annotation>
+		<annotation>
+			<mention>commissioners</mention>
+			<wikiName>Commissioner</wikiName>
+			<offset>1244</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>land mines</mention>
+			<wikiName>Land mine</wikiName>
+			<offset>1416</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Angola</mention>
+			<wikiName>Angola</wikiName>
+			<offset>1479</offset>
+			<length>6</length>
+		</annotation>
+	</document>
+	<document docName="APW19981109_1089.htm">
+		<annotation>
+			<mention>West Indies</mention>
+			<wikiName>Caribbean</wikiName>
+			<offset>91</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>South Africa</mention>
+			<wikiName>South Africa</wikiName>
+			<offset>151</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>cricket</mention>
+			<wikiName>Cricket</wikiName>
+			<offset>167</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>batsman</mention>
+			<wikiName>Batting (cricket)</wikiName>
+			<offset>281</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Brian Lara</mention>
+			<wikiName>Brian Lara</wikiName>
+			<offset>292</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>Carl Hooper</mention>
+			<wikiName>Carl Hooper</wikiName>
+			<offset>321</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Jimmy Adams</mention>
+			<wikiName>Jimmy Adams</wikiName>
+			<offset>545</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>West Indies Cricket Board</mention>
+			<wikiName>West Indies Cricket Board</wikiName>
+			<offset>678</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>Ali Bacher</mention>
+			<wikiName>Ali Bacher</wikiName>
+			<offset>711</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>South African cricket</mention>
+			<wikiName>South Africa national cricket team</wikiName>
+			<offset>734</offset>
+			<length>21</length>
+		</annotation>
+		<annotation>
+			<mention>Clive Lloyd</mention>
+			<wikiName>Clive Lloyd</wikiName>
+			<offset>872</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Joel Garner</mention>
+			<wikiName>Joel Garner</wikiName>
+			<offset>903</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>sponsorship</mention>
+			<wikiName>Sponsor (commercial)</wikiName>
+			<offset>1044</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>wicketkeeper</mention>
+			<wikiName>Wicket-keeper</wikiName>
+			<offset>1096</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>David Richardson</mention>
+			<wikiName>David Richardson</wikiName>
+			<offset>1112</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>sports marketing</mention>
+			<wikiName>Sports marketing</wikiName>
+			<offset>1144</offset>
+			<length>16</length>
+		</annotation>
+		<annotation>
+			<mention>Johannesburg</mention>
+			<wikiName>Johannesburg</wikiName>
+			<offset>1172</offset>
+			<length>12</length>
+		</annotation>
+	</document>
+	<document docName="APW19980816_0994.htm">
+		<annotation>
+			<mention>New Zealand</mention>
+			<wikiName>New Zealand</wikiName>
+			<offset>23</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Auckland Art Gallery</mention>
+			<wikiName>Auckland Art Gallery</wikiName>
+			<offset>130</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>Jacques-Joseph (James) Tissot</mention>
+			<wikiName>James Tissot</wikiName>
+			<offset>360</offset>
+			<length>29</length>
+		</annotation>
+		<annotation>
+			<mention>shotgun</mention>
+			<wikiName>Shotgun</wikiName>
+			<offset>595</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Auckland</mention>
+			<wikiName>Auckland</wikiName>
+			<offset>633</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>crowbar</mention>
+			<wikiName>Crowbar (tool)</wikiName>
+			<offset>799</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>firearm</mention>
+			<wikiName>Firearm</wikiName>
+			<offset>893</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Albert Park</mention>
+			<wikiName>Albert Park, Auckland</wikiName>
+			<offset>1354</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+	<document docName="APW19980615_0417.htm">
+		<annotation>
+			<mention>libel</mention>
+			<wikiName>Defamation</wikiName>
+			<offset>35</offset>
+			<length>5</length>
+		</annotation>
+		<annotation>
+			<mention>damages</mention>
+			<wikiName>Damages</wikiName>
+			<offset>44</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Brooke Shields</mention>
+			<wikiName>Brooke Shields</wikiName>
+			<offset>85</offset>
+			<length>14</length>
+		</annotation>
+		<annotation>
+			<mention>drug</mention>
+			<wikiName>Drug</wikiName>
+			<offset>278</offset>
+			<length>4</length>
+		</annotation>
+		<annotation>
+			<mention>Cannes Film Festival</mention>
+			<wikiName>Cannes Film Festival</wikiName>
+			<offset>311</offset>
+			<length>20</length>
+		</annotation>
+		<annotation>
+			<mention>The Mail on Sunday</mention>
+			<wikiName>The Mail on Sunday</wikiName>
+			<offset>339</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>Nice Airport</mention>
+			<wikiName>Nice Côte d'Azur Airport</wikiName>
+			<offset>515</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>French police</mention>
+			<wikiName>National Police (France)</wikiName>
+			<offset>545</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Associated Newspapers Ltd</mention>
+			<wikiName>Associated Newspapers</wikiName>
+			<offset>615</offset>
+			<length>25</length>
+		</annotation>
+		<annotation>
+			<mention>retraction</mention>
+			<wikiName>Retraction</wikiName>
+			<offset>782</offset>
+			<length>10</length>
+		</annotation>
+		<annotation>
+			<mention>substance abuse</mention>
+			<wikiName>Substance abuse</wikiName>
+			<offset>1084</offset>
+			<length>15</length>
+		</annotation>
+	</document>
+	<document docName="APW19980603_0791.htm">
+		<annotation>
+			<mention>brain tumours</mention>
+			<wikiName>Brain tumor</wikiName>
+			<offset>87</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>breast cancer</mention>
+			<wikiName>Breast cancer</wikiName>
+			<offset>118</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>haemorrhage</mention>
+			<wikiName>Bleeding</wikiName>
+			<offset>145</offset>
+			<length>11</length>
+		</annotation>
+		<annotation>
+			<mention>Bangkok</mention>
+			<wikiName>Bangkok</wikiName>
+			<offset>251</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>Radio Surgery</mention>
+			<wikiName>Radiosurgery</wikiName>
+			<offset>297</offset>
+			<length>13</length>
+		</annotation>
+		<annotation>
+			<mention>Thailand</mention>
+			<wikiName>Thailand</wikiName>
+			<offset>327</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>cancerous</mention>
+			<wikiName>Cancer</wikiName>
+			<offset>506</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>tissues</mention>
+			<wikiName>Tissue (biology)</wikiName>
+			<offset>529</offset>
+			<length>7</length>
+		</annotation>
+		<annotation>
+			<mention>three dimensional</mention>
+			<wikiName>Three-dimensional space</wikiName>
+			<offset>555</offset>
+			<length>17</length>
+		</annotation>
+		<annotation>
+			<mention>Stereotaxic Surgery</mention>
+			<wikiName>Stereotactic surgery</wikiName>
+			<offset>592</offset>
+			<length>19</length>
+		</annotation>
+		<annotation>
+			<mention>radiation</mention>
+			<wikiName>Radiation</wikiName>
+			<offset>655</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Linear Accelerator</mention>
+			<wikiName>Linear particle accelerator</wikiName>
+			<offset>691</offset>
+			<length>18</length>
+		</annotation>
+		<annotation>
+			<mention>conscious</mention>
+			<wikiName>Consciousness</wikiName>
+			<offset>972</offset>
+			<length>9</length>
+		</annotation>
+		<annotation>
+			<mention>Malformation</mention>
+			<wikiName>Congenital disorder</wikiName>
+			<offset>1096</offset>
+			<length>12</length>
+		</annotation>
+		<annotation>
+			<mention>clotting</mention>
+			<wikiName>Coagulation</wikiName>
+			<offset>1117</offset>
+			<length>8</length>
+		</annotation>
+		<annotation>
+			<mention>capillaries</mention>
+			<wikiName>Capillary</wikiName>
+			<offset>1147</offset>
+			<length>11</length>
+		</annotation>
+	</document>
+</AQUAINT.entityAnnotation>

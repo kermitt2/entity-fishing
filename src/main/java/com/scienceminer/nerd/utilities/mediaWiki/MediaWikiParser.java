@@ -69,6 +69,16 @@ public class MediaWikiParser {
         configs.put("de", config);
         engine = new WtEngineImpl(config);        
         engines.put("de", engine);
+
+        config = DefaultConfigItWp.generate();
+        configs.put("it", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("it", engine);
+
+        config = DefaultConfigEsWp.generate();
+        configs.put("es", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("es", engine);
     }
 
     /**
@@ -83,7 +93,7 @@ public class MediaWikiParser {
 
         try {
             // Retrieve a page 
-            // PL: no clue what is this??
+            // PL: no clue what is this page title thing ?? not even documented
             PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
             PageId pageId = new PageId(pageTitle, -1);
 
@@ -92,7 +102,7 @@ public class MediaWikiParser {
             WikiTextConverter converter = new WikiTextConverter(configs.get(lang));
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text", e);
+            LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
 
         return trim(result);
@@ -121,7 +131,37 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text", e);
+            LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
+        }
+
+        return trim(result);
+    }   
+
+    /**
+     * @return the content of the wiki text fragment with all markup removed except links 
+     * to internal wikipedia pages: external links to the internet are removed
+     */ 
+    public String toTextWithInternalLinksAndCategoriesOnly(String wikitext, String lang) {
+        String result = "";
+
+        // Instantiate a compiler for wiki pages
+        //WtEngineImpl engine = new WtEngineImpl(config);        
+        WtEngineImpl engine = engines.get(lang);
+
+        try {
+            // Retrieve a page 
+            // PL: no clue what is this??
+            PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
+            PageId pageId = new PageId(pageTitle, -1);
+
+            // Compile the retrieved page
+            EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
+            WikiTextConverter converter = new WikiTextConverter(configs.get(lang));
+            converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
+            converter.addToKeep(WikiTextConverter.CATEGORY_LINKS);
+            result = (String)converter.go(cp.getPage());
+        } catch(Exception e) {
+            LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
 
         return trim(result);
@@ -151,7 +191,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS_ARTICLES);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text", e);
+            LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
 
         return trim(result);
@@ -164,7 +204,6 @@ public class MediaWikiParser {
      */
     public String toTextWithInternalLinksEmphasisOnly(String wikitext, String lang) {
         String result = "";
-
         // Instantiate a compiler for wiki pages
         //WtEngineImpl engine = new WtEngineImpl(config);
         WtEngineImpl engine = engines.get(lang);    
@@ -183,7 +222,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.ITALICS);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text", e);
+            LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
 
         return trim(result);
@@ -231,7 +270,7 @@ public class MediaWikiParser {
         wikitext = wikitext.replaceAll("\\s,", ",");
 
         return trim(wikitext);
-    }    
+    }
 }
 
 

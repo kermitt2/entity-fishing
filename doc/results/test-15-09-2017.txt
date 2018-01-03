@@ -1,0 +1,213 @@
+client: https://github.com/istex/istex-nerd
+
+------
+TEXT
+------
+
+* local
+----------
+(Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD)
+
+800 pubmed abstracts - 172787 tokens - 1 client
+
+real	2m6.023s
+user	0m1.768s
+sys	0m0.496s
+
+126 s -> 1371 tokens/s
+
+
+4000 pubmed abstracts - 863935 tokens - 5 concurrent clients
+
+real	3m58.419s
+user	0m9.936s
+sys	0m2.656s
+
+238 s -> 3630 tokens/s
+
+
+4800 pubmed abstracts - 1036722 tokens - 6 concurrent clients
+
+real	3m36.645s
+user	0m12.544s
+sys	0m3.380s
+
+216s -> 4800 tokens/s
+
+8000 pubmed abstracts - 1727870 tokens - 10 concurrent clients
+
+real	7m40.297s
+user	0m21.340s
+sys	0m5.532s
+
+460 s -> 3756 tokens/s
+
+
+* nerd.science-miner.com
+------------------------
+(8 cores - 24TB SSD)
+
+800 pubmed abstracts - 172787 tokens - 1 client
+
+real    4m56.314s
+user    0m3.860s
+sys     0m1.390s
+
+296s -> 584 tokens/s
+
+4000 pubmed abstracts - 863935 tokens - 5 concurrent clients
+
+real    11m8.341s
+user    0m19.033s
+sys     0m7.597s
+
+668s -> 1293 tokens/s
+
+8000 pubmed abstracts - 1727870 tokens - 10 concurrent clients
+
+real    24m18.171s
+user    0m39.330s
+sys     0m13.850s
+
+1458s -> 1185 tokens/s
+
+* huma-num
+----------------------
+() 
+
+800 pubmed abstracts - 172787 tokens - 1 client
+
+real    4m24.365s
+user    0m4.127s
+sys     0m1.807s
+
+264s -> 654 tokens/s
+
+4000 pubmed abstracts - 863935 tokens - 5 concurrent clients
+
+real    5m25.793s
+user    0m21.187s
+sys     0m8.333s
+
+325s -> 2658 tokens/s
+
+8000 pubmed abstracts - 1727870 tokens - 10 concurrent clients
+
+real    12m50.277s
+user    0m41.303s
+sys     0m16.410s
+
+770s -> 2244 tokens/s
+
+------
+PDF
+------
+ 
+local
+----------
+(Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD)
+
+* 136 PDF - 1 client, no concurrency
+3443 pages, find /home/lopez/tmp/in2/ -name \*.pdf -exec pdfinfo {} \; | grep Pages | sed -e "s/Pages:\s*//g" | awk '{ sum += $1;} END { print sum; }'
+1422943 tokens, find /home/lopez/tmp/in2/ -name \*.pdf -exec pdftotext {} - \;  | wc -w
+
+real	21m24.137s
+user	0m1.708s
+sys	0m0.456s
+
+1284 s -> 0.11 PDF/s -> 9.44 s/PDF -> 2.6 pages/s -> 1108.2 tokens/s
+
+* 680 PDF - 16715 pages - 5 concurrent clients
+7114715 tokens
+
+total
+real	31m0.138s
+user	0m12.428s
+sys	0m2.376s
+
+1874 s -> 0.36 PDF/s -> 2.76 s/PDF -> 8.92 pages/s -> 3796 tokens/s
+
+
+* 816 PDF - 20658 pages - 6 concurrent clients
+8537658 tokens
+
+total
+real	34m54.695s
+user	0m16.116s
+sys	0m3.000s
+
+2094 s -> 0.39 PDF/s -> 2.56s/PDF -> 9.86 pages/s -> 4077 tokens/s
+
+
+* 1360 PDF - 34430 pages - 10 concurrent clients
+~ tokens words
+
+total
+real	70m14.137s
+user	0m27.024s
+sys	0m4.988s 
+
+4214 s -> 0.32 PDF/s -> 3.09 s/PDF -> 8.17 pages/s -> 3376.7 tokens/s
+
+
+nerd.science-miner.com
+----------------------
+(8 cores - 24TB SSD)
+
+* 136 PDF, 1 client, no concurrency
+3443 pages, 1422943 tokens
+
+real    41m12.309s
+user    0m4.170s
+sys     0m1.283s
+
+2472s -> 0.06 PDF/s -> 18.18 s/PDF -> 1.39 pages/s -> 575.6 tokens/s
+
+* 680 PDF, 5 concurrent clients
+16715 pages, 7114715 tokens
+
+real    51m19.424s
+user    0m19.717s
+sys     0m5.940s
+
+3079s -> 0.22 PDF/s -> 4.53 s/PDF -> 5.43 pages/s -> 2310.7 tokens/s
+
+* 1360 PDF, 10 concurrent clients
+34430 pages, 14229430 tokens
+
+real    256m6.479s
+user    0m19.520s
+sys     0m7.187s
+
+15366s -> 0.09 PDF/s -> 11.30 s/PDF -> 2.24 pages/s -> 926 tokens/s
+
+* huma-num
+----------------------
+()
+
+* 136 PDF, 1 client, no concurrency
+3443 pages, 1422943 tokens
+
+real    34m55.251s
+user    0m4.527s
+sys     0m1.430s
+
+2095s -> 0.06 PDF/s -> 15.4 s/PDF -> 1.64 pages/s -> 679.2 tokens/s
+
+* 680 PDF, 5 concurrent clients
+16715 pages, 7114715 tokens
+
+real    52m34.949s
+user    0m23.660s
+sys     0m6.717s
+
+3154s -> 0.22 PDF/s -> 4.64 s/PDF -> 5.30 pages/s -> 2255.8 tokens/s
+
+* 1360 PDF, 10 concurrent clients
+34430 pages, 14229430 tokens
+
+real    124m22.441s
+user    0m45.197s
+sys     0m12.500s
+
+7462s -> 0.18 PDF/s -> 5.49 s/PDF -> 4.61 pages/s -> 1906.9 tokens/s

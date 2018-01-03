@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +38,10 @@ public class UpperKnowledgeBase {
 
 	private long conceptCount = -1;
 
+	// this is the list of supported languages 
+  	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES);
+ 
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
 			getNewInstance();
@@ -63,33 +69,46 @@ public class UpperKnowledgeBase {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
             LOGGER.info("\nInit Upper Knowledge base layer");
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
+            NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
 			this.env = new KBUpperEnvironment(conf);
 			this.env.buildEnvironment(conf, false);
 
-			wikipedias = new HashMap<String, LowerKnowledgeBase>(); 
-            wikipediaDomainMaps = new HashMap<String,WikipediaDomainMap>();
+			wikipedias = new HashMap<>();
+            wikipediaDomainMaps = new HashMap<>();
 
             LOGGER.info("Init English lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
+            conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
 			LowerKnowledgeBase wikipedia_en = new LowerKnowledgeBase(conf);
 
 			wikipedias.put(Language.EN, wikipedia_en);
             WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
             wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
+            wikipediaDomainMaps_en.createAllMappings();
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
 			LOGGER.info("Init German lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-de.yaml"), NerdConfig.class);;
+            conf = mapper.readValue(new File("data/config/wikipedia-de.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_de = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
             LOGGER.info("Init French lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-fr.yaml"), NerdConfig.class);;
+            conf = mapper.readValue(new File("data/config/wikipedia-fr.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_fr = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Spanish lower Knowledge base layer");
+            conf = mapper.readValue(new File("data/config/wikipedia-es.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_es = new LowerKnowledgeBase(conf);
+			wikipedias.put(Language.ES, wikipedia_es);
+            wikipediaDomainMaps.put(Language.ES, wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Italian lower Knowledge base layer");
+            conf = mapper.readValue(new File("data/config/wikipedia-it.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_it = new LowerKnowledgeBase(conf);
+			wikipedias.put(Language.IT, wikipedia_it);
+            wikipediaDomainMaps.put(Language.IT, wikipediaDomainMaps_en);
 
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
@@ -148,15 +167,76 @@ public class UpperKnowledgeBase {
 	}
 
 	/**
-	 * Return the list of relations associated to a given concept id
+	 * Return the list of statements associated to a given concept id as head
 	 */
 	public List<Statement> getStatements(String wikidataId) {
 		//System.out.println("get statements for: " + wikidataId);
-		List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
+		//List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
 		//if (statements != null)
 		//	System.out.println(statements.size() + " statements: ");
 
 		return env.getDbStatements().retrieve(wikidataId);
+	}
+
+	/**
+	 * Return the list of statements associated to a given concept id as tail
+	 */
+	public List<Statement> getReverseStatements(String wikidataId) {
+		//System.out.println("get reverse statements for: " + wikidataId);
+		//List<Statement> statements = env.getDbReverseStatements().retrieve(wikidataId);
+		//if (statements != null)
+		//	System.out.println(statements.size() + " statements: ");
+		return env.getDbReverseStatements().retrieve(wikidataId);
+	}
+
+	/**
+	 * Returns an iterator for all pages in the database, in order of ascending ids.
+	 * 
+	 */
+	public KBIterator getEntityIterator() {
+		return new KBIterator(env.getDbConcepts());
+	}
+
+	/**
+	 * Load on demand the reverse statement database (get statements by the tail entities), 
+	 * which is not loaded by default.
+	 */
+	public void loadReverseStatementDatabase(boolean overwrite) {
+		env.loadReverseStatementDatabase(overwrite);
+	}
+
+	public String getEntityIdPerDoi(String doi) {
+		return env.getDbBiblio().retrieve(doi.toLowerCase());
+	}
+
+	/**
+	 * Return the list of immediate parent taxons (P171) for a given taxon, null for empty list and non-taxon
+	 */
+	public List<String> getParentTaxons(String wikidataId) {
+		return env.getDbTaxonParent().retrieve(wikidataId);
+	}
+
+	/**
+	 * Return the full list of parent taxons (P171) for a given taxon along the taxon hierarchy, null for empty list and non-taxon
+	 */
+	public List<String> getFullParentTaxons(String wikidataId) {
+		List<String> taxons = env.getDbTaxonParent().retrieve(wikidataId);
+		if (CollectionUtils.isEmpty(taxons)) {
+			return null;
+		}
+		List<String> result = new ArrayList<String>();
+		for(String taxonId : taxons) {
+			if (!result.contains(taxonId))
+				result.add(taxonId);
+			List<String> parents = getFullParentTaxons(taxonId);
+			if (!CollectionUtils.isEmpty(parents)) {
+				for(String parentId : parents) {
+					if (!result.contains(parentId))
+						result.add(parentId);
+				}
+			}
+		}
+		return result;
 	}
 
 	public void close() {

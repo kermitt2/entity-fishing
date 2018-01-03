@@ -1,0 +1,31 @@
+Making Search Social
+
+A new engine can turn a difficult search into a communal quest.
+
+Looking for an apartment online, day after day, can get tedious. Finding the right sofa at the right price can also be time consuming. A new search engine, called Yotify, is designed to make these kinds of persistent quests more tolerable, and hopefully more successful.
+
+Much like Google Alerts and Yahoo Alerts, a Yotify search does not start and end in an instant. Instead, the search runs at regular intervals--either hourly or daily, depending on the user's preference--with results sent back to the user via e-mail.
+
+But Yotify offers much more than the search giants' current alert tools, argues Ron Bouganim, CEO and cofounder of Branchnext, the San Francisco startup behind Yotify. Those alert tools, Bouganim says, are merely an afterthought for these huge companies, and they do not take into account important Web 2.0 developments, such as social networking.
+
+"We want to create a richer experience," Bouganim says.
+
+When users sign up for an account, they are given a personal profile page that lists, stores, and displays what they've searched for and where. That information can be made public as well, so that friends can share the results and help refine the search. This could be particularly useful for group projects such as apartment hunting with roommates, for example.
+
+Meanwhile, Yotify is making it a point to closely integrate with the major social-networking sites, most notably Facebook and LinkedIn. "If people want to search through Facebook using our technology, we want to let them do it," claims Bouganim.
+
+Another distinguishing characteristic of Yotify versus Google Alerts or Yahoo Alerts is its focus on shopping. Whereas Google Alerts is primarily concerned with retrieving news and other hard information, Yotify is setting up as more of a sales tool for its partner sites, which include general retailers such as Shopping.com as well as a host of niche players.
+
+In this respect, Yotify does go above and beyond what Google Alerts currently provides. Say a user wants to buy a black futon, for example. The important aspect of the search is not that the user obtain the futon immediately, but that it's a certain price. Yotify will continually monitor its partner sites, then notify the user when a black futon is available at that particular price.
+
+The main problem with Yotify is that, as of now, it only scans a small portion of the Web: users can only search among Yotify's partner sites. While the search engine has partnered with many key websites, such as Craigslist, the New York Times, and eBay, it certainly does not have the breadth of a search giant such as Google or Yahoo. 
+
+The technology involved is quite different than the large-scale indexing done by a typical search engine. Yotify asks partner sites to integrate its software into their systems. "We don't 'scrape' information from other sites," explains Bouganim. "We help other sites distribute their information in a way that fully complies with the goals of the partner site."
+
+From the user perspective, however, all that matters is the effectiveness of the search. And a user who has no idea where to find what he is looking for won't want to follow the Yotify format and select specific blogs or news sites for the search.
+
+Bouganim claims that this "deep but narrow" issue will be resolved in future releases--and sooner rather than later. Indeed, it's still early days for the search engine; a test version of the tool was just launched on September 24.
+
+Online media analyst Mike Boland of The Kelsey Group notes that getting users to switch from Google to a different engine could prove difficult, no matter what innovations Yotify attempts. "It is such an uphill battle to get users to break out of deep-rooted online habits," Boland says. "Companies that have spent too much time drinking the Kool-Aid seem to forget that, because they think their solution is so great that it will overcome this issue. But it usually doesn't."
+
+Although unwilling to get into details about the business model, Bouganim is clearly planning to exploit the social-networking and e-commerce aspects of Yotify. "Understanding people's wants and needs, as well as those of their friends, obviously has a tremendous amount of value." 

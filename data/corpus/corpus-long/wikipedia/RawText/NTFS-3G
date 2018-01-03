@@ -1,0 +1,9 @@
+NTFS-3G is an open source cross-platform implementation of the Microsoft Windows NTFS file system with read-write support. NTFS-3G often uses the FUSE , so it can run unmodified on many different operating systems. It is runnable on Linux, FreeBSD, NetBSD, OpenSolaris, BeOS, QNX, , Nucleus, VxWorks, Haiku, MorphOS,  and . It is licensed under either the GNU General Public License or a proprietary license. It is a partial fork of ntfsprogs and is under active maintenance and development.
+
+NTFS-3G was introduced by one of the senior Linux NTFS developers, Szabolcs Szakacsits (), in July 2006. The first stable version was released on 2007-02-21 as version 1.0. The developers of NTFS-3G later formed a company, Tuxera Inc., to further develop the code. NTFS-3G is now the free "community edition", while Tuxera NTFS is the proprietary version.
+
+NTFS-3G supports all operations for writing files: files of any size can be created, modified, renamed, moved, or deleted on NTFS partitions.  is supported, but there is no support for encryption. Support to modify access control lists and s is available. NTFS partitions are mounted using the Filesystem in Userspace (FUSE) interface. According to its man page, NTFS-3G supports  and .
+
+NTFS-3G supports partial NTFS journaling, so if an unexpected computer failure leaves the file system in an inconsistent state, the volume can be repaired. As of 2009, a volume having an unclean journal file is recovered and mounted by default. The ‘norecover’ mount option can be used to disable this behavior.
+
+Benchmarks show that the driver's performance via FUSE

@@ -1,0 +1,25 @@
+A new study from the Research Institute of the McGill University Health Centre (MUHC) suggests that some people may be naturally resistant to infection with HIV, the virus that causes AIDS.
+
+Dr. Nicole Bernard, who led the study, says that the simultaneous expression of certain versions of two specific genes called KIR3DL1 and HLA-B*57 is thought to be at the root of some cases of this innate resistance to HIV infection.
+
+She says that depending on which versions of the two genes a patient has, he/she will resist HIV infection or develop AIDS at a slower rate.
+
+The results published in the journal AIDS were obtained by comparing the genetic profiles of people undergoing primary HIV infection to those repeatedly exposed to HIV but non-infected.
+
+Analyses show that the "good" versions of both genes were present in 12.2 per cent of exposed but non-infected subjects as compared to only 2.7 per cent in patients in primary HIV infection.
+
+The researchers point out that the KIR3DL1 gene codes for a receptor on the surface of the immune system's natural killer (NK) cells, which when activated destroy infected cells in the body.
+
+The HLA-B*57 gene codes for a protein normally found on the surface of all body cells that binds the KIR3DL1 and dampens NK cell activity, they add.
+
+The researchers hypothesise that HIV prevents the HLA-B*57-encoded protein from being expressed on the surface of the infected cells, making it unavailable to bind KIR3DL1.
+
+Consequently, the NK cells retain their activity and destroy the virus-infected cells.
+
+According to the research team, the mechanism can occur soon after the virus has started to infect the body cells, and thus people carrying those versions of the two genes may be able to destroy more efficiently the infected cells following exposure to HIV, lowering their chances of developing AIDS.
+
+"More research is needed to determine the exact mechanism behind the protection we have observed, but these findings have revealed a promising avenue," said Dr. Bernard, whose study appears in the journal AIDS.
+
+She says that her study opens the way for new ideas in the fight against HIV infection.
+
+"In the future, our findings could be used to somehow 'boost' the innate immune system and thus fight the virus as soon as it enters the body," she said.

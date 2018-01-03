@@ -1,0 +1,43 @@
+Weizmann Institute scientists have devised a way to reconstruct a cell's 'family tree', and applied the technique to trace the history of the development of cancer.
+
+The researchers say that they have thus far calculated the age of the tumour, and characterized its growth pattern.
+
+They believe that cell lineage studies of cancer may someday lead them to the root of cancer.
+
+According to them, the quest to understand a cell's path of descent, called a cell lineage tree, is shared by many branches of biology and medicine because gleaning such knowledge is key to answering many fundamental questions, such as whether neurons in our brain can regenerate, or whether new eggs are created in adult females.
+
+Until this work, scientists had determined only tree lineages of tiny organisms like worms, possess only a thousand cells.
+
+Prof. Ehud Shapiro of the Institute's Biological Chemistry, and Computer Science and Applied Mathematics Departments now says that he and doctoral students Dan Frumkin and Adam Wasserstrom have developed a novel way to reconstruct trees for larger organisms, including humans.
+
+The human body is made of about 100 trillion cells that are descendants of a single cell, the fertilized egg (zygote).
+
+Cells that have undergone a small number of cell divisions are relatively close descendants, akin to branches representing children and grandchildren on a family tree, while some cells may have undergone hundreds or even thousands of divisions ('distant cell generations').
+
+The researchers say that knowing the number of cell divisions since the zygote, known as the depth of cells, may help address questions about the behaviour of the body under physiological and pathological conditions.
+
+While estimates of cell depth have so far been based on theoretical calculations and assumptions, Shapiro insists that his new approach offers a practical way to determine cell depth precisely.
+
+He points out that previous studies have indicated that harmless mutations are introduced every time a cell divides, and that 'cell relatives' of distant generations tend to acquire more mutations, drifting away from the original DNA sequence of the zygote.
+
+Inspired by this, Shapiro and his colleagues have developed a non-invasive, accurate, and systematic way to quantitatively estimate cell depth on the basis of the number of mutations in microsatellites (repetitive DNA sequences).
+
+The researchers have even applied the process, involving DNA amplification and computer simulations, to several cell lineages in mice.
+
+Describing their work in PLoS Computational Biology, the researchers say that the average depth of B cells-a type of immune cell-is related to mouse age, suggesting a rate of one cell division per day.
+
+In contrast, various types of adult stem cells underwent fewer divisions, supporting the notion that they are relatively quiescent.
+
+The researchers also decided to apply their method to reconstruct the family tree of a cancer cell.
+
+"Despite several decades of scientific research, basic properties of the growth and spread of tumour cells remain controversial. This is surprising, since cancer is primarily a disturbance of cell growth and survival, and an aberrant growth pattern is perhaps the only property that is shared by all cancers. However, because the initiation and much of the subsequent development of tumours occurs prior to diagnosis, studying the growth and spread of tumours seems to require retrospective techniques and these have not been forthcoming," says Shapiro.
+
+He believes that reconstructing a cancer cell lineage tree, and performing an analysis of mutations accumulated in the cells, may cast light on several aspects of the tumour's developmental history.
+
+Shapiro said: "We intend to apply this method to study key questions in human cancers, including when and where does a tumor initiate? The progression from pre-malignant to malignant states. At what stage does metastasis occur? Can the depth of tumor cells serve as a prognostic marker for cancer severity? And does chemotherapy target a subset of cells characterized by distinct lineage features (e.g. greater depth)?"
+
+So far, the researchers have discovered that cancer cells, extracted from tissue sections of a mouse lymphoma by laser micro-dissection, had divided almost twice as many times as adjacent normal lung cells in the same amount of time.
+
+They were also able to calculate the age of the tumour and characterize its growth pattern.
+
+The researchers say that further analysis was sufficient to corroborate the long-standing hypothesis on the single-cell origin of cancer. (ANI)

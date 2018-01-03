@@ -1,8 +1,9 @@
 package com.scienceminer.nerd.service;
 
-import com.scienceminer.nerd.disambiguation.ProcessText;
-import com.scienceminer.nerd.disambiguation.Sentence;
-import org.apache.commons.collections.CollectionUtils;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Sentence;
+import com.scienceminer.nerd.mention.Mention;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;

@@ -3,6 +3,7 @@ package com.scienceminer.nerd.disambiguation;
 import java.util.*;
 import java.io.*;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Entity;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
@@ -22,10 +23,13 @@ import org.grobid.core.lexicon.NERLexicon.NER_Type;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
-import com.scienceminer.nerd.utilities.NerdProperties;
+import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.exceptions.*;
+import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.service.NerdQuery;
-import com.scienceminer.nerd.disambiguation.ProcessText.CaseContext;
+import com.scienceminer.nerd.mention.ProcessText.CaseContext;
+import com.scienceminer.nerd.embeddings.SimilarityScorer;
+import com.scienceminer.nerd.features.GenericRankerFeatureVector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +37,10 @@ import org.slf4j.LoggerFactory;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.text.WordUtils;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
@@ -66,12 +71,12 @@ public class NerdEngine {
 	static public int maxContextSize = 30;	
 	static public int maxLabelLength = 50;
 	static public double minLinkProbability = 0.005;
-	static public double minSenseProbability = 0.05;
+	static public double minSenseProbability = 0.01;
 	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
 
-	public static NerdEngine getInstance() throws Exception {
+	public static NerdEngine getInstance() {
 	    if (instance == null) {
-			getNewInstance();	        
+			getNewInstance();
 	    }
 	    return instance;
 	}
@@ -79,7 +84,7 @@ public class NerdEngine {
 	/**
 	 * Creates a new instance.
 	 */
-	private static synchronized void getNewInstance() throws Exception {
+	private static synchronized void getNewInstance() {
 		LOGGER.debug("Get new instance of Engine");		
 		instance = new NerdEngine();
 	}
@@ -87,7 +92,7 @@ public class NerdEngine {
 	/**
 	 * Hidden constructor
 	 */
-	private NerdEngine() throws Exception {			
+	private NerdEngine() {
 		try {
 			UpperKnowledgeBase.getInstance();
 			parsers = new EngineParsers();
@@ -98,8 +103,8 @@ public class NerdEngine {
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		try {
 			relatedness = Relatedness.getInstance();
-			rankers = new HashMap<String, NerdRanker>();
-			selectors = new HashMap<String, NerdSelector>();
+			rankers = new HashMap<>();
+			selectors = new HashMap<>();
 			wikipediaDomainMaps = UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 
 			
@@ -117,31 +122,29 @@ public class NerdEngine {
 	 *         the enriched and disambiguated query
 	 */
 	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
+		// Validation //TODO we should find a way to move this out of here.
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
 		boolean shortTextVal = false;
 		
-		//TODO: these tests should be moved up in one place and one time 
-		if ((text == null) && (shortText == null)) {
-			LOGGER.info("Cannot parse the text, because it is null.");
-		}
-		
-		if ( (text == null) || (text.length() == 0) ) {
+		if (isEmpty(text) && isNotEmpty(shortText) ) {
 			shortTextVal = true;
 			text = shortText;
 		}
 
-		List<LayoutToken> tokens = null;
-		if ( (text == null) || (text.length() == 0) ) {
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+		if (isEmpty(text) && tokens != null) {
 			// we might have an input as a list of LayoutToken
-			tokens = nerdQuery.getTokens();
 			text = LayoutTokensUtil.toText(tokens);
 			shortTextVal = false;
 		}
-		
-		if ( (text == null) || (text.length() == 0) ) {
+
+		//if the text is null, then better return the same entities provided in input,
+		// AFAIK here is no difference from before.
+		List<NerdEntity> entities = nerdQuery.getEntities();
+		if (isEmpty(text) ) {
 			LOGGER.info("The length of the text to be parsed is 0.");
-			return null;
+			return entities;
 		}
 
 		// source language 
@@ -161,22 +164,24 @@ public class NerdEngine {
 				LOGGER.debug(">> identified language: " + lang);
 			}
 			catch(Exception e) {
-				LOGGER.debug("exception language identifier for: " + text);
-				//e.printStackTrace();
+				LOGGER.debug("exception language identifier for: " + text,e);
 			}
 		}
 		
 		if (lang == null) {
 			// default - it might be better to raise an exception?
-			lang = "en";
+			lang = Language.EN;
+			LOGGER.warn("No language specified, defaulting to EN. ");
 		}
 		
+		// get the LayoutToken ready if not already the case
+		if (tokens == null) {
+			tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, new Language(lang, 1.0));
+		}
+
 		// additional target languages for translations (source language is always the default target 
 		// language for the results!)
 		List<String> targetLanguages = nerdQuery.getResultLanguages();
-		
-		List<NerdEntity> entities = nerdQuery.getEntities();
-		Integer[] processSentence = nerdQuery.getProcessSentence();
 		
 		NerdContext context = nerdQuery.getContext();
 		if (context == null) {
@@ -184,90 +189,106 @@ public class NerdEngine {
 			nerdQuery.setContext(context);
 		}
 
-/*for(NerdEntity entity : entities) {
-System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());	
-}*/
+		/*for(NerdEntity entity : entities) {
+		System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
+		}*/
 
-		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidates(entities, lang);
+		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesSimple(entities, lang);
+		//Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesMultiple(entities, lang);
 
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());	
-for(NerdCandidate cand : cands) {
-	System.out.println("generated candidates: " + cand.toString());
-}
-System.out.println("--");
-}*/
-
-int nbEntities = 0;
-int nbCandidates = 0;
-for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-	nbEntities += 1;
-	if (cands != null)
-		nbCandidates += cands.size();
-
-/*System.out.println(entity.toString());
-for(NerdCandidate cand : cands) {
-System.out.println(cand.toString());
-}
-System.out.println("--");*/
-	}
-System.out.println("total number of entities: " + nbEntities);
-System.out.println("total number of candidates: " + nbCandidates);
-
-		NerdContext localContext = rank(candidates, lang, context, shortTextVal);
-
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-System.out.println("Surface: " + entity.getRawName());	
-for(NerdCandidate cand : cands) {
-	System.out.println("rank: " + cand.toString());
-}
-System.out.println("--");
-}*/
-
-		// reimforce with document-level context if available
-		if (context instanceof DocumentContext) {
-			//reimforce(candidates, (DocumentContext)context);
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
+		for(NerdCandidate cand : cands) {
+			System.out.println("generated candidates: " + cand.toString());
 		}
+		System.out.println("--");
+		}*/
+
+		int nbEntities = 0;
+		int nbCandidates = 0;
+		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+			nbEntities += 1;
+			if (cands != null)
+				nbCandidates += cands.size();
+
+			/*System.out.println(entity.toString());
+			for(NerdCandidate cand : cands) {
+			System.out.println(cand.toString());
+			}
+			System.out.println("--");*/
+		}
+		System.out.println("total number of entities: " + nbEntities);
+		System.out.println("total number of candidates: " + nbCandidates);
 
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
-		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
-		if (nerdQuery.getMinSelectorScore() != 0.0)
-			minSelectorScore = nerdQuery.getMinSelectorScore();
 
-		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-System.out.println("Surface: " + entity.getRawName());	
-for(NerdCandidate cand : cands) {
-	System.out.println("select: " + cand.toString());
-}
-System.out.println("--");
-}*/
-		//prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-for(NerdCandidate cand : cands) {
-	System.out.println(cand.toString());
-}
-}*/
-		//impactOverlap(candidates);
-/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-	List<NerdCandidate> cands = entry.getValue();
-	NerdEntity entity = entry.getKey();
-for(NerdCandidate cand : cands) {
-	System.out.println(cand.toString());
-}
-}*/
-		//if (!shortText && !nerdQuery.getNbest())
-//			prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
+		// if needed, segment long text into either natural paragraph (if present) or arbitary ones
+		/*List<List<LayoutToken>> subTokens = null;
+		if (tokens.size() < ProcessText.MAXIMAL_PARAGRAPH_LENGTH) {
+			subTokens = new ArrayList<>();
+			subTokens.add(tokens);
+		}
+		else {
+			// try to find "natural" paragraph segmentations
+			subTokens = ProcessText.segmentInParagraphs(tokens);
+		}
+
+		for(List<LayoutToken> subToken : subTokens) {
+			NerdContext localContext = rank(candidates, lang, context, shortTextVal, subToken);*/
+		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
+
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		System.out.println("Surface: " + entity.getRawName());
+		for(NerdCandidate cand : cands) {
+			System.out.println("rank: " + cand.toString());
+		}
+		System.out.println("--");
+		}*/
+
+		// reimforce with document-level context if available
+		/*if (context instanceof DocumentContext) {
+			reimforce(candidates, (DocumentContext)context);
+		}*/
+
+			double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
+			if (nerdQuery.getMinSelectorScore() != 0.0)
+				minSelectorScore = nerdQuery.getMinSelectorScore();
+
+			pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
+		//}
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		System.out.println("Surface: " + entity.getRawName());
+		for(NerdCandidate cand : cands) {
+			System.out.println("select: " + cand.toString());
+		}
+		System.out.println("--");
+		}*/
+				//prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		for(NerdCandidate cand : cands) {
+			System.out.println(cand.toString());
+		}
+		}*/
+				//impactOverlap(candidates);
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+		for(NerdCandidate cand : cands) {
+			System.out.println(cand.toString());
+		}
+		}*/
+				//if (!shortText && !nerdQuery.getNbest())
+		//			prune(candidates, nerdQuery.getNbest(), shortTextVal, minRankerScore, lang);
 
 
 		// reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
@@ -282,7 +303,7 @@ for(NerdCandidate cand : cands) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
 			
-			if (entity.getOrigin() == NerdEntity.Origin.USER) {
+			if (entity.getSource() == ProcessText.MentionMethod.user) {
 				result.add(entity);
 			} else if ( (cands == null) || (cands.size() == 0) ) {
 				// default for class entity only
@@ -321,8 +342,13 @@ for(NerdCandidate cand : cands) {
 		}
 		Collections.sort(result);
 
+		/*for (NerdEntity entity : result) {
+		System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
+		System.out.println("--");
+		}*/
+		
 		if (!shortTextVal && !nerdQuery.getNbest()) {
-		//if (!nerdQuery.getNbest()) {
+			//if (!nerdQuery.getNbest()) {
 			result = pruneOverlap(result, shortTextVal);
 		}
 
@@ -337,64 +363,255 @@ for(NerdCandidate cand : cands) {
 	}
 
 
-	public Map<NerdEntity, List<NerdCandidate>> generateCandidates(List<NerdEntity> entities,
-															String lang) {
+	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang) {
 		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<NerdEntity, List<NerdCandidate>>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
 		}
-		if (entities != null) {
-			for(NerdEntity entity : entities) {
-				// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
-				// for it if they are disambiguated
-				if (entity.getOrigin() == NerdEntity.Origin.USER) {
-					// do we have disambiguated entity information for the entity?
-					if (entity.getWikipediaExternalRef() != -1) {
-						result.put(entity, null);
-						continue;
-					}
+		if (entities == null) 
+			return result;
+
+		for(NerdEntity entity : entities) {
+			// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
+			// for it if they are disambiguated
+			if (entity.getSource() == ProcessText.MentionMethod.user) {
+				// do we have disambiguated entity information for the entity?
+				if (entity.getWikipediaExternalRef() != -1) {
+					result.put(entity, null);
+					continue;
 				}
+			}
 
-				List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
+			List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
 
-				// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
-				if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
+			// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
+			if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
+				result.put(entity, candidates);
+				continue;
+			}
+
+			String normalisedString = entity.getNormalisedName();
+			if (entity.getSource() == ProcessText.MentionMethod.species) {
+				normalisedString = entity.getRawName();
+			}	
+			
+			if (isEmpty(normalisedString))
+				continue;
+
+			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
+			if (!bestLabel.exists()) {
+//if (entity.getIsAcronym())
+//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
+				if (entity.getType() != null) {
 					result.put(entity, candidates);
 					continue;
 				}
+			}
+			else {
+//if (entity.getIsAcronym())
+//System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName() +
+//" - " + bestLabel.getSenses().length + " senses");
+				entity.setLinkProbability(bestLabel.getLinkProbability());
+				boolean bestCaseContext = true;
+				Label localBestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
+				if (!localBestLabel.exists()) {
+					bestCaseContext = false;
+				}
+//System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
+				Label.Sense[] senses = bestLabel.getSenses();
+				if ((senses != null) && (senses.length > 0)) {				
+					int s = 0;
+					for(int i=0; i<senses.length; i++) {
+						Label.Sense sense = senses[i];	
+						
+						PageType pageType = sense.getType();
+//System.out.println("pageType:" + pageType);
+						if (pageType != PageType.article)
+							continue;
+//System.out.println("prior prob:" + sense.getPriorProbability());
+						if ( (sense.getPriorProbability() < minSenseProbability) && (sense.getPriorProbability() != 0.0) ) {
+							// senses are sorted by prior prob.
+							//continue;
+							break;
+						}
 
-				String normalisedString = entity.getNormalisedName();
-				if (isEmpty(normalisedString))
-					continue;
+						// not a valid sense if title is a list of ...
+						String title = sense.getTitle();
+						if ((title == null) || title.startsWith("List of") || title.startsWith("Liste des")) 
+							continue;
+						
+						NerdCandidate candidate = new NerdCandidate(entity);
 
-				Label bestLabel = this.bestLabel(normalisedString, wikipedia);
-				if (!bestLabel.exists()) {
-//if (entity.getIsAcronym()) 
-//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
-					//if (strict)
-					if (entity.getType() != null) {
-						result.put(entity, candidates);
-						continue;
+						boolean invalid = false;
+//System.out.println("check categories for " + sense.getId());							
+						com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
+						if ( (parentCategories != null) && (parentCategories.length > 0) ) {
+							for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
+								// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
+								if (theCategory == null) {
+									LOGGER.warn("Invalid category page for sense: " + title);
+									continue;
+								}
+								if (theCategory.getTitle() == null) {
+									LOGGER.warn("Invalid category content for sense: " + title);
+									continue;
+								}
+
+								if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
+									candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
+								if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") != -1) {
+									invalid = true;
+									break;
+								}
+							}
+						}
+						if (invalid)
+							continue;
+						
+						candidate.setWikiSense(sense);
+						candidate.setWikipediaExternalRef(sense.getId());
+						if (sense.getPriorProbability() == 0.0)
+							candidate.setProb_c(1.0);
+						else
+							candidate.setProb_c(sense.getPriorProbability());
+						candidate.setPreferredTerm(sense.getTitle());
+						candidate.setLang(lang);
+						candidate.setLabel(bestLabel);
+						candidate.setWikidataId(sense.getWikidataId());
+						candidate.setBestCaseContext(bestCaseContext);
+						candidates.add(candidate);
+						//System.out.println(candidate.toString());
+						s++;
+						if (s == MAX_SENSES) {
+							// max. sense alternative has been reach
+							break;
+						}
 					}
 				}
-				else {
-//if (entity.getIsAcronym()) 
-//System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName());
+				
+				if (candidates.size() > 0) {
+					List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
+					// check in alternative labels if we get for the same entity sense better statistical 
+					// information
+					//System.out.println((bestLabels.size()-1) + " alternative labels...");
+					for(int p=0; p<bestLabels.size(); p++) {
+						Label altBestLabel = bestLabels.get(p);
+						if (altBestLabel.getText().equals(bestLabel.getText()))
+							continue;
+						long countOcc = altBestLabel.getOccCount();
+						long countLinkOcc = altBestLabel.getLinkOccCount();
+						Label.Sense[] altSenses = altBestLabel.getSenses();
+						if ((altSenses != null) && (altSenses.length > 0)) {				
+							for(int i=0; i<altSenses.length; i++) {
+								Label.Sense sense = altSenses[i];	
+								long senseCountOcc = sense.getLinkOccCount();
+								for(NerdCandidate candid : candidates) {
+									if (sense.getId() == candid.getWikipediaExternalRef()) {
+										// check statistics
+										long candCountOcc = candid.getLabel().getOccCount();
+										long candLinkCountOcc = candid.getLabel().getLinkOccCount();
+										long candSenseCountOcc = candid.getWikiSense().getLinkOccCount();
+
+										if (countOcc > candCountOcc) {
+											//System.out.println("better label for same sense is: " + altBestLabel.getText() + 
+											//	", " + countOcc + " countOcc vs " + candCountOcc + " candCountOcc");
+
+											// update candidate sense
+											candid.setWikiSense(sense);
+											candid.setLabel(altBestLabel);
+
+											// update entity
+											entity.setLinkProbability(altBestLabel.getLinkProbability());
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				Collections.sort(candidates);
+
+				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
+					result.put(entity, candidates);
+				} /*else
+					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
+			}
+			
+		}
+
+		//result = expendCoReference(entities, result);
+
+		return result;
+	}
+
+	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesMultiple(List<NerdEntity> entities, String lang) {
+		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<NerdEntity, List<NerdCandidate>>();
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+		if (wikipedia == null) {
+			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
+		}
+		if (entities == null) 
+			return result;
+
+		for(NerdEntity entity : entities) {
+			// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
+			// for it if they are disambiguated
+			if (entity.getSource() == ProcessText.MentionMethod.user) {
+				// do we have disambiguated entity information for the entity?
+				if (entity.getWikipediaExternalRef() != -1) {
+					result.put(entity, null);
+					continue;
+				}
+			}
+
+			List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
+
+			// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
+			if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
+				result.put(entity, candidates);
+				continue;
+			}
+
+			String normalisedString = entity.getNormalisedName();
+			if (isEmpty(normalisedString))
+				continue;
+
+			List<Label> bestLabels = this.bestLabels(normalisedString, wikipedia, lang);
+			//if (!bestLabel.exists()) {
+			if (bestLabels == null || bestLabels.size() == 0) {
+				//if (entity.getIsAcronym())
+				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
+				//if (strict)
+				if (entity.getType() != null) {
+					result.put(entity, candidates);
+					continue;
+				}
+			}
+			else {
+				int s = 0;
+				for(int p=0; p<bestLabels.size() && s==0; p++) {
+					Label bestLabel = bestLabels.get(p);
+
 					entity.setLinkProbability(bestLabel.getLinkProbability());
-//System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
+					//System.out.println("LinkProbability for the string '" + normalisedString + "': " + entity.getLinkProbability());
 					Label.Sense[] senses = bestLabel.getSenses();
 					if ((senses != null) && (senses.length > 0)) {				
-						int s = 0;
 						for(int i=0; i<senses.length; i++) {
 							Label.Sense sense = senses[i];	
-							//PageType pageType = PageType.values()[sense.getType()];
+							
 							PageType pageType = sense.getType();
+							//System.out.println("pageType:" + pageType);
 							if (pageType != PageType.article)
 								continue;
+							//System.out.println("prior prob:" + sense.getPriorProbability());
+							if ( (sense.getPriorProbability() < minSenseProbability) && (sense.getPriorProbability() != 0.0) ) {
+								// senses are sorted by prior prob.
+								//continue;
+								break;
+							}
 
-							if (sense.getPriorProbability() < minSenseProbability)
-								continue;
 							// not a valid sense if title is a list of ...
 							String title = sense.getTitle();
 							if ((title == null) || title.startsWith("List of") || title.startsWith("Liste des")) 
@@ -403,7 +620,7 @@ for(NerdCandidate cand : cands) {
 							NerdCandidate candidate = new NerdCandidate(entity);
 
 							boolean invalid = false;
-//System.out.println("check categories for " + sense.getId());							
+							//System.out.println("check categories for " + sense.getId());
 							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
 							if ( (parentCategories != null) && (parentCategories.length > 0) ) {
 								for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
@@ -430,28 +647,215 @@ for(NerdCandidate cand : cands) {
 							
 							candidate.setWikiSense(sense);
 							candidate.setWikipediaExternalRef(sense.getId());
-							candidate.setProb_c(sense.getPriorProbability());
+							if (sense.getPriorProbability() == 0.0)
+								candidate.setProb_c(1.0/senses.length);
+							else
+								candidate.setProb_c(sense.getPriorProbability());
 							candidate.setPreferredTerm(sense.getTitle());
 							candidate.setLang(lang);
 							candidate.setLabel(bestLabel);
 							candidate.setWikidataId(sense.getWikidataId());
 							candidates.add(candidate);
+	//System.out.println(candidate.toString());						
 							s++;
-							if (s == MAX_SENSES-1) {
+							if (s == MAX_SENSES) {
 								// max. sense alternative has been reach
 								break;
 							}
 						}
 					}
-					if ( (candidates.size() > 0) || (entity.getType() != null) ) {
-						result.put(entity, candidates);
+				}
+				Collections.sort(candidates);
+				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
+					result.put(entity, candidates);
+				} /*else
+					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
+			}
+			
+		}
+
+		result = expendCoReference(entities, result);
+
+		return result;
+	}
+
+	/**
+	 * Heuristics for covering person name co-reference within a same candidate set. 
+	 * 
+	 * If a mention is a substring of another mentions which are either identified as a PERSON 
+	 * by the NER or whose most-likely candidate is an entity instance of (P31) human (Q5) or 
+	 * if identified as a species by the species mention identifier, then the candidates of the 
+	 * mention is merged with those of these another mentions. 
+	 * 
+	 * Note: TBD global context entities (e.g. from customization) must also be considered. 
+	 * TBD other named entity type might be relevant, e.g. company
+	 *
+	 */
+	private Map<NerdEntity, List<NerdCandidate>> expendCoReference(List<NerdEntity> entities, 
+		Map<NerdEntity, List<NerdCandidate>> candidates) {
+		if (entities == null) 
+			return candidates;
+
+		Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<NerdEntity, List<NerdCandidate>>();
+		Map<String, List<NerdCandidate>> cacheSubSequences = new HashMap<String, List<NerdCandidate>>();
+		Map<String, Double> cacheLinkProbability = new HashMap<String, Double>();
+		List<String> failures = new ArrayList<String>();
+
+		for(NerdEntity entity : entities) {
+			// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
+			// for it if they are disambiguated
+			if (entity.getSource() == ProcessText.MentionMethod.user) {
+				// do we have disambiguated entity information for the entity?
+				if (entity.getWikipediaExternalRef() != -1) {
+					continue;
+				}
+			}
+
+			String entityString = entity.getRawName().toLowerCase();
+			String entityNormalisedString = entity.getNormalisedName().toLowerCase();
+
+			if ((entityString != null) && entityString.length() < 3)
+				continue;
+			if ((entityNormalisedString != null) && entityNormalisedString.length() < 3)
+				continue;
+			// avoiding the case "iii" subsequence of "Valentinian III" which appears from time to time
+			if (entityNormalisedString.equals("iii"))
+				continue;
+
+			// if ner type is present and contradicting a "human" type (basically person) 
+			if ( (entity.getType() != null) && 
+				 (entity.getType() != NER_Type.PERSON) && 
+				 (entity.getType() != NER_Type.PERSON_TYPE) &&
+				 (entity.getSource() != ProcessText.MentionMethod.species))
+				continue;
+
+			if (failures.contains(entityString)) 
+				continue;
+
+			List<NerdCandidate> cands = candidates.get(entity);
+
+			if (cacheSubSequences.get(entityString) != null) {
+				entity.setLinkProbability(cacheLinkProbability.get(entityString).doubleValue());
+				List<NerdCandidate> otherCands = cacheSubSequences.get(entityString);
+				if (cands == null) {
+					// we deep copy the candidates of otherEntity for entity
+					cands = new ArrayList<NerdCandidate>();
+					for(NerdCandidate otherCand : otherCands) {
+						NerdCandidate newCand = otherCand.copy(entity);
+						newCand.setCoReference(true);
+						cands.add(newCand);
+					}
+				} else {
+					// merging of candidates
+					List<Integer> listOfCandsId = new ArrayList<Integer>();
+					for (NerdCandidate cand : cands) {
+						listOfCandsId.add(new Integer(cand.getWikipediaExternalRef()));
+					}
+					for(NerdCandidate otherCand : otherCands) {
+						if (!listOfCandsId.contains(new Integer(otherCand.getWikipediaExternalRef()))) {
+							NerdCandidate newCand = otherCand.copy(entity);
+							newCand.setCoReference(true);
+							cands.add(newCand);
+						}
 					}
 				}
+				// add in temporary map
+				newCandidates.put(entity, cands);
+				continue;
+			}
+
+			int start = entity.getOffsetStart();
+			int end = entity.getOffsetEnd();
+			boolean success = false;
+
+			// check if the mention is a (continous) subsequence of another entities
+			for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+				List<NerdCandidate> otherCands = entry.getValue();
+				NerdEntity otherEntity = entry.getKey();
+
+				if (otherEntity.getRawName().length() <= entityString.length())
+					continue;
+
+				if (otherEntity.getRawName().toLowerCase().equals(entityString) || 
+					otherEntity.getNormalisedName().toLowerCase().equals(entityNormalisedString) )
+					continue;
+
+				boolean isHuman = false;
+				if (otherCands != null && otherCands.size() > 0) {
+					NerdCandidate topCandidate = otherCands.get(0);
+					String instanceOf = topCandidate.getWikidataP31Id();
+					if (instanceOf != null && instanceOf.equals("Q5"))
+						isHuman = true;
+				}
+
+				// entities cannot overlap...
+				if ( (otherEntity.getOffsetStart()<=end && otherEntity.getOffsetEnd()>=end) ||
+ 					 (otherEntity.getOffsetStart()<=start && otherEntity.getOffsetEnd()>=start) )
+					continue;
+
+				// check NER type / top prior P31 property
+				if ( (otherEntity.getType() != NERLexicon.NER_Type.PERSON) && !isHuman) {
+					continue; 
+				}
 				
+				if (NerdEntity.subSequence(entity, otherEntity, false)) {	
+//System.out.println(entityString + " is subsequence of " + otherEntity.getRawName() + " -> merging candidates...");
+					if (otherEntity.getLinkProbability() > entity.getLinkProbability())
+						entity.setLinkProbability(otherEntity.getLinkProbability());
+					// we merge the candidates of otherEntity in those of entity
+					if (cands == null) {
+						// we deep copy the candidates of otherEntity for entity
+						cands = new ArrayList<NerdCandidate>();
+						for(NerdCandidate otherCand : otherCands) {
+							NerdCandidate newCand = otherCand.copy(entity);
+							newCand.setCoReference(true);
+							cands.add(newCand);
+						}
+					} else {
+						// merging of candidates
+						List<Integer> listOfCandsId = new ArrayList<Integer>();
+						for (NerdCandidate cand : cands) {
+							listOfCandsId.add(new Integer(cand.getWikipediaExternalRef()));
+						}
+						for(NerdCandidate otherCand : otherCands) {
+							if (!listOfCandsId.contains(new Integer(otherCand.getWikipediaExternalRef()))) {
+								NerdCandidate newCand = otherCand.copy(entity);
+								newCand.setCoReference(true);
+								cands.add(newCand);
+							}
+						}
+					}
+					// add in temporary map
+					newCandidates.put(entity, cands);
+					cacheSubSequences.put(entityString, otherCands);
+					cacheLinkProbability.put(entityString, new Double(otherEntity.getLinkProbability()));
+					success= true;
+					break;
+				} 
+			}
+
+			if (!success) {
+				failures.add(entityString);
 			}
 		}
 
-		return result;
+		// update of candidates
+		for(Map.Entry<NerdEntity, List<NerdCandidate>> entry : newCandidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			NerdEntity entity = entry.getKey();
+			if (candidates.get(entity) == null)
+				candidates.put(entity, cands);
+			else
+				candidates.replace(entity, cands);
+		}
+
+		// final default sort candidates against priors (prob_c)
+		for(Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			Collections.sort(cands);
+		}
+
+		return candidates;
 	}
 
 	/**
@@ -460,15 +864,16 @@ for(NerdCandidate cand : cands) {
 	 * @return the context enriched with the internal context considered when ranking.
 	 * 
 	 */
-	public NerdContext rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, NerdContext context, boolean shortText) {
+	public NerdContext rank(Map<NerdEntity, List<NerdCandidate>> candidates, String lang, 
+		NerdContext context, boolean shortText, List<LayoutToken> tokens) {
 		// we rank candidates for each entity mention
-//relatedness.resetCache(lang);
+		//relatedness.resetCache(lang);
 
 		// first pass to get the "certain" entities 
 		List<NerdEntity> userEntities = new ArrayList<NerdEntity>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			NerdEntity entity = entry.getKey();
-			if (entity.getOrigin() == NerdEntity.Origin.USER) {
+			if (entity.getSource() == ProcessText.MentionMethod.user) {
 				userEntities.add(entity);
 			}
 		}
@@ -481,26 +886,23 @@ for(NerdCandidate cand : cands) {
 			 if (context != null) {
 			 	context.merge(localContext);
 			 } 
-//System.out.println("size of context: " + context.getSenseNumber());
-//System.out.println(context.toString());
+		//System.out.println("size of context: " + context.getSenseNumber());
+		//System.out.println(context.toString());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		double quality = 0.0;
-
-		if (localContext != null)
-			quality = localContext.getQuality();
 
 		NerdRanker disambiguator = rankers.get(lang);
-		if (disambiguator == null) {
-			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
-			try {
-				disambiguator = new NerdRanker(wikipedia);
-				rankers.put(lang, disambiguator);
+		disambiguator = instantiateDisambiguator(lang, disambiguator);
+
+		GenericRankerFeatureVector feature = disambiguator.getNewFeature();
+		
+		double quality = 0.0;
+		if (localContext != null) {
+			if (feature.Add_context_quality) {
+				// computed only if required
+				quality = localContext.getQuality();
 			}
-			catch(Exception e) {
-				e.printStackTrace();
-			} 
 		}
 
 		// second pass for producing the ranking score
@@ -511,16 +913,30 @@ for(NerdCandidate cand : cands) {
 			if (cands == null)
 				continue;
 			
+			// get a window of layout tokens around without target tokens
+			List<LayoutToken> subTokens = com.scienceminer.nerd.utilities.Utilities.getWindow(entity, tokens, 
+				NerdRanker.EMBEDDINGS_WINDOW_SIZE, lang);
+
 			for(NerdCandidate candidate : cands) {			
 				double score = 0.0;
 				try {
 					double commonness = candidate.getProb_c(); 
-					double related = relatedness.getRelatednessTo(candidate, localContext, lang);
-					boolean bestCaseContext = true;
-					// actual label used
-					Label bestLabel = candidate.getLabel();
-					if (!entity.getNormalisedName().equals(bestLabel.getText())) {
+					
+					double related = 0.0;
+					// computed only if needed
+					if (feature.Add_relatedness) {
+						related = relatedness.getRelatednessTo(candidate, localContext, lang);
+					}
+
+					boolean bestCaseContext = candidate.getBestCaseContext();
+					/*if (!entity.getNormalisedName().equals(bestLabel.getText())) {
 						bestCaseContext = false;
+					}*/
+					
+					float embeddingsSimilarity = 0.0F;
+					// computed only if needed
+					if (feature.Add_embeddings_centroid_similarity) {
+						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 					}
 
 					candidate.setRelatednessScore(related);
@@ -528,13 +944,23 @@ for(NerdCandidate cand : cands) {
 						System.out.println("Cannot rank candidates: disambiguator for the language " + 
 							lang + " is invalid");
 					}
-					score = disambiguator.getProbability(commonness, related, quality, bestCaseContext);
-					
-					//System.out.println(candidate.getWikiSense().getTitle() + " " + candidate.getNerdScore() +  " " + entity.toString());
-					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related);
+
+					String wikidataId = "Q0"; // undefined entity
+					//if (candidate.getWikidataId() != null)	
+					//	wikidataId = candidate.getWikidataId();
+
+					String wikidataP31Id = "Q0"; // undefined entity
+					//if (candidate.getWikidataP31Id() != null)
+					//	wikidataP31Id = candidate.getWikidataP31Id();
+
+					score = disambiguator.getProbability(commonness, related, quality, 
+						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
+
+					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + score + "(ranker/nerd score) " +  " " + entity.toString());
+					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related + ", embeddingsSimilarity: " + embeddingsSimilarity);
 				}
 				catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.debug("Fail to compute ranker score.", e);
 				}
 				
 				candidate.setNerdScore(score);
@@ -542,24 +968,14 @@ for(NerdCandidate cand : cands) {
 			Collections.sort(cands);
 		}
 
-//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
-System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCalculated() 
+		//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
+		System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCalculated()
 		+ " - cache proportion: " + relatedness.getCachedProportion());
 
 		return localContext;
 	}
 
-	/**
-	 * Ranking of candidates for a term rawTerm in a vector of weighted terms.
-	 * Optionally a contextual text is given, where the terms of the vector might occur (or not). 
-	 */
-	private void rank(List<NerdCandidate> candidates, String rawTerm, //List<WeightedTerm> terms, 
-					  String text, String lang, NerdContext context, List<NerdEntity> userEntities) {
-	    if ( (candidates == null) || (candidates.size() == 0) )
-			return;
-
-		// get the disambiguator for this language
-		NerdRanker disambiguator = rankers.get(lang);
+	private NerdRanker instantiateDisambiguator(String lang, NerdRanker disambiguator) {
 		if (disambiguator == null) {
 			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
@@ -567,10 +983,31 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 				rankers.put(lang, disambiguator);
 			}
 			catch(Exception e) {
-				e.printStackTrace();
-			} 
+				LOGGER.error("Cannot load disambiguator for language " + lang, e);
+			}
 		}
-		
+		return disambiguator;
+	}
+
+	/**
+	 * Ranking of candidates for a term rawTerm in a vector of weighted terms.
+	 * Optionally a contextual text is given, where the terms of the vector might occur (or not). 
+	 */
+	private void rank(List<NerdCandidate> candidates, String rawTerm, List<WeightedTerm> terms, 
+					  String text, String lang, NerdContext context, List<NerdEntity> userEntities) {
+	    if ( (candidates == null) || (candidates.size() == 0) )
+			return;
+
+		// get the disambiguator for this language
+		NerdRanker disambiguator = rankers.get(lang);
+		disambiguator = instantiateDisambiguator(lang, disambiguator);
+
+		// for the embeddings similiarity we need a textual context as a list of LayoutToken
+		List<LayoutToken> tokens = new ArrayList<LayoutToken>();
+		for(WeightedTerm term : terms) {
+			tokens.add(new LayoutToken(term.getTerm()));
+		} 
+
 		// if we have extra textual information, we can try to get the different local contexts
 		List<NerdContext> localContexts = null;
 		if ( (text != null) && (text.length() > 0) ) {
@@ -586,38 +1023,71 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 				catch(Exception e) {
 					e.printStackTrace();
 				}
+				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString);
+				for(LayoutToken token : subTokens)
+					tokens.add(token);
 			}
 		}
 		
-		double quality = context.getQuality();
-
+		GenericRankerFeatureVector feature = disambiguator.getNewFeature();
+		double quality = 0.0;
+		if (feature.Add_context_quality) {
+			// calculated if needed
+			quality = context.getQuality();
+		}
 		// second pass for producing the ranking score
 		for(NerdCandidate candidate : candidates) {			
 			double score = 0.0;
 			try {
 				double commonness = candidate.getProb_c(); 
 
-				boolean bestCaseContext = true;
+				boolean bestCaseContext = candidate.getBestCaseContext();
 				// actual label used
-				Label bestLabel = candidate.getLabel();
+				/*Label bestLabel = candidate.getLabel();
 				if (!rawTerm.equals(bestLabel.getText())) {
 					bestCaseContext = false;
+				}*/
+
+				float embeddingsSimilarity = 0.0F;
+				// computed only of needed
+				
+				if (feature.Add_embeddings_centroid_similarity) {
+					//embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, tokens, lang);
+					embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, tokens, lang);
 				}
 
 				// for the candidate
 				double related = 0.0;
-				if (localContexts == null) {
+				// computed only if needed
+				if (feature.Add_relatedness)
 					related = relatedness.getRelatednessTo(candidate, context, lang);
-					score = disambiguator.getProbability(commonness, related, quality, bestCaseContext);
+
+				String wikidataId = "Q0"; // undefined entity
+				if (candidate.getWikidataId() != null)	
+					wikidataId = candidate.getWikidataId();
+
+				String wikidataP31Id = "Q0"; // undefined entity
+				if (candidate.getWikidataP31Id() != null)
+					wikidataP31Id = candidate.getWikidataP31Id();
+
+
+				if (localContexts == null) {
+					score = disambiguator.getProbability(commonness, related, quality, 
+						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 				}
 				else {
 					// we disambiguate for each local context
-					related = relatedness.getRelatednessTo(candidate, context, lang);
-					score = disambiguator.getProbability(commonness, related, quality, bestCaseContext);
-
+					score = disambiguator.getProbability(commonness, related, quality, 
+						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 					for(NerdContext localContext : localContexts) {
-						related = relatedness.getRelatednessTo(candidate, localContext, lang);
-						score += disambiguator.getProbability(commonness, related, localContext.getQuality(), bestCaseContext);
+						if (feature.Add_relatedness)
+							related = relatedness.getRelatednessTo(candidate, localContext, lang);
+						double localQuality = 0.0;
+						if (feature.Add_context_quality) {
+							localQuality = localContext.getQuality();
+						}
+						score += disambiguator.getProbability(commonness, related, localQuality, 
+							bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 						//double localScore = disambiguator.getProbability(commonness, related, localContext);
 						//if (localScore > score)
 						//	score = localScore;
@@ -673,6 +1143,10 @@ System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCal
 		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
 
 		for(NerdEntity entity : entities) {
+			if (entity.getSource() == ProcessText.MentionMethod.species) {
+				// dont prune such explicit mention recognition
+				continue;
+			}
 			/*if (entity.getNerdScore() < threshold) {
 				toRemove.add(entity);
 			}*/
@@ -1212,6 +1686,12 @@ System.out.println("Merging...");
 			if ( (candidates == null) || (candidates.size() == 0) ) 
 				continue;
 			NerdEntity entity = entry.getKey();
+
+			if (entity.getSource() == ProcessText.MentionMethod.species) {
+				// don't prune anything
+				continue;
+			}
+
 			boolean isNe = false;
 			if (entity.getType() != null)
 				isNe = true;
@@ -1359,7 +1839,7 @@ System.out.println("--");*/
 			List<NerdEntity> entities = term.getNerdEntities();
 			if (entities != null) {
 				for(NerdEntity entity : entities) {
-					if (entity.getOrigin() == NerdEntity.Origin.USER) {
+					if (entity.getSource() == ProcessText.MentionMethod.user) {
 						userEntities.add(entity);
 					}
 				}
@@ -1380,7 +1860,7 @@ System.out.println("--");*/
 			if (term.getNerdEntities() == null) {
 				List<NerdCandidate> candidateList = candidates.get(n);
 
-				rank(candidateList, term.getTerm().toLowerCase(), text, lang, stableContext, userEntities);
+				rank(candidateList, term.getTerm().toLowerCase(), terms, text, lang, stableContext, userEntities);
 				prune(candidateList, nerdQuery.getNbest(), 0.1);
 
 				List<NerdEntity> result = new ArrayList<NerdEntity>();
@@ -1421,7 +1901,7 @@ System.out.println("--");*/
 			List<NerdCandidate> candidates = null;
 			List<NerdEntity> entities = term.getNerdEntities();
 			if (entities == null)
-				candidates = new ArrayList<NerdCandidate>();
+				candidates = new ArrayList<>();
 			else {
 				result.add(null);
 				n++;
@@ -1484,14 +1964,14 @@ System.out.println("--");*/
 	}	
 	
 	/**
-	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and expended forms in the complete
+	 *  Reconciliate acronyms, i.e. ensure consistency of acronyms and extended forms in the complete
 	 *  sequence / document.
 	 */
 	public void reconciliateAcronyms(NerdQuery nerdQuery) {
 		if (nerdQuery.getContext() == null)
 			return;
 
-		Map<Entity, Entity> acronyms = nerdQuery.getContext().getAcronyms();
+		Map<Mention, Mention> acronyms = nerdQuery.getContext().getAcronyms();
 		if ( (acronyms == null) || (acronyms.size() == 0) )
 			return;
 
@@ -1510,17 +1990,17 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			return;
 
 		// gives for a given base all the acronyms mentions
-		Map<String, List<Entity>> reverseAcronyms = new HashMap<String, List<Entity>>();
-		for (Map.Entry<Entity, Entity> entry : acronyms.entrySet()) {
-            Entity acronym = entry.getKey();
-            Entity base = entry.getValue();
+		Map<String, List<Mention>> reverseAcronyms = new HashMap<String, List<Mention>>();
+		for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+            Mention acronym = entry.getKey();
+            Mention base = entry.getValue();
             String basePos = "" + base.getOffsetStart() + "/" + base.getOffsetEnd();
             if (reverseAcronyms.get(basePos) == null) {
-            	List<Entity> acros = new ArrayList<Entity>();
+            	List<Mention> acros = new ArrayList<Mention>();
             	acros.add(acronym);
             	reverseAcronyms.put(basePos, acros);
             } else {
-            	List<Entity> acros = reverseAcronyms.get(basePos);
+            	List<Mention> acros = reverseAcronyms.get(basePos);
             	acros.add(acronym);
             	reverseAcronyms.replace(basePos, acros);
             }
@@ -1531,11 +2011,11 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
         	// is it a base?
         	String checkBase = "" + entity.getOffsetStart() + "/" + entity.getOffsetEnd();
 			if (reverseAcronyms.get(checkBase) != null) {
-				List<Entity> localAcronyms = reverseAcronyms.get(checkBase);
+				List<Mention> localAcronyms = reverseAcronyms.get(checkBase);
 				// gather the disambiguations
 				NerdEntity best = entity;
 				List<NerdEntity> acronymSubset = null;
-				for(Entity acroEntity : localAcronyms) {
+				for(Mention acroEntity : localAcronyms) {
 					int localStartPos = acroEntity.getOffsetStart();
 					int localEndPos = acroEntity.getOffsetEnd();
 					acronymSubset = getEntitiesAtPos(entityPositions, localStartPos, localEndPos);
@@ -1550,7 +2030,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 				// get the best one and propagate it to all base/acronyms NerdEntity
 				if (best != null) {
 					updateEntity(entity, best);
-					for(Entity acroEntity : localAcronyms) {
+					for(Mention acroEntity : localAcronyms) {
 						int localStartPos = acroEntity.getOffsetStart();
 						int localEndPos = acroEntity.getOffsetEnd();
 						acronymSubset = getEntitiesAtPos(entityPositions, localStartPos, localEndPos);
@@ -1608,6 +2088,11 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		toBeUpDated.setSubTypes(best.getSubTypes());
 	}	
 
+	/**
+	 * Try to find the best KB Label from a normalized string. In practice, this method has
+	 * a huge impact on performance, as it can maximize the chance to have the right entity
+	 * in the list of candidates.  
+	 */
 	public static Label bestLabel(String normalisedString, LowerKnowledgeBase wikipedia) {
 		Label label = null;
 		//String normalisedString = entity.getNormalisedName();
@@ -1618,10 +2103,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		Label bestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
 
 		// try case variants
-		if (!bestLabel.exists() /*|| 
-			ProcessText.isAllUpperCase(normalisedString) ||
-			ProcessText.isAllLowerCase(normalisedString) */
-			) {
+		if (!bestLabel.exists()) {
 			
 			// full upper or lower case
 			if (ProcessText.isAllUpperCase(normalisedString)) {
@@ -1642,6 +2124,34 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
 			if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 				label = label2;
+			} else {
+				// try variant cases
+				/*if (ProcessText.isAllUpperCase(normalisedString)) {
+					// a usual pattern in all upper case that is missed above is a combination of 
+					// acronym + normal term, e.g. NY RANGERS -> NY Rangers
+					List<String> tentativeLabels = new ArrayList<String>();
+					List<LayoutToken> localTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken();
+					for(int i=0; i<localTokens.size(); i++) {
+						LayoutToken token = localTokens.get(i);
+						if (token.getText().length() == 2) {
+
+
+							label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
+
+							tentativeLabels.add();
+						}
+					}
+				}*/
+
+				label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalizeFully(normalisedString.toLowerCase()));
+				if (!label2.exists()) {
+					// more agressive
+					label2 = new Label(wikipedia.getEnvironment(), 
+						WordUtils.capitalizeFully(normalisedString.toLowerCase(), ProcessText.delimiters.toCharArray()));
+				}
+				if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
+					label = label2;
+				}
 			}
 			if (label.exists() && (!bestLabel.exists() || label.getLinkOccCount() > bestLabel.getLinkOccCount()*2)) {
 				bestLabel = label;
@@ -1652,10 +2162,97 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 	}
 
 	/**
+	 * Try to find the best KB Labels from a normalized string. In practice, this method has
+	 * a huge impact on performance, as it can maximize the chance to have the right entity
+	 * in the list of candidates.  
+	 */
+	public static List<Label> bestLabels(String normalisedString, LowerKnowledgeBase wikipedia, String lang) {
+		List<Label> labels = new ArrayList<Label>();
+		//String normalisedString = entity.getNormalisedName();
+		if (isEmpty(normalisedString))
+			return null;
+
+		// normalised mention following case as it appears
+		Label bestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
+		labels.add(bestLabel);
+
+		// try case variants
+		//if (!bestLabel.exists()) 
+		{
+			// first letter upper case
+			Label label = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
+			if (label.exists())
+					labels.add(label);
+			
+			// full upper or lower case
+			if (ProcessText.isAllUpperCase(normalisedString)) {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
+				if (label.exists())
+					labels.add(label);
+			}
+			else if (ProcessText.isAllLowerCase(normalisedString)) {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
+				if (label.exists())
+					labels.add(label);
+			} else {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
+				if (label.exists())
+					labels.add(label);
+
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
+				if (label.exists())
+					labels.add(label);
+			}
+
+			label = new Label(wikipedia.getEnvironment(), WordUtils.capitalizeFully(normalisedString.toLowerCase()));
+			if (label.exists())
+				labels.add(label);
+
+			// more agressive
+			label = new Label(wikipedia.getEnvironment(), 
+					WordUtils.capitalizeFully(normalisedString.toLowerCase(), ProcessText.delimiters.toCharArray()));
+			if (label.exists())
+				labels.add(label);
+			
+			// only first word capitalize
+			if (normalisedString.length()>1) {
+				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase().substring(0, 1).toUpperCase() +
+					normalisedString.toLowerCase().substring(1));
+				if (label.exists())
+					labels.add(label);
+			}
+
+			// try variant cases
+			if (ProcessText.isAllUpperCase(normalisedString)) {
+				// a usual pattern in all upper case that is missed above is a combination of 
+				// acronym + normal term, e.g. NY RANGERS -> NY Rangers
+				List<LayoutToken> localTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(normalisedString, new Language(lang, 1.0));
+				for(int i=0; i<localTokens.size(); i++) {
+					LayoutToken token = localTokens.get(i);
+					if (token.getText().length() == 2) {
+						StringBuilder newLabel = new StringBuilder();
+						for(int j=0; j<localTokens.size(); j++) {
+							if ( j!= i)
+								newLabel.append(WordUtils.capitalize(localTokens.get(j).getText().toLowerCase()));
+							else
+								newLabel.append(token);
+						}
+						label = new Label(wikipedia.getEnvironment(), newLabel.toString());
+						if (label.exists())
+							labels.add(label);
+					}
+				}
+			}			
+		} 
+
+		return labels;
+	}
+
+	/**
 	 * Exploit a document-level context to reimforce candidates based on previous 
 	 * disambiguation
 	 */
-	private void reimforce(Map<NerdEntity, List<NerdCandidate>> candidates, DocumentContext context) {
+	private void reinforce(Map<NerdEntity, List<NerdCandidate>> candidates, DocumentContext context) {
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
@@ -1676,570 +2273,17 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		}
 	}
 
-	/**
-	 * Based on computed candidate scores, select n-best candidates.  
-	 */
-/*	public List<NerdCandidate> select(List<NerdCandidate> terms, int nbest, int method, String text) {
-System.out.println("Selecting...");	
-System.out.println(terms.toString());	
+	public List<NerdEntity> solveCitations(List<BibDataSet> resCitations) {
+		List<NerdEntity> results = null;
 
-		if ( (terms == null) || (terms.size() == 0) ) 
-			return null;
-
-		if (method == 1) {
-			// machine learning method - a selector produces a score corresponding to the probability of
-			// valid candidate entity
-			
-			// Generate input format for classifier
-			FeatureSelectorShortVector generalFeatures = new FeatureSelectorShortVector();
-			FastVector atts = generalFeatures.setHeaderInstance();
-			Instances classifierData = new Instances("ClassifierData", atts, terms.size());
-			classifierData.setClassIndex(generalFeatures.getNumFeatures()-1);
-			
-			for (NerdCandidate candidate : terms) {
-				Vector<Article> context = erdRelatedness.collectContextTerms(terms, candidate);
-				
-				// create the data instance corresponding to the candidate
-				FeatureSelectorShortVector features = new FeatureSelectorShortVector();
-				if (features.Add_prob_c) {
-					features.prob_c = candidate.getProb_c();
-				}
-				if (features.Add_prob_i) {
-					features.prob_i = candidate.getProb_i();
-				}
-				if (features.Add_frequencyStrict) {
-					features.frequencyStrict = candidate.getFreq();
-				}
-				if (features.Add_frequencyConcept) {
-					features.frequencyConcept = 0;
-				}
-				if (features.Add_termLength) {
-					StringTokenizer st = new StringTokenizer(candidate.getRawString(), " -,");
-					features.termLength = st.countTokens();
-				}
-				double relatedness = erdRelatedness.getRelatednessTo(candidate, context);
-				candidate.setRelatednessScore(relatedness);
-				if (features.Add_relatedness) {
-					features.relatedness = relatedness;
-				}
-				if (features.Add_inDictionary) {
-					boolean inDict = false;				
-					if (Lexicon.getInstance().inDictionary(candidate.getRawString())) {
-						inDict = true;
-					}
-					else {
-						String[] toks = candidate.getRawString().split(" -,");
-						boolean allDict = false;
-						for (int i=0; i<toks.length; i++) {
-							if (!Lexicon.getInstance().inDictionary(toks[i])) {
-								allDict = false;
-								break;
-							}
-							else {
-								allDict = true;
-							}
-						}
-						if (allDict) {
-							inDict = true;
-						}
-					}
-					
-					if (inDict)
-						features.inDictionary = true;
-					else
-						features.inDictionary = false;
-				}
-				if (features.Add_isSubTerm) { 
-					boolean val = false;
-					
-					if (candidate.isSubTerm) {
-						val = true;
-					}
-					else {
-						String surface1 = candidate.getRawString();
-
-						// we check if the raw string is a substring of another NerdCandidate from the ERD method
-						for(int j=0; j<terms.size(); j++) {									
-							NerdCandidate term2 = terms.get(j);
-
-							String surface2 = term2.getRawString();
-							if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
-								val = true;
-								break;
-							}
-						}
-					}
-					
-					if (val)
-						features.isSubTerm = true;
-					else 
-						features.isSubTerm = false;
-				}
-				if (features.Add_ner_st) {
-					if (candidate.getMentionEntityType() != null) {
-						features.ner_st = true;
-					}
-				}
-				if (features.Add_ner_id) {
-					if (candidate.getEntityType() != null) {
-						features.ner_st = true;
-					}
-				}
-				if (features.Add_ner_type) {
-					if (candidate.getMentionEntityType() != null) {
-						features.ner_type = candidate.getMentionEntityType();
-					}
-					else if (candidate.getEntityType() != null) {
-						if (candidate.getEntityType().equals("person/N1"))
-							features.ner_type = "PERSON";
-						else if (candidate.getEntityType().equals("location/N1"))
-							features.ner_type = "LOCATION";	
-						else if (candidate.getEntityType().equals("organizational_unit/N1"))
-							features.ner_type = "ORGANIZATION";	
-						else
-							features.ner_type = "NotNER";	
-					}
-				}
-				if (features.Add_ner_subtype) {
-					List<String> subTypes = candidate.getEntitySubTypes();
-					if ( (subTypes != null) && (subTypes.size()>0) ) {
-						features.ner_subtype = subTypes.get(0);
-					}
-					else
-						features.ner_subtype = "NotNER";
-				}				
-				if (features.Add_NERType_relatedness) {
-									
-				}
-				if (features.Add_NERSubType_relatedness) {
-					
-				}
-				if (features.Add_occ_term) {
-					long frequency = erdRelatedness.getTermOccurrence(candidate.getRawString());
-					features.occ_term = frequency;
-				}
-				if (features.Add_rank_score) {
-					features.rank_score = candidate.getNerdScore();
-				}
-				if (features.Add_preferred_term) {
-					if (candidate.getPreferredTerm() != null) {
-						if (candidate.getPreferredTerm().toLowerCase().equals(candidate.getRawString())) {
-							features.preferred_term = true;
-						}
-					}
-				}
-				List<String> types = candidate.getFreebaseTypes();
-				if (types != null) {
-					List<String> shortTypes = new ArrayList<String>();
-					for(String type : types) {
-						int ind = type.indexOf("/", 2);
-						String subType = type.substring(0,ind);
-						if ((!shortTypes.contains(subType)) && ErdUtilities.erdHighCategories.contains(subType)) {
-							shortTypes.add(subType);
-						}
-					}
-					candidate.setFreebaseHighTypes(shortTypes);
-				}
-				if (features.Add_freebase_type) {
-					if (types != null) {
-						List<String> shortTypes = candidate.getFreebaseHighTypes();
-						if (shortTypes.size() == 0) {
-							features.freebase_type = "unk";
-						}
-						else if (shortTypes.size() == 1) {
-							features.freebase_type = shortTypes.get(0);
-						}
-						else {
-							// we need to select the most discriminant type
-							// TBD...
-							features.freebase_type = shortTypes.get(0);
-						}
-					}
-				}	
-				if (features.Add_freebase_fulltype) {
-					if (types != null) {
-						List<String> allTypes = new ArrayList<String>();
-						for(String type : types) {
-							if (ErdUtilities.erdCategories.contains(type)) {
-								allTypes.add(type);
-							}
-						}
-						
-						if (allTypes.size() == 0) {
-							features.freebase_fulltype = "unk";
-						}
-						else if (allTypes.size() == 1) {
-							features.freebase_fulltype = allTypes.get(0);
-						}
-						else {
-							// we need to select the most discriminant type
-							// TBD...
-							features.freebase_fulltype = allTypes.get(0);
-						}
-					}
-				}
-				
-				//List<Category> categories = erdRelatedness.getParentCategories(candidate.getWikipediaExternalRef());
-				
-				// convert the feature vector into a WEKA data instance
-				Instance inst = features.getFeatureValues(classifierData);
-System.out.println(candidate.toString());
-System.out.println("The instance: " + inst); 
-				
-				// Get the scores
-				try {
-					double[] probs = selector_short.distributionForInstance(inst);
-					double prob = 1.00 - probs[0];
-					//double prob = ranker_short.classifyInstance(inst);
-					
-System.out.println("The selector score: " + prob);
-					candidate.setSelectionScore(prob);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
+		for(BibDataSet bds : resCitations) {
+			BiblioItem biblio = bds.getResBib();
+			System.out.println(biblio.getDOI());
+			if (biblio.getDOI() != null) {
+				System.out.println(UpperKnowledgeBase.getInstance().getEntityIdPerDoi(biblio.getDOI()));
 			}
-			
 		}
-			
-		//if (method == 0) 
-		//{
-			// we simply use the entity score without any other processing or heuristics
-			
-			// create a map with the surface string as key for candidates
-			List<String> freebaseResults = new ArrayList<String>();
-			Map<String, List<NerdCandidate>> candidates = new HashMap<String, List<NerdCandidate>>();
-			for(NerdCandidate term : terms) {
-				String surface = term.getRawString();
-				List<NerdCandidate> theList = candidates.get(surface);
-				if (theList == null) {
-					theList = new ArrayList<NerdCandidate>();
-				}
-				theList.add(term);
-				candidates.put(surface, theList);
-			}
-			
-			List<NerdCandidate> result = new ArrayList<NerdCandidate>();
-			for (String key : candidates.keySet()) {
-			 	List<NerdCandidate> list = candidates.get(key);
-				
-				// sort according to the ranking score (aka nerd_score, it has been made for that!)
-//System.out.println("BEFORE SORT: " + list.toString());
-				//Collections.sort(list);
-//System.out.println("AFTER SORT: " + list.toString());
-				
-				// if we have candidates that all cover the whole input text, there is no disambiguation
-				// context, thus we can safely output all the corresponding candidate entities
-				if (key.length() == text.length()) {
-					int h = 0;
-					for(NerdCandidate term : list) {
-						if (term.getFreeBaseExternalRef() != null) {
-							//if (term.getPreferredTerm() != null) {
-							//	if (term.getPreferredTerm().toLowerCase().equals(text)) {
-							//		result.add(term);
-							//		continue;
-							//	}
-							//}
-							
-							//if ((term.getProb_c() > 0.001) || (term.getFreq() > 1)) 
-							if (term.getSelectionScore() > 0.001)
-							{
-								if (!freebaseResults.contains(term.getFreeBaseExternalRef())) {	
-									result.add(term);
-									freebaseResults.add(term.getFreeBaseExternalRef());
-									h++;
-								}
-							}
-						}
-						// but no more than 3
-						if (h>2) {
-							break;
-						}
-					}
-				}
-				else {
-					// otherwise we select the highest score
-					NerdCandidate theBest = null;
-					if ( (list == null) || (list.size() == 0) )
-						continue;
-					for(NerdCandidate term : list) {
-						if (theBest == null) {
-							theBest = term;
-						}
-						else if (term.getNerdScore() > theBest.getNerdScore()) {
-							theBest = term;
-						}
-					}
-					if (theBest != null) {
-						// the best candidate has also to be in the freebase snapshot
-						if (theBest.getFreeBaseExternalRef() != null) {
-							// and they have be identified as NE by the NER or is not in the dictionary
-							boolean inDict = false;
-						
-							if (Lexicon.getInstance().inDictionary(key)) {
-								inDict = true;
-							}
-							else {
-								String[] toks = key.split(" -,");
-								boolean allDict = false;
-								for (int i=0; i<toks.length; i++) {
-									if (!Lexicon.getInstance().inDictionary(toks[i])) {
-										allDict = false;
-										break;
-									}
-									else {
-										allDict = true;
-									}
-								}
-								if (allDict) {
-									inDict = true;
-								}
-							}
-							if ( (theBest.getEntityType() != null) || 
-								 (theBest.getMentionEntityType() != null) || 
-								 !inDict ||
-								( (theBest.getProb_c() > 0.90) && (theBest.getFreq() > 1000) ) 
-								|| (theBest.getSelectionScore() > 0.79) 
-								|| (theBest.getEntitySubTypes() != null)  
-								) {
-								//if (!theBest.isSubTerm)
-								if ((theBest.getProb_c() > 0.1) || (theBest.getFreq() > 1)) {
-									if (!freebaseResults.contains(theBest.getFreeBaseExternalRef())) {	
-										result.add(theBest);
-										freebaseResults.add(theBest.getFreeBaseExternalRef());
-									}
-								}
-							}
-						}
-					}
-				}
-	        }
-
-			// score-based prunning... 
-			List<NerdCandidate> finalResult = new ArrayList<NerdCandidate>();
-			int p = 0;
-			for(NerdCandidate term : result) {
-				// if it is a substring of another candidate...
-				boolean val = false;
-				double maxSelect = 0.0;
-				List<String> freebaseHighTypeGlobal = null;
-				List<String> freebaseTypeGlobal = null;
-				//if (term.isSubTerm) {
-				//	val = true;
-				//}
-				//else 
-				//
-				{
-					String surface1 = term.getRawString();
-
-					// we check if the raw string is a substring of another NerdCandidate from the ERD method
-					for(int j=0; j<result.size(); j++) {									
-						NerdCandidate term2 = result.get(j);
-
-						String surface2 = term2.getRawString();
-						if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
-							val = true;
-							if (term2.getSelectionScore() > maxSelect)
-								maxSelect = term2.getSelectionScore();
-							if ( (term2.getFreebaseHighTypes() != null) && (term2.getFreebaseHighTypes().size() > 0) ) {	
-								for (String typ : term2.getFreebaseHighTypes()) {
-									if (freebaseHighTypeGlobal == null) {
-										freebaseHighTypeGlobal = new ArrayList<String>();
-									}
-									if (!freebaseHighTypeGlobal.contains(typ))
-										freebaseHighTypeGlobal.add(typ);
-								}
-							}
-							if ( (term2.getFreebaseTypes() != null) && (term2.getFreebaseTypes().size() > 0) ) {	
-								for (String typ : term2.getFreebaseTypes()) {
-									if (freebaseTypeGlobal == null) {
-										freebaseTypeGlobal = new ArrayList<String>();
-									}
-									if (!freebaseTypeGlobal.contains(typ))
-										freebaseTypeGlobal.add(typ);
-								}
-							}
-						}
-					}
-				}
-				
-				if ( ((term.getProb_c() > 0.001) && (term.getFreq() > 1)) || 
-					 (term.getRawString().length() == text.length()) || 
-					 (term.getSelectionScore() == 1) ||
-					 (term.getEntitySubTypes() != null) ||
-					 (term.isSpecialEntityType() )
-				   ) 
-				{
-					List<NerdCandidate> contextTerms = new ArrayList<NerdCandidate>();
-					for(int j=0; j<result.size(); j++) {
-						if (j != p) {		
-							contextTerms.add(result.get(j));
-						}
-					}
-					Vector<Article> context = erdRelatedness.collectAllContextTerms(contextTerms);
-//System.out.println(contextTerms.toString());	
-//System.out.println(context.toString());
-
-					// semantic relatedness between the current sub term and the other terms
-					double localRelatedness = erdRelatedness.getRelatednessTo(term, context);
-					System.out.println("relatedness " + term.getRawString() + " / " + localRelatedness);
-					System.out.println("selection score " + term.getRawString() + " / " + term.getSelectionScore());
-					
-					if (!val) {
-						boolean skip = false;
-						if (term.getEntitySubTypes() != null) {
-							if (term.getEntitySubTypes().contains("musical_composition/N1")
-							 	&& (term.getCoarseConfidence() > 0.7)) {
-								// /music/composition is not in the ERD set
-								skip = true;
-							}
-						}
-						//if ( (term.getSelectionScore() > 0.0001) ) {
-						//if ( (term.getSelectionScore() > 0.01) ) {		
-						//	 ((term.getEntityType()!= null) || (term.getMentionEntityType()!= null) ) )
-						
-							//if ( (term.getRawString().length() > 5) || (localRelatedness > 0.2) )
-						if (!skip) {
-							if (term.getNerdScore() > 1.9) {
-								finalResult.add(term);
-							}
-							else if ( ( ( (term.getSelectionScore() > maxSelect*0.2) || (term.getSelectionScore() == 0.0) )
-								&& (term.getSelectionScore() > 0.12) )  || (term.getEntitySubTypes() != null)
-								) {
-								finalResult.add(term);
-							}
-						}
-					}
-					else {	
-						System.out.println("is subterm " + term.getRawString());
-						boolean skip = false;
-						// we remove sub-term in subterm with the same FreeBase type
-						if ( (freebaseHighTypeGlobal != null) 
-							 && (term.getFreebaseHighTypes() != null) 
-							 && (term.getFreebaseHighTypes().size() > 0) ) {
-											
-							for (String typ : term.getFreebaseHighTypes()){							
-								if (freebaseHighTypeGlobal.contains(typ)) {
-									skip = true;
-									break;
-								}
-							}
-							if (term.getFreebaseHighTypes().contains("/organization") &&
-							   (freebaseHighTypeGlobal.contains("/business") || 
-								freebaseTypeGlobal.contains("/computer/software") ) ) {
-								// remove organization as sub-term of /business/consumer_product and related
-								skip = true;
-							}
-							
-							// check consistency
-							if (term.getEntityType() != null) {
-								if (term.getEntityType().equals("institution/N2") && 
-									!term.getFreebaseHighTypes().contains("/organization") ) {
-									skip = true;	
-								}
-							}
-							
-							// do not consider typical modifiers
-							if (term.getEntitySubTypes() != null) {
- 								if (term.getEntitySubTypes().contains("state/N2") ||
-									term.getEntitySubTypes().contains("municipality/N1")) {
-									skip = true;
-								}
-								if (term.getEntitySubTypes().contains("musical_composition/N1")) {
-									// /music/composition is not in the ERD set
-									skip = true;
-								}
-								
-							}
-							
-						}
-						
-						// semantic relatedness has to be higher than a given threashold
-						if (!skip) {
-							if ( (term.getSelectionScore() > 0.011) 
-							    && (term.getSelectionScore() > maxSelect*0.9) 
-							 	&& (localRelatedness > 0.50) )
-							{
-								finalResult.add(term);
-							}
-						}
-					}
-				}
-				p++;
-			}
-			
-System.out.println("final: " + finalResult.toString());
-			// final pruning based on relatedness 
-			terms = new ArrayList<NerdCandidate>();
-			if (finalResult.size() > 1) {
-				for(NerdCandidate term : finalResult) {
-					String[] tokens = term.getRawString().split(" ");
-					if (term.getRawString().length() == text.length()) {
-						terms.add(term);
-					}
-					else if (term.getNerdScore() > 1.9) {
-						terms.add(term);
-					}
-					else if ( ((term.getEntitySubTypes() == null) || (term.getEntitySubTypes().size() == 0)  || 
-							   (term.getEntityType() == null)) 
-						&& (term.getCoarseConfidence() > 0.9) ) {
-				//		&& (term.getCoarseConfidence() > 0.7) ) {
-						continue;
-					}					
-					else if ( (tokens.length > 2) && (term.getRelatednessScore() > 0.05) ) {
-						terms.add(term);
-					}
-				//	else if ( (term.getProb_c() < 0.3) && (term.getProb_c() != 0) ) {
-				//		continue;
-				//	}
-					else if ( (term.getRelatednessScore() > 0.12) || (term.getRelatednessScore() == 0.0) ) {
-						terms.add(term);
-					}
-					
-				}
-			} 
-			else if (finalResult.size() == 1) {
-				NerdCandidate term = finalResult.get(0);
-				if (term.getNerdScore() > 1.9) {
-					terms.add(term);
-				}
-				else if ( ((term.getEntitySubTypes() == null) || (term.getEntitySubTypes().size() == 0)  || 
-						   (term.getEntityType() == null)) 
-					&& (term.getCoarseConfidence() > 0.9) ) {
-					// nothing
-				}
-				else
-					terms.add(term);
-			}
-				
-
-			// we try to re-expand the surface string of the candidates given the prefered term
-			// and the term variant, in order to have the best largest string fit
-			for(NerdCandidate concept : result) {
-				if (concept.getVariants() != null) {
-					for (Variant variant : concept.getVariants()) {
-						String variantString = variant.getTerm();
-						System.out.println("variant: " + variantString);
-						int ind = text.toLowerCase().indexOf(variantString.toLowerCase());
-						if ( (ind != -1) && (variantString.length() > concept.getRawString().length()) ) {
-							concept.setRawString(text.substring(ind, ind+variantString.length()));
-							OffsetPosition pos2 = new OffsetPosition(); 
-							pos2.start = ind;
-							pos2.end = pos2.start + variantString.length();
-							concept.setPosition(pos2);
-						}
-					}
-				}
-			}
-			// last conservative possible prunning
-			//result = prune(result);
-			
-			//return finalResult;
-		
-		
-		return terms;
-	}*/
+		return results;
+	}
 	
 }
-
-

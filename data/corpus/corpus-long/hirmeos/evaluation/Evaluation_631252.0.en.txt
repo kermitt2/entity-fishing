@@ -1,0 +1,77 @@
+init upper level language independent environment
+building Environment for upper knowledge base
+Environment built - 9155139 concepts.
+init Environment for language en
+building Environment for language en
+isLoaded: true
+Environment built - 14651883 pages.
+domains en / isLoaded: true
+Warning: Orthopedic surgery is not a category found in Wikipedia.
+Warning: Environment is not a category found in Wikipedia.
+init Environment for language de
+building Environment for language de
+isLoaded: true
+Environment built - 3523959 pages.
+init Environment for language fr
+building Environment for language fr
+isLoaded: true
+Environment built - 3631810 pages.
+init Environment for language es
+building Environment for language es
+isLoaded: true
+Environment built - 0 pages.
+init Environment for language it
+building Environment for language it
+isLoaded: true
+Environment built - 0 pages.
+631252.0.en.txt: Invalid article name - article not found in Wikipedia: linguistic context
+631252.0.en.txt: Invalid article name - article not found in Wikipedia: null
+631252.0.en.txt: Invalid article name - article not found in Wikipedia: Speaker
+631252.0.en.txt: Invalid article name - article not found in Wikipedia: Pulau Buaya
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+[Wapiti] Loading model: "/home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /home/tanti/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+found no candidate for mention: The Alor-Pantar languages
+found no candidate for mention: the Alor-Pantar languages
+found no candidate for mention: the state of the art
+found no candidate for mention: The languages of the Alor-Pantar (AP)
+found no candidate for mention: Lesser Sunda island
+found no candidate for mention: The Alor-Pantar languages
+found no candidate for mention: the AP languages
+found no candidate for mention: crosslinguistically
+found no candidate for mention: the AP languages
+found no candidate for mention: AP languages
+found no candidate for mention: the AP languages
+found no candidate for mention: the state of the art
+found no candidate for mention: The Alor-Pantar languages
+found no candidate for mention: the Timor-Alor-Pantar
+found no candidate for mention: The Alor-Pantar languages
+found no candidate for mention: Bahasa Alor
+relatedness - comparisons: 26810 - cache proportion: 0.5565076424270496
+
+Evaluation on 1 documents and 155 expected entities, in total 333 s
+
+candidate gold recall: 89.03
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                84.52        94.24        84.52        89.12
+ranker               85.81        95.68        85.81        90.48
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                84.52        94.24        84.52        89.12
+ranker               85.81        95.68        85.81        90.48
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 05:38 min
+[INFO] Finished at: 2017-12-15T17:33:24+01:00
+[INFO] Final Memory: 387M/1054M
+[INFO] ------------------------------------------------------------------------

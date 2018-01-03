@@ -42,7 +42,7 @@
         <url-pattern>/nerd/nerd.js</url-pattern>
     </servlet-mapping>
     
-    <servlet-mapping>
+    <!--<servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
@@ -73,28 +73,12 @@
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/kb/term</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <!--servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/NERDCustomisation/*</url-pattern>
-    </servlet-mapping-->
-    <!--servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/createNERDCustomisation/*</url-pattern>
-    </servlet-mapping-->
-    <!--servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/extendNERDCustomisation/*</url-pattern>
-    </servlet-mapping-->
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
-    <!--servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>nerd/*</url-pattern>
-    </servlet-mapping-->
 
     <welcome-file-list>
         <welcome-file>nerd/index.html</welcome-file>

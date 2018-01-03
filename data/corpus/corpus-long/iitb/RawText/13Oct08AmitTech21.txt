@@ -1,0 +1,32 @@
+How Spam is Improving AI
+
+Those pesky visual puzzles that have to be completed each time you sign up for a Web mail account or post a comment to a blog are under attack. It's not just from spam-spewing computers or hackers, though; it's also from researchers who are using anti-spam puzzles to develop smarter, more humanlike algorithms.
+
+The most common type of puzzle (a series of distorted letters and numbers) is increasingly being cracked by smarter AI software. And a computer scientist has now developed an algorithm that can defeat even the latest photograph-based tests.
+
+Known as CAPTCHAs (Completely Automated Public Turing test to tell Computers and Humans Apart), these puzzles were developed in the late '90s as a way to separate real users from machines that create e-mail accounts to send out spam or log in to message boards to post ad links. The Turing Test, named after mathematician Alan Turing, involves measuring intelligence by having a computer try to impersonate a real person.
+
+Textual CAPTCHAs are a good way to tell humans and spam-bots apart, because distorted letters and numbers can easily be read by real people (most of the time) but are fiendishly difficult for computers to decipher. However, computer scientists have long seen CAPTCHAs as an interesting AI challenge. Designers of textual CAPTCHAs have gradually introduced more distortion to prevent machines from solving them. But they have to balance security against usability: as distortion increases, even real human beings begin to find CAPTCHAs difficult to decipher.
+
+Earlier this year, Jeff Yan, a researcher at the University of Newcastle, U.K., revealed a program capable of completing the textual CAPTCHAs used to protect Microsoft's Hotmail, MSN, and Windows Live services with a success rate of 60 percent. This might not sound like much, but it's significant, since a computer can try its attack thousands of times each minute. Yan withheld the paper until Microsoft had a chance to tweak its CAPTCHAs so that they were more difficult to crack. But at the ACM Computer and Communication Security Conference in Alexandria, VA, later this month, Yan will present details of another program that he says can crack even more widely used textual CAPTCHAs.
+
+So an alternative is to ask users to solve different kinds of puzzles. But another paper to be presented at the same conference describes an algorithm that could spell trouble for even newer CAPTCHAs.
+
+Philippe Golle of the Palo Alto Research Center has developed a program called Asirra, developed by Microsoft, that can correctly pass an image-based CAPTCHA. Asirra asks users to correctly classify images of either cats or dogs using a database of three million images provided by animal-rescue organizations. This task should be even harder for computers than recognizing squiggly letters, but Golle's program can correctly identify the cats or dogs shown by Asirra 87 percent of the time.
+
+
+
+Golle trained his program using 8,000 images collected from the same website. Through trial and error, his software gradually learned to tell cats and dogs apart, based on a statistical analysis of color and texture in each photo. The pink of the dogs' tongues and the green of the cats' eyes provided strong clues, Golle says, but it is only by studying color and texture information from so many images that his program could attack the problem. "Machine learning is very good at aggregating information," Golle says.
+
+However, although each individual picture was recognized 87 percent of the time, the full CAPTCHA test requires 12 pictures to be identified simultaneously, so the attack actually works only 10.3 percent of the time.
+
+Golle says that an easy countermeasure would be for Asirra to present more pictures, which would further drive down the success rate of the attack. Microsoft did not respond to our requests for comment.
+
+Despite all this progress, it's unclear whether or not real spammers are currently using AI attacks against real CAPTCHAs. Websense Security Labs, in San Diego, has released reports about spammers cracking CAPTCHAs, but often this involves simply having low-paid workers solve CAPTCHAs manually.
+
+Luis von Ahn, a computer scientist at Carnegie Mellon University, who helped coin the term CAPTCHA, says that it's not clear that any common CAPTCHAs have been broken by machine attack in the real world. "I don't know of anybody who's thinking of getting rid of the CAPTCHA because it doesn't work," he says.
+
+However, von Ahn notes that using humans comes at a cost. Even if workers are paid just $3 per 1,000 CAPTCHAs, that is expensive, he says, especially since most of the hacked Web mail accounts will be shut down soon after they begin to send out spam. So a truly automated attack would reduce the cost to spammers and greatly increase the number of successful attacks they could afford, he says.
+
+But until computers start to get much smarter, CAPTCHA creators will always be able to implement a few simple tweaks to make a CAPTCHA much harder. "I do think there will be a day when, essentially, CAPTCHAs are going to be useless," von Ahn says. "But I don't think it's this year, or next."
+

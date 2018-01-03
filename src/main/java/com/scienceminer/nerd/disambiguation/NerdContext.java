@@ -1,20 +1,12 @@
 package com.scienceminer.nerd.disambiguation;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
+import com.scienceminer.nerd.mention.Mention;
 
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
-import org.grobid.core.data.Sense;
-
-import java.util.*; 
-import java.text.*;
-import java.text.*;
-
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.model.*;
-
-import com.fasterxml.jackson.core.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * This class represents a context to be exploited for performing a disambiguation. 
@@ -23,11 +15,20 @@ import com.fasterxml.jackson.core.io.*;
  */
 public class NerdContext {
 	
+	// the selected entities modeling the context
 	protected List<Article> contextArticles = null;
 	protected List<Integer> contextArticlesIds = null;
 	
 	// working acronyms for this context
-	protected Map<Entity, Entity> acronyms = null;
+	protected Map<Mention, Mention> acronyms = null;
+
+	// the list of mentions encountered so far in the current "session"
+	// this is useful for future co-reference resolutions
+	protected List<Mention> mentionRepository = null;
+
+	// the list of disambiguated entities produced so far in the current "session"
+	// this can be used for adding features, reimforcement or various post-processing
+	protected List<Mention> entityRepository = null;
 
 	protected double totalWeight = 0.0;
 	protected Relatedness relatedness = Relatedness.getInstance();
@@ -247,11 +248,11 @@ public class NerdContext {
 		return contextArticlesIds.contains(new Integer(entityId));
 	}
 
-	public Map<Entity, Entity> getAcronyms() {
+	public Map<Mention, Mention> getAcronyms() {
 		return this.acronyms;
 	} 
 
-	public void setAcronyms(Map<Entity, Entity> acronyms) {
+	public void setAcronyms(Map<Mention, Mention> acronyms) {
 		this.acronyms = acronyms;
 	}
 

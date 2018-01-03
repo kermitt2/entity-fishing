@@ -24,11 +24,11 @@
 * interactive disambiguation in text editing mode.  
 ![Editor with real time disambiguation](doc/images/screen6.png)
 
+*entity-fishing* is a work-in-progress !
 
 # Documentation
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io)
-
 
 ## License and contact
 

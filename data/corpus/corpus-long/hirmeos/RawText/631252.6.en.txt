@@ -1,0 +1,31 @@
+shows that aspect in Western Pantar is prefixing, while in Kaera and Kamang it is suffixing. Also, morphemes with overlapping values have very different shapes: compare the perfective of Kaera-i with Kamang-ma and imperfective Kaera-(i)t with Kamang-si.
+
+In sum, overall, the morphological profile of languages in the AP family is simple compared to many other Papuan languages. The only affixes that have been reconstructed for proto-AP at this stage, are a paradigm of person prefixes on verbs and a third person possessive prefix on nouns: Appendix).The assistive (ast) refers to the participant who assists in the action.
+
+Marian Klamer
+
+si Imperfective-ma Perfective-ta Stative
+
+5.9 Typological features of AP languages in the Papuan context
+
+Several proposals have been made to characterize the typological profile of Papuan languages.presents a list of typological features that have been mentioned most commonly in the literature as typical for Papuan languages (see). In the right-most column, I indicate whether or not a feature applies to the AP languages.clearly suggests that some of the syntactic typology of AP languages is much like that of other Papuan languages: object-verb order and preposed possessors (gen-Noun) predominate, and negators and conjunctions are clause final, or at least follow the predicate. A formal distinction between alienable and inalienable possession is made in all languages. Serial verb constructions are found across the group.
+
+AP languages are different from other Papuan languages in that they do not exhibit clause-chaining, do not have switch reference systems, never suffix subject indexes to verbs and generally do not make a formal distinction between medial and final verbs. Gender is not marked in AP languages. Unlike many other Papuan groups, the AP languages do encode clusivity in their pronominal systems, and do have a phonemic r-l distinction.
+
+All this goes to suggest that the typology of Papuan languages is more diverse than has previously been recognized. Indeed, apart from a broadly similar headfinal syntactic profile, there is very little else that the AP languages share with Papuan languages spoken in other regions (see also Holton & Robinson this volume
+
+6.2 Numerals and numeral systems
+
+The indigenous numerals of the AP languages, as well as the indigenous structures for arithmetic operations are currently under pressure from Indonesian, and will inevitably be replaced with Indonesian forms and structures. Future generations may thus be interested in a documentary record of the forms and patterns currently used for cardinal, ordinal and distributive numerals, and the expressions of arithmetic operations (Klamer et al. this volume). The numeral system reconstructed for pAP mixes numeral words that have a quinary and a decimal base, as shown inThat is, numeral '5' is a monomorphemic form, the numeral '7' is expressed with (reflexes of) morphemes for [5 2], '8' as, while '10' is [10 1] (Systems with numeral bases other than 10 such as the one reconstructed for pAP are relatively rare in the world's languages. From a typological point of view, the reconstructed form for the numeral '6' is even more interesting, as it is not composed as, as expected in a quinary system, but is rather a monomorphemic form (see
+
+Reflexes of the pAP numeral system are found across Alor and Pantar. In the region of the Straits between both islands, the languages underwent a separate later development, innovating some forms, as well as introducing a subtractive pattern, representing '9' as1] and '8' asIn contrast with the AP languages, the Papuan languages spoken in Timor all have decimal systems. They have also borrowed forms from Austrone30 1 The Alor-Pantar languages: Linguistic context, history and typology
+
+sian; examples include Makalero '4', '5', '7', '9' (Huber 2011) and
+
+6.3 Numeral classifiers
+
+Numeral classifiers are found in numeral NPs throughout the AP family. From a Papuan point of view, this is remarkable, as few Papuan languages have numeral classifiers. In AP languages, the classifier is usually not obligatory, and it always follows the noun and precedes the numeral:An illustration with the Teiwa general classifier bag 'clf' is (32):
+
+Some of the AP languages have parallel forms for numeral classifiers. For instance, Western Pantar waya and Adang beh both originate from a noun meaning 'leaf'. However, across the AP languages, the classifiers differ significantly in form as well in their classifying function so that no classifier can be reconstructed for proto-AP. A number of AP languages have a 'general' classifier, which functions to classify nouns outside the semantic domains of other classifiers that are semantically more specific (cf.Illustrations are the general classifiers Teiwa bag (derived from a lexeme meaning 'seed', Klamer 2014c,b),
+
+Marian Klamer and Adang pa, derived from a lexeme meaning 'non-round fruit'

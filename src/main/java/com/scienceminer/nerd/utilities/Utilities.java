@@ -7,20 +7,34 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.grobid.core.factory.*;
-import org.grobid.core.mock.*;
 import org.grobid.core.main.*;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.main.GrobidHomeFinder;
+import org.grobid.core.layout.LayoutToken;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
+import com.scienceminer.nerd.disambiguation.NerdEntity;
 
 import org.apache.commons.lang3.StringUtils;
 import com.scienceminer.nerd.exceptions.NerdException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Some utilities methods that I don't know where to put.
- * 
+ *
  */
 public class Utilities {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(Utilities.class);
 
 	/**
 	 * Deletes all files and subdirectories under dir. Returns true if all
@@ -106,7 +120,7 @@ public class Utilities {
 	 * lin-32<br>
 	 * lin-64<br>
 	 * mac-64<br>
-	 * 
+	 *
 	 * @return name of the directory corresponding to the os name and
 	 *         architecture.
 	 */
@@ -119,7 +133,7 @@ public class Utilities {
 
 	/**
 	 * Convert a string to boolean.
-	 * 
+	 *
 	 * @param value
 	 *            the value to convert
 	 * @return true if the string value is "true", false is it equals to
@@ -138,7 +152,7 @@ public class Utilities {
 
 	/**
 	 * Call a java method using the method name given in string.
-	 * 
+	 *
 	 * @param obj
 	 *            Class in which the method is.
 	 * @param args
@@ -163,7 +177,7 @@ public class Utilities {
 
 	/**
 	 * Call a java method using the method name given in string.
-	 * 
+	 *
 	 * @param obj
 	 *            Class in which the method is.
 	 * @param args
@@ -184,7 +198,7 @@ public class Utilities {
 	/**
 	 * Get the method given in string in input corresponding to the given
 	 * arguments.
-	 * 
+	 *
 	 * @param obj
 	 *            Class in which the method is.
 	 * @param paramTypes
@@ -192,7 +206,7 @@ public class Utilities {
 	 * @param methodName
 	 *            the name of the method.
 	 * @return Methood
-	 * 
+	 *
 	 * @throws NoSuchMethodException
 	 */
 	@SuppressWarnings("rawtypes")
@@ -204,7 +218,7 @@ public class Utilities {
 
 	/**
 	 * Creates a file and writes some content in it.
-	 * 
+	 *
 	 * @param file
 	 *            The file to write in.
 	 * @param content
@@ -222,7 +236,7 @@ public class Utilities {
 
 	/**
 	 * Read a file and return the content.
-	 * 
+	 *
 	 * @param pPathToFile
 	 *            path to file to read.
 	 * @return String contained in the document.
@@ -243,15 +257,13 @@ public class Utilities {
 
 		return out.toString();
 	}
-	
+
 	/**
 	 * Format a date in string using pFormat.
-	 * 
-	 * @param pDate
-	 *            the date to parse.
-	 * @param pFormat
-	 *            the format to use following SimpleDateFormat patterns.
-	 * 
+	 *
+	 * @param pDate the date to parse.
+	 * @param pFormat the format to use following SimpleDateFormat patterns.
+	 *
 	 * @return the formatted date.
 	 */
 	public static String dateToString(Date pDate, String pFormat){
@@ -260,17 +272,16 @@ public class Utilities {
 	}
 
 	public static void initGrobid() {
-		String pGrobidHome = NerdProperties.getInstance().getGrobidHome();
-		String pGrobidProperties = NerdProperties.getInstance().getGrobidProperties();
+		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
 		try {
-			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);      
-			GrobidProperties.getInstance();
-			LibraryLoader.load();
-	
-			System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
-		}
-		catch(javax.naming.NameAlreadyBoundException e) {
-			// already loaded, nothing to do
+	        NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
+			String pGrobidHome = conf.getGrobidHome();
+
+			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
+        	GrobidProperties.getInstance(grobidHomeFinder);
+            LibraryLoader.load();
+			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 		}
 		catch(Exception e) {
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
@@ -291,5 +302,41 @@ public class Utilities {
 		ObjectInputStream is = new ObjectInputStream(in);
 		return is.readObject();
 	}
+
+	public static List<LayoutToken> getWindow(NerdEntity entity, List<LayoutToken> tokens, int size, String lang) {
+		int start = entity.getOffsetStart();
+		int end = entity.getOffsetEnd();
+
+		return getWindow(start, end, tokens, size, lang);
+	}
+
+	public static List<LayoutToken> getWindow(int start, int end, List<LayoutToken> tokens, int size, String lang) {
+		List<LayoutToken> subTokens = new ArrayList<LayoutToken>();
+
+		// first locate the entity in the token list
+		int pos = 0;
+		for(LayoutToken token : tokens) {
+			if ( (token.getOffset() >= start) && ((token.getOffset()+token.getText().length()) <= end) )
+				break;
+			pos++;
+		}
+
+		int posStart = pos - size;
+		if (posStart < 0)
+			posStart = 0;
+		int posEnd = pos + size;
+		if (posEnd >= tokens.size())
+			posEnd = tokens.size()-1;
+
+		for(int p = posStart; p <= posEnd; p++) {
+			if (p != pos) {
+				subTokens.add(tokens.get(p));
+			}
+		}
+
+		return subTokens;
+	}
+
+
 
 }

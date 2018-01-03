@@ -1,0 +1,294 @@
+AASM Manual
+===========
+(This is more of a set of notes than a true manual.)
+Alpha++ release!
+Required: {binary file, token specifier "mnemonics", source file}
+Command line format
+~~~~~~~~~~~~~~~~~~~
+qasm [-s[d,v][{l, p}], , -l , -h , -e ]
+-s dumps the symbol table to the specified file.
+the default is to dump in alphabetical order
+the -sd option dumps symbols in order of Definition
+the -sv option sorts symbols into ascending Value
+adding an 'l' will dump the Local labels too
+adding a 'p' will dump the literal Pools too
+-l dumps the list output to the specified file.
+the -ls option will list the symbol table too
+the -lk option will list the symbol table and insert a "KMD" identifier
+-h dumps ASCII hexadecimal to the specified file.
+-e dumps ELF to the specified file.
+omitting the filename (or substituting '-') directs to stdout.
+(Further options will be added later.)
+Output information
+~~~~~~~~~~~~~~~~~~
+Each pass attempts to define and refine label values.
+On each pass
+information is echoed indicating "Label changes":
+"defined" is the number of labels which were defined for the
+first time on that pass.
+"value changed" is the number of labels whose definition has
+been altered on that pass; this is normally due to the object
+code changing size as offsets are adjusted.
+"read while undefined" indicates references to labels which
+have not yet had any definition.
+Iteration continues until all these values are zero - at which time a
+final pass generates code - or the assembler becomes fed up, which
+implies that the source code is not sensible.
+In this case labels
+still undefined are reported.
+Errors are reported as they are determined and, if a pass contains
+errors, assembly will be aborted at the end of the pass.
+Source file input format
+~~~~~~~~~~~~~~~~~~~~~~~~
+Standard assembly language: optional label followed by a mnemonic -
+with addressing mode(s) as required - followed by an optional comment.
+Any field may be omitted where sensible.
+No restrictions on mnemonic/label formatting (1st column, etc.)
+Mnemonics (including directives) are case insensitive.
+Labels are case sensitive.
+Lines are terminated by
+or .
+A line is truncated to a limit of 255 characters. (Alterable in source file.)
+Directives supported are:
+INCLUDE 		Include file as part of source
+GET
+Synonym for "INCLUDE"
+EQU				Equate
+EXPORT	, , ...	Marks labels for export (for expansion)
+If
+= "all", all labels are exported
+ARM				Assemble as 32-bit ARM code (default)
+(Automatically aligns to word boundary)
+THUMB				Assemble as 16-bit Thumb code
+ARCHITECTURE			Set instruction set architecture (default "ALL")
+{v3, v3M, v4, v4xM, v4T, v4TxM, v5, v5xM, v5T, v5TxM,
+v5TE, v5TExP, all, any} (last 2 are synonyms)
+ARCH				Synonym for ARCHITECTURE
+ORIGIN				Origin (defaults to 00000000 at start)
+ORG				Synonym for ORIGIN
+ENTRY				Mark code entry point
+ALIGN	, ]]	Increment origin to next multiple of
+[[Will default to 4-byte alignment
+Note: any label will be at the first filled address
+if filling the gap, but the aligned address if not.
+DEFS	[, ]	Define space - space uninitialised if
+byte omitted
+DEFB	, , ...	Define byte
+DEFB	"string", ...		may mix with above - possible delimiters " ' ` /
+Accepts C-style escape codes
+{ \0 \" \' \? \\ \a \b \f \n \r \t \v }
+DEFH	, , ...	Define 16-bit word (also strings as DEFB)
+DEFW	, , ...	Define 32-bit word (also strings as DEFB)
+DCB				Synonym for DEFB
+DCW				Synonym for DEFH
+DCD				Synonym for DEFW
+LITERAL				Dump any outstanding literal constants
+Owing to the automatic alignment and
+user invisibility of literals it is
+inadvisable to label a LITERAL directive.
+LITERALS			Synonym for LITERAL
+POOL				Synonym for LITERAL
+LTORG				Synonym for LITERAL
+RN				Alias a register name.
+Note: must precede alias use in assembly
+CN				Alias a coprocessor register name.
+Note: must precede alias use in assembly
+Note: a value used in (e.g.) DEFB is truncated to the appropriate
+least significant bits -without- a warning message being generated.
+Label rules
+~~~~~~~~~~~
+Labels are strings of alphanumerics, beginning with an alphabetic
+character.
+'_' is regarded as alphabetic.
+They are case sensitive.
+A label can be any length, but only the first 31 characters are
+stored.
+(This limit can be changed in the source file.)
+Longer
+labels are still likely to be distinguished by their hashes.
+Local labels may be defined as decimal numbers.
+The same label may be
+defined repeatedly, if desired.
+A local label is referenced using a
+'%' prefix, thus:
+999	beq	%b111
+The reference may be specified as "%b##" (back) which searches for the
+nearest matching preceding definition in the assembly process, "%f##"
+(forward) which searches for the nearest matching succeeding
+definition or "%##" which searches backwards then forwards if not
+found.
+Both directions of search begin with the label on the current
+line, if any.
+Expression rules
+~~~~~~~~~~~~~~~~
+An operand may be one of:
+.		current location
+label
+%	local label
+decimal number
+:	binary number			????
+0b	binary number
+@	octal number
+$	hexadecimal number
+&	hexadecimal number
+0x	hexadecimal number
+Values are 32 bit, two's complement.
+Any number may contain an arbitrary number of '_' characters.
+These
+are intended to be available as field separators (e.g. in long binary
+numbers) and are ignored by the assembler.
+A monadic operator may be one of:
+Symbols		Operation
++		Plus
+-		Negative
+(2's complement)
+~		NOT
+(1's complement)
+|		log
+(i.e. the bit number of the MS '1' or -1 for 0)
+Only one monadic operator is allowed per element.
+A diadic operator may be one of:
+Symbols		Operation	Precedence
+<< LSL SHL	Left shift
+6	(High)
+>> LSR SHR	Right shift
+6
+AND		Logical AND
+5
+|
+OR		Logical OR
+4
+^
+EOR XOR	Logical XOR
+4
+*		Multiply
+3
+/
+DIV		DIV
+3
+\
+MOD		MOD
+3
++		Add
+2
+-		Subtract
+2	(Low)
+Parentheses may be used to force priority.
+Mnemonics
+~~~~~~~~~
+Standard ARM mnemonics and syntax are supported, with the following additions:
+NOP			ARM no-operation (MOV R0, R0)
+UNDEF			Undefined instruction (?C000010)
+UNDEFINED		as above
+ADR Rd, addr		Produce an ADD/SUB Rd, PC, ## so that Rd becomes addr
+Exactly one instruction is generated.
+ADRL Rd, addr		Produce a set of operations which sets up Rd
+by adding or subtracting from the PC.
+From
+one to four instructions may be generated.
+ADRn Rd, addr		Produce a set of operations which sets Rd to
+addr, using exactly n instructions
+LDR/STR Rd, addr	PC-relative addressing mode
+LDR Rd, =##		MOV/MVN Rd, ## if possible, otherwise plant a
+PC-relative load to a literal constant.
+The
+literals will be dumped at the end of the file,
+or earlier with a LITERAL directive.
+LDRH will generate half word literals.
+Literals will be aliased to earlier constants
+of the same value, where possible.
+Literal pools are aligned automatically, as
+deemed necessary by the assembler, and
+terminate on word alignment.
+ADDX Rd, Rn, #nn	A number of `extended' immediate operations
+which are synthesized from real operations but
+allow arbitrary sized immediate fields.
+From
+one to four instructions may be generated;
+some substitution (e.g. SUB for ADD) will be
+attempted if it shortens the sequence.
+Operations supported are {MOVX, ADDX, ADCX,
+SUBX, SBCX, RSBX, RSCX, ANDX, BICX, ORRX,
+EORX}.
+Conditional operation and flag setting is
+optional; NOTE that an attempt to set the C or
+V FLAG will result in an UNDEFINED state as
+predicting where an overflow may occur is not
+possible and the flags can only be set on the
+last instruction in the sequence.
+These sequences may provide a convenient means
+of performing some operations but should be
+used with caution.
+An advantage of this mechanism over "LDR =" is
+that the data is fetched from the code stream
+rather than as data; thus the constants are
+more easily integrated with instruction
+caches, etc.
+Notes for Thumb:
+NOP is MOV R8, R8 because MOV R0, R0 would affect the flags.
+Only ADR (and ADR1) are currently supported.
+Register names
+~~~~~~~~~~~~~~
+Register names are case insensitive.
+The following register names are
+predefined:
+Name	Name	Name	Value
+r0	a1
+0
+r1	a2
+1
+r2	a3
+2
+r3	a4
+3
+r4	v1
+4
+r5	v2
+5
+r6	v3
+6
+r7	v4
+7
+r8	v5
+8
+r9	v6	sb
+9
+r10	v7	sl	 10
+r11	fp		 11
+r12	ip		 12
+r13	sp		 13
+r14	lr		 14
+r15	pc		 15
+Other aliases (also case insensitive) may be created with the "RN"
+directive, e.g.
+acc		rn	r0
+Coprocessor names are treated similarly.
+Predefined aliases are "C?"
+and "CR?" where '?' is a decimal number 0-15.
+The relevant directive
+is "CN".
+Status register names are not aliasable.
+Coprocessor names
+~~~~~~~~~~~~~~~~~
+Predefined coprocessor names are "P?" or "CP?" where '?' is a decimal
+number 0-15.
+They are case insensitive.
+Aliases may be defined with
+the "CP" directive.
+Non-literal translation
+~~~~~~~~~~~~~~~~~~~~~~~
+Some instructions will be modified, if possible, if they cannot be
+assembled as specified.
+For example: "ADD R1, R2, #-1" becomes
+"SUB
+R1, R2, #1".
+There are two such sets of pairs:
+ADD/SUB and CMP/CMP		Operand negated
+AND/BIC, ADC/SBC and MOV/MVN	Operand inverted
+As mentioned above, instructions of the form "LDR Rd, =###" will be
+translated to MOV or MVN if the immediate field will fit in the
+instruction.
+Caveats
+~~~~~~~
+If using literal pools (i.e. the LDR R0, =&12345678 syntax) it is
+advisable to finish the code file with a "LITERAL

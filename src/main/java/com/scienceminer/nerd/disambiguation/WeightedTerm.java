@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;

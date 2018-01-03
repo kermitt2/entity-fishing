@@ -3,13 +3,14 @@ package com.scienceminer.nerd.disambiguation;
 import org.grobid.core.data.Entity;
 
 import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
 
 import org.grobid.core.utilities.OffsetPosition;
 import com.scienceminer.nerd.kb.Definition;
 import com.scienceminer.nerd.kb.Domains;
 import com.scienceminer.nerd.kb.Variant;
 import com.scienceminer.nerd.kb.Category;
+import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 
 import java.util.List;    
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import com.fasterxml.jackson.core.io.*;
  */
 public class NerdCandidate implements Comparable<NerdCandidate> {
 
-	// entity associated to the present diambiguated entity candidate
+	// entity associated to the present disambiguated entity candidate
 	private NerdEntity entity = null;
 
 	// true if the textual content corresponding to this element is not continuous
@@ -116,6 +117,13 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 
 	// list of wikipedia categories corresponding to the disambiguated term
 	private List<com.scienceminer.nerd.kb.Category> wikipediaCategories = null;
+
+	// if true, the candidate has been defined for a coreference mention from
+	// the candidates originally from the first reference
+	private boolean coReference = false;
+
+	// if the actual string (with its case) matches exactly the selected label of the candidate
+	private boolean bestCaseContext = true;
 
 	public NerdCandidate(NerdEntity entity) {
 		this.entity = entity;
@@ -213,6 +221,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		domains.add(domain);
 	}
 	
+	public boolean getBestCaseContext() {
+		return bestCaseContext;
+	}
+
+	public void setBestCaseContext(boolean bestCase) {
+		this.bestCaseContext = bestCase;
+	}
+
 	public List<String> getExpandedDomains() {
 		return expandedDomains;
 	}
@@ -372,6 +388,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		relatednessScore = score;
 	}
 	
+	public boolean isCoReference() {
+		return coReference;
+	}
+
+	public void setCoReference(boolean coReference) {
+		this.coReference = coReference;
+	}
+
 	//@Override
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
@@ -558,6 +582,24 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		
 		return result;
 	}
+
+	/**
+	 * Return the Wikidata identifier of the entity in relation to the candidate wikidata ID
+	 * via P31 (instance of) if such relation exists in the list of statements
+	 */
+	public String getWikidataP31Id() {
+		if (wikidataId == null) 
+			return null;
+		// check the statements
+		List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(wikidataId);
+		if (statements == null || statements.size() == 0)
+			return null;
+		for(Statement statement : statements) {
+			if (statement.getPropertyId() != null && statement.getPropertyId().equals("P31"))
+				return statement.getValue(); 
+		}
+		return null;
+	}
 	
 	/**
 	 * Merge two NerdCandidates.
@@ -631,15 +673,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	 *  Comparable implementation. We sort against the nerdScore
 	 */
 	public int compareTo(NerdCandidate compareNerdCandidate) {
-
-		double compareQuantity = compareNerdCandidate.getNerdScore(); 
-		//double compareQuantity = compareNerdCandidate.getSelectionScore(); 
-		//ascending order
-		//return this.nerdScore - compareQuantity;
-		//return this.selectionScore - compareQuantity;
-
+		
 		//descending order
-		int val = ((int)((compareQuantity - this.nerdScore) * 1000));
+		int val = ((int)((compareNerdCandidate.getNerdScore() - this.nerdScore) * 1000));
 		//return ((int)((compareQuantity - this.selectionScore) * 1000));
 
 		if (val == 0) {
@@ -656,5 +692,20 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 
 		return val;
 	}
-	
+
+	/**
+	 * Copy of a candidate, with deep copy of relevant instance variable
+	 */
+	public NerdCandidate copy(NerdEntity entity) {
+		NerdCandidate copy = new NerdCandidate(entity);
+		copy.setWikiSense(this.getWikiSense());
+		copy.setWikipediaExternalRef(this.getWikipediaExternalRef());
+		copy.setProb_c(this.getProb_c());
+		copy.setPreferredTerm(this.getPreferredTerm());
+		copy.setLang(this.getLang());
+		copy.setLabel(this.getLabel());
+		copy.setWikidataId(this.getWikidataId());
+		copy.setWikipediaCategories(this.getWikipediaCategories());
+		return copy;
+	}
 }

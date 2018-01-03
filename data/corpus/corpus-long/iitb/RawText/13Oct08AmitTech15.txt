@@ -1,0 +1,21 @@
+Wireless at Fiber Speeds
+There's no shortage of demand for faster wireless, but today's fastest technologies--Wi-Fi, 3G cellular networks, and even the upcoming WiMax--max out at tens or hundreds of megabits per second. So far, no commercial wireless system can beat the raw speed of optical fiber, which can carry tens of gigabits per second.
+
+One way to achieve faster speeds is to harness the millimeter-wavelength frequency of the wireless spectrum, although this usually requires expensive and very complex equipment. Now, engineers at Battelle, a research and development firm based in Columbus, OH, have come up with a simpler way to send data through the air with millimeter-wave technology. Earlier this year, in field tests of a prototype point-to-point system, the team was able to send a 10.6-gigabit-per-second signal between antennas 800 meters apart. And more recently, the researchers demonstrated a 20-gigabit-per-second signal in the lab.
+
+Richard Ridgway, a senior researcher at Battelle, says that the technique could be used to send huge files across college campuses, to quickly set up emergency networks in a disaster, and even to stream uncompressed high-definition video from a computer or set-top box to a display.
+
+Whereas Wi-Fi and cellular networks operate on frequencies of 2.4 to 5.0 gigahertz, millimeter-wave technology exploits a region from about 60 to 100 gigahertz. These waves can carry more data because they oscillate faster. Much of the millimeter region is unlicensed and open for use; it has only been neglected because of the difficulty and expense involved in generating a millimeter-wave signal, encoding information on it, and then decoding at the other end. Usually, data is encoded by first generating a low-frequency wave of around 10 gigahertz, then converting it into a higher-frequency signal. The drawback is that encoding data on a 10-gigahertz signal limits the data rate to about one gigabit per second.
+
+The Battelle team was able to better this by more than a factor of 10 using off-the-shelf optical telecommunication components. The researchers modulated data on two low-frequency laser beams, then combined the two. When these two beams combine, they create a pattern of interference that acts as a 100-gigahertz signal. "It looks as though we have a laser beam that has a 100-gigahertz frequency," Ridgway says. 
+
+
+
+In the past few years, researchers at Georgia Tech, MIT, Intel, and elsewhere have made great strides in developing millimeter-wave devices. Companies such as Intel have even started pushing for standards that could help develop interoperable technologies that operate at 60 gigahertz. And one company, Gigabeam, has rolled out products that can achieve around one gigabit per second using a point-to-point link over a few hundred meters.
+
+Ridgway explains that using telecommunication lasers has two big advantages. First, they are high power, so the resulting millimeter wave is also of relatively high power. Second, the lasers have been engineered to be stable and dependable, producing a signal that doesn't fluctuate much compared with standard millimeter-wave sources.
+
+Alan Crouch, director of the Communications Technology Lab at Intel, says that the Battelle work is further evidence that millimeter-wave technology could become increasingly important. "There's demand for more and more wireless communication solutions in this space," he says, adding that "there is strong industry interest."
+
+But the research may be years away from being deployed in a product. Ridgway explains that, since the system has been put together from existing components, it's much larger than it ultimately needs to be. In addition, a property of the signal called polarization, which plays a role in encoding data, tends to drift during operation, which means that the system requires attention when running. But Ridgway hopes that, with some more engineering, these problems can be ironed out. "We'd like to get it to a point where you could just turn on and go," he says.
+

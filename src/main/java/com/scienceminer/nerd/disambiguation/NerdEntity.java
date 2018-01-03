@@ -1,93 +1,83 @@
 package com.scienceminer.nerd.disambiguation;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
-
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
-import org.grobid.core.data.Sense;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.lexicon.NERLexicon;
-import org.grobid.core.layout.BoundingBox;
-
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.model.*;
-
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Page;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
+import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.data.Sense;
+import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.lexicon.NERLexicon;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.TextUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*; 
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
-import com.fasterxml.jackson.core.io.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * This class represents disambiguated entity (the result), including conceptual and 
- * encyclopedic information, with the information necessary for a disambiguation. 
- * 
+ * This class represents disambiguated entity (the result), including conceptual and
+ * encyclopedic information, with the information necessary for a disambiguation.
+ *
  *
  */
 public class NerdEntity implements Comparable<NerdEntity> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdEntity.class);
-	
-	// Orign of the entity definition
-	public enum Origin {
-		GROBID	("grobid"),
-		USER	("user"),
-		NERD	("nerd");
-		
-		private String name;
-
-		private Origin(String name) {
-          	this.name = name;
-		}
-
-		public String getName() {
-			return name;
-		}
-	};
 
 	// exact mention form of the entity, as appearing in the input
 	private String rawName = null;
 
-	// mention form of the entity, with soft normalisation: replacing \n per space, 
+	// mention form of the entity, with soft normalisation: replacing \n per space,
 	// replacing sequence of space by a unique space
 	// this is usually this surface form that should be used, in particular for
 	// acronyms where this field capture the expended form
 	private String normalisedRawName = null;
-	
+
 	// preferred/normalised name of the entity
     private String preferredTerm = null;
-	
+
+    private ProcessText.MentionMethod source = null;
+
 	// type of the entity (person, location, etc.)
 	private NERLexicon.NER_Type type = null;
-	
+
 	// subtypes of the entity when available - the first one is the main one, the others secondary subtypes
 	private List<String> subTypes = null;
-	
+
 	// relative offset positions in context, if defined
 	private OffsetPosition offsets = null;
-	
+
 	// optional bounding box in the source document
 	private List<BoundingBox> boundingBoxes = null;
 
 	// probability of the entity in context, if defined
 	private double prob = 1.0;
-	
+
 	// confidence score of the entity in context, if defined
 	private double ner_conf = -1.0;
-	
+
 	// all the sense information related to the entity
 	private Sense sense = null;
 
 	// definitions of the related sense/concept/entity
 	private List<Definition> definitions = null;
-	
+
 	// list of conceptual variants for the term
 	private List<Variant> variants = null;
-	
+
 	// Wikipedia page ID
 	private int wikipediaExternalRef = -1;
-	
+
 	// Wiktionary page ID
 	private int wiktionaryExternalRef = -1;
 
@@ -104,19 +94,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// list of freebase types for the term
 	//private List<String> freebaseTypes = null;
 
-	// method used to produce the disambiguated term 
-	public static final int GROBID = 0;
-	public static final int USER = 1;
-	public static final int NERD = 2;
-	// orign of the entity 
-	private Origin origin = null;
-	
 	// list of wikipedia categories corresponding to the disambiguated term
 	private List<com.scienceminer.nerd.kb.Category> categories = null;
-	
+
 	public boolean isSubTerm = false;
 	public boolean isAcronym = false;
-	
+
 	// to carry statistics/priors
 	// conditional probability of the concept given the string
 	private double prob_c = 0.0;
@@ -136,42 +119,45 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	private double relatednessScore = 0.0;
 	// frequency that the raw string is used as a link anchor in Wikipedia
 	private double linkProbability = 0.0;
-	
+
 	private String lang = null;
 
 	private List<Statement> statements = null;
+
+	private BiblioItem biblio = null;
 
 	public NerdEntity() {
 		offsets = new OffsetPosition();
 	}
 
-	public NerdEntity(Entity entity) {
-		rawName = entity.getRawName();
-		if (entity.getNormalisedName() != null) 
-			this.normalisedRawName = entity.getNormalisedName();
+	public NerdEntity(String rawName, int start, int end) {
+		this();
+		this.rawName = rawName;
+		this.setOffsetStart(start);
+		this.setOffsetEnd(end);
+	}
+
+	public NerdEntity(Mention mention) {
+		rawName = mention.getRawName();
+		if (mention.getNormalisedName() != null)
+			this.normalisedRawName = mention.getNormalisedName();
 		else if (rawName != null) {
 	        this.normalisedRawName = simpleStringNormalisation(rawName);
 		}
-		preferredTerm = entity.getNormalisedName();
-		type = entity.getType();
-		subTypes = entity.getSubTypes();
+		preferredTerm = mention.getNormalisedName();
+		type = mention.getType();
+		subTypes = mention.getSubTypes();
 		offsets = new OffsetPosition();
-		offsets.start = entity.getOffsetStart();
-		offsets.end = entity.getOffsetEnd();
-		prob = entity.getProb();
-		ner_conf = entity.getConf();
-		sense = entity.getSense();
-		boundingBoxes = entity.getBoundingBoxes();
-		isAcronym = entity.getIsAcronym();
-		switch(entity.getOrigin()) {
-			case GROBID : origin = Origin.GROBID;
-						break;
-			case USER : origin = Origin.USER;
-						break;
-			default: origin = Origin.NERD;
-		}
+		offsets.start = mention.getOffsetStart();
+		offsets.end = mention.getOffsetEnd();
+		prob = mention.getProb();
+		ner_conf = mention.getConf();
+		sense = mention.getSense();
+		boundingBoxes = mention.getBoundingBoxes();
+		isAcronym = mention.getIsAcronym();
+		source = mention.getSource();
 	}
-	
+
 	public NerdEntity(NerdEntity entity) {
 		rawName = entity.getRawName();
 		normalisedRawName = entity.getNormalisedName();
@@ -188,17 +174,20 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		linkProbability= entity.linkProbability;
 		ner_conf = entity.getNer_conf();
 		sense = entity.getSense();
-		origin = entity.getOrigin();
+		source = entity.getSource();
 		domains = entity.domains;
 		isAcronym = entity.getIsAcronym();
 		//freebaseTypes = entity.freebaseTypes;
 		lang = entity.getLang();
+		source = entity.getSource();
+		nerdScore = entity.getNerdScore();
+		selectionScore = entity.getSelectionScore();
 	}
-	
+
     public String getRawName() {
         return rawName;
     }
-	
+
 	public void setRawName(String raw) {
         this.rawName = raw;
         if (raw != null) {
@@ -217,7 +206,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public String getPreferredTerm() {
         return preferredTerm;
     }
-	
+
 	public void setPreferredTerm(String raw) {
         this.preferredTerm = raw;
     }
@@ -225,18 +214,18 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public NERLexicon.NER_Type getType() {
 		return type;
 	}
-	
+
 	public void setType(NERLexicon.NER_Type theType) {
 		type = theType;
 	}
-	
+
 	public void setTypeFromString(String theType) {
 		type = NERLexicon.NER_Type.valueOf(theType.toUpperCase());
 	}
-	
+
 	public List<String> getSubTypes() {
 		return subTypes;
-	} 
+	}
 
 	public void setSubTypes(List<String> theSubTypes) {
 		subTypes = theSubTypes;
@@ -247,7 +236,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			subTypes = new ArrayList<String>();
 		subTypes.add(subType);
 	}
-	
+
 	public void setOffsetStart(int start) {
         offsets.start = start;
     }
@@ -263,45 +252,45 @@ public class NerdEntity implements Comparable<NerdEntity> {
     public int getOffsetEnd() {
         return offsets.end;
     }
-	
+
 	public double getProb() {
 		return this.prob;
 	}
-	
+
 	public void setProb(double prob) {
 		this.prob = prob;
 	}
-	
+
 	public double getNer_conf() {
 		return this.ner_conf;
 	}
-	
+
 	public void setNer_conf(double conf) {
 		this.ner_conf = conf;
 	}
-	
+
 	public Sense getSense() {
 		return sense;
 	}
-	
+
 	public void setSense(Sense sense) {
 		this.sense = sense;
 	}
-	
+
 	public String getLang() {
 		return lang;
 	}
-	
+
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
-	
-	public Origin getOrigin() {
-		return origin;
+
+	public ProcessText.MentionMethod getSource() {
+		return source;
 	}
-	
-	public void setOrigin(Origin origin) {
-		this.origin = origin;
+
+	public void setSource(ProcessText.MentionMethod source) {
+		this.source = source;
 	}
 
 	public boolean getIsAcronym() {
@@ -334,11 +323,11 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (!freebaseTypes.contains(type))
 			freebaseTypes.add(type);
 	}*/
-	
+
 	public List<com.scienceminer.nerd.kb.Category> getCategories() {
 		return categories;
 	}
-	
+
 	public void setCategories(List<com.scienceminer.nerd.kb.Category> categories) {
 		categories = categories;
 	}
@@ -348,15 +337,15 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			categories = new ArrayList<com.scienceminer.nerd.kb.Category>();
 		categories.add(categ);
 	}
-	
+
 	public List<Variant> getVariants() {
 		return variants;
 	}
-	
+
 	public void setVariants(List<Variant> variants) {
 		this.variants = variants;
 	}
-	
+
 	public void addVariant(Variant variant) {
 		if (variants == null) {
 			variants = new ArrayList<Variant>();
@@ -365,10 +354,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			variants.add(variant);
 		}
 	}
-	
+
 	public List<String> getDomains() {
 		return domains;
-	} 
+	}
 
 	public void setDomains(List<String> domains) {
 		this.domains = domains;
@@ -419,10 +408,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		return wikipediaMultilingualRef;
 	}
 
-	public void setWikipediaMultilingualRef(Map<String,String> translations, 
+	public void setWikipediaMultilingualRef(Map<String,String> translations,
 											List<String> targetLanguages,
 											Map<String, LowerKnowledgeBase> wikipedias) {
-		if ( (targetLanguages != null) && (targetLanguages.size() != 0) ) {	
+		if ( (targetLanguages != null) && (targetLanguages.size() != 0) ) {
 			Map<String,String> subTranslations = new TreeMap<String,String>();
 			Map<String,Integer> subArticleCorrespondance = new TreeMap<String,Integer>();
 			for(String targetLanguage : targetLanguages) {
@@ -433,6 +422,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 						translation = translation.substring(0,ind);
 					}
 					translation = translation.replace("\\'", "'");
+					// TODO: translation is html encoded, should be decoded in a standard manner
+					translation = translation.replace("%2C", ",");
 					subTranslations.put(targetLanguage, translation);
 					if (wikipedias.get(targetLanguage) != null) {
 						Article article = wikipedias.get(targetLanguage).getArticleByTitle(translation);
@@ -501,11 +492,11 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public List<Definition> getDefinitions() {
 		return definitions;
 	}
-	
+
 	public void setDefinitions(List<Definition> desc) {
 		definitions = desc;
 	}
-	
+
 	public void addDefinition(Definition desc) {
 		if (definitions == null)
 		 	definitions = new ArrayList<Definition>();
@@ -513,79 +504,87 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			return;
 		definitions.add(desc);
 	}
-	
+
 	public double getProb_c() {
 		return prob_c;
 	}
-	
+
 	public void setProb_c(double p) {
 		prob_c = p;
 	}
-	
+
 	public double getProb_i() {
 		return prob_i;
 	}
-	
+
 	public void setProb_i(double p) {
 		prob_i = p;
 	}
-	
+
 	public int getFreq() {
 		return freq;
 	}
-	
+
 	public void setFreq(int f) {
 		freq = f;
 	}
-	
+
 	public int getFreq_i() {
 		return freq_i;
 	}
-	
+
 	public void setFreq_i(int f) {
 		freq_i = f;
 	}
-	
+
 	public double getNerdScore() {
 		return nerdScore;
 	}
-	
+
 	public void setNerdScore(double n) {
 		nerdScore = n;
 	}
-	
+
 	public double getLinkProbability() {
 		return linkProbability;
 	}
-	
+
 	public void setLinkProbability(double prob) {
 		linkProbability = prob;
 	}
-	
+
 	public double getSelectionScore() {
 		return selectionScore;
 	}
-	
+
 	public void setSelectionScore(double n) {
 		selectionScore = n;
 	}
-	
+
 	public double getRelatednessScore() {
 		return relatednessScore;
 	}
-	
+
 	public void setRelatednessScore(double score) {
 		relatednessScore = score;
 	}
-	
+
 	public boolean getIsSubTerm() {
 		return isSubTerm;
 	}
-	
+
 	public void setIsSubTerm(boolean sub) {
 		isSubTerm = sub;
 	}
-	
+
+	public void setBiblio(BiblioItem biblio) {
+		this.biblio = biblio;
+	}
+
+	public BiblioItem getBiblio() {
+		return biblio;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		boolean result = false;
@@ -614,8 +613,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 					thisScore = new Double(getProb_c());
 					score = new Double(theEntity.getProb_c());
 					return thisScore.compareTo(score);
-				} 
-			} else if (offsets.start != start) 
+				}
+			} else if (offsets.start != start)
 				return offsets.start - start;
 			else {
 				if (offsets.end != end)
@@ -687,62 +686,62 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		selectionScore = candidate.getSelectionScore();
 		//freeBaseExternalRef = candidate.getFreeBaseExternalRef();
 		categories = candidate.getWikipediaCategories();
-		statements = UpperKnowledgeBase.getInstance().getStatements(wikidataId); 
+		statements = UpperKnowledgeBase.getInstance().getStatements(wikidataId);
 
 		preferredTerm = candidate.getPreferredTerm();
 		this.lang = lang;
 	}
-	
+
 	@Override
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
-				
+
 		if (normalisedRawName != null)
 			buffer.append(normalisedRawName + "\t");
 		if (definitions != null)
-			buffer.append("[" + definitions.toString() + "]\t");	
+			buffer.append("[" + definitions.toString() + "]\t");
 		if (wiktionaryExternalRef != -1) {
-			buffer.append(wiktionaryExternalRef + "\t");	
-		} 
+			buffer.append(wiktionaryExternalRef + "\t");
+		}
 		if (wikipediaExternalRef != -1) {
-			buffer.append(wikipediaExternalRef + "\t");	
+			buffer.append(wikipediaExternalRef + "\t");
 		}
 		if (wikidataId != null) {
-			buffer.append(wikidataId + "\t");	
+			buffer.append(wikidataId + "\t");
 		}
 		/*if (freeBaseExternalRef != null) {
 			buffer.append(freeBaseExternalRef + "\t");	
 		}*/
-		
+
 		if (domains != null) {
 			buffer.append(domains.toString() + "\t");
 		}
-		
+
 		if (variants != null) {
 			for(Variant variant : variants)
 				buffer.append(variant.toString() + "\t");
 		}
-		
+
 		if (isSubTerm)
 			buffer.append("isSubTerm\t");
 
 		if (isAcronym)
 			buffer.append("isAcronym\t");
-		
-		//if (nerdScore > 0.0) 
+
+		//if (nerdScore > 0.0)
 		{
 			buffer.append(nerdScore + "(nerd)\t");
 		}
-		
-		//if (selectionScore > 0.0) 
+
+		//if (selectionScore > 0.0)
 		{
 			buffer.append(selectionScore + "(selection)\t");
 		}
-		
+
 		{
 			buffer.append(relatednessScore + "(relatedness)\t");
 		}
-		
+
 		buffer.append(prob_c + "(prob_c)\t");
 		buffer.append(freq + "(freq_c)\t");
 		buffer.append(prob_i + "(prob_i)\t");
@@ -751,30 +750,36 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		
 		/*if (freebaseTypes != null)
 			buffer.append(freebaseTypes.toString()+"\t");*/
-		
-		return buffer.toString();	
+
+		return buffer.toString();
 	}
-	
+
 	/**
 	 * Serialize in JSON the largest possible set of information, including
-	 * KB data related to the disambiguated sense. 
+	 * KB data related to the disambiguated sense.
 	 */
 	public String toJsonFull() {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
-		byte[] encodedRawName = encoder.quoteAsUTF8(normalisedRawName);
-		String outputRawName = new String(encodedRawName); 
-		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
-		if (preferredTerm != null) {
+        byte[] encodedRawName;
+        if(isNotBlank(normalisedRawName)) {
+			encodedRawName = encoder.quoteAsUTF8(normalisedRawName);
+
+		} else {
+		    encodedRawName = "".getBytes(StandardCharsets.UTF_8);
+        }
+        String outputRawName = new String(encodedRawName);
+        buffer.append("\"rawName\" : \"" + outputRawName + "\"");
+		if (isNotBlank(preferredTerm)) {
 			byte[] encodedPreferredTerm = encoder.quoteAsUTF8(preferredTerm);
-			String outputPreferredTerm  = new String(encodedPreferredTerm); 
+			String outputPreferredTerm  = new String(encodedPreferredTerm);
 			buffer.append(", \"preferredTerm\" : \"" + outputPreferredTerm + "\"");
 		}
 		if (type != null)
-			buffer.append(", \"type\" : \"" + type.getName() + "\"");	
-		
-		if (subTypes != null) {
+			buffer.append(", \"type\" : \"" + type.getName() + "\"");
+
+		if (CollectionUtils.isNotEmpty(subTypes)) {
 			buffer.append(", \"subtype\" : [ ");
 			boolean begin = true;
 			for(String subtype : subTypes) {
@@ -788,15 +793,15 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			}
 			buffer.append(" ] \"");
 		}
-			
-		if (getOffsetStart() != -1)	
+
+		if (getOffsetStart() != -1)
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());
-		if (getOffsetEnd() != -1)	
-			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
-		
-		if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
+		if (getOffsetEnd() != -1)
+			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());
+
+		if (CollectionUtils.isNotEmpty(boundingBoxes) ) {
 			buffer.append(", \"pos\" : [");
-			boolean start = true; 
+			boolean start = true;
 			for(BoundingBox box : boundingBoxes) {
 				if (start) {
 					buffer.append("{").append(box.toJson()).append("}");
@@ -817,15 +822,15 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");
-		
+
 		sense = correctSense(sense);
 		if (sense != null) {
-			buffer.append(", \"sense\" : { "); 
+			buffer.append(", \"sense\" : { ");
 			if (sense.getFineSense() != null) {
 				buffer.append("\"fineSense\" : \"" + sense.getFineSense() + "\"");
 				//buffer.append(", \"fineSenseConfidence\" : \"" + sense.getFineSenseConfidence() + "\"");
 			}
-		
+
 			if (sense.getCoarseSense() != null) {
 				if ( (sense.getFineSense() == null) ||
 				     ( (sense.getFineSense() != null) && !sense.getCoarseSense().equals(sense.getFineSense())) ) {
@@ -844,20 +849,20 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		/*if (freeBaseExternalRef != null)
 			buffer.append(", \"freeBaseExternalRef\" : \"" + freeBaseExternalRef + "\"" );*/
 
-		if ( (definitions != null) && (definitions.size() > 0) ) {
+		if (CollectionUtils.isNotEmpty(definitions)) {
 			buffer.append(", \"definitions\" : [ ");
 			for(Definition definition : definitions) {
-				if ((definition.getDefinition() == null) || (definition.getDefinition().length() == 0) )
+				if (isBlank(definition.getDefinition()) )
 					continue;
 				byte[] encoded = encoder.quoteAsUTF8(definition.getDefinition());
-				String output = new String(encoded); 
-				buffer.append("{ \"definition\" : \"" + output + "\", \"source\" : \"" + 
+				String output = new String(encoded);
+				buffer.append("{ \"definition\" : \"" + output + "\", \"source\" : \"" +
 					definition.getSource() + "\", \"lang\" : \"" + definition.getLang() + "\" }");
 			}
 			buffer.append(" ] ");
 		}
 
-		if (domains != null) {
+		if (CollectionUtils.isNotEmpty(domains)) {
 			buffer.append(", \"domains\" : [ ");
 			boolean first = true;
 			for(String domain : domains) {
@@ -873,10 +878,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] ");
 		}
 
-		if (categories != null) {
+		if (CollectionUtils.isNotEmpty(categories)) {
 			buffer.append(", \"categories\" : [ ");
 			boolean first = true;
-			for(com.scienceminer.nerd.kb.Category category : categories) {				
+			for(com.scienceminer.nerd.kb.Category category : categories) {
 				byte[] encoded = encoder.quoteAsUTF8(category.getName());
 				String output = new String(encoded);
 				if (first) {
@@ -889,8 +894,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			}
 			buffer.append(" ] ");
 		}
-		
-		if ( (wikipediaMultilingualRef != null) && (wikipediaMultilingualRef.size() != 0) ) {
+
+		if (MapUtils.isNotEmpty(wikipediaMultilingualRef) ) {
 			buffer.append(", \"multilingual\" : [ ");
 			boolean first = true;
 		    Iterator it = wikipediaMultilingualRef.entrySet().iterator();
@@ -900,7 +905,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 				String t = (String)pair.getValue();
 				/*if (t != null)
 					t = t.replace("#", " ");*/
-				// with #, this is an anchor to the first element page, however the page_id seems then not available	
+				// with #, this is an anchor to the first element page, however the page_id seems then not available
    				if (first) {
    					first = false;
    				}
@@ -914,15 +919,15 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	       }
 			buffer.append(" ] ");
 		}
-		
+
 		// statements
-		if (statements != null) {
+		if (CollectionUtils.isNotEmpty(statements)) {
 			buffer.append(", \"statements\": [");
 			boolean start = true;
 			for(Statement statement : statements) {
 				if (start)
 					start = false;
-				else 
+				else
 					buffer.append(", ");
 				buffer.append(statement.toJson());
 			}
@@ -941,8 +946,13 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("{ ");
-		byte[] encodedRawName = encoder.quoteAsUTF8(normalisedRawName);
-		String outputRawName = new String(encodedRawName); 
+		byte[] encodedRawName;
+		if(isNotBlank(normalisedRawName)) {
+			encodedRawName = encoder.quoteAsUTF8(normalisedRawName);
+		} else {
+			encodedRawName = "".getBytes(StandardCharsets.UTF_8);
+		}
+		String outputRawName = new String(encodedRawName);
 		buffer.append("\"rawName\" : \"" + outputRawName + "\"");
 		/*if (preferredTerm != null) {
 			byte[] encodedPreferredTerm = encoder.quoteAsUTF8(preferredTerm);
@@ -950,9 +960,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(", \"preferredTerm\" : \"" + outputPreferredTerm + "\"");
 		}*/
 		if (type != null)
-			buffer.append(", \"type\" : \"" + type.getName() + "\"");	
-		
-		if (subTypes != null) {
+			buffer.append(", \"type\" : \"" + type.getName() + "\"");
+
+		if (CollectionUtils.isNotEmpty(subTypes)) {
 			buffer.append(", \"subtype\" : [ ");
 			boolean begin = true;
 			for(String subtype : subTypes) {
@@ -967,14 +977,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] \"");
 		}
 
-		if (getOffsetStart() != -1)	
+		if (getOffsetStart() != -1)
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());
-		if (getOffsetEnd() != -1)	
-			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());	
+		if (getOffsetEnd() != -1)
+			buffer.append(", \"offsetEnd\" : " + getOffsetEnd());
 
-		if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
+		if (CollectionUtils.isNotEmpty(boundingBoxes) ) {
 			buffer.append(", \"pos\" : [");
-			boolean start = true; 
+			boolean start = true;
 			for(BoundingBox box : boundingBoxes) {
 				if (start) {
 					buffer.append("{").append(box.toJson()).append("}");
@@ -991,15 +1001,15 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");
-		
+
 		sense = correctSense(sense);
 		if (sense != null) {
-			buffer.append(", \"sense\" : { "); 
+			buffer.append(", \"sense\" : { ");
 			if (sense.getFineSense() != null) {
 				buffer.append("\"fineSense\" : \"" + sense.getFineSense() + "\"");
 				//buffer.append(", \"fineSenseConfidence\" : \"" + sense.getFineSenseConfidence() + "\"");
 			}
-		
+
 			if (sense.getCoarseSense() != null) {
 				if ( (sense.getFineSense() == null) ||
 				     ( (sense.getFineSense() != null) && !sense.getCoarseSense().equals(sense.getFineSense())) ) {
@@ -1014,22 +1024,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		if (wikidataId != null)
 			buffer.append(", \"wikidataId\" : \"" + wikidataId + "\"");
-
-		/*if (freeBaseExternalRef != null)
-			buffer.append(", \"freeBaseExternalRef\" : \"" + freeBaseExternalRef + "\"" );*/
-
-		/*if ( (definitions != null) && (definitions.size() > 0) ) {
-			buffer.append(", \"definitions\" : [ ");
-			for(Definition definition : definitions) {
-				if ((definition.getDefinition() == null) || (definition.getDefinition().length() == 0) )
-					continue;
-				byte[] encoded = encoder.quoteAsUTF8(definition.getDefinition());
-				String output = new String(encoded); 
-				buffer.append("{ \"definition\" : \"" + output + "\", \"source\" : \"" + 
-					definition.getSource() + "\", \"lang\" : \"" + definition.getLang() + "\" }");
-			}
-			buffer.append(" ] ");
-		}*/
 
 		if (domains != null) {
 			buffer.append(", \"domains\" : [ ");
@@ -1047,48 +1041,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] ");
 		}
 
-		/*if (categories != null) {
-			buffer.append(", \"categories\" : [ ");
-			boolean first = true;
-			for(com.scienceminer.nerd.kb.Category category : categories) {				
-				byte[] encoded = encoder.quoteAsUTF8(category.getName());
-				String output = new String(encoded);
-				if (first) {
-					first = false;
-				}
-				else
-					buffer.append(", ");
-				buffer.append("{\"source\" : \"wikipedia-"+lang+"\", \"category\" : \"" + output + "\", ");
-				buffer.append("\"page_id\" : " + category.getWikiPageID() + "}");
-			}
-			buffer.append(" ] ");
-		}*/
-		
-		/*if ( (wikipediaMultilingualRef != null) && (wikipediaMultilingualRef.size() != 0) ) {
-			buffer.append(", \"multilingual\" : [ ");
-			boolean first = true;
-		    Iterator it = wikipediaMultilingualRef.entrySet().iterator();
-			while (it.hasNext()) {
-				Map.Entry pair = (Map.Entry)it.next();
-				String l = (String)pair.getKey();
-				String t = (String)pair.getValue();
-				//if (t != null)
-				//	t = t.replace("#", " ");
-				// with #, this is an anchor to the first element page, however the page_id seems then not available	
-   				if (first) {
-   					first = false;
-   				}
-   				else
-   					buffer.append(", ");
-				buffer.append("{\"lang\" : \"" + l + "\", \"term\" : \"" + t + "\"");
-				if (wikipediaMultilingualArticle.get(l) != null)
-					buffer.append(", \"page_id\" : " + wikipediaMultilingualArticle.get(l));
-				buffer.append("}");
-				it.remove(); // avoids a ConcurrentModificationException
-	       }
-			buffer.append(" ] ");
-		}*/
-
 		buffer.append(" }");
 		return buffer.toString();
 	}
@@ -1097,15 +1049,70 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		if (theSense == null)
 			return null;
 		if (theSense.getFineSense() != null) {
-			if (theSense.getFineSense().indexOf("contestant") != -1) 
+			if (theSense.getFineSense().indexOf("contestant") != -1)
 				return null;
-			if (theSense.getFineSense().indexOf("team") != -1) 
+			if (theSense.getFineSense().indexOf("team") != -1)
 				return null;
 		}
 		return theSense;
 	}
 
 	private String simpleStringNormalisation(String str) {
-		return str.replace("\n", " ").trim().replaceAll(" +", " ");
+		// dehyphenize
+		String result = TextUtilities.dehyphenize(str);
+
+		// otherwise clean
+		return result.replace("\n", " ").trim().replaceAll(" +", " ");
+	}
+
+	/**
+	 * True if the token of entity is a continuous subsequence of the token of
+	 * otherEntity
+	 */
+	public static boolean subSequence(NerdEntity entity, NerdEntity otherEntity, boolean caseSensitive) {
+		String entityString = entity.getNormalisedName();
+		if (entityString == null)
+			entityString = entity.getRawName();
+		if ((entityString == null) || (entityString.length() == 0))
+			return false;
+		if (!caseSensitive)
+			entityString = entityString.toLowerCase();
+		List<LayoutToken> entityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(entityString);
+
+		String otherEntityString = otherEntity.getNormalisedName();
+		if (otherEntityString == null)
+			otherEntityString = otherEntity.getRawName();
+		if (otherEntityString == null)
+			return false;
+		if (!caseSensitive)
+			otherEntityString = otherEntityString.toLowerCase();
+		List<LayoutToken> otherEntityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(otherEntityString);
+
+		if (entityTokens.size() >= otherEntityTokens.size())
+			return false;
+
+		LayoutToken entityToken = entityTokens.get(0);
+		int n = 0;
+		for(LayoutToken otherEntityToken : otherEntityTokens) {
+			if (entityToken.getText().equals(otherEntityToken.getText())) {
+				// beginning of a sequence, but does the remaining entity tokens also match?
+				if (entityTokens.size() == 1)
+					return true;
+				else {
+					int i = 1;
+					for(; i<entityTokens.size(); i++) {
+						if (n+i >= otherEntityTokens.size())
+							break;
+						if (!entityTokens.get(i).getText().equals(otherEntityTokens.get(n+i)))
+							break;
+					}
+					if (i == entityTokens.size())
+						return true;
+				}
+			}
+			n++;
+		}
+
+		return false;
 	}
 }
