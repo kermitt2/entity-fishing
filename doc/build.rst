@@ -42,6 +42,8 @@ Then install the compiled indexed data:
 
     **Max OSX**
 
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-kb.osx.zip (4.1 GB)
+
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-en.osx.zip (5.4 GB)
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-fr.osx.zip (1.8 GB)
