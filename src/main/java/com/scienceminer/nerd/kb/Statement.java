@@ -99,7 +99,7 @@ public class Statement implements Serializable {
     }
 
     /**
-     * Json serialization replacing identifier by litteral names
+     * Json serialization replacing identifier by literal names
      */
     public String toJson() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();

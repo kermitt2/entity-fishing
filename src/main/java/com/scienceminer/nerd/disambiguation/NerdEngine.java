@@ -48,14 +48,10 @@ import static org.apache.commons.lang3.StringUtils.trim;
  * Main class to use for applying a disambiguation on a NerdQuery, the NerdQuery containing
  * all the input information (text, existing annotations, customization, languages) and the
  * parameters for the disambiguation.
- *
  * 
  */
 public class NerdEngine {
 
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdEngine.class);
 
 	private static volatile NerdEngine instance = null;

@@ -1933,7 +1933,10 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 					'<td><select style="height:auto;width:auto;top:-10px;right:10px;" name="lang" id="lang">' +
 					'<option value="en" selected>en</option>' +
 					'<option value="de">de</option>' +
-					'<option value="fr">fr</option></select></td>' +
+					'<option value="fr">fr</option>' +
+					'<option value="es">es</option>' +
+					'<option value="it">it</option>' +
+					'</select></td>' +
 					'</tr></table>';
 		$('#field').append(piece);
 	}

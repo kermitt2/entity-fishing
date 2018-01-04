@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.embeddings;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import org.grobid.core.utilities.UnicodeUtil;
@@ -145,7 +146,7 @@ public class EntityDescription {
 			wikipedia = upperKB.getWikipediaConf(lang);
 		}
 		catch(Exception e) {
-			throw new NerdResourceException("Error instanciating the knowledge base. ", e);
+			throw new NerdResourceException("Error instantiating the knowledge base. ", e);
 		}
 
 		// load, and possibly create if not yet done, the full text of wikipedia articles
@@ -231,16 +232,7 @@ public class EntityDescription {
 		} catch(IOException e) {
 			LOGGER.error("Error when writing entity description", e);
  		} finally {
-			if (iter != null)
-				iter.close();
-			if (writer != null) {
-				try {
-					writer.flush();
-					writer.close();
-				} catch(Exception e) {
-					LOGGER.error("fail to close the entity description file", e);
-				}	
-			}
+			IOUtils.closeQuietly(iter, writer);
 		}
 	}
 
@@ -299,7 +291,7 @@ public class EntityDescription {
 								String valueEntityString = page.getTitle();
 								textBuilder.append(valueEntityString).append(" ");
 							} else {
-								// we have a litteral value, and we only consider the textual values
+								// we have a literal value, and we only consider the textual values
 
 							}
 						}
@@ -331,15 +323,7 @@ public class EntityDescription {
 		} catch(IOException e) {
 			LOGGER.error("Error when writing entity description", e);
  		} finally {
-			if (iter != null)
-				iter.close();
-			if (writer != null) {
-				try {
-					writer.close();
-				} catch(Exception e) {
-					LOGGER.error("fail to close the entity description file", e);
-				}	
-			}
+			IOUtils.closeQuietly(iter, writer);
 		}
 
 
@@ -488,13 +472,7 @@ public class EntityDescription {
 		} catch(IOException e) {
 			LOGGER.error("Error when writing entity description", e);
  		} finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				} catch(Exception e) {
-					LOGGER.error("fail to close the entity description file", e);
-				}	
-			}
+			IOUtils.closeQuietly(writer);
 		}
 		System.out.println("total of " + total + " input entity vectors, with " + error + " failed entity resolution.");
 	}

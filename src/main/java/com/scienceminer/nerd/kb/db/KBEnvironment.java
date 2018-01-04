@@ -27,7 +27,7 @@ import static org.fusesource.lmdbjni.Constants.*;
  * -> should be renamed LowerKBEnvironment
  * 
  */
-public abstract class KBEnvironment {
+public abstract class KBEnvironment implements Closeable {
 	private static final Logger LOGGER = LoggerFactory.getLogger(KBEnvironment.class);	
 	
 	// this is the singleton FST configuration for all serialization operations with the KB
