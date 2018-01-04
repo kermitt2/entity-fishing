@@ -22,7 +22,7 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment (warning: total around 13 GB) at the following address:
+#. Download the zipped data files corresponding to your environment (warning: total is several GB) at the following address:
 
     **Linux**
 
@@ -42,7 +42,17 @@ Then install the compiled indexed data:
 
     **Max OSX**
 
-        
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-en.osx.zip (5.4 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-fr.osx.zip (1.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-de.osx.zip (2.0 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-es.osx.zip (1.4 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-it.osx.zip (1.3 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/embeddings/embeddings.zip (4.0 GB)
 
 
 #. Unzip the 4 db archives files under ``data/db/``.
