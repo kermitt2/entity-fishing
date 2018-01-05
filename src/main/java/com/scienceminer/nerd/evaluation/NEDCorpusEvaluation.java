@@ -1,36 +1,33 @@
 package com.scienceminer.nerd.evaluation;
 
-import java.util.*;
-import java.io.*;
-import java.text.*;
-import java.nio.file.*;
-
+import com.scienceminer.nerd.disambiguation.NerdCandidate;
+import com.scienceminer.nerd.disambiguation.NerdEngine;
+import com.scienceminer.nerd.disambiguation.NerdEntity;
+import com.scienceminer.nerd.disambiguation.NerdRanker;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
 import org.apache.commons.io.FileUtils;
-
+import org.apache.commons.io.FilenameUtils;
+import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.UnicodeUtil;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.lang.Language;
-import org.grobid.core.analyzers.GrobidAnalyzer;
-import org.grobid.core.data.Entity;
-
-import com.scienceminer.nerd.exceptions.*;
-import com.scienceminer.nerd.utilities.*;
-import com.scienceminer.nerd.training.*;
-import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.mention.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import java.io.File;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 
 /**
  * Evaluation of entity disambiguation (NED) against the standard dataset 
@@ -52,20 +49,38 @@ public class NEDCorpusEvaluation {
 		"aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos");
 
 	private NerdRanker ranker = null;
-	private LowerKnowledgeBase wikipedia = null;
+	private UpperKnowledgeBase upperKnowledgeBase = null;
+	private Map<String, LowerKnowledgeBase> wikipediaMap = null;
+
+	public String recognizeLanguage(File docFile) {
+		String filename = FilenameUtils.removeExtension(docFile.getName());
+		String langId = "en";
+		final String[] split = filename.split("\\.");
+		try {
+			langId = split[split.length - 1];
+		}catch (ArrayIndexOutOfBoundsException aio) {
+			LOGGER.warn("No language specified in filename, defaulting to EN(glish).");
+		}
+
+		return langId;
+	}
 	
 	public NEDCorpusEvaluation() {
+		wikipediaMap = new HashMap<>();
+
 		// init ranker model
 		try {
-			UpperKnowledgeBase.getInstance();
+			upperKnowledgeBase = UpperKnowledgeBase.getInstance();
+			for(String lang : UpperKnowledgeBase.getInstance().TARGET_LANGUAGES) {
+				LowerKnowledgeBase lowerKnowledgeBase = upperKnowledgeBase.getWikipediaConf(lang);
+				wikipediaMap.put(lang, lowerKnowledgeBase);
+			}
 		} catch(Exception e) {
 			throw new NerdResourceException("Error instanciating the knowledge base. ", e);
 		}
 
-		// all the corpus are in English so far
-		wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
 		try {
-			ranker = new NerdRanker(wikipedia);
+			ranker = new NerdRanker(wikipediaMap.get("en"));
 		} catch(Exception e) {
 			throw new NerdResourceException("Error when opening the relatedness model", e);
 		}
@@ -146,6 +161,12 @@ public class NEDCorpusEvaluation {
 				continue;
 			}
 
+			// language recognition
+			String langId = recognizeLanguage(docFile);
+			if (langId != null && TARGET_LANGUAGES.contains(langId))
+				lang = new Language(langId, 1.0);
+
+			// get the document content
 			String docContent = null;
 			try {
 				docContent = FileUtils.readFileToString(docFile, "UTF-8");
@@ -198,7 +219,8 @@ public class NEDCorpusEvaluation {
 						mentionName = elem.getTextContent();
 				}
 
-				if (wikiName != null && (wikiName.equals("NIL") || wikiName.isEmpty()))
+				// accept the empty wikiName label whether as 'null' or 'NIL'
+				if (wikiName != null && (wikiName.equals("null") || wikiName.equals("NIL") || wikiName.isEmpty()))
 					wikiName = null;
 				
 				// ignore mentions with no true entity
@@ -209,7 +231,7 @@ public class NEDCorpusEvaluation {
 				}
 
 				int pageId = -1;
-				Article article = wikipedia.getArticleByTitle(wikiName);
+				Article article = wikipediaMap.get(langId).getArticleByTitle(wikiName);
 				if (article == null) {
 					System.out.println(docName + ": Invalid article name - article not found in Wikipedia: " + wikiName);
 					continue;
@@ -382,7 +404,7 @@ for(NerdCandidate cand : cands) {
 System.out.println("--");
 }*/
 
-				engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false, tokens);
+				engine.rank(candidates, wikipediaMap.get(langId).getConfig().getLangCode(), null, false, tokens);
 
 				// adjust subterm 
 				/*Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<NerdEntity, List<NerdCandidate>>();

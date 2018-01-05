@@ -53,10 +53,27 @@ public class EvaluationDataGeneration {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
 
     LowerKnowledgeBase lowerKnowledgeBase = null;
+    NEDCorpusEvaluation nedCorpusEvaluation = null;
 
     public EvaluationDataGeneration() {
         Utilities.initGrobid();
         LibraryLoader.load();
+    }
+
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: command [name_of_corpus]");
+            System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
+            System.exit(-1);
+        }
+        String corpus = args[0].toLowerCase();
+        if (!NEDCorpusEvaluation.corpora.contains(corpus)) {
+            System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
+            System.exit(-1);
+        }
+
+        EvaluationDataGeneration nedEval = new EvaluationDataGeneration();
+        nedEval.generate(corpus);
     }
 
     public void generate(String corpus) {
@@ -126,16 +143,11 @@ public class EvaluationDataGeneration {
                 ProcessText textProcessor = ProcessText.getInstance();
                 List<NerdEntity> entities = new ArrayList<>();
 
-                String filename = FilenameUtils.removeExtension(evalTxtFile.getName());
-
-                Language language = new Language("en");
-                final String[] split = filename.split("\\.");
-                try {
-                    final String langId = split[split.length - 1];
-                    language.setLang(langId);
-                } catch (ArrayIndexOutOfBoundsException aio) {
-                    LOGGER.warn("No language specified in filename, defaulting to EN");
-                }
+                // call the method to recognize language of every evalTxtFile
+                nedCorpusEvaluation = new NEDCorpusEvaluation();
+                String langId = nedCorpusEvaluation.recognizeLanguage(evalTxtFile);
+                Language language = new Language(langId);
+                language.setLang(langId);
 
                 lowerKnowledgeBase = UpperKnowledgeBase.getInstance().getWikipediaConf(language.getLang());
 
@@ -376,22 +388,5 @@ public class EvaluationDataGeneration {
 
     protected String postProcess(String string) {
         return StringUtils.trim(StringUtils.replaceAll(string, "^\\.", ""));
-    }
-
-
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.println("Usage: command [name_of_corpus]");
-            System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
-            System.exit(-1);
-        }
-        String corpus = args[0].toLowerCase();
-        if (!NEDCorpusEvaluation.corpora.contains(corpus)) {
-            System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
-            System.exit(-1);
-        }
-
-        EvaluationDataGeneration nedEval = new EvaluationDataGeneration();
-        nedEval.generate(corpus);
     }
 }
