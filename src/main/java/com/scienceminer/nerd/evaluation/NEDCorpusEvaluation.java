@@ -52,19 +52,6 @@ public class NEDCorpusEvaluation {
 	private UpperKnowledgeBase upperKnowledgeBase = null;
 	private Map<String, LowerKnowledgeBase> wikipediaMap = null;
 
-	public String recognizeLanguage(File docFile) {
-		String filename = FilenameUtils.removeExtension(docFile.getName());
-		String langId = "en";
-		final String[] split = filename.split("\\.");
-		try {
-			langId = split[split.length - 1];
-		}catch (ArrayIndexOutOfBoundsException aio) {
-			LOGGER.warn("No language specified in filename, defaulting to EN(glish).");
-		}
-
-		return langId;
-	}
-	
 	public NEDCorpusEvaluation() {
 		wikipediaMap = new HashMap<>();
 
@@ -76,7 +63,7 @@ public class NEDCorpusEvaluation {
 				wikipediaMap.put(lang, lowerKnowledgeBase);
 			}
 		} catch(Exception e) {
-			throw new NerdResourceException("Error instanciating the knowledge base. ", e);
+			throw new NerdResourceException("Error instantiating the knowledge base. ", e);
 		}
 
 		try {
@@ -150,14 +137,6 @@ public class NEDCorpusEvaluation {
 			File docFile = new File(docPath);
 			if (!docFile.exists()) {
 				System.out.println("The document file " + docPath + " for corpus " + corpus + " is not found: ");
-				/*String prefix = docName.substring(0,3);
-				try {
-					Path path1 = FileSystems.getDefault().getPath("/mnt/data/resources/reuters/RCV1_CD1/"+prefix+"/", docName.replace(".txt", ".xml"));
-					Path path2 = FileSystems.getDefault().getPath(corpusPath + "RawText/", docName.replace(".txt", ".xml"));
-					Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}*/
 				continue;
 			}
 
@@ -566,6 +545,19 @@ System.out.println("--");
 		}
 	}
 
+	public static String recognizeLanguage(File docFile) {
+		String filename = FilenameUtils.removeExtension(docFile.getName());
+		String langId = "en";
+		final String[] split = filename.split("\\.");
+		try {
+			langId = split[split.length - 1];
+		}catch (ArrayIndexOutOfBoundsException aio) {
+			LOGGER.warn("No language specified in filename, defaulting to EN(glish).");
+		}
+
+		return langId;
+	}
+
 	/** just a dummy class to hold the results */
 	public class Result {
 		public String method = null;
@@ -581,7 +573,7 @@ System.out.println("--");
 			this.recall = recall;
 			this.f1 = f1;
 		}
-	} 
+	}
 
 	public static void main(String[] args) {
 		if (args.length != 1) {

@@ -53,7 +53,6 @@ public class EvaluationDataGeneration {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
 
     LowerKnowledgeBase lowerKnowledgeBase = null;
-    NEDCorpusEvaluation nedCorpusEvaluation = null;
 
     public EvaluationDataGeneration() {
         Utilities.initGrobid();
@@ -144,8 +143,7 @@ public class EvaluationDataGeneration {
                 List<NerdEntity> entities = new ArrayList<>();
 
                 // call the method to recognize language of every evalTxtFile
-                nedCorpusEvaluation = new NEDCorpusEvaluation();
-                String langId = nedCorpusEvaluation.recognizeLanguage(evalTxtFile);
+                String langId = NEDCorpusEvaluation.recognizeLanguage(evalTxtFile);
                 Language language = new Language(langId);
                 language.setLang(langId);
 
