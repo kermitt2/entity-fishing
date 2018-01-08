@@ -83,7 +83,7 @@ public class SimilarityScorer {
 				}
 
 				CompressedW2V wordVectors = new CompressedW2V(wvFile.getPath());
-				wordEmbeddings.put(lang, wordVectors);
+				//wordEmbeddings.put(lang, wordVectors);
 
 				path = embeddingsDirectory+ "/entity." +lang+ ".embeddings.quantized.compressed";
 				File entityFile = new File(path);
@@ -93,7 +93,7 @@ public class SimilarityScorer {
 				}
 
 				CompressedW2V entityVectors = new CompressedW2V(entityFile.getPath());
-				entityEmbeddings.put(lang, entityVectors);
+//				entityEmbeddings.put(lang, entityVectors);
 				lrscorers.put(lang, new LREntityScorer(wordVectors.getWord2VecCompress(), entityVectors.getWord2VecCompress()));
 				centroidScorers.put(lang, new CentroidEntityScorer(wordVectors.getWord2VecCompress(), entityVectors.getWord2VecCompress()));
 			} catch(Exception e) {

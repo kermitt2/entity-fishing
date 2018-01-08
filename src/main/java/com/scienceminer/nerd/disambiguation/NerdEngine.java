@@ -1,21 +1,12 @@
 package com.scienceminer.nerd.disambiguation;
 
 import java.util.*;
-import java.io.*;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.grobid.core.data.Entity;
-import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.document.*;
 import org.grobid.core.utilities.*;
 import org.grobid.core.data.*;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.EngineParsers;
-import org.grobid.core.engines.label.TaggingLabel;
-import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.lexicon.NERLexicon;
@@ -23,11 +14,9 @@ import org.grobid.core.lexicon.NERLexicon.NER_Type;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
-import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.service.NerdQuery;
-import com.scienceminer.nerd.mention.ProcessText.CaseContext;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 import com.scienceminer.nerd.features.GenericRankerFeatureVector;
 
@@ -41,7 +30,6 @@ import org.apache.commons.text.WordUtils;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
  *
@@ -888,10 +876,10 @@ public class NerdEngine {
 			e.printStackTrace();
 		}
 
-		NerdRanker disambiguator = rankers.get(lang);
-		disambiguator = instantiateDisambiguator(lang, disambiguator);
+		NerdRanker ranker = rankers.get(lang);
+		ranker = instantiateRankerIfNull(lang, ranker);
 
-		GenericRankerFeatureVector feature = disambiguator.getNewFeature();
+		GenericRankerFeatureVector feature = ranker.getNewFeature();
 		
 		double quality = 0.0;
 		if (localContext != null) {
@@ -936,7 +924,7 @@ public class NerdEngine {
 					}
 
 					candidate.setRelatednessScore(related);
-					if (disambiguator == null) {
+					if (ranker == null) {
 						System.out.println("Cannot rank candidates: disambiguator for the language " + 
 							lang + " is invalid");
 					}
@@ -949,7 +937,7 @@ public class NerdEngine {
 					//if (candidate.getWikidataP31Id() != null)
 					//	wikidataP31Id = candidate.getWikidataP31Id();
 
-					score = disambiguator.getProbability(commonness, related, quality, 
+					score = ranker.getProbability(commonness, related, quality,
 						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 
 					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + score + "(ranker/nerd score) " +  " " + entity.toString());
@@ -971,18 +959,19 @@ public class NerdEngine {
 		return localContext;
 	}
 
-	private NerdRanker instantiateDisambiguator(String lang, NerdRanker disambiguator) {
-		if (disambiguator == null) {
+	private NerdRanker instantiateRankerIfNull(String lang, NerdRanker ranker) {
+		if (ranker == null) {
 			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 			try {
-				disambiguator = new NerdRanker(wikipedia);
-				rankers.put(lang, disambiguator);
+				ranker = new NerdRanker(wikipedia);
+				rankers.put(lang, ranker);
 			}
 			catch(Exception e) {
-				LOGGER.error("Cannot load disambiguator for language " + lang, e);
+				LOGGER.error("Cannot load ranker for language " + lang, e);
 			}
 		}
-		return disambiguator;
+		
+		return ranker;
 	}
 
 	/**
@@ -996,7 +985,7 @@ public class NerdEngine {
 
 		// get the disambiguator for this language
 		NerdRanker disambiguator = rankers.get(lang);
-		disambiguator = instantiateDisambiguator(lang, disambiguator);
+		disambiguator = instantiateRankerIfNull(lang, disambiguator);
 
 		// for the embeddings similiarity we need a textual context as a list of LayoutToken
 		List<LayoutToken> tokens = new ArrayList<LayoutToken>();

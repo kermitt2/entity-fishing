@@ -131,9 +131,7 @@ public class EvaluationDataGeneration {
 
         LOGGER.info("Writing: " + corpusRefFile);
         FileWriter corpusRefWriter = null;
-        try
-
-        {
+        try {
             corpusRefWriter = new FileWriter(corpusRefFile);
             corpusRefWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>").append("\n");
             corpusRefWriter.append("<" + corpus + ".entityAnnotation>").append("\n");
@@ -247,8 +245,7 @@ public class EvaluationDataGeneration {
                 String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
 
 
-                List<LayoutToken> tokenizationHeader =
-                        doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
 
                 // alternative

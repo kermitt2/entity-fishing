@@ -48,12 +48,13 @@ public class NEDCorpusEvaluation {
 	public static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb", 
 		"aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos");
 
-	private NerdRanker ranker = null;
 	private UpperKnowledgeBase upperKnowledgeBase = null;
 	private Map<String, LowerKnowledgeBase> wikipediaMap = null;
+	private HashMap<Object, Object> rankers;
 
 	public NEDCorpusEvaluation() {
 		wikipediaMap = new HashMap<>();
+		rankers = new HashMap<>();
 
 		// init ranker model
 		try {
@@ -61,15 +62,10 @@ public class NEDCorpusEvaluation {
 			for(String lang : UpperKnowledgeBase.getInstance().TARGET_LANGUAGES) {
 				LowerKnowledgeBase lowerKnowledgeBase = upperKnowledgeBase.getWikipediaConf(lang);
 				wikipediaMap.put(lang, lowerKnowledgeBase);
+				rankers.put(lang, new NerdRanker(lowerKnowledgeBase));
 			}
 		} catch(Exception e) {
 			throw new NerdResourceException("Error instantiating the knowledge base. ", e);
-		}
-
-		try {
-			ranker = new NerdRanker(wikipediaMap.get("en"));
-		} catch(Exception e) {
-			throw new NerdResourceException("Error when opening the relatedness model", e);
 		}
 	}
 
@@ -301,8 +297,7 @@ public class NEDCorpusEvaluation {
 				}
 
 				NerdEngine engine = NerdEngine.getInstance();
-				Map<NerdEntity, List<NerdCandidate>> candidates = 
-					engine.generateCandidatesMultiple(entities, "en");	
+				Map<NerdEntity, List<NerdCandidate>> candidates = engine.generateCandidatesMultiple(entities, langId);
 
 				for(NerdEntity refEntity : referenceEntities) {
 					int startRef = refEntity.getOffsetStart();
@@ -321,7 +316,7 @@ public class NEDCorpusEvaluation {
 						}
 					}
 					if (!found)
-						System.out.println("found no candidate for mention: " + refEntity.getRawName());
+						LOGGER.debug("found no candidate for mention: " + refEntity.getRawName());
 				}
 
 				// do we have the expected result in the candidates for the mentions?
@@ -552,7 +547,7 @@ System.out.println("--");
 		try {
 			langId = split[split.length - 1];
 		}catch (ArrayIndexOutOfBoundsException aio) {
-			LOGGER.warn("No language specified in filename, defaulting to EN(glish).");
+			LOGGER.warn("No language specified in filename, defaulting to English.", aio);
 		}
 
 		return langId;

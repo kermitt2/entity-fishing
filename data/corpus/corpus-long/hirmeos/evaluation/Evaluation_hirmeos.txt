@@ -1,0 +1,25 @@
+Evaluation on 10 documents and 1327 expected entities, in total 1524 s
+
+candidate gold recall: 93.67
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                84.25        88.61        84.7         86.61
+ranker               85.61        90.08        86.12        88.05
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                84.25        88.38        84.25        86.27
+ranker               85.61        89.8         85.61        87.65
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 25:37 min
+[INFO] Finished at: 2017-12-28T14:22:24+01:00
+[INFO] Final Memory: 406M/979M
+[INFO] ------------------------------------------------------------------------
