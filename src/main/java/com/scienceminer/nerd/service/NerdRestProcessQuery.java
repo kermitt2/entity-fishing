@@ -19,6 +19,7 @@ import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
 import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
+import static com.scienceminer.nerd.mention.ProcessText.GROBID_NER_SUPPORTED_LANGUAGES;
 import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class NerdRestProcessQuery {
@@ -32,7 +33,7 @@ public class NerdRestProcessQuery {
      * @return a response query object containing the structured representation of
      * the enriched and disambiguated query.
      */
-    public static String processQuery(String theQuery) {
+    public String processQuery(String theQuery) {
         LOGGER.debug(methodLogIn());
         LOGGER.debug(">> received query to process: " + theQuery);
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
@@ -75,7 +76,7 @@ public class NerdRestProcessQuery {
     @Deprecated
     public static void processOnlyNER(NerdQuery nerdQuery) {
         if (nerdQuery.getOnlyNER()) {
-            if (!Arrays.asList(Language.FR, Language.EN).contains(nerdQuery.getLanguage().getLang())) {
+            if (!GROBID_NER_SUPPORTED_LANGUAGES.contains(nerdQuery.getLanguage().getLang())) {
                 throw new QueryException("OnlyNER cannot be set true with languages other than FR and EN", LANGUAGE_ISSUE);
             }
             nerdQuery.setMentions(Arrays.asList(ProcessText.MentionMethod.ner));
@@ -114,7 +115,7 @@ public class NerdRestProcessQuery {
      * @return a response query object containing the structured representation of
      * the enriched and disambiguated query.
      */
-    public static String processQueryText(NerdQuery nerdQuery) {
+    public String processQueryText(NerdQuery nerdQuery) {
         LOGGER.debug(methodLogIn());
         long start = System.currentTimeMillis();
 
@@ -127,15 +128,7 @@ public class NerdRestProcessQuery {
         // entities originally from the query are marked as such
         List<NerdEntity> originalEntities = null;
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
-            for (NerdEntity entity : nerdQuery.getEntities()) {
-                entity.setNer_conf(1.0);
-
-                // do we have disambiguated entity information for the entity?
-                if (entity.getWikipediaExternalRef() != -1) {
-                    entity.setSource(ProcessText.MentionMethod.user);
-                    entity.setNerdScore(1.0);
-                }
-            }
+            markUserEnteredEntities(nerdQuery, nerdQuery.getText().length());
             originalEntities = nerdQuery.getEntities();
         }
 
@@ -167,17 +160,11 @@ public class NerdRestProcessQuery {
         // disambiguate
         if (mentions != null) {
             // disambiguate and solve entity mentions
-            //if (!nerdQuery.getOnlyNER())
-//                {
+
             NerdEngine disambiguator = NerdEngine.getInstance();
             List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
             nerdQuery.setEntities(disambiguatedEntities);
             nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-                /*} else {
-                    for (NerdEntity entity : nerdQuery.getEntities()) {
-                        entity.setNerdScore(entity.getNer_conf());
-                    }
-                }*/
         }
 
         long end = System.currentTimeMillis();
@@ -187,6 +174,28 @@ public class NerdRestProcessQuery {
         Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
         return nerdQuery.toJSONClean();
+    }
+
+    /** Mark (confidence 1.0) the user defined entities as long as:
+     *  - they have a valid offset (end > start and != -1)
+     *  - they have a valid wikipedia or wikidata ID
+     **/
+    public void markUserEnteredEntities(NerdQuery nerdQuery, long maxOffsetValue) {
+
+        for (NerdEntity entity : nerdQuery.getEntities()) {
+            if(entity.getOffsetStart() == -1 || entity.getOffsetEnd() == -1
+                    || entity.getOffsetEnd() < entity.getOffsetStart() || entity.getOffsetEnd() > maxOffsetValue) {
+                LOGGER.warn("The entity " + entity.toJsonCompact() + " doesn't have valid offset. Ignoring it.");
+            } else {
+                entity.setNer_conf(1.0);
+
+                // do we have disambiguated entity information for the entity?
+                if (entity.getWikipediaExternalRef() != -1 || StringUtils.isNotBlank(entity.getWikidataId())) {
+                    entity.setSource(ProcessText.MentionMethod.user);
+                    entity.setNerdScore(1.0);
+                }
+            }
+        }
     }
 
 
@@ -306,7 +315,7 @@ public class NerdRestProcessQuery {
      * @param nerdQuery POJO query object with the search query and additional optional contextual information
      * @return a response JSON object containing the search terms with the resolved entities.
      */
-    public static String processSearchQuery(NerdQuery nerdQuery) {
+    public String processSearchQuery(NerdQuery nerdQuery) {
         long start = System.currentTimeMillis();
 
         //nerdQuery.setShortText(true);
@@ -319,27 +328,13 @@ public class NerdRestProcessQuery {
 
         // entities originally from the query are marked as such
         List<NerdEntity> originalEntities = null;
-        if ((nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0)) {
-            for (NerdEntity entity : nerdQuery.getEntities()) {
-                entity.setNer_conf(1.0);
-
-                // do we have disambiguated entity information for the entity?
-                if (entity.getWikipediaExternalRef() != -1) {
-                    entity.setSource(ProcessText.MentionMethod.user);
-                    entity.setNerdScore(1.0);
-                }
-            }
+        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+            markUserEnteredEntities(nerdQuery, nerdQuery.getShortText().length());
             originalEntities = nerdQuery.getEntities();
         }
 
         // possible entity mentions
-        ProcessText processText = ProcessText.getInstance();
-            /*Integer[] processSentence =  nerdQuery.getProcessSentence();
-            List<Sentence> sentences = nerdQuery.getSentences();
-			if ( (sentences == null) && (nerdQuery.getSentence() || (processSentence != null)) ) {
-				sentences = processText.sentenceSegmentation(nerdQuery.getText());
-				nerdQuery.setSentences(sentences);
-			}*/
+        ProcessText processText = ProcessText.getInstance();         
         List<Mention> entities = processText.process(nerdQuery);
 
         // we keep only entities not conflicting with the ones already present in the query

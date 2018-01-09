@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 import java.util.regex.*;
@@ -195,7 +196,7 @@ public class NerdSelector extends NerdModel {
 		StringBuilder arffBuilder = new StringBuilder();
 		GenericSelectionFeatureVector feat = getNewFeature();
 		arffBuilder.append(feat.getArffHeader()).append("\n");
-		FileUtils.writeStringToFile(file, arffBuilder.toString());
+		FileUtils.writeStringToFile(file, arffBuilder.toString(), StandardCharsets.UTF_8);
 		int nbArticle = 0;
 		positives = 1;
 		negatives = 0;
@@ -207,26 +208,26 @@ public class NerdSelector extends NerdModel {
 				arffBuilder = trainCorpusArticle(article, arffBuilder, ranker);	
 			else
 				arffBuilder = trainWikipediaArticle(article, arffBuilder, ranker);	
-			FileUtils.writeStringToFile(file, arffBuilder.toString(), true);
+			FileUtils.writeStringToFile(file, arffBuilder.toString(), StandardCharsets.UTF_8, true);
 			nbArticle++;
 		}
 		//arffDataset = arffBuilder.toString();
-		arffDataset = FileUtils.readFileToString(file, "UTF-8");
-//System.out.println(arffDataset);
-		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
+		arffDataset = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+		//System.out.println(arffDataset);
+		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, StandardCharsets.UTF_8));
 		System.out.println("Training data saved under " + file.getPath());
 	}
 
 	private StringBuilder trainWikipediaArticle(Article article, 
 									StringBuilder arffBuilder, 
 									NerdRanker ranker) throws Exception {
-System.out.println(" - training " + article);
+		System.out.println(" - training " + article);
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 		String lang = wikipedia.getConfig().getLangCode();
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
 		content = content.replace("''", "");
 		StringBuilder contentText = new StringBuilder(); 
-//System.out.println(content);
+		//System.out.println(content);
 		Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
 		Matcher linkMatcher = linkPattern.matcher(content);
 

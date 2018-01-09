@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 import java.util.regex.*;
@@ -93,12 +94,12 @@ public class NerdModel {
 		arffParser = new ArffParser();
 	}
 
-	public void saveTrainingData(File file) throws IOException, Exception {
-		FileUtils.writeStringToFile(file, arffDataset);
+	public void saveTrainingData(File file) throws Exception {
+		FileUtils.writeStringToFile(file, arffDataset, StandardCharsets.UTF_8);
 		System.out.println("Training data saved under " + file.getPath());
 	}
 	
-	public void loadTrainingData(File file) throws Exception{
+	public void loadTrainingData(File file) throws Exception {
 		attributeDataset = arffParser.parse(new FileInputStream(file));
 		System.out.println("Training data loaded from file " + file.getPath());
 	}

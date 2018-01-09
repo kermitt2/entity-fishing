@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import org.apache.commons.io.FileUtils;
@@ -211,7 +212,7 @@ public class TermVectorTrainer {
 
 				builder.append("\t]\n");	
 				builder.append("}\n");
-				FileUtils.writeStringToFile(new File(outputPath), builder.toString());
+				FileUtils.writeStringToFile(new File(outputPath), builder.toString(), StandardCharsets.UTF_8);
 			}
 		}
 		catch(Exception e) {

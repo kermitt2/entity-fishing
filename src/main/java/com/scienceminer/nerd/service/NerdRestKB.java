@@ -1,47 +1,26 @@
 package com.scienceminer.nerd.service;
 
-import java.util.*;
-import java.io.*;
 import com.scienceminer.nerd.disambiguation.NerdCategories;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.kb.Definition;
+import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.HttpHeaders; 
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
-import com.scienceminer.nerd.utilities.NerdRestUtils;
-
-import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.lang.Language;
-
-import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
-import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.io.*;
-
-import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.model.Page.PageType;
+import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 
 /**
  * 
@@ -50,9 +29,6 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
  */
 public class NerdRestKB {
 
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestKB.class);
 
 	/**
@@ -168,7 +144,7 @@ public class NerdRestKB {
 					else
 						entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
-					entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
+					entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
 					entity.setWikidataId(article.getWikidataId());
 
 					List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(entity.getWikidataId());
@@ -195,7 +171,7 @@ public class NerdRestKB {
 	private static Response getWikidataConceptInfo(String id) {
 		NerdEntity entity = new NerdEntity();
 		Response response = null;
-		entity.setLang("en");
+		entity.setLang(Language.EN);
 		UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance(); 
 
 		if (knowledgeBase == null) {
@@ -206,9 +182,9 @@ public class NerdRestKB {
 		if (id.startsWith("Q")) {
 			Concept concept = knowledgeBase.getConcept(id);
 			if (concept != null) {
-				Integer pageId = concept.getPageIdByLang("en");
+				Integer pageId = concept.getPageIdByLang(Language.EN);
 	            if (pageId != null) {
-	                LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
+	                LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(Language.EN);
 	                Article article = (Article)wikipedia.getPageById(pageId);
 	                if (article != null) {
 						entity.setPreferredTerm(article.getTitle());
@@ -223,7 +199,7 @@ public class NerdRestKB {
 							LOGGER.debug("Error when getFirstParagraphWikiTextfor page id "+ id);
 						}
 						definition.setSource("wikipedia-en");
-						definition.setLang("en");
+						definition.setLang(Language.EN);
 						entity.addDefinition(definition);
 						entity.setWikipediaExternalRef(pageId);
 
@@ -250,13 +226,13 @@ public class NerdRestKB {
 							UpperKnowledgeBase.getInstance().getWikipediaConfs();
 						Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
 							UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
-						WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get("en");
+						WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(Language.EN);
 						if (wikipediaDomainMap == null)
 							System.out.println("wikipediaDomainMap is null for en");
 						else
 							entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
-						entity.setWikipediaMultilingualRef(article.getTranslations(), targetLanguages, wikipedias);
+						entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
 					}
 				}
 			} else {
@@ -408,10 +384,6 @@ public class NerdRestKB {
 		
 		return response;
 	}
-
-
-
-	private static List<String> targetLanguages = Arrays.asList("en", "de", "fr");
 
 	/**
 	 * @return

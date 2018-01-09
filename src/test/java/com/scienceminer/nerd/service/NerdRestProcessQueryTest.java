@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
@@ -130,5 +132,117 @@ public class NerdRestProcessQueryTest {
         assertThat(nerdEntities.get(1).getRawName(), is("Russia"));
         assertThat(nerdEntities.get(2).getRawName(), is("Abc"));
     }
+
+    @Test
+    public void testMarkUserEnteredEntities_valid_shouldWork() throws Exception {
+        List<NerdEntity> originalEntities = new ArrayList<>();
+
+        final NerdEntity e1 = new NerdEntity("Austria", 0, 7);
+        e1.setWikipediaExternalRef(123456);
+        originalEntities.add(e1);
+
+        final NerdEntity e2 = new NerdEntity("Russia", 10, 16);
+        originalEntities.add(e2);
+        e2.setWikidataId("Q1234");
+
+        NerdQuery query = new NerdQuery();
+        query.setEntities(originalEntities);
+
+        target.markUserEnteredEntities(query, 100);
+
+        assertThat(query.getEntities(), hasSize(2));
+        assertThat(query.getEntities().get(0).getNer_conf(), is(1.0));
+        assertThat(query.getEntities().get(0).getNerdScore(), is(1.0));
+        assertThat(query.getEntities().get(0).getSource(), is(ProcessText.MentionMethod.user));
+
+
+        assertThat(query.getEntities().get(1).getNer_conf(), is(1.0));
+        assertThat(query.getEntities().get(1).getNerdScore(), is(1.0));
+        assertThat(query.getEntities().get(1).getSource(), is(ProcessText.MentionMethod.user));
+    }
+
+    @Test
+    public void testMarkUserEnteredEntities_missingOffset_shouldWorkHaveNegativeConfidence() throws Exception {
+        List<NerdEntity> originalEntities = new ArrayList<>();
+
+        final NerdEntity e1 = new NerdEntity();
+        e1.setRawName("Austria");
+        e1.setWikipediaExternalRef(123456);
+        originalEntities.add(e1);
+
+        NerdQuery query = new NerdQuery();
+        query.setEntities(originalEntities);
+
+        target.markUserEnteredEntities(query, 100);
+
+        assertThat(query.getEntities(), hasSize(1));
+        assertThat(query.getEntities().get(0).getNer_conf(), is(-1.0));
+        assertThat(query.getEntities().get(0).getNerdScore(), is(0.0));
+        assertThat(query.getEntities().get(0).getSource(), is(nullValue()));
+    }
+
+    @Test
+    public void testMarkUserEnteredEntities_missingReferenceId_shouldWorkHaveNegativeConfidence() throws Exception {
+        List<NerdEntity> originalEntities = new ArrayList<>();
+
+        final NerdEntity e1 = new NerdEntity();
+        e1.setRawName("Austria");
+        e1.setOffsetStart(12);
+        e1.setOffsetEnd(15);
+        originalEntities.add(e1);
+
+        NerdQuery query = new NerdQuery();
+        query.setEntities(originalEntities);
+
+        target.markUserEnteredEntities(query, 100);
+
+        assertThat(query.getEntities(), hasSize(1));
+        assertThat(query.getEntities().get(0).getNer_conf(), is(1.0));
+        assertThat(query.getEntities().get(0).getNerdScore(), is(0.0));
+        assertThat(query.getEntities().get(0).getSource(), is(nullValue()));
+    }
+
+    @Test
+    public void testMarkUserEnteredEntities_invalidOffset1_shouldWorkHaveNegativeConfidence() throws Exception {
+        List<NerdEntity> originalEntities = new ArrayList<>();
+
+        final NerdEntity e1 = new NerdEntity();
+        e1.setRawName("Austria");
+        e1.setOffsetStart(120);
+        e1.setOffsetEnd(15);
+        originalEntities.add(e1);
+
+        NerdQuery query = new NerdQuery();
+        query.setEntities(originalEntities);
+
+        target.markUserEnteredEntities(query, 100);
+
+        assertThat(query.getEntities(), hasSize(1));
+        assertThat(query.getEntities().get(0).getNer_conf(), is(-1.0));
+        assertThat(query.getEntities().get(0).getNerdScore(), is(0.0));
+        assertThat(query.getEntities().get(0).getSource(), is(nullValue()));
+    }
+    
+    @Test
+    public void testMarkUserEnteredEntities_invalidOffset2_shouldWorkHaveNegativeConfidence() throws Exception {
+        List<NerdEntity> originalEntities = new ArrayList<>();
+
+        final NerdEntity e1 = new NerdEntity();
+        e1.setRawName("Austria");
+        e1.setOffsetStart(12);
+        e1.setOffsetEnd(15);
+        originalEntities.add(e1);
+
+        NerdQuery query = new NerdQuery();
+        query.setEntities(originalEntities);
+
+        target.markUserEnteredEntities(query, 10);
+
+        assertThat(query.getEntities(), hasSize(1));
+        assertThat(query.getEntities().get(0).getNer_conf(), is(-1.0));
+        assertThat(query.getEntities().get(0).getNerdScore(), is(0.0));
+        assertThat(query.getEntities().get(0).getSource(), is(nullValue()));
+    }
+
 
 }

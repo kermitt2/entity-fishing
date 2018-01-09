@@ -54,7 +54,7 @@ public class NerdRestProcessFile {
      * @return a response query object containing the structured representation of
      * the enriched and disambiguated query.
      */
-    public static String processQueryAndPdfFile(String theQuery, final InputStream inputStream) {
+    public String processQueryAndPdfFile(String theQuery, final InputStream inputStream) {
         LOGGER.debug(methodLogIn());
         File originFile = null;
         Engine engine = null;
@@ -93,7 +93,9 @@ public class NerdRestProcessFile {
         // them to their right layout tokens when processing the PDF (as done for
         // instance in the project grobid-astro)
 
-				/*List<NerdEntity> originalEntities = null;
+        /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities()
+
+				List<NerdEntity> originalEntities = null;
 				if  ( (nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0) ) {
 					for(NerdEntity entity : nerdQuery.getEntities()) {
 						entity.setNer_conf(1.0);
@@ -117,7 +119,6 @@ public class NerdRestProcessFile {
         Document doc = null;
         DocumentContext documentContext = new DocumentContext();
         NerdQuery workingQuery = new NerdQuery(nerdQuery);
-
 
         DocumentSource documentSource =
                 DocumentSource.fromPdf(originFile, config.getStartPage(), config.getEndPage());

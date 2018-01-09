@@ -40,6 +40,9 @@ public class NerdRestService implements NerdPaths {
     private static final String FORMAT = "format";
     private static final String CUSTOMISATION = "customisation";
 
+    NerdRestProcessQuery nerdProcessQuery;
+    NerdRestProcessFile nerdProcessFile;
+
     public NerdRestService() {
         LOGGER.info("Init lexicon.");
         Lexicon.getInstance();
@@ -48,6 +51,9 @@ public class NerdRestService implements NerdPaths {
         LOGGER.info("Init KB resources.");
         UpperKnowledgeBase.getInstance();
         LOGGER.info("Init KB resources finished.");
+
+        nerdProcessQuery = new NerdRestProcessQuery();
+        nerdProcessFile = new NerdRestProcessFile();
     }
 
     /**
@@ -124,9 +130,9 @@ public class NerdRestService implements NerdPaths {
         try {
 
             if (inputStream != null) {
-                json = NerdRestProcessFile.processQueryAndPdfFile(query, inputStream);
+                json = nerdProcessFile.processQueryAndPdfFile(query, inputStream);
             } else {
-                json = NerdRestProcessQuery.processQuery(query);
+                json = nerdProcessQuery.processQuery(query);
             }
 
             if (json == null) {
@@ -166,7 +172,7 @@ public class NerdRestService implements NerdPaths {
         Response response = null;
 
         try {
-            output = NerdRestProcessQuery.processQuery(query);
+            output = nerdProcessQuery.processQuery(query);
 
             if (output == null) {
                 response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

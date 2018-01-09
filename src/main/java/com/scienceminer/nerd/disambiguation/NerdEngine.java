@@ -308,7 +308,7 @@ public class NerdEngine {
 						candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
 					//nerdEntity.setDomains(freeBaseTypeMap.getTypes(nerdEntity.getWikipediaExternalRef()));
 					// note: for the moment we use English categories via translingual informations
-					if (lang.equals("en")) {
+					if (lang.equals(Language.EN)) {
 						if (wikipediaDomainMap == null)
 							System.out.println("wikipediaDomainMap is null for en");
 						else
@@ -317,8 +317,8 @@ public class NerdEngine {
 						// we get the English page id if available
 						int pageId = nerdEntity.getWikipediaExternalRef();
 						Map<String,String> translations = candidate.getWikiSense().getTranslations();
-						String translationEN = translations.get("en");
-						Article article = wikipedias.get("en").getArticleByTitle(translationEN);
+						String translationEN = translations.get(Language.EN);
+						Article article = wikipedias.get(Language.EN).getArticleByTitle(translationEN);
 						if (article != null) {
 							nerdEntity.setDomains(wikipediaDomainMap.getDomains(article.getId()));
 						}

@@ -18,9 +18,6 @@ import java.util.NoSuchElementException;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-/**
- *
- */
 public class NerdRestProcessString {
 
     /**
@@ -53,7 +50,7 @@ public class NerdRestProcessString {
 
 	 		if (result != null) {
 				StringBuilder builder = new StringBuilder();
-builder
+                builder
 				.append("{")
 				.append("\"lang\": \""+result.getLang()+"\"")
 				.append(", \"conf\":").append(result.getConf())
