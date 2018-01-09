@@ -5,6 +5,7 @@ import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
+import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +14,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * RESTFul service for the NERD system.
@@ -42,6 +46,7 @@ public class NerdRestService implements NerdPaths {
 
     NerdRestProcessQuery nerdProcessQuery;
     NerdRestProcessFile nerdProcessFile;
+    NerdRestKB nerdRestKB;
 
     public NerdRestService() {
         LOGGER.info("Init lexicon.");
@@ -54,6 +59,7 @@ public class NerdRestService implements NerdPaths {
 
         nerdProcessQuery = new NerdRestProcessQuery();
         nerdProcessFile = new NerdRestProcessFile();
+        nerdRestKB = new NerdRestKB();
     }
 
     /**
@@ -128,7 +134,6 @@ public class NerdRestService implements NerdPaths {
         Response response = null;
 
         try {
-
             if (inputStream != null) {
                 json = nerdProcessFile.processQueryAndPdfFile(query, inputStream);
             } else {
@@ -201,21 +206,54 @@ public class NerdRestService implements NerdPaths {
 
     private Response handleQueryException(QueryException qe, String query) {
         Response response;
-        if (qe.getReason().equals(QueryException.LANGUAGE_ISSUE)) {
-            final String message = "The language specified is not supported or not valid. ";
-            LOGGER.error(message, qe);
-            response = Response.status(Response.Status.NOT_ACCEPTABLE)
-                    .entity(message)
-                    .build();
-        } else if(qe.getReason().equals(QueryException.FILE_ISSUE)){
-            final String message = "The file specified is not valid, null or empty. ";
-            LOGGER.error(message);
-            response = Response.status(Response.Status.BAD_REQUEST)
-                    .entity(message)
-                    .build();
-        } else {
-            LOGGER.error("The sent query is invalid. Query sent: " + query, qe);
-            response = Response.status(Response.Status.BAD_REQUEST).build();
+
+        String message = "The sent query is invalid.";
+
+        switch (qe.getReason()) {
+            case QueryException.LANGUAGE_ISSUE:
+                message = "The language specified is not supported or not valid. ";
+                LOGGER.error(message, qe);
+                response = Response
+                        .status(Response.Status.NOT_ACCEPTABLE)
+                        .entity(message)
+                        .build();
+
+                break;
+
+            case QueryException.FILE_ISSUE:
+                message = "There are issues with the posted PDF file. " + qe.getMessage();
+                LOGGER.error(message);
+                response = Response
+                        .status(Response.Status.BAD_REQUEST)
+                        .entity(message)
+                        .build();
+
+                break;
+
+            case QueryException.WRONG_IDENTIFIER:
+                message = "Wrong identifier. " + qe.getMessage();
+                response = Response
+                        .status(Response.Status.BAD_REQUEST)
+                        .entity(message)
+                        .build();
+                break;
+
+            case QueryException.INVALID_TERM:
+                message = "Wrong term identifier. " + qe.getMessage();
+                response = Response
+                        .status(Response.Status.BAD_REQUEST)
+                        .entity(message)
+                        .build();
+                break;
+
+            default:
+                LOGGER.error(message + " Query sent: " + query, qe);
+                response = Response
+                        .status(Response.Status.BAD_REQUEST)
+                        .entity("The sent query is invalid. " + qe.getMessage())
+                        .build();
+
+                break;
         }
 
         return response;
@@ -289,8 +327,37 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getConceptInformation(@PathParam(ID) String identifier,
-                                          @DefaultValue("en") @QueryParam(LANG) String lang) {
-        return NerdRestKB.getConceptInfo(identifier, lang);
+                                          @DefaultValue(Language.EN) @QueryParam(LANG) String lang) {
+
+        String output = null;
+        Response response = null;
+
+        try {
+            output = nerdRestKB.getConceptInfo(identifier, lang);
+
+            if (isBlank(output)) {
+                response = Response.status(Response.Status.NOT_FOUND).build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(output)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+
+        } catch (QueryException qe) {
+            return handleQueryException(qe, identifier);
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        } catch (Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
     }
 
     @GET
@@ -298,7 +365,37 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTermLookup(@PathParam(TERM) String term,
                                   @DefaultValue("en") @QueryParam(LANG) String lang) {
-        return NerdRestKB.getTermLookup(term, lang);
+
+        String output = null;
+        Response response = null;
+
+        try {
+            output = nerdRestKB.getTermLookup(term, lang);
+
+            if (isBlank(output)) {
+                response = Response.status(Response.Status.NOT_FOUND).build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(output)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+
+        } catch (QueryException qe) {
+            return handleQueryException(qe, term);
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        } catch (Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
+
     }
 
     /**

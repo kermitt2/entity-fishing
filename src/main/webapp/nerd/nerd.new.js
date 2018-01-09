@@ -22,7 +22,7 @@ var nerd = (function ($) {
 
     function defineBaseURL(ext) {
         var baseUrl = null;
-        if ($(location).attr('href').indexOf("index.html") != -1)
+        if ($(location).attr('href').indexOf("index.html") !== -1)
             baseUrl = $(location).attr('href').replace("index.html", "service/" + ext);
         else
             baseUrl = $(location).attr('href') + "service/" + ext;
@@ -62,15 +62,6 @@ var nerd = (function ($) {
 
         $('#submitRequest').bind('click', submitQuery);
 
-        /*$('#adminForm').attr("action",$(location).attr('href')+"allProperties");
-        $('#TabAdminProps').hide();
-        $('#adminForm').ajaxForm({
-            beforeSubmit: adminShowRequest,
-            success: adminSubmitSuccesful,
-            error: adminAjaxError,
-            dataType: "text"
-            });*/
-
         $("#about").click(function () {
             $("#about").attr('class', 'section-active');
             $("#services").attr('class', 'section-non-active');
@@ -78,13 +69,10 @@ var nerd = (function ($) {
             $("#demo").attr('class', 'section-non-active');
 
             $("#subTitle").html("About");
-            //$("#subTitle2").hide();
             $("#subTitle").show();
 
             $("#divAbout").show();
             $("#divServices").hide();
-            //$("#divDemo").hide();
-            //$("#divAdmin").hide();
             $("#divDoc").hide();
 
             $("#nerd-text").hide();
@@ -104,89 +92,42 @@ var nerd = (function ($) {
             $("#divServices").show();
             $("#divAbout").hide();
             $("#divDoc").hide();
-            //$("#divAdmin").hide();
 
             return false;
         });
-        /*$("#admin").click(function() {
-            $("#admin").attr('class', 'section-active');
-            $("#doc").attr('class', 'section-non-active');
-            $("#services").attr('class', 'section-non-active');
-            $("#about").attr('class', 'section-non-active');
-            $("#demo").attr('class', 'section-non-active');
 
-            $("#subTitle").html("Admin");
-            //$("#subTitle2").hide();
-            $("#subTitle").show();
-
-            $("#divDoc").hide();
-            $("#divAbout").hide();
-            $("#divServices").hide();
-            $("#divAdmin").show();
-
-            return false;
-        });*/
-
-        // extend customisation field with the registered existing ones
-        /*$.ajax({
-            type: 'GET',
-            url: 'service/customisations',
-//		  data: { text : $('#input').val() },
-            success: fillCustumisationField,
-            error: showError,
-            contentType: false
-        });*/
     });
-
-    /*function fillCustumisationField(response, statusText) {
-        if (response) {
-            for (var ind in response) {
-                var option = '<option value=\"' + response[ind] + '\">' + response[ind] + '</option>';
-                $('#customisation').append(option);
-            }
-        }
-    }*/
 
     function submitQuery() {
         $('#infoResult').html('<font color="grey">Requesting server...</font>');
         $('#requestResult').html('');
 
-        // reinit the entity map
+        // re-init the entity map
         entityMap = new Object();
         conceptMap = new Object();
         var urlLocal = $('#gbdForm').attr('action');
         var selected = $('#selectedService').attr('value');
 
-        //console.log(JSON.stringify($('#textInputArea').val()));
-        if ((urlLocal.indexOf('language') != -1) || (urlLocal.indexOf('segmentation') != -1)) {
+        if ((urlLocal.indexOf('language') !== -1) || (urlLocal.indexOf('segmentation') !== -1)) {
+            url = urlLocal + '?text=' + $('#input').val();
             $.ajax({
                 type: 'GET',
-                url: urlLocal + '?text=' + $('#input').val(),
-                success: SubmitSuccesful,
-                error: showError,
+                url: url,
+                success: handleSuccessfulResponse,
+                error: displayErrorMessage,
                 contentType: false
             });
-        }
-        else if (urlLocal.indexOf('kb/term') != -1) {
+        } else if ((urlLocal.indexOf('kb/term') !== -1) || (urlLocal.indexOf('kb/concept') !== -1)) {
             $.ajax({
                 type: 'GET',
                 url: urlLocal + '/' + $('#input2').val().trim() + '?lang=' + $('#lang').val(),
-                success: SubmitSuccesful,
-                error: showError,
-                contentType: false
-            });
-        }
-        else if (urlLocal.indexOf('kb/concept') != -1) {
-            $.ajax({
-                type: 'GET',
-                url: urlLocal + '/' + $('#input2').val().trim() + '?lang=' + $('#lang').val(),
-                success: SubmitSuccesful,
-                error: showError,
+                success: handleSuccessfulResponse,
+                error: displayErrorMessage,
                 contentType: false
             });
         } else if (selected.indexOf('PDF') !== -1) {
             if (document.getElementById("inputFile").files.length === 0) {
-                showError("No PDF Selected");
+                displayErrorMessage("No PDF Selected");
                 return;
             }
             console.log(document.getElementById("inputFile").files[0].name);
@@ -333,7 +274,7 @@ var nerd = (function ($) {
                             var response = e.target.response;
                             setupAnnotations(response);
                         } else {
-                            showError(xhr)
+                            displayErrorMessage(xhr)
                         }
                     }
                 };
@@ -349,17 +290,21 @@ var nerd = (function ($) {
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: SubmitSuccesful,
-                error: showError
+                success: handleSuccessfulResponse,
+                error: displayErrorMessage
             });
         }
 
         $('#infoResult').html('<font color="grey">Requesting server...</font>');
     };
 
-    function showError(response) {
+    function displayErrorMessage(response) {
         var message = "";
-        if (response.responseText) {
+
+        //Not found get handled first
+        if (response.status === 404) {
+            message = "Not found. Concept or terms not existing or invalid identifier"
+        } else if (response.responseText) {
             message = response.responseText
         } else if (typeof(response) === "string") {
             message = response
@@ -369,32 +314,41 @@ var nerd = (function ($) {
         responseJson = null;
     }
 
-    function SubmitSuccesful(responseText, statusText, xhr) {
+    function handleSuccessfulResponse(responseText, statusText, xhr) {
         responseJson = responseText;
 
         var selected = $('#selectedService').attr('value');
-        if ((selected == 'processNERDQuery') && (responseJson.text != null && responseJson.text.length > 0)) {
+        if ((selected === 'processNERDQuery') && (responseJson.text != null && responseJson.text.length > 0)) {
             SubmitSuccesfulNERD(responseJson, statusText);
         }
-        else if (selected == 'processLanguage') {
+        else if (selected === 'processLanguage') {
             SubmitSuccesfulLId(responseJson, statusText);
         }
-        else if (selected == 'processSentenceSegmentation') {
+        else if (selected === 'processSentenceSegmentation') {
             SubmitSuccesfulSentenceSegmentation(responseJson, statusText);
         }
-        else if ((selected == 'processNERDQuery') && (responseJson.shortText != null) && (responseJson.shortText.length > 0)) {
+        else if ((selected === 'processNERDQuery') && (responseJson.shortText != null) && (responseJson.shortText.length > 0)) {
             SubmitSuccesfulERDSearch(responseJson, statusText);
         }
-        else if ((selected == 'processNERDQuery') && (responseJson.termVector != null) && (responseJson.termVector.length > 0)) {
+        else if ((selected === 'processNERDQuery') && (responseJson.termVector != null) && (responseJson.termVector.length > 0)) {
             console.log("front end for term vector disambiguation not implemented yet !");
         }
-        else if (selected == 'KBTermLookup') {
+        else if (selected === 'KBTermLookup') {
             SubmitSuccesfulKBTermLookup(responseJson, statusText);
         }
-        else if (selected == 'KBConcept') {
+        else if (selected === 'KBConcept') {
             SubmitSuccesfulKBConceptLookup(responseJson, statusText);
         }
 
+    }
+
+    function fetchConcept(identifier, lang, successFunction) {
+        $.ajax({
+            type: 'GET',
+            url: 'service/kb/concept/' + identifier + '?lang=' + lang,
+            success: successFunction,
+            dataType: 'json'
+        });
     }
 
     function htmll(s) {
@@ -455,95 +409,87 @@ var nerd = (function ($) {
         // in case of nbest results, we haveonly one annotation in the text, but this can
         // lead to the visualisation of several info boxes on the right panel (one per entity candidate)
         var lastMaxIndex = responseJson.text.length;
-        {
-            display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">';
-            //var string = responseJson.text.replace(/\n/g, " ");
-            var string = responseJson.text;
-            if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
-                display += '<tr style="background-color:#FFF;">';
-                var lang = 'en'; //default
-                var language = responseJson.language;
-                if (language)
-                    lang = language.lang;
-                if (responseJson.entities) {
-                    var currentAnnotationIndex = responseJson.entities.length - 1;
-                    for (var m = responseJson.entities.length - 1; m >= 0; m--) {
-                        var entity = responseJson.entities[m];
-                        var identifier = entity.wikipediaExternalRef;
-                        var wikidataId = entity.wikidataId;
 
-                        if (identifier && (conceptMap[identifier] == null)) {
-                            $.ajax({
-                                type: 'GET',
-                                url: 'service/kb/concept/' + identifier + '?lang=' + lang,
-                                success: function (result) {
-                                    conceptMap[result.wikipediaExternalRef] = result;
-                                },
-                                dataType: 'json'
-                            });
-                        }
-                        var domains = entity.domains;
-                        var label = null;
-                        if (entity.type)
-                            label = entity.type;
-                        else if (domains && domains.length > 0) {
-                            label = domains[0].toLowerCase();
-                        }
-                        else
-                            label = entity.rawName;
+        display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">';
+        //var string = responseJson.text.replace(/\n/g, " ");
+        var string = responseJson.text;
+        if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
+            display += '<tr style="background-color:#FFF;">';
+            var lang = 'en'; //default
+            var language = responseJson.language;
+            if (language)
+                lang = language.lang;
+            if (responseJson.entities) {
+                var currentAnnotationIndex = responseJson.entities.length - 1;
+                for (var m = responseJson.entities.length - 1; m >= 0; m--) {
+                    var entity = responseJson.entities[m];
+                    var identifier = entity.wikipediaExternalRef;
+                    var wikidataId = entity.wikidataId;
 
-                        var start = parseInt(entity.offsetStart, 10);
-                        var end = parseInt(entity.offsetEnd, 10);
+                    if (identifier && (conceptMap[identifier] == null)) {
+                        fetchConcept(identifier, lang, function (result) {
+                            conceptMap[result.wikipediaExternalRef] = result;
+                        });
+                    }
+                    var domains = entity.domains;
+                    var label = null;
+                    if (entity.type)
+                        label = entity.type;
+                    else if (domains && domains.length > 0) {
+                        label = domains[0].toLowerCase();
+                    }
+                    else
+                        label = entity.rawName;
 
-                        if (start > lastMaxIndex) {
-                            // we have a problem in the initial sort of the entities
-                            // the server response is not compatible with the client
-                            console.log("Sorting of entities as present in the server's response not valid for this client.");
-                        }
-                        else if (start == lastMaxIndex) {
-                            // the entity is associated to the previous map
-                            entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                        }
-                        else if (end > lastMaxIndex) {
-                            end = lastMaxIndex;
-                            lastMaxIndex = start;
-                            // the entity is associated to the previous map
-                            entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                        }
-                        else {
-                            string = string.substring(0, start)
-                                + '<span id="annot-' + m + '" rel="popover" data-color="' + label + '">'
-                                + '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-                                + string.substring(start, end) + '</span></span>' + string.substring(end, string.length + 1);
-                            lastMaxIndex = start;
-                            currentAnnotationIndex = m;
-                            entityMap[currentAnnotationIndex] = [];
-                            entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                        }
+                    var start = parseInt(entity.offsetStart, 10);
+                    var end = parseInt(entity.offsetEnd, 10);
+
+                    if (start > lastMaxIndex) {
+                        // we have a problem in the initial sort of the entities
+                        // the server response is not compatible with the client
+                        console.log("Sorting of entities as present in the server's response not valid for this client.");
+                    }
+                    else if (start == lastMaxIndex) {
+                        // the entity is associated to the previous map
+                        entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
+                    }
+                    else if (end > lastMaxIndex) {
+                        end = lastMaxIndex;
+                        lastMaxIndex = start;
+                        // the entity is associated to the previous map
+                        entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
+                    }
+                    else {
+                        string = string.substring(0, start)
+                            + '<span id="annot-' + m + '" rel="popover" data-color="' + label + '">'
+                            + '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+                            + string.substring(start, end) + '</span></span>' + string.substring(end, string.length + 1);
+                        lastMaxIndex = start;
+                        currentAnnotationIndex = m;
+                        entityMap[currentAnnotationIndex] = [];
+                        entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
                     }
                 }
+            }
 //console.log(entityMap);
-                string = "<p>" + string.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
+            string = "<p>" + string.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
 
-                display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>' + string + '</p></td>';
-                display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
+            display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>' + string + '</p></td>';
+            display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
 
-                display += '</tr>';
-            }
-            else {
-                display += '<tr style="background-color:#FFF;">';
+            display += '</tr>';
+        }
+        else {
+            display += '<tr style="background-color:#FFF;">';
 
-                display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p><span id="sentence_ner">' +
-                    " " + '</span></p></td>';
-                display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
-                display += '</tr>';
-            }
-
-            display += '</table>\n';
+            display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p><span id="sentence_ner">' +
+                " " + '</span></p></td>';
+            display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>';
+            display += '</tr>';
         }
 
+        display += '</table>\n';
         display += '</pre>\n';
-
         display += '</div> \
 					<div class="tab-pane " id="navbar-fixed-categories">\n';
 
@@ -627,7 +573,7 @@ var nerd = (function ($) {
     function SubmitSuccesfulERDSearch(responseJson) {
         $('#infoResult').html('');
         if ((responseJson == null) || (responseJson.length == 0)) {
-            showError("The response is empty");
+            displayErrorMessage("The response is empty");
             return;
         }
 
@@ -686,23 +632,18 @@ var nerd = (function ($) {
             var entity = responseJson['entities'][sens];
             var identifier = entity.wikipediaExternalRef;
             if (identifier && (conceptMap[identifier] == null)) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'service/kb/concept/' + identifier + '?lang=' + lang,
-                    success: function (result) {
-                        var localIdentifier = result.wikipediaExternalRef;
-                        conceptMap[localIdentifier] = result;
-                        var definitions = result.definitions;
-                        var preferredTerm = result.preferredTerm;
-                        var localHtml = "";
-                        if (definitions && (definitions.length > 0)) {
-                            localHtml = wiki2html(definitions[0]['definition'], lang);
-                            $("#def-" + localIdentifier).html(localHtml);
-                        }
-                        if (preferredTerm)
-                            $("#pref-" + localIdentifier).html(preferredTerm);
-                    },
-                    dataType: 'json'
+                fetchConcept(identifier, lang, function (result) {
+                    var localIdentifier = result.wikipediaExternalRef;
+                    conceptMap[localIdentifier] = result;
+                    var definitions = result.definitions;
+                    var preferredTerm = result.preferredTerm;
+                    var localHtml = "";
+                    if (definitions && (definitions.length > 0)) {
+                        localHtml = wiki2html(definitions[0]['definition'], lang);
+                        $("#def-" + localIdentifier).html(localHtml);
+                    }
+                    if (preferredTerm)
+                        $("#pref-" + localIdentifier).html(preferredTerm);
                 });
             }
         }
@@ -711,7 +652,7 @@ var nerd = (function ($) {
     var SubmitSuccesfulKBTermLookup = function (responseJson) {
         $('#infoResult').html('');
         if ((responseJson == null) || (responseJson.length == 0)) {
-            showError("The response is empty");
+            displayErrorMessage("The response is empty");
             return;
         }
 
@@ -762,25 +703,20 @@ var nerd = (function ($) {
             var entity = responseJson['senses'][sens];
             var identifier = entity.pageid;
             if (identifier && (conceptMap[identifier] == null)) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'service/kb/concept/' + identifier + "?lang=" + lang,
-                    success: function (result) {
-                        var localIdentifier = result.wikipediaExternalRef;
-                        conceptMap[localIdentifier] = result;
-                        var definitions = result.definitions;
-                        if (definitions && (definitions.length > 0)) {
-                            var localHtml = wiki2html(definitions[0]['definition'], lang);
-                            $("#def-" + localIdentifier).html(localHtml);
-                        }
-                        var wikidataId = result.wikidataId;
-                        if (wikidataId) {
-                            var localHtml = '<a href="https://www.wikidata.org/wiki/' + wikidataId +
-                                '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
-                            $("#wikidata-" + localIdentifier).html(localHtml);
-                        }
-                    },
-                    dataType: 'json'
+                fetchConcept(identifier, lang, function (result) {
+                    var localIdentifier = result.wikipediaExternalRef;
+                    conceptMap[localIdentifier] = result;
+                    var definitions = result.definitions;
+                    if (definitions && (definitions.length > 0)) {
+                        var localHtml = wiki2html(definitions[0]['definition'], lang);
+                        $("#def-" + localIdentifier).html(localHtml);
+                    }
+                    var wikidataId = result.wikidataId;
+                    if (wikidataId) {
+                        var localHtml = '<a href="https://www.wikidata.org/wiki/' + wikidataId +
+                            '" target="_blank"><img style="max-width:28px;max-height:22px;" src="resources/img/Wikidata-logo.svg"/></a>';
+                        $("#wikidata-" + localIdentifier).html(localHtml);
+                    }
                 });
             }
         }
@@ -1244,13 +1180,8 @@ var nerd = (function ($) {
 
                 var identifier = entity.wikipediaExternalRef;
                 if (identifier && (conceptMap[identifier] == null)) {
-                    $.ajax({
-                        type: 'GET',
-                        url: 'service/kb/concept/' + identifier + '?lang=' + lang,
-                        success: function (result) {
-                            conceptMap[result.wikipediaExternalRef] = result;
-                        },
-                        dataType: 'json'
+                    fetchConcept(identifier, lang, function (result) {
+                        conceptMap[result.wikipediaExternalRef] = result;
                     });
                 }
 
@@ -1810,39 +1741,40 @@ var nerd = (function ($) {
     function processChange() {
         var selected = $('#selectedService').attr('value');
 
-        if (selected == 'processNERDQuery') {
+        if (selected === 'processNERDQuery') {
             createInputTextArea('query');
             setBaseUrl('disambiguate');
             removeInputFile();
             $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
-        }
-        else if (selected == 'processNERDQueryPDF') {
+            $('#requestResult').html('');
+        } else if (selected === 'processNERDQueryPDF') {
             createInputTextArea('query');
             createInputFile();
             setBaseUrl('disambiguate');
             $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate2)));
-        }
-        else if (selected == 'processLanguage') {
+            $('#requestResult').html('');
+        } else if (selected === 'processLanguage') {
             createInputTextArea('query');
             setBaseUrl('language');
             removeInputFile();
-        }
-        else if (selected == 'processSentenceSegmentation') {
+            $('#requestResult').html('');
+        } else if (selected === 'processSentenceSegmentation') {
             createInputTextArea('query');
             setBaseUrl('segmentation');
             removeInputFile();
-        }
-        else if (selected == 'KBTermLookup') {
+            $('#requestResult').html('');
+        } else if (selected === 'KBTermLookup') {
             createSimpleTextFieldArea('query', 'term');
             setBaseUrl('kb/term');
             removeInputFile();
             $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate3)));
-        }
-        else if (selected == 'KBConcept') {
+            $('#requestResult').html('');
+        } else if (selected === 'KBConcept') {
             createSimpleTextFieldArea('query', 'concept ID');
             setBaseUrl('kb/concept');
             removeInputFile();
             $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate3)));
+            $('#requestResult').html('');
         }
     }
 
@@ -1911,15 +1843,34 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         "Goethes literarisches Werk umfasst Lyrik, Dramen, Epik, autobiografische, kunst- und literaturtheoretische sowie naturwissenschaftliche Schriften. Daneben ist sein umfangreicher Briefwechsel von literarischer Bedeutung. Goethe war Vorbereiter und wichtigster Vertreter des Sturm und Drang. Sein Roman Die Leiden des jungen Werthers machte ihn in Europa berühmt. Selbst Napoleon bat ihn zu einer Audienz anlässlich des Erfurter Fürstenkongresses. Im Bunde mit Schiller und gemeinsam mit Herder und Wieland verkörperte er die Weimarer Klassik. Die Wilhelm-Meister-Romane wurden zu beispielgebenden Vorläufern deutschsprachiger Künstler- und Bildungsromane. Sein Faust errang den Ruf als die bedeutendste Schöpfung der deutschsprachigen Literatur. Im Alter wurde er auch im Ausland als Repräsentant des geistigen Deutschland angesehen."
     ];
 
+    var spanishExamples = [
+        "La Exposición Internacional de Barcelona tuvo lugar del 20 de mayo de 1929 al 15 de enero de 1930 en Barcelona (España). Celebrada en la montaña de Montjuic, se desarrolló en una superficie de 118 hectáreas, y tuvo un coste de 130 millones de pesetas. Entre la veintena europea de naciones que oficialmente participaron estaban países como Alemania, Bélgica, Dinamarca, Francia, Hungría, Italia, Noruega, Rumanía o Suiza. También participaron expositores privados japoneses y estadounidenses.\n" +
+        "En Barcelona se guardaba un grato recuerdo de la Exposición Universal de 1888, que supuso un gran avance para la ciudad en el terreno económico y tecnológico, así como la remodelación del Parque de la Ciudadela. Por eso se proyectó esta nueva exposición para dar a conocer los nuevos adelantos tecnológicos y proyectar la imagen de la industria catalana en el exterior. De nuevo, la exposición originó una remodelación de una parte de la ciudad, en este caso la montaña de Montjuic, así como sus zonas colindantes, especialmente la plaza de España.\n" +
+        "La Exposición supuso un gran desarrollo urbanístico para Barcelona, así como un banco de pruebas para los nuevos estilos arquitectónicos gestados a principios del siglo xx: a nivel local, representó la consolidación del novecentismo, estilo de corte clásico que sustituyó al modernismo preponderante en Cataluña durante la transición de siglo; además, supuso la introducción en España de las corrientes de vanguardia internacionales, especialmente el racionalismo, a través del Pabellón de Alemania de Ludwig Mies van der Rohe. La Exposición dejó numerosos edificios e instalaciones algunos de los cuales se han convertido en emblemas de la ciudad, como el Palacio Nacional, la Fuente Mágica, el Teatre Grec, el Pueblo Español y el Estadio Olímpico."
+
+
+    ];
+
+    var italianExamples = [
+        "Rondò Veneziano è un ensemble musicale italiano e svizzero (il marchio è stato ceduto alla svizzera Cleo Music AG nel 1990) che si ispira alla musica barocca sposando sonorità attuali della musica pop e del rock. La genesi di questo progetto musicale risale al 1979, partendo da un'idea condivisa di Freddy Naggiar, discografico della Baby Records e Gian Piero Reverberi, noto compositore e direttore d'orchestra della scuola genovese.\n" +
+        "Il vasto repertorio comprende composizioni ispirate a modelli stilistici di Vivaldi, Albinoni, Boccherini, del tardobarocco europeo e porta la firma dello stesso Reverberi, affermato arrangiatore già noto per aver collaborato con i maggiori artisti italiani tra cui Lucio Battisti, Lucio Dalla, Fabrizio De André, Bruno Lauzi, Mina, Gino Paoli, Eros Ramazzotti, Luigi Tenco e Ornella Vanoni.\n" +
+        "Tuttavia, non tutti i brani dei Rondò Veneziano sono riconducibili a dei modelli settecenteschi. Il loro repertorio comprende anche composizioni che si orientano verso esempi di altre epoche della storia della musica; altre composizioni riproducono invece strutture proprie della musica leggera o del folk, limitando il collegamento con il passato alla sola sonorità orchestrale.\n" +
+        "Ritiratosi quasi del tutto dalle scene italiane, il gruppo continua la propria attività con tournée europee, riscuotendo un particolare successo prevalentemente nell'area di lingua tedesca come Austria, Germania, Svizzera e Lussemburgo. Complessivamente i Rondò Veneziano hanno venduto oltre 25 milioni di dischi in tutto il mondo (aggiornato a 30 milioni nel 2017) e hanno inoltre ricevuto 15 dischi d'oro e 11 dischi di platino in Europa. "
+
+
+    ];
+
     function resetExamplesClasses() {
         $('#example1').removeClass('section-active').addClass('section-non-active');
         $('#example2').removeClass('section-active').addClass('section-non-active');
         $('#example3').removeClass('section-active').addClass('section-non-active');
         $('#example4').removeClass('section-active').addClass('section-non-active');
+        $('#spanish').removeClass('section-active').addClass('section-non-active');
         $('#reuters1').removeClass('section-active').addClass('section-non-active');
         $('#reuters2').removeClass('section-active').addClass('section-non-active');
         $('#reuters3').removeClass('section-active').addClass('section-non-active');
         $('#reuters4').removeClass('section-active').addClass('section-non-active');
+        $('#italian').removeClass('section-active').addClass('section-non-active');
     }
 
     function createSimpleTextFieldArea(nameInput, entryType) {
@@ -1948,6 +1899,20 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         $('#field').append(piece);
     }
 
+    function loadExample(text, lang) {
+        resetExamplesClasses();
+        $(this).addClass('section-active').removeClass('section-non-active');
+        var selected = $('#selectedService').find('option:selected').attr('value');
+        if (selected === 'processNERDQuery' || selected === 'processERDQuery') {
+            var queryInstance = queryTemplate;
+            queryInstance.language.lang = lang;
+            queryInstance.text = text;
+            $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
+        }
+        else
+            $('#input').attr('value', text);
+    }
+
     function createInputTextArea(nameInput) {
         //$('#label').html('Enter ' + nameInput);
         $('#label').html('&nbsp;');
@@ -1960,130 +1925,61 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
             "<tr style='line-height:130%;'><td><span id='example2' style='font-size:90%;'>PubMed_1</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='example3' style='font-size:90%;'>PubMed_2</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='example4' style='font-size:90%;'>HAL_1</span></td></tr>" +
+            "<tr style='line-height:130%;'><td><span id='italian' style='font-size:90%;'>Italiano_1</span></td></tr>" +
             "</table></td>" +
             "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
             "<td><table id='examplesBlock2'><tr style='line-height:130%;'><td><span id='reuters1' style='font-size:90%;'>Reuters_1</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='reuters2' style='font-size:90%;'>Reuters_2</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='reuters3' style='font-size:90%;'>French_1</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='reuters4' style='font-size:90%;'>German_1</span></td></tr>" +
+            "<tr style='line-height:130%;'><td><span id='spanish' style='font-size:90%;'>Spanish_1</span></td></tr>" +
             "</table></td>" +
             "</tr></table>");
+
         // binding of the examples
         $('#example1').popover();
-        $('#example1').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate
-                    queryInstance.text = textExamples[0];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', textExamples[0]);
-            });
-        $('#example2').popover();
-        $('#example2').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate
-                    queryInstance.text = textExamples[1];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', textExamples[1]);
-            });
-        $('#example3').popover();
-        $('#example3').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate
-                    queryInstance.text = textExamples[2];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', textExamples[2]);
-            });
-        $('#example4').popover();
-        $('#example4').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate
-                    queryInstance.text = textExamples[3];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', textExamples[3]);
-            });
+        $('#example1').bind('click', function (event) {
+            loadExample(textExamples[0], "en");
+        });
 
-        $('#reuters1').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate
-                    queryInstance.text = reutersExamples[0];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', reutersExamples[0]);
-            }
-        );
-        $('#reuters2').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate;
-                    queryInstance.text = reutersExamples[1];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', reutersExamples[1]);
-            }
-        );
-        $('#reuters3').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate;
-                    queryInstance.language.lang = "fr";
-                    queryInstance.text = reutersExamples[2];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', reutersExamples[2]);
-            }
-        );
-        $('#reuters4').bind('click',
-            function (event) {
-                resetExamplesClasses();
-                $(this).addClass('section-active').removeClass('section-non-active');
-                var selected = $('#selectedService option:selected').attr('value');
-                if ((selected == 'processNERDQuery') || (selected == 'processERDQuery')) {
-                    var queryInstance = queryTemplate;
-                    queryInstance.language.lang = "de";
-                    queryInstance.text = reutersExamples[3];
-                    $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
-                }
-                else
-                    $('#input').attr('value', reutersExamples[3]);
-            }
-        );
+        $('#example2').popover();
+        $('#example2').bind('click', function (event) {
+            loadExample(textExamples[1], "en")
+        });
+
+        $('#example3').popover();
+        $('#example3').bind('click', function (event) {
+            loadExample(textExamples[2], "en");
+        });
+
+        $('#example4').popover();
+        $('#example4').bind('click', function (event) {
+            loadExample(textExamples[3], "en");
+        });
+
+        $('#reuters1').bind('click',function (event) {
+            loadExample(reutersExamples[0], "en");
+        });
+
+        $('#reuters2').bind('click',function (event) {
+            loadExample(reutersExamples[1], "en");
+        });
+
+        $('#reuters3').bind('click', function (event) {
+            loadExample(reutersExamples[2], "fr");
+        });
+
+        $('#reuters4').bind('click', function (event) {
+            loadExample(reutersExamples[3], "de");
+        });
+
+        $('#spanish').bind('click', function (event) {
+            loadExample(spanishExamples[0], "es");
+        });
+
+        $('#italian').bind('click', function (event) {
+            loadExample(italianExamples[0], "it");
+        });
 
         //$('#gbdForm').attr('enctype', '');
         //$('#gbdForm').attr('method', 'post');
@@ -2138,412 +2034,14 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         $('#gbdForm2').attr('method', 'post');
     }
 
-    function convert2NicelyTabulated(jsonParses, indexSentence) {
-        var result =
-            '<table class="table table-condensed" style="border-width:0px;font-size:small;background-color:#FEE9CC;">';
-        connlParse = jsonParses[indexSentence].parse;
-        // we remove the first index
-        var lines = connlParse.split(/\r?\n/);
-        for (var line in lines) {
-            if (lines[line].trim().length == 0)
-                continue;
-            result += '<tr style="align:left;border-width: 0px;font-size:small;background-color:#FEE9CC;">';
-            var tokens = lines[line].split(/\s/);
-            var n = 0;
-            for (var token in tokens) {
-                if (tokens[token].trim().length == 0)
-                    continue;
-                result += '<td style="align:left;border-width: 0px;font-size:small;background-color:#FEE9CC;">';
-                if (n == 1) {
-                    result += '<b>' + tokens[token] + '</b>';
-                }
-                else if (n == 3) {
-                    if (tokens[token] == '.')
-                        result += 'DOT';
-                    else if (tokens[token] == ',')
-                        result += 'PUNCT';
-                    else
-                        result += tokens[token];
-                }
-                else {
-                    result += tokens[token];
-                }
-                result += '</td>';
-                n++;
-            }
-            result += '</tr>';
-        }
-
-        result += '</table>';
-        return result;
-    }
-
-    function viewBrat(loc, docData, collData) {
-        console.log('viewBrat');
-        console.log(docData);
-        //$('#loading-icon-brat-syntax').show();
-        // for activating brat data visualisation
-
-        var dispatcher = Util.embed(
-            // id of the div element where brat should embed the visualisations
-            loc,
-            // object containing collection data
-            collData,
-            // object containing document data
-            docData,
-            // Array containing locations of the visualisation fonts
-            webFontURLs
-        );
-        //if (callback2) callback(dispatcher2);
-        //dispatcher2.post('ajax', callback2);
-        $('#loading-icon-brat-syntax').hide();
-    }
-
-    function convert2JsonSyntacticDep(jsonParses, indexSentence) {
-        connlParse = jsonParses[indexSentence].parse;
-        var docData = {};
-        var entities = [];
-        var relations = [];
-        var attributes = [];
-        var text = "";
-        var lines = connlParse.split(/\r?\n/);
-        var countEntity = 0;
-        var countRelation = 0;
-        var countAttribute = 0;
-        var offset = 0;
-        for (var line in lines) {
-            var tokens = lines[line].split(/\s/);
-            var n = 0;
-            var lastWord = "";
-            var currentHead = "";
-            for (var token in tokens) {
-                if (tokens[token].trim().length == 0)
-                    continue;
-                if (n == 1) {
-                    text += tokens[token] + " ";
-                    lastWord = tokens[token];
-                }
-                else if (n == 3) {
-                    // we add an entity for this token
-                    var pos = tokens[token];
-                    if (pos == '.')
-                        pos = 'DOT';
-                    if (pos == ',')
-                        pos = 'PUNCT';
-                    var toto = [
-                        "T" + countEntity,
-                        pos,
-                        [[offset, offset + lastWord.length]]
-                    ];
-                    entities.push(toto);
-                    countEntity++;
-                    offset = offset + lastWord.length + 1;
-                }
-                else if (n == 5) {
-                    // give the syntactic head
-                    currentHead = parseInt(tokens[token], 10) - 1;
-                }
-                else if (n == 6) {
-                    // give the syntactic relation label
-                    if (tokens[token] == "root") {
-                        // root is represented as an entity_attribute_types
-                        /*var toto = [ [ "A"+countAttribute, tokens[token], "T"+(line) ] ];
-                        attributes.push(toto);
-                        countAttribute++;   */
-                        var toto = [
-                            "R" + countRelation,
-                            tokens[token],
-                            [["Arg1", "T" + (line)], ["Arg2", "T" + (line)]]
-                        ];
-                        relations.push(toto);
-                        countRelation++;
-                    }
-                    else {
-                        var toto = [
-                            "R" + countRelation,
-                            tokens[token],
-                            [["Arg1", "T" + (line)], ["Arg2", "T" + currentHead]]
-                        ];
-                        relations.push(toto);
-                        countRelation++;
-                    }
-                }
-                n++;
-            }
-        }
-
-        docData['text'] = text.trim();
-        if (countEntity > 0)
-            docData['entities'] = entities;
-        if (countAttribute > 0)
-            docData['attributes'] = attributes;
-        if (countRelation > 0)
-            docData['relations'] = relations;
-        return docData;
-    }
-
-    function convert2JsonSemanticDep(jsonParses, indexSentence) {
-        connlParse = jsonParses[indexSentence].parse;
-        var docData = {};
-        var entities = [];
-        var relations = [];
-        var attributes = [];
-        var text = "";
-        var lines = connlParse.split(/\r?\n/);
-        var countEntity = 0;
-        var countRelation = 0;
-        var countAttribute = 0;
-        var offset = 0;
-        var usedEntities = [];
-        for (var line in lines) {
-            var tokens = lines[line].split(/\s/);
-            var n = 0;
-            var lastWord = "";
-            var currentHead = "";
-            for (var token in tokens) {
-                if (tokens[token].trim().length == 0)
-                    continue;
-                if (n == 1) {
-                    //text += tokens[token]+" ";
-                    //lastWord = tokens[token];
-                }
-                else if (n == 2) {
-                    // we add an entity per lemma
-                    var lemma = tokens[token];
-
-                    //text += lemma+" ";
-                    if (lemma != '0')
-                        lastWord = lemma;
-                    else
-                        lastWord = tokens[1];
-                }
-                else if (n == 4) {
-                    // features: e.g. roleset, pb=verb.01
-                    if (tokens[token] == '_') {
-                        // no feature
-                        var toto = [
-                            "T" + countEntity,
-                            "arg",
-                            [[offset, offset + lastWord.length]]
-                        ];
-                        entities.push(toto);
-                        countEntity++;
-                        offset = offset + lastWord.length + 1;
-                    }
-                    else {
-                        // current features are (separated by a |):
-                        // - p2: second best POS
-                        // - pb: best verb synset
-                        // = vn: verbnet class
-                        var features = tokens[token].split('|');
-                        for (var feature in features) {
-                            var ind = features[feature].indexOf('=');
-                            var attribute = features[feature].substring(0, ind);
-                            ;
-                            var value = features[feature].substring(ind + 1, features[feature].length);
-                            if (attribute == 'p2') {
-                                continue;
-                            }
-                            else if (attribute == 'pb') {
-                                lastWord = value;
-                            }
-                            else if (attribute == 'vn') {
-                                if (value != 'unknown') {
-                                    lastWord += "|" + value;
-                                }
-                            }
-                        }
-
-                        var toto = [
-                            "T" + countEntity,
-                            "pred",
-                            [[offset, offset + lastWord.length]]
-                        ];
-                        entities.push(toto);
-                        countEntity++;
-                        offset = offset + lastWord.length + 1;
-                    }
-                    text += lastWord + " ";
-                }
-                else if (n == 7) {
-                    var sem_label = tokens[token];
-                    if (sem_label == '_')
-                        continue;
-                    var rels = sem_label.split(';');
-                    for (var rel in rels) {
-                        if (rels[rel].trim().length == 0)
-                            continue;
-                        var ind = rels[rel].indexOf(':');
-                        if (ind == -1) {
-                            continue;
-                        }
-                        currentHead = parseInt(rels[rel].substring(0, ind), 10) - 1;
-                        var toto = [
-                            "R" + countRelation,
-                            rels[rel].substring(ind + 1, rels[rel].length),
-                            [["Arg1", "T" + currentHead], ["Arg2", "T" + (line)]]
-                        ];
-                        relations.push(toto);
-                        countRelation++;
-                        if (usedEntities.indexOf(currentHead) == -1)
-                            usedEntities.push(currentHead);
-                        if (usedEntities.indexOf(line) == -1)
-                            usedEntities.push(line);
-                    }
-                }
-                n++;
-            }
-        }
-
-        // we clean the non used entities for better visualisation
-        var newEntities = [];
-        for (var i in usedEntities) {
-            newEntities.push(entities[usedEntities[i]]);
-        }
-        entities = newEntities;
-
-        docData['text'] = text.trim();
-        if (countEntity > 0)
-            docData['entities'] = entities;
-        if (countAttribute > 0)
-            docData['attributes'] = attributes;
-        if (countRelation > 0)
-            docData['relations'] = relations;
-        return docData;
-    }
-
     function sortCategories(categories) {
         var newCategories = [];
         if (categories) {
             newCategories = categories.sort(function (a, b) {
                 return (b.weight) - (a.weight);
             });
-            ;
         }
         return newCategories;
     }
-
-    var bratLocation = 'brat/';
-    /*head.js(
-        // External libraries
-        bratLocation + '/client/lib/jquery.min.js',
-        bratLocation + '/client/lib/jquery.svg.min.js',
-        bratLocation + '/client/lib/jquery.svgdom.min.js',
-
-        'resources/bootstrap/js/bootstrap.min.js',
-        'resources/bootstrap/js/prettify.js',
-           'resources/bootstrap/js/lang-ml.js',
-
-        // brat helper modules
-        bratLocation + '/client/src/configuration.js',
-        bratLocation + '/client/src/util.js',
-        bratLocation + '/client/src/annotation_log.js',
-        bratLocation + '/client/lib/webfont.js',
-
-        // brat modules
-        bratLocation + '/client/src/dispatcher.js',
-        bratLocation + '/client/src/url_monitor.js',
-        bratLocation + '/client/src/visualizer.js'
-    );       */
-
-    var webFontURLs = [
-        bratLocation + '/static/fonts/Astloch-Bold.ttf',
-        bratLocation + '/static/fonts/PT_Sans-Caption-Web-Regular.ttf',
-        bratLocation + '/static/fonts/Liberation_Sans-Regular.ttf'
-    ];
-
-    /** admin functions */
-
-    /*var selectedAdmKey="", selectedAdmValue, selectedAdmType;
-
-    function adminShowRequest(formData, jqForm, options) {
-        $('#TabAdminProps').show();
-        $('#admMessage').html('<font color="grey">Requesting server...</font>');
-        return true;
-    }
-
-    function adminAjaxError() {
-        $('#admMessage').html("<font color='red'>Autentication error.</font>");
-    }
-
-    function adminSubmitSuccesful(responseText, statusText) {
-        $('#admMessage').html("<font color='green'>Welcome to the admin console.</font>");
-        parseXml(responseText);
-        rowEvent();
-    }
-
-    function parseXml(xml){
-        var out="<pre><table class='table-striped table-hover'><thead><tr align='left'><th>Property</th><th align='left'>value</th></tr></thead>";
-        $(xml).find("property").each(function(){
-            var dsipKey = $(this).find("key").text();
-            var key = dsipKey.split('.').join('-');
-            var value = $(this).find("value").text();
-            var type = $(this).find("type").text();
-            out+="<tr class='admRow' id='"+key+"'><td><input type='hidden' value='"+type+"'/>"+dsipKey+"</td><td><div>"+value+"</div></td></tr>";
-        });
-        out+="</table></pre>";
-        $('#TabAdminProps').html(out);
-    }
-
-    function rowEvent(){
-        $('.admRow').click(function() {
-            $("#"+selectedAdmKey).find("div").html($("#val"+selectedAdmKey).attr("value"));
-            selectedAdmKey=$(this).attr("id");
-            selectedAdmValue=$(this).find("div").text();
-            selectedAdmType=$(this).find("input").attr("value");
-            $(this).find("div").html("<input type='text' id='val"+selectedAdmKey+"' size='80' value='"+selectedAdmValue+"' class='input-xxlarge'/>");
-            $("#val"+selectedAdmKey).focus();
-        });
-
-        $('.admRow').keypress(function(event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            selectedAdmKey=$(this).attr("id");
-            // Enter key
-            if(keycode == '13') {
-                var newVal = $("#val"+selectedAdmKey).val();
-                $("#"+selectedAdmKey).find("div").html(newVal);
-                selectedAdmValue=newVal;
-                selectedAdmType=$(this).find("input").attr("value");
-                generateXmlRequest();
-            }
-            // Escape key
-            if(keycode == '27') {
-                $("#"+selectedAdmKey).find("div").html(selectedAdmValue);
-            }
-        });
-    }
-
-    function generateXmlRequest(){
-        var xmlReq= "<changeProperty><password>"+$('#admPwd').val()+"</password>";
-        xmlReq+="<property><key>"+selectedAdmKey.split('-').join('.')+"</key><value>"+selectedAdmValue+"</value><type>"+selectedAdmType+"</type></property></changeProperty>";
-        if("fr.inria.nerd.service.admin.pw"==selectedAdmKey.split('-').join('.')) {
-            $('#admPwd').attr('value', selectedAdmValue);
-        }
-        $.ajax({
-              type: 'POST',
-              url: $(location).attr('href')+"changePropertyValue",
-              data: {xml: xmlReq},
-              success: changePropertySuccesful,
-              error: changePropertyError
-            });
-    }*/
-
-    function fitToContainer(canvas) {
-        // make a canvas visually fill the positioned parent
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        // ...then set the internal size to match
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
-
-    /*function changePropertySuccesful(responseText, statusText) {
-        $("#"+selectedAdmKey).find("div").html(responseText);
-        $('#admMessage').html("<font color='green'>Property "+selectedAdmKey.split('-').join('.')+" updated with success</font>");
-    }
-
-    function changePropertyError() {
-        $('#admMessage').html("<font color='red'>An error occured while updating property"+selectedAdmKey.split('-').join('.')+"</font>");
-    }*/
 
 })(jQuery);

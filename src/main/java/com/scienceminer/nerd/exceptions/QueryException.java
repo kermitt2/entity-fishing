@@ -5,9 +5,11 @@ package com.scienceminer.nerd.exceptions;
  * Should be converted to a 400 http error code
  */
 public class QueryException extends RuntimeException {
-    public static String LANGUAGE_ISSUE = "languageIssueReason";
-    public static String QUERY_GENERIC_ISSUE = "genericIssue";
-    public static String FILE_ISSUE = "fileIssue";
+    public static final String LANGUAGE_ISSUE = "languageIssueReason";
+    public static final String QUERY_GENERIC_ISSUE = "genericIssue";
+    public static final String FILE_ISSUE = "fileIssue";
+    public static final String WRONG_IDENTIFIER = "identifierIssue";
+    public static final String INVALID_TERM = "invalidTerm";
 
     private String reason = QUERY_GENERIC_ISSUE;
 

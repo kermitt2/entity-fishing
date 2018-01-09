@@ -744,7 +744,7 @@ public class NerdQuery {
 
     public static NerdQuery fromJson(String theQuery) throws QueryException {
         if (StringUtils.isEmpty(theQuery)) {
-            throw new QueryException("The query cannot be null:\n " + theQuery);
+            throw new QueryException("The query cannot be null or empty:\n " + theQuery);
         }
 
         try {
@@ -753,9 +753,11 @@ public class NerdQuery {
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             return mapper.readValue(theQuery, NerdQuery.class);
         } catch (JsonGenerationException | JsonMappingException e) {
-            throw new QueryException("JSON cannot be processed:\n " + theQuery + "\n ", e);
+            LOGGER.error("The JSON query cannot be processed\n " + theQuery + "\n ", e);
+            throw new QueryException("The JSON query cannot be processed.");
         } catch (IOException e) {
-            throw new QueryException("Some serious error when deserialize the JSON object: \n" + theQuery, e);
+            LOGGER.error("Some serious error when deserialize the JSON object: \n" + theQuery, e);
+            throw new QueryException("Some serious error when deserialize the JSON object.");
         }
     }
 

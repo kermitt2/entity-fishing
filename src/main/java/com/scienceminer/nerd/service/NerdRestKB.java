@@ -2,12 +2,14 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.NerdCategories;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
+import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,383 +23,286 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
- * 
  * REST service to access data in the knowledge base
- * 
  */
 public class NerdRestKB {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestKB.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestKB.class);
 
-	/**
-	 *  Get the information for a concept.
-	 * 
-	 *  @param id identifier of the concept      
-	 *
-	 *  @return a response object containing the information related to the identified concept.
-	 */
-	public static Response getConceptInfo(String id, String lang) {
-		Response response = null;
-		try {
-			if (id.startsWith("Q")) {
-				// we have a concept
-				response = getWikidataConceptInfo(id);
-			} else if (id.startsWith("P")) {
-				// we have a property
-				response = getWikidataConceptInfo(id);
-			} else {
-				// we have a wikipedia page id, and the lang field matters
-				response = getWikipediaConceptInfo(id, lang);
-			}
-		}
-		catch(NoSuchElementException nseExp) {
-			LOGGER.error("Could not get a KB instance. Sending service unavailable.");
-			response = Response.status(Status.SERVICE_UNAVAILABLE).build();
-		} 
-		catch(Exception e) {
-			LOGGER.error("An unexpected exception occurs. ", e);
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		}
-		
-		return response;
-	}
+    /**
+     * Get the information for a concept.
+     *
+     * @param id identifier of the concept
+     * @return a response object containing the information related to the identified concept.
+     */
+    public String getConceptInfo(String id, String lang) {
+        String response = null;
+            if (id.startsWith("Q")) {
+                // we have a concept
+                response = getWikidataConceptInfo(id);
+            } else if (id.startsWith("P")) {
+                // we have a property
+                response = getWikidataConceptInfo(id);
+            } else {
+                // we have a wikipedia page id, and the lang field matters
+                response = getWikipediaConceptInfo(id, lang);
+            }
 
-	private static Response getWikipediaConceptInfo(String id, String lang) throws Exception {
-		Response response = null;
-		Integer identifier = null;
-		try {
-			identifier = Integer.parseInt(id);
-		} catch(Exception e) {
-			LOGGER.error("Could not parse the concept identifier. Bad request.");
-			response = Response.status(Status.BAD_REQUEST).build();
-		}
+        return response;
+    }
 
-		if (identifier != null) {
-			NerdEntity entity = new NerdEntity();
-			entity.setLang(lang);
-			//LowerKnowledgeBase wikipedia = Lexicon.getInstance().getWikipediaConf(lang); 
-			LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
+    private String getWikipediaConceptInfo(String id, String lang) throws QueryException {
+        Integer identifier = null;
+        try {
+            identifier = Integer.parseInt(id);
+        } catch (Exception e) {
+            LOGGER.error("Could not parse the concept identifier. Bad request.");
+            throw new QueryException("The supplied identifier has the wrong format.", QueryException.WRONG_IDENTIFIER);
+        }
 
-			if (wikipedia == null) {
-				LOGGER.error("Language is not supported. Bad request.");
-				response = Response.status(Status.BAD_REQUEST).build();
-			} else {
-				Page page = wikipedia.getPageById(identifier.intValue());
+        NerdEntity entity = new NerdEntity();
+        entity.setLang(lang);
 
-				// check the type of the page - it must be an article
-				PageType type = page.getType();
-				if (type != PageType.article) {
-					LOGGER.error("Not a valid concept identifier. Bad request.");
-					response = Response.status(Status.BAD_REQUEST).build();
-				} else {
-					Article article = (Article)page;
-					entity.setPreferredTerm(article.getTitle());
-					entity.setRawName(article.getTitle());
-					
-					// definition
-					Definition definition = new Definition();
-					try {
-						definition.setDefinition(article.getFirstParagraphWikiText());
-					}
-					catch(Exception e) {
-						LOGGER.debug("Error when getFirstParagraphWikiText for page id "+ identifier);
-					}
-					definition.setSource("wikipedia-" + lang);
-					definition.setLang(lang);
-					entity.addDefinition(definition);
+        LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
-					entity.setWikipediaExternalRef(identifier);
+        if (wikipedia == null) {
+            LOGGER.error("The knowledge base doesn't contain the language " + lang + ".");
+            throw new QueryException("The knowledge base doesn't contain the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
+        }
+        Page page = wikipedia.getPageById(identifier);
 
-					// categories
-					com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
-					if ( (parentCategories != null) && (parentCategories.length > 0) ) {
-						for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
-							// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
-							if (theCategory == null) {
-								LOGGER.warn("Invalid category page for article: " + identifier);
-								continue;
-							}
-							if (theCategory.getTitle() == null) {
-								LOGGER.warn("Invalid category content for article: " + identifier);
-								continue;
-							}
-							if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
-								entity.addCategory(new com.scienceminer.nerd.kb.Category(theCategory));
+        // check the type of the page - it must be an article
+        PageType type = page.getType();
+        if (type != PageType.article) {
+            return null;
+        }
+        Article article = (Article) page;
+        entity.setPreferredTerm(article.getTitle());
+        entity.setRawName(article.getTitle());
+
+        // definition
+        Definition definition = new Definition();
+        try {
+            definition.setDefinition(article.getFirstParagraphWikiText());
+        } catch (Exception e) {
+            LOGGER.debug("Error when getFirstParagraphWikiText for page id " + identifier);
+        }
+        definition.setSource("wikipedia-" + lang);
+        definition.setLang(lang);
+        entity.addDefinition(definition);
+
+        entity.setWikipediaExternalRef(identifier);
+
+        // categories
+        com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
+        handleCategories(entity, String.valueOf(identifier), parentCategories);
+
+        // translations
+        //Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
+        Map<String, LowerKnowledgeBase> wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
+        //Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
+        Map<String, WikipediaDomainMap> wikipediaDomainMaps =
+                UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
+        WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
+
+        if (wikipediaDomainMap == null)
+            System.out.println("wikipediaDomainMap is null for " + lang);
+        else
+            entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
+
+        entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
+        entity.setWikidataId(article.getWikidataId());
+
+        List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(entity.getWikidataId());
+        entity.setStatements(statements);
+
+        return entity.toJsonFull();
+
+    }
+
+    private void handleCategories(NerdEntity entity, String identifier, com.scienceminer.nerd.kb.model.Category[] parentCategories) {
+        if (ArrayUtils.isNotEmpty(parentCategories)) {
+            for (com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
+                // not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
+                if (theCategory == null) {
+                    LOGGER.warn("Invalid category page for article: " + identifier);
+                    continue;
+                }
+                if (theCategory.getTitle() == null) {
+                    LOGGER.warn("Invalid category content for article: " + identifier);
+                    continue;
+                }
+                if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
+                    entity.addCategory(new Category(theCategory));
 							/*else {
 								break;
 							}*/
-						}
-					}
+            }
+        }
+    }
 
-					// translations
-					//Map<String, Wikipedia> wikipedias = Lexicon.getInstance().getWikipediaConfs();
-					Map<String, LowerKnowledgeBase> wikipedias = 
-						UpperKnowledgeBase.getInstance().getWikipediaConfs();
-					//Map<String, WikipediaDomainMap> wikipediaDomainMaps = Lexicon.getInstance().getWikipediaDomainMaps();
-					Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
-						UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
-					WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(lang);
-					if (wikipediaDomainMap == null)
-						System.out.println("wikipediaDomainMap is null for " + lang);
-					else
-						entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
+    private String getWikidataConceptInfo(String id) {
+        NerdEntity entity = new NerdEntity();
+        entity.setLang(Language.EN);
+        UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance();
 
-					entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
-					entity.setWikidataId(article.getWikidataId());
+        if (id.startsWith("Q")) {
+            Concept concept = knowledgeBase.getConcept(id);
+            if (concept == null) {
+                LOGGER.error("Not a valid concept identifier.");
+                throw new QueryException("The supplied identifier doesn't correspond to a valid concept.", QueryException.WRONG_IDENTIFIER);
+            }
 
-					List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(entity.getWikidataId());
-					entity.setStatements(statements);
+            Integer pageId = concept.getPageIdByLang(Language.EN);
+            if (pageId != null) {
+                LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(Language.EN);
+                Article article = (Article) wikipedia.getPageById(pageId);
+                if (article != null) {
+                    entity.setPreferredTerm(article.getTitle());
+                    entity.setRawName(article.getTitle());
 
-					String json = entity.toJsonFull();
-					if (json == null) {
-						response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-					}
-					else {
-						response = Response.status(Status.OK).entity(json)
-							.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
-							.header("Access-Control-Allow-Origin", "*")
-                    		.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-							.build();
-					}
-				}
-			}
-		}
+                    // definition
+                    Definition definition = new Definition();
+                    try {
+                        definition.setDefinition(article.getFirstParagraphWikiText());
+                    } catch (Exception e) {
+                        LOGGER.debug("Error when getFirstParagraphWikiTextfor page id " + id);
+                    }
+                    definition.setSource("wikipedia-en");
+                    definition.setLang(Language.EN);
+                    entity.addDefinition(definition);
+                    entity.setWikipediaExternalRef(pageId);
 
-		return response;
-	}
+                    // categories
+                    com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
+                    handleCategories(entity, id, parentCategories);
 
-	private static Response getWikidataConceptInfo(String id) {
-		NerdEntity entity = new NerdEntity();
-		Response response = null;
-		entity.setLang(Language.EN);
-		UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance(); 
+                    // translations
+                    Map<String, LowerKnowledgeBase> wikipedias =
+                            UpperKnowledgeBase.getInstance().getWikipediaConfs();
 
-		if (knowledgeBase == null) {
-			LOGGER.error("NERD upper knowledge base not available.");
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-			return response;
-		}
-		if (id.startsWith("Q")) {
-			Concept concept = knowledgeBase.getConcept(id);
-			if (concept != null) {
-				Integer pageId = concept.getPageIdByLang(Language.EN);
-	            if (pageId != null) {
-	                LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(Language.EN);
-	                Article article = (Article)wikipedia.getPageById(pageId);
-	                if (article != null) {
-						entity.setPreferredTerm(article.getTitle());
-						entity.setRawName(article.getTitle());
-				
-						// definition
-						Definition definition = new Definition();
-						try {
-							definition.setDefinition(article.getFirstParagraphWikiText());
-						}
-						catch(Exception e) {
-							LOGGER.debug("Error when getFirstParagraphWikiTextfor page id "+ id);
-						}
-						definition.setSource("wikipedia-en");
-						definition.setLang(Language.EN);
-						entity.addDefinition(definition);
-						entity.setWikipediaExternalRef(pageId);
+                    Map<String, WikipediaDomainMap> wikipediaDomainMaps =
+                            UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
+                    WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(Language.EN);
+                    if (wikipediaDomainMap == null)
+                        LOGGER.warn("wikipediaDomainMap is null for en");
+                    else
+                        entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
-						// categories
-						com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
-						if ( (parentCategories != null) && (parentCategories.length > 0) ) {
-							for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
-								// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
-								if (theCategory == null) {
-									LOGGER.warn("Invalid category page for article: " + id);
-									continue;
-								}
-								if (theCategory.getTitle() == null) {
-									LOGGER.warn("Invalid category content for article: " + id);
-									continue;
-								}
-								if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
-									entity.addCategory(new com.scienceminer.nerd.kb.Category(theCategory));
-							}
-						}
+                    entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
+                }
+            }
+        } else if (id.startsWith("P")) {
+            Property property = knowledgeBase.getProperty(id);
+            entity.setPreferredTerm(property.getName());
+            entity.setRawName(property.getName());
+        } else {
+            LOGGER.error("The supplied identifier for wikidata should start with Q or P");
+            throw new QueryException("The wikidata supplied identifier has the wrong format.", QueryException.WRONG_IDENTIFIER);
+        }
 
-						// translations
-						Map<String, LowerKnowledgeBase> wikipedias = 
-							UpperKnowledgeBase.getInstance().getWikipediaConfs();
-						Map<String, WikipediaDomainMap> wikipediaDomainMaps = 
-							UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
-						WikipediaDomainMap wikipediaDomainMap = wikipediaDomainMaps.get(Language.EN);
-						if (wikipediaDomainMap == null)
-							System.out.println("wikipediaDomainMap is null for en");
-						else
-							entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
+        entity.setWikidataId(id);
 
-						entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
-					}
-				}
-			} else {
-				LOGGER.error("Not a valid concept identifier. Bad request.");
-				response = Response.status(Status.BAD_REQUEST).build();
-				return response;
-			}
+        List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements(id);
+        entity.setStatements(statements);
 
-			entity.setWikidataId(id);
+        return entity.toJsonFull();
+    }
 
-			List<Statement> statements = 
-				UpperKnowledgeBase.getInstance().getStatements(id);
-			entity.setStatements(statements);
-		} else if (id.startsWith("P")) {
-			Property property = knowledgeBase.getProperty(id);
-			entity.setPreferredTerm(property.getName());
-			entity.setRawName(property.getName());
-		}
+    /**
+     * Get the list of all ambiguous concepts that can be realized by a given term with
+     * associated conditional probability.
+     *
+     * @param term the term for which a semantic look-up is realised
+     * @return a response object containing the concept information related to the term.
+     */
+    public String getTermLookup(String term, String lang) {
+        String json = null;
 
-		entity.setWikidataId(id);
+        LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
-		List<Statement> statements = 
-			UpperKnowledgeBase.getInstance().getStatements(id);
-		entity.setStatements(statements);
+        if (isBlank(term)) {
+            LOGGER.error("Empty term value. Bad request.");
+            throw new QueryException("The term supplied is empty or null.", QueryException.INVALID_TERM);
+        } else if (wikipedia == null) {
+            LOGGER.error("The knowledge base doesn't contain the language " + lang + ".");
+            throw new QueryException("The knowledge base doesn't contain the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
+        }
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{ \"term\": \"" + term + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
 
-		String json = entity.toJsonFull();
-		if (json == null) {
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		}
-		else {
-			response = Response.status(Status.OK).entity(json)
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
-				.header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-				.build();
-		}
-		return response;
-	}
+        Label lbl = new Label(wikipedia.getEnvironment(), term.trim());
+        if (lbl.exists()) {
+            Label.Sense[] senses = lbl.getSenses();
+            if ((senses != null) && (senses.length > 0)) {
+                boolean first = true;
+                for (int i = 0; i < senses.length; i++) {
+                    Label.Sense sense = senses[i];
+                    PageType pageType = sense.getType();
+                    if (pageType != PageType.article)
+                        continue;
 
-	/**
-	 *  Get the list of all ambiguous concepts that can be realized by a given term with 
-	 *  associated conditional probability.
-	 * 
-	 *  @param term the term for which a semantic look-up is realised      
-	 *
-	 *  @return a response object containing the concept information related to the term.
-	 */
-	public static Response getTermLookup(String term, String lang) {
-		//LOGGER.debug(methodLogIn());       
+                    // in case we use a min sense probability filter
+                    //if (sense.getPriorProbability() < minSenseProbability)
+                    //	continue;
 
-		Response response = null;
-		String retVal = null;
-		String json = null;
-		try {
-			//LOGGER.debug(">> set raw text for stateless service'...");
-			LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang); 
+                    // not a valid sense if title is a list of ...
+                    String title = sense.getTitle();
+                    if ((title == null) || title.startsWith("List of") || title.startsWith("Liste des"))
+                        continue;
 
-			if ((term == null) || (term.trim().length() == 0)) {
-				LOGGER.error("Empty term. Bad request.");
-				response = Response.status(Status.BAD_REQUEST).build();
-			} else if (wikipedia == null) {
-				LOGGER.error("Language is not supported. Bad request.");
-				response = Response.status(Status.BAD_REQUEST).build();
-			} else {
-				StringBuilder jsonBuilder = new StringBuilder();
-				jsonBuilder.append("{ \"term\": \"" + term + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
-				
-				Label lbl = new Label(wikipedia.getEnvironment(), term.trim());
-				if (lbl.exists()) {
-					Label.Sense[] senses = lbl.getSenses();
-					if ((senses != null) && (senses.length > 0)) {
-						boolean first = true;
-						for(int i=0; i<senses.length; i++) {
-							Label.Sense sense = senses[i];
-							PageType pageType = sense.getType();
-							if (pageType != PageType.article)
-								continue;
+                    boolean invalid = false;
 
-							// in case we use a min sense probability filter
-							//if (sense.getPriorProbability() < minSenseProbability)
-							//	continue; 
+                    //System.out.println("check categories for " + sense.getId());
+                    com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
+                    
+                    if (ArrayUtils.isNotEmpty(parentCategories)) {
+                        for (com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
+                            // not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
+                            if (theCategory == null) {
+                                LOGGER.warn("Invalid category page for sense: " + title);
+                                continue;
+                            }
+                            if (theCategory.getTitle() == null) {
+                                LOGGER.warn("Invalid category content for sense: " + title);
+                                continue;
+                            }
+                            //System.out.println("categ: " + theCategory.getTitle());
+                            if (theCategory.getTitle().toLowerCase().contains("disambiguation")) {
+                                invalid = true;
+                                break;
+                            }
+                        }
+                    }
 
-							// not a valid sense if title is a list of ...
-							String title = sense.getTitle();
-							if ((title == null) || title.startsWith("List of") || title.startsWith("Liste des")) 
-								continue;
-							
-							boolean invalid = false;
-//System.out.println("check categories for " + sense.getId());							
-							com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
-							if ( (parentCategories != null) && (parentCategories.length > 0) ) {
-								for(com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
-									// not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
-									if (theCategory == null) {
-										LOGGER.warn("Invalid category page for sense: " + title);
-										continue;
-									}
-									if (theCategory.getTitle() == null) {
-										LOGGER.warn("Invalid category content for sense: " + title);
-										continue;
-									}
-//System.out.println("categ: " + theCategory.getTitle());
-									if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") != -1) {
-										invalid = true;
-										break;
-									}
-								}
-							}
-							if (invalid)
-								continue;
-							if (first)
-								first = false;
-							else
-								jsonBuilder.append(", ");
-							jsonBuilder.append("{ \"pageid\": " + sense.getId() + 
-								", \"preferred\" : \"" + sense.getTitle() + "\", \"prob_c\" : " +sense.getPriorProbability() +" }");
-						}
-					}
-				}
-				jsonBuilder.append("] }");
-				json = jsonBuilder.toString();
-			}
+                    if (invalid)
+                        continue;
+                    if (first)
+                        first = false;
+                    else
+                        jsonBuilder.append(", ");
 
-			if (json == null) {
-				response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-			} else {
-				response = Response.status(Status.OK).entity(json)
-					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
-					.header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-					.build();
-			}
+                    jsonBuilder.append("{ \"pageid\": " + sense.getId() +
+                            ", \"preferred\" : \"" + sense.getTitle() + "\", \"prob_c\" : " + sense.getPriorProbability() + " }");
+                }
+            }
+        }
+        jsonBuilder.append("] }");
+        json = jsonBuilder.toString();
 
-		}
-		catch(NoSuchElementException nseExp) {
-			LOGGER.error("Could not get a KB instance. Sending service unavailable.");
-			response = Response.status(Status.SERVICE_UNAVAILABLE).build();
-		} 
-		/*catch(JSONException ex) {
-			LOGGER.error("Error when building the JSON response string.", ex);  
-			System.out.println("Error when building the JSON response string."); 
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();      
-		}*/
-		catch(Exception e) {
-			LOGGER.error("An unexpected exception occurs. ", e);
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		}
-		//LOGGER.debug(methodLogOut());
-		
-		return response;
-	}
+        return json;
+    }
 
-	/**
-	 * @return
-	 */
-	public static String methodLogIn() {
-		return ">> " + NerdRestKB.class.getName() + "." + 
-			Thread.currentThread().getStackTrace()[1].getMethodName();
-	}
-
-	/**
-	 * @return
-	 */
-	public static String methodLogOut() {
-		return "<< " + NerdRestKB.class.getName() + "." + 
-			Thread.currentThread().getStackTrace()[1].getMethodName();
-	}
+    public String methodLogIn() {
+        return ">> " + NerdRestKB.class.getName() + "." +
+                Thread.currentThread().getStackTrace()[1].getMethodName();
+    }
+    
+    public String methodLogOut() {
+        return "<< " + NerdRestKB.class.getName() + "." +
+                Thread.currentThread().getStackTrace()[1].getMethodName();
+    }
 }
