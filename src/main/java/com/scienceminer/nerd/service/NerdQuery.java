@@ -88,9 +88,14 @@ public class NerdQuery {
     // runtime in ms of the last processing
     private long runtime = 0;
 
-    // mode indicating if we disambiguate or not
-    //private boolean onlyNER = false;
+    /**
+     * mode indicating if we disambiguate or not
+     * @Deprecated use mentions = ['ner'] to obtain the same result
+     */
+    @Deprecated
+    private boolean onlyNER = false;
 
+    // mention tecniques, specify the method for which the mentions are extracted
     private List<ProcessText.MentionMethod> mentions =
             Arrays.asList(ProcessText.MentionMethod.ner, ProcessText.MentionMethod.wikipedia);
 
@@ -141,7 +146,7 @@ public class NerdQuery {
         this.sentences = query.getSentences();
         this.resultLanguages = query.getResultLanguages();
 
-        //this.onlyNER = query.getOnlyNER();
+        this.onlyNER = query.getOnlyNER();
         this.mentions = query.getMentions();
         this.nbest = query.getNbest();
         this.sentence = query.getSentence();
@@ -282,13 +287,17 @@ public class NerdQuery {
         this.sentences = sentences;
     }
 
-    /*public boolean getOnlyNER() {
+    /** @Deprecated Use mentions field instead */
+    @Deprecated
+    public boolean getOnlyNER() {
         return onlyNER;
     }
 
+    /** @Deprecated Use mentions field instead */
+    @Deprecated
     public void setOnlyNER(boolean onlyNER) {
         this.onlyNER = onlyNER;
-    }*/
+    }
 
     public String getShortText() {
         return shortText;

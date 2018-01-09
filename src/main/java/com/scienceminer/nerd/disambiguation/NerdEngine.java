@@ -106,6 +106,11 @@ public class NerdEngine {
 	 *         the enriched and disambiguated query
 	 */
 	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
+
+	    //TODO remove after next release
+		if(nerdQuery.getOnlyNER()) {
+			return nerdQuery.getEntities();
+		}
 		// Validation //TODO we should find a way to move this out of here.
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();
@@ -925,7 +930,7 @@ public class NerdEngine {
 
 					candidate.setRelatednessScore(related);
 					if (ranker == null) {
-						System.out.println("Cannot rank candidates: disambiguator for the language " + 
+						LOGGER.error("Cannot rank candidates: disambiguator for the language " +
 							lang + " is invalid");
 					}
 
@@ -953,7 +958,7 @@ public class NerdEngine {
 		}
 
 		//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
-		System.out.println("relatedness - comparisons: " + relatedness.getComparisonsCalculated()
+		LOGGER.debug("relatedness - comparisons: " + relatedness.getComparisonsCalculated()
 		+ " - cache proportion: " + relatedness.getCachedProportion());
 
 		return localContext;

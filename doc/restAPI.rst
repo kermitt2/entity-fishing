@@ -130,7 +130,7 @@ The JSON format for the query parameter to be sent to the service is identical t
 ..           "fr",
 ..           "de"
 ..       ],
-..       "onlyNER": false,
+       "onlyNER": false,
        "mentions": ["ner","wikipedia"],
        "nbest": 0,
        "sentence": false,
@@ -406,7 +406,7 @@ In the example above, the root layer of JSON values correspond to:
 
 - runtime: the amount of time in milliseconds to process the request on server side,
 
-..- onlyNER: as provided in the query - when true the disambiguation against wikipedia is skipped,
+- onlyNER: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped. This option has been limited *only to text queries*. **NOTE this option is deprecated and will be removed in the next release**,
 
 - nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
 

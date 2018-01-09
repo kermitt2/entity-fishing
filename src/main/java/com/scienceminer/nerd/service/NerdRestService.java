@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.sun.jersey.multipart.FormDataParam;
@@ -7,12 +8,11 @@ import com.sun.jersey.spi.resource.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.management.Query;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.io.InputStream;
+import java.util.NoSuchElementException;
 
 /**
  * RESTFul service for the NERD system.
@@ -41,10 +41,6 @@ public class NerdRestService implements NerdPaths {
     private static final String CUSTOMISATION = "customisation";
 
     public NerdRestService() {
-        /*LOGGER.info("Init Servlet NerdRestService.");
-        NerdServiceProperties.getInstance();
-        LOGGER.info("Init of Servlet NerdRestService finished.");*/
-
         LOGGER.info("Init lexicon.");
         Lexicon.getInstance();
         LOGGER.info("Init lexicon finished.");
@@ -77,7 +73,6 @@ public class NerdRestService implements NerdPaths {
     /**
      * Sentence Segmentation
      **/
-
     @GET
     @Path(SEGMENTATION)
     @Produces(MediaType.APPLICATION_JSON)
@@ -123,11 +118,40 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     public Response processQueryJson(@FormDataParam(QUERY) String query,
                                      @FormDataParam(FILE) InputStream inputStream) {
-        if (inputStream != null) {
-            return NerdRestProcessFile.processQueryAndPdfFile(query, inputStream);
-        } else {
-            return NerdRestProcessQuery.processQuery(query);
+        String json = null;
+        Response response = null;
+
+        try {
+
+            if (inputStream != null) {
+                json = NerdRestProcessFile.processQueryAndPdfFile(query, inputStream);
+            } else {
+                json = NerdRestProcessQuery.processQuery(query);
+            }
+
+            if (json == null) {
+                response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(json)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+
+        } catch (QueryException qe) {
+            return handleQueryException(qe, query);
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        } catch (Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
+
+        return response;
     }
 
     /**
@@ -138,7 +162,57 @@ public class NerdRestService implements NerdPaths {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response processQueryJsonNoMultipart(String query) {
-        return NerdRestProcessQuery.processQuery(query);
+        String output = null;
+        Response response = null;
+
+        try {
+            output = NerdRestProcessQuery.processQuery(query);
+
+            if (output == null) {
+                response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(output)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+
+        } catch (QueryException qe) {
+            return handleQueryException(qe, query);
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        } catch (Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
+    }
+
+    private Response handleQueryException(QueryException qe, String query) {
+        Response response;
+        if (qe.getReason().equals(QueryException.LANGUAGE_ISSUE)) {
+            final String message = "The language specified is not supported or not valid. ";
+            LOGGER.error(message, qe);
+            response = Response.status(Response.Status.NOT_ACCEPTABLE)
+                    .entity(message)
+                    .build();
+        } else if(qe.getReason().equals(QueryException.FILE_ISSUE)){
+            final String message = "The file specified is not valid, null or empty. ";
+            LOGGER.error(message);
+            response = Response.status(Response.Status.BAD_REQUEST)
+                    .entity(message)
+                    .build();
+        } else {
+            LOGGER.error("The sent query is invalid. Query sent: " + query, qe);
+            response = Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
+        return response;
     }
 
     /*@POST
@@ -205,7 +279,6 @@ public class NerdRestService implements NerdPaths {
     /**
      * KB operations
      **/
-
     @Path(KB + "/" + CONCEPT + "/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET

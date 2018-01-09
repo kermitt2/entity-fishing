@@ -15,12 +15,10 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
+import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
 import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class NerdRestProcessQuery {
@@ -34,52 +32,55 @@ public class NerdRestProcessQuery {
      * @return a response query object containing the structured representation of
      * the enriched and disambiguated query.
      */
-    public static Response processQuery(String theQuery) {
+    public static String processQuery(String theQuery) {
         LOGGER.debug(methodLogIn());
-        Response response = null;
-
         LOGGER.debug(">> received query to process: " + theQuery);
-        try {
-            NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
+        NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
 
-            // we analyze the query object in order to determine the kind of object to be processed
-            LOGGER.debug(">> set query object for stateless service...");
+        // we analyze the query object in order to determine the kind of object to be processed
+        LOGGER.debug(">> set query object for stateless service...");
 
-            // tuning the species only mention selection
-            NerdRestProcessFile.tuneSpeciesMentions(nerdQuery);
+        // tuning the species only mention selection
+        NerdRestProcessFile.tuneSpeciesMentions(nerdQuery);
 
-            //checking customisation
-            processCustomisation(nerdQuery);
+        //checking customisation
+        processCustomisation(nerdQuery);
 
-            switch (nerdQuery.getQueryType()) {
-                case NerdQuery.QUERY_TYPE_TEXT:
-                    if (nerdQuery.getText().length() > 5) {
-                        response = processQueryText(nerdQuery);
-                    } else {
-                        response = Response.status(Status.BAD_REQUEST).build();
-                    }
-                    break;
-                case NerdQuery.QUERY_TYPE_SHORT_TEXT:
-                    response = processSearchQuery(nerdQuery);
-                    break;
-                case NerdQuery.QUERY_TYPE_TERM_VECTOR:
-                    response = processQueryTermVector(nerdQuery);
-                    break;
-                case NerdQuery.QUERY_TYPE_INVALID:
-                    response = Response.status(Status.BAD_REQUEST).build();
-                    break;
-            }
-        } catch (QueryException qe) {
-            LOGGER.error("The sent query is invalid. Query sent: " + theQuery, qe);
-            response = Response.status(Status.BAD_REQUEST).build();
+        String output = null;
 
-        } catch (Exception e) {
-            LOGGER.error("An unexpected exception occurs. ", e);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        switch (nerdQuery.getQueryType()) {
+            case NerdQuery.QUERY_TYPE_TEXT:
+                if (nerdQuery.getText().length() > 5) {
+                    output = processQueryText(nerdQuery);
+                } else {
+                    throw new QueryException("Text query too short, use shortText");
+                }
+                break;
+            case NerdQuery.QUERY_TYPE_SHORT_TEXT:
+                output = processSearchQuery(nerdQuery);
+                break;
+            case NerdQuery.QUERY_TYPE_TERM_VECTOR:
+                output = processQueryTermVector(nerdQuery);
+                break;
+            case NerdQuery.QUERY_TYPE_INVALID:
+                throw new QueryException("Query not valid");
         }
 
         LOGGER.debug(methodLogOut());
-        return response;
+        return output;
+    }
+
+    /** Check if the parameter onlyNER is set and modify the query accordingly, if the language is not fr or en,
+     * an error is thrown. Deprecated, will be removed in next release. */
+    @Deprecated
+    public static void processOnlyNER(NerdQuery nerdQuery) {
+        if (nerdQuery.getOnlyNER()) {
+            if (!Arrays.asList(Language.FR, Language.EN).contains(nerdQuery.getLanguage().getLang())) {
+                throw new QueryException("OnlyNER cannot be set true with languages other than FR and EN", LANGUAGE_ISSUE);
+            }
+            nerdQuery.setMentions(Arrays.asList(ProcessText.MentionMethod.ner));
+            LOGGER.warn("Method onlyNER:true set in query, please use the mentions attribute as this option will be removed in the next release.");
+        }
     }
 
     /**
@@ -113,110 +114,96 @@ public class NerdRestProcessQuery {
      * @return a response query object containing the structured representation of
      * the enriched and disambiguated query.
      */
-    public static Response processQueryText(NerdQuery nerdQuery) {
+    public static String processQueryText(NerdQuery nerdQuery) {
         LOGGER.debug(methodLogIn());
-        Response response = null;
-        try {
-            long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
 
-            // language identification
-            Language lang = nerdQuery.getLanguage();
-            if ((nerdQuery.getLanguage() == null) || (nerdQuery.getLanguage().getLang() == null)) {
-                LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-                lang = languageUtilities.runLanguageId(nerdQuery.getText());
-                nerdQuery.setLanguage(lang);
-                LOGGER.debug(">> identified language: " + lang.toString());
-            } else {
-                LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
-            }
+        // language identification
+        languageIdentificationAndValidation(nerdQuery, nerdQuery.getText());
 
-            if (!nerdQuery.hasValidLanguage()) {
-                response = Response.status(Status.NOT_ACCEPTABLE).build();
-                LOGGER.debug(methodLogOut());
-                return response;
-            }
+        //TODO: remove after release
+        processOnlyNER(nerdQuery);
 
-            // entities originally from the query are marked as such
-            List<NerdEntity> originalEntities = null;
-            if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
-                for (NerdEntity entity : nerdQuery.getEntities()) {
-                    entity.setNer_conf(1.0);
+        // entities originally from the query are marked as such
+        List<NerdEntity> originalEntities = null;
+        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+            for (NerdEntity entity : nerdQuery.getEntities()) {
+                entity.setNer_conf(1.0);
 
-                    // do we have disambiguated entity information for the entity?
-                    if (entity.getWikipediaExternalRef() != -1) {
-                        entity.setSource(ProcessText.MentionMethod.user);
-                        entity.setNerdScore(1.0);
-                    }
+                // do we have disambiguated entity information for the entity?
+                if (entity.getWikipediaExternalRef() != -1) {
+                    entity.setSource(ProcessText.MentionMethod.user);
+                    entity.setNerdScore(1.0);
                 }
-                originalEntities = nerdQuery.getEntities();
             }
+            originalEntities = nerdQuery.getEntities();
+        }
 
-            ProcessText processText = ProcessText.getInstance();
-            Integer[] processSentence = nerdQuery.getProcessSentence();
-            List<Sentence> sentences = nerdQuery.getSentences();
-            //If not previously segmented, call the sentence segmentation and set it back
-            if ((sentences == null) && (nerdQuery.getSentence() || (processSentence != null))) {
-                sentences = processText.sentenceSegmentation(nerdQuery.getText());
-                nerdQuery.setSentences(sentences);
-            }
+        ProcessText processText = ProcessText.getInstance();
+        Integer[] processSentence = nerdQuery.getProcessSentence();
+        List<Sentence> sentences = nerdQuery.getSentences();
+        //If not previously segmented, call the sentence segmentation and set it back
+        if ((sentences == null) && (nerdQuery.getSentence() || (processSentence != null))) {
+            sentences = processText.sentenceSegmentation(nerdQuery.getText());
+            nerdQuery.setSentences(sentences);
+        }
 
-            // first process all mentions
-            List<Mention> mentions = processText.process(nerdQuery);
+        // first process all mentions
+        List<Mention> mentions = processText.process(nerdQuery);
 
-            // inject explicit acronyms
-            mentions = ProcessText.acronymCandidates(nerdQuery, mentions);
+        // inject explicit acronyms
+        mentions = ProcessText.acronymCandidates(nerdQuery, mentions);
 
-            if (originalEntities == null) {
-                nerdQuery.setAllEntities(mentions);
-            } else {
-                List<NerdEntity> selectedMentions = selectEntities(originalEntities, mentions);
-                nerdQuery.setEntities(selectedMentions);
-            }
+        if (originalEntities == null) {
+            nerdQuery.setAllEntities(mentions);
+        } else {
+            List<NerdEntity> selectedMentions = selectEntities(originalEntities, mentions);
+            nerdQuery.setEntities(selectedMentions);
+        }
 
-            // sort the entities
-            Collections.sort(nerdQuery.getEntities());
+        // sort the entities
+        Collections.sort(nerdQuery.getEntities());
 
-            // disambiguate
-            if (mentions != null) {
-                // disambiguate and solve entity mentions
-                //if (!nerdQuery.getOnlyNER()) 
+        // disambiguate
+        if (mentions != null) {
+            // disambiguate and solve entity mentions
+            //if (!nerdQuery.getOnlyNER())
 //                {
-                    NerdEngine disambiguator = NerdEngine.getInstance();
-                    List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
-                    nerdQuery.setEntities(disambiguatedEntities);
-                    nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+            NerdEngine disambiguator = NerdEngine.getInstance();
+            List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
+            nerdQuery.setEntities(disambiguatedEntities);
+            nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
                 /*} else {
                     for (NerdEntity entity : nerdQuery.getEntities()) {
                         entity.setNerdScore(entity.getNer_conf());
                     }
                 }*/
-            }
-
-            long end = System.currentTimeMillis();
-            nerdQuery.setRuntime(end - start);
-            System.out.println("runtime: " + (end - start));
-
-            Collections.sort(nerdQuery.getEntities());
-            String json = nerdQuery.toJSONClean();
-            if (StringUtils.isEmpty(json)) {
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-            } else {
-                response = Response.status(Status.OK).entity(json)
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
-                        .header("Access-Control-Allow-Origin", "*")
-                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                        .build();
-            }
-        } catch (QueryException qe) {
-            LOGGER.error("Bad input data. ", qe);
-            response = Response.status(Status.BAD_REQUEST).build();
-        } catch (Exception e) {
-            LOGGER.error("An unexpected exception occurs. ", e);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
 
+        long end = System.currentTimeMillis();
+        nerdQuery.setRuntime(end - start);
+        System.out.println("runtime: " + (end - start));
+
+        Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
-        return response;
+        return nerdQuery.toJSONClean();
+    }
+
+
+    public static void languageIdentificationAndValidation(NerdQuery nerdQuery, String text) {
+        Language lang = nerdQuery.getLanguage();
+        if (lang == null || lang.getLang() == null) {
+            LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
+            lang = languageUtilities.runLanguageId(text);
+            nerdQuery.setLanguage(lang);
+            LOGGER.debug(">> identified language: " + lang.toString());
+        } else {
+            LOGGER.debug(">> language already identified: " + lang.getLang().toString());
+        }
+
+        if (!nerdQuery.hasValidLanguage()) {
+            throw new QueryException("Language not invalid or not supported", LANGUAGE_ISSUE);
+        }
     }
 
     /**
@@ -279,79 +266,38 @@ public class NerdRestProcessQuery {
      * @param nerdQuery query object with the weighted term vector to be processed
      * @return a response JSON object containing the weighted term vector with the resolved entities.
      */
-    public static Response processQueryTermVector(NerdQuery nerdQuery) {
+    public static String processQueryTermVector(NerdQuery nerdQuery) {
         LOGGER.debug(methodLogIn());
-        Response response = null;
-        try {
-            long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
 
-            // language identification
-            // test first if the language is already indicated in the query structure
+        // language identification
+        // test first if the language is already indicated in the query structure
 
-            // reformat text content
-            StringBuilder textContent = new StringBuilder();
-            for (WeightedTerm wt : nerdQuery.getTermVector()) {
-                textContent.append(" " + wt.getTerm());
-            }
-            String text = textContent.toString();
-            Language lang = nerdQuery.getLanguage();
-            if ((lang == null) || (lang.getLang() == null)) {
-                LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-                try {
-                    lang = languageUtilities.runLanguageId(text);
-                } catch (Exception e) {
-                    LOGGER.debug("exception language identifier for: " + text);
-                    //e.printStackTrace();
-                }
-                if ((lang != null) && (lang.getLang() != null)) {
-                    nerdQuery.setLanguage(lang);
-                    LOGGER.debug(">> identified language: " + lang.toString());
-                }
-            } else {
-                System.out.println("lang is already defined");
-                //lang.setConfidence(1.0);
-                LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
-            }
-
-            if (!nerdQuery.hasValidLanguage()) {
-                response = Response.status(Status.NOT_ACCEPTABLE).build();
-                LOGGER.debug(methodLogOut());
-                return response;
-            }
-
-            NerdEngine disambiguator = NerdEngine.getInstance();
-            //nerdQuery.setEntities(disambiguatedEntities);
-            //disambiguatedEntities = disambiguator.disambiguate(nerdQuery, true, false);
-            // add the NerdEntity objects to the WeightedTerm object if disambiguation
-            // is successful
-            disambiguator.disambiguateWeightedTerms(nerdQuery);
-//System.out.println(nerdQuery.toJSONClean(null));	
-            nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-
-            long end = System.currentTimeMillis();
-            nerdQuery.setRuntime(end - start);
-
-            //Collections.sort(nerdQuery.getEntities());
-            String json = nerdQuery.toJSONClean(null);
-            if (json == null) {
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-            } else {
-                //TODO: move this somewhere at higher level
-                response = Response.status(Status.OK).entity(json)
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
-                        .header("Access-Control-Allow-Origin", "*")
-                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                        .build();
-            }
-        } catch (NoSuchElementException nseExp) {
-            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
-            response = Response.status(Status.SERVICE_UNAVAILABLE).build();
-        } catch (Exception e) {
-            LOGGER.error("An unexpected exception occurs. ", e);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        // reformat text content
+        StringBuilder textContent = new StringBuilder();
+        for (WeightedTerm wt : nerdQuery.getTermVector()) {
+            textContent.append(" " + wt.getTerm());
         }
+        String text = textContent.toString();
+
+        languageIdentificationAndValidation(nerdQuery, text);
+
+        NerdEngine disambiguator = NerdEngine.getInstance();
+        //nerdQuery.setEntities(disambiguatedEntities);
+        //disambiguatedEntities = disambiguator.disambiguate(nerdQuery, true, false);
+        // add the NerdEntity objects to the WeightedTerm object if disambiguation
+        // is successful
+        disambiguator.disambiguateWeightedTerms(nerdQuery);
+//System.out.println(nerdQuery.toJSONClean(null));	
+        nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+
+        long end = System.currentTimeMillis();
+        nerdQuery.setRuntime(end - start);
+
+        //Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
-        return response;
+        return nerdQuery.toJSONClean();
+
     }
 
     /**
@@ -360,118 +306,69 @@ public class NerdRestProcessQuery {
      * @param nerdQuery POJO query object with the search query and additional optional contextual information
      * @return a response JSON object containing the search terms with the resolved entities.
      */
-    public static Response processSearchQuery(NerdQuery nerdQuery) {
-        LOGGER.debug(methodLogIn());
-        Response response = null;
-        try {
-            long start = System.currentTimeMillis();
+    public static String processSearchQuery(NerdQuery nerdQuery) {
+        long start = System.currentTimeMillis();
 
-            //nerdQuery.setShortText(true);
+        //nerdQuery.setShortText(true);
 
-            // language identification
-            // test first if the language is already indicated in the query structure
-            Language lang = nerdQuery.getLanguage();
-            if ((lang == null) || (lang.getLang() == null)) {
-                LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-                try {
-                    lang = languageUtilities.runLanguageId(nerdQuery.getShortText());
-                } catch (Exception e) {
-                    LOGGER.debug("exception language identifier for: " + nerdQuery.getShortText());
-                    //e.printStackTrace();
-                }
-                if ((lang != null) && (lang.getLang() != null)) {
-                    nerdQuery.setLanguage(lang);
-                    LOGGER.debug(">> identified language: " + lang.toString());
-                }
-            } else {
-                System.out.println("lang is already defined");
-                LOGGER.debug(">> language already identified: " + nerdQuery.getLanguage().getLang().toString());
-            }
+        // language identification
+        languageIdentificationAndValidation(nerdQuery, nerdQuery.getShortText());
 
-            if ((lang == null) || (lang.getLang() == null)) {
-                response = Response.status(Status.NOT_ACCEPTABLE).build();
-                LOGGER.debug(methodLogOut());
-                return response;
-            } else {
-                String theLang = lang.getLang();
-                if (!theLang.equals("en") && !theLang.equals("de") && !theLang.equals("fr")) {
-                    response = Response.status(Status.NOT_ACCEPTABLE).build();
-                    LOGGER.debug(methodLogOut());
-                    return response;
+        //TODO remove after release
+        processOnlyNER(nerdQuery);
+
+        // entities originally from the query are marked as such
+        List<NerdEntity> originalEntities = null;
+        if ((nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0)) {
+            for (NerdEntity entity : nerdQuery.getEntities()) {
+                entity.setNer_conf(1.0);
+
+                // do we have disambiguated entity information for the entity?
+                if (entity.getWikipediaExternalRef() != -1) {
+                    entity.setSource(ProcessText.MentionMethod.user);
+                    entity.setNerdScore(1.0);
                 }
             }
+            originalEntities = nerdQuery.getEntities();
+        }
 
-            // entities originally from the query are marked as such
-            List<NerdEntity> originalEntities = null;
-            if ((nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0)) {
-                for (NerdEntity entity : nerdQuery.getEntities()) {
-                    entity.setNer_conf(1.0);
-
-                    // do we have disambiguated entity information for the entity?
-                    if (entity.getWikipediaExternalRef() != -1) {
-                        entity.setSource(ProcessText.MentionMethod.user);
-                        entity.setNerdScore(1.0);
-                    }
-                }
-                originalEntities = nerdQuery.getEntities();
-            }
-
-            // possible entity mentions
-            ProcessText processText = ProcessText.getInstance();
+        // possible entity mentions
+        ProcessText processText = ProcessText.getInstance();
             /*Integer[] processSentence =  nerdQuery.getProcessSentence();
             List<Sentence> sentences = nerdQuery.getSentences();
 			if ( (sentences == null) && (nerdQuery.getSentence() || (processSentence != null)) ) {
 				sentences = processText.sentenceSegmentation(nerdQuery.getText());
 				nerdQuery.setSentences(sentences);
 			}*/
-            List<Mention> entities = processText.process(nerdQuery);
+        List<Mention> entities = processText.process(nerdQuery);
 
-            // we keep only entities not conflicting with the ones already present in the query
-            if (originalEntities == null) {
-                nerdQuery.setAllEntities(entities);
-            } else {
-                List<NerdEntity> selectedMentions = selectEntities(originalEntities, entities);
-                nerdQuery.setEntities(selectedMentions);
-            }
-
-            // sort the entities
-            if (CollectionUtils.isNotEmpty(nerdQuery.getEntities()))
-                Collections.sort(nerdQuery.getEntities());
-
-            if (nerdQuery.getEntities() != null) {
-                // disambiguate and solve entity mentions
-                NerdEngine disambiguator = NerdEngine.getInstance();
-                List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
-                nerdQuery.setEntities(disambiguatedEntities);
-                // calculate the global categories
-                nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-            }
-
-            long end = System.currentTimeMillis();
-            nerdQuery.setRuntime(end - start);
-
-            if (nerdQuery.getEntities() != null)
-                Collections.sort(nerdQuery.getEntities());
-            String json = nerdQuery.toJSONClean(null);
-
-            if (json == null) {
-                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-            } else {
-                response = Response.status(Status.OK).entity(json)
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
-                        .header("Access-Control-Allow-Origin", "*")
-                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                        .build();
-            }
-        } catch (NoSuchElementException nseExp) {
-            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
-            response = Response.status(Status.SERVICE_UNAVAILABLE).build();
-        } catch (Exception e) {
-            LOGGER.error("An unexpected exception occurs. ", e);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        // we keep only entities not conflicting with the ones already present in the query
+        if (originalEntities == null) {
+            nerdQuery.setAllEntities(entities);
+        } else {
+            List<NerdEntity> selectedMentions = selectEntities(originalEntities, entities);
+            nerdQuery.setEntities(selectedMentions);
         }
-        LOGGER.debug(methodLogOut());
-        return response;
+
+        // sort the entities
+        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities()))
+            Collections.sort(nerdQuery.getEntities());
+
+        if (nerdQuery.getEntities() != null) {
+            // disambiguate and solve entity mentions
+            NerdEngine disambiguator = NerdEngine.getInstance();
+            List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
+            nerdQuery.setEntities(disambiguatedEntities);
+            // calculate the global categories
+            nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+        }
+
+        long end = System.currentTimeMillis();
+        nerdQuery.setRuntime(end - start);
+
+        if (nerdQuery.getEntities() != null)
+            Collections.sort(nerdQuery.getEntities());
+        return nerdQuery.toJSONClean(null);
     }
 
 
