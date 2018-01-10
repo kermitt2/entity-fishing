@@ -659,17 +659,17 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.grobid</groupId>
+            <groupId>org.grobid.ner</groupId>
             <artifactId>grobid-ner</artifactId>
-            <version>0.5.0.2-SNAPSHOT</version>
+            <version>0.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.grobid</groupId>
+            <groupId>org.grobid.trainer</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>
