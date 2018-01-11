@@ -754,10 +754,10 @@ public class NerdQuery {
             return mapper.readValue(theQuery, NerdQuery.class);
         } catch (JsonGenerationException | JsonMappingException e) {
             LOGGER.error("The JSON query cannot be processed\n " + theQuery + "\n ", e);
-            throw new QueryException("The JSON query cannot be processed.");
+            throw new QueryException("The JSON query is invalid, please check the format.");
         } catch (IOException e) {
             LOGGER.error("Some serious error when deserialize the JSON object: \n" + theQuery, e);
-            throw new QueryException("Some serious error when deserialize the JSON object.");
+            throw new QueryException("Some serious error when deserialize the JSON object. Please check the format.");
         }
     }
 

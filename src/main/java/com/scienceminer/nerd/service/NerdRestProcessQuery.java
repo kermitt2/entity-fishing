@@ -54,7 +54,7 @@ public class NerdRestProcessQuery {
                 if (nerdQuery.getText().length() > 5) {
                     output = processQueryText(nerdQuery);
                 } else {
-                    throw new QueryException("Text query too short, use shortText");
+                    throw new QueryException("Text query too short, use shortText instead.");
                 }
                 break;
             case NerdQuery.QUERY_TYPE_SHORT_TEXT:
@@ -64,7 +64,7 @@ public class NerdRestProcessQuery {
                 output = processQueryTermVector(nerdQuery);
                 break;
             case NerdQuery.QUERY_TYPE_INVALID:
-                throw new QueryException("Query not valid");
+                throw new QueryException();
         }
 
         LOGGER.debug(methodLogOut());

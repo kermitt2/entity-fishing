@@ -2,6 +2,7 @@ package com.scienceminer.nerd.disambiguation;
 
 import java.util.*;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.*;
@@ -245,11 +246,11 @@ public class NerdEngine {
 			reimforce(candidates, (DocumentContext)context);
 		}*/
 
-			double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
-			if (nerdQuery.getMinSelectorScore() != 0.0)
-				minSelectorScore = nerdQuery.getMinSelectorScore();
+		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
+		if (nerdQuery.getMinSelectorScore() != 0.0)
+			minSelectorScore = nerdQuery.getMinSelectorScore();
 
-			pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
+		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
 		//}
 		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -362,14 +363,22 @@ public class NerdEngine {
 			return result;
 
 		for(NerdEntity entity : entities) {
-			// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
+			// if the entity is already input in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
-			if (entity.getSource() == ProcessText.MentionMethod.user) {
+
+			if (entity.getSource() == ProcessText.MentionMethod.user
+					&& entity.getNer_conf() == 1.0) {
+
 				// do we have disambiguated entity information for the entity?
-				if (entity.getWikipediaExternalRef() != -1) {
-					result.put(entity, null);
-					continue;
-				}
+				// the assumption is that the validation has been already done upstream or we will have to maintain the
+				// same logic everywhere.
+
+				//Maybe a validation flag on the entity?
+
+				//if (entity.getWikipediaExternalRef() != -1) {
+				result.put(entity, null);
+				continue;
+				//}
 			}
 
 			List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
@@ -390,8 +399,8 @@ public class NerdEngine {
 
 			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
 			if (!bestLabel.exists()) {
-//if (entity.getIsAcronym())
-//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
+				//if (entity.getIsAcronym())
+				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
 				if (entity.getType() != null) {
 					result.put(entity, candidates);
 					continue;
@@ -545,7 +554,7 @@ public class NerdEngine {
 			return result;
 
 		for(NerdEntity entity : entities) {
-			// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
+			// if the entity is already inputted in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
 			if (entity.getSource() == ProcessText.MentionMethod.user) {
 				// do we have disambiguated entity information for the entity?
@@ -691,13 +700,15 @@ public class NerdEngine {
 		List<String> failures = new ArrayList<String>();
 
 		for(NerdEntity entity : entities) {
-			// if the entity is already inputed in the query (i.e. by the "user"), we do not generate candidates
+			// if the entity is already inputted in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
-			if (entity.getSource() == ProcessText.MentionMethod.user) {
+			if (entity.getSource() == ProcessText.MentionMethod.user && entity.getNer_conf() == 1.0) {
 				// do we have disambiguated entity information for the entity?
-				if (entity.getWikipediaExternalRef() != -1) {
-					continue;
-				}
+//				if (entity.getWikipediaExternalRef() != -1) {
+//					continue;
+//				}
+
+				continue;
 			}
 
 			String entityString = entity.getRawName().toLowerCase();
@@ -859,7 +870,7 @@ public class NerdEngine {
 		//relatedness.resetCache(lang);
 
 		// first pass to get the "certain" entities 
-		List<NerdEntity> userEntities = new ArrayList<NerdEntity>();
+		List<NerdEntity> userEntities = new ArrayList<>();
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			NerdEntity entity = entry.getKey();
 			if (entity.getSource() == ProcessText.MentionMethod.user) {
@@ -878,7 +889,7 @@ public class NerdEngine {
 		//System.out.println("size of context: " + context.getSenseNumber());
 		//System.out.println(context.toString());
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error while merging context for the disambiguation.", e);
 		}
 
 		NerdRanker ranker = rankers.get(lang);
@@ -992,7 +1003,7 @@ public class NerdEngine {
 		NerdRanker disambiguator = rankers.get(lang);
 		disambiguator = instantiateRankerIfNull(lang, disambiguator);
 
-		// for the embeddings similiarity we need a textual context as a list of LayoutToken
+		// for the embeddings similarity we need a textual context as a list of LayoutToken
 		List<LayoutToken> tokens = new ArrayList<LayoutToken>();
 		for(WeightedTerm term : terms) {
 			tokens.add(new LayoutToken(term.getTerm()));
@@ -1409,7 +1420,7 @@ public class NerdEngine {
 		//List<ErdAnnotationShort> annotations = new ArrayList<ErdAnnotationShort>();
 		List<NerdCandidate> concept_terms = null;//generateCandidates(text, true);	
 		
-		if ( (concept_terms != null) && (concept_terms.size() > 0) ) {	
+		if (CollectionUtils.isNotEmpty(concept_terms) ) {
 			try {
 				// we rank the entity candidates
 				// second parameter is the method
@@ -1665,7 +1676,7 @@ System.out.println("Merging...");
 				selectors.put(lang, selector);
 			}
 			catch(Exception e) {
-				e.printStackTrace();
+				LOGGER.error("Cannot load selector for language " + lang + ". Ignoring it.", e);
 			} 
 		}
 
@@ -1681,12 +1692,10 @@ System.out.println("Merging...");
 				// don't prune anything
 				continue;
 			}
-
-			boolean isNe = false;
-			if (entity.getType() != null)
-				isNe = true;
+			
+			boolean isNe = entity.getType() != null;
 			for(NerdCandidate candidate : candidates) {			
-				//if (candidate.getMethod() == NerdCandidate.NERD) 
+				//if (candidate.getMethod() == NerdCandidate.NERD)
 				{
 					try {
 						GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();

@@ -19,6 +19,8 @@ import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
 
 import org.grobid.core.utilities.OffsetPosition;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 /**
  * Provide semantic relatedness measures, which is an adaptation of the original Relateness measure from 
  * Milne and Witten. 
@@ -332,8 +334,8 @@ public class Relatedness {
 	 */	
 	public NerdContext getContext(Map<NerdEntity, List<NerdCandidate>> candidates, 
 							List<NerdEntity> userEntities, 
-							String lang,
-							boolean shortText) throws Exception {
+							String lang, boolean shortText) throws Exception {
+
 		List<Label.Sense> unambig = new ArrayList<Label.Sense>();
 		List<Integer> unambigIds = new ArrayList<Integer>();
 		
@@ -349,6 +351,7 @@ public class Relatedness {
 
 		if ( (userEntities != null) && (userEntities.size() > 0) ){
 			for(NerdEntity ent : userEntities) {
+
 				if (ent.getWikipediaExternalRef() != -1) {
 					Page thePage = wikipedia.getPageById(ent.getWikipediaExternalRef());
 					if (thePage.getType() == Page.PageType.article) {
@@ -358,9 +361,12 @@ public class Relatedness {
 						}
 					}
 				}
+
+				//TODO: wikidata id
 			}
 		}
-//System.out.println(certainPages.size()+ " certain entities; " + certainPages.size());		
+
+		//System.out.println(certainPages.size()+ " certain entities; " + certainPages.size());
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
