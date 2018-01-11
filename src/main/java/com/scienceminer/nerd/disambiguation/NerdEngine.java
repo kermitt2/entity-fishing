@@ -1813,7 +1813,7 @@ System.out.println("--");*/
 
 		if (lang == null) {
 			// default - it might be better to raise an exception?
-			lang = "en";
+			lang = Language.EN;
 		}
 
 		// additional target languages for translations (source language is always the default target 

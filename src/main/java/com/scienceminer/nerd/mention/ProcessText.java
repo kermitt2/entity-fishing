@@ -241,14 +241,7 @@ public class ProcessText {
         List<Mention> results = new ArrayList<>();
 
         Language language = nerdQuery.getLanguage();
-        String lang = null;
-        if (language != null)
-            lang = language.getLang();
-
-        //TODO: get it from grobid-ner
-        if (!GROBID_NER_SUPPORTED_LANGUAGES.contains(lang))
-            return results;
-
+        
         // get the list of requested mention types
         List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
 
