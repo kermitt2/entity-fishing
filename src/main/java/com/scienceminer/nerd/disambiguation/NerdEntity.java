@@ -411,7 +411,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setWikipediaMultilingualRef(Map<String,String> translations,
 											List<String> targetLanguages,
 											Map<String, LowerKnowledgeBase> wikipedias) {
-		if ( (targetLanguages != null) && (targetLanguages.size() != 0) ) {
+		if (CollectionUtils.isNotEmpty (targetLanguages) ) {
 			Map<String,String> subTranslations = new TreeMap<String,String>();
 			Map<String,Integer> subArticleCorrespondance = new TreeMap<String,Integer>();
 			for(String targetLanguage : targetLanguages) {
@@ -431,11 +431,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 							subArticleCorrespondance.put(targetLanguage, article.getId());
 						}
 						else {
-							System.out.println(translation + ": Article for language " + targetLanguage + " is null");
+							LOGGER.warn("Lookup translation: " +translation + ": Article for language " + targetLanguage + " is null. Ignoring it.");
 						}
-					}
-					else {
-						System.out.println("Wikipedia for language " + targetLanguage + " is null");
+					} else {
+						LOGGER.warn("Lookup translations: No Knowledge base available for language " + targetLanguage + ".");
 					}
 				}
 			}

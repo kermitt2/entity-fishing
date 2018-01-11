@@ -1716,7 +1716,7 @@ var nerd = (function ($) {
     }
 
     // query for text XOR shortText content
-    var queryTemplate = {
+    var queryTemplateText = {
         "text": "",
         "shortText": "",
         "termVector": [],
@@ -1729,8 +1729,9 @@ var nerd = (function ($) {
     };
 
     // query + PDF
-    var queryTemplate2 = {
-        "language": {"lang": "en"}, "mentions": ["ner", "wikipedia"],
+    var queryTemplatePDF = {
+        // "language": {"lang": "en"},
+        "mentions": ["ner", "wikipedia"],
         "nbest": false,
         "customisation": "generic"
     };
@@ -1745,13 +1746,13 @@ var nerd = (function ($) {
             createInputTextArea('query');
             setBaseUrl('disambiguate');
             removeInputFile();
-            $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate)));
+            $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplateText)));
             $('#requestResult').html('');
         } else if (selected === 'processNERDQueryPDF') {
             createInputTextArea('query');
             createInputFile();
             setBaseUrl('disambiguate');
-            $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplate2)));
+            $('#input').attr('value', vkbeautify.json(JSON.stringify(queryTemplatePDF)));
             $('#requestResult').html('');
         } else if (selected === 'processLanguage') {
             createInputTextArea('query');
@@ -1904,7 +1905,7 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         $(this).addClass('section-active').removeClass('section-non-active');
         var selected = $('#selectedService').find('option:selected').attr('value');
         if (selected === 'processNERDQuery' || selected === 'processERDQuery') {
-            var queryInstance = queryTemplate;
+            var queryInstance = queryTemplateText;
             queryInstance.language.lang = lang;
             queryInstance.text = text;
             $('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
@@ -2043,5 +2044,6 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         }
         return newCategories;
     }
+
 
 })(jQuery);

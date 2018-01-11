@@ -171,42 +171,42 @@ public class NerdRestProcessFile {
                 // title
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                 if (titleTokens != null) {
-                    System.out.println("Process title... ");
-//System.out.println(LayoutTokensUtil.toText(titleTokens));
+                    LOGGER.debug("Process title... ");
+//LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
                     //workingQuery.setEntities(null);
                     List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                     if (newEntities != null) {
-                        System.out.println(newEntities.size() + " nerd entities");
+                        LOGGER.debug(newEntities.size() + " nerd entities");
 									/*for(NerdEntity entity : newEntities) {
-										System.out.println(entity.toString());
+										LOGGER.debug(entity.toString());
 									}*/
                     }
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                 // abstract
                 List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                 if (abstractTokens != null) {
-                    System.out.println("Process abstract...");
+                    LOGGER.debug("Process abstract...");
                     //workingQuery.setEntities(null);
                     List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, null, workingQuery);
                     if (newEntities != null) {
-                        System.out.println(newEntities.size() + " nerd entities");
+                        LOGGER.debug(newEntities.size() + " nerd entities");
                     }
 
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                 // keywords
                 List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                 if (keywordTokens != null) {
-                    System.out.println("Process keywords...");
+                    LOGGER.debug("Process keywords...");
                     //workingQuery.setEntities(null);
                     List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, null, workingQuery);
                     if (newEntities != null)
-                        System.out.println(newEntities.size() + " nerd entities");
+                        LOGGER.debug(newEntities.size() + " nerd entities");
                     nerdQuery.addNerdEntities(newEntities);
                 }
 
@@ -222,29 +222,29 @@ public class NerdRestProcessFile {
                     //workingQuery.setEntities(null);
                     List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, documentContext, workingQuery);
                     if (newEntities != null) {
-                        System.out.println(newEntities.size() + " nerd entities");
+                        LOGGER.debug(newEntities.size() + " nerd entities");
                         for (NerdEntity entity : newEntities) {
-                            System.out.println(entity.toString());
+                            LOGGER.debug(entity.toString());
                         }
                     }
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                 if (abstractTokens != null) {
                     //workingQuery.setEntities(null);
                     List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                 if (keywordTokens != null) {
                     //workingQuery.setEntities(null);
                     List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
             }
         }
 
@@ -252,7 +252,7 @@ public class NerdRestProcessFile {
         // object of more refined processing
         documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
         if (documentParts != null) {
-            System.out.println("Process body...");
+            LOGGER.debug("Process body...");
             // full text processing
             Pair<String, LayoutTokenization> featSeg = engine.getParsers().getFullTextParser().getBodyTextFeatured(doc, documentParts);
             if (featSeg != null) {
@@ -283,8 +283,8 @@ public class NerdRestProcessFile {
                     LOGGER.debug("no body part?!?");
             }
         }
-        //System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
         // we process references if required
         if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.grobid)) {
             List<BibDataSet> resCitations = engine.getParsers().getCitationParser().
@@ -292,44 +292,44 @@ public class NerdRestProcessFile {
             if ((resCitations != null) && (resCitations.size() > 0)) {
                 List<NerdEntity> newEntities = processCitations(resCitations, doc, workingQuery);
                 if (newEntities != null)
-                    System.out.println(newEntities.size() + " citation entities");
+                    LOGGER.debug(newEntities.size() + " citation entities");
                 nerdQuery.addNerdEntities(newEntities);
             }
         }
-        //System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
         // acknowledgement
         documentParts = doc.getDocumentPart(SegmentationLabels.ACKNOWLEDGEMENT);
         if (documentParts != null) {
-            System.out.println("Process acknowledgement...");
+            LOGGER.debug("Process acknowledgement...");
             workingQuery.setEntities(null);
             List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
             if (newEntities != null)
-                System.out.println(newEntities.size() + " nerd entities");
+                LOGGER.debug(newEntities.size() + " nerd entities");
             nerdQuery.addNerdEntities(newEntities);
         }
-        //System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
         // we can process annexes
         documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
         if (documentParts != null) {
-            System.out.println("Process annex...");
+            LOGGER.debug("Process annex...");
             //workingQuery.setEntities(null);
             List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
             if (newEntities != null)
-                System.out.println(newEntities.size() + " nerd entities");
+                LOGGER.debug(newEntities.size() + " nerd entities");
             nerdQuery.addNerdEntities(newEntities);
         }
-        //System.out.println(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //System.out.println(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
         // footnotes are also relevant
         documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
         if (documentParts != null) {
-            System.out.println("Process footnotes...");
+            LOGGER.debug("Process footnotes...");
             //workingQuery.setEntities(null);
             List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
             if (newEntities != null)
-                System.out.println(newEntities.size() + " nerd entities");
+                LOGGER.debug(newEntities.size() + " nerd entities");
             nerdQuery.addNerdEntities(newEntities);
         }
 
@@ -475,7 +475,7 @@ public class NerdRestProcessFile {
                 ProcessText processText = ProcessText.getInstance();
                 List<Mention> nerEntities = processText.process(workingQuery);
 				/*if (nerEntities != null)
-					System.out.println(nerEntities.size() + " ner entities");
+					LOGGER.debug(nerEntities.size() + " ner entities");
 				else
 					nerEntities = new ArrayList<Mention>();*/
 
@@ -483,7 +483,7 @@ public class NerdRestProcessFile {
 				/*{
 					List<Mention> entities2 = processText.processWikipedia(workingQuery);
 					if (entities2 != null) {
-						System.out.println(entities2.size() + " non-ner entities");
+						LOGGER.debug(entities2.size() + " non-ner entities");
 						for(Mention entity : entities2) {
 							// we add entities only if the mention is not already present
 							if (!nerEntities.contains(entity))
@@ -511,7 +511,7 @@ public class NerdRestProcessFile {
                 if (workingQuery.getEntities() != null) {
 /*for (NerdEntity entity : workingQuery.getEntities()) {
 	if (entity.getBoundingBoxes() == null)
-		System.out.println("Empty bounding box for " + entity.toString());
+		LOGGER.debug("Empty bounding box for " + entity.toString());
 }*/
 
                     // sort the entities
@@ -524,10 +524,10 @@ public class NerdRestProcessFile {
                             disambiguator.disambiguate(workingQuery);
                     workingQuery.setEntities(disambiguatedEntities);
 /*if (workingQuery.getEntities() != null)
-System.out.println(workingQuery.getEntities().size() + " nerd entities");	*/
+LOGGER.debug(workingQuery.getEntities().size() + " nerd entities");	*/
 	/*for (NerdEntity entity : workingQuery.getEntities()) {
 		if (entity.getBoundingBoxes() == null)
-			System.out.println("Empty bounding box for " + entity.toString());
+			LOGGER.debug("Empty bounding box for " + entity.toString());
 	}*/
                     //}
 //						else {

@@ -211,8 +211,8 @@ public class NerdEngine {
 			}
 			System.out.println("--");*/
 		}
-		System.out.println("total number of entities: " + nbEntities);
-		System.out.println("total number of candidates: " + nbCandidates);
+		LOGGER.debug("Total number of entities: " + nbEntities);
+		LOGGER.debug("Total number of candidates: " + nbCandidates);
 
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
