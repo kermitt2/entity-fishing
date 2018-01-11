@@ -206,7 +206,7 @@ public class ProcessText {
                             for (Mention entity : localResults) {
                                 Mention mention = new Mention(entity);
                                 mention.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
-                                mention.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
+                                mention.setOffsetEnd(sentence.getOffsetEnd() + entity.getOffsetEnd());
                                 //mention.setSource(entity.getSource());
                                 results.add(mention);
                             }
