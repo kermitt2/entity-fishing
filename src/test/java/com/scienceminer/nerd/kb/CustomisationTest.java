@@ -26,7 +26,7 @@ public class CustomisationTest {
 
     @Test
     public void testCreate_Retrieve() throws Exception {
-        String createJson = "{ \"wikipedia\" : [4764461, 51499, 1014346], \"freebase\": [\"/m/0cm2xh\", \"/m/0dl4z\", \"/m/02kxg_\", \"/m/06v9th\"],\"language\" : {\"lang\":\"en\"}, \"texts\": [\"World War I (WWI or WW1 or World War One), also known as the First World War or the Great War, was a global war centred in Europe that began on 28 July 1914 and lasted until 11 November 1918.\", \"The war drew in all the world's economic great powers, which were assembled in two opposing alliances: the Allies (based on the Triple Entente of the United Kingdom, France and the Russian Empire) and the Central Powers of Germany and Austria-Hungary.\"] }";
+        String createJson = "{ \"wikipedia\" : [4764461, 51499, 1014346], \"freebase\": [\"/m/0cm2xh\", \"/m/0dl4z\", \"/m/02kxg_\", \"/m/06v9th\"], \"language\" : {\"lang\":\"en\"}, \"texts\": [\"World War I (WWI or WW1 or World War One), also known as the First World War or the Great War, was a global war centred in Europe that began on 28 July 1914 and lasted until 11 November 1918.\", \"The war drew in all the world's economic great powers, which were assembled in two opposing alliances: the Allies (based on the Triple Entente of the United Kingdom, France and the Russian Empire) and the Central Powers of Germany and Austria-Hungary.\"] }";
         boolean result = target.createCustomisation("testWW1", createJson);
 
         assertThat(result, is(true));
