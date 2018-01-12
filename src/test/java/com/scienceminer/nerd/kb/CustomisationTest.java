@@ -63,13 +63,13 @@ public class CustomisationTest {
 
     @Test
     public void testUpdateCustomisation_doesntExists_shouldReturnFalse() throws Exception {
-        assertThat(target.updateCustomisation("bao", "{}"), is(false));
+        assertThat(target.updateCustomisation("bao", "{ \"wikipedia\" : [], \"language\" : {\"lang\":\"en\"} }"), is(false));
     }
 
     @Test
     public void testUpdateCustomisation_Exists_shouldReturnTrue() throws Exception {
-        target.createCustomisation("bao", "{}");
-        assertThat(target.updateCustomisation("bao", "{\"aaa\": \"bbb\"}"), is(true));
+        target.createCustomisation("bao", "{ \"wikipedia\" : [], \"language\" : {\"lang\":\"en\"} }");
+        assertThat(target.updateCustomisation("bao", "{\"wikipedia\" : [], \"language\" : {\"lang\":\"en\"}, \"aaa\": \"bbb\"}"), is(true));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class CustomisationTest {
 
     @Test
     public void testDelete_customisationExists_shouldbeDeleted() {
-        target.createCustomisation("test", "{}");
+        target.createCustomisation("test", "{\"wikipedia\" : [], \"language\" : {\"lang\":\"en\"}}");
         assertThat(target.getCustomisations(), hasSize(1));
         target.deleteCustomisation("test");
         assertThat(target.getCustomisations(), hasSize(0));
