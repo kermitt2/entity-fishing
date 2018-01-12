@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.exceptions.CustomisationException;
+import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
@@ -36,8 +37,13 @@ public class NerdCustomisation extends NerdContext {
      * Instantiate a NerdCustomisation object from a user specified JSON customisation
      */
     public void createNerdCustomisation(String customisationJsonData) {
+        JsonNode root = null;
 
-        final JsonNode root = parseAndValidate(customisationJsonData);
+        try {
+            root = parseAndValidate(customisationJsonData);
+        } catch(CustomisationException ce) {
+            throw new QueryException("The selected customisation cannot be applied.");
+        }
 
         JsonNode langNode = root.findPath("lang");
         String lang = langNode.textValue().trim();
@@ -82,6 +88,7 @@ public class NerdCustomisation extends NerdContext {
      * Method to validate the customisation JSON sent by the user.
      */
     public static JsonNode parseAndValidate(String customisationJsonData) throws CustomisationException {
+
         ObjectMapper mapper = new ObjectMapper();
 
         // check parsing
