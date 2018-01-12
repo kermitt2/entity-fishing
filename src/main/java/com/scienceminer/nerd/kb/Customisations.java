@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import static com.scienceminer.nerd.disambiguation.NerdCustomisation.parseAndValidate;
+
 /**
  * Class for managing the NERD customisation which are contexts for particular domains.
  */
@@ -84,13 +86,10 @@ public final class Customisations {
         try {
             customisationFile = new File("data/maps/" + databaseName + ".obj");
 
-            if (customisationFile != null) {
-                LOGGER.debug("Cannot find customisation database, creating new one and saving: "
-                        + customisationFile.getAbsolutePath());
-                FileOutputStream fileOut = new FileOutputStream(customisationFile);
-                out = new ObjectOutputStream(fileOut);
-                out.writeObject(customisationDatabase);
-            }
+            LOGGER.debug("Persisting customisation database on: " + customisationFile.getAbsolutePath());
+            FileOutputStream fileOut = new FileOutputStream(customisationFile);
+            out = new ObjectOutputStream(fileOut);
+            out.writeObject(customisationDatabase);
         } catch (IOException e) {
             throw new CustomisationException("Error when saving the customization map.", e);
         } finally {
@@ -118,34 +117,33 @@ public final class Customisations {
         }
     }
 
-    public boolean createCustomisation(String name, String profile) {
-        try {
-            open();
+    public boolean createCustomisation(String name, String content) {
+        parseAndValidate(content);
+        open();
 
-            if (customisationDatabase.get(name) == null) {
-                customisationDatabase.put(name, profile);
-            } else {
-                throw new CustomisationException("The customisation " + name + " has been already created.");
-            }
-        } catch (Exception e) {
-            LOGGER.debug("Cannot create customisation.", e);
-        } finally {
-            save();
+        if (customisationDatabase.get(name) == null) {
+            customisationDatabase.put(name, content);
+        } else {
+            throw new CustomisationException("The customisation " + name + " has been already created.");
         }
+
+        save();
+
         return true;
     }
 
     /**
      * Update the customisation only if it's already existing
      **/
-    public boolean updateCustomisation(String name, String profile) {
+    public boolean updateCustomisation(String name, String content) {
+        parseAndValidate(content);
         try {
             open();
 
             if (customisationDatabase.get(name) == null) {
                 return false;
             }
-            customisationDatabase.put(name, profile);
+            customisationDatabase.put(name, content);
 
         } catch (Exception e) {
             throw new CustomisationException("Cannot update customisation", e);
@@ -159,16 +157,17 @@ public final class Customisations {
      * delete customisation, if it doesn't exists it's ignoring the request
      **/
     public boolean deleteCustomisation(String name) {
+        boolean ok = false;
         try {
             open();
-            customisationDatabase.remove(name);
+            ok = customisationDatabase.remove(name) != null;
         } catch (Exception e) {
-            throw new NerdException("Cannot delete customisation", e);
+            throw new CustomisationException("Cannot delete customisation", e);
         } finally {
             save();
         }
 
-        return true;
+        return ok;
     }
 
     public void setCustomisationFile(File customisationFile) {

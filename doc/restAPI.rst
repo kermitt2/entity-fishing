@@ -1024,12 +1024,7 @@ The JSON profile of a customisation to be sent to the server for creation and ex
        51499,
        1014346
      ],
-     "freebase": [
-       "/m/0cm2xh",
-       "/m/0dl4z",
-       "/m/02kxg_",
-       "/m/06v9th"
-     ],
+     "language": {"lang":"en"},
      "texts": [
        "World War I (WWI or WW1 or World War One), also known as Germany and Austria-Hungary."
      ],
@@ -1087,8 +1082,10 @@ Here a sample of the response:
    ]
 
 
-GET /customisation/{profile}
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+GET /customisation/{name}
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Retrieve the content of a specific customisation
 
 (1) Parameters
 
@@ -1098,7 +1095,7 @@ GET /customisation/{profile}
 ==========  =========  =====================  ================================================
  required    name       content-type value      description
 ==========  =========  =====================  ================================================
- required    profile     String                 name of the customisation to be retrieved
+ required    name       String                 name of the customisation to be retrieved
 ==========  =========  =====================  ================================================
 
 
@@ -1125,18 +1122,21 @@ Here a sample of the response
        51499,
        1014346
      ],
-     "freebase": [
-       "/m/0cm2xh",
-       "/m/0dl4z",
-       "/m/02kxg_",
-       "/m/06v9th"
-     ],
+     "language": {
+         "lang": "en"
+     },
      "texts": [
        "World War I (WWI or WW1 or World War One), also known as the First World War or the Great War, was a global war centred in Europe that began on 28 July 1914 and lasted until 11 November 1918."
      ],
      "description": "Customisation for World War 1 domain"
    }
 
+Or in case of issues:
+::
+   {
+     "ok": "false",
+     "message": "The customisation already exists."
+   }
 
 
 POST /customisations
@@ -1154,11 +1154,12 @@ If the customisation already exists an error is returned.
 .. table:: Parameters
    :widths: auto
 
-==========  =========  =====================  ================================================
+==========  =========  =====================  ==========================================================
  required    name       content-type value      description
-==========  =========  =====================  ================================================
- required    profile     String                 profile of the customisation to be created
-==========  =========  =====================  ================================================
+==========  =========  =====================  ==========================================================
+ required    name       String                 name of the customisation to be created
+ required    value      String                 JSON representation of the customisation (see example)
+==========  =========  =====================  ==========================================================
 
 
 (2) Request header
@@ -1179,18 +1180,14 @@ If the customisation already exists an error is returned.
 Here a sample of the response
 ::
    {
-     "status": "ok",
-     "profile": "profileName"
-     "customisation": {
-     "wikipedia": [
-       1,
-       222,
-       21233
-     ],
-     "texts": [
-       "World War II"
-     ],
-     "description": "Customisation for World War 2 domain"
+     "ok": "true"
+   }
+
+Or in case of issues:
+::
+   {
+     "ok": "false",
+     "message": "The customisation already exists."
    }
 
 
@@ -1232,18 +1229,14 @@ A text describing informally the customisation can be added optionally.
 Here a sample of the response
 ::
    {
-     "status": "ok",
-     "profile": "profileName"
-     "customisation": {
-     "wikipedia": [
-       1,
-       222,
-       21233
-     ],
-     "texts": [
-       "World War II"
-     ],
-     "description": "Customisation for World War 2 domain"
+     "ok": "true"
+   }
+
+Or in case of issues:
+::
+   {
+     "ok": "false",
+     "message": "The customisation already exists."
    }
 
 DELETE /customisation/{profile}
@@ -1271,3 +1264,18 @@ DELETE /customisation/{profile}
 +==========+==============+=====================+===========================================+
 | optional | Accept       | application/json    | Set the response type of the output       |
 +----------+--------------+---------------------+-------------------------------------------+
+
+(3) Example response
+
+Here a sample of the response
+::
+   {
+     "ok": "true"
+   }
+
+Or in case of issues:
+::
+   {
+     "ok": "false",
+     "message": "The customisation already exists."
+   }

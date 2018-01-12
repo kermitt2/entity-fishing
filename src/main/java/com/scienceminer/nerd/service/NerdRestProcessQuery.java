@@ -103,7 +103,7 @@ public class NerdRestProcessQuery {
         }
 
         NerdCustomisation customisationObj = new NerdCustomisation();
-        customisationObj.createNerdCustomisation(customisation, customisationData);
+        customisationObj.createNerdCustomisation(customisationData);
 
         nerdQuery.setContext(customisationObj);
     }

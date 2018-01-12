@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.exceptions.CustomisationException;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
@@ -9,14 +10,12 @@ import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.management.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * RESTFul service for the NERD system.
@@ -405,14 +404,59 @@ public class NerdRestService implements NerdPaths {
     @Path(CUSTOMISATIONS)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomisations() {
-        return NerdRestCustomisation.getCustomisations();
+        Response response = null;
+        try {
+            String output = NerdRestCustomisation.getCustomisations();
+
+            response = Response
+                    .status(Response.Status.OK)
+                    .entity(output)
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .build();
+
+        } catch (CustomisationException ce) {
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(responseJson(false, ce.getMessage()))
+                    .build();
+            
+        } catch (Exception exp) {
+            LOGGER.error("General error when accessing the list of existing customisations. ", exp);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
     }
 
     @GET
     @Path(CUSTOMISATION + "/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomisation(@PathParam(NAME) String name) {
-        return NerdRestCustomisation.getCustomisation(name);
+        Response response = null;
+        try {
+            String output = NerdRestCustomisation.getCustomisation(name);
+            if (output == null) {
+                response = Response
+                        .status(Response.Status.NOT_FOUND)
+                        .build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(output)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+        } catch (CustomisationException ce) {
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(responseJson(false, ce.getMessage()))
+                    .build();
+        } catch (Exception exp) {
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
+
     }
 
     @PUT
@@ -420,7 +464,33 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response updateCustomisation(@PathParam(NAME) String name, @FormDataParam(VALUE) String newContent) {
-        return NerdRestCustomisation.updateCustomisation(name, newContent);
+        boolean ok = false;
+        Response response = null;
+        try {
+            ok = NerdRestCustomisation.updateCustomisation(name, newContent);
+
+            response = Response
+                    .status(Response.Status.OK)
+                    .entity(responseJson(ok, null))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .build();
+            
+        } catch (CustomisationException ce) {
+            response = Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(responseJson(ok, ce.getMessage()))
+                    .build();
+
+        } catch (Exception e) {
+            response = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+        return response;
+
+
     }
 
     @POST
@@ -428,14 +498,73 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response addCustomisation(@FormDataParam(NAME) String name, @FormDataParam(VALUE) String content) {
-        return NerdRestCustomisation.createCustomisation(name, content);
+        boolean ok = false;
+        Response response = null;
+        try {
+            ok = NerdRestCustomisation.createCustomisation(name, content);
+            response = Response
+                    .status(Response.Status.OK)
+                    .entity(responseJson(ok, null))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .build();
+
+        } catch (CustomisationException ce) {
+            response = Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(responseJson(ok, ce.getMessage()))
+                    .build();
+
+        } catch (Exception e) {
+            response = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+        return response;
     }
 
 
     @Path(CUSTOMISATION + "/{name}")
     @DELETE
     public Response processDeleteNerdCustomisation(@PathParam(NAME) String name) {
-        return NerdRestCustomisation.processDeleteNerdCustomisation(name);
+        boolean ok = false;
+        Response response = null;
+        try {
+            ok = NerdRestCustomisation.deleteCustomisation(name);
+            response = Response
+                    .status(Response.Status.OK)
+                    .entity(responseJson(ok, null))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .build();
+            
+        } catch (CustomisationException ce) {
+            response = Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(responseJson(ok, ce.getMessage()))
+                    .build();
+
+        } catch (Exception e) {
+            response = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+        return response;
+    }
+
+
+    private static String responseJson(boolean ok, String message) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{")
+                .append("\"ok\": \"" + ok + "\"");
+        if (message != null) {
+            sb.append(", \"status\": \"" + message + "\"");
+        }
+        sb.append("}");
+
+        return sb.toString();
     }
 
 }
