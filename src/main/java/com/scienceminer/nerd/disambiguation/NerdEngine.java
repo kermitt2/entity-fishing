@@ -295,7 +295,7 @@ public class NerdEngine {
 			
 			if (entity.getSource() == ProcessText.MentionMethod.user) {
 				result.add(entity);
-			} else if ( (cands == null) || (cands.size() == 0) ) {
+			} else if ( CollectionUtils.isEmpty(cands) ) {
 				// default for class entity only
 				if (entity.getType() != null) {
 					entity.setNerdScore(entity.getNer_conf()); 
@@ -307,16 +307,15 @@ public class NerdEngine {
 					nerdEntity.populateFromCandidate(candidate, lang);
 					nerdEntity.setWikipediaMultilingualRef(
 						candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
-					//nerdEntity.setDomains(freeBaseTypeMap.getTypes(nerdEntity.getWikipediaExternalRef()));
-					// note: for the moment we use English categories via translingual informations
+
+					// note: for the moment we use English categories via translingual information
 					if (lang.equals(Language.EN)) {
 						if (wikipediaDomainMap == null)
-							System.out.println("wikipediaDomainMap is null for en");
+							LOGGER.warn("wikipediaDomainMap is null for en");
 						else
 							nerdEntity.setDomains(wikipediaDomainMap.getDomains(nerdEntity.getWikipediaExternalRef()));
 					} else {
-						// we get the English page id if available
-						int pageId = nerdEntity.getWikipediaExternalRef();
+						// we get the English page id if available via the translations and then calculate the domain
 						Map<String,String> translations = candidate.getWikiSense().getTranslations();
 						String translationEN = translations.get(Language.EN);
 						Article article = wikipedias.get(Language.EN).getArticleByTitle(translationEN);
@@ -1715,7 +1714,8 @@ System.out.println("Merging...");
 							isNe, 
 							tf*idf,
 							dice);			
-//System.out.println("selector score: " + prob);
+
+							//System.out.println("selector score: " + prob);
 
 						candidate.setSelectionScore(prob);
 					} catch(Exception e) {

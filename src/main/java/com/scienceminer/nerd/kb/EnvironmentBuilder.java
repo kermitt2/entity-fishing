@@ -13,6 +13,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.grobid.core.lang.Language;
 
 /*
  * Initialize LMDB and categories for a given pre-processed Wikipedia
@@ -49,9 +50,9 @@ public class EnvironmentBuilder {
         LowerKnowledgeBase wikipedia = new LowerKnowledgeBase(conf);
 
         // mapping wikipedia categories / domains and domain assigments for all pageid
-        if (lang.equals("en")) {
+        if (lang.equals(Language.EN)) {
             System.out.println("Generating domain for all Wikipedia articles...");
-            WikipediaDomainMap wikipediaDomainMap = new WikipediaDomainMap("en", conf.getDbDirectory());
+            WikipediaDomainMap wikipediaDomainMap = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
             try {
                 wikipediaDomainMap.setWikipedia(wikipedia);
                 wikipediaDomainMap.setLang(lang);
