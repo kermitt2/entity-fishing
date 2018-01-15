@@ -26,13 +26,13 @@ Then install the compiled indexed data:
 
     **Linux**
 
-        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-kb.zip (4.1 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-kb.zip (4.1 GB)
 
-        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-en.zip (5.4 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-en.zip (5.5 GB)
 
-        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-fr.zip (1.8 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-fr.zip (1.9 GB)
 
-        - https://grobid.s3.amazonaws.com/entity-fishing/0.0.3/db-de.zip (2.0 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-de.zip (2.0 GB)
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-es.zip (2.6 GB)
 
