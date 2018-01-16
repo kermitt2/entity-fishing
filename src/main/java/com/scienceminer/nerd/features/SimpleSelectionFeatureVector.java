@@ -17,8 +17,8 @@ public class SimpleSelectionFeatureVector extends GenericSelectionFeatureVector 
 		Add_nerd_score = true;
 		Add_prob_anchor_string = true;
 		//Add_prob_c = true;
-		//Add_nb_tokens = true;
-		Add_relatedness = true;
+		Add_nb_tokens = true;
+		//Add_relatedness = true;
 		Add_inContext = true;
 		Add_isNe = true;
 		Add_tf_idf = true;

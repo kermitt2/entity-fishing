@@ -326,7 +326,8 @@ public class ProcessText {
                 results.add(mention);
             }
         } catch (Exception e) {
-            throw new NerdException("NERD error when processing text.", e);
+            //throw new NerdException("NERD error when processing text.", e);
+            LOGGER.error("NER extraction failed", e);
         }
 
         return results;
@@ -386,10 +387,11 @@ public class ProcessText {
                 LOGGER.warn("LayoutToken sequence not found for mention: " + entity.getRawName(
                 ));
             // we have an additional check of validy based on language
-            //if (validEntity(entity, lang.getLang()))
-            if (!finalResults.contains(entity)) {
-                finalResults.add(entity);
-            }
+            if (validEntity(entity, language.getLang())) {
+	            if (!finalResults.contains(entity)) {
+    	            finalResults.add(entity);
+        	    }
+        	}
         }
 
         return finalResults;
@@ -558,9 +560,10 @@ public class ProcessText {
                 else
                     LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
                 // we have an additional check of validy based on language
-                if (validEntity(entity, lang.getLang()))
+                if (validEntity(entity, lang.getLang())) {
                     if (!results.contains(entity))
                         results.add(entity);
+                }
             }
         } catch (Exception e) {
             throw new NerdException("NERD error when processing text.", e);
@@ -834,14 +837,15 @@ public class ProcessText {
     private static boolean validEntity(Mention entity, String lang) {
         if ((entity == null) || (entity.getRawName() == null))
             return false;
-        if (lang.equals("fr")) {
-            // given the French Wikipedia, we need to remove
+        //if (lang.equals("fr")) 
+        {
+            // we need in general to remove as valid mention:
             // * one letter tokens
             // * numerical tokens
             if ((entity.getRawName().length() <= 1) || TextUtilities.test_digit(entity.getRawName()))
                 return false;
-            else
-                return true;
+            //else
+            //    return true;
         }
 
         return true;
