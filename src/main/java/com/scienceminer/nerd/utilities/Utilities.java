@@ -2,15 +2,14 @@ package com.scienceminer.nerd.utilities;
 
 import com.scienceminer.nerd.exceptions.NerdException;
 import org.apache.commons.lang3.StringUtils;
-import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.mock.MockContext;
 import org.grobid.core.utilities.GrobidProperties;
 
 import java.io.*;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -260,10 +259,18 @@ public class Utilities {
 
 	public static void initGrobid() {
 		String pGrobidHome = NerdProperties.getInstance().getGrobidHome();
+		String pGrobidProperties = NerdProperties.getInstance().getGrobidProperties();
 		try {
-			GrobidProperties.getInstance(new GrobidHomeFinder(Arrays.asList(pGrobidHome)));
+			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
+			GrobidProperties.getInstance();
 			LibraryLoader.load();
-		} catch(Exception e) {
+
+			System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
+		}
+		catch(javax.naming.NameAlreadyBoundException e) {
+			// already loaded, nothing to do
+		}
+		catch(Exception e) {
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
 	}

@@ -142,7 +142,7 @@ public class EvaluationDataGeneration {
 
                 // call the method to recognize language of every evalTxtFile
                 String langId = NEDCorpusEvaluation.recognizeLanguage(evalTxtFile);
-                Language language = new Language(langId);
+                Language language = new Language(langId, 1.0);
                 language.setLang(langId);
 
                 lowerKnowledgeBase = UpperKnowledgeBase.getInstance().getWikipediaConf(language.getLang());
@@ -281,7 +281,7 @@ public class EvaluationDataGeneration {
                     if (titleTokens != null) {
                         LOGGER.info("Process title... ");
 
-                        sb.append(StringProcessor.removeInvalidUtf8Chars(LayoutTokensUtil.normalizeDehyphenizeText(titleTokens)));
+                        sb.append(StringProcessor.removeInvalidUtf8Chars(LayoutTokensUtil.toTextDehyphenized(titleTokens)));
                         sb.append("\n");
                         sb.append("\n");
                     }
@@ -291,7 +291,7 @@ public class EvaluationDataGeneration {
                     if (abstractTokens != null) {
                         LOGGER.info("Process abstract...");
 
-                        sb.append(StringProcessor.removeInvalidUtf8Chars(LayoutTokensUtil.normalizeDehyphenizeText(abstractTokens)));
+                        sb.append(StringProcessor.removeInvalidUtf8Chars(LayoutTokensUtil.toTextDehyphenized(abstractTokens)));
                         sb.append("\n");
                         sb.append("\n");
                     }
@@ -342,7 +342,7 @@ public class EvaluationDataGeneration {
                         }
 
                         TaggingLabel clusterLabel = cluster.getTaggingLabel();
-                        String clusterContent = LayoutTokensUtil.normalizeDehyphenizeText(cluster.concatTokens());
+                        String clusterContent = LayoutTokensUtil.toTextDehyphenized(cluster.concatTokens());
 
                         if (toProcess.contains(clusterLabel)) {
                             wordsCounter += cluster.getLabeledTokensContainers().size();
