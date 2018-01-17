@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.*;  
+import java.util.concurrent.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -25,9 +25,9 @@ import static org.fusesource.lmdbjni.Constants.*;
 
 /**
  * Persistent mapping between Wikipedia page and GRISP domain taxonomy based on Wikipedia categories.
- * 
+ *
  */
-public class WikipediaDomainMap { 
+public class WikipediaDomainMap {
     /**
      * The class Logger.
      */
@@ -45,7 +45,7 @@ public class WikipediaDomainMap {
 
     // domain id map
     private Map<Integer,String> id2domain = null;
-  
+
     // domain label map  
     private Map<String,Integer> domain2id = null;
 
@@ -63,16 +63,16 @@ public class WikipediaDomainMap {
         this.envFilePath = envPath + "/" + database_name;
 
         this.environment = new Env();
-        this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+        this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES);
         File thePath = new File(this.envFilePath);
         if (!thePath.exists()) {
             thePath.mkdirs();
             isLoaded = false;
-            System.out.println("domains "+ lang + " / isLoaded: " + isLoaded);
+            LOGGER.info("domains "+ lang + " / isLoaded: " + isLoaded);
         } else {
             // we assume that if the DB files exist, it has been already loaded
             isLoaded = true;
-            System.out.println("domains "+ lang + " / isLoaded: " + isLoaded);
+            LOGGER.info("domains "+ lang + " / isLoaded: " + isLoaded);
         }
         this.environment.open(this.envFilePath, Constants.NOTLS);
         db = this.environment.openDatabase();
@@ -94,7 +94,7 @@ public class WikipediaDomainMap {
     public String getLang() {
         return this.lang;
     }
-    
+
     private void loadGrispMapping() throws Exception {
         importDomains();
         wikiCat2domains = readMapping(wikiGrispMapping);
@@ -129,7 +129,7 @@ System.out.print("\n");*/
             Set<Integer> nextCategories = new HashSet<Integer>();
             for(Integer category : newCategories) {
                 if (wikiCat2domains.get(category) != null) {
-                    if (theDomains == null) 
+                    if (theDomains == null)
                         theDomains = new ArrayList<Integer>();
                     List<Integer> grispDomains = wikiCat2domains.get(category);
                     for(Integer grispDomain : grispDomains) {
@@ -158,7 +158,7 @@ System.out.print("\n");*/
                 break;
         }
 
-        
+
         if (theDomains == null)
             return null;
         else {
@@ -225,17 +225,17 @@ System.out.print("\n");*/
                 continue;
             }
             StringTokenizer st = new StringTokenizer(line, "\t");
-            String category = null; 
+            String category = null;
             int categoryId = -1;
             if (st.hasMoreTokens()) {
                 category = st.nextToken();
                 com.scienceminer.nerd.kb.model.Category theCategory = wikipedia.getCategoryByTitle(category);
                 if (theCategory == null)
-                    System.out.println("Warning: " + category + " is not a category found in Wikipedia.");
+                    LOGGER.warn(category + " is not a category found in Wikipedia.");
                 else {
                     categoryId = theCategory.getId();
                     if (domains.get(new Integer(categoryId)) != null) {
-                        System.out.println("Warning: " + category + " is already defined in " + mappingFilePath);
+                        LOGGER.warn(category + " is already defined in " + mappingFilePath);
                     }
                 }
             }
@@ -244,7 +244,7 @@ System.out.print("\n");*/
                 while (st.hasMoreTokens()) {
                     String domain = st.nextToken();
                     if (domain2id.get(domain) == null)
-                        System.out.println("Warning: " + domain + " is an invalid GRISP domain label in " + mappingFilePath);
+                        LOGGER.warn(domain + " is an invalid GRISP domain label in " + mappingFilePath);
                     else {
                         Integer domainId = domain2id.get(domain);
                         dom.add(domainId);
@@ -282,7 +282,7 @@ System.out.print("\n");*/
         int[] list = null;
         /*if (domainsCache != null)
             domainsCache.get(new Integer(pageId));
-        else*/ 
+        else*/
         {
             byte[] cachedData = null;
             try (Transaction tx = environment.createReadTransaction()) {

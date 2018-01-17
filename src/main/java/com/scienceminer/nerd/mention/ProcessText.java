@@ -241,7 +241,7 @@ public class ProcessText {
         List<Mention> results = new ArrayList<>();
 
         Language language = nerdQuery.getLanguage();
-        
+
         // get the list of requested mention types
         List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
 
@@ -366,13 +366,13 @@ public class ProcessText {
                 }
 
                 if (tokenPos == entity.getOffsetStart()) {
-                    entityTokens = new ArrayList<LayoutToken>();
+                    entityTokens = new ArrayList<>();
                     entityTokens.add(tokens.get(j));
                     lastTokenIndex = j;
                     lastTokenPos = tokenPos;
                 } else if ((tokenPos >= entity.getOffsetStart()) && (tokenPos <= entity.getOffsetEnd())) {
                     if (entityTokens == null) {
-                        entityTokens = new ArrayList<LayoutToken>();
+                        entityTokens = new ArrayList<>();
                         lastTokenIndex = j;
                         lastTokenPos = tokenPos;
                     }
@@ -384,14 +384,13 @@ public class ProcessText {
             if (entityTokens != null)
                 entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
             else
-                LOGGER.warn("LayoutToken sequence not found for mention: " + entity.getRawName(
-                ));
-            // we have an additional check of validy based on language
+                LOGGER.warn("LayoutToken sequence not found for mention: " + entity.getRawName());
+            // we have an additional check of validity based on language
             if (validEntity(entity, language.getLang())) {
-	            if (!finalResults.contains(entity)) {
-    	            finalResults.add(entity);
-        	    }
-        	}
+                if (!finalResults.contains(entity)) {
+                    finalResults.add(entity);
+                }
+            }
         }
 
         return finalResults;
@@ -426,7 +425,7 @@ public class ProcessText {
                 pos.start = candidate.pos;
                 pos.end = pos.start + candidate.string.length();
                 entity.setOffsets(pos);
-                // we have an additional check of validy based on language
+                // we have an additional check of validity based on language
                 if (validEntity(entity, lang.getLang())) {
                     if (!results.contains(entity))
                         results.add(entity);
@@ -559,7 +558,7 @@ public class ProcessText {
                     entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
                 else
                     LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
-                // we have an additional check of validy based on language
+                // we have an additional check of validity based on language
                 if (validEntity(entity, lang.getLang())) {
                     if (!results.contains(entity))
                         results.add(entity);
@@ -837,16 +836,11 @@ public class ProcessText {
     private static boolean validEntity(Mention entity, String lang) {
         if ((entity == null) || (entity.getRawName() == null))
             return false;
-        //if (lang.equals("fr")) 
-        {
-            // we need in general to remove as valid mention:
-            // * one letter tokens
-            // * numerical tokens
-            if ((entity.getRawName().length() <= 1) || TextUtilities.test_digit(entity.getRawName()))
-                return false;
-            //else
-            //    return true;
-        }
+        // we need in general to remove as valid mention:
+        // * one letter tokens
+        // * numerical tokens
+        if (entity.getRawName().length() <= 1 || TextUtilities.test_digit(entity.getRawName()))
+            return false;
 
         return true;
     }
