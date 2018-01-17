@@ -266,7 +266,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
+                                <argument>-Xmx10g</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>en</argument>
@@ -299,7 +299,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
+                                <argument>-Xmx10g</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>de</argument>
@@ -332,7 +332,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
+                                <argument>-Xmx10g</argument>
                                 <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
                                 <argument>data/wikipedia/training/</argument>
                                 <argument>fr</argument>
