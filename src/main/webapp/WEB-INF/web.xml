@@ -39,7 +39,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>defaultStatic</servlet-name>
-        <url-pattern>/nerd/nerd.js</url-pattern>
+        <url-pattern>/nerd/nerd.new.js</url-pattern>
     </servlet-mapping>
     
     <!--<servlet-mapping>
