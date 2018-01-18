@@ -10,39 +10,33 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
-import com.scienceminer.nerd.mention.Sentence;
 import com.scienceminer.nerd.disambiguation.WeightedTerm;
-import com.scienceminer.nerd.mention.ProcessText;
-import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
-import com.scienceminer.nerd.kb.KBUtilities;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Sentence;
 import com.scienceminer.nerd.utilities.Filter;
-import com.scienceminer.nerd.utilities.NerdRestUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.grobid.core.data.Entity;
 import org.grobid.core.document.Document;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.Page;
 import org.grobid.core.utilities.KeyGen;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.grobid.core.lang.Language.*;
 
 /**
  * This is the POJO object for representing input and output "enriched" query.
@@ -90,6 +84,7 @@ public class NerdQuery {
 
     /**
      * mode indicating if we disambiguate or not
+     *
      * @Deprecated use mentions = ['ner'] to obtain the same result
      */
     @Deprecated
@@ -287,13 +282,17 @@ public class NerdQuery {
         this.sentences = sentences;
     }
 
-    /** @Deprecated Use mentions field instead */
+    /**
+     * @Deprecated Use mentions field instead
+     */
     @Deprecated
     public boolean getOnlyNER() {
         return onlyNER;
     }
 
-    /** @Deprecated Use mentions field instead */
+    /**
+     * @Deprecated Use mentions field instead
+     */
     @Deprecated
     public void setOnlyNER(boolean onlyNER) {
         this.onlyNER = onlyNER;
@@ -749,7 +748,7 @@ public class NerdQuery {
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             return mapper.readValue(theQuery, NerdQuery.class);
         } catch (JsonGenerationException | JsonMappingException e) {
