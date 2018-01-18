@@ -91,7 +91,7 @@ public class NerdQueryTest {
 
         String json = aQuery.toJSON();
 
-        MatcherAssert.assertThat(json, is("{\"text\":\"bla bla\",\"format\":\"JSON\",\"customisation\":\"generic\"}"));
+        MatcherAssert.assertThat(json, is("{\"text\":\"bla bla\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\"}"));
 
         aQuery = mapper.readValue(json, NerdQuery.class);
         MatcherAssert.assertThat(aQuery.getText(), is("bla bla"));
@@ -183,7 +183,7 @@ public class NerdQueryTest {
         String theQuery = IOUtils.toString(is, UTF_8);
         NerdQuery nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
 
-        MatcherAssert.assertThat(nerdQuery.toJSON(), is("{\"text\":\"John\",\"format\":\"JSON\",\"customisation\":\"generic\"}"));
+        MatcherAssert.assertThat(nerdQuery.toJSON(), is("{\"text\":\"John\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\"}"));
 
 
     }
