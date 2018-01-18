@@ -1,10 +1,17 @@
 package com.scienceminer.nerd.service;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scienceminer.nerd.exceptions.QueryException;
+import org.apache.commons.io.IOUtils;
 import org.grobid.core.lang.Language;
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.isA;
 import static org.junit.Assert.assertThat;
@@ -63,7 +70,42 @@ public class NerdQueryTest {
 
     @Test
     public void testFromJson_validJsonValue_ShouldWork() throws Exception {
-        assertThat(target.fromJson("{\"name\":\"bao\"}"), isA(NerdQuery.class));
+        assertThat(target.fromJson("{\"text\":\"bao\"}"), isA(NerdQuery.class));
     }
 
+    @Test
+    public void testSerialiseQueryAndBack() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+
+        NerdQuery aQuery = new NerdQuery();
+        aQuery.setText("bla bla");
+
+        String json = aQuery.toJSON();
+
+        MatcherAssert.assertThat(json, is("{\"text\":\"bla bla\",\"format\":\"JSON\",\"customisation\":\"generic\"}"));
+
+        aQuery = mapper.readValue(json, NerdQuery.class);
+        MatcherAssert.assertThat(aQuery.getText(), is("bla bla"));
+    }
+
+
+    @Test
+    public void testDeserialiseQueryAndBack() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+
+        InputStream is = this.getClass().getResourceAsStream("/query.json");
+        String theQuery = IOUtils.toString(is, UTF_8);
+        NerdQuery nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
+
+        MatcherAssert.assertThat(nerdQuery.toJSON(), is("{\"text\":\"John\",\"format\":\"JSON\",\"customisation\":\"generic\"}"));
+
+
+    }
+
+    @Test(expected = JsonParseException.class)
+    public void testDeserialiseQueryAndBack_unknownField() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        NerdQuery nerdQuery = mapper.readValue("{'languages':{'lang':'fr'}}", NerdQuery.class);
+
+    }
 }

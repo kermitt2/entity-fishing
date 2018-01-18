@@ -1,12 +1,15 @@
 package com.scienceminer.nerd.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.disambiguation.Sentence;
@@ -43,7 +46,7 @@ import static org.grobid.core.lang.Language.*;
  * @author Patrice
  */
 public class NerdQuery {
-
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdQuery.class);
 
     public static final String QUERY_TYPE_TEXT = "text";
@@ -382,140 +385,18 @@ public class NerdQuery {
 
     public String toJSON() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
         String json = null;
         try {
             json = mapper.writeValueAsString(this);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new QueryException("Cannot serialise this query", e);
         }
         return json;
     }
-
-    /*public String toJSONFullClean() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
-        StringBuilder buffer = new StringBuilder();
-        buffer.append("{");
-
-        // server runtime is always present (even at 0.0)
-        buffer.append("\"runtime\": " + runtime);
-
-        // parameters
-        buffer.append(", \"onlyNER\": " + onlyNER);
-        buffer.append(", \"nbest\": " + nbest);
-
-        // parameters
-        if ((processSentence != null) && (processSentence.length > 0)) {
-            buffer.append(", \"processSentence\": [");
-            for (int i = 0; i < processSentence.length; i++) {
-                if (i != 0) {
-                    buffer.append(", ");
-                }
-                buffer.append(processSentence[i].intValue());
-            }
-            buffer.append("]");
-        }
-
-        // surface form
-        if (text != null) {
-            byte[] encoded = encoder.quoteAsUTF8(text);
-            String output = new String(encoded);
-            buffer.append(", \"text\": \"" + output + "\"");
-            if (CollectionUtils.isNotEmpty(sentences)) {
-                buffer.append(",").append(Sentence.listToJSON(sentences));
-            }
-        }
-
-        if (shortText != null) {
-            byte[] encoded = encoder.quoteAsUTF8(shortText);
-            String output = new String(encoded);
-            buffer.append(", \"shortText\": \"" + output + "\"");
-        }
-
-        if (CollectionUtils.isNotEmpty(termVector)) {
-            buffer.append(", \"termVector\": [ ");
-            boolean begin = true;
-            for (WeightedTerm term : termVector) {
-                if (!begin)
-                    buffer.append(", ");
-                else
-                    begin = false;
-                buffer.append(term.toJson());
-            }
-            buffer.append(" ]");
-        }
-
-        String lang = "en"; // default language
-        if (language != null) {
-            buffer.append(", \"language\": " + language.toJSON());
-            lang = language.getLang();
-        }
-
-        // if available, document level distribution of categories
-        if (CollectionUtils.isNotEmpty(globalCategories)) {
-            buffer.append(", \"global_categories\": [");
-            boolean first = true;
-            for (com.scienceminer.nerd.kb.Category category : globalCategories) {
-                byte[] encoded = encoder.quoteAsUTF8(category.getName());
-                String output = new String(encoded);
-                if (first) {
-                    first = false;
-                } else
-                    buffer.append(", ");
-                buffer.append("{\"weight\" : " + category.getWeight() + ", \"source\" : \"wikipedia-" + lang
-                        + "\", \"category\" : \"" + output + "\", ");
-                buffer.append("\"page_id\" : " + category.getWikiPageID() + "}");
-            }
-            buffer.append("]");
-        }
-
-        if (CollectionUtils.isNotEmpty(entities)) {
-            buffer.append(", \"entities\": [");
-            boolean first = true;
-            for (NerdEntity entity : entities) {
-                if (filter != null) {
-                    List<Statement> statements = entity.getStatements();
-                    if ( (statements == null) && 
-                         ( (filter.getValueMustNotMatch() == null) || (filter.getValueMustMatch() != null) ) )
-                        continue;
-                    if (statements != null) {
-                        if (!filter.valid(statements))
-                            continue;
-                    }
-                }
-
-                if (first)
-                    first = false;
-                else
-                    buffer.append(", ");
-                buffer.append(entity.toJsonFull());
-            }
-            buffer.append("]");
-        }
-
-        // possible page information
-        // page height and width
-        if (doc != null) {
-            List<Page> pages = doc.getPages();
-            boolean first = true;
-            if (pages != null) {
-                buffer.append(", \"pages\":[");
-                for (Page page : pages) {
-                    if (first)
-                        first = false;
-                    else
-                        buffer.append(", ");
-                    buffer.append("{\"page_height\":" + page.getHeight());
-                    buffer.append(", \"page_width\":" + page.getWidth() + "}");
-                }
-                buffer.append("]");
-            }
-        }
-
-        buffer.append("}");
-
-        return buffer.toString();
-    }*/
 
     public String toJSONClean(Document doc) {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
@@ -696,7 +577,7 @@ public class NerdQuery {
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             return mapper.readValue(theQuery, NerdQuery.class);
         } catch(JsonGenerationException | JsonMappingException e) {
