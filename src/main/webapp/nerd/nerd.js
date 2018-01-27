@@ -1964,8 +1964,9 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			    $(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
 					queryInstance.text=textExamples[0];
+                    queryInstance.language.lang = "en";
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
 				else
@@ -1978,8 +1979,9 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			    $(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
 					queryInstance.text=textExamples[1];
+                    queryInstance.language.lang = "en";
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
 				else
@@ -1992,8 +1994,9 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			    $(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ){
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
 					queryInstance.text=textExamples[2];
+                    queryInstance.language.lang = "en";
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
 				else
@@ -2006,8 +2009,9 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			    $(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ){
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
 					queryInstance.text=textExamples[3];
+                    queryInstance.language.lang = "en";
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
 				else
@@ -2020,8 +2024,9 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 			    $(this).addClass('section-active').removeClass('section-non-active');
 				var selected = $('#selectedService option:selected').attr('value');
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
-					var queryInstance = queryTemplate
+					var queryInstance = queryTemplate;
 					queryInstance.text=reutersExamples[0];
+                    queryInstance.language.lang = "en";
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
 				else
@@ -2036,6 +2041,7 @@ In the first nine months of 1996, 362,297 layoffs were announced, against 302,01
 				if ( (selected == 'processNERDQuery') || (selected == 'processERDQuery') ) {
 					var queryInstance = queryTemplate;
 					queryInstance.text=reutersExamples[1];
+                    queryInstance.language.lang = "en";
 					$('#input').attr('value', vkbeautify.json(JSON.stringify(queryInstance)));
 				}
 				else
