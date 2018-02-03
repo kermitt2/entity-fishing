@@ -92,9 +92,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// domain information
 	private List<String> domains = null;
 
-	// list of freebase types for the term
-	//private List<String> freebaseTypes = null;
-
 	// list of wikipedia categories corresponding to the disambiguated term
 	private List<com.scienceminer.nerd.kb.Category> categories = null;
 
@@ -197,10 +194,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	        this.normalisedRawName = simpleStringNormalisation(raw);
 		}
     }
-
-	/*public void setNormalisedRawName(String raw) {
-        this.normalisedRawName = raw;
-    }*/
 
     public String getNormalisedName() {
         return normalisedRawName;
@@ -312,21 +305,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		this.statements = statements;
 	}
 
-	/*public List<String> getFreebaseTypes() {
-		return freebaseTypes;
-	}
-	
-	public void setFreebaseTypes(List<String> types) {
-		freebaseTypes = types;
-	}
-	
-	public void addFreebaseType(String type) {
-		if (freebaseTypes == null)
-			freebaseTypes = new ArrayList<String>();
-		if (!freebaseTypes.contains(type))
-			freebaseTypes.add(type);
-	}*/
-
 	public List<com.scienceminer.nerd.kb.Category> getCategories() {
 		return categories;
 	}
@@ -414,66 +392,42 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setWikipediaMultilingualRef(Map<String,String> translations,
 											List<String> targetLanguages,
 											Map<String, LowerKnowledgeBase> wikipedias) {
-		if (CollectionUtils.isNotEmpty (targetLanguages) ) {
-			Map<String,String> subTranslations = new TreeMap<String,String>();
-			Map<String,Integer> subArticleCorrespondance = new TreeMap<String,Integer>();
-			for(String targetLanguage : targetLanguages) {
-				String translation = translations.get(targetLanguage);
-				if (translation != null) {
-					int ind = translation.indexOf("#");
-					if (ind != -1) {
-						translation = translation.substring(0,ind);
-					}
-					translation = translation.replace("\\'", "'");
-					// TODO: translation is html encoded, should be decoded in a standard manner
-					translation = translation.replace("%2C", ",");
-					subTranslations.put(targetLanguage, translation);
-					if (wikipedias.get(targetLanguage) != null) {
-						Article article = wikipedias.get(targetLanguage).getArticleByTitle(translation);
-						if (article != null) {
-							subArticleCorrespondance.put(targetLanguage, article.getId());
-						}
-						else {
-							LOGGER.warn("Lookup translation: " +translation + ": Article for language " + targetLanguage + " is null. Ignoring it.");
-						}
-					} else {
-						LOGGER.warn("Lookup translations: No Knowledge base available for language " + targetLanguage + ".");
-					}
-				}
-			}
-			wikipediaMultilingualRef = subTranslations;
-			wikipediaMultilingualArticle = subArticleCorrespondance;
-		}
-	}
 
-	/**
-	 *  If missing and possible, add to the current entity the corresponding FreeBase ID
-	 */
-	/*public void injectFreeBaseId(TreeMap<String,String> translations, 
-								Map<String, Wikipedia> wikipedias,
-								KBAccess kbAccess) {
-		// if we already have the English wikipedia article id 
-		int englishArticleId = -1;
-		if ( (wikipediaMultilingualArticle != null) && (wikipediaMultilingualArticle.get("en") != null) ) {
-			englishArticleId = wikipediaMultilingualArticle.get("en");
+	    if (CollectionUtils.isEmpty (targetLanguages) ) {
+			return;
 		}
-		else if (translations != null) {
-			// we need to get the English wikipedia article id from the translations
-			String translation = translations.get("en");
-			if (translation != null) {
-				Article article = wikipedias.get("en").getArticleByTitle(translation);
-				if (article != null) {
-					englishArticleId = article.getId();
-				}
-			}
-		}
-		if (englishArticleId != -1) {
-			String freebaseId = kbAccess.getFreeBaseId(englishArticleId);
-			if (freebaseId != null) {
-				freeBaseExternalRef = freebaseId;
-			}
-		}
-	}*/
+
+        Map<String,String> subTranslations = new TreeMap<>();
+        Map<String,Integer> subArticleCorrespondance = new TreeMap<>();
+        for(String targetLanguage : targetLanguages) {
+            String translation = translations.get(targetLanguage);
+            if (translation != null) {
+                int ind = translation.indexOf("#");
+                if (ind != -1) {
+                    translation = translation.substring(0,ind);
+                }
+                translation = translation.replace("\\'", "'");
+                // TODO: translation is html encoded, should be decoded in a standard manner
+                translation = translation.replace("%2C", ",");
+                subTranslations.put(targetLanguage, translation);
+                if (wikipedias.get(targetLanguage) != null) {
+                    Article article = wikipedias.get(targetLanguage).getArticleByTitle(translation);
+                    if (article != null) {
+                        subArticleCorrespondance.put(targetLanguage, article.getId());
+                    }
+                    else {
+                        LOGGER.warn("Lookup translation: " +translation + ": Article for language " + targetLanguage + " is null. Ignoring it.");
+                    }
+                } else {
+                    LOGGER.warn("Lookup translations: No Knowledge base available for language " + targetLanguage + ".");
+                }
+            }
+        }
+        wikipediaMultilingualRef = subTranslations;
+        wikipediaMultilingualArticle = subArticleCorrespondance;
+
+	}
+	
 
 	public int getWiktionaryExternalRef() {
 		return wiktionaryExternalRef;
@@ -482,14 +436,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	public void setWiktionaryExternalRef(int ref) {
         this.wiktionaryExternalRef = ref;
     }
-
-	/*public String getFreeBaseExternalRef() {
-		return freeBaseExternalRef;
-	}
-
-	public void setFreeBaseExternalRef(String freebase) {
-		freeBaseExternalRef = freebase;
-	}*/
 
 	public List<Definition> getDefinitions() {
 		return definitions;

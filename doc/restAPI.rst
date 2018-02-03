@@ -126,11 +126,6 @@ The JSON format for the query parameter to be sent to the service is identical t
            "lang": "en"
        },
        "entities": [],
-..       "resultLanguages": [
-..           "fr",
-..           "de"
-..       ],
-       "onlyNER": false,
        "mentions": ["ner","wikipedia"],
        "nbest": 0,
        "sentence": false,
@@ -157,11 +152,6 @@ Provides a list of terms, each term being associated to a weight indicating the 
 (4) language
 """"""""""""
 When the source language (parameters language) is pre-set the language is considered certain, and the language identifier is not used.
-
-..(5) resultLanguages
-.."""""""""""""""""""
-..The additional parameter resultLanguages providing a list of language codes, permits to get the wikipedia pages, if they exist, of such additional languages.
-..Currently only English, German, French, Italian and Spanish wikipedia are supported.
 
 (5) mentions
 """"""""""""
@@ -276,8 +266,6 @@ The JSON format for the query parameter to be sent to the service is identical t
          "lang": "en"
       },
       "entities": [],
-..      "resultLanguages" : ["fr", "de"],
-..      "onlyNER": false,
       "nbest": 0,
       "sentence": false,
       "customisation": "generic"
@@ -310,7 +298,6 @@ Example request
       "language": {
          "lang": "en"
       },
-      "resultLanguages": ["de"],
       "nbest": 0,
       "customisation": "generic"
    }
@@ -370,7 +357,6 @@ If the textual content to be processed is provided as a PDF document, the identi
 ::
    {
       "runtime": 223,
-..      "onlyNER": false,
       "nbest": false,
       "text": "Austria was attaching Serbia.",
       "language": {
@@ -406,7 +392,8 @@ In the example above, the root layer of JSON values correspond to:
 
 - runtime: the amount of time in milliseconds to process the request on server side,
 
-- onlyNER: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped. This option has been limited *only to text queries*. **NOTE this option is deprecated and will be removed in the next release**,
+- onlyNER: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
+This option has been limited *only to text queries*. **NOTE this option is deprecated and will be removed in the next release**,
 
 - nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
 
@@ -441,7 +428,6 @@ The type of recognised entities are restricted to a set of 26 classes of named e
 ::
    {
       "runtime": 146,
-..      "onlyNER": false,
       "nbest": false,
       "shortText": "concrete pump sensor",
       "language": {
@@ -689,6 +675,7 @@ GET /kb/concept/{id}
      "nerd_score": "0.0",
      "nerd_selection_score": "0.0",
      "wikipediaExternalRef": "26964606",
+     "wikidataId": "Q1234"
      "definitions": [
        {
          "definition": "'''Austria''', officially the '''Republic of Austria'''",
@@ -732,7 +719,9 @@ The elements present in this response are:
 
 - nerd_selection_score: NERD selection score confidence
 
-- wikipediaExternalRef: unique identifier of the concept
+- wikipediaExternalRef: unique identifier of the concept in wikipedia
+
+- wikidataId: unique identifier of the concept in wikidata
 
 - definitions: list of wikipedia definitions (usually in wikipedia a concept contains one and only one definition). Each definition is characterized by three properties:
 

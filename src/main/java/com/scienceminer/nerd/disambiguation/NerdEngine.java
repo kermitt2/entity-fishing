@@ -305,8 +305,8 @@ public class NerdEngine {
 				for(NerdCandidate candidate : cands) {
 					NerdEntity nerdEntity = new NerdEntity(entity);
 					nerdEntity.populateFromCandidate(candidate, lang);
-					nerdEntity.setWikipediaMultilingualRef(
-						candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
+					//nerdEntity.setWikipediaMultilingualRef(
+					//	candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
 
 					// note: for the moment we use English categories via translingual information
 					if (lang.equals(Language.EN)) {

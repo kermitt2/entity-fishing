@@ -73,10 +73,12 @@ public class NerdQuery {
 
     // the sentence position if such segmentation is to be realized
     private List<Sentence> sentences = null;
-
+    
     // a list of optional language codes for having multilingual Wikipedia sense correspondences
     // note that the source language is by default the language of results, here ae additional
     // result correspondences in target languages for each entities
+    // *NOTE*: This field is deprecated since the multilingual information will be provided using the knowledge base API for all supported languages
+    @Deprecated
     private List<String> resultLanguages = null;
 
     // runtime in ms of the last processing
@@ -90,7 +92,7 @@ public class NerdQuery {
     @Deprecated
     private boolean onlyNER = false;
 
-    // mention tecniques, specify the method for which the mentions are extracted
+    // mention techniques, specify the method for which the mentions are extracted
     private List<ProcessText.MentionMethod> mentions =
             Arrays.asList(ProcessText.MentionMethod.ner, ProcessText.MentionMethod.wikipedia);
 
@@ -113,8 +115,8 @@ public class NerdQuery {
 
     private NerdContext context = null;
 
-    // only the entities fullfilling the constraints expressed in the filter will be
-    // disambiguated and outputed
+    // only the entities fulfilling the constraints expressed in the filter will be
+    // disambiguated and output
     private Filter filter = null;
 
     // indicate if the full description of the entities should be included in the result
@@ -151,7 +153,7 @@ public class NerdQuery {
         this.termVector = query.getTermVector();
         this.globalCategories = query.getGlobalCategories();
 
-        this.filter = filter;
+        this.filter = query.getFilter();
         this.context = query.getContext();
     }
 
@@ -342,7 +344,7 @@ public class NerdQuery {
         if (entities == null) {
             entities = new ArrayList<>();
         }
-        if (newEntities.size() == 0) {
+        if (CollectionUtils.isEmpty(newEntities)) {
             return;
         }
         for (NerdEntity entity : newEntities) {

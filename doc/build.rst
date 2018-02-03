@@ -1,4 +1,4 @@
-`.. topic:: Build and install NERD.
+.. topic:: Build and install NERD.
 
 Install, build and run
 ======================
