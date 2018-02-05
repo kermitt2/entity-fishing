@@ -846,6 +846,7 @@ POST /language
 
 (3) Example response (ISO 639-1)
 
+Here a sample of the response
 ::
 {
    "lang":"en",
@@ -881,6 +882,7 @@ GET /language?text={text}
 
 (3) Example response (ISO 639-1)
 
+Here a sample of the response
 ::
 {
    "lang":"en",
@@ -939,6 +941,7 @@ POST /segmentation
 
 (3) Example response
 
+Here a sample of the response
 ::
 {
   "sentences": [

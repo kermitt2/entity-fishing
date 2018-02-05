@@ -6,7 +6,7 @@ This page explains differences between versions and how to adapt in order to sup
 
 
 From 0.0.2 to 0.0.3
-===================
+*******************
 
 1. the parameter `OnlyNER` has been deprecated and is limited to text processing only (not PDF) for English and French.
 This option will be removed in the next release.
