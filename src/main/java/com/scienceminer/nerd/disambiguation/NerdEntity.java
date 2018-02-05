@@ -1,24 +1,20 @@
 package com.scienceminer.nerd.disambiguation;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.NerdProperties;
-
-import org.grobid.core.utilities.OffsetPosition;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.scienceminer.nerd.kb.*;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Page;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Sense;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.layout.BoundingBox;
-
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.model.*;
-
+import org.grobid.core.lexicon.NERLexicon;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.TextUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*; 
-
-import com.fasterxml.jackson.core.io.*;
+import java.util.*;
 
 /**
  * This class represents disambiguated entity (the result), including conceptual and 
@@ -129,8 +125,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// among all the strings which can realise this particular concept
 	private int freq_i = 0;
 	// represent named entity disambiguation score in a NERD scenario
+	@JsonProperty("nerd_score")
 	private double nerdScore = 0.0;
 	// represent named entity selection score in a NERD scenario
+	@JsonProperty("nerd_selection_score")
 	private double selectionScore = 0.0;
 	// relatedness score of the term with the context
 	private double relatednessScore = 0.0;
