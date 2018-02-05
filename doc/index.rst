@@ -12,6 +12,7 @@
    :maxdepth: 2
 
    overview.rst
+   upgradeGuide.rst
    build.rst
    console.rst
    restAPI.rst

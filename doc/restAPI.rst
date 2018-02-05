@@ -711,6 +711,7 @@ GET /kb/concept/{id}
    }
 
 The elements present in this response are:
+
 - rawName: The term name
 
 - preferredTerm: The normalised term name
@@ -844,6 +845,7 @@ POST /language
 
 
 (3) Example response (ISO 639-1)
+
 ::
 {
    "lang":"en",
@@ -878,6 +880,7 @@ GET /language?text={text}
 
 
 (3) Example response (ISO 639-1)
+
 ::
 {
    "lang":"en",
@@ -935,6 +938,7 @@ POST /segmentation
 
 
 (3) Example response
+
 ::
 {
   "sentences": [
