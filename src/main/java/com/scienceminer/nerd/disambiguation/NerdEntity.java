@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.Article;
@@ -112,8 +113,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// among all the strings which can realise this particular concept
 	private int freq_i = 0;
 	// represent named entity disambiguation score in a NERD scenario
+	@JsonProperty("nerd_score")
 	private double nerdScore = 0.0;
 	// represent named entity selection score in a NERD scenario
+	@JsonProperty("nerd_selection_score")
 	private double selectionScore = 0.0;
 	// relatedness score of the term with the context
 	private double relatednessScore = 0.0;
