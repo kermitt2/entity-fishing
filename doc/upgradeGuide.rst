@@ -17,11 +17,11 @@ Shipped with NERD there is now grobid-ner for Named Entity Recognition and Wikip
 They can be selected by using the parameter `mentions` and specifying a list of `recognitors`.
 ::
 {
-    "text": "Sample text",
-    "mentions": [
-        "ner",
-        "wikipedia"
-    ]
+   "text": "Sample text",
+   "mentions": [
+      "ner",
+      "wikipedia"
+   ]
 }
 
 
