@@ -14,8 +14,7 @@ This option will be removed in the next release.
 
 2. the mention recognition (prior dismabiguation) has been redesigned to accomodate different type of recognitions.
 Shipped with NERD there is now grobid-ner for Named Entity Recognition and Wikipedia.
-They can be selected by using the parameter `mentions` and specifying a list of `recognitors`, example:
-
+They can be selected by using the parameter `mentions` and specifying a list of `recognitors`.
 ::
 {
     "text": "Sample text",
