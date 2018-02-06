@@ -199,6 +199,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
         return normalisedRawName;
     }
 
+    public void setNormalisedName(String normalisedName) {
+		this.normalisedRawName = normalisedName;
+	}
+
 	public String getPreferredTerm() {
         return preferredTerm;
     }
@@ -533,13 +537,17 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		return biblio;
 	}
 
+
+	
+
 	@Override
 	public boolean equals(Object object) {
 		boolean result = false;
 		if ( (object != null) && object instanceof NerdEntity) {
 			int start = ((NerdEntity)object).getOffsetStart();
 			int end = ((NerdEntity)object).getOffsetEnd();
-			if ( (start == offsets.start) && (end == offsets.end) && (this.wikipediaExternalRef == ((NerdEntity)object).getWikipediaExternalRef()) ) {
+			if ( (start == offsets.start) && (end == offsets.end)
+					&& (this.wikipediaExternalRef == ((NerdEntity)object).getWikipediaExternalRef()) ) {
 				result = true;
 			}
 		}
