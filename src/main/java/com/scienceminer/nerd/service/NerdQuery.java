@@ -120,6 +120,7 @@ public class NerdQuery {
     private Filter filter = null;
 
     // indicate if the full description of the entities should be included in the result
+    @Deprecated
     private boolean full = false;
 
     // query-based threshold, override default values in the config file only for the present query
@@ -285,7 +286,7 @@ public class NerdQuery {
     }
 
     /**
-     * @Deprecated Use mentions field instead
+     * @Deprecated Use mentions field instead. Will be removed after next release.
      */
     @Deprecated
     public boolean getOnlyNER() {
@@ -293,7 +294,7 @@ public class NerdQuery {
     }
 
     /**
-     * @Deprecated Use mentions field instead
+     * @Deprecated Use mentions field instead. Will be removed after the next release.
      */
     @Deprecated
     public void setOnlyNER(boolean onlyNER) {
@@ -398,10 +399,18 @@ public class NerdQuery {
         this.filter = filter;
     }
 
+    /**
+     * @deprecated Will be removed after the next release.
+     */
+    @Deprecated
     public boolean getFull() {
         return this.full;
     }
 
+    /**
+     * @deprecated Will be removed after the next release.
+     */
+    @Deprecated
     public void setFull(boolean full) {
         this.full = full;
     }
@@ -667,9 +676,11 @@ public class NerdQuery {
                     first = false;
                 else
                     buffer.append(", ");
-                if (this.full)
+                if (this.full) {
                     buffer.append(entity.toJsonFull());
-                else
+                    //TODO: remove after release
+                    LOGGER.warn("The full json is a deprecated option and will be removed next release. ");
+                } else
                     buffer.append(entity.toJsonCompact());
             }
             buffer.append("]");
