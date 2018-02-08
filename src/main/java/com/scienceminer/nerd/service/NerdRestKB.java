@@ -15,13 +15,8 @@ import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -153,9 +148,8 @@ public class NerdRestKB {
         if (id.startsWith("Q")) {
             Concept concept = knowledgeBase.getConcept(id);
             if (concept == null) {
-                LOGGER.error("Not a valid concept identifier.");
-                //throw new QueryException("The supplied identifier doesn't correspond to a valid concept.", QueryException.WRONG_IDENTIFIER);
-                throw new ResourceNotFound("The requested resource could not be found but may be available in the future.", ResourceNotFound.RESOURCE_ISSUE);
+                LOGGER.error("There is no resource for this Id.");
+                throw new ResourceNotFound("The requested resource could not be found but may be available in the future.");
             }
 
             Integer pageId = concept.getPageIdByLang(Language.EN);

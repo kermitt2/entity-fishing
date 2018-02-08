@@ -153,7 +153,7 @@ public class NerdRestService implements NerdPaths {
             }
 
         } catch (ResourceNotFound re) {
-            return handleResourceNotFound(re, query);
+            return handleResourceNotFound(re);
         }  catch (QueryException qe) {
             return handleQueryException(qe, query);
         } catch (NoSuchElementException nseExp) {
@@ -206,31 +206,16 @@ public class NerdRestService implements NerdPaths {
         return response;
     }
 
-    private Response handleResourceNotFound(ResourceNotFound re, String query){
+    private Response handleResourceNotFound(ResourceNotFound re){
         Response response;
-        String message = "Resource is not found.";
+        String message = "The requested resource could not be found but may be available in the future.";
 
-        switch (re.getReason()) {
-            case ResourceNotFound.RESOURCE_ISSUE:
-                message = "The requested resource could not be found but may be available in the future. ";
-                LOGGER.error(message, re);
-                response = Response
-                        .status(Response.Status.NOT_FOUND)
-                        .entity(message)
-                        .build();
-
-                break;
-            default:
-                LOGGER.error(message + " Resource demanded: " + query, re);
-                response = Response
-                        .status(Response.Status.BAD_REQUEST)
-                        .entity("Resource could not be found. " + re.getMessage())
-                        .build();
-
-                break;
-        }
+        LOGGER.error(message);
+        response = Response
+                .status(Response.Status.NOT_FOUND)
+                .entity(message)
+                .build();
         return response;
-
     }
 
     private Response handleQueryException(QueryException qe, String query) {
@@ -378,7 +363,7 @@ public class NerdRestService implements NerdPaths {
             }
 
         } catch (ResourceNotFound re) {
-            return handleResourceNotFound(re, identifier);
+            return handleResourceNotFound(re);
         }catch (QueryException qe) {
             return handleQueryException(qe, identifier);
         } catch (NoSuchElementException nseExp) {
@@ -417,7 +402,7 @@ public class NerdRestService implements NerdPaths {
             }
 
         } catch (ResourceNotFound re) {
-            return handleResourceNotFound(re, term);
+            return handleResourceNotFound(re);
         } catch (QueryException qe) {
             return handleQueryException(qe, term);
         } catch (NoSuchElementException nseExp) {
