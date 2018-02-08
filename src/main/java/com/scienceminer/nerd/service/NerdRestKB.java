@@ -3,6 +3,7 @@ package com.scienceminer.nerd.service;
 import com.scienceminer.nerd.disambiguation.NerdCategories;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
@@ -153,7 +154,8 @@ public class NerdRestKB {
             Concept concept = knowledgeBase.getConcept(id);
             if (concept == null) {
                 LOGGER.error("Not a valid concept identifier.");
-                throw new QueryException("The supplied identifier doesn't correspond to a valid concept.", QueryException.WRONG_IDENTIFIER);
+                //throw new QueryException("The supplied identifier doesn't correspond to a valid concept.", QueryException.WRONG_IDENTIFIER);
+                throw new ResourceNotFound("The requested resource could not be found but may be available in the future.", ResourceNotFound.RESOURCE_ISSUE);
             }
 
             Integer pageId = concept.getPageIdByLang(Language.EN);

@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.exceptions.CustomisationException;
 import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.sun.jersey.multipart.FormDataParam;
@@ -151,7 +152,9 @@ public class NerdRestService implements NerdPaths {
                         .build();
             }
 
-        } catch (QueryException qe) {
+        } catch (ResourceNotFound re) {
+            return handleResourceNotFound(re, query);
+        }  catch (QueryException qe) {
             return handleQueryException(qe, query);
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
@@ -203,12 +206,40 @@ public class NerdRestService implements NerdPaths {
         return response;
     }
 
+    private Response handleResourceNotFound(ResourceNotFound re, String query){
+        Response response;
+        String message = "Resource is not found.";
+
+        switch (re.getReason()) {
+            case ResourceNotFound.RESOURCE_ISSUE:
+                message = "The requested resource could not be found but may be available in the future. ";
+                LOGGER.error(message, re);
+                response = Response
+                        .status(Response.Status.NOT_FOUND)
+                        .entity(message)
+                        .build();
+
+                break;
+            default:
+                LOGGER.error(message + " Resource demanded: " + query, re);
+                response = Response
+                        .status(Response.Status.BAD_REQUEST)
+                        .entity("Resource could not be found. " + re.getMessage())
+                        .build();
+
+                break;
+        }
+        return response;
+
+    }
+
     private Response handleQueryException(QueryException qe, String query) {
         Response response;
 
         String message = "The sent query is invalid.";
 
         switch (qe.getReason()) {
+
             case QueryException.LANGUAGE_ISSUE:
                 message = "The language specified is not supported or not valid. ";
                 LOGGER.error(message, qe);
@@ -346,7 +377,9 @@ public class NerdRestService implements NerdPaths {
                         .build();
             }
 
-        } catch (QueryException qe) {
+        } catch (ResourceNotFound re) {
+            return handleResourceNotFound(re, identifier);
+        }catch (QueryException qe) {
             return handleQueryException(qe, identifier);
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
@@ -383,6 +416,8 @@ public class NerdRestService implements NerdPaths {
                         .build();
             }
 
+        } catch (ResourceNotFound re) {
+            return handleResourceNotFound(re, term);
         } catch (QueryException qe) {
             return handleQueryException(qe, term);
         } catch (NoSuchElementException nseExp) {
