@@ -218,6 +218,18 @@ public class NerdRestService implements NerdPaths {
         return response;
     }
 
+    private Response handleResourceNotFound(ResourceNotFound re, String identifier){
+        Response response;
+        String message = " ;The requested resource could not be found but may be available in the future.";
+
+        LOGGER.error(message);
+        response = Response
+                .status(Response.Status.NOT_FOUND)
+                .entity(identifier + message)
+                .build();
+        return response;
+    }
+
     private Response handleQueryException(QueryException qe, String query) {
         Response response;
 
@@ -363,7 +375,7 @@ public class NerdRestService implements NerdPaths {
             }
 
         } catch (ResourceNotFound re) {
-            return handleResourceNotFound(re);
+            return handleResourceNotFound(re, identifier);
         }catch (QueryException qe) {
             return handleQueryException(qe, identifier);
         } catch (NoSuchElementException nseExp) {
@@ -401,8 +413,6 @@ public class NerdRestService implements NerdPaths {
                         .build();
             }
 
-        } catch (ResourceNotFound re) {
-            return handleResourceNotFound(re);
         } catch (QueryException qe) {
             return handleQueryException(qe, term);
         } catch (NoSuchElementException nseExp) {
