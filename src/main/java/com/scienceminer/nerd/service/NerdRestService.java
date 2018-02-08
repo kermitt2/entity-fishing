@@ -220,12 +220,12 @@ public class NerdRestService implements NerdPaths {
 
     private Response handleResourceNotFound(ResourceNotFound re, String identifier){
         Response response;
-        String message = " ;The requested resource could not be found but may be available in the future.";
+        String message = "The requested resource for " + identifier + " could not be found but may be available in the future.";
 
         LOGGER.error(message);
         response = Response
                 .status(Response.Status.NOT_FOUND)
-                .entity(identifier + message)
+                .entity(message)
                 .build();
         return response;
     }
