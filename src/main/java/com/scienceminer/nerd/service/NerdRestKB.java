@@ -155,9 +155,15 @@ public class NerdRestKB {
             Integer pageId = concept.getPageIdByLang(Language.EN);
             if (pageId != null) {
                 LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(Language.EN);
-                Article article = (Article) wikipedia.getPageById(pageId);
-                if (article != null) {
-                    entity.setPreferredTerm(article.getTitle());
+                Page page = wikipedia.getPageById(pageId);
+                PageType pageType = page.getType();
+
+                if (pageType != PageType.article) {
+                    throw new ResourceNotFound("The requested resource could not be found but may be available in the future.");
+                }
+                else {
+                    Article article = (Article) page;
+                    entity.setPreferredTerm(page.getTitle());
                     entity.setRawName(article.getTitle());
 
                     // definition

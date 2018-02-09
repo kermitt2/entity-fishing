@@ -362,7 +362,7 @@ public class NerdRestService implements NerdPaths {
         try {
             output = nerdRestKB.getConceptInfo(identifier, lang);
 
-            if (isBlank(output)) {
+            if (isBlank(output) || output == null) {
                 response = Response.status(Response.Status.NOT_FOUND).build();
             } else {
                 response = Response
