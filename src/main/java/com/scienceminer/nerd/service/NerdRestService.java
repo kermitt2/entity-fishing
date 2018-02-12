@@ -7,6 +7,7 @@ import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
+import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,7 +158,12 @@ public class NerdRestService implements NerdPaths {
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
             response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
-        } catch (Exception e) {
+        } catch (GrobidException ge) {
+            response = Response
+                    .status(Response.Status.SERVICE_UNAVAILABLE)
+                    .entity("The PDF cannot be processed by grobid. " + ge.getMessage())
+                    .build();
+        } catch(Exception e) {
             LOGGER.error("An unexpected exception occurs. ", e);
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
