@@ -36,16 +36,16 @@ public class NerdRestKB {
      */
     public String getConceptInfo(String id, String lang) {
         String response = null;
-            if (id.startsWith("Q")) {
-                // we have a concept
-                response = getWikidataConceptInfo(id);
-            } else if (id.startsWith("P")) {
-                // we have a property
-                response = getWikidataConceptInfo(id);
-            } else {
-                // we have a wikipedia page id, and the lang field matters
-                response = getWikipediaConceptInfo(id, lang);
-            }
+        if (id.startsWith("Q")) {
+            // we have a concept
+            response = getWikidataConceptInfo(id);
+        } else if (id.startsWith("P")) {
+            // we have a property
+            response = getWikidataConceptInfo(id);
+        } else {
+            // we have a wikipedia page id, and the lang field matters
+            response = getWikipediaConceptInfo(id, lang);
+        }
 
         return response;
     }
@@ -158,10 +158,7 @@ public class NerdRestKB {
                 Page page = wikipedia.getPageById(pageId);
                 PageType pageType = page.getType();
 
-                if (pageType != PageType.article) {
-                    throw new ResourceNotFound("The requested resource could not be found but may be available in the future.");
-                }
-                else {
+                if (pageType == PageType.article) {
                     Article article = (Article) page;
                     entity.setPreferredTerm(page.getTitle());
                     entity.setRawName(article.getTitle());
@@ -195,6 +192,10 @@ public class NerdRestKB {
                         entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
                     entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
+                } else {
+                    // if it's not article, but it still a concept
+                    entity.setPreferredTerm(page.getTitle());
+                    entity.setRawName(page.getTitle());
                 }
             }
         } else if (id.startsWith("P")) {
@@ -260,7 +261,7 @@ public class NerdRestKB {
 
                     //System.out.println("check categories for " + sense.getId());
                     com.scienceminer.nerd.kb.model.Category[] parentCategories = sense.getParentCategories();
-                    
+
                     if (ArrayUtils.isNotEmpty(parentCategories)) {
                         for (com.scienceminer.nerd.kb.model.Category theCategory : parentCategories) {
                             // not a valid sense if a category of the sense contains "disambiguation" -> this is then a disambiguation page
@@ -302,7 +303,7 @@ public class NerdRestKB {
         return ">> " + NerdRestKB.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
-    
+
     public String methodLogOut() {
         return "<< " + NerdRestKB.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
