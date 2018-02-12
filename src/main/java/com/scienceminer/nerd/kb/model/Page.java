@@ -159,10 +159,10 @@ public class Page implements Comparable<Page> {
 		if (pd != null)
 			return createPage(env, id, pd);
 		else {
-			//pd = new DbPage("Invalid id or excluded via caching", PageType.invalid.ordinal(), -1);
-			//return new Page(env, id, pd);
+			pd = new DbPage("Invalid id or excluded via caching", PageType.invalid.ordinal(), -1);
+			return new Page(env, id, pd);
 			//return null;
-			throw new ResourceNotFound("The requested resource could not be found but may be available in the future.");
+			//throw new ResourceNotFound("The requested resource could not be found but may be available in the future.");
 		}
 	}
 
