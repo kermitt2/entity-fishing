@@ -16,11 +16,11 @@ This option will be removed in the next release.
 They can be selected by using the parameter `mentions` and specifying a list of `recognitors`.::
 
 {
-   "text": "Sample text",
-   "mentions": [
-      "ner",
+  "text": "Sample text",
+  "mentions": [
+    "ner",
       "wikipedia"
-   ]
+  ]
 }
 
 
