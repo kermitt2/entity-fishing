@@ -132,7 +132,6 @@ public class NerdEngine {
 		}
 
 		//if the text is null, then better return the same entities provided in input,
-		// AFAIK here is no difference from before.
 		List<NerdEntity> entities = nerdQuery.getEntities();
 		if (isEmpty(text) ) {
 			LOGGER.info("The length of the text to be parsed is 0.");
@@ -1667,7 +1666,7 @@ System.out.println("Merging...");
 	}
 
 	/**
-	 * 	Pruning using a NERD selector model.
+	 * 	Pruning using a the selector model scores.
 	 */
 	public void pruneWithSelector(Map<NerdEntity, List<NerdCandidate>> cands,
 			String lang,

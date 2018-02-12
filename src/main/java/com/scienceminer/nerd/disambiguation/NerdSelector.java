@@ -137,6 +137,7 @@ public class NerdSelector extends NerdModel {
 		feature.tf_idf = tf_idf;
 		feature.dice = dice;
 		double[] features = feature.toVector(attributes);
+		smile.math.Math.setSeed(7);
 		return forest.predict(features);
 	}
 
@@ -178,6 +179,7 @@ public class NerdSelector extends NerdModel {
 		double[] y = attributeDataset.toArray(new double[attributeDataset.size()]);
 		
 		long start = System.currentTimeMillis();
+		smile.math.Math.setSeed(7);
 		if (model == MLModel.RANDOM_FOREST)
 			forest = new RandomForest(attributeDataset.attributes(), x, y, 200);
 		else {

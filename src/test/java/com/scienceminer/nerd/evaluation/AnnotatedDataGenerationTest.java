@@ -11,13 +11,13 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
-public class EvaluationDataGenerationTest {
+public class AnnotatedDataGenerationTest {
 
-    EvaluationDataGeneration target;
+    AnnotatedDataGeneration target;
 
     @Before
     public void setUp() {
-        target = new EvaluationDataGeneration();
+        target = new AnnotatedDataGeneration();
     }
 
     @Test

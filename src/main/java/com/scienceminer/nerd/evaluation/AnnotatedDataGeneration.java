@@ -49,12 +49,19 @@ import static com.scienceminer.nerd.service.NerdRestProcessFile.identifyLanguage
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.text.StringEscapeUtils.escapeXml11;
 
-public class EvaluationDataGeneration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationDataGeneration.class);
+/**
+ * This class generate annotated text from raw text exploiting the current models to recognize and 
+ * disambiguate entities. The annotated text can be used as training data or evaluation data
+ * either in semi-supervised mode or in supervised mode after manual corrections. 
+ * The format of the generated documents is the standard NERD corpus with offset annotations in a 
+ * separate XML file. 
+ */
+public class AnnotatedDataGeneration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AnnotatedDataGeneration.class);
 
     LowerKnowledgeBase lowerKnowledgeBase = null;
 
-    public EvaluationDataGeneration() {
+    public AnnotatedDataGeneration() {
         Utilities.initGrobid();
         LibraryLoader.load();
     }
@@ -71,7 +78,7 @@ public class EvaluationDataGeneration {
             System.exit(-1);
         }
 
-        EvaluationDataGeneration nedEval = new EvaluationDataGeneration();
+        AnnotatedDataGeneration nedEval = new AnnotatedDataGeneration();
         nedEval.generate(corpus);
     }
 

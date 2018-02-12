@@ -165,6 +165,7 @@ public class NerdRanker extends NerdModel {
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
 		double[] features = feature.toVector(attributes);
+		smile.math.Math.setSeed(7);
 		double score = forest.predict(features);
 		/*System.out.println("\t\t" + "commonness: " + commonness + 
 							", relatedness: " + relatedness + 
@@ -220,6 +221,7 @@ public class NerdRanker extends NerdModel {
 		double[] y = attributeDataset.toArray(new double[attributeDataset.size()]);
 		
 		long start = System.currentTimeMillis();
+		smile.math.Math.setSeed(7);
 		if (model == MLModel.RANDOM_FOREST)
 			forest = new RandomForest(attributeDataset.attributes(), x, y, 200);
 		else {
