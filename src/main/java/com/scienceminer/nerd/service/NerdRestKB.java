@@ -193,15 +193,19 @@ public class NerdRestKB {
 
                     entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
                 } else {
-                    // if it's not article, but it still a concept
-                    entity.setPreferredTerm(page.getTitle());
-                    entity.setRawName(page.getTitle());
+                    // if it's not an article, but it still a concept
+                    String json = null;
+                    StringBuilder jsonBuilder = new StringBuilder();
+                    jsonBuilder.append("{ \"message\": \"The requested resource for identifier "  + id + " could not be found but may be available in the future.\" }");
+                    json = jsonBuilder.toString();
+                    return json;
                 }
             }
         } else if (id.startsWith("P")) {
             Property property = knowledgeBase.getProperty(id);
             entity.setPreferredTerm(property.getName());
             entity.setRawName(property.getName());
+
         } else {
             LOGGER.error("The supplied identifier for wikidata should start with Q or P");
             throw new QueryException("The wikidata supplied identifier has the wrong format.", QueryException.WRONG_IDENTIFIER);

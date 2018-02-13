@@ -152,9 +152,7 @@ public class NerdRestService implements NerdPaths {
                         .build();
             }
 
-        } catch (ResourceNotFound re) {
-            return handleResourceNotFound(re);
-        }  catch (QueryException qe) {
+        } catch (QueryException qe) {
             return handleQueryException(qe, query);
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
@@ -206,26 +204,18 @@ public class NerdRestService implements NerdPaths {
         return response;
     }
 
-    private Response handleResourceNotFound(ResourceNotFound re){
-        Response response;
-        String message = "The requested resource could not be found but may be available in the future.";
-
-        LOGGER.error(message);
-        response = Response
-                .status(Response.Status.NOT_FOUND)
-                .entity(message)
-                .build();
-        return response;
-    }
-
     private Response handleResourceNotFound(ResourceNotFound re, String identifier){
         Response response;
-        String message = "The requested resource for " + identifier + " could not be found but may be available in the future.";
 
-        LOGGER.error(message);
+        String json = null;
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{ \"message\": \"The requested resource for identifier "  + identifier + " could not be found but may be available in the future.\" }");
+        json = jsonBuilder.toString();
+
+        LOGGER.error(json);
         response = Response
                 .status(Response.Status.NOT_FOUND)
-                .entity(message)
+                .entity(json)
                 .build();
         return response;
     }
@@ -235,41 +225,52 @@ public class NerdRestService implements NerdPaths {
 
         String message = "The sent query is invalid.";
 
+        String json = null;
+        StringBuilder jsonBuilder = new StringBuilder();
+
         switch (qe.getReason()) {
 
             case QueryException.LANGUAGE_ISSUE:
                 message = "The language specified is not supported or not valid. ";
+                jsonBuilder.append("{ \"message\": \""  + message + "\" }");
+                json = jsonBuilder.toString();
                 LOGGER.error(message, qe);
                 response = Response
                         .status(Response.Status.NOT_ACCEPTABLE)
-                        .entity(message)
+                        .entity(json)
                         .build();
 
                 break;
 
             case QueryException.FILE_ISSUE:
                 message = "There are issues with the posted PDF file. " + qe.getMessage();
+                jsonBuilder.append("{ \"message\": \""  + message + "\" }");
+                json = jsonBuilder.toString();
                 LOGGER.error(message);
                 response = Response
                         .status(Response.Status.BAD_REQUEST)
-                        .entity(message)
+                        .entity(json)
                         .build();
 
                 break;
 
             case QueryException.WRONG_IDENTIFIER:
                 message = "Wrong identifier. " + qe.getMessage();
+                jsonBuilder.append("{ \"message\": \""  + message + "\" }");
+                json = jsonBuilder.toString();
                 response = Response
                         .status(Response.Status.BAD_REQUEST)
-                        .entity(message)
+                        .entity(json)
                         .build();
                 break;
 
             case QueryException.INVALID_TERM:
                 message = "Wrong term identifier. " + qe.getMessage();
+                jsonBuilder.append("{ \"message\": \""  + message + "\" }");
+                json = jsonBuilder.toString();
                 response = Response
                         .status(Response.Status.BAD_REQUEST)
-                        .entity(message)
+                        .entity(json)
                         .build();
                 break;
 
