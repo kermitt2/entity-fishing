@@ -514,9 +514,9 @@ public class Relatedness {
 	 */	
 	public NerdContext getContext(List<WeightedTerm> terms, 
 							List<NerdEntity> userEntities,
-							String lang) throws Exception{
-		Vector<Label.Sense> unambig = new Vector<Label.Sense>();
-		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
+							String lang) {
+		Vector<Label.Sense> unambig = new Vector<>();
+		List<Label.Sense> extraSenses = new ArrayList<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
 		for (WeightedTerm term : terms) {

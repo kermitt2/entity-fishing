@@ -59,7 +59,7 @@ public class NerdEngine {
 	static public int maxLabelLength = 50;
 	static public double minLinkProbability = 0.005;
 	static public double minSenseProbability = 0.01;
-	static public int MAX_SENSES = 5; // maximum level of ambiguity for an entity
+	static public int MAX_SENSES = 4; // maximum level of ambiguity for an entity
 
 	public static NerdEngine getInstance() {
 	    if (instance == null) {
@@ -205,12 +205,6 @@ public class NerdEngine {
 			nbEntities += 1;
 			if (cands != null)
 				nbCandidates += cands.size();
-
-			/*System.out.println(entity.toString());
-			for(NerdCandidate cand : cands) {
-			System.out.println(cand.toString());
-			}
-			System.out.println("--");*/
 		}
 		LOGGER.debug("Total number of entities: " + nbEntities);
 		LOGGER.debug("Total number of candidates: " + nbCandidates);
@@ -388,9 +382,11 @@ public class NerdEngine {
 				//}
 			}
 
-			List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
+			List<NerdCandidate> candidates = new ArrayList<>();
 
 			// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
+			/*if (entity.getType() == NERLexicon.NER_Type.MEASURE ||
+					entity.getType() == NER_Type.PERIOD) {*/
 			if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
 				result.put(entity, candidates);
 				continue;
@@ -431,10 +427,9 @@ public class NerdEngine {
 						Label.Sense sense = senses[i];
 
 						PageType pageType = sense.getType();
-//System.out.println("pageType:" + pageType);
 						if (pageType != PageType.article)
 							continue;
-//System.out.println("prior prob:" + sense.getPriorProbability());
+
 						if ( (sense.getPriorProbability() < minSenseProbability) && (sense.getPriorProbability() != 0.0) ) {
 							// senses are sorted by prior prob.
 							//continue;
@@ -661,7 +656,6 @@ public class NerdEngine {
 							candidate.setLabel(bestLabel);
 							candidate.setWikidataId(sense.getWikidataId());
 							candidates.add(candidate);
-	//System.out.println(candidate.toString());
 							s++;
 							if (s == MAX_SENSES) {
 								// max. sense alternative has been reach
@@ -670,8 +664,8 @@ public class NerdEngine {
 						}
 					}
 				}
-				Collections.sort(candidates);
-				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
+				if (candidates.size() > 0 || entity.getType() != null) {
+					Collections.sort(candidates);
 					result.put(entity, candidates);
 				} /*else
 					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
@@ -701,10 +695,10 @@ public class NerdEngine {
 		if (entities == null)
 			return candidates;
 
-		Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<NerdEntity, List<NerdCandidate>>();
-		Map<String, List<NerdCandidate>> cacheSubSequences = new HashMap<String, List<NerdCandidate>>();
-		Map<String, Double> cacheLinkProbability = new HashMap<String, Double>();
-		List<String> failures = new ArrayList<String>();
+		Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<>();
+		Map<String, List<NerdCandidate>> cacheSubSequences = new HashMap<>();
+		Map<String, Double> cacheLinkProbability = new HashMap<>();
+		List<String> failures = new ArrayList<>();
 
 		for(NerdEntity entity : entities) {
 			// if the entity is already inputted in the query (i.e. by the "user"), we do not generate candidates
@@ -924,7 +918,9 @@ public class NerdEngine {
 			List<LayoutToken> subTokens = com.scienceminer.nerd.utilities.Utilities.getWindow(entity, tokens,
 				NerdRanker.EMBEDDINGS_WINDOW_SIZE, lang);
 
+//			LOGGER.debug("Mention: " + entry.toString());
 			for(NerdCandidate candidate : cands) {
+//			    LOGGER.debug("Candidate: " +  candidate.toString());
 				double score = 0.0;
 				try {
 					double commonness = candidate.getProb_c();
@@ -1678,16 +1674,16 @@ System.out.println("Merging...");
 		NerdSelector selector = selectors.get(lang);
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (selector == null) {
-			try {
-				selector = new NerdSelector(wikipedia);
-				selectors.put(lang, selector);
+			if(wikipedia == null) {
+				LOGGER.warn("Cannot find a selector for the language " + lang + ". Skipping the pruning.");
+				return;
 			}
-			catch(Exception e) {
-				LOGGER.error("Cannot load selector for language " + lang + ". Ignoring it.", e);
-			}
+			selector = new NerdSelector(wikipedia);
+			selectors.put(lang, selector);
 		}
 
-		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
+		List<NerdEntity> toRemove = new ArrayList<>();
+		GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
 
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : cands.entrySet()) {
 			List<NerdCandidate> candidates = entry.getValue();
@@ -1699,37 +1695,35 @@ System.out.println("Merging...");
 				// don't prune anything
 				continue;
 			}
+			List<String> words = analyzer.tokenize(entity.getRawName(),
+					new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
+			double dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
 			boolean isNe = entity.getType() != null;
 			for(NerdCandidate candidate : candidates) {
 				//if (candidate.getMethod() == NerdCandidate.NERD)
-				{
-					try {
-						GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
-						List<String> words = analyzer.tokenize(entity.getRawName(),
-							new Language(wikipedia.getConfig().getLangCode(), 1.0));
+				//{
+				try {
+					double tf = (double)TextUtilities.getOccCount(candidate.getLabel().getText(), text);
+					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
 
-						double tf = (double)TextUtilities.getOccCount(candidate.getLabel().getText(), text);
-						double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
-						double dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
+					double prob = selector.getProbability(candidate.getNerdScore(),
+						candidate.getLabel().getLinkProbability(),
+						candidate.getWikiSense().getPriorProbability(),
+						words.size(),
+						candidate.getRelatednessScore(),
+						context.contains(candidate),
+						isNe,
+						tf*idf,
+						dice);
 
-						double prob = selector.getProbability(candidate.getNerdScore(),
-							candidate.getLabel().getLinkProbability(),
-							candidate.getWikiSense().getPriorProbability(),
-							words.size(),
-							candidate.getRelatednessScore(),
-							context.contains(candidate),
-							isNe,
-							tf*idf,
-							dice);
+						//System.out.println("selector score: " + prob);
 
-							//System.out.println("selector score: " + prob);
-
-						candidate.setSelectionScore(prob);
-					} catch(Exception e) {
-						e.printStackTrace();
-					}
+					candidate.setSelectionScore(prob);
+				} catch(Exception e) {
+					e.printStackTrace();
 				}
+				//}
 			}
 
 /*System.out.println("Surface: " + entity.getRawName());	
@@ -1739,7 +1733,7 @@ for(NerdCandidate cand : candidates) {
 System.out.println("--");*/
 
 
-			List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
+			List<NerdCandidate> newCandidates = new ArrayList<>();
 			for(NerdCandidate candidate : candidates) {
 				if ( (candidate.getSelectionScore() < minSenseProbability) && shortText )
 					continue;
@@ -1774,7 +1768,7 @@ System.out.println("--");*/
 					toRemove.add(entity);
 				else {
 					// this should be useless...
-					cands.replace(entity, new ArrayList<NerdCandidate>());
+					cands.replace(entity, new ArrayList<>());
 				}
 			}
 		}
@@ -1853,13 +1847,7 @@ System.out.println("--");*/
 			}
 		}
 		// this is a stable context for the whole vector
-		NerdContext stableContext = null;
-		try {
-			 stableContext = relatedness.getContext(terms, userEntities, lang);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+		NerdContext stableContext = relatedness.getContext(terms, userEntities, lang);
 
 		List<List<NerdCandidate>> candidates = generateCandidatesTerms(terms, lang);
 		int n = 0;
@@ -1901,7 +1889,7 @@ System.out.println("--");*/
 	}
 
 	private List<List<NerdCandidate>> generateCandidatesTerms(List<WeightedTerm> terms, String lang) {
-		List<List<NerdCandidate>> result = new ArrayList<List<NerdCandidate>>();
+		List<List<NerdCandidate>> result = new ArrayList<>();
 		int n = 0;
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		for(WeightedTerm term : terms) {
@@ -2152,7 +2140,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 				label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalizeFully(normalisedString.toLowerCase()));
 				if (!label2.exists()) {
-					// more agressive
+					// more aggressive
 					label2 = new Label(wikipedia.getEnvironment(),
 						WordUtils.capitalizeFully(normalisedString.toLowerCase(), ProcessText.delimiters.toCharArray()));
 				}
@@ -2215,7 +2203,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			if (label.exists())
 				labels.add(label);
 
-			// more agressive
+			// more aggressive
 			label = new Label(wikipedia.getEnvironment(),
 					WordUtils.capitalizeFully(normalisedString.toLowerCase(), ProcessText.delimiters.toCharArray()));
 			if (label.exists())

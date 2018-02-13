@@ -102,14 +102,12 @@ public class TaxonDatabase extends StringRecordDatabase<List<String>> {
 							// we have a taxon
 							nbTaxon++;
 							// store the parent information
-							try {
-								db.put(tx, KBEnvironment.serialize(entityId), 
-									KBEnvironment.serialize(parentTaxons));
-								nbToAdd++;
-								
-							} catch(Exception e) {
-								e.printStackTrace();
-							}
+
+							db.put(tx, KBEnvironment.serialize(entityId),
+								KBEnvironment.serialize(parentTaxons));
+							nbToAdd++;
+
+
 						}
 					}
 				} catch(Exception e) {
@@ -117,8 +115,8 @@ public class TaxonDatabase extends StringRecordDatabase<List<String>> {
 				}
 				n++;
 			}
-			System.out.println("total nb entities visited: " + n);
-			System.out.println("total nb taxon found: " + nbTaxon);
+			logger.info("total nb entities visited: " + n);
+			logger.info("total nb taxon found: " + nbTaxon);
 		} catch(Exception e) {
 			logger.error("Error when filling taxon databases", e);
  		} finally {

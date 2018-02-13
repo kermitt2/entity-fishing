@@ -65,7 +65,7 @@ public class NerdSelector extends NerdModel {
 
 	private LowerKnowledgeBase wikipedia = null;
 
-	public NerdSelector(LowerKnowledgeBase wikipedia) throws Exception {
+	public NerdSelector(LowerKnowledgeBase wikipedia) {
 		super();
 		this.wikipedia = wikipedia;
 		
@@ -137,11 +137,27 @@ public class NerdSelector extends NerdModel {
 		feature.tf_idf = tf_idf;
 		feature.dice = dice;
 		double[] features = feature.toVector(attributes);
+		
 		smile.math.Math.setSeed(7);
-		return forest.predict(features);
+		final double score = forest.predict(features);
+
+		/*logger.debug("selector: " +
+				"score: " + score + ", " +
+				"ranker score: "+nerd_score+", " +
+				"link prob: "+prob_anchor_string+", " +
+				"ranker score: "+prob_c+", " +
+				"words size: "+nb_tokens+", " +
+				"relatedness: "+relatedness+", " +
+				"candidate in context? : "+inContext+", " +
+				"NE? : "+isNe+", " +
+				"tf/idf : "+ tf_idf+", " +
+				"dice : "+dice+", "
+		);*/
+
+		return score;
 	}
 
-	public void saveModel() throws IOException, Exception {
+	public void saveModel() throws Exception {
 		logger.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
@@ -153,7 +169,7 @@ public class NerdSelector extends NerdModel {
 		System.out.println("Model saved under " + modelFile.getPath());
 	}
 
-	public void loadModel() throws IOException, Exception {
+	public void loadModel() throws Exception {
 		logger.info("loading model");
 		// load model
 		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -222,7 +238,7 @@ public class NerdSelector extends NerdModel {
 
 	private StringBuilder trainWikipediaArticle(Article article, 
 									StringBuilder arffBuilder, 
-									NerdRanker ranker) throws Exception {
+									NerdRanker ranker) {
 		System.out.println(" - training " + article);
 		List<NerdEntity> refs = new ArrayList<NerdEntity>();
 		String lang = wikipedia.getConfig().getLangCode();
@@ -490,7 +506,7 @@ public class NerdSelector extends NerdModel {
 	}
 
 	private LabelStat evaluateWikipediaArticle(Article article, NerdRanker ranker, boolean full) throws Exception {
-System.out.println(" - evaluating " + article);
+		System.out.println(" - evaluating " + article);
 		Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		String content = MediaWikiParser.getInstance().toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), 
 			lang.getLang());

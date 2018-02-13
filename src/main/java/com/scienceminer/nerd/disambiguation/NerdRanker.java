@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.disambiguation;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 import java.util.regex.*;
@@ -75,7 +76,7 @@ public class NerdRanker extends NerdModel {
 	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
 	// embeddings-based similiarity
 
-	public NerdRanker(LowerKnowledgeBase wikipedia) throws Exception {
+	public NerdRanker(LowerKnowledgeBase wikipedia) {
 		this.wikipedia = wikipedia;
 
 		model = MLModel.GRADIENT_TREE_BOOST;
@@ -132,7 +133,8 @@ public class NerdRanker extends NerdModel {
 			if (!modelFile.exists()) {
                 logger.debug("Invalid model file for nerd ranker.");
 			}
-			String xml = FileUtils.readFileToString(modelFile, "UTF-8");
+			String xml = FileUtils.readFileToString(modelFile, StandardCharsets.UTF_8);
+
 			if (model == MLModel.RANDOM_FOREST)
 				forest = (RandomForest)xstream.fromXML(xml);
 			else
@@ -146,7 +148,7 @@ public class NerdRanker extends NerdModel {
 				arffBuilder.append(feature.getArffHeader()).append("\n");
 				arffBuilder.append(feature.printVector());
 				String arff = arffBuilder.toString();
-				attributeDataset = arffParser.parse(IOUtils.toInputStream(arff, "UTF-8"));
+				attributeDataset = arffParser.parse(IOUtils.toInputStream(arff, StandardCharsets.UTF_8));
 				attributes = attributeDataset.attributes();
 				attributeDataset = null;
 			}
@@ -167,15 +169,18 @@ public class NerdRanker extends NerdModel {
 		double[] features = feature.toVector(attributes);
 		smile.math.Math.setSeed(7);
 		double score = forest.predict(features);
-		/*System.out.println("\t\t" + "commonness: " + commonness + 
+
+		/*logger.debug("[Ranker] score: "+ score +
+							", commonness: " + commonness +
 							", relatedness: " + relatedness + 
 							", context_quality: " + quality + 
 							", context_quality: " + bestCaseContext + 
 							", embeddingsSimilarity: " + embeddingsSimilarity);*/
+
 		return score;
 	}
 
-	public void saveModel() throws IOException, Exception {
+	public void saveModel() throws Exception {
 		logger.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
@@ -183,7 +188,7 @@ public class NerdRanker extends NerdModel {
 		if (!modelFile.exists()) {
             logger.debug("Invalid file for saving author filtering model.");
 		}
-		FileUtils.writeStringToFile(modelFile, xml, "UTF-8");
+		FileUtils.writeStringToFile(modelFile, xml, StandardCharsets.UTF_8);
 		System.out.println("Model saved under " + modelFile.getPath());
 	}
 
@@ -195,7 +200,7 @@ public class NerdRanker extends NerdModel {
         	logger.debug("Model file for nerd ranker does not exist.");
         	throw new NerdResourceException("Model file for nerd ranker does not exist.");
 		}
-		String xml = FileUtils.readFileToString(modelFile, "UTF-8");
+		String xml = FileUtils.readFileToString(modelFile, StandardCharsets.UTF_8);
 		if (model == MLModel.RANDOM_FOREST)
 			forest = (RandomForest)xstream.fromXML(xml);
 		else
@@ -262,7 +267,7 @@ public class NerdRanker extends NerdModel {
 			nbArticle++;
 		}
 		arffDataset = arffBuilder.toString();
-		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, "UTF-8"));
+		attributeDataset = arffParser.parse(IOUtils.toInputStream(arffDataset, StandardCharsets.UTF_8));
 	}
 
 	private StringBuilder trainWikipediaArticle(Article article, StringBuilder arffBuilder) throws Exception {
@@ -508,7 +513,7 @@ System.out.println(docPath);
 
 		String docContent = null;
 		try {
-			docContent = FileUtils.readFileToString(docFile, "UTF-8");
+			docContent = FileUtils.readFileToString(docFile, StandardCharsets.UTF_8);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

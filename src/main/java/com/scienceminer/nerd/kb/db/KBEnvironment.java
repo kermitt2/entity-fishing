@@ -1,25 +1,19 @@
 package com.scienceminer.nerd.kb.db;
 
-import com.scienceminer.nerd.utilities.*;
-
-import java.io.*;
-import java.util.Map;
-import java.util.HashMap;
-
-import org.nustaq.serialization.*;
-
+import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.DbTranslations;
+import com.scienceminer.nerd.utilities.NerdConfig;
+import org.nustaq.serialization.FSTConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import com.scienceminer.nerd.kb.model.hadoop.*; 
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-import com.scienceminer.nerd.kb.*;
-
-import org.apache.hadoop.record.*;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.io.Closeable;
+import java.io.File;
+import java.util.Map;
 
 /**
  * A KB corresponding to a Wikipedia instance, which is concretely stored as a set of LMDB databases.
@@ -41,7 +35,7 @@ public abstract class KBEnvironment implements Closeable {
 	/**
 	 * Serialization in the KBEnvironment with FST
 	 */
-    public static byte[] serialize(Object obj) throws IOException {
+    public static byte[] serialize(Object obj) {
     	byte data[] = getFSTConfigurationInstance().asByteArray(obj);
 		return data;
 	}
@@ -50,7 +44,7 @@ public abstract class KBEnvironment implements Closeable {
 	 * Deserialization in the KBEnvironment with FST. The returned Object needs to be casted
 	 * in the expected actual object. 
 	 */
-	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
+	public static Object deserialize(byte[] data) {
 		return getFSTConfigurationInstance().asObject(data);
 	}
 
@@ -93,7 +87,7 @@ public abstract class KBEnvironment implements Closeable {
 
 	public abstract void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception;
 
-	protected static File getDataFile(File dataDirectory, String fileName) throws IOException {
+	protected static File getDataFile(File dataDirectory, String fileName) {
 		File file = new File(dataDirectory + File.separator + fileName);
 		if (!file.canRead()) {
 			LOGGER.info(file + " is not readable");

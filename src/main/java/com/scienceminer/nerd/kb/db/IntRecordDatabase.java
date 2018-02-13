@@ -1,18 +1,11 @@
 package com.scienceminer.nerd.kb.db;
 
-import org.apache.hadoop.record.Record;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 import org.apache.hadoop.record.CsvRecordInput;
+import org.fusesource.lmdbjni.BufferCursor;
+import org.fusesource.lmdbjni.Transaction;
 
 import java.io.*;
-
-import com.scienceminer.nerd.utilities.*;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
 
 public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Record> {
 

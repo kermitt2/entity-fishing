@@ -42,10 +42,10 @@ public class NerdContext {
 
 	public NerdContext(List<Label.Sense> unambig, 
 					List<Article> certainPages,
-					String lang) throws Exception {
+					String lang) {
 		this.lang = lang;
 		
-		List<Article> articles = new ArrayList<Article>();
+		List<Article> articles = new ArrayList<>();
 		for(Label.Sense sense : unambig) {
 			double sp = sense.getPriorProbability();
 			
