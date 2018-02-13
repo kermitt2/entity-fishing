@@ -1,17 +1,11 @@
 package com.scienceminer.nerd.service;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.core.Response.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- *
- */
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 public class NerdRestProcessGeneric {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessGeneric.class);
@@ -37,32 +31,6 @@ public class NerdRestProcessGeneric {
 			response = Response.status(Status.OK).entity(retVal).build();
 		} catch (Exception e) {
 			LOGGER.error("Exception occurred while check if the service is alive. " + e);
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		}
-		return response;
-	}
-	
-	/**
-	 * Returns the description of how to use the nerd-service in a human
-	 * readable way (html).
-	 * 
-	 * @return returns a response object containing a html description
-	 */
-	public static Response getDescriptionAsHtml(UriInfo uriInfo) {
-		Response response = null;
-		try {
-			LOGGER.debug("called getDescriptionAsHtml()...");
-
-			StringBuffer htmlCode = new StringBuffer();
-
-			htmlCode.append("<h4>nerd-service documentation</h4>");
-			htmlCode.append("This service provides a RESTful interface for using the query " + 
-				"enrichment and disambiguation system, also know as (N)ERD. ");
-			
-			response = Response.status(Status.OK).entity(htmlCode.toString())
-					.type(MediaType.TEXT_HTML).build();
-		} catch (Exception e) {
-			LOGGER.error("Cannot response the description for nerd-service. ", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		return response;

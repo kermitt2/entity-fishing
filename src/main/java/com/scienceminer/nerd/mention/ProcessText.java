@@ -650,8 +650,6 @@ public class ProcessText {
      * Generate a list of entity mentions that will be instanciated by
      * Wikipedia labels (anchors and titles).
      *
-     * @param nerdQuery the NERD query to be processed
-     * @return the list of identified entities.
      */
 	/*public List<Mention> processWikipedia(NerdQuery nerdQuery) throws NerdException {
 		String text = nerdQuery.getText();
@@ -855,7 +853,7 @@ public class ProcessText {
      */
     public static List<Mention> acronymCandidates(NerdQuery nerdQuery, List<Mention> entities) {
         if (entities == null)
-            entities = new ArrayList<Mention>();
+            entities = new ArrayList<>();
 
         String text = nerdQuery.getText();
         List<LayoutToken> tokens = nerdQuery.getTokens();

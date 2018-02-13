@@ -41,39 +41,6 @@
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/nerd/nerd.new.js</url-pattern>
     </servlet-mapping>
-    
-    <!--<servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/language</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/disambiguate</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/segmentation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/customisations</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/customisation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/kb/concept</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>nerd-service</servlet-name>
-        <url-pattern>/kb/term</url-pattern>
-    </servlet-mapping>-->
 
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>

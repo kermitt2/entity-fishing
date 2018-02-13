@@ -74,16 +74,6 @@ public class NerdRestService implements NerdPaths {
     }
 
     /**
-     * @see com.scienceminer.nerd.service.NerdRestProcessGeneric#getDescriptionAsHtml(UriInfo)
-     */
-    @GET
-    @Produces(MediaType.TEXT_HTML)
-    @Path(NERD)
-    public Response getDescription_html(@Context UriInfo uriInfo) {
-        return NerdRestProcessGeneric.getDescriptionAsHtml(uriInfo);
-    }
-
-    /**
      * Sentence Segmentation
      **/
     @GET
