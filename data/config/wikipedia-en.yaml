@@ -32,7 +32,7 @@ minLinkProbability: 0.005
 # minimum conditional probability of a sense for being an entity candidate 
 # (e.g. min probability of an entity to be realized by a given string, given all possible 
 # entities that can be realized by this string)
-minSenseProbability: 0.02
+minSenseProbability: 0.05
 
 # minimum score produced by the selector model under which the entity 
 # will be pruned
