@@ -363,6 +363,8 @@ public class NerdSelector extends NerdModel {
 			e.printStackTrace();
 		}
 
+		GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
+
 		double quality = (double)context.getQuality();
 		int nbInstance = 0;
 		// second pass for producing the disambiguation observations
@@ -378,7 +380,12 @@ public class NerdSelector extends NerdModel {
 				// do not considerer unambiguous entities
 				continue;
 			}*/
-			
+
+			final double dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
+
+			List<String> words = analyzer.tokenize(entity.getNormalisedName(),
+					new Language(wikipedia.getConfig().getLangCode(), 1.0));
+
 			for(NerdCandidate candidate : cands) {
 				try {
 					nbCandidate++;
@@ -422,10 +429,6 @@ public class NerdSelector extends NerdModel {
 					if (entity.getType() != null)
 						isNe = true;
 
-					GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
-					List<String> words = analyzer.tokenize(entity.getNormalisedName(), 
-						new Language(wikipedia.getConfig().getLangCode(), 1.0));
-
 					GenericSelectionFeatureVector feature = getNewFeature();
 					feature.nerd_score = nerd_score;
 					feature.prob_anchor_string = entity.getLinkProbability();
@@ -434,7 +437,7 @@ public class NerdSelector extends NerdModel {
 					feature.relatedness = related;
 					feature.inContext = inContext;
 					feature.isNe = isNe;
-					feature.dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
+					feature.dice = dice;
 
 					int tf = TextUtilities.getOccCount(candidate.getLabel().getText(), contentString);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();

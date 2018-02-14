@@ -458,6 +458,10 @@ public class NerdRestProcessFile {
                                                                 NerdQuery workingQuery) {
         // text of the selected segment
         List<NerdEntity> resultingEntities = new ArrayList<>();
+
+        ProcessText processText = ProcessText.getInstance();
+        NerdEngine disambiguator = NerdEngine.getInstance();
+
         for (LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
 
@@ -472,7 +476,6 @@ public class NerdRestProcessFile {
             //workingQuery.setMentions(mentions);
             try {
                 // ner
-                ProcessText processText = ProcessText.getInstance();
                 List<Mention> nerEntities = processText.process(workingQuery);
 				/*if (nerEntities != null)
 					LOGGER.debug(nerEntities.size() + " ner entities");
@@ -507,21 +510,18 @@ public class NerdRestProcessFile {
 					}
 				}*/
 
-
                 if (workingQuery.getEntities() != null) {
-/*for (NerdEntity entity : workingQuery.getEntities()) {
-	if (entity.getBoundingBoxes() == null)
-		LOGGER.debug("Empty bounding box for " + entity.toString());
-}*/
+                    /*for (NerdEntity entity : workingQuery.getEntities()) {
+                        if (entity.getBoundingBoxes() == null)
+                            LOGGER.debug("Empty bounding box for " + entity.toString());
+                    }*/
 
                     // sort the entities
                     Collections.sort(workingQuery.getEntities());
                     // disambiguate and solve entity mentions
                     //if (!workingQuery.getOnlyNER())
                     //{
-                    NerdEngine disambiguator = NerdEngine.getInstance();
-                    List<NerdEntity> disambiguatedEntities =
-                            disambiguator.disambiguate(workingQuery);
+                    List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(workingQuery);
                     workingQuery.setEntities(disambiguatedEntities);
 /*if (workingQuery.getEntities() != null)
 LOGGER.debug(workingQuery.getEntities().size() + " nerd entities");	*/
@@ -536,14 +536,14 @@ LOGGER.debug(workingQuery.getEntities().size() + " nerd entities");	*/
                     }
 //					}*/
                 }
-                if (workingQuery.getEntities() != null) {
-                    resultingEntities.addAll(workingQuery.getEntities());
-                    // update document context
-                    if (documentContext != null)
-                        ((DocumentContext) documentContext).update(workingQuery);
-                }
+
+                resultingEntities.addAll(workingQuery.getEntities());
+                // update document context
+                if (documentContext != null)
+                    ((DocumentContext) documentContext).update(workingQuery);
+
             } catch (Exception e) {
-                LOGGER.error("An unexpected exception occurs. ", e);
+                LOGGER.error("An unexpected exception occurs when processing layout tokens. ", e);
             }
         }
         workingQuery.setEntities(resultingEntities);

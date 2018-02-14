@@ -1109,9 +1109,9 @@ public class ProcessText {
 
         // tokenise according to language and remove punctuations/delimeters
         List<String> tokens = GrobidAnalyzer.getInstance().tokenize(term, new Language(lang, 1.0));
-        List<String> newTokens = new ArrayList<String>();
+        List<String> newTokens = new ArrayList<>();
         for (String token : tokens) {
-            if ((token.trim().length() == 0) || (delimiters.indexOf(token) != -1))
+            if (token.trim().length() == 0 || delimiters.contains(token))
                 continue;
             newTokens.add(token);
         }

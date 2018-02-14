@@ -2,6 +2,7 @@ package com.scienceminer.nerd.disambiguation;
 
 import java.util.*;
 
+import com.scienceminer.nerd.utilities.NerdConfig;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
@@ -57,9 +58,7 @@ public class NerdEngine {
 
 	static public int maxContextSize = 30;
 	static public int maxLabelLength = 50;
-	static public double minLinkProbability = 0.005;
-	static public double minSenseProbability = 0.01;
-	static public int MAX_SENSES = 4; // maximum level of ambiguity for an entity
+	public static int MAX_SENSES = 4; // maximum level of ambiguity for an entity
 
 	public static NerdEngine getInstance() {
 	    if (instance == null) {
@@ -357,12 +356,15 @@ public class NerdEngine {
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang) {
 		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
 		}
 		if (entities == null)
 			return result;
 
+		NerdConfig conf = wikipedia.getConfig();
+		
 		for(NerdEntity entity : entities) {
 			// if the entity is already input in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
@@ -400,8 +402,8 @@ public class NerdEngine {
 			if (isEmpty(normalisedString))
 				continue;
 
-			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
-			if (!bestLabel.exists()) {
+			Label bestLabel = bestLabel(normalisedString, wikipedia);
+			if (bestLabel !=null && !bestLabel.exists()) {
 				//if (entity.getIsAcronym())
 				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
 				if (entity.getType() != null) {
@@ -430,7 +432,8 @@ public class NerdEngine {
 						if (pageType != PageType.article)
 							continue;
 
-						if ( (sense.getPriorProbability() < minSenseProbability) && (sense.getPriorProbability() != 0.0) ) {
+						if (sense.getPriorProbability() < conf.getMinSenseProbability()
+								&& sense.getPriorProbability() != 0.0 ) {
 							// senses are sorted by prior prob.
 							//continue;
 							break;
@@ -460,7 +463,7 @@ public class NerdEngine {
 
 								if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 									candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
-								if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") != -1) {
+								if (theCategory.getTitle().toLowerCase().contains("disambiguation")) {
 									invalid = true;
 									break;
 								}
@@ -555,6 +558,8 @@ public class NerdEngine {
 		if (entities == null)
 			return result;
 
+		NerdConfig conf = wikipedia.getConfig();
+
 		for(NerdEntity entity : entities) {
 			// if the entity is already inputted in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
@@ -606,7 +611,8 @@ public class NerdEngine {
 							if (pageType != PageType.article)
 								continue;
 							//System.out.println("prior prob:" + sense.getPriorProbability());
-							if ( (sense.getPriorProbability() < minSenseProbability) && (sense.getPriorProbability() != 0.0) ) {
+							if (sense.getPriorProbability() < conf.getMinSenseProbability()
+									&& sense.getPriorProbability() != 0.0) {
 								// senses are sorted by prior prob.
 								//continue;
 								break;
@@ -1018,15 +1024,11 @@ public class NerdEngine {
 			List<String> localContextStrings = buildLocalContexts(rawTerm, text);
 			// build the corresponding contexts
 			for(String localContextString : localContextStrings) {
-				try {
-					NerdContext contextObject = relatedness.getContextFromText(localContextString, userEntities, lang);
-					if (localContexts == null)
-						localContexts = new ArrayList<NerdContext>();
-					localContexts.add(contextObject);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
+                NerdContext contextObject = relatedness.getContextFromText(localContextString, userEntities, lang);
+                if (localContexts == null)
+                    localContexts = new ArrayList<NerdContext>();
+                localContexts.add(contextObject);
+
 				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString);
 				for(LayoutToken token : subTokens)
 					tokens.add(token);
@@ -1640,20 +1642,19 @@ System.out.println("Merging...");
 						//}
 					}
 					String surface2 = term2.getEntity().getNormalisedName();
-					if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
-						toRemove.add(new Integer(i));
+					if ((surface2.length() > surface1.length()) && (surface2.contains(surface1))) {
+						toRemove.add(i);
 						break;
 					}
 				}
 			}
 		}
 
-		List<NerdCandidate> result = new ArrayList<NerdCandidate>();
+		List<NerdCandidate> result = new ArrayList<>();
 		for(int i=0; i<candidates.size(); i++) {
-			if (toRemove.contains(new Integer(i))) {
+			if (toRemove.contains(i)) {
 				continue;
-			}
-			else if (candidates.get(i).getNerdScore() > threshold) {
+			} else if (candidates.get(i).getNerdScore() > threshold) {
 				result.add(candidates.get(i));
 			}
 		}
@@ -1671,16 +1672,19 @@ System.out.println("Merging...");
 			double threshold,
 			NerdContext context,
 			String text) {
-		NerdSelector selector = selectors.get(lang);
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+		if(wikipedia == null) {
+			LOGGER.warn("Cannot find a selector for the language " + lang + ". Skipping the pruning.");
+			return;
+		}
+
+		NerdSelector selector = selectors.get(lang);
 		if (selector == null) {
-			if(wikipedia == null) {
-				LOGGER.warn("Cannot find a selector for the language " + lang + ". Skipping the pruning.");
-				return;
-			}
 			selector = new NerdSelector(wikipedia);
 			selectors.put(lang, selector);
 		}
+
+		NerdConfig conf = wikipedia.getConfig();
 
 		List<NerdEntity> toRemove = new ArrayList<>();
 		GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
@@ -1699,6 +1703,7 @@ System.out.println("Merging...");
 					new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
 			double dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
+			
 			boolean isNe = entity.getType() != null;
 			for(NerdCandidate candidate : candidates) {
 				//if (candidate.getMethod() == NerdCandidate.NERD)
@@ -1735,11 +1740,11 @@ System.out.println("--");*/
 
 			List<NerdCandidate> newCandidates = new ArrayList<>();
 			for(NerdCandidate candidate : candidates) {
-				if ( (candidate.getSelectionScore() < minSenseProbability) && shortText )
+				if (candidate.getSelectionScore() < conf.getMinSenseProbability() && shortText) {
 					continue;
-				else if ( (candidate.getSelectionScore() < threshold) && !shortText )
+				} else if (candidate.getSelectionScore() < threshold && !shortText) {
 					continue;
-				else {
+				} else {
 					newCandidates.add(candidate);
 				}
 
@@ -1934,7 +1939,7 @@ System.out.println("--");*/
 					for(com.scienceminer.nerd.kb.model.Category theCategory : sense.getParentCategories()) {
 						if (!NerdCategories.categoryToBefiltered(theCategory.getTitle()))
 							candidate.addWikipediaCategories(new com.scienceminer.nerd.kb.Category(theCategory));
-						if (theCategory.getTitle().toLowerCase().indexOf("disambiguation") != -1) {
+						if (theCategory.getTitle().toLowerCase().contains("disambiguation")) {
 							invalid = true;
 							break;
 						}
@@ -2023,19 +2028,18 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 					}
 				}
 				// get the best one and propagate it to all base/acronyms NerdEntity
-				if (best != null) {
-					updateEntity(entity, best);
-					for(Mention acroEntity : localAcronyms) {
-						int localStartPos = acroEntity.getOffsetStart();
-						int localEndPos = acroEntity.getOffsetEnd();
-						acronymSubset = getEntitiesAtPos(entityPositions, localStartPos, localEndPos);
-						if (acronymSubset != null) {
-							for(NerdEntity localAcronym : acronymSubset) {
-								updateEntity(localAcronym, best);
-							}
+				updateEntity(entity, best);
+				for(Mention acroEntity : localAcronyms) {
+					int localStartPos = acroEntity.getOffsetStart();
+					int localEndPos = acroEntity.getOffsetEnd();
+					acronymSubset = getEntitiesAtPos(entityPositions, localStartPos, localEndPos);
+					if (acronymSubset != null) {
+						for(NerdEntity localAcronym : acronymSubset) {
+							updateEntity(localAcronym, best);
 						}
 					}
 				}
+
 			}
         }
 	}

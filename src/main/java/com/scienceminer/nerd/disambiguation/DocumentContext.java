@@ -1,22 +1,16 @@
 package com.scienceminer.nerd.disambiguation;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.Pair;
 
-import java.util.*; 
-import java.text.*;
-import java.text.*;
+import java.util.*;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.mention.Mention;
-
-import com.fasterxml.jackson.core.io.*;
 
 /**
  * This class represents a context in relation to a document. 
@@ -51,11 +45,11 @@ public class DocumentContext extends NerdContext {
           			return 1;
     			return 0;
     		}
-		}); 
+		});
 
 		if (contextArticles == null) {
 			contextArticles = new ArrayList<Article>();
-			contextArticlesIds = new ArrayList<Integer>(); 
+			contextArticlesIds = new ArrayList<Integer>();
 		}
 
 		int nb = 0;

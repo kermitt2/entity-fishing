@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.kb.*;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.utilities.TextUtilities;
 
 import org.slf4j.Logger;
@@ -24,13 +25,9 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 /**
  * Provide semantic relatedness measures, which is an adaptation of the original Relateness measure from 
  * Milne and Witten. 
- * 
- * 
+ *
  */
 public class Relatedness {
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(Relatedness.class);
 
 	private static volatile Relatedness instance = null;
@@ -62,7 +59,7 @@ public class Relatedness {
 	 */
 	private Relatedness() {	
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
-		caches = new HashMap<String, ConcurrentMap<Long,Double>>();
+		caches = new HashMap<>();
 	}
 
 	/**
@@ -82,7 +79,7 @@ public class Relatedness {
 		Label.Sense sense = candidate.getWikiSense();
 		Article article = null;
 		if (sense.getType() == Page.PageType.article)
-		 	article = (Article)sense;
+		 	article = (Article) sense;
 		else 
 			return 0.0;
 
@@ -90,24 +87,20 @@ public class Relatedness {
 			// if there is no context, we can set an arbitrary score
 			return 0.1;
 		} 
-		
-		if (article == null) {
-			return 0.0;
-		}
+
 		for (Article contextArticle : contextArticles) {
-			//if (article.getId() != contextArticle.getId()) 
-			{
-				currentRelatedness = 0.0;
-				try {
-					currentRelatedness = getRelatedness(article, contextArticle, lang);
-				} 
-				catch (Exception e) {
-					LOGGER.error("Error computing semantic relatedness for "
-							+ article + " and " + contextArticle, e);
-				}
-				totalRelatedness += currentRelatedness;
-				totalComparisons++;
+			//if (article.getId() != contextArticle.getId()){
+			currentRelatedness = 0.0;
+			try {
+				currentRelatedness = getRelatedness(article, contextArticle, lang);
 			}
+			catch (Exception e) {
+				LOGGER.error("Error computing semantic relatedness for "
+						+ article + " and " + contextArticle, e);
+			}
+			totalRelatedness += currentRelatedness;
+			totalComparisons++;
+			//}
 		}
 		if (totalComparisons == 0) {
 			return 0.0;
@@ -118,7 +111,7 @@ public class Relatedness {
 	/**
 	 * Calculate the relatedness between two articles
 	 */
-	public double getRelatedness(Article art1, Article art2, String lang) throws Exception {
+	public double getRelatedness(Article art1, Article art2, String lang) {
 		comparisonsRequested++;
 		
 		//generate unique key for the pair of articles
@@ -131,22 +124,22 @@ public class Relatedness {
 		double relatedness = 0.0;
 		ConcurrentMap<Long,Double> cache = caches.get(lang);
 		if (cache == null) {
-			cache = new ConcurrentHashMap<Long,Double>();
+			cache = new ConcurrentHashMap<>();
 			caches.put(lang, cache);
 		}
-		if (!cache.containsKey(new Long(key))) {
+		if (!cache.containsKey(key)) {
 			relatedness = getRelatednessWithoutCache(art1, art2, lang);		
-			cache.put(new Long(key), new Double(relatedness));
+			cache.put(key, relatedness);
 			
 			comparisonsCalculated++;
 		} else {
-			relatedness = cache.get(new Long(key)).doubleValue();
+			relatedness = cache.get(key);
 		}
 //System.out.println("obtained relatedness: " + relatedness);
 		return relatedness;
 	}
 
-	public double getRelatednessWithoutCache(Article artA, Article artB, String lang) throws Exception {
+	public double getRelatednessWithoutCache(Article artA, Article artB, String lang) {
 		if (artA.getId() == artB.getId()) 
 			return 1.0;
 
@@ -219,8 +212,8 @@ public class Relatedness {
 		int indexA = 0;
 		int indexB = 0;
 
-		List<Double> vectA = new ArrayList<Double>();
-		List<Double> vectB = new ArrayList<Double>();
+		List<Double> vectA = new ArrayList<>();
+		List<Double> vectB = new ArrayList<>();
 		
 		while (indexA < linksA.size() || indexB < linksB.size()) {
 			//identify which links to use (A, B, or both)
@@ -334,13 +327,13 @@ public class Relatedness {
 	 */	
 	public NerdContext getContext(Map<NerdEntity, List<NerdCandidate>> candidates, 
 							List<NerdEntity> userEntities, 
-							String lang, boolean shortText) throws Exception {
+							String lang, boolean shortText) {
 
-		List<Label.Sense> unambig = new ArrayList<Label.Sense>();
-		List<Integer> unambigIds = new ArrayList<Integer>();
+		List<Label.Sense> unambig = new ArrayList<>();
+		List<Integer> unambigIds = new ArrayList<>();
 		
-		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
-		List<Integer> extraSensesIds = new ArrayList<Integer>();
+		List<Label.Sense> extraSenses = new ArrayList<>();
+		List<Integer> extraSensesIds = new ArrayList<>();
 		
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
@@ -355,9 +348,9 @@ public class Relatedness {
 				if (ent.getWikipediaExternalRef() != -1) {
 					Page thePage = wikipedia.getPageById(ent.getWikipediaExternalRef());
 					if (thePage.getType() == Page.PageType.article) {
-						if (!certainPagesIds.contains(new Integer(thePage.getId()))) {
+						if (!certainPagesIds.contains(thePage.getId())) {
 							certainPages.add((Article)thePage);
-							certainPagesIds.add(new Integer(thePage.getId()));
+							certainPagesIds.add(thePage.getId());
 						}
 					}
 				}
@@ -373,19 +366,19 @@ public class Relatedness {
 
 			if ( (cands == null) || (cands.size() == 0) )
 				continue;
-			else if (cands.size() == 1) { 
-				if (!unambigIds.contains(new Integer(cands.get(0).getWikiSense().getId()))) {
+			else if (cands.size() == 1) {
+				if (!unambigIds.contains(cands.get(0).getWikiSense().getId())) {
 					Label.Sense theSense = cands.get(0).getWikiSense();
 					unambig.add(theSense);
-					unambigIds.add(new Integer(theSense.getId()));
+					unambigIds.add(theSense.getId());
 				}
 			} else {
 				for(NerdCandidate cand : cands) {
 					if (cand.getProb_c() >= (1-minSenseProbability)) {
 						Label.Sense theSense = cands.get(0).getWikiSense();
-						if (!unambigIds.contains(new Integer(theSense.getId()))) {
+						if (!unambigIds.contains(theSense.getId())) {
 							unambig.add(theSense);
-							unambigIds.add(new Integer(theSense.getId()));
+							unambigIds.add(theSense.getId());
 						}
 						//extraSenses.add(cands.get(0).getWikiSense());
 						break;
@@ -393,10 +386,10 @@ public class Relatedness {
 					else if (cand.getProb_c() >= 0.8) { 
 						// we store some extra "good" senses in case we need more of them
 						Label.Sense theSense = cands.get(0).getWikiSense();
-						if ( !extraSensesIds.contains(new Integer(theSense.getId())) && 
-							!unambigIds.contains(new Integer(theSense.getId())) ) {
+						if ( !extraSensesIds.contains(theSense.getId()) &&
+							!unambigIds.contains(theSense.getId()) ) {
 							extraSenses.add(theSense);
-							extraSensesIds.add(new Integer(theSense.getId()));
+							extraSensesIds.add(theSense.getId());
 						}
 						break;
 					}
@@ -410,9 +403,9 @@ public class Relatedness {
 		// if the context is still too small, we add come of the top sense of ambiguous labels
 		if (shortText) {
 			if (unambig.size()+certainPages.size() < NerdEngine.maxContextSize) {
-				if ((extraSenses != null) && (extraSenses.size() > 0)) {
+				if (CollectionUtils.isNotEmpty(extraSenses)) {
 					for(Label.Sense sense : extraSenses) {
-						Integer theId = new Integer(sense.getId());
+						Integer theId = sense.getId();
 						if (!unambigIds.contains(theId)) {
 							unambig.add(sense);
 							unambigIds.add(theId);
@@ -437,8 +430,8 @@ public class Relatedness {
 	 */	
 	public NerdContext getContextFromText(String content, 
 							List<NerdEntity> userEntities, 
-							String lang) throws Exception{
-		List<Label.Sense> unambig = new ArrayList<Label.Sense>();
+							String lang) {
+		List<Label.Sense> unambig = new ArrayList<>();
 
 		//String targetString = content.substring(entity.getOffsetStart(), entity.getOffsetEnd());
 
@@ -448,10 +441,11 @@ public class Relatedness {
 			//would just match all non-word chars, but we dont want to match utf chars
 		Matcher m = p.matcher(s);
 
-		List<Integer> matchIndexes = new ArrayList<Integer>();
-		List<Label.Sense> extraSenses = new ArrayList<Label.Sense>();
+		List<Integer> matchIndexes = new ArrayList<>();
+		List<Label.Sense> extraSenses = new ArrayList<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
+		double minLinkProbability = wikipedia.getConfig().getMinLinkProbability();
 
 		while (m.find()) 
 			matchIndexes.add(m.start());
@@ -467,7 +461,7 @@ public class Relatedness {
 				if (! (ngram.length()==1 && s.substring(startIndex-1, startIndex).equals("'")) && 
 						!ngram.trim().equals("")) {
 					Label label = new Label(wikipedia.getEnvironment(), ngram);
-					if (label.getLinkProbability() > NerdEngine.minLinkProbability) {
+					if (label.getLinkProbability() > minLinkProbability) {
 						Label.Sense[] senses = label.getSenses();						
 						if ( senses.length == 1 || 
 							(senses[0].getPriorProbability() >= (1-minSenseProbability)) ) 
@@ -518,7 +512,10 @@ public class Relatedness {
 		Vector<Label.Sense> unambig = new Vector<>();
 		List<Label.Sense> extraSenses = new ArrayList<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+		
 		double minSenseProbability = wikipedia.getConfig().getMinSenseProbability();
+		double minLinkProbability = wikipedia.getConfig().getMinLinkProbability();
+		
 		for (WeightedTerm term : terms) {
 
 			String termString = term.getTerm();
@@ -527,7 +524,7 @@ public class Relatedness {
 				//Label label = new Label(wikipedia.getEnvironment(), ngram, tp);
 				Label label = new Label(wikipedia.getEnvironment(), termString);
 
-				if (label.getLinkProbability() > NerdEngine.minLinkProbability) {
+				if (label.getLinkProbability() > minLinkProbability) {
 					
 					Label.Sense[] senses = label.getSenses();
 					

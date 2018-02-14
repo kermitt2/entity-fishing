@@ -1,8 +1,11 @@
 package com.scienceminer.nerd.disambiguation;
 
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.utilities.NerdConfig;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,23 +36,29 @@ public class NerdContext {
 	protected double totalWeight = 0.0;
 	protected Relatedness relatedness = Relatedness.getInstance();
 	protected String lang = null;
-	
-	public NerdContext() {}
+	private Map<String, LowerKnowledgeBase> wikipediaConfs;
+
+	public NerdContext() {
+		wikipediaConfs = UpperKnowledgeBase.getInstance().getWikipediaConfs();
+	}
 
 	public NerdContext(String lang) {
+		this();
 		this.lang = lang;
 	}
 
 	public NerdContext(List<Label.Sense> unambig, 
 					List<Article> certainPages,
 					String lang) {
-		this.lang = lang;
-		
+		this(lang);
+
+		final NerdConfig config = wikipediaConfs.get(lang).getConfig();
+
 		List<Article> articles = new ArrayList<>();
 		for(Label.Sense sense : unambig) {
 			double sp = sense.getPriorProbability();
 			
-			if (sp < NerdEngine.minSenseProbability) 
+			if (sp < config.getMinSenseProbability())
 				continue; 
 			
 			if (isDate(sense) || isNumber(sense)) 
@@ -69,8 +78,8 @@ public class NerdContext {
 		}
 		
 		Collections.sort(articles);		
-		contextArticles = new ArrayList<Article>(); 
-		contextArticlesIds = new ArrayList<Integer>(); 
+		contextArticles = new ArrayList<>();
+		contextArticlesIds = new ArrayList<>();
 		int c = 0;
 		for (Article art: articles) {
 			if (c >= NerdEngine.maxContextSize)
@@ -87,13 +96,15 @@ public class NerdContext {
 		if (sense == null)
 			return;
 		if (contextArticles == null) {
-			contextArticles = new ArrayList<Article>();
-			contextArticlesIds = new ArrayList<Integer>(); 
+			contextArticles = new ArrayList<>();
+			contextArticlesIds = new ArrayList<>();
 		}
+
+		final NerdConfig config = wikipediaConfs.get(lang).getConfig();
 		
 		double sp = sense.getPriorProbability();
 
-		if (sp < NerdEngine.minSenseProbability) 
+		if (sp < config.getMinSenseProbability())
 			return; 
 		
 		if (isDate(sense) || isNumber(sense)) 
@@ -110,13 +121,15 @@ public class NerdContext {
 		if (article == null)
 			return;
 		if (contextArticles == null) {
-			contextArticles = new ArrayList<Article>();
-			contextArticlesIds = new ArrayList<Integer>(); 
+			contextArticles = new ArrayList<>();
+			contextArticlesIds = new ArrayList<>();
 		}
+
+		final NerdConfig config = wikipediaConfs.get(lang).getConfig();
 		
 		double sp = article.getWeight();
 
-		if (sp < NerdEngine.minSenseProbability) 
+		if (sp < config.getMinSenseProbability())
 			return; 
 		
 		if (isDate(article) || isNumber(article)) 
