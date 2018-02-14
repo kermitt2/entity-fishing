@@ -1,9 +1,9 @@
 package com.scienceminer.nerd.disambiguation;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.scienceminer.nerd.mention.ProcessText;
+import org.grobid.core.analyzers.GrobidAnalyzer;
+
+import java.util.*;
 import java.util.function.Function;
 
 public class PruningService {
@@ -100,6 +100,83 @@ public class PruningService {
         return newEntities;
     }
 
+    public void prune(List<NerdEntity> entities, double threshold) {
+        List<NerdEntity> toRemove = new ArrayList<>();
+
+        for(NerdEntity entity : entities) {
+            if (entity.getSource() == ProcessText.MentionMethod.species) {
+                // dont prune such explicit mention recognition
+                continue;
+            }
+			/*if (entity.getNerdScore() < threshold) {
+				toRemove.add(entity);
+			}*/
+            // variant: prune named entities less aggressively
+            if ( (entity.getNerdScore() < threshold) && ( (entity.getType() == null) || entity.getIsAcronym() ) ) {
+                toRemove.add(entity);
+            } else if ( (entity.getNerdScore() < threshold/2) && (entity.getType() != null) ) {
+                toRemove.add(entity);
+            }
+        }
+
+        for(NerdEntity entity : toRemove) {
+            entities.remove(entity);
+        }
+    }
+    
+    public void prune(Map<NerdEntity, List<NerdCandidate>> candidates,
+                      boolean nbest,
+                      boolean shortText,
+                      double threshold,
+                      String lang) {
+        List<NerdEntity> toRemove = new ArrayList<>();
+
+        // we prune candidates for each entity mention
+        for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+            List<NerdCandidate> cands = entry.getValue();
+            if ( (cands == null) || (cands.size() == 0) )
+                continue;
+            NerdEntity entity = entry.getKey();
+            List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
+            for(NerdCandidate candidate : cands) {
+                if (!nbest) {
+                    if (shortText && (candidate.getNerdScore() > 0.10)) {
+                        newCandidates.add(candidate);
+                        break;
+                    }
+                    else if (candidate.getNerdScore() > threshold) {
+                        newCandidates.add(candidate);
+                        break;
+                    }
+                }
+                else {
+                    if (shortText && (candidate.getNerdScore() > 0.10)) {
+                        newCandidates.add(candidate);
+                    }
+                    else if ( (newCandidates.size() == 0) && (candidate.getNerdScore() > threshold) ) {
+                        newCandidates.add(candidate);
+                    }
+                    else if (candidate.getNerdScore() > 0.6) {
+                        newCandidates.add(candidate);
+                    }
+                }
+            }
+            if (newCandidates.size() > 0)
+                candidates.replace(entity, newCandidates);
+            else {
+                if (entity.getType() == null)
+                    toRemove.add(entity);
+                else
+                    candidates.replace(entity, new ArrayList<NerdCandidate>());
+            }
+        }
+
+        for(NerdEntity entity : toRemove) {
+            candidates.remove(entity);
+        }
+    }
+
+
     /**
      * We prioritize the longest term match from the KB : the term coming from the KB shorter than
      * the longest match from the KB is pruned.
@@ -109,7 +186,7 @@ public class PruningService {
      * validated...
      */
     public List<NerdEntity> pruneOverlap(List<NerdEntity> entities, boolean shortText) {
-        //System.out.println("pruning overlaps - we have " + entities.size() + " entities");
+
         Set<Integer> toRemove = new HashSet<>();
         for (int pos1 = 0; pos1 < entities.size(); pos1++) {
             if (toRemove.contains(pos1))
@@ -119,13 +196,13 @@ public class PruningService {
 
             if (entity1.getRawName() == null || entity1.getNormalisedName() == null) {
                 toRemove.add(pos1);
-                //System.out.println("Removing " + pos1 + " - " + entity1.getNormalisedName());
                 continue;
             }
 
+            GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
+
             // the arity measure below does not need to be precise
-            int arity1 = entity1.getNormalisedName().length() - entity1.getNormalisedName().replaceAll("\\s", "").length() + 1;
-            //System.out.println("Position1 " + pos1 + " / arity1 : " + entity1.getNormalisedName() + ": " + arity1);
+            int arity1 = analyzer.tokenize(entity1.getNormalisedName()).size();
 
             // find all sub term of this entity and entirely or partially overlapping entities
             for (int pos2 = 0; pos2 < entities.size(); pos2++) {
@@ -140,40 +217,29 @@ public class PruningService {
                 if (!areEntityOverlapping(entity1, entity2))
                     continue;
 
-                // overlap
-                //int arity2 = entity2.getOffsetEnd() - entity2.getOffsetStart();
+                // they overlap
                 if (entity2.getRawName() == null) {
                     toRemove.add(pos2);
                     continue;
                 }
 
-                if ((entity2.getType() != null) && (entity2.getWikipediaExternalRef() == -1)) {
-                    // we have a NER not disambiguated
-                    // check if the other entity has been disambiguated
-                    if ((entity1.getWikipediaExternalRef() != -1) && (entity1.getNerdScore() > 0.2)) {
+                if (entity2.getType() != null && entity2.getWikipediaExternalRef() == -1) {
+                    // we have a NER not disambiguated check if the other entity has been disambiguated
+                    if (entity1.getWikipediaExternalRef() != -1 && entity1.getNerdScore() > 0.2) {
                         toRemove.add(pos2);
                         continue;
-                    }
-                }
-
-                if ((entity1.getType() != null) && (entity1.getWikipediaExternalRef() == -1)) {
-                    // we have a NER not disambiguated
-                    // check if the other entity has been disambiguated
-                    if ((entity2.getWikipediaExternalRef() != -1) && (entity2.getNerdScore() > 0.2)) {
-                        toRemove.add(pos1);
-                        break;
                     }
                 }
 
 
                 if (entity1.getWikipediaExternalRef() == entity2.getWikipediaExternalRef()) {
-                    if ((entity1.getType() != null) && (entity2.getType() == null)) {
+                    if (entity1.getType() != null && entity2.getType() == null) {
                         toRemove.add(pos2);
                         continue;
                     }
                 }
 
-                int arity2 = entity2.getNormalisedName().length() - entity2.getNormalisedName().replaceAll("\\s", "").length() + 1;
+                int arity2 = analyzer.tokenize(entity2.getNormalisedName()).size();
                 if (arity2 < arity1) {
                     // longest match wins
                     toRemove.add(pos2);
@@ -187,35 +253,14 @@ public class PruningService {
                     if (conf2 < conf1) {
                         toRemove.add(pos2);
                         continue;
-                    }
-                    /*else {
-							// if equal we check the selection scores of the top candiate for the two entities
-							conf1 = entity1.getSelectionScore();
-							conf2 = entity2.getSelectionScore();
-							if (conf2 < conf1) {
-								if (!toRemove.contains(new Integer(pos2))) {
-									toRemove.add(new Integer(pos2));
-								}
-							} else {
-								// if still equal we check the prob_c
-								conf1 = entity1.getProb_c();
-								conf2 = entity2.getProb_c();
-								if (conf2 < conf1) {
-									if (!toRemove.contains(new Integer(pos2))) {
-										toRemove.add(new Integer(pos2));
-									}
-								} else {
-									// too uncertain we remove all
-									if (!toRemove.contains(new Integer(pos2))) {
-										toRemove.add(new Integer(pos2));
-									}
-									if (!toRemove.contains(new Integer(pos1))) {
-										toRemove.add(new Integer(pos1));
-                    }
-                }
-							}
-						}*/
+                    } else {
+                        double selectionConf1 = entity1.getSelectionScore();
+                        double selectionConf2 = entity2.getSelectionScore();
 
+                        if (selectionConf2 < selectionConf1) {
+                            toRemove.add(pos2);
+                        }
+                    }
                 }
             }
         }
@@ -244,5 +289,30 @@ public class PruningService {
             return false;
 
         return true;
+    }
+
+    /**
+     * 	We prioritize the longest term match from the KB : the term coming from the KB shorter than
+     *  the longest match from the KB and which have not been merged, are lowered.
+     */
+    public void impactOverlap(Map<NerdEntity, List<NerdCandidate>> candidates) {
+        //List<Integer> toRemove = new ArrayList<Integer>();
+
+        for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+            List<NerdCandidate> cands = entry.getValue();
+            NerdEntity entity = entry.getKey();
+            if (cands == null)
+                continue;
+            // the arity measure below does not need to be precise
+            int arity = entity.getNormalisedName().split("[ ,-.]").length;
+            for(NerdCandidate candidate : cands) {
+                double score = candidate.getNerdScore();
+                double new_score = score - ( (5-arity)*0.01);
+                if ( (new_score > 0) && (new_score <= 1) )
+                    candidate.setNerdScore(new_score);
+
+            }
+            Collections.sort(cands);
+        }
     }
 }

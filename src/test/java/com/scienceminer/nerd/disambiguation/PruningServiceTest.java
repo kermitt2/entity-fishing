@@ -103,6 +103,55 @@ public class PruningServiceTest {
         assertThat(result.get(0), is(entity2));
     }
 
+
+    /**
+     * {
+         "rawName": "German-occupied territory",
+         "offsetStart": 2413,
+         "offsetEnd": 2438,
+         "nerd_score": 1,
+         "nerd_selection_score": 0.6295,
+         "wikipediaExternalRef": 4900822,
+         "wikidataId": "Q553157",
+         "domains": [
+            "Military"
+         ]
+     },
+     {
+         "rawName": "occupied territory",
+         "offsetStart": 2420,
+         "offsetEnd": 2438,
+         "nerd_score": 1,
+         "nerd_selection_score": 0.5973,
+         "wikipediaExternalRef": 816214,
+         "wikidataId": "Q188686",
+         "domains": [
+            "Military"
+         ]
+     },
+     */
+
+    @Test
+    public void testPruneOverlap_realExample_shouldPrune() throws Exception {
+        NerdEntity entity1 = new NerdEntity("German-occupied territory", 2413, 2438);
+        entity1.setNormalisedName("German-occupied territory");
+        entity1.setWikipediaExternalRef(4900822);
+        entity1.setWikidataId("Q553157");
+        entity1.setNerdScore(1);
+        entity1.setSelectionScore(0.6295);
+
+        NerdEntity entity2 = new NerdEntity("occupied territory", 2420, 2438);
+        entity2.setNormalisedName("occupied territory");
+        entity2.setWikipediaExternalRef(816214);
+        entity2.setWikidataId("Q188686");
+        entity2.setNerdScore(1);
+        entity2.setSelectionScore(0.5973);
+
+        final List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        assertThat(result, hasSize(1));
+        assertThat(result.get(0).getRawName(), is("German-occupied territory"));
+    }
+
     @Test
     public void testPruneOverlapNBest_differentEntity_overlapping_shouldNotRemove() throws Exception {
         NerdEntity entity1 = new NerdEntity("Austria", 0, 10);

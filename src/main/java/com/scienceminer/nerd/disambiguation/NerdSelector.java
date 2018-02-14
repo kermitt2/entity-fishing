@@ -52,13 +52,12 @@ import com.thoughtworks.xstream.*;
  * decision based on the ranked entities and the context. 
  */
 public class NerdSelector extends NerdModel {
-	/**
-	 * The class Logger.
-	 */
 	private static final Logger logger = LoggerFactory.getLogger(NerdSelector.class);
 
 	// selected feature set for this particular selector
 	private FeatureType featureType;
+
+	private PruningService pruningService;
 
 	// ranker model files
 	private static String MODEL_PATH_LONG = "data/models/selector-long";
@@ -77,6 +76,8 @@ public class NerdSelector extends NerdModel {
 		
 		GenericSelectionFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
+
+		pruningService = new PruningService();
 	}
 
 	public GenericSelectionFeatureVector getNewFeature() {
@@ -597,7 +598,7 @@ public class NerdSelector extends NerdModel {
 		
 		if (full) {
 			Collections.sort(result);
-			result = engine.pruneOverlap(result, false);
+			result = pruningService.pruneOverlap(result, false);
 			for(NerdEntity entit : result) {
 				if (!producedDisamb.contains(entit.getWikipediaExternalRef()))
 					producedDisamb.add(entit.getWikipediaExternalRef());

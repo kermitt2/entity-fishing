@@ -338,7 +338,7 @@ public class NerdEngine {
         if (nerdQuery.getNbest()) {
             result = pruningService.pruneOverlapNBest(result, shortTextVal);
         } else {
-            result = pruneOverlap(result, shortTextVal);
+            result = pruningService.pruneOverlap(result, shortTextVal);
         }
 
 		// final pruning
@@ -347,7 +347,7 @@ public class NerdEngine {
 			minRankerScore = nerdQuery.getMinRankerScore();
 
 		if (!nerdQuery.getNbest())
-			prune(result, minRankerScore);
+			pruningService.prune(result, minRankerScore);
 
 		return result;
 	}
@@ -1144,115 +1144,15 @@ public class NerdEngine {
 		return localContexts;
 	}
 
-	public void prune(List<NerdEntity> entities,
-			double threshold) {
-		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
-
-		for(NerdEntity entity : entities) {
-			if (entity.getSource() == ProcessText.MentionMethod.species) {
-				// dont prune such explicit mention recognition
-				continue;
-			}
-			/*if (entity.getNerdScore() < threshold) {
-				toRemove.add(entity);
-			}*/
-			// variant: prune named entities less aggressively
-			if ( (entity.getNerdScore() < threshold) && ( (entity.getType() == null) || entity.getIsAcronym() ) ) {
-				toRemove.add(entity);
-			} else if ( (entity.getNerdScore() < threshold/2) && (entity.getType() != null) ) {
-				toRemove.add(entity);
-			}
-		}
-
-		for(NerdEntity entity : toRemove) {
-			entities.remove(entity);
-		}
-	}
-
-
-	public void prune(Map<NerdEntity, List<NerdCandidate>> candidates,
-			boolean nbest,
-			boolean shortText,
-			double threshold,
-			String lang) {
-		List<NerdEntity> toRemove = new ArrayList<NerdEntity>();
-
-		// we prune candidates for each entity mention
-		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-			List<NerdCandidate> cands = entry.getValue();
-			if ( (cands == null) || (cands.size() == 0) )
-				continue;
-			NerdEntity entity = entry.getKey();
-			List<NerdCandidate> newCandidates = new ArrayList<NerdCandidate>();
-			for(NerdCandidate candidate : cands) {
-				if (!nbest) {
-					if (shortText && (candidate.getNerdScore() > 0.10)) {
-						newCandidates.add(candidate);
-						break;
-					}
-					else if (candidate.getNerdScore() > threshold) {
-						newCandidates.add(candidate);
-						break;
-					}
-				}
-				else {
-					if (shortText && (candidate.getNerdScore() > 0.10)) {
-						newCandidates.add(candidate);
-					}
-					else if ( (newCandidates.size() == 0) && (candidate.getNerdScore() > threshold) ) {
-						newCandidates.add(candidate);
-					}
-					else if (candidate.getNerdScore() > 0.6) {
-						newCandidates.add(candidate);
-					}
-				}
-			}
-			if (newCandidates.size() > 0)
-				candidates.replace(entity, newCandidates);
-			else {
-				if (entity.getType() == null)
-					toRemove.add(entity);
-				else
-					candidates.replace(entity, new ArrayList<NerdCandidate>());
-			}
-		}
-
-		for(NerdEntity entity : toRemove) {
-			candidates.remove(entity);
-		}
-	}
-
-	/**
-	 * 	We prioritize the longest term match from the KB : the term coming from the KB shorter than
-     *  the longest match from the KB and which have not been merged, are lowered.
-	 */
-	public void impactOverlap(Map<NerdEntity, List<NerdCandidate>> candidates) {
-		//List<Integer> toRemove = new ArrayList<Integer>();
-
-		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
-			List<NerdCandidate> cands = entry.getValue();
-			NerdEntity entity = entry.getKey();
-			if (cands == null)
-				continue;
-			// the arity measure below does not need to be precise
-			int arity = entity.getNormalisedName().split("[ ,-.]").length;
-			for(NerdCandidate candidate : cands) {
-				double score = candidate.getNerdScore();
-				double new_score = score - ( (5-arity)*0.01);
-				if ( (new_score > 0) && (new_score <= 1) )
-					candidate.setNerdScore(new_score);
-
-			}
-			Collections.sort(cands);
-		}
-	}
-
 	/**
 	 * 	We prioritize the longest term match from the KB : the term coming from the KB shorter than
      *  the longest match from the KB is pruned. For equal mention arity, nerd confidence score is used.
 	 *  Note that the longest match heuristics is debatable and should be further experimentally
 	 *  validated...
+	 *
+	 *  @Deprecated: please use PruningService.pruneOverlap()
 	 */
+	@Deprecated
 	public List<NerdEntity> pruneOverlap(List<NerdEntity> entities, boolean shortText) {
 //System.out.println("pruning overlaps - we have " + entities.size() + " entities");
 		List<Integer> toRemove = new ArrayList<Integer>();
