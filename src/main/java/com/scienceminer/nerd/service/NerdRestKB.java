@@ -55,8 +55,8 @@ public class NerdRestKB {
         try {
             identifier = Integer.parseInt(id);
         } catch (Exception e) {
-            LOGGER.error("Could not parse the concept identifier. Bad request.");
-            throw new QueryException("The supplied identifier has the wrong format.", QueryException.WRONG_IDENTIFIER);
+            LOGGER.error("Could not parse the concept identifier.");
+            throw new QueryException("Invalid format of the supplied identifier.", QueryException.WRONG_IDENTIFIER);
         }
 
         NerdEntity entity = new NerdEntity();
@@ -65,8 +65,8 @@ public class NerdRestKB {
         LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
         if (wikipedia == null) {
-            LOGGER.error("The knowledge base doesn't contain the language " + lang + ".");
-            throw new QueryException("The knowledge base doesn't contain the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
+            LOGGER.error("The knowledge base does not cover the language " + lang + ".");
+            throw new QueryException("The knowledge base does not cover the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
         }
         Page page = wikipedia.getPageById(identifier);
 
@@ -149,20 +149,23 @@ public class NerdRestKB {
             Concept concept = knowledgeBase.getConcept(id);
             if (concept == null) {
                 LOGGER.error("There is no resource for this Id.");
-                throw new ResourceNotFound("The requested resource could not be found but may be available in the future.");
+                throw new ResourceNotFound("The requested resource could not be found in the current version of the KB.");
             }
 
             Integer pageId = concept.getPageIdByLang(Language.EN);
             if (pageId != null) {
                 LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(Language.EN);
                 Page page = wikipedia.getPageById(pageId);
+                
+                entity.setRawName(page.getTitle());
+                entity.setPreferredTerm(page.getTitle());
+                entity.setWikipediaExternalRef(pageId);
+
                 PageType pageType = page.getType();
 
                 if (pageType == PageType.article) {
                     Article article = (Article) page;
-                    entity.setPreferredTerm(page.getTitle());
-                    entity.setRawName(article.getTitle());
-
+                    
                     // definition
                     Definition definition = new Definition();
                     try {
@@ -173,8 +176,7 @@ public class NerdRestKB {
                     definition.setSource("wikipedia-en");
                     definition.setLang(Language.EN);
                     entity.addDefinition(definition);
-                    entity.setWikipediaExternalRef(pageId);
-
+                    
                     // categories
                     com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
                     handleCategories(entity, id, parentCategories);
@@ -192,14 +194,14 @@ public class NerdRestKB {
                         entity.setDomains(wikipediaDomainMap.getDomains(entity.getWikipediaExternalRef()));
 
                     entity.setWikipediaMultilingualRef(article.getTranslations(), TARGET_LANGUAGES, wikipedias);
-                } else {
+                } /*else {
                     // if it's not an article, but it still a concept
                     String json = null;
                     StringBuilder jsonBuilder = new StringBuilder();
                     jsonBuilder.append("{ \"message\": \"The requested resource for identifier "  + id + " could not be found but may be available in the future.\" }");
                     json = jsonBuilder.toString();
                     return json;
-                }
+                }*/
             }
         } else if (id.startsWith("P")) {
             Property property = knowledgeBase.getProperty(id);
@@ -207,8 +209,8 @@ public class NerdRestKB {
             entity.setRawName(property.getName());
 
         } else {
-            LOGGER.error("The supplied identifier for wikidata should start with Q or P");
-            throw new QueryException("The wikidata supplied identifier has the wrong format.", QueryException.WRONG_IDENTIFIER);
+            LOGGER.error("The supplied wikidata identifier does not start with Q or P");
+            throw new QueryException("Invalid format of the supplied wikidata identifier.", QueryException.WRONG_IDENTIFIER);
         }
 
         entity.setWikidataId(id);
@@ -232,11 +234,11 @@ public class NerdRestKB {
         LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
         if (isBlank(term)) {
-            LOGGER.error("Empty term value. Bad request.");
-            throw new QueryException("The term supplied is empty or null.", QueryException.INVALID_TERM);
+            LOGGER.error("Empty term value.");
+            throw new QueryException("The supplied term is empty or null.", QueryException.INVALID_TERM);
         } else if (wikipedia == null) {
-            LOGGER.error("The knowledge base doesn't contain the language " + lang + ".");
-            throw new QueryException("The knowledge base doesn't contain the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
+            LOGGER.error("The knowledge base does not cover the language " + lang + ".");
+            throw new QueryException("The knowledge base does not cover the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
         }
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{ \"term\": \"" + term + "\", \"lang\": \"" + lang + "\", \"senses\" : [");

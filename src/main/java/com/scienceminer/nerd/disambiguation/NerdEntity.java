@@ -570,13 +570,14 @@ public class NerdEntity implements Comparable<NerdEntity> {
 					score = new Double(theEntity.getProb_c());
 					return thisScore.compareTo(score);
 				}
-			} else if (offsets.start != start)
+			} else if (offsets.start != start) {
 				return offsets.start - start;
-			else {
-				if (offsets.end != end)
-					return offsets.end - end;
-				else
-					return rawName.length() - theEntity.getRawName().length();
+			} else if (offsets.end != end) {
+				return offsets.end - end;
+			} else if (!rawName.equals(theEntity.getRawName())) {
+				return rawName.length() - theEntity.getRawName().length();
+			} else {
+				return source.getName().compareTo(theEntity.getSource().getName());
 			}
 		/*} else {
 			// we have coordinates

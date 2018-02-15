@@ -21,6 +21,7 @@ import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 import com.scienceminer.nerd.features.GenericRankerFeatureVector;
+import com.scienceminer.nerd.utilities.Utilities;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,7 +109,6 @@ public class NerdEngine {
 	 *         the enriched and disambiguated query
 	 */
 	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
-
 	    //TODO remove after next release
 		if(nerdQuery.getOnlyNER()) {
 			return nerdQuery.getEntities();
@@ -189,11 +189,11 @@ public class NerdEngine {
 		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
-		System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
-		for(NerdCandidate cand : cands) {
-			System.out.println("generated candidates: " + cand.toString());
-		}
-		System.out.println("--");
+			System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
+			for(NerdCandidate cand : cands) {
+				System.out.println("generated candidates: " + cand.toString());
+			}
+			System.out.println("--");
 		}*/
 
 		int nbEntities = 0;
@@ -243,7 +243,6 @@ public class NerdEngine {
 		double minSelectorScore = wikipedia.getConfig().getMinSelectorScore();
 		if (nerdQuery.getMinSelectorScore() != 0.0)
 			minSelectorScore = nerdQuery.getMinSelectorScore();
-
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
 		//}
 		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -893,8 +892,6 @@ public class NerdEngine {
 			 if (context != null) {
 			 	context.merge(localContext);
 			 }
-		//System.out.println("size of context: " + context.getSenseNumber());
-		//System.out.println(context.toString());
 		} catch(Exception e) {
 			LOGGER.error("Error while merging context for the disambiguation.", e);
 		}
@@ -935,6 +932,7 @@ public class NerdEngine {
 					// computed only if needed
 					if (feature.Add_relatedness) {
 						related = relatedness.getRelatednessTo(candidate, localContext, lang);
+						candidate.setRelatednessScore(related);
 					}
 
 					boolean bestCaseContext = candidate.getBestCaseContext();
@@ -948,7 +946,6 @@ public class NerdEngine {
 						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 					}
 
-					candidate.setRelatednessScore(related);
 					if (ranker == null) {
 						LOGGER.error("Cannot rank candidates: disambiguator for the language " +
 							lang + " is invalid");
@@ -964,6 +961,10 @@ public class NerdEngine {
 
 					score = ranker.getProbability(commonness, related, quality,
 						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
+
+					/*System.out.println("RANKER - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> commonness: " + commonness + 
+						", related: " + related + ", quality: " + quality + 
+						", bestCaseContext: " + bestCaseContext + ", embeddingsSimilarity: " + embeddingsSimilarity + " = " + score);*/
 
 					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + score + "(ranker/nerd score) " +  " " + entity.toString());
 					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related + ", embeddingsSimilarity: " + embeddingsSimilarity);
@@ -1317,7 +1318,7 @@ public class NerdEngine {
 	}
 
 	public List<NerdCandidate> annotateShort(String runID, String textID, String text) {
-		System.out.println("runID=" + runID + " textID="+textID+ " text="+text);
+		//System.out.println("runID=" + runID + " textID="+textID+ " text="+text);
 
 		long start = System.currentTimeMillis();
 		LOGGER.debug(">> set ERD short text for stateless service: " + text);
@@ -1609,9 +1610,8 @@ System.out.println("Merging...");
 				//if (candidate.getMethod() == NerdCandidate.NERD)
 				//{
 				try {
-					double tf = (double)TextUtilities.getOccCount(candidate.getLabel().getText(), text);
+					double tf = Utilities.getOccCount(candidate.getLabel().getText(), text);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
-
 					double prob = selector.getProbability(candidate.getNerdScore(),
 						candidate.getLabel().getLinkProbability(),
 						candidate.getWikiSense().getPriorProbability(),
@@ -1622,7 +1622,12 @@ System.out.println("Merging...");
 						tf*idf,
 						dice);
 
-						//System.out.println("selector score: " + prob);
+					/*System.out.println("SELECTOR - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> nerdScore: " + candidate.getNerdScore() + 
+						", linkProbability: " + candidate.getLabel().getLinkProbability() + 
+						", priorProbability(): " + candidate.getWikiSense().getPriorProbability() + 
+						", size: " + words.size() + ", relatedness: " + candidate.getRelatednessScore() + 
+						", context: " + context.contains(candidate) + 
+						", isNe: " + isNe + ", tf*idf: " + tf*idf + ", dice: " + dice + " = " + prob);*/
 
 					candidate.setSelectionScore(prob);
 				} catch(Exception e) {

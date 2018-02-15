@@ -690,6 +690,13 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 			val = ((int)((compareNerdCandidate.getProb_c() - this.prob_c) * 1000));	
 		}
 
+		if (val == 0) {
+			if (compareNerdCandidate.getWikipediaExternalRef() != -1)
+				val = compareNerdCandidate.getWikipediaExternalRef() - this.wikipediaExternalRef;
+			else if (compareNerdCandidate.getWikidataId() != null) 
+				val = compareNerdCandidate.getWikidataId().compareTo(this.wikidataId);
+		}
+
 		return val;
 	}
 

@@ -337,6 +337,8 @@ public class Utilities {
 		return subTokens;
 	}
 
-
+	public static double getOccCount(String term, String string) {
+        return (double) StringUtils.countMatches(string, term);
+    }
 
 }

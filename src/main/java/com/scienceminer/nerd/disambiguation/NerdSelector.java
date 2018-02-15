@@ -35,6 +35,7 @@ import com.scienceminer.nerd.features.*;
 import com.scienceminer.nerd.training.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
+import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.evaluation.*;
 
 import smile.validation.ConfusionMatrix;
@@ -440,9 +441,9 @@ public class NerdSelector extends NerdModel {
 					feature.isNe = isNe;
 					feature.dice = dice;
 
-					int tf = TextUtilities.getOccCount(candidate.getLabel().getText(), contentString);
+					double tf = Utilities.getOccCount(candidate.getLabel().getText(), contentString);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
-					feature.tf_idf = (double)tf * idf;
+					feature.tf_idf = tf * idf;
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 

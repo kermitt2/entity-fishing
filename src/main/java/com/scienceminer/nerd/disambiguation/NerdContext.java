@@ -64,7 +64,7 @@ public class NerdContext {
 			if (isDate(sense) || isNumber(sense)) 
 				continue;
 			
-			sense.setWeight(sp);				
+			sense.setWeight(sp);
 			if (!articles.contains(sense)) {
 				articles.add(sense);
 			}
@@ -158,7 +158,7 @@ public class NerdContext {
 
 		if (totalWeight != 0.0)
 			return totalWeight;
-
+//System.out.println("size of context: " + contextArticles.size());
 		for (Article art : contextArticles) {
 			double avgRelatedness = 0.0;
 			for (Article art2 : contextArticles) {
@@ -272,8 +272,10 @@ public class NerdContext {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		for(Article article : contextArticles) {
-			builder.append(article.getTitle() + "\t" + article.getId() + "\t" + article.getWeight() + "\n");
+		if (contextArticles != null) {
+			for(Article article : contextArticles) {
+				builder.append(article.getTitle() + "\t" + article.getId() + "\t" + article.getWeight() + "\n");
+			}
 		}
 		return builder.toString();
 	}

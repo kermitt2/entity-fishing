@@ -328,7 +328,6 @@ public class Relatedness {
 	public NerdContext getContext(Map<NerdEntity, List<NerdCandidate>> candidates, 
 							List<NerdEntity> userEntities, 
 							String lang, boolean shortText) {
-
 		List<Label.Sense> unambig = new ArrayList<>();
 		List<Integer> unambigIds = new ArrayList<>();
 		
@@ -359,7 +358,7 @@ public class Relatedness {
 			}
 		}
 
-		//System.out.println(certainPages.size()+ " certain entities; " + certainPages.size());
+		// first pass for non-ambiguous candidates
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
@@ -367,40 +366,59 @@ public class Relatedness {
 			if ( (cands == null) || (cands.size() == 0) )
 				continue;
 			else if (cands.size() == 1) {
-				if (!unambigIds.contains(cands.get(0).getWikiSense().getId())) {
-					Label.Sense theSense = cands.get(0).getWikiSense();
-					unambig.add(theSense);
-					unambigIds.add(theSense.getId());
-				}
-			} else {
-				for(NerdCandidate cand : cands) {
-					if (cand.getProb_c() >= (1-minSenseProbability)) {
+				NerdCandidate cand = cands.get(0);
+				if (cand.getProb_c() >= (1-minSenseProbability)) {
+					// conditional prob of candidate sense must also be above the acceptable threashold   
+					if (!unambigIds.contains(cand.getWikiSense().getId())) {
 						Label.Sense theSense = cands.get(0).getWikiSense();
-						if (!unambigIds.contains(theSense.getId())) {
-							unambig.add(theSense);
-							unambigIds.add(theSense.getId());
-						}
-						//extraSenses.add(cands.get(0).getWikiSense());
-						break;
-					}
-					else if (cand.getProb_c() >= 0.8) { 
-						// we store some extra "good" senses in case we need more of them
-						Label.Sense theSense = cands.get(0).getWikiSense();
-						if ( !extraSensesIds.contains(theSense.getId()) &&
-							!unambigIds.contains(theSense.getId()) ) {
-							extraSenses.add(theSense);
-							extraSensesIds.add(theSense.getId());
-						}
-						break;
+						unambig.add(theSense);
+						unambigIds.add(theSense.getId());
 					}
 				}
 			}
 			if (unambig.size()+certainPages.size() > NerdEngine.maxContextSize)
 				break;
 		}
-//System.out.println(unambig.size()+ " unambiguous entities; " + unambig.size());	
 
-		// if the context is still too small, we add come of the top sense of ambiguous labels
+		if (unambig.size()+certainPages.size() < NerdEngine.maxContextSize) {
+			// second pass for not so ambiguous candidates
+			for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+				List<NerdCandidate> cands = entry.getValue();
+				NerdEntity entity = entry.getKey();
+
+				if ( (cands == null) || (cands.size() == 0) )
+					continue;
+				else if (cands.size() == 1) {
+					continue;
+				} else {
+					for(NerdCandidate cand : cands) {
+						if (cand.getProb_c() >= (1-minSenseProbability)) {
+							Label.Sense theSense = cands.get(0).getWikiSense();
+							if (!unambigIds.contains(theSense.getId())) {
+								unambig.add(theSense);
+								unambigIds.add(theSense.getId());
+							}
+							//extraSenses.add(cands.get(0).getWikiSense());
+							break;
+						}
+						/*else if (cand.getProb_c() >= 0.8) { 
+							// we store some extra "good" senses in case we need more of them
+							Label.Sense theSense = cands.get(0).getWikiSense();
+							if ( !extraSensesIds.contains(theSense.getId()) &&
+								!unambigIds.contains(theSense.getId()) ) {
+								extraSenses.add(theSense);
+								extraSensesIds.add(theSense.getId());
+							}
+							break;
+						}*/
+					}
+				}
+				if (unambig.size()+certainPages.size() > NerdEngine.maxContextSize)
+					break;
+			}
+		}
+
+		// if the context is still too small, we add some of the top sense of ambiguous labels
 		if (shortText) {
 			if (unambig.size()+certainPages.size() < NerdEngine.maxContextSize) {
 				if (CollectionUtils.isNotEmpty(extraSenses)) {
