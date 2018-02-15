@@ -3,7 +3,7 @@
 *entity-fishing* Console
 ========================
 
-The *entity-fishing* console is a **graphical web interface**, part of the *entity-fishing* project, providing means to test the service and explore the functionalities. With the console, it is possible to process chunks of text, PDF files and to verify which entities are recognised and how they are disambiguated.
+The *entity-fishing* console is a **graphical web interface**, part of the *entity-fishing* project, providing means to test the service and to explore the different functionalities. With the console, it is possible to process chunks of text, PDF files and to verify which entities are recognised and how they are disambiguated.
 
 The console is also a **reference implementation** in javascript (with JQuery) of a web application using the *entity-fishing* API service. As such, it illustrates how to call the services with mainstream Ajax queries and how to parse JSON results with *vulgus JQuery*.
 

@@ -22,7 +22,7 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment (warning: total is several GB) at the following address:
+#. Download the zipped data files corresponding to your environment and to your languages of choice (warning: total is around 60 GB) at the following links:
 
     **Linux**
 
@@ -57,7 +57,7 @@ Then install the compiled indexed data:
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/embeddings/embeddings.zip (4.0 GB)
 
 
-#. Unzip the 4 db archives files under ``data/db/``.
+#. Unzip the 6 first db archives files under ``data/db/``.
 
     This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
     The uncompressed data is about 60 GB.

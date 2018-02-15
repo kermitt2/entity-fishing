@@ -2192,7 +2192,8 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 	 * disambiguated. E.g. PERIOD, MEASURE
 	 */
 	public static boolean isNERClassExcludedFromDisambiguation(NerdEntity entity) {
-		return entity.getType() == NER_Type.MEASURE || entity.getType() == NER_Type.PERIOD;
+		//return entity.getType() == NER_Type.MEASURE || entity.getType() == NER_Type.PERIOD;
+		return entity.getType() == NER_Type.MEASURE;
 	}
 
 }

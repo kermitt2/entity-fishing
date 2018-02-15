@@ -568,17 +568,21 @@ public class NerdEntity implements Comparable<NerdEntity> {
 				else {
 					thisScore = new Double(getProb_c());
 					score = new Double(theEntity.getProb_c());
-					return thisScore.compareTo(score);
-				}
+					if (thisScore != score)
+						return thisScore.compareTo(score);
+					else 
+						return source.getName().compareTo(theEntity.getSource().getName());
+				} 
 			} else if (offsets.start != start) {
 				return offsets.start - start;
 			} else if (offsets.end != end) {
 				return offsets.end - end;
-			} else if (!rawName.equals(theEntity.getRawName())) {
-				return rawName.length() - theEntity.getRawName().length();
 			} else {
-				return source.getName().compareTo(theEntity.getSource().getName());
+				return 0;
 			}
+			/*else if (!rawName.equals(theEntity.getRawName())) {
+				return rawName.length() - theEntity.getRawName().length();
+			} */
 		/*} else {
 			// we have coordinates
 			List<BoundingBox> bb = theEntity.getBoundingBoxes();
