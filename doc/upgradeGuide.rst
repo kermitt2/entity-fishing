@@ -26,3 +26,8 @@ They can be selected by using the parameter `mentions` and specifying a list of 
 
 3. the option `resultLanguages` has been removed, the translated results will be provided in all languages anyway
 when fetching the concept information from the knowledge base.
+
+
+4. The NER system for Named Entity Recognition has been updated, however with some slighly modifications. Improvement in precision and recall are expected globally.
+Named Entities of type `PERIOD` are not resolved anymore in wikipedia, they are also matched using a Longest Entity Match, this means that a string `.. the forces fought in Paris from 12 April to 23 August` will match the entire string `from 12 April to 23 August` as `PERIOD`.
+
