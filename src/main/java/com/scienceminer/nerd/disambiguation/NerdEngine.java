@@ -386,9 +386,7 @@ public class NerdEngine {
 			List<NerdCandidate> candidates = new ArrayList<>();
 
 			// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
-			/*if (entity.getType() == NERLexicon.NER_Type.MEASURE ||
-					entity.getType() == NER_Type.PERIOD) {*/
-			if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
+			if (isNERClassExcludedFromDisambiguation(entity)) {
 				result.put(entity, candidates);
 				continue;
 			}
@@ -572,8 +570,7 @@ public class NerdEngine {
 
 			List<NerdCandidate> candidates = new ArrayList<NerdCandidate>();
 
-			// if the mention is originally recognized as NE class MEASURE, we don't try to disambiguate it
-			if (entity.getType() == NERLexicon.NER_Type.MEASURE) {
+			if (isNERClassExcludedFromDisambiguation(entity)) {
 				result.put(entity, candidates);
 				continue;
 			}
@@ -1505,7 +1502,7 @@ System.out.println("Merging...");
 				for(int j=0; j<candidates.size(); j++) {
 					if (j == i)
 						continue;
-						
+
 					/*if (toRemove.contains(new Integer(j))) {
 						// already pruned
 						continue;
@@ -1530,7 +1527,7 @@ System.out.println("Merging...");
 							diff_freq = term1.getFreq() - term2.getFreq();
 
 					/*	if (term1.getFreq() < 50000) {
-							if ((term1.getEntityType() == null) || 
+							if ((term1.getEntityType() == null) ||
 								!term1.getEntityType().equals(term2.getEntityType())) {*/
 
 								if (diff_prob > 0.99)
@@ -2188,6 +2185,14 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			}
 		}
 		return results;
+	}
+
+	/**
+	 * Return true when the entity is originally recognised as NE class which we don't want to have
+	 * disambiguated. E.g. PERIOD, MEASURE
+	 */
+	public static boolean isNERClassExcludedFromDisambiguation(NerdEntity entity) {
+		return entity.getType() == NER_Type.MEASURE || entity.getType() == NER_Type.PERIOD;
 	}
 
 }
