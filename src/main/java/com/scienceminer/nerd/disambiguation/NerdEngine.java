@@ -353,7 +353,7 @@ public class NerdEngine {
 
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang) {
-		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<>();
+		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		if (wikipedia == null) {
@@ -547,7 +547,7 @@ public class NerdEngine {
 	}
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesMultiple(List<NerdEntity> entities, String lang) {
-		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<NerdEntity, List<NerdCandidate>>();
+		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<NerdEntity, List<NerdCandidate>>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
@@ -697,7 +697,7 @@ public class NerdEngine {
 		if (entities == null)
 			return candidates;
 
-		Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<>();
+		Map<NerdEntity, List<NerdCandidate>> newCandidates = new TreeMap<>();
 		Map<String, List<NerdCandidate>> cacheSubSequences = new HashMap<>();
 		Map<String, Double> cacheLinkProbability = new HashMap<>();
 		List<String> failures = new ArrayList<>();
@@ -885,6 +885,8 @@ public class NerdEngine {
 		NerdContext localContext = null;
 		try {
 			 localContext = relatedness.getContext(candidates, userEntities, lang, shortText);
+//System.out.println("size of local context: " + localContext.getSenseNumber());
+//System.out.println(localContext.toString());
 			 // merge context
 			 if (context != null) {
 			 	context.merge(localContext);
