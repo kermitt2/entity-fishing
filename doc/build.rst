@@ -62,7 +62,7 @@ Then install the compiled indexed data:
     This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
     The uncompressed data is about 60 GB.
 
-#. Unzip the embeddings archives files (``embeddings.zip``) under ``data/embeddings/``.
+#. Unzip the embeddings archives files (``embeddings.zip``) under ``data/``.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
