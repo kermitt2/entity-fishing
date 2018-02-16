@@ -77,7 +77,7 @@ public class WikipediaTrainer {
 		// training ranker, training selector, eval ranker, eval selector, eval end-to-end
 
 		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
-		criteriaTraining.setMinOutLinks(20);
+		criteriaTraining.setMinOutLinks(50);
 		criteriaTraining.setMinInLinks(20);
 		criteriaTraining.setMinWordCount(200);
 		criteriaTraining.setMaxWordCount(1000);
