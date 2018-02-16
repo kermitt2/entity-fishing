@@ -125,7 +125,7 @@
                 <version>9.4.8.v20171121</version>
 
                 <configuration>
-                    <jvmArgs>-Xms4g -Xmx10g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
+                    <jvmArgs>-Xms4g -Xmx8g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <stopKey/>
                     <stopPort/>
@@ -137,7 +137,7 @@
                         </systemProperty>
                         <systemProperty>
                             <name>jetty.port</name>
-                            <value>8090</value>
+                            <value>8091</value>
                         </systemProperty>
                         <systemProperty>
                             <name>maxIdleTime</name>
@@ -600,6 +600,14 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-rookies-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/rookies/maven</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -783,7 +791,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.grobid</groupId>
@@ -793,7 +801,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.5.1</version>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>
