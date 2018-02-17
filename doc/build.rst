@@ -70,9 +70,9 @@ Then install the compiled indexed data:
 
    Some tests will be executed. If all tests are successful, you should be now ready to run the service.
 
-#. Run the service with Jetty:
+#. Run the service:
    ::
-      $ mvn -Dmaven.test.skip=true jetty:run-war
+      $ ./nerd.sh
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
