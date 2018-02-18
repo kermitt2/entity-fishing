@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Represent the language specific resources of the Knowledge Base, e.g. a 
- * Wikipedia instance. 
+ * Wikipedia instance, including corresponding word and entity embeddings. 
  * 
  */
 public class LowerKnowledgeBase {
@@ -251,6 +251,31 @@ public class LowerKnowledgeBase {
 
 		return ids.getValues();
 	}
+
+	/**
+     * Returns the vector for a given word
+     * @param word the word
+     * @return word vector or null if not found
+     */
+    public float[] getWordEmbeddings(String word) {
+        return env.getDbWordEmbeddings().retrieve(word);
+    }
+
+    /**
+     * Returns the vector for a given entity
+     * @param entity the entity identifier
+     * @return entity vector or null if not found
+     */
+    public float[] getEntityEmbeddings(String entityId) {
+        return env.getDbEntityEmbeddings().retrieve(entityId);
+    }
+
+    /**
+     * @return number of dimensions of the vectors for both word and entity embeddings
+     */
+    public int getEmbeddingsSize() {
+        return env.getEmbeddingsSize();
+    }
 
 	public void close() {
 		env.close();

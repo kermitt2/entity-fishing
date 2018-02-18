@@ -280,6 +280,16 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates a concept id string to a list of concept id strings following the taxon hierarchy 
 		 */
-		taxon
+		taxon,
+
+		/**
+		 * Associates a strind (word) to a vector
+		 */
+		wordEmbeddings,
+
+		/**
+		 * Associates a string (entity) to a vector
+		 */
+		entityEmbeddings
 	}
 }

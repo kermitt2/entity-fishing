@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.GZIPInputStream;
 import java.math.BigInteger;
 
 import org.apache.hadoop.record.*;
@@ -370,6 +371,174 @@ System.out.println("isLoaded: " + isLoaded);
 			public KBEntry<Integer,String> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
 				throw new UnsupportedOperationException();
 			}
+		};
+	}
+
+	public KBDatabase<String, float[]> buildWordEmbeddingsDatabase() {
+		return new KBDatabase<String, float[]>(env, DatabaseType.wordEmbeddings) {
+
+			// using standard LMDB copy mode
+			@Override
+			public float[] retrieve(String key) {
+				byte[] cachedData = null;
+				float[] record = null;
+				try (Transaction tx = environment.createReadTransaction()) {
+					cachedData = db.get(tx, KBEnvironment.serialize(key));
+					if (cachedData != null) {
+						record = (float[])KBEnvironment.deserialize(cachedData);
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				return record;
+			}
+
+			@Override
+		    public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
+		        if (isLoaded && !overwrite)
+		            return;
+		        System.out.println("Loading " + name + " database");
+
+		        if (dataFile == null)
+		            throw new NerdResourceException("Embeddings file not found");
+
+		        //BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+		        BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), "UTF-8"));
+		        String line = null;
+		        int nbToAdd = 0;
+		        Transaction tx = environment.createWriteTransaction();
+		        while ((line=input.readLine()) != null) {      
+		            if (nbToAdd == 10000) {
+		                tx.commit();
+		                tx.close();
+		                nbToAdd = 0;
+		                tx = environment.createWriteTransaction();
+		            }
+		            
+		            try {
+		                String[] pieces = line.split(" ");
+		                if (pieces.length == 2) {
+		                    // this is a header
+		                    continue;
+		                }
+		                String keyVal = pieces[0];
+		                float[] vector = new float[pieces.length-1];
+		                for(int i=1; i<pieces.length; i++) {
+		                    try {
+		                        vector[i-1] = Float.parseFloat(pieces[i]);
+		                    } catch(Exception e) {
+		                        LOGGER.warn("Word embeddings: Cannot parse float value: " + pieces[i]);
+		                        vector[i-1] = 0.0f; 
+		                    }
+		                }
+		                KBEntry<String,float[]> entry = new KBEntry<String,float[]>(keyVal, vector);;
+		                if (entry != null) {
+		                    try {
+		                        db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+		                        nbToAdd++;
+		                    } catch(Exception e) {
+		                        e.printStackTrace();
+		                    }
+		                }
+		            } catch(Exception e) {
+		                System.out.println("Error parsing: " + line);
+		                e.printStackTrace();
+		            }
+		        }
+		        tx.commit();
+		        tx.close();
+		        input.close();
+		        isLoaded = true;
+		    }
+
+			@Override
+		    public KBEntry<String, float[]> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+		        throw new UnsupportedOperationException();
+		    }
+		};
+	}
+
+	public KBDatabase<String, float[]> buildEntityEmbeddingsDatabase() {
+		return new KBDatabase<String, float[]>(env, DatabaseType.entityEmbeddings) {
+
+			// using standard LMDB copy mode
+			@Override
+			public float[] retrieve(String key) {
+				byte[] cachedData = null;
+				float[] record = null;
+				try (Transaction tx = environment.createReadTransaction()) {
+					cachedData = db.get(tx, KBEnvironment.serialize(key));
+					if (cachedData != null) {
+						record = (float[])KBEnvironment.deserialize(cachedData);
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				return record;
+			}
+
+			@Override
+		    public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
+		        if (isLoaded && !overwrite)
+		            return;
+		        System.out.println("Loading " + name + " database");
+
+		        if (dataFile == null)
+		            throw new NerdResourceException("Embeddings file not found");
+
+		        //BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+		        BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), "UTF-8"));
+		        String line = null;
+		        int nbToAdd = 0;
+		        Transaction tx = environment.createWriteTransaction();
+		        while ((line=input.readLine()) != null) {      
+		            if (nbToAdd == 10000) {
+		                tx.commit();
+		                tx.close();
+		                nbToAdd = 0;
+		                tx = environment.createWriteTransaction();
+		            }
+		            
+		            try {
+		                String[] pieces = line.split(" ");
+		                if (pieces.length == 2) {
+		                    // this is a header
+		                    continue;
+		                }
+		                String keyVal = pieces[0];
+		                float[] vector = new float[pieces.length-1];
+		                for(int i=1; i<pieces.length; i++) {
+		                    try {
+		                        vector[i-1] = Float.parseFloat(pieces[i]);
+		                    } catch(Exception e) {
+		                        LOGGER.warn("Entity embeddings: Cannot parse float value: " + pieces[i]);
+		                        vector[i-1] = 0.0f; 
+		                    }
+		                }
+		                KBEntry<String,float[]> entry = new KBEntry<String,float[]>(keyVal, vector);;
+		                if (entry != null) {
+		                    try {
+		                        db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+		                        nbToAdd++;
+		                    } catch(Exception e) {
+		                        e.printStackTrace();
+		                    }
+		                }
+		            } catch(Exception e) {
+		                System.out.println("Error parsing: " + line);
+		                e.printStackTrace();
+		            }
+		        }
+		        tx.commit();
+		        tx.close();
+		        input.close();
+		        isLoaded = true;
+		    }
+
+			@Override
+		    public KBEntry<String, float[]> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+		        throw new UnsupportedOperationException();
+		    }
 		};
 	}
 }

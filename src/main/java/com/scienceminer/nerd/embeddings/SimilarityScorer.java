@@ -14,9 +14,6 @@ import com.scienceminer.nerd.utilities.Stopwords;
 import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.layout.LayoutToken;
 
-import it.cnr.isti.hpc.LREntityScorer;
-import it.cnr.isti.hpc.CentroidEntityScorer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * and entity embeddings, the context being terms and/or other entities.
  * Embeddings and thus similarity scoring depend on the language. The class uses as resources
  * pre-trained word and entity embeddings produced by the class EntityDescription, which have
- * been both quantized and compressed.
+ * been quantized.
  */
 public class SimilarityScorer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SimilarityScorer.class);
@@ -33,8 +30,8 @@ public class SimilarityScorer {
 	private static volatile SimilarityScorer instance = null;
 
 	// mapping language to vectors
-	private Map<String, CompressedW2V> entityEmbeddings = null;
-	private Map<String, CompressedW2V> wordEmbeddings = null;
+	//private Map<String, CompressedW2V> entityEmbeddings = null;
+	//private Map<String, CompressedW2V> wordEmbeddings = null;
 
 	// mapping language to similarity scorers
 	private Map<String, LREntityScorer> lrscorers = null;
@@ -61,41 +58,19 @@ public class SimilarityScorer {
 	 * Hidden constructor
 	 */
 	private SimilarityScorer() {
-		entityEmbeddings = new HashMap<>();
-		wordEmbeddings = new HashMap<>();
+		//entityEmbeddings = new HashMap<>();
+		//wordEmbeddings = new HashMap<>();
 
 		lrscorers = new HashMap<>();
 		centroidScorers = new HashMap<>();
 
 		UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance();
 
-
 		for(String lang : UpperKnowledgeBase.getInstance().TARGET_LANGUAGES) {
 			try {
 				LowerKnowledgeBase lowerKnowledgeBase = knowledgeBase.getWikipediaConf(lang);
-
-				final String embeddingsDirectory = lowerKnowledgeBase.getConfig().getEmbeddingsDirectory();
-				String path = embeddingsDirectory + "/word."+lang+".embeddings.quantized.compressed";
-				File wvFile = new File(path);
-				if (!wvFile.exists()) {
-					LOGGER.error("The word embeddings file for " + lang + " does not exist: " + path);
-					continue;
-				}
-
-				CompressedW2V wordVectors = new CompressedW2V(wvFile.getPath());
-				//wordEmbeddings.put(lang, wordVectors);
-
-				path = embeddingsDirectory+ "/entity." +lang+ ".embeddings.quantized.compressed";
-				File entityFile = new File(path);
-				if (!entityFile.exists()) {
-					LOGGER.error("The entity embeddings file for " + lang + " does not exist: " + path);
-					continue;
-				}
-
-				CompressedW2V entityVectors = new CompressedW2V(entityFile.getPath());
-//				entityEmbeddings.put(lang, entityVectors);
-				lrscorers.put(lang, new LREntityScorer(wordVectors.getWord2VecCompress(), entityVectors.getWord2VecCompress()));
-				centroidScorers.put(lang, new CentroidEntityScorer(wordVectors.getWord2VecCompress(), entityVectors.getWord2VecCompress()));
+				lrscorers.put(lang, new LREntityScorer(lowerKnowledgeBase));
+				centroidScorers.put(lang, new CentroidEntityScorer(lowerKnowledgeBase));
 			} catch(Exception e) {
 				throw new NerdException("Fails to initialize embeddings for " + lang, e);
 			}
@@ -122,9 +97,10 @@ public class SimilarityScorer {
 		CentroidEntityScorer scorer = centroidScorers.get(lang);
 		if (scorer != null) {
 			List<String> terms = toStringEmbeddings(tokens, lang);
-            //System.out.println(candidate.toString());
+            //System.out.println("\n"+candidate.toString());
             //System.out.println(terms.toString());
 			float score = scorer.score(candidate.getWikidataId(), terms);
+			//System.out.println("score: " + score);
 			if (score < 0.0F)
 				score = 0.0F;
 			return score;

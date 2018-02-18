@@ -49,7 +49,11 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private KBDatabase<Integer, DbTranslations> dbTranslations = null;
 	private KBDatabase<Integer, Long> dbStatistics = null;
 	private KBDatabase<Integer,String> dbConceptByPageId = null;
-	
+	private KBDatabase<String, float[]> dbWordEmbeddings = null;
+	private KBDatabase<String, float[]> dbEntityEmbeddings = null;
+
+	private int embeddingsSize = 300;
+
 	public KBLowerEnvironment(NerdConfig conf) {
 		super(conf);
 		// register classes to be serialized
@@ -129,6 +133,14 @@ public class KBLowerEnvironment extends KBEnvironment {
 		return dbConceptByPageId;
 	}
 
+	public KBDatabase<String, float[]> getDbWordEmbeddings() {
+		return dbWordEmbeddings;
+	}
+
+	public KBDatabase<String, float[]> getDbEntityEmbeddings() {
+		return dbEntityEmbeddings;
+	}
+
 	@Override
 	protected void initDatabases() {
 		System.out.println("init Environment for language " + conf.getLangCode());
@@ -184,6 +196,12 @@ public class KBLowerEnvironment extends KBEnvironment {
 
 		dbStatistics = dbFactory.buildStatisticsDatabase();
 		databasesByType.put(DatabaseType.statistics, dbStatistics);
+
+		dbWordEmbeddings = dbFactory.buildWordEmbeddingsDatabase();
+		databasesByType.put(DatabaseType.wordEmbeddings, dbWordEmbeddings);
+
+		dbEntityEmbeddings = dbFactory.buildEntityEmbeddingsDatabase();
+		databasesByType.put(DatabaseType.entityEmbeddings, dbEntityEmbeddings);
 	}
 
 	public Long retrieveStatistic(StatisticName sn) {
@@ -210,7 +228,9 @@ public class KBLowerEnvironment extends KBEnvironment {
 		File wikidata = getDataFile(dataDirectory, "wikidata.txt");
 		File translations = getDataFile(dataDirectory, "translations.csv");
 		File markup = getMarkupDataFile(dataDirectory);
-		
+		File wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.gz");
+		File entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.gz");
+
 		//now load databases
 		File dbDirectory = new File(conf.getDbDirectory());
 		if (!dbDirectory.exists())
@@ -270,6 +290,12 @@ public class KBLowerEnvironment extends KBEnvironment {
 		//System.out.println("Building Markup db");
 		dbMarkup.loadFromXmlFile(markup, overwrite);
 
+		//System.out.println("Building embeddings db");
+		dbWordEmbeddings.loadFromFile(wordEmbeddingsFile, overwrite);
+
+		//System.out.println("Building embeddings db");
+		dbEntityEmbeddings.loadFromFile(entityEmbeddingsFile, overwrite);
+
 		// we need to enrich the Label database with the article titles to ensure 
 		// better mention resolution
 		//dbLabel.enrich(dbArticlesByTitle);
@@ -317,6 +343,14 @@ public class KBLowerEnvironment extends KBEnvironment {
 				LOGGER.info(files[0] + " is not readable");
 		}
 		return files[0];
+	}
+
+	public int getEmbeddingsSize() {
+		return this.embeddingsSize;
+	}
+
+	public void setEmbeddingsSize(int size) {
+		this.embeddingsSize = size;
 	}
 
 }

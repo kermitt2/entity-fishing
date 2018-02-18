@@ -27,6 +27,8 @@ import com.scienceminer.nerd.main.MainArgs;
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer 
  * -Dexec.args="-i /mnt/data/wikipedia/embeddings/wiki.en.vec -o /mnt/data/wikipedia/embeddings/wiki.en.quantized -hashheader -quantizer 5"
  *
+ * The quantized embeddings will always be saved in the traditional word2vec .vec format.
+ *
  * @author roi blanco (original), with modifications patrice lopez
  */
 public class Quantizer {
@@ -74,54 +76,6 @@ public class Quantizer {
         }
         return acc;
     }
-
-    /**
-     * Format: <numWords> <vector size> <quantization factor> Words (one per
-     * line) Vectors (one per line)
-     *
-     * @param modelFile vector file
-     * @param outputFile output file
-     * @param q quantization factor
-     * @throws IOException
-     */
-    public void serialize(String modelFile, String outputFile, int q, int numberOfWords, boolean hashheader) throws
-            IOException {
-        LOGGER.info("Serializing quantized model to " + outputFile + " using q = " + q);
-
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(modelFile))));
-        String line = null;
-        if(hashheader) br.readLine();
-
-        line = br.readLine();
-        int len = line.split("\\s+").length - 1;
-        bw.write(numberOfWords + "\t" + len + "\t" + q);
-        bw.write("\n");
-        br.close();
-
-        br = new BufferedReader(new InputStreamReader(new FileInputStream(modelFile), "UTF-8"));
-        if(hashheader) br.readLine(); //skip the header
-        while((line = br.readLine()) != null) {
-            String[] parts = line.split("\\s+");
-            bw.write(parts[0] + "\n");
-        }
-        br.close();
-
-        br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(modelFile))));
-        if(hashheader) br.readLine(); //skip the header
-        while((line = br.readLine()) != null) {
-            String[] parts = line.split("\\s+");
-            for(int i = 1; i < parts.length; i++) {
-                Double ff = new Double(parts[i]);
-                int qa = (int) ((int) (Math.abs(ff) * q) * Math.signum(ff));
-                bw.write(qa + " "); //this might blow up depending on how it's parsed later on
-            }
-            bw.write("\n");
-        }
-        br.close();
-        bw.close();
-    }
-
 
     /**
      * Writes out to disk the quantized vectors
@@ -206,9 +160,8 @@ public class Quantizer {
      * @param hasheader whether the original file has a header or not
      * @throws IOException
      */
-    public void quantizeSinglePass(String inputFile, String outputFile, int q, boolean hasheader, boolean w2vFormat) throws IOException {
-        if(!w2vFormat) serialize(inputFile, outputFile, q, countWords(inputFile, hasheader), hasheader);
-        else  serializeW2VFormat(inputFile, outputFile, q, countWords(inputFile, hasheader), hasheader);
+    public void quantizeSinglePass(String inputFile, String outputFile, int q, boolean hasheader) throws IOException {
+        serializeW2VFormat(inputFile, outputFile, q, countWords(inputFile, hasheader), hasheader);
     }
 
     /**
@@ -240,7 +193,7 @@ public class Quantizer {
      * @param hasheader whether the input file has a header or not
      * @throws IOException
      */
-    public void quantize(String inputFile, String outputFile, double targetError, boolean hasheader, boolean w2vFormat) throws IOException {
+    public void quantize(String inputFile, String outputFile, double targetError, boolean hasheader) throws IOException {
         int low = 1;
         int high = 128;
         int bestQ = 0;
@@ -259,8 +212,7 @@ public class Quantizer {
                 high = bestQ;
             }
         }
-        if(! w2vFormat) serialize(inputFile, outputFile, bestQ, nWords, hasheader);
-        else serializeW2VFormat(inputFile,outputFile,bestQ, nWords, hasheader);
+        serializeW2VFormat(inputFile,outputFile,bestQ, nWords, hasheader);
     }
 
     /**
@@ -290,13 +242,6 @@ public class Quantizer {
                     i++;
                     continue;
                 }
-                /*if (currArg.equals("-lang")) {
-                    if (pArgs[i + 1] != null) {
-                        gbdArgs.setLang(pArgs[i + 1]);
-                    }
-                    i++;
-                    continue;
-                }*/
                 if (currArg.equals("-i") || currArg.equals("-in") || currArg.equals("-input")) {
                     if (pArgs[i + 1] != null) {
                         gbdArgs.setInput(pArgs[i + 1]);
@@ -322,10 +267,6 @@ public class Quantizer {
                     gbdArgs.setHashheader(true);
                     continue;
                 }
-                if (currArg.equals("-w2v")) {
-                    gbdArgs.setW2v(true);
-                    continue;
-                }
             }
         }
         return result;
@@ -343,8 +284,6 @@ public class Quantizer {
         help.append("-error: error rate for quantizing, default is 0.01 (must be a double)\n");
         help.append("-quantizer: quantizer value to avoid binary search (must be an integer)\n");
         help.append("-hashheader: flag to indicate if the data file include a header (that will be skipped)\n");
-        help.append("-w2v: flag to indicate the result vector file will be in the original word2vec format " + 
-            "(don't use it if you want to compress the vector later)\n");
         return help.toString();
     }
 
@@ -360,10 +299,10 @@ public class Quantizer {
             if(gbdArgs.getQuantizer() != null) {
                 System.out.println("Using as a quantizer " + gbdArgs.getQuantizer() + " (won't attempt to search for a better one) ");
                 q.quantizeSinglePass(gbdArgs.getInput(), gbdArgs.getOutput(), Integer.parseInt(gbdArgs.getQuantizer()), 
-                    gbdArgs.getHashheader(), gbdArgs.getW2v());
+                    gbdArgs.getHashheader());
             } else {
                 q.quantize(gbdArgs.getInput(), gbdArgs.getOutput(), 
-                    Double.parseDouble(gbdArgs.getError()), gbdArgs.getHashheader(), gbdArgs.getW2v());
+                    Double.parseDouble(gbdArgs.getError()), gbdArgs.getHashheader());
             }
         } else {
             System.out.println("Command line error, usage: \n" + Quantizer.getHelp());
