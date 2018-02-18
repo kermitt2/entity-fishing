@@ -93,7 +93,8 @@ public class Quantizer {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(modelFile))));
         String line = null;
-        if(hasheader) br.readLine();
+        if(hasheader) 
+            br.readLine();
 
         line = br.readLine();
         int len = line.split("\\s+").length - 1;
