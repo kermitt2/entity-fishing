@@ -112,6 +112,7 @@ public class Quantizer {
                 int qa = (int) ((int) (Math.abs(ff) * q) * Math.signum(ff));
                 bw.write(qa + " ");
             }
+            bw.write("\n");
         }
         br.close();
         bw.close();
