@@ -228,8 +228,8 @@ public class KBLowerEnvironment extends KBEnvironment {
 		File wikidata = getDataFile(dataDirectory, "wikidata.txt");
 		File translations = getDataFile(dataDirectory, "translations.csv");
 		File markup = getMarkupDataFile(dataDirectory);
-		File wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.gz");
-		File entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.gz");
+		File wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.quantized.gz");
+		File entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.quantized.gz");
 
 		//now load databases
 		File dbDirectory = new File(conf.getDbDirectory());
