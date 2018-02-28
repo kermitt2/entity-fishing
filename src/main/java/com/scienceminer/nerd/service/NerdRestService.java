@@ -1,12 +1,16 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.disambiguation.NerdEngine;
+import com.scienceminer.nerd.embeddings.SimilarityScorer;
 import com.scienceminer.nerd.exceptions.CustomisationException;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.mention.ProcessText;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
+import org.apache.commons.text.similarity.SimilarityScore;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
@@ -61,6 +65,11 @@ public class NerdRestService implements NerdPaths {
         nerdProcessQuery = new NerdRestProcessQuery();
         nerdProcessFile = new NerdRestProcessFile();
         nerdRestKB = new NerdRestKB();
+
+        //Pre-instantiate
+        ProcessText.getInstance();
+        SimilarityScorer.getInstance();
+        NerdEngine.getInstance();
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.scienceminer.nerd.utilities;
 
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import org.apache.pdfbox.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +28,7 @@ public class Stopwords {
     //private Map<String, FastMatcher> allMatcherSuffix = null;
 
     // list of languages coming with a stopword list
-    private List<String> languages = Arrays.asList("en", "fr", "de", "es", "it");
+    private List<String> languages = UpperKnowledgeBase.TARGET_LANGUAGES;
 
     public static Stopwords getInstance() {
         if (instance == null) {
@@ -74,17 +76,11 @@ public class Stopwords {
                 e.printStackTrace();
             }
             finally {
-                try {
-                    if (br0 != null)
-                        br0.close();
-                }
-                catch(Exception e) {
-                    e.printStackTrace();
-                }
+                IOUtils.closeQuietly(br0);
             }
             if ( (stopwords != null) && (stopwords.size() > 0) ) {
                 if (allStopwords == null)
-                    allStopwords = new HashMap<String, Set<String>>();
+                    allStopwords = new HashMap<>();
                 allStopwords.put(lang, stopwords);
             }
 

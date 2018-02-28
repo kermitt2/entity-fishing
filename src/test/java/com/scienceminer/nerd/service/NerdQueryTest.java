@@ -17,6 +17,7 @@ import java.io.InputStream;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.isA;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -193,5 +194,14 @@ public class NerdQueryTest {
         ObjectMapper mapper = new ObjectMapper();
         NerdQuery nerdQuery = mapper.readValue("{'languages':{'lang':'fr'}}", NerdQuery.class);
 
+    }
+
+    @Test
+    public void testDeserializeQuery_singleQuote() throws Exception {
+        final NerdQuery nerdQuery = target.fromJson("{'mentions': ['ner']}");
+        assertThat(nerdQuery.getMentions(), hasSize(1));
+
+        final NerdQuery nerdQuery2 = target.fromJson("{\"mentions\": [\"ner\"]}");
+        assertThat(nerdQuery2.getMentions(), hasSize(1));
     }
 }
