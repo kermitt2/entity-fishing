@@ -34,8 +34,6 @@ import java.util.regex.Pattern;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-// linnaeus
-
 /**
  * Everything we need to get the mentions and names entities from a text. From a text or a
  * NerdQuery object, we generate a list of Mention objects corresponding to the potential

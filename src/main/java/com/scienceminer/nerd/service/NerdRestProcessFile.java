@@ -177,9 +177,9 @@ public class NerdRestProcessFile {
                     List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                     if (newEntities != null) {
                         LOGGER.debug(newEntities.size() + " nerd entities");
-									/*for(NerdEntity entity : newEntities) {
-										LOGGER.debug(entity.toString());
-									}*/
+/*for(NerdEntity entity : newEntities) {
+	LOGGER.debug(entity.toString());
+}*/
                     }
                     nerdQuery.addNerdEntities(newEntities);
                 }
