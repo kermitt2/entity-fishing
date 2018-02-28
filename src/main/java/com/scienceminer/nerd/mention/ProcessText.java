@@ -94,6 +94,8 @@ public class ProcessText {
     private ProcessText() {
         String dictionaryFile = "data/clearNLP/dictionary-1.3.1.zip";
 
+        nerParsers = new NERParsers();
+
         try {
             tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));
         } catch (FileNotFoundException e) {
@@ -238,6 +240,17 @@ public class ProcessText {
      */
     private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException {
         List<LayoutToken> tokens = nerdQuery.getTokens();
+
+        //Re-align the tokens 
+        if(CollectionUtils.isNotEmpty(tokens)) {
+            final int initialOffset = tokens.get(0).getOffset();
+            if(initialOffset > 0) {
+                for (LayoutToken token : tokens) {
+                    token.setOffset(token.getOffset() - initialOffset);
+                }
+            }
+        }
+
         List<Mention> results = new ArrayList<>();
 
         Language language = nerdQuery.getLanguage();
@@ -315,10 +328,6 @@ public class ProcessText {
 
 
         try {
-            if (nerParsers == null) {
-                //Utilities.initGrobid();
-                nerParsers = new NERParsers();
-            }
             List<Entity> entityResults = nerParsers.extractNE(tokens, language);
             for (Entity entityResult : entityResults) {
                 Mention mention = new Mention(entityResult);
@@ -326,7 +335,6 @@ public class ProcessText {
                 results.add(mention);
             }
         } catch (Exception e) {
-            //throw new NerdException("NERD error when processing text.", e);
             LOGGER.error("NER extraction failed", e);
         }
 
@@ -466,7 +474,7 @@ public class ProcessText {
                         stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
                         stopwords.endsWithStopword(termValueLowercase, lang.getLang())
                         ) {
-                    toRemove.add(new Integer(i));
+                    toRemove.add(i);
                     continue;
                 }
             }
@@ -476,7 +484,7 @@ public class ProcessText {
                 termPosition.string = termPosition.string.substring(0, termPosition.string.length() - 1);
                 termValueLowercase = termValueLowercase.substring(0, termValueLowercase.length() - 1);
                 if (termValueLowercase.length() == 0) {
-                    toRemove.add(new Integer(i));
+                    toRemove.add(i);
                     continue;
                 }
             }
@@ -484,7 +492,7 @@ public class ProcessText {
 
         List<StringPos> subPool = new ArrayList<StringPos>();
         for (int i = 0; i < pool.size(); i++) {
-            if (toRemove.contains(new Integer(i))) {
+            if (toRemove.contains(i)) {
                 continue;
             } else {
                 subPool.add(pool.get(i));
