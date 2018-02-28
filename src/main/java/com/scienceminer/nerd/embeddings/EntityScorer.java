@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +36,11 @@ public abstract class EntityScorer {
             if (entity_id == null || word_counts.length == 0) {
                 return DEFAULT_SCORE;
             }
-            this.entity_vec = kb.getEntityEmbeddings(entity_id);
+            short[] entity_vec_tmp = kb.getEntityEmbeddings(entity_id);
+            entity_vec = new float[entity_vec_tmp.length];
+            for(int i= 0 ; i < entity_vec_tmp.length; i++) {
+                this.entity_vec[i] = entity_vec_tmp[i];
+            }
 //if (this.entity_vec == null)
 //    System.out.println("warning: null vector for " + entity_id);
 //else
@@ -59,7 +64,7 @@ public abstract class EntityScorer {
         int n_words = 0;
 
         for(Multiset.Entry<String> entry : counter.entrySet()) {
-            float[] vector = kb.getWordEmbeddings(entry.getElement());
+            short[] vector = kb.getWordEmbeddings(entry.getElement());
             if (vector != null) {
                 word_counts.add(entry.getCount());
                 for (int i=0; i<kb.getEmbeddingsSize(); i++) {

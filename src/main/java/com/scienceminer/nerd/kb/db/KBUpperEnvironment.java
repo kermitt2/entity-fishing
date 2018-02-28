@@ -101,7 +101,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	protected void initDatabases() {
 		System.out.println("\ninit upper level language independent environment");
 				
-		databasesByType = new HashMap<DatabaseType, KBDatabase>();
+		databasesByType = new HashMap<>();
 		
 		dbConcepts = buildConceptDatabase();//new ConceptDatabase(env, DatabaseType.concepts);
 		databasesByType.put(DatabaseType.concepts, dbConcepts);

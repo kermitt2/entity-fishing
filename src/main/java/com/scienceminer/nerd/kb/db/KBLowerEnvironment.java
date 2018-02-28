@@ -49,8 +49,8 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private KBDatabase<Integer, DbTranslations> dbTranslations = null;
 	private KBDatabase<Integer, Long> dbStatistics = null;
 	private KBDatabase<Integer,String> dbConceptByPageId = null;
-	private KBDatabase<String, float[]> dbWordEmbeddings = null;
-	private KBDatabase<String, float[]> dbEntityEmbeddings = null;
+	private KBDatabase<String, short[]> dbWordEmbeddings = null;
+	private KBDatabase<String, short[]> dbEntityEmbeddings = null;
 
 	private int embeddingsSize = 300;
 
@@ -133,11 +133,11 @@ public class KBLowerEnvironment extends KBEnvironment {
 		return dbConceptByPageId;
 	}
 
-	public KBDatabase<String, float[]> getDbWordEmbeddings() {
+	public KBDatabase<String, short[]> getDbWordEmbeddings() {
 		return dbWordEmbeddings;
 	}
 
-	public KBDatabase<String, float[]> getDbEntityEmbeddings() {
+	public KBDatabase<String, short[]> getDbEntityEmbeddings() {
 		return dbEntityEmbeddings;
 	}
 
@@ -323,7 +323,7 @@ public class KBLowerEnvironment extends KBEnvironment {
 		System.out.println("Full markup database built - " + dbPage.getDatabaseSize() + " pages.");
 	}
 	
-	private static File getMarkupDataFile(File dataDirectory) throws IOException {
+	private static File getMarkupDataFile(File dataDirectory) {
 		File[] files = dataDirectory.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
 				return name.endsWith("-pages-articles.xml") || name.endsWith("-pages-articles.xml.bz2") ||

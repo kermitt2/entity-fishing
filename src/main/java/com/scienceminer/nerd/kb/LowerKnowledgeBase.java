@@ -1,25 +1,18 @@
 package com.scienceminer.nerd.kb;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-
+import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
+import com.scienceminer.nerd.kb.db.KBLowerEnvironment;
+import com.scienceminer.nerd.kb.db.LabelIterator;
+import com.scienceminer.nerd.kb.db.PageIterator;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
+import com.scienceminer.nerd.utilities.NerdConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.grobid.core.utilities.TextUtilities;
-
-import com.scienceminer.nerd.kb.db.*;
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
-import com.scienceminer.nerd.utilities.NerdConfig;
-import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
-import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
-import com.scienceminer.nerd.kb.model.Page.PageType;
-import com.scienceminer.nerd.kb.model.*;
-
-import org.xml.sax.SAXException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represent the language specific resources of the Knowledge Base, e.g. a 
@@ -53,7 +46,7 @@ public class LowerKnowledgeBase {
 
 	public int getArticleCount() {
 		if (wikipediaArticleCount == -1)
-			wikipediaArticleCount = new Long(this.env.retrieveStatistic(StatisticName.articleCount)).intValue();
+			wikipediaArticleCount = this.env.retrieveStatistic(StatisticName.articleCount).intValue();
 		return wikipediaArticleCount;
 	}
 
@@ -257,7 +250,7 @@ public class LowerKnowledgeBase {
      * @param word the word
      * @return word vector or null if not found
      */
-    public float[] getWordEmbeddings(String word) {
+    public short[] getWordEmbeddings(String word) {
         return env.getDbWordEmbeddings().retrieve(word);
     }
 
@@ -266,7 +259,7 @@ public class LowerKnowledgeBase {
      * @param entity the entity identifier
      * @return entity vector or null if not found
      */
-    public float[] getEntityEmbeddings(String entityId) {
+    public short[] getEntityEmbeddings(String entityId) {
         return env.getDbEntityEmbeddings().retrieve(entityId);
     }
 
