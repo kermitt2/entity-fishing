@@ -204,4 +204,14 @@ public class NerdQueryTest {
         final NerdQuery nerdQuery2 = target.fromJson("{\"mentions\": [\"ner\"]}");
         assertThat(nerdQuery2.getMentions(), hasSize(1));
     }
+
+
+    @Test
+    public void testDeserializeQuery_minRankScore() throws Exception {
+        NerdQuery nerdQuery = target.fromJson("{'minRankerScore': 0.03}");
+        assertThat(nerdQuery.getMinRankerScore(), is(0.03));
+
+        nerdQuery = target.fromJson("{'minRankerScore': 0.0123}");
+        assertThat(nerdQuery.getMinRankerScore(), is(0.0123));
+    }
 }

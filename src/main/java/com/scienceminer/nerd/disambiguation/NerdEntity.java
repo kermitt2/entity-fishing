@@ -9,6 +9,7 @@ import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Sense;
@@ -60,6 +61,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	// optional bounding box in the source document
 	private List<BoundingBox> boundingBoxes = null;
+
+	// layout tokens corresponding to the entity in the text
+    private List<LayoutToken> layoutTokens = null;
 
 	// probability of the entity in context, if defined
 	private double prob = 1.0;
@@ -156,6 +160,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		boundingBoxes = mention.getBoundingBoxes();
 		isAcronym = mention.getIsAcronym();
 		source = mention.getSource();
+		layoutTokens = mention.getLayoutTokens();
 	}
 
 	public NerdEntity(NerdEntity entity) {
@@ -182,6 +187,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		source = entity.getSource();
 		nerdScore = entity.getNerdScore();
 		selectionScore = entity.getSelectionScore();
+		layoutTokens = entity.getLayoutTokens();
 	}
 
     public String getRawName() {
@@ -431,7 +437,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
         wikipediaMultilingualArticle = subArticleCorrespondance;
 
 	}
-	
+
 
 	public int getWiktionaryExternalRef() {
 		return wiktionaryExternalRef;
@@ -537,21 +543,22 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		return biblio;
 	}
 
-
-	
-
 	@Override
 	public boolean equals(Object object) {
-		boolean result = false;
-		if ( (object != null) && object instanceof NerdEntity) {
-			int start = ((NerdEntity)object).getOffsetStart();
-			int end = ((NerdEntity)object).getOffsetEnd();
-			if ( (start == offsets.start) && (end == offsets.end)
-					&& (this.wikipediaExternalRef == ((NerdEntity)object).getWikipediaExternalRef()) ) {
-				result = true;
-			}
-		}
-		return result;
+		if (this == object) return true;
+		if (!(object instanceof NerdEntity)) return false;
+
+        NerdEntity ne = (NerdEntity) object;
+        
+        int start = ne.getOffsetStart();
+        int end = ne.getOffsetEnd();
+        if (start != offsets.start || end != offsets.end) return false;
+
+		if(this.wikipediaExternalRef != ne.getWikipediaExternalRef())
+			return false;
+
+		return StringUtils.equals(wikidataId, ne.getWikidataId());
+
 	}
 
 	@Override
@@ -1076,4 +1083,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		return false;
 	}
+
+    public List<LayoutToken> getLayoutTokens() {
+        return layoutTokens;
+    }
+
+    public void setLayoutTokens(List<LayoutToken> layoutTokens) {
+        this.layoutTokens = layoutTokens;
+    }
 }

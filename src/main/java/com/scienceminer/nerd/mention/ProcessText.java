@@ -238,17 +238,6 @@ public class ProcessText {
      */
     private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException {
         List<LayoutToken> tokens = nerdQuery.getTokens();
-
-        //Re-align the tokens 
-        if(CollectionUtils.isNotEmpty(tokens)) {
-            final int initialOffset = tokens.get(0).getOffset();
-            if(initialOffset > 0) {
-                for (LayoutToken token : tokens) {
-                    token.setOffset(token.getOffset() - initialOffset);
-                }
-            }
-        }
-
         List<Mention> results = new ArrayList<>();
 
         Language language = nerdQuery.getLanguage();
@@ -354,43 +343,15 @@ public class ProcessText {
 
         // associate bounding boxes to identified mentions
         List<Mention> finalResults = new ArrayList<>();
-
-        int tokenPos = 0;
-        int lastTokenIndex = 0;
-        int lastTokenPos = 0;
+        
         for (Mention entity : results) {
-            // synchronize layout token with the selected ngrams
-            List<LayoutToken> entityTokens = null;
-            tokenPos = lastTokenPos;
-            for (int j = lastTokenIndex; j < tokens.size(); j++) {
-                if (tokenPos < entity.getOffsetStart()) {
-                    tokenPos += tokens.get(j).getText().length();
-                    continue;
-                }
-                if (tokenPos + tokens.get(j).getText().length() > entity.getOffsetEnd()) {
-                    break;
-                }
-
-                if (tokenPos == entity.getOffsetStart()) {
-                    entityTokens = new ArrayList<>();
-                    entityTokens.add(tokens.get(j));
-                    lastTokenIndex = j;
-                    lastTokenPos = tokenPos;
-                } else if ((tokenPos >= entity.getOffsetStart()) && (tokenPos <= entity.getOffsetEnd())) {
-                    if (entityTokens == null) {
-                        entityTokens = new ArrayList<>();
-                        lastTokenIndex = j;
-                        lastTokenPos = tokenPos;
-                    }
-                    entityTokens.add(tokens.get(j));
-                }
-
-                tokenPos += tokens.get(j).getText().length();
-            }
+            // synchronize layout token with the selected n-grams
+            List<LayoutToken> entityTokens = entity.getLayoutTokens();
+            
             if (entityTokens != null)
                 entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
             else
-                LOGGER.warn("LayoutToken sequence not found for mention: " + entity.getRawName());
+                LOGGER.warn("processNER: LayoutToken sequence not found for mention: " + entity.getRawName());
             // we have an additional check of validity based on language
             if (validEntity(entity, language.getLang())) {
                 if (!finalResults.contains(entity)) {
@@ -452,7 +413,7 @@ public class ProcessText {
 
         // candidates which start and end with a stop word are removed.
         // beware not to be too aggressive.
-        List<Integer> toRemove = new ArrayList<Integer>();
+        List<Integer> toRemove = new ArrayList<>();
 
         for (int i = 0; i < pool.size(); i++) {
             StringPos termPosition = pool.get(i);
@@ -465,7 +426,7 @@ public class ProcessText {
                 continue;
             }*/
 
-            // remove term starting or ending with a stopword, and term starting with a separator (conservative
+            // remove term starting or ending with a stop-word, and term starting with a separator (conservative
             // it should never be the case)
             if (stopwords != null) {
                 if ((delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
@@ -488,11 +449,9 @@ public class ProcessText {
             }
         }
 
-        List<StringPos> subPool = new ArrayList<StringPos>();
+        List<StringPos> subPool = new ArrayList<>();
         for (int i = 0; i < pool.size(); i++) {
-            if (toRemove.contains(i)) {
-                continue;
-            } else {
+            if (!toRemove.contains(i)) {
                 subPool.add(pool.get(i));
             }
         }
@@ -563,7 +522,7 @@ public class ProcessText {
                 if (entityTokens != null)
                     entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
                 else
-                    LOGGER.warn("LayoutToken sequence not found for mention: " + candidate.string);
+                    LOGGER.warn("processWikipedia: LayoutToken sequence not found for mention: " + candidate.string);
                 // we have an additional check of validity based on language
                 if (validEntity(entity, lang.getLang())) {
                     if (!results.contains(entity))
@@ -804,7 +763,7 @@ public class ProcessText {
 
     public static List<StringPos> ngrams(String str, int ngram, Language lang) {
         int actualNgram = (ngram * 2) - 1; // for taking into account separators
-        List<StringPos> ngrams = new ArrayList<StringPos>();
+        List<StringPos> ngrams = new ArrayList<>();
         if (str == null) {
             return ngrams;
         }
