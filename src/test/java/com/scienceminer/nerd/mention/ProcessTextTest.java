@@ -252,9 +252,13 @@ public class ProcessTextTest {
         if (processText == null) {
             System.err.println("text processor was not properly initialised!");
         }
-        String text = "Nous retomberions dans une étrange situation";
-        List<StringPos> resultNGrams = ProcessText.ngrams(text, 1, new Language("fr", 1.0));
-        //assertThat(resultNGrams, hasSize(11));
-        assertEquals("Nous\t0",resultNGrams.get(0).toString());
+        String textFrench = "Nous retomberions dans une étrange situation";
+        String textEnglish = "The cow jumps over the moon";
+        List<StringPos> resultNGramsFrench = ProcessText.ngrams(textFrench, 1, new Language("fr", 1.0));
+        List<StringPos> resultNGramsEnglish = ProcessText.ngrams(textEnglish, 2, new Language("en", 1.0));
+        //assertThat(resultNGramsFrench, hasSize(11));
+        //assertEquals("Nous\t0",resultNGramsFrench.get(0).toString());
+        assertEquals("The",resultNGramsEnglish.get(0).string);
+        assertEquals(0,resultNGramsEnglish.get(0).pos);
     }
 }
