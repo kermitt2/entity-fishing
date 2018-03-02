@@ -350,7 +350,7 @@ The response returned by the *entity-fishing* query processing service is basica
 
 If the textual content to be processed is provided in the query as a string, the identified entities will be associated to offset positions in the input string, so that the client can associate precisely the textual mention and the entity “annotation”.
 
-If the textual content to be processed is provided as a PDF document, the identified entities will be associated to coordinates positions in the input PDF, so that the client can associate precisely the textual mention in the PDF via a bounding box and makes possible dynamic PDF annotations.
+If the textual content to be processed is provided as a PDF document, the identified entities will be associated to  coordinates positions in the input PDF, so that the client can associate precisely the textual mention in the PDF via a bounding box and makes possible dynamic PDF annotations.
 
 
 **Response when processing a text**

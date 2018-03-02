@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.mention;
 
+import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.lang.Language;
@@ -244,5 +245,16 @@ public class ProcessTextTest {
 
         List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
         assertThat(segments, hasSize(4));
+    }
+
+    @Test
+    public void testNGrams(){
+        if (processText == null) {
+            System.err.println("text processor was not properly initialised!");
+        }
+        String text = "Nous retomberions dans une étrange situation";
+        List<StringPos> resultNGrams = ProcessText.ngrams(text, 1, new Language("fr", 1.0));
+        //assertThat(resultNGrams, hasSize(11));
+        assertEquals("Nous\t0",resultNGrams.get(0).toString());
     }
 }
