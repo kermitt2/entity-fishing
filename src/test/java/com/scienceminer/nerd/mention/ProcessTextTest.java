@@ -247,11 +247,9 @@ public class ProcessTextTest {
         assertThat(segments, hasSize(4));
     }
 
+    /*the test for the ngrams method in ProcessText class in order to get the ngram result, the text and the position*/
     @Test
     public void testNGrams(){
-        if (processText == null) {
-            System.err.println("text processor was not properly initialised!");
-        }
         String textFrench = "Nous retomberions dans une étrange situation";
         String textEnglish = "The cow jumps over the moon";
         List<StringPos> resultNGramsFrench = ProcessText.ngrams(textFrench, 1, new Language("fr", 1.0));
