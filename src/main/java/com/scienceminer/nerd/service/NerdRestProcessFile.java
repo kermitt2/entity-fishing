@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class NerdRestProcessFile {
 
@@ -172,19 +173,28 @@ public class NerdRestProcessFile {
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                 if (titleTokens != null) {
                     LOGGER.debug("Process title... ");
-//LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
+                    //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
                     //workingQuery.setEntities(null);
+
+                    // since the titles have likely to be upper case, we move them lowercase to avoid trying to
+                    // process acronym by mistake
+
+                    for(LayoutToken token : titleTokens) {
+                        token.setText(lowerCase(token.getText()));
+                    }
+
                     List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                     if (newEntities != null) {
                         LOGGER.debug(newEntities.size() + " nerd entities");
-/*for(NerdEntity entity : newEntities) {
-	LOGGER.debug(entity.toString());
-}*/
+                        /*for(NerdEntity entity : newEntities) {
+                            LOGGER.debug(entity.toString());
+                        }*/
                     }
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                
                 // abstract
                 List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                 if (abstractTokens != null) {
@@ -197,8 +207,9 @@ public class NerdRestProcessFile {
 
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                
                 // keywords
                 List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                 if (keywordTokens != null) {
