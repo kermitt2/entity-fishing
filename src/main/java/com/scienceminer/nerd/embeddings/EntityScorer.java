@@ -37,9 +37,11 @@ public abstract class EntityScorer {
                 return DEFAULT_SCORE;
             }
             short[] entity_vec_tmp = kb.getEntityEmbeddings(entity_id);
-            entity_vec = new float[entity_vec_tmp.length];
-            for(int i= 0 ; i < entity_vec_tmp.length; i++) {
-                this.entity_vec[i] = entity_vec_tmp[i];
+            if(entity_vec_tmp != null) {
+                entity_vec = new float[entity_vec_tmp.length];
+                for (int i = 0; i < entity_vec_tmp.length; i++) {
+                    this.entity_vec[i] = entity_vec_tmp[i];
+                }
             }
 //if (this.entity_vec == null)
 //    System.out.println("warning: null vector for " + entity_id);
