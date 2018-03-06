@@ -1,6 +1,5 @@
 package com.scienceminer.nerd.mention;
 
-import com.scienceminer.nerd.service.NerdRestProcessString;
 import org.junit.Test;
 
 import java.util.Arrays;
