@@ -124,8 +124,8 @@ public class NerdQuery {
     private boolean full = false;
 
     // query-based threshold, override default values in the config file only for the present query
-    private double minSelectorScore;
-    private double minRankerScore;
+    private double minSelectorScore = 0.0;
+    private double minRankerScore = 0.0;
 
     public NerdQuery() {
     }
@@ -156,6 +156,9 @@ public class NerdQuery {
 
         this.filter = query.getFilter();
         this.context = query.getContext();
+
+        this.minSelectorScore = query.getMinSelectorScore();
+        this.minRankerScore = query.getMinRankerScore();
     }
 
     /**
@@ -419,7 +422,7 @@ public class NerdQuery {
         return this.minSelectorScore;
     }
 
-    public void setMinSelectionScore(double minSelectorScore) {
+    public void setMinSelectorScore(double minSelectorScore) {
         this.minSelectorScore = minSelectorScore;
     }
 

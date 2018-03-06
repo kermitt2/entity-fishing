@@ -168,11 +168,7 @@ public class NerdEngine {
 		if (tokens == null) {
 			tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, new Language(lang, 1.0));
 		}
-
-		// additional target languages for translations (source language is always the default target
-		// language for the results!)
-		List<String> targetLanguages = nerdQuery.getResultLanguages();
-
+		
 		NerdContext context = nerdQuery.getContext();
 		if (context == null) {
 			context = new NerdContext();
@@ -207,7 +203,6 @@ public class NerdEngine {
 		}
 		LOGGER.debug("Total number of entities: " + nbEntities);
 		LOGGER.debug("Total number of candidates: " + nbCandidates);
-
 		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 
 		// if needed, segment long text into either natural paragraph (if present) or arbitary ones

@@ -198,7 +198,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 																ArticleTrainingSampleCriterias evaluationConstraints, 
 																List<Integer> sizes, 
 																LowerKnowledgeBase wikipedia) {
-		List<ArticleTrainingSample> samples = new ArrayList<ArticleTrainingSample>();
+		List<ArticleTrainingSample> samples = new ArrayList<>();
 		List<Integer> exclude = trainingConstraints.getExclude();
 
 		for (int i=0; i<sizes.size(); i++) {
@@ -212,7 +212,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 			} else {
 				for(Article article : samples.get(i).getSample()) {
 					if (exclude == null)
-						exclude = new ArrayList<Integer>();
+						exclude = new ArrayList<>();
 					exclude.add(article.getId());
 				}
 				trainingConstraints.setExclude(exclude);

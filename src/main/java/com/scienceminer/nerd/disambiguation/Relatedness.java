@@ -57,7 +57,7 @@ public class Relatedness {
 	/**
 	 * Hidden constructor
 	 */
-	private Relatedness() {	
+	private Relatedness() {
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		caches = new HashMap<>();
 	}
@@ -368,7 +368,7 @@ public class Relatedness {
 			else if (cands.size() == 1) {
 				NerdCandidate cand = cands.get(0);
 				if (cand.getProb_c() >= (1-minSenseProbability)) {
-					// conditional prob of candidate sense must also be above the acceptable threashold   
+					// conditional prob of candidate sense must also be above the acceptable threshold
 					if (!unambigIds.contains(cand.getWikiSense().getId())) {
 						Label.Sense theSense = cands.get(0).getWikiSense();
 						unambig.add(theSense);
@@ -381,7 +381,7 @@ public class Relatedness {
 		}
 
 		if (unambig.size()+certainPages.size() < NerdEngine.maxContextSize) {
-			// second pass for not so ambiguous candidates
+		// second pass for not so ambiguous candidates
 			for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 				List<NerdCandidate> cands = entry.getValue();
 				NerdEntity entity = entry.getKey();

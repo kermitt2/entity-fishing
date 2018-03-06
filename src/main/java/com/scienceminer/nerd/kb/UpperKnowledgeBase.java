@@ -160,7 +160,7 @@ public class UpperKnowledgeBase {
 	}
 
 	/**
-	 * Return the defintiion of a property 
+	 * Return the definition of a property
 	 */
 	public Property getProperty(String propertyId) {
 		return env.getDbProperties().retrieve(propertyId);

@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class NerdRestProcessFile {
 
@@ -134,7 +135,7 @@ public class NerdRestProcessFile {
         if (documentParts != null) {
             String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
             List<LayoutToken> tokenizationHeader =
-                    doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                    Document.getTokenizationParts(documentParts, doc.getTokenizations());
             String labeledResult = null;
 
             // alternative
@@ -172,19 +173,28 @@ public class NerdRestProcessFile {
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                 if (titleTokens != null) {
                     LOGGER.debug("Process title... ");
-//LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
+                    //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
                     //workingQuery.setEntities(null);
+
+                    // since the titles have likely to be upper case, we move them lowercase to avoid trying to
+                    // process acronym by mistake
+
+                    for(LayoutToken token : titleTokens) {
+                        token.setText(lowerCase(token.getText()));
+                    }
+
                     List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                     if (newEntities != null) {
                         LOGGER.debug(newEntities.size() + " nerd entities");
-									/*for(NerdEntity entity : newEntities) {
-										LOGGER.debug(entity.toString());
-									}*/
+                        /*for(NerdEntity entity : newEntities) {
+                            LOGGER.debug(entity.toString());
+                        }*/
                     }
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                
                 // abstract
                 List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                 if (abstractTokens != null) {
@@ -197,8 +207,9 @@ public class NerdRestProcessFile {
 
                     nerdQuery.addNerdEntities(newEntities);
                 }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                
                 // keywords
                 List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                 if (keywordTokens != null) {
@@ -254,7 +265,7 @@ public class NerdRestProcessFile {
         if (documentParts != null) {
             LOGGER.debug("Process body...");
             // full text processing
-            Pair<String, LayoutTokenization> featSeg = engine.getParsers().getFullTextParser().getBodyTextFeatured(doc, documentParts);
+            Pair<String, LayoutTokenization> featSeg = FullTextParser.getBodyTextFeatured(doc, documentParts);
             if (featSeg != null) {
                 // if featSeg is null, it usually means that no body segment is found in the
                 // document segmentation
@@ -264,23 +275,23 @@ public class NerdRestProcessFile {
                 String rese = null;
                 if ((bodytext != null) && (bodytext.trim().length() > 0)) {
                     rese = engine.getParsers().getFullTextParser().label(bodytext);
+
+                    // get the reference, figure, table and formula markers, plus the formula
+                    // the rest can be processed by NERD
+                    List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
+                            TaggingLabels.SECTION, TaggingLabels.FIGURE, TaggingLabels.TABLE);
+                    List<LayoutTokenization> documentBodyTokens =
+                            FullTextParser.getDocumentFullTextTokens(toProcess, rese, tokenizationBody.getTokenization());
+
+                    if (documentBodyTokens != null) {
+                        List<NerdEntity> newEntities =
+                                processLayoutTokenSequences(documentBodyTokens, documentContext, workingQuery);
+                        nerdQuery.addNerdEntities(newEntities);
+                    } else
+                        LOGGER.debug("no body part?!?");
                 } else {
                     LOGGER.debug("Fulltext model: The input to the CRF processing is empty");
                 }
-
-                // get the reference, figure, table and formula markers, plus the formula
-                // the rest can be processed by NERD
-                List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
-                        TaggingLabels.SECTION, TaggingLabels.FIGURE, TaggingLabels.TABLE);
-                List<LayoutTokenization> documentBodyTokens =
-                        FullTextParser.getDocumentFullTextTokens(toProcess, rese, tokenizationBody.getTokenization());
-
-                if (documentBodyTokens != null) {
-                    List<NerdEntity> newEntities =
-                            processLayoutTokenSequences(documentBodyTokens, documentContext, workingQuery);
-                    nerdQuery.addNerdEntities(newEntities);
-                } else
-                    LOGGER.debug("no body part?!?");
             }
         }
         //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
@@ -553,7 +564,7 @@ LOGGER.debug(workingQuery.getEntities().size() + " nerd entities");	*/
     private static List<NerdEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens,
                                                                NerdContext documentContext,
                                                                NerdQuery workingQuery) {
-        List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
+        List<LayoutTokenization> layoutTokenizations = new ArrayList<>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
         return processLayoutTokenSequences(layoutTokenizations, documentContext, workingQuery);
     }
@@ -562,7 +573,7 @@ LOGGER.debug(workingQuery.getEntities().size() + " nerd entities");	*/
                                                         Document doc,
                                                         NerdContext documentContext,
                                                         NerdQuery workingQuery) {
-        List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+        List<LayoutToken> tokenizationParts = Document.getTokenizationParts(documentParts, doc.getTokenizations());
         return processLayoutTokenSequence(tokenizationParts, documentContext, workingQuery);
     }
 

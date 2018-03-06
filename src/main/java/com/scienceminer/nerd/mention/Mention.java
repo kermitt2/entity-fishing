@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.mention;
 
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.layout.BoundingBox;
@@ -46,6 +47,9 @@ public class Mention implements Comparable<Mention> {
     // optional bounding box in the source document
     protected List<BoundingBox> boundingBoxes = null;
 
+    // optional layout tokens corresponding to the current mention
+    private List<LayoutToken> layoutTokens = null;
+
     // if the mention is an acronym; if true, the normalisedName will give the found expended form
     private boolean isAcronym = false;
 
@@ -78,6 +82,7 @@ public class Mention implements Comparable<Mention> {
 		boundingBoxes = ent.getBoundingBoxes();
 		isAcronym = ent.getIsAcronym();
 		entity = ent;
+		layoutTokens = ent.getLayoutTokens();
 		//startTokenPos = ent.startTokenPos;
 		//endTokenPos = ent.startTokenPos;
 	}
@@ -90,6 +95,7 @@ public class Mention implements Comparable<Mention> {
 		isAcronym = ent.isAcronym;
 		entity = ent.entity;
 		source = ent.source;
+		layoutTokens = ent.layoutTokens;
 		//startTokenPos = ent.startTokenPos;
 		//endTokenPos = ent.startTokenPos;
 	}
@@ -335,5 +341,13 @@ public class Mention implements Comparable<Mention> {
         }
 
         return buffer.toString();
+    }
+
+    public List<LayoutToken> getLayoutTokens() {
+        return layoutTokens;
+    }
+
+    public void setLayoutTokens(List<LayoutToken> layoutTokens) {
+        this.layoutTokens = layoutTokens;
     }
 }

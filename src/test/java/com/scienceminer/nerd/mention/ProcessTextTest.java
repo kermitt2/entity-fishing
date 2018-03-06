@@ -1,16 +1,20 @@
 package com.scienceminer.nerd.mention;
 
+import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 
@@ -24,43 +28,8 @@ public class ProcessTextTest {
 
     @Before
     public void setUp() throws Exception {
-        testPath = "src/test/resources/";
+        processText = new ProcessText(true);
 
-        Utilities.initGrobid();
-        processText = ProcessText.getInstance();
-
-    }
-
-    //@Test
-    public void testProcess() {
-        if (processText == null) {
-            System.err.println("text processor was not properly initialised!");
-        }
-        try {
-            List<Mention> entities = processText.processNER(testText, new Language("en", 1.0));
-
-            System.out.println("\n" + testText);
-            if (entities != null) {
-                for (Mention entity : entities) {
-                    System.out.print(testText.substring(entity.getOffsetStart(), entity.getOffsetEnd()) + "\t");
-                    System.out.println(entity.toString());
-                }
-            } else {
-                System.out.println("No entity found.");
-            }
-
-			/*List<LayoutToken> tokens = new ArrayList<LayoutToken>();
-            tokens.add(new LayoutToken("the"));
-			tokens.add(new LayoutToken(" "));
-			tokens.add(new LayoutToken("test"));
-			List<List<LayoutToken>> pool = processText.ngrams(tokens, 2);*/
-            /*for(List<LayoutToken> cand : pool) {
-                System.out.println(LayoutTokensUtil.toText(cand));
-			}*/
-            //assertEquals(pool.size(), 3);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
@@ -82,15 +51,14 @@ public class ProcessTextTest {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
         Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens);
-        assertNotNull(acronyms);
-        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
-            Mention base = entry.getValue();
-            Mention acronym = entry.getKey();
-            assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "PGM");
-            assertEquals(base.getRawName(), "probabilistic graphical model");
+        assertThat(acronyms.entrySet(), hasSize(1));
 
-            //System.out.println("acronym: " + input.substring(acronym.start, acronym.end) + " / base: " + base.getRawName());
-        }
+        final ArrayList<Mention> keys = new ArrayList<>(acronyms.keySet());
+        final Mention shortAcronym = keys.get(0);
+        final Mention extendedAcronym = acronyms.get(shortAcronym);
+
+        assertThat(extendedAcronym.getRawName(), is("probabilistic graphical model"));
+        assertThat(input.substring(shortAcronym.getOffsetStart(), shortAcronym.getOffsetEnd()), is("PGM"));
     }
 
     @Test
@@ -134,11 +102,7 @@ public class ProcessTextTest {
     }
 
     @Test
-    public void testDICECoefficient() {
-        if (processText == null) {
-            System.err.println("text processor was not properly initialised!");
-        }
-
+    public void testDICECoefficient() throws Exception {
         String mention = "Setophaga ruticilla";
         Double dice = ProcessText.getDICECoefficient(mention, "en");
         System.out.println(mention + ": " + dice);
@@ -192,27 +156,6 @@ public class ProcessTextTest {
     }*/
 
 
-    /*@Test
-    public void testNgram() {
-        if (processText == null) {
-            System.err.println("text processor was not properly initialised!");
-        }
-        List<StringPos> ngrams = processText.ngrams("the house of card is here with us", 4);
-
-        assertThat(ngrams, hasSize(26));
-    }
-
-    @Test
-    public void testProcessBrutal() {
-        if (processText == null) {
-            System.err.println("text processor was not properly initialised!");
-        }
-        List<Entity> entities = processText.processBrutal("The Maven is here with us, beware not to be too aggressive.", "en");
-
-        assertThat(entities, hasSize(5));
-    }*/
-
-
     @Test
     public void testParagraphSegmentation() {
         // create a dummy super long text to be segmented
@@ -244,5 +187,82 @@ public class ProcessTextTest {
 
         List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
         assertThat(segments, hasSize(4));
+    }
+
+    @Test
+    @Ignore("This test is failing")
+    public void testNGram_old_oneGram_shouldWork() throws Exception {
+        final String input = "this is it.";
+
+        final List<StringPos> result = ProcessText.ngrams(input, 1, new Language("en"));
+        System.out.println(result);
+
+        assertThat(result, hasSize(6));
+        assertThat(result.get(0), is(new StringPos("this", 0)));
+        assertThat(result.get(1), is(new StringPos(" ", 4)));
+        assertThat(result.get(2), is(new StringPos("is", 5)));
+        assertThat(result.get(3), is(new StringPos(" ", 7)));
+    }
+
+    @Test
+    @Ignore("This test is failing too")
+    public void testNGram_old_biGram_shouldWork() throws Exception {
+        final String input = "this is it.";
+
+        final List<StringPos> result = ProcessText.ngrams(input, 2, new Language("en"));
+        System.out.println(result);
+
+        assertThat(result, hasSize(6));
+        assertThat(result.get(0), is(new StringPos("this", 0)));
+        assertThat(result.get(1), is(new StringPos("this ", 4)));
+        assertThat(result.get(2), is(new StringPos(" ", 5)));
+        assertThat(result.get(3), is(new StringPos(" is", 7)));
+    }
+
+    @Test
+    public void testNGram_new_oneGram_shouldWork() throws Exception {
+        final String input = "this is it.";
+
+        final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
+                .tokenizeWithLayoutToken(input, new Language("en"));
+
+        final List<StringPos> result = processText.ngrams(inputLayoutTokens, 1);
+        System.out.println(result);
+
+        assertThat(result, hasSize(6));
+        assertThat(result.get(0), is(new StringPos("this", 0)));
+        assertThat(result.get(1), is(new StringPos(" ", 4)));
+        assertThat(result.get(2), is(new StringPos("is", 5)));
+        assertThat(result.get(3), is(new StringPos(" ", 7)));
+    }
+
+    @Test
+    @Ignore("This test is not testing anything")
+    public void testNGram_twoGram_shouldWork() throws Exception {
+        final String input = "this is it.";
+
+        final List<StringPos> old = processText.ngrams(input, 2, new Language("en"));
+        Collections.sort(old);
+        old.remove(4);
+        System.out.println(old);
+
+        final List<StringPos> newd = processText.ngrams(GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input), 2);
+        Collections.sort(newd);
+        System.out.println(newd);
+    }
+
+    @Test
+    @Ignore("This test is not testing anything")
+    public void extractMentionsWikipedia() throws Exception {
+        final String input = "this is it.";
+
+        final Language language = new Language("en");
+        final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
+                .tokenizeWithLayoutToken(input, language);
+
+        System.out.println(processText.extractMentionsWikipedia(inputLayoutTokens, language));
+
+        System.out.println(processText.extractMentionsWikipedia(input, language));
+
     }
 }

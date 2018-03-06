@@ -71,8 +71,10 @@ public class NerdRestProcessQuery {
         return output;
     }
 
-    /** Check if the parameter onlyNER is set and modify the query accordingly, if the language is not fr or en,
-     * an error is thrown. Deprecated, will be removed in next release. */
+    /**
+     * Check if the parameter onlyNER is set and modify the query accordingly, if the language is not fr or en,
+     * an error is thrown. Deprecated, will be removed in next release.
+     */
     @Deprecated
     public static void processOnlyNER(NerdQuery nerdQuery) {
         if (nerdQuery.getOnlyNER()) {
@@ -157,15 +159,12 @@ public class NerdRestProcessQuery {
         // sort the entities
         Collections.sort(nerdQuery.getEntities());
 
-        // disambiguate
-        if (mentions != null) {
-            // disambiguate and solve entity mentions
+        // disambiguate and solve entity mentions
+        NerdEngine disambiguator = NerdEngine.getInstance();
+        List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
+        nerdQuery.setEntities(disambiguatedEntities);
+        nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
 
-            NerdEngine disambiguator = NerdEngine.getInstance();
-            List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
-            nerdQuery.setEntities(disambiguatedEntities);
-            nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-        }
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
@@ -176,14 +175,15 @@ public class NerdRestProcessQuery {
         return nerdQuery.toJSONClean();
     }
 
-    /** Mark (confidence 1.0) the user defined entities as long as:
-     *  - they have a valid offset (end > start and != -1)
-     *  - they have a valid wikipedia or wikidata ID
+    /**
+     * Mark (confidence 1.0) the user defined entities as long as:
+     * - they have a valid offset (end > start and != -1)
+     * - they have a valid wikipedia or wikidata ID
      **/
     public void markUserEnteredEntities(NerdQuery nerdQuery, long maxOffsetValue) {
 
         for (NerdEntity entity : nerdQuery.getEntities()) {
-            if(entity.getOffsetStart() == -1 || entity.getOffsetEnd() == -1
+            if (entity.getOffsetStart() == -1 || entity.getOffsetEnd() == -1
                     || entity.getOffsetEnd() < entity.getOffsetStart() || entity.getOffsetEnd() > maxOffsetValue) {
                 LOGGER.warn("The entity " + entity.toJsonCompact() + " doesn't have valid offset. Ignoring it.");
             } else {
@@ -275,7 +275,7 @@ public class NerdRestProcessQuery {
      * @param nerdQuery query object with the weighted term vector to be processed
      * @return a response JSON object containing the weighted term vector with the resolved entities.
      */
-    public static String processQueryTermVector(NerdQuery nerdQuery) {
+    public String processQueryTermVector(NerdQuery nerdQuery) {
         LOGGER.debug(methodLogIn());
         long start = System.currentTimeMillis();
 
@@ -334,7 +334,7 @@ public class NerdRestProcessQuery {
         }
 
         // possible entity mentions
-        ProcessText processText = ProcessText.getInstance();         
+        ProcessText processText = ProcessText.getInstance();
         List<Mention> entities = processText.process(nerdQuery);
 
         // we keep only entities not conflicting with the ones already present in the query

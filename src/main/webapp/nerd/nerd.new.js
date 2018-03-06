@@ -376,7 +376,7 @@ var nerd = (function ($) {
 			<div class="tab-pane active" id="navbar-fixed-annotation">\n';
 
         var nbest = false;
-        if (responseJson.nbest == true)
+        if (responseJson.nbest === true)
             nbest = true;
 
         if (responseJson.sentences) {
@@ -413,7 +413,7 @@ var nerd = (function ($) {
         display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">';
         //var string = responseJson.text.replace(/\n/g, " ");
         var string = responseJson.text;
-        if (!responseJson.sentences || (responseJson.sentences.length == 0)) {
+        if (!responseJson.sentences || (responseJson.sentences.length === 0)) {
             display += '<tr style="background-color:#FFF;">';
             var lang = 'en'; //default
             var language = responseJson.language;
@@ -449,7 +449,7 @@ var nerd = (function ($) {
                         // the server response is not compatible with the client
                         console.log("Sorting of entities as present in the server's response not valid for this client.");
                     }
-                    else if (start == lastMaxIndex) {
+                    else if (start === lastMaxIndex) {
                         // the entity is associated to the previous map
                         entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
                     }
@@ -1204,7 +1204,7 @@ var nerd = (function ($) {
         }
     }
 
-    function annotateEntity(theType, thePos, page_height, page_width, entitytIndex, positionIndex) {
+    function annotateEntity(theType, thePos, page_height, page_width, entityIndex, positionIndex) {
         var page = thePos.p;
         var pageDiv = $('#page-' + page);
         var canvas = pageDiv.children('canvas').eq(0);
@@ -1230,13 +1230,13 @@ var nerd = (function ($) {
         element.setAttribute("style", attributes + "border-width: 2px;border-style:solid; "); //border-color: " + getColor(theId) +";");
         //element.setAttribute("style", attributes + "border:2px solid;");
         element.setAttribute("class", theType.toLowerCase());
-        element.setAttribute("id", 'annot-' + entitytIndex + '-' + positionIndex);
+        element.setAttribute("id", 'annot-' + entityIndex + '-' + positionIndex);
         element.setAttribute("page", page);
 
         pageDiv.append(element);
 
-        $('#annot-' + entitytIndex + '-' + positionIndex).bind('hover', viewEntityPDF);
-        $('#annot-' + entitytIndex + '-' + positionIndex).bind('click', viewEntityPDF);
+        $('#annot-' + entityIndex + '-' + positionIndex).bind('hover', viewEntityPDF);
+        $('#annot-' + entityIndex + '-' + positionIndex).bind('click', viewEntityPDF);
     }
 
     function viewEntityPDF() {

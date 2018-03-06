@@ -66,7 +66,7 @@ public class SimilarityScorer {
 
 		UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance();
 
-		for(String lang : UpperKnowledgeBase.getInstance().TARGET_LANGUAGES) {
+		for(String lang : UpperKnowledgeBase.TARGET_LANGUAGES) {
 			try {
 				LowerKnowledgeBase lowerKnowledgeBase = knowledgeBase.getWikipediaConf(lang);
 				lrscorers.put(lang, new LREntityScorer(lowerKnowledgeBase));
