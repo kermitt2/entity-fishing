@@ -53,19 +53,39 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class ProcessText {
 
-    public static final List<String> GROBID_NER_SUPPORTED_LANGUAGES = Arrays.asList(Language.FR, Language.EN);
-    public static final int NGRAM_LENGTH = 6;
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcessText.class);
-    // default indo-european delimiters, should be moved to language specific analysers
-    public static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
-    public static int MINIMAL_PARAGRAPH_LENGTH = 100;
-    public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
-    private static volatile ProcessText instance;
+    public static final List<String> GROBID_NER_SUPPORTED_LANGUAGES = Arrays.asList(Language.FR, Language.EN);
+
+    public static final int NGRAM_LENGTH = 6;
+
     public final String language = AbstractReader.LANG_EN;
+
+    private static volatile ProcessText instance;
+
     // ClearParser components for sentence segmentation
     private AbstractTokenizer tokenizer = null;
+
     private NERParsers nerParsers = null;
+
     private Stopwords stopwords = Stopwords.getInstance();
+
+    // default indo-european delimiters, should be moved to language specific analysers
+    public static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
+
+    public static ProcessText getInstance() {
+        if (instance == null)
+            getNewInstance();
+        return instance;
+    }
+
+    /**
+     * Creates a new instance.
+     */
+    private static synchronized void getNewInstance() {
+        LOGGER.debug("Get new instance of ProcessText");
+
+        instance = new ProcessText();
+    }
 
     /**
      * Hidden constructor
@@ -88,19 +108,21 @@ public class ProcessText {
     ProcessText(boolean test) {
     }
 
-    public static ProcessText getInstance() {
-        if (instance == null)
-            getNewInstance();
-        return instance;
-    }
-
     /**
-     * Creates a new instance.
+     * Case context where a token appears
      */
-    private static synchronized void getNewInstance() {
-        LOGGER.debug("Get new instance of ProcessText");
+    public enum CaseContext {
+        /* token is found in lower cased text */
+        lower,
 
-        instance = new ProcessText();
+        /* token is found in UPPER CASED TEXT */
+        upper,
+
+        /* token is found in Text Where Every Word Starts With A Capital Letter */
+        upperFirst,
+
+        /* token is found in text with a Healthy mixture of capitalization (probably normal text) */
+        mixed
     }
 
     public static boolean isAllUpperCase(String text) {
@@ -116,6 +138,639 @@ public class ProcessText {
         else
             return false;
     }
+
+    /**
+     * This is the entry point for a NerdQuery to have its textual content processed.
+     * The mthod will generate a list of recognized named entities produced by a list
+     * of mention recognition modules specified in the list field 'mention' of the NerdQuery
+     * object. Each mention recognition method will be applied sequencially in the order
+     * given in the list field 'mention'.
+     *
+     * @param nerdQuery the NERD query to be processed
+     * @return the list of identified mentions
+     */
+    public List<Mention> process(NerdQuery nerdQuery) throws NerdException {
+        String text = nerdQuery.getTextOrShortText();
+
+        List<LayoutToken> tokens = nerdQuery.getTokens();
+
+        if (isBlank(text) && isEmpty(tokens)) {
+            LOGGER.warn("No content to process.");
+            return new ArrayList<>();
+        }
+
+        if (isNotBlank(text))
+            return processText(nerdQuery);
+        else
+            return processTokens(nerdQuery);
+    }
+
+
+    /**
+     * Precondition: text in the query object is not empty and
+     * we assume here that the text has been dehyphenized before calling this method.
+     */
+    private List<Mention> processText(NerdQuery nerdQuery) throws NerdException {
+        String text = nerdQuery.getTextOrShortText();
+        text = UnicodeUtil.normaliseText(text);
+
+        List<Mention> results = new ArrayList<>();
+
+        Language language = nerdQuery.getLanguage();
+
+        Integer[] processSentence = nerdQuery.getProcessSentence();
+        List<Sentence> sentences = nerdQuery.getSentences();
+
+        // get the list of requested mention types
+        List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
+
+        // do we need to process the whole text only a sentence?
+        if (ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences)) {
+            // we process only the indicated sentences
+            String text2tag = null;
+            for (int i = 0; i < processSentence.length; i++) {
+                Integer index = processSentence[i];
+
+                // for robustness, we have to consider index out of the current sentences range
+                // here we ignore it, but we might better raise an exception and return an error
+                // message to the client
+                if (index >= sentences.size())
+                    continue;
+
+                Sentence sentence = sentences.get(index);
+                try {
+                    text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
+                } catch (StringIndexOutOfBoundsException sioobe) {
+                    throw new QueryException("The sentence offsets are not correct", sioobe);
+                }
+
+                try {
+                    for (ProcessText.MentionMethod mentionType : mentionTypes) {
+                        List<Mention> localResults = getMentions(text2tag, language, mentionType);
+
+                        // we "shift" the entities offset in case only specific sentences are processed
+                        for (Mention entity : localResults) {
+                            Mention mention = new Mention(entity);
+                            mention.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
+                            mention.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
+                            //mention.setSource(entity.getSource());
+                            results.add(mention);
+                        }
+                    }
+                } catch (Exception e) {
+                    throw new NerdException("NERD error when processing text.", e);
+                }
+            }
+        } else {
+            // we process the whole text
+            try {
+                for (ProcessText.MentionMethod mentionType : mentionTypes) {
+                    List<Mention> localResults = getMentions(text, language, mentionType);
+                    results.addAll(localResults);
+                }
+            } catch (Exception e) {
+                throw new NerdException("NERD error when processing text.", e);
+            }
+        }
+
+        return results;
+    }
+
+    /**
+     * Precondition: list of LayoutToken in the query object is not empty
+     */
+    private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException {
+        List<LayoutToken> tokens = nerdQuery.getTokens();
+        List<Mention> results = new ArrayList<>();
+
+        Language language = nerdQuery.getLanguage();
+
+        // get the list of requested mention types
+        List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
+
+        // we process the whole text, sentence info does not apply to layout documents
+        try {
+            for (ProcessText.MentionMethod mentionType : mentionTypes) {
+                List<Mention> localResults = getMentions(tokens, language, mentionType);
+
+                results.addAll(localResults);
+            }
+        } catch (Exception e) {
+            throw new NerdException("NERD error when processing text.", e);
+        }
+
+        return results;
+    }
+
+    private List<Mention> getMentions(String text, Language language, MentionMethod mentionType) {
+        List<Mention> localResults = new ArrayList<>();
+
+        if (mentionType == MentionMethod.ner) {
+            localResults = processNER(text, language);
+        } else if (mentionType == MentionMethod.wikipedia) {
+            localResults = processWikipedia(text, language);
+        } /*else if (mentionType == ProcessText.MentionMethod.species) {
+            localResults = processSpecies(text, language);
+        }*/
+        return localResults;
+    }
+
+    private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType) {
+        List<Mention> localResults = new ArrayList<>();
+
+        if (mentionType == MentionMethod.ner) {
+            localResults = processNER(tokens, language);
+        } else if (mentionType == MentionMethod.wikipedia) {
+            localResults = processWikipedia(tokens, language);
+        } /*else if (mentionType == ProcessText.MentionMethod.species) {
+            localResults = processSpecies(tokens, language);
+        }*/
+        return localResults;
+    }
+
+    /**
+     * NER processing of some raw text. Generate list of named entity mentions.
+     *
+     * @param text the raw text to be parsed
+     * @return the list of identified mentions
+     */
+    public List<Mention> processNER(String text, Language language) throws NerdException {
+        final List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
+
+        return extractNER(tokens, language);
+    }
+
+    /**
+     * Utility method to process a list of layout tokens and return the NER mentions
+     **/
+    private List<Mention> extractNER(List<LayoutToken> tokens, Language language) {
+        List<Mention> results = new ArrayList<>();
+
+        if (isEmpty(tokens)) {
+            LOGGER.warn("Trying to extract NE mention from empty content. Returning empty list.");
+            return results;
+        }
+
+        String lang = language.getLang();
+        if (!lang.equals("en") && !lang.equals("fr"))
+            return new ArrayList<>();
+
+
+        try {
+            List<Entity> entityResults = nerParsers.extractNE(tokens, language);
+            for (Entity entityResult : entityResults) {
+                Mention mention = new Mention(entityResult);
+                mention.setSource(MentionMethod.ner);
+                results.add(mention);
+            }
+        } catch (Exception e) {
+            LOGGER.error("NER extraction failed", e);
+        }
+
+        return results;
+    }
+
+
+    /**
+     * NER processing of a sequence of LayoutTokens. Generate list of named entity
+     * mentions.
+     *
+     * @param tokens the sequence of LayoutToken objects
+     * @return the list of identified mentions
+     */
+    public List<Mention> processNER(List<LayoutToken> tokens, Language language) throws NerdException {
+        List<Mention> results = extractNER(tokens, language);
+
+        Collections.sort(results);
+
+        // associate bounding boxes to identified mentions
+        List<Mention> finalResults = new ArrayList<>();
+
+        for (Mention entity : results) {
+            // synchronize layout token with the selected n-grams
+            List<LayoutToken> entityTokens = entity.getLayoutTokens();
+
+            if (entityTokens != null)
+                entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
+            else
+                LOGGER.warn("processNER: LayoutToken sequence not found for mention: " + entity.getRawName());
+            // we have an additional check of validity based on language
+            if (validEntity(entity, language.getLang())) {
+                if (!finalResults.contains(entity)) {
+                    finalResults.add(entity);
+                }
+            }
+        }
+
+        return finalResults;
+    }
+
+
+    /**
+     * Processing of some raw text by extracting all non-trivial ngrams.
+     * Generate a list of entity mentions that will be instanciated by
+     * Wikipedia labels (anchors and titles).
+     * We assume here that the text has been dehyphenized before calling this method.
+     *
+     * @param text the raw text to be parsed
+     * @return the list of identified entities.
+     */
+    public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
+        List<Mention> results = new ArrayList<>();
+        if (StringUtils.isBlank(text)) {
+            LOGGER.warn("Trying to extract Wikipedia mentions from empty content. Returning empty list. ");
+            return results;
+        }
+
+        final GrobidAnalyzer grobidAnalyzer = GrobidAnalyzer.getInstance();
+        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang);
+    }
+
+    protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang) {
+        List<StringPos> pool = ngrams(tokens, NGRAM_LENGTH);
+        List<Mention> results = new ArrayList<>();
+
+        // candidates which start and end with a stop word are removed.
+        // beware not to be too aggressive.
+        for (int i = 0; i < pool.size(); i++) {
+            StringPos pos = pool.get(i);
+
+            String rawName = pos.getString();
+            String rawNameLowerCase = rawName.toLowerCase();
+
+            // remove term starting or ending with a stop-word, and term starting with a separator (conservative
+            // it should never be the case)
+            if (stopwords != null) {
+                if ((delimiters.indexOf(rawNameLowerCase.charAt(0)) != -1) ||
+                        stopwords.startsWithStopword(rawNameLowerCase, lang.getLang()) ||
+                        stopwords.endsWithStopword(rawNameLowerCase, lang.getLang())
+                        ) {
+                    continue;
+                }
+            }
+
+            // remove term ending with a separator
+            if (delimiters.indexOf(rawNameLowerCase.charAt(rawNameLowerCase.length() - 1)) != -1) {
+                continue;
+            }
+
+            Mention mention = new Mention(pos.getString(), MentionMethod.wikipedia);
+            mention.setOffsetStart(pos.getOffsetStart());
+            mention.setOffsetEnd(pos.getOffsetStart() + pos.getString().length());
+            mention.setLayoutTokens(pos.getLayoutTokens());
+
+            // remove invalid mentions
+            if (!validEntity(mention, lang.getLang())) {
+                continue;
+            }
+
+            results.add(mention);
+        }
+
+        return results;
+    }
+
+    /**
+     * Use extractMentionsWikipedia(List<LayoutToken> tokens, String lang)
+     */
+    @Deprecated
+    protected List<StringPos> extractMentionsWikipedia(String text, Language lang) {
+        List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
+
+        // candidates which start and end with a stop word are removed.
+        // beware not to be too aggressive.
+        List<Integer> toRemove = new ArrayList<>();
+
+        for (int i = 0; i < pool.size(); i++) {
+            StringPos termPosition = pool.get(i);
+            String termValue = termPosition.getString();
+            //term = term.replace("\n", " ");
+            String termValueLowercase = termValue.toLowerCase();
+
+            /*if (termValueLowercase.indexOf("\n") != -1) {
+                toRemove.add(new Integer(i));
+                continue;
+            }*/
+
+            // remove term starting or ending with a stop-word, and term starting with a separator (conservative
+            // it should never be the case)
+            if (stopwords != null) {
+                if ((delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
+                        stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
+                        stopwords.endsWithStopword(termValueLowercase, lang.getLang())
+                        ) {
+                    toRemove.add(i);
+                    continue;
+                }
+            }
+
+            // remove term ending with a separator (conservative it should never be the case)
+            while (delimiters.indexOf(termValueLowercase.charAt(termValueLowercase.length() - 1)) != -1) {
+                termPosition.setString(termPosition.getString().substring(0, termPosition.getString().length() - 1));
+                termValueLowercase = termValueLowercase.substring(0, termValueLowercase.length() - 1);
+                if (termValueLowercase.length() == 0) {
+                    toRemove.add(i);
+                    continue;
+                }
+            }
+        }
+
+        List<StringPos> subPool = new ArrayList<>();
+        for (int i = 0; i < pool.size(); i++) {
+            if (!toRemove.contains(i)) {
+                subPool.add(pool.get(i));
+            }
+        }
+        return subPool;
+    }
+
+    /**
+     * Processing of some raw text by extracting all non-trivial ngrams.
+     * Generate a list of entity mentions that will be instanciated by
+     * Wikipedia labels (anchors and titles).
+     *
+     * @param tokens the sequence of tokens to be parsed
+     * @return the list of identified entities.
+     */
+    public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException {
+        if ((tokens == null) || (tokens.size() == 0)) {
+            //System.out.println("Content to be processed is empty.");
+            LOGGER.error("Content to be processed is empty.");
+            return null;
+        }
+
+        List<Mention> results = new ArrayList<>();
+        try {
+            List<Mention> subPool = extractMentionsWikipedia(tokens, lang);
+
+            Collections.sort(subPool);
+            for (Mention candidate : subPool) {
+                List<LayoutToken> entityTokens = candidate.getLayoutTokens();
+
+                if (entityTokens != null)
+                    candidate.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
+                else
+                    LOGGER.warn("processWikipedia: LayoutToken sequence not found for mention: " + candidate.rawName);
+                // we have an additional check of validity based on language
+                if (validEntity(candidate, lang.getLang())) {
+                    if (!results.contains(candidate))
+                        results.add(candidate);
+                }
+            }
+        } catch (Exception e) {
+            throw new NerdException("NERD error when processing text.", e);
+        }
+
+        return results;
+    }
+
+    /**
+     * Processing of a vector of weighted terms. We do not control here the textual
+     * mentions by a NER.
+     *
+     * @param terms
+     *		a list of weighted terms
+     * @return
+     * 		the list of identified entities.
+     */
+	/*public List<Mention> processWeightedTerms(List<WeightedTerm> terms) throws NerdException {
+		if (terms == null) {
+			throw new NerdException("Cannot parse the weighted terms, because it is null.");
+		}
+		else if (terms.length() == 0) {
+			System.out.println("The length of the term vector to be processed is 0.");
+			LOGGER.error("The length of the term vector to be processed is 0.");
+			return null;
+		}
+		
+		List<Mention> results = new ArrayList<Mention>();
+		try {
+			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
+		
+			// candidates which start and end with a stop word are removed. 
+			// beware not to be too agressive. 
+			List<Integer> toRemove = new ArrayList<Integer>();
+	
+			for(int i=0; i<pool.size(); i++) {
+				StringPos term1 = pool.get(i);
+				String term = term1.string;
+		
+				List<String> stopwords = allStopwords.get(lang);
+				if (stopwords != null) {
+					for (String stopword : stopwords) {
+						String termLow = term.toLowerCase();
+						if ( (termLow.equals(stopword)) ||
+							 (termLow.startsWith(stopword+ " ")) || 
+							 (termLow.endsWith(" " + stopword)) ) {
+							toRemove.add(new Integer(i));
+						} 
+					}
+				}
+			}
+
+			List<StringPos> subPool = new ArrayList<StringPos>();
+			for(int i=0; i<pool.size(); i++) {
+				if (toRemove.contains(new Integer(i))) {
+					continue;
+				}
+				else {
+					subPool.add(pool.get(i));
+				}
+			}
+		
+			for(StringPos candidate : subPool) {
+		
+				Entity entity = new Entity(candidate.string);
+				
+				org.grobid.core.utilities.OffsetPosition pos = 
+					new org.grobid.core.utilities.OffsetPosition();
+				pos.start = candidate.pos;
+				pos.end = pos.start + candidate.string.length();
+				entity.setOffsets(pos);
+				results.add(entity);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new NerdException("NERD error when processing text.", e);
+		}
+		
+		return results;
+	}*/
+
+    /**
+     * Processing of some raw text by extracting all non-trivial ngrams.
+     * Generate a list of entity mentions that will be instanciated by
+     * Wikipedia labels (anchors and titles).
+     */
+	/*public List<Mention> processWikipedia(NerdQuery nerdQuery) throws NerdException {
+		String text = nerdQuery.getText();
+		String shortText = nerdQuery.getShortText();
+		List<LayoutToken> tokens = nerdQuery.getTokens();
+
+		//if ((text == null) && (shortText == null)) {
+			//LOGGER.info("Cannot parse the given text, because it is null.");
+		//}
+		
+		if ( (text == null) || (text.length() == 0) ) 
+			text = shortText;
+
+		if ( (text == null) || (text.length() == 0) ) {
+			//LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
+			if ( (tokens != null) && (tokens.size() > 0) )
+				text = LayoutTokensUtil.toText(tokens);
+			else {
+				LOGGER.error("All possible content to process are empty - process stops.");
+				return null;
+			}
+		}
+		
+		// source language 
+		String lang = null;
+		Language language = nerdQuery.getLanguage();
+		if (language != null) 
+			lang = language.getLang();
+		
+		if (lang == null) {
+			// the language recognition has not been done upstream of the call to this method, so
+			// let's do it
+			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
+			try {
+				language = languageUtilities.runLanguageId(text);
+				nerdQuery.setLanguage(language);
+				lang = language.getLang();
+				LOGGER.debug(">> identified language: " + lang);
+			}
+			catch(Exception e) {
+				LOGGER.debug("exception language identifier for: " + text);
+			}
+		}
+		
+		if (lang == null) {
+			// default - it might be better to raise an exception?
+			lang = "en";
+			language = new Language(lang, 1.0);
+		}
+		
+		Integer[] processSentence = nerdQuery.getProcessSentence();
+		List<Sentence> sentences = nerdQuery.getSentences();
+		
+		List<Mention> results = null;
+		
+		// do we need to process the whole text only a sentence?
+		if ( ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences) ) {
+			// we process only the indicated sentences
+			String text2tag = null;
+			for(int i=0; i<processSentence.length; i++) {
+				Integer index = processSentence[i];
+			
+				// for robustness, we have to consider index out of the current sentences range
+				// here we ignore it, but we might better raise an exception and return an error
+				// message to the client
+				if (index.intValue() >= sentences.size())
+					continue;
+				Sentence sentence = sentences.get(index.intValue());
+				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
+				try {
+					List<Mention> localResults = processBrutal(text2tag, language);
+
+					// we "shift" the entities offset in case only specific sentences are processed
+					if ( CollectionUtils.isNotEmpty(localResults) ) {
+						for(Mention entity : localResults) {
+							entity.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
+							entity.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
+						}
+						for(Mention entity : localResults) {
+							if (validEntity(entity, lang)) {
+								if (results == null)
+									results = new ArrayList<>();
+								results.add(entity);
+							}
+						}
+					}
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+					throw new NerdException("NERD error when processing text.", e);
+				}
+			}
+		}
+		else {
+			if (CollectionUtils.isNotEmpty(tokens) )
+				return processBrutal(tokens, language);
+			else
+				return processBrutal(text, language);
+		}
+		return results;
+	}*/
+    public List<Sentence> sentenceSegmentation(String text) {
+        AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
+        // convert String into InputStream
+        InputStream is = new ByteArrayInputStream(text.getBytes());
+        // read it with BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        List<List<String>> sentences = segmenter.getSentences(br);
+        List<Sentence> results = new ArrayList<Sentence>();
+
+        if ((sentences == null) || (sentences.size() == 0)) {
+            // there is some text but not in a state so that a sentence at least can be
+            // identified by the sentence segmenter, so we parse it as a single sentence
+            Sentence sentence = new Sentence();
+            OffsetPosition pos = new OffsetPosition();
+            pos.start = 0;
+            pos.end = text.length();
+            sentence.setOffsets(pos);
+            results.add(sentence);
+            return results;
+        }
+
+        // we need to realign with the original sentences, so we have to match it from the text
+        // to be parsed based on the tokenization
+        int offSetSentence = 0;
+        //List<List<String>> trueSentences = new ArrayList<List<String>>();
+        for (List<String> theSentence : sentences) {
+            int next = offSetSentence;
+            for (String token : theSentence) {
+                next = text.indexOf(token, next);
+                next = next + token.length();
+            }
+            List<String> dummy = new ArrayList<String>();
+            //dummy.add(text.substring(offSetSentence, next));
+            //trueSentences.add(dummy);
+            Sentence sentence = new Sentence();
+            OffsetPosition pos = new OffsetPosition();
+            pos.start = offSetSentence;
+            pos.end = next;
+            sentence.setOffsets(pos);
+            results.add(sentence);
+            offSetSentence = next;
+        }
+        return results;
+    }
+
+    public List<StringPos> ngrams(List<LayoutToken> layoutTokens, int ngram) {
+        List<StringPos> ngrams = new ArrayList<>();
+
+        if (isEmpty(layoutTokens)) return ngrams;
+
+        int actualNgram = (ngram * 2) - 1; // for taking into account separators
+
+        for (int i = 0; i < layoutTokens.size(); i++) {
+            if (StringUtils.isEmpty(layoutTokens.get(i).getText()))
+                continue;
+
+            int tmpNgram = layoutTokens.size() - i < actualNgram ? layoutTokens.size() - i : actualNgram;
+
+            for (int n = 1; n <= tmpNgram; n++) {
+                final List<LayoutToken> tokens = layoutTokens.subList(i, i + n);
+                StringPos stringPos = new StringPos(LayoutTokensUtil.toText(tokens), tokens.get(0).getOffset(), tokens);
+
+                ngrams.add(stringPos);
+            }
+        }
+        return ngrams;
+    }
+
 
     public static List<StringPos> ngrams(String str, int ngram, Language lang) {
         int actualNgram = (ngram * 2) - 1; // for taking into account separators
@@ -305,12 +960,12 @@ public class ProcessText {
                                 // when the token is all digit, it often appears in full as such in the
                                 // acronym (e.g. GDF15)
                                 String acronymCurrentPrefix = acronym.getText().substring(0, k + 1);
-//System.out.println("acronymCurrentPrefix: " + acronymCurrentPrefix);
+//System.out.println("acronymCurrentPrefix: " + acronymCurrentPrefix);								
                                 if (acronymCurrentPrefix.endsWith(tok)) {
                                     // there is a full number match
                                     k = k - tok.length() + 1;
                                     numericMatch = true;
-//System.out.println("numericMatch is: " + numericMatch);
+//System.out.println("numericMatch is: " + numericMatch);									
                                 }
                             }
 
@@ -392,19 +1047,11 @@ public class ProcessText {
                         (linkMatcher.end() == acronym.getOffsetEnd()))
                     continue;
                 String entityText = text.substring(linkMatcher.start(), linkMatcher.end());
-            Mention entity = new Mention(entityText);
-            entity.setNormalisedName(base.getRawName());
-            entity.setOffsetStart(base.getOffsetStart());
-            entity.setOffsetEnd(base.getOffsetEnd());
-            entity.setType(null);
-
-                // add bounding box
-//                List<LayoutToken> entityTokens = entity.getLayoutTokens();
-//                if (entityTokens != null) {
-//                    entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
-//                } else
-//                    LOGGER.warn("propagateAcronyms: LayoutToken sequence not found for mention: " + entity.getRawName());
-
+                Mention entity = new Mention(entityText);
+                entity.setNormalisedName(base.getRawName());
+                entity.setOffsetStart(linkMatcher.start());
+                entity.setOffsetEnd(linkMatcher.end());
+                entity.setType(null);
                 if (entities == null)
                     entities = new ArrayList<Mention>();
                 entities.add(entity);
@@ -496,483 +1143,6 @@ public class ProcessText {
             dice = 1.0;
 
         return dice;
-    }
-
-    public static List<List<LayoutToken>> segmentInParagraphs(List<LayoutToken> tokens) {
-        // heuristics: double end of line, if not simple end of line (not aligned with
-        // previous line), and if still not we segment arbitrarly the monolithic block
-        List<List<LayoutToken>> result = new ArrayList<>();
-        result.add(tokens);
-
-        // we recursively segment too large segments, starting with one unique segment
-        // which is the whole text
-
-        while (true) {
-            result = subSsegmentInParagraphs(result);
-            if (!containsTooLargeSegment(result))
-                break;
-        }
-
-        return result;
-    }
-
-    private static boolean containsTooLargeSegment(List<List<LayoutToken>> segments) {
-        for (List<LayoutToken> segment : segments) {
-            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static List<List<LayoutToken>> subSsegmentInParagraphs(List<List<LayoutToken>> segments) {
-        List<List<LayoutToken>> result = new ArrayList<>();
-
-        for (List<LayoutToken> segment : segments) {
-            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
-                // let's try to slice this guy
-                boolean previousEOL = false;
-                int n = 0; // current position in the segment
-                List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
-                for (LayoutToken token : segment) {
-                    currentParagraph.add(token);
-                    if (token.getText().equals("\n")) {
-                        if (previousEOL) {
-                            if (n > MINIMAL_PARAGRAPH_LENGTH) {
-                                // new paragraph
-                                result.add(currentParagraph);
-                                currentParagraph = new ArrayList<LayoutToken>();
-                                n = 0;
-                            }
-                            previousEOL = false;
-                        } else
-                            previousEOL = true;
-                    } else
-                        previousEOL = false;
-                    n++;
-                }
-                result.add(currentParagraph);
-            }
-        }
-
-        if (!containsTooLargeSegment(result))
-            return result;
-
-        // if we fail to to slice with double EOL, let's see if we can do something
-        // with simple EOL
-        segments = result;
-        result = new ArrayList<>();
-        for (List<LayoutToken> segment : segments) {
-            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
-                // let's try to slice this guy
-                int n = 0; // current position in the segment
-                List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
-                for (LayoutToken token : segment) {
-                    currentParagraph.add(token);
-                    if (token.getText().equals("\n")) {
-                        if (n > MINIMAL_PARAGRAPH_LENGTH) {
-                            // new paragraph
-                            result.add(currentParagraph);
-                            currentParagraph = new ArrayList<LayoutToken>();
-                            n = 0;
-                        }
-                    }
-                    n++;
-                }
-                result.add(currentParagraph);
-            }
-        }
-
-        if (!containsTooLargeSegment(result))
-            return result;
-
-        segments = result;
-        result = new ArrayList<>();
-        for (List<LayoutToken> segment : segments) {
-            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
-                // if failure again, we arbitrarly segment
-                int n = 0;
-                List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
-                for (LayoutToken token : segment) {
-                    currentParagraph.add(token);
-                    if (n == MAXIMAL_PARAGRAPH_LENGTH - 1) {
-                        // new paragraph
-                        result.add(currentParagraph);
-                        currentParagraph = new ArrayList<LayoutToken>();
-                        n = 0;
-                    }
-                    n++;
-                }
-                result.add(currentParagraph);
-            } else {
-                // no need to further segment
-                result.add(segment);
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Processing of a vector of weighted terms. We do not control here the textual
-     * mentions by a NER.
-     *
-     * @param terms
-     *		a list of weighted terms
-     * @return
-     * 		the list of identified entities.
-     */
-	/*public List<Mention> processWeightedTerms(List<WeightedTerm> terms) throws NerdException {
-		if (terms == null) {
-			throw new NerdException("Cannot parse the weighted terms, because it is null.");
-		}
-		else if (terms.length() == 0) {
-			System.out.println("The length of the term vector to be processed is 0.");
-			LOGGER.error("The length of the term vector to be processed is 0.");
-			return null;
-		}
-		
-		List<Mention> results = new ArrayList<Mention>();
-		try {
-			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
-		
-			// candidates which start and end with a stop word are removed. 
-			// beware not to be too agressive. 
-			List<Integer> toRemove = new ArrayList<Integer>();
-	
-			for(int i=0; i<pool.size(); i++) {
-				StringPos term1 = pool.get(i);
-				String term = term1.string;
-		
-				List<String> stopwords = allStopwords.get(lang);
-				if (stopwords != null) {
-					for (String stopword : stopwords) {
-						String termLow = term.toLowerCase();
-						if ( (termLow.equals(stopword)) ||
-							 (termLow.startsWith(stopword+ " ")) || 
-							 (termLow.endsWith(" " + stopword)) ) {
-							toRemove.add(new Integer(i));
-						} 
-					}
-				}
-			}
-
-			List<StringPos> subPool = new ArrayList<StringPos>();
-			for(int i=0; i<pool.size(); i++) {
-				if (toRemove.contains(new Integer(i))) {
-					continue;
-				}
-				else {
-					subPool.add(pool.get(i));
-				}
-			}
-		
-			for(StringPos candidate : subPool) {
-		
-				Entity entity = new Entity(candidate.string);
-				
-				org.grobid.core.utilities.OffsetPosition pos = 
-					new org.grobid.core.utilities.OffsetPosition();
-				pos.start = candidate.pos;
-				pos.end = pos.start + candidate.string.length();
-				entity.setOffsets(pos);
-				results.add(entity);
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new NerdException("NERD error when processing text.", e);
-		}
-		
-		return results;
-	}*/
-
-    /**
-     * This is the entry point for a NerdQuery to have its textual content processed.
-     * The mthod will generate a list of recognized named entities produced by a list
-     * of mention recognition modules specified in the list field 'mention' of the NerdQuery
-     * object. Each mention recognition method will be applied sequencially in the order
-     * given in the list field 'mention'.
-     *
-     * @param nerdQuery the NERD query to be processed
-     * @return the list of identified mentions
-     */
-    public List<Mention> process(NerdQuery nerdQuery) throws NerdException {
-        String text = nerdQuery.getTextOrShortText();
-
-        List<LayoutToken> tokens = nerdQuery.getTokens();
-
-        if (isBlank(text) && isEmpty(tokens)) {
-            LOGGER.warn("No content to process.");
-            return new ArrayList<>();
-        }
-
-        if (isNotBlank(text))
-            return processText(nerdQuery);
-        else
-            return processTokens(nerdQuery);
-    }
-
-    /**
-     * Precondition: text in the query object is not empty and
-     * we assume here that the text has been dehyphenized before calling this method.
-     */
-    private List<Mention> processText(NerdQuery nerdQuery) throws NerdException {
-        String text = nerdQuery.getTextOrShortText();
-        text = UnicodeUtil.normaliseText(text);
-
-        List<Mention> results = new ArrayList<>();
-
-        Language language = nerdQuery.getLanguage();
-
-        Integer[] processSentence = nerdQuery.getProcessSentence();
-        List<Sentence> sentences = nerdQuery.getSentences();
-
-        // get the list of requested mention types
-        List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
-
-        // do we need to process the whole text only a sentence?
-        if (ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences)) {
-            // we process only the indicated sentences
-            String text2tag = null;
-            for (int i = 0; i < processSentence.length; i++) {
-                Integer index = processSentence[i];
-
-                // for robustness, we have to consider index out of the current sentences range
-                // here we ignore it, but we might better raise an exception and return an error
-                // message to the client
-                if (index >= sentences.size())
-                    continue;
-
-                Sentence sentence = sentences.get(index);
-                try {
-                    text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
-                } catch (StringIndexOutOfBoundsException sioobe) {
-                    throw new QueryException("The sentence offsets are not correct", sioobe);
-                }
-
-                try {
-                    for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                        List<Mention> localResults = getMentions(text2tag, language, mentionType);
-
-                        // we "shift" the entities offset in case only specific sentences are processed
-                        for (Mention entity : localResults) {
-                            Mention mention = new Mention(entity);
-                            mention.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
-                            mention.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
-                            //mention.setSource(entity.getSource());
-                            results.add(mention);
-                        }
-                    }
-                } catch (Exception e) {
-                    throw new NerdException("NERD error when processing text.", e);
-                }
-            }
-        } else {
-            // we process the whole text
-            try {
-                for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                    List<Mention> localResults = getMentions(text, language, mentionType);
-                    results.addAll(localResults);
-                }
-            } catch (Exception e) {
-                throw new NerdException("NERD error when processing text.", e);
-            }
-        }
-
-        return results;
-    }
-
-    /**
-     * Precondition: list of LayoutToken in the query object is not empty
-     */
-    private List<Mention> processTokens(NerdQuery nerdQuery) throws NerdException {
-        List<LayoutToken> tokens = nerdQuery.getTokens();
-        List<Mention> results = new ArrayList<>();
-
-        Language language = nerdQuery.getLanguage();
-
-        // get the list of requested mention types
-        List<ProcessText.MentionMethod> mentionTypes = nerdQuery.getMentions();
-
-        // we process the whole text, sentence info does not apply to layout documents
-        try {
-            for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                List<Mention> localResults = getMentions(tokens, language, mentionType);
-
-                results.addAll(localResults);
-            }
-        } catch (Exception e) {
-            throw new NerdException("NERD error when processing text.", e);
-        }
-
-        return results;
-    }
-
-    private List<Mention> getMentions(String text, Language language, MentionMethod mentionType) {
-        List<Mention> localResults = new ArrayList<>();
-
-        if (mentionType == MentionMethod.ner) {
-            localResults = processNER(text, language);
-        } else if (mentionType == MentionMethod.wikipedia) {
-            localResults = processWikipedia(text, language);
-        } /*else if (mentionType == ProcessText.MentionMethod.species) {
-            localResults = processSpecies(text, language);
-        }*/
-        return localResults;
-    }
-
-    private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType) {
-        List<Mention> localResults = new ArrayList<>();
-
-        if (mentionType == MentionMethod.ner) {
-            localResults = processNER(tokens, language);
-        } else if (mentionType == MentionMethod.wikipedia) {
-            localResults = processWikipedia(tokens, language);
-        } /*else if (mentionType == ProcessText.MentionMethod.species) {
-            localResults = processSpecies(tokens, language);
-        }*/
-        return localResults;
-    }
-
-    /**
-     * NER processing of some raw text. Generate list of named entity mentions.
-     *
-     * @param text the raw text to be parsed
-     * @return the list of identified mentions
-     */
-    public List<Mention> processNER(String text, Language language) throws NerdException {
-        final List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
-
-        return extractNER(tokens, language);
-    }
-
-    /**
-     * Utility method to process a list of layout tokens and return the NER mentions
-     **/
-    private List<Mention> extractNER(List<LayoutToken> tokens, Language language) {
-        List<Mention> results = new ArrayList<>();
-
-        if (isEmpty(tokens)) {
-            LOGGER.warn("Trying to extract NE mention from empty content. Returning empty list.");
-            return results;
-        }
-
-        String lang = language.getLang();
-        if (!lang.equals("en") && !lang.equals("fr"))
-            return new ArrayList<>();
-
-
-        try {
-            List<Entity> entityResults = nerParsers.extractNE(tokens, language);
-            for (Entity entityResult : entityResults) {
-                Mention mention = new Mention(entityResult);
-                mention.setSource(MentionMethod.ner);
-                results.add(mention);
-            }
-        } catch (Exception e) {
-            LOGGER.error("NER extraction failed", e);
-        }
-
-        return results;
-    }
-
-    /**
-     * NER processing of a sequence of LayoutTokens. Generate list of named entity
-     * mentions.
-     *
-     * @param tokens the sequence of LayoutToken objects
-     * @return the list of identified mentions
-     */
-    public List<Mention> processNER(List<LayoutToken> tokens, Language language) throws NerdException {
-        List<Mention> results = extractNER(tokens, language);
-
-        Collections.sort(results);
-
-        // associate bounding boxes to identified mentions
-        List<Mention> finalResults = new ArrayList<>();
-
-        for (Mention entity : results) {
-            // synchronize layout token with the selected n-grams
-            List<LayoutToken> entityTokens = entity.getLayoutTokens();
-
-            if (entityTokens != null)
-                entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
-            else
-                LOGGER.warn("processNER: LayoutToken sequence not found for mention: " + entity.getRawName());
-            // we have an additional check of validity based on language
-            if (validEntity(entity, language.getLang())) {
-                if (!finalResults.contains(entity)) {
-                    finalResults.add(entity);
-                }
-            }
-        }
-
-        return finalResults;
-    }
-
-    /**
-     * Processing of some raw text by extracting all non-trivial ngrams.
-     * Generate a list of entity mentions that will be instanciated by
-     * Wikipedia labels (anchors and titles).
-     * We assume here that the text has been dehyphenized before calling this method.
-     *
-     * @param text the raw text to be parsed
-     * @return the list of identified entities.
-     */
-    public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
-        List<Mention> results = new ArrayList<>();
-        if (StringUtils.isBlank(text)) {
-            LOGGER.warn("Trying to extract Wikipedia mentions from empty content. Returning empty list. ");
-            return results;
-        }
-
-        final GrobidAnalyzer grobidAnalyzer = GrobidAnalyzer.getInstance();
-        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang);
-    }
-
-    protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang) {
-        List<StringPos> pool = ngrams(tokens, NGRAM_LENGTH);
-        List<Mention> results = new ArrayList<>();
-
-        // candidates which start and end with a stop word are removed.
-        // beware not to be too aggressive.
-        for (int i = 0; i < pool.size(); i++) {
-            StringPos pos = pool.get(i);
-
-            String rawName = pos.getString();
-            String rawNameLowerCase = rawName.toLowerCase();
-
-            // remove term starting or ending with a stop-word, and term starting with a separator (conservative
-            // it should never be the case)
-            if (stopwords != null) {
-                if ((delimiters.indexOf(rawNameLowerCase.charAt(0)) != -1) ||
-                        stopwords.startsWithStopword(rawNameLowerCase, lang.getLang()) ||
-                        stopwords.endsWithStopword(rawNameLowerCase, lang.getLang())
-                        ) {
-                    continue;
-                }
-            }
-
-            // remove term ending with a separator
-            if (delimiters.indexOf(rawNameLowerCase.charAt(rawNameLowerCase.length() - 1)) != -1) {
-                continue;
-            }
-
-            Mention mention = new Mention(pos.getString(), MentionMethod.wikipedia);
-            mention.setOffsetStart(pos.getOffsetStart());
-            mention.setOffsetEnd(pos.getOffsetStart() + pos.getString().length());
-            mention.setLayoutTokens(pos.getLayoutTokens());
-
-            // remove invalid mentions
-            if (!validEntity(mention, lang.getLang())) {
-                continue;
-            }
-
-            results.add(mention);
-        }
-
-        return results;
     }
 
     /*private uk.ac.man.entitytagger.matching.Matcher matcher = null;
@@ -1091,289 +1261,123 @@ public class ProcessText {
     	return finalResults;
     }*/
 
-    /**
-     * Use extractMentionsWikipedia(List<LayoutToken> tokens, String lang)
-     */
-    @Deprecated
-    protected List<StringPos> extractMentionsWikipedia(String text, Language lang) {
-        List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
+    public static int MINIMAL_PARAGRAPH_LENGTH = 100;
+    public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
 
-        // candidates which start and end with a stop word are removed.
-        // beware not to be too aggressive.
-        List<Integer> toRemove = new ArrayList<>();
+    public static List<List<LayoutToken>> segmentInParagraphs(List<LayoutToken> tokens) {
+        // heuristics: double end of line, if not simple end of line (not aligned with
+        // previous line), and if still not we segment arbitrarly the monolithic block
+        List<List<LayoutToken>> result = new ArrayList<>();
+        result.add(tokens);
 
-        for (int i = 0; i < pool.size(); i++) {
-            StringPos termPosition = pool.get(i);
-            String termValue = termPosition.getString();
-            //term = term.replace("\n", " ");
-            String termValueLowercase = termValue.toLowerCase();
+        // we recursively segment too large segments, starting with one unique segment
+        // which is the whole text
 
-            /*if (termValueLowercase.indexOf("\n") != -1) {
-                toRemove.add(new Integer(i));
-                continue;
-            }*/
+        while (true) {
+            result = subSsegmentInParagraphs(result);
+            if (!containsTooLargeSegment(result))
+                break;
+        }
 
-            // remove term starting or ending with a stop-word, and term starting with a separator (conservative
-            // it should never be the case)
-            if (stopwords != null) {
-                if ((delimiters.indexOf(termValueLowercase.charAt(0)) != -1) ||
-                        stopwords.startsWithStopword(termValueLowercase, lang.getLang()) ||
-                        stopwords.endsWithStopword(termValueLowercase, lang.getLang())
-                        ) {
-                    toRemove.add(i);
-                    continue;
+        return result;
+    }
+
+    private static boolean containsTooLargeSegment(List<List<LayoutToken>> segments) {
+        for (List<LayoutToken> segment : segments) {
+            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private static List<List<LayoutToken>> subSsegmentInParagraphs(List<List<LayoutToken>> segments) {
+        List<List<LayoutToken>> result = new ArrayList<>();
+
+        for (List<LayoutToken> segment : segments) {
+            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+                // let's try to slice this guy
+                boolean previousEOL = false;
+                int n = 0; // current position in the segment
+                List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
+                for (LayoutToken token : segment) {
+                    currentParagraph.add(token);
+                    if (token.getText().equals("\n")) {
+                        if (previousEOL) {
+                            if (n > MINIMAL_PARAGRAPH_LENGTH) {
+                                // new paragraph
+                                result.add(currentParagraph);
+                                currentParagraph = new ArrayList<LayoutToken>();
+                                n = 0;
+                            }
+                            previousEOL = false;
+                        } else
+                            previousEOL = true;
+                    } else
+                        previousEOL = false;
+                    n++;
                 }
+                result.add(currentParagraph);
             }
+        }
 
-            // remove term ending with a separator (conservative it should never be the case)
-            while (delimiters.indexOf(termValueLowercase.charAt(termValueLowercase.length() - 1)) != -1) {
-                termPosition.setString(termPosition.getString().substring(0, termPosition.getString().length() - 1));
-                termValueLowercase = termValueLowercase.substring(0, termValueLowercase.length() - 1);
-                if (termValueLowercase.length() == 0) {
-                    toRemove.add(i);
-                    continue;
+        if (!containsTooLargeSegment(result))
+            return result;
+
+        // if we fail to to slice with double EOL, let's see if we can do something
+        // with simple EOL
+        segments = result;
+        result = new ArrayList<>();
+        for (List<LayoutToken> segment : segments) {
+            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+                // let's try to slice this guy
+                int n = 0; // current position in the segment
+                List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
+                for (LayoutToken token : segment) {
+                    currentParagraph.add(token);
+                    if (token.getText().equals("\n")) {
+                        if (n > MINIMAL_PARAGRAPH_LENGTH) {
+                            // new paragraph
+                            result.add(currentParagraph);
+                            currentParagraph = new ArrayList<LayoutToken>();
+                            n = 0;
+                        }
+                    }
+                    n++;
                 }
+                result.add(currentParagraph);
             }
         }
 
-        List<StringPos> subPool = new ArrayList<>();
-        for (int i = 0; i < pool.size(); i++) {
-            if (!toRemove.contains(i)) {
-                subPool.add(pool.get(i));
-            }
-        }
-        return subPool;
-    }
+        if (!containsTooLargeSegment(result))
+            return result;
 
-    /**
-     * Processing of some raw text by extracting all non-trivial ngrams.
-     * Generate a list of entity mentions that will be instanciated by
-     * Wikipedia labels (anchors and titles).
-     *
-     * @param tokens the sequence of tokens to be parsed
-     * @return the list of identified entities.
-     */
-    public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException {
-        if ((tokens == null) || (tokens.size() == 0)) {
-            //System.out.println("Content to be processed is empty.");
-            LOGGER.error("Content to be processed is empty.");
-            return null;
-        }
-
-        List<Mention> results = new ArrayList<>();
-        try {
-            List<Mention> subPool = extractMentionsWikipedia(tokens, lang);
-
-            Collections.sort(subPool);
-            for (Mention candidate : subPool) {
-                List<LayoutToken> entityTokens = candidate.getLayoutTokens();
-
-                if (entityTokens != null)
-                    candidate.setBoundingBoxes(BoundingBoxCalculator.calculate(entityTokens));
-                else
-                    LOGGER.warn("processWikipedia: LayoutToken sequence not found for mention: " + candidate.rawName);
-                // we have an additional check of validity based on language
-                if (validEntity(candidate, lang.getLang())) {
-                    if (!results.contains(candidate))
-                        results.add(candidate);
+        segments = result;
+        result = new ArrayList<>();
+        for (List<LayoutToken> segment : segments) {
+            if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
+                // if failure again, we arbitrarly segment
+                int n = 0;
+                List<LayoutToken> currentParagraph = new ArrayList<LayoutToken>();
+                for (LayoutToken token : segment) {
+                    currentParagraph.add(token);
+                    if (n == MAXIMAL_PARAGRAPH_LENGTH - 1) {
+                        // new paragraph
+                        result.add(currentParagraph);
+                        currentParagraph = new ArrayList<LayoutToken>();
+                        n = 0;
+                    }
+                    n++;
                 }
-            }
-        } catch (Exception e) {
-            throw new NerdException("NERD error when processing text.", e);
-        }
-
-        return results;
-    }
-
-    /**
-     * Processing of some raw text by extracting all non-trivial ngrams.
-     * Generate a list of entity mentions that will be instanciated by
-     * Wikipedia labels (anchors and titles).
-     */
-	/*public List<Mention> processWikipedia(NerdQuery nerdQuery) throws NerdException {
-		String text = nerdQuery.getText();
-		String shortText = nerdQuery.getShortText();
-		List<LayoutToken> tokens = nerdQuery.getTokens();
-
-		//if ((text == null) && (shortText == null)) {
-			//LOGGER.info("Cannot parse the given text, because it is null.");
-		//}
-
-		if ( (text == null) || (text.length() == 0) )
-			text = shortText;
-
-		if ( (text == null) || (text.length() == 0) ) {
-			//LOGGER.info("The length of the text to be parsed is 0. Look at the layout tokens.");
-			if ( (tokens != null) && (tokens.size() > 0) )
-				text = LayoutTokensUtil.toText(tokens);
-			else {
-				LOGGER.error("All possible content to process are empty - process stops.");
-				return null;
-			}
-		}
-
-		// source language
-		String lang = null;
-		Language language = nerdQuery.getLanguage();
-		if (language != null)
-			lang = language.getLang();
-
-		if (lang == null) {
-			// the language recognition has not been done upstream of the call to this method, so
-			// let's do it
-			LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
-			try {
-				language = languageUtilities.runLanguageId(text);
-				nerdQuery.setLanguage(language);
-				lang = language.getLang();
-				LOGGER.debug(">> identified language: " + lang);
-			}
-			catch(Exception e) {
-				LOGGER.debug("exception language identifier for: " + text);
-			}
-		}
-
-		if (lang == null) {
-			// default - it might be better to raise an exception?
-			lang = "en";
-			language = new Language(lang, 1.0);
-		}
-
-		Integer[] processSentence = nerdQuery.getProcessSentence();
-		List<Sentence> sentences = nerdQuery.getSentences();
-
-		List<Mention> results = null;
-
-		// do we need to process the whole text only a sentence?
-		if ( ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences) ) {
-			// we process only the indicated sentences
-			String text2tag = null;
-			for(int i=0; i<processSentence.length; i++) {
-				Integer index = processSentence[i];
-
-				// for robustness, we have to consider index out of the current sentences range
-				// here we ignore it, but we might better raise an exception and return an error
-				// message to the client
-				if (index.intValue() >= sentences.size())
-					continue;
-				Sentence sentence = sentences.get(index.intValue());
-				text2tag = text.substring(sentence.getOffsetStart(), sentence.getOffsetEnd());
-				try {
-					List<Mention> localResults = processBrutal(text2tag, language);
-
-					// we "shift" the entities offset in case only specific sentences are processed
-					if ( CollectionUtils.isNotEmpty(localResults) ) {
-						for(Mention entity : localResults) {
-							entity.setOffsetStart(sentence.getOffsetStart() + entity.getOffsetStart());
-							entity.setOffsetEnd(sentence.getOffsetStart() + entity.getOffsetEnd());
-						}
-						for(Mention entity : localResults) {
-							if (validEntity(entity, lang)) {
-								if (results == null)
-									results = new ArrayList<>();
-								results.add(entity);
-							}
-						}
-					}
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-					throw new NerdException("NERD error when processing text.", e);
-				}
-			}
-		}
-		else {
-			if (CollectionUtils.isNotEmpty(tokens) )
-				return processBrutal(tokens, language);
-			else
-				return processBrutal(text, language);
-		}
-		return results;
-	}*/
-    public List<Sentence> sentenceSegmentation(String text) {
-        AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
-        // convert String into InputStream
-        InputStream is = new ByteArrayInputStream(text.getBytes());
-        // read it with BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        List<List<String>> sentences = segmenter.getSentences(br);
-        List<Sentence> results = new ArrayList<Sentence>();
-
-        if ((sentences == null) || (sentences.size() == 0)) {
-            // there is some text but not in a state so that a sentence at least can be
-            // identified by the sentence segmenter, so we parse it as a single sentence
-            Sentence sentence = new Sentence();
-            OffsetPosition pos = new OffsetPosition();
-            pos.start = 0;
-            pos.end = text.length();
-            sentence.setOffsets(pos);
-            results.add(sentence);
-            return results;
-        }
-
-        // we need to realign with the original sentences, so we have to match it from the text
-        // to be parsed based on the tokenization
-        int offSetSentence = 0;
-        //List<List<String>> trueSentences = new ArrayList<List<String>>();
-        for (List<String> theSentence : sentences) {
-            int next = offSetSentence;
-            for (String token : theSentence) {
-                next = text.indexOf(token, next);
-                next = next + token.length();
-            }
-            List<String> dummy = new ArrayList<String>();
-            //dummy.add(text.substring(offSetSentence, next));
-            //trueSentences.add(dummy);
-            Sentence sentence = new Sentence();
-            OffsetPosition pos = new OffsetPosition();
-            pos.start = offSetSentence;
-            pos.end = next;
-            sentence.setOffsets(pos);
-            results.add(sentence);
-            offSetSentence = next;
-        }
-        return results;
-    }
-
-    public List<StringPos> ngrams(List<LayoutToken> layoutTokens, int ngram) {
-        List<StringPos> ngrams = new ArrayList<>();
-
-        if (isEmpty(layoutTokens)) return ngrams;
-
-        int actualNgram = (ngram * 2) - 1; // for taking into account separators
-
-        for (int i = 0; i < layoutTokens.size(); i++) {
-            if (StringUtils.isEmpty(layoutTokens.get(i).getText()))
-                continue;
-
-            int tmpNgram = layoutTokens.size() - i < actualNgram ? layoutTokens.size() - i : actualNgram;
-
-            for (int n = 1; n <= tmpNgram; n++) {
-                final List<LayoutToken> tokens = layoutTokens.subList(i, i + n);
-                StringPos stringPos = new StringPos(LayoutTokensUtil.toText(tokens), tokens.get(0).getOffset(), tokens);
-
-                ngrams.add(stringPos);
+                result.add(currentParagraph);
+            } else {
+                // no need to further segment
+                result.add(segment);
             }
         }
-        return ngrams;
-    }
 
-
-    /**
-     * Case context where a token appears
-     */
-    public enum CaseContext {
-        /* token is found in lower cased text */
-        lower,
-
-        /* token is found in UPPER CASED TEXT */
-        upper,
-
-        /* token is found in Text Where Every Word Starts With A Capital Letter */
-        upperFirst,
-
-        /* token is found in text with a Healthy mixture of capitalization (probably normal text) */
-        mixed
+        return result;
     }
 
     // mention recognition methods
