@@ -147,7 +147,7 @@ public class NerdRestProcessQuery {
         List<Mention> mentions = processText.process(nerdQuery);
 
         // inject explicit acronyms
-        mentions = ProcessText.acronymCandidates(nerdQuery, mentions);
+        mentions = processText.acronymCandidates(nerdQuery, mentions);
 
         if (originalEntities == null) {
             nerdQuery.setAllEntities(mentions);
