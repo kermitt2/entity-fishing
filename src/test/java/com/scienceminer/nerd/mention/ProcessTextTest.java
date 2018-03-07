@@ -36,7 +36,7 @@ public class ProcessTextTest {
     public void testAcronymsStringAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
 
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0));
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(input, new Language("en", 1.0));
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -50,7 +50,7 @@ public class ProcessTextTest {
     public void testAcronymsTokensAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens);
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens);
         assertThat(acronyms.entrySet(), hasSize(1));
 
         final ArrayList<Mention> keys = new ArrayList<>(acronyms.keySet());
@@ -62,11 +62,34 @@ public class ProcessTextTest {
     }
 
     @Test
+    public void testAcronymsTokens() {
+        String input = "Figure 4. \n" +
+                "Canonical Correspondence Analysis (CCA) diagram showing the ordination of anopheline species along the\n" +
+                "first two axes and their correlation with environmental variables. The first axis is horizontal, second vertical. Direction\n" +
+                "and length of arrows shows the degree of correlation between mosquito larvae and the variables.";
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens);
+
+        assertNotNull(acronyms);
+        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+            Mention base = entry.getValue();
+            Mention acronym = entry.getKey();
+
+            assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "CCA");
+            assertEquals(base.getRawName(), "Canonical Correspondence Analysis");
+
+            assertThat(acronym.getOffsetStart(), is(46));
+            assertThat(acronym.getOffsetEnd(), is(49));
+        }
+    }
+
+
+    @Test
     public void testAcronymsStringMixedCase() {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
                 "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
 
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(input, new Language("en", 1.0));
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(input, new Language("en", 1.0));
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -86,7 +109,7 @@ public class ProcessTextTest {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
                 "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = ProcessText.acronymCandidates(tokens);
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens);
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();
@@ -194,7 +217,7 @@ public class ProcessTextTest {
     public void testNGram_old_oneGram_shouldWork() throws Exception {
         final String input = "this is it.";
 
-        final List<StringPos> result = ProcessText.ngrams(input, 1, new Language("en"));
+        final List<StringPos> result = processText.ngrams(input, 1, new Language("en"));
         System.out.println(result);
 
         assertThat(result, hasSize(6));
@@ -209,18 +232,18 @@ public class ProcessTextTest {
     public void testNGram_old_biGram_shouldWork() throws Exception {
         final String input = "this is it.";
 
-        final List<StringPos> result = ProcessText.ngrams(input, 2, new Language("en"));
-        System.out.println(result);
+        final List<StringPos> result = processText.ngrams(input, 2, new Language("en"));
+//        System.out.println(result);
 
-        assertThat(result, hasSize(6));
+        assertThat(result, hasSize(15));
         assertThat(result.get(0), is(new StringPos("this", 0)));
-        assertThat(result.get(1), is(new StringPos("this ", 4)));
-        assertThat(result.get(2), is(new StringPos(" ", 5)));
-        assertThat(result.get(3), is(new StringPos(" is", 7)));
+        assertThat(result.get(1), is(new StringPos("this ", 0)));
+        assertThat(result.get(2), is(new StringPos("this is", 0)));
+        assertThat(result.get(3), is(new StringPos(" ", 4)));
     }
 
     @Test
-    public void testNGram_new_oneGram_shouldWork() throws Exception {
+    public void testNGram_LayoutTokens_oneGram_shouldWork() throws Exception {
         final String input = "this is it.";
 
         final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()

@@ -9,6 +9,7 @@ import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Filter;
+import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -24,13 +25,12 @@ import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.factory.GrobidFactory;
+import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.utilities.IOUtilities;
-import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -176,12 +176,7 @@ public class NerdRestProcessFile {
                     //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
                     //workingQuery.setEntities(null);
 
-                    // since the titles have likely to be upper case, we move them lowercase to avoid trying to
-                    // process acronym by mistake
-
-                    for(LayoutToken token : titleTokens) {
-                        token.setText(lowerCase(token.getText()));
-                    }
+                    StringProcessor.adjustLetterCase(titleTokens);
 
                     List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                     if (newEntities != null) {
@@ -420,6 +415,8 @@ public class NerdRestProcessFile {
     }
 
 
+
+
     //TODO: we should move it downstream
     public static void tuneSpeciesMentions(NerdQuery nerdQuery) {
         if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
@@ -507,7 +504,7 @@ public class NerdRestProcessFile {
 				}*/
 
                 // inject explicit acronyms
-                nerEntities = ProcessText.acronymCandidates(workingQuery, nerEntities);
+                nerEntities = processText.acronymCandidates(workingQuery, nerEntities);
 
 				/*if (nerEntities != null) {
 					// we keep only entities not conflicting with the ones already present in the query

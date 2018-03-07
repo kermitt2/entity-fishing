@@ -542,28 +542,28 @@ public class ProcessText {
 			LOGGER.error("The length of the term vector to be processed is 0.");
 			return null;
 		}
-		
+
 		List<Mention> results = new ArrayList<Mention>();
 		try {
 			List<StringPos> pool = ngrams(text, NGRAM_LENGTH);
-		
-			// candidates which start and end with a stop word are removed. 
-			// beware not to be too agressive. 
+
+			// candidates which start and end with a stop word are removed.
+			// beware not to be too agressive.
 			List<Integer> toRemove = new ArrayList<Integer>();
-	
+
 			for(int i=0; i<pool.size(); i++) {
 				StringPos term1 = pool.get(i);
 				String term = term1.string;
-		
+
 				List<String> stopwords = allStopwords.get(lang);
 				if (stopwords != null) {
 					for (String stopword : stopwords) {
 						String termLow = term.toLowerCase();
 						if ( (termLow.equals(stopword)) ||
-							 (termLow.startsWith(stopword+ " ")) || 
+							 (termLow.startsWith(stopword+ " ")) ||
 							 (termLow.endsWith(" " + stopword)) ) {
 							toRemove.add(new Integer(i));
-						} 
+						}
 					}
 				}
 			}
@@ -577,12 +577,12 @@ public class ProcessText {
 					subPool.add(pool.get(i));
 				}
 			}
-		
+
 			for(StringPos candidate : subPool) {
-		
+
 				Entity entity = new Entity(candidate.string);
-				
-				org.grobid.core.utilities.OffsetPosition pos = 
+
+				org.grobid.core.utilities.OffsetPosition pos =
 					new org.grobid.core.utilities.OffsetPosition();
 				pos.start = candidate.pos;
 				pos.end = pos.start + candidate.string.length();
@@ -594,7 +594,7 @@ public class ProcessText {
 			e.printStackTrace();
 			throw new NerdException("NERD error when processing text.", e);
 		}
-		
+
 		return results;
 	}*/
 
@@ -611,8 +611,8 @@ public class ProcessText {
 		//if ((text == null) && (shortText == null)) {
 			//LOGGER.info("Cannot parse the given text, because it is null.");
 		//}
-		
-		if ( (text == null) || (text.length() == 0) ) 
+
+		if ( (text == null) || (text.length() == 0) )
 			text = shortText;
 
 		if ( (text == null) || (text.length() == 0) ) {
@@ -624,13 +624,13 @@ public class ProcessText {
 				return null;
 			}
 		}
-		
-		// source language 
+
+		// source language
 		String lang = null;
 		Language language = nerdQuery.getLanguage();
-		if (language != null) 
+		if (language != null)
 			lang = language.getLang();
-		
+
 		if (lang == null) {
 			// the language recognition has not been done upstream of the call to this method, so
 			// let's do it
@@ -645,25 +645,25 @@ public class ProcessText {
 				LOGGER.debug("exception language identifier for: " + text);
 			}
 		}
-		
+
 		if (lang == null) {
 			// default - it might be better to raise an exception?
 			lang = "en";
 			language = new Language(lang, 1.0);
 		}
-		
+
 		Integer[] processSentence = nerdQuery.getProcessSentence();
 		List<Sentence> sentences = nerdQuery.getSentences();
-		
+
 		List<Mention> results = null;
-		
+
 		// do we need to process the whole text only a sentence?
 		if ( ArrayUtils.isNotEmpty(processSentence) && CollectionUtils.isNotEmpty(sentences) ) {
 			// we process only the indicated sentences
 			String text2tag = null;
 			for(int i=0; i<processSentence.length; i++) {
 				Integer index = processSentence[i];
-			
+
 				// for robustness, we have to consider index out of the current sentences range
 				// here we ignore it, but we might better raise an exception and return an error
 				// message to the client
@@ -827,7 +827,7 @@ public class ProcessText {
      * @param entities  the current list of mentions to complete with acronyms
      * @return the updated list of Entity
      */
-    public static List<Mention> acronymCandidates(NerdQuery nerdQuery, List<Mention> entities) {
+    public List<Mention> acronymCandidates(NerdQuery nerdQuery, List<Mention> entities) {
         if (entities == null)
             entities = new ArrayList<>();
 
@@ -883,36 +883,29 @@ public class ProcessText {
             for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
                 Mention base = entry.getValue();
                 Mention acronym = entry.getKey();
-                System.out.println("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
+                LOGGER.debug("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
 
-                Mention localEntity = new Mention();
-                localEntity.setRawName(acronym.getRawName());
-                localEntity.setOffsetStart(acronym.getOffsetStart());
-                localEntity.setOffsetEnd(acronym.getOffsetEnd());
+                Mention localEntity = new Mention(acronym);
                 localEntity.setIsAcronym(true);
-                localEntity.setNormalisedName(base.getRawName());
-                localEntity.setSource(base.getSource());
                 entities.add(localEntity);
             }
 
             // propagate back mentions
-            List<Mention> acronymEntities = ProcessText.propagateAcronyms(nerdQuery);
+            List<Mention> acronymEntities = propagateAcronyms(nerdQuery);
             if (acronymEntities != null) {
-                for (Mention entity : acronymEntities) {
-                    entities.add(entity);
-                }
+                entities.addAll(acronymEntities);
             }
         }
 
         return entities;
     }
 
-    public static Map<Mention, Mention> acronymCandidates(String text, Language language) {
+    public Map<Mention, Mention> acronymCandidates(String text, Language language) {
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
         return acronymCandidates(tokens);
     }
 
-    public static Map<Mention, Mention> acronymCandidates(List<LayoutToken> tokens) {
+    public Map<Mention, Mention> acronymCandidates(List<LayoutToken> tokens) {
         Map<Mention, Mention> acronyms = null;
 
         // detect possible acronym
@@ -940,7 +933,7 @@ public class ProcessText {
             }
 
             if ((acronym != null) && (!openParenthesis)) {
-                // check if this possible acronym matches an immediatly preceeding term
+                // check if this possible acronym matches an immediately preceeding term
                 int j = posParenthesis;
                 int k = acronym.getText().length();
                 boolean stop = false;
@@ -951,7 +944,7 @@ public class ProcessText {
                         j--;
                         if (tokens.get(j) != null) {
                             String tok = tokens.get(j).getText();
-                            if ((tok.trim().length() == 0) || (delimiters.indexOf(tok) != -1))
+                            if (tok.trim().length() == 0 || delimiters.contains(tok))
                                 continue;
                             boolean numericMatch = false;
                             if ((tok.length() > 1) && StringUtils.isNumeric(tok)) {
@@ -960,22 +953,24 @@ public class ProcessText {
                                 // when the token is all digit, it often appears in full as such in the
                                 // acronym (e.g. GDF15)
                                 String acronymCurrentPrefix = acronym.getText().substring(0, k + 1);
-//System.out.println("acronymCurrentPrefix: " + acronymCurrentPrefix);								
+//System.out.println("acronymCurrentPrefix: " + acronymCurrentPrefix);
                                 if (acronymCurrentPrefix.endsWith(tok)) {
                                     // there is a full number match
                                     k = k - tok.length() + 1;
                                     numericMatch = true;
-//System.out.println("numericMatch is: " + numericMatch);									
+//System.out.println("numericMatch is: " + numericMatch);
                                 }
                             }
 
                             if ((tok.toLowerCase().charAt(0) == c) || numericMatch) {
                                 if (k == 0) {
                                     if (acronyms == null)
-                                        acronyms = new HashMap<Mention, Mention>();
+                                        acronyms = new HashMap<>();
+                                    List<LayoutToken> baseTokens = new ArrayList<>();
                                     StringBuilder builder = new StringBuilder();
                                     for (int l = j; l < posParenthesis; l++) {
                                         builder.append(tokens.get(l));
+                                        baseTokens.add(tokens.get(l));
                                     }
 
                                     Mention entityAcronym = new Mention();
@@ -984,10 +979,12 @@ public class ProcessText {
                                     entityAcronym.setOffsetStart(acronym.getOffset());
                                     entityAcronym.setOffsetEnd(acronym.getOffset() + acronym.getText().length());
                                     entityAcronym.setType(null);
+                                    entityAcronym.setLayoutTokens(Arrays.asList(acronym));
 
                                     Mention entityBase = new Mention(builder.toString().trim());
                                     entityBase.setOffsetStart(tokens.get(j).getOffset());
                                     entityBase.setOffsetEnd(tokens.get(j).getOffset() + entityBase.getRawName().length());
+                                    entityBase.setLayoutTokens(baseTokens);
 
                                     acronyms.put(entityAcronym, entityBase);
                                     stop = true;
@@ -1009,9 +1006,9 @@ public class ProcessText {
     }
 
     /**
-     * Add entities corresponding to acronym defintions to a query
+     * Add entities corresponding to acronym definitions to a query
      */
-    public static List<Mention> propagateAcronyms(NerdQuery nerdQuery) {
+    public List<Mention> propagateAcronyms(NerdQuery nerdQuery) {
 
         if ((nerdQuery == null) || (nerdQuery.getContext() == null))
             return null;
@@ -1049,11 +1046,13 @@ public class ProcessText {
                 String entityText = text.substring(linkMatcher.start(), linkMatcher.end());
                 Mention entity = new Mention(entityText);
                 entity.setNormalisedName(base.getRawName());
-                entity.setOffsetStart(linkMatcher.start());
-                entity.setOffsetEnd(linkMatcher.end());
+                entity.setOffsetStart(acronym.getOffsetStart());
+                entity.setOffsetEnd(acronym.getOffsetEnd());
                 entity.setType(null);
+                entity.setBoundingBoxes(BoundingBoxCalculator.calculate(base.getLayoutTokens()));
+
                 if (entities == null)
-                    entities = new ArrayList<Mention>();
+                    entities = new ArrayList<>();
                 entities.add(entity);
                 toBeAdded.put(entity, base);
             }
@@ -1062,8 +1061,7 @@ public class ProcessText {
         for (Map.Entry<Mention, Mention> entry : toBeAdded.entrySet()) {
             Mention entity = entry.getKey();
             Mention base = entry.getValue();
-            if (acronyms.get(entity) == null)
-                acronyms.put(entity, base);
+            acronyms.putIfAbsent(entity, base);
         }
         return entities;
     }
@@ -1400,6 +1398,4 @@ public class ProcessText {
             return name;
         }
     }
-
-    ;
 }
