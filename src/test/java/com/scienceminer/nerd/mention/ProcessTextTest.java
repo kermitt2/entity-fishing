@@ -1,5 +1,7 @@
 package com.scienceminer.nerd.mention;
 
+import com.scienceminer.nerd.disambiguation.NerdContext;
+import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.analyzers.GrobidAnalyzer;
@@ -15,6 +17,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 
@@ -44,6 +48,16 @@ public class ProcessTextTest {
             assertEquals(input.substring(acronym.getOffsetStart(), acronym.getOffsetEnd()).trim(), "PGM");
             assertEquals(base.getRawName(), "probabilistic graphical model");
         }
+    }
+
+    @Test
+    @Ignore("Not yet finished")
+    public void testAcronymCandidates() {
+        String input = "We are working with Pulse Calculation Tarmac (P.C.T.) during our discovery on science";
+
+        final Map<Mention, Mention> acronyms = processText.acronymCandidates(input, new Language("en"));
+
+        assertThat(acronyms.keySet(), hasSize(1));
     }
 
     @Test
@@ -81,6 +95,119 @@ public class ProcessTextTest {
             assertThat(acronym.getOffsetStart(), is(46));
             assertThat(acronym.getOffsetEnd(), is(49));
         }
+    }
+
+    @Test
+    @Ignore("Failing test")
+    public void testPropagateAcronyms_textSyncronisedWithLayoutTokens_shouldWork() {
+        String input = "The Pulse Covariant Transmission (PCT) is a great deal. We are going to make it great again.\n " +
+                "We propose a new methodology where the PCT results are improving in the gamma ray action matter.";
+        final Language language = new Language("en");
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, language);
+
+        NerdQuery aQuery = new NerdQuery();
+        aQuery.setText(input);
+        aQuery.setTokens(tokens);
+
+        final HashMap<Mention, Mention> acronyms = new HashMap<>();
+        Mention base = new Mention("Pulse Covariant Transmission");
+        base.setOffsetStart(4);
+        base.setOffsetEnd(32);
+        final LayoutToken baseLayoutToken1 = new LayoutToken("Pulse");
+        baseLayoutToken1.setOffset(4);
+        final LayoutToken baseLayoutToken2 = new LayoutToken(" ");
+        baseLayoutToken2.setOffset(9);
+        final LayoutToken baseLayoutToken3 = new LayoutToken("Covariant");
+        baseLayoutToken3.setOffset(10);
+        final LayoutToken baseLayoutToken4 = new LayoutToken(" ");
+        baseLayoutToken4.setOffset(19);
+        final LayoutToken baseLayoutToken5 = new LayoutToken("Transmission");
+        baseLayoutToken5.setOffset(20);
+        final LayoutToken baseLayoutToken6 = new LayoutToken(" ");
+        baseLayoutToken6.setOffset(21);
+
+        Mention acronym = new Mention("PCT");
+        acronym.setNormalisedName("Pulse Covariant Transmission");
+        acronym.setOffsetStart(34);
+        acronym.setOffsetEnd(37);
+        acronym.setIsAcronym(true);
+        final LayoutToken acronymLayoutToken = new LayoutToken("PCT");
+        acronymLayoutToken.setOffset(34);
+        acronym.setLayoutTokens(Arrays.asList(acronymLayoutToken));
+
+        acronyms.put(acronym, base);
+
+        final NerdContext nerdContext = new NerdContext();
+        nerdContext.setAcronyms(acronyms);
+        aQuery.setContext(nerdContext);
+
+        final List<Mention> mentions = processText.propagateAcronyms(aQuery);
+        assertThat(mentions, hasSize(1));
+        assertThat(mentions.get(0).getRawName(), is("PCT"));
+        assertThat(mentions.get(0).getOffsetStart(), is(133));
+        assertThat(mentions.get(0).getOffsetEnd(), is(136));
+        assertThat(mentions.get(0).getLayoutTokens(), is(Arrays.asList(tokens.get(53))));
+        assertThat(mentions.get(0).getBoundingBoxes(), hasSize(greaterThan(0)));
+    }
+
+    @Test
+    @Ignore("Failing test")
+    public void testPropagateAcronyms_textNotSyncronisedWithLayoutTokens_shouldWork() {
+        String input = "The Pulse Covariant Transmission (PCT) is a great deal. We are going to make it great again.\n " +
+                "We propose a new methodology where the PCT results are improving in the gamma ray action matter.";
+        final Language language = new Language("en");
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, language);
+        tokens = tokens.stream()
+                .map(layoutToken -> {
+                    layoutToken.setOffset(layoutToken.getOffset() + 10);
+                    return layoutToken;
+                }).collect(Collectors.toList());
+
+        NerdQuery aQuery = new NerdQuery();
+        aQuery.setText(input);
+        aQuery.setTokens(tokens);
+
+        processText.acronymCandidates(tokens);
+
+        final HashMap<Mention, Mention> acronyms = new HashMap<>();
+        Mention base = new Mention("Pulse Covariant Transmission");
+        base.setOffsetStart(14);
+        base.setOffsetEnd(42);
+        final LayoutToken baseLayoutToken1 = new LayoutToken("Pulse");
+        baseLayoutToken1.setOffset(4);
+        final LayoutToken baseLayoutToken2 = new LayoutToken(" ");
+        baseLayoutToken2.setOffset(9);
+        final LayoutToken baseLayoutToken3 = new LayoutToken("Covariant");
+        baseLayoutToken3.setOffset(10);
+        final LayoutToken baseLayoutToken4 = new LayoutToken(" ");
+        baseLayoutToken4.setOffset(19);
+        final LayoutToken baseLayoutToken5 = new LayoutToken("Transmission");
+        baseLayoutToken5.setOffset(20);
+        final LayoutToken baseLayoutToken6 = new LayoutToken(" ");
+        baseLayoutToken6.setOffset(21);
+
+        Mention acronym = new Mention("PCT");
+        acronym.setNormalisedName("Pulse Covariant Transmission");
+        acronym.setOffsetStart(44);
+        acronym.setOffsetEnd(47);
+        acronym.setIsAcronym(true);
+        final LayoutToken acronymLayoutToken = new LayoutToken("PCT");
+        acronymLayoutToken.setOffset(44);
+        acronym.setLayoutTokens(Arrays.asList(acronymLayoutToken));
+
+        acronyms.put(acronym, base);
+
+        final NerdContext nerdContext = new NerdContext();
+        nerdContext.setAcronyms(acronyms);
+        aQuery.setContext(nerdContext);
+
+        final List<Mention> mentions = processText.propagateAcronyms(aQuery);
+        assertThat(mentions, hasSize(1));
+        assertThat(mentions.get(0).getRawName(), is("PCT"));
+        assertThat(mentions.get(0).getOffsetStart(), is(143));
+        assertThat(mentions.get(0).getOffsetEnd(), is(146));
+        assertThat(mentions.get(0).getBoundingBoxes(), hasSize(greaterThan(0)));
+        assertThat(mentions.get(0).getLayoutTokens(), is(Arrays.asList(tokens.get(63))));
     }
 
 
