@@ -92,7 +92,7 @@ NOTE: If you are migrating from version 0.0.2 you can only download additional p
 
 #. Run the service:
    ::
-      $ ./nerd.sh
+      $ mvn clean jetty:run
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 

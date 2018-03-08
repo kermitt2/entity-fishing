@@ -8,6 +8,33 @@ This page explains differences between versions and how to adapt in order to sup
 From 0.0.2 to 0.0.3
 *******************
 
+0. the data under `data/db` must be updated with the embedding LMDB. Unzip the following files in `data/db`:  
+
+    **Linux**
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-en.zip (2.9 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-fr.zip (1.2 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-de.zip (3.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-es.zip (0.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-it.zip (0.7 GB)
+
+    **Max OSX**
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-en-embeddings.osx.zip (2.9 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-fr-embeddings.osx.zip (1.2 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-de-embeddings.osx.zip (1.9 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-es-embeddings.osx.zip (0.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-it-embeddings.osx.zip (0.7 GB)
+
+
 1. the parameter `OnlyNER` has been deprecated and is limited to text processing only (not PDF) for English and French.
 This option will be removed in the next release.
 
