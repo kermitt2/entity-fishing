@@ -28,41 +28,61 @@ Then install the compiled indexed data:
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-kb.zip (4.1 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-en.zip (5.5 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-en.zip (8.3 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-fr.zip (1.9 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-fr.zip (2.9 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-de.zip (2.0 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-de.zip (3.8 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-es.zip (2.6 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-es.zip (2.2 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-it.zip (2.3 GB)
-
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/embeddings/embeddings.zip (4.0 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-it.zip (2.0 GB)
 
     **Max OSX**
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-kb.osx.zip (4.1 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-en.osx.zip (5.4 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-en.osx.zip (8.3 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-fr.osx.zip (1.8 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-fr.osx.zip (2.9 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-de.osx.zip (2.0 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-de.osx.zip (3.8 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-es.osx.zip (1.4 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-es.osx.zip (2.2 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3/db-it.osx.zip (1.3 GB)
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-it.osx.zip (2.0 GB)
 
-        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/embeddings/embeddings.zip (4.0 GB)
+
+NOTE: If you are migrating from version 0.0.2 you can only download additional part with embeddings (they can be unpacked directly under the ``data/db/`` directory):
+    **Linux**
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-en.zip (2.9 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-fr.zip (1.2 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-de.zip (3.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-es.zip (0.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-it.zip (0.7 GB)
+
+    **Max OSX**
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-en-embeddings.osx.zip (2.9 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-fr-embeddings.osx.zip (1.2 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-de-embeddings.osx.zip (1.9 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-es-embeddings.osx.zip (0.8 GB)
+
+        - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-it-embeddings.osx.zip (0.7 GB)
 
 
 #. Unzip the 6 first db archives files under ``data/db/``.
 
     This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
-    The uncompressed data is about 60 GB.
-
-#. Unzip the embeddings archives files (``embeddings.zip``) under ``data/``.
+    The uncompressed data is about 80 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
