@@ -887,6 +887,8 @@ public class ProcessText {
 
                 Mention localEntity = new Mention(acronym);
                 localEntity.setIsAcronym(true);
+                localEntity.setNormalisedName(base.getRawName());
+                localEntity.setSource(base.getSource());
                 entities.add(localEntity);
             }
 
@@ -1046,8 +1048,8 @@ public class ProcessText {
                 String entityText = text.substring(linkMatcher.start(), linkMatcher.end());
                 Mention entity = new Mention(entityText);
                 entity.setNormalisedName(base.getRawName());
-                entity.setOffsetStart(acronym.getOffsetStart());
-                entity.setOffsetEnd(acronym.getOffsetEnd());
+                entity.setOffsetStart(linkMatcher.start());
+                entity.setOffsetEnd(linkMatcher.end());
                 entity.setType(null);
                 entity.setBoundingBoxes(BoundingBoxCalculator.calculate(base.getLayoutTokens()));
 
