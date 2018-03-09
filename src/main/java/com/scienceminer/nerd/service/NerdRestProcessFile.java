@@ -171,14 +171,15 @@ public class NerdRestProcessFile {
 
                 // title
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
+                List<LayoutToken> adjustedTitle = new ArrayList<>();
                 if (titleTokens != null) {
                     LOGGER.debug("Process title... ");
                     //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
                     //workingQuery.setEntities(null);
 
-                    StringProcessor.adjustLetterCase(titleTokens);
-
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
+                    adjustedTitle = StringProcessor.adjustLetterCase(titleTokens);
+//
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(adjustedTitle, null, workingQuery);
                     if (newEntities != null) {
                         LOGGER.debug(newEntities.size() + " nerd entities");
                         /*for(NerdEntity entity : newEntities) {

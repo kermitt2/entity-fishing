@@ -3,6 +3,7 @@ package com.scienceminer.nerd.disambiguation;
 import java.util.*;
 
 import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
@@ -2004,10 +2005,10 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		if (!bestLabel.exists()) {
 
 			// full upper or lower case
-			if (ProcessText.isAllUpperCase(normalisedString)) {
+			if (StringProcessor.isAllUpperCase(normalisedString)) {
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
 			}
-			else if (ProcessText.isAllLowerCase(normalisedString)) {
+			else if (StringProcessor.isAllLowerCase(normalisedString)) {
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 			}
 			else {
@@ -2083,12 +2084,12 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 					labels.add(label);
 
 			// full upper or lower case
-			if (ProcessText.isAllUpperCase(normalisedString)) {
+			if (StringProcessor.isAllUpperCase(normalisedString)) {
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
 				if (label.exists())
 					labels.add(label);
 			}
-			else if (ProcessText.isAllLowerCase(normalisedString)) {
+			else if (StringProcessor.isAllLowerCase(normalisedString)) {
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 				if (label.exists())
 					labels.add(label);
@@ -2121,7 +2122,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			}
 
 			// try variant cases
-			if (ProcessText.isAllUpperCase(normalisedString)) {
+			if (StringProcessor.isAllUpperCase(normalisedString)) {
 				// a usual pattern in all upper case that is missed above is a combination of
 				// acronym + normal term, e.g. NY RANGERS -> NY Rangers
 				List<LayoutToken> localTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(normalisedString, new Language(lang, 1.0));

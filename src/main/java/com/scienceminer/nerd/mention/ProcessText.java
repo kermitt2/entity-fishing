@@ -14,6 +14,7 @@ import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.Stopwords;
 import com.scienceminer.nerd.utilities.StringPos;
+import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -124,21 +125,7 @@ public class ProcessText {
         /* token is found in text with a Healthy mixture of capitalization (probably normal text) */
         mixed
     }
-
-    public static boolean isAllUpperCase(String text) {
-        if (text.equals(text.toUpperCase()))
-            return true;
-        else
-            return false;
-    }
-
-    public static boolean isAllLowerCase(String text) {
-        if (text.equals(text.toLowerCase()))
-            return true;
-        else
-            return false;
-    }
-
+    
     /**
      * This is the entry point for a NerdQuery to have its textual content processed.
      * The mthod will generate a list of recognized named entities produced by a list
@@ -787,7 +774,7 @@ public class ProcessText {
                     continue;
                 currentPos = str.indexOf(words.get(i), currentPos - 1);
                 StringPos stringp = new StringPos();
-                stringp.setString(concat(words, i, i + n));
+                stringp.setString(StringProcessor.concat(words, i, i + n));
                 stringp.setOffsetStart(currentPos);
                 ngrams.add(stringp);
             }
@@ -795,13 +782,7 @@ public class ProcessText {
         return ngrams;
     }
 
-    public static String concat(List<String> words, int start, int end) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = start; i < end; i++) {
-            sb.append(words.get(i));
-        }
-        return sb.toString();
-    }
+
 
     /**
      * Validity criteria for a raw entity. The entity raw string must not be

@@ -27,9 +27,9 @@ public class StringProcessorTest {
         String input = "THIS IS A TITLE";
 
         final List<LayoutToken> layoutTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input);
-        StringProcessor.adjustLetterCase(layoutTokens);
+        final List<LayoutToken> result = StringProcessor.adjustLetterCase(layoutTokens);
 
-        assertThat(LayoutTokensUtil.toText(layoutTokens), is(lowerCase(input)));
+        assertThat(LayoutTokensUtil.toText(result), is(lowerCase(input)));
         
     }
 
@@ -39,9 +39,9 @@ public class StringProcessorTest {
         String input = "THIS IS A TITLE.";
 
         final List<LayoutToken> layoutTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input);
-        StringProcessor.adjustLetterCase(layoutTokens);
+        final List<LayoutToken> result = StringProcessor.adjustLetterCase(layoutTokens);
 
-        assertThat(LayoutTokensUtil.toText(layoutTokens), is(lowerCase(input)));
+        assertThat(LayoutTokensUtil.toText(result), is(lowerCase(input)));
 
     }
 
@@ -51,10 +51,9 @@ public class StringProcessorTest {
         String input = "This Is A Title";
 
         final List<LayoutToken> layoutTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input);
-        StringProcessor.adjustLetterCase(layoutTokens);
+        final List<LayoutToken> result = StringProcessor.adjustLetterCase(layoutTokens);
 
-        assertThat(LayoutTokensUtil.toText(layoutTokens), is(input.charAt(0) + lowerCase(input.substring(1, input.length()))));
-
+        assertThat(LayoutTokensUtil.toText(result), is(input.charAt(0) + lowerCase(input.substring(1, input.length()))));
     }
 
     @Test
@@ -63,9 +62,9 @@ public class StringProcessorTest {
         String input = "This Is A, Title";
 
         final List<LayoutToken> layoutTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input);
-        StringProcessor.adjustLetterCase(layoutTokens);
+        final List<LayoutToken> result = StringProcessor.adjustLetterCase(layoutTokens);
 
-        assertThat(LayoutTokensUtil.toText(layoutTokens), is(input.charAt(0) + lowerCase(input.substring(1, input.length()))));
+        assertThat(LayoutTokensUtil.toText(result), is(input.charAt(0) + lowerCase(input.substring(1, input.length()))));
 
     }
 }
