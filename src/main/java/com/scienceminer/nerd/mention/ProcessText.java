@@ -962,6 +962,7 @@ public class ProcessText {
                                     entityAcronym.setOffsetStart(acronym.getOffset());
                                     entityAcronym.setOffsetEnd(acronym.getOffset() + acronym.getText().length());
                                     entityAcronym.setType(null);
+                                    entityAcronym.setIsAcronym(true);
                                     entityAcronym.setLayoutTokens(Arrays.asList(acronym));
 
                                     Mention entityBase = new Mention(builder.toString().trim());

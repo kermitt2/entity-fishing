@@ -25,7 +25,6 @@ import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
@@ -38,6 +37,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.*;
 
+import static com.scienceminer.nerd.utilities.StringProcessor.isAllUpperCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
@@ -171,15 +171,12 @@ public class NerdRestProcessFile {
 
                 // title
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
-                List<LayoutToken> adjustedTitle = new ArrayList<>();
                 if (titleTokens != null) {
                     LOGGER.debug("Process title... ");
                     //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
                     //workingQuery.setEntities(null);
 
-                    adjustedTitle = StringProcessor.adjustLetterCase(titleTokens);
-//
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(adjustedTitle, null, workingQuery);
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                     if (newEntities != null) {
                         LOGGER.debug(newEntities.size() + " nerd entities");
                         /*for(NerdEntity entity : newEntities) {
@@ -190,7 +187,7 @@ public class NerdRestProcessFile {
                 }
                 //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
                 //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-                
+
                 // abstract
                 List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                 if (abstractTokens != null) {
@@ -205,7 +202,7 @@ public class NerdRestProcessFile {
                 }
                 //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
                 //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-                
+
                 // keywords
                 List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                 if (keywordTokens != null) {
@@ -416,8 +413,6 @@ public class NerdRestProcessFile {
     }
 
 
-
-
     //TODO: we should move it downstream
     public static void tuneSpeciesMentions(NerdQuery nerdQuery) {
         if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.species) &&
@@ -462,9 +457,9 @@ public class NerdRestProcessFile {
         return null;
     }
 
-    private static List<NerdEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations,
-                                                                NerdContext documentContext,
-                                                                NerdQuery workingQuery) {
+    private List<NerdEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations,
+                                                         NerdContext documentContext,
+                                                         NerdQuery workingQuery) {
         // text of the selected segment
         List<NerdEntity> resultingEntities = new ArrayList<>();
 
@@ -486,6 +481,12 @@ public class NerdRestProcessFile {
             try {
                 // ner
                 List<Mention> nerEntities = processText.process(workingQuery);
+
+                if (isTitle(layoutTokens) && needToLowerCase(layoutTokens)) {
+                    for (Mention nerEntity : nerEntities) {
+                        nerEntity.setNormalisedName(lowerCase(nerEntity.getRawName()));
+                    }
+                }
 				/*if (nerEntities != null)
 					LOGGER.debug(nerEntities.size() + " ner entities");
 				else
@@ -559,25 +560,70 @@ LOGGER.debug(workingQuery.getEntities().size() + " nerd entities");	*/
         return workingQuery.getEntities();
     }
 
-    private static List<NerdEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens,
-                                                               NerdContext documentContext,
-                                                               NerdQuery workingQuery) {
+    protected boolean isTitle(List<LayoutToken> layoutTokens) {
+        int count = 0;
+        int total = 0;
+        for (LayoutToken layoutToken : layoutTokens) {
+            if (!TextUtilities.delimiters.contains(layoutToken.getText())) {
+                if (layoutToken.getLabels().contains(TaggingLabels.HEADER_TITLE)) {
+                    count++;
+                }
+                total++;
+            }
+        }
+
+        return count == total;
+    }
+
+    private boolean needToLowerCase(List<LayoutToken> layoutTokens) {
+        if (isAllUpperCase(LayoutTokensUtil.toText(layoutTokens))) {
+            return true;
+        } else {
+            int count = 0;
+            int total = 0;
+            for (LayoutToken token : layoutTokens) {
+                final String tokenText = token.getText();
+                if (!TextUtilities.fullPunctuations.contains(tokenText)) {
+                    total++;
+
+                    if (tokenText.length() == 1) {
+                        if (TextUtilities.isAllUpperCase(tokenText)) {
+                            count++;
+                        }
+                    } else if (tokenText.length() > 1) {
+                        if (Character.isUpperCase(tokenText.charAt(0))
+                                && TextUtilities.isAllLowerCase(tokenText.substring(1, tokenText.length()))) {
+                            count++;
+                        }
+                    }
+                }
+            }
+            if (count == total) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<NerdEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens,
+                                                        NerdContext documentContext,
+                                                        NerdQuery workingQuery) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
         return processLayoutTokenSequences(layoutTokenizations, documentContext, workingQuery);
     }
 
-    private static List<NerdEntity> processDocumentPart(SortedSet<DocumentPiece> documentParts,
-                                                        Document doc,
-                                                        NerdContext documentContext,
-                                                        NerdQuery workingQuery) {
+    private List<NerdEntity> processDocumentPart(SortedSet<DocumentPiece> documentParts,
+                                                 Document doc,
+                                                 NerdContext documentContext,
+                                                 NerdQuery workingQuery) {
         List<LayoutToken> tokenizationParts = Document.getTokenizationParts(documentParts, doc.getTokenizations());
         return processLayoutTokenSequence(tokenizationParts, documentContext, workingQuery);
     }
 
-    private static List<NerdEntity> processCitations(List<BibDataSet> resCitations,
-                                                     Document doc,
-                                                     NerdQuery workingQuery) {
+    private List<NerdEntity> processCitations(List<BibDataSet> resCitations,
+                                              Document doc,
+                                              NerdQuery workingQuery) {
         return NerdEngine.getInstance().solveCitations(resCitations);
     }
 

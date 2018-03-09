@@ -1,7 +1,5 @@
 package com.scienceminer.nerd.utilities;
 
-import org.apache.commons.lang.StringUtils;
-import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.TextUtilities;
@@ -33,7 +31,7 @@ public class StringProcessor {
             int total = 0;
             for (LayoutToken token : result) {
                 final String tokenText = token.getText();
-                if(!TextUtilities.fullPunctuations.contains(tokenText)) {
+                if(!TextUtilities.delimiters.contains(tokenText)) {
                     total++;
 
                     if (tokenText.length() == 1) {

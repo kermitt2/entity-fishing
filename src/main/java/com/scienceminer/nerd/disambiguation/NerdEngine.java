@@ -543,7 +543,7 @@ public class NerdEngine {
 	}
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesMultiple(List<NerdEntity> entities, String lang) {
-		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<NerdEntity, List<NerdCandidate>>();
+		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
