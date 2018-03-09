@@ -796,7 +796,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-ner</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.grobid</groupId>
