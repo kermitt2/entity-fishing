@@ -23,7 +23,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 
 public class ProcessTextTest {
-    private String testPath = null;
     private ProcessText processText = null;
 
     static final String testText = "Other factors were also at play, said Felix Boni, head of research at " +
@@ -208,6 +207,85 @@ public class ProcessTextTest {
         assertThat(mentions.get(0).getOffsetEnd(), is(146));
         assertThat(mentions.get(0).getBoundingBoxes(), hasSize(greaterThan(0)));
         assertThat(mentions.get(0).getLayoutTokens(), is(Arrays.asList(tokens.get(63))));
+    }
+
+    @Test
+    @Ignore("To be activated once propagateLayout has been patched")
+    public void testPropagateAcronyms_textNotSyncronisedWithLayoutTokens2_shouldWork() {
+        String input = "The Pulse Covariant Transmission (P.C.T.) is a great deal. We are going to make it great again.\n " +
+                "We propose a new methodology where the P.C.T. results are improving in the gamma ray action matter. " +
+                "P.C.T. is good for you";
+        final Language language = new Language("en");
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, language);
+        tokens = tokens.stream()
+                .map(layoutToken -> {
+                    layoutToken.setOffset(layoutToken.getOffset() + 10);
+                    return layoutToken;
+                }).collect(Collectors.toList());
+
+        NerdQuery aQuery = new NerdQuery();
+        aQuery.setText(input);
+        aQuery.setTokens(tokens);
+
+        processText.acronymCandidates(tokens);
+
+        final HashMap<Mention, Mention> acronyms = new HashMap<>();
+        Mention base = new Mention("Pulse Covariant Transmission");
+        base.setOffsetStart(14);
+        base.setOffsetEnd(42);
+        final LayoutToken baseLayoutToken1 = new LayoutToken("Pulse");
+        baseLayoutToken1.setOffset(4);
+        final LayoutToken baseLayoutToken2 = new LayoutToken(" ");
+        baseLayoutToken2.setOffset(9);
+        final LayoutToken baseLayoutToken3 = new LayoutToken("Covariant");
+        baseLayoutToken3.setOffset(10);
+        final LayoutToken baseLayoutToken4 = new LayoutToken(" ");
+        baseLayoutToken4.setOffset(19);
+        final LayoutToken baseLayoutToken5 = new LayoutToken("Transmission");
+        baseLayoutToken5.setOffset(20);
+        final LayoutToken baseLayoutToken6 = new LayoutToken(" ");
+        baseLayoutToken6.setOffset(21);
+
+        Mention acronym = new Mention("P.C.T.");
+        acronym.setNormalisedName("Pulse Covariant Transmission");
+        acronym.setOffsetStart(44);
+        acronym.setOffsetEnd(47);
+        acronym.setIsAcronym(true);
+        final LayoutToken acronymLayoutToken1 = new LayoutToken("P");
+        acronymLayoutToken1.setOffset(44);
+        final LayoutToken acronymLayoutToken2 = new LayoutToken(".");
+        acronymLayoutToken2.setOffset(45);
+        final LayoutToken acronymLayoutToken3 = new LayoutToken("C");
+        acronymLayoutToken3.setOffset(46);
+        final LayoutToken acronymLayoutToken4 = new LayoutToken(".");
+        acronymLayoutToken4.setOffset(47);
+        final LayoutToken acronymLayoutToken5 = new LayoutToken("T");
+        acronymLayoutToken5.setOffset(48);
+        final LayoutToken acronymLayoutToken6 = new LayoutToken(".");
+        acronymLayoutToken6.setOffset(49);
+
+        acronym.setLayoutTokens(Arrays.asList(acronymLayoutToken1, acronymLayoutToken2,
+                acronymLayoutToken3, acronymLayoutToken4, acronymLayoutToken5, acronymLayoutToken6));
+
+        acronyms.put(acronym, base);
+
+        final NerdContext nerdContext = new NerdContext();
+        nerdContext.setAcronyms(acronyms);
+        aQuery.setContext(nerdContext);
+
+        final List<Mention> mentions = processText.propagateAcronyms(aQuery);
+        assertThat(mentions, hasSize(2));
+        assertThat(mentions.get(0).getRawName(), is("P.C.T."));
+        assertThat(mentions.get(0).getOffsetStart(), is(146));
+        assertThat(mentions.get(0).getOffsetEnd(), is(152));
+        assertThat(mentions.get(0).getBoundingBoxes(), hasSize(greaterThan(0)));
+        assertThat(mentions.get(0).getLayoutTokens(), hasSize(6));
+
+        assertThat(mentions.get(1).getRawName(), is("P.C.T."));
+        assertThat(mentions.get(1).getOffsetStart(), is(207));
+        assertThat(mentions.get(1).getOffsetEnd(), is(212));
+        assertThat(mentions.get(1).getBoundingBoxes(), hasSize(greaterThan(0)));
+        assertThat(mentions.get(1).getLayoutTokens(), hasSize(6));
     }
 
 
