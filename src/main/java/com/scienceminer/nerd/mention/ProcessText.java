@@ -1003,50 +1003,60 @@ public class ProcessText {
             return null;
 
         List<Mention> entities = null;
-        String text = nerdQuery.getText();
         List<LayoutToken> tokens = nerdQuery.getTokens();
 
-        if ((text == null) || (text.length() == 0)) {
-            //LOGGER.info("The length of the text to be processed is 0. Look at the layout tokens.");
-            if ((tokens != null) && (tokens.size() > 0))
-                text = LayoutTokensUtil.toText(tokens);
-            else {
-                LOGGER.error("All possible content to process are empty - process stops.");
-                return null;
+        // iterate for all token in layout token list
+        searchToken: for (LayoutToken token : tokens){
+            // get the text and the offsets for the current token
+            String textInLayoutToken = token.getText();
+            int offsetStart = token.getOffset();
+
+            Map<Mention, Mention> toBeAdded = new HashMap<>();
+            // find the acronym saved in the map to be compared with the current token
+            searchAcronym: for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+                Mention acronym = entry.getKey();
+                Mention base = entry.getValue();
+
+                // get the acronym, the offset and the length
+                String acronymText = acronym.getRawName();
+                int lengthComplexAcronym = acronymText.length();
+                int offsetEnd = offsetStart + lengthComplexAcronym;
+
+                // compare the acronym with the current token whether they are exactly the same string or not
+                if (textInLayoutToken.equals(acronymText)) {
+                    // ignore the current acronym to avoid having it twice
+                    if ((offsetStart == acronym.getOffsetStart()) && (offsetEnd == acronym.getOffsetEnd()))
+                        continue searchToken;
+                    else {
+                        Mention entity = new Mention(acronymText);
+                        entity.setNormalisedName(base.getRawName());
+                        entity.setOffsetStart(offsetStart);
+                        entity.setOffsetEnd(offsetEnd);
+                        entity.setLayoutTokens(entity.getLayoutTokens());
+                        entity.setBoundingBoxes(BoundingBoxCalculator.calculate(acronym.getLayoutTokens()));
+                        if (entities == null)
+                            entities = new ArrayList<>();
+                        entities.add(entity);
+                        toBeAdded.put(entity, base);
+                    }
+                }
+                else {
+                    // the acronym and the current token are not the same string but they have the same length, just ignore it
+                    if(textInLayoutToken.length() == lengthComplexAcronym){
+                        continue searchToken;
+                    } else{
+                        // the acronym and the current token are not the same string and they have not the same length as well, so it's probably the case of acronym with dots, for example C.C.A., P.C.T., S.V.M.
+                        // still work on it
+                    }
+                }
+            }
+            for (Map.Entry<Mention, Mention> entry : toBeAdded.entrySet()) {
+                Mention entity = entry.getKey();
+                Mention base = entry.getValue();
+                acronyms.putIfAbsent(entity, base);
             }
         }
 
-        Map<Mention, Mention> toBeAdded = new HashMap<>();
-        for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
-            Mention acronym = entry.getKey();
-            Mention base = entry.getValue();
-            Pattern linkPattern = Pattern.compile(acronym.getRawName());
-            Matcher linkMatcher = linkPattern.matcher(text);
-            while (linkMatcher.find()) {
-                // we need to ignore the current acronym to avoid having it twice
-                if ((linkMatcher.start() == acronym.getOffsetStart()) &&
-                        (linkMatcher.end() == acronym.getOffsetEnd()))
-                    continue;
-                String entityText = text.substring(linkMatcher.start(), linkMatcher.end());
-                Mention entity = new Mention(entityText);
-                entity.setNormalisedName(base.getRawName());
-                entity.setOffsetStart(linkMatcher.start());
-                entity.setOffsetEnd(linkMatcher.end());
-                entity.setType(null);
-                entity.setBoundingBoxes(BoundingBoxCalculator.calculate(base.getLayoutTokens()));
-
-                if (entities == null)
-                    entities = new ArrayList<>();
-                entities.add(entity);
-                toBeAdded.put(entity, base);
-            }
-        }
-
-        for (Map.Entry<Mention, Mention> entry : toBeAdded.entrySet()) {
-            Mention entity = entry.getKey();
-            Mention base = entry.getValue();
-            acronyms.putIfAbsent(entity, base);
-        }
         return entities;
     }
 
