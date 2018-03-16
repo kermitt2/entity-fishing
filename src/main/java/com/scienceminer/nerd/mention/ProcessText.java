@@ -22,10 +22,12 @@ import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.Entity;
 import org.grobid.core.engines.NERParsers;
 import org.grobid.core.lang.Language;
+import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import scala.Char;
 
 import java.io.*;
 import java.util.*;
@@ -1005,58 +1007,55 @@ public class ProcessText {
         List<Mention> entities = null;
         List<LayoutToken> tokens = nerdQuery.getTokens();
 
-        // iterate for all token in layout token list
-        searchToken: for (LayoutToken token : tokens){
-            // get the text and the offsets for the current token
-            String textInLayoutToken = token.getText();
-            int offsetStart = token.getOffset();
+        if (tokens != null) {
+            // iterate through all tokens in layout token list
+            searchToken:
+            for (LayoutToken token : tokens) {
+                // get the text and the offsets for the current token
+                String textInLayoutToken = token.getText();
+                int offsetStart = token.getOffset();
 
-            Map<Mention, Mention> toBeAdded = new HashMap<>();
-            // find the acronym saved in the map to be compared with the current token
-            searchAcronym: for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
-                Mention acronym = entry.getKey();
-                Mention base = entry.getValue();
+                Map<Mention, Mention> toBeAdded = new HashMap<>();
+                // find the acronym saved in the map to be compared with the current token
+                for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+                    Mention acronym = entry.getKey();
+                    Mention base = entry.getValue();
 
-                // get the acronym, the offset and the length
-                String acronymText = acronym.getRawName();
-                int lengthComplexAcronym = acronymText.length();
-                int offsetEnd = offsetStart + lengthComplexAcronym;
+                    // get the acronym, the offset and the length
+                    String acronymText = acronym.getRawName();
+                    int lengthComplexAcronym = acronymText.length();
+                    int offsetEnd = offsetStart + lengthComplexAcronym;
 
-                // compare the acronym with the current token whether they are exactly the same string or not
-                if (textInLayoutToken.equals(acronymText)) {
-                    // ignore the current acronym to avoid having it twice
-                    if ((offsetStart == acronym.getOffsetStart()) && (offsetEnd == acronym.getOffsetEnd()))
-                        continue searchToken;
-                    else {
-                        Mention entity = new Mention(acronymText);
-                        entity.setNormalisedName(base.getRawName());
-                        entity.setOffsetStart(offsetStart);
-                        entity.setOffsetEnd(offsetEnd);
-                        entity.setLayoutTokens(entity.getLayoutTokens());
-                        entity.setBoundingBoxes(BoundingBoxCalculator.calculate(acronym.getLayoutTokens()));
-                        if (entities == null)
-                            entities = new ArrayList<>();
-                        entities.add(entity);
-                        toBeAdded.put(entity, base);
+                    // compare the acronym with the current token whether they are exactly the same string or not
+                    if (textInLayoutToken.equals(acronymText)) {
+                        // ignore the current acronym to avoid having it twice
+                        if ((offsetStart == acronym.getOffsetStart()) && (offsetEnd == acronym.getOffsetEnd()))
+                            continue searchToken;
+                        else {
+                            Mention entity = new Mention(acronymText);
+                            entity.setNormalisedName(base.getRawName());
+                            entity.setOffsetStart(offsetStart);
+                            entity.setOffsetEnd(offsetEnd);
+                            entity.setType(null);
+                            entity.setLayoutTokens(Arrays.asList(token));
+                            entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
+                            if (entities == null)
+                                entities = new ArrayList<>();
+                            entities.add(entity);
+                            toBeAdded.put(entity, base);
+                        }
                     }
                 }
-                else {
-                    // the acronym and the current token are not the same string but they have the same length, just ignore it
-                    if(textInLayoutToken.length() == lengthComplexAcronym){
-                        continue searchToken;
-                    } else{
-                        // the acronym and the current token are not the same string and they have not the same length as well, so it's probably the case of acronym with dots, for example C.C.A., P.C.T., S.V.M.
-                        // still work on it
-                    }
+                for (Map.Entry<Mention, Mention> entry : toBeAdded.entrySet()) {
+                    Mention entity = entry.getKey();
+                    Mention base = entry.getValue();
+                    acronyms.putIfAbsent(entity, base);
                 }
             }
-            for (Map.Entry<Mention, Mention> entry : toBeAdded.entrySet()) {
-                Mention entity = entry.getKey();
-                Mention base = entry.getValue();
-                acronyms.putIfAbsent(entity, base);
-            }
+
+            // for the case of acronym with the dots, ex. S.V.M. (still in progress)
+
         }
-
         return entities;
     }
 
