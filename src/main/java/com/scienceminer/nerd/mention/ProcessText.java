@@ -127,7 +127,7 @@ public class ProcessText {
         /* token is found in text with a Healthy mixture of capitalization (probably normal text) */
         mixed
     }
-    
+
     /**
      * This is the entry point for a NerdQuery to have its textual content processed.
      * The mthod will generate a list of recognized named entities produced by a list
@@ -826,7 +826,41 @@ public class ProcessText {
                 return entities;
             }
         }
+        Language language = getLanguage(nerdQuery, text);
 
+        Map<Mention, Mention> acronyms = null;
+        if (CollectionUtils.isNotEmpty(tokens))
+            acronyms = acronymCandidates(tokens);
+        else
+            acronyms = acronymCandidates(text, language);
+
+        if (acronyms != null) {
+            if (nerdQuery.getContext() == null)
+                nerdQuery.setContext(new NerdContext());
+            nerdQuery.getContext().setAcronyms(acronyms);
+            for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+                Mention base = entry.getValue();
+                Mention acronym = entry.getKey();
+                LOGGER.debug("acronym: " + acronym.getRawName() + " / base: " + base.getRawName());
+
+                Mention localEntity = new Mention(acronym);
+                localEntity.setIsAcronym(true);
+                localEntity.setNormalisedName(base.getRawName());
+                localEntity.setSource(base.getSource());
+                entities.add(localEntity);
+            }
+
+            // propagate back mentions
+            List<Mention> acronymEntities = propagateAcronyms(nerdQuery);
+            if (acronymEntities != null) {
+                entities.addAll(acronymEntities);
+            }
+        }
+
+        return entities;
+    }
+
+    private Language getLanguage(NerdQuery nerdQuery, String text) {
         // source language
         String lang = null;
         Language language = nerdQuery.getLanguage();
@@ -852,37 +886,7 @@ public class ProcessText {
             lang = Language.EN;
             language = new Language(lang, 1.0);
         }
-
-        Map<Mention, Mention> acronyms = null;
-        if (CollectionUtils.isNotEmpty(tokens))
-            acronyms = acronymCandidates(tokens);
-        else
-            acronyms = acronymCandidates(text, language);
-
-        if (acronyms != null) {
-            if (nerdQuery.getContext() == null)
-                nerdQuery.setContext(new NerdContext());
-            nerdQuery.getContext().setAcronyms(acronyms);
-            for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
-                Mention base = entry.getValue();
-                Mention acronym = entry.getKey();
-                LOGGER.debug("acronym: " + acronym.getOffsetStart() + " " + acronym.getOffsetEnd() + " / base: " + base.getRawName());
-
-                Mention localEntity = new Mention(acronym);
-                localEntity.setIsAcronym(true);
-                localEntity.setNormalisedName(base.getRawName());
-                localEntity.setSource(base.getSource());
-                entities.add(localEntity);
-            }
-
-            // propagate back mentions
-            List<Mention> acronymEntities = propagateAcronyms(nerdQuery);
-            if (acronymEntities != null) {
-                entities.addAll(acronymEntities);
-            }
-        }
-
-        return entities;
+        return language;
     }
 
     public Map<Mention, Mention> acronymCandidates(String text, Language language) {
@@ -910,7 +914,7 @@ public class ProcessText {
             } else if (token.getText().equals(")")) {
                 openParenthesis = false;
             } else if (openParenthesis) {
-                if (TextUtilities.isAllUpperCaseOrDigitOrDot(token.getText())) {
+                if (isAllUpperCaseOrDigitOrDot(token.getText())) {
                     acronym = token;
                 } else {
                     acronym = null;
@@ -933,17 +937,17 @@ public class ProcessText {
                                 continue;
                             boolean numericMatch = false;
                             if ((tok.length() > 1) && StringUtils.isNumeric(tok)) {
-//System.out.println("acronym: " + acronym.getText());
-//System.out.println("tok: " + tok);
+                                //System.out.println("acronym: " + acronym.getText());
+                                //System.out.println("tok: " + tok);
                                 // when the token is all digit, it often appears in full as such in the
                                 // acronym (e.g. GDF15)
                                 String acronymCurrentPrefix = acronym.getText().substring(0, k + 1);
-//System.out.println("acronymCurrentPrefix: " + acronymCurrentPrefix);
+                                //System.out.println("acronymCurrentPrefix: " + acronymCurrentPrefix);
                                 if (acronymCurrentPrefix.endsWith(tok)) {
                                     // there is a full number match
                                     k = k - tok.length() + 1;
                                     numericMatch = true;
-//System.out.println("numericMatch is: " + numericMatch);
+                                    //System.out.println("numericMatch is: " + numericMatch);
                                 }
                             }
 
@@ -995,6 +999,68 @@ public class ProcessText {
      * Add entities corresponding to acronym definitions to a query
      */
     public List<Mention> propagateAcronyms(NerdQuery nerdQuery) {
+        if ((nerdQuery == null) || (nerdQuery.getContext() == null))
+            return null;
+        Map<Mention, Mention> acronyms = nerdQuery.getContext().getAcronyms();
+        if (acronyms == null)
+            return null;
+
+        String text = nerdQuery.getText();
+        List<LayoutToken> tokens = nerdQuery.getTokens();
+        if (CollectionUtils.isEmpty(tokens)) {
+            if (StringUtils.isEmpty(text)) {
+                LOGGER.error("All possible content to process are empty - process stops.");
+                return null;
+            } else {
+                Language language = getLanguage(nerdQuery, text);
+                tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
+            }
+        }
+
+        List<Mention> entities = new ArrayList<>();
+        // iterate for every token in layout token list
+        outer:
+        for (int i = 0; i < tokens.size(); i++) {
+            // get the text and the offsets for every token
+            final LayoutToken token = tokens.get(i);
+
+            // find the acronym saved in the map to be compared with the current token
+            for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
+                Mention acronym = entry.getKey();
+                Mention base = entry.getValue();
+
+                List<LayoutToken> layoutTokensAcronym = acronym.getLayoutTokens();
+
+                //we check whether the sequence correspond to the acronym and if so we get it as result
+                final List<LayoutToken> matchedSequence = getSequenceMatch(tokens, i, layoutTokensAcronym);
+                if (isEmpty(matchedSequence)) {
+                    continue;
+                }
+
+                int offsetStart = token.getOffset();
+                int offsetEnd = offsetStart + LayoutTokensUtil.toText(matchedSequence).length();
+
+                Mention entity = new Mention(acronym.getRawName());
+                entity.setNormalisedName(base.getRawName());
+                entity.setOffsetStart(offsetStart);
+                entity.setOffsetEnd(offsetEnd);
+                entity.setLayoutTokens(matchedSequence);
+                entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
+
+                entities.add(entity);
+
+                // Since we matched the acronym, we look forward and move on
+                i += layoutTokensAcronym.size();
+                continue outer;
+            }
+        }
+        return entities;
+    }
+
+    /**
+     * Add entities corresponding to acronym definitions to a query
+     */
+    public List<Mention> propagateAcronyms2(NerdQuery nerdQuery) {
 
         if ((nerdQuery == null) || (nerdQuery.getContext() == null))
             return null;
@@ -1083,6 +1149,34 @@ public class ProcessText {
             }
         }
         return entities;
+    }
+
+
+    protected List<LayoutToken> getSequenceMatch(List<LayoutToken> tokens, int i, List<LayoutToken> layoutTokensAcronym) {
+        final LayoutToken firstLayoutTokenAcronym = layoutTokensAcronym.get(0);
+
+        List<LayoutToken> matchingList = new ArrayList<>();
+        if (StringUtils.equals(firstLayoutTokenAcronym.getText(), tokens.get(i).getText())
+                && firstLayoutTokenAcronym.getOffset() != tokens.get(i).getOffset()) {
+            matchingList.add(tokens.get(i));
+            int localCount = 1;
+            int tokenStart = i + 1;
+            //We try to match from i+1 (the second element) for n elements (n = the size of the acronym)
+            for (int j = tokenStart; j < i + layoutTokensAcronym.size(); j++) {
+                LayoutToken tok = tokens.get(j);
+                if (StringUtils.equals(layoutTokensAcronym.get(localCount).getText(), tok.getText())) {
+                    matchingList.add(tokens.get(j));
+                } else {
+                    matchingList = new ArrayList<>();
+                    break;
+                }
+                localCount++;
+            }
+
+
+            return matchingList;
+        }
+        return Collections.emptyList();
     }
 
     /**
@@ -1395,6 +1489,21 @@ public class ProcessText {
         }
 
         return result;
+    }
+
+    /**
+     * Use TextUtilities.isAllUpperCaseOrDigitOrDot from grobid > 0.5.1
+     * @return
+     */
+    @Deprecated
+    public static boolean isAllUpperCaseOrDigitOrDot(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            final char charAt = text.charAt(i);
+            if (!Character.isUpperCase(charAt) && !Character.isDigit(charAt) && charAt != '.') {
+                return false;
+            }
+        }
+        return true;
     }
 
     // mention recognition methods

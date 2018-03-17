@@ -97,7 +97,6 @@ public class ProcessTextTest {
     }
 
     @Test
-    @Ignore("Testing purposes")
     public void testPropagateAcronyms_textSyncronisedWithLayoutTokens_shouldWork() {
         String input = "The Pulse Covariant Transmission (PCT) is a great deal. We are going to make it great again.\n " +
                 "We propose a new methodology where the PCT results are improving in the gamma ray action matter.";
@@ -150,7 +149,6 @@ public class ProcessTextTest {
     }
 
     @Test
-    @Ignore("Testing purposes")
     public void testPropagateAcronyms_textNotSyncronisedWithLayoutTokens_shouldWork() {
         String input = "The Pulse Covariant Transmission (PCT) is a great deal. We are going to make it great again.\n " +
                 "We propose a new methodology where the PCT results are improving in the gamma ray action matter.";
@@ -169,8 +167,6 @@ public class ProcessTextTest {
         NerdQuery aQuery = new NerdQuery();
         aQuery.setText(input);
         aQuery.setTokens(tokens);
-
-        processText.acronymCandidates(tokens);
 
         final HashMap<Mention, Mention> acronyms = new HashMap<>();
         Mention base = new Mention("Pulse Covariant Transmission");
@@ -214,7 +210,6 @@ public class ProcessTextTest {
     }
 
     @Test
-    @Ignore("Testing purposes")
     public void testPropagateAcronyms_textNotSyncronisedWithLayoutTokens2_shouldWork() {
         String input = "The Pulse Covariant Transmission (P.C.T.) is a great deal. We are going to make it great again.\n " +
                 "We propose a new methodology where the P.C.T. results are improving in the gamma ray action matter. " +
@@ -275,7 +270,7 @@ public class ProcessTextTest {
         nerdContext.setAcronyms(acronyms);
         aQuery.setContext(nerdContext);
 
-        final List<Mention> mentions = processText.propagateAcronyms2(aQuery);
+        final List<Mention> mentions = processText.propagateAcronyms(aQuery);
         assertThat(mentions, hasSize(2));
         assertThat(mentions.get(0).getRawName(), is("P.C.T."));
         assertThat(mentions.get(0).getOffsetStart(), is(146));
@@ -292,7 +287,6 @@ public class ProcessTextTest {
 
 
     @Test
-    @Ignore("for later ")
     public void testAcronymsStringMixedCase() {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
                 "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
@@ -313,7 +307,6 @@ public class ProcessTextTest {
     }
 
     @Test
-    @Ignore("for later ")
     public void testAcronymsTokensMixedCase() {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
                 "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
@@ -409,7 +402,6 @@ public class ProcessTextTest {
     }
 
     @Test
-    @Ignore("for later ")
     public void testGetSequenceMatch_singleTokenAcronym_shouldWork() throws Exception {
 
         String text = "We are proving that the PCT is working fine. PCT will work just fine.";
@@ -424,7 +416,6 @@ public class ProcessTextTest {
     }
 
     @Test
-    @Ignore("for later ")
     public void testGetSequenceMatch_multiTokenAcronym_shouldWork() throws Exception {
 
         String text = "We are proving that the P.C.T. is working fine. P.C.T. will work just fine.";

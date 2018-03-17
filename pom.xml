@@ -125,7 +125,7 @@
                 <version>9.4.8.v20171121</version>
 
                 <configuration>
-                    <jvmArgs>-Xms4g -Xmx8g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
+                    <jvmArgs>-Xmx4g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <stopKey/>
                     <stopPort/>
