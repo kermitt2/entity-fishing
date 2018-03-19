@@ -133,7 +133,7 @@ public class NerdRanker extends NerdModel {
 			if (!modelFile.exists()) {
                 logger.debug("Invalid model file for nerd ranker.");
 			}
-			String xml = FileUtils.readFileToString(modelFile, StandardCharsets.UTF_8);
+			InputStream xml = new FileInputStream(modelFile);
 
 			if (model == MLModel.RANDOM_FOREST)
 				forest = (RandomForest)xstream.fromXML(xml);

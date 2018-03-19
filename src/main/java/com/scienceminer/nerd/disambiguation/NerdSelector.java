@@ -107,7 +107,7 @@ public class NerdSelector extends NerdModel {
 			if (!modelFile.exists()) {
                 logger.debug("Invalid model file for nerd selector.");
 			}
-			String xml = FileUtils.readFileToString(modelFile, "UTF-8");
+			InputStream xml = new FileInputStream(modelFile);
 			if (model == MLModel.RANDOM_FOREST)
 				forest = (RandomForest)xstream.fromXML(xml);
 			else
