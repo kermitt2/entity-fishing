@@ -42,7 +42,6 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 	// using LMDB zero copy mode
 	//@Override
 	public Record retrieve2(String key) {
-		byte[] cachedData = null;
 		Record record = null;
 		try (Transaction tx = environment.createReadTransaction();
 			BufferCursor cursor = db.bufferCursor(tx)) {
