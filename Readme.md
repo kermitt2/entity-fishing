@@ -28,10 +28,12 @@
 
 # Documentation
 
-The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io)
+The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
+For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html): 
 
 ## License and contact
 
-Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
+Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
+The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
 
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)

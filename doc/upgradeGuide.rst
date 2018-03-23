@@ -41,14 +41,13 @@ This option will be removed in the next release.
 
 2. the mention recognition (prior disambiguation) has been redesigned to accommodate different type of recognitions. Shipped with NERD there is now grobid-ner for Named Entity Recognition and Wikipedia.
 They can be selected by using the parameter `mentions` and specifying a list of `recognitors`.::
-
-{
-  "text": "Sample text",
-  "mentions": [
-    "ner",
-      "wikipedia"
-  ]
-}
+   {
+      "text": "Sample text",
+      "mentions": [
+         "ner",
+         "wikipedia"
+      ]
+   }
 
 
 3. the option `resultLanguages` has been removed, the translated results will be provided in all languages anyway
