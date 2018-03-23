@@ -1,5 +1,8 @@
 package com.scienceminer.nerd.mention;
 
+import com.googlecode.clearnlp.engine.EngineGetter;
+import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
+import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
@@ -7,17 +10,18 @@ import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.Pair;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.*;
 import java.util.*;
 import java.util.prefs.PreferenceChangeEvent;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
@@ -32,6 +36,47 @@ public class ProcessTextTest {
     @Before
     public void setUp() throws Exception {
         processText = new ProcessText(true);
+    }
+
+    @Test
+    @Ignore("This test is for sentence segmention method.")
+    public void testSentenceSegmentation() {
+        // set the resource for the sentence segmentation since tokenizer need this resource
+        InputStream inputFile = this.getClass().getResourceAsStream("dictionary-1.3.1.zip");
+
+        AbstractTokenizer tokenizer = EngineGetter.getTokenizer("en", inputFile);
+
+        String text = "Austria invaded and fought the Serbian army at the Battle of Cer and Battle of Kolubara beginning on 12 August. \n\nThe army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg (17 August – 2 September). But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne. \n\nUnfortunately for the Allies, the pro-German King Constantine I dismissed the pro-Allied government of E. Venizelos before the Allied expeditionary force could arrive. Beginning in 1915, the Italians under Cadorna mounted eleven offensives on the Isonzo front along the Isonzo River, northeast of Trieste.\\n\\n At the Siege of Maubeuge about 40000 French soldiers surrendered, at the battle of Galicia Russians took about 100-120000 Austrian captives, at the Brusilov Offensive about 325 000 to 417 000 Germans and Austrians surrendered to Russians, at the Battle of Tannenberg 92,000 Russians surrendered.\n\n After marching through Belgium, Luxembourg and the Ardennes, the German Army advanced, in the latter half of August, into northern France where they met both the French army, under Joseph Joffre, and the initial six divisions of the British Expeditionary Force, under Sir John French. A series of engagements known as the Battle of the Frontiers ensued. Key battles included the Battle of Charleroi and the Battle of Mons.";
+
+        processText.setTokenizer(tokenizer);
+        List<Sentence> sentences = processText.sentenceSegmentation(text);
+
+        assertThat(sentences, hasSize(9));
+
+        Sentence sentence0 = sentences.get(0);
+        assertThat(sentence0.getOffsetStart(),is(0));
+        assertThat(sentence0.getOffsetEnd(),is(111));
+        assertThat(text.substring(sentence0.getOffsetStart(), sentence0.getOffsetEnd()), is("Austria invaded and fought the Serbian army at the Battle of Cer and Battle of Kolubara beginning on 12 August."));
+
+        Sentence sentence1 = sentences.get(1);
+        assertThat(sentence1.getOffsetStart(),is(114));
+        assertThat(sentence1.getOffsetEnd(),is(277));
+        assertThat(text.substring(sentence1.getOffsetStart(), sentence1.getOffsetEnd()), is("The army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg (17 August – 2 September)."));
+
+        Sentence sentence2 = sentences.get(2);
+        assertThat(sentence2.getOffsetStart(),is(278));
+        assertThat(sentence2.getOffsetEnd(),is(433));
+        assertThat(text.substring(sentence2.getOffsetStart(), sentence2.getOffsetEnd()), is("But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne."));
+
+        Sentence sentence3 = sentences.get(3);
+        assertThat(sentence3.getOffsetStart(),is(436));
+        assertThat(sentence3.getOffsetEnd(),is(603));
+        assertThat(text.substring(sentence3.getOffsetStart(), sentence3.getOffsetEnd()), is("Unfortunately for the Allies, the pro-German King Constantine I dismissed the pro-Allied government of E. Venizelos before the Allied expeditionary force could arrive."));
+
+        Sentence sentence4 = sentences.get(4);
+        assertThat(sentence4.getOffsetStart(),is(604));
+        assertThat(sentence4.getOffsetEnd(),is(741));
+        assertThat(text.substring(sentence4.getOffsetStart(), sentence4.getOffsetEnd()), is("Beginning in 1915, the Italians under Cadorna mounted eleven offensives on the Isonzo front along the Isonzo River, northeast of Trieste."));
 
     }
 
