@@ -1902,7 +1902,7 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
 
     function loadExample(text, lang) {
         resetExamplesClasses();
-        $(this).addClass('section-active').removeClass('section-non-active');
+        //$(this).addClass('section-active').removeClass('section-non-active');
         var selected = $('#selectedService').find('option:selected').attr('value');
         if (selected === 'processNERDQuery' || selected === 'processERDQuery') {
             var queryInstance = queryTemplateText;
@@ -1941,45 +1941,55 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         $('#example1').popover();
         $('#example1').bind('click', function (event) {
             loadExample(textExamples[0], "en");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#example2').popover();
         $('#example2').bind('click', function (event) {
             loadExample(textExamples[1], "en")
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#example3').popover();
         $('#example3').bind('click', function (event) {
             loadExample(textExamples[2], "en");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#example4').popover();
         $('#example4').bind('click', function (event) {
             loadExample(textExamples[3], "en");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#reuters1').bind('click',function (event) {
             loadExample(reutersExamples[0], "en");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#reuters2').bind('click',function (event) {
             loadExample(reutersExamples[1], "en");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#reuters3').bind('click', function (event) {
             loadExample(reutersExamples[2], "fr");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#reuters4').bind('click', function (event) {
             loadExample(reutersExamples[3], "de");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#spanish').bind('click', function (event) {
             loadExample(spanishExamples[0], "es");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         $('#italian').bind('click', function (event) {
             loadExample(italianExamples[0], "it");
+            $(this).removeClass('section-non-active').addClass('section-active');
         });
 
         //$('#gbdForm').attr('enctype', '');
