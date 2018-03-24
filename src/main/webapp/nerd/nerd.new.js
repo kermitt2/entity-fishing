@@ -381,7 +381,7 @@ var nerd = (function ($) {
 
         if (responseJson.sentences) {
             display +=
-                '<div style="max-height:150px; overflow:auto;"><table id="sentenceIndex" class="table table-bordered table-condensed">';
+                '<div style="max-height:150px; overflow:auto;"><table id="sentenceIndex" class="table table-bordered table-condensed sentence">';
             var m = 0;
             var text = responseJson.text.replace(/\n/g, " ");
             for (var sentence in responseJson.sentences) {

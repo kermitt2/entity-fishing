@@ -230,6 +230,27 @@ table.concept td {
   border-top:1px solid #ddd;
 }
 
+table.sentence tr { 
+  font-size: 12px;
+  background-color: #FCF8E3;
+  border-color: grey; 
+  word-break:normal; 
+}
+
+table.sentence td { 
+  font-size: 12px;
+  border-color: grey; 
+  word-break:normal; 
+}
+
+table.sentence tr.highlight { 
+  background-color:  #ffcccc; 
+}
+
+table.sentence tr.highlight td { 
+  background-color:  #ffcccc;
+}
+
 p {word-break:normal;}
 span {word-break:normal;}
 
