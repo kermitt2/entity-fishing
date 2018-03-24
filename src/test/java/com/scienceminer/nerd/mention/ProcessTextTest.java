@@ -35,7 +35,8 @@ public class ProcessTextTest {
 
     @Before
     public void setUp() throws Exception {
-        processText = new ProcessText(true);
+        //processText = new ProcessText(true);
+        processText = ProcessText.getInstance();
     }
 
     @Test
@@ -44,11 +45,11 @@ public class ProcessTextTest {
         // set the resource for the sentence segmentation since tokenizer need this resource
         InputStream inputFile = this.getClass().getResourceAsStream("dictionary-1.3.1.zip");
 
-        AbstractTokenizer tokenizer = EngineGetter.getTokenizer("en", inputFile);
+        //AbstractTokenizer tokenizer = EngineGetter.getTokenizer("en", inputFile);
 
         String text = "Austria invaded and fought the Serbian army at the Battle of Cer and Battle of Kolubara beginning on 12 August. \n\nThe army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg (17 August – 2 September). But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne. \n\nUnfortunately for the Allies, the pro-German King Constantine I dismissed the pro-Allied government of E. Venizelos before the Allied expeditionary force could arrive. Beginning in 1915, the Italians under Cadorna mounted eleven offensives on the Isonzo front along the Isonzo River, northeast of Trieste.\\n\\n At the Siege of Maubeuge about 40000 French soldiers surrendered, at the battle of Galicia Russians took about 100-120000 Austrian captives, at the Brusilov Offensive about 325 000 to 417 000 Germans and Austrians surrendered to Russians, at the Battle of Tannenberg 92,000 Russians surrendered.\n\n After marching through Belgium, Luxembourg and the Ardennes, the German Army advanced, in the latter half of August, into northern France where they met both the French army, under Joseph Joffre, and the initial six divisions of the British Expeditionary Force, under Sir John French. A series of engagements known as the Battle of the Frontiers ensued. Key battles included the Battle of Charleroi and the Battle of Mons.";
 
-        processText.setTokenizer(tokenizer);
+        //processText.setTokenizer(tokenizer);
         List<Sentence> sentences = processText.sentenceSegmentation(text);
 
         assertThat(sentences, hasSize(9));

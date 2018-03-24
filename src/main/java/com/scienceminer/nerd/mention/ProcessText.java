@@ -108,8 +108,8 @@ public class ProcessText {
     /**
      * Only for testing
      **/
-    ProcessText(boolean test) {
-    }
+    /*ProcessText(boolean test) {
+    }*/
 
     /**
      * Case context where a token appears
