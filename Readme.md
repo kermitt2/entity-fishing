@@ -10,25 +10,45 @@
 *entity-fishing* performs the following tasks:
 
 * entity recognition and disambiguation against Wikidata and Wikipedia in a raw text or partially-annotated text segment,
-![entity-fishing](doc/images/screen2.png)
+![entity-fishing](doc/images/screen1.png)
 
 * entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
-![entity-fishing](doc/images/screen7.png)
+![entity-fishing](doc/images/screen3.png)
 
-* search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
+* search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
 ![Search query disambiguation](doc/images/screen8.png)
 
 * weighted term vector disambiguation (a term being a phrase),
-![Search query disambiguation](doc/images/screen4.png)
+![Search query disambiguation](doc/images/screen5.png)
 
 * interactive disambiguation in text editing mode.  
 ![Editor with real time disambiguation](doc/images/screen6.png)
 
-*entity-fishing* is a work-in-progress !
+# Current version
+
+*entity-fishing* is a work-in-progress!
+
+Latest release version is `0.0.3`. 
+
+This version supports English, French, German, Italian and Spanish. The Knowledge Base includes 37 million entities from Wikipedia. 
+
+Runtime: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD):
+
+* 800 pubmed abstracts (172787 tokens) processed in 126s with 1 client (1371 tokens/s) 
+
+* 4800 pubmed abstracts (1036722 tokens) processed in 216s with 6 concurrent clients (4800 tokens/s) 
+
+* 136 PDF (3443 pages, 1422943 tokens) processed in 1284s with 1 client (2.6 pages/s, 1108.2 tokens/s)
+
+* 816 PDF (20658 pages, 8537658 tokens) processed in 2094s with 6 concurrent clients (9.86 pages/s, 4077 tokens/s)
+
+Accuracy: f-score between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC).
+
 
 # Documentation
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
+
 For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html): 
 
 ## License and contact
