@@ -108,8 +108,15 @@ public class ProcessText {
     /**
      * Only for testing
      **/
-    /*ProcessText(boolean test) {
-    }*/
+    ProcessText(boolean test) {
+    }
+
+    /**
+     * Only for testing
+     **/
+    public void setTokenizer(AbstractTokenizer tokenizer) {
+        this.tokenizer = tokenizer;
+    }
 
     /**
      * Case context where a token appears
@@ -1019,7 +1026,7 @@ public class ProcessText {
 
         List<Mention> entities = new ArrayList<>();
         // iterate for every token in layout token list
-        outer:
+        //outer:
         for (int i = 0; i < tokens.size(); i++) {
             // get the text and the offsets for every token
             final LayoutToken token = tokens.get(i);
@@ -1051,7 +1058,8 @@ public class ProcessText {
 
                 // Since we matched the acronym, we look forward and move on
                 i += layoutTokensAcronym.size();
-                continue outer;
+                //continue outer;
+                break;
             }
         }
         return entities;
@@ -1060,7 +1068,7 @@ public class ProcessText {
     /**
      * Add entities corresponding to acronym definitions to a query
      */
-    public List<Mention> propagateAcronyms2(NerdQuery nerdQuery) {
+    /*public List<Mention> propagateAcronyms2(NerdQuery nerdQuery) {
 
         if ((nerdQuery == null) || (nerdQuery.getContext() == null))
             return null;
@@ -1149,7 +1157,7 @@ public class ProcessText {
             }
         }
         return entities;
-    }
+    }*/
 
 
     protected List<LayoutToken> getSequenceMatch(List<LayoutToken> tokens, int i, List<LayoutToken> layoutTokensAcronym) {

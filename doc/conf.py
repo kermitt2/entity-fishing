@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'entity-fishing'
-copyright = '2017, Patrice Lopez'
+copyright = '2018, Patrice Lopez'
 author = 'Patrice Lopez'
 
 # The version info for the project you're documenting, acts as replacement for

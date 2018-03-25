@@ -3,7 +3,8 @@
 Upgrade Guide
 =============
 This page explains differences between versions and how to adapt in order to support the new version.
-Please read it carefully until the end before starting the upgrade.
+If you are not upgrading, you can skip this page.
+Otherwise, please read it carefully until the end before starting the upgrade. 
 
 
 From 0.0.2 to 0.0.3
