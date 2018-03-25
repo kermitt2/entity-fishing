@@ -28,17 +28,17 @@
 
 *entity-fishing* is a **work-in-progress**! Latest release version is `0.0.3`. 
 
-This version supports English, French, German, Italian and Spanish, with our in-house NER for English and French. The knowledge base includes 37 million entities from Wikidata. 
+This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. The knowledge base includes 37 million entities from Wikidata. 
 
 **Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD)
 
-* 800 pubmed abstracts (172787 tokens) processed in 126s with 1 client (1371 tokens/s) 
+* 800 pubmed abstracts (172 787 tokens) processed in 126s with 1 client (1371 tokens/s) 
 
-* 4800 pubmed abstracts (1036722 tokens) processed in 216s with 6 concurrent clients (4800 tokens/s) 
+* 4800 pubmed abstracts (1 036 722 tokens) processed in 216s with 6 concurrent clients (4800 tokens/s) 
 
-* 136 PDF (3443 pages, 1422943 tokens) processed in 1284s with 1 client (2.6 pages/s, 1108.2 tokens/s)
+* 136 PDF (3443 pages, 1 422 943 tokens) processed in 1284s with 1 client (2.6 pages/s, 1108.2 tokens/s)
 
-* 816 PDF (20658 pages, 8537658 tokens) processed in 2094s with 6 concurrent clients (9.86 pages/s, 4077 tokens/s)
+* 816 PDF (20658 pages, 8 537 658 tokens) processed in 2094s with 6 concurrent clients (9.86 pages/s, 4077 tokens/s)
 
 **Accuracy**: f-score between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC) - to be improved in the next versions.
 
