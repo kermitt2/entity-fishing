@@ -52,7 +52,8 @@ By default they are both used but they can now be selected by using the paramete
       "text": "Sample text",
       "mentions": [
          "ner",
-         "wikipedia"
+         "wikipedia",
+         "species"
       ]
    }
 
