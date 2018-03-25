@@ -26,13 +26,11 @@
 
 # Current version
 
-*entity-fishing* is a work-in-progress!
-
-Latest release version is `0.0.3`. 
+*entity-fishing* is a **work-in-progress**! Latest release version is `0.0.3`. 
 
 This version supports English, French, German, Italian and Spanish. The Knowledge Base includes 37 million entities from Wikipedia. 
 
-Runtime: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD):
+**Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD):
 
 * 800 pubmed abstracts (172787 tokens) processed in 126s with 1 client (1371 tokens/s) 
 
@@ -42,14 +40,14 @@ Runtime: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - 
 
 * 816 PDF (20658 pages, 8537658 tokens) processed in 2094s with 6 concurrent clients (9.86 pages/s, 4077 tokens/s)
 
-Accuracy: f-score between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC).
+**Accuracy**: f-score between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC).
 
 
 # Documentation
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
 
-For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html): 
+For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html).
 
 ## License and contact
 
@@ -57,3 +55,5 @@ Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.
 The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
 
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
+
+*entity-fishing* is developed by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) with contributions of [Inria](http://inria.fr) Paris. Inria contribution is supported by the H2020 [HIRMEOS](http://www.hirmeos.eu) EU project, where *entity-fishing* has been [integrated by several partners](http://www.hirmeos.eu/2018/02/15/hirmeos-enhances-its-digital-platforms-with-entity-fishing-validation-of-the-nerd-services/). 
