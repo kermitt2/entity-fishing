@@ -42,6 +42,8 @@ This version supports English, French, German, Italian and Spanish. The Knowledg
 
 **Accuracy**: f-score between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC).
 
+Have a look at our [presentation at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
+
 
 # Documentation
 
