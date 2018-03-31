@@ -11,10 +11,14 @@ import java.io.*;
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.fusesource.lmdbjni.*;
 import static org.fusesource.lmdbjni.Constants.*;
 
 public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
+	private static final Logger logger = LoggerFactory.getLogger(StringIntDatabase.class);	
 
 	public StringIntDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
@@ -34,7 +38,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 				record = (Integer)KBEnvironment.deserialize(cachedData);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error("cannot retrieve " + key, e);
 		}
 		return record;
 	}
@@ -51,7 +55,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 				record = (Integer)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error("cannot retrieve " + key, e);
 		}
 		return record;
 	}

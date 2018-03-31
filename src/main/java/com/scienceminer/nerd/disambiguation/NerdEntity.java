@@ -435,7 +435,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
         }
         wikipediaMultilingualRef = subTranslations;
         wikipediaMultilingualArticle = subArticleCorrespondance;
-
 	}
 
 

@@ -4,11 +4,15 @@ import com.scienceminer.nerd.exceptions.NerdResourceException;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.fusesource.lmdbjni.Transaction;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
+	private static final Logger logger = LoggerFactory.getLogger(ConceptDatabase.class);	
 
 	public ConceptDatabase(KBEnvironment env) {
 		super(env, DatabaseType.concepts);
@@ -18,10 +22,10 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 		super(env, type);
 	}
 
-	@Override
+	/*@Override
 	public Map<String,Integer> retrieve(String key) {
 		return super.retrieve(key);
-	}
+	}*/
 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
 //System.out.println("input file: " + dataFile.getPath());

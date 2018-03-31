@@ -51,7 +51,7 @@ public class KBDatabaseFactory {
 						record = (DbPage)KBEnvironment.deserialize(cursor.valBytes());
 					}
 				} catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.error("Cannot retrieve key " + key, e);
 				}
 				return record;
 			}
@@ -66,7 +66,7 @@ public class KBDatabaseFactory {
 					if (cachedData != null)
 						record = (DbPage)KBEnvironment.deserialize(cachedData);
 				} catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.error("Cannot retrieve key " + key, e);
 				}
 				return record;
 			}
@@ -304,7 +304,7 @@ public class KBDatabaseFactory {
 						record = (String)KBEnvironment.deserialize(cachedData);
 					}
 				} catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.error("Cannot retrieve key " + key, e);
 				}
 				return record;
 			}
@@ -378,7 +378,7 @@ public class KBDatabaseFactory {
 						record = (short[])KBEnvironment.deserialize(cachedData);
 					}
 				} catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.error("Word Embeddings Database: Cannot retrieve key " + key, e);
 				}
 				return record;
 			}
@@ -457,7 +457,7 @@ public class KBDatabaseFactory {
 						record = (short[]) KBEnvironment.deserialize(cachedData);
 					}
 				} catch(Exception e) {
-					e.printStackTrace();
+					LOGGER.error("Entity Embeddings Database: Cannot retrieve key " + key, e);
 				}
 				return record;
 			}

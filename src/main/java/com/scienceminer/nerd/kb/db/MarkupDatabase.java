@@ -90,7 +90,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 				theString = (String)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error("cannot retrieve " + key, e);
 		}
 		return theString;
 	}

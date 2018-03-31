@@ -26,10 +26,10 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 		super(env, DatabaseType.label);
 	}
 
-	@Override
+	/*@Override
 	public DbLabel retrieve(String key) {
 		return super.retrieve(key);
-	}
+	}*/
 
 	@Override
 	public KBEntry<String,DbLabel> deserialiseCsvRecord(CsvRecordInput record) throws IOException {

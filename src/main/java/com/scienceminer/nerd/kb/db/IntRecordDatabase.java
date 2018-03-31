@@ -2,12 +2,17 @@ package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import org.apache.hadoop.record.CsvRecordInput;
+
 import org.fusesource.lmdbjni.BufferCursor;
 import org.fusesource.lmdbjni.Transaction;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
 public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Record> {
+	private static final Logger logger = LoggerFactory.getLogger(IntRecordDatabase.class);
 
 	public IntRecordDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
@@ -28,7 +33,7 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 				record = (Record)KBEnvironment.deserialize(cachedData);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error("Cannot retrieve key " + key, e);
 		}
 		return record;
 	}
@@ -45,7 +50,7 @@ public abstract class IntRecordDatabase<Record> extends KBDatabase<Integer, Reco
 				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error("cannot retrieve " + key, e);
 		}
 		return record;
 	}

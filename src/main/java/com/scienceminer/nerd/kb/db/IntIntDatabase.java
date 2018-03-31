@@ -15,6 +15,7 @@ import static org.fusesource.lmdbjni.Constants.*;
 
 
 public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
+	private static final Logger logger = LoggerFactory.getLogger(IntIntDatabase.class);
 
 	public IntIntDatabase(KBEnvironment envi, DatabaseType type) {
 		super(envi, type);
@@ -35,7 +36,7 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 				record = (Integer)KBEnvironment.deserialize(cachedData);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error("Cannot retrieve key " + key, e);
 		}
 		return record;
 	}
@@ -52,7 +53,7 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
 				record = (Integer)KBEnvironment.deserialize(cursor.valBytes());
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error("cannot retrieve " + key, e);
 		}
 		return record;
 	}

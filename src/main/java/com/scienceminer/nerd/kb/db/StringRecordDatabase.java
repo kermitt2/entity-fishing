@@ -34,7 +34,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 				record = (Record)KBEnvironment.deserialize(cachedData);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Cannot retrieve key " + key, e);
 		}
 		return record;
 	}
