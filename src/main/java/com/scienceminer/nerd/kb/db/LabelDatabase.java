@@ -1,21 +1,9 @@
 package com.scienceminer.nerd.kb.db;
 
-import java.io.*;
-import java.util.*;
-
-import org.apache.hadoop.record.CsvRecordInput;
-import org.apache.hadoop.record.CsvRecordOutput;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
-import com.scienceminer.nerd.kb.model.hadoop.DbSenseForLabel;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
-import com.scienceminer.nerd.utilities.*;
+import org.apache.hadoop.record.CsvRecordInput;
 
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.io.IOException;
 
 /**
  * A {@link KBDatabase} for associating Strings with a record. 

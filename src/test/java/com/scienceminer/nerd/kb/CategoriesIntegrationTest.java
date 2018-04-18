@@ -13,43 +13,24 @@ import org.junit.Test;
 import java.io.File;
 
 public class CategoriesIntegrationTest {
-	
-	private LowerKnowledgeBase wikipedia = null;
 
-	@Before
-	public void setUp() {
-		try {
-			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-        	wikipedia = new LowerKnowledgeBase(conf); 
-        } catch(Exception e) {
-        	e.printStackTrace();
+    private LowerKnowledgeBase wikipedia = null;
+
+    @Before
+    public void setUp() throws Exception {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
+        wikipedia = new LowerKnowledgeBase(conf);
+    }
+
+    @Test
+    public void testCategoryHierarchy() {
+        Page page = wikipedia.getPageById(32768);
+
+        com.scienceminer.nerd.kb.model.Category[] categories = ((Article) page).getParentCategories();
+        System.out.println("pageId:" + page.getId());
+        for (int l = 0; l < categories.length; l++) {
+            System.out.println(categories[l].getId());
         }
-	}
-   	
-	@Test
-	public void testCategoryHierarchy() {
-		try {
-			Page page = wikipedia.getPageById(32768);
-
-			com.scienceminer.nerd.kb.model.Category[] categories = ((Article)page).getParentCategories();
-			System.out.println("pageId:" + page.getId());
-			for(int l=0; l<categories.length;l++){
-			    System.out.println(categories[l].getId());
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@After
-	public void testClose() {
-		try {
-			wikipedia.close();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+    }
 }

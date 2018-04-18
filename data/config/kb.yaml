@@ -1,10 +1,13 @@
 # entity-fishing configuration for the (upper) conceptual KB layer
 
 # path to the LMDB data
-dbDirectory: data/db/db-kb
+#dbDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/nerd-data/db/db-kb
+#dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/nerd-data/db/db-kb
+dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.4/nerd-data/db/db-kb
 
 # path to the wikidata files (dump, list of properties, mapping)
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
 #dataDirectory: /mnt/data/wikipedia/latest/wikidata/
-dataDirectory: /home/lopez/resources/wikidata/
+dataDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/wikidata/
+dataDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/wikidata/

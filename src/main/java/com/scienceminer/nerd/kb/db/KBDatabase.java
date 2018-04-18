@@ -2,10 +2,11 @@ package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.kb.model.hadoop.DbTranslations;
 import org.apache.hadoop.record.CsvRecordInput;
-import org.fusesource.lmdbjni.*;
+import org.lmdbjava.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 /**
  * 
@@ -14,8 +15,8 @@ import java.io.IOException;
  */
 public abstract class KBDatabase<K,V> {
 
-	protected Env environment = null;
-  	protected Database db = null;
+	protected Env<ByteBuffer> environment = null;
+  	protected Dbi<ByteBuffer> db = null;
   	protected String envFilePath = null;
   	protected boolean isLoaded = false;
 	protected String name = null;
@@ -36,8 +37,6 @@ public abstract class KBDatabase<K,V> {
 		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + type.toString();
 		//System.out.println("db path: " + this.envFilePath);
 
-		this.environment = new Env();
-    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
     	File thePath = new File(this.envFilePath);
     	if (!thePath.exists()) {
     		thePath.mkdirs();
@@ -47,8 +46,11 @@ public abstract class KBDatabase<K,V> {
     		// we assume that if the DB files exist, it has been already loaded
     		isLoaded = true;
     	}
-    	this.environment.open(envFilePath, Constants.NOTLS);
-		db = this.environment.openDatabase();
+		this.environment = Env.create()
+				.setMapSize(100 * 1024 * 1024)
+				.open(thePath, EnvFlags.MDB_NOTLS);
+
+		db = this.environment.openDbi(this.name, DbiFlags.MDB_CREATE);
 	}
 
 	/**
@@ -64,8 +66,7 @@ public abstract class KBDatabase<K,V> {
 		this.name = name;
 
 		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + name;
-		this.environment = new Env();
-    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+
     	File thePath = new File(this.envFilePath);
     	if (!thePath.exists()) {
     		thePath.mkdirs();
@@ -76,11 +77,13 @@ public abstract class KBDatabase<K,V> {
     		isLoaded = true;
     		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
     	}
-    	this.environment.open(envFilePath);
-		db = this.environment.openDatabase();
+		this.environment = Env.create()
+				.setMapSize(100 * 1024 * 1024)
+				.open(thePath);
+		db = this.environment.openDbi(this.name, DbiFlags.MDB_CREATE);
 	}
 
-	public Database getDatabase() {
+	public Dbi getDatabase() {
 		return db;
 	}
 
@@ -101,8 +104,8 @@ public abstract class KBDatabase<K,V> {
 	 * @return the number of entries in the database
 	 */
 	public long getDatabaseSize() {
-		Stat statistics = db.stat();
-		return statistics.ms_entries;
+		Stat statistics = db.stat(this.environment.txnRead());
+		return statistics.entries;
 	}
 
 	/**

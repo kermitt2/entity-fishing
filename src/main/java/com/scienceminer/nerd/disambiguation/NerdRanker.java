@@ -60,9 +60,6 @@ import org.xml.sax.SAXException;
  * A machine learning model for ranking a list of ambiguous candidates for a given mention.
  */
 public class NerdRanker extends NerdModel {
-	/**
-	 * The class Logger
-	 */
 	private static final Logger logger = LoggerFactory.getLogger(NerdRanker.class);
 
 	// ranker model files
@@ -74,7 +71,7 @@ public class NerdRanker extends NerdModel {
 	private LowerKnowledgeBase wikipedia = null;
 
 	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
-	// embeddings-based similiarity
+	// embeddings-based similarity
 
 	public NerdRanker(LowerKnowledgeBase wikipedia) {
 		this.wikipedia = wikipedia;

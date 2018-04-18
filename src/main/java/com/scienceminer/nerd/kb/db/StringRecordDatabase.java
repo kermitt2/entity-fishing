@@ -1,16 +1,17 @@
 package com.scienceminer.nerd.kb.db;
 
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 import org.apache.hadoop.record.CsvRecordInput;
-import org.fusesource.lmdbjni.BufferCursor;
-import org.fusesource.lmdbjni.Transaction;
+import org.lmdbjava.Cursor;
+import org.lmdbjava.SeekOp;
+import org.lmdbjava.Txn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.exceptions.NerdResourceException;
-
 import java.io.*;
+import java.nio.ByteBuffer;
 
-import static org.fusesource.lmdbjni.Constants.bytes;
+import static java.nio.ByteBuffer.allocateDirect;
 
 public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Record> {
 
@@ -26,10 +27,12 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		
 	@Override
 	public Record retrieve(String key) {
-		byte[] cachedData = null;
+		final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+		ByteBuffer cachedData = null;
 		Record record = null;
-		try (Transaction tx = environment.createReadTransaction()) {
-			cachedData = db.get(tx, KBEnvironment.serialize(key));
+		try (Txn<ByteBuffer> tx = environment.txnRead()) {
+			keyBuffer.put(KBEnvironment.serialize(key)).flip();
+			cachedData = db.get(tx, keyBuffer);
 			if (cachedData != null) {
 				record = (Record)KBEnvironment.deserialize(cachedData);
 			}
@@ -43,11 +46,13 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 	//@Override
 	public Record retrieve2(String key) {
 		Record record = null;
-		try (Transaction tx = environment.createReadTransaction();
-			BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(KBEnvironment.serialize(key));
-			if (cursor.seekKey()) {
-				record = (Record)KBEnvironment.deserialize(cursor.valBytes());
+		final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+		try (Txn<ByteBuffer> tx = environment.txnRead();
+			 final Cursor<ByteBuffer> cursor = db.openCursor(tx)) {
+
+			keyBuffer.put(KBEnvironment.serialize(key)).flip();
+			if (cursor.seek(SeekOp.MDB_FIRST)) {
+				record = (Record)KBEnvironment.deserialize(cursor.val());
 			}
 		} catch(Exception e) {
             LOGGER.error("Cannot retrieve key " + key, e);
@@ -66,20 +71,25 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 		String line = null;
 		int nbToAdd = 0;
-		Transaction tx = environment.createWriteTransaction();
+		Txn<ByteBuffer> tx = environment.txnWrite();
 		while ((line=input.readLine()) != null) {
 			if (nbToAdd == 10000) {
 				tx.commit();
 				tx.close();
 				nbToAdd = 0;
-				tx = environment.createWriteTransaction();
+				tx = environment.txnWrite();
 			}
 
 			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
 			KBEntry<String,Record> entry = deserialiseCsvRecord(cri);
 			if (entry != null) {
 				try {
-					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+					keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+					final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+					final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+					valBuffer.put(serializedValue);
+					db.put(tx, keyBuffer, valBuffer);
 					nbToAdd++;
 				} catch(Exception e) {
 					//System.out.println("Invalid input line: " + line);

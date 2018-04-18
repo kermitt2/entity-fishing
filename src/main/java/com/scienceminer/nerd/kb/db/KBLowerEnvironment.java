@@ -1,26 +1,17 @@
 package com.scienceminer.nerd.kb.db;
 
-import com.scienceminer.nerd.utilities.*;
-
-import java.io.*;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.concurrent.*;
-
-import org.nustaq.serialization.*;
-
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
+import com.scienceminer.nerd.kb.model.hadoop.DbPage;
+import com.scienceminer.nerd.kb.model.hadoop.DbPageLinkCounts;
+import com.scienceminer.nerd.kb.model.hadoop.DbTranslations;
+import com.scienceminer.nerd.utilities.NerdConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import com.scienceminer.nerd.kb.model.hadoop.*; 
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-import com.scienceminer.nerd.kb.*;
-
-import org.apache.hadoop.record.*;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.HashMap;
 
 /**
  * The part of the KB corresponding to language-dependent resources, e.g. 

@@ -1,101 +1,110 @@
 package com.scienceminer.nerd.kb.db;
 
-import org.apache.hadoop.record.CsvRecordInput;
-
-import java.io.*;
-
-import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
-
+import org.apache.hadoop.record.CsvRecordInput;
+import org.lmdbjava.Cursor;
+import org.lmdbjava.SeekOp;
+import org.lmdbjava.Txn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.io.*;
+import java.nio.ByteBuffer;
+
+import static com.scienceminer.nerd.kb.db.KBEnvironment.deserialize;
+import static java.nio.ByteBuffer.allocateDirect;
 
 public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
-	private static final Logger logger = LoggerFactory.getLogger(IntLongDatabase.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IntLongDatabase.class);
 
-	public IntLongDatabase(KBEnvironment envi, DatabaseType type) {
-		super(envi, type);
-	}
-	
-	public IntLongDatabase(KBEnvironment envi, DatabaseType type, String name) {
-		super(envi, type, name);
-	}
-	
-	// using standard LMDB copy mode
-	@Override
-	public Long retrieve(Integer key) {
-		byte[] cachedData = null;
-		Long record = null;
-		try (Transaction tx = environment.createReadTransaction()) {
-			cachedData = db.get(tx, KBEnvironment.serialize(key));
-			if (cachedData != null) {
-				record = (Long)KBEnvironment.deserialize(cachedData);
-			}
-		} catch(Exception e) {
-			logger.error("Cannot retrieve key " + key, e);
-		}
-		return record;
-	}
+    public IntLongDatabase(KBEnvironment envi, DatabaseType type) {
+        super(envi, type);
+    }
 
-	// using LMDB zero copy mode
-	//@Override
-	public Long retrieve2(Integer key) {
-		byte[] cachedData = null;
-		Long record = null;
-		try (Transaction tx = environment.createReadTransaction();
-			BufferCursor cursor = db.bufferCursor(tx)) {
-			cursor.keyWriteBytes(KBEnvironment.serialize(key));
-			if (cursor.seekKey()) {
-				record = (Long)KBEnvironment.deserialize(cursor.valBytes());
-			}
-		} catch(Exception e) {
-			logger.error("cannot retrieve " + key, e);
-		}
-		return record;
-	}
+    public IntLongDatabase(KBEnvironment envi, DatabaseType type, String name) {
+        super(envi, type, name);
+    }
 
-	public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-		if (isLoaded && !overwrite)
-			return;
+    // using standard LMDB copy mode
+    @Override
+    public Long retrieve(Integer key) {
+        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+        ByteBuffer cachedData = null;
+        Long record = null;
+        try (Txn<ByteBuffer> tx = environment.txnRead()) {
+            keyBuffer.put(KBEnvironment.serialize(key));
+            cachedData = db.get(tx, keyBuffer);
+            if (cachedData != null) {
+                record = (Long) KBEnvironment.deserialize(cachedData);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Cannot retrieve key " + key, e);
+        }
+        return record;
+    }
 
-		if (dataFile == null)
-			throw new NerdResourceException("Resource file not found");
+    // using LMDB zero copy mode
+    //@Override
+    public Long retrieve2(Integer key) {
+        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+        Long record = null;
+        try (Txn<ByteBuffer> tx = environment.txnRead();
+             final Cursor<ByteBuffer> cursor = db.openCursor(tx)) {
 
-		System.out.println("Loading " + name + " database");
+            keyBuffer.put(KBEnvironment.serialize(key)).flip();
+            if (cursor.seek(SeekOp.MDB_FIRST)) {
+                record = (Long) deserialize(cursor.val());
+            }
+        } catch (Exception e) {
+            LOGGER.error("Cannot retrieve key " + key, e);
+        }
+        return record;
+    }
 
-		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-		long bytesRead = 0;
+    public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
+        if (isLoaded && !overwrite)
+            return;
 
-		String line = null;
-		int nbToAdd = 0;
-		Transaction tx = environment.createWriteTransaction();
-		while ((line=input.readLine()) != null) {
-			if (nbToAdd == 10000) {
-				tx.commit();
-				tx.close();
-				nbToAdd = 0;
-				tx = environment.createWriteTransaction();
-			}
-			bytesRead = bytesRead + line.length() + 1;
+        if (dataFile == null)
+            throw new NerdResourceException("Resource file not found");
 
-			CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
-			KBEntry<Integer,Long> entry = deserialiseCsvRecord(cri);
-			if (entry != null) {
-				try {
-					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-					nbToAdd++;
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		tx.commit();
-		tx.close();
-		input.close();
-		isLoaded = true;
-	}
+        System.out.println("Loading " + name + " database");
+
+        BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+        long bytesRead = 0;
+
+        String line = null;
+        int nbToAdd = 0;
+        Txn<ByteBuffer> tx = environment.txnWrite();
+        while ((line = input.readLine()) != null) {
+            if (nbToAdd == 10000) {
+                tx.commit();
+                tx.close();
+                nbToAdd = 0;
+                tx = environment.txnWrite();
+            }
+            bytesRead = bytesRead + line.length() + 1;
+
+            CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
+            KBEntry<Integer, Long> entry = deserialiseCsvRecord(cri);
+            if (entry != null) {
+                try {
+                    final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                    keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+                    final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+                    final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                    valBuffer.put(serializedValue);
+                    db.put(tx, keyBuffer, valBuffer);
+                    nbToAdd++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        tx.commit();
+        tx.close();
+        input.close();
+        isLoaded = true;
+    }
 
 }

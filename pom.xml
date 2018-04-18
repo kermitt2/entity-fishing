@@ -683,6 +683,12 @@
             <artifactId>jersey-server</artifactId>
             <version>1.8</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -854,7 +860,7 @@
         </dependency>
 
         <!-- LMDB -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.deephacks.lmdbjni</groupId>
             <artifactId>lmdbjni</artifactId>
             <version>${lmdbjni.version}</version>
@@ -873,6 +879,12 @@
             <groupId>org.deephacks.lmdbjni</groupId>
             <artifactId>lmdbjni-win64</artifactId>
             <version>${lmdbjni.version}</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.lmdbjava</groupId>
+            <artifactId>lmdbjava</artifactId>
+            <version>0.6.0</version>
         </dependency>
 
         <!-- TBD: update to the latest version! -->

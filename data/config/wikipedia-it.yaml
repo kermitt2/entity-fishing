@@ -4,15 +4,15 @@
 langCode: it
 
 # path to the LMDB data
-dbDirectory: data/db/db-it
-
-# path to the embeddings
-embeddingsDirectory: data/embeddings/it
+#dbDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/nerd-data/db/db-it
+#dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/nerd-data/db/db-it
+dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.4/nerd-data/db/db-it
 
 # path to the compiled CSV wikipedia, infobox, wikidata files
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
-dataDirectory: /mnt/data/wikipedia/latest/it/
+#dataDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/wikipedia/it/
+dataDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/wikipedia/it/
 #dataDirectory: /home/lopez/resources/wikipedia/it/
 
 # path to the stopwords file to consider for the target language

@@ -7,13 +7,16 @@ import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 import com.scienceminer.nerd.kb.model.hadoop.DbTranslations;
 import com.scienceminer.nerd.utilities.NerdConfig;
+import org.apache.commons.io.IOUtils;
 import org.nustaq.serialization.FSTConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Closeable;
-import java.io.File;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.Map;
+
+import static java.nio.ByteBuffer.allocateDirect;
 
 /**
  * A KB corresponding to a Wikipedia instance, which is concretely stored as a set of LMDB databases.
@@ -47,6 +50,27 @@ public abstract class KBEnvironment implements Closeable {
 	public static Object deserialize(byte[] data) {
 		return getFSTConfigurationInstance().asObject(data);
 	}
+
+	public static Object deserialize(ByteBuffer data) {
+		byte[] b = new byte[data.remaining()];
+		return data.get(b);
+	}
+
+	/*public static Object toObject(ByteBuffer byteBuffer) throws IOException, ClassNotFoundException {
+		byte[] bytes = new byte[byteBuffer.remaining()];
+		byteBuffer.get(bytes);
+		Object obj = null;
+		ByteArrayInputStream bis = null;
+		ObjectInputStream ois = null;
+		try {
+			bis = new ByteArrayInputStream(bytes);
+			ois = new ObjectInputStream(bis);
+			obj = ois.readObject();
+		} finally {
+			IOUtils.closeQuietly(bis, ois);
+		}
+		return obj;
+	}*/
 
 	// NERD configuration for the KB instance
 	protected NerdConfig conf = null;

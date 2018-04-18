@@ -2,14 +2,16 @@ package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import org.apache.hadoop.record.CsvRecordInput;
-import org.fusesource.lmdbjni.Transaction;
-
+import org.lmdbjava.Txn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.nio.ByteBuffer.allocateDirect;
 
 public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 	private static final Logger logger = LoggerFactory.getLogger(ConceptDatabase.class);	
@@ -41,13 +43,13 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 
 		String line = null;
 		int nbToAdd = 0;
-		Transaction tx = environment.createWriteTransaction();
+		Txn<ByteBuffer> tx = environment.txnWrite();
 		while ((line=input.readLine()) != null) {
 			if (nbToAdd == 10000) {
 				tx.commit();
 				tx.close();
 				nbToAdd = 0;
-				tx = environment.createWriteTransaction();
+				tx = environment.txnWrite();
 			}
 
 			String[] pieces = line.split(",");
@@ -83,7 +85,12 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 			KBEntry<String,Map<String,Integer>> entry = new KBEntry<String,Map<String,Integer>>(keyVal, conceptMap);
 			if (entry != null) {
 				try {
-					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+					keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+					final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+					final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+					valBuffer.put(serializedValue);
+					db.put(tx, keyBuffer, valBuffer);
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();
