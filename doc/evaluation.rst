@@ -63,7 +63,7 @@ If there is a directory called ``pdf`` or ``PDF``, the process will extract info
 
 Use the following maven command with the above dataset identifier for generating the annotation xml file:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.EvaluationDataGeneration -Dexec.args="toto"
+	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.AnnotatedDataGeneration -Dexec.args="toto"
 
 References
 **********
