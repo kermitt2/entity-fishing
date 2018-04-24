@@ -139,10 +139,10 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 				try {
 
 					final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-					keyBuffer.put(KBEnvironment.serialize(linkCountEntry.getKey()));
+					keyBuffer.put(KBEnvironment.serialize(linkCountEntry.getKey())).flip();
 					final byte[] serializedValue = KBEnvironment.serialize(linkCountEntry.getValue());
 					final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-					valBuffer.put(serializedValue);
+					valBuffer.put(serializedValue).flip();
 					db.put(tx, keyBuffer, valBuffer);
 					nbToAdd++;
 				} catch(Exception e) {

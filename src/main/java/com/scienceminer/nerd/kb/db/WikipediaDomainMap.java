@@ -195,10 +195,11 @@ System.out.print("\n");*/
                 if (theDomains != null) {
                     try {
                         final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                        keyBuffer.put(KBEnvironment.serialize(pageId));
+                        keyBuffer.put(KBEnvironment.serialize(pageId)).flip();
                         final byte[] serializedValue = KBEnvironment.serialize(theDomains);
                         final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                        valBuffer.put(serializedValue);
+                        valBuffer.put(serializedValue).flip();
+                        db.put(tx, keyBuffer, valBuffer);
                         nbToAdd++;
                     } catch (Exception e) {
                         e.printStackTrace();

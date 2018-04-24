@@ -1,16 +1,11 @@
 package com.scienceminer.nerd.kb;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-
+import com.scienceminer.nerd.kb.db.KBUpperEnvironment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.db.*;
-import com.scienceminer.nerd.kb.model.Page.PageType;
+import java.util.List;
+import java.util.Map;
 
 /**
  * An language-independent atomic element of the (N)ERD Knowledge Base.

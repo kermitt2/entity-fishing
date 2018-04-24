@@ -53,7 +53,8 @@ public abstract class KBEnvironment implements Closeable {
 
 	public static Object deserialize(ByteBuffer data) {
 		byte[] b = new byte[data.remaining()];
-		return data.get(b);
+		data.get(b);
+		return deserialize(b);
 	}
 
 	/*public static Object toObject(ByteBuffer byteBuffer) throws IOException, ClassNotFoundException {

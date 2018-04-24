@@ -34,7 +34,7 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 			keyBuffer.put(KBEnvironment.serialize(key)).flip();
 			cachedData = db.get(tx, keyBuffer);
 			if (cachedData != null) {
-				record = (Record)KBEnvironment.deserialize(cachedData);
+				record = (Record) KBEnvironment.deserialize(cachedData);
 			}
 		} catch(Exception e) {
 			LOGGER.error("Cannot retrieve key " + key, e);
@@ -85,10 +85,10 @@ public abstract class StringRecordDatabase<Record> extends KBDatabase<String, Re
 			if (entry != null) {
 				try {
 					final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-					keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+					keyBuffer.put(KBEnvironment.serialize(entry.getKey())).flip();
 					final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
 					final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-					valBuffer.put(serializedValue);
+					valBuffer.put(serializedValue).flip();
 					db.put(tx, keyBuffer, valBuffer);
 					nbToAdd++;
 				} catch(Exception e) {

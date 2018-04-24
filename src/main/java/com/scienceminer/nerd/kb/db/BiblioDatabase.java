@@ -83,10 +83,10 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
                         if (theEntry != null) {
                             try {
                                 final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                                keyBuffer.put(KBEnvironment.serialize(theEntry.getKey()));
+                                keyBuffer.put(KBEnvironment.serialize(theEntry.getKey())).flip();
                                 final byte[] serializedValue = KBEnvironment.serialize(theEntry.getValue());
                                 final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                                valBuffer.put(serializedValue);
+                                valBuffer.put(serializedValue).flip();
                                 db.put(tx, keyBuffer, valBuffer);
                                 nbToAdd++;
                                 nbDoi++;

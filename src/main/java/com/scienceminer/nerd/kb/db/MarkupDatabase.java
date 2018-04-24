@@ -197,10 +197,10 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
                             if ((currMarkup != null) && (currMarkup.trim().length() > 5)) {
                                 try {
                                     final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                                    keyBuffer.put(KBEnvironment.serialize(currId));
+                                    keyBuffer.put(KBEnvironment.serialize(currId)).flip();
                                     final byte[] serializedValue = KBEnvironment.serialize(currMarkup);
                                     final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                                    valBuffer.put(serializedValue);
+                                    valBuffer.put(serializedValue).flip();
                                     db.put(tx, keyBuffer, valBuffer);
                                     nbToAdd++;
                                     totalAdded++;

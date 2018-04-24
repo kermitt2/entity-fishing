@@ -22,7 +22,7 @@ public class KBUpperEnvironment extends KBEnvironment {
     private StatementDatabase dbStatements = null;
     private PropertyDatabase dbProperties = null;
 
-    // index of bliographical entities via their DOI
+    // index of bibliographical entities via their DOI
     private BiblioDatabase dbBiblio = null;
 
     // index for the taxon taxonomy (aka the tree of life)
@@ -121,7 +121,7 @@ public class KBUpperEnvironment extends KBEnvironment {
      */
     @Override
     public void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception {
-        System.out.println("building Environment for upper knowledge base");
+        LOGGER.info("building Environment for upper knowledge base");
         //check all files exist and are readable before doing anything
 
         File dataDirectory = new File(conf.getDataDirectory());
@@ -153,7 +153,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 
         dbTaxonParent.fillTaxonDbs(dbConcepts, dbStatements, overwrite);
 
-        System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
+        LOGGER.info("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
     }
 
     /**

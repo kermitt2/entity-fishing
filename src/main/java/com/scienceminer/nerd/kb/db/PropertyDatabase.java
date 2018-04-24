@@ -120,10 +120,10 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
         for (Property property : properties) {
             try {
                 final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                keyBuffer.put(KBEnvironment.serialize(property.getId()));
+                keyBuffer.put(KBEnvironment.serialize(property.getId())).flip();
                 final byte[] serializedValue = KBEnvironment.serialize(property);
                 final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                valBuffer.put(serializedValue);
+                valBuffer.put(serializedValue).flip();
                 db.put(tx, keyBuffer, valBuffer);
                 nbTotalAdded++;
             } catch (Exception e) {

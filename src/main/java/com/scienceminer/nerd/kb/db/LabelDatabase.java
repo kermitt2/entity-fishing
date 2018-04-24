@@ -25,7 +25,7 @@ public class LabelDatabase extends StringRecordDatabase<DbLabel> {
 		DbLabel l = new DbLabel();
 		l.deserialize(record);
 		
-		return new KBEntry<String,DbLabel>(text, l);
+		return new KBEntry<>(text, l);
 	}
 
 	/**

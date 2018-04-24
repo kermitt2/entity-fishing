@@ -132,10 +132,10 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
             if (statements.size() > 0) {
                 try {
                     final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                    keyBuffer.put(KBEnvironment.serialize(itemId));
+                    keyBuffer.put(KBEnvironment.serialize(itemId)).flip();
                     final byte[] serializedValue = KBEnvironment.serialize(statements);
                     final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                    valBuffer.put(serializedValue);
+                    valBuffer.put(serializedValue).flip();
                     db.put(tx, keyBuffer, valBuffer);
                     nbToAdd++;
                     nbTotalAdded++;

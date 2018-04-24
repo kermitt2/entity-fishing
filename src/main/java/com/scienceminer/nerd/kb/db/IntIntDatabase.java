@@ -92,10 +92,10 @@ public abstract class IntIntDatabase extends KBDatabase<Integer, Integer> {
             if (entry != null) {
                 try {
                     final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                    keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+                    keyBuffer.put(KBEnvironment.serialize(entry.getKey())).flip();
                     final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
                     final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                    valBuffer.put(serializedValue);
+                    valBuffer.put(serializedValue).flip();
                     db.put(tx, keyBuffer, valBuffer);
                     nbToAdd++;
                 } catch (Exception e) {

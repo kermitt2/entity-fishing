@@ -34,14 +34,14 @@ public class UpperKnowledgeBase {
 	private KBUpperEnvironment env = null;
 
 	private Map<String, LowerKnowledgeBase> wikipedias = null;
-    private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
 
+	private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
 	private long conceptCount = -1;
 
-	// this is the list of supported languages 
-  	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
+	// this is the list of supported languages
+
+	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
   			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES);
- 
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
 			getNewInstance();
@@ -57,72 +57,81 @@ public class UpperKnowledgeBase {
 		instance = new UpperKnowledgeBase();
 	}
 
+	/**
+	 * Only for tests
+	 */
+	UpperKnowledgeBase(boolean test) { }
+
     /**
      * Hidden constructor
      * Initialises a newly created Upper-level knowledge base
      */
     private UpperKnowledgeBase() {
-    	try {
-    		LOGGER.info("Init Lexicon");
-    		Lexicon.getInstance();
-    		LOGGER.info("Lexicon initialized");
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+		init();
+	}
 
-            LOGGER.info("\nInit Upper Knowledge base layer");
-            NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
+	protected void init() {
+		try {
+			LOGGER.info("Init Lexicon");
+			Lexicon.getInstance();
+			LOGGER.info("Lexicon initialized");
+			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+			LOGGER.info("\nInit Upper Knowledge base layer");
+			NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
 			this.env = new KBUpperEnvironment(conf);
 			this.env.buildEnvironment(conf, false);
 
 			wikipedias = new HashMap<>();
-            wikipediaDomainMaps = new HashMap<>();
+			wikipediaDomainMaps = new HashMap<>();
 
-            LOGGER.info("Init English lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
+			LOGGER.info("Init English lower Knowledge base layer");
+			conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
 			LowerKnowledgeBase wikipedia_en = new LowerKnowledgeBase(conf);
 
 			wikipedias.put(Language.EN, wikipedia_en);
-            WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
-            wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
-            wikipediaDomainMaps_en.createAllMappings();
-            wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
-			
+			WikipediaDomainMap wikipediaDomainMaps_en = new WikipediaDomainMap(Language.EN, conf.getDbDirectory());
+			wikipediaDomainMaps_en.setWikipedia(wikipedia_en);
+			wikipediaDomainMaps_en.createAllMappings();
+			wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
+
 			LOGGER.info("Init German lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/config/wikipedia-de.yaml"), NerdConfig.class);;
+			conf = mapper.readValue(new File("data/config/wikipedia-de.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_de = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
-            wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
+			wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
-            LOGGER.info("Init French lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/config/wikipedia-fr.yaml"), NerdConfig.class);;
+			LOGGER.info("Init French lower Knowledge base layer");
+			conf = mapper.readValue(new File("data/config/wikipedia-fr.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_fr = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
-            wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
+			wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
 
-            LOGGER.info("Init Spanish lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/config/wikipedia-es.yaml"), NerdConfig.class);;
+			LOGGER.info("Init Spanish lower Knowledge base layer");
+			conf = mapper.readValue(new File("data/config/wikipedia-es.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_es = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.ES, wikipedia_es);
-            wikipediaDomainMaps.put(Language.ES, wikipediaDomainMaps_en);
+			wikipediaDomainMaps.put(Language.ES, wikipediaDomainMaps_en);
 
-            LOGGER.info("Init Italian lower Knowledge base layer");
-            conf = mapper.readValue(new File("data/config/wikipedia-it.yaml"), NerdConfig.class);;
+			LOGGER.info("Init Italian lower Knowledge base layer");
+			conf = mapper.readValue(new File("data/config/wikipedia-it.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_it = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.IT, wikipedia_it);
-            wikipediaDomainMaps.put(Language.IT, wikipediaDomainMaps_en);
+			wikipediaDomainMaps.put(Language.IT, wikipediaDomainMaps_en);
 
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
 			LOGGER.info("Init Grobid") ;
-            Utilities.initGrobid();
+			Utilities.initGrobid();
 		} catch(Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public LowerKnowledgeBase getWikipediaConf(String lang) {
 		return wikipedias.get(lang);
 	}
-	
+
 	public Map<String, LowerKnowledgeBase> getWikipediaConfs() {
 		return wikipedias;
 	}
@@ -133,7 +142,7 @@ public class UpperKnowledgeBase {
 
 	public long getEntityCount() {
 		if (conceptCount == -1)
-			conceptCount = env.getDbConcepts().getDatabaseSize();
+			conceptCount = getEnv().getDbConcepts().getDatabaseSize();
 		return conceptCount;
 	}
 
@@ -141,20 +150,20 @@ public class UpperKnowledgeBase {
 	 * Return the concept object corresponding to a given wikidata ID
 	 */
 	public Concept getConcept(String wikidataId) {
-		if (env.getDbConcepts().retrieve(wikidataId) == null) 
+		if (getEnv().getDbConcepts().retrieve(wikidataId) == null)
 			return null;
 		else
-			return new Concept(env, wikidataId);
+			return new Concept(getEnv(), wikidataId);
 	}
 
 	/**
 	 * Return the page id corresponding to a given concept id and a target lang
 	 */
 	public Integer getPageIdByLang(String wikidataId, String lang) {
-		if (env.getDbConcepts().retrieve(wikidataId) == null) 
+		if (getEnv().getDbConcepts().retrieve(wikidataId) == null)
 			return null;
 		else {
-			Concept concept = new Concept(env, wikidataId);
+			Concept concept = new Concept(getEnv(), wikidataId);
 			return concept.getPageIdByLang(lang);
 		}
 	}
@@ -163,7 +172,7 @@ public class UpperKnowledgeBase {
 	 * Return the definition of a property
 	 */
 	public Property getProperty(String propertyId) {
-		return env.getDbProperties().retrieve(propertyId);
+		return getEnv().getDbProperties().retrieve(propertyId);
 	}
 
 	/**
@@ -171,11 +180,11 @@ public class UpperKnowledgeBase {
 	 */
 	public List<Statement> getStatements(String wikidataId) {
 		//System.out.println("get statements for: " + wikidataId);
-		//List<Statement> statements = env.getDbStatements().retrieve(wikidataId);
+		//List<Statement> statements = getEnv().getDbStatements().retrieve(wikidataId);
 		//if (statements != null)
 		//	System.out.println(statements.size() + " statements: ");
 
-		return env.getDbStatements().retrieve(wikidataId);
+		return getEnv().getDbStatements().retrieve(wikidataId);
 	}
 
 	/**
@@ -183,44 +192,44 @@ public class UpperKnowledgeBase {
 	 */
 	public List<Statement> getReverseStatements(String wikidataId) {
 		//System.out.println("get reverse statements for: " + wikidataId);
-		//List<Statement> statements = env.getDbReverseStatements().retrieve(wikidataId);
+		//List<Statement> statements = getEnv().getDbReverseStatements().retrieve(wikidataId);
 		//if (statements != null)
 		//	System.out.println(statements.size() + " statements: ");
-		return env.getDbReverseStatements().retrieve(wikidataId);
+		return getEnv().getDbReverseStatements().retrieve(wikidataId);
 	}
 
 	/**
 	 * Returns an iterator for all pages in the database, in order of ascending ids.
-	 * 
+	 *
 	 */
 	public KBIterator getEntityIterator() {
-		return new KBIterator(env.getDbConcepts());
+		return new KBIterator(getEnv().getDbConcepts());
 	}
 
 	/**
-	 * Load on demand the reverse statement database (get statements by the tail entities), 
+	 * Load on demand the reverse statement database (get statements by the tail entities),
 	 * which is not loaded by default.
 	 */
 	public void loadReverseStatementDatabase(boolean overwrite) {
-		env.loadReverseStatementDatabase(overwrite);
+		getEnv().loadReverseStatementDatabase(overwrite);
 	}
 
 	public String getEntityIdPerDoi(String doi) {
-		return env.getDbBiblio().retrieve(doi.toLowerCase());
+		return getEnv().getDbBiblio().retrieve(doi.toLowerCase());
 	}
 
 	/**
 	 * Return the list of immediate parent taxons (P171) for a given taxon, null for empty list and non-taxon
 	 */
 	public List<String> getParentTaxons(String wikidataId) {
-		return env.getDbTaxonParent().retrieve(wikidataId);
+		return getEnv().getDbTaxonParent().retrieve(wikidataId);
 	}
 
 	/**
 	 * Return the full list of parent taxons (P171) for a given taxon along the taxon hierarchy, null for empty list and non-taxon
 	 */
 	public List<String> getFullParentTaxons(String wikidataId) {
-		List<String> taxons = env.getDbTaxonParent().retrieve(wikidataId);
+		List<String> taxons = getEnv().getDbTaxonParent().retrieve(wikidataId);
 		if (CollectionUtils.isEmpty(taxons)) {
 			return null;
 		}
@@ -245,7 +254,11 @@ public class UpperKnowledgeBase {
 			LowerKnowledgeBase wikipedia = entry.getValue();
 			wikipedia.close();
 		}
-		env.close();
+		getEnv().close();
 		this.env = null;
+	}
+
+	protected KBUpperEnvironment getEnv() {
+		return env;
 	}
 }

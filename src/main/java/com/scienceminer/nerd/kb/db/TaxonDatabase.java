@@ -77,36 +77,36 @@ public class TaxonDatabase extends StringRecordDatabase<List<String>> {
                     // check the statements for a property P171 (parent taxon)
 
                     //if ((superType != null) && (superType.equals("Q16521")) )
-                    {
-                        List<String> parentTaxons = null;
+                    //{
+                    List<String> parentTaxons = null;
 
-                        // check the statements for a property P171 (parent taxon)
-                        for (Statement statement : statements) {
-                            if (statement.getPropertyId().equals("P171")) {
-                                String parentTaxon = statement.getValue();
-                                //System.out.println("found DOI: " + doi);
-                                if (parentTaxons == null)
-                                    parentTaxons = new ArrayList<String>();
-                                if (!parentTaxons.contains(parentTaxon))
-                                    parentTaxons.add(parentTaxon);
-                            }
-                        }
-
-                        if (parentTaxons != null) {
-                            // we have a taxon
-                            nbTaxon++;
-                            // store the parent information
-
-                            final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                            keyBuffer.put(KBEnvironment.serialize(entityId));
-                            final byte[] serializedValue = KBEnvironment.serialize(parentTaxons);
-                            final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                            valBuffer.put(serializedValue);
-                            db.put(tx, keyBuffer, valBuffer);
-             
-                            nbToAdd++;
+                    // check the statements for a property P171 (parent taxon)
+                    for (Statement statement : statements) {
+                        if (statement.getPropertyId().equals("P171")) {
+                            String parentTaxon = statement.getValue();
+                            //System.out.println("found DOI: " + doi);
+                            if (parentTaxons == null)
+                                parentTaxons = new ArrayList<String>();
+                            if (!parentTaxons.contains(parentTaxon))
+                                parentTaxons.add(parentTaxon);
                         }
                     }
+
+                    if (parentTaxons != null) {
+                        // we have a taxon
+                        nbTaxon++;
+                        // store the parent information
+
+                        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                        keyBuffer.put(KBEnvironment.serialize(entityId)).flip();
+                        final byte[] serializedValue = KBEnvironment.serialize(parentTaxons);
+                        final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                        valBuffer.put(serializedValue).flip();
+                        db.put(tx, keyBuffer, valBuffer);
+
+                        nbToAdd++;
+                    }
+                    //}
                 } catch (Exception e) {
                     logger.error("fail to write entity description", e);
                 }
