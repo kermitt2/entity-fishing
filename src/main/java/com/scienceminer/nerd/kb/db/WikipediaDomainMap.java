@@ -70,7 +70,9 @@ public class WikipediaDomainMap {
             isLoaded = true;
             LOGGER.info("domains " + lang + " / isLoaded: " + isLoaded);
         }
-        this.environment = Env.create().setMapSize(100 * 1024 * 1024).open(thePath, MDB_NOTLS);
+        this.environment = Env.create()
+                .setMapSize(100L * 1024L * 1024L * 1024L)
+                .open(thePath, MDB_NOTLS);
         db = this.environment.openDbi(database_name, DbiFlags.MDB_CREATE);
     }
 

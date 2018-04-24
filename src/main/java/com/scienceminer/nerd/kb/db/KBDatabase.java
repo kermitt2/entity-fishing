@@ -46,7 +46,7 @@ public abstract class KBDatabase<K, V> {
             isLoaded = true;
         }
         this.environment = Env.create()
-                .setMapSize(100 * 1024 * 1024)
+                .setMapSize(100L * 1024L * 1024L * 1024L)
                 .open(thePath, EnvFlags.MDB_NOTLS);
 
         db = this.environment.openDbi(type.name(), DbiFlags.MDB_CREATE);
@@ -77,7 +77,7 @@ public abstract class KBDatabase<K, V> {
             System.out.println(type.toString() + " / isLoaded: " + isLoaded);
         }
         this.environment = Env.create()
-                .setMapSize(100 * 1024 * 1024)
+                .setMapSize(100L * 1024L * 1024L * 1024L)
                 .open(thePath);
         db = this.environment.openDbi(this.name, DbiFlags.MDB_CREATE);
     }

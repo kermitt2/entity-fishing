@@ -42,7 +42,7 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String, Integer>> 
         int nbToAdd = 0;
         Txn<ByteBuffer> tx = environment.txnWrite();
         while ((line = input.readLine()) != null) {
-            if (nbToAdd == 100000) {
+            if (nbToAdd == 10000) {
                 tx.commit();
                 tx.close();
                 nbToAdd = 0;
@@ -91,6 +91,7 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String, Integer>> 
                 nbToAdd++;
             } catch (Exception e) {
                 e.printStackTrace();
+                System.exit(-1);
             }
         }
         tx.commit();
