@@ -14,10 +14,10 @@ import java.nio.ByteBuffer;
 public class KBIterator implements Closeable {
 
     private KBDatabase database;
-    private Dbi<ByteBuffer> db = null;
-    private CursorIterator<ByteBuffer> iterator = null;
-    private Env<ByteBuffer> environment = null;
-    private Txn<ByteBuffer> tx = null;
+    private Dbi<ByteBuffer> db;
+    private CursorIterator<ByteBuffer> iterator;
+    private Env<ByteBuffer> environment;
+    private Txn<ByteBuffer> tx;
 
     public KBIterator(KBDatabase database) {
         this.database = database;

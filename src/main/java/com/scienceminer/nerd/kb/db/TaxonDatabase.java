@@ -65,6 +65,9 @@ public class TaxonDatabase extends StringRecordDatabase<List<String>> {
                     String superType = null;
 
                     List<Statement> statements = statementDb.retrieve(entityId);
+                    if(statements == null) {
+                        continue;
+                    }
 					/*if ( (statements != null) && (statements.size() > 0) ) {
 						for(Statement statement : statements) {
 							if (statement.getPropertyId().equals("P31")) {

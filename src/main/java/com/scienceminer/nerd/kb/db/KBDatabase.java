@@ -14,13 +14,13 @@ import java.nio.ByteBuffer;
  */
 public abstract class KBDatabase<K, V> {
 
-    protected Env<ByteBuffer> environment = null;
-    protected Dbi<ByteBuffer> db = null;
-    protected String envFilePath = null;
+    protected Env<ByteBuffer> environment;
+    protected Dbi<ByteBuffer> db;
+    protected String envFilePath;
     protected boolean isLoaded = false;
-    protected String name = null;
-    protected DatabaseType type = null;
-    protected KBEnvironment env = null;
+    protected String name;
+    protected DatabaseType type;
+    protected KBEnvironment env;
 
     /**
      * Creates or load an existing database whose name will match the given {@link KBDatabase.DatabaseType}
@@ -82,11 +82,11 @@ public abstract class KBDatabase<K, V> {
         db = this.environment.openDbi(this.name, DbiFlags.MDB_CREATE);
     }
 
-    public Dbi getDatabase() {
+    public Dbi<ByteBuffer> getDatabase() {
         return db;
     }
 
-    public Env getEnvironment() {
+    public Env<ByteBuffer> getEnvironment() {
         return environment;
     }
 

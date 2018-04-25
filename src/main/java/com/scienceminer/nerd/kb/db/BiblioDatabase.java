@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 import static java.nio.ByteBuffer.allocateDirect;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public class BiblioDatabase extends StringRecordDatabase<String> {
     private static final Logger logger = LoggerFactory.getLogger(BiblioDatabase.class);
@@ -65,7 +66,7 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
                     String doi = null;
 
                     List<Statement> statements = statementDb.retrieve(entityId);
-                    if ((statements != null) && (statements.size() > 0)) {
+                    if (isNotEmpty(statements)) {
                         for (Statement statement : statements) {
                             if (statement.getPropertyId().equals("P356")) {
                                 doi = statement.getValue();
@@ -79,20 +80,18 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
                     }
 
                     if (doi != null) {
-                        KBEntry<String, String> theEntry = new KBEntry<String, String>(doi, entityId);
-                        if (theEntry != null) {
-                            try {
-                                final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
-                                keyBuffer.put(KBEnvironment.serialize(theEntry.getKey())).flip();
-                                final byte[] serializedValue = KBEnvironment.serialize(theEntry.getValue());
-                                final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
-                                valBuffer.put(serializedValue).flip();
-                                db.put(tx, keyBuffer, valBuffer);
-                                nbToAdd++;
-                                nbDoi++;
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                        KBEntry<String, String> theEntry = new KBEntry<>(doi, entityId);
+                        try {
+                            final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                            keyBuffer.put(KBEnvironment.serialize(theEntry.getKey())).flip();
+                            final byte[] serializedValue = KBEnvironment.serialize(theEntry.getValue());
+                            final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                            valBuffer.put(serializedValue).flip();
+                            db.put(tx, keyBuffer, valBuffer);
+                            nbToAdd++;
+                            nbDoi++;
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
                 } catch (Exception e) {
