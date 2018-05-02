@@ -90,8 +90,7 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String, Integer>> 
                 db.put(tx, keyBuffer, valBuffer);
                 nbToAdd++;
             } catch (Exception e) {
-                e.printStackTrace();
-                System.exit(-1);
+                LOGGER.warn("While loading the concept database, there was a problem with the record  " + line, e);
             }
         }
         tx.commit();

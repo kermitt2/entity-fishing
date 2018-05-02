@@ -102,7 +102,7 @@ public abstract class KBDatabase<K, V> {
      * @return the number of entries in the database
      */
     public long getDatabaseSize() {
-        try (final Txn<ByteBuffer> txn = this.environment.txnRead();) {
+        try (final Txn<ByteBuffer> txn = this.environment.txnRead()) {
             Stat statistics = db.stat(txn);
             return statistics.entries;
         }
