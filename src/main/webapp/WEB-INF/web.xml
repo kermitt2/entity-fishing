@@ -30,7 +30,7 @@
         <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>-->
-    <<!--servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/index.html</url-pattern>
     </servlet-mapping>
