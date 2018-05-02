@@ -287,7 +287,7 @@ System.out.print("\n");*/
 
         ByteBuffer cachedData = null;
         try (Txn<ByteBuffer> tx = environment.txnRead()) {
-            keyBuffer.put(KBEnvironment.serialize(pageId));
+            keyBuffer.put(KBEnvironment.serialize(pageId)).flip();
 
             cachedData = db.get(tx, keyBuffer);
             if (cachedData != null) {

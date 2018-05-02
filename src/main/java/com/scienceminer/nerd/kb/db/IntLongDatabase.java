@@ -32,7 +32,7 @@ public abstract class IntLongDatabase extends KBDatabase<Integer, Long> {
         ByteBuffer cachedData = null;
         Long record = null;
         try (Txn<ByteBuffer> tx = environment.txnRead()) {
-            keyBuffer.put(KBEnvironment.serialize(key));
+            keyBuffer.put(KBEnvironment.serialize(key)).flip();
             cachedData = db.get(tx, keyBuffer);
             if (cachedData != null) {
                 record = (Long) KBEnvironment.deserialize(cachedData);
