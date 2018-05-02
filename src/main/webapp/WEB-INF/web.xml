@@ -4,6 +4,7 @@
 
 <web-app>
     <display-name>NERD service - a RESTful service for the (Named) Entity Recognition and Disambiguation</display-name>
+
     <servlet>
         <servlet-name>nerd-service</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -24,12 +25,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>defaultStatic</servlet-name>
         <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
+    </servlet>-->
+    <<!--servlet-mapping>
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/index.html</url-pattern>
     </servlet-mapping>
@@ -41,7 +42,7 @@
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/nerd/nerd.new.js</url-pattern>
     </servlet-mapping>
-
+-->
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/service/*</url-pattern>
@@ -74,3 +75,24 @@
      </filter-mapping-->
 
 </web-app>
+
+
+<web-app
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+version="3.0"
+>
+<servlet>
+    <servlet-name>rest-test</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+        <param-name>com.sun.jersey.config.property.packages</param-name>
+        <param-value>com.domain.mypackage</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name> rest-test</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+</servlet-m
