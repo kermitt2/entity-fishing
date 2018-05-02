@@ -682,9 +682,15 @@
             <artifactId>jersey-media-multipart</artifactId>
             <version>2.27</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.mimepull</groupId>
+            <artifactId>mimepull</artifactId>
+            <version>1.9.7</version>
+        </dependency>
         
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>2.27</version>
@@ -694,25 +700,18 @@
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-servlet</artifactId>
             <version>2.27</version>
-        </dependency> -->
+        </dependency>
 
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.1</version>
-            <scope>provided</scope>
         </dependency>
+
 
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
-            <version>2.27</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- if you are using Jersey client specific features without the server side -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
             <version>2.27</version>
             <scope>provided</scope>
         </dependency>
@@ -930,6 +929,12 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>2.4.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-server</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

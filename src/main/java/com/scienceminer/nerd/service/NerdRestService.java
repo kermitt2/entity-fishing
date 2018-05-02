@@ -8,13 +8,13 @@ import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.mention.ProcessText;
-import com.sun.jersey.spi.resource.Singleton;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.io.InputStream;

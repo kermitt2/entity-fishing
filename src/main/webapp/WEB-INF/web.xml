@@ -7,15 +7,19 @@
 
     <servlet>
         <servlet-name>nerd-service</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 
-        <init-param>
+<!--        <init-param>
             <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
             <param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
+        </init-param>-->
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.scienceminer.nerd.service</param-value>
         </init-param>
         <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.scienceminer.nerd.service</param-value>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>
         </init-param>
 
 <!--        <init-param>
