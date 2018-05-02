@@ -25,12 +25,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!--<servlet>
+    <servlet>
         <servlet-name>defaultStatic</servlet-name>
         <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-    </servlet>-->
-    <!--servlet-mapping>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/index.html</url-pattern>
     </servlet-mapping>
@@ -42,7 +42,6 @@
         <servlet-name>defaultStatic</servlet-name>
         <url-pattern>/nerd/nerd.new.js</url-pattern>
     </servlet-mapping>
--->
     <servlet-mapping>
         <servlet-name>nerd-service</servlet-name>
         <url-pattern>/service/*</url-pattern>
