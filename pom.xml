@@ -127,6 +127,7 @@
                 <configuration>
                     <jvmArgs>-Xmx4g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <jettyXml>src/main/resources/jetty.xml</jettyXml>
                     <stopKey/>
                     <stopPort/>
                     <systemProperties>
