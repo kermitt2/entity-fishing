@@ -40,9 +40,9 @@ This version supports English, French, German, Italian and Spanish, with an in-h
 
 * 816 PDF (20658 pages, 8 537 658 tokens) processed in 2094s with 6 concurrent clients (9.86 pages/s, 4077 tokens/s)
 
-**Accuracy**: f-score between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC) - to be improved in the next versions.
+**Accuracy**: f-score for disambiguation only between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC) - to be improved in the next versions.
 
-The knowledge base contains more than 1 billion objects, not far from 15 millions word and entity embeddings, but *entity-fishing* will work with 3-4 GB RAM memory after a 15 second start-up for the server (but please use SSD!). 
+The knowledge base contains more than 1 billion objects, not far from 15 millions word and entity embeddings, however *entity-fishing* will work with 3-4 GB RAM memory after a 15 second start-up for the server (but please use SSD!). 
 
 Have a look at our [presentation at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
 
