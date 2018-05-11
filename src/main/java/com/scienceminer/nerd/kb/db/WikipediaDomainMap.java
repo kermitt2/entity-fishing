@@ -237,7 +237,7 @@ System.out.print("\n");*/
                     LOGGER.warn(category + " is not a category found in Wikipedia.");
                 else {
                     categoryId = theCategory.getId();
-                    if (domains.get(new Integer(categoryId)) != null) {
+                    if (domains.get(categoryId) != null) {
                         LOGGER.warn(category + " is already defined in " + mappingFilePath);
                     }
                 }
