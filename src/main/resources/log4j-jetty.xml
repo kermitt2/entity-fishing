@@ -6,9 +6,16 @@
             <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm.ss} [%-5p] %-25c{1} - %m\n"/>
         </layout>
     </appender>
+    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="maxBackupIndex" value="5"/>
+        <param name="File" value="demoApplication.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm.ss} [%-5p] %-25c{1} - %m\n"/>
+        </layout>
+    </appender>
 
     <root>
-        <priority value="DEBUG"></priority>
-        <appender-ref ref="CONSOLE"/>
+        <priority value="INFO"/>
+        <appender-ref ref="FILE"/>
     </root>
 </log4j:configuration>
