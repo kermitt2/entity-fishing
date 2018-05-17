@@ -30,7 +30,10 @@ public class GenericRankerFeatureVector {
 	public boolean Add_ner = false; // boolean indicating if identified as NER mention GROBID NER
 	public boolean Add_ner_type = false; // GROBID NER class
 	public boolean Add_ner_subtype = false; // wordnet ner sense/subtype 
-	
+
+	// for Nerd-Kid
+	public boolean Add_ner_type_kid = false;
+
 	public boolean Add_isSubTerm = false; // true if sub-string of another term candidate
 	
 	public boolean Add_NERType_relatedness = false; // relateness between the concept and the estimated NER type
@@ -82,6 +85,9 @@ public class GenericRankerFeatureVector {
 	public boolean ner = false;
 	public String ner_type = "NotNER";
 	public String ner_subtype = "NotNER";
+
+	// for Nerd-Kid
+	public String ner_type_kid = "NotNER";
 
 	public boolean isSubTerm = false;
 	
@@ -138,8 +144,11 @@ public class GenericRankerFeatureVector {
 			header.append("@attribute ner {false, true}\n");
 		if (Add_ner_type)
 			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION}\n");
-		if (Add_ner_subtype)	
+		if (Add_ner_subtype)
 			header.append("@attribute ner_subtype STRING\n");
+		// for Nerd-Kid
+		if (Add_ner_type_kid)
+			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
 		if (Add_NERType_relatedness)
 			header.append("@attribute NERType_relatedness REAL\n");
 		if (Add_NERSubType_relatedness)
@@ -192,6 +201,9 @@ public class GenericRankerFeatureVector {
 		if (Add_ner_type)
 			num++;
 		if (Add_ner_subtype)	
+			num++;
+		// for Nerd-Kid
+		if (Add_ner_type_kid)
 			num++;
 		if (Add_NERType_relatedness)
 			num++;
@@ -314,6 +326,10 @@ public class GenericRankerFeatureVector {
 		}
 		if (Add_ner_subtype) {
 			res.append(","+ner_subtype);
+		}
+		// for Nerd-Kid
+		if (Add_ner_type_kid) {
+			res.append(","+ner_type_kid);
 		}
 		if (Add_NERType_relatedness) {
 			res.append("," + NERType_relatedness);

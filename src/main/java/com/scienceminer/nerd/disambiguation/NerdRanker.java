@@ -15,6 +15,7 @@ import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 
+import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
@@ -73,6 +74,9 @@ public class NerdRanker extends NerdModel {
 
 	private LowerKnowledgeBase wikipedia = null;
 
+	// for Nerd-kid
+	private UpperKnowledgeBase wikidata = null;
+
 	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
 	// embeddings-based similiarity
 
@@ -82,6 +86,17 @@ public class NerdRanker extends NerdModel {
 		model = MLModel.GRADIENT_TREE_BOOST;
 		//model = MLModel.RANDOM_FOREST;
 		featureType = FeatureType.NERD;
+
+		GenericRankerFeatureVector feature = getNewFeature();
+		arffParser.setResponseIndex(feature.getNumFeatures()-1);
+	}
+
+	// initialisation for Nerd-Kid
+	public NerdRanker(UpperKnowledgeBase wikidata){
+		this.wikidata = wikidata;
+
+		model = MLModel.GRADIENT_TREE_BOOST;
+        featureType = FeatureType.NERD;  // check the need of feature for Nerd-Kid
 
 		GenericRankerFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
@@ -106,6 +121,19 @@ public class NerdRanker extends NerdModel {
 		return feature;
 	}
 
+    // for Nerd-kid
+//    public double getProbabilityKid(double commonness,
+//                                 double relatedness,
+//                                 double quality,
+//                                 boolean bestCaseContext,
+//                                 float embeddingsSimilarity,
+//                                 String wikidataId,
+//                                 String wikidataP31Id,
+//                                 NERLexicon.NER_Type nerType,
+//                                 String nerTypeKid) throws Exception {
+//
+//    }
+
 	public double getProbability(double commonness, 
 								 double relatedness, 
 								 double quality, 
@@ -129,7 +157,7 @@ public class NerdRanker extends NerdModel {
 
 		if (forest == null) {
 			// load model
-			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
+			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 			if (!modelFile.exists()) {
                 logger.debug("Invalid model file for nerd ranker.");
 			}

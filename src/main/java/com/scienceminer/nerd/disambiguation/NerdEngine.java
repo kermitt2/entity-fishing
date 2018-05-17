@@ -2,6 +2,7 @@ package com.scienceminer.nerd.disambiguation;
 
 import java.util.*;
 
+import com.scienceminer.nerd.kid.TypeClassifier;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -50,6 +51,10 @@ public class NerdEngine {
 
 	private EngineParsers parsers = null;
 
+
+	// for Nerd-Kid
+	private UpperKnowledgeBase wikidatas = null;
+
 	private Map<String, LowerKnowledgeBase> wikipedias = null;
 	private Map<String, NerdRanker> rankers = null;
 	private Map<String, NerdSelector> selectors = null;
@@ -87,6 +92,9 @@ public class NerdEngine {
 		} catch(Exception e) {
 			throw new NerdResourceException("Error instanciating the (N)ERD knowledge base. ", e);
 		}
+
+		// for Nerd-Kid
+		wikidatas = UpperKnowledgeBase.getInstance();
 
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		try {
@@ -475,6 +483,12 @@ public class NerdEngine {
 						candidate.setLang(lang);
 						candidate.setLabel(bestLabel);
 						candidate.setWikidataId(sense.getWikidataId());
+
+						// for Nerd-Kid
+						TypeClassifier typeClassifier = new TypeClassifier();
+						String typeKid = typeClassifier.getPredictionResultFromNerdKid(candidate.getWikidataId());
+						candidate.setTypeKid(typeKid);
+
 						candidate.setBestCaseContext(bestCaseContext);
 						candidates.add(candidate);
 						//System.out.println(candidate.toString());
@@ -1984,6 +1998,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		toBeUpDated.setCategories(best.getCategories());
 		toBeUpDated.setStatements(best.getStatements());
 		toBeUpDated.setType(best.getType());
+        toBeUpDated.setTypeKid(best.getTypeKid());
 		toBeUpDated.setSubTypes(best.getSubTypes());
 	}
 

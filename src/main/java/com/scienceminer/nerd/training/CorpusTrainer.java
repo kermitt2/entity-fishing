@@ -43,6 +43,10 @@ public class CorpusTrainer {
 		arffRanker = new File("data/wikipedia/training/" + lang + "/ranker.arff");
 		arffSelector = new File("data/wikipedia/training/" + lang + "/selector.arff");
 
+		// for Nerd-Kid
+		//arffRanker = new File("data/wikidata/training/" + lang + "/ranker.arff");
+		//arffSelector = new File("data/wikidata/training/" + lang + "/selector.arff");
+
 		try {
 			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 			if(wikipedia == null) {

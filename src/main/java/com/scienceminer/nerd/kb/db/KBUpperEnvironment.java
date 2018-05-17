@@ -45,6 +45,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 	// loaded only if needed, gives the statements by the tail entity
 	private StatementDatabase dbReverseStatements = null;
 
+	// for Nerd-Kid
+	private NerdKidDatabase dbNerdKid = null;
+
 	/**
 	 * Constructor
 	 */	
@@ -97,6 +100,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 		return dbTaxonParent;
 	}
 
+	// for Nerd-Kid
+	public NerdKidDatabase getDbNerdKid() { return dbNerdKid; }
+
 	@Override
 	protected void initDatabases() {
 		System.out.println("\ninit upper level language independent environment");
@@ -120,6 +126,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		dbTaxonParent = buildTaxonParentDatabase();
 		databasesByType.put(DatabaseType.taxon, dbTaxonParent);
+
+		// for Nerd-Kid
+		dbNerdKid =  buildNerdKidDatabase();
+		databasesByType.put(DatabaseType.nerdKid,dbNerdKid);
 	}
 
 	/**
@@ -162,6 +172,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		//System.out.println("Building Statement db");
 		dbStatements.loadFromFile(wikidataStatements, overwrite);
+
+		//for Nerd-kid db
+		dbNerdKid.buildNerdKidDatabase(dbStatements, overwrite);
 		
 		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
 
@@ -201,6 +214,11 @@ public class KBUpperEnvironment extends KBEnvironment {
 	private TaxonDatabase buildTaxonParentDatabase() {
 		return new TaxonDatabase(this);
 	}	
+
+	// for Nerd-Kid
+	private NerdKidDatabase buildNerdKidDatabase() {
+		return new NerdKidDatabase(this);
+	}
 
 	public Long retrieveStatistic(StatisticName sn) {
 		throw new UnsupportedOperationException();

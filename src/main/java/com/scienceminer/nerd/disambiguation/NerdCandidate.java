@@ -69,6 +69,13 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// Wikidata identifier
 	private String wikidataId = null;
 
+	public String getTypeKid() { return typeKid; }
+
+	public void setTypeKid(String typeKid) { this.typeKid = typeKid; }
+
+	// for Nerd-Kid prediction of Ner type result
+	private String typeKid = null;
+
 	// preferred term for the corresponding sense
 	private String preferredTerm = null;
 	

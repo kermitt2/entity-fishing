@@ -70,7 +70,7 @@ public class UpperKnowledgeBase {
 
             LOGGER.info("\nInit Upper Knowledge base layer");
             NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
-			this.env = new KBUpperEnvironment(conf);
+			this.env = new KBUpperEnvironment(conf); //data/db/db-kb
 			this.env.buildEnvironment(conf, false);
 
 			wikipedias = new HashMap<>();

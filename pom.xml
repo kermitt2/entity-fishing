@@ -154,6 +154,37 @@
     </build>
 
     <profiles>
+        <!-- for Nerd-Kid environment   -->
+        <!-- mvn compile exec:exec -PbuildMapWikidataClass -->
+        <profile>
+            <id>buildMapWikidataClass</id>
+            <activation>
+                <property>
+                    <name>buildMapWikidataClass</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Xms2g</argument>
+                                <argument>-Xmx8g</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
+                                <argument>com.scienceminer.nerd.kb.NerdKidDataBuilder</argument>
+                                <argument>data/config/kb.yaml</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <!-- mvn compile exec:exec -PbuildMapWikiEN -->
         <profile>
             <id>buildMapWikiEN</id>
@@ -644,7 +675,7 @@
         </dependency>
 
 
-        <!-- logging -->
+        <!-- logging >
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -654,7 +685,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
+        </dependency -->
 
         <!-- for test only -->
         <dependency>
@@ -796,6 +827,24 @@
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
         </dependency>
+
+        <!-- for Nerd-Kid -->
+        <dependency>
+            <groupId>org.nerd.kid</groupId>
+            <artifactId>nerd-kid-project</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 
         <!-- for GROBID NER -->
         <dependency>

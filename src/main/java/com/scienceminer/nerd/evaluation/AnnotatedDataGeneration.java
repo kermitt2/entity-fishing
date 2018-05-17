@@ -200,6 +200,11 @@ public class AnnotatedDataGeneration {
                         sbDocument.append("\t\t\t").append("<wikiName>").append(escapeXml11(title)).append("</wikiName>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikidataId>").append(e.getWikidataId()).append("</wikidataId>").append("\n");
                         sbDocument.append("\t\t\t").append("<wikipediaId>").append(String.valueOf(wikipediaExternalRef)).append("</wikipediaId>").append("\n");
+
+                        // for Nerd-Kid
+                        sbDocument.append("\t\t\t").append("<nerTypeByNerd>").append(e.getType()).append("</nerTypeByNerd>").append("\n");
+                        sbDocument.append("\t\t\t").append("<nerTypeByNerdKid>").append(e.getTypeKid()).append("</nerTypeByNerdKid>").append("\n");
+
                         sbDocument.append("\t\t\t").append("<offset>").append(String.valueOf(e.getOffsetStart())).append("</offset>").append("\n");
                         sbDocument.append("\t\t\t").append("<length>").append(String.valueOf(e.getRawName().length())).append("</length>").append("\n");
                         sbDocument.append("\t\t").append("</annotation>").append("\n");

@@ -50,8 +50,19 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
     private ProcessText.MentionMethod source = null;
 
-	// type of the entity (person, location, etc.)
+	// type of the entity (person, location, etc.) by Nerd
 	private NERLexicon.NER_Type type = null;
+
+	public NERLexicon.NER_Type getTypeKid() {
+		return typeKid;
+	}
+
+	public void setTypeKid(NERLexicon.NER_Type typeKid) {
+		this.typeKid = typeKid;
+	}
+
+	// type of the entity (person, location, etc.) by Nerd-Kid
+	private NERLexicon.NER_Type typeKid = null;
 
 	// subtypes of the entity when available - the first one is the main one, the others secondary subtypes
 	private List<String> subTypes = null;
@@ -150,6 +161,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 		preferredTerm = mention.getNormalisedName();
 		type = mention.getType();
+		// for Nerd-Kid
 		subTypes = mention.getSubTypes();
 		offsets = new OffsetPosition();
 		offsets.start = mention.getOffsetStart();
@@ -168,6 +180,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		normalisedRawName = entity.getNormalisedName();
 		preferredTerm = entity.getPreferredTerm();
 		type = entity.getType();
+		// for Nerd-Kid
 		subTypes = entity.getSubTypes();
 		offsets = new OffsetPosition();
 		offsets.start = entity.getOffsetStart();
