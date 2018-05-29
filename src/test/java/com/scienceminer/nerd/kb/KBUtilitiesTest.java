@@ -26,13 +26,53 @@ public class KBUtilitiesTest {
         	e.printStackTrace();
         }
 	}
-   	
+
+	@Test
+	public void testGetStatements(){
+		try{
+			List<Statement> statements = UpperKnowledgeBase.getInstance().getStatements("Q76");
+			System.out.println(statements);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testGetReverseStatements(){
+		try {
+			List<Statement> reverseStatements = UpperKnowledgeBase.getInstance().getReverseStatements("Q76");
+			System.out.println(reverseStatements);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	@Test
 	public void testImmediateTaxonParents() {
 		try {
 			List<String> parents = UpperKnowledgeBase.getInstance().getParentTaxons("Q7377");
 System.out.println(parents);
 		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testLoadFeatures(){
+		try{
+			Map<String, List<String>> features = UpperKnowledgeBase.getInstance().getFeatures();
+			System.out.println("Features = " + features);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testLoadFeaturesNoValue(){
+		try{
+			List<String> featuresNoValue = UpperKnowledgeBase.getInstance().getFeaturesNoValue();
+			System.out.println("Features No Value = " + featuresNoValue);
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

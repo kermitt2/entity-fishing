@@ -239,6 +239,14 @@ public class UpperKnowledgeBase {
 		return result;
 	}
 
+	public Map<String, List<String>> getFeatures(){
+		return env.getDbNerdKid().loadFeatures();
+	}
+
+    public List<String> getFeaturesNoValue(){
+        return env.getDbNerdKid().loadFeaturesNoValue();
+    }
+
 	public void close() {
 		// close wikipedia instances
 		for (Map.Entry<String, LowerKnowledgeBase> entry : wikipedias.entrySet()) {
