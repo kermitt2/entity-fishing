@@ -91,17 +91,6 @@ public class NerdRanker extends NerdModel {
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 	}
 
-	// initialisation for Nerd-Kid
-	public NerdRanker(UpperKnowledgeBase wikidata){
-		this.wikidata = wikidata;
-
-		model = MLModel.GRADIENT_TREE_BOOST;
-        featureType = FeatureType.NERD;  // check the need of feature for Nerd-Kid
-
-		GenericRankerFeatureVector feature = getNewFeature();
-		arffParser.setResponseIndex(feature.getNumFeatures()-1);
-	}
-
 	public GenericRankerFeatureVector getNewFeature() {
 		GenericRankerFeatureVector feature = null;
 		if (featureType == FeatureType.SIMPLE)
@@ -120,19 +109,6 @@ public class NerdRanker extends NerdModel {
 			feature = new MilneWittenRelatednessFeatureVector();
 		return feature;
 	}
-
-    // for Nerd-kid
-//    public double getProbabilityKid(double commonness,
-//                                 double relatedness,
-//                                 double quality,
-//                                 boolean bestCaseContext,
-//                                 float embeddingsSimilarity,
-//                                 String wikidataId,
-//                                 String wikidataP31Id,
-//                                 NERLexicon.NER_Type nerType,
-//                                 String nerTypeKid) throws Exception {
-//
-//    }
 
 	public double getProbability(double commonness, 
 								 double relatedness, 
@@ -488,10 +464,21 @@ public class NerdRanker extends NerdModel {
 					feature.context_quality = quality;
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
-					if (candidate.getWikidataId() != null)	
-						feature.wikidata_id = candidate.getWikidataId();
-					else
-						feature.wikidata_id = "Q0"; // undefined entity
+					if (candidate.getWikidataId() != null) {
+                        feature.wikidata_id = candidate.getWikidataId();
+                        // for Nerd-Kid
+                        String typeKid = candidate.getPredictionClass();
+                        if (typeKid != null) {
+                            feature.nerKid_type = candidate.getPredictionClass();
+                        } else {
+                            feature.nerKid_type = "UNKNOWN";
+                        }
+                    }
+					else {
+                        feature.wikidata_id = "Q0"; // undefined entity
+                        // for Nerd-Kid
+                        feature.nerKid_type = "NotNER";
+                    }
 
 					if (candidate.getWikidataP31Id() != null)
 						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
@@ -499,6 +486,7 @@ public class NerdRanker extends NerdModel {
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
+
 
 					// addition of the example is constrained by the sampling ratio
 					if ( ((feature.label == 0.0) && ((double)this.negatives / this.positives < sampling)) ||
@@ -819,15 +807,28 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					feature.context_quality = quality;
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
-					if (candidate.getWikidataId() != null)	
-						feature.wikidata_id = candidate.getWikidataId();
-					else
-						feature.wikidata_id = "Q0"; // undefined entity
+					if (candidate.getWikidataId() != null) {
+                        feature.wikidata_id = candidate.getWikidataId();
+                        // for Nerd-Kid
+                        String typeKid = candidate.getPredictionClass();
+                        if (typeKid != null) {
+                            feature.nerKid_type = candidate.getPredictionClass();
+                        } else {
+                            feature.nerKid_type = "UNKNOWN";
+                        }
+                    }
+					else {
+                        feature.wikidata_id = "Q0"; // undefined entity
+                        // for Nerd-Kid
+                        feature.nerKid_type = "NotNER";
+                    }
 
-					if (candidate.getWikidataP31Id() != null)
+					if (candidate.getWikidataP31Id() != null) {
 						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-					else
+					}
+					else {
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+					}
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 

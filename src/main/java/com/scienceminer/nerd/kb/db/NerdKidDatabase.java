@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdResourceException;
+import com.scienceminer.nerd.kb.NerdKid;
 import com.scienceminer.nerd.kb.Statement;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -26,7 +27,7 @@ import java.util.Map;
  * Class of Wikidata Ids might be one of these: NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN
  */
 
-public class NerdKidDatabase extends StringRecordDatabase<List<String>> {
+public class NerdKidDatabase extends StringRecordDatabase<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdKidDatabase.class);
 
@@ -35,11 +36,10 @@ public class NerdKidDatabase extends StringRecordDatabase<List<String>> {
     }
 
     @Override
-    public KBEntry<String, List<String>> deserialiseCsvRecord(
+    public KBEntry<String, String> deserialiseCsvRecord(
             CsvRecordInput record) throws IOException {
         throw new UnsupportedOperationException();
     }
-
 
     /*
     * build Nerd_kid database
@@ -133,7 +133,7 @@ public class NerdKidDatabase extends StringRecordDatabase<List<String>> {
                         // do the prediction based on propertyId and valueProperty collected
                         WikidataNERPredictor wikidataNERPredictor = new WikidataNERPredictor();
                         predictedClass = wikidataNERPredictor.predict(featureVectorArr);
- //                       System.out.println("Predicted class: " + predictedClass);
+                        System.out.println("Wikidata Id: "+ wikidataId + "; predicted class: " + predictedClass);
                     }
                     db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
                     transaction.commit();

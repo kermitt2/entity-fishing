@@ -1,14 +1,21 @@
 package com.scienceminer.nerd.kb;
 
+import com.scienceminer.nerd.kb.db.KBUpperEnvironment;
 import org.codehaus.jackson.io.JsonStringEncoder;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class for getting information about wikidata Ids and their predicted classes
  */
 
 public class NerdKid implements Serializable {
+
+    private KBUpperEnvironment env = null;
+    private String wikidataId = null;
+
     public String getWikidataId() {
         return wikidataId;
     }
@@ -16,9 +23,6 @@ public class NerdKid implements Serializable {
     public void setWikidataId(String wikidataId) {
         this.wikidataId = wikidataId;
     }
-
-
-    private String wikidataId = null;
 
     public String getPredictedClass() {
         return predictedClass;
@@ -32,9 +36,14 @@ public class NerdKid implements Serializable {
 
     public NerdKid() {}
 
-    public NerdKid(String wikidataId, String claz){
+    public NerdKid(KBUpperEnvironment env, String wikidataId) {
+        this.env = env;
         this.wikidataId = wikidataId;
-        this.predictedClass = claz;
+    }
+
+    public String getPredictedClassById(String wikidataId) {
+        String result = env.getDbNerdKid().retrieve(wikidataId);
+        return result;
     }
 
     @Override

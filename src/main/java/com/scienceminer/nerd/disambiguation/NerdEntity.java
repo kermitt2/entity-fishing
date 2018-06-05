@@ -26,6 +26,7 @@ import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.splitByCharacterTypeCamelCase;
 
 /**
  * This class represents disambiguated entity (the result), including conceptual and
@@ -53,16 +54,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// type of the entity (person, location, etc.) by Nerd
 	private NERLexicon.NER_Type type = null;
 
-	public NERLexicon.NER_Type getTypeKid() {
-		return typeKid;
-	}
-
-	public void setTypeKid(NERLexicon.NER_Type typeKid) {
-		this.typeKid = typeKid;
-	}
-
+	// for Nerd-Kid
 	// type of the entity (person, location, etc.) by Nerd-Kid
-	private NERLexicon.NER_Type typeKid = null;
+	private String typeKid = null;
 
 	// subtypes of the entity when available - the first one is the main one, the others secondary subtypes
 	private List<String> subTypes = null;
@@ -161,7 +155,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 		preferredTerm = mention.getNormalisedName();
 		type = mention.getType();
-		// for Nerd-Kid
+		// for Nerd-Kid, it needs a change in the Entity class in Grobid (grobid.core.data)
 		subTypes = mention.getSubTypes();
 		offsets = new OffsetPosition();
 		offsets.start = mention.getOffsetStart();
@@ -181,6 +175,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		preferredTerm = entity.getPreferredTerm();
 		type = entity.getType();
 		// for Nerd-Kid
+		typeKid = entity.getTypeKid();
 		subTypes = entity.getSubTypes();
 		offsets = new OffsetPosition();
 		offsets.start = entity.getOffsetStart();
@@ -255,6 +250,16 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			subTypes = new ArrayList<String>();
 		subTypes.add(subType);
 	}
+
+	// for Nerd-Kid
+	public String getTypeKid() {
+		return typeKid;
+	}
+
+	public void setTypeKid(String theTypeKid) {
+		typeKid = theTypeKid;
+	}
+
 
 	public void setOffsetStart(int start) {
         offsets.start = start;
@@ -661,6 +666,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		domains = candidate.getDomains();
 
+		// we get the type
+		typeKid = candidate.getTypeKid();
+
 		prob_c = candidate.getProb_c();
 		nerdScore = candidate.getNerdScore();
 		selectionScore = candidate.getSelectionScore();
@@ -773,6 +781,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			}
 			buffer.append(" ] \"");
 		}
+
+		// for Nerd-Kid
+		if (typeKid != null)
+			buffer.append(", \"typeNerdKid\" : \"" + getTypeKid() + "\"");
 
 		if (getOffsetStart() != -1)
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());
@@ -956,6 +968,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			}
 			buffer.append(" ] \"");
 		}
+
+		// for Nerd-Kid
+		if (typeKid != null)
+			buffer.append(", \"typeNerdKid\" : \"" + typeKid + "\"");
 
 		if (getOffsetStart() != -1)
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());

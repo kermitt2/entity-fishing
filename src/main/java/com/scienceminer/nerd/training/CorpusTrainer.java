@@ -40,12 +40,13 @@ public class CorpusTrainer {
 	public CorpusTrainer(String lang) {
 		this.lang = lang;
 
-		arffRanker = new File("data/wikipedia/training/" + lang + "/ranker.arff");
-		arffSelector = new File("data/wikipedia/training/" + lang + "/selector.arff");
+		//arffRanker = new File("data/wikipedia/training/" + lang + "/ranker.arff");
+		//arffSelector = new File("data/wikipedia/training/" + lang + "/selector.arff");
+
 
 		// for Nerd-Kid
-		//arffRanker = new File("data/wikidata/training/" + lang + "/ranker.arff");
-		//arffSelector = new File("data/wikidata/training/" + lang + "/selector.arff");
+		arffRanker = new File("data/wikipedia/training/" + lang + "/rankerNerdKid.arff");
+		arffSelector = new File("data/wikipedia/training/" + lang + "/selectorNerdKid.arff");
 
 		try {
 			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);

@@ -447,6 +447,7 @@ public class NerdSelector extends NerdModel {
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
+
 					// addition of the example is constrained by the sampling ratio
 					if ( ((feature.label == 0.0) && ((double)this.negatives / this.positives < sampling)) ||
 						 ((feature.label == 1.0) && ((double)this.negatives / this.positives >= sampling)) ) {

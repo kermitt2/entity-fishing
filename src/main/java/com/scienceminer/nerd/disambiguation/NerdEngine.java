@@ -93,9 +93,6 @@ public class NerdEngine {
 			throw new NerdResourceException("Error instanciating the (N)ERD knowledge base. ", e);
 		}
 
-		// for Nerd-Kid
-		wikidatas = UpperKnowledgeBase.getInstance();
-
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		try {
 			relatedness = Relatedness.getInstance();
@@ -1793,6 +1790,7 @@ System.out.println("--");*/
 						nerdEntity.populateFromCandidate(candidate, lang);
 						nerdEntity.setWikipediaMultilingualRef(
 							candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
+
 						result.add(nerdEntity);
 						if (!nerdQuery.getNbest())
 							break;

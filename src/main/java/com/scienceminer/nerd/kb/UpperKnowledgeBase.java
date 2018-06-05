@@ -147,6 +147,16 @@ public class UpperKnowledgeBase {
 			return new Concept(env, wikidataId);
 	}
 
+	// for Nerd-kid
+	public String getNerdKidPredictedClass(String wikidataId) {
+		if (env.getDbNerdKid().retrieve(wikidataId) == null) {
+			return null;
+		} else {
+			NerdKid nerdKid = new NerdKid(env, wikidataId);
+			return nerdKid.getPredictedClassById(wikidataId);
+		}
+	}
+
 	/**
 	 * Return the page id corresponding to a given concept id and a target lang
 	 */
@@ -177,6 +187,7 @@ public class UpperKnowledgeBase {
 
 		return env.getDbStatements().retrieve(wikidataId);
 	}
+
 
 	/**
 	 * Return the list of statements associated to a given concept id as tail
@@ -209,6 +220,11 @@ public class UpperKnowledgeBase {
 		return env.getDbBiblio().retrieve(doi.toLowerCase());
 	}
 
+	// for Nerd-Kid
+	public  String getPredictedClassByWikidataId(String wikidataId) {
+		return env.getDbNerdKid().retrieve(wikidataId);
+	}
+
 	/**
 	 * Return the list of immediate parent taxons (P171) for a given taxon, null for empty list and non-taxon
 	 */
@@ -238,6 +254,7 @@ public class UpperKnowledgeBase {
 		}
 		return result;
 	}
+
 
 	public Map<String, List<String>> getFeatures(){
 		return env.getDbNerdKid().loadFeatures();

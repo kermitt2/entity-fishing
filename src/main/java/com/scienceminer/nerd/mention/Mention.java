@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.mention;
 
+import com.scienceminer.nerd.kb.NerdKid;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lexicon.NERLexicon;
