@@ -1,0 +1,26 @@
+
+candidate gold recall: 92.45
+
+** micro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                82.18        86.63        82.74        84.64
+ranker               83.01        87.52        83.55        85.49
+
+** macro average measures **
+
+hirmeos              accuracy     precision    recall       f1
+
+prior                82.18        86.42        82.18        84.24
+ranker               83.01        87.29        83.01        85.09
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:44 min
+[INFO] Finished at: 2018-06-06T16:03:32+02:00
+[INFO] Final Memory: 411M/1741M
+[INFO] ------------------------------------------------------------------------
+
+

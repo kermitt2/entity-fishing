@@ -75,7 +75,7 @@ public class NerdRanker extends NerdModel {
 	private LowerKnowledgeBase wikipedia = null;
 
 	// for Nerd-kid
-	private UpperKnowledgeBase wikidata = null;
+	private UpperKnowledgeBase upperKnowledgeBase = null;
 
 	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
 	// embeddings-based similiarity
@@ -170,6 +170,7 @@ public class NerdRanker extends NerdModel {
 		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
+
 		double[] features = feature.toVector(attributes);
 		smile.math.Math.setSeed(7);
 		double score = forest.predict(features);
