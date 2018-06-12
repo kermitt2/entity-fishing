@@ -1,0 +1,21 @@
+Steps:
+1. Create new models by masking some features
+a. Masking the features in the class NerdRankerFeatureVector.java
+b. Generate new ranker model with Wikipedia or with certain corpus, for instance with English corpus "aquaint"
+   $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aquaint en"
+c. Evaluate the new model with certain corpus, for example evaluate with IITB corpus
+   $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="iitb"
+
+2. Name of models
+a. Model1: ranker-long-en-original.model
+    - taken from the model exist
+b. Model2: ranker-long-en-kid.model
+    - taken from the model exist + nerd kid prediction class result
+      Add_prob_c = true;
+      Add_relatedness = true;
+      Add_context_quality = true;
+	  Add_bestCaseContext = true;
+      Add_embeddings_centroid_similarity = true;
+	  Add_nerKid_type = true;
+      target_numeric = true;
+	  target_class = false;

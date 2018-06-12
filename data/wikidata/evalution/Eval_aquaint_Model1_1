@@ -1,0 +1,25 @@
+Evaluation on 50 documents and 727 expected entities, in total 124 s
+
+candidate gold recall: 92.02
+
+** micro average measures **
+
+aquaint              accuracy     precision    recall       f1
+
+prior                86.8         90.46        86.62        88.5
+ranker               87.21        90.44        86.59        88.47
+
+** macro average measures **
+
+aquaint              accuracy     precision    recall       f1
+
+prior                86.8         90.14        86.8         88.44
+ranker               87.21        90.57        87.21        88.86
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 02:09 min
+[INFO] Finished at: 2018-06-11T11:40:43+02:00
+[INFO] Final Memory: 410M/1680M
+[INFO] ------------------------------------------------------------------------

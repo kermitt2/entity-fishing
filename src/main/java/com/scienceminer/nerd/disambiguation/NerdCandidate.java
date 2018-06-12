@@ -65,6 +65,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// Wikidata identifier
 	private String wikidataId = null;
 
+	// for Ner type result of Grobid
+	private String type = null;
+
 	// for Nerd-Kid prediction of Ner type result
 	private String typeKid = null;
 
@@ -263,7 +266,11 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
         this.wikidataId = ref;
     }
 
-    // for Nerd-Kid
+	public String getType() { return type; }
+
+	public void setType(String type) { this.type = type; }
+
+	// for Nerd-Kid
 	public String getTypeKid() { return typeKid; }
 
 	public void setTypeKid(String theTypeKid) { typeKid = theTypeKid; }
@@ -425,6 +432,10 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		// for Nerd-Kid
 		if (typeKid != null) {
 			buffer.append(typeKid.toString() + "(typeKid)\t");
+		}
+
+		if (type != null) {
+			buffer.append(type.toString() + "(type)\t");
 		}
 
 		if (domains != null) {

@@ -1,0 +1,25 @@
+Evaluation on 20 documents and 656 expected entities, in total 120 s
+
+candidate gold recall: 92.53
+
+** micro average measures **
+
+msnbc                accuracy     precision    recall       f1
+
+prior                82.47        84.72        83.5         84.11
+ranker               85.98        87.93        86.68        87.3
+
+** macro average measures **
+
+msnbc                accuracy     precision    recall       f1
+
+prior                82.47        83.36        82.47        82.91
+ranker               85.98        86.9         85.98        86.44
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 02:17 min
+[INFO] Finished at: 2018-06-11T14:14:56+02:00
+[INFO] Final Memory: 415M/1771M
+[INFO] ------------------------------------------------------------------------
