@@ -47,6 +47,7 @@ public abstract class KBDatabase<K, V> {
         }
         this.environment = Env.create()
                 .setMapSize(100L * 1024L * 1024L * 1024L)
+                .setMaxReaders(126)
                 .open(thePath, EnvFlags.MDB_NOTLS);
 
         db = this.environment.openDbi(type.name(), DbiFlags.MDB_CREATE);
@@ -78,6 +79,7 @@ public abstract class KBDatabase<K, V> {
         }
         this.environment = Env.create()
                 .setMapSize(100L * 1024L * 1024L * 1024L)
+                .setMaxReaders(126)
                 .open(thePath);
         db = this.environment.openDbi(this.name, DbiFlags.MDB_CREATE);
     }

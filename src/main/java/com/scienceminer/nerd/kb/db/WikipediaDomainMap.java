@@ -72,6 +72,7 @@ public class WikipediaDomainMap {
         }
         this.environment = Env.create()
                 .setMapSize(100L * 1024L * 1024L * 1024L)
+                .setMaxReaders(126)
                 .open(thePath, MDB_NOTLS);
         db = this.environment.openDbi(database_name, DbiFlags.MDB_CREATE);
     }
