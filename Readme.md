@@ -5,6 +5,13 @@
 <!-- [![Coverage Status](https://coveralls.io/repos/kermitt2/nerd/badge.svg)](https://coveralls.io/r/kermitt2/nerd) -->
 <!-- [![Docker Status](https://images.microbadger.com/badges/version/lfoppiano/grobid.svg)](https://hub.docker.com/r/lfoppiano/ grobid/ "Latest Docker HUB image") -->
 
+
+# Documentation
+
+The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
+
+For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html).
+
 # entity-fishing
 
 *entity-fishing* performs the following tasks:
@@ -46,12 +53,6 @@ The knowledge base contains more than 1 billion objects, not far from 15 million
 
 Have a look at our [presentation at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
 
-
-# Documentation
-
-The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
-
-For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html).
 
 ## License and contact
 
