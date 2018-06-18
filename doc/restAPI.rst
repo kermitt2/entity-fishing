@@ -26,7 +26,7 @@ One and only one input type is mandatory in a query, otherwise an HTTP error 400
 Supported languages
 -------------------
 
-In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support at every new release.
+In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support in future releases, as long the volume of the Wikipedia corpus for a new language is sufficient.
 
 The service returns an HTTP error 406 if the language of the text to be processed is not supported, see below.
 
@@ -84,13 +84,13 @@ NOTE: To process the text query only (no PDF), is also possible to send it as no
 Query format description
 ------------------------
 
-The NERD query processing service always consumes a parameter which is a JSON string representing a query, and optionally a PDF file. The service thus follows a Query DSL approach (like, for instance, ElasticSearch) to express queries instead of multiples HTTP parameters. This approach allows queries which are much richer, flexible and simple to express, but also interactive scenarios (where output of the services can be used easily as input after some changes from the user, as for instance in an interactive text editing task).
+The *entity-fishing* query processing service always consumes a parameter which is a JSON string representing a query, and optionally a PDF file. The service thus follows a Query DSL approach (like, for instance, ElasticSearch) to express queries instead of multiples HTTP parameters. This approach allows queries which are much richer, flexible and simple to express, but also interactive scenarios (where output of the services can be used easily as input after some changes from the user, as for instance in an interactive text editing task).
 
 The JSON query indicates what is the textual content to process, the various (optional) parameters to consider when processing it, optionally some already existing disambiguated entities (already disambiguated by a user or via a particular workflow), and an optional customisation to provide more context to the disambiguation process.
 
-The JSON query is similar to the response of the NERD service, so that a NERD service response can be sent as query after light modifications in an interactive usage scenario, or to be able to process easily already partially annotated text.
+The JSON query is similar to the response of the *entity-fishing* service, so that a *entity-fishing* service response can be sent as query after light modifications in an interactive usage scenario, or to be able to process easily already partially annotated text.
 
-When annotations are present in the query, the NERD system will consider them certain and:
+When annotations are present in the query, the *entity-fishing* system will consider them certain and:
 
 * ensure that the user annotations will be present in the output response without inconsistencies with other annotations,
 
@@ -98,11 +98,11 @@ When annotations are present in the query, the NERD system will consider them ce
 
 Similarly,
 
-* if no language is indicated (usual scenario), the NERD service will use a language identifier to detect the correct language and the language resources to use. However, the query can also optionally specify a language for the text to be processed. This will force the NERD service to process the text with the corresponding particular language resources.
+* if no language is indicated (usual scenario), the *entity-fishing* service will use a language identifier to detect the correct language and the language resources to use. However, the query can also optionally specify a language for the text to be processed. This will force the service to process the text with the corresponding particular language resources.
 
-* It is possible also to pass an existing sentence segmentation to the NERD service via the JSON query, in order that the NERD service provides back identified entities following the given sentence segmentation.
+* It is possible also to pass an existing sentence segmentation to the *entity-fishing* service via the JSON query, in order that the service provides back identified entities following the given sentence segmentation.
 
-The client must respect the JSON format of the NERD response as new query, as described below:
+The client must respect the JSON format of the *entity-fishing* response as new query, as described below:
 
 
 Generic format
@@ -200,7 +200,7 @@ The corrected annotations will then be exploited by the *entity-fishing* system 
 
 (7) processSentence
 """""""""""""""""""
-The processSentence parameter is introduced to support interactive text editing scenarios. For instance, a user starts writing a text and wants to use the NERD service to annotate dynamically the text with entities as it is typed.
+The processSentence parameter is introduced to support interactive text editing scenarios. For instance, a user starts writing a text and wants to use the *entity-fishing* service to annotate dynamically the text with entities as it is typed.
 
 To avoid having the server reprocessing several time the same chunk of text and slowing down a processing time which has to be almost real time, the client can simply indicate a sentence - the one that has just been changed - to be processed.
 
@@ -208,7 +208,7 @@ The goal is to be able to process around two requests per second, even if the ty
 
 The processSentence parameter is followed by a list of notations (only numbers in integer, e.g. *[1, 7]* - note that the index starts from 0) corresponding to the sentence index will limit the disambiguation to the selected sentences, while considering the entire text and the previous annotations.
 
-In this example only the second sentence will be processed by NERD:
+In this example only the second sentence will be processed by *entity-fishing*:
 ::
    {
        "text": "The army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg. But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne.",
