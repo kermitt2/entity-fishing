@@ -390,38 +390,38 @@ If the textual content to be processed is provided as a PDF document, the identi
 
 In the example above, the root layer of JSON values correspond to:
 
-- runtime: the amount of time in milliseconds to process the request on server side,
+- **runtime**: the amount of time in milliseconds to process the request on server side,
 
-- onlyNER: **NOTE this option is deprecated and will be removed in the next release** - if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
+- **nbest**: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
 
-- nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
+- **text**: input text as provided in the query, all the offset position information are based on the text in this field,
 
-- text: input text as provided in the query, all the offset position information are based on the text in this field,
+- **language**: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
 
-- language: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
+- **entities**: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
 
-- entities: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
-
-- global_categories: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
+- **global_categories**: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
 For each entity the following information are provided:
 
-- rawName: string realizing the entity as it appears in the text
+- **rawName**: string realizing the entity as it appears in the text
 
-- offsetStart, offsetEnd: the position offset of where the entity starts and ends in the text element in characters (JSON UTF-8 characters)
+- **offsetStart, offsetEnd**: the position offset of where the entity starts and ends in the text element in characters (JSON UTF-8 characters)
 
-- nerd_score: disambiguation confidence score, indicates the score of the entity against the other entity candidates for the text mention,
+- **nerd_score**: disambiguation confidence score, indicates the score of the entity against the other entity candidates for the text mention,
 
-- nerd_selection_score: selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention,
+- **nerd_selection_score**: selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention,
 
-- wikipediaExternalRef: id of the wikipedia page. This id can be used to retrieve the original page from wikipedia3 or to retrieve all the information associated to the concept in the knowledge base (definition, synonyms, categories, etc. - see the section “Knowledge base concept retrieval”),
+- **wikipediaExternalRef**: id of the wikipedia page. This id can be used to retrieve the original page from wikipedia3 or to retrieve all the information associated to the concept in the knowledge base (definition, synonyms, categories, etc. - see the section “Knowledge base concept retrieval”),
 
-- type: NER class of the entity (see table of the 26 NER classes below under “2. Named entity types”),
+- **type**: NER class of the entity (see table of the 27 NER classes below under “2. Named entity types”),
 
-- sense: NER sense mapped on the Wordnet4 synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
+- **sense**: NER sense mapped on Wordnet synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
 
+**Deprecated - ** this option is deprecated and will be removed in the next release:
+- *onlyNER*: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
 
-The type of recognised entities are restricted to a set of 26 classes of named entities (see GROBID NER documentation5). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
+The type of recognised entities are restricted to a set of 27 classes of named entities (see `GROBID NER documentation <http://grobid-ner.readthedocs.io/en/latest/class-and-senses/>`). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
 
 **Response when processing a search query**
 ::
