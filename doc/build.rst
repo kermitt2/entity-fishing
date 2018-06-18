@@ -54,7 +54,7 @@ Then install the compiled indexed data:
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/db-it.osx.zip (2.0 GB)
 
 
-NOTE: If you are migrating from version 0.0.2 you can only download additional part with embeddings (they can be unpacked directly under the ``data/db/`` directory):
+NOTE: We recommand to reinstall the above updated full resources, but if you are migrating from version 0.0.2 and you're in a hurry, you can only download additional part with embeddings (they can be unpacked directly under the ``data/db/`` directory):
     **Linux**
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-en.zip (2.9 GB)
@@ -91,6 +91,7 @@ NOTE: If you are migrating from version 0.0.2 you can only download additional p
 
    Some tests will be executed. If all tests are successful, you should be now ready to run the service.
 
+ 
 #. Run the service:
    ::
       $ mvn clean jetty:run

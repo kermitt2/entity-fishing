@@ -13,11 +13,11 @@
 
    overview.rst
    build.rst
-   upgradeGuide.rst
    console.rst
    restAPI.rst
    evaluation.rst
    train.rst
+   upgradeGuide.rst
    license.rst
 
 
