@@ -20,7 +20,7 @@ public class AnnotatedDataGenerationTest {
         target = new AnnotatedDataGeneration();
     }
 
-    @Test
+    //@Test
     public void testExtractionPdfData_1() throws Exception {
         File input = new File(this.getClass().getResource("OB-oep-1830.pdf").getPath());
 
