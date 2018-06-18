@@ -402,6 +402,10 @@ In the example above, the root layer of JSON values correspond to:
 
 - **global_categories**: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
+The following option is **deprecated**, it will be removed in the next release:
+
+- *onlyNER*: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
+
 For each entity the following information are provided:
 
 - **rawName**: string realizing the entity as it appears in the text
@@ -418,10 +422,7 @@ For each entity the following information are provided:
 
 - **sense**: NER sense mapped on Wordnet synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
 
-**Deprecated - ** this option is deprecated and will be removed in the next release:
-- *onlyNER*: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
-
-The type of recognised entities are restricted to a set of 27 classes of named entities (see `GROBID NER documentation <http://grobid-ner.readthedocs.io/en/latest/class-and-senses/>`). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
+The type of recognised entities are restricted to a set of 27 classes of named entities (see `GROBID NER documentation <http://grobid-ner.readthedocs.io/en/latest/class-and-senses/>`_). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
 
 **Response when processing a search query**
 ::
