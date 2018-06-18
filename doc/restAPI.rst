@@ -848,10 +848,10 @@ POST /language
 
 Here a sample of the response
 ::
-{
-   "lang":"en",
-   "conf": 0.9
-}
+  {
+     "lang":"en",
+     "conf": 0.9
+  }
 
 
 GET /language?text={text}
@@ -884,10 +884,10 @@ GET /language?text={text}
 
 Here a sample of the response
 ::
-{
-   "lang":"en",
-   "conf": 0.9
-}
+  {
+     "lang":"en",
+     "conf": 0.9
+  }
 
 Sentence segmentation
 *********************
@@ -943,18 +943,18 @@ POST /segmentation
 
 Here a sample of the response
 ::
-{
-  "sentences": [
-    {
-      "offsetStart": 0,
-      "offsetEnd": 7
-    },
-    {
-      "offsetStart": 6,
-      "offsetEnd": 21
-    }
-  ]
-}
+  {
+    "sentences": [
+      {
+        "offsetStart": 0,
+        "offsetEnd": 7
+      },
+      {
+        "offsetStart": 6,
+        "offsetEnd": 21
+      }
+    ]
+  }
 
 
 GET /segmentation?text={text}
