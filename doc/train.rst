@@ -95,4 +95,4 @@ Similarly as the steps 2.1 for the entity embeddings, the quantization:
 
 The entity embeddings are now ready to be loaded in the embedded database of *entity-fishing*. 
 
-6. Copy the embeddings files under the *entity-fishing* data repository (the one containing the csv files).*entity-fishing* expects compressed files with ``.gz`` extension:  ``word.embeddings.quantized.gz`` and ``entity.embeddings.quantized.gz``. Starting *entity-fishing* will load automatically the embeddings in the embedded database LMDB as binary data.
+6. Copy the embeddings files under the *entity-fishing* data repository (the one containing the csv files). *entity-fishing* expects compressed files with ``.gz`` extension:  ``word.embeddings.quantized.gz`` and ``entity.embeddings.quantized.gz``. Starting *entity-fishing* will load automatically the embeddings in the embedded database LMDB as binary data.

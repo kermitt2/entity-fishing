@@ -55,6 +55,7 @@ Then install the compiled indexed data:
 
 
 NOTE: We recommand to reinstall the above updated full resources, but if you are migrating from version 0.0.2 and you're in a hurry, you can only download additional part with embeddings (they can be unpacked directly under the ``data/db/`` directory):
+
     **Linux**
 
         - https://s3.eu-central-1.amazonaws.com/storagescienceminer/NERD/0.0.3-embeddings/embeddings/db-en.zip (2.9 GB)
