@@ -316,9 +316,9 @@ Search query disambiguation
 
 This functionality provides disambiguation for a search query expressed as a “short text”.
 
-The input is the list of terms that are typically provided in the search bar of a search engine, and response time are optimized to remain very low (1-5ms).
+The input is the list of terms that are typically provided in the search bar of a search engine, and response time are optimized to remain very low (1-10ms).
 
-For example the query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to *concrete* is the material, the entity is the device called *concrete pump*, and it has nothing to do with *concrete* as the antonym of *abstract*.
+For example, let's consider the search query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to *concrete* is the material, the entity is the device called *concrete pump*, and it has nothing to do with *concrete* as the antonym of *abstract*.
 
 Processing this kind of input permits to implement semantic search (search based on concept matching) and semantic-based ranking (ranking of documents based on semantic proximity with a query, for instance exploiting clasifications, domain information, etc.) in a search engine.
 
@@ -392,8 +392,7 @@ In the example above, the root layer of JSON values correspond to:
 
 - runtime: the amount of time in milliseconds to process the request on server side,
 
-- onlyNER: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
-This option has been limited *only to text queries*. **NOTE this option is deprecated and will be removed in the next release**,
+- onlyNER: **NOTE this option is deprecated and will be removed in the next release** - if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
 
 - nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
 
