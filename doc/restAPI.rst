@@ -589,7 +589,7 @@ The PDF coordinates system has three main characteristics:
 
 In addition, contrary to usage in computer science, the index associated to the first page is 1 (not 0).
 
-The response of the processing of a PDF document by the NERD service contains two specific structures for positioning entity annotations in the PDF:
+The response of the processing of a PDF document by the *entity-fishing* service contains two specific structures for positioning entity annotations in the PDF:
 
 * the list of page size, introduced by the JSON attribute pages. The dimension of each page is given successively by two attributes page_height and page_height.
 * for each entity, a json attribute pos introduces a list of bounding boxes to identify the area of the annotation corresponding to the entity. Several bounding boxes might be necessary because a textual mention does not need to be a rectangle, but the union of rectangles (a union of bounding boxes), for instance when a mention to be annotated is on several lines.
@@ -610,16 +610,16 @@ The *entity-fishing* console offers a reference implementation with PDF.js for d
 Knowledge base concept retrieval
 ********************************
 
-This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main NERD query processing service in order to retrieve a full description of an identified entity.
+This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main *entity-fishing* query processing service in order to retrieve a full description of an identified entity.
 
 The service supports the following identifiers:
  - wikidata identifier (starting with `Q`, e.g. `Q61`)
  - wikipedia identifier
 
 The *entity-fishing* content processing service returns the identifiers of the resulting entities with some position offset information. Then, if the client wants, for instance, to display an infobox for this entity, it will send a second call to this service and retrieve the full information for this particular entity.
-Adding all the associated information for each entity in the response of the NERD query processing service would result in a very large response which would slow a lot the client, such as a web browser for instance. Using such separate queries allows efficient asynchronous calls which will never block a browser and permits to make only one call per entity, even if the same entity has been found in several places in the same text.
+Adding all the associated information for each entity in the response of the *entity-fishing* query processing service would result in a very large response which would slow a lot the client, such as a web browser for instance. Using such separate queries allows efficient asynchronous calls which will never block a browser and permits to make only one call per entity, even if the same entity has been found in several places in the same text.
 
-The *entity-fishing* console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main NERD query processing service and the Knowledge base concept retrieval.
+The *entity-fishing* console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main *entity-fishing* query processing service and the Knowledge base concept retrieval.
 
 
 Response status codes
@@ -712,37 +712,37 @@ GET /kb/concept/{id}
 
 The elements present in this response are:
 
-- rawName: The term name
+- **rawName**: The term name
 
-- preferredTerm: The normalised term name
+- **preferredTerm**: The normalised term name
 
-- nerd_score: NERD score confidence
+- **nerd_score**: always 0.0 because no disambiguation took place in a KB access
 
-- nerd_selection_score: NERD selection score confidence
+- **nerd_selection_score**: always 0.0 because no disambiguation took place in a KB access
 
-- wikipediaExternalRef: unique identifier of the concept in wikipedia
+- **wikipediaExternalRef**: unique identifier of the concept in wikipedia
 
-- wikidataId: unique identifier of the concept in wikidata
+- **wikidataId**: unique identifier of the concept in wikidata
 
-- definitions: list of wikipedia definitions (usually in wikipedia a concept contains one and only one definition). Each definition is characterized by three properties:
+- **definitions**: list of wikipedia definitions (usually in wikipedia a concept contains one and only one definition). Each definition is characterized by three properties:
 
- - definition: The text of the definition
+ - **definition**: The text of the definition
 
- - source: The knowledge base from which the definition comes from (in this case can be wikipedia-en, wikipedia-de and wikipedia-fr)
+ - **source**: The knowledge base from which the definition comes from (in this case can be wikipedia-en, wikipedia-de and wikipedia-fr)
 
- - lang: the language of the definition
+ - **lang**: the language of the definition
 
-- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated entity. Each category is characterised by the following properties:
+- **categories**: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated entity. Each category is characterised by the following properties:
 
- - category: The category name
+ - **category**: The category name
 
- - source: The knowledge base from which the definition comes from.
+ - **source**: The knowledge base from which the definition comes from.
 
- - pageId: the Id of the page describing the category
+ - **pageId**: the Id of the page describing the category
 
-- domains: For each entry, Wikipedia provides a huge set of categories, that are not always well curated (1 milion categories in the whole wikipedia). Domains are generic classification of concepts, they are mapped from the wikipedia categories.
+- **domains**: For each entry, Wikipedia provides a huge set of categories, that are not always well curated (1 milion categories in the whole wikipedia). Domains are generic classification of concepts, they are mapped from the wikipedia categories.
 
-- multilingual: provides references to multi-languages resources referring to the same entity. E.g. the entity country called Austria is Österreich in German wikipedia and Autriche in French wikipedia. The page_id provided here relates to the language-specific Wikipedia (e.g. in the above example the page_id for the country Autriche in the French Wikipedia is 15).
+- **multilingual**: provides references to multi-languages resources referring to the same entity. E.g. the entity country called Austria is Österreich in German wikipedia and Autriche in French wikipedia. The page_id provided here relates to the language-specific Wikipedia (e.g. in the above example the page_id for the country Autriche in the French Wikipedia is 15).
 
 
 Term Lookup
