@@ -96,6 +96,6 @@ NOTE: We recommand to reinstall the above updated full resources, but if you are
    ::
       $ mvn clean jetty:run
 
-The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
+The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): ``http://localhost:8090``
 
 For more information, see the next section on the *entity-fishing* Console.
