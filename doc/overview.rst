@@ -17,11 +17,11 @@ Tasks
 *entity-fishing* performs the following tasks:
 
 * entity recognition and disambiguation against Wikidata and Wikipedia in a raw text, partially-annotated text segment,
-.. image:: images/screen2.png
+.. image:: images/screen1.png
    :alt: text query processing
 
 * entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
-.. image:: images/screen7.png
+.. image:: images/screen3.png
    :alt: PDF query processing
 
 * search query disambiguation (the *short text* mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
@@ -29,7 +29,7 @@ Tasks
    :alt: short text query processing
 
 * weighted term vector disambiguation (a term being a phrase),
-.. image:: images/screen4.png
+.. image:: images/screen5.png
    :alt: Weighted term vector query processing
 
 * interactive disambiguation in text editing mode.  
@@ -42,7 +42,7 @@ Summary
 
 Supervised machine learning is used for the disambiguation, based on Random Forest and Gradient Tree Boosting exploiting various features, including word and entity embeddings. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and, optionally, statements. 
 
-The API also offers the possibility to apply filters based on Wikidata properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 27M entities and 154M statements present in Wikipedia. 
+The API also offers the possibility to apply filters based on Wikidata properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 37M entities and 154M statements present in Wikipedia. 
 
 The tool currently supports English, German, French, Spanish and Italian languages (more to come!). For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the two other languages. A *nbest* mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores.
 
