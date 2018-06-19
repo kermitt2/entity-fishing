@@ -6,6 +6,7 @@ import com.scienceminer.nerd.kid.TypeClassifier;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
+import org.grobid.core.engines.NERParsers;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.*;
@@ -51,9 +52,6 @@ public class NerdEngine {
 
 	private EngineParsers parsers = null;
 
-
-	// for Nerd-Kid
-	private UpperKnowledgeBase wikidatas = null;
 
 	private Map<String, LowerKnowledgeBase> wikipedias = null;
 	private Map<String, NerdRanker> rankers = null;
@@ -480,13 +478,17 @@ public class NerdEngine {
 						candidate.setLang(lang);
 						candidate.setLabel(bestLabel);
 						candidate.setWikidataId(sense.getWikidataId());
-
-						// for Nerd-Kid
-						TypeClassifier typeClassifier = new TypeClassifier();
-						String typeKid = typeClassifier.getPredictionResultFromNerdKid(candidate.getWikidataId());
-						candidate.setTypeKid(typeKid);
-
 						candidate.setBestCaseContext(bestCaseContext);
+
+						// get the NER Type of Grobid
+						NERParsers nerParsers = new NERParsers();
+
+						List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
+						for (Entity entityResult : resultNEExtractText) {
+							Mention mention = new Mention(entityResult);
+							candidate.setType(mention.getType().toString());
+						}
+
 						candidates.add(candidate);
 						//System.out.println(candidate.toString());
 						s++;
@@ -956,17 +958,28 @@ public class NerdEngine {
 						LOGGER.error("Cannot rank candidates: disambiguator for the language " +
 							lang + " is invalid");
 					}
-
+//
 					String wikidataId = "Q0"; // undefined entity
-					//if (candidate.getWikidataId() != null)
-					//	wikidataId = candidate.getWikidataId();
+//					if (candidate.getWikidataId() != null)
+//						wikidataId = candidate.getWikidataId();
 
 					String wikidataP31Id = "Q0"; // undefined entity
 					//if (candidate.getWikidataP31Id() != null)
 					//	wikidataP31Id = candidate.getWikidataP31Id();
 
-					score = ranker.getProbability(commonness, related, quality,
-						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
+					String nerType = "UNKNOWN"; // undefined entity
+					if (candidate.getType() != null)
+						nerType = candidate.getType();
+
+					String nerKidType = "UNKNOWN"; // undefined entity
+					if (candidate.getTypeKid() != null)
+						nerKidType = candidate.getTypeKid();
+
+                    score = ranker.getProbability(commonness, related, quality,
+                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+
+//					score = ranker.getProbability(commonness, related, quality,
+//						bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
 
 					/*System.out.println("RANKER - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> commonness: " + commonness + 
 						", related: " + related + ", quality: " + quality + 
@@ -1083,15 +1096,26 @@ public class NerdEngine {
 				if (candidate.getWikidataP31Id() != null)
 					wikidataP31Id = candidate.getWikidataP31Id();
 
+				String nerType = "UNKNOWN"; // undefined entity
+				if (candidate.getType() != null)
+					nerType = candidate.getType();
+
+				String nerKidType = "UNKNOWN"; // undefined entity
+				if (candidate.getTypeKid() != null)
+					nerKidType = candidate.getTypeKid();
 
 				if (localContexts == null) {
-					score = disambiguator.getProbability(commonness, related, quality,
-						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
+                    score = disambiguator.getProbability(commonness, related, quality,
+                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+//					score = disambiguator.getProbability(commonness, related, quality,
+//							bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
 				}
 				else {
 					// we disambiguate for each local context
-					score = disambiguator.getProbability(commonness, related, quality,
-						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
+                    score = disambiguator.getProbability(commonness, related, quality,
+                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+//					score = disambiguator.getProbability(commonness, related, quality,
+//							bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
 					for(NerdContext localContext : localContexts) {
 						if (feature.Add_relatedness)
 							related = relatedness.getRelatednessTo(candidate, localContext, lang);
@@ -1099,8 +1123,10 @@ public class NerdEngine {
 						if (feature.Add_context_quality) {
 							localQuality = localContext.getQuality();
 						}
-						score += disambiguator.getProbability(commonness, related, localQuality,
-							bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
+                        score += disambiguator.getProbability(commonness, related, localQuality,
+                                bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+//						score += disambiguator.getProbability(commonness, related, quality,
+//								bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
 						//double localScore = disambiguator.getProbability(commonness, related, localContext);
 						//if (localScore > score)
 						//	score = localScore;

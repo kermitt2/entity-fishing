@@ -3,13 +3,15 @@ Steps:
 a. Masking the features in the class NerdRankerFeatureVector.java
 b. Generate new ranker model with Wikipedia or with certain corpus, for instance with English corpus "aquaint"
    $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aquaint en"
+   - A new ranker and selector are generated in  `/data/wikipedia/training/[lang]/[ranker|selector].arff`
+   - A new model is generated in `/data/models/ranker-long-[lang].model`
 c. Evaluate the new model with certain corpus, for example evaluate with IITB corpus
    $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="iitb"
 
 2. Name of models
-a. Model1: ranker-long-en-original.model
+a. Model1: ranker-long-en-original.model (from : ranker.arff)
     - taken from the model exist
-b. Model2: ranker-long-en-kid.model
+b. Model2: ranker-long-en-kid1.model (from : rankerNerdKid1.arff)
     - taken from the model exist + nerd kid prediction class result
       Add_prob_c = true;
       Add_relatedness = true;
@@ -19,3 +21,19 @@ b. Model2: ranker-long-en-kid.model
 	  Add_nerKid_type = true;
       target_numeric = true;
 	  target_class = false;
+b. Model2: ranker-long-en-kid1.model (from : rankerNerdKid2.arff)
+	  Add_prob_c = true;
+      Add_relatedness = true;
+      Add_context_quality = true;
+      Add_bestCaseContext = true;
+      Add_embeddings_centroid_similarity = true;
+      Add_wikidata_id = true;
+      Add_ner_type = true;
+      Add_nerKid_type = true;
+      target_numeric = true;
+      target_class = false;
+
+3. The training model is saved in `/data/wikidata/training/*.model`
+For temporary training, the corpus "aquaint" is used
+
+4. The result of evaluation is saved in `/data/wikidata/evaluation/Model[No Model]`

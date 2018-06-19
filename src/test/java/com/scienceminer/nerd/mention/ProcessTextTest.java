@@ -49,7 +49,15 @@ public class ProcessTextTest {
     public void testExtractNE() {
         NERParsers nerParsers = new NERParsers();
 
-        String text = "Barack Obama";
+        String text = "Atlantic";
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(testText, new Language("en", 1.0));
+
+        // this method doesn't give any result
+//        List<Mention> results = processText.processNER(tokens, new Language("en", 1.0));
+//        for (Mention result:results){
+//            System.out.println("Result:" + result.getType());
+//        }
+
         List<org.grobid.core.data.Entity> resultNEExtractText = nerParsers.extractNE(text, new Language("en", 1.0));
         List<Mention> mentionsByText = new ArrayList<>();
         for (org.grobid.core.data.Entity entityResult : resultNEExtractText) {
@@ -57,7 +65,6 @@ public class ProcessTextTest {
             mentionsByText.add(mention);
         }
 
-        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(testText, new Language("en", 1.0));
         List<org.grobid.core.data.Entity> resultNEExtractTokens = nerParsers.extractNE(tokens,new Language("en", 1.0));
         List<Mention> mentionsByTokens = new ArrayList<>();
         for (org.grobid.core.data.Entity entityResult : resultNEExtractTokens) {
@@ -65,8 +72,8 @@ public class ProcessTextTest {
             mentionsByTokens.add(mention);
         }
 
-        assertThat(mentionsByText.get(0).getRawName(),is("Barack Obama"));
-        assertThat(mentionsByText.get(0).getType(),is(NERLexicon.NER_Type.PERSON));
+        assertThat(mentionsByText.get(0).getRawName(),is("Atlantic"));
+        assertThat(mentionsByText.get(0).getType(),is(NERLexicon.NER_Type.LOCATION));
 
         assertThat(mentionsByTokens.get(0).getRawName(),is("Felix Boni"));
         assertThat(mentionsByTokens.get(0).getType(),is(NERLexicon.NER_Type.PERSON));

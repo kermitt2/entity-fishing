@@ -40,7 +40,7 @@ public class GenericRankerFeatureVector {
 	public boolean Add_NERSubType_relatedness = false; // relateness between the concept and the estimated NER subtype
 
 	// for Nerd-Kid
-	public boolean Add_NERKidType_relatedness = false; // to be checked later on whether this feature will be really needed since the prediction results are already there in the KB model
+//	public boolean Add_NERKidType_relatedness = false; // to be checked later on whether this feature will be really needed since the prediction results are already there in the KB model
 
 	public boolean Add_occ_term = false; // term frequency 
 	
@@ -98,7 +98,7 @@ public class GenericRankerFeatureVector {
 	public double NERSubType_relatedness = 0.0;
 
 	// for Nerd-Kid
-	public double NERKidType_relatedness = 0.0;
+//	public double NERKidType_relatedness = 0.0;
 
 	public long occ_term = 0;
 	public double dice_coef = 0.0;
@@ -149,19 +149,19 @@ public class GenericRankerFeatureVector {
 		if (Add_ner) 
 			header.append("@attribute ner {false, true}\n");
 		if (Add_ner_type)
-			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION}\n");
+			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, ORGANISATION, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
 		if (Add_ner_subtype)
 			header.append("@attribute ner_subtype STRING\n");
 		// for Nerd-Kid
 		if (Add_nerKid_type)
-			header.append("@attribute nerKid_type {NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
+			header.append("@attribute nerKid_type {NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, ORGANISATION, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
 		if (Add_NERType_relatedness)
 			header.append("@attribute NERType_relatedness REAL\n");
 		if (Add_NERSubType_relatedness)
 			header.append("@attribute NERSubType_relatedness REAL\n");
 		// for Nerd-Kid
-		if (Add_NERKidType_relatedness)
-			header.append("@attribute NERKidType_relatedness REAL\n");
+//		if (Add_NERKidType_relatedness)
+//			header.append("@attribute NERKidType_relatedness REAL\n");
 		if (Add_occ_term) 
 			header.append("@attribute occ_term NUMERIC\n");	
 		if (Add_dice_coef) 
@@ -219,8 +219,8 @@ public class GenericRankerFeatureVector {
 		if (Add_NERSubType_relatedness)	
 			num++;
 		// for Nerd-Kid
-		if (Add_NERKidType_relatedness)
-			num++;
+//		if (Add_NERKidType_relatedness)
+//			num++;
 		if (Add_occ_term) 
 			num++;
 		if (Add_dice_coef) 
@@ -350,9 +350,9 @@ public class GenericRankerFeatureVector {
 			res.append("," + NERSubType_relatedness);
 		}
 		// for Nerd-Kid
-		if (Add_NERKidType_relatedness) {
-			res.append("," + NERKidType_relatedness);
-		}
+//		if (Add_NERKidType_relatedness) {
+//			res.append("," + NERKidType_relatedness);
+//		}
 		if (Add_occ_term) {
 			res.append("," + occ_term);
 		}
@@ -380,7 +380,7 @@ public class GenericRankerFeatureVector {
 				res.append("," + embeddings_centroid_similarity);
 		}
 		if (Add_wikidata_id) 
-			res.append("," + wikidata_id);
+			res.append(",'" + wikidata_id+"'");
 		if (Add_wikidata_P31_entity_id)
 			res.append(",'" + wikidata_P31_entity_id+"'");
 
@@ -495,6 +495,7 @@ public class GenericRankerFeatureVector {
 			result[i] = ner_subtype;
 			i++;
 		}*/
+
 		if (Add_ner_type) {
 			Attribute att = attributes[i];
 			double val = 0.0;
@@ -506,17 +507,17 @@ public class GenericRankerFeatureVector {
 			result[i] = val;
 			i++;
 		}
-		if (Add_ner_subtype) {
-			Attribute att = attributes[i];
-			double val = 0.0;
-			try {
-				val = att.valueOf(ner_subtype);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			result[i] = val;
-			i++;
-		}
+//		if (Add_ner_subtype) {
+//			Attribute att = attributes[i];
+//			double val = 0.0;
+//			try {
+//				val = att.valueOf(ner_subtype);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			result[i] = val;
+//			i++;
+//		}
 		// for Nerd-Kid
 		if (Add_nerKid_type) {
 			Attribute att = attributes[i];
@@ -538,10 +539,10 @@ public class GenericRankerFeatureVector {
 			i++;
 		}
 		// for Nerd-Kid
-		if (Add_NERKidType_relatedness) {
-			result[i] = NERKidType_relatedness;
-			i++;
-		}
+//		if (Add_NERKidType_relatedness) {
+//			result[i] = NERKidType_relatedness;
+//			i++;
+//		}
 		if (Add_occ_term) {
 			result[i] = occ_term;
 			i++;
@@ -577,6 +578,10 @@ public class GenericRankerFeatureVector {
 			result[i] = embeddings_centroid_similarity;
 			i++;
 		}
+//		if (Add_wikidata_id) {
+//			result[i] = wikidata_id;
+//			i++;
+//		}
 		if (Add_wikidata_id) {
 			Attribute att = attributes[i];
 			double val = 0.0;

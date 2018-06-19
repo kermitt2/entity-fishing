@@ -743,6 +743,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		copy.setLabel(this.getLabel());
 		copy.setWikidataId(this.getWikidataId());
 		copy.setWikipediaCategories(this.getWikipediaCategories());
+		copy.setType(this.getType());
 		//for Nerd-Kid
 		copy.setTypeKid(this.getTypeKid());
 		return copy;

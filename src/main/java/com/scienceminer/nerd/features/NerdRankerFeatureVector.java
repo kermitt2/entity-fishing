@@ -20,8 +20,9 @@ public class NerdRankerFeatureVector extends GenericRankerFeatureVector {
 		Add_bestCaseContext = true;
 		Add_embeddings_centroid_similarity = true;
 
-		//Add_wikidata_id = true;
-		//Add_ner_type = true;
+//		Add_wikidata_id = true;
+//		Add_wikidata_P31_entity_id = true;
+		Add_ner_type = true;
 		// for Nerd-Kid
 		Add_nerKid_type = true;
 

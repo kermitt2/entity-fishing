@@ -74,9 +74,6 @@ public class NerdRanker extends NerdModel {
 
 	private LowerKnowledgeBase wikipedia = null;
 
-	// for Nerd-kid
-	private UpperKnowledgeBase upperKnowledgeBase = null;
-
 	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
 	// embeddings-based similiarity
 
@@ -110,13 +107,20 @@ public class NerdRanker extends NerdModel {
 		return feature;
 	}
 
+	// public double getProbability(double commonness,
+    //								 double relatedness,
+    //								 double quality,
+    //								 boolean bestCaseContext,
+    //								 float embeddingsSimilarity,
+    //								 String wikidataId,
+    //								 String wikidataP31Id)
 	public double getProbability(double commonness, 
 								 double relatedness, 
 								 double quality, 
 								 boolean bestCaseContext,
 								 float embeddingsSimilarity,
-								 String wikidataId,
-								 String wikidataP31Id) throws Exception {
+								 String nerType,
+								 String nerKidType) throws Exception {
 		// special cases with only one feature
 		if (featureType == FeatureType.BASELINE) {
 			// special case of baseline, we just need the prior conditional prob
@@ -168,8 +172,11 @@ public class NerdRanker extends NerdModel {
 		//feature.dice_coef = dice_coef;
 		feature.bestCaseContext = bestCaseContext;
 		feature.embeddings_centroid_similarity = embeddingsSimilarity;
-		feature.wikidata_id = wikidataId;
-		feature.wikidata_P31_entity_id = wikidataP31Id;
+		//feature.wikidata_id = wikidataId;
+		feature.ner_type = nerType;
+		feature.nerKid_type = nerKidType;
+		//feature.wikidata_P31_entity_id = wikidataP31Id;
+
 
 		double[] features = feature.toVector(attributes);
 		smile.math.Math.setSeed(7);
@@ -189,10 +196,10 @@ public class NerdRanker extends NerdModel {
 		logger.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
-		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
-		if (!modelFile.exists()) {
-            logger.debug("Invalid file for saving author filtering model.");
-		}
+		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+"_Kid.model");
+//		if (!modelFile.exists()) {
+//            logger.debug("Invalid file for saving author filtering model.");
+//		}
 		FileUtils.writeStringToFile(modelFile, xml, StandardCharsets.UTF_8);
 		System.out.println("Model saved under " + modelFile.getPath());
 	}
@@ -465,29 +472,41 @@ public class NerdRanker extends NerdModel {
 					feature.context_quality = quality;
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
-					if (candidate.getWikidataId() != null) {
-                        feature.wikidata_id = candidate.getWikidataId();
-                        // for Nerd-Kid
-                        String typeKid = candidate.getPredictionClass();
-                        if (typeKid != null) {
-                            feature.nerKid_type = candidate.getPredictionClass();
-                        } else {
-                            feature.nerKid_type = "UNKNOWN";
-                        }
-                    }
-					else {
-                        feature.wikidata_id = "Q0"; // undefined entity
-                        // for Nerd-Kid
-                        feature.nerKid_type = "NotNER";
-                    }
 
-					if (candidate.getWikidataP31Id() != null)
+					if (candidate.getWikidataId() != null) {
+						feature.wikidata_id = candidate.getWikidataId();
+
+						// NE type of Grobid
+						String typeNE = candidate.getType();
+						if ((typeNE != null)){
+							feature.ner_type = typeNE;
+						} else {
+							feature.ner_type = "UNKNOWN";
+						}
+
+						// for Nerd-Kid
+						String typeKid = candidate.getPredictionClass();
+						if (typeKid != null) {
+							feature.nerKid_type = typeKid;
+						} else {
+							feature.nerKid_type = "UNKNOWN";
+						}
+					}
+					else {
+						feature.wikidata_id = "Q0"; // undefined entity
+						feature.ner_type = "NotNER";
+						// for Nerd-Kid
+						feature.nerKid_type = "NotNER";
+					}
+
+					if (candidate.getWikidataP31Id() != null) {
 						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-					else
+					}
+					else {
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+					}
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
-
 
 					// addition of the example is constrained by the sampling ratio
 					if ( ((feature.label == 0.0) && ((double)this.negatives / this.positives < sampling)) ||
@@ -678,7 +697,7 @@ System.out.println(annotations.getLength() + " annotations in total");
 				ref.setWikipediaExternalRef(pageId);
 				ref.setOffsetStart(start);
 				ref.setOffsetEnd(end);
-System.out.println("reference entity: " + start + " / " + end + " - " + docContent.substring(start, end) + " - " + pageId);
+				System.out.println("reference entity: " + start + " / " + end + " - " + docContent.substring(start, end) + " - " + pageId);
 				referenceEntities.add(ref);
 				referenceDisamb.add(new Integer(pageId));
 			}
@@ -695,10 +714,10 @@ System.out.println("reference entity: " + start + " / " + end + " - " + docConte
 		List<Mention> entities = new ArrayList<Mention>();
 		Language language = new Language(lang, 1.0);
 		if (lang.equals("en") || lang.equals("fr")) {
-			entities = processText.processNER(tokens, language);
+			entities = processText.processNER(tokens, language); // named-entity
 		}
 System.out.println("number of NE found: " + entities.size());	
-		List<Mention> entities2 = processText.processWikipedia(tokens, language);
+		List<Mention> entities2 = processText.processWikipedia(tokens, language); // non named-entity
 System.out.println("number of non-NE found: " + entities2.size());	
 		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
@@ -808,18 +827,29 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					feature.context_quality = quality;
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
+
 					if (candidate.getWikidataId() != null) {
                         feature.wikidata_id = candidate.getWikidataId();
+
+						// NE type of Grobid
+						String typeNE = candidate.getType();
+						if ((typeNE != null)){
+							feature.ner_type = typeNE;
+						} else {
+							feature.ner_type = "UNKNOWN";
+						}
+
                         // for Nerd-Kid
                         String typeKid = candidate.getPredictionClass();
                         if (typeKid != null) {
-                            feature.nerKid_type = candidate.getPredictionClass();
+                            feature.nerKid_type = typeKid;
                         } else {
                             feature.nerKid_type = "UNKNOWN";
                         }
                     }
 					else {
                         feature.wikidata_id = "Q0"; // undefined entity
+						feature.ner_type = "NotNER";
                         // for Nerd-Kid
                         feature.nerKid_type = "NotNER";
                     }
