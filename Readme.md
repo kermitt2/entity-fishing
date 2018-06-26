@@ -61,5 +61,5 @@ Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
 Inria contributors are supported by the H2020 [HIRMEOS](http://www.hirmeos.eu), [IPERION-CH](http://www.iperionch.eu) and [DESIR](https://www.dariah.eu/activities/projects-and-affiliations/desir/) EU projects. 
 
-<a href="https://www.dariah.eu/activities/projects-and-affiliations/desir/"><img align="right" width="75" height="50" src="doc/images/dariah.png"/></a><a href="http://www.iperionch.eu"><img align="right" width="160" height="40" src="doc/images/iperion.png"/></a><a href="http://www.hirmeos.eu"><img align="right" width="120" height="40" src="doc/images/hirmeos.png"/></a>
+<a href="https://www.dariah.eu/activities/projects-and-affiliations/desir/" target="_blank"><img align="right" width="75" height="50" src="doc/images/dariah.png"/></a><a href="http://www.iperionch.eu" target="_blank"><img align="right" width="160" height="40" src="doc/images/iperion.png"/></a><a href="http://www.hirmeos.eu" target="_blank"><img align="right" width="120" height="40" src="doc/images/hirmeos.png"/></a>
 
