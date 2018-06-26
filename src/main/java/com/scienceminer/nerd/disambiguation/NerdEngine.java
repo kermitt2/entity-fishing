@@ -489,6 +489,10 @@ public class NerdEngine {
 							candidate.setType(mention.getType().toString());
 						}
 
+						// for Nerd-Kid
+						String typeKid = candidate.getPredictionClass();
+						candidate.setTypeKid(typeKid);
+
 						candidates.add(candidate);
 						//System.out.println(candidate.toString());
 						s++;
@@ -666,6 +670,20 @@ public class NerdEngine {
 							candidate.setLang(lang);
 							candidate.setLabel(bestLabel);
 							candidate.setWikidataId(sense.getWikidataId());
+
+							// get the NER Type of Grobid
+							NERParsers nerParsers = new NERParsers();
+
+							List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
+							for (Entity entityResult : resultNEExtractText) {
+								Mention mention = new Mention(entityResult);
+								candidate.setType(mention.getType().toString());
+							}
+
+							// for Nerd-Kid
+							String typeKid = candidate.getPredictionClass();
+							candidate.setTypeKid(typeKid);
+
 							candidates.add(candidate);
 							s++;
 							if (s == MAX_SENSES) {
@@ -967,11 +985,11 @@ public class NerdEngine {
 					//if (candidate.getWikidataP31Id() != null)
 					//	wikidataP31Id = candidate.getWikidataP31Id();
 
-					String nerType = "UNKNOWN"; // undefined entity
+					String nerType = "NotNER"; // undefined entity
 					if (candidate.getType() != null)
 						nerType = candidate.getType();
 
-					String nerKidType = "UNKNOWN"; // undefined entity
+					String nerKidType = "NotNER"; // undefined entity
 					if (candidate.getTypeKid() != null)
 						nerKidType = candidate.getTypeKid();
 

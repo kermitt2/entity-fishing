@@ -46,7 +46,7 @@ public class NEDCorpusEvaluation {
     private static final Logger LOGGER = LoggerFactory.getLogger(NEDCorpusEvaluation.class);
 
     public static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb",
-            "aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos", "kid");
+            "aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos");
 
     private UpperKnowledgeBase upperKnowledgeBase = null;
     private Map<String, LowerKnowledgeBase> wikipediaMap = null;

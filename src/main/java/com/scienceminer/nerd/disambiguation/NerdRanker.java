@@ -175,8 +175,8 @@ public class NerdRanker extends NerdModel {
 		//feature.wikidata_id = wikidataId;
 		feature.ner_type = nerType;
 		feature.nerKid_type = nerKidType;
+		feature.isSameClassType = nerType.equals(nerKidType);
 		//feature.wikidata_P31_entity_id = wikidataP31Id;
-
 
 		double[] features = feature.toVector(attributes);
 		smile.math.Math.setSeed(7);
@@ -485,7 +485,7 @@ public class NerdRanker extends NerdModel {
 						}
 
 						// for Nerd-Kid
-						String typeKid = candidate.getPredictionClass();
+						String typeKid = candidate.getTypeKid();
 						if (typeKid != null) {
 							feature.nerKid_type = typeKid;
 						} else {
@@ -860,6 +860,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					else {
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
 					}
+					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 

@@ -1,0 +1,19 @@
+Steps:
+1. Create new models by masking some features
+a. Masking the features in the class NerdRankerFeatureVector.java
+b. Generate new ranker model with Wikipedia or with certain corpus, for instance with English corpus "aida" (aida-train)
+   $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aida en"
+   - A new ranker and selector are generated in  `/data/wikipedia/training/[lang]/[ranker|selector].arff`
+   - A new model is generated in `/data/models/ranker-long-[lang].model`
+
+   To avoid error of java.lang.IllegalThreadStateException, add -Dexec.cleanupDaemonThreads=false in the command
+   Ex: $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="ada en" -Dexec.cleanupDaemonThreads=false
+
+c. Evaluate the new model with certain corpus, for example evaluate with aida corpus (aida-testb)
+   $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="aida"
+
+2. Arff files to create the modesl are saved in /data/nerdKid/training/rankerNerdKid/*.arff
+
+3. The training models are saved in `/data/nerdKid/training/rankerNerdKid/*.models`
+
+4. The result of evaluation is saved in `/data/wikidata/evaluation/Model[No Model]`
