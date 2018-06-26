@@ -3,7 +3,7 @@
 <!-- [![Build Status](https://travis-ci.org/kermitt2/nerd.svg?branch=master)](https://travis-ci.org/kermitt2/nerd) -->
 <!-- [![Coverage Status](https://coveralls.io/repos/kermitt2/nerd/badge.svg)](https://coveralls.io/r/kermitt2/nerd) -->
 <!-- [![Docker Status](https://images.microbadger.com/badges/version/lfoppiano/grobid.svg)](https://hub.docker.com/r/lfoppiano/ grobid/ "Latest Docker HUB image") -->
-
+[![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/kermitt2/entity-fishing/total.svg)]()
 
 # Documentation
 
@@ -55,9 +55,11 @@ Have a look at our [presentation at WikiDataCon 2017](https://grobid.s3.amazonaw
 
 ## License and contact
 
-Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
-The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
+Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
 
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
-*entity-fishing* is developed by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) with contributions of [Inria](http://inria.fr) Paris. Inria contribution is supported by the H2020 [HIRMEOS](http://www.hirmeos.eu) EU project, where *entity-fishing* has been [integrated by several partners](http://www.hirmeos.eu/2018/02/15/hirmeos-enhances-its-digital-platforms-with-entity-fishing-validation-of-the-nerd-services/). 
+*entity-fishing* is developed by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) with contributions of [Inria](http://inria.fr) Paris. 
+
+Inria contributors are supported by the H2020 [HIRMEOS](http://www.hirmeos.eu), [IPERION-CH](http://www.iperionch.eu) and [DESIR](https://www.dariah.eu/activities/projects-and-affiliations/desir/) EU projects. 
+

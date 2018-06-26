@@ -41,7 +41,7 @@ public class AnnotatedDataGenerationTest {
         assertThat(output.b.get(0).split("\n")[4], startsWith("Comme nous l'avons "));
     }
 
-    @Test
+    //@Test
     public void testExtractionPdfData_2() throws Exception {
         File input = new File(this.getClass().getResource("OB-oep-1827.pdf").getPath());
 
@@ -58,7 +58,7 @@ public class AnnotatedDataGenerationTest {
         assertThat(output.b.get(0).split("\n")[1], is(""));
     }
 
-    @Test
+    //@Test
     public void testExtractionPdfData_3() throws Exception {
         File input = new File(this.getClass().getResource("OB-obp-1523.pdf").getPath());
 
