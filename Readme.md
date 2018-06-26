@@ -59,5 +59,5 @@ Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
 *entity-fishing* is developed by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) with contributions of [Inria](http://inria.fr) Paris. 
 
-Inria contributors are supported by the H2020 [HIRMEOS](http://www.hirmeos.eu), [IPERION-CH](http://www.iperionch.eu) and [DESIR](https://www.dariah.eu/activities/projects-and-affiliations/desir/) EU projects. <img align="right" width="50" height="50" src="doc/images/hirmeos.png">
+Inria contributors are supported by the H2020 [HIRMEOS](http://www.hirmeos.eu), [IPERION-CH](http://www.iperionch.eu) and [DESIR](https://www.dariah.eu/activities/projects-and-affiliations/desir/) EU projects. <img align="right" width="150" height="50" src="doc/images/hirmeos.png"/><img align="right" width="200" height="50" src="doc/images/iperion.png"/><img align="right" width="75" height="50" src="doc/images/dariah.png"/>
 
