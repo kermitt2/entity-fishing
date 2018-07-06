@@ -38,7 +38,6 @@ public class Relatedness {
 
 	private long comparisonsRequested = 0;
 	private long comparisonsCalculated = 0;
-	private final static int MAX_CACHE_SIZE = 1000000;
 
 	public static Relatedness getInstance() {
 	    if (instance == null) {
@@ -129,10 +128,8 @@ public class Relatedness {
 			caches.put(lang, cache);
 		}
 		if (!cache.containsKey(key)) {
-			relatedness = getRelatednessWithoutCache(art1, art2, lang);
-
-			if(cache.size() < MAX_CACHE_SIZE)
-				cache.put(key, relatedness);
+			relatedness = getRelatednessWithoutCache(art1, art2, lang);		
+			cache.put(key, relatedness);
 			
 			comparisonsCalculated++;
 		} else {
