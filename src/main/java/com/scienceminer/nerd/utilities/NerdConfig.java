@@ -57,10 +57,6 @@ public class NerdConfig {
 	// path to resources for species recognition
 	private String speciesPath = null;
 
-	// the type of document structure to be considered in case of processing 
-	// a complete document 
-	private String structure = null;
-
 	public String getLangCode() {
 		return langCode;
 	}

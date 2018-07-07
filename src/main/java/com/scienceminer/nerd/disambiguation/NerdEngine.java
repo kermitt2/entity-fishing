@@ -395,7 +395,7 @@ public class NerdEngine {
 			if (isEmpty(normalisedString))
 				continue;
 
-			Label bestLabel = bestLabel(normalisedString, wikipedia);
+			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
 			if (bestLabel !=null && !bestLabel.exists()) {
 				//if (entity.getIsAcronym())
 				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
@@ -527,9 +527,8 @@ public class NerdEngine {
 					}
 				}
 
-				Collections.sort(candidates);
-
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
+					Collections.sort(candidates);
 					result.put(entity, candidates);
 				} /*else
 					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
@@ -653,17 +652,53 @@ public class NerdEngine {
 							candidate.setLang(lang);
 							candidate.setLabel(bestLabel);
 							candidate.setWikidataId(sense.getWikidataId());
-							candidates.add(candidate);
-							s++;
-							if (s == MAX_SENSES) {
-								// max. sense alternative has been reach
-								break;
+
+							// check if the entity is already present with another candidate (coming from an alternative label)
+							// if yes, check if the current sense has better statistical information than the already present one
+							long countOcc = bestLabel.getOccCount();
+							long countLinkOcc = bestLabel.getLinkOccCount();
+							boolean updateExistingCandidate = false;
+							for(NerdCandidate candid : candidates) {
+								if (sense.getId() == candid.getWikipediaExternalRef()) {
+									// check statistics
+									long candCountOcc = candid.getLabel().getOccCount();
+									long candLinkCountOcc = candid.getLabel().getLinkOccCount();
+									long candSenseCountOcc = candid.getWikiSense().getLinkOccCount();
+
+									if (countOcc > candCountOcc) {
+										//System.out.println("better label for same sense is: " + altBestLabel.getText() +
+										//	", " + countOcc + " countOcc vs " + candCountOcc + " candCountOcc");
+
+										// update candidate sense
+										candid.setWikiSense(sense);
+										candid.setLabel(bestLabel);
+
+										// update entity
+										entity.setLinkProbability(bestLabel.getLinkProbability());
+									}
+									updateExistingCandidate = true;
+									break;
+								}
+							}
+
+							// if the new candidate's entity is not already present, we add the candidate
+							if (!updateExistingCandidate) {
+								candidates.add(candidate);
+								s++;
+								if (s == MAX_SENSES) {
+									// max. sense alternative has been reach
+									break;
+								}
 							}
 						}
 					}
 				}
+
 				if (candidates.size() > 0 || entity.getType() != null) {
 					Collections.sort(candidates);
+					// we just take the best candidates following the conf. MAX_SENSES
+					//int upperLimit = Math.min(candidates.size(), MAX_SENSES);
+					//candidates = candidates.subList(0, upperLimit);
 					result.put(entity, candidates);
 				} /*else
 					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
@@ -671,7 +706,7 @@ public class NerdEngine {
 
 		}
 
-		result = expendCoReference(entities, result);
+		result = this.expendCoReference(entities, result);
 
 		return result;
 	}

@@ -8,6 +8,7 @@ import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import org.apache.commons.io.FileUtils;
@@ -17,8 +18,8 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.UnicodeUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -43,7 +44,7 @@ import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
  */
 
 public class NEDCorpusEvaluation {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NEDCorpusEvaluation.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(NEDCorpusEvaluation.class);
 
     public static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb",
             "aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos");
@@ -100,7 +101,7 @@ public class NEDCorpusEvaluation {
         Element root = dom.getDocumentElement();
         NodeList docs = root.getElementsByTagName("document");
         if (docs == null || docs.getLength() <= 0) {
-            LOGGER.error("the list documents for this corpus is empty");
+            System.out.println("the list documents for this corpus is empty");
             return null;
         }
 
@@ -317,18 +318,20 @@ public class NEDCorpusEvaluation {
                             }
                         }
                     }
-                    if (!found)
-                        LOGGER.debug("found no candidate for mention: " + refEntity.getRawName());
+                    if (!found) {
+                        System.out.println("found no candidate for mention: " + refEntity.getRawName());
+                    }
                 }
 
                 // do we have the expected result in the candidates for the mentions?
-                for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+                /*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
                     List<NerdCandidate> cands = entry.getValue();
                     NerdEntity entity = entry.getKey();
                     if (cands.size() > 0) {
                         // check that we have a reference result for the same chunck
                         int start = entity.getOffsetStart();
                         int end = entity.getOffsetEnd();
+                        boolean found = false;
                         for (NerdEntity refEntity : referenceEntities) {
                             int startRef = refEntity.getOffsetStart();
                             int endRef = refEntity.getOffsetEnd();
@@ -336,7 +339,40 @@ public class NEDCorpusEvaluation {
                                 for (NerdCandidate cand : cands) {
                                     if (cand.getWikipediaExternalRef() == refEntity.getWikipediaExternalRef()) {
                                         totalFoundMention++;
+                                        found = true;
                                         break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }*/
+
+                // do we have the expected result in the candidates for the mentions?
+                for (NerdEntity refEntity : referenceEntities) {
+                    int startRef = refEntity.getOffsetStart();
+                    int endRef = refEntity.getOffsetEnd();
+                    for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+                        List<NerdCandidate> cands = entry.getValue();
+                        NerdEntity entity = entry.getKey();
+                        if (cands.size() > 0) {
+                            int start = entity.getOffsetStart();
+                            int end = entity.getOffsetEnd();
+                            if ((start == startRef) && (end == endRef)) {
+                                boolean found = false;
+                                for (NerdCandidate cand : cands) {
+                                    if (cand.getWikipediaExternalRef() == refEntity.getWikipediaExternalRef()) {
+                                        totalFoundMention++;
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    Page article = wikipediaMap.get(langId).getPageById(refEntity.getWikipediaExternalRef());
+                                    if (article != null) {
+                                        System.out.println("do not found expected candidate for mention: " + 
+                                            entity.getRawName() + " / was expecting: " + refEntity.getWikipediaExternalRef() + " / "
+                                            + article.getTitle());
                                     }
                                 }
                             }
@@ -549,7 +585,7 @@ System.out.println("--");
         try {
             langId = split[split.length - 1];
         } catch (ArrayIndexOutOfBoundsException aio) {
-            LOGGER.warn("No language specified in filename, defaulting to English.", aio);
+            System.out.println("No language specified in filename, defaulting to English: " + docFile.getPath());
         }
 
         return langId;

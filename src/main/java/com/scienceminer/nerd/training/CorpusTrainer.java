@@ -6,8 +6,8 @@ import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.evaluation.NEDCorpusEvaluation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  */
 public class CorpusTrainer {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CorpusTrainer.class);
+	//private static final Logger LOGGER = LoggerFactory.getLogger(CorpusTrainer.class);
 
 	private LowerKnowledgeBase wikipedia = null;
 
@@ -46,7 +46,7 @@ public class CorpusTrainer {
 		try {
 			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
 			if(wikipedia == null) {
-				LOGGER.error("Problem initalizing language-dependent knowledge base for language " + lang);
+				System.out.println("Problem initalizing language-dependent knowledge base for language " + lang);
 			}
 
 			this.ranker = new NerdRanker(this.wikipedia);

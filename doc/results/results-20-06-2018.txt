@@ -1,0 +1,36 @@
+
+Ranker evaluation on 500 Wikipedia articles (trained with 5000)
+
+-- Macro-average --
+precision: 0.9426
+recall: 0.9847
+f1-score: 0.9622
+
+-- Micro-average --
+precision: 0.9408
+recall: 0.9852
+f1-score: 0.9625
+
+
+
+
+AIDA-TESTB (trained with 5000 Wikipedia articles)
+
+Evaluation on 231 documents and 4480 expected entities, in total 121 s
+
+candidate gold recall: 82.48
+
+** micro average measures **
+
+aida-testb           accuracy     precision    recall       f1     
+
+prior                70.25        73.2         73.04        73.12  
+ranker               75.13        76.98        76.8         76.89  
+
+** macro average measures **
+
+aida-testb           accuracy     precision    recall       f1     
+
+prior                70.25        70.37        70.25        70.31  
+ranker               75.13        75.27        75.13        75.2  
+

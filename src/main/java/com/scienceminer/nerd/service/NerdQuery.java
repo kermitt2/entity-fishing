@@ -127,6 +127,10 @@ public class NerdQuery {
     private double minSelectorScore = 0.0;
     private double minRankerScore = 0.0;
 
+    // the type of document structure to be considered in case of processing 
+    // a complete document 
+    private String structure = null;
+
     public NerdQuery() {
     }
 
@@ -159,6 +163,8 @@ public class NerdQuery {
 
         this.minSelectorScore = query.getMinSelectorScore();
         this.minRankerScore = query.getMinRankerScore();
+
+        this.structure = query.getStructure();
     }
 
     /**
@@ -432,6 +438,14 @@ public class NerdQuery {
 
     public void setMinRankerScore(double minRankerScore) {
         this.minRankerScore = minRankerScore;
+    }
+
+    public String getStructure() {
+        return this.structure;
+    }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
     }
 
     public String toJSON() {
