@@ -308,9 +308,8 @@ public class ProcessText {
         }
 
         String lang = language.getLang();
-        if (!lang.equals("en") && !lang.equals("fr"))
+        if ((lang == null) || (!lang.equals("en") && !lang.equals("fr")))
             return new ArrayList<>();
-
 
         try {
             List<Entity> entityResults = nerParsers.extractNE(tokens, language);

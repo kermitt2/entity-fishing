@@ -87,7 +87,7 @@ public class NerdRestProcessFile {
         if (nerdQuery.hasValidLanguage()) {
             lang.setConf(1.0);
             LOGGER.debug(">> language provided in query: " + lang);
-        }
+        } 
 
         /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities()
 
@@ -124,15 +124,36 @@ public class NerdRestProcessFile {
                 DocumentSource.fromPdf(originFile, config.getStartPage(), config.getEndPage());
         doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
 
+        // test if we consider or not document structures when fishing entities
         if ((nerdQuery.getStructure() != null) && (nerdQuery.getStructure().equals("default"))) {
             List<LayoutToken> allTokens = doc.getTokenizations();
             if (allTokens != null) {
+                if (lang == null) {
+                    StringBuilder builder = new StringBuilder();
+                    int nbTok = 0;
+                    for(LayoutToken token : allTokens) {
+                        if (nbTok == 1000)
+                            break;
+                        builder.append(token.getText());
+                        nbTok++;
+                    }
+
+                    LanguageUtilities languageIdentifier = LanguageUtilities.getInstance();
+                    synchronized (languageIdentifier) {
+                        lang = languageIdentifier.runLanguageId(builder.toString(), 2000);
+                    }
+
+                    if (lang != null) {
+                        workingQuery.setLanguage(lang);
+                        nerdQuery.setLanguage(lang);
+                    } else {
+                        LOGGER.error("Language was not specified and there was not enough text to identify it. The process might fail. ");
+                    }
+                }
+
                 List<NerdEntity> newEntities = processLayoutTokenSequence(allTokens, null, workingQuery);
                 if (newEntities != null) {
                     LOGGER.debug(newEntities.size() + " nerd entities");
-                    /*for(NerdEntity entity : newEntities) {
-                        LOGGER.debug(entity.toString());
-                    }*/
                 }
                 nerdQuery.addNerdEntities(newEntities);
             }
@@ -188,7 +209,6 @@ public class NerdRestProcessFile {
                     if (titleTokens != null) {
                         LOGGER.debug("Process title... ");
                         //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
-                        //workingQuery.setEntities(null);
 
                         List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
                         if (newEntities != null) {
@@ -443,24 +463,29 @@ public class NerdRestProcessFile {
     }
 
     public static Language identifyLanguage(BiblioItem resHeader, Document doc) {
-
-        String contentSample = "";
-        if (resHeader.getTitle() != null)
-            contentSample += resHeader.getTitle();
-        if (resHeader.getAbstract() != null)
-            contentSample += "\n" + resHeader.getAbstract();
-        if (resHeader.getKeywords() != null)
-            contentSample += "\n" + resHeader.getKeywords();
+        StringBuilder contentSample = new StringBuilder();
+        if (resHeader.getTitle() != null) {
+            contentSample.append(resHeader.getTitle());
+        }
+        if (resHeader.getAbstract() != null) {
+            contentSample.append("\n");
+            contentSample.append(resHeader.getAbstract());
+        }
+        if (resHeader.getKeywords() != null) {
+            contentSample.append("\n");
+            contentSample.append(resHeader.getKeywords());
+        }
         if (contentSample.length() < 200) {
             // we need more textual content to ensure that the language identification will be
             // correct
-            contentSample += doc.getBody();
+            // PL: the whole body, this is violent !
+            contentSample.append(doc.getBody());
         }
         LanguageUtilities languageIdentifier = LanguageUtilities.getInstance();
 
         Language resultLang = null;
         synchronized (languageIdentifier) {
-            resultLang = languageIdentifier.runLanguageId(contentSample, 2000);
+            resultLang = languageIdentifier.runLanguageId(contentSample.toString(), 2000);
         }
 
         return resultLang;
@@ -470,6 +495,7 @@ public class NerdRestProcessFile {
      * Generate a global context for a document
      */
     public static NerdContext getGlobalContext(NerdQuery query) {
+        // TODO
         return null;
     }
 
@@ -498,6 +524,10 @@ public class NerdRestProcessFile {
                 // ner
                 List<Mention> nerEntities = processText.process(workingQuery);
 
+                // TODO: this should not be done at this place for all segments (this is quite costly), 
+                // but before when dealing with explicit HEADER_TITLE, or by passing a parameter indicating 
+                // that the token sequence is a title - or better a possibly full upper case sequence, 
+                // because this is probably relevant to more than just title 
                 if (isTitle(layoutTokens) && needToLowerCase(layoutTokens)) {
                     for (Mention nerEntity : nerEntities) {
                         nerEntity.setNormalisedName(lowerCase(nerEntity.getRawName()));
