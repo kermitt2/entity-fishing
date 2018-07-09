@@ -175,7 +175,7 @@ public class NerdRanker extends NerdModel {
 		//feature.wikidata_id = wikidataId;
 		feature.ner_type = nerType;
 		feature.nerKid_type = nerKidType;
-		feature.isSameClassType = nerType.equals(nerKidType);
+		//feature.isSameClassType = nerType.equals(nerKidType);
 		//feature.wikidata_P31_entity_id = wikidataP31Id;
 
 		double[] features = feature.toVector(attributes);
@@ -473,30 +473,27 @@ public class NerdRanker extends NerdModel {
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 
+					// NE type of Grobid
+					String typeNE = candidate.getType();
+					if ((typeNE != null)){
+						feature.ner_type = typeNE;
+					} else {
+						feature.ner_type = "NotNER";
+					}
+
+					// for Nerd-Kid
+					String typeKid = candidate.getTypeKid();
+					if (typeKid != null) {
+						feature.nerKid_type = typeKid;
+					} else {
+						feature.nerKid_type = "NotNER";
+					}
+
 					if (candidate.getWikidataId() != null) {
 						feature.wikidata_id = candidate.getWikidataId();
-
-						// NE type of Grobid
-						String typeNE = candidate.getType();
-						if ((typeNE != null)){
-							feature.ner_type = typeNE;
-						} else {
-							feature.ner_type = "UNKNOWN";
-						}
-
-						// for Nerd-Kid
-						String typeKid = candidate.getTypeKid();
-						if (typeKid != null) {
-							feature.nerKid_type = typeKid;
-						} else {
-							feature.nerKid_type = "UNKNOWN";
-						}
 					}
 					else {
 						feature.wikidata_id = "Q0"; // undefined entity
-						feature.ner_type = "NotNER";
-						// for Nerd-Kid
-						feature.nerKid_type = "NotNER";
 					}
 
 					if (candidate.getWikidataP31Id() != null) {
@@ -506,6 +503,7 @@ public class NerdRanker extends NerdModel {
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
 					}
 
+					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
 					// addition of the example is constrained by the sampling ratio
@@ -828,31 +826,26 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 
+					// NE type of Grobid
+					String typeNE = candidate.getType();
+					if ((typeNE != null)){
+						feature.ner_type = typeNE;
+					}
+
+					// for Nerd-Kid
+					String typeKid = candidate.getTypeKid();
+					if (typeKid != null) {
+						feature.nerKid_type = typeKid;
+					} else {
+						feature.nerKid_type = "NotNER";
+					}
+
 					if (candidate.getWikidataId() != null) {
-                        feature.wikidata_id = candidate.getWikidataId();
-
-						// NE type of Grobid
-						String typeNE = candidate.getType();
-						if ((typeNE != null)){
-							feature.ner_type = typeNE;
-						} else {
-							feature.ner_type = "UNKNOWN";
-						}
-
-                        // for Nerd-Kid
-                        String typeKid = candidate.getPredictionClass();
-                        if (typeKid != null) {
-                            feature.nerKid_type = typeKid;
-                        } else {
-                            feature.nerKid_type = "UNKNOWN";
-                        }
-                    }
+						feature.wikidata_id = candidate.getWikidataId();
+					}
 					else {
-                        feature.wikidata_id = "Q0"; // undefined entity
-						feature.ner_type = "NotNER";
-                        // for Nerd-Kid
-                        feature.nerKid_type = "NotNER";
-                    }
+						feature.wikidata_id = "Q0"; // undefined entity
+					}
 
 					if (candidate.getWikidataP31Id() != null) {
 						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
@@ -860,6 +853,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					else {
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
 					}
+
 					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;

@@ -398,6 +398,15 @@ public class NerdEngine {
 			if (isEmpty(normalisedString))
 				continue;
 
+			// get the NER Type of Grobid for each entity as NER Type for each candidate
+			String typeNE = null;
+			if (entity.getType() != null) {
+				typeNE = entity.getType().getName();
+			}
+			else {
+				typeNE = "NotNER";
+			}
+
 			Label bestLabel = bestLabel(normalisedString, wikipedia);
 			if (bestLabel !=null && !bestLabel.exists()) {
 				//if (entity.getIsAcronym())
@@ -480,14 +489,16 @@ public class NerdEngine {
 						candidate.setWikidataId(sense.getWikidataId());
 						candidate.setBestCaseContext(bestCaseContext);
 
-						// get the NER Type of Grobid
-						NERParsers nerParsers = new NERParsers();
 
-						List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
-						for (Entity entityResult : resultNEExtractText) {
-							Mention mention = new Mention(entityResult);
-							candidate.setType(mention.getType().toString());
-						}
+						candidate.setType(typeNE);
+
+//						NERParsers nerParsers = new NERParsers();
+//
+//						List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
+//						for (Entity entityResult : resultNEExtractText) {
+//							Mention mention = new Mention(entityResult);
+//							candidate.setType(mention.getType().toString());
+//						}
 
 						// for Nerd-Kid
 						String typeKid = candidate.getPredictionClass();
@@ -671,14 +682,23 @@ public class NerdEngine {
 							candidate.setLabel(bestLabel);
 							candidate.setWikidataId(sense.getWikidataId());
 
-							// get the NER Type of Grobid
-							NERParsers nerParsers = new NERParsers();
-
-							List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
-							for (Entity entityResult : resultNEExtractText) {
-								Mention mention = new Mention(entityResult);
-								candidate.setType(mention.getType().toString());
+							// get the NER Type of Grobid for each entity as NER Type for each candidate
+							String typeNE = null;
+							if (entity.getType() != null) {
+								typeNE = entity.getType().getName();
 							}
+							else {
+								typeNE = "NotNER";
+							}
+							candidate.setType(typeNE);
+
+//							NERParsers nerParsers = new NERParsers();
+//
+//							List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
+//							for (Entity entityResult : resultNEExtractText) {
+//								Mention mention = new Mention(entityResult);
+//								candidate.setType(mention.getType().toString());
+//							}
 
 							// for Nerd-Kid
 							String typeKid = candidate.getPredictionClass();
