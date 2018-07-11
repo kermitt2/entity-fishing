@@ -175,7 +175,7 @@ public class NerdRanker extends NerdModel {
 		//feature.wikidata_id = wikidataId;
 		feature.ner_type = nerType;
 		feature.nerKid_type = nerKidType;
-		//feature.isSameClassType = nerType.equals(nerKidType);
+		feature.isSameClassType = nerType.equals(nerKidType);
 		//feature.wikidata_P31_entity_id = wikidataP31Id;
 
 		double[] features = feature.toVector(attributes);
@@ -473,35 +473,43 @@ public class NerdRanker extends NerdModel {
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 
-					// NE type of Grobid
-					String typeNE = candidate.getType();
-					if ((typeNE != null)){
-						feature.ner_type = typeNE;
-					} else {
-						feature.ner_type = "NotNER";
-					}
+                    // wikidata Id
+                    String wikiId = candidate.getWikidataId();
+                    if (wikiId != null) {
+                        feature.wikidata_id = wikiId;
+                    }
+                    else {
+                        feature.wikidata_id = "Q0"; // undefined entity
+                    }
 
-					// for Nerd-Kid
-					String typeKid = candidate.getTypeKid();
-					if (typeKid != null) {
-						feature.nerKid_type = typeKid;
-					} else {
-						feature.nerKid_type = "NotNER";
-					}
+                    if (candidate.getWikidataP31Id() != null) {
+                        feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
+                    }
+                    else {
+                        feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+                    }
 
-					if (candidate.getWikidataId() != null) {
-						feature.wikidata_id = candidate.getWikidataId();
-					}
-					else {
-						feature.wikidata_id = "Q0"; // undefined entity
-					}
+                    // NE type of Grobid
+                    String typeNE = candidate.getType();
+                    if ((typeNE != null)){
+                        feature.ner_type = typeNE;
+                    } else {
+                        feature.ner_type = "NotNER";
+                    }
 
-					if (candidate.getWikidataP31Id() != null) {
-						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-					}
-					else {
-						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
-					}
+                    // for Nerd-Kid
+                    String typeKid = candidate.getTypeKid();
+                    if (typeKid != null) {
+                        feature.nerKid_type = typeKid;
+                    } else {
+                        int counterRef = 412546; // since the NerdKidDatabase contains the key until the Id "Q412546"
+                        int counter = Integer.parseInt(wikiId.substring(1,wikiId.length()));
+                        if (counter<=counterRef) {
+                            feature.nerKid_type = "NotNER";
+                        } else {
+                            feature.nerKid_type = "NULL";
+                        }
+                    }
 
 					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
@@ -826,32 +834,43 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					feature.bestCaseContext = bestCaseContext;
 					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 
+                    // wikidata Id
+                    String wikiId = candidate.getWikidataId();
+                    if (wikiId != null) {
+                        feature.wikidata_id = wikiId;
+                    }
+                    else {
+                        feature.wikidata_id = "Q0"; // undefined entity
+                    }
+
+                    if (candidate.getWikidataP31Id() != null) {
+                        feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
+                    }
+                    else {
+                        feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+                    }
+
 					// NE type of Grobid
 					String typeNE = candidate.getType();
 					if ((typeNE != null)){
 						feature.ner_type = typeNE;
-					}
+					} else {
+                        feature.ner_type = "NotNER";
+                    }
+
 
 					// for Nerd-Kid
 					String typeKid = candidate.getTypeKid();
 					if (typeKid != null) {
 						feature.nerKid_type = typeKid;
 					} else {
-						feature.nerKid_type = "NotNER";
-					}
-
-					if (candidate.getWikidataId() != null) {
-						feature.wikidata_id = candidate.getWikidataId();
-					}
-					else {
-						feature.wikidata_id = "Q0"; // undefined entity
-					}
-
-					if (candidate.getWikidataP31Id() != null) {
-						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-					}
-					else {
-						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+					    int counterRef = 412546; // since the NerdKidDatabase contains the key until the Id "Q412546"
+                        int counter = Integer.parseInt(wikiId.substring(1,wikiId.length()));
+                        if (counter<=counterRef) {
+                            feature.nerKid_type = "NotNER";
+                        } else {
+                            feature.nerKid_type = "NULL";
+                        }
 					}
 
 					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);

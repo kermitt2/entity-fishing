@@ -996,12 +996,12 @@ public class NerdEngine {
 						LOGGER.error("Cannot rank candidates: disambiguator for the language " +
 							lang + " is invalid");
 					}
-//
-					String wikidataId = "Q0"; // undefined entity
+
+//					String wikidataId = "Q0"; // undefined entity
 //					if (candidate.getWikidataId() != null)
 //						wikidataId = candidate.getWikidataId();
 
-					String wikidataP31Id = "Q0"; // undefined entity
+//					String wikidataP31Id = "Q0"; // undefined entity
 					//if (candidate.getWikidataP31Id() != null)
 					//	wikidataP31Id = candidate.getWikidataP31Id();
 
@@ -1126,13 +1126,13 @@ public class NerdEngine {
 				if (feature.Add_relatedness)
 					related = relatedness.getRelatednessTo(candidate, context, lang);
 
-				String wikidataId = "Q0"; // undefined entity
-				if (candidate.getWikidataId() != null)
-					wikidataId = candidate.getWikidataId();
-
-				String wikidataP31Id = "Q0"; // undefined entity
-				if (candidate.getWikidataP31Id() != null)
-					wikidataP31Id = candidate.getWikidataP31Id();
+//				String wikidataId = "Q0"; // undefined entity
+//				if (candidate.getWikidataId() != null)
+//					wikidataId = candidate.getWikidataId();
+//
+//				String wikidataP31Id = "Q0"; // undefined entity
+//				if (candidate.getWikidataP31Id() != null)
+//					wikidataP31Id = candidate.getWikidataP31Id();
 
 				String nerType = "UNKNOWN"; // undefined entity
 				if (candidate.getType() != null)

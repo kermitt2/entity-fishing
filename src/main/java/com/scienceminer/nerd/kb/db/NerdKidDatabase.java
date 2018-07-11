@@ -1,7 +1,6 @@
 package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdResourceException;
-import com.scienceminer.nerd.kb.NerdKid;
 import com.scienceminer.nerd.kb.Statement;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -25,6 +24,7 @@ import java.util.Map;
  * A factory for creating the LMDB databases used in (N)ERD Knowlegde Base for associating Wikidata Ids with their classes.
  * Wikidata Id is an entity Id for each Wikidata entity which is a number prefixed by a letter 'Q', e.g 'Q16502' for the entity 'World'
  * Class of Wikidata Ids might be one of these: NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN
+ * Currently, it has been stored the prediction class until the Wikidata Id of Q412546;
  */
 
 public class NerdKidDatabase extends StringRecordDatabase<String> {

@@ -157,7 +157,7 @@ public class GenericRankerFeatureVector {
 			header.append("@attribute ner_subtype STRING\n");
 		// for Nerd-Kid
 		if (Add_nerKid_type)
-			header.append("@attribute nerKid_type {NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, ORGANISATION, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
+			header.append("@attribute nerKid_type {NotNER, NULL, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, ORGANISATION, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
 		if (Add_isSameClassType)
 			header.append("@attribute isSameClassType {false, true}\n");
 		if (Add_NERType_relatedness)
@@ -393,7 +393,7 @@ public class GenericRankerFeatureVector {
 				res.append("," + embeddings_centroid_similarity);
 		}
 		if (Add_wikidata_id) 
-			res.append(",'" + wikidata_id+"'");
+			res.append("," + wikidata_id);
 		if (Add_wikidata_P31_entity_id)
 			res.append(",'" + wikidata_P31_entity_id+"'");
 
