@@ -303,7 +303,7 @@ public class NerdRestProcessFile {
                     if ((bodytext != null) && (bodytext.trim().length() > 0)) {
                         rese = engine.getParsers().getFullTextParser().label(bodytext);
 
-                        // get the reference, figure, table and formula markers, plus the formula
+                        // get out the reference, figure, table and formula markers, plus the formula
                         // the rest can be processed by NERD
                         List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
                                 TaggingLabels.SECTION, TaggingLabels.FIGURE, TaggingLabels.TABLE);

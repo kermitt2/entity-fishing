@@ -166,13 +166,17 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 		if (isLoaded && !overwrite)
 			return;
 		System.out.println("Loading " + name + " database");
+		long totalStatements = statementDb.getDatabaseSize();
+		System.out.println(totalStatements + " statements in statement db");
 
 		KBIterator iter = new KBIterator(statementDb);
 		Transaction tx = environment.createWriteTransaction();
 		Map<String, List<Statement>> tmpMap = new HashMap<String, List<Statement>>();
+		long nbSeen = -1;
 		int nbToAdd = 0;
-		int nbTotalAdded = 0;
+		long nbTotalAdded = 0;
 		while(iter.hasNext()) {
+			nbSeen++;
 			if (nbToAdd >= 10000) {
 				try {
 					tx.commit();
@@ -184,6 +188,7 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
+				System.out.println(nbSeen + " / " + totalStatements);
 			}
 
 			Entry entry = iter.next();
@@ -206,7 +211,12 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 							newStatements = this.retrieve(value);
 						}
 						if (newStatements == null) {
-							newStatements = new ArrayList<Statement>();
+							// nothing in the tmp map, we look at the db
+							List<Statement> localReverses = this.retrieve(entityId);
+							if (localReverses != null)
+								newStatements = localReverses;
+							else
+								newStatements = new ArrayList<Statement>();
 						}
 						newStatements.add(statement);
 
