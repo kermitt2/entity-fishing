@@ -179,6 +179,10 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 			nbSeen++;
 			if (nbToAdd >= 10000) {
 				try {
+					// put what's in the tmp map into the db
+					for (Map.Entry<String, List<Statement>> entry : tmpMap.entrySet()) {
+						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+					}
 					tx.commit();
 					tx.close();
 					nbToAdd = 0;
@@ -207,20 +211,16 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 						// check temporary map first
 						List<Statement> newStatements = tmpMap.get(value);
 						if (newStatements == null) {
-							// get statements from the db
+							// nothing in the tmp map, we look at the db
 							newStatements = this.retrieve(value);
 						}
 						if (newStatements == null) {
-							// nothing in the tmp map, we look at the db
-							List<Statement> localReverses = this.retrieve(entityId);
-							if (localReverses != null)
-								newStatements = localReverses;
-							else
-								newStatements = new ArrayList<Statement>();
+							// nothing in db neither, we start a new fresh entry for this entity
+							newStatements = new ArrayList<Statement>();
 						}
 						newStatements.add(statement);
 
-						db.put(tx, KBEnvironment.serialize(value), KBEnvironment.serialize(newStatements));
+						//db.put(tx, KBEnvironment.serialize(value), KBEnvironment.serialize(newStatements));
 						tmpMap.put(value, newStatements);
 						nbToAdd++;
 					} 

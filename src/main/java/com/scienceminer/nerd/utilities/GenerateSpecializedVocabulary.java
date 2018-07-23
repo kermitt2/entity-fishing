@@ -21,9 +21,10 @@ import com.scienceminer.nerd.exceptions.*;
  * and P31 (instance of) properties. The Wikipedia for the target language can be 
  * exploited with the redirection and anchors. 
  *
- * Command for creating the vocabulary of all software (Q7397) names in English:
+ * Example: Command for creating the vocabulary of all software (Q7397) names in 
+ * English but excluding video games (Q7889):
  * mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.utilities.GenerateSpecializedVocabulary 
- * -Dexec.args="en Q7397 /home/lopez/test/softwareVoc.txt"
+ * -Dexec.args="en +Q7397 -Q7889 /home/lopez/test/softwareVoc.txt"
  */
 public class GenerateSpecializedVocabulary {
 
@@ -35,7 +36,7 @@ public class GenerateSpecializedVocabulary {
         this.outputPath = outputFile;
     }
 
-    public void process(String wikidataId) throws NerdResourceException {
+    public void process(List<String> positiveEntityIds, List<String> negativeEntityIds) throws NerdResourceException {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(outputPath));
@@ -56,24 +57,37 @@ public class GenerateSpecializedVocabulary {
                 "Error instanciating the lower knowledge base. Mostlikely the language is not supported or not loaded: " + lang);
         }
 
-        Set<String> selection = new HashSet<String>();
-        select(wikidataId, upperKB, selection);
+        Set<String> selection = new TreeSet<String>();
+        for (String wikidataId : positiveEntityIds) {
+            select(wikidataId, negativeEntityIds, upperKB, selection);
+        }
 
         System.out.println("Selection of " + selection.size() + " entities");
 
         // gather vocabulary, as Wikipedia page titles/redirections/anchors (ok wikidata entity labels are missing!)
         try {
             for (String entityId : selection) {
+                //System.out.println(entityId);
                 Integer pageId = upperKB.getPageIdByLang(entityId, lang); 
+                //System.out.println(pageId);
+                if (pageId == null) {
+                    // no wikipedia page for this entity and the target language
+                    continue;
+                }
                 Page page = wikipedia.getPageById(pageId);
-                String title = page.getTitle();
-                writer.write(title);
-                writer.write("\n");
+                String title = cleanTitle(page.getTitle());
+                if (title.length() > 0) {
+                    writer.write(title);
+                    writer.write("\n");
+                }
                 if (page.getType() == Page.PageType.article) {
                 Redirect[] redirects = ((Article)page).getRedirects();
                     for(Redirect redirect : redirects) {
-                        writer.write(redirect.getTitle());
-                        writer.write("\n");
+                        title = cleanTitle(redirect.getTitle());
+                        if (title.length() > 0) {
+                            writer.write(title);
+                            writer.write("\n");
+                        }
                     }
                 }
             }
@@ -91,25 +105,36 @@ public class GenerateSpecializedVocabulary {
     /**
      * Recursive selection of wikidata entities via P279 and P31 properties
      */
-    private void select(String wikidataId, UpperKnowledgeBase upperKB, Set<String> selection) {
+    private void select(String wikidataId, List<String> negativeEntityIds, UpperKnowledgeBase upperKB, Set<String> selection) {
         List<Statement> statements = upperKB.getReverseStatements(wikidataId);
         if (statements != null) {
             // filter by P279 and P31
             for(Statement statement : statements) {
                 if (statement.getPropertyId().equals("P279") || statement.getPropertyId().equals("P31")) {
-                    if (!selection.contains(statement.getConceptId())) {
-                        String newWikidataID = statement.getConceptId();
-                        selection.add(newWikidataID);
-                        select(newWikidataID, upperKB, selection); 
+                    String newEntityId = statement.getConceptId();
+                    if (!selection.contains(newEntityId) && !negativeEntityIds.contains(newEntityId)) {
+                        selection.add(newEntityId);
+                        select(newEntityId, negativeEntityIds, upperKB, selection); 
                     }
                 }
             }
         }
     }
 
+    /**
+     * Remove the disambiguation suffix in a title
+     */
+    private String cleanTitle(String title) {
+        int ind = title.lastIndexOf("(");
+        if (ind != -1) {
+            title = title.substring(0, ind);
+        }
+        return title.replace("\n", "").trim();
+    }
+
     public static void main(String args[]) throws Exception {
         System.out.println(args.length);
-        if (args.length != 3) {
+        if (args.length < 3) {
             System.out.println("usage: command lang entity_id outputPath");
             System.exit(-1);
         }
@@ -121,20 +146,28 @@ public class GenerateSpecializedVocabulary {
             System.exit(-1);
         }
 
-        String entityId = args[1];
-        if (!entityId.startsWith("Q")) {
-            System.out.println("invalid entity identifier");
-            System.exit(-1);
+        List<String> positiveEntityIds = new ArrayList<String>();
+        List<String> negativeEntityIds = new ArrayList<String>();
+        for (int i=1; i< args.length-1; i++) {
+            String entityId = args[i];
+            if (entityId.startsWith("+Q") || entityId.startsWith("Q")) {
+                positiveEntityIds.add(entityId.substring(1, entityId.length()));
+            } else if (entityId.startsWith("-Q")) {
+                negativeEntityIds.add(entityId.substring(1, entityId.length()));
+            } else {
+                System.out.println("invalid entity identifier: " + entityId);
+                System.exit(-1);
+            }
         }
 
-        File outputFile = new File(args[2]);
+        File outputFile = new File(args[args.length-1]);
         File dataDir = outputFile.getParentFile();
         if (!dataDir.exists() || !dataDir.isDirectory()) {
             System.err.println("Invalid output path directory: " + dataDir.getPath());
             System.exit(-1);
         }
         GenerateSpecializedVocabulary voc = new GenerateSpecializedVocabulary(lang, outputFile);
-        voc.process(entityId);
+        voc.process(positiveEntityIds, negativeEntityIds);
     }
 }
 
