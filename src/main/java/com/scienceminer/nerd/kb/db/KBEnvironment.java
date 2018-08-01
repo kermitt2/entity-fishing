@@ -99,7 +99,7 @@ public abstract class KBEnvironment implements Closeable {
 	/**
 	 * Statistics available about a wikipedia dump
 	 */
-	public enum StatisticName {
+	public enum 	StatisticName {
 		/**
 		 * number of articles (not disambiguations or redirects)
 		 */

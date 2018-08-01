@@ -20,6 +20,7 @@ import java.util.Map;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * REST service to access data in the knowledge base
@@ -156,7 +157,7 @@ public class NerdRestKB {
             if (pageId != null) {
                 LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(Language.EN);
                 Page page = wikipedia.getPageById(pageId);
-                
+
                 entity.setRawName(page.getTitle());
                 entity.setPreferredTerm(page.getTitle());
                 entity.setWikipediaExternalRef(pageId);
@@ -165,7 +166,7 @@ public class NerdRestKB {
 
                 if (pageType == PageType.article) {
                     Article article = (Article) page;
-                    
+
                     // definition
                     Definition definition = new Definition();
                     try {
@@ -176,7 +177,7 @@ public class NerdRestKB {
                     definition.setSource("wikipedia-en");
                     definition.setLang(Language.EN);
                     entity.addDefinition(definition);
-                    
+
                     // categories
                     com.scienceminer.nerd.kb.model.Category[] parentCategories = article.getParentCategories();
                     handleCategories(entity, id, parentCategories);
@@ -313,5 +314,20 @@ public class NerdRestKB {
     public String methodLogOut() {
         return "<< " + NerdRestKB.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
+    }
+
+    public String getWikidataIDByDOI(String doi) {
+        if (isEmpty(doi)) {
+            return "";
+        }
+        String wikidataID = UpperKnowledgeBase.getInstance().getEntityIdPerDoi(doi);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        sb.append("\"").append("doi").append("\"").append(":").append("\"").append(doi).append("\"");
+        sb.append(",");
+        sb.append("\"").append("wikidataID").append("\"").append(":").append("\"").append(wikidataID).append("\"");
+        sb.append("}");
+        return sb.toString();
     }
 }

@@ -78,7 +78,7 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
 								doi = statement.getValue();
 								//System.out.println("found DOI: " + doi);
 								if (doi.startsWith("\""))
-									doi = doi.substring(1, doi.length());
+									doi = doi.substring(1);
 								if (doi.endsWith("\""))
 									doi = doi.substring(0, doi.length()-1);
 							}
@@ -86,18 +86,16 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
 					}
 
 					if (doi != null) {
-						KBEntry<String,String> theEntry = new KBEntry<String, String>(doi, entityId);
-						if (theEntry != null) {
-							try {
-								db.put(tx, KBEnvironment.serialize(theEntry.getKey()), 
-									KBEnvironment.serialize(theEntry.getValue()));
-								nbToAdd++;
-								nbDoi++;
-							} catch(Exception e) {
-								e.printStackTrace();
-							}
-						}
-					}
+						KBEntry<String,String> theEntry = new KBEntry<>(doi, entityId);
+                        try {
+                            db.put(tx, KBEnvironment.serialize(theEntry.getKey()),
+                                KBEnvironment.serialize(theEntry.getValue()));
+                            nbToAdd++;
+                            nbDoi++;
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 				} catch(Exception e) {
 					logger.error("fail to write entity description", e);
 				}

@@ -169,7 +169,7 @@ public class NerdEngine {
 		if (tokens == null) {
 			tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, new Language(lang, 1.0));
 		}
-		
+
 		NerdContext context = nerdQuery.getContext();
 		if (context == null) {
 			context = new NerdContext();
@@ -359,7 +359,7 @@ public class NerdEngine {
 			return result;
 
 		NerdConfig conf = wikipedia.getConfig();
-		
+
 		for(NerdEntity entity : entities) {
 			// if the entity is already input in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
@@ -1215,7 +1215,7 @@ public class NerdEngine {
 
 				if (entity1.getOffsetEnd() < entity2.getOffsetStart())
 					continue;
-				
+
 				if (toRemove.contains(new Integer(pos2)))
 					continue;
 				
@@ -1634,7 +1634,7 @@ System.out.println("Merging...");
 					new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
 			double dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
-			
+
 			boolean isNe = entity.getType() != null;
 			for(NerdCandidate candidate : candidates) {
 				//if (candidate.getMethod() == NerdCandidate.NERD)
@@ -2205,6 +2205,23 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			}
 
 		}
+	}
+
+	public String solveCitation(BiblioItem citation) {
+
+        final String originalDOI= citation.getDOI();
+        String wikidataID = "";
+        if(isEmpty(originalDOI)) {
+            LOGGER.warn("Cannot fetch Wikidata ID without DOI. ");
+        }else {
+            wikidataID = UpperKnowledgeBase.getInstance().getEntityIdPerDoi(originalDOI);
+
+            if (isEmpty(wikidataID)) {
+                return "";
+            }
+        }
+
+        return wikidataID;
 	}
 
 	public List<NerdEntity> solveCitations(List<BibDataSet> resCitations) {

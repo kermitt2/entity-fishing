@@ -206,7 +206,7 @@ public class UpperKnowledgeBase {
 	}
 
 	public String getEntityIdPerDoi(String doi) {
-		return env.getDbBiblio().retrieve(doi.toLowerCase());
+		return env.getDbBiblio().retrieve(doi);
 	}
 
 	/**
