@@ -322,6 +322,10 @@ public class NerdRestKB {
         }
         String wikidataID = UpperKnowledgeBase.getInstance().getEntityIdPerDoi(doi);
 
+        if (isEmpty(wikidataID)) {
+            return "";
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         sb.append("\"").append("doi").append("\"").append(":").append("\"").append(doi).append("\"");
