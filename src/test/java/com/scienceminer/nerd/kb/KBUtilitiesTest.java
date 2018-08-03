@@ -1,17 +1,9 @@
 package com.scienceminer.nerd.kb;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.scienceminer.nerd.kb.model.Article;
-import com.scienceminer.nerd.kb.model.Page;
-import com.scienceminer.nerd.utilities.NerdConfig;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.File;
-import java.util.*;
+import java.util.List;
 
 public class KBUtilitiesTest {
 	

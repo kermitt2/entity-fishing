@@ -435,6 +435,7 @@ public class NerdRestProcessFile {
         nerdQuery.setTokens(null);
 
         long end = System.currentTimeMillis();
+        IOUtilities.removeTempFile(originFile);
         nerdQuery.setRuntime(end - start);
         LOGGER.info("runtime: " + (end - start));
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
