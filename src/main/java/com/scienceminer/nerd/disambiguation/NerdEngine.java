@@ -172,7 +172,7 @@ public class NerdEngine {
 		if (tokens == null) {
 			tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, new Language(lang, 1.0));
 		}
-		
+
 		NerdContext context = nerdQuery.getContext();
 		if (context == null) {
 			context = new NerdContext();
@@ -362,7 +362,7 @@ public class NerdEngine {
 			return result;
 
 		NerdConfig conf = wikipedia.getConfig();
-		
+
 		for(NerdEntity entity : entities) {
 			// if the entity is already input in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
@@ -407,7 +407,7 @@ public class NerdEngine {
 				typeNE = "NotNER";
 			}
 
-			Label bestLabel = bestLabel(normalisedString, wikipedia);
+			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
 			if (bestLabel !=null && !bestLabel.exists()) {
 				//if (entity.getIsAcronym())
 				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
@@ -555,9 +555,8 @@ public class NerdEngine {
 					}
 				}
 
-				Collections.sort(candidates);
-
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
+					Collections.sort(candidates);
 					result.put(entity, candidates);
 				} /*else
 					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
@@ -713,8 +712,12 @@ public class NerdEngine {
 						}
 					}
 				}
+
 				if (candidates.size() > 0 || entity.getType() != null) {
 					Collections.sort(candidates);
+					// we just take the best candidates following the conf. MAX_SENSES
+					//int upperLimit = Math.min(candidates.size(), MAX_SENSES);
+					//candidates = candidates.subList(0, upperLimit);
 					result.put(entity, candidates);
 				} /*else
 					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
@@ -722,7 +725,7 @@ public class NerdEngine {
 
 		}
 
-		result = expendCoReference(entities, result);
+		result = this.expendCoReference(entities, result);
 
 		return result;
 	}
@@ -1255,7 +1258,7 @@ public class NerdEngine {
 
 				if (entity1.getOffsetEnd() < entity2.getOffsetStart())
 					continue;
-				
+
 				if (toRemove.contains(new Integer(pos2)))
 					continue;
 				
@@ -1674,7 +1677,7 @@ System.out.println("Merging...");
 					new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
 			double dice = ProcessText.getDICECoefficient(entity.getNormalisedName(), lang);
-			
+
 			boolean isNe = entity.getType() != null;
 			for(NerdCandidate candidate : candidates) {
 				//if (candidate.getMethod() == NerdCandidate.NERD)
@@ -2247,6 +2250,23 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			}
 
 		}
+	}
+
+	public String solveCitation(BiblioItem citation) {
+
+        final String originalDOI= citation.getDOI();
+        String wikidataID = "";
+        if(isEmpty(originalDOI)) {
+            LOGGER.warn("Cannot fetch Wikidata ID without DOI. ");
+        }else {
+            wikidataID = UpperKnowledgeBase.getInstance().getEntityIdPerDoi(originalDOI);
+
+            if (isEmpty(wikidataID)) {
+                return "";
+            }
+        }
+
+        return wikidataID;
 	}
 
 	public List<NerdEntity> solveCitations(List<BibDataSet> resCitations) {

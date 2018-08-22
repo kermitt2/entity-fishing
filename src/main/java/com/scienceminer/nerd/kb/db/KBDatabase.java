@@ -76,7 +76,7 @@ public abstract class KBDatabase<K,V> {
     		isLoaded = true;
     		System.out.println(type.toString() + " / isLoaded: " + isLoaded);
     	}
-    	this.environment.open(envFilePath);
+    	this.environment.open(envFilePath, Constants.NOTLS);
 		db = this.environment.openDatabase();
 	}
 

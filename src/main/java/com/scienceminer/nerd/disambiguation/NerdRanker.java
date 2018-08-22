@@ -15,7 +15,6 @@ import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 
-import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
@@ -107,13 +106,6 @@ public class NerdRanker extends NerdModel {
 		return feature;
 	}
 
-	// public double getProbability(double commonness,
-    //								 double relatedness,
-    //								 double quality,
-    //								 boolean bestCaseContext,
-    //								 float embeddingsSimilarity,
-    //								 String wikidataId,
-    //								 String wikidataP31Id)
 	public double getProbability(double commonness, 
 								 double relatedness, 
 								 double quality, 

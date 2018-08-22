@@ -105,7 +105,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 	@Override
 	protected void initDatabases() {
-		System.out.println("\ninit upper level language independent environment");
+		//System.out.println("\ninit upper level language independent environment");
 				
 		databasesByType = new HashMap<>();
 		
@@ -145,7 +145,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	 */
 	@Override
 	public void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception {
-		System.out.println("building Environment for upper knowledge base");	
+		System.out.println("building Environment for upper knowledge-base");	
 		//check all files exist and are readable before doing anything
 		
 		File dataDirectory = new File(conf.getDataDirectory());

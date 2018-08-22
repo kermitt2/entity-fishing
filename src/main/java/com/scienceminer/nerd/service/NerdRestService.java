@@ -43,6 +43,7 @@ public class NerdRestService implements NerdPaths {
     private static final String ID = "id";
     private static final String FILE = "file";
     private static final String LANG = "lang";
+    private static final String DOI = "doi";
     private static final String ONLY_NER = "onlyNER";
     private static final String NBEST = "nbest";
     private static final String SENTENCE = "sentence";
@@ -421,6 +422,41 @@ public class NerdRestService implements NerdPaths {
 
         } catch (QueryException qe) {
             return handleQueryException(qe, term);
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        } catch (Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
+
+    }
+
+    @GET
+    @Path(KB + "/" + DOI + "/{doi}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getWikiedataIdByDOI(@PathParam(DOI) String doi) {
+
+        String output = null;
+        Response response = null;
+
+        try {
+            output = nerdRestKB.getWikidataIDByDOI(doi);
+
+            if (isBlank(output)) {
+                response = Response.status(Response.Status.NOT_FOUND).build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(output)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+            
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
             response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();

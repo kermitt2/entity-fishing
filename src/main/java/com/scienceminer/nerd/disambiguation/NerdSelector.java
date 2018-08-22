@@ -409,7 +409,7 @@ public class NerdSelector extends NerdModel {
 						bestCaseContext = false;
 					}
 
-					float embeddingsSimilarity = SimilarityScorer.getInstance().getLRScore(candidate, tokens, lang);
+					float embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, tokens, lang);
 
 					String wikidataId = "Q0"; // undefined entity
 					if (candidate.getWikidataId() != null)	

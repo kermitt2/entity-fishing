@@ -1,0 +1,60 @@
+		title = "Simple NERD selector";
+		Add_nerd_score = true;
+		Add_prob_anchor_string = true;
+		//Add_prob_c = true;
+		Add_nb_tokens = true;
+		//Add_relatedness = true;
+		Add_inContext = true;
+		//Add_isNe = true;
+		Add_tf_idf = true;
+		Add_dice = true;
+		target_numeric = true;
+		target_class = false;
+
+Evaluation on 100 articles 
+
+-- Macro-average --
+precision: 0.6187
+recall: 0.7659
+f1-score: 0.6759
+
+-- Micro-average --
+precision: 0.6064
+recall: 0.7685
+f1-score: 0.6779
+
+lower precision in evaluation set: 0.2889
+lower recall in evalution set : 0.4444
+perfect precision in evaluation set: 0 / 100
+perfect recall in evaluation set: 0 / 100
+
+---------------------------------------------------------------------------
+
+		title = "Simple NERD selector";
+		Add_nerd_score = true;
+		Add_prob_anchor_string = true;
+		Add_prob_c = true;
+		Add_nb_tokens = true;
+		//Add_relatedness = true;
+		Add_inContext = true;
+		Add_isNe = true;
+		Add_tf_idf = true;
+		Add_dice = true;
+		target_numeric = true;
+		target_class = false;
+
+Evaluation on 100 articles 
+
+-- Macro-average --
+precision: 0.624
+recall: 0.7582
+f1-score: 0.6753
+
+-- Micro-average --
+precision: 0.6129
+recall: 0.762
+f1-score: 0.6794
+
+---------------------------------------------------------------------------
+
+

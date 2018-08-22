@@ -168,7 +168,7 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
-        System.out.println("runtime: " + (end - start));
+        LOGGER.info("runtime: " + (end - start));
 
         Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());

@@ -68,7 +68,7 @@ public class UpperKnowledgeBase {
     		LOGGER.info("Lexicon initialized");
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
-            LOGGER.info("\nInit Upper Knowledge base layer");
+            LOGGER.info("\nInit Upper Knowledge-base layer");
             NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
 			this.env = new KBUpperEnvironment(conf); //data/db/db-kb
 			this.env.buildEnvironment(conf, false);
@@ -76,7 +76,7 @@ public class UpperKnowledgeBase {
 			wikipedias = new HashMap<>();
             wikipediaDomainMaps = new HashMap<>();
 
-            LOGGER.info("Init English lower Knowledge base layer");
+            LOGGER.info("Init English lower Knowledge-base layer");
             conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
 			LowerKnowledgeBase wikipedia_en = new LowerKnowledgeBase(conf);
 
@@ -86,25 +86,25 @@ public class UpperKnowledgeBase {
             wikipediaDomainMaps_en.createAllMappings();
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
-			LOGGER.info("Init German lower Knowledge base layer");
+			LOGGER.info("Init German lower Knowledge-base layer");
             conf = mapper.readValue(new File("data/config/wikipedia-de.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_de = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
-            LOGGER.info("Init French lower Knowledge base layer");
+            LOGGER.info("Init French lower Knowledge-base layer");
             conf = mapper.readValue(new File("data/config/wikipedia-fr.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_fr = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
 
-            LOGGER.info("Init Spanish lower Knowledge base layer");
+            LOGGER.info("Init Spanish lower Knowledge-base layer");
             conf = mapper.readValue(new File("data/config/wikipedia-es.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_es = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.ES, wikipedia_es);
             wikipediaDomainMaps.put(Language.ES, wikipediaDomainMaps_en);
 
-            LOGGER.info("Init Italian lower Knowledge base layer");
+            LOGGER.info("Init Italian lower Knowledge-base layer");
             conf = mapper.readValue(new File("data/config/wikipedia-it.yaml"), NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_it = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.IT, wikipedia_it);
@@ -217,7 +217,7 @@ public class UpperKnowledgeBase {
 	}
 
 	public String getEntityIdPerDoi(String doi) {
-		return env.getDbBiblio().retrieve(doi.toLowerCase());
+		return env.getDbBiblio().retrieve(doi);
 	}
 
 	// for Nerd-Kid
