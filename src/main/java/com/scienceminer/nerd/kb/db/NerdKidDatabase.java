@@ -41,14 +41,74 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
         throw new UnsupportedOperationException();
     }
 
+    // collect statements for a certain Wikidata Id
+    public void collectStatementsWikidataId(StatementDatabase statementDatabase, boolean overwrite) throws Exception {
+        if (isLoaded && !overwrite)
+            return;
+        System.out.println("Loading " + statementDatabase.getName() + " database");
+
+        if (statementDatabase == null)
+            throw new NerdResourceException("The database is not found.");
+
+        // iterate through the statement database
+        KBIterator kbIterator = new KBIterator(statementDatabase);
+
+        try{
+
+            // while there are some data inside the database
+            while (kbIterator.hasNext()) {
+                Entry entry = kbIterator.next();
+                byte[] key = entry.getKey();
+                byte[] value = entry.getValue();
+                String wikidataId = null;
+                String predictedClass = null;
+
+                // we got the statement Id, just collect the Ids begin with 'Q'
+                String statementId = (String) KBEnvironment.deserialize(key);
+                if (statementId.startsWith("Q")) {
+                    // we have wikidataId (the wikidata Id can be get by accessing the key's statement or the concept Id of statements)
+                    wikidataId = statementId;
+                    // collect the content of the statement database into a list
+                    List<Statement> statements = (List<Statement>) KBUpperEnvironment.deserialize(value);
+
+//                        System.out.println("Wikidata Id: " + wikidataId);
+//                        System.out.println(Arrays.toString(statements.toArray()));
+
+                    List<String> featuresNoValueCollected = new ArrayList<>();
+                    List<String> featuresCollected = new ArrayList<>();
+                    List<Double> featureVector = new ArrayList<>();
+
+                    for (Statement statement : statements) {
+                        // for each wikidata Id, we have some features (properties + values)
+                        String prop = statement.getPropertyId();
+                        String val = statement.getValue();
+                        String concatenatePropVal = prop + "_" + val;
+
+                        // collect the features collected into the lists
+                        featuresNoValueCollected.add(prop);
+                        featuresCollected.add(concatenatePropVal);
+
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error when reading the database.", e);
+        } finally {
+            if (kbIterator != null)
+                kbIterator.close();
+            isLoaded = true;
+        }
+    }
+
     /*
     * build Nerd_kid database
     * */
 
     public void buildNerdKidDatabase(StatementDatabase statementDatabase, boolean overwrite) throws Exception {
         // read the features from the mapper
-        Map<String, List<String>> resultFeatures = this.loadFeatures();
-        List<String> propertiesNoValuesMapper = this.loadFeaturesNoValue();
+        Map<String, List<String>> resultFeatures = loadFeatures();
+        List<String> propertiesNoValuesMapper = loadFeaturesNoValue();
 
         // concatenate features with value
         List<String> propValMap = new ArrayList<>();

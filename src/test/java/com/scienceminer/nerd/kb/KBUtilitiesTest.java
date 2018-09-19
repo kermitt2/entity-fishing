@@ -3,7 +3,9 @@ package com.scienceminer.nerd.kb;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class KBUtilitiesTest {
 	
@@ -17,6 +19,17 @@ public class KBUtilitiesTest {
         } catch(Exception e) {
         	e.printStackTrace();
         }
+	}
+
+	@Test
+	public void testGetConcept(){
+		try{
+			Concept concept = UpperKnowledgeBase.getInstance().getConcept("Q76");
+			System.out.println("Wikipedia Id : " + concept.getPageIdByLang("en") + ", Wikidata Id : " + concept.getId());
+			System.out.println("Features : " + concept.getStatements());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Test
