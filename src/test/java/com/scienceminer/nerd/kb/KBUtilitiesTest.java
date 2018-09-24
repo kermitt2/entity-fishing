@@ -63,26 +63,6 @@ System.out.println(parents);
 	}
 
 	@Test
-	public void testLoadFeatures(){
-		try{
-			Map<String, List<String>> features = UpperKnowledgeBase.getInstance().getFeatures();
-			System.out.println("Features = " + features);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testLoadFeaturesNoValue(){
-		try{
-			List<String> featuresNoValue = UpperKnowledgeBase.getInstance().getFeaturesNoValue();
-			System.out.println("Features No Value = " + featuresNoValue);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
 	public void testFullTaxonParents() {
 		try {
 			List<String> parents = UpperKnowledgeBase.getInstance().getFullParentTaxons("Q18498");
@@ -113,6 +93,7 @@ System.out.println("Q3200306: " + parents);
 			wikidataId.add("Q29424");
 			wikidataId.add("Q35315");
 			wikidataId.add("Q412546");
+			wikidataId.add("Q123220"); // the new Nerd-Kid database has element until 'Q123220' -- predicted class LOCATION
 			for (String wiki : wikidataId){
 				String predictedClass = UpperKnowledgeBase.getInstance().getNerdKidPredictedClass(wiki);
 				System.out.println("Predicted class for " + wiki + " : " + predictedClass);

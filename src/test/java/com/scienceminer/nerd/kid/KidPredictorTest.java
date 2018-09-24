@@ -2,17 +2,9 @@ package com.scienceminer.nerd.kid;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nerd.kid.data.WikidataElement;
-import org.nerd.kid.data.WikidataElementInfos;
-import org.nerd.kid.model.WikidataNERPredictor;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class KidPredictorTest {
     KidPredictor kidPredictor;
