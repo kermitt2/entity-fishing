@@ -361,12 +361,12 @@ var nerd = (function($) {
 			for(var m=responseJson.entities.length-1; m>=0; m--) {
 				if ( (responseJson.entities[m].offsetStart>=responseJson.sentences[sentence].offsetStart) &&
 					 (responseJson.entities[m].offsetEnd<=responseJson.sentences[sentence].offsetEnd) ) {
-				
-				
+
 					var entity = responseJson.entities[m];
 					var label = entity.type;	
 					if (!label)
 						label = entity.rawName;
+					// prediction result from Nerd-Kid
 			    	//var start = parseInt(entity.offsetStart,10);
 				    //var end = parseInt(entity.offsetEnd,10);       
 			    	var start = parseInt(entity.offsetStart,10) - responseJson.sentences[sentence].offsetStart;

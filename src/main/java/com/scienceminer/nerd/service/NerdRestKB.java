@@ -10,6 +10,7 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kid.KidPredictor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
@@ -146,12 +147,16 @@ public class NerdRestKB {
         entity.setLang(Language.EN);
         UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance();
 
+        // for prediction class by Nerd-Kid
+        //KidPredictor kidPredictor = new KidPredictor();
+
         if (id.startsWith("Q")) {
             Concept concept = knowledgeBase.getConcept(id);
             if (concept == null) {
                 LOGGER.error("There is no resource for this Id.");
                 throw new ResourceNotFound("The requested resource could not be found in the current version of the KB.");
             }
+
 
             Integer pageId = concept.getPageIdByLang(Language.EN);
             if (pageId != null) {

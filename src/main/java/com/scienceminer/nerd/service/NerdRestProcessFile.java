@@ -6,6 +6,7 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.kid.KidPredictor;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Filter;
@@ -44,6 +45,9 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 public class NerdRestProcessFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
+
+    // for prediction by Nerd-Kid
+    KidPredictor kidPredictor = new KidPredictor();
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
@@ -433,6 +437,19 @@ public class NerdRestProcessFile {
         nerdQuery.setText(null);
         nerdQuery.setShortText(null);
         nerdQuery.setTokens(null);
+
+        // inject the class prediction result from Nerd-Kid
+        String typeKid = null;
+        String wikidataId = null;
+        List<NerdEntity> newEntities = nerdQuery.getEntities();
+        for (NerdEntity entity : newEntities){
+            wikidataId = entity.getWikidataId();
+            if (wikidataId != null){
+                // prediction class by Nerd-Kid
+                typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
+                entity.setTypeKid(typeKid);
+            }
+        }
 
         long end = System.currentTimeMillis();
         IOUtilities.removeTempFile(originFile);

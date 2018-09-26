@@ -10,6 +10,7 @@ import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.kid.KidPredictor;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.service.NerdQuery;
@@ -284,7 +285,6 @@ public class NerdEngine {
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
-
 			if (entity.getSource() == ProcessText.MentionMethod.user) {
 				result.add(entity);
 			} else if ( CollectionUtils.isEmpty(cands) ) {
@@ -297,6 +297,7 @@ public class NerdEngine {
 				for(NerdCandidate candidate : cands) {
 					NerdEntity nerdEntity = new NerdEntity(entity);
 					nerdEntity.populateFromCandidate(candidate, lang);
+
 					//nerdEntity.setWikipediaMultilingualRef(
 					//	candidate.getWikiSense().getTranslations(), targetLanguages, wikipedias);
 
@@ -500,10 +501,6 @@ public class NerdEngine {
 //							candidate.setType(mention.getType().toString());
 //						}
 
-						// for Nerd-Kid
-						String typeKid = candidate.getPredictionClass();
-						candidate.setTypeKid(typeKid);
-
 						candidates.add(candidate);
 						//System.out.println(candidate.toString());
 						s++;
@@ -698,10 +695,6 @@ public class NerdEngine {
 //								Mention mention = new Mention(entityResult);
 //								candidate.setType(mention.getType().toString());
 //							}
-
-							// for Nerd-Kid
-							String typeKid = candidate.getPredictionClass();
-							candidate.setTypeKid(typeKid);
 
 							candidates.add(candidate);
 							s++;

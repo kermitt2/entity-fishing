@@ -856,7 +856,7 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
 					if (typeKid != null) {
 						feature.nerKid_type = typeKid;
 					} else {
-					    int counterRef = 412546; // since the NerdKidDatabase contains the key until the Id "Q412546"
+					    int counterRef = 123220; // since the NerdKidDatabase contains the key until the Id "Q123220"
                         int counter = Integer.parseInt(wikiId.substring(1,wikiId.length()));
                         if (counter<=counterRef) {
                             feature.nerKid_type = "NotNER";

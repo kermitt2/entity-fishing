@@ -433,6 +433,7 @@ var nerd = (function ($) {
                     }
                     var domains = entity.domains;
                     var label = null;
+
                     if (entity.type)
                         label = entity.type;
                     else if (domains && domains.length > 0) {
@@ -1167,7 +1168,7 @@ var nerd = (function ($) {
                 var entityType = entity.type;
                 if (!entityType) {
                     if (entity.domains && entity.domains.length > 0)
-                        entityType = entity.domains[0]
+                        entityType = entity.domains[0];
                 }
 
                 entityMap[n] = [];
@@ -1277,6 +1278,9 @@ var nerd = (function ($) {
             var domains = entity.domains;
             var type = entity.type;
 
+            // for prediction class result by Nerd-Kid
+            var typeKid = entity.typeKid;
+
             var colorLabel = null;
             if (type)
                 colorLabel = type;
@@ -1311,6 +1315,9 @@ var nerd = (function ($) {
 
             if (type)
                 string += "<p>Type: <b>" + type + "</b></p>";
+
+            if (typeKid && (typeKid != "UNKNOWN"))
+                string += "<p>Predicted as: <b>" + typeKid + "</b></p>";
 
             if (sense) {
                 // to do: cut the sense string to avoid a string too large
@@ -1456,6 +1463,7 @@ var nerd = (function ($) {
             var wikidataId = entity.wikidataId;
             var domains = entity.domains;
             var type = entity.type;
+            var typeKid = entity.typeKid;
 
             var colorLabel = null;
             if (type)
@@ -1488,6 +1496,9 @@ var nerd = (function ($) {
 
             if (type)
                 string += "<p>Type: <b>" + type + "</b></p>";
+
+            if (typeKid && (typeKid != "UNKNOWN"))
+                string += "<p>Predicted as: <b>" + typeKid + "</b></p>";
 
             if (sense) {
                 // to do: cut the sense string to avoid a string too large

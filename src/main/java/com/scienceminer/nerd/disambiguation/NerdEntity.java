@@ -155,7 +155,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 		preferredTerm = mention.getNormalisedName();
 		type = mention.getType();
-		// for Nerd-Kid, it needs a change in the Entity class in Grobid (grobid.core.data)
 		subTypes = mention.getSubTypes();
 		offsets = new OffsetPosition();
 		offsets.start = mention.getOffsetStart();
@@ -666,9 +665,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 		domains = candidate.getDomains();
 
-		// we get the type
-		typeKid = candidate.getTypeKid();
-
 		prob_c = candidate.getProb_c();
 		nerdScore = candidate.getNerdScore();
 		selectionScore = candidate.getSelectionScore();
@@ -783,8 +779,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 
 		// for Nerd-Kid
-		if (typeKid != null)
-			buffer.append(", \"typeNerdKid\" : \"" + getTypeKid() + "\"");
+		if (getTypeKid() != null)
+			buffer.append(", \"typeKid\" : \"" + getTypeKid() + "\"");
 
 		if (getOffsetStart() != -1)
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());
@@ -970,8 +966,8 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		}
 
 		// for Nerd-Kid
-		if (typeKid != null)
-			buffer.append(", \"typeNerdKid\" : \"" + typeKid + "\"");
+		if (getTypeKid() != null)
+			buffer.append(", \"typeKid\" : \"" + getTypeKid() + "\"");
 
 		if (getOffsetStart() != -1)
 			buffer.append(", \"offsetStart\" : " + getOffsetStart());

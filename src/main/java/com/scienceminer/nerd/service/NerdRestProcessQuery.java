@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.kid.KidPredictor;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,6 +26,9 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
+
+    // for prediction by Nerd-Kid
+    KidPredictor kidPredictor = new KidPredictor();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -162,9 +166,21 @@ public class NerdRestProcessQuery {
         // disambiguate and solve entity mentions
         NerdEngine disambiguator = NerdEngine.getInstance();
         List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
+
+        // inject the class prediction result from Nerd-Kid
+        String typeKid = null;
+        String wikidataId = null;
+        for (NerdEntity entity : disambiguatedEntities){
+            wikidataId = entity.getWikidataId();
+            if (wikidataId != null){
+                // prediction class by Nerd-Kid
+                typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
+                entity.setTypeKid(typeKid);
+            }
+        }
+
         nerdQuery.setEntities(disambiguatedEntities);
         nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
-
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
@@ -353,6 +369,19 @@ public class NerdRestProcessQuery {
             // disambiguate and solve entity mentions
             NerdEngine disambiguator = NerdEngine.getInstance();
             List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
+
+            // inject the class prediction result from Nerd-Kid
+            String typeKid = null;
+            String wikidataId = null;
+            for (NerdEntity entity : disambiguatedEntities){
+                wikidataId = entity.getWikidataId();
+                if (wikidataId != null){
+                    // prediction class by Nerd-Kid
+                    typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
+                    entity.setTypeKid(typeKid);
+                }
+            }
+
             nerdQuery.setEntities(disambiguatedEntities);
             // calculate the global categories
             nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
