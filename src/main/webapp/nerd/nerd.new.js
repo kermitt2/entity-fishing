@@ -1365,7 +1365,7 @@ var nerd = (function ($) {
                 string += "<p><div class='accordion' id='accordionParent'>";
                 string +="<div class='accordion-group'>";
                 string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;font-size:small'>";
-                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Statements:</a>";
+                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Wikidata statements</a>";
                 string +="</div>";
                 string +="<div id='collapseElement' class='accordion-body collapse'>";
                 string +="<div class='accordion-inner'>";
@@ -1555,7 +1555,7 @@ var nerd = (function ($) {
                 string += "<p><div class='accordion' id='accordionParent'>";
                 string +="<div class='accordion-group'>";
                 string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;font-size:small'>";
-                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Statements:</a>";
+                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Wikidata statements</a>";
                 string +="</div>";
                 string +="<div id='collapseElement' class='accordion-body collapse'>";
                 string +="<div class='accordion-inner'>";
