@@ -109,10 +109,17 @@ var nerd = (function ($) {
         var selected = $('#selectedService').attr('value');
 
         if ((urlLocal.indexOf('language') !== -1) || (urlLocal.indexOf('segmentation') !== -1)) {
-            url = urlLocal + '?text=' + $('#input').val();
+            // url = urlLocal + '?text=' + $('#input').val();
+
+            var formData = new FormData();
+            formData.append("text", $('#input').val());
+
             $.ajax({
-                type: 'GET',
-                url: url,
+                type: 'POST',
+                url: urlLocal,
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: handleSuccessfulResponse,
                 error: displayErrorMessage,
                 contentType: false
