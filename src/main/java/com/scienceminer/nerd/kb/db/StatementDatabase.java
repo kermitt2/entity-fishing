@@ -177,7 +177,7 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 		long nbTotalAdded = 0;
 		while(iter.hasNext()) {
 			nbSeen++;
-			if (nbToAdd >= 10000) {
+			if (nbToAdd >= 1000) {
 				try {
 					// put what's in the tmp map into the db
 					for (Map.Entry<String, List<Statement>> entry : tmpMap.entrySet()) {
