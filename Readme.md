@@ -34,7 +34,7 @@ For upgrade from the previous version please check the [upgrade guide](http://ne
 
 This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. The knowledge base includes 37 million entities from Wikidata. 
 
-**Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16TB - SSD)
+**Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD)
 
 * 800 pubmed abstracts (172 787 tokens) processed in 126s with 1 client (1371 tokens/s) 
 

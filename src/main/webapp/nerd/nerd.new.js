@@ -109,10 +109,17 @@ var nerd = (function ($) {
         var selected = $('#selectedService').attr('value');
 
         if ((urlLocal.indexOf('language') !== -1) || (urlLocal.indexOf('segmentation') !== -1)) {
-            url = urlLocal + '?text=' + $('#input').val();
+            // url = urlLocal + '?text=' + $('#input').val();
+
+            var formData = new FormData();
+            formData.append("text", $('#input').val());
+
             $.ajax({
-                type: 'GET',
-                url: url,
+                type: 'POST',
+                url: urlLocal,
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: handleSuccessfulResponse,
                 error: displayErrorMessage,
                 contentType: false
@@ -1352,6 +1359,7 @@ var nerd = (function ($) {
 
             string += "</td></tr></table>";
 
+            // definition
             if ((definitions != null) && (definitions.length > 0)) {
                 var localHtml = wiki2html(definitions[0]['definition'], lang);
                 string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
@@ -1370,16 +1378,28 @@ var nerd = (function ($) {
                 // make the statements information collapsible
                 string += "<p><div class='accordion' id='accordionParent'>";
                 string +="<div class='accordion-group'>";
+<<<<<<< HEAD
                 string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;font-size:small'>";
                 string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Statements:</a>";
                 string +="</div>";
                 string +="<div id='collapseElement' class='accordion-body collapse'>";
                 string +="<div class='accordion-inner'>";
+=======
+                string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small'>";
+                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Wikidata statements<i class=\"icon-chevron-down\" style=\"float:right\"></i></a>";
+                string +="</div>";
+                string +="<div id='collapseElement' class='accordion-body collapse'>";
+                string +="<div class='accordion-inner' style='padding:0px;'>";
+>>>>>>> master
                 string +="<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
                 string +="</div></div></div></div></p>";
             }
 
+<<<<<<< HEAD
             // references from Wikipedia and Wikidata
+=======
+            // reference of Wikipedia/Wikidata
+>>>>>>> master
             if ((wikipedia != null) || (wikidataId != null)) {
                 string += '<p>References: '
                 if (wikipedia != null) {
@@ -1547,6 +1567,7 @@ var nerd = (function ($) {
 
             string += "</td></tr></table>";
 
+            // definition
             if ((definitions != null) && (definitions.length > 0)) {
                 var localHtml = wiki2html(definitions[0]['definition'], lang);
                 string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
@@ -1565,16 +1586,28 @@ var nerd = (function ($) {
                 // make the statements information collapsible
                 string += "<p><div class='accordion' id='accordionParent'>";
                 string +="<div class='accordion-group'>";
+<<<<<<< HEAD
                 string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;font-size:small'>";
                 string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Statements:</a>";
                 string +="</div>";
                 string +="<div id='collapseElement' class='accordion-body collapse'>";
                 string +="<div class='accordion-inner'>";
+=======
+                string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small;'>";
+                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Wikidata statements<i class=\"icon-chevron-down\" style=\"float:right\"></i></a>";
+                string +="</div>";
+                string +="<div id='collapseElement' class='accordion-body collapse'>";
+                string +="<div class='accordion-inner' style='padding:0px;'>";
+>>>>>>> master
                 string +="<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
                 string +="</div></div></div></div></p>";
             }
 
+<<<<<<< HEAD
             // references from Wikipedia and Wikidata
+=======
+            // reference of Wikipedia/Wikidata
+>>>>>>> master
             if (wikipedia != null) {
                 string += '<p>References: '
                 if (wikipedia != null) {
