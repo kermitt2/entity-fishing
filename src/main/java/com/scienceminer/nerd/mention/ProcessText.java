@@ -34,6 +34,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -699,9 +700,12 @@ public class ProcessText {
 		return results;
 	}*/
     public List<Sentence> sentenceSegmentation(String text) {
+        // replace the unseen carriage return "\r" hidden in the text
+        text = text.replace("\r","");
+
         AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
         // convert String into InputStream
-        InputStream is = new ByteArrayInputStream(text.getBytes());
+        InputStream is = new ByteArrayInputStream(text.getBytes(UTF_8));
         // read it with BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         List<List<String>> sentences = segmenter.getSentences(br);
