@@ -957,50 +957,6 @@ Here a sample of the response
   }
 
 
-GET /segmentation?text={text}
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-(1) Parameters
-
-.. table:: Parameters
-   :widths: auto
-
-==========  =======  =====================  ================================================
- required    name     content-type value      description
-==========  =======  =====================  ================================================
- required    text     String                 The text whose language needs to be identified
-==========  =======  =====================  ================================================
-
-(2) Request header
-
-.. table:: Request headers
-   :widths: auto
-
-+----------+--------------+---------------------+-------------------------------------------+
-| required | name         | value               | description                               |
-+==========+==============+=====================+===========================================+
-| optional | Accept       | application/json    | Set the response type of the output       |
-+----------+--------------+---------------------+-------------------------------------------+
-
-
-(3) Example response
-
-Here a sample of the response:
-::
-   {
-     "sentences": [
-       {
-         "offsetStart": 0,
-         "offsetEnd": 7
-       },
-       {
-         "offsetStart": 6,
-         "offsetEnd": 21
-       }
-     ]
-   }
-
-
 Customisation API
 *****************
 
