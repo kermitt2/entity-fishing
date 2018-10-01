@@ -1366,7 +1366,7 @@ var nerd = (function ($) {
                     var statement = statements[i];
                     localHtml += displayStatement(statement);
                 }
-                string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+                //string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
                 string += "<p><div class='panel-group' id='accordion'>";
