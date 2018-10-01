@@ -1369,15 +1369,17 @@ var nerd = (function ($) {
                 string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
-                /*string += "<p><div class='accordion' id='accordionParent'>";
-                string +="<div class='accordion-group'>";
-                string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small'>";
-                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Wikidata statements<i class=\"icon-chevron-down\" style=\"float:right\"></i></a>";
-                string +="</div>";
-                string +="<div id='collapseElement' class='accordion-body collapse'>";
-                string +="<div class='accordion-inner' style='padding:0px;'>";
-                string +="<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
-                string +="</div></div></div></div></p>";*/
+                string += "<p><div class='panel-group' id='accordion'>";
+                string += "<div class='panel panel-default'>";
+                string += "<div class='panel-heading'>";
+                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapseElement'>";
+                string += "Wikidata statements";
+                string += "</a>";
+                string += "</div>";
+                string += "<div id='collapseElement' class='panel-collapse collapse'>";
+                string += "<div class='panel-body'>";
+                string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
+                string += "</div></div></div></div></p>";
             }
 
             // reference of Wikipedia/Wikidata
@@ -1556,18 +1558,20 @@ var nerd = (function ($) {
                     var statement = statements[i];
                     localHtml += displayStatement(statement);
                 }
-                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+//                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
-                /*string += "<p><div class='accordion' id='accordionParent'>";
-                string +="<div class='accordion-group'>";
-                string +="<div class='accordion-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small;'>";
-                string +="<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>Wikidata statements<i class=\"icon-chevron-down\" style=\"float:right\"></i></a>";
-                string +="</div>";
-                string +="<div id='collapseElement' class='accordion-body collapse'>";
-                string +="<div class='accordion-inner' style='padding:0px;'>";
-                string +="<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
-                string +="</div></div></div></div></p>";*/
+                string += "<p><div class='panel-group' id='accordion'>";
+                string += "<div class='panel panel-default'>";
+                string += "<div class='panel-heading'>";
+                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapseElement'>";
+                string += "Wikidata statements";
+                string += "</a>";
+                string += "</div>";
+                string += "<div id='collapseElement' class='panel-collapse collapse'>";
+                string += "<div class='panel-body'>";
+                string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
+                string += "</div></div></div></div></p>";
             }
 
             // reference of Wikipedia/Wikidata
