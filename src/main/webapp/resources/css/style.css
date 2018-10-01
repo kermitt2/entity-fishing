@@ -463,3 +463,16 @@ a.electronics {
     border-color: #01A9DB;
 }
 
+/* for chevron toggle icon*/
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+   font-family: 'FontAwesome';  /* essential for enabling glyphicon */
+    content:"\f078";
+    float: right;
+    color: grey;
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content:"\f077;
+}
+
