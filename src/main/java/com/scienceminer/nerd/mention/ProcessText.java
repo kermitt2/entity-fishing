@@ -700,8 +700,8 @@ public class ProcessText {
 		return results;
 	}*/
     public List<Sentence> sentenceSegmentation(String text) {
-        // replace the unseen carriage return "\r" hidden in the text
-        text = text.replace("\r","");
+        // replace the EOL "\r\n" with "\n"
+        text = text.replace("\r\n","\n");
 
         AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
         // convert String into InputStream
