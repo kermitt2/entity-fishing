@@ -1369,14 +1369,16 @@ var nerd = (function ($) {
                 //string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
-                string += "<p><div class='panel-group' id='accordion'>";
+                string += "<p><div class='panel-group' id='accordionParent'>";
                 string += "<div class='panel panel-default'>";
                 string += "<div class='panel-heading'>";
-                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapseElement'>";
+                string += "<h4 class='panel-title'>";
+                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ pageIndex+ "'>";
                 string += "Wikidata statements";
                 string += "</a>";
+                string += "</h4>";
                 string += "</div>";
-                string += "<div id='collapseElement' class='panel-collapse collapse'>";
+                string += "<div id='collapseElement"+ pageIndex +"' class='panel-collapse collapse'>";
                 string += "<div class='panel-body'>";
                 string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
                 string += "</div></div></div></div></p>";
@@ -1561,10 +1563,10 @@ var nerd = (function ($) {
 //                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
-                string += "<p><div class='panel-group' id='accordion'>";
+                string += "<p><div class='panel-group' id='accordionParent'>";
                 string += "<div class='panel panel-default'>";
                 string += "<div class='panel-heading'>";
-                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapseElement'>";
+                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>";
                 string += "Wikidata statements";
                 string += "</a>";
                 string += "</div>";
