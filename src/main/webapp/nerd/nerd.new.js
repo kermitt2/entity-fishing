@@ -1372,12 +1372,12 @@ var nerd = (function ($) {
                 string += "<p><div class='panel-group' id='accordionParent'>";
                 string += "<div class='panel panel-default'>";
                 string += "<div class='panel-heading'>";
-                string += "<h4 class='panel-title'>";
-                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ pageIndex+ "'>";
+                // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up; show elements for every page
+                string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ pageIndex+ "'>";
                 string += "Wikidata statements";
                 string += "</a>";
-                string += "</h4>";
                 string += "</div>";
+                // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
                 string += "<div id='collapseElement"+ pageIndex +"' class='panel-collapse collapse'>";
                 string += "<div class='panel-body'>";
                 string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
@@ -1566,10 +1566,12 @@ var nerd = (function ($) {
                 string += "<p><div class='panel-group' id='accordionParent'>";
                 string += "<div class='panel panel-default'>";
                 string += "<div class='panel-heading'>";
-                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>";
+                // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
+                string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>";
                 string += "Wikidata statements";
                 string += "</a>";
                 string += "</div>";
+                // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
                 string += "<div id='collapseElement' class='panel-collapse collapse'>";
                 string += "<div class='panel-body'>";
                 string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
