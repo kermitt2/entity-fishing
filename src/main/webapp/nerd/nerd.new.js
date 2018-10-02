@@ -1316,7 +1316,7 @@ var nerd = (function ($) {
 
             string += "><h3 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
                 "</h3>";
-            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:2px;margin-top:2px;'>" +
+            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
                 "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
 
             if (type)
@@ -1372,17 +1372,19 @@ var nerd = (function ($) {
                     var statement = statements[i];
                     localHtml += displayStatement(statement);
                 }
-                string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+                //string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
-                string += "<p><div class='panel-group' id='accordion'>";
+                string += "<p><div class='panel-group' id='accordionParent'>";
                 string += "<div class='panel panel-default'>";
                 string += "<div class='panel-heading'>";
-                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapseElement'>";
+                // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up; show elements for every page
+                string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ pageIndex+ "'>";
                 string += "Wikidata statements";
                 string += "</a>";
                 string += "</div>";
-                string += "<div id='collapseElement' class='panel-collapse collapse'>";
+                // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
+                string += "<div id='collapseElement"+ pageIndex +"' class='panel-collapse collapse'>";
                 string += "<div class='panel-body'>";
                 string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
                 string += "</div></div></div></div></p>";
@@ -1512,7 +1514,7 @@ var nerd = (function ($) {
             string += "<div class='info-sense-box " + colorLabel +
                 "'><h3 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
                 "</h3>";
-            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:2px;margin-top:2px;'>" +
+            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
                 "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
 
             if (type)
@@ -1573,13 +1575,15 @@ var nerd = (function ($) {
 //                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
                 // make the statements information collapsible
-                string += "<p><div class='panel-group' id='accordion'>";
+                string += "<p><div class='panel-group' id='accordionParent'>";
                 string += "<div class='panel panel-default'>";
                 string += "<div class='panel-heading'>";
-                string += "<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapseElement'>";
+                // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
+                string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement'>";
                 string += "Wikidata statements";
                 string += "</a>";
                 string += "</div>";
+                // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
                 string += "<div id='collapseElement' class='panel-collapse collapse'>";
                 string += "<div class='panel-body'>";
                 string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";

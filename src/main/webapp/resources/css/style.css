@@ -465,14 +465,15 @@ a.electronics {
 
 /* for chevron toggle icon*/
 .panel-heading .accordion-toggle:after {
-    /* symbol for "opening" panels */
-   font-family: 'FontAwesome';  /* essential for enabling glyphicon */
-    content:"\f078";
+    /* chevron for "opening" panels */
+    font-family: 'FontAwesome';
+    content: "\f077";
     float: right;
     color: grey;
 }
 .panel-heading .accordion-toggle.collapsed:after {
-    /* symbol for "collapsed" panels */
-    content:"\f077;
+    /* chevron icon for "collapsed" panels */
+    content: "\f078";
 }
+
 
