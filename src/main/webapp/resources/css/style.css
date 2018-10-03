@@ -464,14 +464,15 @@ a.electronics {
 }
 
 /* for chevron toggle icon*/
-.panel-heading .accordion-toggle:after {
-    /* chevron for "opening" panels */
+.panel-heading .accordion-toggle h5:after {
+    /* chevron icon for "opening" panels */
     font-family: 'FontAwesome';
     content: "\f077";
     float: right;
     color: grey;
+    overflow: hidden;
 }
-.panel-heading .accordion-toggle.collapsed:after {
+.panel-heading .accordion-toggle.collapsed h5:after {
     /* chevron icon for "collapsed" panels */
     content: "\f078";
 }
@@ -479,6 +480,3 @@ a.electronics {
 a.accordion-toggle{
     text-decoration: none;
 }
-
-
-
