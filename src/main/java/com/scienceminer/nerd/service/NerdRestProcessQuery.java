@@ -28,7 +28,7 @@ public class NerdRestProcessQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
 
     // for prediction by Nerd-Kid
-    KidPredictor kidPredictor = new KidPredictor();
+    private KidPredictor kidPredictor = new KidPredictor();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -168,14 +168,12 @@ public class NerdRestProcessQuery {
         List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 
         // inject the class prediction result from Nerd-Kid
-        String typeKid = null;
         String wikidataId = null;
-        for (NerdEntity entity : disambiguatedEntities){
+        for (NerdEntity entity : disambiguatedEntities) {
             wikidataId = entity.getWikidataId();
-            if (wikidataId != null){
+            if (wikidataId != null) {
                 // prediction class by Nerd-Kid
-                typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
-                entity.setTypeKid(typeKid);
+                entity.setTypeKid(kidPredictor.predict(wikidataId).getPredictedClass());
             }
         }
 
@@ -373,9 +371,9 @@ public class NerdRestProcessQuery {
             // inject the class prediction result from Nerd-Kid
             String typeKid = null;
             String wikidataId = null;
-            for (NerdEntity entity : disambiguatedEntities){
+            for (NerdEntity entity : disambiguatedEntities) {
                 wikidataId = entity.getWikidataId();
-                if (wikidataId != null){
+                if (wikidataId != null) {
                     // prediction class by Nerd-Kid
                     typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
                     entity.setTypeKid(typeKid);

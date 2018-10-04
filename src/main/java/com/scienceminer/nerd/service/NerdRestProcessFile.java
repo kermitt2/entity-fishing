@@ -47,7 +47,7 @@ public class NerdRestProcessFile {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
 
     // for prediction by Nerd-Kid
-    KidPredictor kidPredictor = new KidPredictor();
+    private KidPredictor kidPredictor = new KidPredictor();
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
@@ -91,7 +91,7 @@ public class NerdRestProcessFile {
         if (nerdQuery.hasValidLanguage()) {
             lang.setConf(1.0);
             LOGGER.debug(">> language provided in query: " + lang);
-        } 
+        }
 
         /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities()
 
@@ -135,7 +135,7 @@ public class NerdRestProcessFile {
                 if (lang == null) {
                     StringBuilder builder = new StringBuilder();
                     int nbTok = 0;
-                    for(LayoutToken token : allTokens) {
+                    for (LayoutToken token : allTokens) {
                         if (nbTok == 1000)
                             break;
                         builder.append(token.getText());
@@ -271,22 +271,22 @@ public class NerdRestProcessFile {
                         }
                         nerdQuery.addNerdEntities(newEntities);
                     }
-    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                     if (abstractTokens != null) {
                         //workingQuery.setEntities(null);
                         List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
                         nerdQuery.addNerdEntities(newEntities);
                     }
-    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                     if (keywordTokens != null) {
                         //workingQuery.setEntities(null);
                         List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
                         nerdQuery.addNerdEntities(newEntities);
                     }
-    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                 }
             }
 
@@ -439,15 +439,13 @@ public class NerdRestProcessFile {
         nerdQuery.setTokens(null);
 
         // inject the class prediction result from Nerd-Kid
-        String typeKid = null;
         String wikidataId = null;
         List<NerdEntity> newEntities = nerdQuery.getEntities();
         for (NerdEntity entity : newEntities){
             wikidataId = entity.getWikidataId();
             if (wikidataId != null){
                 // prediction class by Nerd-Kid
-                typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
-                entity.setTypeKid(typeKid);
+                entity.setTypeKid(kidPredictor.predict(wikidataId).getPredictedClass());
             }
         }
 
