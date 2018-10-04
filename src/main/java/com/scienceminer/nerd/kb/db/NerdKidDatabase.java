@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.exceptions.NerdResourceException;
+import com.scienceminer.nerd.kb.Statement;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kid.KidPredictor;
 import org.apache.hadoop.record.CsvRecordInput;
@@ -8,6 +9,9 @@ import org.fusesource.lmdbjni.Entry;
 import org.fusesource.lmdbjni.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A factory for creating the LMDB databases used in (N)ERD Knowlegde Base for associating Wikidata Ids with their classes.
@@ -20,14 +24,18 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdKidDatabase.class);
 
+    private KidPredictor kidPredictor;
+
     public NerdKidDatabase(KBEnvironment env) {
         super(env, DatabaseType.nerdKid);
+        kidPredictor = new KidPredictor();
     }
 
     @Override
     public KBEntry<String, String> deserialiseCsvRecord(
             CsvRecordInput record) {
         throw new UnsupportedOperationException();
+
     }
 
     /*
@@ -35,53 +43,68 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
      * */
 
     public void buildNerdKidDatabase(StatementDatabase statementDatabase, boolean overwrite) throws Exception {
-
         if (isLoaded && !overwrite)
             return;
-        System.out.println("Loading " + statementDatabase.getName() + " database");
+        System.out.println("Loading " + getName() + " database");
 
         if (statementDatabase == null)
-            throw new NerdResourceException("The database is not found.");
+            throw new NerdResourceException("The statement database is not found. Cannot get the data. Aborting. ");
 
         // iterate through the statement database
         KBIterator kbIterator = new KBIterator(statementDatabase);
 
+        int counter = 0;
         try {
+            // it's better to put the create write transaction in the try to avoid writing error bug
+            Transaction transaction = environment.createWriteTransaction();
+            long start = System.nanoTime();
+
             // while there are some data inside the database
             while (kbIterator.hasNext()) {
                 Entry entry = kbIterator.next();
-                byte[] key = entry.getKey();
-                byte[] value = entry.getValue();
-                String wikidataId = null;
-                String predictedClass = null;
+                if (counter > 0 && counter % 10000 == 0) {
+                    try {
+                        transaction.commit();
+                        transaction.close();
 
-                // it's better to put the create write transaction in the try to avoid writing error bug
-                try (Transaction transaction = environment.createWriteTransaction()) {
-                    // we got the statement Id, just collect the Ids begin with 'Q'
-                    String statementId = (String) KBEnvironment.deserialize(key);
-                    if (statementId.startsWith("Q")) {
-                        // we have wikidataId (the wikidata Id can be get by accessing the key's statement or the concept Id of statements)
-                        wikidataId = statementId;
+                        System.out.println(counter + ": 10000 elements classified and loaded in "
+                                + TimeUnit.SECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS) + " s");
 
-//                        System.out.println("Wikidata Id: " + wikidataId);
-//                        System.out.println(Arrays.toString(statements.toArray()));
-
-                        // prediction
-                        KidPredictor kidPredictor = new KidPredictor();
-                        predictedClass = kidPredictor.predict(wikidataId).getPredictedClass();
-                        System.out.println("Wikidata Id: " + wikidataId + "; predicted class: " + predictedClass);
+                        start = System.nanoTime();
+                        transaction = environment.createWriteTransaction();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
-                    transaction.commit();
-                } catch (Exception e) {
-                    LOGGER.error("Error when writing the database.", e);
                 }
+
+                // we got the statement Id, just collect the Ids begin with 'Q'
+                byte[] key = entry.getKey();
+                String wikidataId = (String) KBEnvironment.deserialize(key);
+
+                if (wikidataId.startsWith("Q")) {
+                    List<Statement> value = (List<Statement>) KBEnvironment.deserialize(entry.getValue());
+
+                    // we have wikidataId (the wikidata Id can be get by accessing the key's statement or the concept Id of statements)
+                    //                        System.out.println("Wikidata Id: " + wikidataId);
+                    //                        System.out.println(Arrays.toString(statements.toArray()));
+
+                    // prediction
+
+                    String predictedClass = kidPredictor.predict(wikidataId, value).getPredictedClass();
+//                    String predictedClass = kidPredictor.predict(wikidataId).getPredictedClass();
+                    //                        System.out.println("Wikidata Id: " + wikidataId + "; predicted class: " + predictedClass);
+                    db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
+                    counter++;
+                }
+                //                    transaction.commit();
             }
+
         } catch (Exception e) {
             LOGGER.error("Error when reading the database.", e);
         } finally {
             if (kbIterator != null)
                 kbIterator.close();
+
             isLoaded = true;
         }
     }

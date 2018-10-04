@@ -17,7 +17,7 @@ public class NerdAPIJavaFetcherWrapper implements WikidataFetcherWrapper {
         WikidataElement wikidataElement = new WikidataElement();
         Map<String, List<String>> propertiesCollected = new HashMap<>();
         List<String> propertiesNoValueCollected = new ArrayList<>();
-        System.out.println("Fetch data through Nerd API JAVA... " + wikidataId);
+//        System.out.println("Fetch data through Nerd API JAVA... " + wikidataId);
         try {
             Concept concept = UpperKnowledgeBase.getInstance().getConcept(wikidataId);
             List<Statement> statements = concept.getStatements();
