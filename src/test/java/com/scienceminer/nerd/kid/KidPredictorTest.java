@@ -23,7 +23,6 @@ public class KidPredictorTest {
         assertThat(kidPredictor.predict("Q76").getPredictedClass(), is("PERSON"));
         assertThat(kidPredictor.predict("Q34389").getPredictedClass(), is("PERSON"));
         assertThat(kidPredictor.predict("Q28119").getPredictedClass(), is("ACRONYM"));
-        assertThat(kidPredictor.predict("Q34687").getPredictedClass(), is("PLANT"));
         assertThat(kidPredictor.predict("Q629").getPredictedClass(), is("SUBSTANCE"));
         assertThat(kidPredictor.predict("Q23644849").getPredictedClass(), is("TITLE"));
         assertThat(kidPredictor.predict("Q19939").getPredictedClass(), is("ANIMAL"));
