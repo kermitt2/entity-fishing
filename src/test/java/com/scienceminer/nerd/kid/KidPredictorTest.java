@@ -20,7 +20,6 @@ public class KidPredictorTest {
 
     @Test
     public void predictTest() {
-        KidPredictor kidPredictor = new KidPredictor();
         assertThat(kidPredictor.predict("Q76").getPredictedClass(), is("PERSON"));
         assertThat(kidPredictor.predict("Q34389").getPredictedClass(), is("PERSON"));
         assertThat(kidPredictor.predict("Q28119").getPredictedClass(), is("ACRONYM"));
