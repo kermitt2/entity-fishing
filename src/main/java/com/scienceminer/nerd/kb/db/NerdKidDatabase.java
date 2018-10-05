@@ -40,8 +40,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
 
     /*
      * build Nerd_kid database
-     * */
-
+     */
     public void buildNerdKidDatabase(StatementDatabase statementDatabase, boolean overwrite) throws Exception {
         if (isLoaded && !overwrite)
             return;
@@ -52,59 +51,48 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
 
         // iterate through the statement database
         KBIterator kbIterator = new KBIterator(statementDatabase);
-
         int counter = 0;
         try {
-            // it's better to put the create write transaction in the try to avoid writing error bug
-            Transaction transaction = environment.createWriteTransaction();
             long start = System.nanoTime();
 
             // while there are some data inside the database
             while (kbIterator.hasNext()) {
                 Entry entry = kbIterator.next();
-                if (counter > 0 && counter % 10000 == 0) {
-                    try {
+
+                // it's better to put the create write transaction in the try to avoid writing error bug and the database won't be created
+                try (Transaction transaction = environment.createWriteTransaction()){
+                    byte[] key = entry.getKey();
+                    // we have wikidataId (the wikidata Id can be get by accessing the key's statement or the concept Id of statements)
+                    String wikidataId = (String) KBEnvironment.deserialize(key);
+                    //transaction = environment.createWriteTransaction();
+                    // we got the statement Id, just collect the Ids begin with 'Q'
+                    if (wikidataId.startsWith("Q")) {
+                        List<Statement> value = (List<Statement>) KBEnvironment.deserialize(entry.getValue());
+                        // prediction
+                        String predictedClass = kidPredictor.predict(wikidataId, value).getPredictedClass();
+                        //System.out.println("Wikidata Id: " + wikidataId + "; predicted class: " + predictedClass);
+
+                        db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
+                        counter++;
+                        // show the message every 10000 elements been stored in the database
+                        if (counter > 0 && counter % 10000 == 0) {
+                            System.out.println(counter + " : 10000 elements have been classified and loaded in "
+                                    + TimeUnit.SECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS) + " seconds.");
+                            start = System.nanoTime();
+                        }
                         transaction.commit();
                         transaction.close();
-
-                        System.out.println(counter + ": 10000 elements classified and loaded in "
-                                + TimeUnit.SECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS) + " s");
-
-                        start = System.nanoTime();
-                        transaction = environment.createWriteTransaction();
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                } catch (Exception e) {
+                    LOGGER.error("Error when writing the database.", e);
+                } finally {
                 }
-
-                // we got the statement Id, just collect the Ids begin with 'Q'
-                byte[] key = entry.getKey();
-                String wikidataId = (String) KBEnvironment.deserialize(key);
-
-                if (wikidataId.startsWith("Q")) {
-                    List<Statement> value = (List<Statement>) KBEnvironment.deserialize(entry.getValue());
-
-                    // we have wikidataId (the wikidata Id can be get by accessing the key's statement or the concept Id of statements)
-                    //                        System.out.println("Wikidata Id: " + wikidataId);
-                    //                        System.out.println(Arrays.toString(statements.toArray()));
-
-                    // prediction
-
-                    String predictedClass = kidPredictor.predict(wikidataId, value).getPredictedClass();
-//                    String predictedClass = kidPredictor.predict(wikidataId).getPredictedClass();
-                    //                        System.out.println("Wikidata Id: " + wikidataId + "; predicted class: " + predictedClass);
-                    db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
-                    counter++;
-                }
-                //                    transaction.commit();
             }
-
         } catch (Exception e) {
             LOGGER.error("Error when reading the database.", e);
         } finally {
             if (kbIterator != null)
                 kbIterator.close();
-
             isLoaded = true;
         }
     }
