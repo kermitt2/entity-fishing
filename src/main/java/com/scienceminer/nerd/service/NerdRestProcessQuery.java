@@ -2,7 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.Customisations;
-import com.scienceminer.nerd.kid.KidPredictor;
+import com.scienceminer.nerd.kid.ClassPredictor;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
@@ -12,10 +12,6 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
@@ -28,7 +24,7 @@ public class NerdRestProcessQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
 
     // for prediction by Nerd-Kid
-    private KidPredictor kidPredictor = new KidPredictor();
+    private ClassPredictor classPredictor = new ClassPredictor();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -173,7 +169,7 @@ public class NerdRestProcessQuery {
             wikidataId = entity.getWikidataId();
             if (wikidataId != null) {
                 // prediction class by Nerd-Kid
-                entity.setTypeKid(kidPredictor.predict(wikidataId).getPredictedClass());
+                entity.setTypeKid(classPredictor.predict(wikidataId).getPredictedClass());
             }
         }
 
@@ -375,7 +371,7 @@ public class NerdRestProcessQuery {
                 wikidataId = entity.getWikidataId();
                 if (wikidataId != null) {
                     // prediction class by Nerd-Kid
-                    typeKid = kidPredictor.predict(wikidataId).getPredictedClass();
+                    typeKid = classPredictor.predict(wikidataId).getPredictedClass();
                     entity.setTypeKid(typeKid);
                 }
             }

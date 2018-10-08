@@ -76,34 +76,6 @@ System.out.println("Q3200306: " + parents);
 	}
 
 	@Test
-	public void testNerdKidPredictedClass(){
-		try {
-			List<String> wikidataId = new ArrayList<>();
-			wikidataId.add("Q18498");
-			wikidataId.add("Q1098");
-			wikidataId.add("Q27145");
-			wikidataId.add("Q27146");
-			wikidataId.add("Q27470");
-			wikidataId.add("Q27471");
-			wikidataId.add("Q27549");
-			wikidataId.add("Q29416");
-			wikidataId.add("Q29417");
-			wikidataId.add("Q29418");
-			wikidataId.add("Q29423");
-			wikidataId.add("Q29424");
-			wikidataId.add("Q35315");
-			wikidataId.add("Q412546");
-			wikidataId.add("Q123220"); // the new Nerd-Kid database has element until 'Q123220' -- predicted class LOCATION
-			for (String wiki : wikidataId){
-				String predictedClass = UpperKnowledgeBase.getInstance().getNerdKidPredictedClass(wiki);
-				System.out.println("Predicted class for " + wiki + " : " + predictedClass);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
 	public void testKingdomMethods() {
 		try {
 			boolean isAnimal = KBUtilities.isAnimal("Q18498");

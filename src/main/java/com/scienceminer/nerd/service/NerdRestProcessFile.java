@@ -6,11 +6,10 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Property;
-import com.scienceminer.nerd.kid.KidPredictor;
+import com.scienceminer.nerd.kid.ClassPredictor;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Filter;
-import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +46,7 @@ public class NerdRestProcessFile {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
 
     // for prediction by Nerd-Kid
-    private KidPredictor kidPredictor = new KidPredictor();
+    private ClassPredictor classPredictor = new ClassPredictor();
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
@@ -445,7 +444,7 @@ public class NerdRestProcessFile {
             wikidataId = entity.getWikidataId();
             if (wikidataId != null){
                 // prediction class by Nerd-Kid
-                entity.setTypeKid(kidPredictor.predict(wikidataId).getPredictedClass());
+                entity.setTypeKid(classPredictor.predict(wikidataId).getPredictedClass());
             }
         }
 

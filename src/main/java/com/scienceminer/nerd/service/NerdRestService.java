@@ -86,12 +86,12 @@ public class NerdRestService implements NerdPaths {
     /**
      * Sentence Segmentation
      **/
-//    @GET
-//    @Path(SEGMENTATION)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response processSentenceSegmentationGet(@QueryParam(TEXT) String text) {
-//        return NerdRestProcessString.processSentenceSegmentation(text);
-//    }
+    @GET
+    @Path(SEGMENTATION)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processSentenceSegmentationGet(@QueryParam(TEXT) String text) {
+        return NerdRestProcessString.processSentenceSegmentation(text);
+    }
 
 
     @POST

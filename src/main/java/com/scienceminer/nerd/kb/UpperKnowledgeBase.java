@@ -148,12 +148,11 @@ public class UpperKnowledgeBase {
 	}
 
 	// for Nerd-kid
-	public String getNerdKidPredictedClass(String wikidataId) {
+	public  String getPredictedClassByWikidataId(String wikidataId) {
 		if (env.getDbNerdKid().retrieve(wikidataId) == null) {
 			return null;
 		} else {
-			NerdKid nerdKid = new NerdKid(env, wikidataId);
-			return nerdKid.getPredictedClassById(wikidataId);
+			return env.getDbNerdKid().retrieve(wikidataId);
 		}
 	}
 
@@ -220,10 +219,6 @@ public class UpperKnowledgeBase {
 		return env.getDbBiblio().retrieve(doi);
 	}
 
-	// for Nerd-Kid
-	public  String getPredictedClassByWikidataId(String wikidataId) {
-		return env.getDbNerdKid().retrieve(wikidataId);
-	}
 
 	/**
 	 * Return the list of immediate parent taxons (P171) for a given taxon, null for empty list and non-taxon

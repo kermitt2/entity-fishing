@@ -154,163 +154,9 @@
     </build>
 
     <profiles>
-        <!-- for Nerd-Kid environment   -->
-        <!-- mvn compile exec:exec -PbuildMapWikidataClass -->
-        <!--profile>
-            <id>buildMapWikidataClass</id>
-            <activation>
-                <property>
-                    <name>buildMapWikidataClass</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>com.scienceminer.nerd.kb.NerdKidDataBuilder</argument>
-                                <argument>data/config/kb.yaml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
 
-        <!-- mvn compile exec:exec -PbuildMapWikiEN -->
-        <!--profile>
-            <id>buildMapWikiEN</id>
-            <activation>
-                <property>
-                    <name>buildMapWikiEN</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-                                <argument>data/wikipedia/wikipedia-en.yaml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
-
-        <!-- mvn compile exec:exec -PbuildMapWikiFR -->
-        <!--profile>
-            <id>buildMapWikiFR</id>
-            <activation>
-                <property>
-                    <name>buildMapWikiFR</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-                                <argument>data/wikipedia/wikipedia-fr.yaml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
-
-        <!-- mvn compile exec:exec -PbuildMapWikiDE -->
-        <!--profile>
-            <id>buildMapWikiDE</id>
-            <activation>
-                <property>
-                    <name>buildMapWikiDE</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>com.scienceminer.nerd.kb.EnvironmentBuilder</argument>
-                                <argument>data/wikipedia/wikipedia-de.yaml</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile-->
-        <!--To avoid error of java.lang.IllegalThreadStateException, add -Dexec.cleanupDaemonThreads=false in the command-->
-        <!--Ex: $ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aquaint en" -Dexec.cleanupDaemonThreads=false-->
         <profile>
             <!-- mvn compile exec:exec -Ptrain_annotate_en -->
-            <id>train_annotate_en</id>
-            <activation>
-                <property>
-                    <name>train_annotate_en</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx10g</argument>
-                                <argument>com.scienceminer.nerd.training.CorpusTrainer</argument>
-                                <argument>data/wikipedia/training/</argument>
-                                <argument>en</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!--profile>
-            <mvn compile exec:exec -Ptrain_annotate_en>
             <id>train_annotate_en</id>
             <activation>
                 <property>
@@ -340,7 +186,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile-->
+        </profile>
 
         <profile>
             <!-- mvn compile exec:exec -Ptrain_annotate_de -->
@@ -708,8 +554,7 @@
             <version>1.1</version>
         </dependency>
 
-
-        <!-- logging >
+        <!-- logging
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -719,7 +564,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency -->
+        </dependency-->
 
         <!-- for test only -->
         <dependency>
@@ -933,7 +778,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>19.0</version>
+            <version>25.1-jre</version>
         </dependency>
 
         <!-- LMDB -->

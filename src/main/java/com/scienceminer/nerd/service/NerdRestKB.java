@@ -10,7 +10,6 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
-import com.scienceminer.nerd.kid.KidPredictor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;

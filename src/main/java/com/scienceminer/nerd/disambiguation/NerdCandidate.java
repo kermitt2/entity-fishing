@@ -623,11 +623,11 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 
 	/* Return the class type as a result of Nerd-Kid prediction based on the candidate wikidata ID
 	* */
-	public String getPredictionClass() {
+	public String getClassPrediction() {
 		if (wikidataId == null)
 			return null;
 		// get the content of Nerd-Kid database
-		String predictedClasses = UpperKnowledgeBase.getInstance().getNerdKidPredictedClass(wikidataId);
+		String predictedClasses = UpperKnowledgeBase.getInstance().getPredictedClassByWikidataId(wikidataId);
 		return predictedClasses;
 	}
 

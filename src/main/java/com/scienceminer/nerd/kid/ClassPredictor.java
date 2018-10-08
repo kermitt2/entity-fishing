@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class KidPredictor {
+public class ClassPredictor {
 
     private WikidataNERPredictor wikidataNERPredictor;
 
-    public KidPredictor() {
+    public ClassPredictor() {
         WikidataFetcherWrapper wrapper = new NerdAPIJavaFetcherWrapper();
         wikidataNERPredictor = new WikidataNERPredictor(wrapper);
     }
