@@ -106,13 +106,22 @@ public class NerdRanker extends NerdModel {
 		return feature;
 	}
 
-	public double getProbability(double commonness, 
-								 double relatedness, 
-								 double quality, 
+	// for generating score without Nerd-Kid prediction result
+	public double getProbability(double commonness,
+								 double relatedness,
+								 double quality,
 								 boolean bestCaseContext,
 								 float embeddingsSimilarity,
-								 String nerType,
-								 String nerKidType) throws Exception {
+								 String nerType) throws Exception {
+
+	// for generating score with Nerd-Kid prediction result
+//	public double getProbability(double commonness,
+//								 double relatedness,
+//								 double quality,
+//								 boolean bestCaseContext,
+//								 float embeddingsSimilarity,
+//								 String nerType,
+//								 String nerKidType) throws Exception {
 		// special cases with only one feature
 		if (featureType == FeatureType.BASELINE) {
 			// special case of baseline, we just need the prior conditional prob
@@ -166,8 +175,8 @@ public class NerdRanker extends NerdModel {
 		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		//feature.wikidata_id = wikidataId;
 		feature.ner_type = nerType;
-		feature.nerKid_type = nerKidType;
-		feature.isSameClassType = nerType.equals(nerKidType);
+//		feature.nerKid_type = nerKidType;
+//		feature.isSameClassType = nerType.equals(nerKidType);
 		//feature.wikidata_P31_entity_id = wikidataP31Id;
 
 		double[] features = feature.toVector(attributes);
@@ -494,13 +503,7 @@ public class NerdRanker extends NerdModel {
                     if (typeKid != null) {
                         feature.nerKid_type = typeKid;
                     } else {
-                        int counterRef = 412546; // since the NerdKidDatabase contains the key until the Id "Q412546"
-                        int counter = Integer.parseInt(wikiId.substring(1,wikiId.length()));
-                        if (counter<=counterRef) {
-                            feature.nerKid_type = "NotNER";
-                        } else {
-                            feature.nerKid_type = "NULL";
-                        }
+                        feature.nerKid_type = "NotNER";
                     }
 
 					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);
@@ -850,19 +853,12 @@ System.out.println("entity: " + start + " / " + end + " - " + docContent.substri
                         feature.ner_type = "NotNER";
                     }
 
-
 					// for Nerd-Kid
 					String typeKid = candidate.getTypeKid();
 					if (typeKid != null) {
 						feature.nerKid_type = typeKid;
 					} else {
-					    int counterRef = 123220; // since the NerdKidDatabase contains the key until the Id "Q123220"
-                        int counter = Integer.parseInt(wikiId.substring(1,wikiId.length()));
-                        if (counter<=counterRef) {
-                            feature.nerKid_type = "NotNER";
-                        } else {
-                            feature.nerKid_type = "NULL";
-                        }
+						feature.nerKid_type = "NotNER";
 					}
 
 					feature.isSameClassType = feature.ner_type.equals(feature.nerKid_type);

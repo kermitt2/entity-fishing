@@ -428,10 +428,10 @@ public class NerdSelector extends NerdModel {
 						nerKidType = candidate.getTypeKid();
 
 					// nerd score
-					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext,
-							embeddingsSimilarity, nerType, nerKidType);
-//					double nerd_score = ranker.getProbability(commonness, related, quality,
-//							bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
+//					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext,
+//							embeddingsSimilarity, nerType, nerKidType);
+					double nerd_score = ranker.getProbability(commonness, related, quality,
+							bestCaseContext, embeddingsSimilarity, nerType);
 
 					boolean inContext = false;
 					if (context.contains(candidate))

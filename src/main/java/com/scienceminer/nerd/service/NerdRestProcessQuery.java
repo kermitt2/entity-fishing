@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kid.ClassPredictor;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
@@ -25,6 +26,7 @@ public class NerdRestProcessQuery {
 
     // for prediction by Nerd-Kid
     private ClassPredictor classPredictor = new ClassPredictor();
+    private UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -163,13 +165,14 @@ public class NerdRestProcessQuery {
         NerdEngine disambiguator = NerdEngine.getInstance();
         List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 
-        // inject the class prediction result from Nerd-Kid
+        // inject the class prediction result from Nerd-Kid for text processing service
         String wikidataId = null;
         for (NerdEntity entity : disambiguatedEntities) {
             wikidataId = entity.getWikidataId();
             if (wikidataId != null) {
                 // prediction class by Nerd-Kid
-                entity.setTypeKid(classPredictor.predict(wikidataId).getPredictedClass());
+//                entity.setTypeKid(classPredictor.predict(wikidataId).getPredictedClass());
+                entity.setTypeKid(upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId));
             }
         }
 
@@ -371,7 +374,8 @@ public class NerdRestProcessQuery {
                 wikidataId = entity.getWikidataId();
                 if (wikidataId != null) {
                     // prediction class by Nerd-Kid
-                    typeKid = classPredictor.predict(wikidataId).getPredictedClass();
+//                    typeKid = classPredictor.predict(wikidataId).getPredictedClass();
+                    typeKid = upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId);
                     entity.setTypeKid(typeKid);
                 }
             }
