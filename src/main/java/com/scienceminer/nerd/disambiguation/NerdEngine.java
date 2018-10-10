@@ -1017,12 +1017,12 @@ public class NerdEngine {
 						nerKidType = candidate.getTypeKid();
 
 					// for generating score without Nerd-Kid prediction result
-					score = ranker.getProbability(commonness, related, quality,
-							bestCaseContext, embeddingsSimilarity, nerType);
+//					score = ranker.getProbability(commonness, related, quality,
+//							bestCaseContext, embeddingsSimilarity, nerType);
 
 					// for generating score with Nerd-Kid prediction result
-//                    score = ranker.getProbability(commonness, related, quality,
-//                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+                    score = ranker.getProbability(commonness, related, quality,
+                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
 
 //					score = ranker.getProbability(commonness, related, quality,
 //						bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
@@ -1151,17 +1151,17 @@ public class NerdEngine {
 					nerKidType = candidate.getTypeKid();
 
 				if (localContexts == null) {
-                    score = disambiguator.getProbability(commonness, related, quality,
-                            bestCaseContext, embeddingsSimilarity, nerType);
-//					score = disambiguator.getProbability(commonness, related, quality,
-//							bestCaseContext, embeddingsSimilarity, wikidataId, nerType, nerKidType);
+//                    score = disambiguator.getProbability(commonness, related, quality,
+//                            bestCaseContext, embeddingsSimilarity, nerType);
+					score = disambiguator.getProbability(commonness, related, quality,
+							bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
 				}
 				else {
 					// we disambiguate for each local context
-//                    score = disambiguator.getProbability(commonness, related, quality,
-//                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
-					score = disambiguator.getProbability(commonness, related, quality,
-							bestCaseContext, embeddingsSimilarity,  nerType);
+                    score = disambiguator.getProbability(commonness, related, quality,
+                            bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+//					score = disambiguator.getProbability(commonness, related, quality,
+//							bestCaseContext, embeddingsSimilarity,  nerType);
 					for(NerdContext localContext : localContexts) {
 						if (feature.Add_relatedness)
 							related = relatedness.getRelatednessTo(candidate, localContext, lang);
@@ -1169,10 +1169,10 @@ public class NerdEngine {
 						if (feature.Add_context_quality) {
 							localQuality = localContext.getQuality();
 						}
-//                        score += disambiguator.getProbability(commonness, related, localQuality,
-//                                bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
-						score += disambiguator.getProbability(commonness, related, quality,
-								bestCaseContext, embeddingsSimilarity, nerType);
+                        score += disambiguator.getProbability(commonness, related, localQuality,
+                                bestCaseContext, embeddingsSimilarity, nerType, nerKidType);
+//						score += disambiguator.getProbability(commonness, related, quality,
+//								bestCaseContext, embeddingsSimilarity, nerType);
 						//double localScore = disambiguator.getProbability(commonness, related, localContext);
 						//if (localScore > score)
 						//	score = localScore;

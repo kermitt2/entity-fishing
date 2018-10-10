@@ -107,21 +107,21 @@ public class NerdRanker extends NerdModel {
 	}
 
 	// for generating score without Nerd-Kid prediction result
-	public double getProbability(double commonness,
-								 double relatedness,
-								 double quality,
-								 boolean bestCaseContext,
-								 float embeddingsSimilarity,
-								 String nerType) throws Exception {
-
-	// for generating score with Nerd-Kid prediction result
 //	public double getProbability(double commonness,
 //								 double relatedness,
 //								 double quality,
 //								 boolean bestCaseContext,
 //								 float embeddingsSimilarity,
-//								 String nerType,
-//								 String nerKidType) throws Exception {
+//								 String nerType) throws Exception {
+
+	// for generating score with Nerd-Kid prediction result
+	public double getProbability(double commonness,
+								 double relatedness,
+								 double quality,
+								 boolean bestCaseContext,
+								 float embeddingsSimilarity,
+								 String nerType,
+								 String nerKidType) throws Exception {
 		// special cases with only one feature
 		if (featureType == FeatureType.BASELINE) {
 			// special case of baseline, we just need the prior conditional prob

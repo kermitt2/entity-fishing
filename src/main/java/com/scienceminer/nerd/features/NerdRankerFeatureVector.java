@@ -25,7 +25,7 @@ public class NerdRankerFeatureVector extends GenericRankerFeatureVector {
 
 		Add_ner_type = true;
 		// for Nerd-Kid
-//		Add_nerKid_type = true;
+		Add_nerKid_type = true;
 
 //		Add_isSameClassType = true;
 
