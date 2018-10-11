@@ -3,7 +3,6 @@ package com.scienceminer.nerd.kid;
 import com.scienceminer.nerd.kb.Statement;
 import org.nerd.kid.data.WikidataElement;
 import org.nerd.kid.data.WikidataElementInfos;
-import org.nerd.kid.extractor.FeatureDataExtractor;
 import org.nerd.kid.extractor.wikidata.WikidataFetcherWrapper;
 import org.nerd.kid.model.WikidataNERPredictor;
 
