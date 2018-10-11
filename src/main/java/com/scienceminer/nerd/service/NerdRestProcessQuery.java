@@ -1,11 +1,12 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Customisations;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.kid.ClassPredictor;
-import com.scienceminer.nerd.mention.*;
-import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
@@ -13,7 +14,10 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
 import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
@@ -25,7 +29,6 @@ public class NerdRestProcessQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
 
     // for prediction by Nerd-Kid
-    private ClassPredictor classPredictor = new ClassPredictor();
     private UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
 
     /**
@@ -171,7 +174,6 @@ public class NerdRestProcessQuery {
             wikidataId = entity.getWikidataId();
             if (wikidataId != null) {
                 // prediction class by Nerd-Kid
-//                entity.setTypeKid(classPredictor.predict(wikidataId).getPredictedClass());
                 entity.setTypeKid(upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId));
             }
         }
@@ -374,7 +376,6 @@ public class NerdRestProcessQuery {
                 wikidataId = entity.getWikidataId();
                 if (wikidataId != null) {
                     // prediction class by Nerd-Kid
-//                    typeKid = classPredictor.predict(wikidataId).getPredictedClass();
                     typeKid = upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId);
                     entity.setTypeKid(typeKid);
                 }
