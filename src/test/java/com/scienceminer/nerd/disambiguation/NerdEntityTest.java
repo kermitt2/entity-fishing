@@ -45,7 +45,7 @@ public class NerdEntityTest {
         assertThat(object.get("preferredTerm"), is(nullValue()));
 //        assertThat(object.get("nerd_selection_score"), is(0L));
 //        assertThat(object.get("nerd_score"), is(0L));
-        assertThat(object.get("confidenceScore"), is(0L));
+        assertThat(object.get("confidence_score"), is(0L));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class NerdEntityTest {
         assertThat(object.get("preferredTerm"), is(nullValue()));
 //        assertThat(object.get("nerd_selection_score"), is(0L));
 //        assertThat(object.get("nerd_score"), is(0L));
-        assertThat(object.get("confidenceScore"), is(0L));
+        assertThat(object.get("confidence_score"), is(0L));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class NerdEntityTest {
         assertThat(object.get("preferredTerm"), is(preferredTerm));
 //        assertThat(object.get("nerd_selection_score"), is(0L));
 //        assertThat(object.get("nerd_score"), is(0L));
-        assertThat(object.get("confidenceScore"), is(0L));
+        assertThat(object.get("confidence_score"), is(0L));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class NerdEntityTest {
         assertThat(object.get("preferredTerm"), is(preferredTerm));
 //        assertThat(object.get("nerd_selection_score"), is(0L));
 //        assertThat(object.get("nerd_score"), is(0L));
-        assertThat(object.get("confidenceScore"), is(0L));
+        assertThat(object.get("confidence_score"), is(0L));
     }
 
     @Test

@@ -118,7 +118,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	private double nerdScore = 0.0;
 	// represent named entity selection score in a NERD scenario
 //	@JsonProperty("nerd_selection_score")
-	@JsonProperty("confidenceScore")
+	@JsonProperty("confidence_score")
 
 	private double selectionScore = 0.0;
 	// relatedness score of the term with the context
@@ -787,7 +787,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 //		buffer.append(", \"nerd_score\":" + TextUtilities.formatFourDecimals(nerdScore));
 //		buffer.append(", \"nerd_selection_score\":" + TextUtilities.formatFourDecimals(selectionScore));
-		buffer.append(", \"confidenceScore\":" + TextUtilities.formatFourDecimals(selectionScore));
+		buffer.append(", \"confidence_score\":" + TextUtilities.formatFourDecimals(selectionScore));
 
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
@@ -968,7 +968,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 //		buffer.append(", \"nerd_score\": " + TextUtilities.formatFourDecimals(nerdScore));
 //		buffer.append(", \"nerd_selection_score\": " + TextUtilities.formatFourDecimals(selectionScore));
-		buffer.append(", \"confidenceScore\":" + TextUtilities.formatFourDecimals(selectionScore));
+		buffer.append(", \"confidence_score\":" + TextUtilities.formatFourDecimals(selectionScore));
 
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
