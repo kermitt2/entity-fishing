@@ -1298,7 +1298,8 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-            var conf = entity.nerd_selection_score;
+//            var conf = entity.nerd_selection_score;
+            var conf = entity.confidence_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
@@ -1499,7 +1500,8 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-            var conf = entity.nerd_selection_score;
+//            var conf = entity.nerd_selection_score;
+            var conf = entity.confidence_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
