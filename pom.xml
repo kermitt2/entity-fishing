@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <avro.version>1.7.5</avro.version>
         <lmdbjni.version>0.4.6</lmdbjni.version>
-        <jackson.version>2.9.0</jackson.version>
+        <jackson.version>2.9.5</jackson.version>
     </properties>
 
     <licenses>
