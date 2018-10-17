@@ -1,26 +1,26 @@
 package com.scienceminer.nerd.disambiguation;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
+import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import com.scienceminer.nerd.kb.*;
-
 import org.apache.commons.collections4.CollectionUtils;
-import org.grobid.core.utilities.TextUtilities;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import shadedwipo.org.apache.commons.lang3.concurrent.ConcurrentUtils;
 
-import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
-
-import org.grobid.core.utilities.OffsetPosition;
-
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Provide semantic relatedness measures, which is an adaptation of the original Relateness measure from 
@@ -34,11 +34,13 @@ public class Relatedness {
 		
 	// all the maps use the language code as a key
 	private Map<String, LowerKnowledgeBase> wikipedias = null;
-	private Map<String, ConcurrentMap<Long,Double>> caches = null;
+	private Map<String, LoadingCache<Long, Double>> caches = null;
 
 	private long comparisonsRequested = 0;
 	private long comparisonsCalculated = 0;
 	private final static int MAX_CACHE_SIZE = 1000000;
+
+	private LoadingCache<Long, Double> relatednessCache;
 
 	public static Relatedness getInstance() {
 	    if (instance == null) {
@@ -61,6 +63,25 @@ public class Relatedness {
 	private Relatedness() {
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		caches = new HashMap<>();
+		relatednessCache = CacheBuilder.newBuilder()
+				.maximumSize(MAX_CACHE_SIZE)  // if cache reach the max, then remove the older elements
+				.build(
+						new CacheLoader<Long, Double>() {
+							@Override
+							public Double load(Long key) throws Exception {
+								return getRelatednessWithCacheId(key);
+							}
+						}
+				);
+
+	}
+
+	public LoadingCache<Long, Double> getLoadingCache() {
+		return relatednessCache;
+	}
+
+	public double getRelatednessWithCacheId(Long key) throws ExecutionException{
+		return relatednessCache.get(key);
 	}
 
 	/**
@@ -112,9 +133,9 @@ public class Relatedness {
 	/**
 	 * Calculate the relatedness between two articles
 	 */
-	public double getRelatedness(Article art1, Article art2, String lang) {
+	public double getRelatedness(Article art1, Article art2, String lang) throws ExecutionException{
 		comparisonsRequested++;
-		
+
 		//generate unique key for the pair of articles
 		int min = Math.min(art1.getId(), art2.getId());
 		int max = Math.max(art1.getId(), art2.getId());
@@ -123,24 +144,26 @@ public class Relatedness {
 		long key = (((long)min) << 32) | (max & 0xffffffffL);
 //System.out.println(key);
 		double relatedness = 0.0;
-		ConcurrentMap<Long,Double> cache = caches.get(lang);
-		if (cache == null) {
-			cache = new ConcurrentHashMap<>();
-			caches.put(lang, cache);
+		relatednessCache = caches.get(lang);
+		// if the cache is still empty
+		if (relatednessCache == null) {
+			relatednessCache = getLoadingCache();
+			caches.put(lang, relatednessCache);
 		}
-		if (!cache.containsKey(key)) {
+		// if there isn't any cache with a certain key yet, add the key and relatedness in the cache
+		if (relatednessCache.get(key) == null) {
 			relatedness = getRelatednessWithoutCache(art1, art2, lang);
+			relatednessCache.put(key, relatedness);
 
-			if(cache.size() < MAX_CACHE_SIZE)
-				cache.put(key, relatedness);
-			
 			comparisonsCalculated++;
 		} else {
-			relatedness = cache.get(key);
+			// if the key exists, take the relatedness value
+			relatedness = relatednessCache.get(key);
 		}
 //System.out.println("obtained relatedness: " + relatedness);
 		return relatedness;
 	}
+
 
 	public double getRelatednessWithoutCache(Article artA, Article artB, String lang) {
 		if (artA.getId() == artB.getId()) 
@@ -609,9 +632,9 @@ public class Relatedness {
 	}
 
 	public void resetCache(String lang) {
-		ConcurrentMap<Long,Double> cache = caches.get(lang);
+		LoadingCache<Long,Double> cache = caches.get(lang);
 		if (cache != null) {
-			cache.clear();
+			cache.invalidateAll();
 		}
 		comparisonsCalculated = 0;
 		comparisonsRequested = 0;

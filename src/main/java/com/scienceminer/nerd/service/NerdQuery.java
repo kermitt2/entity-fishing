@@ -30,9 +30,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -596,11 +598,27 @@ public class NerdQuery {
     }
 
     public String toJSONClean(Document doc) {
+//        String propertiesFile = "/project.properties";
+//        final Properties properties = new Properties();
+//        try {
+//            properties.load(this.getClass().getResourceAsStream(propertiesFile));
+//        }catch (IOException e){
+//            LOGGER.error("Some errors occur when calling the \n" + propertiesFile + " file.", e);
+//        }
+//
+//        System.out.println(properties.getProperty("version"));
+//        System.out.println(properties.getProperty("artifactId"));
+
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
 
+        // add other metadata
+//        buffer.append("\"software\": " + properties.getProperty("name"));
+//        buffer.append("\"software\": entity-fishing");
+
         // server runtime is always present (even at 0.0)
+//        buffer.append(", \"runtime\": " + runtime);
         buffer.append("\"runtime\": " + runtime);
 
         // parameters

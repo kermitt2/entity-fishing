@@ -298,6 +298,7 @@ public class ProcessTextTest {
         nerdContext.setAcronyms(acronyms);
         aQuery.setContext(nerdContext);
 
+
         final List<Mention> mentions = processText.propagateAcronyms(aQuery);
         assertThat(mentions, hasSize(1));
         assertThat(mentions.get(0).getRawName(), is("PCT"));

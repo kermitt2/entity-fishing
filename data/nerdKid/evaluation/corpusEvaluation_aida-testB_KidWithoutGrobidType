@@ -1,0 +1,17 @@
+Evaluation on 231 documents and 4480 expected entities, in total 239 s
+
+candidate gold recall: 82.48
+
+** micro average measures **
+
+aida-testb           accuracy     precision    recall       f1
+
+prior                70.25        73.2         73.04        73.12
+ranker               69.82        72.83        72.67        72.75
+
+** macro average measures **
+
+aida-testb           accuracy     precision    recall       f1
+
+prior                70.25        70.37        70.25        70.31
+ranker               69.82        69.95        69.82        69.88

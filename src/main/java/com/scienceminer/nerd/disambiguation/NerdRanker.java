@@ -174,8 +174,8 @@ public class NerdRanker extends NerdModel {
 		feature.bestCaseContext = bestCaseContext;
 		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		//feature.wikidata_id = wikidataId;
-		feature.ner_type = nerType;
-//		feature.nerKid_type = nerKidType;
+//		feature.ner_type = nerType;
+		feature.nerKid_type = nerKidType;
 //		feature.isSameClassType = nerType.equals(nerKidType);
 		//feature.wikidata_P31_entity_id = wikidataP31Id;
 
