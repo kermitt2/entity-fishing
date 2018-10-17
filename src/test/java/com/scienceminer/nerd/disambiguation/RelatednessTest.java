@@ -3,6 +3,7 @@ package com.scienceminer.nerd.disambiguation;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.scienceminer.nerd.kb.model.Article;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -10,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
 public class RelatednessTest {
+    private Relatedness relatedness;
+
     @Test
     public void whenCacheMissValueIsComputed(){
         CacheLoader<String, String> loader;
@@ -64,6 +67,5 @@ public class RelatednessTest {
                 .refreshAfterWrite(1, TimeUnit.MINUTES)
                 .build(loader);
     }
-
 
 }

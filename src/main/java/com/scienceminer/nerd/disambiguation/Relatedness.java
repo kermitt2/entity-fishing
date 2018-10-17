@@ -13,14 +13,13 @@ import com.scienceminer.nerd.utilities.NerdConfig;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import shadedwipo.org.apache.commons.lang3.concurrent.ConcurrentUtils;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 
 /**
  * Provide semantic relatedness measures, which is an adaptation of the original Relateness measure from 
@@ -34,13 +33,12 @@ public class Relatedness {
 		
 	// all the maps use the language code as a key
 	private Map<String, LowerKnowledgeBase> wikipedias = null;
-	private Map<String, LoadingCache<Long, Double>> caches = null;
+	private Map<String, LoadingCache<ArticlePair, Double>> caches = null;
 
 	private long comparisonsRequested = 0;
 	private long comparisonsCalculated = 0;
-	private final static int MAX_CACHE_SIZE = 1000000;
+	private final static int MAX_CACHE_SIZE = 5000000;
 
-	private LoadingCache<Long, Double> relatednessCache;
 
 	public static Relatedness getInstance() {
 	    if (instance == null) {
@@ -63,25 +61,20 @@ public class Relatedness {
 	private Relatedness() {
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		caches = new HashMap<>();
-		relatednessCache = CacheBuilder.newBuilder()
-				.maximumSize(MAX_CACHE_SIZE)  // if cache reach the max, then remove the older elements
-				.build(
-						new CacheLoader<Long, Double>() {
-							@Override
-							public Double load(Long key) throws Exception {
-								return getRelatednessWithCacheId(key);
+		for (String lang : TARGET_LANGUAGES) {
+			 caches.put(lang, CacheBuilder.newBuilder()
+					.maximumSize(MAX_CACHE_SIZE)  // if cache reach the max, then remove the older elements
+					.build(
+							new CacheLoader<ArticlePair, Double>() {
+								@Override
+								public Double load(ArticlePair articlePair) throws Exception {
+									return getRelatednessWithoutCache(articlePair.getArticleA(),articlePair.getArtticleB() ,lang);
+								}
 							}
-						}
-				);
+					)
+			 );
+		}
 
-	}
-
-	public LoadingCache<Long, Double> getLoadingCache() {
-		return relatednessCache;
-	}
-
-	public double getRelatednessWithCacheId(Long key) throws ExecutionException{
-		return relatednessCache.get(key);
 	}
 
 	/**
@@ -136,36 +129,13 @@ public class Relatedness {
 	public double getRelatedness(Article art1, Article art2, String lang) throws ExecutionException{
 		comparisonsRequested++;
 
-		//generate unique key for the pair of articles
-		int min = Math.min(art1.getId(), art2.getId());
-		int max = Math.max(art1.getId(), art2.getId());
-		//long key = min + (max << 30);
-//System.out.println(min + " / " + max);
-		long key = (((long)min) << 32) | (max & 0xffffffffL);
-//System.out.println(key);
-		double relatedness = 0.0;
-		relatednessCache = caches.get(lang);
-		// if the cache is still empty
-		if (relatednessCache == null) {
-			relatednessCache = getLoadingCache();
-			caches.put(lang, relatednessCache);
-		}
-		// if there isn't any cache with a certain key yet, add the key and relatedness in the cache
-		if (relatednessCache.get(key) == null) {
-			relatedness = getRelatednessWithoutCache(art1, art2, lang);
-			relatednessCache.put(key, relatedness);
-
-			comparisonsCalculated++;
-		} else {
-			// if the key exists, take the relatedness value
-			relatedness = relatednessCache.get(key);
-		}
-//System.out.println("obtained relatedness: " + relatedness);
-		return relatedness;
+		LoadingCache<ArticlePair, Double> relatednessCache = caches.get(lang);
+		return relatednessCache.get(new ArticlePair(art1,art2));
 	}
 
 
 	public double getRelatednessWithoutCache(Article artA, Article artB, String lang) {
+		comparisonsCalculated++;
 		if (artA.getId() == artB.getId()) 
 			return 1.0;
 
@@ -632,7 +602,7 @@ public class Relatedness {
 	}
 
 	public void resetCache(String lang) {
-		LoadingCache<Long,Double> cache = caches.get(lang);
+		LoadingCache<ArticlePair,Double> cache = caches.get(lang);
 		if (cache != null) {
 			cache.invalidateAll();
 		}
