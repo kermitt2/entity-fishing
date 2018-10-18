@@ -30,7 +30,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @Path(NerdPaths.ROOT)
 public class NerdRestService implements NerdPaths {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestService.class);
-
     private static final String SHA1 = "authToken";
     private static final String NAME = "name";
     private static final String PROFILE = "profile";

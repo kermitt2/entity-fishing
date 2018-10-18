@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,12 @@ public class NerdQuery {
     public static final String QUERY_TYPE_TERM_VECTOR = "termVector";
     public static final String QUERY_TYPE_LAYOUT_TOKENS = "layoutToken";
     public static final String QUERY_TYPE_INVALID = "invalid";
+
+    private String software = null;
+
+    private String version = null;
+
+    private String date = null;
 
     // main text component
     private String text = null;
@@ -135,6 +142,9 @@ public class NerdQuery {
     }
 
     public NerdQuery(NerdQuery query) {
+        this.software = query.getSoftware();
+        this.version = query.getVersion();
+        this.date = query.getDate();
         this.text = query.getText();
         this.shortText = query.getShortText();
         this.tokens = query.getTokens();
@@ -165,6 +175,30 @@ public class NerdQuery {
         this.minRankerScore = query.getMinRankerScore();
 
         this.structure = query.getStructure();
+    }
+
+    public String getSoftware() {
+        return software;
+    }
+
+    public void setSoftware(String software) {
+        this.software = software;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**
@@ -600,11 +634,29 @@ public class NerdQuery {
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
 
+        // for metadata
+        if (software != null) {
+            byte[] encoded = encoder.quoteAsUTF8(software);
+            String output = new String(encoded);
+            buffer.append("\"software\": \"" + output + "\"");
+        }
+        if (version != null) {
+            byte[] encoded = encoder.quoteAsUTF8(version);
+            String output = new String(encoded);
+            buffer.append(", \"version\": \"" + output + "\"");
+        }
+        if (date != null) {
+            byte[] encoded = encoder.quoteAsUTF8(date);
+            String output = new String(encoded);
+            buffer.append(", \"date\": \"" + output + "\"");
+        }
+
         // server runtime is always present (even at 0.0)
-        buffer.append("\"runtime\": " + runtime);
+        buffer.append(", \"runtime\": " + runtime);
 
         // parameters
-        //buffer.append(", \"onlyNER\": " + onlyNER);
+//        buffer.append(", \"onlyNER\": " + onlyNER);
+
         buffer.append(", \"nbest\": " + nbest);
 
         // parameters
@@ -809,5 +861,7 @@ public class NerdQuery {
             return QUERY_TYPE_INVALID;
         }
     }
+
+
 
 }

@@ -44,6 +44,8 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 public class NerdRestProcessFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
+    NerdRestProcessQuery nerdRestProcessQuery = new NerdRestProcessQuery();
+    SoftwareInfo softwareInfo = nerdRestProcessQuery.getSoftwareInfo();
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
@@ -437,6 +439,11 @@ public class NerdRestProcessFile {
         long end = System.currentTimeMillis();
         IOUtilities.removeTempFile(originFile);
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
             Collections.sort(nerdQuery.getEntities());

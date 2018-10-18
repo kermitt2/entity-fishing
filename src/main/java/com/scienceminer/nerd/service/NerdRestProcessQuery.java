@@ -6,16 +6,22 @@ import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xmlpull.v1.XmlPullParserException;
 
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import java.io.*;
 import java.util.*;
+import java.util.jar.Manifest;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
 import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
@@ -25,6 +31,7 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
+    SoftwareInfo softwareInfo = getSoftwareInfo();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -168,6 +175,11 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
 
         Collections.sort(nerdQuery.getEntities());
@@ -302,6 +314,10 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
         //Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
@@ -361,6 +377,11 @@ public class NerdRestProcessQuery {
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
 
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         if (nerdQuery.getEntities() != null)
             Collections.sort(nerdQuery.getEntities());
         return nerdQuery.toJSONClean(null);
@@ -377,4 +398,19 @@ public class NerdRestProcessQuery {
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 
+    public SoftwareInfo getSoftwareInfo(){
+        SoftwareInfo softwareInfo = new SoftwareInfo();
+        try {
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            Model model = reader.read(new FileReader(new File("pom.xml")));
+            softwareInfo.setSoftware(model.getName());
+            softwareInfo.setVersion(model.getModelVersion());
+
+        }catch (IOException e){
+            e.printStackTrace();
+        } catch (org.codehaus.plexus.util.xml.pull.XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        return softwareInfo;
+    }
 }
