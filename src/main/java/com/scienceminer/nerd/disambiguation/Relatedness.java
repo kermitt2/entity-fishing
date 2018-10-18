@@ -10,7 +10,7 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import com.sun.istack.NotNull;
+import com.sun.istack.internal.NotNull;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +62,6 @@ public class Relatedness {
 	private Relatedness() {
 		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		caches = new HashMap<>();
-
 		for (String lang : TARGET_LANGUAGES) {
 			 caches.put(lang, CacheBuilder.newBuilder()
 					.maximumSize(MAX_CACHE_SIZE)  // if cache reach the max, then remove the older elements
@@ -399,7 +398,7 @@ public class Relatedness {
 							//extraSenses.add(cands.get(0).getWikiSense());
 							break;
 						}
-						/*else if (cand.getProb_c() >= 0.8) { 
+						/*else if (cand.getProb_c() >= 0.8) {
 							// we store some extra "good" senses in case we need more of them
 							Label.Sense theSense = cands.get(0).getWikiSense();
 							if ( !extraSensesIds.contains(theSense.getId()) &&
