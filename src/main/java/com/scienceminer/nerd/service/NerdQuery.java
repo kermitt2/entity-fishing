@@ -22,6 +22,7 @@ import com.scienceminer.nerd.utilities.Filter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.grobid.core.document.Document;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -863,5 +865,4 @@ public class NerdQuery {
             return QUERY_TYPE_INVALID;
         }
     }
-
 }

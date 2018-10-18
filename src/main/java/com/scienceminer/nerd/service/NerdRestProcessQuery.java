@@ -404,16 +404,24 @@ public class NerdRestProcessQuery {
     }
 
     public SoftwareInfo getSoftwareInfo(){
-        Properties properties = new Properties();
         SoftwareInfo softwareInfo = new SoftwareInfo();
         try {
-            properties.load(Main.class.getResourceAsStream("/pom.properties"));
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            Model model;
+            if ((new File("pom.xml")).exists())
+                model = reader.read(new FileReader("pom.xml"));
+            else
+                model = reader.read(
+                        new InputStreamReader(
+                                Application.class.getResourceAsStream(
+                                        "/META-INF/maven/com.scienceminer.nerd/nerd/pom.properties"
+                                )
+                        )
+                );
+            softwareInfo.setSoftware(model.getName());
+            softwareInfo.setVersion(model.getVersion());
 
-            String name = properties.getProperty("name");
-            String version = properties.getProperty("version");
-            softwareInfo.setSoftware(name);
-            softwareInfo.setVersion(version);
-        }catch (IOException e){
+        }catch (Exception e){
             e.printStackTrace();
         }
         return softwareInfo;
