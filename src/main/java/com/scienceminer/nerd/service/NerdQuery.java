@@ -14,6 +14,7 @@ import com.scienceminer.nerd.disambiguation.WeightedTerm;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.main.Main;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
@@ -34,6 +35,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -861,7 +863,5 @@ public class NerdQuery {
             return QUERY_TYPE_INVALID;
         }
     }
-
-
 
 }

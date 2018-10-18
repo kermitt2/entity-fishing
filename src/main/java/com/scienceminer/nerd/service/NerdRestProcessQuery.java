@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.main.Main;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
@@ -31,8 +32,11 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
-    SoftwareInfo softwareInfo = getSoftwareInfo();
+    SoftwareInfo softwareInfo = null;
 
+    public NerdRestProcessQuery(){
+        softwareInfo = getSoftwareInfo();
+    }
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
      *
@@ -41,6 +45,7 @@ public class NerdRestProcessQuery {
      * the enriched and disambiguated query.
      */
     public String processQuery(String theQuery) {
+
         LOGGER.debug(methodLogIn());
         LOGGER.debug(">> received query to process: " + theQuery);
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
@@ -399,18 +404,19 @@ public class NerdRestProcessQuery {
     }
 
     public SoftwareInfo getSoftwareInfo(){
+        Properties properties = new Properties();
         SoftwareInfo softwareInfo = new SoftwareInfo();
         try {
-            MavenXpp3Reader reader = new MavenXpp3Reader();
-            Model model = reader.read(new FileReader(new File("pom.xml")));
-            softwareInfo.setSoftware(model.getName());
-            softwareInfo.setVersion(model.getModelVersion());
+            properties.load(Main.class.getResourceAsStream("/pom.properties"));
 
+            String name = properties.getProperty("name");
+            String version = properties.getProperty("version");
+            softwareInfo.setSoftware(name);
+            softwareInfo.setVersion(version);
         }catch (IOException e){
-            e.printStackTrace();
-        } catch (org.codehaus.plexus.util.xml.pull.XmlPullParserException e) {
             e.printStackTrace();
         }
         return softwareInfo;
     }
+
 }
