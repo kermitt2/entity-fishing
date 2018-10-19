@@ -79,6 +79,11 @@ public class MediaWikiParser {
         configs.put("es", config);
         engine = new WtEngineImpl(config);        
         engines.put("es", engine);
+
+        config = DefaultConfigJaWp.generate();
+        configs.put("ja", config);
+        engine = new WtEngineImpl(config);
+        engines.put("ja", engine);
     }
 
     /**
