@@ -10,7 +10,6 @@ import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
-import org.apache.commons.text.similarity.SimilarityScore;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lang.Language;
 import org.slf4j.Logger;
@@ -80,6 +79,16 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.TEXT_PLAIN)
     public Response isAlive() {
         return NerdRestProcessGeneric.isAlive();
+    }
+
+    /**
+     * @see com.scienceminer.nerd.service.NerdRestProcessGeneric#version()
+     */
+    @GET
+    @Path(NerdPaths.VERSION)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response version() {
+        return NerdRestProcessString.processVersion();
     }
 
     /**

@@ -1,10 +1,11 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.kb.Customisations;
-import com.scienceminer.nerd.main.Main;
-import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
@@ -13,16 +14,12 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xmlpull.v1.XmlPullParserException;
 
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.*;
-import java.util.jar.Manifest;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
 import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
@@ -402,9 +399,9 @@ public class NerdRestProcessQuery {
         return "<< " + NerdRestProcessString.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
-
     public SoftwareInfo getSoftwareInfo(){
         SoftwareInfo softwareInfo = new SoftwareInfo();
+        Properties properties = new Properties();
         try {
             MavenXpp3Reader reader = new MavenXpp3Reader();
             Model model;
@@ -414,12 +411,13 @@ public class NerdRestProcessQuery {
                 model = reader.read(
                         new InputStreamReader(
                                 Application.class.getResourceAsStream(
-                                        "/META-INF/maven/com.scienceminer.nerd/nerd/pom.properties"
+                                        "/META-INF/maven/com.scienceminer.nerd/nerd/pom.xml"
                                 )
                         )
                 );
             softwareInfo.setSoftware(model.getName());
             softwareInfo.setVersion(model.getVersion());
+            softwareInfo.setDescription(model.getDescription());
 
         }catch (Exception e){
             e.printStackTrace();
