@@ -410,7 +410,7 @@ public class NerdRestProcessQuery {
             else
                 model = reader.read(
                         new InputStreamReader(
-                                Application.class.getResourceAsStream(
+                                NerdRestProcessString.class.getResourceAsStream(
                                         "/META-INF/maven/com.scienceminer.nerd/nerd/pom.xml"
                                 )
                         )

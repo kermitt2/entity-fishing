@@ -5,6 +5,8 @@ import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.factory.GrobidFactory;
@@ -14,11 +16,14 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import java.io.*;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
