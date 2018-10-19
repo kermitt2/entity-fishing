@@ -3,22 +3,19 @@ package com.scienceminer.nerd.service;
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.main.Main;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.Application;
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
@@ -178,7 +175,7 @@ public class NerdRestProcessQuery {
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
         // for metadata
-        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setSoftware(softwareInfo.getName());
         nerdQuery.setVersion(softwareInfo.getVersion());
         nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
@@ -317,7 +314,7 @@ public class NerdRestProcessQuery {
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
         // for metadata
-        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setSoftware(softwareInfo.getName());
         nerdQuery.setVersion(softwareInfo.getVersion());
         nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
@@ -380,7 +377,7 @@ public class NerdRestProcessQuery {
         nerdQuery.setRuntime(end - start);
 
         // for metadata
-        nerdQuery.setSoftware(softwareInfo.getSoftware());
+        nerdQuery.setSoftware(softwareInfo.getName());
         nerdQuery.setVersion(softwareInfo.getVersion());
         nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
@@ -399,30 +396,7 @@ public class NerdRestProcessQuery {
         return "<< " + NerdRestProcessString.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
-    public SoftwareInfo getSoftwareInfo(){
-        SoftwareInfo softwareInfo = new SoftwareInfo();
-        Properties properties = new Properties();
-        try {
-            MavenXpp3Reader reader = new MavenXpp3Reader();
-            Model model;
-            if ((new File("pom.xml")).exists())
-                model = reader.read(new FileReader("pom.xml"));
-            else
-                model = reader.read(
-                        new InputStreamReader(
-                                NerdRestProcessString.class.getResourceAsStream(
-                                        "/META-INF/maven/com.scienceminer.nerd/nerd/pom.xml"
-                                )
-                        )
-                );
-            softwareInfo.setSoftware(model.getName());
-            softwareInfo.setVersion(model.getVersion());
-            softwareInfo.setDescription(model.getDescription());
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return softwareInfo;
     }
+
 
 }
