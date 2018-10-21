@@ -38,9 +38,10 @@ public class UpperKnowledgeBase {
 
 	private long conceptCount = -1;
 
-	// this is the list of supported languages 
+	public static final String JAPANESE = "ja";
+	// this is the list of supported languages
   	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
-  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES);
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, JAPANESE);
  
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
@@ -109,6 +110,12 @@ public class UpperKnowledgeBase {
 			LowerKnowledgeBase wikipedia_it = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.IT, wikipedia_it);
             wikipediaDomainMaps.put(Language.IT, wikipediaDomainMaps_en);
+
+			LOGGER.info("Init Japanese lower Knowledge-base layer");
+			conf = mapper.readValue(new File("data/config/wikipedia-ja.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_ja = new LowerKnowledgeBase(conf);
+			wikipedias.put(JAPANESE, wikipedia_ja);
+			wikipediaDomainMaps.put(JAPANESE, wikipediaDomainMaps_en);
 
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
