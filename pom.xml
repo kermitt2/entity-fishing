@@ -43,6 +43,16 @@
     </contributors>
 
     <build>
+        <!--in order to read *.properties in the resource-->
+        <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+                <include>**/service.properties</include>
+            </includes>
+        </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

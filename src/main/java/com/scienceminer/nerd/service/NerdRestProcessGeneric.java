@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,19 +43,19 @@ public class NerdRestProcessGeneric {
 	 * @return returns a response object containing the string true if service
 	 *         is alive.
 	 */
-	public static Response version() {
-		Response response = null;
-		NerdRestProcessQuery nerdRestProcessQuery = null;
-		SoftwareInfo softwareInfo = null;
-		try {
-			LOGGER.debug("Called version...");
-			nerdRestProcessQuery = new NerdRestProcessQuery();
-			softwareInfo = nerdRestProcessQuery.getSoftwareInfo();
-
-		} catch (Exception e) {
-			LOGGER.error("Exception occurred while getting the version of this application. " + e);
-		}
-		return response;
-	}
+//	public static Response version() {
+//		Response response = null;
+//		NerdRestProcessQuery nerdRestProcessQuery = null;
+//		SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
+//		try {
+//			LOGGER.debug("Called version...");
+//			nerdRestProcessQuery = new NerdRestProcessQuery();
+//			softwareInfo = nerdRestProcessQuery.getSoftwareInfo();
+//
+//		} catch (Exception e) {
+//			LOGGER.error("Exception occurred while getting the version of this application. " + e);
+//		}
+//		return response;
+//	}
 
 }

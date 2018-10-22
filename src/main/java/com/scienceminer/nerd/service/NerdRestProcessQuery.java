@@ -26,11 +26,8 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
-    SoftwareInfo softwareInfo = null;
+    SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
-    public NerdRestProcessQuery(){
-        softwareInfo = getSoftwareInfo();
-    }
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
      *
@@ -396,7 +393,9 @@ public class NerdRestProcessQuery {
         return "<< " + NerdRestProcessString.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
+
+    public static void main(String[] args) {
+        SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
+        System.out.println(softwareInfo.getName());
     }
-
-
 }

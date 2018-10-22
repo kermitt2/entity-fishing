@@ -145,11 +145,9 @@ public class NerdRestProcessString {
     public static Response processVersion() {
         Response response = null;
         StringBuilder stringBuilder = new StringBuilder();
-        NerdRestProcessQuery nerdRestProcessQuery = null;
         SoftwareInfo softwareInfo = null;
         try {
-            nerdRestProcessQuery = new NerdRestProcessQuery();
-            softwareInfo = nerdRestProcessQuery.getSoftwareInfo();
+            softwareInfo = SoftwareInfo.getInstance();
 
             if (softwareInfo != null) {
                 stringBuilder

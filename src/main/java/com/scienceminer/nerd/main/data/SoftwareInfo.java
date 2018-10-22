@@ -1,39 +1,38 @@
 package com.scienceminer.nerd.main.data;
 
-import com.scienceminer.nerd.main.Main;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Properties;
 
 public class SoftwareInfo {
+    private String name;
+    private String version;
+    private String description;
 
-    private SoftwareInfo(String name, String version, String description) {
-        this.name =
+    private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareInfo.class);
+
+
+    public SoftwareInfo(String name, String version, String description){
+        this.name = name;
+        this.version = version;
+        this.description = description;
     }
 
     public static SoftwareInfo getInstance() {
+        String name = null, version = null, description = null;
         Properties properties = new Properties();
-
         try {
-            properties.load(Main.class.getResourceAsStream("/service.properties"));
-
-            String name = properties.getProperty("name");
-            String version = properties.getProperty("version");
-            String description = properties.getProperty("description");
-            return new SoftwareInfo(name, version, description);
-        }catch (IOException e){
-            e.printStackTrace();
-
-            //throw NerdException
+            properties.load(SoftwareInfo.class.getResourceAsStream("/service.properties"));
+            name = properties.getProperty("name");
+            version = properties.getProperty("version");
+            description = properties.getProperty("description");
+        }catch (Exception e){
+            LOGGER.error("General error when extracting the version of this application", e);
         }
-
+        return new SoftwareInfo(name, version, description);
     }
 
-    String name;
-
-    String version;
-
-    String description;
 
     public String getName() {
         return name;
