@@ -1060,7 +1060,7 @@ public class NerdEngine {
                     localContexts = new ArrayList<NerdContext>();
                 localContexts.add(contextObject);
 
-				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString);
+				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString, new Language(lang));
 				for(LayoutToken token : subTokens)
 					tokens.add(token);
 			}
