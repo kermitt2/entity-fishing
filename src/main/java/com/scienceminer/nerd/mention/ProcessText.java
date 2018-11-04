@@ -378,8 +378,8 @@ public class ProcessText {
             return results;
         }
 
-        final List<LayoutToken> layoutTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, lang);
-        return processWikipedia(layoutTokens, lang);
+        final GrobidAnalyzer grobidAnalyzer = GrobidAnalyzer.getInstance();
+        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang);
     }
 
     protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang) {

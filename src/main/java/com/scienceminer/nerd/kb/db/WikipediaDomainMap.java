@@ -113,8 +113,8 @@ for(int l=0; l<categories.length;l++){
         Set<Integer> allCategories = new HashSet<Integer>();
         Set<Integer> newCategories = new HashSet<Integer>();
         for(int i=0;i<categories.length;i++) {
-            allCategories.add(categories[i].getId());
-            newCategories.add(categories[i].getId());
+            allCategories.add(new Integer(categories[i].getId()));
+            newCategories.add(new Integer(categories[i].getId()));
             //break;
         }
 
@@ -140,7 +140,7 @@ System.out.print("\n");*/
                 com.scienceminer.nerd.kb.model.Category theCategory = (com.scienceminer.nerd.kb.model.Category)wikipedia.getPageById(category.intValue());
                 categories = theCategory.getParentCategories();
                 for(int i=0;i<categories.length;i++) {
-                    if (!nextCategories.contains(categories[i].getId()))
+                    if (!nextCategories.contains(new Integer(categories[i].getId())))
                         nextCategories.add(categories[i].getId());
                 }
             }

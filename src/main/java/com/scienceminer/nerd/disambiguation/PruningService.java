@@ -2,7 +2,6 @@ package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.mention.ProcessText;
 import org.grobid.core.analyzers.GrobidAnalyzer;
-import org.grobid.core.lang.Language;
 
 import java.util.*;
 import java.util.function.Function;
@@ -203,7 +202,7 @@ public class PruningService {
             GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
 
             // the arity measure below does not need to be precise
-            int arity1 = analyzer.tokenize(entity1.getNormalisedName(), new Language(entity1.getLang())).size();
+            int arity1 = analyzer.tokenize(entity1.getNormalisedName()).size();
 
             // find all sub term of this entity and entirely or partially overlapping entities
             for (int pos2 = 0; pos2 < entities.size(); pos2++) {
