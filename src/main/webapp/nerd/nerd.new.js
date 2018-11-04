@@ -1898,9 +1898,33 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         "Il vasto repertorio comprende composizioni ispirate a modelli stilistici di Vivaldi, Albinoni, Boccherini, del tardobarocco europeo e porta la firma dello stesso Reverberi, affermato arrangiatore già noto per aver collaborato con i maggiori artisti italiani tra cui Lucio Battisti, Lucio Dalla, Fabrizio De André, Bruno Lauzi, Mina, Gino Paoli, Eros Ramazzotti, Luigi Tenco e Ornella Vanoni.\n" +
         "Tuttavia, non tutti i brani dei Rondò Veneziano sono riconducibili a dei modelli settecenteschi. Il loro repertorio comprende anche composizioni che si orientano verso esempi di altre epoche della storia della musica; altre composizioni riproducono invece strutture proprie della musica leggera o del folk, limitando il collegamento con il passato alla sola sonorità orchestrale.\n" +
         "Ritiratosi quasi del tutto dalle scene italiane, il gruppo continua la propria attività con tournée europee, riscuotendo un particolare successo prevalentemente nell'area di lingua tedesca come Austria, Germania, Svizzera e Lussemburgo. Complessivamente i Rondò Veneziano hanno venduto oltre 25 milioni di dischi in tutto il mondo (aggiornato a 30 milioni nel 2017) e hanno inoltre ricevuto 15 dischi d'oro e 11 dischi di platino in Europa. "
-
-
     ];
+
+    var japaneseExamples = [
+        "ニューヨーク市はアメリカ合衆国北東部の大西洋に面し、巨大なニューヨーク港を持つ。市はブロンクス、ブルックリン、マンハッタン、クイーンズ、スタテンアイランドという5つの行政区（バロウ、ボロウ）に分けられる。2010年の国勢調査における市域人口は8,175,133人を数え、陸地面積は790km2、人口密度はアメリカ国内の主要都市の中で2位である。ニューヨーク都市圏の人口もまた国内最大であり、ハドソン川対岸のニュージャージー州ニューアークやジャージーシティ、本土側のヨンカーズやニューロシェル、およびロングアイランド等を含む都市圏は18,897,109人、コネチカット州のスタンフォード、ブリッジポート、ニューヘイブンやニュージャージー州の州都トレントン、内陸のポキプシー等を含む広域都市圏は22,085,649人（いずれも2010年国勢調査）の人口を抱えている。\\nアメリカ合衆国の都市の中では公共交通機関が際立って多く利用されており、多くの交通機関が24時間運行している。また人口密度の高さと、その多様性も著しい。2005年の調査によれば、市内では170近くの言語が話され、人口の36%がアメリカ合衆国の外で生まれた人であった。\\n\\nニューヨークは「眠らない街」とも呼ばれ、そのほかにも「ビッグ・アップル」、「ゴッサム」といったニックネームがある。\\n\\nニューヨークは1624年にオランダ人の手によって交易場として築かれた町である。この入植地は1664年までニューアムステルダムと呼ばれていたが、同年イギリス人の支配が始まって現在の名称になった。1785年から1790年まではアメリカ合衆国の首都としての役割を担った。", 
+        "仮眠を取る簡易宿泊所であり、必要最低限の設備です。過剰な期待はしないようにしましょう。\n" +
+        "    富士山の山小屋は、各ルート上、五合目以上にあります。自分の体力に応じた場所の山小屋で一泊しましょう。\n" +
+        "    原則として、登山道が開通している期間中に営業しています。\n" +
+        "    宿泊者は、夕食や朝食の簡単な食事を頼むことができます。\n" +
+        "    夜間に到着しても入れない山小屋もあるため、利用する際は予め利用時間を確かめておきましょう。\n" +
+        "    富士山では水が貴重なため、洗面や手洗い用の水はありません。お風呂もありません。また、水場もないため、山小屋で水の補給はできません。ただし、飲料水はペットボトルの水を購入することができます。\n" +
+        "\n" +
+        "※水や食料は、麓からクローラーという車で運びます。そのため、費用がかかり、山麓や五合目に比べて割高です。\n" +
+        "※持ち込んだものは、必ずすべて自分で持ち帰りましょう。宿泊者が出すゴミは、同じく山小屋がクローラーで五合目まで運んで処理しなければならず、大変な費用がかかります。\n" +
+        "\n" +
+        "    週末は混雑していることが多く、1人分ぎりぎりのスペースになる場合が多いです。\n" +
+        "    男女相部屋の山小屋がほぼ全てとなります。\n" +
+        "    混雑時には予約がない場合、宿泊できないことがあるため、必ず事前に予約しましょう。\n" +
+        "    富士山の山小屋のトイレは、すべて環境配慮型になっていますが、処理方式が異なるため、利用する際は、必ず利用方法や注意事項を確認しましょう。\n" +
+        "\n" +
+        "※例えば、オガクズによる処理の場合は、紙を捨てることができません。トイレに備え付けの水を使用後にかけるタイプもあります。\n" +
+        "\n" +
+        "    荒天時に、雨宿りや休憩のみはできません。\n" +
+        "    支払いは現金のみです。クレジットカード、その他カードは使用できないことが多いです。\n" +
+        "    一部の山小屋では、営業中、現地からブログで富士山の様子などの情報を発信しています。混雑状況や天候の状況などが参考になります。\n"
+    ];
+
+
 
     function resetExamplesClasses() {
         $('#example1').removeClass('section-active').addClass('section-non-active');
@@ -1968,6 +1992,7 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
             "<tr style='line-height:130%;'><td><span id='example3' style='font-size:90%;'>PubMed_2</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='example4' style='font-size:90%;'>HAL_1</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='italian' style='font-size:90%;'>Italiano_1</span></td></tr>" +
+            "<tr style='line-height:130%;'><td><span id='japanese1' style='font-size:90%;'>Japanese_1</span></td></tr>" +
             "</table></td>" +
             "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
             "<td><table id='examplesBlock2'><tr style='line-height:130%;'><td><span id='reuters1' style='font-size:90%;'>Reuters_1</span></td></tr>" +
@@ -1975,6 +2000,7 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
             "<tr style='line-height:130%;'><td><span id='reuters3' style='font-size:90%;'>French_1</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='reuters4' style='font-size:90%;'>German_1</span></td></tr>" +
             "<tr style='line-height:130%;'><td><span id='spanish' style='font-size:90%;'>Spanish_1</span></td></tr>" +
+            "<tr style='line-height:130%;'><td><span id='japanese2' style='font-size:90%;'>Japanese_2</span></td></tr>" +
             "</table></td>" +
             "</tr></table>");
 
@@ -2030,6 +2056,16 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
 
         $('#italian').bind('click', function (event) {
             loadExample(italianExamples[0], "it");
+            $(this).removeClass('section-non-active').addClass('section-active');
+        });
+
+        $('#japanese1').bind('click', function (event) {
+            loadExample(japaneseExamples[0], "ja");
+            $(this).removeClass('section-non-active').addClass('section-active');
+        });
+
+        $('#japanese2').bind('click', function (event) {
+            loadExample(japaneseExamples[1], "ja");
             $(this).removeClass('section-non-active').addClass('section-active');
         });
 
