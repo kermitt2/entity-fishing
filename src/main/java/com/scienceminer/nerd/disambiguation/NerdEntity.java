@@ -161,6 +161,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		isAcronym = mention.getIsAcronym();
 		source = mention.getSource();
 		layoutTokens = mention.getLayoutTokens();
+		lang = mention.getLanguage().getLang();
 	}
 
 	public NerdEntity(NerdEntity entity) {
@@ -188,6 +189,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		nerdScore = entity.getNerdScore();
 		selectionScore = entity.getSelectionScore();
 		layoutTokens = entity.getLayoutTokens();
+		lang = entity.getLang();
 	}
 
     public String getRawName() {

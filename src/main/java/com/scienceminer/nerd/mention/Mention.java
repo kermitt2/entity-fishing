@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.mention;
 
+import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lexicon.NERLexicon;
@@ -55,6 +56,8 @@ public class Mention implements Comparable<Mention> {
 
     private Entity entity = null;
 
+    private Language language = null;
+
     public Mention() {
         this.offsets = new OffsetPosition();
     }
@@ -96,6 +99,7 @@ public class Mention implements Comparable<Mention> {
 		entity = ent.entity;
 		source = ent.source;
 		layoutTokens = ent.layoutTokens;
+		language = ent.language;
 		//startTokenPos = ent.startTokenPos;
 		//endTokenPos = ent.startTokenPos;
 	}
@@ -349,5 +353,13 @@ public class Mention implements Comparable<Mention> {
 
     public void setLayoutTokens(List<LayoutToken> layoutTokens) {
         this.layoutTokens = layoutTokens;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 }

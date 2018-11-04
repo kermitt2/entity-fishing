@@ -108,8 +108,9 @@ public class ProcessTextTest {
     @Test
     public void testAcronymsTokensAllLower() {
         String input = "A graphical model or probabilistic graphical model (PGM) is a probabilistic model.";
-        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens);
+        final Language language = new Language("en", 1.0);
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, language);
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens, language);
         assertThat(acronyms.entrySet(), hasSize(1));
 
         final ArrayList<Mention> keys = new ArrayList<>(acronyms.keySet());
@@ -126,8 +127,9 @@ public class ProcessTextTest {
                 "Canonical Correspondence Analysis (CCA) diagram showing the ordination of anopheline species along the\n" +
                 "first two axes and their correlation with environmental variables. The first axis is horizontal, second vertical. Direction\n" +
                 "and length of arrows shows the degree of correlation between mosquito larvae and the variables.";
-        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens);
+        final Language language = new Language("en", 1.0);
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, language);
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens, language);
 
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
@@ -356,8 +358,9 @@ public class ProcessTextTest {
     public void testAcronymsTokensMixedCase() {
         String input = "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in " +
                 "the pathogenesis of chronic obstructive pulmonary disease (COPD).";
-        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, new Language("en", 1.0));
-        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens);
+        final Language language = new Language("en", 1.0);
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(input, language);
+        Map<Mention, Mention> acronyms = processText.acronymCandidates(tokens, language);
         assertNotNull(acronyms);
         for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention base = entry.getValue();

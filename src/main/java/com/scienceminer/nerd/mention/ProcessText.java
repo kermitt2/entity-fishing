@@ -317,6 +317,7 @@ public class ProcessText {
             for (Entity entityResult : entityResults) {
                 Mention mention = new Mention(entityResult);
                 mention.setSource(MentionMethod.ner);
+                mention.setLanguage(new Language(lang));
                 results.add(mention);
             }
         } catch (Exception e) {
@@ -414,6 +415,7 @@ public class ProcessText {
             mention.setOffsetStart(pos.getOffsetStart());
             mention.setOffsetEnd(pos.getOffsetStart() + pos.getString().length());
             mention.setLayoutTokens(pos.getLayoutTokens());
+            mention.setLanguage(lang);
 
             // remove invalid mentions
             if (!validEntity(mention, lang.getLang())) {
@@ -840,14 +842,16 @@ public class ProcessText {
 
         Map<Mention, Mention> acronyms = null;
         if (CollectionUtils.isNotEmpty(tokens))
-            acronyms = acronymCandidates(tokens);
+            acronyms = acronymCandidates(tokens, language);
         else
             acronyms = acronymCandidates(text, language);
 
         if (acronyms != null) {
             if (nerdQuery.getContext() == null)
                 nerdQuery.setContext(new NerdContext());
+
             nerdQuery.getContext().setAcronyms(acronyms);
+
             for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
                 Mention base = entry.getValue();
                 Mention acronym = entry.getKey();
@@ -901,10 +905,10 @@ public class ProcessText {
 
     public Map<Mention, Mention> acronymCandidates(String text, Language language) {
         List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(text, language);
-        return acronymCandidates(tokens);
+        return acronymCandidates(tokens, language);
     }
 
-    public Map<Mention, Mention> acronymCandidates(List<LayoutToken> tokens) {
+    public Map<Mention, Mention> acronymCandidates(List<LayoutToken> tokens, Language language) {
         Map<Mention, Mention> acronyms = null;
 
         // detect possible acronym
@@ -980,11 +984,13 @@ public class ProcessText {
                                     entityAcronym.setType(null);
                                     entityAcronym.setIsAcronym(true);
                                     entityAcronym.setLayoutTokens(Arrays.asList(acronym));
+                                    entityAcronym.setLanguage(language);
 
                                     Mention entityBase = new Mention(builder.toString().trim());
                                     entityBase.setOffsetStart(tokens.get(j).getOffset());
                                     entityBase.setOffsetEnd(tokens.get(j).getOffset() + entityBase.getRawName().length());
                                     entityBase.setLayoutTokens(baseTokens);
+                                    entityBase.setLanguage(language);
 
                                     acronyms.put(entityAcronym, entityBase);
                                     stop = true;
@@ -1056,6 +1062,7 @@ public class ProcessText {
                 entity.setOffsetEnd(offsetEnd);
                 entity.setLayoutTokens(matchedSequence);
                 entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
+                entity.setLanguage(acronym.getLanguage());
 
                 entities.add(entity);
 
