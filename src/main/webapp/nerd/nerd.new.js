@@ -1937,6 +1937,8 @@ almost destroyed by the German 2nd and 3rd Armies and the latter delayed the Ger
         $('#reuters3').removeClass('section-active').addClass('section-non-active');
         $('#reuters4').removeClass('section-active').addClass('section-non-active');
         $('#italian').removeClass('section-active').addClass('section-non-active');
+        $('#japanese1').removeClass('section-active').addClass('section-non-active');
+        $('#japanese2').removeClass('section-active').addClass('section-non-active');
     }
 
     function createSimpleTextFieldArea(nameInput, entryType) {
