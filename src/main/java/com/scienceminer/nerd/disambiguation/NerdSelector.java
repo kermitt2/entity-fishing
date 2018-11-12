@@ -423,7 +423,7 @@ public class NerdSelector extends NerdModel {
 					if (candidate.getType() != null)
 						nerType = candidate.getType();
 
-					String nerKidType = "UNKNOWN"; // undefined entity
+					String nerKidType = "OTHER"; // undefined entity
 					if (candidate.getTypeKid() != null)
 						nerKidType = candidate.getTypeKid();
 
