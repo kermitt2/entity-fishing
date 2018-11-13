@@ -175,7 +175,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		//for Nerd-kid db
 		dbNerdKid.buildNerdKidDatabase(dbStatements, overwrite);
-		
+
+		System.out.println("The content of nerdKid database - " + dbNerdKid.getDatabaseSize() + " items."); // currently, 35030909 items
+
 		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
 
 		dbTaxonParent.fillTaxonDbs(dbConcepts, dbStatements, overwrite);

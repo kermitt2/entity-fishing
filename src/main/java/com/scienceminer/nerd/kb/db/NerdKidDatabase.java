@@ -86,6 +86,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
                     LOGGER.error("Error when writing the database.", e);
                 }
             }
+            System.out.println(counter + " elements have been stored into " + getName() + " database");
         } catch (Exception e) {
             LOGGER.error("Error when reading the database.", e);
         } finally {
@@ -96,8 +97,8 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
     }
 
     public static void main(String[] args) {
+        // for building database
         UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
         upperKnowledgeBase.close();
-
     }
 }
