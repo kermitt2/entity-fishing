@@ -1323,7 +1323,7 @@ var nerd = (function ($) {
             if (type)
                 string += "<p>Type: <b>" + type + "</b></p>";
 
-            if (typeKid && (typeKid != "UNKNOWN"))
+            //if (typeKid && (typeKid != "OTHER"))
                 string += "<p>Predicted as: <b>" + typeKid + "</b></p>";
 
             if (sense) {

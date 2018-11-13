@@ -21,7 +21,7 @@ public class ClassPredictorTest {
 
     @Test
     public void predictTestMustValid() {
-        assertThat(classPredictor.predict("Q76").getPredictedClass(), is("PERSON"));
+        assertThat(classPredictor.predict("Q152099").getPredictedClass(), is("PERSON"));
         assertThat(classPredictor.predict("Q34389").getPredictedClass(), is("PERSON"));
         assertThat(classPredictor.predict("Q629").getPredictedClass(), is("SUBSTANCE"));
         assertThat(classPredictor.predict("Q19939").getPredictedClass(), is("ANIMAL"));
