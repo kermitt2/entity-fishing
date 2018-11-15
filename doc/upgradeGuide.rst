@@ -7,6 +7,13 @@ If you are not upgrading, you can skip this page.
 Otherwise, please read it carefully until the end before starting the upgrade. 
 
 
+From 0.0.3 to 0.0.4
+*******************
+
+#. OnlyNER has been removed
+
+#. resulting languages has been removed
+
 From 0.0.2 to 0.0.3
 *******************
 

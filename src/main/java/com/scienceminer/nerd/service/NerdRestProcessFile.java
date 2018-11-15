@@ -75,11 +75,6 @@ public class NerdRestProcessFile {
         long start = System.currentTimeMillis();
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
 
-        //TODO: remove after release
-        if (nerdQuery.getOnlyNER()) {
-            throw new QueryException("OnlyNER is not supported for PDF input");
-        }
-
         if (nerdQuery == null || isNotBlank(nerdQuery.getText()) || isNotBlank(nerdQuery.getShortText())) {
             throw new QueryException("Query with PDF shall not have the field text or shortText filled in.");
         }
@@ -545,8 +540,6 @@ public class NerdRestProcessFile {
             workingQuery.setTokens(layoutTokens);
             workingQuery.setContext(documentContext);
 
-            //TODO remove in next release
-            workingQuery.setOnlyNER(workingQuery.getOnlyNER());
             //workingQuery.setMentions(mentions);
             try {
                 // ner

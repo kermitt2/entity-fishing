@@ -108,7 +108,6 @@ public class ErdEvaluate {
 				String text = tokens[1];
 				try {
 					NerdQuery nerdQuery = new NerdQuery();
-					//nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
 					nerdQuery.setShortText(text);

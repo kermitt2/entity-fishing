@@ -44,7 +44,6 @@ public class NerdRestService implements NerdPaths {
     private static final String FILE = "file";
     private static final String LANG = "lang";
     private static final String DOI = "doi";
-    private static final String ONLY_NER = "onlyNER";
     private static final String NBEST = "nbest";
     private static final String SENTENCE = "sentence";
     private static final String FORMAT = "format";

@@ -75,21 +75,6 @@ public class NerdRestProcessQuery {
     }
 
     /**
-     * Check if the parameter onlyNER is set and modify the query accordingly, if the language is not fr or en,
-     * an error is thrown. Deprecated, will be removed in next release.
-     */
-    @Deprecated
-    public static void processOnlyNER(NerdQuery nerdQuery) {
-        if (nerdQuery.getOnlyNER()) {
-            if (!GROBID_NER_SUPPORTED_LANGUAGES.contains(nerdQuery.getLanguage().getLang())) {
-                throw new QueryException("OnlyNER cannot be set true with languages other than FR and EN", LANGUAGE_ISSUE);
-            }
-            nerdQuery.setMentions(Arrays.asList(ProcessText.MentionMethod.ner));
-            LOGGER.warn("Method onlyNER:true set in query, please use the mentions attribute as this option will be removed in the next release.");
-        }
-    }
-
-    /**
      * Validate and create a new context based on the customisation provided
      **/
     public static void processCustomisation(NerdQuery nerdQuery) {
@@ -126,9 +111,6 @@ public class NerdRestProcessQuery {
 
         // language identification
         languageIdentificationAndValidation(nerdQuery, nerdQuery.getText());
-
-        //TODO: remove after release
-        processOnlyNER(nerdQuery);
 
         // entities originally from the query are marked as such
         List<NerdEntity> originalEntities = null;
@@ -334,9 +316,6 @@ public class NerdRestProcessQuery {
 
         // language identification
         languageIdentificationAndValidation(nerdQuery, nerdQuery.getShortText());
-
-        //TODO remove after release
-        processOnlyNER(nerdQuery);
 
         // entities originally from the query are marked as such
         List<NerdEntity> originalEntities = null;

@@ -260,7 +260,6 @@ public class ErdCorpus {
 				try {
 					NerdQuery nerdQuery = new NerdQuery();
 					nerdQuery.setShortText(query);
-					//nerdQuery.setOnlyNER(false);
 					nerdQuery.setNbest(false);
 					nerdQuery.setSentence(false);
 					nerdQuery.addMention(ProcessText.MentionMethod.wikipedia);
