@@ -14,6 +14,7 @@ import com.scienceminer.nerd.disambiguation.WeightedTerm;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.main.Main;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
@@ -21,6 +22,7 @@ import com.scienceminer.nerd.utilities.Filter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.grobid.core.document.Document;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -30,9 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -53,6 +58,12 @@ public class NerdQuery {
     public static final String QUERY_TYPE_TERM_VECTOR = "termVector";
     public static final String QUERY_TYPE_LAYOUT_TOKENS = "layoutToken";
     public static final String QUERY_TYPE_INVALID = "invalid";
+
+    private String software = null;
+
+    private String version = null;
+
+    private String date = null;
 
     // main text component
     private String text = null;
@@ -127,10 +138,17 @@ public class NerdQuery {
     private double minSelectorScore = 0.0;
     private double minRankerScore = 0.0;
 
+    // the type of document structure to be considered in case of processing 
+    // a complete document 
+    private String structure = null;
+
     public NerdQuery() {
     }
 
     public NerdQuery(NerdQuery query) {
+        this.software = query.getSoftware();
+        this.version = query.getVersion();
+        this.date = query.getDate();
         this.text = query.getText();
         this.shortText = query.getShortText();
         this.tokens = query.getTokens();
@@ -159,6 +177,32 @@ public class NerdQuery {
 
         this.minSelectorScore = query.getMinSelectorScore();
         this.minRankerScore = query.getMinRankerScore();
+
+        this.structure = query.getStructure();
+    }
+
+    public String getSoftware() {
+        return software;
+    }
+
+    public void setSoftware(String software) {
+        this.software = software;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**
@@ -434,6 +478,14 @@ public class NerdQuery {
         this.minRankerScore = minRankerScore;
     }
 
+    public String getStructure() {
+        return this.structure;
+    }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
     public String toJSON() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -586,11 +638,29 @@ public class NerdQuery {
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
 
+        // for metadata
+        if (software != null) {
+            byte[] encoded = encoder.quoteAsUTF8(software);
+            String output = new String(encoded);
+            buffer.append("\"software\": \"" + output + "\"");
+        }
+        if (version != null) {
+            byte[] encoded = encoder.quoteAsUTF8(version);
+            String output = new String(encoded);
+            buffer.append(", \"version\": \"" + output + "\"");
+        }
+        if (date != null) {
+            byte[] encoded = encoder.quoteAsUTF8(date);
+            String output = new String(encoded);
+            buffer.append(", \"date\": \"" + output + "\"");
+        }
+
         // server runtime is always present (even at 0.0)
-        buffer.append("\"runtime\": " + runtime);
+        buffer.append(", \"runtime\": " + runtime);
 
         // parameters
-        //buffer.append(", \"onlyNER\": " + onlyNER);
+//        buffer.append(", \"onlyNER\": " + onlyNER);
+
         buffer.append(", \"nbest\": " + nbest);
 
         // parameters
@@ -795,5 +865,4 @@ public class NerdQuery {
             return QUERY_TYPE_INVALID;
         }
     }
-
 }

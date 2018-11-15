@@ -1,11 +1,16 @@
 package com.scienceminer.nerd.service;
 
+import com.scienceminer.nerd.disambiguation.NerdEngine;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
-import com.scienceminer.nerd.mention.Mention;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.engines.Engine;
+import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.lang.Language;
+import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,6 +120,26 @@ public class NerdRestProcessString {
         LOGGER.debug(methodLogOut());
 
         return response;
+    }
+
+    public static String processReference(String citationText, boolean consolidation) {
+        LibraryLoader.load();
+        Engine engine = GrobidFactory.getInstance().getEngine();
+
+        final BiblioItem processedCitation = engine.getParsers().getCitationParser().processing(citationText, consolidation);
+
+        String wikidataID = NerdEngine.getInstance().solveCitation(processedCitation);
+
+        // Transforming in json
+        StringBuilder sb = new StringBuilder();
+        sb.append("\"").append("title").append(":").append("\"").append(processedCitation.getTitle()).append("\"");
+        sb.append(",");
+        sb.append("\"").append("doi").append(":").append("\"").append(processedCitation.getDOI()).append("\"");
+        sb.append(",");
+        sb.append("\"").append("wikidataID").append(":").append("\"").append(wikidataID).append("\"");
+        sb.append(",");
+        sb.append("\"").append("authors").append(":").append("\"").append(processedCitation.getAuthors()).append("\"");
+        return sb.toString();
     }
 
     public static String methodLogIn() {

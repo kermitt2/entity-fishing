@@ -15,7 +15,12 @@ public interface NerdPaths {
 	 * path extension for is alive request
 	 */
 	String IS_ALIVE = "isalive";
-	
+
+	/**
+	 * path extension for version request
+	 */
+	String VERSION = "version";
+
 	/**
 	 * Language identification entry point
 	 */

@@ -26,7 +26,7 @@ One and only one input type is mandatory in a query, otherwise an HTTP error 400
 Supported languages
 -------------------
 
-In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support at every new release.
+In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support in future releases, as long the volume of the Wikipedia corpus for a new language is sufficient.
 
 The service returns an HTTP error 406 if the language of the text to be processed is not supported, see below.
 
@@ -84,13 +84,13 @@ NOTE: To process the text query only (no PDF), is also possible to send it as no
 Query format description
 ------------------------
 
-The NERD query processing service always consumes a parameter which is a JSON string representing a query, and optionally a PDF file. The service thus follows a Query DSL approach (like, for instance, ElasticSearch) to express queries instead of multiples HTTP parameters. This approach allows queries which are much richer, flexible and simple to express, but also interactive scenarios (where output of the services can be used easily as input after some changes from the user, as for instance in an interactive text editing task).
+The *entity-fishing* query processing service always consumes a parameter which is a JSON string representing a query, and optionally a PDF file. The service thus follows a Query DSL approach (like, for instance, ElasticSearch) to express queries instead of multiples HTTP parameters. This approach allows queries which are much richer, flexible and simple to express, but also interactive scenarios (where output of the services can be used easily as input after some changes from the user, as for instance in an interactive text editing task).
 
 The JSON query indicates what is the textual content to process, the various (optional) parameters to consider when processing it, optionally some already existing disambiguated entities (already disambiguated by a user or via a particular workflow), and an optional customisation to provide more context to the disambiguation process.
 
-The JSON query is similar to the response of the NERD service, so that a NERD service response can be sent as query after light modifications in an interactive usage scenario, or to be able to process easily already partially annotated text.
+The JSON query is similar to the response of the *entity-fishing* service, so that a *entity-fishing* service response can be sent as query after light modifications in an interactive usage scenario, or to be able to process easily already partially annotated text.
 
-When annotations are present in the query, the NERD system will consider them certain and:
+When annotations are present in the query, the *entity-fishing* system will consider them certain and:
 
 * ensure that the user annotations will be present in the output response without inconsistencies with other annotations,
 
@@ -98,11 +98,11 @@ When annotations are present in the query, the NERD system will consider them ce
 
 Similarly,
 
-* if no language is indicated (usual scenario), the NERD service will use a language identifier to detect the correct language and the language resources to use. However, the query can also optionally specify a language for the text to be processed. This will force the NERD service to process the text with the corresponding particular language resources.
+* if no language is indicated (usual scenario), the *entity-fishing* service will use a language identifier to detect the correct language and the language resources to use. However, the query can also optionally specify a language for the text to be processed. This will force the service to process the text with the corresponding particular language resources.
 
-* It is possible also to pass an existing sentence segmentation to the NERD service via the JSON query, in order that the NERD service provides back identified entities following the given sentence segmentation.
+* It is possible also to pass an existing sentence segmentation to the *entity-fishing* service via the JSON query, in order that the service provides back identified entities following the given sentence segmentation.
 
-The client must respect the JSON format of the NERD response as new query, as described below:
+The client must respect the JSON format of the *entity-fishing* response as new query, as described below:
 
 
 Generic format
@@ -200,7 +200,7 @@ The corrected annotations will then be exploited by the *entity-fishing* system 
 
 (7) processSentence
 """""""""""""""""""
-The processSentence parameter is introduced to support interactive text editing scenarios. For instance, a user starts writing a text and wants to use the NERD service to annotate dynamically the text with entities as it is typed.
+The processSentence parameter is introduced to support interactive text editing scenarios. For instance, a user starts writing a text and wants to use the *entity-fishing* service to annotate dynamically the text with entities as it is typed.
 
 To avoid having the server reprocessing several time the same chunk of text and slowing down a processing time which has to be almost real time, the client can simply indicate a sentence - the one that has just been changed - to be processed.
 
@@ -208,7 +208,7 @@ The goal is to be able to process around two requests per second, even if the ty
 
 The processSentence parameter is followed by a list of notations (only numbers in integer, e.g. *[1, 7]* - note that the index starts from 0) corresponding to the sentence index will limit the disambiguation to the selected sentences, while considering the entire text and the previous annotations.
 
-In this example only the second sentence will be processed by NERD:
+In this example only the second sentence will be processed by *entity-fishing*:
 ::
    {
        "text": "The army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg. But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne.",
@@ -316,9 +316,9 @@ Search query disambiguation
 
 This functionality provides disambiguation for a search query expressed as a “short text”.
 
-The input is the list of terms that are typically provided in the search bar of a search engine, and response time are optimized to remain very low (1-5ms).
+The input is the list of terms that are typically provided in the search bar of a search engine, and response time are optimized to remain very low (1-10ms).
 
-For example the query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to *concrete* is the material, the entity is the device called *concrete pump*, and it has nothing to do with *concrete* as the antonym of *abstract*.
+For example, let's consider the search query: "concrete pump sensor". From this association of search terms, it is clear that the sense corresponding to *concrete* is the material, the entity is the device called *concrete pump*, and it has nothing to do with *concrete* as the antonym of *abstract*.
 
 Processing this kind of input permits to implement semantic search (search based on concept matching) and semantic-based ranking (ranking of documents based on semantic proximity with a query, for instance exploiting clasifications, domain information, etc.) in a search engine.
 
@@ -390,39 +390,39 @@ If the textual content to be processed is provided as a PDF document, the identi
 
 In the example above, the root layer of JSON values correspond to:
 
-- runtime: the amount of time in milliseconds to process the request on server side,
+- **runtime**: the amount of time in milliseconds to process the request on server side,
 
-- onlyNER: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
-This option has been limited *only to text queries*. **NOTE this option is deprecated and will be removed in the next release**,
+- **nbest**: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
 
-- nbest: as provided in the query - when false or 0 returns only the best disambiguated result, otherwise indicates to return up to the specified number of concurrent entities for each disambiguated mention,
+- **text**: input text as provided in the query, all the offset position information are based on the text in this field,
 
-- text: input text as provided in the query, all the offset position information are based on the text in this field,
+- **language**: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
 
-- language: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
+- **entities**: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
 
-- entities: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
+- **global_categories**: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
-- global_categories: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
+The following option is **deprecated**, it will be removed in the next release:
+
+- *onlyNER*: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
 
 For each entity the following information are provided:
 
-- rawName: string realizing the entity as it appears in the text
+- **rawName**: string realizing the entity as it appears in the text
 
-- offsetStart, offsetEnd: the position offset of where the entity starts and ends in the text element in characters (JSON UTF-8 characters)
+- **offsetStart, offsetEnd**: the position offset of where the entity starts and ends in the text element in characters (JSON UTF-8 characters)
 
-- nerd_score: disambiguation confidence score, indicates the score of the entity against the other entity candidates for the text mention,
+- **nerd_score**: disambiguation confidence score, indicates the score of the entity against the other entity candidates for the text mention,
 
-- nerd_selection_score: selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention,
+- **nerd_selection_score**: selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention,
 
-- wikipediaExternalRef: id of the wikipedia page. This id can be used to retrieve the original page from wikipedia3 or to retrieve all the information associated to the concept in the knowledge base (definition, synonyms, categories, etc. - see the section “Knowledge base concept retrieval”),
+- **wikipediaExternalRef**: id of the wikipedia page. This id can be used to retrieve the original page from wikipedia3 or to retrieve all the information associated to the concept in the knowledge base (definition, synonyms, categories, etc. - see the section “Knowledge base concept retrieval”),
 
-- type: NER class of the entity (see table of the 26 NER classes below under “2. Named entity types”),
+- **type**: NER class of the entity (see table of the 27 NER classes below under “2. Named entity types”),
 
-- sense: NER sense mapped on the Wordnet4 synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
+- **sense**: NER sense mapped on Wordnet synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
 
-
-The type of recognised entities are restricted to a set of 26 classes of named entities (see GROBID NER documentation5). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
+The type of recognised entities are restricted to a set of 27 classes of named entities (see `GROBID NER documentation <http://grobid-ner.readthedocs.io/en/latest/class-and-senses/>`_). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
 
 **Response when processing a search query**
 ::
@@ -589,7 +589,7 @@ The PDF coordinates system has three main characteristics:
 
 In addition, contrary to usage in computer science, the index associated to the first page is 1 (not 0).
 
-The response of the processing of a PDF document by the NERD service contains two specific structures for positioning entity annotations in the PDF:
+The response of the processing of a PDF document by the *entity-fishing* service contains two specific structures for positioning entity annotations in the PDF:
 
 * the list of page size, introduced by the JSON attribute pages. The dimension of each page is given successively by two attributes page_height and page_height.
 * for each entity, a json attribute pos introduces a list of bounding boxes to identify the area of the annotation corresponding to the entity. Several bounding boxes might be necessary because a textual mention does not need to be a rectangle, but the union of rectangles (a union of bounding boxes), for instance when a mention to be annotated is on several lines.
@@ -610,16 +610,16 @@ The *entity-fishing* console offers a reference implementation with PDF.js for d
 Knowledge base concept retrieval
 ********************************
 
-This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main NERD query processing service in order to retrieve a full description of an identified entity.
+This service returns the knowledge base concept information. In our case case, language-independent information from Wikidata will be provided (Wikidata identifier, statements), together with language-dependent information (all the Wikipedia information: Wikipedia categories, definitions, translingual information, etc.). This service is typically used in pair with the main *entity-fishing* query processing service in order to retrieve a full description of an identified entity.
 
 The service supports the following identifiers:
  - wikidata identifier (starting with `Q`, e.g. `Q61`)
  - wikipedia identifier
 
 The *entity-fishing* content processing service returns the identifiers of the resulting entities with some position offset information. Then, if the client wants, for instance, to display an infobox for this entity, it will send a second call to this service and retrieve the full information for this particular entity.
-Adding all the associated information for each entity in the response of the NERD query processing service would result in a very large response which would slow a lot the client, such as a web browser for instance. Using such separate queries allows efficient asynchronous calls which will never block a browser and permits to make only one call per entity, even if the same entity has been found in several places in the same text.
+Adding all the associated information for each entity in the response of the *entity-fishing* query processing service would result in a very large response which would slow a lot the client, such as a web browser for instance. Using such separate queries allows efficient asynchronous calls which will never block a browser and permits to make only one call per entity, even if the same entity has been found in several places in the same text.
 
-The *entity-fishing* console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main NERD query processing service and the Knowledge base concept retrieval.
+The *entity-fishing* console offers an efficient reference implementation with Javascript and Ajax queries through the combination of the main *entity-fishing* query processing service and the Knowledge base concept retrieval.
 
 
 Response status codes
@@ -712,37 +712,37 @@ GET /kb/concept/{id}
 
 The elements present in this response are:
 
-- rawName: The term name
+- **rawName**: The term name
 
-- preferredTerm: The normalised term name
+- **preferredTerm**: The normalised term name
 
-- nerd_score: NERD score confidence
+- **nerd_score**: always 0.0 because no disambiguation took place in a KB access
 
-- nerd_selection_score: NERD selection score confidence
+- **nerd_selection_score**: always 0.0 because no disambiguation took place in a KB access
 
-- wikipediaExternalRef: unique identifier of the concept in wikipedia
+- **wikipediaExternalRef**: unique identifier of the concept in wikipedia
 
-- wikidataId: unique identifier of the concept in wikidata
+- **wikidataId**: unique identifier of the concept in wikidata
 
-- definitions: list of wikipedia definitions (usually in wikipedia a concept contains one and only one definition). Each definition is characterized by three properties:
+- **definitions**: list of wikipedia definitions (usually in wikipedia a concept contains one and only one definition). Each definition is characterized by three properties:
 
- - definition: The text of the definition
+ - **definition**: The text of the definition
 
- - source: The knowledge base from which the definition comes from (in this case can be wikipedia-en, wikipedia-de and wikipedia-fr)
+ - **source**: The knowledge base from which the definition comes from (in this case can be wikipedia-en, wikipedia-de and wikipedia-fr)
 
- - lang: the language of the definition
+ - **lang**: the language of the definition
 
-- categories: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated entity. Each category is characterised by the following properties:
+- **categories**: This provides a list of Wikipedia categories7 directly coming from the wikipedia page of the disambiguated entity. Each category is characterised by the following properties:
 
- - category: The category name
+ - **category**: The category name
 
- - source: The knowledge base from which the definition comes from.
+ - **source**: The knowledge base from which the definition comes from.
 
- - pageId: the Id of the page describing the category
+ - **pageId**: the Id of the page describing the category
 
-- domains: For each entry, Wikipedia provides a huge set of categories, that are not always well curated (1 milion categories in the whole wikipedia). Domains are generic classification of concepts, they are mapped from the wikipedia categories.
+- **domains**: For each entry, Wikipedia provides a huge set of categories, that are not always well curated (1 milion categories in the whole wikipedia). Domains are generic classification of concepts, they are mapped from the wikipedia categories.
 
-- multilingual: provides references to multi-languages resources referring to the same entity. E.g. the entity country called Austria is Österreich in German wikipedia and Autriche in French wikipedia. The page_id provided here relates to the language-specific Wikipedia (e.g. in the above example the page_id for the country Autriche in the French Wikipedia is 15).
+- **multilingual**: provides references to multi-languages resources referring to the same entity. E.g. the entity country called Austria is Österreich in German wikipedia and Autriche in French wikipedia. The page_id provided here relates to the language-specific Wikipedia (e.g. in the above example the page_id for the country Autriche in the French Wikipedia is 15).
 
 
 Term Lookup
@@ -848,10 +848,10 @@ POST /language
 
 Here a sample of the response
 ::
-{
-   "lang":"en",
-   "conf": 0.9
-}
+  {
+     "lang":"en",
+     "conf": 0.9
+  }
 
 
 GET /language?text={text}
@@ -884,10 +884,10 @@ GET /language?text={text}
 
 Here a sample of the response
 ::
-{
-   "lang":"en",
-   "conf": 0.9
-}
+  {
+     "lang":"en",
+     "conf": 0.9
+  }
 
 Sentence segmentation
 *********************
@@ -943,18 +943,18 @@ POST /segmentation
 
 Here a sample of the response
 ::
-{
-  "sentences": [
-    {
-      "offsetStart": 0,
-      "offsetEnd": 7
-    },
-    {
-      "offsetStart": 6,
-      "offsetEnd": 21
-    }
-  ]
-}
+  {
+    "sentences": [
+      {
+        "offsetStart": 0,
+        "offsetEnd": 7
+      },
+      {
+        "offsetStart": 6,
+        "offsetEnd": 21
+      }
+    ]
+  }
 
 
 GET /segmentation?text={text}

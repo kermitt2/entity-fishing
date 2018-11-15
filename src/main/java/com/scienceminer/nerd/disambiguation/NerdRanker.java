@@ -532,7 +532,7 @@ System.out.println(docPath);
 		}
 
 		docContent = UnicodeUtil.normaliseText(docContent);
-System.out.println(docContent.length() + " characters");
+//System.out.println(docContent.length() + " characters");
 
 		// xml annotation file
 		String corpusPath = "data/corpus/corpus-long/" + corpus + "/";
@@ -576,12 +576,12 @@ System.out.println(docContent.length() + " characters");
 
 			if (!docName.equals(docFile.getName()))
 				continue;
-System.out.println("found annotations!");
+//System.out.println("found annotations!");
 			// get the annotations, mentions + entity
 			NodeList annotations = docElement.getElementsByTagName("annotation");
 			if (annotations == null || annotations.getLength() <= 0)
 				continue;
-System.out.println(annotations.getLength() + " annotations in total");
+//System.out.println(annotations.getLength() + " annotations in total");
 			for (int j = 0; j < annotations.getLength(); j++) {
 				Element element = (Element) annotations.item(j);
 
@@ -658,7 +658,7 @@ System.out.println(annotations.getLength() + " annotations in total");
 				ref.setWikipediaExternalRef(pageId);
 				ref.setOffsetStart(start);
 				ref.setOffsetEnd(end);
-System.out.println("reference entity: " + start + " / " + end + " - " + docContent.substring(start, end) + " - " + pageId);
+//System.out.println("reference entity: " + start + " / " + end + " - " + docContent.substring(start, end) + " - " + pageId);
 				referenceEntities.add(ref);
 				referenceDisamb.add(new Integer(pageId));
 			}
@@ -677,9 +677,9 @@ System.out.println("reference entity: " + start + " / " + end + " - " + docConte
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.processNER(tokens, language);
 		}
-System.out.println("number of NE found: " + entities.size());	
+//System.out.println("number of NE found: " + entities.size());	
 		List<Mention> entities2 = processText.processWikipedia(tokens, language);
-System.out.println("number of non-NE found: " + entities2.size());	
+//System.out.println("number of non-NE found: " + entities2.size());	
 		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
@@ -717,7 +717,7 @@ System.out.println("number of non-NE found: " + entities2.size());
 				int start_ref = ref.getOffsetStart();
 				int end_ref = ref.getOffsetEnd();
 				if ( (start_ref == start) && (end_ref == end) ) {
-System.out.println("entity: " + start + " / " + end + " - " + docContent.substring(start, end));
+//System.out.println("entity: " + start + " / " + end + " - " + docContent.substring(start, end));
 					entity.setWikipediaExternalRef(ref.getWikipediaExternalRef());
 					break;
 				} 

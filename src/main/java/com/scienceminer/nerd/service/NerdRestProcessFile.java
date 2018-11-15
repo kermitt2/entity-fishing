@@ -6,10 +6,10 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Filter;
-import com.scienceminer.nerd.utilities.StringProcessor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +44,8 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 public class NerdRestProcessFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
+    NerdRestProcessQuery nerdRestProcessQuery = new NerdRestProcessQuery();
+    SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
@@ -87,28 +89,20 @@ public class NerdRestProcessFile {
         if (nerdQuery.hasValidLanguage()) {
             lang.setConf(1.0);
             LOGGER.debug(">> language provided in query: " + lang);
-        }
+        } 
+
+        /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities() */
 
         // we assume for the moment that there are no entities originally set in the query
         // however, it would be nice to have them specified with coordinates and map
         // them to their right layout tokens when processing the PDF (as done for
         // instance in the project grobid-astro)
 
-        /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities()
-
-				List<NerdEntity> originalEntities = null;
-				if  ( (nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0) ) {
-					for(NerdEntity entity : nerdQuery.getEntities()) {
-						entity.setNer_conf(1.0);
-						
-						// do we have disambiguated entity information for the entity?
-						if (entity.getWikipediaExternalRef() != -1) {
-							entity.setOrigin(NerdEntity.Origin.USER);
-							entity.setNerdScore(1.0);
-						}
-					}
-					originalEntities = nerdQuery.getEntities();
-				}*/
+//        List<NerdEntity> originalEntities = null;
+//        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+//            markUserEnteredEntities(nerdQuery, nerdQuery.getText().length());
+//            originalEntities = nerdQuery.getEntities();
+//        }
 
         // tuning the species only mention selection
         tuneSpeciesMentions(nerdQuery);
@@ -125,42 +119,25 @@ public class NerdRestProcessFile {
                 DocumentSource.fromPdf(originFile, config.getStartPage(), config.getEndPage());
         doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
 
-        // here we process the relevant textual content of the document
-        // for refining the process based on structures, we need to filter
-        // segment of interest (e.g. header, body, annex) and possibly apply
-        // the corresponding model to further filter by structure types
-
-        // from the header, we are interested in title, abstract and keywords
-        SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
-        if (documentParts != null) {
-            String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
-            List<LayoutToken> tokenizationHeader =
-                    Document.getTokenizationParts(documentParts, doc.getTokenizations());
-            String labeledResult = null;
-
-            // alternative
-            String alternativeHeader = doc.getHeaderFeatured(true, true);
-            // we choose the longest header
-            if (StringUtils.isNotBlank(StringUtils.trim(header))) {
-                header = alternativeHeader;
-                tokenizationHeader = doc.getTokenizationsHeader();
-            } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
-                header = alternativeHeader;
-                tokenizationHeader = doc.getTokenizationsHeader();
-            }
-
-            if (StringUtils.isNotBlank(StringUtils.trim(header))) {
-                labeledResult = engine.getParsers().getHeaderParser().label(header);
-
-                BiblioItem resHeader = new BiblioItem();
-                resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
-
+        // test if we consider or not document structures when fishing entities
+        if ((nerdQuery.getStructure() != null) && (nerdQuery.getStructure().equals("default"))) {
+            List<LayoutToken> allTokens = doc.getTokenizations();
+            if (allTokens != null) {
                 if (lang == null) {
-                    BiblioItem resHeaderLangIdentification = new BiblioItem();
-                    engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
-                            tokenizationHeader, resHeaderLangIdentification);
+                    StringBuilder builder = new StringBuilder();
+                    int nbTok = 0;
+                    for(LayoutToken token : allTokens) {
+                        if (nbTok == 1000)
+                            break;
+                        builder.append(token.getText());
+                        nbTok++;
+                    }
 
-                    lang = identifyLanguage(resHeaderLangIdentification, doc);
+                    LanguageUtilities languageIdentifier = LanguageUtilities.getInstance();
+                    synchronized (languageIdentifier) {
+                        lang = languageIdentifier.runLanguageId(builder.toString(), 2000);
+                    }
+
                     if (lang != null) {
                         workingQuery.setLanguage(lang);
                         nerdQuery.setLanguage(lang);
@@ -169,237 +146,297 @@ public class NerdRestProcessFile {
                     }
                 }
 
-                // title
-                List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
-                if (titleTokens != null) {
-                    LOGGER.debug("Process title... ");
-                    //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
-                    //workingQuery.setEntities(null);
-
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
-                    if (newEntities != null) {
-                        LOGGER.debug(newEntities.size() + " nerd entities");
-                        /*for(NerdEntity entity : newEntities) {
-                            LOGGER.debug(entity.toString());
-                        }*/
-                    }
-                    nerdQuery.addNerdEntities(newEntities);
+                List<NerdEntity> newEntities = processLayoutTokenSequence(allTokens, null, workingQuery);
+                if (newEntities != null) {
+                    LOGGER.debug(newEntities.size() + " nerd entities");
                 }
-                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-
-                // abstract
-                List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
-                if (abstractTokens != null) {
-                    LOGGER.debug("Process abstract...");
-                    //workingQuery.setEntities(null);
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, null, workingQuery);
-                    if (newEntities != null) {
-                        LOGGER.debug(newEntities.size() + " nerd entities");
-                    }
-
-                    nerdQuery.addNerdEntities(newEntities);
-                }
-                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-
-                // keywords
-                List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
-                if (keywordTokens != null) {
-                    LOGGER.debug("Process keywords...");
-                    //workingQuery.setEntities(null);
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, null, workingQuery);
-                    if (newEntities != null)
-                        LOGGER.debug(newEntities.size() + " nerd entities");
-                    nerdQuery.addNerdEntities(newEntities);
-                }
-
-                // create document context from this first pass
-                documentContext.seed(nerdQuery.getEntities(), lang);
-                nerdQuery.setEntities(null);
-
-                // as alternative, we should use key phrase extraction and disambiguation on the whole document
-                // to seed the document context
-
-                // reprocess header fields with document context
-                if (titleTokens != null) {
-                    //workingQuery.setEntities(null);
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, documentContext, workingQuery);
-                    if (newEntities != null) {
-                        LOGGER.debug(newEntities.size() + " nerd entities");
-                        for (NerdEntity entity : newEntities) {
-                            LOGGER.debug(entity.toString());
-                        }
-                    }
-                    nerdQuery.addNerdEntities(newEntities);
-                }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-                if (abstractTokens != null) {
-                    //workingQuery.setEntities(null);
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
-                    nerdQuery.addNerdEntities(newEntities);
-                }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-                if (keywordTokens != null) {
-                    //workingQuery.setEntities(null);
-                    List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
-                    nerdQuery.addNerdEntities(newEntities);
-                }
-//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-            }
-        }
-
-        // we can process all the body, in the future figure and table could be the
-        // object of more refined processing
-        documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
-        if (documentParts != null) {
-            LOGGER.debug("Process body...");
-            // full text processing
-            Pair<String, LayoutTokenization> featSeg = FullTextParser.getBodyTextFeatured(doc, documentParts);
-            if (featSeg != null) {
-                // if featSeg is null, it usually means that no body segment is found in the
-                // document segmentation
-                String bodytext = featSeg.getA();
-
-                LayoutTokenization tokenizationBody = featSeg.getB();
-                String rese = null;
-                if ((bodytext != null) && (bodytext.trim().length() > 0)) {
-                    rese = engine.getParsers().getFullTextParser().label(bodytext);
-
-                    // get the reference, figure, table and formula markers, plus the formula
-                    // the rest can be processed by NERD
-                    List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
-                            TaggingLabels.SECTION, TaggingLabels.FIGURE, TaggingLabels.TABLE);
-                    List<LayoutTokenization> documentBodyTokens =
-                            FullTextParser.getDocumentFullTextTokens(toProcess, rese, tokenizationBody.getTokenization());
-
-                    if (documentBodyTokens != null) {
-                        List<NerdEntity> newEntities =
-                                processLayoutTokenSequences(documentBodyTokens, documentContext, workingQuery);
-                        nerdQuery.addNerdEntities(newEntities);
-                    } else
-                        LOGGER.debug("no body part?!?");
-                } else {
-                    LOGGER.debug("Fulltext model: The input to the CRF processing is empty");
-                }
-            }
-        }
-        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-        // we process references if required
-        if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.grobid)) {
-            List<BibDataSet> resCitations = engine.getParsers().getCitationParser().
-                    processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), true);
-            if ((resCitations != null) && (resCitations.size() > 0)) {
-                List<NerdEntity> newEntities = processCitations(resCitations, doc, workingQuery);
-                if (newEntities != null)
-                    LOGGER.debug(newEntities.size() + " citation entities");
                 nerdQuery.addNerdEntities(newEntities);
             }
-        }
-        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-        // acknowledgement
-        documentParts = doc.getDocumentPart(SegmentationLabels.ACKNOWLEDGEMENT);
-        if (documentParts != null) {
-            LOGGER.debug("Process acknowledgement...");
-            workingQuery.setEntities(null);
-            List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
-            if (newEntities != null)
-                LOGGER.debug(newEntities.size() + " nerd entities");
-            nerdQuery.addNerdEntities(newEntities);
-        }
-        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-        // we can process annexes
-        documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
-        if (documentParts != null) {
-            LOGGER.debug("Process annex...");
-            //workingQuery.setEntities(null);
-            List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
-            if (newEntities != null)
-                LOGGER.debug(newEntities.size() + " nerd entities");
-            nerdQuery.addNerdEntities(newEntities);
-        }
-        //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-        //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
-        // footnotes are also relevant
-        documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
-        if (documentParts != null) {
-            LOGGER.debug("Process footnotes...");
-            //workingQuery.setEntities(null);
-            List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
-            if (newEntities != null)
-                LOGGER.debug(newEntities.size() + " nerd entities");
-            nerdQuery.addNerdEntities(newEntities);
-        }
+        } else {
+            // we applied entirely GROBID article structuring
 
+            // we process the relevant textual content of the document
+            // for refining the process based on structures, we need to filter
+            // segment of interest (e.g. header, body, annex) and possibly apply
+            // the corresponding model to further filter by structure types
 
-        //List<NerdEntity> entities = workingQuery.getEntities();
-		        /*if (entities != null) {
-					// we keep only entities not conflicting with the ones already present in the query
-					int offsetPos = 0;
-					int ind = 0;
-					
-					if (originalEntities == null)
-						workingQuery.setAllEntities(entities);
-					else {
-						for(Entity entity : entities) {
-							int begin = entity.getOffsetStart();
-							int end = entity.getOffsetEnd();
-							
-							if (ind >= originalEntities.size()) {
-								NerdEntity theEntity = new NerdEntity(entity);
-								newEntities.add(theEntity);
-							}
-							else if (end < originalEntities.get(ind).getOffsetStart()) {
-								NerdEntity theEntity = new NerdEntity(entity);
-								newEntities.add(theEntity);
-							}
-							else if ( (begin > originalEntities.get(ind).getOffsetStart()) &&
-								(begin < originalEntities.get(ind).getOffsetEnd()) ) {
-								continue;
-							}
-							else if ( (end > originalEntities.get(ind).getOffsetStart()) &&
-							(end < originalEntities.get(ind).getOffsetEnd()) ) {
-								continue;
-							}
-							else if (begin > originalEntities.get(ind).getOffsetEnd()) {
-								while(ind < originalEntities.size()) {
-									ind++;
-									if (ind >= originalEntities.size()) {
-										NerdEntity theEntity = new NerdEntity(entity);
-										newEntities.add(theEntity);
-										break;
-									}
-									if (begin < originalEntities.get(ind).getOffsetEnd()) {
-										if (end < originalEntities.get(ind).getOffsetStart()) {
-											NerdEntity theEntity = new NerdEntity(entity);
-											newEntities.add(theEntity);
-										}
-										break;
-									}
-								}
-							}
-						}
-						for(NerdEntity entity : originalEntities) {
-							newEntities.add(entity);
-						}
-						workingQuery.setEntities(newEntities);
-					}
-				} else {
-					workingQuery.setEntities(originalEntities);
-				}*/
+            // from the header, we are interested in title, abstract and keywords
+            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
+            if (documentParts != null) {
+                String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                List<LayoutToken> tokenizationHeader =
+                        Document.getTokenizationParts(documentParts, doc.getTokenizations());
+                String labeledResult = null;
+
+                // alternative
+                String alternativeHeader = doc.getHeaderFeatured(true, true);
+                // we choose the longest header
+                if (StringUtils.isNotBlank(StringUtils.trim(header))) {
+                    header = alternativeHeader;
+                    tokenizationHeader = doc.getTokenizationsHeader();
+                } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
+                    header = alternativeHeader;
+                    tokenizationHeader = doc.getTokenizationsHeader();
+                }
+
+                if (StringUtils.isNotBlank(StringUtils.trim(header))) {
+                    labeledResult = engine.getParsers().getHeaderParser().label(header);
+
+                    BiblioItem resHeader = new BiblioItem();
+                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+
+                    if (lang == null) {
+                        BiblioItem resHeaderLangIdentification = new BiblioItem();
+                        engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
+                                tokenizationHeader, resHeaderLangIdentification);
+
+                        lang = identifyLanguage(resHeaderLangIdentification, doc);
+                        if (lang != null) {
+                            workingQuery.setLanguage(lang);
+                            nerdQuery.setLanguage(lang);
+                        } else {
+                            LOGGER.error("Language was not specified and there was not enough text to identify it. The process might fail. ");
+                        }
+                    }
+
+                    // title
+                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
+                    if (titleTokens != null) {
+                        LOGGER.debug("Process title... ");
+                        //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
+
+                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
+                        if (newEntities != null) {
+                            LOGGER.debug(newEntities.size() + " nerd entities");
+                            /*for(NerdEntity entity : newEntities) {
+                                LOGGER.debug(entity.toString());
+                            }*/
+                        }
+                        nerdQuery.addNerdEntities(newEntities);
+                    }
+                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+
+                    // abstract
+                    List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
+                    if (abstractTokens != null) {
+                        LOGGER.debug("Process abstract...");
+                        //workingQuery.setEntities(null);
+                        List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, null, workingQuery);
+                        if (newEntities != null) {
+                            LOGGER.debug(newEntities.size() + " nerd entities");
+                        }
+
+                        nerdQuery.addNerdEntities(newEntities);
+                    }
+                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+
+                    // keywords
+                    List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
+                    if (keywordTokens != null) {
+                        LOGGER.debug("Process keywords...");
+                        //workingQuery.setEntities(null);
+                        List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, null, workingQuery);
+                        if (newEntities != null)
+                            LOGGER.debug(newEntities.size() + " nerd entities");
+                        nerdQuery.addNerdEntities(newEntities);
+                    }
+
+                    // create document context from this first pass
+                    documentContext.seed(nerdQuery.getEntities(), lang);
+                    nerdQuery.setEntities(null);
+
+                    // as alternative, we should use key phrase extraction and disambiguation on the whole document
+                    // to seed the document context
+
+                    // reprocess header fields with document context
+                    if (titleTokens != null) {
+                        //workingQuery.setEntities(null);
+                        List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, documentContext, workingQuery);
+                        if (newEntities != null) {
+                            LOGGER.debug(newEntities.size() + " nerd entities");
+                            for (NerdEntity entity : newEntities) {
+                                LOGGER.debug(entity.toString());
+                            }
+                        }
+                        nerdQuery.addNerdEntities(newEntities);
+                    }
+    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                    if (abstractTokens != null) {
+                        //workingQuery.setEntities(null);
+                        List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
+                        nerdQuery.addNerdEntities(newEntities);
+                    }
+    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                    if (keywordTokens != null) {
+                        //workingQuery.setEntities(null);
+                        List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
+                        nerdQuery.addNerdEntities(newEntities);
+                    }
+    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                }
+            }
+
+            // we can process all the body, in the future figure and table could be the
+            // object of more refined processing
+            documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
+            if (documentParts != null) {
+                LOGGER.debug("Process body...");
+                // full text processing
+                Pair<String, LayoutTokenization> featSeg = FullTextParser.getBodyTextFeatured(doc, documentParts);
+                if (featSeg != null) {
+                    // if featSeg is null, it usually means that no body segment is found in the
+                    // document segmentation
+                    String bodytext = featSeg.getA();
+
+                    LayoutTokenization tokenizationBody = featSeg.getB();
+                    String rese = null;
+                    if ((bodytext != null) && (bodytext.trim().length() > 0)) {
+                        rese = engine.getParsers().getFullTextParser().label(bodytext);
+
+                        // get out the reference, figure, table and formula markers, plus the formula
+                        // the rest can be processed by NERD
+                        List<TaggingLabel> toProcess = Arrays.asList(TaggingLabels.PARAGRAPH, TaggingLabels.ITEM,
+                                TaggingLabels.SECTION, TaggingLabels.FIGURE, TaggingLabels.TABLE);
+                        List<LayoutTokenization> documentBodyTokens =
+                                FullTextParser.getDocumentFullTextTokens(toProcess, rese, tokenizationBody.getTokenization());
+
+                        if (documentBodyTokens != null) {
+                            List<NerdEntity> newEntities =
+                                    processLayoutTokenSequences(documentBodyTokens, documentContext, workingQuery);
+                            nerdQuery.addNerdEntities(newEntities);
+                        } else
+                            LOGGER.debug("no body part?!?");
+                    } else {
+                        LOGGER.debug("Fulltext model: The input to the CRF processing is empty");
+                    }
+                }
+            }
+            //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+            //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+            // we process references if required
+            if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.grobid)) {
+                List<BibDataSet> resCitations = engine.getParsers().getCitationParser().
+                        processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), true);
+                if ((resCitations != null) && (resCitations.size() > 0)) {
+                    List<NerdEntity> newEntities = processCitations(resCitations, doc, workingQuery);
+                    if (newEntities != null)
+                        LOGGER.debug(newEntities.size() + " citation entities");
+                    nerdQuery.addNerdEntities(newEntities);
+                }
+            }
+            //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+            //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+            // acknowledgement
+            documentParts = doc.getDocumentPart(SegmentationLabels.ACKNOWLEDGEMENT);
+            if (documentParts != null) {
+                LOGGER.debug("Process acknowledgement...");
+                workingQuery.setEntities(null);
+                List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
+                if (newEntities != null)
+                    LOGGER.debug(newEntities.size() + " nerd entities");
+                nerdQuery.addNerdEntities(newEntities);
+            }
+            //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+            //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+            // we can process annexes
+            documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
+            if (documentParts != null) {
+                LOGGER.debug("Process annex...");
+                //workingQuery.setEntities(null);
+                List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
+                if (newEntities != null)
+                    LOGGER.debug(newEntities.size() + " nerd entities");
+                nerdQuery.addNerdEntities(newEntities);
+            }
+            //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+            //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+            // footnotes are also relevant
+            documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
+            if (documentParts != null) {
+                LOGGER.debug("Process footnotes...");
+                //workingQuery.setEntities(null);
+                List<NerdEntity> newEntities = processDocumentPart(documentParts, doc, documentContext, workingQuery);
+                if (newEntities != null)
+                    LOGGER.debug(newEntities.size() + " nerd entities");
+                nerdQuery.addNerdEntities(newEntities);
+            }
+
+            // we assume for the moment that there are no entities originally set in the query
+            // but the following deals with that
+            //List<NerdEntity> entities = workingQuery.getEntities();
+            /*if (entities != null) {
+    			// we keep only entities not conflicting with the ones already present in the query
+    			int offsetPos = 0;
+    			int ind = 0;
+    			
+    			if (originalEntities == null)
+    				workingQuery.setAllEntities(entities);
+    			else {
+    				for(Entity entity : entities) {
+    					int begin = entity.getOffsetStart();
+    					int end = entity.getOffsetEnd();
+    					
+    					if (ind >= originalEntities.size()) {
+    						NerdEntity theEntity = new NerdEntity(entity);
+    						newEntities.add(theEntity);
+    					}
+    					else if (end < originalEntities.get(ind).getOffsetStart()) {
+    						NerdEntity theEntity = new NerdEntity(entity);
+    						newEntities.add(theEntity);
+    					}
+    					else if ( (begin > originalEntities.get(ind).getOffsetStart()) &&
+    						(begin < originalEntities.get(ind).getOffsetEnd()) ) {
+    						continue;
+    					}
+    					else if ( (end > originalEntities.get(ind).getOffsetStart()) &&
+    					(end < originalEntities.get(ind).getOffsetEnd()) ) {
+    						continue;
+    					}
+    					else if (begin > originalEntities.get(ind).getOffsetEnd()) {
+    						while(ind < originalEntities.size()) {
+    							ind++;
+    							if (ind >= originalEntities.size()) {
+    								NerdEntity theEntity = new NerdEntity(entity);
+    								newEntities.add(theEntity);
+    								break;
+    							}
+    							if (begin < originalEntities.get(ind).getOffsetEnd()) {
+    								if (end < originalEntities.get(ind).getOffsetStart()) {
+    									NerdEntity theEntity = new NerdEntity(entity);
+    									newEntities.add(theEntity);
+    								}
+    								break;
+    							}
+    						}
+    					}
+    				}
+    				for(NerdEntity entity : originalEntities) {
+    					newEntities.add(entity);
+    				}
+    				workingQuery.setEntities(newEntities);
+    			}
+    		} else {
+    			workingQuery.setEntities(originalEntities);
+    		}*/
+        }
 
         nerdQuery.setText(null);
         nerdQuery.setShortText(null);
         nerdQuery.setTokens(null);
 
         long end = System.currentTimeMillis();
+        IOUtilities.removeTempFile(originFile);
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
             Collections.sort(nerdQuery.getEntities());
@@ -427,24 +464,29 @@ public class NerdRestProcessFile {
     }
 
     public static Language identifyLanguage(BiblioItem resHeader, Document doc) {
-
-        String contentSample = "";
-        if (resHeader.getTitle() != null)
-            contentSample += resHeader.getTitle();
-        if (resHeader.getAbstract() != null)
-            contentSample += "\n" + resHeader.getAbstract();
-        if (resHeader.getKeywords() != null)
-            contentSample += "\n" + resHeader.getKeywords();
+        StringBuilder contentSample = new StringBuilder();
+        if (resHeader.getTitle() != null) {
+            contentSample.append(resHeader.getTitle());
+        }
+        if (resHeader.getAbstract() != null) {
+            contentSample.append("\n");
+            contentSample.append(resHeader.getAbstract());
+        }
+        if (resHeader.getKeywords() != null) {
+            contentSample.append("\n");
+            contentSample.append(resHeader.getKeywords());
+        }
         if (contentSample.length() < 200) {
             // we need more textual content to ensure that the language identification will be
             // correct
-            contentSample += doc.getBody();
+            // PL: the whole body, this is violent !
+            contentSample.append(doc.getBody());
         }
         LanguageUtilities languageIdentifier = LanguageUtilities.getInstance();
 
         Language resultLang = null;
         synchronized (languageIdentifier) {
-            resultLang = languageIdentifier.runLanguageId(contentSample, 2000);
+            resultLang = languageIdentifier.runLanguageId(contentSample.toString(), 2000);
         }
 
         return resultLang;
@@ -454,8 +496,36 @@ public class NerdRestProcessFile {
      * Generate a global context for a document
      */
     public static NerdContext getGlobalContext(NerdQuery query) {
+        // TODO
         return null;
     }
+
+
+    /**
+     * Mark (confidence 1.0) the user defined entities as long as:
+     * - they have a valid coordinate set
+     * - they have a valid wikipedia or wikidata ID
+     **/
+//    public void markUserEnteredEntities(NerdQuery nerdQuery) {
+//
+//        for (NerdEntity entity : nerdQuery.getEntities()) {
+//
+//            if (entity.getLayoutTokens().get(0).getX()== -1
+//                    || entity.getOffsetEnd() == -1
+//                    || entity.getOffsetEnd() < entity.getOffsetStart()
+//                    || entity.getOffsetEnd() > maxOffsetValue) {
+//                LOGGER.warn("The entity " + entity.toJsonCompact() + " doesn't have valid offset. Ignoring it.");
+//            } else {
+//                entity.setNer_conf(1.0);
+//
+//                // do we have disambiguated entity information for the entity?
+//                if (entity.getWikipediaExternalRef() != -1 || StringUtils.isNotBlank(entity.getWikidataId())) {
+//                    entity.setSource(ProcessText.MentionMethod.user);
+//                    entity.setNerdScore(1.0);
+//                }
+//            }
+//        }
+//    }
 
     private List<NerdEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations,
                                                          NerdContext documentContext,
@@ -482,6 +552,10 @@ public class NerdRestProcessFile {
                 // ner
                 List<Mention> nerEntities = processText.process(workingQuery);
 
+                // TODO: this should not be done at this place for all segments (this is quite costly), 
+                // but before when dealing with explicit HEADER_TITLE, or by passing a parameter indicating 
+                // that the token sequence is a title - or better a possibly full upper case sequence, 
+                // because this is probably relevant to more than just title 
                 if (isTitle(layoutTokens) && needToLowerCase(layoutTokens)) {
                     for (Mention nerEntity : nerEntities) {
                         nerEntity.setNormalisedName(lowerCase(nerEntity.getRawName()));

@@ -6,17 +6,22 @@
             <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm.ss} [%-5p] %-25c{1} - %m\n"/>
         </layout>
     </appender>
-    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="maxBackupIndex" value="5"/>
-        <param name="maxFileSize" value="50Mb"/>
-        <param name="File" value="nerd.log"/>
-        <layout class="org.apache.log4j.PatternLayout">
+
+    <appender name="FILE" class="org.apache.log4j.FileAppender">
+       <param name="file" value="entity-fishing.log"/>
+       <param name="immediateFlush" value="true"/>
+       <param name="threshold" value="debug"/>
+       <param name="append" value="true"/>
+       <param name="encoding" value="UTF-8"/>
+
+       <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm.ss} [%-5p] %-25c{1} - %m\n"/>
-        </layout>
+       </layout>
     </appender>
 
     <root>
-        <priority value="INFO"/>
+        <priority value="INFO"></priority>
+        <!--appender-ref ref="CONSOLE"/-->
         <appender-ref ref="FILE"/>
     </root>
 </log4j:configuration>

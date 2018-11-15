@@ -4,6 +4,8 @@
 langCode: en
 
 # path to the LMDB data
+#dbDirectory: data/db/db-en
+
 #dbDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/nerd-data/db/db-en
 #dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/nerd-data/db/db-en
 dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.4/nerd-data/db/db-en

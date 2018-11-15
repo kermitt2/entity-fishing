@@ -109,10 +109,17 @@ var nerd = (function ($) {
         var selected = $('#selectedService').attr('value');
 
         if ((urlLocal.indexOf('language') !== -1) || (urlLocal.indexOf('segmentation') !== -1)) {
-            url = urlLocal + '?text=' + $('#input').val();
+            // url = urlLocal + '?text=' + $('#input').val();
+
+            var formData = new FormData();
+            formData.append("text", $('#input').val());
+
             $.ajax({
-                type: 'GET',
-                url: url,
+                type: 'POST',
+                url: urlLocal,
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: handleSuccessfulResponse,
                 error: displayErrorMessage,
                 contentType: false
@@ -893,7 +900,8 @@ var nerd = (function ($) {
                 var end = parseInt(entity.offsetEnd, 10);
 
                 var subType = entity.subtype;
-                var conf = entity.nerd_score;
+//                var conf = entity.nerd_score;
+                var conf = entity.confidence_score;
                 if (conf && conf.length > 4)
                     conf = conf.substring(0, 4);
 
@@ -1288,7 +1296,8 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-            var conf = entity.nerd_selection_score;
+//            var conf = entity.nerd_selection_score;
+            var conf = entity.confidence_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
@@ -1345,6 +1354,7 @@ var nerd = (function ($) {
 
             string += "</td></tr></table>";
 
+            // definition
             if ((definitions != null) && (definitions.length > 0)) {
                 var localHtml = wiki2html(definitions[0]['definition'], lang);
                 string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
@@ -1358,9 +1368,25 @@ var nerd = (function ($) {
                     var statement = statements[i];
                     localHtml += displayStatement(statement);
                 }
-                string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+                //string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+
+                // make the statements information collapsible
+                string += "<p><div class='panel-group' id='accordionParent'>";
+                string += "<div class='panel panel-default'>";
+                string += "<div class='panel-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small;'>";
+                // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up; show elements for every page
+                string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ pageIndex+ "' style='outline:0;'>";
+                string += "<h5 class='panel-title' style='font-weight:normal;'>Wikidata statements</h5>";
+                string += "</a>";
+                string += "</div>";
+                // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
+                string += "<div id='collapseElement"+ pageIndex +"' class='panel-collapse collapse'>";
+                string += "<div class='panel-body'>";
+                string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
+                string += "</div></div></div></div></p>";
             }
 
+            // reference of Wikipedia/Wikidata
             if ((wikipedia != null) || (wikidataId != null)) {
                 string += '<p>References: '
                 if (wikipedia != null) {
@@ -1468,7 +1494,8 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-            var conf = entity.nerd_selection_score;
+//            var conf = entity.nerd_selection_score;
+            var conf = entity.confidence_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
@@ -1522,6 +1549,7 @@ var nerd = (function ($) {
 
             string += "</td></tr></table>";
 
+            // definition
             if ((definitions != null) && (definitions.length > 0)) {
                 var localHtml = wiki2html(definitions[0]['definition'], lang);
                 string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
@@ -1535,9 +1563,25 @@ var nerd = (function ($) {
                     var statement = statements[i];
                     localHtml += displayStatement(statement);
                 }
-                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+//                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+
+                // make the statements information collapsible
+                string += "<p><div class='panel-group' id='accordionParent'>";
+                string += "<div class='panel panel-default'>";
+                string += "<div class='panel-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small;'>";
+                // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
+                string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ entityListIndex+ "' style='outline:0;'>";
+                string += "<h5 class='panel-title' style='font-weight:normal;'>Wikidata statements</h5>";
+                string += "</a>";
+                string += "</div>";
+                // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
+                string += "<div id='collapseElement"+ entityListIndex +"' class='panel-collapse collapse'>";
+                string += "<div class='panel-body'>";
+                string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
+                string += "</div></div></div></div></p>";
             }
 
+            // reference of Wikipedia/Wikidata
             if (wikipedia != null) {
                 string += '<p>References: '
                 if (wikipedia != null) {

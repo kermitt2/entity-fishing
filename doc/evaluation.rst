@@ -10,16 +10,13 @@ It is possible to evaluate *entity-fishing* entity disambiguation models with se
 
 - ```ace```: this is a subset of the documents used in the ACE 2004 Coreference documents with 36 articles and 256 mentions, annotated through crowdsourcing, see [1].
 
-- ```aida```: AIDA-CONLL is a manually annotated dataset based on the CoNLL 2003 dataset, with 13881 Reuters news articlesand 27817 mentions, see [2]. Note that the raw texts of this dataset are not included in *entity-fishing*, they have to be obtained from NIST (free for research purpose).
-AIDA-CONLL dataset can be considered as the most significant gold data for entity disambiguation both in term of size, ambiguity rate and annotation quality.
+- ```aida```: AIDA-CONLL is a manually annotated dataset based on the CoNLL 2003 dataset, with 13881 Reuters news articlesand 27817 mentions, see [2]. Note that the raw texts of this dataset are not included in *entity-fishing*, they have to be obtained from NIST (free for research purpose). AIDA-CONLL dataset can be considered as the most significant gold data for entity disambiguation both in term of size, ambiguity rate and annotation quality. In addition to the complete AIDA-CONLL dataset, this corpus is divided into tree subsets that can be used for evaluation separately: 
 
-In addition to the complete AIDA-CONLL dataset, this corpus is divided into tree subsets that can be used for evaluation separately: 
+  - ```aida-train```: corresponds to the training subset of the CoNLL 2003 dataset
 
-- ```aida-train```: corresponds to the training subset of the CoNLL 2003 dataset
+  - ```aida-testa```: corresponds to the validation subset of the CoNLL 2003 dataset
 
-- ```aida-testa```: corresponds to the validation subset of the CoNLL 2003 dataset
-
-- ```aida-testb```: corresponds to the test subset of the CoNLL 2003 dataset
+  - ```aida-testb```: corresponds to the test subset of the CoNLL 2003 dataset
 
 - ```aquaint```: this dataset has been created by Milne and Witten [3], with 50 documents and 727 mentions from a news corpus from the Xinhua News Service, the New York Times, and the Associated Press.
 
@@ -63,7 +60,7 @@ If there is a directory called ``pdf`` or ``PDF``, the process will extract info
 
 Use the following maven command with the above dataset identifier for generating the annotation xml file:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.EvaluationDataGeneration -Dexec.args="toto"
+	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.AnnotatedDataGeneration -Dexec.args="toto"
 
 References
 **********

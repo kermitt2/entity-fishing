@@ -2,6 +2,7 @@ package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,6 +26,7 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
+    SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -34,6 +36,7 @@ public class NerdRestProcessQuery {
      * the enriched and disambiguated query.
      */
     public String processQuery(String theQuery) {
+
         LOGGER.debug(methodLogIn());
         LOGGER.debug(">> received query to process: " + theQuery);
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
@@ -168,6 +171,11 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
 
         Collections.sort(nerdQuery.getEntities());
@@ -302,6 +310,10 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
         //Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
@@ -361,6 +373,11 @@ public class NerdRestProcessQuery {
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
 
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         if (nerdQuery.getEntities() != null)
             Collections.sort(nerdQuery.getEntities());
         return nerdQuery.toJSONClean(null);
@@ -376,5 +393,4 @@ public class NerdRestProcessQuery {
         return "<< " + NerdRestProcessString.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
-
 }

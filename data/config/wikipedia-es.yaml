@@ -8,6 +8,8 @@ langCode: es
 #dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/nerd-data/db/db-es
 dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.4/nerd-data/db/db-es
 
+#dbDirectory: data/db/db-es
+
 # path to the compiled CSV wikipedia, infobox, wikidata files
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
