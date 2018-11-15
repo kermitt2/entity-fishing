@@ -142,34 +142,6 @@ public class NerdRestProcessString {
         return sb.toString();
     }
 
-    public static Response processVersion() {
-        Response response = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        SoftwareInfo softwareInfo = null;
-        try {
-            softwareInfo = SoftwareInfo.getInstance();
-
-            if (softwareInfo != null) {
-                stringBuilder
-                        .append("{")
-                        .append("\"name\": \"" + softwareInfo.getName() + "\"")
-                        .append(", \"version\": \"" + softwareInfo.getVersion() + "\"")
-                        .append(", \"description\": \"" + softwareInfo.getDescription() + "\"")
-                        .append("}");
-
-                response = Response.status(Status.OK)
-                        .entity(stringBuilder.toString())
-                        .type(MediaType.APPLICATION_JSON)
-                        .build();
-            }
-
-        }catch (Exception e) {
-            LOGGER.error("An unexpected exception occurs. ", e);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-        }
-        return response;
-    }
-
     public static String methodLogIn() {
         return ">> " + NerdRestProcessString.class.getName() + "." +
                 Thread.currentThread().getStackTrace()[1].getMethodName();

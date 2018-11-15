@@ -12,25 +12,41 @@ public class SoftwareInfo {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareInfo.class);
 
+    private static SoftwareInfo INSTANCE = null;
 
-    public SoftwareInfo(String name, String version, String description){
+    private SoftwareInfo(String name, String version, String description) {
         this.name = name;
         this.version = version;
         this.description = description;
     }
 
     public static SoftwareInfo getInstance() {
-        String name = null, version = null, description = null;
+        if (INSTANCE != null) {
+            return INSTANCE;
+        }
+
+        //Default in case of issues of any nature
+        INSTANCE = new SoftwareInfo("entity-fishing", "N/A", "Entity Recognition and Disambiguation");
+        
         Properties properties = new Properties();
         try {
             properties.load(SoftwareInfo.class.getResourceAsStream("/service.properties"));
-            name = properties.getProperty("name");
-            version = properties.getProperty("version");
-            description = properties.getProperty("description");
-        }catch (Exception e){
+            INSTANCE = new SoftwareInfo(properties.getProperty("name"), properties.getProperty("version"), properties.getProperty("description"));
+        } catch (Exception e) {
             LOGGER.error("General error when extracting the version of this application", e);
         }
-        return new SoftwareInfo(name, version, description);
+
+        return INSTANCE; 
+    }
+
+    public String toJson() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{")
+                .append("\"name\": \"" + this.getName() + "\"")
+                .append(", \"version\": \"" + this.getVersion() + "\"")
+                .append(", \"description\": \"" + this.getDescription() + "\"")
+                .append("}");
+        return sb.toString();
     }
 
 
