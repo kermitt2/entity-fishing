@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.NerdEngine;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;

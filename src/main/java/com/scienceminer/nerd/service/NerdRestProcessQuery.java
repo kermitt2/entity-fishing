@@ -1,9 +1,13 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
-import com.scienceminer.nerd.kb.Customisations;
-import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.exceptions.QueryException;
+import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.main.Main;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
@@ -11,10 +15,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import java.io.IOException;
 import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
@@ -25,6 +26,7 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
+    SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
@@ -34,6 +36,7 @@ public class NerdRestProcessQuery {
      * the enriched and disambiguated query.
      */
     public String processQuery(String theQuery) {
+
         LOGGER.debug(methodLogIn());
         LOGGER.debug(">> received query to process: " + theQuery);
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
@@ -168,6 +171,11 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
 
         Collections.sort(nerdQuery.getEntities());
@@ -302,6 +310,10 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
         //Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
@@ -361,6 +373,11 @@ public class NerdRestProcessQuery {
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
 
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         if (nerdQuery.getEntities() != null)
             Collections.sort(nerdQuery.getEntities());
         return nerdQuery.toJSONClean(null);
@@ -377,4 +394,8 @@ public class NerdRestProcessQuery {
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 
+    public static void main(String[] args) {
+        SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
+        System.out.println(softwareInfo.getName());
+    }
 }

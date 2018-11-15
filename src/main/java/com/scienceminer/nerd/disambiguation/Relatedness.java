@@ -1,26 +1,21 @@
 package com.scienceminer.nerd.disambiguation;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
+import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import com.scienceminer.nerd.kb.*;
-
 import org.apache.commons.collections4.CollectionUtils;
-import org.grobid.core.utilities.TextUtilities;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
-
-import org.grobid.core.utilities.OffsetPosition;
-
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Provide semantic relatedness measures, which is an adaptation of the original Relateness measure from 
