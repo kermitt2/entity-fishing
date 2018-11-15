@@ -91,7 +91,6 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVersion() {
         Response response = null;
-        StringBuilder buffer = new StringBuilder();
         try {
             response = Response.status(Response.Status.OK)
                     .entity(NerdRestProcessGeneric.getVersion())
