@@ -60,14 +60,14 @@ Then install the compiled indexed data:
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
-      $ mvn clean install
+      $ ./gradlew clean build
 
    Some tests will be executed. If all tests are successful, you should be now ready to run the service.
 
  
 #. Run the service:
    ::
-      $ mvn clean jetty:run
+      $ ./gradlew clean appRun
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 

@@ -37,11 +37,11 @@ Evaluation commands
 
 Use the following maven command with the above dataset identifier for running an evaluation:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="aquaint"
+    $ ./gradlew evaluation -Pcorpus=[dataset]
 
 For instance for evaluating against the testb subset of the AIDA-CONLL, use: 
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="aida-testb"
+	$ ./gradlew evaluation -Pcorpus=aida-testb
 
 The evaluation process will provide standard metrics (accuracy, precision, recall. f1) for micro- and macro-averages for the entity disambiguation algorithm selected as ranker and for priors (as baseline). 
 
@@ -60,7 +60,7 @@ If there is a directory called ``pdf`` or ``PDF``, the process will extract info
 
 Use the following maven command with the above dataset identifier for generating the annotation xml file:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.AnnotatedDataGeneration -Dexec.args="toto"
+	$ ./gradlew evaluationDataGeneration -Pcorpus=[corpusname]
 
 References
 **********
