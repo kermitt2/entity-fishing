@@ -148,7 +148,7 @@ public class GenericRankerFeatureVector {
 		if (Add_ner) 
 			header.append("@attribute ner {false, true}\n");
 		if (Add_nerGrobid_type)
-			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION, ACRONYM, ANIMAL, ARTIFACT, BUSINESS, INSTITUTION, MEASURE, AWARD, CONCEPT, CONCEPTUAL, CREATION, EVENT, LEGAL, IDENTIFIER, INSTALLATION, MEDIA, NATIONAL, ORGANISATION, SUBSTANCE, PLANT, PERIOD, TITLE, PERSON_TYPE, WEBSITE, SPORT_TEAM, UNKNOWN}\n");
+			header.append("@attribute ner_type {NotNER, PERSON, LOCATION, ORGANIZATION}\n");
 		if (Add_ner_subtype)
 			header.append("@attribute ner_subtype STRING\n");
 
@@ -592,10 +592,6 @@ public class GenericRankerFeatureVector {
 			result[i] = embeddings_centroid_similarity;
 			i++;
 		}
-//		if (Add_wikidata_id) {
-//			result[i] = wikidata_id;
-//			i++;
-//		}
 		if (Add_wikidata_id) {
 			Attribute att = attributes[i];
 			double val = 0.0;

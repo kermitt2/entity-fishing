@@ -1298,8 +1298,7 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-//            var conf = entity.nerd_selection_score;
-            var conf = entity.confidence_score;
+            var conf = entity.nerd_selection_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
@@ -1500,8 +1499,7 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-//            var conf = entity.nerd_selection_score;
-            var conf = entity.confidence_score;
+            var conf = entity.nerd_selection_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
@@ -1522,7 +1520,7 @@ var nerd = (function ($) {
             if (type)
                 string += "<p>Type: <b>" + type + "</b></p>";
 
-            if (typeKid && (typeKid != "UNKNOWN"))
+            //if (typeKid && (typeKid != "OTHER"))
                 string += "<p>Predicted as: <b>" + typeKid + "</b></p>";
 
             if (sense) {

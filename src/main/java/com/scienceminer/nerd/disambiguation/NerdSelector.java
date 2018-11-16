@@ -419,19 +419,21 @@ public class NerdSelector extends NerdModel {
 					if (candidate.getWikidataP31Id() != null)
 						wikidataP31Id = candidate.getWikidataP31Id();
 
-					String nerType = "UNKNOWN"; // undefined entity
-					if (candidate.getType() != null)
-						nerType = candidate.getType();
-
-					String nerKidType = "OTHER"; // undefined entity
-					if (candidate.getTypeKid() != null)
-						nerKidType = candidate.getTypeKid();
+//					String nerType = "UNKNOWN"; // undefined entity
+//					if (candidate.getType() != null)
+//						nerType = candidate.getType();
+//
+//					String nerKidType = "OTHER"; // undefined entity
+//					if (candidate.getTypeKid() != null)
+//						nerKidType = candidate.getTypeKid();
 
 					// nerd score
-					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext,
-							embeddingsSimilarity, nerType, nerKidType);
+//					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext,
+//							embeddingsSimilarity, nerType, nerKidType);
 //					double nerd_score = ranker.getProbability(commonness, related, quality,
 //							bestCaseContext, embeddingsSimilarity, nerType);
+					double nerd_score = ranker.getProbability(commonness, related, quality, bestCaseContext,
+							embeddingsSimilarity, wikidataId, wikidataP31Id);
 
 					boolean inContext = false;
 					if (context.contains(candidate))

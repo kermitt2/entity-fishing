@@ -1,15 +1,31 @@
 package com.scienceminer.nerd.mention;
 
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.lexicon.NERLexicon;
+import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Entity.Origin;
 import org.grobid.core.data.Sense;
-import org.grobid.core.layout.BoundingBox;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.lexicon.NERLexicon;
-import org.grobid.core.utilities.OffsetPosition;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.scienceminer.nerd.exceptions.NerdException;
+import com.scienceminer.nerd.service.NerdQuery;
+import com.scienceminer.nerd.utilities.StringPos;
+import com.scienceminer.nerd.utilities.Utilities;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Label;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
 
 /**
  * Common representation of an unresolved mention in a textual document.

@@ -132,7 +132,7 @@ public class NerdRestProcessFile {
                 if (lang == null) {
                     StringBuilder builder = new StringBuilder();
                     int nbTok = 0;
-                    for (LayoutToken token : allTokens) {
+                    for(LayoutToken token : allTokens) {
                         if (nbTok == 1000)
                             break;
                         builder.append(token.getText());
@@ -268,22 +268,22 @@ public class NerdRestProcessFile {
                         }
                         nerdQuery.addNerdEntities(newEntities);
                     }
-                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                     if (abstractTokens != null) {
                         //workingQuery.setEntities(null);
                         List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
                         nerdQuery.addNerdEntities(newEntities);
                     }
-                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                     if (keywordTokens != null) {
                         //workingQuery.setEntities(null);
                         List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
                         nerdQuery.addNerdEntities(newEntities);
                     }
-                    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
-                    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+    //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+    //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
                 }
             }
 

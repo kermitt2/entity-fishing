@@ -14,10 +14,11 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
 import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
@@ -28,7 +29,7 @@ public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
 
-    // for prediction by Nerd-Kid
+    // for nerKid_type
     private UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
 
     /**
@@ -180,6 +181,7 @@ public class NerdRestProcessQuery {
 
         nerdQuery.setEntities(disambiguatedEntities);
         nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
@@ -370,16 +372,16 @@ public class NerdRestProcessQuery {
             List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 
             // inject the class prediction result from Nerd-Kid
-            String typeKid = null;
-            String wikidataId = null;
-            for (NerdEntity entity : disambiguatedEntities) {
-                wikidataId = entity.getWikidataId();
-                if (wikidataId != null) {
-                    // prediction class by Nerd-Kid
-                    typeKid = upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId);
-                    entity.setTypeKid(typeKid);
-                }
-            }
+//            String typeKid = null;
+//            String wikidataId = null;
+//            for (NerdEntity entity : disambiguatedEntities) {
+//                wikidataId = entity.getWikidataId();
+//                if (wikidataId != null) {
+//                    // prediction class by Nerd-Kid
+//                    typeKid = upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId);
+//                    entity.setTypeKid(typeKid);
+//                }
+//            }
 
             nerdQuery.setEntities(disambiguatedEntities);
             // calculate the global categories

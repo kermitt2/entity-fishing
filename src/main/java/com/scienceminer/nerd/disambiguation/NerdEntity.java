@@ -26,7 +26,6 @@ import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.splitByCharacterTypeCamelCase;
 
 /**
  * This class represents disambiguated entity (the result), including conceptual and
@@ -54,8 +53,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// type of the entity (person, location, etc.) by Nerd
 	private NERLexicon.NER_Type type = null;
 
-	// for Nerd-Kid
-	// type of the entity (person, location, etc.) by Nerd-Kid
+	// nerKid_type: class type of the entity (person, location, etc.) by Nerd-Kid
 	private String typeKid = null;
 
 	// subtypes of the entity when available - the first one is the main one, the others secondary subtypes
@@ -174,7 +172,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		normalisedRawName = entity.getNormalisedName();
 		preferredTerm = entity.getPreferredTerm();
 		type = entity.getType();
-		// for Nerd-Kid
+		// nerKid_type
 		typeKid = entity.getTypeKid();
 		subTypes = entity.getSubTypes();
 		offsets = new OffsetPosition();
@@ -251,7 +249,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		subTypes.add(subType);
 	}
 
-	// for Nerd-Kid
+	// for nerKid_type
 	public String getTypeKid() {
 		return typeKid;
 	}
@@ -779,7 +777,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] \"");
 		}
 
-		// for Nerd-Kid
+		// for nerKid_type
 		if (getTypeKid() != null)
 			buffer.append(", \"typeKid\" : \"" + getTypeKid() + "\"");
 
@@ -805,8 +803,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		/*buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
 		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");*/
 
-		//buffer.append(", \"ranker_score\":" + TextUtilities.formatFourDecimals(nerdScore));
-		buffer.append(", \"confidence_score\":" + TextUtilities.formatFourDecimals(getSelectionScore()));
+//		buffer.append(", \"nerd_score\":" + TextUtilities.formatFourDecimals(nerdScore));
+//		buffer.append(", \"nerd_selection_score\":" + TextUtilities.formatFourDecimals(selectionScore));
+		buffer.append(", \"confidence_score\":" + TextUtilities.formatFourDecimals(selectionScore));
 
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
@@ -966,7 +965,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append(" ] \"");
 		}
 
-		// for Nerd-Kid
+		// for nerKid_type
 		if (getTypeKid() != null)
 			buffer.append(", \"typeKid\" : \"" + getTypeKid() + "\"");
 
@@ -991,8 +990,6 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 //		buffer.append(", \"nerd_score\": " + TextUtilities.formatFourDecimals(nerdScore));
 //		buffer.append(", \"nerd_selection_score\": " + TextUtilities.formatFourDecimals(selectionScore));
-
-		//buffer.append(", \"ranker_score\": " + TextUtilities.formatFourDecimals(nerdScore));
 		buffer.append(", \"confidence_score\": " + TextUtilities.formatFourDecimals(selectionScore));
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
