@@ -112,9 +112,18 @@ public class GenerateSpecializedVocabulary {
             for(Statement statement : statements) {
                 if (statement.getPropertyId().equals("P279") || statement.getPropertyId().equals("P31")) {
                     String newEntityId = statement.getConceptId();
+                    String value = statement.getValue();
                     if (!selection.contains(newEntityId) && !negativeEntityIds.contains(newEntityId)) {
                         selection.add(newEntityId);
                         select(newEntityId, negativeEntityIds, upperKB, selection); 
+                    }
+                    
+                    if ( (value!= null) && (value.length() > 2) && (value.startsWith("Q")) ) {
+                        Boolean valueSuffixIsNumeric = StringUtils.isNumeric(value.substring(1,value.length()));
+                        if (valueSuffixIsNumeric && !selection.contains(value) && !negativeEntityIds.contains(value)) {
+                            selection.add(value);
+                            select(value, negativeEntityIds, upperKB, selection); 
+                        }
                     }
                 }
             }
@@ -133,9 +142,14 @@ public class GenerateSpecializedVocabulary {
     }
 
     public static void main(String args[]) throws Exception {
-        System.out.println(args.length);
+        //System.out.println(args.length);
         if (args.length < 3) {
             System.out.println("usage: command lang entity_id outputPath");
+            // e.g. all software names: 
+            /** 
+            mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.utilities.GenerateSpecializedVocabulary -Dexec.args="en +Q7397 /tmp/vocabulary-software.txt"
+            */
+            // we can put as many seed entities +Q??? and ones to ignore -Q??? as needed 
             System.exit(-1);
         }
 
@@ -150,6 +164,7 @@ public class GenerateSpecializedVocabulary {
         List<String> negativeEntityIds = new ArrayList<String>();
         for (int i=1; i< args.length-1; i++) {
             String entityId = args[i];
+            System.out.println(entityId);
             if (entityId.startsWith("+Q") || entityId.startsWith("Q")) {
                 positiveEntityIds.add(entityId.substring(1, entityId.length()));
             } else if (entityId.startsWith("-Q")) {
