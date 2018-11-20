@@ -15,6 +15,7 @@ import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 
+import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
@@ -65,6 +66,8 @@ public class NerdRanker extends NerdModel {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(NerdRanker.class);
 
+	UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
+
 	// ranker model files
 	private static String MODEL_PATH_LONG = "data/models/ranker-long";
 
@@ -112,25 +115,20 @@ public class NerdRanker extends NerdModel {
 //								 double quality,
 //								 boolean bestCaseContext,
 //								 float embeddingsSimilarity,
-//								 String nerType) throws Exception {
-
-	public double getProbability(double commonness,
-								 double relatedness,
-								 double quality,
-								 boolean bestCaseContext,
-								 float embeddingsSimilarity,
-								 String wikidataId,
-								 String wikidataP31Id) throws Exception {
+//								 String wikidataId,
+//								 String wikidataP31Id) throws Exception {
 
 	// for generating score with Nerd-Kid prediction result
-//	public double getProbability(double commonness,
-//								 double relatedness,
-//								 double quality,
-//								 boolean bestCaseContext,
-//								 float embeddingsSimilarity,
-//								 String nerType,
-//								 String nerKidType) throws Exception {
-		// special cases with only one feature
+	public double getProbability(double commonness,
+                                 double relatedness,
+                                 double quality,
+                                 boolean bestCaseContext,
+                                 float embeddingsSimilarity,
+                                 String wikidataId,
+                                 String wikidataP31Id,
+								 String nerGrobid_type,
+								 String nerKid_type) throws Exception {
+        // special cases with only one feature
 		if (featureType == FeatureType.BASELINE) {
 			// special case of baseline, we just need the prior conditional prob
 			return commonness;
@@ -183,8 +181,8 @@ public class NerdRanker extends NerdModel {
 		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
-		//		feature.ner_type = nerType;
-		//      feature.nerKid_type = nerKidType;
+		feature.nerGrobid_type = nerGrobid_type;
+		feature.nerKid_type = nerKid_type;
 		double[] features = feature.toVector(attributes);
 		smile.math.Math.setSeed(7);
 		double score = forest.predict(features);
@@ -206,6 +204,18 @@ public class NerdRanker extends NerdModel {
 		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
 		if (!modelFile.exists()) {
             logger.debug("Invalid file for saving author filtering model.");
+		}
+		FileUtils.writeStringToFile(modelFile, xml, StandardCharsets.UTF_8);
+		System.out.println("Model saved under " + modelFile.getPath());
+	}
+
+	public void saveModelNerdKid(String corpus) throws Exception {
+		logger.info("saving model");
+		// save the model with XStream
+		String xml = xstream.toXML(forest);
+		File modelFile = new File("data/nerdKid/models/ranker-"+corpus+".model");
+		if (!modelFile.exists()) {
+			logger.debug("Invalid file for saving author filtering model.");
 		}
 		FileUtils.writeStringToFile(modelFile, xml, StandardCharsets.UTF_8);
 		System.out.println("Model saved under " + modelFile.getPath());
@@ -488,21 +498,22 @@ public class NerdRanker extends NerdModel {
 						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
 					else
 						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
-					// NE type of Grobid
-//					String typeNE = candidate.getType();
-//					if ((typeNE != null)){
-//						feature.ner_type = typeNE;
-//					} else {
-//						feature.ner_type = "NotNER";
-//					}
-//
-//					// for Nerd-Kid
-//                    String typeKid = candidate.getTypeKid();
-//                    if (typeKid != null) {
-//                        feature.nerKid_type = typeKid;
-//                    } else {
-//                        feature.nerKid_type = "NotNER";
-//                    }
+
+					// for nerGrobid_type
+					String nerGrobid_type = candidate.getType();
+					if ((nerGrobid_type != null)){
+						feature.nerGrobid_type = nerGrobid_type;
+					} else {
+						feature.nerGrobid_type = "UNKNOWN";
+					}
+
+					// for nerKid_type
+					String nerKid_type = candidate.getTypeKid();
+					if (nerKid_type != null) {
+						feature.nerKid_type = nerKid_type;
+					} else {
+						feature.nerKid_type = "OTHER";
+					}
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
@@ -516,7 +527,7 @@ public class NerdRanker extends NerdModel {
 						else
 							this.positives++;
 					}
-					
+
 /*System.out.println("*"+candidate.getWikiSense().getTitle() + "* " + 
 							entity.toString());
 					System.out.println("\t\t" + "commonness: " + commonness + 
@@ -830,28 +841,26 @@ System.out.println(docPath);
 					else
 						feature.wikidata_id = "Q0"; // undefined entity
 
-                    if (candidate.getWikidataP31Id() != null) {
-                        feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-                    }
-                    else {
-                        feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+					if (candidate.getWikidataP31Id() != null)
+						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
+					else
+						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+
+					// for nerGrobid_type
+					String nerGrobid_type = candidate.getType();
+					if ((nerGrobid_type != null)){
+						feature.nerGrobid_type = nerGrobid_type;
+					} else {
+                        feature.nerGrobid_type = "UNKNOWN";
                     }
 
-					// NE type of Grobid
-//					String typeNE = candidate.getType();
-//					if ((typeNE != null)){
-//						feature.ner_type = typeNE;
-//					} else {
-//                        feature.ner_type = "NotNER";
-//                    }
-//
-//					// for Nerd-Kid
-//					String typeKid = candidate.getTypeKid();
-//					if (typeKid != null) {
-//						feature.nerKid_type = typeKid;
-//					} else {
-//						feature.nerKid_type = "NotNER";
-//					}
+					// for nerKid_type
+					String nerKid_type = candidate.getTypeKid();
+					if (nerKid_type != null) {
+						feature.nerKid_type = nerKid_type;
+					} else {
+						feature.nerKid_type = "OTHER";
+					}
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 

@@ -40,11 +40,8 @@ public class CorpusTrainer {
 	public CorpusTrainer(String lang) {
 		this.lang = lang;
 
-		arffRanker = new File("data/wikipedia/training/" + lang + "/rankerKid.arff");
+		arffRanker = new File("data/wikipedia/training/" + lang + "/ranker.arff");
 		arffSelector = new File("data/wikipedia/training/" + lang + "/selector.arff");
-
-//		modelRanker = new File("data/wikipedia/training/" + "/" + lang + "/rankerKid.arff");
-		//modelSelector = new File("data/wikipedia/training/" + "/" + lang + "/selectorKid.model");
 
 		try {
 			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);

@@ -72,10 +72,10 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	private String wikidataId = null;
 
 	// for Ner type result of Grobid
-//	private String type = null;
-//
-//	// for Nerd-Kid prediction of Ner type result
-//	private String typeKid = null;
+	private String type = null;
+
+	// for Nerd-Kid prediction of Ner type result
+	private String typeKid = null;
 
 	// preferred term for the corresponding sense
 	private String preferredTerm = null;
@@ -272,14 +272,15 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
         this.wikidataId = ref;
     }
 
-//	public String getType() { return type; }
-//
-//	public void setType(String type) { this.type = type; }
-//
-//	// for Nerd-Kid
-//	public String getTypeKid() { return typeKid; }
-//
-//	public void setTypeKid(String theTypeKid) { typeKid = theTypeKid; }
+    // for nerGrobid_type
+	public String getType() { return type; }
+
+	public void setType(String type) { this.type = type; }
+
+	// for nerKid_type
+	public String getTypeKid() { return typeKid; }
+
+	public void setTypeKid(String theTypeKid) { typeKid = theTypeKid; }
 
 	public List<com.scienceminer.nerd.kb.Category> getWikipediaCategories() {
 		return wikipediaCategories;
@@ -436,13 +437,13 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		}
 
 		// for Nerd-Kid
-//		if (typeKid != null) {
-//			buffer.append(typeKid.toString() + "(typeKid)\t");
-//		}
-//
-//		if (type != null) {
-//			buffer.append(type.toString() + "(type)\t");
-//		}
+		if (typeKid != null) {
+			buffer.append(typeKid.toString() + "(typeKid)\t");
+		}
+
+		if (type != null) {
+			buffer.append(type.toString() + "(type)\t");
+		}
 
 		if (domains != null) {
 			buffer.append(domains.toString() + "\t");
@@ -627,16 +628,6 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		return null;
 	}
 
-	/* Return the class type as a result of Nerd-Kid prediction based on the candidate wikidata ID
-	* */
-//	public String getClassPrediction() {
-//		if (wikidataId == null)
-//			return null;
-//		// get the content of Nerd-Kid database
-//		String predictedClasses = UpperKnowledgeBase.getInstance().getPredictedClassByWikidataId(wikidataId);
-//		return predictedClasses;
-//	}
-
 	/**
 	 * Merge two NerdCandidates.
 	 */
@@ -749,9 +740,9 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		copy.setLabel(this.getLabel());
 		copy.setWikidataId(this.getWikidataId());
 		copy.setWikipediaCategories(this.getWikipediaCategories());
-//		copy.setType(this.getType());
-//		//for Nerd-Kid
-//		copy.setTypeKid(this.getTypeKid());
+		copy.setType(this.getType());
+		//for nerKid_type
+		copy.setTypeKid(this.getTypeKid());
 		return copy;
 	}
 }

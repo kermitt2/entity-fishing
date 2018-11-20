@@ -371,18 +371,6 @@ public class NerdRestProcessQuery {
             NerdEngine disambiguator = NerdEngine.getInstance();
             List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
 
-            // inject the class prediction result from Nerd-Kid
-//            String typeKid = null;
-//            String wikidataId = null;
-//            for (NerdEntity entity : disambiguatedEntities) {
-//                wikidataId = entity.getWikidataId();
-//                if (wikidataId != null) {
-//                    // prediction class by Nerd-Kid
-//                    typeKid = upperKnowledgeBase.getPredictedClassByWikidataId(wikidataId);
-//                    entity.setTypeKid(typeKid);
-//                }
-//            }
-
             nerdQuery.setEntities(disambiguatedEntities);
             // calculate the global categories
             nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
