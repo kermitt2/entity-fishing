@@ -1,0 +1,2375 @@
+wifi-pro-83-039:nerd tkristan$ mvn compile exec:exec -Ptrain_annotate_en
+[INFO] Scanning for projects...
+[WARNING]
+[WARNING] Some problems were encountered while building the effective model for com.scienceminer.nerd:nerd:war:0.0.3
+[WARNING] 'build.plugins.plugin.version' for org.codehaus.mojo:exec-maven-plugin is missing. @ line 177, column 29
+[WARNING]
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING]
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING]
+[INFO]
+[INFO] ---------------------< com.scienceminer.nerd:nerd >---------------------
+[INFO] Building entity-fishing 0.0.3
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ nerd ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ nerd ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-jar-plugin:3.0.2:jar (make-a-jar) @ nerd ---
+[INFO] Building jar: /Users/tkristan/Desktop/Tanti/nerd/target/nerd-0.0.3.jar
+[INFO]
+[INFO] --- exec-maven-plugin:1.6.0:exec (default-cli) @ nerd ---
+17:57:50.833 [main] DEBUG com.scienceminer.nerd.kb.UpperKnowledgeBase - Get new instance of UpperKnowledgeBase
+17:57:50.836 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Lexicon
+17:57:50.837 [main] DEBUG com.scienceminer.nerd.kb.Lexicon - Get new instance of Lexicon
+17:57:50.837 [main] INFO com.scienceminer.nerd.kb.Lexicon - Initiating dictionaries
+17:57:50.837 [main] INFO com.scienceminer.nerd.kb.Lexicon - End of Initialization of dictionaries
+17:57:50.837 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Lexicon initialized
+17:57:51.045 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase -
+Init Upper Knowledge-base layer
+building Environment for upper knowledge-base
+17:57:52.555 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /home/lopez/resources/wikidata/wikidataIds.csv is not readable
+17:57:52.586 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /home/lopez/resources/wikidata/latest-all.json.bz2 is not readable
+The content of nerdKid database - 35030909 items.
+Environment built - 37413613 concepts.
+17:57:52.586 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init English lower Knowledge-base layer
+init Environment for language en
+building Environment for language en
+17:57:52.664 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/stats.csv is not readable
+17:57:52.664 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/page.csv is not readable
+17:57:52.664 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/label.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLabel.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLinkIn.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLinkOut.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/categoryParents.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/articleParents.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/childCategories.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/childArticles.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/redirectTargetsBySource.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/redirectSourcesByTarget.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/wikidata.txt is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/translations.csv is not readable
+17:57:52.665 [main] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/en
+17:57:52.667 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/word.embeddings.quantized.gz is not readable
+17:57:52.668 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 14899737 pages.
+17:57:52.669 [main] INFO com.scienceminer.nerd.kb.db.WikipediaDomainMap - domains en / isLoaded: true
+17:57:52.724 [main] WARN com.scienceminer.nerd.kb.db.WikipediaDomainMap - Orthopedic surgery is not a category found in Wikipedia.
+17:57:52.727 [main] WARN com.scienceminer.nerd.kb.db.WikipediaDomainMap - Environment is not a category found in Wikipedia.
+17:57:52.740 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init German lower Knowledge-base layer
+init Environment for language de
+building Environment for language de
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/stats.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/page.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/label.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLabel.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLinkIn.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLinkOut.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/categoryParents.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/articleParents.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/childCategories.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/childArticles.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/redirectTargetsBySource.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/redirectSourcesByTarget.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/wikidata.txt is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/translations.csv is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/de
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/word.embeddings.quantized.gz is not readable
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3579552 pages.
+17:57:52.791 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init French lower Knowledge-base layer
+init Environment for language fr
+building Environment for language fr
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/stats.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/page.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/label.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLabel.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLinkIn.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLinkOut.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/categoryParents.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/articleParents.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/childCategories.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/childArticles.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/redirectTargetsBySource.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/redirectSourcesByTarget.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/wikidata.txt is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/translations.csv is not readable
+17:57:52.879 [main] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/fr
+17:57:52.880 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/word.embeddings.quantized.gz is not readable
+17:57:52.880 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3681264 pages.
+17:57:52.880 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Spanish lower Knowledge-base layer
+init Environment for language es
+building Environment for language es
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/stats.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/page.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/label.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLabel.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLinkIn.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLinkOut.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/categoryParents.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/articleParents.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/childCategories.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/childArticles.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/redirectTargetsBySource.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/redirectSourcesByTarget.csv is not readable
+17:57:52.929 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/wikidata.txt is not readable
+17:57:52.930 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/translations.csv is not readable
+17:57:52.930 [main] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/es
+17:57:52.930 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/word.embeddings.quantized.gz is not readable
+17:57:52.930 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3322291 pages.
+17:57:52.930 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Italian lower Knowledge-base layer
+init Environment for language it
+building Environment for language it
+17:57:52.981 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/stats.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/page.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/label.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLabel.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLinkIn.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLinkOut.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/categoryParents.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/articleParents.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/childCategories.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/childArticles.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/redirectTargetsBySource.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/redirectSourcesByTarget.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/wikidata.txt is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/translations.csv is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/it
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/word.embeddings.quantized.gz is not readable
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 2291751 pages.
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - End of Initialization of Wikipedia environments
+17:57:52.982 [main] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Grobid
+17:57:53.009 [main] WARN org.grobid.core.main.GrobidHomeFinder - No Grobid property was provided. Attempting to find Grobid home in the current directory...
+17:57:53.009 [main] WARN org.grobid.core.main.GrobidHomeFinder - ***************************************************************
+17:57:53.009 [main] WARN org.grobid.core.main.GrobidHomeFinder - *** USING GROBID HOME: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home
+17:57:53.009 [main] WARN org.grobid.core.main.GrobidHomeFinder - ***************************************************************
+17:57:53.009 [main] DEBUG org.grobid.core.utilities.GrobidProperties - synchronized getNewInstance
+17:57:53.009 [main] DEBUG org.grobid.core.utilities.GrobidProperties - loading grobid.properties
+17:57:53.009 [main] WARN org.grobid.core.main.GrobidHomeFinder - Grobid property file location was not explicitly set via 'org.grobid.property' system variable, defaulting to: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/config/grobid.properties
+17:57:53.015 [main] DEBUG org.grobid.core.utilities.GrobidProperties - Checking Properties
+17:57:53.015 [main] DEBUG org.grobid.core.utilities.GrobidProperties - loading pdf2xml path
+17:57:53.017 [main] DEBUG org.grobid.core.utilities.GrobidProperties - pdf2xml home directory set to /Users/tkristan/Desktop/Tanti/grobid/grobid-home/pdf2xml/mac-64
+17:57:53.018 [main] INFO org.grobid.core.main.LibraryLoader - Loading external native CRF library
+17:57:53.018 [main] DEBUG org.grobid.core.main.LibraryLoader - /Users/tkristan/Desktop/Tanti/grobid/grobid-home/lib/mac-64
+17:57:53.019 [main] INFO org.grobid.core.main.LibraryLoader - Loading Wapiti native library...
+17:57:53.054 [main] INFO org.grobid.core.main.LibraryLoader - Library crfpp loaded
+17:57:53.054 [main] INFO com.scienceminer.nerd.utilities.Utilities - >>>>>>>> GROBID_HOME=/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home
+17:57:53.054 [main] INFO com.scienceminer.nerd.training.WikipediaTrainer - Loading full wikitext content - this will take a while the first time
+building full markup database for language en
+17:57:53.064 [main] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/en
+Full markup database built - 14899737 pages.
+Create article sets...
+17:57:53.095 [main] DEBUG com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser - Get new instance of MediaWikiParser
+Create Ranker arff files...
+Training on 1  / 500
+18:00:01.056 [main] DEBUG org.grobid.core.analyzers.GrobidAnalyzer - Get new instance of GrobidAnalyzer
+18:00:01.069 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - Get new instance of Engine
+18:00:01.075 [main] DEBUG com.scienceminer.nerd.disambiguation.Relatedness - Get new instance of Relatedness
+18:00:01.168 [main] DEBUG com.scienceminer.nerd.mention.ProcessText - Get new instance of ProcessText
+18:00:01.169 [main] DEBUG com.scienceminer.nerd.utilities.Stopwords - Get new instance of Stopwords
+18:00:01.217 [main] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti (size: 96825300)
+[Wapiti] Loading model: "/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+18:00:12.165 [main] DEBUG org.grobid.core.lexicon.Lexicon - Get new instance of Lexicon
+18:00:12.165 [main] INFO org.grobid.core.lexicon.Lexicon - Initiating dictionary
+18:00:12.165 [main] INFO org.grobid.core.lexicon.Lexicon - End of Initialization of dictionary
+18:00:12.165 [main] INFO org.grobid.core.lexicon.Lexicon - Initiating names
+18:00:12.165 [main] INFO org.grobid.core.lexicon.Lexicon - End of initialization of names
+18:00:12.574 [main] INFO org.grobid.core.lexicon.Lexicon - Initiating country codes
+18:00:12.574 [main] INFO org.grobid.core.lexicon.Lexicon - End of initialization of country codes
+18:00:12.700 [main] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-ho[Wapiti] Loading model: "/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+me/models/nerfr/model.wapiti (size: 6624683)
+Model path: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+18:00:39.957 [main] DEBUG com.scienceminer.nerd.embeddings.SimilarityScorer - Get new instance of SimilarityScorer
+article contribution: 27 training instances
+Training on 2  / 500
+article contribution: 42 training instances
+Training on 3  / 500
+article contribution: 42 training instances
+Training on 4  / 500
+article contribution: 40 training instances
+Training on 5  / 500
+article contribution: 14 training instances
+Training on 6  / 500
+article contribution: 66 training instances
+Training on 7  / 500
+article contribution: 32 training instances
+Training on 8  / 500
+article contribution: 34 training instances
+Training on 9  / 500
+article contribution: 36 training instances
+Training on 10  / 500
+article contribution: 34 training instances
+Training on 11  / 500
+article contribution: 46 training instances
+Training on 12  / 500
+article contribution: 32 training instances
+Training on 13  / 500
+article contribution: 36 training instances
+Training on 14  / 500
+article contribution: 31 training instances
+Training on 15  / 500
+article contribution: 19 training instances
+Training on 16  / 500
+article contribution: 22 training instances
+Training on 17  / 500
+article contribution: 12 training instances
+Training on 18  / 500
+article contribution: 36 training instances
+Training on 19  / 500
+article contribution: 18 training instances
+Training on 20  / 500
+article contribution: 18 training instances
+Training on 21  / 500
+article contribution: 50 training instances
+Training on 22  / 500
+article contribution: 17 training instances
+Training on 23  / 500
+article contribution: 31 training instances
+Training on 24  / 500
+article contribution: 26 training instances
+Training on 25  / 500
+article contribution: 52 training instances
+Training on 26  / 500
+article contribution: 8 training instances
+Training on 27  / 500
+article contribution: 28 training instances
+Training on 28  / 500
+article contribution: 176 training instances
+Training on 29  / 500
+article contribution: 22 training instances
+Training on 30  / 500
+article contribution: 40 training instances
+Training on 31  / 500
+article contribution: 22 training instances
+Training on 32  / 500
+article contribution: 24 training instances
+Training on 33  / 500
+article contribution: 34 training instances
+Training on 34  / 500
+article contribution: 20 training instances
+Training on 35  / 500
+article contribution: 26 training instances
+Training on 36  / 500
+article contribution: 30 training instances
+Training on 37  / 500
+article contribution: 28 training instances
+Training on 38  / 500
+article contribution: 22 training instances
+Training on 39  / 500
+article contribution: 38 training instances
+Training on 40  / 500
+article contribution: 24 training instances
+Training on 41  / 500
+article contribution: 34 training instances
+Training on 42  / 500
+article contribution: 24 training instances
+Training on 43  / 500
+article contribution: 14 training instances
+Training on 44  / 500
+article contribution: 6 training instances
+Training on 45  / 500
+article contribution: 0 training instances
+Training on 46  / 500
+article contribution: 26 training instances
+Training on 47  / 500
+article contribution: 18 training instances
+Training on 48  / 500
+article contribution: 10 training instances
+Training on 49  / 500
+article contribution: 29 training instances
+Training on 50  / 500
+article contribution: 27 training instances
+Training on 51  / 500
+article contribution: 34 training instances
+Training on 52  / 500
+article contribution: 12 training instances
+Training on 53  / 500
+article contribution: 30 training instances
+Training on 54  / 500
+article contribution: 3 training instances
+Training on 55  / 500
+article contribution: 11 training instances
+Training on 56  / 500
+article contribution: 10 training instances
+Training on 57  / 500
+article contribution: 28 training instances
+Training on 58  / 500
+article contribution: 36 training instances
+Training on 59  / 500
+article contribution: 28 training instances
+Training on 60  / 500
+article contribution: 34 training instances
+Training on 61  / 500
+article contribution: 2 training instances
+Training on 62  / 500
+article contribution: 10 training instances
+Training on 63  / 500
+article contribution: 12 training instances
+Training on 64  / 500
+article contribution: 8 training instances
+Training on 65  / 500
+article contribution: 24 training instances
+Training on 66  / 500
+article contribution: 50 training instances
+Training on 67  / 500
+article contribution: 40 training instances
+Training on 68  / 500
+article contribution: 40 training instances
+Training on 69  / 500
+article contribution: 16 training instances
+Training on 70  / 500
+article contribution: 12 training instances
+Training on 71  / 500
+article contribution: 36 training instances
+Training on 72  / 500
+article contribution: 22 training instances
+Training on 73  / 500
+article contribution: 26 training instances
+Training on 74  / 500
+article contribution: 34 training instances
+Training on 75  / 500
+article contribution: 24 training instances
+Training on 76  / 500
+article contribution: 45 training instances
+Training on 77  / 500
+article contribution: 13 training instances
+Training on 78  / 500
+article contribution: 14 training instances
+Training on 79  / 500
+article contribution: 32 training instances
+Training on 80  / 500
+article contribution: 26 training instances
+Training on 81  / 500
+article contribution: 32 training instances
+Training on 82  / 500
+article contribution: 34 training instances
+Training on 83  / 500
+article contribution: 52 training instances
+Training on 84  / 500
+article contribution: 156 training instances
+Training on 85  / 500
+article contribution: 24 training instances
+Training on 86  / 500
+article contribution: 16 training instances
+Training on 87  / 500
+article contribution: 20 training instances
+Training on 88  / 500
+article contribution: 18 training instances
+Training on 89  / 500
+article contribution: 34 training instances
+Training on 90  / 500
+article contribution: 10 training instances
+Training on 91  / 500
+article contribution: 9 training instances
+Training on 92  / 500
+article contribution: 27 training instances
+Training on 93  / 500
+article contribution: 22 training instances
+Training on 94  / 500
+article contribution: 15 training instances
+Training on 95  / 500
+article contribution: 27 training instances
+Training on 96  / 500
+article contribution: 22 training instances
+Training on 97  / 500
+article contribution: 34 training instances
+Training on 98  / 500
+article contribution: 17 training instances
+Training on 99  / 500
+article contribution: 10 training instances
+Training on 100  / 500
+article contribution: 23 training instances
+Training on 101  / 500
+article contribution: 40 training instances
+Training on 102  / 500
+article contribution: 30 training instances
+Training on 103  / 500
+article contribution: 30 training instances
+Training on 104  / 500
+article contribution: 18 training instances
+Training on 105  / 500
+article contribution: 10 training instances
+Training on 106  / 500
+article contribution: 20 training instances
+Training on 107  / 500
+article contribution: 26 training instances
+Training on 108  / 500
+article contribution: 53 training instances
+Training on 109  / 500
+article contribution: 25 training instances
+Training on 110  / 500
+article contribution: 14 training instances
+Training on 111  / 500
+article contribution: 94 training instances
+Training on 112  / 500
+article contribution: 28 training instances
+Training on 113  / 500
+article contribution: 22 training instances
+Training on 114  / 500
+article contribution: 14 training instances
+Training on 115  / 500
+article contribution: 31 training instances
+Training on 116  / 500
+article contribution: 15 training instances
+Training on 117  / 500
+article contribution: 24 training instances
+Training on 118  / 500
+article contribution: 32 training instances
+Training on 119  / 500
+article contribution: 20 training instances
+Training on 120  / 500
+article contribution: 24 training instances
+Training on 121  / 500
+article contribution: 38 training instances
+Training on 122  / 500
+article contribution: 20 training instances
+Training on 123  / 500
+article contribution: 18 training instances
+Training on 124  / 500
+article contribution: 25 training instances
+Training on 125  / 500
+article contribution: 21 training instances
+Training on 126  / 500
+article contribution: 16 training instances
+Training on 127  / 500
+article contribution: 38 training instances
+Training on 128  / 500
+article contribution: 48 training instances
+Training on 129  / 500
+article contribution: 52 training instances
+Training on 130  / 500
+article contribution: 9 training instances
+Training on 131  / 500
+article contribution: 23 training instances
+Training on 132  / 500
+article contribution: 32 training instances
+Training on 133  / 500
+article contribution: 26 training instances
+Training on 134  / 500
+article contribution: 40 training instances
+Training on 135  / 500
+article contribution: 16 training instances
+Training on 136  / 500
+article contribution: 28 training instances
+Training on 137  / 500
+article contribution: 54 training instances
+Training on 138  / 500
+article contribution: 12 training instances
+Training on 139  / 500
+article contribution: 42 training instances
+Training on 140  / 500
+article contribution: 35 training instances
+Training on 141  / 500
+article contribution: 11 training instances
+Training on 142  / 500
+article contribution: 30 training instances
+Training on 143  / 500
+article contribution: 58 training instances
+Training on 144  / 500
+article contribution: 100 training instances
+Training on 145  / 500
+article contribution: 30 training instances
+Training on 146  / 500
+article contribution: 14 training instances
+Training on 147  / 500
+article contribution: 26 training instances
+Training on 148  / 500
+article contribution: 6 training instances
+Training on 149  / 500
+article contribution: 14 training instances
+Training on 150  / 500
+article contribution: 10 training instances
+Training on 151  / 500
+article contribution: 26 training instances
+Training on 152  / 500
+article contribution: 10 training instances
+Training on 153  / 500
+article contribution: 24 training instances
+Training on 154  / 500
+article contribution: 14 training instances
+Training on 155  / 500
+article contribution: 16 training instances
+Training on 156  / 500
+article contribution: 54 training instances
+Training on 157  / 500
+article contribution: 12 training instances
+Training on 158  / 500
+article contribution: 22 training instances
+Training on 159  / 500
+article contribution: 14 training instances
+Training on 160  / 500
+article contribution: 22 training instances
+Training on 161  / 500
+article contribution: 12 training instances
+Training on 162  / 500
+article contribution: 28 training instances
+Training on 163  / 500
+article contribution: 44 training instances
+Training on 164  / 500
+article contribution: 24 training instances
+Training on 165  / 500
+article contribution: 12 training instances
+Training on 166  / 500
+article contribution: 91 training instances
+Training on 167  / 500
+article contribution: 25 training instances
+Training on 168  / 500
+article contribution: 20 training instances
+Training on 169  / 500
+article contribution: 34 training instances
+Training on 170  / 500
+article contribution: 18 training instances
+Training on 171  / 500
+article contribution: 32 training instances
+Training on 172  / 500
+article contribution: 24 training instances
+Training on 173  / 500
+article contribution: 13 training instances
+Training on 174  / 500
+article contribution: 35 training instances
+Training on 175  / 500
+article contribution: 44 training instances
+Training on 176  / 500
+article contribution: 46 training instances
+Training on 177  / 500
+article contribution: 18 training instances
+Training on 178  / 500
+article contribution: 22 training instances
+Training on 179  / 500
+article contribution: 25 training instances
+Training on 180  / 500
+article contribution: 17 training instances
+Training on 181  / 500
+article contribution: 18 training instances
+Training on 182  / 500
+article contribution: 14 training instances
+Training on 183  / 500
+article contribution: 33 training instances
+Training on 184  / 500
+article contribution: 9 training instances
+Training on 185  / 500
+article contribution: 31 training instances
+Training on 186  / 500
+article contribution: 35 training instances
+Training on 187  / 500
+article contribution: 8 training instances
+Training on 188  / 500
+article contribution: 11 training instances
+Training on 189  / 500
+article contribution: 7 training instances
+Training on 190  / 500
+article contribution: 18 training instances
+Training on 191  / 500
+article contribution: 52 training instances
+Training on 192  / 500
+article contribution: 14 training instances
+Training on 193  / 500
+article contribution: 22 training instances
+Training on 194  / 500
+article contribution: 7 training instances
+Training on 195  / 500
+article contribution: 25 training instances
+Training on 196  / 500
+article contribution: 8 training instances
+Training on 197  / 500
+article contribution: 50 training instances
+Training on 198  / 500
+article contribution: 16 training instances
+Training on 199  / 500
+article contribution: 22 training instances
+Training on 200  / 500
+article contribution: 106 training instances
+Training on 201  / 500
+article contribution: 70 training instances
+Training on 202  / 500
+article contribution: 14 training instances
+Training on 203  / 500
+article contribution: 36 training instances
+Training on 204  / 500
+article contribution: 12 training instances
+Training on 205  / 500
+article contribution: 38 training instances
+Training on 206  / 500
+article contribution: 44 training instances
+Training on 207  / 500
+article contribution: 22 training instances
+Training on 208  / 500
+article contribution: 16 training instances
+Training on 209  / 500
+article contribution: 20 training instances
+Training on 210  / 500
+article contribution: 10 training instances
+Training on 211  / 500
+article contribution: 20 training instances
+Training on 212  / 500
+article contribution: 17 training instances
+Training on 213  / 500
+article contribution: 49 training instances
+Training on 214  / 500
+article contribution: 16 training instances
+Training on 215  / 500
+article contribution: 26 training instances
+Training on 216  / 500
+article contribution: 36 training instances
+Training on 217  / 500
+article contribution: 20 training instances
+Training on 218  / 500
+article contribution: 7 training instances
+Training on 219  / 500
+article contribution: 3 training instances
+Training on 220  / 500
+article contribution: 2 training instances
+Training on 221  / 500
+article contribution: 36 training instances
+Training on 222  / 500
+article contribution: 16 training instances
+Training on 223  / 500
+article contribution: 22 training instances
+Training on 224  / 500
+article contribution: 16 training instances
+Training on 225  / 500
+article contribution: 32 training instances
+Training on 226  / 500
+article contribution: 34 training instances
+Training on 227  / 500
+article contribution: 42 training instances
+Training on 228  / 500
+article contribution: 20 training instances
+Training on 229  / 500
+article contribution: 30 training instances
+Training on 230  / 500
+article contribution: 16 training instances
+Training on 231  / 500
+article contribution: 12 training instances
+Training on 232  / 500
+article contribution: 25 training instances
+Training on 233  / 500
+article contribution: 11 training instances
+Training on 234  / 500
+article contribution: 10 training instances
+Training on 235  / 500
+article contribution: 18 training instances
+Training on 236  / 500
+article contribution: 22 training instances
+Training on 237  / 500
+article contribution: 46 training instances
+Training on 238  / 500
+article contribution: 26 training instances
+Training on 239  / 500
+article contribution: 15 training instances
+Training on 240  / 500
+article contribution: 15 training instances
+Training on 241  / 500
+article contribution: 44 training instances
+Training on 242  / 500
+article contribution: 21 training instances
+Training on 243  / 500
+article contribution: 26 training instances
+Training on 244  / 500
+article contribution: 35 training instances
+Training on 245  / 500
+article contribution: 18 training instances
+Training on 246  / 500
+article contribution: 38 training instances
+Training on 247  / 500
+article contribution: 24 training instances
+Training on 248  / 500
+article contribution: 44 training instances
+Training on 249  / 500
+article contribution: 17 training instances
+Training on 250  / 500
+article contribution: 47 training instances
+Training on 251  / 500
+article contribution: 19 training instances
+Training on 252  / 500
+article contribution: 25 training instances
+Training on 253  / 500
+article contribution: 20 training instances
+Training on 254  / 500
+article contribution: 22 training instances
+Training on 255  / 500
+article contribution: 28 training instances
+Training on 256  / 500
+article contribution: 28 training instances
+Training on 257  / 500
+article contribution: 60 training instances
+Training on 258  / 500
+article contribution: 16 training instances
+Training on 259  / 500
+article contribution: 18 training instances
+Training on 260  / 500
+article contribution: 34 training instances
+Training on 261  / 500
+article contribution: 5 training instances
+Training on 262  / 500
+article contribution: 11 training instances
+Training on 263  / 500
+article contribution: 32 training instances
+Training on 264  / 500
+article contribution: 12 training instances
+Training on 265  / 500
+article contribution: 20 training instances
+Training on 266  / 500
+article contribution: 10 training instances
+Training on 267  / 500
+article contribution: 30 training instances
+Training on 268  / 500
+article contribution: 38 training instances
+Training on 269  / 500
+article contribution: 26 training instances
+Training on 270  / 500
+article contribution: 30 training instances
+Training on 271  / 500
+article contribution: 18 training instances
+Training on 272  / 500
+article contribution: 20 training instances
+Training on 273  / 500
+article contribution: 26 training instances
+Training on 274  / 500
+article contribution: 30 training instances
+Training on 275  / 500
+article contribution: 42 training instances
+Training on 276  / 500
+article contribution: 18 training instances
+Training on 277  / 500
+article contribution: 14 training instances
+Training on 278  / 500
+article contribution: 18 training instances
+Training on 279  / 500
+article contribution: 8 training instances
+Training on 280  / 500
+article contribution: 44 training instances
+Training on 281  / 500
+article contribution: 26 training instances
+Training on 282  / 500
+article contribution: 18 training instances
+Training on 283  / 500
+article contribution: 34 training instances
+Training on 284  / 500
+article contribution: 16 training instances
+Training on 285  / 500
+article contribution: 30 training instances
+Training on 286  / 500
+article contribution: 120 training instances
+Training on 287  / 500
+article contribution: 10 training instances
+Training on 288  / 500
+article contribution: 30 training instances
+Training on 289  / 500
+article contribution: 11 training instances
+Training on 290  / 500
+article contribution: 13 training instances
+Training on 291  / 500
+article contribution: 14 training instances
+Training on 292  / 500
+article contribution: 50 training instances
+Training on 293  / 500
+article contribution: 23 training instances
+Training on 294  / 500
+article contribution: 13 training instances
+Training on 295  / 500
+article contribution: 16 training instances
+Training on 296  / 500
+article contribution: 26 training instances
+Training on 297  / 500
+article contribution: 20 training instances
+Training on 298  / 500
+article contribution: 36 training instances
+Training on 299  / 500
+article contribution: 22 training instances
+Training on 300  / 500
+article contribution: 45 training instances
+Training on 301  / 500
+article contribution: 19 training instances
+Training on 302  / 500
+article contribution: 24 training instances
+Training on 303  / 500
+article contribution: 14 training instances
+Training on 304  / 500
+article contribution: 12 training instances
+Training on 305  / 500
+article contribution: 17 training instances
+Training on 306  / 500
+article contribution: 14 training instances
+Training on 307  / 500
+article contribution: 17 training instances
+Training on 308  / 500
+article contribution: 6 training instances
+Training on 309  / 500
+article contribution: 16 training instances
+Training on 310  / 500
+article contribution: 32 training instances
+Training on 311  / 500
+article contribution: 14 training instances
+Training on 312  / 500
+article contribution: 26 training instances
+Training on 313  / 500
+article contribution: 45 training instances
+Training on 314  / 500
+article contribution: 70 training instances
+Training on 315  / 500
+article contribution: 17 training instances
+Training on 316  / 500
+article contribution: 12 training instances
+Training on 317  / 500
+article contribution: 28 training instances
+Training on 318  / 500
+article contribution: 12 training instances
+Training on 319  / 500
+article contribution: 19 training instances
+Training on 320  / 500
+article contribution: 29 training instances
+Training on 321  / 500
+article contribution: 22 training instances
+Training on 322  / 500
+article contribution: 14 training instances
+Training on 323  / 500
+article contribution: 21 training instances
+Training on 324  / 500
+article contribution: 41 training instances
+Training on 325  / 500
+article contribution: 26 training instances
+Training on 326  / 500
+article contribution: 20 training instances
+Training on 327  / 500
+article contribution: 0 training instances
+Training on 328  / 500
+article contribution: 24 training instances
+Training on 329  / 500
+article contribution: 14 training instances
+Training on 330  / 500
+article contribution: 70 training instances
+Training on 331  / 500
+article contribution: 27 training instances
+Training on 332  / 500
+article contribution: 21 training instances
+Training on 333  / 500
+article contribution: 50 training instances
+Training on 334  / 500
+article contribution: 68 training instances
+Training on 335  / 500
+article contribution: 54 training instances
+Training on 336  / 500
+article contribution: 24 training instances
+Training on 337  / 500
+article contribution: 18 training instances
+Training on 338  / 500
+article contribution: 28 training instances
+Training on 339  / 500
+article contribution: 8 training instances
+Training on 340  / 500
+article contribution: 38 training instances
+Training on 341  / 500
+article contribution: 4 training instances
+Training on 342  / 500
+article contribution: 24 training instances
+Training on 343  / 500
+article contribution: 48 training instances
+Training on 344  / 500
+article contribution: 19 training instances
+Training on 345  / 500
+article contribution: 25 training instances
+Training on 346  / 500
+article contribution: 22 training instances
+Training on 347  / 500
+article contribution: 30 training instances
+Training on 348  / 500
+article contribution: 26 training instances
+Training on 349  / 500
+article contribution: 4 training instances
+Training on 350  / 500
+article contribution: 12 training instances
+Training on 351  / 500
+article contribution: 48 training instances
+Training on 352  / 500
+article contribution: 22 training instances
+Training on 353  / 500
+article contribution: 35 training instances
+Training on 354  / 500
+article contribution: 21 training instances
+Training on 355  / 500
+article contribution: 22 training instances
+Training on 356  / 500
+article contribution: 62 training instances
+Training on 357  / 500
+article contribution: 31 training instances
+Training on 358  / 500
+article contribution: 21 training instances
+Training on 359  / 500
+article contribution: 27 training instances
+Training on 360  / 500
+article contribution: 16 training instances
+Training on 361  / 500
+article contribution: 18 training instances
+Training on 362  / 500
+article contribution: 21 training instances
+Training on 363  / 500
+article contribution: 50 training instances
+Training on 364  / 500
+article contribution: 16 training instances
+Training on 365  / 500
+article contribution: 13 training instances
+Training on 366  / 500
+article contribution: 13 training instances
+Training on 367  / 500
+article contribution: 38 training instances
+Training on 368  / 500
+article contribution: 24 training instances
+Training on 369  / 500
+article contribution: 42 training instances
+Training on 370  / 500
+article contribution: 14 training instances
+Training on 371  / 500
+article contribution: 4 training instances
+Training on 372  / 500
+article contribution: 17 training instances
+Training on 373  / 500
+article contribution: 9 training instances
+Training on 374  / 500
+article contribution: 28 training instances
+Training on 375  / 500
+article contribution: 30 training instances
+Training on 376  / 500
+article contribution: 24 training instances
+Training on 377  / 500
+article contribution: 17 training instances
+Training on 378  / 500
+article contribution: 8 training instances
+Training on 379  / 500
+article contribution: 25 training instances
+Training on 380  / 500
+article contribution: 34 training instances
+Training on 381  / 500
+article contribution: 44 training instances
+Training on 382  / 500
+article contribution: 56 training instances
+Training on 383  / 500
+article contribution: 22 training instances
+Training on 384  / 500
+article contribution: 28 training instances
+Training on 385  / 500
+article contribution: 26 training instances
+Training on 386  / 500
+article contribution: 6 training instances
+Training on 387  / 500
+article contribution: 18 training instances
+Training on 388  / 500
+article contribution: 10 training instances
+Training on 389  / 500
+article contribution: 40 training instances
+Training on 390  / 500
+article contribution: 34 training instances
+Training on 391  / 500
+article contribution: 12 training instances
+Training on 392  / 500
+article contribution: 16 training instances
+Training on 393  / 500
+article contribution: 36 training instances
+Training on 394  / 500
+article contribution: 17 training instances
+Training on 395  / 500
+article contribution: 38 training instances
+Training on 396  / 500
+article contribution: 41 training instances
+Training on 397  / 500
+article contribution: 26 training instances
+Training on 398  / 500
+article contribution: 46 training instances
+Training on 399  / 500
+article contribution: 54 training instances
+Training on 400  / 500
+article contribution: 18 training instances
+Training on 401  / 500
+article contribution: 67 training instances
+Training on 402  / 500
+article contribution: 36 training instances
+Training on 403  / 500
+article contribution: 21 training instances
+Training on 404  / 500
+article contribution: 14 training instances
+Training on 405  / 500
+article contribution: 50 training instances
+Training on 406  / 500
+article contribution: 28 training instances
+Training on 407  / 500
+article contribution: 24 training instances
+Training on 408  / 500
+article contribution: 30 training instances
+Training on 409  / 500
+article contribution: 12 training instances
+Training on 410  / 500
+article contribution: 40 training instances
+Training on 411  / 500
+article contribution: 24 training instances
+Training on 412  / 500
+article contribution: 48 training instances
+Training on 413  / 500
+article contribution: 38 training instances
+Training on 414  / 500
+article contribution: 18 training instances
+Training on 415  / 500
+article contribution: 4 training instances
+Training on 416  / 500
+article contribution: 52 training instances
+Training on 417  / 500
+article contribution: 20 training instances
+Training on 418  / 500
+article contribution: 22 training instances
+Training on 419  / 500
+article contribution: 30 training instances
+Training on 420  / 500
+article contribution: 22 training instances
+Training on 421  / 500
+article contribution: 16 training instances
+Training on 422  / 500
+article contribution: 20 training instances
+Training on 423  / 500
+article contribution: 6 training instances
+Training on 424  / 500
+article contribution: 36 training instances
+Training on 425  / 500
+article contribution: 38 training instances
+Training on 426  / 500
+article contribution: 34 training instances
+Training on 427  / 500
+article contribution: 18 training instances
+Training on 428  / 500
+article contribution: 22 training instances
+Training on 429  / 500
+article contribution: 6 training instances
+Training on 430  / 500
+article contribution: 25 training instances
+Training on 431  / 500
+article contribution: 53 training instances
+Training on 432  / 500
+article contribution: 16 training instances
+Training on 433  / 500
+article contribution: 10 training instances
+Training on 434  / 500
+article contribution: 24 training instances
+Training on 435  / 500
+article contribution: 30 training instances
+Training on 436  / 500
+article contribution: 20 training instances
+Training on 437  / 500
+article contribution: 36 training instances
+Training on 438  / 500
+article contribution: 34 training instances
+Training on 439  / 500
+article contribution: 20 training instances
+Training on 440  / 500
+article contribution: 22 training instances
+Training on 441  / 500
+article contribution: 44 training instances
+Training on 442  / 500
+article contribution: 30 training instances
+Training on 443  / 500
+article contribution: 20 training instances
+Training on 444  / 500
+article contribution: 32 training instances
+Training on 445  / 500
+article contribution: 34 training instances
+Training on 446  / 500
+article contribution: 16 training instances
+Training on 447  / 500
+article contribution: 26 training instances
+Training on 448  / 500
+article contribution: 12 training instances
+Training on 449  / 500
+article contribution: 42 training instances
+Training on 450  / 500
+article contribution: 14 training instances
+Training on 451  / 500
+article contribution: 24 training instances
+Training on 452  / 500
+article contribution: 4 training instances
+Training on 453  / 500
+article contribution: 28 training instances
+Training on 454  / 500
+article contribution: 28 training instances
+Training on 455  / 500
+article contribution: 29 training instances
+Training on 456  / 500
+article contribution: 29 training instances
+Training on 457  / 500
+article contribution: 6 training instances
+Training on 458  / 500
+article contribution: 16 training instances
+Training on 459  / 500
+article contribution: 20 training instances
+Training on 460  / 500
+article contribution: 50 training instances
+Training on 461  / 500
+article contribution: 10 training instances
+Training on 462  / 500
+article contribution: 46 training instances
+Training on 463  / 500
+article contribution: 50 training instances
+Training on 464  / 500
+article contribution: 16 training instances
+Training on 465  / 500
+article contribution: 0 training instances
+Training on 466  / 500
+article contribution: 24 training instances
+Training on 467  / 500
+article contribution: 12 training instances
+Training on 468  / 500
+article contribution: 12 training instances
+Training on 469  / 500
+article contribution: 30 training instances
+Training on 470  / 500
+article contribution: 34 training instances
+Training on 471  / 500
+article contribution: 48 training instances
+Training on 472  / 500
+article contribution: 44 training instances
+Training on 473  / 500
+article contribution: 29 training instances
+Training on 474  / 500
+article contribution: 9 training instances
+Training on 475  / 500
+article contribution: 18 training instances
+Training on 476  / 500
+article contribution: 62 training instances
+Training on 477  / 500
+article contribution: 70 training instances
+Training on 478  / 500
+article contribution: 7 training instances
+Training on 479  / 500
+article contribution: 15 training instances
+Training on 480  / 500
+article contribution: 39 training instances
+Training on 481  / 500
+article contribution: 23 training instances
+Training on 482  / 500
+article contribution: 32 training instances
+Training on 483  / 500
+article contribution: 32 training instances
+Training on 484  / 500
+article contribution: 12 training instances
+Training on 485  / 500
+article contribution: 24 training instances
+Training on 486  / 500
+article contribution: 8 training instances
+Training on 487  / 500
+article contribution: 31 training instances
+Training on 488  / 500
+article contribution: 3 training instances
+Training on 489  / 500
+article contribution: 18 training instances
+Training on 490  / 500
+article contribution: 11 training instances
+Training on 491  / 500
+article contribution: 13 training instances
+Training on 492  / 500
+article contribution: 18 training instances
+Training on 493  / 500
+article contribution: 9 training instances
+Training on 494  / 500
+article contribution: 25 training instances
+Training on 495  / 500
+article contribution: 42 training instances
+Training on 496  / 500
+article contribution: 12 training instances
+Training on 497  / 500
+article contribution: 24 training instances
+Training on 498  / 500
+article contribution: 27 training instances
+Training on 499  / 500
+article contribution: 22 training instances
+Training on 500  / 500
+article contribution: 19 training instances
+Training data saved under data/wikipedia/training/en/ranker.arff
+Create Ranker classifier...
+18:21:56.434 [main] INFO com.scienceminer.nerd.disambiguation.NerdRanker - building model
+NERD ranker model created in 1.413 seconds
+18:21:57.852 [main] INFO com.scienceminer.nerd.disambiguation.NerdRanker - saving model
+Model saved under data/models/ranker-long-en.model
+Create Selector arff files...
+Training on 1  / 100
+ - training 88320: Glen
+18:21:59.653 [main] INFO com.scienceminer.nerd.disambiguation.NerdRanker - Model for nerd ranker loaded: data/models/ranker-long-en.model
+article contribution: 97 training instances
+Training on 2  / 100
+ - training 93184: Mountrail County, North Dakota
+article contribution: 86 training instances
+Training on 3  / 100
+ - training 94976: Freeborn County, Minnesota
+article contribution: 138 training instances
+Training on 4  / 100
+ - training 95744: Bourbon County, Kansas
+article contribution: 102 training instances
+Training on 5  / 100
+ - training 96256: Edgar County, Illinois
+article contribution: 66 training instances
+Training on 6  / 100
+ - training 96768: Greene County, Georgia
+article contribution: 86 training instances
+Training on 7  / 100
+ - training 155136: Minster-in-Thanet
+article contribution: 158 training instances
+Training on 8  / 100
+ - training 160768: John Barrow, 1st Baronet
+article contribution: 112 training instances
+Training on 9  / 100
+ - training 174080: Diagonal matrix
+article contribution: 116 training instances
+Training on 10  / 100
+ - training 214272: Burned-over district
+article contribution: 128 training instances
+Training on 11  / 100
+ - training 226816: 1599 in literature
+article contribution: 152 training instances
+Training on 12  / 100
+ - training 236800: Porthos
+article contribution: 88 training instances
+Training on 13  / 100
+ - training 282624: Hiawatha National Forest
+article contribution: 110 training instances
+Training on 14  / 100
+ - training 286976: Sanderling
+article contribution: 118 training instances
+Training on 15  / 100
+ - training 293888: Bismarck Archipelago
+article contribution: 150 training instances
+Training on 16  / 100
+ - training 294912: Kelly McGillis
+article contribution: 183 training instances
+Training on 17  / 100
+ - training 295936: 1757 in art
+article contribution: 101 training instances
+Training on 18  / 100
+ - training 300800: Metropolitan Borough of Knowsley
+article contribution: 122 training instances
+Training on 19  / 100
+ - training 305152: Papaver rhoeas
+article contribution: 94 training instances
+Training on 20  / 100
+ - training 343808: Bernard Lovell
+article contribution: 102 training instances
+Training on 21  / 100
+ - training 345600: High Peak, Derbyshire
+article contribution: 154 training instances
+Training on 22  / 100
+ - training 355584: Mikawa Province
+article contribution: 104 training instances
+Training on 23  / 100
+ - training 357632: Mating
+article contribution: 164 training instances
+Training on 24  / 100
+ - training 479232: Sectionalism
+article contribution: 86 training instances
+Training on 25  / 100
+ - training 540672: Radley
+article contribution: 110 training instances
+Training on 26  / 100
+ - training 603648: Mapai
+article contribution: 102 training instances
+Training on 27  / 100
+ - training 691968: Oily fish
+article contribution: 92 training instances
+Training on 28  / 100
+ - training 806656: Thomas Chrowder Chamberlin
+article contribution: 96 training instances
+Training on 29  / 100
+ - training 831744: Visitor center
+article contribution: 100 training instances
+Training on 30  / 100
+ - training 872960: Duncan Lamont
+article contribution: 118 training instances
+Training on 31  / 100
+ - training 1132032: Wawel Cathedral
+article contribution: 94 training instances
+Training on 32  / 100
+ - training 1135616: Garth Drabinsky
+article contribution: 128 training instances
+Training on 33  / 100
+ - training 1219584: Parlamentarischer Rat
+article contribution: 132 training instances
+Training on 34  / 100
+ - training 1284864: Trad jazz
+article contribution: 84 training instances
+Training on 35  / 100
+ - training 1477888: Gheorghe Popescu
+article contribution: 100 training instances
+Training on 36  / 100
+ - training 1536256: Helena Christensen
+article contribution: 130 training instances
+Training on 37  / 100
+ - training 1597952: Moshav
+article contribution: 240 training instances
+Training on 38  / 100
+ - training 1792768: Randal Kleiser
+article contribution: 136 training instances
+Training on 39  / 100
+ - training 1873920: Beaver Harris
+article contribution: 120 training instances
+Training on 40  / 100
+ - training 1982720: Samuel Adler (composer)
+article contribution: 122 training instances
+Training on 41  / 100
+ - training 1989888: Francis Burton Harrison
+article contribution: 138 training instances
+Training on 42  / 100
+ - training 2178816: India Meteorological Department
+article contribution: 101 training instances
+Training on 43  / 100
+ - training 2261248: Endless Harmony Soundtrack
+article contribution: 126 training instances
+Training on 44  / 100
+ - training 2268416: Title 28 of the United States Code
+article contribution: 145 training instances
+Training on 45  / 100
+ - training 2401792: 1970 in art
+article contribution: 214 training instances
+Training on 46  / 100
+ - training 2534656: Polygala
+article contribution: 98 training instances
+Training on 47  / 100
+ - training 2592768: International Bluegrass Music Hall of Fame
+article contribution: 54 training instances
+Training on 48  / 100
+ - training 2664704: Kevin Grevioux
+article contribution: 152 training instances
+Training on 49  / 100
+ - training 2771456: Joe Kuhel
+article contribution: 98 training instances
+Training on 50  / 100
+ - training 2987264: That Old Feeling (song)
+article contribution: 212 training instances
+Training on 51  / 100
+ - training 3051520: Footballfish
+article contribution: 138 training instances
+Training on 52  / 100
+ - training 3124224: Bharuch district
+article contribution: 108 training instances
+Training on 53  / 100
+ - training 3238912: Bad Belzig
+article contribution: 124 training instances
+Training on 54  / 100
+ - training 3559936: SpinART Records
+article contribution: 82 training instances
+Training on 55  / 100
+ - training 3622144: Derek Morris (ice hockey)
+article contribution: 98 training instances
+Training on 56  / 100
+ - training 4210688: Ruby Dandridge
+article contribution: 90 training instances
+Training on 57  / 100
+ - training 4629504: Doris Hare
+article contribution: 104 training instances
+Training on 58  / 100
+ - training 4877312: Mikhail Tereshchenko
+article contribution: 116 training instances
+Training on 59  / 100
+ - training 4939008: Curt Bois
+article contribution: 86 training instances
+Training on 60  / 100
+ - training 5525760: Adopt-a-Highway
+article contribution: 90 training instances
+Training on 61  / 100
+ - training 5727232: Ruggero Raimondi
+article contribution: 182 training instances
+Training on 62  / 100
+ - training 5795328: 1805 in art
+article contribution: 120 training instances
+Training on 63  / 100
+ - training 5848832: Jim Donnan
+article contribution: 92 training instances
+Training on 64  / 100
+ - training 5876480: Plantation High School
+article contribution: 134 training instances
+Training on 65  / 100
+ - training 5937920: MRAP (NGO)
+article contribution: 92 training instances
+Training on 66  / 100
+ - training 6042880: Spoonful
+article contribution: 114 training instances
+Training on 67  / 100
+ - training 6070528: Robert Torti
+article contribution: 136 training instances
+Training on 68  / 100
+ - training 6978560: Robert Dorning
+article contribution: 146 training instances
+Training on 69  / 100
+ - training 7506176: Black Saddle
+article contribution: 148 training instances
+Training on 70  / 100
+ - training 7701504: Westlake High School (California)
+article contribution: 158 training instances
+Training on 71  / 100
+ - training 7820544: Bishop of Ravenna
+article contribution: 100 training instances
+Training on 72  / 100
+ - training 8271872: Hymne à l'amour
+article contribution: 198 training instances
+Training on 73  / 100
+ - training 8494592: Jesse Applegate
+article contribution: 102 training instances
+Training on 74  / 100
+ - training 8494848: T.A.M.I. Show
+article contribution: 132 training instances
+Training on 75  / 100
+ - training 9086464: Dorothy Canfield Fisher Children's Book Award
+article contribution: 146 training instances
+Training on 76  / 100
+ - training 9392640: Sant'Adriano al Foro
+article contribution: 120 training instances
+Training on 77  / 100
+ - training 9587456: 1985 FIFA World Youth Championship
+article contribution: 84 training instances
+Training on 78  / 100
+ - training 9778688: 1828 in Ireland
+article contribution: 82 training instances
+Training on 79  / 100
+ - training 10448896: Rob Benedict
+article contribution: 102 training instances
+Training on 80  / 100
+ - training 12999424: Christianity in Omaha, Nebraska
+article contribution: 106 training instances
+Training on 81  / 100
+ - training 14135808: Landslide dam
+article contribution: 100 training instances
+Training on 82  / 100
+ - training 15426304: Bobby Diamond
+article contribution: 134 training instances
+Training on 83  / 100
+ - training 15503360: Dragotin Kette
+article contribution: 102 training instances
+Training on 84  / 100
+ - training 16940544: 1984–85 Football League
+article contribution: 96 training instances
+Training on 85  / 100
+ - training 18442752: Quincy, Illinois micropolitan area
+article contribution: 82 training instances
+Training on 86  / 100
+ - training 22892544: Carlos Páez Vilaró
+article contribution: 102 training instances
+Training on 87  / 100
+ - training 24226816: League Championship Series Most Valuable Player Award
+article contribution: 94 training instances
+Training on 88  / 100
+ - training 26517248: William Little Lee
+article contribution: 96 training instances
+Training on 89  / 100
+ - training 26819840: Curt Lowens
+article contribution: 76 training instances
+Training on 90  / 100
+ - training 30839552: Vanitha Film Awards
+article contribution: 234 training instances
+Training on 91  / 100
+ - training 31359232: The Saint (music venue)
+article contribution: 110 training instances
+Training on 92  / 100
+ - training 31479552: Rudolf Platte
+article contribution: 128 training instances
+Training on 93  / 100
+ - training 31955200: Glory (kickboxing)
+article contribution: 244 training instances
+Training on 94  / 100
+ - training 32656640: Pechorsky District
+article contribution: 106 training instances
+Training on 95  / 100
+ - training 32676096: American Music Awards of 2011
+article contribution: 96 training instances
+Training on 96  / 100
+ - training 33385984: 2020 Summer Paralympics
+article contribution: 84 training instances
+Training on 97  / 100
+ - training 37965312: Freda Betti
+article contribution: 128 training instances
+Training on 98  / 100
+ - training 44587520: Atonement
+article contribution: 112 training instances
+Training on 99  / 100
+ - training 48396032: 3 Quarks Daily
+article contribution: 108 training instances
+Training on 100  / 100
+ - training 52848128: 2019 Africa Cup of Nations qualification
+article contribution: 126 training instances
+Training data saved under data/wikipedia/training/en/selector.arff
+Create Selector classifier...
+18:44:32.322 [main] INFO com.scienceminer.nerd.disambiguation.NerdSelector - building model
+NERD selector model created in 0.466 seconds
+18:44:32.791 [main] INFO com.scienceminer.nerd.disambiguation.NerdSelector - saving model
+Model saved under data/models/selector-long-en.model
+Evaluate classifiers...
+-------------------------- evaluating ranker model --------------------------
+Evaluating on article 1 / 100
+18:44:34.560 [main] INFO com.scienceminer.nerd.disambiguation.NerdRanker - Model for nerd ranker loaded: data/models/ranker-long-en.model
+18:44:35.699 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2763807 - cache proportion: 0.38894694986074574
+Evaluating on article 2 / 100
+18:44:38.086 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2774952 - cache proportion: 0.38949960762296076
+Evaluating on article 3 / 100
+18:44:40.000 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2784297 - cache proportion: 0.3897274735593219
+Evaluating on article 4 / 100
+18:44:42.199 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2794275 - cache proportion: 0.38962348455739937
+Evaluating on article 5 / 100
+18:44:44.940 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2810514 - cache proportion: 0.38942963605364733
+Evaluating on article 6 / 100
+18:44:46.017 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2814937 - cache proportion: 0.38934724423489675
+Evaluating on article 7 / 100
+18:44:47.625 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2823851 - cache proportion: 0.3893528571966097
+Evaluating on article 8 / 100
+18:44:50.859 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2840837 - cache proportion: 0.3889938596919501
+Evaluating on article 9 / 100
+18:44:53.896 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2856134 - cache proportion: 0.38926617230054306
+Evaluating on article 10 / 100
+18:44:56.788 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2874318 - cache proportion: 0.38940836307531645
+Evaluating on article 11 / 100
+18:44:59.122 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2888747 - cache proportion: 0.390202188160527
+Evaluating on article 12 / 100
+18:44:59.945 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2892856 - cache proportion: 0.3904569419516716
+Evaluating on article 13 / 100
+18:45:01.924 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2903083 - cache proportion: 0.3901693402799805
+Evaluating on article 14 / 100
+18:45:03.713 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2910274 - cache proportion: 0.390099075468867
+Evaluating on article 15 / 100
+18:45:05.414 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2921215 - cache proportion: 0.3906793102355004
+Evaluating on article 16 / 100
+18:45:08.023 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2935416 - cache proportion: 0.3910892999162374
+Evaluating on article 17 / 100
+18:45:10.543 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2951144 - cache proportion: 0.3909009458427767
+Evaluating on article 18 / 100
+18:45:11.563 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2956750 - cache proportion: 0.3918518535277734
+Evaluating on article 19 / 100
+18:45:15.319 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2977233 - cache proportion: 0.3918395627960771
+Evaluating on article 20 / 100
+18:45:16.973 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 2986284 - cache proportion: 0.3916496887339389
+Evaluating on article 21 / 100
+18:45:19.939 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3003284 - cache proportion: 0.39146671021702306
+Evaluating on article 22 / 100
+18:45:22.645 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3019478 - cache proportion: 0.3924472972611337
+Evaluating on article 23 / 100
+18:45:24.209 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3027934 - cache proportion: 0.39242192361244743
+Evaluating on article 24 / 100
+18:45:29.178 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3045599 - cache proportion: 0.3934958099699237
+Evaluating on article 25 / 100
+18:45:32.584 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3068654 - cache proportion: 0.39327961140209333
+Evaluating on article 26 / 100
+18:45:34.962 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3082504 - cache proportion: 0.3930971261881844
+Evaluating on article 27 / 100
+18:45:36.641 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3093210 - cache proportion: 0.39326493299592813
+Evaluating on article 28 / 100
+18:45:41.241 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3113322 - cache proportion: 0.3940375019487864
+Evaluating on article 29 / 100
+18:45:43.395 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3128309 - cache proportion: 0.3947886544915382
+Evaluating on article 30 / 100
+18:45:44.904 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3137844 - cache proportion: 0.39543175697845734
+Evaluating on article 31 / 100
+18:45:48.127 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3157730 - cache proportion: 0.39529828150831403
+Evaluating on article 32 / 100
+18:45:51.124 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3178119 - cache proportion: 0.3959743521079193
+Evaluating on article 33 / 100
+18:45:52.982 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3189320 - cache proportion: 0.39648551000940657
+Evaluating on article 34 / 100
+18:45:56.757 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3207089 - cache proportion: 0.3965658455962665
+Evaluating on article 35 / 100
+18:45:57.652 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3212436 - cache proportion: 0.3965816066144614
+Evaluating on article 36 / 100
+18:46:01.040 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3232703 - cache proportion: 0.3967992530296689
+Evaluating on article 37 / 100
+18:46:04.684 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3256405 - cache proportion: 0.39718519014905407
+Evaluating on article 38 / 100
+18:46:07.475 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3273047 - cache proportion: 0.39728763072621465
+Evaluating on article 39 / 100
+18:46:10.678 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3290377 - cache proportion: 0.3979610600453143
+Evaluating on article 40 / 100
+18:46:12.430 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3297849 - cache proportion: 0.39827652521442625
+Evaluating on article 41 / 100
+18:46:14.001 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3306153 - cache proportion: 0.39861469502299385
+Evaluating on article 42 / 100
+18:46:15.280 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3314582 - cache proportion: 0.3986107699079495
+Evaluating on article 43 / 100
+18:46:18.222 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3332573 - cache proportion: 0.39849943109129393
+Evaluating on article 44 / 100
+18:46:20.371 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3344605 - cache proportion: 0.3991064043239265
+Evaluating on article 45 / 100
+18:46:23.210 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3361338 - cache proportion: 0.3993633641704185
+Evaluating on article 46 / 100
+18:46:26.143 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3375290 - cache proportion: 0.39938488060441424
+Evaluating on article 47 / 100
+18:46:27.967 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3384458 - cache proportion: 0.3999987944869762
+Evaluating on article 48 / 100
+18:46:30.999 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3398201 - cache proportion: 0.40014019437273696
+Evaluating on article 49 / 100
+18:46:35.774 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3421854 - cache proportion: 0.4000885704808542
+Evaluating on article 50 / 100
+18:46:38.812 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3433998 - cache proportion: 0.40044123639774265
+Evaluating on article 51 / 100
+18:46:41.714 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3448081 - cache proportion: 0.4005476654244433
+Evaluating on article 52 / 100
+18:46:45.225 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3467636 - cache proportion: 0.400632167825399
+Evaluating on article 53 / 100
+18:46:48.924 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3487107 - cache proportion: 0.40115136151882724
+Evaluating on article 54 / 100
+18:46:50.882 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3498968 - cache proportion: 0.40122142363432656
+Evaluating on article 55 / 100
+18:46:54.714 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3519631 - cache proportion: 0.40183113248127256
+Evaluating on article 56 / 100
+18:46:56.087 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3528542 - cache proportion: 0.40210610003797265
+Evaluating on article 57 / 100
+18:46:57.463 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3536347 - cache proportion: 0.4025844471973469
+Evaluating on article 58 / 100
+18:46:58.822 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3545238 - cache proportion: 0.40236777958713044
+Evaluating on article 59 / 100
+18:47:00.328 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3553544 - cache proportion: 0.4024020332373701
+Evaluating on article 60 / 100
+18:47:03.419 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3570476 - cache proportion: 0.40311399220206356
+Evaluating on article 61 / 100
+18:47:06.564 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3586104 - cache proportion: 0.40338801230655386
+Evaluating on article 62 / 100
+18:47:08.107 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3594060 - cache proportion: 0.4041816993336197
+Evaluating on article 63 / 100
+18:47:11.516 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3609936 - cache proportion: 0.4041166202414114
+Evaluating on article 64 / 100
+18:47:14.138 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3623985 - cache proportion: 0.4043519958975067
+Evaluating on article 65 / 100
+18:47:16.327 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3637018 - cache proportion: 0.4044358420755726
+Evaluating on article 66 / 100
+18:47:17.860 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3646019 - cache proportion: 0.4043051229329079
+Evaluating on article 67 / 100
+18:47:20.691 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3663245 - cache proportion: 0.40404758515505845
+Evaluating on article 68 / 100
+18:47:23.075 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3674770 - cache proportion: 0.4044369388897847
+Evaluating on article 69 / 100
+18:47:26.563 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3688659 - cache proportion: 0.4050382067235768
+Evaluating on article 70 / 100
+18:47:28.447 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3697702 - cache proportion: 0.4055757883627823
+Evaluating on article 71 / 100
+18:47:32.845 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3716916 - cache proportion: 0.4067613497162621
+Evaluating on article 72 / 100
+18:47:34.619 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3725955 - cache proportion: 0.40739571446180267
+Evaluating on article 73 / 100
+18:47:37.028 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3741467 - cache proportion: 0.4076644135604329
+Evaluating on article 74 / 100
+18:47:39.252 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3753756 - cache proportion: 0.4074805315342974
+Evaluating on article 75 / 100
+18:47:42.365 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3765583 - cache proportion: 0.40736205201973263
+Evaluating on article 76 / 100
+18:47:45.340 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3782871 - cache proportion: 0.40731086531960947
+Evaluating on article 77 / 100
+18:47:47.541 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3793731 - cache proportion: 0.40747811269803214
+Evaluating on article 78 / 100
+18:47:50.698 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3808091 - cache proportion: 0.4075671223789594
+Evaluating on article 79 / 100
+18:47:53.247 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3820180 - cache proportion: 0.40748114420857173
+Evaluating on article 80 / 100
+18:47:55.178 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3830361 - cache proportion: 0.4076357677569574
+Evaluating on article 81 / 100
+18:48:01.075 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3852373 - cache proportion: 0.40832997492250056
+Evaluating on article 82 / 100
+18:48:04.906 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3873207 - cache proportion: 0.40789380753923543
+Evaluating on article 83 / 100
+18:48:08.109 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3888959 - cache proportion: 0.4080944733187666
+Evaluating on article 84 / 100
+18:48:09.895 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3899090 - cache proportion: 0.4079150770284856
+Evaluating on article 85 / 100
+18:48:13.942 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3921880 - cache proportion: 0.40790916849455017
+Evaluating on article 86 / 100
+18:48:17.509 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3933970 - cache proportion: 0.40788874605262426
+Evaluating on article 87 / 100
+18:48:20.582 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3949859 - cache proportion: 0.40895069141022067
+Evaluating on article 88 / 100
+18:48:22.019 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3959073 - cache proportion: 0.40935901791001084
+Evaluating on article 89 / 100
+18:48:25.249 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3976977 - cache proportion: 0.41057380682745337
+Evaluating on article 90 / 100
+18:48:28.551 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 3991957 - cache proportion: 0.410831779592038
+Evaluating on article 91 / 100
+18:48:29.944 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4001423 - cache proportion: 0.41103862757216514
+Evaluating on article 92 / 100
+18:48:32.656 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4013876 - cache proportion: 0.4108757688829763
+Evaluating on article 93 / 100
+18:48:36.277 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4033664 - cache proportion: 0.41126882137263443
+Evaluating on article 94 / 100
+18:48:38.616 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4046267 - cache proportion: 0.41133159906325556
+Evaluating on article 95 / 100
+18:48:42.358 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4063025 - cache proportion: 0.41196821840202513
+Evaluating on article 96 / 100
+18:48:46.728 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4083649 - cache proportion: 0.4130177519896082
+Evaluating on article 97 / 100
+18:48:50.271 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4102576 - cache proportion: 0.4134386612609183
+Evaluating on article 98 / 100
+18:48:53.099 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4116535 - cache proportion: 0.41334520361586624
+Evaluating on article 99 / 100
+18:48:55.731 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4130869 - cache proportion: 0.41314330753317174
+Evaluating on article 100 / 100
+18:48:59.326 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4153183 - cache proportion: 0.41379826741477377
+
+Evaluation on 100 articles
+
+-- Macro-average --
+precision: 0.9246
+recall: 0.9886
+f1-score: 0.9543
+
+-- Micro-average --
+precision: 0.9233
+recall: 0.9886
+f1-score: 0.9548
+
+lower precision in evaluation set: 0.76
+lower recall in evalution set : 0.8095
+perfect precision in evaluation set: 6 / 100
+perfect recall in evaluation set: 54 / 100
+
+------------------------- evaluating selector model -------------------------
+Evaluating on article 1 / 100
+ - evaluating 788: Apiales
+18:49:00.317 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4159184 - cache proportion: 0.41384972780943674
+18:49:00.799 [main] INFO com.scienceminer.nerd.disambiguation.NerdSelector - Model for nerd selector loaded: data/models/selector-long-en.model
+Evaluating on article 2 / 100
+ - evaluating 789: Asterales
+18:49:04.318 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4174091 - cache proportion: 0.41432410771262485
+Evaluating on article 3 / 100
+ - evaluating 795: Affidavit
+18:49:07.275 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4191190 - cache proportion: 0.41455192274167807
+Evaluating on article 4 / 100
+ - evaluating 1303: Abdominal surgery
+18:49:09.916 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4206723 - cache proportion: 0.4150223312929845
+Evaluating on article 5 / 100
+ - evaluating 1309: Almost all
+18:49:10.696 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4209832 - cache proportion: 0.4152060008648629
+Evaluating on article 6 / 100
+ - evaluating 1559: Ahenobarbus
+18:49:12.314 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4216026 - cache proportion: 0.4159422673020149
+Evaluating on article 7 / 100
+ - evaluating 1563: Arthur Aikin
+18:49:15.369 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4225840 - cache proportion: 0.41610180276067465
+Evaluating on article 8 / 100
+ - evaluating 1564: Ailanthus
+18:49:18.187 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4233960 - cache proportion: 0.4160763129546087
+Evaluating on article 9 / 100
+ - evaluating 1567: Ajax the Lesser
+18:49:21.477 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4248517 - cache proportion: 0.4159944707674683
+Evaluating on article 10 / 100
+ - evaluating 2086: Abijah
+18:49:23.695 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4255972 - cache proportion: 0.41594243372186135
+Evaluating on article 11 / 100
+ - evaluating 2330: Abbe number
+18:49:25.547 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4265068 - cache proportion: 0.4163161996700494
+Evaluating on article 12 / 100
+ - evaluating 3112: Arianespace
+18:49:28.647 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4281614 - cache proportion: 0.4165454660664438
+Evaluating on article 13 / 100
+ - evaluating 3615: Politics of Botswana
+18:49:32.958 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4297739 - cache proportion: 0.41680380118288274
+Evaluating on article 14 / 100
+ - evaluating 3618: Transport in Botswana
+18:49:35.670 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4307612 - cache proportion: 0.41676280972880686
+Evaluating on article 15 / 100
+ - evaluating 3860: National League Championship Series
+18:49:38.916 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4313550 - cache proportion: 0.417220065879647
+Evaluating on article 16 / 100
+ - evaluating 3861: American League Championship Series
+18:49:42.663 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4316018 - cache proportion: 0.41782835234240834
+Evaluating on article 17 / 100
+ - evaluating 3863: National League Division Series
+18:49:47.462 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4326105 - cache proportion: 0.4190000112812794
+Evaluating on article 18 / 100
+ - evaluating 4132: Branco River
+18:49:49.781 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4331195 - cache proportion: 0.41889799254462656
+Evaluating on article 19 / 100
+ - evaluating 4389: Book of Lamentations
+18:49:53.053 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4348867 - cache proportion: 0.41897320915626823
+Evaluating on article 20 / 100
+ - evaluating 5409: Commelinales
+18:49:54.166 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4352828 - cache proportion: 0.41911221679433897
+Evaluating on article 21 / 100
+ - evaluating 5411: Cucurbitales
+18:49:57.080 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4367709 - cache proportion: 0.41952001952073714
+Evaluating on article 22 / 100
+ - evaluating 5653: Clarke's three laws
+18:49:59.990 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4381294 - cache proportion: 0.419572846999548
+Evaluating on article 23 / 100
+ - evaluating 5916: Circumference
+18:50:01.165 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4385353 - cache proportion: 0.4195979573610231
+Evaluating on article 24 / 100
+ - evaluating 5926: Computation
+18:50:03.162 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4397481 - cache proportion: 0.4198126874154948
+Evaluating on article 25 / 100
+ - evaluating 6183: Teochew cuisine
+18:50:06.311 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4412550 - cache proportion: 0.41984528681735134
+Evaluating on article 26 / 100
+ - evaluating 6423: Calorie
+18:50:08.974 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4425471 - cache proportion: 0.42021151577131965
+Evaluating on article 27 / 100
+ - evaluating 6426: Corcovado
+18:50:11.713 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4437856 - cache proportion: 0.4201250573948475
+Evaluating on article 28 / 100
+ - evaluating 6431: Charles Farrar Browne
+18:50:16.509 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4456456 - cache proportion: 0.4199502634817177
+Evaluating on article 29 / 100
+ - evaluating 6436: Chamaeleon
+18:50:18.642 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4464788 - cache proportion: 0.42002528887749235
+Evaluating on article 30 / 100
+ - evaluating 6693: Cofinality
+18:50:20.591 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4473031 - cache proportion: 0.42115388995348557
+Evaluating on article 31 / 100
+ - evaluating 6945: Chrominance
+18:50:22.740 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4482302 - cache proportion: 0.421801540881501
+Evaluating on article 32 / 100
+ - evaluating 7193: Commutator
+18:50:25.232 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4495946 - cache proportion: 0.42250653669824934
+Evaluating on article 33 / 100
+ - evaluating 7198: Characteristic subgroup
+18:50:27.206 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4503441 - cache proportion: 0.42378199980653863
+Evaluating on article 34 / 100
+ - evaluating 7450: Context menu
+18:50:29.594 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4519226 - cache proportion: 0.42419136633485743
+Evaluating on article 35 / 100
+ - evaluating 8729: David Deutsch
+18:50:32.607 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4536245 - cache proportion: 0.4242206232881294
+Evaluating on article 36 / 100
+ - evaluating 8735: BIND
+18:50:35.974 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4552059 - cache proportion: 0.424643057704444
+Evaluating on article 37 / 100
+ - evaluating 9241: Euglenozoa
+18:50:39.848 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4561709 - cache proportion: 0.425941835716523
+Evaluating on article 38 / 100
+ - evaluating 9765: Equuleus
+18:50:42.457 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4572786 - cache proportion: 0.4259494058618418
+Evaluating on article 39 / 100
+ - evaluating 10017: Ettore Ximenes
+18:50:46.724 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4591778 - cache proportion: 0.4257322892628257
+Evaluating on article 40 / 100
+ - evaluating 10263: Executive (government)
+18:50:49.109 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4596917 - cache proportion: 0.42581988580141983
+Evaluating on article 41 / 100
+ - evaluating 10530: Environmental skepticism
+18:50:52.047 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4612573 - cache proportion: 0.42564638507244645
+Evaluating on article 42 / 100
+ - evaluating 12066: Foreign relations of Georgia
+18:50:55.807 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4622118 - cache proportion: 0.4255693888746245
+Evaluating on article 43 / 100
+ - evaluating 12308: Gregory Chaitin
+18:50:59.078 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4636653 - cache proportion: 0.42563888674862016
+Evaluating on article 44 / 100
+ - evaluating 12312: Gestation
+18:51:01.085 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4645495 - cache proportion: 0.4258877153556756
+Evaluating on article 45 / 100
+ - evaluating 12571: Galaxy groups and clusters
+18:51:04.338 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4665597 - cache proportion: 0.42676562468900026
+Evaluating on article 46 / 100
+ - evaluating 12577: Giga-
+18:51:06.949 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4675412 - cache proportion: 0.42675774305414216
+Evaluating on article 47 / 100
+ - evaluating 12823: Garbage in, garbage out
+18:51:08.408 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4683982 - cache proportion: 0.42668140034218094
+Evaluating on article 48 / 100
+ - evaluating 14871: International Hydrographic Organization
+18:51:11.632 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4703084 - cache proportion: 0.4268226604167119
+Evaluating on article 49 / 100
+ - evaluating 15392: Imperial Conference
+18:51:14.252 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4711068 - cache proportion: 0.42704228928753596
+Evaluating on article 50 / 100
+ - evaluating 16417: Jan Długosz
+18:51:17.481 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4724458 - cache proportion: 0.426871306990085
+Evaluating on article 51 / 100
+ - evaluating 16932: Kamov Ka-25
+18:51:22.034 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4749894 - cache proportion: 0.4266630101032681
+Evaluating on article 52 / 100
+ - evaluating 17176: KISS principle
+18:51:24.810 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4763875 - cache proportion: 0.4265059669502752
+Evaluating on article 53 / 100
+ - evaluating 17190: Kipchoge Keino
+18:51:28.539 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4779478 - cache proportion: 0.42649379285717204
+Evaluating on article 54 / 100
+ - evaluating 17442: Katsuhiro Otomo
+18:51:32.608 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4797250 - cache proportion: 0.4264767662865774
+Evaluating on article 55 / 100
+ - evaluating 17445: Kittiwake
+18:51:35.855 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4807722 - cache proportion: 0.4268098262494313
+Evaluating on article 56 / 100
+ - evaluating 17687: False dilemma
+18:51:38.683 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4824343 - cache proportion: 0.4266942096904607
+Evaluating on article 57 / 100
+ - evaluating 17688: Loaded question
+18:51:40.447 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4835261 - cache proportion: 0.426655873122177
+Evaluating on article 58 / 100
+ - evaluating 17689: Ignoratio elenchi
+18:51:42.214 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4845452 - cache proportion: 0.42647979266663316
+Evaluating on article 59 / 100
+ - evaluating 17694: No true Scotsman
+18:51:43.441 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4851897 - cache proportion: 0.4264753442994079
+Evaluating on article 60 / 100
+ - evaluating 17949: Fibonacci
+18:51:47.815 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4871554 - cache proportion: 0.4266517871223994
+Evaluating on article 61 / 100
+ - evaluating 18968: Malvales
+18:51:50.533 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4883418 - cache proportion: 0.4267673785661983
+Evaluating on article 62 / 100
+ - evaluating 18969: Myrtales
+18:51:51.679 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4889475 - cache proportion: 0.4267871097894407
+Evaluating on article 63 / 100
+ - evaluating 18974: Mississippian (geology)
+18:51:53.190 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4896881 - cache proportion: 0.4268058862625079
+Evaluating on article 64 / 100
+ - evaluating 19736: Muspelheim
+18:51:56.052 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4911824 - cache proportion: 0.4265672774395405
+Evaluating on article 65 / 100
+ - evaluating 19738: Metrization theorem
+18:51:57.865 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4920677 - cache proportion: 0.42708679954406115
+Evaluating on article 66 / 100
+ - evaluating 20759: Major scale
+18:51:59.970 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4928482 - cache proportion: 0.42762977121133894
+Evaluating on article 67 / 100
+ - evaluating 21267: Nasjonal Samling
+18:52:04.528 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4949443 - cache proportion: 0.42746746492467635
+Evaluating on article 68 / 100
+ - evaluating 21797: Nahum
+18:52:07.418 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4960096 - cache proportion: 0.4274011198016445
+Evaluating on article 69 / 100
+ - evaluating 22551: Oaths of Strasbourg
+18:52:10.877 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4975230 - cache proportion: 0.427438656196778
+Evaluating on article 70 / 100
+ - evaluating 23329: Pythonidae
+18:52:14.045 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 4987453 - cache proportion: 0.427419729803856
+Evaluating on article 71 / 100
+ - evaluating 23580: Paleogene
+18:52:17.419 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5004317 - cache proportion: 0.4274221774267827
+Evaluating on article 72 / 100
+ - evaluating 23829: Pope Adrian V
+18:52:20.607 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5018260 - cache proportion: 0.4271756921392099
+Evaluating on article 73 / 100
+ - evaluating 23830: Pope John XXI
+18:52:26.242 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5037865 - cache proportion: 0.42693556901942953
+Evaluating on article 74 / 100
+ - evaluating 23835: Pope Anastasius II
+18:52:29.921 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5050165 - cache proportion: 0.4272719859982216
+Evaluating on article 75 / 100
+ - evaluating 23843: Plutino
+18:52:32.386 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5062304 - cache proportion: 0.42744072665193844
+Evaluating on article 76 / 100
+ - evaluating 24099: Pope Clement II
+18:52:36.947 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5079545 - cache proportion: 0.42751673170230864
+Evaluating on article 77 / 100
+ - evaluating 24100: Pope Clement III
+18:52:40.509 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5091953 - cache proportion: 0.4273400633867974
+Evaluating on article 78 / 100
+ - evaluating 24347: Pope Sergius IV
+18:52:43.380 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5100144 - cache proportion: 0.42741686411807
+Evaluating on article 79 / 100
+ - evaluating 24353: Pacific Beach, San Diego
+18:52:49.680 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5127037 - cache proportion: 0.4275933090416717
+Evaluating on article 80 / 100
+ - evaluating 24857: Phenothiazine
+18:52:53.443 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5144265 - cache proportion: 0.42763104532174234
+Evaluating on article 81 / 100
+ - evaluating 25117: Puget Sound Naval Shipyard and Intermediate Maintenance Facility
+18:52:58.497 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5162228 - cache proportion: 0.4285318289395217
+Evaluating on article 82 / 100
+ - evaluating 25119: Poeciliidae
+18:53:02.057 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5173147 - cache proportion: 0.42876298180121275
+Evaluating on article 83 / 100
+ - evaluating 25121: Polymath
+18:53:06.555 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5192601 - cache proportion: 0.4288191619991347
+Evaluating on article 84 / 100
+ - evaluating 25877: Anastasios II
+18:53:09.438 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5204600 - cache proportion: 0.428667528323473
+Evaluating on article 85 / 100
+ - evaluating 25886: Rán
+18:53:10.895 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5210573 - cache proportion: 0.42876019731807735
+Evaluating on article 86 / 100
+ - evaluating 26137: Rabbinical Assembly
+18:53:15.588 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5228831 - cache proportion: 0.4292439360802407
+Evaluating on article 87 / 100
+ - evaluating 26151: Raven
+18:53:17.547 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5234107 - cache proportion: 0.4294098229767628
+Evaluating on article 88 / 100
+ - evaluating 26392: Run-length encoding
+18:53:19.916 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5248623 - cache proportion: 0.42982448326372835
+Evaluating on article 89 / 100
+ - evaluating 26899: Spearmint
+18:53:23.371 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5261439 - cache proportion: 0.42988544481695223
+Evaluating on article 90 / 100
+ - evaluating 26902: Satureja
+18:53:28.952 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5275109 - cache proportion: 0.4302359692430989
+Evaluating on article 91 / 100
+ - evaluating 26912: Sapindales
+18:53:30.319 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5277481 - cache proportion: 0.43035078213038236
+Evaluating on article 92 / 100
+ - evaluating 27924: Sharp-P
+18:53:31.484 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5286217 - cache proportion: 0.4305731736217334
+Evaluating on article 93 / 100
+ - evaluating 27925: Sharp-P-complete
+18:53:32.928 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5293873 - cache proportion: 0.4312555865921788
+Evaluating on article 94 / 100
+ - evaluating 28452: Summary offence
+18:53:36.602 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5308396 - cache proportion: 0.4321805933205972
+Evaluating on article 95 / 100
+ - evaluating 28710: Smelt (fish)
+18:53:42.271 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5330858 - cache proportion: 0.43223935407118974
+Evaluating on article 96 / 100
+ - evaluating 28957: Southern blot
+18:53:46.110 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5349998 - cache proportion: 0.43270043178405704
+Evaluating on article 97 / 100
+ - evaluating 31006: Phenotypic trait
+18:53:48.423 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5364769 - cache proportion: 0.43264299281281593
+Evaluating on article 98 / 100
+ - evaluating 31256: Tax law
+18:53:55.107 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5376770 - cache proportion: 0.4329336524030952
+Evaluating on article 99 / 100
+ - evaluating 31261: Twinkle, Twinkle, Little Star
+18:53:58.136 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5386615 - cache proportion: 0.43296282572492684
+Evaluating on article 100 / 100
+ - evaluating 32543: Volvox
+18:54:00.824 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5400269 - cache proportion: 0.4330259577184421
+
+Evaluation on 100 articles
+
+-- Macro-average --
+precision: 0.5195
+recall: 0.8014
+f1-score: 0.6186
+
+-- Micro-average --
+precision: 0.4945
+recall: 0.8052
+f1-score: 0.6127
+
+lower precision in evaluation set: 0.2237
+lower recall in evalution set : 0.4545
+perfect precision in evaluation set: 0 / 100
+perfect recall in evaluation set: 0 / 100
+
+--------------------------- evaluating end-to-end ---------------------------
+Evaluating on article 1 / 100
+ - evaluating 809: Anaconda
+18:54:03.917 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5412749 - cache proportion: 0.43292844802930097
+Evaluating on article 2 / 100
+ - evaluating 1331: Arabian Prince
+18:54:05.657 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5420504 - cache proportion: 0.4328503941951043
+Evaluating on article 3 / 100
+ - evaluating 1336: Apache Software Foundation
+18:54:09.228 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5439631 - cache proportion: 0.4328004354386137
+Evaluating on article 4 / 100
+ - evaluating 1585: Alexander I of Epirus
+18:54:11.357 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5444099 - cache proportion: 0.43276495901530454
+Evaluating on article 5 / 100
+ - evaluating 1586: Alexander Balas
+18:54:13.753 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5452204 - cache proportion: 0.43273612281739815
+Evaluating on article 6 / 100
+ - evaluating 1588: Alexander II of Epirus
+18:54:15.657 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5459081 - cache proportion: 0.43267280203723457
+Evaluating on article 7 / 100
+ - evaluating 1589: Alexander Jagiellon
+18:54:19.231 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5470541 - cache proportion: 0.43267221465975214
+Evaluating on article 8 / 100
+ - evaluating 1595: Alexander I of Serbia
+18:54:25.891 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5493289 - cache proportion: 0.4326431078078371
+Evaluating on article 9 / 100
+ - evaluating 1835: Affix
+18:54:29.773 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5508706 - cache proportion: 0.43289231296955655
+Evaluating on article 10 / 100
+ - evaluating 1840: Agathocles of Syracuse
+18:54:32.573 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5521289 - cache proportion: 0.43285281570088574
+Evaluating on article 11 / 100
+ - evaluating 1851: Antiprism
+18:54:34.542 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5531571 - cache proportion: 0.43318178753407377
+Evaluating on article 12 / 100
+ - evaluating 2093: Abimelech
+18:54:36.289 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5537394 - cache proportion: 0.4331456305670516
+Evaluating on article 13 / 100
+ - evaluating 2106: Ansible
+18:54:38.081 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5547357 - cache proportion: 0.4330413518972831
+Evaluating on article 14 / 100
+ - evaluating 2346: Albion, Michigan
+18:54:44.033 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5569089 - cache proportion: 0.4331076726006353
+Evaluating on article 15 / 100
+ - evaluating 2360: Abu Nidal Organization
+18:54:47.799 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5579720 - cache proportion: 0.4331065713560588
+Evaluating on article 16 / 100
+ - evaluating 2602: Abano Terme
+18:54:49.938 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5590267 - cache proportion: 0.4329820897841642
+Evaluating on article 17 / 100
+ - evaluating 2607: Antoine Thomson d'Abbadie
+18:54:54.785 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5610361 - cache proportion: 0.43293520736356506
+Evaluating on article 18 / 100
+ - evaluating 2616: Adware
+18:54:58.324 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5628388 - cache proportion: 0.433043736834386
+Evaluating on article 19 / 100
+ - evaluating 2618: Aeacus
+18:55:00.878 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5640956 - cache proportion: 0.4329190590946981
+Evaluating on article 20 / 100
+ - evaluating 2621: Aedicula
+18:55:03.719 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5653954 - cache proportion: 0.432784803485021
+Evaluating on article 21 / 100
+ - evaluating 2622: Aedui
+18:55:06.812 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5669130 - cache proportion: 0.43253979812733423
+Evaluating on article 22 / 100
+ - evaluating 2865: Andrzej Sapkowski
+18:55:12.010 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5686958 - cache proportion: 0.43272041348772794
+Evaluating on article 23 / 100
+ - evaluating 3120: Andersonville, Georgia
+18:55:16.531 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5700504 - cache proportion: 0.43292363201191353
+Evaluating on article 24 / 100
+ - evaluating 3123: Amakusa
+18:55:19.046 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5710916 - cache proportion: 0.43277804489988847
+Evaluating on article 25 / 100
+ - evaluating 3129: Algebraic closure
+18:55:20.669 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5717637 - cache proportion: 0.4334946592236204
+Evaluating on article 26 / 100
+ - evaluating 3130: Advanced Power Management
+18:55:23.355 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5728319 - cache proportion: 0.43415207797756195
+Evaluating on article 27 / 100
+ - evaluating 3132: Adolphe Sax
+18:55:26.607 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5744220 - cache proportion: 0.43416260208250523
+Evaluating on article 28 / 100
+ - evaluating 4158: Bill Atkinson
+18:55:29.499 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5757026 - cache proportion: 0.4341652746920087
+Evaluating on article 29 / 100
+ - evaluating 4407: Bubble and squeak
+18:55:31.658 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5763715 - cache proportion: 0.4341561937680867
+Evaluating on article 30 / 100
+ - evaluating 5679: Christian Social Union in Bavaria
+18:55:37.827 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5781056 - cache proportion: 0.43470533384233156
+Evaluating on article 31 / 100
+ - evaluating 6955: Chalcedonian Definition
+18:55:42.357 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5793715 - cache proportion: 0.4348071538164978
+Evaluating on article 32 / 100
+ - evaluating 7477: Cuitláhuac
+18:55:44.077 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5799163 - cache proportion: 0.43481716863932574
+Evaluating on article 33 / 100
+ - evaluating 8495: Data set
+18:55:47.016 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5814335 - cache proportion: 0.4350431830868632
+Evaluating on article 34 / 100
+ - evaluating 8508: Slalom skiing
+18:55:51.599 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5835056 - cache proportion: 0.43514560954560877
+Evaluating on article 35 / 100
+ - evaluating 9001: Degree Confluence Project
+18:55:54.122 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5843240 - cache proportion: 0.43518302730429437
+Evaluating on article 36 / 100
+ - evaluating 9011: Dual Alliance (1879)
+18:55:58.439 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5854920 - cache proportion: 0.43527077809947257
+Evaluating on article 37 / 100
+ - evaluating 10302: Ethnologue
+18:56:02.877 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5871455 - cache proportion: 0.43540927828280795
+Evaluating on article 38 / 100
+ - evaluating 10799: Film theory
+18:56:07.948 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5890493 - cache proportion: 0.4353076323625432
+Evaluating on article 39 / 100
+ - evaluating 11563: Federal jurisdiction (United States)
+18:56:14.579 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5908313 - cache proportion: 0.4358525904003583
+Evaluating on article 40 / 100
+ - evaluating 11824: Frederick Augustus II of Saxony
+18:56:20.400 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5927219 - cache proportion: 0.43574418517645175
+Evaluating on article 41 / 100
+ - evaluating 12087: Glorioso Islands
+18:56:23.627 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5935880 - cache proportion: 0.43578728370378916
+Evaluating on article 42 / 100
+ - evaluating 12851: Governor of Victoria
+18:56:31.695 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5953378 - cache proportion: 0.4363709555106886
+Evaluating on article 43 / 100
+ - evaluating 12861: Governor of New York
+18:56:38.733 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5966165 - cache proportion: 0.436666802633373
+Evaluating on article 44 / 100
+ - evaluating 13114: Geoff Ryman
+18:56:43.903 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5979483 - cache proportion: 0.43675587416452744
+Evaluating on article 45 / 100
+ - evaluating 13865: Heart of Oak
+18:56:49.235 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 5999605 - cache proportion: 0.4367989562822079
+Evaluating on article 46 / 100
+ - evaluating 13879: Henry J. Heinz
+18:56:56.762 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6018371 - cache proportion: 0.437126574554901
+Evaluating on article 47 / 100
+ - evaluating 14123: Heroic couplet
+18:57:01.192 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6031307 - cache proportion: 0.43694833127299215
+Evaluating on article 48 / 100
+ - evaluating 14386: Hydroxy group
+18:57:03.860 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6042358 - cache proportion: 0.43696055733315886
+Evaluating on article 49 / 100
+ - evaluating 14387: Warm-blooded
+18:57:06.529 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6056637 - cache proportion: 0.43721583829202193
+Evaluating on article 50 / 100
+ - evaluating 14645: Demographics of Indonesia
+18:57:10.283 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6069540 - cache proportion: 0.43763158055662577
+Evaluating on article 51 / 100
+ - evaluating 14900: ISO 3166
+18:57:13.545 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6079439 - cache proportion: 0.43820279645576754
+Evaluating on article 52 / 100
+ - evaluating 15402: International standard
+18:57:17.318 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6097683 - cache proportion: 0.438324698362472
+Evaluating on article 53 / 100
+ - evaluating 16427: James Scarlett, 1st Baron Abinger
+18:57:22.009 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6113598 - cache proportion: 0.43833321910615797
+Evaluating on article 54 / 100
+ - evaluating 16437: James Norris Memorial Trophy
+18:57:25.075 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6120246 - cache proportion: 0.4385658907261968
+Evaluating on article 55 / 100
+ - evaluating 16688: Government of Kuwait
+18:57:31.078 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6135698 - cache proportion: 0.4392563969134188
+Evaluating on article 56 / 100
+ - evaluating 17213: KornShell
+18:57:34.705 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6147581 - cache proportion: 0.43948659380833
+Evaluating on article 57 / 100
+ - evaluating 17449: Kimberly Beck
+18:57:37.188 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6157766 - cache proportion: 0.43926115159629053
+Evaluating on article 58 / 100
+ - evaluating 17466: Karen Kain
+18:57:42.181 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6176605 - cache proportion: 0.43921855278446653
+Evaluating on article 59 / 100
+ - evaluating 17974: Long gun
+18:57:45.727 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6189021 - cache proportion: 0.43946383978918335
+Evaluating on article 60 / 100
+ - evaluating 17981: Law of definite proportions
+18:57:48.306 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6200453 - cache proportion: 0.43964561078006925
+Evaluating on article 61 / 100
+ - evaluating 18492: Lexeme
+18:57:49.991 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6208467 - cache proportion: 0.43988110999490715
+Evaluating on article 62 / 100
+ - evaluating 18737: Landau
+18:57:54.157 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6224364 - cache proportion: 0.4397412303117554
+Evaluating on article 63 / 100
+ - evaluating 19248: Military of Moldova
+18:57:59.775 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6245457 - cache proportion: 0.43997189034976736
+Evaluating on article 64 / 100
+ - evaluating 19757: Mariotto Albertinelli
+18:58:03.302 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6260913 - cache proportion: 0.43987556315162
+Evaluating on article 65 / 100
+ - evaluating 20016: Myrinet
+18:58:05.091 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6269879 - cache proportion: 0.43981855488981725
+Evaluating on article 66 / 100
+ - evaluating 20285: Malachi
+18:58:07.324 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6280834 - cache proportion: 0.4398050066755138
+Evaluating on article 67 / 100
+ - evaluating 20286: Martin Fowler
+18:58:09.892 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6292157 - cache proportion: 0.4397185804789182
+Evaluating on article 68 / 100
+ - evaluating 21047: Military ordinariate
+18:58:11.896 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6297182 - cache proportion: 0.43982749640728713
+Evaluating on article 69 / 100
+ - evaluating 21288: Nicholas Lemann
+18:58:16.918 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6316887 - cache proportion: 0.4397685423123331
+Evaluating on article 70 / 100
+ - evaluating 21289: Nautical mile
+18:58:19.953 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6327154 - cache proportion: 0.4399561677010304
+Evaluating on article 71 / 100
+ - evaluating 21557: Niflheim
+18:58:21.698 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6333723 - cache proportion: 0.43999372949453197
+Evaluating on article 72 / 100
+ - evaluating 21561: Nanoengineering
+18:58:23.992 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6342877 - cache proportion: 0.44001912959292755
+Evaluating on article 73 / 100
+ - evaluating 21813: Naked News
+18:58:29.654 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6367343 - cache proportion: 0.44004962333559605
+Evaluating on article 74 / 100
+ - evaluating 21819: Papal diplomacy
+18:58:34.494 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6381771 - cache proportion: 0.44064610060159437
+Evaluating on article 75 / 100
+ - evaluating 21820: Newlyn School
+18:58:37.276 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6392812 - cache proportion: 0.4405088902014761
+Evaluating on article 76 / 100
+ - evaluating 22076: Nori
+18:58:42.310 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6414030 - cache proportion: 0.4404179170470117
+Evaluating on article 77 / 100
+ - evaluating 22315: Oligarchy
+18:58:48.225 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6435614 - cache proportion: 0.4402620941211035
+Evaluating on article 78 / 100
+ - evaluating 22323: Transport in Oman
+18:58:51.721 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6448759 - cache proportion: 0.4403177558689203
+Evaluating on article 79 / 100
+ - evaluating 22827: Ovo-lacto vegetarianism
+18:58:53.954 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6455534 - cache proportion: 0.44050620163389875
+Evaluating on article 80 / 100
+ - evaluating 22830: Ostwald process
+18:58:55.454 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6461673 - cache proportion: 0.44055205466832803
+Evaluating on article 81 / 100
+ - evaluating 23342: P
+18:58:57.739 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6469468 - cache proportion: 0.44068257898522656
+Evaluating on article 82 / 100
+ - evaluating 23852: Pope Honorius I
+18:59:00.772 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6483188 - cache proportion: 0.44075254254832785
+Evaluating on article 83 / 100
+ - evaluating 24380: Pope Zachary
+18:59:04.580 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6497799 - cache proportion: 0.4408638911500937
+Evaluating on article 84 / 100
+ - evaluating 24622: Pacta sunt servanda
+18:59:06.468 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6505015 - cache proportion: 0.4409429092731071
+Evaluating on article 85 / 100
+ - evaluating 24637: Pentium FDIV bug
+18:59:09.778 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6523079 - cache proportion: 0.4411079448846402
+Evaluating on article 86 / 100
+ - evaluating 25130: Ponte Vecchio
+18:59:14.564 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6548298 - cache proportion: 0.4408687077217829
+Evaluating on article 87 / 100
+ - evaluating 26167: Robert Calvert
+18:59:20.142 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6574589 - cache proportion: 0.4406912314554158
+Evaluating on article 88 / 100
+ - evaluating 26429: Redshirt (character)
+18:59:23.708 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6589249 - cache proportion: 0.4405933714050526
+Evaluating on article 89 / 100
+ - evaluating 27183: Sorrel
+18:59:27.446 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6601488 - cache proportion: 0.44075357227088263
+Evaluating on article 90 / 100
+ - evaluating 27438: Transport in Suriname
+18:59:28.977 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6606517 - cache proportion: 0.440707768465718
+Evaluating on article 91 / 100
+ - evaluating 27946: Stephen R. Lawhead
+18:59:35.323 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6634377 - cache proportion: 0.44055010515019666
+Evaluating on article 92 / 100
+ - evaluating 28211: Stan Kelly-Bootle
+18:59:40.956 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6656811 - cache proportion: 0.44061826671443016
+Evaluating on article 93 / 100
+ - evaluating 28731: Stow-on-the-Wold
+18:59:47.364 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6680146 - cache proportion: 0.4406386092771074
+Evaluating on article 94 / 100
+ - evaluating 30253: Tertiary
+18:59:49.698 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6686408 - cache proportion: 0.4406678583746345
+Evaluating on article 95 / 100
+ - evaluating 30263: Problem of other minds
+18:59:52.833 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6704020 - cache proportion: 0.4406194353627423
+Evaluating on article 96 / 100
+ - evaluating 31528: Treaty of Cahuenga
+18:59:58.555 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6722123 - cache proportion: 0.4407593919214089
+Evaluating on article 97 / 100
+ - evaluating 31799: University of Bergen
+19:00:04.083 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6741007 - cache proportion: 0.44075998490443447
+Evaluating on article 98 / 100
+ - evaluating 31804: Colleges of the University of Cambridge
+19:00:08.797 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6755639 - cache proportion: 0.44123437558285405
+Evaluating on article 99 / 100
+ - evaluating 32054: Union for Europe of the Nations
+19:00:11.768 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6763804 - cache proportion: 0.44136024627774006
+Evaluating on article 100 / 100
+ - evaluating 32316: Unary numeral system
+19:00:13.639 [main] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 6773496 - cache proportion: 0.44154635398850406
+
+Evaluation on 100 articles
+
+-- Macro-average --
+precision: 0.5803
+recall: 0.7905
+f1-score: 0.6615
+
+-- Micro-average --
+precision: 0.5647
+recall: 0.7882
+f1-score: 0.658
+
+lower precision in evaluation set: 0.3684
+lower recall in evalution set : 0.5556
+perfect precision in evaluation set: 0 / 100
+perfect recall in evaluation set: 0 / 100
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:02 h
+[INFO] Finished at: 2018-11-21T19:00:14+01:00
+[INFO] ------------------------------------------------------------------------

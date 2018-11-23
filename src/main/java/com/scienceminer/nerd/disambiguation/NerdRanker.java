@@ -181,7 +181,8 @@ public class NerdRanker extends NerdModel {
 		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		feature.wikidata_id = wikidataId;
 		feature.wikidata_P31_entity_id = wikidataP31Id;
-		feature.nerGrobid_type = nerGrobid_type;
+		// hidden if it's not involving nerGrobid_type and nerKid_type
+//		feature.nerGrobid_type = nerGrobid_type;
 		feature.nerKid_type = nerKid_type;
 		double[] features = feature.toVector(attributes);
 		smile.math.Math.setSeed(7);

@@ -900,7 +900,8 @@ var nerd = (function ($) {
                 var end = parseInt(entity.offsetEnd, 10);
 
                 var subType = entity.subtype;
-                var conf = entity.nerd_score;
+//                var conf = entity.nerd_score;
+                var conf = entity.confidence_score;
                 if (conf && conf.length > 4)
                     conf = conf.substring(0, 4);
 
@@ -1082,7 +1083,7 @@ var nerd = (function ($) {
 
         var text = responseJson.text;
         var currentSentence = text.substring(responseJson.sentences[sentence].offsetStart,
-            responseJson.sentences[sentence].offsetEnd);
+            responseJson.sentences[sentence].offsetEnd);Nerd
 
         var lastMaxIndex = responseJson.text.length;
         if (responseJson.entities) {
@@ -1298,7 +1299,8 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-            var conf = entity.nerd_selection_score;
+//            var conf = entity.nerd_selection_score;
+            var conf = entity.confidence_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 
@@ -1499,7 +1501,8 @@ var nerd = (function ($) {
 
             var subType = entity.subtype;
             //var conf = entity.nerd_score;
-            var conf = entity.nerd_selection_score;
+//            var conf = entity.nerd_selection_score;
+            var conf = entity.confidence_score;
             //var definitions = entity.definitions;
             var definitions = getDefinitions(wikipedia);
 

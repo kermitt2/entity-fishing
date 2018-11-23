@@ -162,7 +162,7 @@ public class GenericRankerFeatureVector {
 			header.append("@attribute occ_term NUMERIC\n");	
 		if (Add_dice_coef) 
 			header.append("@attribute dice_coef REAL\n");
-		if (Add_bestCaseContext) 
+		if (Add_bestCaseContext)
 			header.append("@attribute bestCaseContext {false, true}\n");
 		if (Add_embeddings_LR_similarity) 
 			header.append("@attribute embeddings_LR_similarity REAL\n");
