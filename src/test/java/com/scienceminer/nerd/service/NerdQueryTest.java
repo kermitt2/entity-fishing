@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -216,4 +217,6 @@ public class NerdQueryTest {
         nerdQuery = target.fromJson("{'minRankerScore': 0.0123}");
         assertThat(nerdQuery.getMinRankerScore(), is(0.0123));
     }
+
+
 }

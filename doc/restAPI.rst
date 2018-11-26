@@ -303,8 +303,7 @@ Example request
    }
 
 
-The termVector field is required for having a well-formed query. 
-The additional parameter *resultLanguages* provides a list of language codes in addition to the language of the input terms. It will allow to get back the wikipedia pages, if they exist, of such additional languages. Currently only English, German and French wikipedia are supported.
+The termVector field is required for having a well-formed query.
 
 **Example using CURL** (using the query above):
 ::
@@ -402,9 +401,6 @@ In the example above, the root layer of JSON values correspond to:
 
 - **global_categories**: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
-The following option is **deprecated**, it will be removed in the next release:
-
-- *onlyNER*: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
 
 For each entity the following information are provided:
 
@@ -488,7 +484,6 @@ The type of recognised entities are restricted to a set of 27 classes of named e
 ::
    {
       "runtime": 870,
-..      "onlyNER": false,
       "nbest": false,
       "termVector": [
          {
@@ -528,7 +523,6 @@ The type of recognised entities are restricted to a set of 27 classes of named e
 ::
    {
       "runtime": 2823,
-..      "onlyNER": false,
       "nbest": false,
       "file”: "filename.pdf",
       “pages”: 10,

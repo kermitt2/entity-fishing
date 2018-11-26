@@ -14,6 +14,7 @@ import com.scienceminer.nerd.disambiguation.WeightedTerm;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Category;
 import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.main.Main;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
@@ -21,6 +22,7 @@ import com.scienceminer.nerd.utilities.Filter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.grobid.core.document.Document;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -30,9 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -53,6 +58,12 @@ public class NerdQuery {
     public static final String QUERY_TYPE_TERM_VECTOR = "termVector";
     public static final String QUERY_TYPE_LAYOUT_TOKENS = "layoutToken";
     public static final String QUERY_TYPE_INVALID = "invalid";
+
+    private String software = null;
+
+    private String version = null;
+
+    private String date = null;
 
     // main text component
     private String text = null;
@@ -84,14 +95,6 @@ public class NerdQuery {
     // runtime in ms of the last processing
     private long runtime = 0;
 
-    /**
-     * mode indicating if we disambiguate or not
-     *
-     * @Deprecated use mentions = ['ner'] to obtain the same result
-     */
-    @Deprecated
-    private boolean onlyNER = false;
-
     // mention techniques, specify the method for which the mentions are extracted
     private List<ProcessText.MentionMethod> mentions =
             Arrays.asList(ProcessText.MentionMethod.ner, ProcessText.MentionMethod.wikipedia);
@@ -119,10 +122,6 @@ public class NerdQuery {
     // disambiguated and output
     private Filter filter = null;
 
-    // indicate if the full description of the entities should be included in the result
-    @Deprecated
-    private boolean full = false;
-
     // query-based threshold, override default values in the config file only for the present query
     private double minSelectorScore = 0.0;
     private double minRankerScore = 0.0;
@@ -135,6 +134,9 @@ public class NerdQuery {
     }
 
     public NerdQuery(NerdQuery query) {
+        this.software = query.getSoftware();
+        this.version = query.getVersion();
+        this.date = query.getDate();
         this.text = query.getText();
         this.shortText = query.getShortText();
         this.tokens = query.getTokens();
@@ -146,9 +148,7 @@ public class NerdQuery {
         this.language = query.getLanguage();
         this.entities = query.getEntities();
         this.sentences = query.getSentences();
-        this.resultLanguages = query.getResultLanguages();
 
-        this.onlyNER = query.getOnlyNER();
         this.mentions = query.getMentions();
         this.nbest = query.getNbest();
         this.sentence = query.getSentence();
@@ -165,6 +165,30 @@ public class NerdQuery {
         this.minRankerScore = query.getMinRankerScore();
 
         this.structure = query.getStructure();
+    }
+
+    public String getSoftware() {
+        return software;
+    }
+
+    public void setSoftware(String software) {
+        this.software = software;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**
@@ -294,22 +318,6 @@ public class NerdQuery {
         this.sentences = sentences;
     }
 
-    /**
-     * @Deprecated Use mentions field instead. Will be removed after next release.
-     */
-    @Deprecated
-    public boolean getOnlyNER() {
-        return onlyNER;
-    }
-
-    /**
-     * @Deprecated Use mentions field instead. Will be removed after the next release.
-     */
-    @Deprecated
-    public void setOnlyNER(boolean onlyNER) {
-        this.onlyNER = onlyNER;
-    }
-
     public String getShortText() {
         return shortText;
     }
@@ -408,22 +416,6 @@ public class NerdQuery {
         this.filter = filter;
     }
 
-    /**
-     * @deprecated Will be removed after the next release.
-     */
-    @Deprecated
-    public boolean getFull() {
-        return this.full;
-    }
-
-    /**
-     * @deprecated Will be removed after the next release.
-     */
-    @Deprecated
-    public void setFull(boolean full) {
-        this.full = full;
-    }
-
     public double getMinSelectorScore() {
         return this.minSelectorScore;
     }
@@ -475,7 +467,6 @@ public class NerdQuery {
         buffer.append("\"runtime\": " + runtime);
 
         // parameters
-        buffer.append(", \"onlyNER\": " + onlyNER);
         buffer.append(", \"nbest\": " + nbest);
 
         // parameters
@@ -600,11 +591,27 @@ public class NerdQuery {
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
 
+        // for metadata
+        if (software != null) {
+            byte[] encoded = encoder.quoteAsUTF8(software);
+            String output = new String(encoded);
+            buffer.append("\"software\": \"" + output + "\"");
+        }
+        if (version != null) {
+            byte[] encoded = encoder.quoteAsUTF8(version);
+            String output = new String(encoded);
+            buffer.append(", \"version\": \"" + output + "\"");
+        }
+        if (date != null) {
+            byte[] encoded = encoder.quoteAsUTF8(date);
+            String output = new String(encoded);
+            buffer.append(", \"date\": \"" + output + "\"");
+        }
+
         // server runtime is always present (even at 0.0)
-        buffer.append("\"runtime\": " + runtime);
+        buffer.append(", \"runtime\": " + runtime);
 
         // parameters
-        //buffer.append(", \"onlyNER\": " + onlyNER);
         buffer.append(", \"nbest\": " + nbest);
 
         // parameters
@@ -693,12 +700,8 @@ public class NerdQuery {
                     first = false;
                 else
                     buffer.append(", ");
-                if (this.full) {
-                    buffer.append(entity.toJsonFull());
-                    //TODO: remove after release
-                    LOGGER.warn("The full json is a deprecated option and will be removed next release. ");
-                } else
-                    buffer.append(entity.toJsonCompact());
+                
+                buffer.append(entity.toJsonCompact());
             }
             buffer.append("]");
         }
@@ -809,5 +812,4 @@ public class NerdQuery {
             return QUERY_TYPE_INVALID;
         }
     }
-
 }

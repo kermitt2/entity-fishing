@@ -1,5 +1,11 @@
 package com.scienceminer.nerd.disambiguation;
 
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase.Direction;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
+import com.scienceminer.nerd.kb.model.Page;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -14,6 +20,11 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;

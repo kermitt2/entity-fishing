@@ -118,10 +118,6 @@ public class NerdEngine {
 	 *         the enriched and disambiguated query
 	 */
 	public List<NerdEntity> disambiguate(NerdQuery nerdQuery) {
-	    //TODO remove after next release
-		if(nerdQuery.getOnlyNER()) {
-			return nerdQuery.getEntities();
-		}
 		// Validation //TODO we should find a way to move this out of here.
 		String text = nerdQuery.getText();
 		String shortText = nerdQuery.getShortText();

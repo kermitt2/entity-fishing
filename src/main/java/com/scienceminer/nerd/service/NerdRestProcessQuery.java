@@ -7,6 +7,12 @@ import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.mention.Sentence;
+import com.scienceminer.nerd.kb.Customisations;
+import com.scienceminer.nerd.main.Main;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.mention.Sentence;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
@@ -14,10 +20,7 @@ import org.grobid.core.utilities.LanguageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import java.io.IOException;
 import java.util.*;
 
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
@@ -28,6 +31,7 @@ import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
+    SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
     // for nerKid_type
     private UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
@@ -40,6 +44,7 @@ public class NerdRestProcessQuery {
      * the enriched and disambiguated query.
      */
     public String processQuery(String theQuery) {
+
         LOGGER.debug(methodLogIn());
         LOGGER.debug(">> received query to process: " + theQuery);
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
@@ -75,21 +80,6 @@ public class NerdRestProcessQuery {
 
         LOGGER.debug(methodLogOut());
         return output;
-    }
-
-    /**
-     * Check if the parameter onlyNER is set and modify the query accordingly, if the language is not fr or en,
-     * an error is thrown. Deprecated, will be removed in next release.
-     */
-    @Deprecated
-    public static void processOnlyNER(NerdQuery nerdQuery) {
-        if (nerdQuery.getOnlyNER()) {
-            if (!GROBID_NER_SUPPORTED_LANGUAGES.contains(nerdQuery.getLanguage().getLang())) {
-                throw new QueryException("OnlyNER cannot be set true with languages other than FR and EN", LANGUAGE_ISSUE);
-            }
-            nerdQuery.setMentions(Arrays.asList(ProcessText.MentionMethod.ner));
-            LOGGER.warn("Method onlyNER:true set in query, please use the mentions attribute as this option will be removed in the next release.");
-        }
     }
 
     /**
@@ -129,9 +119,6 @@ public class NerdRestProcessQuery {
 
         // language identification
         languageIdentificationAndValidation(nerdQuery, nerdQuery.getText());
-
-        //TODO: remove after release
-        processOnlyNER(nerdQuery);
 
         // entities originally from the query are marked as such
         List<NerdEntity> originalEntities = null;
@@ -185,6 +172,11 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
 
         Collections.sort(nerdQuery.getEntities());
@@ -319,6 +311,10 @@ public class NerdRestProcessQuery {
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
         //Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
@@ -339,9 +335,6 @@ public class NerdRestProcessQuery {
 
         // language identification
         languageIdentificationAndValidation(nerdQuery, nerdQuery.getShortText());
-
-        //TODO remove after release
-        processOnlyNER(nerdQuery);
 
         // entities originally from the query are marked as such
         List<NerdEntity> originalEntities = null;
@@ -379,6 +372,11 @@ public class NerdRestProcessQuery {
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
 
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         if (nerdQuery.getEntities() != null)
             Collections.sort(nerdQuery.getEntities());
         return nerdQuery.toJSONClean(null);
@@ -395,4 +393,8 @@ public class NerdRestProcessQuery {
                 Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 
+    public static void main(String[] args) {
+        SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
+        System.out.println(softwareInfo.getName());
+    }
 }

@@ -6,7 +6,7 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Property;
-import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Filter;
@@ -45,6 +45,8 @@ public class NerdRestProcessFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
     private UpperKnowledgeBase upperKnowledgeBase = UpperKnowledgeBase.getInstance();
+    NerdRestProcessQuery nerdRestProcessQuery = new NerdRestProcessQuery();
+    SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
@@ -74,11 +76,6 @@ public class NerdRestProcessFile {
         long start = System.currentTimeMillis();
         NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
 
-        //TODO: remove after release
-        if (nerdQuery.getOnlyNER()) {
-            throw new QueryException("OnlyNER is not supported for PDF input");
-        }
-
         if (nerdQuery == null || isNotBlank(nerdQuery.getText()) || isNotBlank(nerdQuery.getShortText())) {
             throw new QueryException("Query with PDF shall not have the field text or shortText filled in.");
         }
@@ -88,27 +85,20 @@ public class NerdRestProcessFile {
         if (nerdQuery.hasValidLanguage()) {
             lang.setConf(1.0);
             LOGGER.debug(">> language provided in query: " + lang);
-        }
+        } 
 
-        /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities()
+        /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities() */
 
         // we assume for the moment that there are no entities originally set in the query
         // however, it would be nice to have them specified with coordinates and map
         // them to their right layout tokens when processing the PDF (as done for
         // instance in the project grobid-astro)
-		/*List<NerdEntity> originalEntities = null;
-		if  ( (nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0) ) {
-			for(NerdEntity entity : nerdQuery.getEntities()) {
-				entity.setNer_conf(1.0);
-				
-				// do we have disambiguated entity information for the entity?
-				if (entity.getWikipediaExternalRef() != -1) {
-					entity.setOrigin(NerdEntity.Origin.USER);
-					entity.setNerdScore(1.0);
-				}
-			}
-			originalEntities = nerdQuery.getEntities();
-		}*/
+
+//        List<NerdEntity> originalEntities = null;
+//        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+//            markUserEnteredEntities(nerdQuery, nerdQuery.getText().length());
+//            originalEntities = nerdQuery.getEntities();
+//        }
 
         // tuning the species only mention selection
         tuneSpeciesMentions(nerdQuery);
@@ -448,6 +438,11 @@ public class NerdRestProcessFile {
         long end = System.currentTimeMillis();
         IOUtilities.removeTempFile(originFile);
         nerdQuery.setRuntime(end - start);
+        // for metadata
+        nerdQuery.setSoftware(softwareInfo.getName());
+        nerdQuery.setVersion(softwareInfo.getVersion());
+        nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
+
         LOGGER.info("runtime: " + (end - start));
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
             Collections.sort(nerdQuery.getEntities());
@@ -511,6 +506,33 @@ public class NerdRestProcessFile {
         return null;
     }
 
+
+    /**
+     * Mark (confidence 1.0) the user defined entities as long as:
+     * - they have a valid coordinate set
+     * - they have a valid wikipedia or wikidata ID
+     **/
+//    public void markUserEnteredEntities(NerdQuery nerdQuery) {
+//
+//        for (NerdEntity entity : nerdQuery.getEntities()) {
+//
+//            if (entity.getLayoutTokens().get(0).getX()== -1
+//                    || entity.getOffsetEnd() == -1
+//                    || entity.getOffsetEnd() < entity.getOffsetStart()
+//                    || entity.getOffsetEnd() > maxOffsetValue) {
+//                LOGGER.warn("The entity " + entity.toJsonCompact() + " doesn't have valid offset. Ignoring it.");
+//            } else {
+//                entity.setNer_conf(1.0);
+//
+//                // do we have disambiguated entity information for the entity?
+//                if (entity.getWikipediaExternalRef() != -1 || StringUtils.isNotBlank(entity.getWikidataId())) {
+//                    entity.setSource(ProcessText.MentionMethod.user);
+//                    entity.setNerdScore(1.0);
+//                }
+//            }
+//        }
+//    }
+
     private List<NerdEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations,
                                                          NerdContext documentContext,
                                                          NerdQuery workingQuery) {
@@ -529,8 +551,6 @@ public class NerdRestProcessFile {
             workingQuery.setTokens(layoutTokens);
             workingQuery.setContext(documentContext);
 
-            //TODO remove in next release
-            workingQuery.setOnlyNER(workingQuery.getOnlyNER());
             //workingQuery.setMentions(mentions);
             try {
                 // ner
