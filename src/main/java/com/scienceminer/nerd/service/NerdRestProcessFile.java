@@ -6,6 +6,7 @@ import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
