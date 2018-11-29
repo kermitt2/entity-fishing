@@ -100,7 +100,9 @@ public class NerdSelector extends NerdModel {
 								boolean inContext,
 								boolean isNe,
 								double tf_idf, 
-								double dice) throws Exception {
+								double dice,
+								String nerGrobid_type,
+								String nerKid_type) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -138,6 +140,9 @@ public class NerdSelector extends NerdModel {
 		feature.isNe = isNe;
 		feature.tf_idf = tf_idf;
 		feature.dice = dice;
+		// hidden if it's not involving nerGrobid_type and nerKid_type
+		feature.nerGrobid_type = nerGrobid_type;
+		feature.nerKid_type = nerKid_type;
 		double[] features = feature.toVector(attributes);
 		
 		smile.math.Math.setSeed(7);
@@ -450,6 +455,8 @@ public class NerdSelector extends NerdModel {
 					feature.inContext = inContext;
 					feature.isNe = isNe;
 					feature.dice = dice;
+					feature.nerGrobid_type = nerGrobid_type;
+					feature.nerKid_type = nerKid_type;
 
 					double tf = Utilities.getOccCount(candidate.getLabel().getText(), contentString);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();

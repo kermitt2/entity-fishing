@@ -1729,7 +1729,9 @@ System.out.println("Merging...");
 						context.contains(candidate),
 						isNe,
 						tf*idf,
-						dice);
+						dice,
+						candidate.getType(),
+						candidate.getTypeKid());
 
 					/*System.out.println("SELECTOR - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> nerdScore: " + candidate.getNerdScore() + 
 						", linkProbability: " + candidate.getLabel().getLinkProbability() + 
