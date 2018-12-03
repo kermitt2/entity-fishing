@@ -1,0 +1,1270 @@
+wifi-pro-83-039:nerd tkristan$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="aida-testa"
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ---------------------< com.scienceminer.nerd:nerd >---------------------
+[INFO] Building entity-fishing 0.0.3
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ nerd ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 5 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ nerd ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-jar-plugin:3.0.2:jar (make-a-jar) @ nerd ---
+[INFO] Building jar: /Users/tkristan/Desktop/Tanti/nerd/target/nerd-0.0.3.jar
+[INFO]
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ nerd ---
+12:13:19.514 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.kb.UpperKnowledgeBase - Get new instance of UpperKnowledgeBase
+12:13:19.517 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Lexicon
+12:13:19.518 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.kb.Lexicon - Get new instance of Lexicon
+12:13:19.518 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.Lexicon - Initiating dictionaries
+12:13:19.518 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.Lexicon - End of Initialization of dictionaries
+12:13:19.519 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Lexicon initialized
+12:13:19.810 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase -
+Init Upper Knowledge-base layer
+building Environment for upper knowledge-base
+12:13:21.611 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /home/lopez/resources/wikidata/wikidataIds.csv is not readable
+12:13:21.631 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /home/lopez/resources/wikidata/latest-all.json.bz2 is not readable
+The content of nerdKid database - 35030909 items.
+Environment built - 37413613 concepts.
+12:13:21.632 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init English lower Knowledge-base layer
+init Environment for language en
+building Environment for language en
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/stats.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/page.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/label.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLabel.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLinkIn.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLinkOut.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/categoryParents.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/articleParents.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/childCategories.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/childArticles.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/redirectTargetsBySource.csv is not readable
+12:13:22.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/redirectSourcesByTarget.csv is not readable
+12:13:22.109 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/wikidata.txt is not readable
+12:13:22.109 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/translations.csv is not readable
+12:13:22.109 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/en
+12:13:22.110 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/word.embeddings.quantized.gz is not readable
+12:13:22.110 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 14899737 pages.
+12:13:22.112 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.WikipediaDomainMap - domains en / isLoaded: true
+12:13:22.186 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN com.scienceminer.nerd.kb.db.WikipediaDomainMap - Orthopedic surgery is not a category found in Wikipedia.
+12:13:22.189 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN com.scienceminer.nerd.kb.db.WikipediaDomainMap - Environment is not a category found in Wikipedia.
+12:13:22.202 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init German lower Knowledge-base layer
+init Environment for language de
+building Environment for language de
+12:13:22.419 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/stats.csv is not readable
+12:13:22.419 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/page.csv is not readable
+12:13:22.419 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/label.csv is not readable
+12:13:22.419 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLabel.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLinkIn.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLinkOut.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/categoryParents.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/articleParents.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/childCategories.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/childArticles.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/redirectTargetsBySource.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/redirectSourcesByTarget.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/wikidata.txt is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/translations.csv is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/de
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/word.embeddings.quantized.gz is not readable
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3579552 pages.
+12:13:22.420 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init French lower Knowledge-base layer
+init Environment for language fr
+building Environment for language fr
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/stats.csv is not readable
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/page.csv is not readable
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/label.csv is not readable
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLabel.csv is not readable
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLinkIn.csv is not readable
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLinkOut.csv is not readable
+12:13:22.602 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/categoryParents.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/articleParents.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/childCategories.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/childArticles.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/redirectTargetsBySource.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/redirectSourcesByTarget.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/wikidata.txt is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/translations.csv is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/fr
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/word.embeddings.quantized.gz is not readable
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3681264 pages.
+12:13:22.603 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Spanish lower Knowledge-base layer
+init Environment for language es
+building Environment for language es
+12:13:22.780 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/stats.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/page.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/label.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLabel.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLinkIn.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLinkOut.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/categoryParents.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/articleParents.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/childCategories.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/childArticles.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/redirectTargetsBySource.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/redirectSourcesByTarget.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/wikidata.txt is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/translations.csv is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/es
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/word.embeddings.quantized.gz is not readable
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3322291 pages.
+12:13:22.781 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Italian lower Knowledge-base layer
+init Environment for language it
+building Environment for language it
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/stats.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/page.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/label.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLabel.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLinkIn.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLinkOut.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/categoryParents.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/articleParents.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/childCategories.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/childArticles.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/redirectTargetsBySource.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/redirectSourcesByTarget.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/wikidata.txt is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/translations.csv is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/it
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/word.embeddings.quantized.gz is not readable
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 2291751 pages.
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - End of Initialization of Wikipedia environments
+12:13:22.998 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Grobid
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - No Grobid property was provided. Attempting to find Grobid home in the current directory...
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - ***************************************************************
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - *** USING GROBID HOME: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - ***************************************************************
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - synchronized getNewInstance
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - loading grobid.properties
+12:13:23.020 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - Grobid property file location was not explicitly set via 'org.grobid.property' system variable, defaulting to: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/config/grobid.properties
+12:13:23.027 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - Checking Properties
+12:13:23.027 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - loading pdf2xml path
+12:13:23.029 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - pdf2xml home directory set to /Users/tkristan/Desktop/Tanti/grobid/grobid-home/pdf2xml/mac-64
+12:13:23.030 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.main.LibraryLoader - Loading external native CRF library
+12:13:23.030 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.main.LibraryLoader - /Users/tkristan/Desktop/Tanti/grobid/grobid-home/lib/mac-64
+12:13:23.031 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.main.LibraryLoader - Loading Wapiti native library...
+12:13:23.076 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.main.LibraryLoader - Library crfpp loaded
+12:13:23.077 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.utilities.Utilities - >>>>>>>> GROBID_HOME=/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home
+12:13:23.389 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.analyzers.GrobidAnalyzer - Get new instance of GrobidAnalyzer
+12:13:23.397 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.mention.ProcessText - Get new instance of ProcessText
+12:13:23.406 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.utilities.Stopwords - Get new instance of Stopwords
+12:13:23.443 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti (size: 96825300)
+[Wapiti] Loading model: "/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+12:13:34.480 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.lexicon.Lexicon - Get new instance of Lexicon
+12:13:34.480 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - Initiating dictionary
+12:13:34.480 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - End of Initialization of dictionary
+12:13:34.480 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - Initiating names
+12:13:34.480 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - End of initialization of names
+12:13:34.909 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - Initiating country codes
+12:13:34.909 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - End of initialization of country codes
+12:13:34.943 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti (size: 6624683)
+[Wapiti] Loading model: "/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+12:13:54.519 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - Get new instance of Engine
+12:13:54.523 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.Relatedness - Get new instance of Relatedness
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Australian / was expecting: 4689264 / Australia
+do not found expected candidate for mention: Paul Johnson / was expecting: 6459613 / Paul Johnson (cricketer)
+12:13:55.802 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.embeddings.SimilarityScorer - Get new instance of SimilarityScorer
+12:13:55.950 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.disambiguation.NerdRanker - Model for nerd ranker loaded: data/models/ranker-long-en.model
+12:13:56.732 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 9175 - cache proportion: 0.3241252302025782
+12:13:57.477 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 11215 - cache proportion: 0.3055297541643446
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Northampton / was expecting: 530308 / Northamptonshire County Cricket Club
+12:13:58.862 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 13857 - cache proportion: 0.3568046787968808
+do not found expected candidate for mention: ENGLAND / was expecting: 9904 / England national football team
+do not found expected candidate for mention: Newcastle / was expecting: 57802 / Newcastle United F.C.
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Moldova / was expecting: 1011292 / Moldova national football team
+do not found expected candidate for mention: Newcastle / was expecting: 57802 / Newcastle United F.C.
+12:13:59.956 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 16692 - cache proportion: 0.3519683205217796
+do not found expected candidate for mention: Red Star / was expecting: 5604103 / KK Crvena zvezda
+12:14:00.241 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 16872 - cache proportion: 0.3513264129181084
+do not found expected candidate for mention: ROMANIA / was expecting: 679755 / Romania national football team
+do not found expected candidate for mention: LITHUANIA / was expecting: 655953 / Lithuania national football team
+do not found expected candidate for mention: Romania / was expecting: 5452605 / Romania national under-21 football team
+do not found expected candidate for mention: Lithuania / was expecting: 17674262 / Lithuania national under-21 football team
+do not found expected candidate for mention: Romania / was expecting: 5452605 / Romania national under-21 football team
+do not found expected candidate for mention: Lithuania / was expecting: 17674262 / Lithuania national under-21 football team
+12:14:00.490 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 17140 - cache proportion: 0.35267014124933904
+do not found expected candidate for mention: ROTOR / was expecting: 3108494 / FC Rotor Volgograd
+do not found expected candidate for mention: VOLGOGRAD / was expecting: 22257982 / FC Volgograd
+do not found expected candidate for mention: MOSCOW / was expecting: 19004 / Moscow
+do not found expected candidate for mention: Rotor / was expecting: 3108494 / FC Rotor Volgograd
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Rotor / was expecting: 3108494 / FC Rotor Volgograd
+do not found expected candidate for mention: Rotor / was expecting: 3108494 / FC Rotor Volgograd
+do not found expected candidate for mention: Volgograd / was expecting: 22257982 / FC Volgograd
+12:14:00.982 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 18647 - cache proportion: 0.34841708015934025
+do not found expected candidate for mention: PANAMA / was expecting: 22997 / Panama
+12:14:02.111 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 23192 - cache proportion: 0.3469801492327186
+do not found expected candidate for mention: Chris Walker / was expecting: 3672106 / Chris Walker (squash player)
+12:14:02.873 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 24137 - cache proportion: 0.3457211786072484
+do not found expected candidate for mention: Pohang / was expecting: 1056366 / Pohang Steelers
+do not found expected candidate for mention: Ulsan / was expecting: 1056425 / Ulsan Hyundai FC
+do not found expected candidate for mention: Pohang / was expecting: 1056366 / Pohang Steelers
+do not found expected candidate for mention: Ulsan / was expecting: 1056425 / Ulsan Hyundai FC
+do not found expected candidate for mention: Anyang / was expecting: 1056336 / FC Seoul
+12:14:03.154 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 24816 - cache proportion: 0.3496173603103051
+do not found expected candidate for mention: Hanwha / was expecting: 4086558 / Hanwha Eagles
+do not found expected candidate for mention: Hanwha / was expecting: 4086558 / Hanwha Eagles
+12:14:03.459 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 25363 - cache proportion: 0.3599404431433907
+12:14:06.741 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 34699 - cache proportion: 0.38670507971296264
+data/corpus/corpus-long/aida-testa/RawText/23521newsML.txt: AMERICAN LEAGUE
+
+		EASTERN DIVISION =/= AMERICAN LEAGUE
+
+  EASTERN DIVISION
+data/corpus/corpus-long/aida-testa/RawText/23521newsML.txt: NATIONAL LEAGUE
+
+		EASTERN DIVISION =/= NATIONAL LEAGUE
+
+  EASTERN DIVISION
+found no candidate for mention: AMERICAN LEAGUE
+
+		EASTERN DIVISION
+found no candidate for mention: NATIONAL LEAGUE
+
+		EASTERN DIVISION
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: BALTIMORE / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: BOSTON / was expecting: 4339 / Boston Red Sox
+do not found expected candidate for mention: TORONTO / was expecting: 30847 / Toronto Blue Jays
+do not found expected candidate for mention: DETROIT / was expecting: 8579 / Detroit Tigers
+do not found expected candidate for mention: CENTRAL DIVISION / was expecting: 2456377 / National League Central
+do not found expected candidate for mention: CLEVELAND / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: MINNESOTA / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: MILWAUKEE / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: KANSAS CITY / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: TEXAS / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: SEATTLE / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: OAKLAND / was expecting: 22523 / Oakland Athletics
+do not found expected candidate for mention: CALIFORNIA / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: KANSAS CITY / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: DETROIT / was expecting: 8579 / Detroit Tigers
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: TORONTO / was expecting: 30847 / Toronto Blue Jays
+do not found expected candidate for mention: MINNESOTA / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: MILWAUKEE / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: CLEVELAND / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: TEXAS / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: CALIFORNIA / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: BOSTON / was expecting: 4339 / Boston Red Sox
+do not found expected candidate for mention: OAKLAND / was expecting: 22523 / Oakland Athletics
+do not found expected candidate for mention: BALTIMORE / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: SEATTLE / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: ATLANTA / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: MONTREAL / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: FLORIDA / was expecting: 11278 / Miami Marlins
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: PHILADELPHIA / was expecting: 23741 / Philadelphia Phillies
+do not found expected candidate for mention: CENTRAL DIVISION / was expecting: 2456377 / National League Central
+do not found expected candidate for mention: HOUSTON / was expecting: 13894 / Houston Astros
+do not found expected candidate for mention: CINCINNATI / was expecting: 6671 / Cincinnati Reds
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: PITTSBURGH / was expecting: 24270 / Pittsburgh Pirates
+do not found expected candidate for mention: SAN DIEGO / was expecting: 28417 / San Diego Padres
+do not found expected candidate for mention: LOS ANGELES / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: COLORADO / was expecting: 6669 / Colorado Rockies
+do not found expected candidate for mention: SAN FRANCISCO / was expecting: 28416 / San Francisco Giants
+do not found expected candidate for mention: ATLANTA / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: FLORIDA / was expecting: 11278 / Miami Marlins
+do not found expected candidate for mention: CINCINNATI / was expecting: 6671 / Cincinnati Reds
+do not found expected candidate for mention: SAN DIEGO / was expecting: 28417 / San Diego Padres
+do not found expected candidate for mention: MONTREAL / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: LOS ANGELES / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: PHILADELPHIA / was expecting: 23741 / Philadelphia Phillies
+do not found expected candidate for mention: HOUSTON / was expecting: 13894 / Houston Astros
+do not found expected candidate for mention: PITTSBURGH / was expecting: 24270 / Pittsburgh Pirates
+do not found expected candidate for mention: SAN FRANCISCO / was expecting: 28416 / San Francisco Giants
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: COLORADO / was expecting: 6669 / Colorado Rockies
+12:14:08.395 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 37466 - cache proportion: 0.4075959774840301
+do not found expected candidate for mention: DETROIT / was expecting: 8579 / Detroit Tigers
+do not found expected candidate for mention: Kansas City / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: Minnesota / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: MILWAUKEE / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: CALIFORNIA / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: New York / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: SEATTLE / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: Baltimore / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: Chicago / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: HOUSTON / was expecting: 13894 / Houston Astros
+do not found expected candidate for mention: Cincinnati / was expecting: 6671 / Cincinnati Reds
+do not found expected candidate for mention: COLORADO / was expecting: 6669 / Colorado Rockies
+do not found expected candidate for mention: Atlanta / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: PITTSBURGH / was expecting: 24270 / Pittsburgh Pirates
+do not found expected candidate for mention: Los Angeles / was expecting: 18213 / Los Angeles Dodgers
+do not found expected candidate for mention: Florida / was expecting: 11278 / Miami Marlins
+12:14:08.999 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 37916 - cache proportion: 0.41775184275184274
+do not found expected candidate for mention: Wimbledon / was expecting: 2062900 / 1996 Wimbledon Championships
+12:14:11.533 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 50894 - cache proportion: 0.4080716445685043
+12:14:12.459 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 53215 - cache proportion: 0.4080645161290323
+do not found expected candidate for mention: Mike Sullivan / was expecting: 6828058 / Mike Sullivan (golfer)
+12:14:13.522 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 59720 - cache proportion: 0.396450660953228
+12:14:15.485 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 69845 - cache proportion: 0.4025184133311662
+do not found expected candidate for mention: SILVA / was expecting: 6881012 / Mário Silva
+do not found expected candidate for mention: Netherlands / was expecting: 9647657 / Netherlands national football team
+12:14:16.027 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 70875 - cache proportion: 0.4015906922550849
+do not found expected candidate for mention: Olympic / was expecting: 650360 / Olympic sports
+do not found expected candidate for mention: Olympic / was expecting: 650360 / Olympic sports
+do not found expected candidate for mention: Olympic / was expecting: 650360 / Olympic sports
+do not found expected candidate for mention: Olympic / was expecting: 650360 / Olympic sports
+12:14:17.363 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 74384 - cache proportion: 0.40036598440938664
+do not found expected candidate for mention: Steve Brown / was expecting: 7885102 / Steve Brown (athlete)
+do not found expected candidate for mention: Mike Conley / was expecting: 972840 / Mike Conley Sr.
+do not found expected candidate for mention: Armen Martirosyan / was expecting: 4531486 / Armen Martirosyan (athlete)
+12:14:28.731 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 97706 - cache proportion: 0.39589580615443587
+do not found expected candidate for mention: Karlsruhe / was expecting: 1734592 / Karlsruher SC
+do not found expected candidate for mention: Karlsruhe / was expecting: 1734592 / Karlsruher SC
+do not found expected candidate for mention: Karlsruhe / was expecting: 1734592 / Karlsruher SC
+12:14:29.394 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 99161 - cache proportion: 0.39488378053468887
+do not found expected candidate for mention: Olympic / was expecting: 72311 / 1996 Summer Olympics
+do not found expected candidate for mention: IAAF Grand Prix Final / was expecting: 24168650 / 1996 IAAF Grand Prix Final
+12:14:30.413 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 102887 - cache proportion: 0.3925024503725747
+do not found expected candidate for mention: NICE / was expecting: 704478 / OGC Nice
+do not found expected candidate for mention: NICE / was expecting: 47088 / Nice
+12:14:30.829 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 103539 - cache proportion: 0.39191998684457807
+do not found expected candidate for mention: MILAN / was expecting: 18940588 / A.C. Milan
+do not found expected candidate for mention: ATALANTA / was expecting: 210482 / Atalanta B.C.
+do not found expected candidate for mention: MILAN / was expecting: 36511 / Milan
+12:14:31.558 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 106833 - cache proportion: 0.38921857848518115
+do not found expected candidate for mention: SRI LANKA / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: AUSTRALIA / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+12:14:31.910 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 107039 - cache proportion: 0.3893848725306195
+found no candidate for mention: Dharmasena
+found no candidate for mention: S.Waugh
+found no candidate for mention: Dharmasena
+found no candidate for mention: S.Waugh
+found no candidate for mention: U.Chandana
+found no candidate for mention: Dharmasena
+found no candidate for mention: S.Waugh
+do not found expected candidate for mention: AUSTRALIA / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: SRI LANKA / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Ranatunga / was expecting: 1160705 / Arjuna Ranatunga
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: Healy / was expecting: 928267 / Ian Healy
+do not found expected candidate for mention: Law / was expecting: 2047175 / Stuart Law
+do not found expected candidate for mention: Gillespie / was expecting: 409561 / Jason Gillespie
+do not found expected candidate for mention: Lehmann / was expecting: 994713 / Darren Lehmann
+do not found expected candidate for mention: Bevan / was expecting: 284900 / Michael Bevan
+do not found expected candidate for mention: India / was expecting: 407754 / India national cricket team
+12:14:32.641 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 109126 - cache proportion: 0.39513563248971806
+do not found expected candidate for mention: AUSTRALIA / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: SRI LANKA / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+12:14:32.887 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 109283 - cache proportion: 0.3959294901913095
+do not found expected candidate for mention: AUSTRALIA / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+do not found expected candidate for mention: Australia / was expecting: 374833 / Australia national cricket team
+do not found expected candidate for mention: Sri Lanka / was expecting: 397246 / Sri Lanka national cricket team
+12:14:33.763 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 113448 - cache proportion: 0.3974346036382951
+12:14:34.952 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 118813 - cache proportion: 0.3968117781444346
+12:14:35.152 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 119153 - cache proportion: 0.3966050711243676
+12:14:35.824 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 120506 - cache proportion: 0.39631998958015013
+12:14:36.161 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 121191 - cache proportion: 0.39666648412647043
+12:14:37.170 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 124542 - cache proportion: 0.40235808991837385
+do not found expected candidate for mention: CHICAGO / was expecting: 6886 / Chicago
+do not found expected candidate for mention: Japanese / was expecting: 15573 / Japan
+12:14:41.340 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 136743 - cache proportion: 0.4005103047361014
+12:14:42.977 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 145623 - cache proportion: 0.3977568330982916
+do not found expected candidate for mention: Chicago / was expecting: 230102 / Chicago Stock Exchange
+do not found expected candidate for mention: Chicago / was expecting: 230102 / Chicago Stock Exchange
+12:14:43.336 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 146219 - cache proportion: 0.39757661154096524
+do not found expected candidate for mention: Iraqis / was expecting: 7515928 / Iraq
+do not found expected candidate for mention: Iraqis / was expecting: 7515928 / Iraq
+do not found expected candidate for mention: Hussein / was expecting: 29490 / Saddam Hussein
+do not found expected candidate for mention: English / was expecting: 31717 / United Kingdom
+12:14:44.006 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 148780 - cache proportion: 0.39591047878905994
+do not found expected candidate for mention: BRITAIN / was expecting: 31717 / United Kingdom
+do not found expected candidate for mention: ITALY / was expecting: 14532 / Italy
+do not found expected candidate for mention: Labour Day / was expecting: 19156272 / Labor Day
+do not found expected candidate for mention: Labour Day / was expecting: 19156272 / Labor Day
+do not found expected candidate for mention: Japanese / was expecting: 15573 / Japan
+do not found expected candidate for mention: European / was expecting: 9317 / European Union
+12:14:46.210 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 160305 - cache proportion: 0.4031587295086545
+do not found expected candidate for mention: Sun / was expecting: 26146987 / The Sun (United Kingdom)
+do not found expected candidate for mention: Sun / was expecting: 26146987 / The Sun (United Kingdom)
+do not found expected candidate for mention: Wembley / was expecting: 596136 / Wembley Arena
+12:14:47.211 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 164252 - cache proportion: 0.402904556773361
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Birmingham / was expecting: 185196 / Birmingham City F.C.
+do not found expected candidate for mention: Staunton / was expecting: 1227638 / Steve Staunton
+do not found expected candidate for mention: Irwin / was expecting: 1114589 / Denis Irwin
+do not found expected candidate for mention: McAteer / was expecting: 1929564 / Jason McAteer
+do not found expected candidate for mention: McLoughlin / was expecting: 3163529 / Alan McLoughlin
+do not found expected candidate for mention: Houghton / was expecting: 1219053 / Ray Houghton
+do not found expected candidate for mention: Townsend / was expecting: 2255163 / Andy Townsend
+12:14:48.052 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 165947 - cache proportion: 0.4022189802056879
+do not found expected candidate for mention: Nigerian / was expecting: 21383 / Nigeria
+12:14:48.425 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 166891 - cache proportion: 0.40184366812540095
+do not found expected candidate for mention: JOHANNESBURG / was expecting: 58893 / Johannesburg
+12:14:48.843 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 167953 - cache proportion: 0.40162319501498145
+12:14:49.351 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 169188 - cache proportion: 0.4008944727532835
+do not found expected candidate for mention: MOSCOW / was expecting: 19004 / Moscow
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Moscow / was expecting: 25391 / Russia
+12:14:50.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 175396 - cache proportion: 0.4023395838089624
+do not found expected candidate for mention: Chechens / was expecting: 6095 / Chechnya
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:14:51.463 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 177775 - cache proportion: 0.4044328753722818
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Serb / was expecting: 29265 / Serbia
+12:14:52.544 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 183814 - cache proportion: 0.40352858334225705
+12:14:53.168 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 186075 - cache proportion: 0.40302026988007467
+12:14:55.056 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 193456 - cache proportion: 0.3994101393933749
+12:14:56.961 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 205016 - cache proportion: 0.39512598099958696
+do not found expected candidate for mention: Foreign Ministry / was expecting: 1161355 / Ministry of Foreign Affairs (Poland)
+do not found expected candidate for mention: Federal Republic of Yugoslavia / was expecting: 297809 / Socialist Federal Republic of Yugoslavia
+do not found expected candidate for mention: Serbian / was expecting: 29265 / Serbia
+12:14:57.815 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 208309 - cache proportion: 0.39428154368661017
+do not found expected candidate for mention: MOSCOW / was expecting: 19004 / Moscow
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:14:58.639 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 211490 - cache proportion: 0.3953835422193761
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:14:58.943 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 211910 - cache proportion: 0.39663223352277255
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: MOSCOW / was expecting: 19004 / Moscow
+12:14:59.260 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 212637 - cache proportion: 0.3967744680851064
+do not found expected candidate for mention: BSE / was expecting: 2114707 / Budapest Stock Exchange
+do not found expected candidate for mention: BSE / was expecting: 2114707 / Budapest Stock Exchange
+12:15:00.798 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 220511 - cache proportion: 0.3978432668308748
+12:15:01.223 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 221650 - cache proportion: 0.398203706619895
+12:15:01.779 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 223636 - cache proportion: 0.39780649434928606
+12:15:02.505 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 225237 - cache proportion: 0.3972801785384572
+do not found expected candidate for mention: Cambodian / was expecting: 334751 / Cambodia
+12:15:03.514 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 230196 - cache proportion: 0.3969459049505262
+do not found expected candidate for mention: Australian / was expecting: 4689264 / Australia
+do not found expected candidate for mention: Koreans / was expecting: 27019 / South Korea
+12:15:04.954 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 236337 - cache proportion: 0.3967717152432316
+do not found expected candidate for mention: TRIPOLI / was expecting: 268796 / Tripoli, Lebanon
+12:15:06.690 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 246419 - cache proportion: 0.39240116184455154
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+do not found expected candidate for mention: Standard & Poor / was expecting: 170992 / S&P 500 Index
+12:15:10.805 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 264619 - cache proportion: 0.3946376894480984
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+12:15:13.959 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 281361 - cache proportion: 0.3969082440395172
+12:15:16.357 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 291565 - cache proportion: 0.3975967091113072
+do not found expected candidate for mention: CHICAGO / was expecting: 6886 / Chicago
+12:15:18.697 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 304643 - cache proportion: 0.3948808504637069
+24388newsML.txt: Invalid article name - article not found in Wikipedia: Norwest
+do not found expected candidate for mention: CHICAGO / was expecting: 6886 / Chicago
+12:15:20.464 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 314592 - cache proportion: 0.39713584335098284
+12:15:21.515 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 318460 - cache proportion: 0.3985771778112258
+12:15:21.835 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 319058 - cache proportion: 0.39899146873722613
+do not found expected candidate for mention: South Carolina / was expecting: 253089 / Governor of South Carolina
+12:15:23.169 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 323919 - cache proportion: 0.39920541740625537
+12:15:23.960 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 326576 - cache proportion: 0.398711535239456
+do not found expected candidate for mention: Palestinians / was expecting: 241405 / State of Palestine
+12:15:26.278 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 335492 - cache proportion: 0.4007937216687445
+do not found expected candidate for mention: PARIS / was expecting: 22989 / Paris
+do not found expected candidate for mention: Charles de Gaulle / was expecting: 105927 / Charles de Gaulle Airport
+12:15:28.063 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 341124 - cache proportion: 0.4009230509855711
+12:15:28.590 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 342274 - cache proportion: 0.40081333120926566
+12:15:29.440 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 343885 - cache proportion: 0.40173728179594503
+do not found expected candidate for mention: Indian / was expecting: 14533 / India
+do not found expected candidate for mention: Indian / was expecting: 14533 / India
+12:15:29.928 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 344808 - cache proportion: 0.401788347634794
+12:15:30.085 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 345081 - cache proportion: 0.40180456602007386
+12:15:31.840 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 350605 - cache proportion: 0.4058247326588371
+12:15:32.100 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 350779 - cache proportion: 0.40596475541149735
+12:15:32.666 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 352552 - cache proportion: 0.40606015681068497
+do not found expected candidate for mention: Palestinians / was expecting: 241405 / State of Palestine
+do not found expected candidate for mention: Gaza / was expecting: 3067136 / Gaza
+12:15:34.158 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 355551 - cache proportion: 0.4063702115723674
+24989newsML.txt: Invalid article name - article not found in Wikipedia: Akhbar
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: CAIRO / was expecting: 6293 / Cairo
+12:15:34.903 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 356338 - cache proportion: 0.4062161522644031
+do not found expected candidate for mention: Palestinians / was expecting: 241405 / State of Palestine
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Palestinians / was expecting: 241405 / State of Palestine
+do not found expected candidate for mention: Palestinians / was expecting: 241405 / State of Palestine
+do not found expected candidate for mention: Israelis / was expecting: 9282173 / Israel
+do not found expected candidate for mention: Israelis / was expecting: 9282173 / Israel
+12:15:36.831 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 363398 - cache proportion: 0.4070737115529892
+12:15:38.062 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 365905 - cache proportion: 0.40622778861413933
+do not found expected candidate for mention: Commerce / was expecting: 70243 / United States Department of Commerce
+do not found expected candidate for mention: Wall Street / was expecting: 21560 / New York Stock Exchange
+12:15:39.397 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 373504 - cache proportion: 0.411960300267016
+do not found expected candidate for mention: Japanese / was expecting: 15573 / Japan
+12:15:42.868 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 388736 - cache proportion: 0.41338451973513457
+found no candidate for mention: Pirelli Cables
+do not found expected candidate for mention: MILAN / was expecting: 36511 / Milan
+12:15:45.446 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 401194 - cache proportion: 0.4122526355267244
+12:15:46.011 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 403079 - cache proportion: 0.4125120608185907
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:15:47.335 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 408470 - cache proportion: 0.412454294648842
+12:15:47.927 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 409934 - cache proportion: 0.4120761785109365
+do not found expected candidate for mention: Armenians / was expecting: 10918072 / Armenia
+do not found expected candidate for mention: Azeris / was expecting: 746 / Azerbaijan
+do not found expected candidate for mention: Azerbaijani / was expecting: 746 / Azerbaijan
+do not found expected candidate for mention: Armenian / was expecting: 10918072 / Armenia
+do not found expected candidate for mention: Azeri / was expecting: 746 / Azerbaijan
+do not found expected candidate for mention: Armenians / was expecting: 10918072 / Armenia
+do not found expected candidate for mention: Azeris / was expecting: 746 / Azerbaijan
+12:15:49.208 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 414206 - cache proportion: 0.41218777362603365
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russians / was expecting: 25391 / Russia
+do not found expected candidate for mention: Ukrainians / was expecting: 31750 / Ukraine
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:15:52.159 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 428778 - cache proportion: 0.408457233043663
+12:15:52.803 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 430728 - cache proportion: 0.40837560418821417
+12:15:53.670 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 432905 - cache proportion: 0.4083540158754455
+do not found expected candidate for mention: House of Representatives / was expecting: 19468532 / House of Representatives
+12:15:55.370 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 440802 - cache proportion: 0.40653987931596225
+12:15:55.609 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 441007 - cache proportion: 0.40661539330952656
+12:15:55.830 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 441278 - cache proportion: 0.4068254100542258
+12:15:56.379 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 443089 - cache proportion: 0.40662041110401337
+12:15:56.987 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 444266 - cache proportion: 0.40665563493240053
+12:15:57.920 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 445472 - cache proportion: 0.40730017908509597
+12:15:59.589 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 452225 - cache proportion: 0.4067826625354507
+do not found expected candidate for mention: REAL / was expecting: 26413 / Real Madrid C.F.
+do not found expected candidate for mention: Real / was expecting: 26413 / Real Madrid C.F.
+do not found expected candidate for mention: Real / was expecting: 26413 / Real Madrid C.F.
+do not found expected candidate for mention: Real / was expecting: 26413 / Real Madrid C.F.
+do not found expected candidate for mention: Real / was expecting: 26413 / Real Madrid C.F.
+do not found expected candidate for mention: Brazil / was expecting: 149286 / Brazil national football team
+12:16:01.266 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 459911 - cache proportion: 0.4052949338133274
+12:16:01.541 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 460241 - cache proportion: 0.4053050027716365
+do not found expected candidate for mention: ISRAEL / was expecting: 769536 / Israel national football team
+do not found expected candidate for mention: BULGARIA / was expecting: 679770 / Bulgaria national football team
+do not found expected candidate for mention: Israel / was expecting: 6077360 / Israel national under-21 football team
+do not found expected candidate for mention: Bulgaria / was expecting: 6872188 / Bulgaria national under-21 football team
+12:16:01.765 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 460483 - cache proportion: 0.40533116722110873
+do not found expected candidate for mention: IRISH / was expecting: 578510 / Republic of Ireland national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Irish / was expecting: 578510 / Republic of Ireland national football team
+do not found expected candidate for mention: Norwich / was expecting: 248083 / Norwich City F.C.
+do not found expected candidate for mention: Ireland / was expecting: 578510 / Republic of Ireland national football team
+do not found expected candidate for mention: Irish / was expecting: 578510 / Republic of Ireland national football team
+do not found expected candidate for mention: Ireland / was expecting: 578510 / Republic of Ireland national football team
+12:16:02.471 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 462786 - cache proportion: 0.405260290027913
+do not found expected candidate for mention: IRELAND / was expecting: 578510 / Republic of Ireland national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+12:16:02.828 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 463167 - cache proportion: 0.4056032812215261
+do not found expected candidate for mention: Miguel Angel Martin / was expecting: 5022198 / Miguel Ángel Martín (golfer)
+do not found expected candidate for mention: Peter Mitchell / was expecting: 5000237 / Peter Mitchell (golfer)
+12:16:04.266 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 466923 - cache proportion: 0.4050132396828593
+do not found expected candidate for mention: SLOVAKIA / was expecting: 681620 / Slovakia national football team
+do not found expected candidate for mention: FAROES / was expecting: 1011425 / Faroe Islands national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Slovakia / was expecting: 681620 / Slovakia national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Slovakia / was expecting: 681620 / Slovakia national football team
+12:16:04.647 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 467502 - cache proportion: 0.4052258478198917
+do not found expected candidate for mention: ENGLAND / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: PAKISTAN / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Pakistan / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Pakistan / was expecting: 759295 / Pakistan national cricket team
+12:16:05.016 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 467772 - cache proportion: 0.4053423236514523
+do not found expected candidate for mention: Motorola / was expecting: 2290911 / 7-Eleven (cycling team)
+12:16:06.312 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 471658 - cache proportion: 0.4053746712691093
+found no candidate for mention: D.Gough
+do not found expected candidate for mention: ENGLAND / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: PAKISTAN / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Pakistan / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Stewart / was expecting: 896414 / Alec Stewart
+do not found expected candidate for mention: Gough / was expecting: 413178 / Darren Gough
+do not found expected candidate for mention: Croft / was expecting: 1160680 / Robert Croft
+do not found expected candidate for mention: Gough / was expecting: 413178 / Darren Gough
+do not found expected candidate for mention: Mullally / was expecting: 2222543 / Alan Mullally
+do not found expected candidate for mention: Croft / was expecting: 1160680 / Robert Croft
+do not found expected candidate for mention: Thorpe / was expecting: 397259 / Graham Thorpe
+do not found expected candidate for mention: Croft / was expecting: 1160680 / Robert Croft
+do not found expected candidate for mention: Stewart / was expecting: 896414 / Alec Stewart
+do not found expected candidate for mention: Hollioake / was expecting: 2037175 / Adam Hollioake
+do not found expected candidate for mention: Knight / was expecting: 994718 / Nick Knight
+do not found expected candidate for mention: Hollioake / was expecting: 2037175 / Adam Hollioake
+do not found expected candidate for mention: Hollioake / was expecting: 2037175 / Adam Hollioake
+do not found expected candidate for mention: Gough / was expecting: 413178 / Darren Gough
+do not found expected candidate for mention: Knight / was expecting: 994718 / Nick Knight
+do not found expected candidate for mention: Hollioake / was expecting: 2037175 / Adam Hollioake
+do not found expected candidate for mention: Gough / was expecting: 413178 / Darren Gough
+do not found expected candidate for mention: Mullally / was expecting: 2222543 / Alan Mullally
+do not found expected candidate for mention: Headley / was expecting: 672220 / Dean Headley
+do not found expected candidate for mention: Irani / was expecting: 2053953 / Ronnie Irani
+do not found expected candidate for mention: Croft / was expecting: 1160680 / Robert Croft
+do not found expected candidate for mention: Hollioake / was expecting: 2037175 / Adam Hollioake
+12:16:07.068 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 474543 - cache proportion: 0.40878335025633683
+do not found expected candidate for mention: Oksana Grichina / was expecting: 33655197 / Oksana Grishina
+12:16:10.628 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 483301 - cache proportion: 0.410738605259083
+do not found expected candidate for mention: PAKISTAN / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: ENGLAND / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Pakistan / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Pakistan / was expecting: 759295 / Pakistan national cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: England / was expecting: 759125 / England cricket team
+do not found expected candidate for mention: Pakistan / was expecting: 759295 / Pakistan national cricket team
+12:16:11.537 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 487768 - cache proportion: 0.4116990084584369
+do not found expected candidate for mention: Texas / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: Texas / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: Texas / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: Cleveland / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: Cleveland / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: Cleveland / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: Texas / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: Seattle / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: West / was expecting: 2455857 / American League West
+do not found expected candidate for mention: New York / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: Baltimore / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: Seattle / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: Chicago / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: Boston / was expecting: 4339 / Boston Red Sox
+do not found expected candidate for mention: Kansas City / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: Milwaukee / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: Minnesota / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: Milwaukee / was expecting: 20152 / Milwaukee Brewers
+12:16:16.769 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 506621 - cache proportion: 0.4141843381170265
+do not found expected candidate for mention: KENT / was expecting: 1177719 / Kent County Cricket Club
+do not found expected candidate for mention: Australian / was expecting: 4689264 / Australia
+do not found expected candidate for mention: Australian / was expecting: 4689264 / Australia
+12:16:17.659 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 509715 - cache proportion: 0.41383838883324264
+25749newsML.txt: Invalid article name - article not found in Wikipedia: Raymond Russell
+do not found expected candidate for mention: Peter Mitchell / was expecting: 5000237 / Peter Mitchell (golfer)
+do not found expected candidate for mention: Miguel Angel Martin / was expecting: 5022198 / Miguel Ángel Martín (golfer)
+12:16:19.069 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 513262 - cache proportion: 0.4138228364486889
+do not found expected candidate for mention: ENGLISH / was expecting: 9316 / England
+do not found expected candidate for mention: Bristol / was expecting: 1463014 / Bristol Rugby
+do not found expected candidate for mention: Northampton / was expecting: 629560 / Northampton Saints
+do not found expected candidate for mention: Caerphilly / was expecting: 2795095 / Caerphilly RFC
+12:16:19.818 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 515262 - cache proportion: 0.4133503659857022
+do not found expected candidate for mention: WALES / was expecting: 580291 / Wales national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: John Robinson / was expecting: 4410583 / John Robinson (footballer)
+12:16:20.306 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 515536 - cache proportion: 0.4134831435108234
+do not found expected candidate for mention: UKRAINE / was expecting: 1008682 / Ukraine national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Ukraine / was expecting: 1008682 / Ukraine national football team
+12:16:20.660 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 515780 - cache proportion: 0.41370981034061394
+do not found expected candidate for mention: England / was expecting: 691024 / England national rugby union team
+do not found expected candidate for mention: England / was expecting: 691024 / England national rugby union team
+do not found expected candidate for mention: Northampton / was expecting: 629560 / Northampton Saints
+do not found expected candidate for mention: Bristol / was expecting: 1463014 / Bristol Rugby
+12:16:21.928 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 521338 - cache proportion: 0.41291757459051925
+do not found expected candidate for mention: Partick / was expecting: 226415 / Partick Thistle F.C.
+do not found expected candidate for mention: Stirling / was expecting: 880388 / Stirling Albion F.C.
+do not found expected candidate for mention: Ayr / was expecting: 451240 / Ayr United F.C.
+do not found expected candidate for mention: Hamilton / was expecting: 309502 / Hamilton Academical F.C.
+do not found expected candidate for mention: Brechin / was expecting: 451241 / Brechin City F.C.
+do not found expected candidate for mention: Berwick / was expecting: 451242 / Berwick Rangers F.C.
+do not found expected candidate for mention: Albion / was expecting: 33921 / West Bromwich Albion F.C.
+12:16:22.605 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 522689 - cache proportion: 0.4125934874834939
+do not found expected candidate for mention: ENGLISH / was expecting: 9316 / England
+do not found expected candidate for mention: Norwich / was expecting: 248083 / Norwich City F.C.
+do not found expected candidate for mention: Wolverhampton / was expecting: 217730 / Wolverhampton Wanderers F.C.
+do not found expected candidate for mention: Swindon / was expecting: 74291 / Swindon Town F.C.
+do not found expected candidate for mention: Bradford / was expecting: 431144 / Bradford City A.F.C.
+do not found expected candidate for mention: Ipswich / was expecting: 352843 / Ipswich Town F.C.
+do not found expected candidate for mention: Birmingham / was expecting: 185196 / Birmingham City F.C.
+do not found expected candidate for mention: Huddersfield / was expecting: 236211 / Huddersfield Town A.F.C.
+do not found expected candidate for mention: Oxford / was expecting: 451165 / Oxford United F.C.
+do not found expected candidate for mention: West Bromwich / was expecting: 33921 / West Bromwich Albion F.C.
+do not found expected candidate for mention: Oldham / was expecting: 451131 / Oldham Athletic A.F.C.
+do not found expected candidate for mention: Grimsby / was expecting: 451129 / Grimsby Town F.C.
+do not found expected candidate for mention: Plymouth / was expecting: 23857 / Plymouth Argyle F.C.
+do not found expected candidate for mention: Shrewsbury / was expecting: 451207 / Shrewsbury Town F.C.
+do not found expected candidate for mention: York / was expecting: 451170 / York City F.C.
+do not found expected candidate for mention: Peterborough / was expecting: 451132 / Peterborough United F.C.
+do not found expected candidate for mention: Preston / was expecting: 429092 / Preston North End F.C.
+do not found expected candidate for mention: Luton / was expecting: 18367 / Luton Town F.C.
+do not found expected candidate for mention: Stockport / was expecting: 451135 / Stockport County F.C.
+do not found expected candidate for mention: Wigan / was expecting: 367030 / Wigan Athletic F.C.
+do not found expected candidate for mention: Hull / was expecting: 451358 / Hull City A.F.C.
+do not found expected candidate for mention: Torquay / was expecting: 193049 / Torquay United F.C.
+do not found expected candidate for mention: Cardiff / was expecting: 5624949 / Cardiff City F.C.
+do not found expected candidate for mention: Carlisle / was expecting: 451157 / Carlisle United F.C.
+do not found expected candidate for mention: Northampton / was expecting: 425750 / Northampton Town F.C.
+do not found expected candidate for mention: Lincoln / was expecting: 451163 / Lincoln City F.C.
+do not found expected candidate for mention: Exeter / was expecting: 347780 / Exeter City F.C.
+do not found expected candidate for mention: Doncaster / was expecting: 451160 / Doncaster Rovers F.C.
+do not found expected candidate for mention: Brighton / was expecting: 69455 / Brighton & Hove Albion F.C.
+do not found expected candidate for mention: Hereford / was expecting: 451201 / Hereford United F.C.
+do not found expected candidate for mention: Swansea / was expecting: 451169 / Swansea City A.F.C.
+do not found expected candidate for mention: Colchester / was expecting: 451127 / Colchester United F.C.
+do not found expected candidate for mention: Mansfield / was expecting: 451164 / Mansfield Town F.C.
+12:16:23.989 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 526733 - cache proportion: 0.41137219799094593
+do not found expected candidate for mention: Partick / was expecting: 226415 / Partick Thistle F.C.
+do not found expected candidate for mention: Stirling / was expecting: 880388 / Stirling Albion F.C.
+do not found expected candidate for mention: Dundee / was expecting: 331074 / Dundee United F.C.
+do not found expected candidate for mention: Ayr / was expecting: 451240 / Ayr United F.C.
+do not found expected candidate for mention: Berwick / was expecting: 451242 / Berwick Rangers F.C.
+do not found expected candidate for mention: Brechin / was expecting: 451241 / Brechin City F.C.
+do not found expected candidate for mention: Hamilton / was expecting: 309502 / Hamilton Academical F.C.
+12:16:24.422 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 526903 - cache proportion: 0.4121341339599106
+do not found expected candidate for mention: ENGLISH / was expecting: 9316 / England
+do not found expected candidate for mention: Bradford / was expecting: 431144 / Bradford City A.F.C.
+do not found expected candidate for mention: Grimsby / was expecting: 451129 / Grimsby Town F.C.
+do not found expected candidate for mention: Huddersfield / was expecting: 236211 / Huddersfield Town A.F.C.
+do not found expected candidate for mention: Norwich / was expecting: 248083 / Norwich City F.C.
+do not found expected candidate for mention: Wolverhampton / was expecting: 217730 / Wolverhampton Wanderers F.C.
+do not found expected candidate for mention: Oldham / was expecting: 451131 / Oldham Athletic A.F.C.
+do not found expected candidate for mention: Ipswich / was expecting: 352843 / Ipswich Town F.C.
+do not found expected candidate for mention: Oxford / was expecting: 451165 / Oxford United F.C.
+do not found expected candidate for mention: Swindon / was expecting: 74291 / Swindon Town F.C.
+do not found expected candidate for mention: Birmingham / was expecting: 185196 / Birmingham City F.C.
+do not found expected candidate for mention: Peterborough / was expecting: 451132 / Peterborough United F.C.
+do not found expected candidate for mention: Stockport / was expecting: 451135 / Stockport County F.C.
+do not found expected candidate for mention: Luton / was expecting: 18367 / Luton Town F.C.
+do not found expected candidate for mention: York / was expecting: 451170 / York City F.C.
+do not found expected candidate for mention: Shrewsbury / was expecting: 451207 / Shrewsbury Town F.C.
+do not found expected candidate for mention: Brighton / was expecting: 69455 / Brighton & Hove Albion F.C.
+do not found expected candidate for mention: Cardiff / was expecting: 5624949 / Cardiff City F.C.
+do not found expected candidate for mention: Colchester / was expecting: 451127 / Colchester United F.C.
+do not found expected candidate for mention: Hereford / was expecting: 451201 / Hereford United F.C.
+do not found expected candidate for mention: Doncaster / was expecting: 451160 / Doncaster Rovers F.C.
+do not found expected candidate for mention: Carlisle / was expecting: 451157 / Carlisle United F.C.
+do not found expected candidate for mention: Hull / was expecting: 451358 / Hull City A.F.C.
+do not found expected candidate for mention: Mansfield / was expecting: 451164 / Mansfield Town F.C.
+do not found expected candidate for mention: Northampton / was expecting: 425750 / Northampton Town F.C.
+do not found expected candidate for mention: Torquay / was expecting: 193049 / Torquay United F.C.
+do not found expected candidate for mention: Exeter / was expecting: 347780 / Exeter City F.C.
+do not found expected candidate for mention: Wigan / was expecting: 367030 / Wigan Athletic F.C.
+12:16:25.198 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 527400 - cache proportion: 0.4141679385242897
+do not found expected candidate for mention: Tunbridge Wells / was expecting: 10877349 / Nevill Ground
+do not found expected candidate for mention: Bristol / was expecting: 2642664 / Bristol County Ground
+12:16:25.849 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 527945 - cache proportion: 0.4156500353081549
+do not found expected candidate for mention: INDYCAR / was expecting: 8511358 / IndyCar Series
+do not found expected candidate for mention: Al Unser / was expecting: 768194 / Al Unser Jr.
+12:16:26.652 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 530637 - cache proportion: 0.4157543741047275
+do not found expected candidate for mention: PANAMA / was expecting: 1028241 / Panama national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Panama / was expecting: 1028241 / Panama national football team
+do not found expected candidate for mention: CONCACAF / was expecting: 15577036 / CONCACAF Champions League
+do not found expected candidate for mention: Panama / was expecting: 1028241 / Panama national football team
+12:16:27.127 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 530991 - cache proportion: 0.41576086059553796
+do not found expected candidate for mention: JOHANNESBURG / was expecting: 58893 / Johannesburg
+do not found expected candidate for mention: South Africa / was expecting: 376115 / South Africa national rugby union team
+do not found expected candidate for mention: New Zealand / was expecting: 154957 / New Zealand national rugby union team
+do not found expected candidate for mention: New Zealand / was expecting: 154957 / New Zealand national rugby union team
+do not found expected candidate for mention: South African / was expecting: 376115 / South Africa national rugby union team
+do not found expected candidate for mention: South Africa / was expecting: 376115 / South Africa national rugby union team
+do not found expected candidate for mention: New Zealand / was expecting: 154957 / New Zealand national rugby union team
+12:16:31.609 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 547139 - cache proportion: 0.41767084943112276
+do not found expected candidate for mention: SOUTH AFRICA / was expecting: 376115 / South Africa national rugby union team
+do not found expected candidate for mention: JOHANNESBURG / was expecting: 58893 / Johannesburg
+do not found expected candidate for mention: South Africa / was expecting: 376115 / South Africa national rugby union team
+do not found expected candidate for mention: New Zealand / was expecting: 154957 / New Zealand national rugby union team
+do not found expected candidate for mention: South Africa / was expecting: 376115 / South Africa national rugby union team
+do not found expected candidate for mention: New Zealand / was expecting: 154957 / New Zealand national rugby union team
+do not found expected candidate for mention: New Zealand / was expecting: 154957 / New Zealand national rugby union team
+12:16:32.508 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 547650 - cache proportion: 0.4186861127917715
+do not found expected candidate for mention: MAURITANIA / was expecting: 1234981 / Mauritania national football team
+do not found expected candidate for mention: Mauritania / was expecting: 1234981 / Mauritania national football team
+do not found expected candidate for mention: Benin / was expecting: 1198472 / Benin national football team
+12:16:33.030 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 548677 - cache proportion: 0.41842936487746973
+do not found expected candidate for mention: MAURITANIA / was expecting: 1234981 / Mauritania national football team
+do not found expected candidate for mention: BENIN / was expecting: 1198472 / Benin national football team
+do not found expected candidate for mention: Mauritania / was expecting: 1234981 / Mauritania national football team
+do not found expected candidate for mention: Benin / was expecting: 1198472 / Benin national football team
+do not found expected candidate for mention: Benin / was expecting: 1198472 / Benin national football team
+12:16:33.260 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 548747 - cache proportion: 0.41855238619988133
+do not found expected candidate for mention: Hajduk / was expecting: 4827125 / FK Hajduk Kula
+do not found expected candidate for mention: Buducnost / was expecting: 2652690 / FK Budućnost Podgorica
+do not found expected candidate for mention: Hajduk / was expecting: 4827125 / FK Hajduk Kula
+do not found expected candidate for mention: Buducnost / was expecting: 2652690 / FK Budućnost Podgorica
+do not found expected candidate for mention: Rudar / was expecting: 1940309 / FK Rudar Ugljevik
+do not found expected candidate for mention: Rudar / was expecting: 1940309 / FK Rudar Ugljevik
+12:16:33.809 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 549527 - cache proportion: 0.4188736749490284
+do not found expected candidate for mention: Moldova / was expecting: 1011292 / Moldova national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+12:16:34.507 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551302 - cache proportion: 0.41878519905454104
+do not found expected candidate for mention: Benetton / was expecting: 3450530 / Pallacanestro Treviso
+do not found expected candidate for mention: Red Star / was expecting: 5604103 / KK Crvena zvezda
+12:16:34.780 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551377 - cache proportion: 0.4189174805217525
+do not found expected candidate for mention: Benetton / was expecting: 3450530 / Pallacanestro Treviso
+do not found expected candidate for mention: Red Star / was expecting: 5604103 / KK Crvena zvezda
+12:16:35.040 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551377 - cache proportion: 0.4191225582429252
+do not found expected candidate for mention: ROMANIA / was expecting: 679755 / Romania national football team
+do not found expected candidate for mention: LITHUANIA / was expecting: 655953 / Lithuania national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Romania / was expecting: 679755 / Romania national football team
+do not found expected candidate for mention: Lithuania / was expecting: 655953 / Lithuania national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Romania / was expecting: 679755 / Romania national football team
+12:16:35.358 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551697 - cache proportion: 0.4192479762518816
+do not found expected candidate for mention: ARMENIA / was expecting: 695292 / Armenia national football team
+do not found expected candidate for mention: PORTUGAL / was expecting: 576328 / Portugal national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Armenia / was expecting: 695292 / Armenia national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+12:16:35.698 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551768 - cache proportion: 0.4193657692166034
+do not found expected candidate for mention: AZERBAIJAN / was expecting: 655906 / Azerbaijan national football team
+do not found expected candidate for mention: SWITZERLAND / was expecting: 681862 / Switzerland national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Azerbaijan / was expecting: 655906 / Azerbaijan national football team
+do not found expected candidate for mention: Switzerland / was expecting: 681862 / Switzerland national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+12:16:36.025 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551922 - cache proportion: 0.4195653065538445
+do not found expected candidate for mention: BENETTON / was expecting: 3450530 / Pallacanestro Treviso
+do not found expected candidate for mention: Benetton / was expecting: 3450530 / Pallacanestro Treviso
+12:16:36.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 551951 - cache proportion: 0.419702634279274
+do not found expected candidate for mention: SWEDEN / was expecting: 578468 / Sweden national football team
+do not found expected candidate for mention: LATVIA / was expecting: 711598 / Latvia national football team
+do not found expected candidate for mention: Sweden / was expecting: 578468 / Sweden national football team
+do not found expected candidate for mention: Latvia / was expecting: 711598 / Latvia national football team
+12:16:36.516 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 552099 - cache proportion: 0.41977396261155786
+do not found expected candidate for mention: BELARUS / was expecting: 1009113 / Belarus national football team
+do not found expected candidate for mention: ESTONIA / was expecting: 1006164 / Estonia national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Belarus / was expecting: 1009113 / Belarus national football team
+do not found expected candidate for mention: Estonia / was expecting: 1006164 / Estonia national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+12:16:36.793 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 552209 - cache proportion: 0.41996558924737504
+do not found expected candidate for mention: ENGLAND / was expecting: 9904 / England national football team
+do not found expected candidate for mention: MOLDOVA / was expecting: 1011292 / Moldova national football team
+do not found expected candidate for mention: Moldova / was expecting: 1011292 / Moldova national football team
+12:16:37.032 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 552461 - cache proportion: 0.4200846473760783
+do not found expected candidate for mention: Australian / was expecting: 4689264 / Australia
+do not found expected candidate for mention: Australian / was expecting: 4689264 / Australia
+12:16:38.165 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 556484 - cache proportion: 0.42085341498164686
+12:16:38.861 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 556502 - cache proportion: 0.42132370297427113
+12:16:40.518 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 562056 - cache proportion: 0.4252048142993158
+do not found expected candidate for mention: Spain / was expecting: 11233291 / Spain Fed Cup team
+do not found expected candidate for mention: United States / was expecting: 9479975 / United States Fed Cup team
+do not found expected candidate for mention: Spain / was expecting: 11233291 / Spain Fed Cup team
+do not found expected candidate for mention: Belgium / was expecting: 2707548 / Belgium Fed Cup team
+do not found expected candidate for mention: Netherlands / was expecting: 11280801 / Netherlands Fed Cup team
+do not found expected candidate for mention: Germany / was expecting: 11233379 / Germany Fed Cup team
+do not found expected candidate for mention: Czech Republic / was expecting: 10829679 / Czech Republic Fed Cup team
+do not found expected candidate for mention: France / was expecting: 11233202 / France Fed Cup team
+do not found expected candidate for mention: Japan / was expecting: 11233243 / Japan Fed Cup team
+do not found expected candidate for mention: Spain / was expecting: 11233291 / Spain Fed Cup team
+do not found expected candidate for mention: United States / was expecting: 9479975 / United States Fed Cup team
+do not found expected candidate for mention: Austria / was expecting: 11233341 / Austria Fed Cup team
+do not found expected candidate for mention: Japan / was expecting: 11233243 / Japan Fed Cup team
+do not found expected candidate for mention: Japan / was expecting: 11233243 / Japan Fed Cup team
+do not found expected candidate for mention: Olympic / was expecting: 72311 / 1996 Summer Olympics
+do not found expected candidate for mention: Lindsay / was expecting: 52828 / Lindsay Davenport
+do not found expected candidate for mention: Davenport / was expecting: 52828 / Lindsay Davenport
+do not found expected candidate for mention: Spain / was expecting: 11233291 / Spain Fed Cup team
+12:16:44.443 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 571076 - cache proportion: 0.4248247258209258
+12:16:45.129 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 572291 - cache proportion: 0.4249227507272736
+do not found expected candidate for mention: United States / was expecting: 9479975 / United States Fed Cup team
+do not found expected candidate for mention: Belgium / was expecting: 2707548 / Belgium Fed Cup team
+do not found expected candidate for mention: Austria / was expecting: 11233341 / Austria Fed Cup team
+12:16:46.106 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 572950 - cache proportion: 0.42512878038404345
+do not found expected candidate for mention: U.S. / was expecting: 582488 / United States men's national soccer team
+do not found expected candidate for mention: United States / was expecting: 582488 / United States men's national soccer team
+do not found expected candidate for mention: U.S. / was expecting: 582488 / United States men's national soccer team
+12:16:46.478 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 573480 - cache proportion: 0.4252313687286897
+data/corpus/corpus-long/aida-testa/RawText/25795newsML.txt: AMERICAN LEAGUE
+
+		EASTERN DIVISION =/= AMERICAN LEAGUE
+
+  EASTERN DIVISION
+data/corpus/corpus-long/aida-testa/RawText/25795newsML.txt: NATIONAL LEAGUE
+
+		EASTERN DIVISION =/= NATIONAL LEAGUE
+
+  EASTERN DIVISION
+found no candidate for mention: AMERICAN LEAGUE
+
+		EASTERN DIVISION
+found no candidate for mention: NATIONAL LEAGUE
+
+		EASTERN DIVISION
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: BALTIMORE / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: BOSTON / was expecting: 4339 / Boston Red Sox
+do not found expected candidate for mention: TORONTO / was expecting: 30847 / Toronto Blue Jays
+do not found expected candidate for mention: DETROIT / was expecting: 8579 / Detroit Tigers
+do not found expected candidate for mention: CENTRAL DIVISION / was expecting: 2456377 / National League Central
+do not found expected candidate for mention: CLEVELAND / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: MINNESOTA / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: MILWAUKEE / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: KANSAS CITY / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: TEXAS / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: SEATTLE / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: OAKLAND / was expecting: 22523 / Oakland Athletics
+do not found expected candidate for mention: CALIFORNIA / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: KANSAS CITY / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: DETROIT / was expecting: 8579 / Detroit Tigers
+do not found expected candidate for mention: BALTIMORE / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: SEATTLE / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: MINNESOTA / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: MILWAUKEE / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: CLEVELAND / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: TEXAS / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: BOSTON / was expecting: 4339 / Boston Red Sox
+do not found expected candidate for mention: OAKLAND / was expecting: 22523 / Oakland Athletics
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: CALIFORNIA / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: ATLANTA / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: MONTREAL / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: FLORIDA / was expecting: 11278 / Miami Marlins
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: PHILADELPHIA / was expecting: 23741 / Philadelphia Phillies
+do not found expected candidate for mention: CENTRAL DIVISION / was expecting: 2456377 / National League Central
+do not found expected candidate for mention: HOUSTON / was expecting: 13894 / Houston Astros
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: CINCINNATI / was expecting: 6671 / Cincinnati Reds
+do not found expected candidate for mention: PITTSBURGH / was expecting: 24270 / Pittsburgh Pirates
+do not found expected candidate for mention: SAN DIEGO / was expecting: 28417 / San Diego Padres
+do not found expected candidate for mention: LOS ANGELES / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: COLORADO / was expecting: 6669 / Colorado Rockies
+do not found expected candidate for mention: SAN FRANCISCO / was expecting: 28416 / San Francisco Giants
+do not found expected candidate for mention: ATLANTA / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: HOUSTON / was expecting: 13894 / Houston Astros
+do not found expected candidate for mention: PITTSBURGH / was expecting: 24270 / Pittsburgh Pirates
+do not found expected candidate for mention: SAN FRANCISCO / was expecting: 28416 / San Francisco Giants
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: FLORIDA / was expecting: 11278 / Miami Marlins
+do not found expected candidate for mention: CINCINNATI / was expecting: 6671 / Cincinnati Reds
+do not found expected candidate for mention: LOS ANGELES / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: PHILADELPHIA / was expecting: 23741 / Philadelphia Phillies
+do not found expected candidate for mention: SAN DIEGO / was expecting: 28417 / San Diego Padres
+do not found expected candidate for mention: MONTREAL / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: COLORADO / was expecting: 6669 / Colorado Rockies
+12:16:48.234 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 573604 - cache proportion: 0.4289849820911985
+do not found expected candidate for mention: DETROIT / was expecting: 8579 / Detroit Tigers
+do not found expected candidate for mention: Kansas City / was expecting: 16883 / Kansas City Royals
+do not found expected candidate for mention: Chicago / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: TORONTO / was expecting: 30847 / Toronto Blue Jays
+do not found expected candidate for mention: MILWAUKEE / was expecting: 20152 / Milwaukee Brewers
+do not found expected candidate for mention: Minnesota / was expecting: 20050 / Minnesota Twins
+do not found expected candidate for mention: TEXAS / was expecting: 30857 / Texas Rangers (baseball)
+do not found expected candidate for mention: Cleveland / was expecting: 6652 / Cleveland Indians
+do not found expected candidate for mention: New York / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: CALIFORNIA / was expecting: 1360083 / Los Angeles Angels
+do not found expected candidate for mention: OAKLAND / was expecting: 22523 / Oakland Athletics
+do not found expected candidate for mention: Boston / was expecting: 4339 / Boston Red Sox
+do not found expected candidate for mention: Baltimore / was expecting: 4340 / Baltimore Orioles
+do not found expected candidate for mention: SEATTLE / was expecting: 27660 / Seattle Mariners
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: Atlanta / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: Atlanta / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: CHICAGO / was expecting: 5945 / Chicago White Sox
+do not found expected candidate for mention: Florida / was expecting: 11278 / Miami Marlins
+do not found expected candidate for mention: CINCINNATI / was expecting: 6671 / Cincinnati Reds
+do not found expected candidate for mention: San Diego / was expecting: 28417 / San Diego Padres
+do not found expected candidate for mention: MONTREAL / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: Los Angeles / was expecting: 18213 / Los Angeles Dodgers
+do not found expected candidate for mention: PHILADELPHIA / was expecting: 23741 / Philadelphia Phillies
+do not found expected candidate for mention: Houston / was expecting: 13894 / Houston Astros
+do not found expected candidate for mention: PITTSBURGH / was expecting: 24270 / Pittsburgh Pirates
+do not found expected candidate for mention: San Francisco / was expecting: 28416 / San Francisco Giants
+do not found expected candidate for mention: NEW YORK / was expecting: 4848143 / New York Yankees
+do not found expected candidate for mention: Colorado / was expecting: 6669 / Colorado Rockies
+12:16:49.034 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 573773 - cache proportion: 0.4304598225984483
+do not found expected candidate for mention: Florida / was expecting: 11278 / Miami Marlins
+do not found expected candidate for mention: Los Angeles / was expecting: 18213 / Los Angeles Dodgers
+do not found expected candidate for mention: Los Angeles / was expecting: 18213 / Los Angeles Dodgers
+do not found expected candidate for mention: Atlanta / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: Chicago / was expecting: 6654 / Chicago Cubs
+do not found expected candidate for mention: Atlanta / was expecting: 2140 / Atlanta Braves
+do not found expected candidate for mention: Montreal / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: Montreal / was expecting: 20153 / Montreal Expos
+do not found expected candidate for mention: Colorado / was expecting: 6669 / Colorado Rockies
+12:16:53.679 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 591450 - cache proportion: 0.43311972488407446
+12:16:55.030 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 600261 - cache proportion: 0.4325930001077605
+12:16:55.245 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 600456 - cache proportion: 0.432565295210519
+do not found expected candidate for mention: AUSTRIA / was expecting: 695226 / Austria national football team
+do not found expected candidate for mention: SCOTLAND / was expecting: 578101 / Scotland national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Austria / was expecting: 695226 / Austria national football team
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Belarus / was expecting: 1009113 / Belarus national football team
+do not found expected candidate for mention: Austria / was expecting: 695226 / Austria national football team
+do not found expected candidate for mention: Scottish / was expecting: 578101 / Scotland national football team
+do not found expected candidate for mention: Craig Brown / was expecting: 1016478 / Craig Brown
+do not found expected candidate for mention: Austrian / was expecting: 695226 / Austria national football team
+do not found expected candidate for mention: Austria / was expecting: 695226 / Austria national football team
+do not found expected candidate for mention: Thomas Boyd / was expecting: 1044943 / Thomas Boyd
+do not found expected candidate for mention: John Collins / was expecting: 438613 / John Collins
+12:16:57.209 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 610727 - cache proportion: 0.4313232347310474
+25805newsML.txt: Invalid article name - article not found in Wikipedia: International Boxing Association
+do not found expected candidate for mention: Tom Johnson / was expecting: 6920798 / Tom Johnson (boxer)
+12:16:57.473 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 611168 - cache proportion: 0.4313023411620204
+do not found expected candidate for mention: FRANCE / was expecting: 250197 / France national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: PARIS / was expecting: 22989 / Paris
+do not found expected candidate for mention: France / was expecting: 250197 / France national football team
+do not found expected candidate for mention: Mexico / was expecting: 808402 / Mexico national football team
+do not found expected candidate for mention: France / was expecting: 250197 / France national football team
+do not found expected candidate for mention: France / was expecting: 250197 / France national football team
+do not found expected candidate for mention: France / was expecting: 250197 / France national football team
+do not found expected candidate for mention: European / was expecting: 249510 / UEFA European Championship
+do not found expected candidate for mention: World Cup / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: France / was expecting: 250197 / France national football team
+do not found expected candidate for mention: Mexico / was expecting: 808402 / Mexico national football team
+do not found expected candidate for mention: Gomez / was expecting: 2477286 / Herculez Gomez
+do not found expected candidate for mention: Luis Garcia / was expecting: 1780045 / Luis García Postigo
+12:17:00.055 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 624624 - cache proportion: 0.4294212218649518
+do not found expected candidate for mention: FRANCE / was expecting: 250197 / France national football team
+do not found expected candidate for mention: MEXICO / was expecting: 808402 / Mexico national football team
+do not found expected candidate for mention: PARIS / was expecting: 22989 / Paris
+do not found expected candidate for mention: France / was expecting: 250197 / France national football team
+do not found expected candidate for mention: Mexico / was expecting: 808402 / Mexico national football team
+12:17:00.290 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 624750 - cache proportion: 0.4295312431516356
+found no candidate for mention: Degryse
+do not found expected candidate for mention: BELGIUM / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: TURKEY / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Turkey / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Turkey / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Turkey / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Turkey / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Turkish / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Van Moer / was expecting: 3568744 / Wilfried Van Moer
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Van Moer / was expecting: 3568744 / Wilfried Van Moer
+do not found expected candidate for mention: Russia / was expecting: 25127146 / Russia national football team
+do not found expected candidate for mention: Italy / was expecting: 362466 / Italy national football team
+12:17:02.852 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 636609 - cache proportion: 0.4293112567345878
+do not found expected candidate for mention: Roberto Carlos / was expecting: 24947598 / Roberto Carlos (Spanish footballer)
+12:17:03.060 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 636663 - cache proportion: 0.42937794368734516
+12:17:03.251 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 636674 - cache proportion: 0.4294284282965588
+do not found expected candidate for mention: BELGIUM / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: TURKEY / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Turkey / was expecting: 743577 / Turkey national football team
+do not found expected candidate for mention: Belgium / was expecting: 679716 / Belgium national football team
+do not found expected candidate for mention: Turkey / was expecting: 743577 / Turkey national football team
+12:17:03.651 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 636763 - cache proportion: 0.42961702935743984
+do not found expected candidate for mention: AUSTRIA / was expecting: 695226 / Austria national football team
+do not found expected candidate for mention: SCOTLAND / was expecting: 578101 / Scotland national football team
+do not found expected candidate for mention: WORLD CUP / was expecting: 126460 / 1998 FIFA World Cup
+do not found expected candidate for mention: Austria / was expecting: 695226 / Austria national football team
+12:17:04.035 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 636836 - cache proportion: 0.4297876150567673
+do not found expected candidate for mention: James Heath / was expecting: 28148156 / James Heath (boxer)
+12:17:04.756 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 638458 - cache proportion: 0.42979344393478225
+found no candidate for mention: Van Gastel
+do not found expected candidate for mention: DUTCH / was expecting: 9647657 / Netherlands national football team
+do not found expected candidate for mention: BRAZIL / was expecting: 149286 / Brazil national football team
+do not found expected candidate for mention: The Netherlands / was expecting: 9647657 / Netherlands national football team
+do not found expected candidate for mention: Brazil / was expecting: 149286 / Brazil national football team
+do not found expected candidate for mention: Netherlands / was expecting: 9647657 / Netherlands national football team
+do not found expected candidate for mention: Brazil / was expecting: 149286 / Brazil national football team
+12:17:05.092 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 638767 - cache proportion: 0.42981079594955507
+do not found expected candidate for mention: James Heath / was expecting: 28148156 / James Heath (boxer)
+12:17:05.371 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 638868 - cache proportion: 0.42990790976584814
+25817newsML.txt: Invalid article name - article not found in Wikipedia: Richard Hannon
+12:17:05.894 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 639733 - cache proportion: 0.42971006482623864
+do not found expected candidate for mention: Germany / was expecting: 250204 / Germany national football team
+do not found expected candidate for mention: European / was expecting: 249510 / UEFA European Championship
+do not found expected candidate for mention: Poland / was expecting: 771860 / Poland national football team
+do not found expected candidate for mention: Germany / was expecting: 250204 / Germany national football team
+12:17:06.599 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 640935 - cache proportion: 0.4297000683361569
+do not found expected candidate for mention: Karlsruhe / was expecting: 1734592 / Karlsruher SC
+do not found expected candidate for mention: Duisburg / was expecting: 1586579 / MSV Duisburg
+12:17:07.013 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 641277 - cache proportion: 0.4296545786692234
+do not found expected candidate for mention: ROMANIA / was expecting: 679755 / Romania national football team
+do not found expected candidate for mention: LITHUANIA / was expecting: 655953 / Lithuania national football team
+do not found expected candidate for mention: Romania / was expecting: 679755 / Romania national football team
+do not found expected candidate for mention: Lithuania / was expecting: 655953 / Lithuania national football team
+do not found expected candidate for mention: Romania / was expecting: 679755 / Romania national football team
+do not found expected candidate for mention: Lithuania / was expecting: 655953 / Lithuania national football team
+12:17:07.214 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 641280 - cache proportion: 0.42985474311990224
+do not found expected candidate for mention: Irish / was expecting: 21265 / Northern Ireland
+do not found expected candidate for mention: Nancy / was expecting: 21181 / Nancy Reagan
+12:17:08.368 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 646028 - cache proportion: 0.42943695109974356
+25830newsML.txt: Invalid article name - article not found in Wikipedia: Treaty of Baden
+do not found expected candidate for mention: England / was expecting: 407950 / Kingdom of England
+do not found expected candidate for mention: Orleans / was expecting: 1559513 / House of Orléans
+do not found expected candidate for mention: Eugene / was expecting: 9679 / Prince Eugene of Savoy
+do not found expected candidate for mention: Brazil / was expecting: 269405 / Empire of Brazil
+do not found expected candidate for mention: Portugal / was expecting: 230578 / Portuguese Empire
+do not found expected candidate for mention: Brazil / was expecting: 269405 / Empire of Brazil
+do not found expected candidate for mention: China / was expecting: 25310 / Qing dynasty
+do not found expected candidate for mention: German / was expecting: 21212 / Nazi Germany
+do not found expected candidate for mention: Gulf / was expecting: 182000 / Gulf War
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:17:15.182 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 668074 - cache proportion: 0.42561902469220714
+do not found expected candidate for mention: Holland / was expecting: 21148 / Netherlands
+do not found expected candidate for mention: Holland / was expecting: 21148 / Netherlands
+12:17:15.859 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 670524 - cache proportion: 0.4253465794561685
+12:17:17.150 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 673236 - cache proportion: 0.4253184395310603
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+12:17:18.106 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 675033 - cache proportion: 0.4255008961747889
+do not found expected candidate for mention: Iraqis / was expecting: 7515928 / Iraq
+do not found expected candidate for mention: English / was expecting: 31717 / United Kingdom
+12:17:18.716 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 676809 - cache proportion: 0.42599086923740404
+do not found expected candidate for mention: Iraqis / was expecting: 7515928 / Iraq
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+12:17:19.897 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 680679 - cache proportion: 0.426496719547654
+12:17:20.421 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 681377 - cache proportion: 0.4263788754828043
+do not found expected candidate for mention: Hanwha / was expecting: 4086558 / Hanwha Eagles
+12:17:20.669 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 681399 - cache proportion: 0.426804298889947
+12:17:21.933 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 685696 - cache proportion: 0.4264463556505025
+do not found expected candidate for mention: Zaire / was expecting: 76762 / Democratic Republic of the Congo
+do not found expected candidate for mention: Zaire / was expecting: 76762 / Democratic Republic of the Congo
+do not found expected candidate for mention: Zaire / was expecting: 76762 / Democratic Republic of the Congo
+12:17:23.199 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 691029 - cache proportion: 0.4268639410532322
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Serb / was expecting: 29265 / Serbia
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Serb / was expecting: 29265 / Serbia
+12:17:23.833 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 693259 - cache proportion: 0.4270814050351721
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: Dudayeva / was expecting: 23189278 / Alla Dudayeva
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:17:26.593 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 703110 - cache proportion: 0.4272473562192184
+do not found expected candidate for mention: Hachette / was expecting: 140311 / Hachette Filipacchi Médias
+do not found expected candidate for mention: Hachette / was expecting: 140311 / Hachette Filipacchi Médias
+12:17:28.646 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 709762 - cache proportion: 0.4277026732828145
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+do not found expected candidate for mention: MOSCOW / was expecting: 19004 / Moscow
+do not found expected candidate for mention: Russian / was expecting: 25391 / Russia
+12:17:29.067 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 710751 - cache proportion: 0.42770215592729033
+12:17:30.227 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 713983 - cache proportion: 0.4272911106886548
+12:17:31.083 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 716117 - cache proportion: 0.42746045845249303
+12:17:32.049 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 718558 - cache proportion: 0.42756652159815944
+do not found expected candidate for mention: New York-based / was expecting: 673381 / New York
+do not found expected candidate for mention: Communist Party / was expecting: 7175 / Communist Party of China
+12:17:34.149 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 729064 - cache proportion: 0.42646178438901516
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+12:17:35.461 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 731871 - cache proportion: 0.4263744945601782
+12:17:39.439 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 744281 - cache proportion: 0.4271937162862611
+12:17:40.112 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 746482 - cache proportion: 0.4272167973395823
+do not found expected candidate for mention: South / was expecting: 27019 / South Korea
+do not found expected candidate for mention: Korean / was expecting: 16749 / Korea
+do not found expected candidate for mention: Korean / was expecting: 16749 / Korea
+do not found expected candidate for mention: South / was expecting: 27019 / South Korea
+12:17:41.796 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 750238 - cache proportion: 0.4276286778449656
+do not found expected candidate for mention: New York-based / was expecting: 673381 / New York
+12:17:43.274 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 754442 - cache proportion: 0.4282251867031863
+do not found expected candidate for mention: New York-based / was expecting: 673381 / New York
+12:17:44.060 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 754667 - cache proportion: 0.4298888208146895
+do not found expected candidate for mention: High Court / was expecting: 2305259 / High Court (Hong Kong)
+12:17:44.693 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 756418 - cache proportion: 0.43019788928143665
+12:17:45.328 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 757607 - cache proportion: 0.4304135027441546
+do not found expected candidate for mention: Baghdad / was expecting: 7515928 / Iraq
+do not found expected candidate for mention: Kurds / was expecting: 80777 / Kurdistan
+12:17:46.631 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 761270 - cache proportion: 0.4312310041749723
+found no candidate for mention: U.N. Interim Force in Lebanon
+do not found expected candidate for mention: JERUSALEM / was expecting: 16043 / Jerusalem
+12:17:47.738 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 764589 - cache proportion: 0.4314275048484776
+do not found expected candidate for mention: Kurds / was expecting: 80777 / Kurdistan
+12:17:48.037 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 765273 - cache proportion: 0.4315681340099592
+12:17:48.293 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 765746 - cache proportion: 0.4315680859908546
+do not found expected candidate for mention: Aziz / was expecting: 200692 / Tariq Aziz
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Aziz / was expecting: 200692 / Tariq Aziz
+do not found expected candidate for mention: Aziz / was expecting: 200692 / Tariq Aziz
+12:17:49.267 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 770126 - cache proportion: 0.4317134651542387
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+12:17:49.626 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 770408 - cache proportion: 0.4319346171202393
+do not found expected candidate for mention: TUNIS / was expecting: 57659 / Tunis
+12:17:50.249 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 772367 - cache proportion: 0.43177934086824354
+26026newsML.txt: Invalid article name - article not found in Wikipedia: Interstate 95
+12:17:51.755 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 781482 - cache proportion: 0.43155974433783373
+do not found expected candidate for mention: New Hampshire / was expecting: 6578575 / New Hampshire, Ohio
+do not found expected candidate for mention: ROCHESTER / was expecting: 124931 / Rochester, New Hampshire
+do not found expected candidate for mention: Rochester / was expecting: 124931 / Rochester, New Hampshire
+12:17:52.207 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 782656 - cache proportion: 0.43145432237415127
+12:17:52.635 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 784064 - cache proportion: 0.4314227845971662
+do not found expected candidate for mention: Enterprise / was expecting: 194856 / USS Enterprise (CVN-65)
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Troy / was expecting: 135317 / Troy, Tennessee
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Enterprise / was expecting: 194856 / USS Enterprise (CVN-65)
+12:17:55.249 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 793006 - cache proportion: 0.4329859534594388
+12:17:55.634 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 793763 - cache proportion: 0.43308514475286486
+do not found expected candidate for mention: PARIS / was expecting: 22989 / Paris
+do not found expected candidate for mention: Algiers / was expecting: 358 / Algeria
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+12:17:56.504 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 797175 - cache proportion: 0.4331179844195001
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+do not found expected candidate for mention: Kurdish / was expecting: 80777 / Kurdistan
+12:17:59.342 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 804922 - cache proportion: 0.43277044144601884
+12:18:01.559 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 810506 - cache proportion: 0.43249467333150815
+12:18:01.985 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 811326 - cache proportion: 0.43263836732638783
+12:18:02.386 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 811719 - cache proportion: 0.4327023339940119
+12:18:02.863 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 812649 - cache proportion: 0.43309833609116755
+do not found expected candidate for mention: Oscar / was expecting: 23245410 / Academy Award for Best Actor
+12:18:06.226 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 823550 - cache proportion: 0.432442341434638
+do not found expected candidate for mention: Dhaka / was expecting: 4450516 / Dhaka Stock Exchange
+do not found expected candidate for mention: Moslem / was expecting: 6037917 / Islam
+12:18:06.682 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 825419 - cache proportion: 0.43245597750228626
+
+Evaluation on 216 documents and 4784 expected entities, in total 283 s
+
+candidate gold recall: 83.01
+
+** micro average measures **
+
+aida-testa           accuracy     precision    recall       f1
+
+prior                70.44        69.93        69.86        69.89
+ranker               74           72.35        72.25        72.3
+
+** macro average measures **
+
+aida-testa           accuracy     precision    recall       f1
+
+prior                70.44        70.68        70.44        70.56
+ranker               74           74.24        74           74.12
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 05:04 min
+[INFO] Finished at: 2018-11-27T12:18:06+01:00
+[INFO] ------------------------------------------------------------------------
