@@ -171,6 +171,52 @@ public class NerdRestService implements NerdPaths {
         return response;
     }
 
+    @POST
+    @Path(DISAMBIGUATE_ABSTRACT)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processQueryJsonForAbstract(@FormDataParam(QUERY) String query,
+                                     @FormDataParam(FILE) InputStream inputStream) {
+        String json = null;
+        Response response = null;
+
+        try {
+            if (inputStream != null) {
+                json = nerdProcessFile.processQueryAndPdfFileForAbstract(query, inputStream);
+            } else {
+                json = nerdProcessQuery.processQuery(query);
+            }
+
+            if (json == null) {
+                response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            } else {
+                response = Response
+                        .status(Response.Status.OK)
+                        .entity(json)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
+            }
+
+        } catch (QueryException qe) {
+            return handleQueryException(qe, query);
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            response = Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        } catch (GrobidException ge) {
+            response = Response
+                    .status(Response.Status.SERVICE_UNAVAILABLE)
+                    .entity("The PDF cannot be processed by grobid. " + ge.getMessage())
+                    .build();
+        } catch(Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
+    }
+
     /**
      * Same as processQueryJson when the user send only the query and can avoid using multipart/form-data
      */

@@ -42,6 +42,11 @@ public interface NerdPaths {
 	String DISAMBIGUATE= "disambiguate";
 
 	/**
+	 * NERD abstract disambiguation (query, text, shortText, PDF) entry point
+	 */
+	String DISAMBIGUATE_ABSTRACT= "disambiguate_abstract";
+
+	/**
 	 * Customisation entry points:
 	 *  - GET /customisations
 	 *  - POST /customisation/id

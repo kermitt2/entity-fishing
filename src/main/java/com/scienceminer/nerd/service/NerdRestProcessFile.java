@@ -47,6 +47,233 @@ public class NerdRestProcessFile {
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding
+     * normalized enriched and disambiguated query object for abstract part, where resulting entities include
+     * position coordinates in the PDF.
+     *
+     * @param theQuery    the POJO query object
+     * @param inputStream the PDF file as InputStream
+     * @return a response query object containing the structured representation of
+     * the enriched and disambiguated query.
+     */
+    public String processQueryAndPdfFileForAbstract(String theQuery, final InputStream inputStream) {
+        LOGGER.debug(methodLogIn());
+        File originFile = null;
+        Engine engine = null;
+        LOGGER.debug(">> received query to process: " + theQuery);
+
+        LibraryLoader.load();
+        engine = GrobidFactory.getInstance().getEngine();
+        originFile = IOUtilities.writeInputFile(inputStream);
+        LOGGER.debug(">> input PDF file saved locally...");
+
+        GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().consolidateHeader(true).build();
+        if (originFile == null || FileUtils.sizeOf(originFile) == 0) {
+            throw new QueryException("The PDF file is empty or null", QueryException.FILE_ISSUE);
+        }
+        long start = System.currentTimeMillis();
+        NerdQuery nerdQuery = NerdQuery.fromJson(theQuery);
+
+        //TODO: remove after release
+        if (nerdQuery.getOnlyNER()) {
+            throw new QueryException("OnlyNER is not supported for PDF input");
+        }
+
+        if (nerdQuery == null || isNotBlank(nerdQuery.getText()) || isNotBlank(nerdQuery.getShortText())) {
+            throw new QueryException("Query with PDF shall not have the field text or shortText filled in.");
+        }
+        LOGGER.debug(">> set query object...");
+
+        Language lang = nerdQuery.getLanguage();
+        if (nerdQuery.hasValidLanguage()) {
+            lang.setConf(1.0);
+            LOGGER.debug(">> language provided in query: " + lang);
+        }
+
+        // we assume for the moment that there are no entities originally set in the query
+        // however, it would be nice to have them specified with coordinates and map
+        // them to their right layout tokens when processing the PDF (as done for
+        // instance in the project grobid-astro)
+
+        /* the code for validation has been moved in nerdRestProcessQuery.markUserEnteredEntities()
+
+				List<NerdEntity> originalEntities = null;
+				if  ( (nerdQuery.getEntities() != null) && (nerdQuery.getEntities().size() > 0) ) {
+					for(NerdEntity entity : nerdQuery.getEntities()) {
+						entity.setNer_conf(1.0);
+
+						// do we have disambiguated entity information for the entity?
+						if (entity.getWikipediaExternalRef() != -1) {
+							entity.setOrigin(NerdEntity.Origin.USER);
+							entity.setNerdScore(1.0);
+						}
+					}
+					originalEntities = nerdQuery.getEntities();
+				}*/
+
+        // tuning the species only mention selection
+        tuneSpeciesMentions(nerdQuery);
+
+        //checking customisation
+        NerdRestProcessQuery.processCustomisation(nerdQuery);
+
+        //List<NerdEntity> entities = originalEntities;
+        Document doc = null;
+        DocumentContext documentContext = new DocumentContext();
+        NerdQuery workingQuery = new NerdQuery(nerdQuery);
+
+        DocumentSource documentSource =
+                DocumentSource.fromPdf(originFile, config.getStartPage(), config.getEndPage());
+        doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
+
+        // here we process the relevant textual content of the document
+        // for refining the process based on structures, we need to filter
+        // segment of interest (e.g. header, body, annex) and possibly apply
+        // the corresponding model to further filter by structure types
+
+
+        // from the header, we are interested in title, abstract and keywords
+        SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
+        if (documentParts != null) {
+            String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+            List<LayoutToken> tokenizationHeader =
+                    Document.getTokenizationParts(documentParts, doc.getTokenizations());
+            String labeledResult = null;
+
+            // alternative
+            String alternativeHeader = doc.getHeaderFeatured(true, true);
+            // we choose the longest header
+            if (StringUtils.isNotBlank(StringUtils.trim(header))) {
+                header = alternativeHeader;
+                tokenizationHeader = doc.getTokenizationsHeader();
+            } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
+                header = alternativeHeader;
+                tokenizationHeader = doc.getTokenizationsHeader();
+            }
+
+            if (StringUtils.isNotBlank(StringUtils.trim(header))) {
+                labeledResult = engine.getParsers().getHeaderParser().label(header);
+
+                BiblioItem resHeader = new BiblioItem();
+                resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+
+                if (lang == null) {
+                    BiblioItem resHeaderLangIdentification = new BiblioItem();
+                    engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
+                            tokenizationHeader, resHeaderLangIdentification);
+
+                    lang = identifyLanguage(resHeaderLangIdentification, doc);
+                    if (lang != null) {
+                        workingQuery.setLanguage(lang);
+                        nerdQuery.setLanguage(lang);
+                    } else {
+                        LOGGER.error("Language was not specified and there was not enough text to identify it. The process might fail. ");
+                    }
+                }
+
+                // title
+                List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
+                if (titleTokens != null) {
+                    LOGGER.debug("Process title... ");
+                    //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
+                    //workingQuery.setEntities(null);
+
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, null, workingQuery);
+                    if (newEntities != null) {
+                        LOGGER.debug(newEntities.size() + " nerd entities");
+                        /*for(NerdEntity entity : newEntities) {
+                            LOGGER.debug(entity.toString());
+                        }*/
+                    }
+                    nerdQuery.addNerdEntities(newEntities);
+                }
+                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+
+                // abstract
+                List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
+                if (abstractTokens != null) {
+                    LOGGER.debug("Process abstract...");
+                    //workingQuery.setEntities(null);
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, null, workingQuery);
+                    if (newEntities != null) {
+                        LOGGER.debug(newEntities.size() + " nerd entities");
+                    }
+
+                    nerdQuery.addNerdEntities(newEntities);
+                }
+                //LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+                //LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+
+                // keywords
+                List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
+                if (keywordTokens != null) {
+                    LOGGER.debug("Process keywords...");
+                    //workingQuery.setEntities(null);
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, null, workingQuery);
+                    if (newEntities != null)
+                        LOGGER.debug(newEntities.size() + " nerd entities");
+                    nerdQuery.addNerdEntities(newEntities);
+                }
+
+                // create document context from this first pass
+                documentContext.seed(nerdQuery.getEntities(), lang);
+                nerdQuery.setEntities(null);
+
+                // as alternative, we should use key phrase extraction and disambiguation on the whole document
+                // to seed the document context
+
+                // reprocess header fields with document context
+                if (titleTokens != null) {
+                    //workingQuery.setEntities(null);
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(titleTokens, documentContext, workingQuery);
+                    if (newEntities != null) {
+                        LOGGER.debug(newEntities.size() + " nerd entities");
+                        for (NerdEntity entity : newEntities) {
+                            LOGGER.debug(entity.toString());
+                        }
+                    }
+                    nerdQuery.addNerdEntities(newEntities);
+                }
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+                if (abstractTokens != null) {
+                    //workingQuery.setEntities(null);
+                    List<NerdEntity> newEntities = processLayoutTokenSequence(abstractTokens, documentContext, workingQuery);
+                    nerdQuery.addNerdEntities(newEntities);
+                }
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+//                if (keywordTokens != null) {
+//                    //workingQuery.setEntities(null);
+//                    List<NerdEntity> newEntities = processLayoutTokenSequence(keywordTokens, documentContext, workingQuery);
+//                    nerdQuery.addNerdEntities(newEntities);
+//                }
+//LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+            }
+        }
+
+        nerdQuery.setText(null);
+        nerdQuery.setShortText(null);
+        nerdQuery.setTokens(null);
+
+        long end = System.currentTimeMillis();
+        nerdQuery.setRuntime(end - start);
+        LOGGER.info("runtime: " + (end - start));
+        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+            Collections.sort(nerdQuery.getEntities());
+            LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
+//                LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
+        }
+
+        LOGGER.debug(methodLogOut());
+        // TODO: output in the resulting json also page info from the doc object as in GROBID
+        return nerdQuery.toJSONClean(doc);
+    }
+
+
+    /**
+     * Parse a structured query in combination with a PDF file and return the corresponding
      * normalized enriched and disambiguated query object, where resulting entities include
      * position coordinates in the PDF.
      *
