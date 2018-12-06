@@ -74,7 +74,7 @@ public class NerdSelector extends NerdModel {
 		//model = MLModel.GRADIENT_TREE_BOOST;
 		model = MLModel.RANDOM_FOREST;
 		featureType = FeatureType.SIMPLE;
-		
+
 		GenericSelectionFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
 
@@ -141,8 +141,8 @@ public class NerdSelector extends NerdModel {
 		feature.tf_idf = tf_idf;
 		feature.dice = dice;
 		// hidden if it's not involving nerGrobid_type and nerKid_type
-		feature.nerGrobid_type = nerGrobid_type;
-		feature.nerKid_type = nerKid_type;
+//		feature.nerGrobid_type = nerGrobid_type;
+//		feature.nerKid_type = nerKid_type;
 		double[] features = feature.toVector(attributes);
 		
 		smile.math.Math.setSeed(7);
@@ -455,12 +455,12 @@ public class NerdSelector extends NerdModel {
 					feature.inContext = inContext;
 					feature.isNe = isNe;
 					feature.dice = dice;
-					feature.nerGrobid_type = nerGrobid_type;
-					feature.nerKid_type = nerKid_type;
+//                    feature.nerGrobid_type = nerGrobid_type;
+//                    feature.nerKid_type = nerKid_type;
 
-					double tf = Utilities.getOccCount(candidate.getLabel().getText(), contentString);
-					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
-					feature.tf_idf = tf * idf;
+//					double tf = Utilities.getOccCount(candidate.getLabel().getText(), contentString);
+//					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
+//					feature.tf_idf = tf * idf;
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 

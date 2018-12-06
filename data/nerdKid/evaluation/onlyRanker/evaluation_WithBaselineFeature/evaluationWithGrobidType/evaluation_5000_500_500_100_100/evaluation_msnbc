@@ -1,0 +1,274 @@
+wifi-pro-83-039:nerd tkristan$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.evaluation.NEDCorpusEvaluation -Dexec.args="msnbc"
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ---------------------< com.scienceminer.nerd:nerd >---------------------
+[INFO] Building entity-fishing 0.0.3
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ nerd ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 5 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ nerd ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-jar-plugin:3.0.2:jar (make-a-jar) @ nerd ---
+[INFO] Building jar: /Users/tkristan/Desktop/Tanti/nerd/target/nerd-0.0.3.jar
+[INFO]
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ nerd ---
+16:37:30.676 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.kb.UpperKnowledgeBase - Get new instance of UpperKnowledgeBase
+16:37:30.679 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Lexicon
+16:37:30.680 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.kb.Lexicon - Get new instance of Lexicon
+16:37:30.680 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.Lexicon - Initiating dictionaries
+16:37:30.680 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.Lexicon - End of Initialization of dictionaries
+16:37:30.680 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Lexicon initialized
+16:37:31.012 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase -
+Init Upper Knowledge-base layer
+building Environment for upper knowledge-base
+16:37:33.862 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /home/lopez/resources/wikidata/wikidataIds.csv is not readable
+16:37:33.894 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /home/lopez/resources/wikidata/latest-all.json.bz2 is not readable
+The content of nerdKid database - 35030909 items.
+Environment built - 37413613 concepts.
+16:37:33.895 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init English lower Knowledge-base layer
+init Environment for language en
+building Environment for language en
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/stats.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/page.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/label.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLabel.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLinkIn.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/pageLinkOut.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/categoryParents.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/articleParents.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/childCategories.csv is not readable
+16:37:34.275 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/childArticles.csv is not readable
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/redirectTargetsBySource.csv is not readable
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/redirectSourcesByTarget.csv is not readable
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/wikidata.txt is not readable
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/translations.csv is not readable
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/en
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/word.embeddings.quantized.gz is not readable
+16:37:34.276 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/en/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 14899737 pages.
+16:37:34.278 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.WikipediaDomainMap - domains en / isLoaded: true
+16:37:34.336 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN com.scienceminer.nerd.kb.db.WikipediaDomainMap - Orthopedic surgery is not a category found in Wikipedia.
+16:37:34.342 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN com.scienceminer.nerd.kb.db.WikipediaDomainMap - Environment is not a category found in Wikipedia.
+16:37:34.366 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init German lower Knowledge-base layer
+init Environment for language de
+building Environment for language de
+16:37:34.561 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/stats.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/page.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/label.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLabel.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLinkIn.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/pageLinkOut.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/categoryParents.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/articleParents.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/childCategories.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/childArticles.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/redirectTargetsBySource.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/redirectSourcesByTarget.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/wikidata.txt is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/translations.csv is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/de
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/word.embeddings.quantized.gz is not readable
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/de/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3579552 pages.
+16:37:34.562 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init French lower Knowledge-base layer
+init Environment for language fr
+building Environment for language fr
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/stats.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/page.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/label.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLabel.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLinkIn.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/pageLinkOut.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/categoryParents.csv is not readable
+16:37:34.749 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/articleParents.csv is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/childCategories.csv is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/childArticles.csv is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/redirectTargetsBySource.csv is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/redirectSourcesByTarget.csv is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/wikidata.txt is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/translations.csv is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/fr
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/word.embeddings.quantized.gz is not readable
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/fr/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3681264 pages.
+16:37:34.750 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Spanish lower Knowledge-base layer
+init Environment for language es
+building Environment for language es
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/stats.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/page.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/label.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLabel.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLinkIn.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/pageLinkOut.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/categoryParents.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/articleParents.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/childCategories.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/childArticles.csv is not readable
+16:37:34.931 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/redirectTargetsBySource.csv is not readable
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/redirectSourcesByTarget.csv is not readable
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/wikidata.txt is not readable
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/translations.csv is not readable
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/es
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/word.embeddings.quantized.gz is not readable
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/es/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 3322291 pages.
+16:37:34.932 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Italian lower Knowledge-base layer
+init Environment for language it
+building Environment for language it
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/stats.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/page.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/label.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLabel.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLinkIn.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/pageLinkOut.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/categoryParents.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/articleParents.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/childCategories.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/childArticles.csv is not readable
+16:37:35.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/redirectTargetsBySource.csv is not readable
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/redirectSourcesByTarget.csv is not readable
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/wikidata.txt is not readable
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/translations.csv is not readable
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBLowerEnvironment - Could not locate markup file in /mnt/data/wikipedia/latest/it
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/word.embeddings.quantized.gz is not readable
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.db.KBEnvironment - /mnt/data/wikipedia/latest/it/entity.embeddings.quantized.gz is not readable
+isLoaded: true
+Environment built - 2291751 pages.
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - End of Initialization of Wikipedia environments
+16:37:35.119 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.kb.UpperKnowledgeBase - Init Grobid
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - No Grobid property was provided. Attempting to find Grobid home in the current directory...
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - ***************************************************************
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - *** USING GROBID HOME: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - ***************************************************************
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - synchronized getNewInstance
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - loading grobid.properties
+16:37:35.132 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] WARN org.grobid.core.main.GrobidHomeFinder - Grobid property file location was not explicitly set via 'org.grobid.property' system variable, defaulting to: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/config/grobid.properties
+16:37:35.134 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - Checking Properties
+16:37:35.134 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - loading pdf2xml path
+16:37:35.135 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.utilities.GrobidProperties - pdf2xml home directory set to /Users/tkristan/Desktop/Tanti/grobid/grobid-home/pdf2xml/mac-64
+16:37:35.136 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.main.LibraryLoader - Loading external native CRF library
+16:37:35.136 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.main.LibraryLoader - /Users/tkristan/Desktop/Tanti/grobid/grobid-home/lib/mac-64
+16:37:35.137 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.main.LibraryLoader - Loading Wapiti native library...
+16:37:35.138 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.main.LibraryLoader - Library crfpp loaded
+16:37:35.138 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.utilities.Utilities - >>>>>>>> GROBID_HOME=/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home
+16:37:35.411 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.analyzers.GrobidAnalyzer - Get new instance of GrobidAnalyzer
+16:37:35.418 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.mention.ProcessText - Get new instance of ProcessText
+16:37:35.418 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.utilities.Stopwords - Get new instance of Stopwords
+16:37:35.430 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti (size: 96825300)
+[Wapiti] Loading model: "/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti"
+Model path: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/ner/model.wapiti
+16:37:51.008 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG org.grobid.core.lexicon.Lexicon - Get new instance of Lexicon
+16:37:51.009 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - Initiating dictionary
+16:37:51.009 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - End of Initialization of dictionary
+16:37:51.009 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - Initiating names
+16:37:51.009 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - End of initialization of names
+16:37:51.356 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - Initiating country codes
+16:37:51.356 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.lexicon.Lexicon - End of initialization of country codes
+16:37:51.392 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti (size: 6624683)
+[Wapiti] Loading model: "/Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti"
+Model path: /Users/tkristan/Desktop/Tanti/nerd/../grobid/grobid-home/models/nerfr/model.wapiti
+16:38:20.251 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - Get new instance of Engine
+16:38:20.255 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.Relatedness - Get new instance of Relatedness
+found no candidate for mention: Pacific Sunwear of California Inc.
+do not found expected candidate for mention: ING Investment Management / was expecting: 230965 / ING Group
+16:38:26.151 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] INFO com.scienceminer.nerd.disambiguation.NerdRanker - Model for nerd ranker loaded: data/models/ranker-long-en.model
+16:38:26.311 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:38:37.018 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: Finn / was expecting: 8094112 / Innosense
+16:38:37.657 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: O'Donnell / was expecting: 44205 / Rosie O'Donnell
+do not found expected candidate for mention: O'Donnell / was expecting: 44205 / Rosie O'Donnell
+do not found expected candidate for mention: O'Donnell / was expecting: 44205 / Rosie O'Donnell
+do not found expected candidate for mention: O'Donnell / was expecting: 44205 / Rosie O'Donnell
+do not found expected candidate for mention: O'Donnell / was expecting: 44205 / Rosie O'Donnell
+16:38:38.616 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:38:41.674 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+found no candidate for mention: Alabama Blue Cross Blue Shield
+16:38:45.516 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Alabama / was expecting: 327950 / University of Alabama
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Tide / was expecting: 1570819 / Alabama Crimson Tide
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Alabama / was expecting: 327950 / University of Alabama
+do not found expected candidate for mention: Miami / was expecting: 19190 / Miami Dolphins
+do not found expected candidate for mention: Alabama / was expecting: 327950 / University of Alabama
+do not found expected candidate for mention: Tide / was expecting: 1570819 / Alabama Crimson Tide
+do not found expected candidate for mention: Alabama / was expecting: 327950 / University of Alabama
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Alabama / was expecting: 327950 / University of Alabama
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Tide / was expecting: 1570819 / Alabama Crimson Tide
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+do not found expected candidate for mention: Saban / was expecting: 618468 / Nick Saban
+16:38:50.807 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: MIAMI / was expecting: 53846 / Miami
+do not found expected candidate for mention: Heat / was expecting: 72850 / Miami Heat
+do not found expected candidate for mention: Heat / was expecting: 72850 / Miami Heat
+do not found expected candidate for mention: Heat / was expecting: 72850 / Miami Heat
+do not found expected candidate for mention: Heat / was expecting: 72850 / Miami Heat
+do not found expected candidate for mention: Heat / was expecting: 72850 / Miami Heat
+16:38:56.710 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:38:58.118 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:38:59.474 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:39:00.513 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: BA / was expecting: 3970 / British Airways
+do not found expected candidate for mention: BA / was expecting: 3970 / British Airways
+do not found expected candidate for mention: BA / was expecting: 3970 / British Airways
+do not found expected candidate for mention: BA / was expecting: 3970 / British Airways
+16:39:01.594 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+found no candidate for mention: LDL-Cholesterol
+16:39:05.108 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+found no candidate for mention: W. Va
+found no candidate for mention: W. Va
+do not found expected candidate for mention: Sago / was expecting: 3616717 / Sago Mine disaster
+do not found expected candidate for mention: Sago / was expecting: 3616717 / Sago Mine disaster
+16:39:09.172 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:39:14.776 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: Washington / was expecting: 195149 / Federal government of the United States
+16:39:18.259 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:39:21.773 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+do not found expected candidate for mention: New York / was expecting: 673381 / New York
+16:39:26.072 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+found no candidate for mention: al-Rubaie
+found no candidate for mention: al-Rubaie
+16:39:28.523 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+16:39:30.403 [com.scienceminer.nerd.evaluation.NEDCorpusEvaluation.main()] DEBUG com.scienceminer.nerd.disambiguation.NerdEngine - relatedness - comparisons: 0 - cache proportion: NaN
+
+Evaluation on 20 documents and 656 expected entities, in total 115 s
+
+candidate gold recall: 92.53
+
+** micro average measures **
+
+msnbc                accuracy     precision    recall       f1
+
+prior                82.47        84.72        83.5         84.11
+ranker               82.47        84.72        83.5         84.11
+
+** macro average measures **
+
+msnbc                accuracy     precision    recall       f1
+
+prior                82.47        83.36        82.47        82.91
+ranker               82.47        83.36        82.47        82.91
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 02:05 min
+[INFO] Finished at: 2018-12-06T16:39:30+01:00
+[INFO] ------------------------------------------------------------------------

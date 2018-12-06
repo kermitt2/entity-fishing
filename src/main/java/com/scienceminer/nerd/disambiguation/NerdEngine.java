@@ -353,6 +353,7 @@ public class NerdEngine {
 
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang) {
+		ProcessText processText = ProcessText.getInstance();
 		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
@@ -484,26 +485,27 @@ public class NerdEngine {
 						candidate.setWikidataId(sense.getWikidataId());
 						candidate.setBestCaseContext(bestCaseContext);
 
-//						// for nerGrobid_type
-//						nerParsers = new NERParsers();
+						// for nerGrobid_type
 						/* The result of named entity from Grobid named entity extraction
 						input: a text; output: a Grobid Entity (rawName, normalisedName, NER_Type, OffsetPosition, boundingBoxes, layoutTokens)
 						*/
-//						List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
 
-//						for (Entity entityResult : resultNEExtractText) {
-//							Mention mention = new Mention(entityResult);
-//							candidate.setType(mention.getType().toString());
-//						}
-//
-//						// for nerKid_type
-//						nerKid_type = UpperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
-//						if (nerKid_type != null) {
-//							nerKid_type = upperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
-//						} else {
-//							nerKid_type = "OTHER";
-//						}
-//						candidate.setTypeKid(nerKid_type);
+						nerParsers = new NERParsers();
+						List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
+
+						for (Entity entityResult : resultNEExtractText) {
+							Mention mention = new Mention(entityResult);
+							candidate.setType(mention.getType().toString());
+						}
+
+						// for nerKid_type
+						nerKid_type = UpperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
+						if (nerKid_type != null) {
+							nerKid_type = upperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
+						} else {
+							nerKid_type = "OTHER";
+						}
+						candidate.setTypeKid(nerKid_type);
 
 						candidates.add(candidate);
 						//System.out.println(candidate.toString());
@@ -571,6 +573,7 @@ public class NerdEngine {
 	}
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesMultiple(List<NerdEntity> entities, String lang) {
+		ProcessText processText = ProcessText.getInstance();
 		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
@@ -685,25 +688,26 @@ public class NerdEngine {
 							candidate.setLabel(bestLabel);
 							candidate.setWikidataId(sense.getWikidataId());
 
-//						// for nerGrobid_type
-//						nerParsers = new NERParsers();
+							// for nerGrobid_type
 							/* The result of named entity from Grobid named entity extraction
 							input: a text; output: a Grobid Entity (rawName, normalisedName, NER_Type, OffsetPosition, boundingBoxes, layoutTokens)
 							*/
-//							List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
-//							for (Entity entityResult : resultNEExtractText) {
-//								Mention mention = new Mention(entityResult);
-//								candidate.setType(mention.getType().toString());
-//							}
-//
-//							// for nerKid_type
-//							nerKid_type = UpperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
-//							if (nerKid_type != null) {
-//								nerKid_type = upperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
-//							} else {
-//								nerKid_type = "OTHER";
-//							}
-//							candidate.setTypeKid(nerKid_type);
+							nerParsers = new NERParsers();
+							List<Entity> resultNEExtractText = nerParsers.extractNE(normalisedString, new Language("en", 1.0));
+
+							for (Entity entityResult : resultNEExtractText) {
+								Mention mention = new Mention(entityResult);
+								candidate.setType(mention.getType().toString());
+							}
+
+							// for nerKid_type
+							nerKid_type = UpperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
+							if (nerKid_type != null) {
+								nerKid_type = upperKnowledgeBase.getInstance().getPredictedClassByWikidataId(candidate.getWikidataId());
+							} else {
+								nerKid_type = "OTHER";
+							}
+							candidate.setTypeKid(nerKid_type);
 
 							// check if the entity is already present with another candidate (coming from an alternative label)
 							// if yes, check if the current sense has better statistical information than the already present one
