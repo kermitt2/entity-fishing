@@ -554,7 +554,7 @@
             <version>1.1</version>
         </dependency>
 
-        <!-- logging -->
+        <!-- logging
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -564,7 +564,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
+        </dependency-->
 
         <!-- for test only -->
         <dependency>
@@ -705,6 +705,23 @@
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
+        </dependency>
+
+        <!-- for integration with nerdKid -->
+        <dependency>
+        <groupId>org.nerd.kid</groupId>
+        <artifactId>nerd-kid-project</artifactId>
+        <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- for GROBID NER -->
