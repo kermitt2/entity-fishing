@@ -1,14 +1,11 @@
 package com.scienceminer.nerd.kb.db;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
 import com.scienceminer.nerd.kb.model.Label;
-import com.scienceminer.nerd.utilities.*;
+import com.scienceminer.nerd.kb.model.hadoop.DbLabel;
+import org.lmdbjava.CursorIterator;
 
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.nio.ByteBuffer;
+import java.util.Iterator;
 
 public class LabelIterator implements Iterator<Label> {
 
@@ -29,15 +26,15 @@ public class LabelIterator implements Iterator<Label> {
     }
 
     public Label next() {
-        Entry entry = iter.next();
-        byte[] keyData = entry.getKey();
-        byte[] valueData = entry.getValue();
+        CursorIterator.KeyVal<ByteBuffer> entry = iter.next();
+        ByteBuffer keyData = entry.key();
+        ByteBuffer valueData = entry.val();
         Label l = null;
         try {
-            DbLabel la = (DbLabel)KBEnvironment.deserialize(valueData);
-            String keyId = string(keyData);
-            l = toLabel(new KBEntry<String, DbLabel>(keyId, la));
-        } catch(Exception e) {
+            DbLabel la = (DbLabel) KBEnvironment.deserialize(valueData);
+            String keyId = (String) KBEnvironment.deserialize(keyData);
+            l = toLabel(new KBEntry<>(keyId, la));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return l;

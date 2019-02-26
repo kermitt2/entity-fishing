@@ -1,6 +1,5 @@
 package com.scienceminer.nerd.kb.model;
 
-import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.db.KBLowerEnvironment;
 import com.scienceminer.nerd.kb.model.hadoop.DbPage;
 

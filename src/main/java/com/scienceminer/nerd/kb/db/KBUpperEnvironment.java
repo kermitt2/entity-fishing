@@ -1,208 +1,194 @@
 package com.scienceminer.nerd.kb.db;
 
-import com.scienceminer.nerd.utilities.*;
-
-import java.io.*;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.concurrent.*;
-
-import org.nustaq.serialization.*;
-
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+import com.scienceminer.nerd.utilities.NerdConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import com.scienceminer.nerd.kb.model.hadoop.*; 
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-import com.scienceminer.nerd.kb.*;
-
-import org.apache.hadoop.record.*;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Top language-independent KB instance, which is concretely stored as a set of LMDB databases.
- * This environment is normally unique for a complete knowledge base instance. 
- * 
+ * This environment is normally unique for a complete knowledge base instance.
  */
 public class KBUpperEnvironment extends KBEnvironment {
-	private static final Logger LOGGER = LoggerFactory.getLogger(KBUpperEnvironment.class);	
+    private static final Logger LOGGER = LoggerFactory.getLogger(KBUpperEnvironment.class);
 
-	// the different databases of the KB
-	private ConceptDatabase dbConcepts = null;
-	// gives statement by the head entity
-	private StatementDatabase dbStatements = null;
-	private PropertyDatabase dbProperties = null;
+    // the different databases of the KB
+    private ConceptDatabase dbConcepts = null;
+    // gives statement by the head entity
+    private StatementDatabase dbStatements = null;
+    private PropertyDatabase dbProperties = null;
 
-	// index of bliographical entities via their DOI
-	private BiblioDatabase dbBiblio = null;
+    // index of bibliographical entities via their DOI
+    private BiblioDatabase dbBiblio = null;
 
-	// index for the taxon taxonomy (aka the tree of life)
-	private TaxonDatabase dbTaxonParent = null;
+    // index for the taxon taxonomy (aka the tree of life)
+    private TaxonDatabase dbTaxonParent = null;
 
-	// loaded only if needed, gives the statements by the tail entity
-	private StatementDatabase dbReverseStatements = null;
+    // loaded only if needed, gives the statements by the tail entity
+    private StatementDatabase dbReverseStatements = null;
 
-	/**
-	 * Constructor
-	 */	
-	public KBUpperEnvironment(NerdConfig conf) {
-		super(conf);
-		// register classes to be serialized
-		//singletonConf.registerClass(Property.class, Statement.class);
-		initDatabases();
-	}
-	
-	/**
-	 * Returns the {@link DatabaseType#page} database
-	 */
-	public ConceptDatabase getDbConcepts() {
-		return dbConcepts;
-	}
+    /**
+     * Constructor
+     */
+    public KBUpperEnvironment(NerdConfig conf) {
+        super(conf);
+        // register classes to be serialized
+        //singletonConf.registerClass(Property.class, Statement.class);
+        initDatabases();
+    }
 
-	/**
-	 * Returns the {@link DatabaseType#properties} database
-	 */
-	public PropertyDatabase getDbProperties() {
-		return dbProperties;
-	}
+    /**
+     * Returns the {@link DatabaseType#page} database
+     */
+    public ConceptDatabase getDbConcepts() {
+        return dbConcepts;
+    }
 
-	/**
-	 * Returns the {@link DatabaseType#statements} database
-	 */
-	public StatementDatabase getDbStatements() {
-		return dbStatements;
-	}
-	
-	/**
-	 * Returns the reverse {@link DatabaseType#statements} database
-	 */
-	public StatementDatabase getDbReverseStatements() {
-		return dbReverseStatements;
-	}
-	
-	/**
-	 * Returns the {@link DatabaseType#biblio} database
-	 */
-	public BiblioDatabase getDbBiblio() {
-		return dbBiblio;
-	}
+    /**
+     * Returns the {@link DatabaseType#properties} database
+     */
+    public PropertyDatabase getDbProperties() {
+        return dbProperties;
+    }
 
-	/**
-	 * Returns the {@link DatabaseType#taxon} database
-	 */
-	public TaxonDatabase getDbTaxonParent() {
-		return dbTaxonParent;
-	}
+    /**
+     * Returns the {@link DatabaseType#statements} database
+     */
+    public StatementDatabase getDbStatements() {
+        return dbStatements;
+    }
 
-	@Override
-	protected void initDatabases() {
-		//System.out.println("\ninit upper level language independent environment");
-				
-		databasesByType = new HashMap<>();
-		
-		dbConcepts = buildConceptDatabase();//new ConceptDatabase(env, DatabaseType.concepts);
-		databasesByType.put(DatabaseType.concepts, dbConcepts);
-		
-		dbProperties = buildPropertyDatabase();
-		databasesByType.put(DatabaseType.properties, dbProperties);
+    /**
+     * Returns the reverse {@link DatabaseType#statements} database
+     */
+    public StatementDatabase getDbReverseStatements() {
+        return dbReverseStatements;
+    }
 
-		dbStatements = buildStatementDatabase();
-		databasesByType.put(DatabaseType.statements, dbStatements);
+    /**
+     * Returns the {@link DatabaseType#biblio} database
+     */
+    public BiblioDatabase getDbBiblio() {
+        return dbBiblio;
+    }
 
-		dbReverseStatements = buildReverseStatementDatabase();
-		databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
+    /**
+     * Returns the {@link DatabaseType#taxon} database
+     */
+    public TaxonDatabase getDbTaxonParent() {
+        return dbTaxonParent;
+    }
 
-		dbBiblio = buildBiblioDatabase();
-		databasesByType.put(DatabaseType.biblio, dbBiblio);	
+    @Override
+    protected void initDatabases() {
+        System.out.println("\ninit upper level language independent environment");
 
-		dbTaxonParent = buildTaxonParentDatabase();
-		databasesByType.put(DatabaseType.taxon, dbTaxonParent);
-	}
+        databasesByType = new HashMap<>();
 
-	/**
-	 * Builds a KBEnvironment by loading all of the data files stored in the given directory into persistent databases.
-	 * 
-	 * It will not create the environment or any databases unless all of the required files are found in the given directory. 
-	 * 
-	 * It will not delete any existing databases, and will only overwrite them if explicitly specified (even if they are incomplete).
-	 * 
-	 * @param conf a configuration specifying where the databases are to be stored, etc.
-	 * @param overwrite true if existing databases should be overwritten, otherwise false
-	 * @throws IOException if any of the required files cannot be read
-	 */
-	@Override
-	public void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception {
-		System.out.println("building Environment for upper knowledge-base");	
-		//check all files exist and are readable before doing anything
-		
-		File dataDirectory = new File(conf.getDataDirectory());
+        dbConcepts = buildConceptDatabase();//new ConceptDatabase(env, DatabaseType.concepts);
+        databasesByType.put(DatabaseType.concepts, dbConcepts);
 
-		// mapping wikipedia ids to wikidata id
-		File wikidata = getDataFile(dataDirectory, "wikidataIds.csv");
+        dbProperties = buildPropertyDatabase();
+        databasesByType.put(DatabaseType.properties, dbProperties);
 
-		// definition of properties used in Wikidata
-		//File wikidataProperties = getDataFile(dataDirectory, "wikidata-properties.json");
+        dbStatements = buildStatementDatabase();
+        databasesByType.put(DatabaseType.statements, dbStatements);
 
-		// the actual list of statements in Wikidata with the JSON Wikidata dump file
-		File wikidataStatements = getDataFile(dataDirectory, "latest-all.json.bz2");
+        dbReverseStatements = buildReverseStatementDatabase();
+        databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
 
-		//now load databases
-		File dbDirectory = new File(conf.getDbDirectory());
-		if (!dbDirectory.exists())
-			dbDirectory.mkdirs();
+        dbBiblio = buildBiblioDatabase();
+        databasesByType.put(DatabaseType.biblio, dbBiblio);
 
-		//System.out.println("Building Concept db");                                                     	
-		dbConcepts.loadFromFile(wikidata, overwrite);
+        dbTaxonParent = buildTaxonParentDatabase();
+        databasesByType.put(DatabaseType.taxon, dbTaxonParent);
+    }
 
-		//System.out.println("Building Properties db");
-		dbProperties.loadFromFile(wikidataStatements, overwrite);
+    /**
+     * Builds a KBEnvironment by loading all of the data files stored in the given directory into persistent databases.
+     * <p>
+     * It will not create the environment or any databases unless all of the required files are found in the given directory.
+     * <p>
+     * It will not delete any existing databases, and will only overwrite them if explicitly specified (even if they are incomplete).
+     *
+     * @param conf      a configuration specifying where the databases are to be stored, etc.
+     * @param overwrite true if existing databases should be overwritten, otherwise false
+     * @throws IOException if any of the required files cannot be read
+     */
+    @Override
+    public void buildEnvironment(NerdConfig conf, boolean overwrite) throws Exception {
+        LOGGER.info("building Environment for upper knowledge base");
+        //check all files exist and are readable before doing anything
 
-		//System.out.println("Building Statement db");
-		dbStatements.loadFromFile(wikidataStatements, overwrite);
-		
-		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
+        File dataDirectory = new File(conf.getDataDirectory());
 
-		dbTaxonParent.fillTaxonDbs(dbConcepts, dbStatements, overwrite);
+        // mapping wikipedia ids to wikidata id
+        File wikidata = getDataFile(dataDirectory, "wikidataIds.csv");
 
-		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
-	}
+        // definition of properties used in Wikidata
+        //File wikidataProperties = getDataFile(dataDirectory, "wikidata-properties.json");
 
-	/**
-	 * Loaded only if needed, gives the statements by the tail entity.
-	 * dbStatements must be already built to create the reverse one.  
-	 */
-	public void loadReverseStatementDatabase(boolean overwrite) {
-		dbReverseStatements.loadReverseStatements(overwrite, dbStatements);
-	}
+        // the actual list of statements in Wikidata with the JSON Wikidata dump file
+        File wikidataStatements = getDataFile(dataDirectory, "latest-all.json.bz2");
 
-	private StatementDatabase buildStatementDatabase() {
-		return new StatementDatabase(this, DatabaseType.statements);
-	}
+        //now load databases
+        File dbDirectory = new File(conf.getDbDirectory());
+        if (!dbDirectory.exists())
+            dbDirectory.mkdirs();
 
-	private StatementDatabase buildReverseStatementDatabase() {
-		return new StatementDatabase(this, DatabaseType.reverseStatements);
-	}
+        //System.out.println("Building Concept db");
+        dbConcepts.loadFromFile(wikidata, overwrite);
 
-	private PropertyDatabase buildPropertyDatabase() {
-		return new PropertyDatabase(this);
-	}
+        //System.out.println("Building Properties db");
+        dbProperties.loadFromFile(wikidataStatements, overwrite);
 
-	private ConceptDatabase buildConceptDatabase() {
-		return new ConceptDatabase(this);
-	}
+        //System.out.println("Building Statement db");
+        dbStatements.loadFromFile(wikidataStatements, overwrite);
 
-	private BiblioDatabase buildBiblioDatabase() {
-		return new BiblioDatabase(this);
-	}
+        dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
 
-	private TaxonDatabase buildTaxonParentDatabase() {
-		return new TaxonDatabase(this);
-	}	
+        dbTaxonParent.fillTaxonDbs(dbConcepts, dbStatements, overwrite);
 
-	public Long retrieveStatistic(StatisticName sn) {
-		throw new UnsupportedOperationException();
-	}
+        LOGGER.info("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
+    }
+
+    /**
+     * Loaded only if needed, gives the statements by the tail entity.
+     * dbStatements must be already built to create the reverse one.
+     */
+    public void loadReverseStatementDatabase(boolean overwrite) {
+        dbReverseStatements.loadReverseStatements(overwrite, dbStatements);
+    }
+
+    private StatementDatabase buildStatementDatabase() {
+        return new StatementDatabase(this, DatabaseType.statements);
+    }
+
+    private StatementDatabase buildReverseStatementDatabase() {
+        return new StatementDatabase(this, DatabaseType.reverseStatements);
+    }
+
+    private PropertyDatabase buildPropertyDatabase() {
+        return new PropertyDatabase(this);
+    }
+
+    private ConceptDatabase buildConceptDatabase() {
+        return new ConceptDatabase(this);
+    }
+
+    private BiblioDatabase buildBiblioDatabase() {
+        return new BiblioDatabase(this);
+    }
+
+    private TaxonDatabase buildTaxonParentDatabase() {
+        return new TaxonDatabase(this);
+    }
+
+    public Long retrieveStatistic(StatisticName sn) {
+        throw new UnsupportedOperationException();
+    }
 }

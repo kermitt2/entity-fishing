@@ -4,12 +4,15 @@
 langCode: de
 
 # path to the LMDB data
-dbDirectory: data/db/db-de
+#dbDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/nerd-data/db/db-de
+#dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/nerd-data/db/db-de
+dbDirectory: /Volumes/LaCie/workspace/nerd/0.0.4/nerd-data/db/db-de
 
 # path to the compiled CSV wikipedia, infobox, wikidata files
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
-dataDirectory: /mnt/data/wikipedia/latest/de/
+#dataDirectory: /Volumes/SEAGATE1TB/nerd/0.0.3/wikipedia/de/
+dataDirectory: /Volumes/LaCie/workspace/nerd/0.0.3/wikipedia/de/
 #dataDirectory: /home/lopez/resources/wikipedia/de/
 
 # path to the stopwords file to consider for the target language

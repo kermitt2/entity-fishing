@@ -6,518 +6,552 @@ import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.hadoop.*;
 import org.apache.hadoop.record.CsvRecordInput;
-import org.fusesource.lmdbjni.BufferCursor;
-import org.fusesource.lmdbjni.Transaction;
+import org.lmdbjava.Cursor;
+import org.lmdbjava.SeekOp;
+import org.lmdbjava.Txn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
+import static com.scienceminer.nerd.kb.db.KBEnvironment.deserialize;
+import static java.nio.ByteBuffer.allocateDirect;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
- * A factory for creating the LMDB databases used in (N)ERD Knowlegde Base for the 
+ * A factory for creating the LMDB databases used in (N)ERD Knowlegde Base for the
  * lower environment (e.g. the language-dependent part of the KB).
  */
 public class KBDatabaseFactory {
-	private static final Logger LOGGER = LoggerFactory.getLogger(KBDatabaseFactory.class);	
-	
-	private KBEnvironment env = null;
+    private static final Logger LOGGER = LoggerFactory.getLogger(KBDatabaseFactory.class);
 
-	public KBDatabaseFactory(KBEnvironment env) {
-		this.env = env;
-	}
+    private KBEnvironment env = null;
 
-	public KBDatabase<Integer, DbPage> buildPageDatabase() {
-		return new IntRecordDatabase<DbPage>(env, DatabaseType.page) {
-			@Override
-			public KBEntry<Integer,DbPage> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				Integer id = record.readInt(null);
-				DbPage p = new DbPage();
-				p.deserialize(record);
+    public KBDatabaseFactory(KBEnvironment env) {
+        this.env = env;
+    }
 
-				return new KBEntry<>(id, p);
-			}
+    public KBDatabase<Integer, DbPage> buildPageDatabase() {
+        return new IntRecordDatabase<DbPage>(env, DatabaseType.page) {
+            @Override
+            public KBEntry<Integer, DbPage> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                Integer id = record.readInt(null);
+                DbPage p = new DbPage();
+                p.deserialize(record);
 
-			// using LMDB zero copy mode
-			//@Override
-			public DbPage retrieve2(Integer key) {
-				DbPage record = null;
-				try (Transaction tx = environment.createReadTransaction();
-					BufferCursor cursor = db.bufferCursor(tx)) {
-					cursor.keyWriteBytes(KBEnvironment.serialize(key));
-					if (cursor.seekKey()) {
-						record = (DbPage)KBEnvironment.deserialize(cursor.valBytes());
-					}
-				} catch(Exception e) {
-					LOGGER.error("Cannot retrieve key " + key, e);
-				}
-				return record;
-			}
+                return new KBEntry<>(id, p);
+            }
 
-			// using standard LMDB copy mode
-			@Override
-			public DbPage retrieve(Integer key) {
-				byte[] cachedData = null;
-				DbPage record = null;
-				try (Transaction tx = environment.createReadTransaction()) {
-					cachedData = db.get(tx, KBEnvironment.serialize(key));
-					if (cachedData != null)
-						record = (DbPage)KBEnvironment.deserialize(cachedData);
-				} catch(Exception e) {
-					LOGGER.error("Cannot retrieve key " + key, e);
-				}
-				return record;
-			}
+            // using LMDB zero copy mode
+            //@Override
+            public DbPage retrieve2(Integer key) {
+                final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                DbPage record = null;
+                try (Txn<ByteBuffer> tx = environment.txnRead();
+                     final Cursor<ByteBuffer> cursor = db.openCursor(tx)) {
 
-			public DbPage filterEntry(KBEntry<Integer, DbPage> e) {
-				// we want to index only articles
-				PageType pageType = PageType.values()[e.getValue().getType()];
-				if ( (pageType == PageType.article) || (pageType == PageType.category) || (pageType == PageType.redirect) ) {
-					//|| (pageType == PageType.disambiguation))
-					return e.getValue();
-				}
-				else
-					return null;
-			}
+                    keyBuffer.put(KBEnvironment.serialize(key)).flip();
+                    if (cursor.seek(SeekOp.MDB_FIRST)) {
+                        record = (DbPage) deserialize(cursor.val());
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Cannot retrieve key " + key, e);
+                }
+                return record;
+            }
 
-			public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-				if (isLoaded && !overwrite)
-					return;
-				System.out.println("Loading " + name + " database");
+            // using standard LMDB copy mode
+            @Override
+            public DbPage retrieve(Integer key) {
+                final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                ByteBuffer cachedData = null;
+                DbPage record = null;
+                try (Txn<ByteBuffer> tx = environment.txnRead()) {
+                    keyBuffer.put(KBEnvironment.serialize(key)).flip();
+                    cachedData = db.get(tx, keyBuffer);
+                    if (cachedData != null)
+                        record = (DbPage) KBEnvironment.deserialize(cachedData);
+                } catch (Exception e) {
+                    LOGGER.error("Cannot retrieve key " + key, e);
+                }
+                return record;
+            }
 
-				if (dataFile == null)
-					throw new NerdResourceException("Markup file not found");
+            public DbPage filterEntry(KBEntry<Integer, DbPage> e) {
+                // we want to index only articles
+                PageType pageType = PageType.values()[e.getValue().getType()];
+                if ((pageType == PageType.article) || (pageType == PageType.category) || (pageType == PageType.redirect)) {
+                    //|| (pageType == PageType.disambiguation))
+                    return e.getValue();
+                } else
+                    return null;
+            }
 
-				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-				String line = null;
-				int nbToAdd = 0;
-				Transaction tx = environment.createWriteTransaction();
-				while ((line=input.readLine()) != null) {
-					if (nbToAdd == 10000) {
-						tx.commit();
-						tx.close();
-						nbToAdd = 0;
-						tx = environment.createWriteTransaction();
-					}
-					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
-					try {
-						KBEntry<Integer,DbPage> entry = deserialiseCsvRecord(cri);
-						if ( (entry != null) && (filterEntry(entry) != null) ) {
-							try {
-								db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-								nbToAdd++;
-							} catch(Exception e) {
-								e.printStackTrace();
-							}
-						}
-					} catch(Exception e) {
-						System.out.println("Error deserialising: " + line);
-						e.printStackTrace();
-					}
-				}
-				tx.commit();
-				tx.close();
-				input.close();
-				isLoaded = true;
-			}
-		};
-	}
+            public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
+                if (isLoaded && !overwrite)
+                    return;
+                System.out.println("Loading " + name + " database");
 
-	public KBDatabase<String,Integer> buildTitleDatabase(DatabaseType type) {
-		return new StringIntDatabase(env, type) {
-			@Override
-			public KBEntry<String,Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				Integer id = record.readInt(null);
+                if (dataFile == null)
+                    throw new NerdResourceException("Markup file not found");
 
-				DbPage p = new DbPage();
-				p.deserialize(record);
+                BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+                String line = null;
+                int nbToAdd = 0;
+                Txn tx = environment.txnWrite();
+                while ((line = input.readLine()) != null) {
+                    if (nbToAdd == 10000) {
+                        tx.commit();
+                        tx.close();
+                        nbToAdd = 0;
+                        tx = environment.txnWrite();
+                    }
+                    CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
+                    try {
+                        KBEntry<Integer, DbPage> entry = deserialiseCsvRecord(cri);
+                        if (filterEntry(entry) != null) {
+                            final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                            keyBuffer.put(KBEnvironment.serialize(entry.getKey())).flip();
+                            final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+                            final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                            valBuffer.put(serializedValue).flip();
+                            db.put(tx, keyBuffer, valBuffer);
+                            nbToAdd++;
+                        }
+                    } catch (Exception e) {
+                        LOGGER.error("Error deserialising: " + line, e);
+                    }
+                }
+                tx.commit();
+                tx.close();
+                input.close();
+                isLoaded = true;
+            }
+        };
+    }
 
-				PageType pageType = PageType.values()[p.getType()];
-				DatabaseType dbType = getType();
+    public KBDatabase<String, Integer> buildTitleDatabase(DatabaseType type) {
+        return new StringIntDatabase(env, type) {
+            @Override
+            public KBEntry<String, Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                Integer id = record.readInt(null);
 
-				if ((dbType == DatabaseType.articlesByTitle) && 
-					(pageType != PageType.article && pageType != PageType.disambiguation && pageType != PageType.redirect) )
-					return null;
+                DbPage p = new DbPage();
+                p.deserialize(record);
 
-				if (dbType == DatabaseType.categoriesByTitle && pageType != PageType.category)
-					return null;
+                PageType pageType = PageType.values()[p.getType()];
+                DatabaseType dbType = getType();
 
-				if (dbType == DatabaseType.templatesByTitle && pageType != PageType.template)
-					return null;
+                if ((dbType == DatabaseType.articlesByTitle) &&
+                        (pageType != PageType.article && pageType != PageType.disambiguation && pageType != PageType.redirect))
+                    return null;
 
-				return new KBEntry<>(p.getTitle(), id);
-			}
-		};
-	}
+                if (dbType == DatabaseType.categoriesByTitle && pageType != PageType.category)
+                    return null;
 
-	public LabelDatabase buildLabelDatabase() {
-		return new LabelDatabase(env);
-	}
+                if (dbType == DatabaseType.templatesByTitle && pageType != PageType.template)
+                    return null;
 
-	public KBDatabase<Integer, DbIntList> buildPageLinkNoSentencesDatabase(DatabaseType type) {
-		if (type != DatabaseType.pageLinksInNoSentences && type != DatabaseType.pageLinksOutNoSentences)
-			throw new IllegalArgumentException("type must be either DatabaseType.pageLinksInNoSentences or DatabaseType.pageLinksOutNoSentences");
+                return new KBEntry<>(p.getTitle(), id);
+            }
+        };
+    }
 
-		return new IntRecordDatabase<DbIntList>(env, type) {
-			@Override
-			public KBEntry<Integer, DbIntList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				// this has to read from pagelinks file (with sentences)
-				Integer id = record.readInt(null);
+    public LabelDatabase buildLabelDatabase() {
+        return new LabelDatabase(env);
+    }
 
-				DbLinkLocationList l = new DbLinkLocationList();
-				l.deserialize(record);
-				
-				ArrayList<Integer> linkIds = new ArrayList<Integer>();
-				for (DbLinkLocation ll : l.getLinkLocations()) {
-					if (!linkIds.contains(ll.getLinkId()))
-						linkIds.add(ll.getLinkId());
-				}
-				return new KBEntry<>(id, new DbIntList(linkIds));
-			}
-			
-			@Override
-			public void loadFromFile(File dataFile, boolean overwrite) throws IOException  {
-				if (isLoaded && !overwrite)
-					return;
-				System.out.println("Loading " + getName());
+    public KBDatabase<Integer, DbIntList> buildPageLinkNoSentencesDatabase(DatabaseType type) {
+        if (type != DatabaseType.pageLinksInNoSentences && type != DatabaseType.pageLinksOutNoSentences)
+            throw new IllegalArgumentException("type must be either DatabaseType.pageLinksInNoSentences or DatabaseType.pageLinksOutNoSentences");
 
-				if (dataFile == null)
-					throw new NerdResourceException("Markup file not found");
+        return new IntRecordDatabase<DbIntList>(env, type) {
+            @Override
+            public KBEntry<Integer, DbIntList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                // this has to read from pagelinks file (with sentences)
+                Integer id = record.readInt(null);
 
-				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-				String line = null;
-				int nbToAdd = 0;
-				Transaction tx = environment.createWriteTransaction();
-				while ((line=input.readLine()) != null) {
-					if (nbToAdd == 10000) {
-						tx.commit();
-						tx.close();
-						nbToAdd = 0;
-						tx = environment.createWriteTransaction();
-					}
-					CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
-					KBEntry<Integer,DbIntList> entry = deserialiseCsvRecord(cri);
-					try {
-						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-						nbToAdd++;
-					} catch(Exception e) {
-						e.printStackTrace();
-					}
-				}
-				tx.commit();
-				tx.close();
-				input.close();
-			}
-		};
-	}
+                DbLinkLocationList l = new DbLinkLocationList();
+                l.deserialize(record);
 
-	public KBDatabase<Integer,DbIntList> buildIntIntListDatabase(final DatabaseType type) {
-		switch (type) {
-			case categoryParents:
-			case articleParents:
-			case childCategories:
-			case childArticles:
-			case redirectSourcesByTarget:
-				break;
-			default: 
-				throw new IllegalArgumentException(type.name() + " is not a valid DatabaseType for IntIntListDatabase");
-			}
+                ArrayList<Integer> linkIds = new ArrayList<Integer>();
+                for (DbLinkLocation ll : l.getLinkLocations()) {
+                    if (!linkIds.contains(ll.getLinkId()))
+                        linkIds.add(ll.getLinkId());
+                }
+                return new KBEntry<>(id, new DbIntList(linkIds));
+            }
 
-		return new IntRecordDatabase<DbIntList>(env, type) {
-			@Override
-			public KBEntry<Integer, DbIntList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				Integer k = record.readInt(null);
-				DbIntList v = new DbIntList();
-				v.deserialize(record);
+            @Override
+            public void loadFromFile(File dataFile, boolean overwrite) throws IOException {
+                if (isLoaded && !overwrite)
+                    return;
+                System.out.println("Loading " + getName());
 
-				return new KBEntry<>(k,v);
-			}
-		};
-	}
+                if (dataFile == null)
+                    throw new NerdResourceException("Markup file not found");
 
-	public KBDatabase<Integer,Integer> buildRedirectTargetBySourceDatabase() {
+                BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+                String line = null;
+                int nbToAdd = 0;
+                Txn<ByteBuffer> tx = environment.txnWrite();
+                while ((line = input.readLine()) != null) {
+                    if (nbToAdd == 10000) {
+                        tx.commit();
+                        tx.close();
+                        nbToAdd = 0;
+                        tx = environment.txnWrite();
+                    }
+                    CsvRecordInput cri = new CsvRecordInput(new ByteArrayInputStream((line + "\n").getBytes("UTF-8")));
+                    KBEntry<Integer, DbIntList> entry = deserialiseCsvRecord(cri);
+                    try {
+                        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                        keyBuffer.put(KBEnvironment.serialize(entry.getKey())).flip();
+                        final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+                        final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                        valBuffer.put(serializedValue).flip();
 
-		return new IntIntDatabase(env, DatabaseType.redirectTargetBySource) {
-			@Override
-			public KBEntry<Integer, Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				int k = record.readInt(null);
-				int v = record.readInt(null);
-				return new KBEntry<>(k,v);
-			}
-		};
-	}
+                        db.put(tx, keyBuffer, valBuffer);
+                        nbToAdd++;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                tx.commit();
+                tx.close();
+                input.close();
+            }
+        };
+    }
 
-	public IntLongDatabase buildStatisticsDatabase() {
-		return new IntLongDatabase(env, DatabaseType.statistics) {
-			@Override
-			public KBEntry<Integer, Long> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				String statName = record.readString(null);
-				Long v = record.readLong(null);
-				Integer k = null;
-				try {
-					k = StatisticName.valueOf(statName).ordinal();
-				} catch (Exception e) {
-					LOGGER.warn("Ignoring unknown statistic: " + statName);
-					return null;
-				}
-				return new KBEntry<>(k,v);
-			}
-		};
-	}
+    public KBDatabase<Integer, DbIntList> buildIntIntListDatabase(final DatabaseType type) {
+        switch (type) {
+            case categoryParents:
+            case articleParents:
+            case childCategories:
+            case childArticles:
+            case redirectSourcesByTarget:
+                break;
+            default:
+                throw new IllegalArgumentException(type.name() + " is not a valid DatabaseType for IntIntListDatabase");
+        }
 
-	public KBDatabase<Integer,DbTranslations> buildTranslationsDatabase() {
-		return new IntRecordDatabase<DbTranslations>(env, DatabaseType.translations) {
-			@Override
-			public KBEntry<Integer, DbTranslations> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				int k = record.readInt(null);
-				DbTranslations v = new DbTranslations();
-				v.deserialize(record);
-				return new KBEntry<>(k,v);
-			}
-		};
-	}
+        return new IntRecordDatabase<DbIntList>(env, type) {
+            @Override
+            public KBEntry<Integer, DbIntList> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                Integer k = record.readInt(null);
+                DbIntList v = new DbIntList();
+                v.deserialize(record);
 
-	public PageLinkCountDatabase buildPageLinkCountDatabase() {
-		return new PageLinkCountDatabase(env);
-	}
+                return new KBEntry<>(k, v);
+            }
+        };
+    }
 
-	public KBDatabase<Integer,String> buildMarkupDatabase() {
-		return new MarkupDatabase(env, DatabaseType.markup);
-	}
+    public KBDatabase<Integer, Integer> buildRedirectTargetBySourceDatabase() {
 
-	public KBDatabase<Integer,String> buildMarkupFullDatabase() {
-		return new MarkupDatabase(env, DatabaseType.markupFull);
-	}
+        return new IntIntDatabase(env, DatabaseType.redirectTargetBySource) {
+            @Override
+            public KBEntry<Integer, Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                int k = record.readInt(null);
+                int v = record.readInt(null);
+                return new KBEntry<>(k, v);
+            }
+        };
+    }
 
-	public KBDatabase<Integer,String> buildDbConceptByPageIdDatabase() {
-		return new KBDatabase<Integer,String>(env, DatabaseType.conceptByPageId) {
-			// using standard LMDB copy mode
-			@Override
-			public String retrieve(Integer key) {
-				byte[] cachedData = null;
-				String record = null;
-				try (Transaction tx = environment.createReadTransaction()) {
-					cachedData = db.get(tx, KBEnvironment.serialize(key));
-					if (cachedData != null) {
-						record = (String)KBEnvironment.deserialize(cachedData);
-					}
-				} catch(Exception e) {
-					LOGGER.error("Cannot retrieve key " + key, e);
-				}
-				return record;
-			}
+    public IntLongDatabase buildStatisticsDatabase() {
+        return new IntLongDatabase(env, DatabaseType.statistics) {
+            @Override
+            public KBEntry<Integer, Long> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                String statName = record.readString(null);
+                Long v = record.readLong(null);
+                Integer k = null;
+                try {
+                    k = StatisticName.valueOf(statName).ordinal();
+                } catch (Exception e) {
+                    LOGGER.warn("Ignoring unknown statistic: " + statName);
+                    return null;
+                }
+                return new KBEntry<>(k, v);
+            }
+        };
+    }
 
-			public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-			//System.out.println("input file: " + dataFile.getPath());
-			System.out.println("isLoaded: " + isLoaded);
-				if (isLoaded && !overwrite)
-					return;
-				System.out.println("Loading " + name + " database");
+    public KBDatabase<Integer, DbTranslations> buildTranslationsDatabase() {
+        return new IntRecordDatabase<DbTranslations>(env, DatabaseType.translations) {
+            @Override
+            public KBEntry<Integer, DbTranslations> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                int k = record.readInt(null);
+                DbTranslations v = new DbTranslations();
+                v.deserialize(record);
+                return new KBEntry<>(k, v);
+            }
+        };
+    }
 
-				if (dataFile == null)
-					throw new NerdResourceException("Markup file not found");
+    public PageLinkCountDatabase buildPageLinkCountDatabase() {
+        return new PageLinkCountDatabase(env);
+    }
 
-				BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-				String line = null;
-				int nbToAdd = 0;
-				Transaction tx = environment.createWriteTransaction();
-				while ((line=input.readLine()) != null) {
-					if (nbToAdd == 10000) {
-						tx.commit();
-						tx.close();
-						nbToAdd = 0;
-						tx = environment.createWriteTransaction();
-					}
+    public KBDatabase<Integer, String> buildMarkupDatabase() {
+        return new MarkupDatabase(env, DatabaseType.markup);
+    }
 
-					String[] pieces = line.split("\t");
-					if (pieces.length != 2)
-						continue;
-					Integer keyVal = null;
-					try {
-						keyVal = Integer.parseInt(pieces[0]);
-					} catch(Exception e) {
-						e.printStackTrace();
-					}
-					if (keyVal == null)
-						continue;
-					KBEntry<Integer,String> entry = new KBEntry<>(keyVal, pieces[1]);
+    public KBDatabase<Integer, String> buildMarkupFullDatabase() {
+        return new MarkupDatabase(env, DatabaseType.markupFull);
+    }
 
-					try {
-						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-						nbToAdd++;
-					} catch(Exception e) {
-						e.printStackTrace();
+    public KBDatabase<Integer, String> buildDbConceptByPageIdDatabase() {
+        return new KBDatabase<Integer, String>(env, DatabaseType.conceptByPageId) {
+            // using standard LMDB copy mode
+            @Override
+            public String retrieve(Integer key) {
+                final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                ByteBuffer cachedData = null;
+                String record = null;
+                try (Txn<ByteBuffer> tx = environment.txnRead()) {
+                    keyBuffer.put(KBEnvironment.serialize(key)).flip();
+                    cachedData = db.get(tx, keyBuffer);
+                    if (cachedData != null) {
+                        record = (String) KBEnvironment.deserialize(cachedData);
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Cannot retrieve key " + key, e);
+                }
+                return record;
+            }
 
-					}
-				}
-				tx.commit();
-				tx.close();
-				input.close();
-				isLoaded = true;
-			}
+            public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
+                //System.out.println("input file: " + dataFile.getPath());
+                System.out.println("isLoaded: " + isLoaded);
+                if (isLoaded && !overwrite)
+                    return;
+                System.out.println("Loading " + name + " database");
 
-			@Override
-			public KBEntry<Integer,String> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
+                if (dataFile == null)
+                    throw new NerdResourceException("Markup file not found");
 
-	public KBDatabase<String, short[]> buildWordEmbeddingsDatabase() {
-		return new KBDatabase<String, short[]>(env, DatabaseType.wordEmbeddings) {
+                BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+                String line = null;
+                int nbToAdd = 0;
+                Txn<ByteBuffer> tx = environment.txnWrite();
+                while ((line = input.readLine()) != null) {
+                    if (nbToAdd == 10000) {
+                        tx.commit();
+                        tx.close();
+                        nbToAdd = 0;
+                        tx = environment.txnWrite();
+                    }
 
-			// using standard LMDB copy mode
-			@Override
-			public short[] retrieve(String key) {
-				short[] record = null;
-				try (Transaction tx = environment.createReadTransaction()) {
-					byte[] cachedData = db.get(tx, KBEnvironment.serialize(key));
-					if (cachedData != null) {
-						record = (short[])KBEnvironment.deserialize(cachedData);
-					}
-				} catch(Exception e) {
-					LOGGER.error("Word Embeddings Database: Cannot retrieve key " + key, e);
-				}
-				return record;
-			}
+                    String[] pieces = line.split("\t");
+                    if (pieces.length != 2)
+                        continue;
+                    Integer keyVal = null;
+                    try {
+                        keyVal = Integer.parseInt(pieces[0]);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (keyVal == null)
+                        continue;
+                    KBEntry<Integer, String> entry = new KBEntry<>(keyVal, pieces[1]);
 
-			@Override
-		    public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-		        if (isLoaded && !overwrite)
-		            return;
-		        System.out.println("Loading " + name + " database");
+                    try {
+                        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                        keyBuffer.put(KBEnvironment.serialize(entry.getKey())).flip();
+                        final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+                        final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                        valBuffer.put(serializedValue).flip();
+                        db.put(tx, keyBuffer, valBuffer);
+                        nbToAdd++;
+                    } catch (Exception e) {
+                        e.printStackTrace();
 
-		        if (dataFile == null)
-		            throw new NerdResourceException("Embeddings file not found");
+                    }
+                }
+                tx.commit();
+                tx.close();
+                input.close();
+                isLoaded = true;
+            }
 
-		        //BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
-		        BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), StandardCharsets.UTF_8));
-		        String line = null;
-		        int nbToAdd = 0;
-		        Transaction tx = environment.createWriteTransaction();
-		        while ((line=input.readLine()) != null) {      
-		            if (nbToAdd == 10000) {
-		                tx.commit();
-		                tx.close();
-		                nbToAdd = 0;
-		                tx = environment.createWriteTransaction();
-		            }
-		            
-		            try {
-		                String[] pieces = line.split(" ");
-		                if (pieces.length == 2) {
-		                    // this is a header
-		                    continue;
-		                }
-		                String keyVal = pieces[0];
-		                short[] vector = new short[pieces.length-1];
-		                for(int i=1; i<pieces.length; i++) {
-		                    try {
-		                        vector[i-1] = Short.parseShort(pieces[i]);
-		                    } catch(Exception e) {
-		                        LOGGER.warn("Word embeddings: Cannot parse float value: " + pieces[i]);
-		                        vector[i-1] = 0;
-		                    }
-		                }
-		                KBEntry<String,short[]> entry = new KBEntry<>(keyVal, vector);
+            @Override
+            public KBEntry<Integer, String> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
 
-							db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-							nbToAdd++;
+    public KBDatabase<String, short[]> buildWordEmbeddingsDatabase() {
+        return new KBDatabase<String, short[]>(env, DatabaseType.wordEmbeddings) {
 
-		            } catch(Exception e) {
-		                System.out.println("Error parsing: " + line);
-		                e.printStackTrace();
-		            }
-		        }
-		        tx.commit();
-		        tx.close();
-		        input.close();
-		        isLoaded = true;
-		    }
+            // using standard LMDB copy mode
+            @Override
+            public short[] retrieve(String key) {
+                final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                short[] record = null;
+                try (Txn<ByteBuffer> tx = environment.txnRead()) {
+                    keyBuffer.put(KBEnvironment.serialize(key)).flip();
+                    ByteBuffer cachedData = db.get(tx, keyBuffer);
+                    if (cachedData != null) {
+                        record = (short[]) KBEnvironment.deserialize(cachedData);
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Word Embeddings Database: Cannot retrieve key " + key, e);
+                }
+                return record;
+            }
 
-			@Override
-		    public KBEntry<String, short[]> deserialiseCsvRecord(CsvRecordInput record) {
-		        throw new UnsupportedOperationException();
-		    }
-		};
-	}
+            @Override
+            public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
+                if (isLoaded && !overwrite)
+                    return;
+                System.out.println("Loading " + name + " database");
 
-	public KBDatabase<String, short[]> buildEntityEmbeddingsDatabase() {
-		return new KBDatabase<String, short[]>(env, DatabaseType.entityEmbeddings) {
+                if (dataFile == null)
+                    throw new NerdResourceException("Embeddings file not found");
 
-			// using standard LMDB copy mode
-			@Override
-			public short[] retrieve(String key) {
-				short[] record = null;
-				try (Transaction tx = environment.createReadTransaction()) {
-					byte[] cachedData = db.get(tx, KBEnvironment.serialize(key));
-					if (cachedData != null) {
-						record = (short[]) KBEnvironment.deserialize(cachedData);
-					}
-				} catch(Exception e) {
-					LOGGER.error("Entity Embeddings Database: Cannot retrieve key " + key, e);
-				}
-				return record;
-			}
+                //BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+                BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), UTF_8));
+                String line = null;
+                int nbToAdd = 0;
+                Txn<ByteBuffer> tx = environment.txnWrite();
+                while ((line = input.readLine()) != null) {
+                    if (nbToAdd == 10000) {
+                        tx.commit();
+                        tx.close();
+                        nbToAdd = 0;
+                        tx = environment.txnWrite();
+                    }
 
-			@Override
-		    public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-		        if (isLoaded && !overwrite)
-		            return;
-		        System.out.println("Loading " + name + " database");
+                    try {
+                        String[] pieces = line.split(" ");
+                        if (pieces.length == 2) {
+                            // this is a header
+                            continue;
+                        }
+                        String keyVal = pieces[0];
+                        short[] vector = new short[pieces.length - 1];
+                        for (int i = 1; i < pieces.length; i++) {
+                            try {
+                                vector[i - 1] = Short.parseShort(pieces[i]);
+                            } catch (Exception e) {
+                                LOGGER.warn("Word embeddings: Cannot parse float value: " + pieces[i]);
+                                vector[i - 1] = 0;
+                            }
+                        }
+                        KBEntry<String, short[]> entry = new KBEntry<>(keyVal, vector);
 
-		        if (dataFile == null)
-		            throw new NerdResourceException("Embeddings file not found");
+                        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                        keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+                        final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+                        final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                        valBuffer.put(serializedValue);
+                        db.put(tx, keyBuffer, valBuffer);
+                        nbToAdd++;
 
-		        BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), "UTF-8"));
-		        String line = null;
-		        int nbToAdd = 0;
-		        Transaction tx = environment.createWriteTransaction();
-		        while ((line=input.readLine()) != null) {      
-		            if (nbToAdd == 10000) {
-		                tx.commit();
-		                tx.close();
-		                nbToAdd = 0;
-		                tx = environment.createWriteTransaction();
-		            }
-		            
-		            try {
-		                String[] pieces = line.split(" ");
-		                if (pieces.length == 2) {
-		                    // this is a header
-		                    continue;
-		                }
-		                String keyVal = pieces[0];
-		                short[] vector = new short[pieces.length-1];
-		                for(int i=1; i<pieces.length; i++) {
-		                    try {
-		                        vector[i-1] = Short.parseShort(pieces[i]);
-		                    } catch(Exception e) {
-		                        LOGGER.warn("Entity embeddings: Cannot parse float value: " + pieces[i]);
-		                        vector[i-1] = 0;
-		                    }
-		                }
-		                KBEntry<String,short[]> entry = new KBEntry<>(keyVal, vector);
-						db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
-						nbToAdd++;
+                    } catch (Exception e) {
+                        LOGGER.error("Error parsing: " + line, e);
+                    }
+                }
+                tx.commit();
+                tx.close();
+                input.close();
+                isLoaded = true;
+            }
 
-		            } catch(Exception e) {
-		                System.out.println("Error parsing: " + line);
-		                e.printStackTrace();
-		            }
-		        }
-		        tx.commit();
-		        tx.close();
-		        input.close();
-		        isLoaded = true;
-		    }
+            @Override
+            public KBEntry<String, short[]> deserialiseCsvRecord(CsvRecordInput record) {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
 
-			@Override
-		    public KBEntry<String, short[]> deserialiseCsvRecord(CsvRecordInput record) {
-		        throw new UnsupportedOperationException();
-		    }
-		};
-	}
+    public KBDatabase<String, short[]> buildEntityEmbeddingsDatabase() {
+        return new KBDatabase<String, short[]>(env, DatabaseType.entityEmbeddings) {
+
+            // using standard LMDB copy mode
+            @Override
+            public short[] retrieve(String key) {
+                final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                short[] record = null;
+                try (Txn<ByteBuffer> tx = environment.txnRead()) {
+                    keyBuffer.put(KBEnvironment.serialize(key)).flip();
+                    ByteBuffer cachedData = db.get(tx, keyBuffer);
+
+                    if (cachedData != null) {
+                        record = (short[]) KBEnvironment.deserialize(cachedData);
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Entity Embeddings Database: Cannot retrieve key " + key, e);
+                }
+                return record;
+            }
+
+            @Override
+            public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
+                if (isLoaded && !overwrite)
+                    return;
+                System.out.println("Loading " + name + " database");
+
+                if (dataFile == null)
+                    throw new NerdResourceException("Embeddings file not found");
+
+                BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), "UTF-8"));
+                String line = null;
+                int nbToAdd = 0;
+                Txn<ByteBuffer> tx = environment.txnWrite();
+                while ((line = input.readLine()) != null) {
+                    if (nbToAdd == 10000) {
+                        tx.commit();
+                        tx.close();
+                        nbToAdd = 0;
+                        tx = environment.txnWrite();
+                    }
+
+                    try {
+                        String[] pieces = line.split(" ");
+                        if (pieces.length == 2) {
+                            // this is a header
+                            continue;
+                        }
+                        String keyVal = pieces[0];
+                        short[] vector = new short[pieces.length - 1];
+                        for (int i = 1; i < pieces.length; i++) {
+                            try {
+                                vector[i - 1] = Short.parseShort(pieces[i]);
+                            } catch (Exception e) {
+                                LOGGER.warn("Entity embeddings: Cannot parse float value: " + pieces[i]);
+                                vector[i - 1] = 0;
+                            }
+                        }
+                        KBEntry<String, short[]> entry = new KBEntry<>(keyVal, vector);
+                        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                        keyBuffer.put(KBEnvironment.serialize(entry.getKey()));
+                        final byte[] serializedValue = KBEnvironment.serialize(entry.getValue());
+                        final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                        valBuffer.put(serializedValue);
+                        db.put(tx, keyBuffer, valBuffer);
+                        nbToAdd++;
+
+                    } catch (Exception e) {
+                        LOGGER.error("Error parsing: " + line, e);
+                    }
+                }
+                tx.commit();
+                tx.close();
+                input.close();
+                isLoaded = true;
+            }
+
+            @Override
+            public KBEntry<String, short[]> deserialiseCsvRecord(CsvRecordInput record) {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
 }

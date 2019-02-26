@@ -1,31 +1,29 @@
 package com.scienceminer.nerd.kb.db;
 
-import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.utilities.*;
-
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Page;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
-
+import org.apache.commons.lang.ArrayUtils;
+import org.lmdbjava.Dbi;
+import org.lmdbjava.DbiFlags;
+import org.lmdbjava.Env;
+import org.lmdbjava.Txn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.*;
-import java.util.concurrent.*;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang.ArrayUtils;
+import static java.nio.ByteBuffer.allocateDirect;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-
-import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import static org.lmdbjava.EnvFlags.MDB_NOTLS;
 
 /**
  * Persistent mapping between Wikipedia page and GRISP domain taxonomy based on Wikipedia categories.
- *
  */
 public class WikipediaDomainMap {
     /**
@@ -34,8 +32,8 @@ public class WikipediaDomainMap {
     private static final Logger LOGGER = LoggerFactory.getLogger(WikipediaDomainMap.class);
 
     // LMDB metadata
-    protected Env environment;
-    protected Database db;
+    protected Env<ByteBuffer> environment;
+    protected Dbi<ByteBuffer> db;
     protected String envFilePath = null;
     protected boolean isLoaded = false;
     private String database_name = "domains";
@@ -44,13 +42,13 @@ public class WikipediaDomainMap {
     //private ConcurrentMap<Integer, int[]> domainsCache = null;
 
     // domain id map
-    private Map<Integer,String> id2domain = null;
+    private Map<Integer, String> id2domain = null;
 
     // domain label map  
-    private Map<String,Integer> domain2id = null;
+    private Map<String, Integer> domain2id = null;
 
     // wikipedia main categories (pageId of the category) to grisp domains
-    private Map<Integer,List<Integer>> wikiCat2domains = null;
+    private Map<Integer, List<Integer>> wikiCat2domains = null;
 
     private LowerKnowledgeBase wikipedia = null;
     private String lang = null;
@@ -62,27 +60,28 @@ public class WikipediaDomainMap {
         this.lang = lang;
         this.envFilePath = envPath + "/" + database_name;
 
-        this.environment = new Env();
-        this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES);
         File thePath = new File(this.envFilePath);
         if (!thePath.exists()) {
             thePath.mkdirs();
             isLoaded = false;
-            LOGGER.info("domains "+ lang + " / isLoaded: " + isLoaded);
+            LOGGER.info("domains " + lang + " / isLoaded: " + isLoaded);
         } else {
             // we assume that if the DB files exist, it has been already loaded
             isLoaded = true;
-            LOGGER.info("domains "+ lang + " / isLoaded: " + isLoaded);
+            LOGGER.info("domains " + lang + " / isLoaded: " + isLoaded);
         }
-        this.environment.open(this.envFilePath, Constants.NOTLS);
-        db = this.environment.openDatabase();
+        this.environment = Env.create()
+                .setMapSize(100L * 1024L * 1024L * 1024L)
+                .setMaxReaders(126)
+                .open(thePath, MDB_NOTLS);
+        db = this.environment.openDbi(database_name, DbiFlags.MDB_CREATE);
     }
 
     public void setWikipedia(LowerKnowledgeBase wikipedia) {
         this.wikipedia = wikipedia;
         try {
             loadGrispMapping();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -112,14 +111,14 @@ for(int l=0; l<categories.length;l++){
         // expand the categories (hope there is no cycle!) 
         Set<Integer> allCategories = new HashSet<Integer>();
         Set<Integer> newCategories = new HashSet<Integer>();
-        for(int i=0;i<categories.length;i++) {
+        for (int i = 0; i < categories.length; i++) {
             allCategories.add(new Integer(categories[i].getId()));
             newCategories.add(new Integer(categories[i].getId()));
             //break;
         }
 
         int size = newCategories.size();
-        while(size != 0) {
+        while (size != 0) {
 /*System.out.println(size + " / " + allCategories.size());
 for(Integer cat : newCategories) {
     org.wikipedia.miner.model.Category theCategory = (org.wikipedia.miner.model.Category)wikipedia.getPageById(cat.intValue());
@@ -127,26 +126,26 @@ for(Integer cat : newCategories) {
 }
 System.out.print("\n");*/
             Set<Integer> nextCategories = new HashSet<Integer>();
-            for(Integer category : newCategories) {
+            for (Integer category : newCategories) {
                 if (wikiCat2domains.get(category) != null) {
                     if (theDomains == null)
                         theDomains = new ArrayList<Integer>();
                     List<Integer> grispDomains = wikiCat2domains.get(category);
-                    for(Integer grispDomain : grispDomains) {
+                    for (Integer grispDomain : grispDomains) {
                         if (!theDomains.contains(grispDomain))
                             theDomains.add(grispDomain);
                     }
                 }
-                com.scienceminer.nerd.kb.model.Category theCategory = (com.scienceminer.nerd.kb.model.Category)wikipedia.getPageById(category.intValue());
+                com.scienceminer.nerd.kb.model.Category theCategory = (com.scienceminer.nerd.kb.model.Category) wikipedia.getPageById(category.intValue());
                 categories = theCategory.getParentCategories();
-                for(int i=0;i<categories.length;i++) {
+                for (int i = 0; i < categories.length; i++) {
                     if (!nextCategories.contains(new Integer(categories[i].getId())))
                         nextCategories.add(categories[i].getId());
                 }
             }
 
             newCategories = new HashSet<Integer>();
-            for(Integer category : nextCategories) {
+            for (Integer category : nextCategories) {
                 if (!allCategories.contains(category)) {
                     newCategories.add(category);
                     allCategories.add(category);
@@ -154,7 +153,7 @@ System.out.print("\n");*/
                 }
             }
             size = newCategories.size();
-            if ((theDomains != null) && theDomains.size()>0)
+            if ((theDomains != null) && theDomains.size() > 0)
                 break;
         }
 
@@ -178,16 +177,16 @@ System.out.print("\n");*/
         PageIterator iterator = wikipedia.getPageIterator(Page.PageType.article);
         int p = 0;
         int nbToAdd = 0;
-        Transaction tx = environment.createWriteTransaction();
-        while(iterator.hasNext()) {
-            if ((p%10000) == 0)
+        Txn<ByteBuffer> tx = environment.txnWrite();
+        while (iterator.hasNext()) {
+            if ((p % 10000) == 0)
                 System.out.println(p);
 
             if (nbToAdd == 10000) {
                 tx.commit();
                 tx.close();
                 nbToAdd = 0;
-                tx = environment.createWriteTransaction();
+                tx = environment.txnWrite();
             }
 
             // add to the persistent map
@@ -198,9 +197,14 @@ System.out.print("\n");*/
                 int[] theDomains = createMapping((Article) page);
                 if (theDomains != null) {
                     try {
-                        db.put(tx, KBEnvironment.serialize(pageId), KBEnvironment.serialize(theDomains));
+                        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+                        keyBuffer.put(KBEnvironment.serialize(pageId)).flip();
+                        final byte[] serializedValue = KBEnvironment.serialize(theDomains);
+                        final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+                        valBuffer.put(serializedValue).flip();
+                        db.put(tx, keyBuffer, valBuffer);
                         nbToAdd++;
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     //domainsCache.put(new Integer(pageId), theDomains);
@@ -234,7 +238,7 @@ System.out.print("\n");*/
                     LOGGER.warn(category + " is not a category found in Wikipedia.");
                 else {
                     categoryId = theCategory.getId();
-                    if (domains.get(new Integer(categoryId)) != null) {
+                    if (domains.get(categoryId) != null) {
                         LOGGER.warn(category + " is already defined in " + mappingFilePath);
                     }
                 }
@@ -280,25 +284,24 @@ System.out.print("\n");*/
     // standard LMDB retrieval
     public List<String> getDomains(int pageId) {
         int[] list = null;
-        /*if (domainsCache != null)
-            domainsCache.get(new Integer(pageId));
-        else*/
-        {
-            byte[] cachedData = null;
-            try (Transaction tx = environment.createReadTransaction()) {
-                cachedData = db.get(tx, KBEnvironment.serialize(pageId));
-                if (cachedData != null) {
-                    list = (int[])KBEnvironment.deserialize(cachedData);
-                }
-            } catch(Exception e) {
-                e.printStackTrace();
+        final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+
+        ByteBuffer cachedData = null;
+        try (Txn<ByteBuffer> tx = environment.txnRead()) {
+            keyBuffer.put(KBEnvironment.serialize(pageId)).flip();
+
+            cachedData = db.get(tx, keyBuffer);
+            if (cachedData != null) {
+                list = (int[]) KBEnvironment.deserialize(cachedData);
             }
+        } catch (Exception e) {
+            LOGGER.error("Cannot fetch data " + pageId, e);
         }
 
-        List<String> result = null;
+
+        List<String> result = new ArrayList<>();
         if (list != null) {
-            result = new ArrayList<String>();
-            for(int i=0; i<list.length; i++) {
+            for (int i = 0; i < list.length; i++) {
                 String domain = id2domain.get(new Integer(list[i]));
                 if (domain != null)
                     result.add(domain);

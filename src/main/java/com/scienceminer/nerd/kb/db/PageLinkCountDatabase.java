@@ -1,18 +1,17 @@
 package com.scienceminer.nerd.kb.db;
 
-import java.io.*;
-
-import org.apache.hadoop.record.CsvRecordInput;
-
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.model.hadoop.DbLinkLocation;
 import com.scienceminer.nerd.kb.model.hadoop.DbLinkLocationList;
 import com.scienceminer.nerd.kb.model.hadoop.DbPageLinkCounts;
+import org.apache.hadoop.record.CsvRecordInput;
+import org.lmdbjava.Txn;
 
-import com.scienceminer.nerd.utilities.*;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
+import java.io.*;
+import java.nio.ByteBuffer;
 
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import static java.nio.ByteBuffer.allocateDirect;
+
 
 public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
@@ -107,13 +106,13 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 		KBEntry<Integer, DbLinkLocationList> outLinkEntry = deserializePageLinkCsvRecord(linksOutRecord);
 
 		int nbToAdd = 0;
-		Transaction tx = environment.createWriteTransaction();
+		Txn<ByteBuffer> tx = environment.txnWrite();
 		while (inLinkEntry != null && outLinkEntry != null) {
 			if (nbToAdd == 10000) {
 				tx.commit();
 				tx.close();
 				nbToAdd = 0;
-				tx = environment.createWriteTransaction();
+				tx = environment.txnWrite();
 			}
 			KBEntry<Integer, DbPageLinkCounts> linkCountEntry = null;
 			boolean advanceInLinks = false;
@@ -138,7 +137,13 @@ public class PageLinkCountDatabase extends IntRecordDatabase<DbPageLinkCounts>{
 
 			if (linkCountEntry != null) {
 				try {
-					db.put(tx, KBEnvironment.serialize(linkCountEntry.getKey()), KBEnvironment.serialize(linkCountEntry.getValue()));
+
+					final ByteBuffer keyBuffer = allocateDirect(environment.getMaxKeySize());
+					keyBuffer.put(KBEnvironment.serialize(linkCountEntry.getKey())).flip();
+					final byte[] serializedValue = KBEnvironment.serialize(linkCountEntry.getValue());
+					final ByteBuffer valBuffer = allocateDirect(serializedValue.length);
+					valBuffer.put(serializedValue).flip();
+					db.put(tx, keyBuffer, valBuffer);
 					nbToAdd++;
 				} catch(Exception e) {
 					e.printStackTrace();

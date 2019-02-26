@@ -8,7 +8,7 @@
     <groupId>com.scienceminer.nerd</groupId>
     <artifactId>nerd</artifactId>
     <packaging>war</packaging>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <name>entity-fishing</name>
     <description>Entity Recognition and Disambiguation</description>
@@ -43,11 +43,30 @@
     </contributors>
 
     <build>
+        <!--in order to read *.properties in the resource-->
+        <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+                <include>**/service.properties</include>
+            </includes>
+        </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
                 <executions>
                     <execution>
                         <id>make-a-jar</id>
@@ -127,6 +146,7 @@
                 <configuration>
                     <jvmArgs>-Xmx4g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <jettyXml>src/main/resources/jetty.xml</jettyXml>
                     <stopKey/>
                     <stopPort/>
                     <systemProperties>
@@ -522,6 +542,13 @@
     </repositories>
 
     <dependencies>
+        <!--maven model library -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
         <!--Apache commons -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -582,26 +609,63 @@
 
         <!-- Jersey and dependencies -->
         <dependency>
-            <groupId>com.sun.jersey</groupId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>2.27</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.mimepull</groupId>
+            <artifactId>mimepull</artifactId>
+            <version>1.9.7</version>
+        </dependency>
+        
+
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>2.27</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-servlet</artifactId>
+            <version>2.27</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+
+<!--        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.27</version>
+            <scope>provided</scope>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>2.27</version>
+        </dependency>
+        <!-- Required only when you are using JAX-RS Client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.8</version>
-            <scope>compile</scope>
+            <version>2.27</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>1.8</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey.contribs</groupId>
-            <artifactId>jersey-multipart</artifactId>
-            <version>1.8</version>
-            <scope>compile</scope>
-        </dependency>
-
+        
         <!-- Language recognition -->
         <dependency>
             <groupId>com.cybozu</groupId>
@@ -764,7 +828,7 @@
         </dependency>
 
         <!-- LMDB -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.deephacks.lmdbjni</groupId>
             <artifactId>lmdbjni</artifactId>
             <version>${lmdbjni.version}</version>
@@ -783,6 +847,12 @@
             <groupId>org.deephacks.lmdbjni</groupId>
             <artifactId>lmdbjni-win64</artifactId>
             <version>${lmdbjni.version}</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.lmdbjava</groupId>
+            <artifactId>lmdbjava</artifactId>
+            <version>0.6.0</version>
         </dependency>
 
         <!-- TBD: update to the latest version! -->
@@ -792,42 +862,16 @@
             <version>1.3.1</version>
         </dependency>
 
-        <!-- to be removed !-->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>1.2.1</version>
-            <!--<exclusions>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-core</artifactId>
-                </exclusion>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.4.1</version>
+            <exclusions>
                 <exclusion>
                     <groupId>com.sun.jersey</groupId>
                     <artifactId>jersey-server</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-json</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty-util</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jsp-2.1</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jsp-api-2.1</artifactId>
-                </exclusion>
-            </exclusions>-->
+            </exclusions>
         </dependency>
-
     </dependencies>
 </project>

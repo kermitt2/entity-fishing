@@ -160,4 +160,5 @@ public class NerdConfig {
 	public void setSpeciesPath(String speciesPath) {
 		this.speciesPath = speciesPath;
 	}
+
 }

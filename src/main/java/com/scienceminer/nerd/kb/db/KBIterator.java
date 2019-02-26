@@ -1,8 +1,12 @@
 package com.scienceminer.nerd.kb.db;
 
-import org.fusesource.lmdbjni.*;
+import org.lmdbjava.CursorIterator;
+import org.lmdbjava.Dbi;
+import org.lmdbjava.Env;
+import org.lmdbjava.Txn;
 
 import java.io.Closeable;
+import java.nio.ByteBuffer;
 
 /**
  * Iterator for entries of an LMDB database.
@@ -10,16 +14,16 @@ import java.io.Closeable;
 public class KBIterator implements Closeable {
 
     private KBDatabase database;
-    private Database db = null;
-    private EntryIterator iterator = null;
-    private Env environment = null;
-    private Transaction tx = null;
+    private Dbi<ByteBuffer> db;
+    private CursorIterator<ByteBuffer> iterator;
+    private Env<ByteBuffer> environment;
+    private Txn<ByteBuffer> tx;
 
     public KBIterator(KBDatabase database) {
         this.database = database;
         environment = database.getEnvironment();
         db = database.getDatabase();
-        tx = environment.createReadTransaction();
+        tx = environment.txnRead();
         iterator = db.iterate(tx);
     }
 
@@ -38,7 +42,7 @@ public class KBIterator implements Closeable {
             tx.close();
     }
 
-    public Entry next() {
+    public CursorIterator.KeyVal<ByteBuffer> next() {
         return iterator.next();
     }
 }
