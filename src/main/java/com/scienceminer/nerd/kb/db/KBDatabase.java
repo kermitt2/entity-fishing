@@ -290,6 +290,11 @@ public abstract class KBDatabase<K,V> {
 		/**
 		 * Associates a string (entity) to a vector
 		 */
-		entityEmbeddings
+		entityEmbeddings,
+
+		/**
+		 * Associates a Wikidata Id to a class
+		 */
+		nerdKid
 	}
 }

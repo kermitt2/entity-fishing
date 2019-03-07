@@ -70,7 +70,7 @@ public class UpperKnowledgeBase {
 
             LOGGER.info("\nInit Upper Knowledge-base layer");
             NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
-			this.env = new KBUpperEnvironment(conf);
+			this.env = new KBUpperEnvironment(conf); //data/db/db-kb
 			this.env.buildEnvironment(conf, false);
 
 			wikipedias = new HashMap<>();
@@ -145,6 +145,15 @@ public class UpperKnowledgeBase {
 			return null;
 		else
 			return new Concept(env, wikidataId);
+	}
+
+	// for Nerd-kid
+	public  String getPredictedClassByWikidataId(String wikidataId) {
+		if (env.getDbNerdKid().retrieve(wikidataId) == null) {
+			return null;
+		} else {
+			return env.getDbNerdKid().retrieve(wikidataId);
+		}
 	}
 
 	/**

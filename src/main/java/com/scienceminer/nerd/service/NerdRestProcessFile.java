@@ -40,7 +40,6 @@ import java.util.*;
 import static com.scienceminer.nerd.utilities.StringProcessor.isAllUpperCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
-import org.apache.commons.lang3.tuple.Pair;
 
 public class NerdRestProcessFile {
 
@@ -67,7 +66,7 @@ public class NerdRestProcessFile {
         originFile = IOUtilities.writeInputFile(inputStream);
         LOGGER.debug(">> input PDF file saved locally...");
 
-        GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().consolidateHeader(1).build();
+        GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().consolidateHeader(true).build();
         if (originFile == null || FileUtils.sizeOf(originFile) == 0) {
             throw new QueryException("The PDF file is empty or null", QueryException.FILE_ISSUE);
         }
@@ -169,8 +168,7 @@ public class NerdRestProcessFile {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
-                String header = headerFeatured.getLeft();
+                String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
                 List<LayoutToken> tokenizationHeader =
                         Document.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
@@ -195,7 +193,7 @@ public class NerdRestProcessFile {
                     if (lang == null) {
                         BiblioItem resHeaderLangIdentification = new BiblioItem();
                         engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
-                                tokenizationHeader, resHeaderLangIdentification, doc);
+                                tokenizationHeader, resHeaderLangIdentification);
 
                         lang = identifyLanguage(resHeaderLangIdentification, doc);
                         if (lang != null) {
@@ -298,9 +296,9 @@ public class NerdRestProcessFile {
                 if (featSeg != null) {
                     // if featSeg is null, it usually means that no body segment is found in the
                     // document segmentation
-                    String bodytext = featSeg.getLeft();
+                    String bodytext = featSeg.getA();
 
-                    LayoutTokenization tokenizationBody = featSeg.getRight();
+                    LayoutTokenization tokenizationBody = featSeg.getB();
                     String rese = null;
                     if ((bodytext != null) && (bodytext.trim().length() > 0)) {
                         rese = engine.getParsers().getFullTextParser().label(bodytext);
@@ -328,7 +326,7 @@ public class NerdRestProcessFile {
             // we process references if required
             if (nerdQuery.getMentions().contains(ProcessText.MentionMethod.grobid)) {
                 List<BibDataSet> resCitations = engine.getParsers().getCitationParser().
-                        processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), 1);
+                        processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), true);
                 if ((resCitations != null) && (resCitations.size() > 0)) {
                     List<NerdEntity> newEntities = processCitations(resCitations, doc, workingQuery);
                     if (newEntities != null)

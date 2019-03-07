@@ -4,12 +4,16 @@ import com.googlecode.clearnlp.engine.EngineGetter;
 import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
 import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.scienceminer.nerd.disambiguation.NerdContext;
+import com.scienceminer.nerd.disambiguation.NerdEntity;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.engines.NERParsers;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.utilities.Pair;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -28,6 +32,7 @@ import static org.junit.Assert.*;
 
 public class ProcessTextTest {
     private ProcessText processText = null;
+    private UpperKnowledgeBase upperKnowledgeBase = null;
 
     static final String testText = "Other factors were also at play, said Felix Boni, head of research at " +
             "James Capel in Mexico City, such as positive technicals and economic uncertainty in Argentina, " +
@@ -37,6 +42,60 @@ public class ProcessTextTest {
     public void setUp() throws Exception {
         processText = new ProcessText(true);
         //processText = ProcessText.getInstance();
+        upperKnowledgeBase = UpperKnowledgeBase.getInstance();
+    }
+
+    /*
+    There are several ways to get nerGrobid_type:
+        - using a method prepared in entity-fishing by calling the "processNER" method of ProcessText class
+        - using directly extractNE method of NERParser class of Grobid
+    * */
+
+    @Test
+    public void testProcessNER() {
+        ProcessText processText = ProcessText.getInstance();
+        List<NerdEntity> disambiguatedEntities = new ArrayList<NerdEntity>();
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(testText, new Language("en", 1.0));
+        List<Mention>  entities = processText.processNER(tokens, new Language("en", 1.0));
+        for (Mention entity : entities) {
+            NerdEntity nerdEntity = new NerdEntity(entity);
+            disambiguatedEntities.add(nerdEntity);
+        }
+
+        assertThat(disambiguatedEntities.get(0).getRawName(),is("Felix Boni"));
+        assertThat(disambiguatedEntities.get(0).getType(),is(NERLexicon.NER_Type.PERSON));
+        assertThat(disambiguatedEntities.get(1).getRawName(),is("James Capel"));
+        assertThat(disambiguatedEntities.get(1).getType(),is(NERLexicon.NER_Type.PERSON));
+        assertThat(disambiguatedEntities.get(2).getRawName(),is("Mexico City"));
+        assertThat(disambiguatedEntities.get(2).getType(),is(NERLexicon.NER_Type.LOCATION));
+        assertThat(disambiguatedEntities.get(3).getRawName(),is("Argentina"));
+        assertThat(disambiguatedEntities.get(3).getType(),is(NERLexicon.NER_Type.LOCATION));
+        assertThat(disambiguatedEntities.get(4).getRawName(),is("Brazil"));
+        assertThat(disambiguatedEntities.get(4).getType(),is(NERLexicon.NER_Type.LOCATION));
+
+        List<LayoutToken> newToken = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken("Australia", new Language("en", 1.0));
+        List<Mention> newMention = processText.processNER(newToken, new Language("en", 1.0));
+        NerdEntity newEntity = new NerdEntity(newMention.get(0));
+        assertThat(newEntity.getRawName(),is("Australia"));
+        assertThat(newEntity.getType(),is(NERLexicon.NER_Type.LOCATION));
+    }
+
+    @Test
+    public void testExtractNE() {
+        NERParsers nerParsers = new NERParsers();
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(testText, new Language("en", 1.0));
+        List<org.grobid.core.data.Entity> disambiguatedEntities = nerParsers.extractNE(tokens,new Language("en", 1.0));
+
+        assertThat(disambiguatedEntities.get(0).getRawName(),is("Felix Boni"));
+        assertThat(disambiguatedEntities.get(0).getType(),is(NERLexicon.NER_Type.PERSON));
+        assertThat(disambiguatedEntities.get(1).getRawName(),is("James Capel"));
+        assertThat(disambiguatedEntities.get(1).getType(),is(NERLexicon.NER_Type.PERSON));
+        assertThat(disambiguatedEntities.get(2).getRawName(),is("Mexico City"));
+        assertThat(disambiguatedEntities.get(2).getType(),is(NERLexicon.NER_Type.LOCATION));
+        assertThat(disambiguatedEntities.get(3).getRawName(),is("Argentina"));
+        assertThat(disambiguatedEntities.get(3).getType(),is(NERLexicon.NER_Type.LOCATION));
+        assertThat(disambiguatedEntities.get(4).getRawName(),is("Brazil"));
+        assertThat(disambiguatedEntities.get(4).getType(),is(NERLexicon.NER_Type.LOCATION));
     }
 
     @Test
