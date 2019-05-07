@@ -142,7 +142,7 @@ public class NerdSelector extends NerdModel {
 		feature.dice = dice;
 		double[] features = feature.toVector(attributes);
 		
-		smile.math.Math.setSeed(7);
+		//smile.math.Math.setSeed(7);
 
 		// we add some robustness when calling the prediction, with an Executor and timer
 		// it appears that smile-ml on some cloud machine can randomly take minutes to predict 
