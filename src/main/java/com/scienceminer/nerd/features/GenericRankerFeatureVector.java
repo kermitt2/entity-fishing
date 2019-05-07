@@ -7,12 +7,12 @@ import java.util.regex.*;
 
 import smile.data.Attribute;
 
-public class GenericRankerFeatureVector {
-	public String title = "Generic";
+public class GenericRankerFeatureVector extends GenericFeatureVector {
+	public String title = "Generic ranker";
 
-	public String string = null; // lexical feature
+	/*public String string = null; // lexical feature
 	public double label = 0.0; // numerical label if known
-	public String classes = "N"; // class label if known
+	public String classes = "N"; // class label if known*/
 	
 	// mask of features
 	public boolean Add_prob_c = false;  // commonness: conditional probability of the concept given the string
