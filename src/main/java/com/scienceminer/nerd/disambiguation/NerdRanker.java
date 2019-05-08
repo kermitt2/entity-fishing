@@ -182,7 +182,7 @@ public class NerdRanker extends NerdModel {
 		while(score == -1.0) {
 			Future<Double> future = executor.submit(task);
 			try {
-	    		score = future.get(5, TimeUnit.MILLISECONDS).doubleValue();
+	    		score = future.get(50, TimeUnit.MILLISECONDS).doubleValue();
 	    	} catch (TimeoutException ex) {
 			   	// handle the timeout
 			} catch (InterruptedException e) {
@@ -192,7 +192,7 @@ public class NerdRanker extends NerdModel {
 			} finally {
 			   	future.cancel(true); // may or may not desire this
 			}
-			if (counter == 10)
+			if (counter == 5)
 				score = 0.0;
 			counter++;
 		}
