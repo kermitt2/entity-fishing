@@ -7,16 +7,16 @@
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
 
-For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html).
+[Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
 
 # entity-fishing
 
 *entity-fishing* performs the following tasks:
 
-* entity recognition and disambiguation against Wikidata and Wikipedia in a raw text or partially-annotated text segment,
+* entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
 ![entity-fishing](doc/images/screen1.png)
 
-* entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
+* entity recognition and disambiguation against Wikidata at document level, for example a PDF with layout positioning and structure-aware annotations,
 ![entity-fishing](doc/images/screen3.png)
 
 * search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
@@ -32,7 +32,7 @@ For upgrade from the previous version please check the [upgrade guide](http://ne
 
 *entity-fishing* is a **work-in-progress**! Latest release version is `0.0.3`. 
 
-This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. The knowledge base includes 37 million entities from Wikidata. 
+This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. For this version, the knowledge base includes 37 million entities from Wikidata. 
 
 **Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD)
 
@@ -47,8 +47,6 @@ This version supports English, French, German, Italian and Spanish, with an in-h
 **Accuracy**: f-score for disambiguation only between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC) - to be improved in the next versions.
 
 The knowledge base contains more than 1 billion objects, not far from 15 millions word and entity embeddings, however *entity-fishing* will work with 3-4 GB RAM memory after a 15 second start-up for the server (but please use SSD!). 
-
-Have a look at our [presentation at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
 
 
 ## License and contact
