@@ -255,11 +255,11 @@ When *processSentence* is set, the sentence segmentation is triggered anyway and
 (8) structure
 """""""""""""
 
-The **structure** parameter is only considered when the input is a PDF. For processing scientific and technical documents, in particular scholar papers, the value should be **grobid** which is a state of the art tool for structure the body of a scientific paper - it will avoid labelling bibliographical callout (like *Romary and al.*), running foot and head notes, figure content, it will identify the useful areas (header, paragraphs, captions, etc.) handling multiple columns, hyphen, etc. and it will apply custom processing based on the nature of the identified structure. If no **structure** value is provided, the value **grobid** will be used. 
+The **structure** parameter is only considered when the input is a PDF. For processing scientific and technical documents, in particular scholar papers, the value should be **grobid** which is a state of the art tool for structure the body of a scientific paper - it will avoid labelling bibliographical callout (like *Romary and al.*), running foot and head notes, figure content, it will identify the useful areas (header, paragraphs, captions, etc.), handling multiple columns, hyphen, etc. It will apply custom processing based on the nature of the identified structure. This enables "structure-aware" annotations. If no **structure** value is provided, the value **grobid** will be used. 
 
 If you wish to process the whole document without specific structure analysis - this is advised for non-scientific papers -, use the value **full**.
 
-**Example using CURL** for processing the full content of a PDF, without preliminar structure recognition and "structure-aware" annotations:
+**Example using CURL** for processing the full content of a PDF, *without* preliminar structure recognition:
 ::
    curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'full', customisation': 'generic'}" -F "file=@PATH_FILENAME.pdf"
 
