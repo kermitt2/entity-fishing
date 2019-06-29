@@ -126,7 +126,7 @@ public class NerdRestProcessFile {
         doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
 
         // test if we consider or not document structures when fishing entities
-        if ((nerdQuery.getStructure() != null) && (nerdQuery.getStructure().equals("default"))) {
+        if ((nerdQuery.getStructure() != null) && (nerdQuery.getStructure().equals("default") || nerdQuery.getStructure().equals("full"))) {
             List<LayoutToken> allTokens = doc.getTokenizations();
             if (allTokens != null) {
                 if (lang == null) {
@@ -158,7 +158,7 @@ public class NerdRestProcessFile {
                 }
                 nerdQuery.addNerdEntities(newEntities);
             }
-        } else {
+        } else if ( (nerdQuery.getStructure() == null) || (nerdQuery.getStructure() != null && nerdQuery.getStructure().equals("grobid"))) {
             // we applied entirely GROBID article structuring
 
             // we process the relevant textual content of the document
@@ -430,6 +430,10 @@ public class NerdRestProcessFile {
     		} else {
     			workingQuery.setEntities(originalEntities);
     		}*/
+        } else {
+            // the value of the parameter structure is nto supported
+            throw new QueryException("The value of the query parameter \"structure\" is not supported fot the PDF input: " + 
+                nerdQuery.getStructure());
         }
 
         nerdQuery.setText(null);

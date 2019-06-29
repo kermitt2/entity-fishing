@@ -148,7 +148,11 @@ public class NerdSelector extends NerdModel {
 		// it appears that smile-ml on some cloud machine can randomly take minutes to predict 
 		// a result that usually takes a few milliseconds. Reasons for this random super slowness
 		// was not found.
-		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		// -> note: we are finally not using it because it is expensive in term of number of used threads
+		// for very large sequences, to be reviewed
+
+		/*ExecutorService executor = Executors.newSingleThreadExecutor();
 		PredictTask task = new PredictTask(forest, features);
 		double score = -1.0;
 		int counter = 0;
@@ -168,9 +172,9 @@ public class NerdSelector extends NerdModel {
 			if (counter == 5)
 				score = 0.0;
 			counter++;
-		}
+		}*/
 
-		//final double score = forest.predict(features);
+		final double score = forest.predict(features);
 
 		/*logger.debug("selector: " +
 				"score: " + score + ", " +

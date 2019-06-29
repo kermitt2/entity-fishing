@@ -1774,6 +1774,7 @@ var nerd = (function ($) {
         // "language": {"lang": "en"},
         "mentions": ["ner", "wikipedia"],
         "nbest": false,
+        "structure": "grobid",
         "customisation": "generic"
     };
 

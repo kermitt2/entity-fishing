@@ -130,7 +130,8 @@ The JSON format for the query parameter to be sent to the service is identical t
        "nbest": 0,
        "sentence": false,
        "customisation": "generic",
-       "processSentence": []
+       "processSentence": [],
+       "structure": "grobid"
    }
 
 
@@ -251,13 +252,24 @@ When *processSentence* is set, the sentence segmentation is triggered anyway and
    curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={ 'text': 'The army, led by general Paul von Hindenburg defeated Russia in a series of battles collectively known as the First Battle of Tannenberg. But the failed Russian invasion, causing the fresh German troops to move to the east, allowed the tactical Allied victory at the First Battle of the Marne.', 'processSentence': [ 1 ], 'sentences': [ { 'offsetStart': 0, 'offsetEnd': 138 }, { 'offsetStart': 138, 'offsetEnd': 293 } ], 'entities': [ { 'rawName': 'Russian', 'type': 'NATIONAL', 'offsetStart': 153, 'offsetEnd': 160 } ] }"
 
 
+(8) structure
+"""""""""""""
+
+The **structure** parameter is only considered when the input is a PDF. For processing scientific and technical documents, in particular scholar papers, the value should be **grobid** which is a state of the art tool for structure the body of a scientific paper - it will avoid labelling bibliographical callout (like *Romary and al.*), running foot and head notes, figure content, it will identify the useful areas (header, paragraphs, captions, etc.) handling multiple columns, hyphen, etc. and it will apply custom processing based on the nature of the identified structure. If no **structure** value is provided, the value **grobid** will be used. 
+
+If you wish to process the whole document without specific structure analysis - this is advised for non-scientific papers -, use the value **full**.
+
+**Example using CURL** for processing the full content of a PDF, without preliminar structure recognition and "structure-aware" annotations:
+::
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'full', customisation': 'generic'}" -F "file=@PATH_FILENAME.pdf"
+
 
 PDF input
 ^^^^^^^^^
 
 This service is processing a PDF provided as input after extracting and structuring its raw content. Structuration is currently specialized to scientific and technical articles. Processing a PDF not corresponding to scientific articles is currently not recommended. 
 
-In addition to the query it accepts a PDF file via ```multi-part/form-data```.
+In addition to the query, it accepts a PDF file via ```multi-part/form-data```.
 
 The JSON format for the query parameter to be sent to the service is identical to a response of the service:
 ::
@@ -268,12 +280,17 @@ The JSON format for the query parameter to be sent to the service is identical t
       "entities": [],
       "nbest": 0,
       "sentence": false,
+      "structure": "grobid"
       "customisation": "generic"
    }
 
+An additional parameter related to the processing of the structure of the PDF is available, called `structure`. For processing scientific and technical documents, in particular scholar papers, the value should be `grobid` which is a state of the art tool for structure the body of a scientific paper - it will avoid labelling bibliographical information, foot and head notes, figure content, will identify the useful areas (header, paragraphs, captions, etc.) handling multiple columns, hyphen, etc. and it will apply custom processnig based on the identified structure. 
+
+If you wish to process the whole document without specific structure analysis (this is advised for non-scientific papers), use the value **full** for the paramter **structure**.
+
 **Example using CURL** (using the query above):
 ::
-   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'customisation': 'generic'}" -F"file=@PATH_FILENAME.pdf"
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'grobid', customisation': 'generic'}" -F "file=@PATH_FILENAME.pdf"
 
 
 Weighted term disambiguation

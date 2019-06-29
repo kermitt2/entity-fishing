@@ -41,6 +41,7 @@ public class GenerateSpecializedVocabulary {
         BufferedWriter writerVocab = null;
         BufferedWriter writerSuperType = null;
         BufferedWriter writerCategories = null;
+        BufferedWriter writerEntities = null;
         List<String> properties = Arrays.asList(new String[]{"P279", "P31"});
         try {
             writerVocab = new BufferedWriter(new FileWriter(outputPath));
@@ -48,6 +49,8 @@ public class GenerateSpecializedVocabulary {
             writerSuperType = new BufferedWriter(new FileWriter(outputPathTypes));
             File outputPathCategories = new File(outputPath.getPath()+".categories");
             writerCategories = new BufferedWriter(new FileWriter(outputPathCategories));
+            File outputPathEntities = new File(outputPath.getPath()+".entities");
+            writerEntities = new BufferedWriter(new FileWriter(outputPathEntities));
         } catch(Exception e) {
             throw new NerdException("Opening output file failed, path or right might be invalid.", e);
         }
@@ -121,6 +124,10 @@ public class GenerateSpecializedVocabulary {
                         }
                     }
                 }
+
+                // and finally all the entity in a last file
+                writerEntities.write(entityId);
+                writerEntities.write("\n");
             }
 
             // write list of values of the P279 and P31 properties
@@ -146,6 +153,7 @@ public class GenerateSpecializedVocabulary {
                 writerVocab.close();
                 writerSuperType.close();
                 writerCategories.close();
+                writerEntities.close();
             } catch(Exception e) {
                 e.printStackTrace();
             }
