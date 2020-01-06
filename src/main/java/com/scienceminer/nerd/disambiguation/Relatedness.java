@@ -10,7 +10,6 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.utilities.NerdConfig;
-import com.sun.istack.internal.NotNull;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +67,7 @@ public class Relatedness {
 					.build(
 							new CacheLoader<ArticlePair, Double>() {
 								@Override
-								public Double load(@NotNull ArticlePair articlePair) throws Exception {
+								public Double load(ArticlePair articlePair) throws Exception {
 									return getRelatednessWithoutCache(articlePair.getArticleA(),articlePair.getArtticleB() ,lang);
 								}
 							}
