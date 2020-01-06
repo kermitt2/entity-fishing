@@ -1219,8 +1219,8 @@ var nerd = (function ($) {
 
         var canvasHeight = canvas.height();
         var canvasWidth = canvas.width();
-        var scale_x = canvasHeight / page_height;
-        var scale_y = canvasWidth / page_width;
+        var scale_y = canvasHeight / page_height;
+        var scale_x = canvasWidth / page_width;
 
         var x = thePos.x * scale_x - 1;
         var y = thePos.y * scale_y - 1;
@@ -1774,6 +1774,7 @@ var nerd = (function ($) {
         // "language": {"lang": "en"},
         "mentions": ["ner", "wikipedia"],
         "nbest": false,
+        "structure": "grobid",
         "customisation": "generic"
     };
 

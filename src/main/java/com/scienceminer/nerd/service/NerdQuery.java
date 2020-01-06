@@ -129,7 +129,7 @@ public class NerdQuery {
 
     // the type of document structure to be considered in case of processing 
     // a complete document 
-    private String structure = null;
+    private String structure = "grobid";
 
     public NerdQuery() {
     }
