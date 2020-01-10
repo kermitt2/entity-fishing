@@ -3,7 +3,7 @@ package com.scienceminer.nerd.kb.db;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.Statement;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.kid.ClassPredictor;
+import com.scienceminer.nerd.kid.NERTypePredictor;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.fusesource.lmdbjni.Entry;
 import org.fusesource.lmdbjni.Transaction;
@@ -24,11 +24,11 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdKidDatabase.class);
 
-    private ClassPredictor classPredictor;
+    private NERTypePredictor nerTypePredictor;
 
     public NerdKidDatabase(KBEnvironment env) {
         super(env, DatabaseType.nerdKid);
-        classPredictor = new ClassPredictor();
+        nerTypePredictor = new NERTypePredictor();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
                     if (wikidataId.startsWith("Q")) {
                         List<Statement> value = (List<Statement>) KBEnvironment.deserialize(entry.getValue());
                         // prediction
-                        String predictedClass = classPredictor.predict(wikidataId, value).getPredictedClass();
+                        String predictedClass = nerTypePredictor.predict(wikidataId, value).getPredictedClass();
                         //System.out.println("Wikidata Id: " + wikidataId + "; predicted class: " + predictedClass);
 
                         db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
