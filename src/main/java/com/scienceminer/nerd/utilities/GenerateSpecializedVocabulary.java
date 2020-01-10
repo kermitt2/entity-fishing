@@ -13,6 +13,7 @@ import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.exceptions.*;
+import com.scienceminer.nerd.disambiguation.NerdCategories;
 
 /**
  * Utility for generating a vocabulary for a constrained set of Wikidata entity in a 
@@ -37,9 +38,19 @@ public class GenerateSpecializedVocabulary {
     }
 
     public void process(List<String> positiveEntityIds, List<String> negativeEntityIds) throws NerdResourceException {
-        BufferedWriter writer = null;
+        BufferedWriter writerVocab = null;
+        BufferedWriter writerSuperType = null;
+        BufferedWriter writerCategories = null;
+        BufferedWriter writerEntities = null;
+        List<String> properties = Arrays.asList(new String[]{"P279", "P31"});
         try {
-            writer = new BufferedWriter(new FileWriter(outputPath));
+            writerVocab = new BufferedWriter(new FileWriter(outputPath));
+            File outputPathTypes = new File(outputPath.getPath()+".types");
+            writerSuperType = new BufferedWriter(new FileWriter(outputPathTypes));
+            File outputPathCategories = new File(outputPath.getPath()+".categories");
+            writerCategories = new BufferedWriter(new FileWriter(outputPathCategories));
+            File outputPathEntities = new File(outputPath.getPath()+".entities");
+            writerEntities = new BufferedWriter(new FileWriter(outputPathEntities));
         } catch(Exception e) {
             throw new NerdException("Opening output file failed, path or right might be invalid.", e);
         }
@@ -66,6 +77,8 @@ public class GenerateSpecializedVocabulary {
 
         // gather vocabulary, as Wikipedia page titles/redirections/anchors (ok wikidata entity labels are missing!)
         try {
+            List<String> categories = new ArrayList<String>();
+            List<String> types = new ArrayList<String>();
             for (String entityId : selection) {
                 //System.out.println(entityId);
                 Integer pageId = upperKB.getPageIdByLang(entityId, lang); 
@@ -77,25 +90,70 @@ public class GenerateSpecializedVocabulary {
                 Page page = wikipedia.getPageById(pageId);
                 String title = cleanTitle(page.getTitle());
                 if (title.length() > 0) {
-                    writer.write(title);
-                    writer.write("\n");
+                    writerVocab.write(title);
+                    writerVocab.write("\n");
                 }
                 if (page.getType() == Page.PageType.article) {
-                Redirect[] redirects = ((Article)page).getRedirects();
+                    Redirect[] redirects = ((Article)page).getRedirects();
                     for(Redirect redirect : redirects) {
                         title = cleanTitle(redirect.getTitle());
                         if (title.length() > 0) {
-                            writer.write(title);
-                            writer.write("\n");
+                            writerVocab.write(title);
+                            writerVocab.write("\n");
                         }
                     }
+                }
+
+                // we also generate an additional file with the values of the P279 and P31 properties of 
+                // all the selected entities
+                List<String> localTypes = getPropertyValues(entityId, properties, upperKB);
+                if (localTypes != null) {
+                    for(String localType : localTypes) {
+                        if (!types.contains(localType))
+                            types.add(localType);
+                    }
+                }
+
+                // we also generate an additional file with the Wikipedia categories of all the selected entities
+                if (page.getType() == Page.PageType.article) {
+                    List<String> localCategories = getCategoryTitles(page.getTitle(), wikipedia);
+                    if (localCategories != null) {
+                        for(String localCategory : localCategories) {
+                            if (!categories.contains(localCategory))
+                                categories.add(localCategory);
+                        }
+                    }
+                }
+
+                // and finally all the entity in a last file
+                writerEntities.write(entityId);
+                writerEntities.write("\n");
+            }
+
+            // write list of values of the P279 and P31 properties
+            for(String type : types) {
+                if (type.length() > 0) {
+                    writerSuperType.write(type);
+                    writerSuperType.write("\n");
+                }
+            }
+
+            // write list of categories
+            Collections.sort(categories);
+            for(String category : categories) {
+                if (category.length() > 0) {
+                    writerCategories.write(category);
+                    writerCategories.write("\n");
                 }
             }
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                writer.close();
+                writerVocab.close();
+                writerSuperType.close();
+                writerCategories.close();
+                writerEntities.close();
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -128,6 +186,38 @@ public class GenerateSpecializedVocabulary {
                 }
             }
         }
+    }
+
+    public List<String> getPropertyValues(String wikidataId, List<String> properties, UpperKnowledgeBase upperKB) {
+        List<String> result = new ArrayList<String>();
+        List<Statement> statements = upperKB.getReverseStatements(wikidataId);
+        if (statements != null) {
+            for(Statement statement : statements) {
+                if (properties.contains(statement.getPropertyId())) {
+                    if (!result.contains(statement.getValue()))
+                        result.add(statement.getValue());
+                }
+            }
+        }
+        return result;
+    }
+
+    public List<String> getCategoryTitles(String title, LowerKnowledgeBase wikipedia) {
+        List<String> result = new ArrayList<String>();
+        Article sense = wikipedia.getArticleByTitle(title);
+        for(com.scienceminer.nerd.kb.model.Category theCategory : sense.getParentCategories()) {
+            if (theCategory == null) 
+                continue;
+            if (theCategory.getTitle() == null) 
+                continue;
+            if (theCategory.getTitle().toLowerCase().contains("disambiguation")) 
+                continue;
+            if (!NerdCategories.categoryToBefiltered(theCategory.getTitle())) {
+                if (!result.contains(theCategory.getTitle()))
+                    result.add(theCategory.getTitle());
+            }
+        }
+        return result;
     }
 
     /**

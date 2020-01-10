@@ -4,11 +4,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 import java.util.regex.*;
+import java.util.concurrent.*;  
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
+import com.scienceminer.nerd.disambiguation.NerdModel.PredictTask;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
@@ -140,7 +142,38 @@ public class NerdSelector extends NerdModel {
 		feature.dice = dice;
 		double[] features = feature.toVector(attributes);
 		
-		smile.math.Math.setSeed(7);
+		//smile.math.Math.setSeed(7);
+
+		// we add some robustness when calling the prediction, with an Executor and timer
+		// it appears that smile-ml on some cloud machine can randomly take minutes to predict 
+		// a result that usually takes a few milliseconds. Reasons for this random super slowness
+		// was not found.
+
+		// -> note: we are finally not using it because it is expensive in term of number of used threads
+		// for very large sequences, to be reviewed
+
+		/*ExecutorService executor = Executors.newSingleThreadExecutor();
+		PredictTask task = new PredictTask(forest, features);
+		double score = -1.0;
+		int counter = 0;
+		while(score == -1.0) {
+			Future<Double> future = executor.submit(task);
+			try {
+	    		score = future.get(50, TimeUnit.MILLISECONDS).doubleValue();
+	    	} catch (TimeoutException ex) {
+			   	// handle the timeout
+			} catch (InterruptedException e) {
+			   	// handle the interrupts
+			} catch (ExecutionException e) {
+			   	// handle other exceptions
+			} finally {
+			   	future.cancel(true); // may or may not desire this
+			}
+			if (counter == 5)
+				score = 0.0;
+			counter++;
+		}*/
+
 		final double score = forest.predict(features);
 
 		/*logger.debug("selector: " +
