@@ -42,16 +42,7 @@
         </contributor>
     </contributors>
 
-
     <build>
-        <!--for metadata in Json results-->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -563,17 +554,30 @@
             <version>1.1</version>
         </dependency>
 
-        <!-- logging
+        <!-- logging -->
         <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>2.0.0-alpha1</version>
+        </dependency>
+
+        <!--dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.25</version>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency-->
+        </dependency>
 
         <!-- for test only -->
         <dependency>
@@ -716,7 +720,7 @@
             <version>${avro.version}</version>
         </dependency>
 
-        <!-- for Nerd-Kid -->
+        <!-- for integration with nerdKid -->
         <dependency>
             <groupId>org.nerd.kid</groupId>
             <artifactId>nerd-kid-project</artifactId>
@@ -732,7 +736,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
 
         <!-- for GROBID NER -->
         <dependency>
