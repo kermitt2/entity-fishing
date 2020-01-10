@@ -7,14 +7,14 @@ import java.util.regex.*;
 
 import smile.data.Attribute;
 
-public class GenericSelectionFeatureVector {
+public class GenericSelectionFeatureVector extends GenericFeatureVector {
 
 	public String title = "Generic selector";
 
-	public String string = null; // lexical feature, here the FreeBase ID of the entity candidate
+	/*public String string = null; // lexical feature, here the FreeBase ID of the entity candidate
 	public double label = 0.0; // numerical label if known
-	public String classes = "N"; // class label if known
-
+	public String classes = "N"; // class label if known*/
+	
 	// mask of features
 	public boolean Add_nerd_score = false;  // NERd score produced by the disambiguator
 	public boolean Add_prob_anchor_string = false; // probability of the string to be an anchor in Wikipedia

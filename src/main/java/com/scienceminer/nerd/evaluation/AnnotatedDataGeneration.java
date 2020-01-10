@@ -48,6 +48,7 @@ import java.util.stream.Collectors;
 import static com.scienceminer.nerd.service.NerdRestProcessFile.identifyLanguage;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.text.StringEscapeUtils.escapeXml11;
+//import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * This class generate annotated text from raw text exploiting the current models to recognize and 
@@ -246,7 +247,7 @@ public class AnnotatedDataGeneration {
         StringBuilder sb = new StringBuilder();
         Engine engine = GrobidFactory.getInstance().getEngine();
         Document doc = null;
-        GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().consolidateHeader(true).build();
+        GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().consolidateHeader(1).build();
 
         try {
             DocumentSource documentSource = DocumentSource.fromPdf(originFile, config.getStartPage(), config.getEndPage());
@@ -255,8 +256,8 @@ public class AnnotatedDataGeneration {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
-
+                org.apache.commons.lang3.tuple.Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                String header = headerFeatured.getLeft();
 
                 List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
@@ -280,7 +281,7 @@ public class AnnotatedDataGeneration {
 
                     BiblioItem resHeaderLangIdentification = new BiblioItem();
                     engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
-                            tokenizationHeader, resHeaderLangIdentification);
+                            tokenizationHeader, resHeaderLangIdentification, doc);
 
                     Language lang = identifyLanguage(resHeaderLangIdentification, doc);
                     if (lang != null) {
@@ -316,13 +317,14 @@ public class AnnotatedDataGeneration {
             if (documentParts != null) {
                 LOGGER.info("Process body...");
                 // full text processing
-                Pair<String, LayoutTokenization> featSeg = engine.getParsers().getFullTextParser().getBodyTextFeatured(doc, documentParts);
+                org.apache.commons.lang3.tuple.Pair<String, LayoutTokenization> featSeg = 
+                    engine.getParsers().getFullTextParser().getBodyTextFeatured(doc, documentParts);
                 if (featSeg != null) {
                     // if featSeg is null, it usually means that no body segment is found in the
                     // document segmentation
-                    String bodytext = featSeg.getA();
+                    String bodytext = featSeg.getLeft();
 
-                    LayoutTokenization tokenizationBody = featSeg.getB();
+                    LayoutTokenization tokenizationBody = featSeg.getRight();
                     String labeledResult = null;
                     if ((bodytext != null) && (bodytext.trim().length() > 0)) {
                         labeledResult = engine.getParsers().getFullTextParser().label(bodytext);

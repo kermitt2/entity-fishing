@@ -16,7 +16,7 @@ public class ArticlePair {
 
     @Override
     public int hashCode() {
-        return getKey().intValue();
+        return getKey().hashCode();
     }
 
     public static long computeKey(Article art1, Article art2) {

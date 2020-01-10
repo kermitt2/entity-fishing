@@ -1,43 +1,62 @@
 package com.scienceminer.nerd.disambiguation;
 
-import com.scienceminer.nerd.embeddings.SimilarityScorer;
-import com.scienceminer.nerd.evaluation.EvaluationUtil;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
-import com.scienceminer.nerd.features.*;
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.kb.model.Article;
-import com.scienceminer.nerd.kb.model.Label;
-import com.scienceminer.nerd.mention.Mention;
-import com.scienceminer.nerd.mention.ProcessText;
-import com.scienceminer.nerd.training.ArticleTrainingSample;
-import com.scienceminer.nerd.training.CorpusArticle;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.io.*;
+import java.util.regex.*;
+import java.text.*;
+import java.util.concurrent.*;
+
+import com.scienceminer.nerd.kb.*;
+import com.scienceminer.nerd.disambiguation.NerdCandidate;
+import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.utilities.Utilities;
-import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.grobid.core.analyzers.GrobidAnalyzer;
+import com.scienceminer.nerd.exceptions.*;
+import com.scienceminer.nerd.evaluation.*;
+import com.scienceminer.nerd.mention.*;
+import com.scienceminer.nerd.embeddings.SimilarityScorer;
+import com.scienceminer.nerd.disambiguation.NerdModel.PredictTask;
+
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
+import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.trainer.LabelStat;
+import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.UnicodeUtil;
-import org.grobid.trainer.LabelStat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import smile.regression.GradientTreeBoost;
-import smile.regression.RandomForest;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.training.*;
+import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
+import com.scienceminer.nerd.evaluation.*;
+
+import com.scienceminer.nerd.kb.model.Label.Sense;
+import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
+import com.scienceminer.nerd.features.*;
+
+import smile.validation.ConfusionMatrix;
+import smile.validation.FMeasure;
+import smile.validation.Precision;
+import smile.validation.Recall;
+import smile.data.*;
+import smile.data.parser.*;
+import smile.regression.*;
+import com.thoughtworks.xstream.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * A machine learning model for ranking a list of ambiguous candidates for a given mention.
@@ -117,7 +136,7 @@ public class NerdRanker extends NerdModel {
 
 		if (forest == null) {
 			// load model
-			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
+			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
 			if (!modelFile.exists()) {
                 logger.debug("Invalid model file for nerd ranker.");
 			}
@@ -147,20 +166,50 @@ public class NerdRanker extends NerdModel {
 		GenericRankerFeatureVector feature = getNewFeature();
 
 		feature.prob_c = commonness;
-//		feature.relatedness = relatedness;
-//		feature.context_quality = quality;
+		feature.relatedness = relatedness;
+		feature.context_quality = quality; 
 		//feature.dice_coef = dice_coef;
-//		feature.bestCaseContext = bestCaseContext;
-//		feature.embeddings_centroid_similarity = embeddingsSimilarity;
-//		feature.wikidata_id = wikidataId;
-//		feature.wikidata_P31_entity_id = wikidataP31Id;
+		feature.bestCaseContext = bestCaseContext;
+		feature.embeddings_centroid_similarity = embeddingsSimilarity;
+		feature.wikidata_id = wikidataId;
+		feature.wikidata_P31_entity_id = wikidataP31Id;
 		// hidden if it's not involving nerGrobid_type and nerKid_type
-		feature.nerGrobid_type = nerGrobid_type;
+//		feature.nerGrobid_type = nerGrobid_type;
 //		feature.nerKid_type = nerKid_type;
 		double[] features = feature.toVector(attributes);
-		smile.math.Math.setSeed(7);
-		double score = forest.predict(features);
+		//smile.math.Math.setSeed(7);
 
+		// we add some robustness when calling the prediction, with an Executor and timer
+		// it appears that smile-ml on some cloud machine can randomly take minutes to predict
+		// a result that usually takes a few milliseconds. Reasons for this random super slowness
+		// was not found.
+
+		// -> note: we are finally not using it because it is expensive in term of number of used threads
+		// for very large sequences, to be reviewed
+
+		/*ExecutorService executor = Executors.newSingleThreadExecutor();
+		PredictTask task = new PredictTask(forest, features);
+		double score = -1.0;
+		int counter = 0;
+		while(score == -1.0) {
+			Future<Double> future = executor.submit(task);
+			try {
+	    		score = future.get(50, TimeUnit.MILLISECONDS).doubleValue();
+	    	} catch (TimeoutException ex) {
+			   	// handle the timeout
+			} catch (InterruptedException e) {
+			   	// handle the interrupts
+			} catch (ExecutionException e) {
+			   	// handle other exceptions
+			} finally {
+			   	future.cancel(true); // may or may not desire this
+			}
+			if (counter == 5)
+				score = 0.0;
+			counter++;
+		}*/
+
+		double score = forest.predict(features);
 		/*logger.debug("[Ranker] score: "+ score +
 							", commonness: " + commonness +
 							", relatedness: " + relatedness + 
@@ -175,14 +224,13 @@ public class NerdRanker extends NerdModel {
 		logger.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
-		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model");
+		File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
 		if (!modelFile.exists()) {
             logger.debug("Invalid file for saving author filtering model.");
 		}
 		FileUtils.writeStringToFile(modelFile, xml, StandardCharsets.UTF_8);
 		System.out.println("Model saved under " + modelFile.getPath());
 	}
-
 
 	public void loadModel() throws IOException, Exception {
 		logger.info("loading model");
@@ -448,35 +496,35 @@ public class NerdRanker extends NerdModel {
 					}
 
 					feature.prob_c = commonness;
-//					feature.relatedness = related;
-//					feature.context_quality = quality;
-//					feature.bestCaseContext = bestCaseContext;
-//					feature.embeddings_centroid_similarity = embeddingsSimilarity;
-//					if (candidate.getWikidataId() != null)
-//						feature.wikidata_id = candidate.getWikidataId();
-//					else
-//						feature.wikidata_id = "Q0"; // undefined entity
-//
-//					if (candidate.getWikidataP31Id() != null)
-//						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-//					else
-//						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+					feature.relatedness = related;
+					feature.context_quality = quality;
+					feature.bestCaseContext = bestCaseContext;
+					feature.embeddings_centroid_similarity = embeddingsSimilarity;
+					if (candidate.getWikidataId() != null)	
+						feature.wikidata_id = candidate.getWikidataId();
+					else
+						feature.wikidata_id = "Q0"; // undefined entity
 
-					// for nerGrobid_type
-					String nerGrobid_type = candidate.getType();
-					if ((nerGrobid_type != null)){
-						feature.nerGrobid_type = nerGrobid_type;
+					if (candidate.getWikidataP31Id() != null)
+						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
+					else
+						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+
+                    // for nerGrobid_type
+                    String nerGrobid_type = candidate.getType();
+                    if ((nerGrobid_type != null)){
+                        feature.nerGrobid_type = nerGrobid_type;
+                    } else {
+                        feature.nerGrobid_type = "UNKNOWN";
+                    }
+
+                    // for nerKid_type
+					String nerKid_type = candidate.getTypeKid();
+					if (nerKid_type != null) {
+						feature.nerKid_type = nerKid_type;
 					} else {
-						feature.nerGrobid_type = "UNKNOWN";
+						feature.nerKid_type = "OTHER";
 					}
-
-					// for nerKid_type
-//					String nerKid_type = candidate.getTypeKid();
-//					if (nerKid_type != null) {
-//						feature.nerKid_type = nerKid_type;
-//					} else {
-//						feature.nerKid_type = "OTHER";
-//					}
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 
@@ -688,9 +736,9 @@ System.out.println(docPath);
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.processNER(tokens, language);
 		}
-//System.out.println("number of NE found: " + entities.size());
+//System.out.println("number of NE found: " + entities.size());	
 		List<Mention> entities2 = processText.processWikipedia(tokens, language);
-//System.out.println("number of non-NE found: " + entities2.size());
+//System.out.println("number of non-NE found: " + entities2.size());	
 		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
@@ -795,35 +843,35 @@ System.out.println(docPath);
 					}
 
 					feature.prob_c = commonness;
-//					feature.relatedness = related;
-//					feature.context_quality = quality;
-//					feature.bestCaseContext = bestCaseContext;
-//					feature.embeddings_centroid_similarity = embeddingsSimilarity;
-//					if (candidate.getWikidataId() != null)
-//						feature.wikidata_id = candidate.getWikidataId();
-//					else
-//						feature.wikidata_id = "Q0"; // undefined entity
-//
-//					if (candidate.getWikidataP31Id() != null)
-//						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
-//					else
-//						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+					feature.relatedness = related;
+					feature.context_quality = quality;
+					feature.bestCaseContext = bestCaseContext;
+					feature.embeddings_centroid_similarity = embeddingsSimilarity;
+					if (candidate.getWikidataId() != null)	
+						feature.wikidata_id = candidate.getWikidataId();
+					else
+						feature.wikidata_id = "Q0"; // undefined entity
 
-					// for nerGrobid_type
-					String nerGrobid_type = candidate.getType();
-					if ((nerGrobid_type != null)){
-						feature.nerGrobid_type = nerGrobid_type;
-					} else {
+					if (candidate.getWikidataP31Id() != null)
+						feature.wikidata_P31_entity_id = candidate.getWikidataP31Id();
+					else
+						feature.wikidata_P31_entity_id = "Q0"; // undefined entity
+
+                    // for nerGrobid_type
+                    String nerGrobid_type = candidate.getType();
+                    if ((nerGrobid_type != null)){
+                        feature.nerGrobid_type = nerGrobid_type;
+                    } else {
                         feature.nerGrobid_type = "UNKNOWN";
                     }
 
-					// for nerKid_type
-//					String nerKid_type = candidate.getTypeKid();
-//					if (nerKid_type != null) {
-//						feature.nerKid_type = nerKid_type;
-//					} else {
-//						feature.nerKid_type = "OTHER";
-//					}
+                    // for nerKid_type
+					String nerKid_type = candidate.getTypeKid();
+					if (nerKid_type != null) {
+						feature.nerKid_type = nerKid_type;
+					} else {
+						feature.nerKid_type = "OTHER";
+					}
 
 					feature.label = (expectedId == candidate.getWikipediaExternalRef()) ? 1.0 : 0.0;
 

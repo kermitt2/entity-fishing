@@ -5,6 +5,8 @@ import java.util.*;
 import java.io.*;
 import java.util.regex.*;
 import java.text.*;
+import java.util.concurrent.*;  
+import java.security.InvalidParameterException;
 
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.disambiguation.NerdCandidate;
@@ -109,4 +111,27 @@ public class NerdModel {
 		arffDataset = null;
 		attributeDataset = null;
 	}
+
+	/**
+	 * Make predict a callable, so that it can be run in a separate thread and associated to a 
+	 * timeout.
+	 */
+	public static class PredictTask implements Callable<Double> { 
+        private double[] features;
+        private Regression<double[]> forest;
+
+        public PredictTask(Regression<double[]> forest, double[] features) { 
+            this.forest = forest;
+            this.features = features;
+        } 
+          
+        @Override
+        public Double call() throws InvalidParameterException { 
+            if(features == null) {
+ 	           throw new InvalidParameterException("Features are empty");
+        	}
+        	double score = forest.predict(features);
+        	return new Double(score);
+        } 
+    } 
 }

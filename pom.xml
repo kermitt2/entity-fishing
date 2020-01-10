@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <avro.version>1.7.5</avro.version>
         <lmdbjni.version>0.4.6</lmdbjni.version>
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.9.9</jackson.version>
     </properties>
 
     <licenses>
@@ -674,7 +674,7 @@
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.10</version>
+            <version>1.4.11</version>
         </dependency>
         <dependency>
             <groupId>de.ruedigermoeller</groupId>
@@ -689,7 +689,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.9.10.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -738,7 +738,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.5.1</version>
+            <version>0.5.5</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -754,7 +754,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.5.1</version>
+            <version>0.5.5</version>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>
@@ -854,6 +854,28 @@
                     <artifactId>jsp-api-2.1</artifactId>
                 </exclusion>
             </exclusions>-->
+        </dependency>
+
+        <!-- for latest JDK support -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
     </dependencies>

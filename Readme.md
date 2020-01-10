@@ -7,16 +7,16 @@
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
 
-For upgrade from the previous version please check the [upgrade guide](http://nerd.readthedocs.io/en/latest/upgradeGuide.html).
+[Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
 
 # entity-fishing
 
 *entity-fishing* performs the following tasks:
 
-* entity recognition and disambiguation against Wikidata and Wikipedia in a raw text or partially-annotated text segment,
+* entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
 ![entity-fishing](doc/images/screen1.png)
 
-* entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
+* entity recognition and disambiguation against Wikidata at document level, for example a PDF with layout positioning and structure-aware annotations,
 ![entity-fishing](doc/images/screen3.png)
 
 * search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
@@ -32,7 +32,7 @@ For upgrade from the previous version please check the [upgrade guide](http://ne
 
 *entity-fishing* is a **work-in-progress**! Latest release version is `0.0.3`. 
 
-This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. The knowledge base includes 37 million entities from Wikidata. 
+This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. For this version, the knowledge base includes 37 million entities from Wikidata. 
 
 **Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD)
 
@@ -48,8 +48,6 @@ This version supports English, French, German, Italian and Spanish, with an in-h
 
 The knowledge base contains more than 1 billion objects, not far from 15 millions word and entity embeddings, however *entity-fishing* will work with 3-4 GB RAM memory after a 15 second start-up for the server (but please use SSD!). 
 
-Have a look at our [presentation at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design and implementation descriptions.
-
 
 ## License and contact
 
@@ -59,7 +57,7 @@ Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
 *entity-fishing* is developed by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) with contributions of [Inria](http://inria.fr) Paris. 
 
-Inria contributors are supported by the H2020 [HIRMEOS](http://www.hirmeos.eu), [IPERION-CH](http://www.iperionch.eu) and [DESIR](https://www.dariah.eu/activities/projects-and-affiliations/desir/) EU projects. 
+Inria contributors were supported by the H2020 [HIRMEOS](http://www.hirmeos.eu), [IPERION-CH](http://www.iperionch.eu) and [DESIR](https://www.dariah.eu/activities/projects-and-affiliations/desir/) EU projects. 
 
 <a href="https://www.dariah.eu/activities/projects-and-affiliations/desir/" target="_blank"><img align="right" width="75" height="50" src="doc/images/dariah.png"/></a><a href="http://www.iperionch.eu" target="_blank"><img align="right" width="160" height="40" src="doc/images/iperion.png"/></a><a href="http://www.hirmeos.eu" target="_blank"><img align="right" width="120" height="40" src="doc/images/hirmeos.png"/></a>
 

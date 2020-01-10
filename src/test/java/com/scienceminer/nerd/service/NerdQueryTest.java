@@ -94,7 +94,7 @@ public class NerdQueryTest {
 
         String json = aQuery.toJSON();
 
-        MatcherAssert.assertThat(json, is("{\"text\":\"bla bla\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\"}"));
+        MatcherAssert.assertThat(json, is("{\"text\":\"bla bla\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\",\"structure\":\"grobid\"}"));
 
         aQuery = mapper.readValue(json, NerdQuery.class);
         MatcherAssert.assertThat(aQuery.getText(), is("bla bla"));
@@ -106,11 +106,11 @@ public class NerdQueryTest {
         target.setText("this is a test of a query");
 
         final String jsonQuery = target.toJSON();
-        assertThat(jsonQuery, is("{\"text\":\"this is a test of a query\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\"}"));
+        assertThat(jsonQuery, is("{\"text\":\"this is a test of a query\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\",\"structure\":\"grobid\"}"));
 
         JSONParser anotherParser = new JSONParser();
         final JSONObject parsed = (JSONObject) anotherParser.parse(jsonQuery);
-        assertThat(parsed.keySet().size(), is(3));
+        assertThat(parsed.keySet().size(), is(4));
         assertThat(parsed.get("text"), is("this is a test of a query"));
         assertThat(parsed.get("customisation"), is("generic"));
         assertThat(((JSONArray) parsed.get("mentions")).size(), is(2));
@@ -187,7 +187,7 @@ public class NerdQueryTest {
         String theQuery = IOUtils.toString(is, UTF_8);
         NerdQuery nerdQuery = mapper.readValue(theQuery, NerdQuery.class);
 
-        MatcherAssert.assertThat(nerdQuery.toJSON(), is("{\"text\":\"John\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\"}"));
+        MatcherAssert.assertThat(nerdQuery.toJSON(), is("{\"text\":\"John\",\"mentions\":[\"ner\",\"wikipedia\"],\"customisation\":\"generic\",\"structure\":\"grobid\"}"));
 
 
     }
