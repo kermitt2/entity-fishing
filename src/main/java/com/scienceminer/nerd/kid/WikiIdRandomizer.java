@@ -32,7 +32,7 @@ public class WikiIdRandomizer {
                 continue;
             }else{
                 if (label.equals("UNKNOWN")) {
-                    ids.add(wikiId);
+                    ids.add(wikiId + "," + label);
                     i++;
                 }
             }
@@ -52,7 +52,7 @@ public class WikiIdRandomizer {
 
                 for (String id : result) {
                     wikiIds.add(id);
-                    System.out.println(id + ",UNKNOWN");
+                    System.out.println(id);
                 }
                 csvWriter.writeNext(wikiIds.toArray(new String[wikiIds.size()]));
             }
