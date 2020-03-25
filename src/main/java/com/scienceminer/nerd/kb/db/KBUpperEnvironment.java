@@ -173,7 +173,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 		//System.out.println("Building Statement db");
 		dbStatements.loadFromFile(wikidataStatements, overwrite);
 
-		//for Nerd-kid db
+		//for load a nerdKid db
 		dbNerdKid.buildNerdKidDatabase(dbStatements, overwrite);
 
 		System.out.println("The content of nerdKid database - " + dbNerdKid.getDatabaseSize() + " items."); // currently, 35030909 items

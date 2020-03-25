@@ -12,8 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /*  A class for predicting NER type for Wikidata elements.
-    The statements for eace element are collected directly from the local LMDB (db/db-kb)
-    through the class NerdKBDBFetcherWrapper.
+    The statements or features for each element are collected directly from the local LMDB (db/db-kb)
 * */
 
 public class NERTypePredictor {

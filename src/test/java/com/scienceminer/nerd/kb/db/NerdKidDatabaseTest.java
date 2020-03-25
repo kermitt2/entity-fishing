@@ -37,19 +37,19 @@ public class NerdKidDatabaseTest {
             wikidataId.add("Q35315"); // Ghomara language,CONCEPT
             wikidataId.add("Q412546"); // Wikimedia disambiguation page, OTHER
 
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(0)), is("ANIMAL"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(1)), is("SUBSTANCE"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(2)), is("EVENT"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(3)), is("ANIMAL"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(4)), is("ANIMAL"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(5)), is("PERSON"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(6)), is("PERSON"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(7)), is("SUBSTANCE"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(8)), is("PERSON"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(0)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(1)), is("SPORT_TEAM"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(2)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(3)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(4)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(5)), is("PERIOD"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(6)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(7)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(8)), is("UNKNOWN"));
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(9)), is("OTHER"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(10)), is("CREATION"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(11)), is("CONCEPT"));
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(12)), is("OTHER"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(10)), is("LOCATION"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(11)), is("UNKNOWN"));
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(12)), is("UNKNOWN"));
         }catch (Exception e) {
             e.printStackTrace();
         }

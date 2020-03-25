@@ -32,6 +32,7 @@ public class NERTypePredictorTest {
 
     @Test
     // predict the NER of Wikdiata element based on the statements collected from the local LMDB
+    @Ignore("make sure the correct nerdKid model is copied")
     public void predictTestMustValid1() {
         assertThat(nerTypePredictor.predict("Q152099").getPredictedClass(), is("PERSON"));
         assertThat(nerTypePredictor.predict("Q34389").getPredictedClass(), is("PERSON"));
