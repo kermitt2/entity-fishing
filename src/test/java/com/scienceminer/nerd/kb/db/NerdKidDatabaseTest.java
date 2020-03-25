@@ -42,12 +42,12 @@ public class NerdKidDatabaseTest {
 
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(0)), is("ANIMAL")); // Gray wolf-Canis lupus,ANIMAL
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(1)), is("SUBSTANCE")); // Uranium,SUBSTANCE
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(2)), is("OTHER")); // World War II,EVENT
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(2)), is("EVENT")); // World War II,EVENT
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(3)), is("ANIMAL")); // Germains swiftlet,ANIMAL
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(4)), is("ANIMAL")); // Common firecrest,ANIMAL
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(5)), is("PERSON")); // Jacob Markström,PERSON
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(6)), is("PERSON")); // Alfons Kontarsky,PERSON
-            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(7)), is("OTHER")); // Tretinoin,SUBSTANCE
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(7)), is("SUBSTANCE")); // Tretinoin,SUBSTANCE
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(8)), is("PERSON")); // John Ashbery,PERSON
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(9)), is("OTHER")); // English articles,OTHER
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(10)), is("CREATION")); // Fathers and Sons (novel),CREATION

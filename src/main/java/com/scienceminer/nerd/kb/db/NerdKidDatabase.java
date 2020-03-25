@@ -149,7 +149,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
             System.out.println("ACRONYM : " + numAcronym + " ;ANIMAL : " + numAnimal +
                             ";ARTIFACT : " + numArtifact +  ";AWARD : " + numAward +
                             ";BUSINESS : " + numBusiness + ";CONCEPT : " + numConcept +
-                            ";CONCEPTUAL : " + numConceptual + ";CREATION" + numCreation +
+                            ";CONCEPTUAL : " + numConceptual + ";CREATION: " + numCreation +
                             ";EVENT : " + numEvent + ";IDENTIFIER : " + numIdentifier +
                             ";INSTALLATION : " + numInstallation + ";INSTITUTION : " + numInstitution +
                             ";LEGAL : " + numLegal + ";LOCATION : " + numLocation + ";MEASURE : " + numMeasure +

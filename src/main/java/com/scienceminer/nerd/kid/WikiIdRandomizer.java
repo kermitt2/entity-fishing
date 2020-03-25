@@ -16,7 +16,7 @@ import java.util.Random;
 public class WikiIdRandomizer {
     private static final Logger LOGGER = LoggerFactory.getLogger(WikiIdRandomizer.class);
 
-    public List<String> randomItemUnknown() {
+    public List<String> randomItemOther() {
         String label = null;
         Random random = new Random();
         List<String> ids = new ArrayList<>();
@@ -24,14 +24,14 @@ public class WikiIdRandomizer {
         int i = 0;
         while (i < 100) {
             // take any random Id
-            int randomId = random.nextInt(35030908) + 1;
+            int randomId = random.nextInt(35030909) + 1;
             String wikiId = "Q" + String.valueOf(randomId);
             // get the predicted label of random id
             label = target.getPredictedClassByWikidataId(wikiId);
             if (label == null) {
                 continue;
             }else{
-                if (label.equals("UNKNOWN")) {
+                if (label.equals("OTHER")) {
                     ids.add(wikiId + "," + label);
                     i++;
                 }
@@ -66,7 +66,7 @@ public class WikiIdRandomizer {
 
     public static void main(String[] args) throws IOException {
         WikiIdRandomizer wikiIdRandomizer = new WikiIdRandomizer();
-        List<String> randomizedWikidataId = wikiIdRandomizer.randomItemUnknown();
+        List<String> randomizedWikidataId = wikiIdRandomizer.randomItemOther();
         wikiIdRandomizer.writeToCsv(randomizedWikidataId);
     }
 }
