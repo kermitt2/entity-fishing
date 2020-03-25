@@ -57,12 +57,12 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
         int counter = 0;
         try (Transaction transaction = environment.createWriteTransaction()) {
             long start = System.nanoTime();
-            /*int numAcronym = 0, numAnimal = 0, numArtifact = 0, numAward = 0,
+            int numAcronym = 0, numAnimal = 0, numArtifact = 0, numAward = 0,
                     numBusiness = 0, numConcept = 0, numConceptual = 0, numCreation = 0,
                     numEvent = 0, numIdentifier = 0, numInstallation = 0, numInstitution = 0,
                     numLegal = 0, numLocation = 0, numMeasure = 0, numMedia = 0, numNational = 0,
                     numOrganisation = 0, numPeriod = 0, numPerson = 0, numPersonType = 0, numPlant = 0,
-                    numSportTeam = 0, numSubstance = 0, numTitle = 0, numUnknown = 0, numWebsite = 0, numOther = 0;*/
+                    numSportTeam = 0, numSubstance = 0, numTitle = 0, numUnknown = 0, numWebsite = 0, numOther = 0;
             // while there are some data inside the database
             while (kbIterator.hasNext()) {
                 Entry entry = kbIterator.next();
@@ -78,7 +78,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
                     // prediction
                     String predictedClass = nerTypePredictor.predict(wikidataId, features).getPredictedClass();
                     //System.out.println("Wikidata Id: " + wikidataId + "; predicted class: " + predictedClass);
-                    /*if (predictedClass.equals("ACRONYM")) {
+                    if (predictedClass.equals("ACRONYM")) {
                         numAcronym++;
                     } else if (predictedClass.equals("ANIMAL")) {
                         numAnimal++;
@@ -134,7 +134,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
                         numWebsite++;
                     } else if (predictedClass.equals("OTHER")) {
                         numOther++;
-                    }*/
+                    }
                     db.put(transaction, KBEnvironment.serialize(wikidataId), KBEnvironment.serialize(predictedClass));
                     counter++;
                     // show the message every 10000 elements been stored in the database
@@ -146,7 +146,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
                     }
                 }
             }
-            /*System.out.println("ACRONYM : " + numAcronym + " ;ANIMAL : " + numAnimal +
+            System.out.println("ACRONYM : " + numAcronym + " ;ANIMAL : " + numAnimal +
                             ";ARTIFACT : " + numArtifact +  ";AWARD : " + numAward +
                             ";BUSINESS : " + numBusiness + ";CONCEPT : " + numConcept +
                             ";CONCEPTUAL : " + numConceptual + ";CREATION" + numCreation +
@@ -157,7 +157,7 @@ public class NerdKidDatabase extends StringRecordDatabase<String> {
                             ";PERIOD : " + numPeriod + ";PERSON : " + numPerson + ";PERSON_TYPE : " + numPersonType+
                             ";PLANT : " + numPlant + ";SPORT_TEAM : " + numSportTeam + ";SUBSTANCE" + numSubstance +
                             ";TITLE : " + numTitle + ";UNKNOWN : " + numUnknown + ";WEBSITE : " + numWebsite +
-                            ";OTHER : " + numOther);*/
+                            ";OTHER : " + numOther);
 
             transaction.commit();
             transaction.close();
