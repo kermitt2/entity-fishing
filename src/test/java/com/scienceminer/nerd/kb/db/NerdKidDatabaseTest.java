@@ -2,7 +2,6 @@ package com.scienceminer.nerd.kb.db;
 
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.service.NerdRestService;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class NerdKidDatabaseTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestService.class);
@@ -39,6 +38,7 @@ public class NerdKidDatabaseTest {
             wikidataId.add("Q412546"); // Wikimedia disambiguation page, OTHER
             wikidataId.add("Q18543268"); // Anatoliy Arestov, PERSON
             wikidataId.add("Q1744"); // Madonna, PERSON
+            wikidataId.add("Q13"); // Triskaidekaphobia, UNKNOWN
 
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(0)), is("ANIMAL")); // Gray wolf-Canis lupus,ANIMAL
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(1)), is("SUBSTANCE")); // Uranium,SUBSTANCE
@@ -55,6 +55,7 @@ public class NerdKidDatabaseTest {
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(12)), is("OTHER")); // Wikimedia disambiguation page, OTHER
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(13)), is("PERSON")); // Anatoliy Arestov, PERSON
             assertThat(target.getPredictedClassByWikidataId(wikidataId.get(14)), is("PERSON")); // Madonna, PERSON
+            assertThat(target.getPredictedClassByWikidataId(wikidataId.get(15)), is("OTHER")); // Triskaidekaphobia, UNKNOWN
         }catch (Exception e) {
             e.printStackTrace();
         }

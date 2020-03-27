@@ -2,8 +2,6 @@ package com.scienceminer.nerd.kid;
 
 import au.com.bytecode.opencsv.CSVWriter;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.kb.db.NerdKidDatabase;
-import org.nerd.kid.service.NerdKidPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

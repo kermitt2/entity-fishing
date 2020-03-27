@@ -54,6 +54,7 @@ public class NERTypePredictorTest {
         assertThat(nerTypePredictor.predict("Q412546").getPredictedClass(), is("OTHER")); // Wikimedia disambiguation page, OTHER
         assertThat(nerTypePredictor.predict("Q18543268").getPredictedClass(), is("PERSON")); // Anatoliy Arestov, PERSON
         assertThat(nerTypePredictor.predict("Q1744").getPredictedClass(), is("PERSON")); // Madonna, PERSON
+        assertThat(nerTypePredictor.predict("Q13").getPredictedClass(), is("OTHER")); // Triskaidekaphobia, UNKNOWN
     }
 
     @Test
