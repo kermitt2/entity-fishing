@@ -78,7 +78,7 @@ public class EntityDescription {
 		}
 
 		try {
-			writer = new BufferedWriter(new FileWriter(new File(path+"/description.summaries."+lang)));
+			writer = new BufferedWriter(new FileWriter(new File(path+"/" + lang + "/description.summaries."+lang)));
 			iter = upperKB.getEntityIterator();
 			int n = 0;
 			while(iter.hasNext()) {
@@ -157,7 +157,7 @@ public class EntityDescription {
 		BufferedWriter writer = null;
 		KBIterator iter = null;
 		try {
-			writer = new BufferedWriter(new FileWriter(new File(path+"/description.mentions."+lang)));
+			writer = new BufferedWriter(new FileWriter(new File(path+"/"+lang+"/description.mentions."+lang)));
 			iter = upperKB.getEntityIterator();
 			int n = 0;
 			while(iter.hasNext()) {
@@ -263,7 +263,7 @@ public class EntityDescription {
 		BufferedWriter writer = null;
 		KBIterator iter = null;
 		try {
-			writer = new BufferedWriter(new FileWriter(new File(path+"/description.summaries."+lang)));
+			writer = new BufferedWriter(new FileWriter(new File(path+"/"+lang+"/description.summaries."+lang)));
 			iter = upperKB.getEntityIterator();
 			int n = 0;
 			while(iter.hasNext()) {

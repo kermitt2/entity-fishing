@@ -12,16 +12,13 @@ Currently a random sample of Wikipedia articles is used for training. The full a
 
 The following command will build the two models used in *entity-fishing*, the ``ranker`` and the ``selector`` model (Gradient Tree Boosting for the first one, Random Forest for the second one) and preliminary build the full article content database the first time for the English Wikipedia:
 ::
-	$ ./gradlew train_annotate_en
+	$ ./gradlew train_wikipedia -Plang=en
 
 
 For other languages, replace the ending language code (``en``) by the desired one (``fr``, ``de``, ``it`` and ``es`` are supported), e.g.:
 ::
-	$ ./gradlew train_annotate_de
-	$ ./gradlew train_annotate_fr
-	$ ./gradlew train_annotate_es
-	$ ./gradlew train_annotate_it
-
+	$ ./gradlew train_annotate -Plang=fr
+	$ ./gradlew train_annotate -Plang=de
 
 Models will be saved under ``data/models``. ``ARFF`` training data files used to build the model are saved under ``data/wikipedia/training/``.
 
@@ -39,15 +36,17 @@ Training with an annotated corpus
 
 It is possible to train the entity-fishing models with several well-known available datasets. For convenience, the datasets indicated here :doc:`evaluation` are present in the *entity-fishing* distribution.
 
-Use the following maven command with a dataset and a language identifier for running a training with this dataset:
+Use the following command with a dataset name and a language identifier for running a training with this dataset:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aquaint en"
+	$ ./gradlew train_corpus -Pcorpus=aquaint -Plang=en
 
 For instance for training with the train subset of the AIDA-CONLL, use: 
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aida-train en"
+	$ ./gradlew train_corpus -Pcorpus=aida-train -Plang=en 
 
 *entity-fishing* also included the possibility to generate additional pre-annotated corpus, for instance to be further corrected manually. See :doc:`evaluation` for the explanations.
+
+The evaluation with annotated corpus is also described in the page :doc:`evaluation`.
 
 Creating entity embeddings
 **************************

@@ -101,7 +101,7 @@ dependencies {
 
     //Misc
     compile group: 'com.googlecode.clearnlp', name: 'clearnlp', version: '1.3.1'
-    compile group: 'org.jvnet', name: 'mimepull', version: '1.6'
+    //compile group: 'org.jvnet', name: 'mimepull', version: '1.6'
 
     //Specialised libraries
     compile "com.cybozu.labs:langdetect:1.1-20120112"
@@ -165,11 +165,6 @@ gretty {
     reloadOnClassChange = false
 }
 
-// return the default value if the property has not been specified in command line
-ext.getArg = { propName, defaultVal ->
-    return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;
-}
-
 war {
     classifier = 'war'
 //    dependsOn mainWar
@@ -198,105 +193,64 @@ wrapper {
     gradleVersion "5.4.1"
 }
 
-// Evaluation
+// return the default value if the property has not been specified in command line
+ext.getArg = { propName, defaultVal ->
+    return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;
+}
 
+// Training with Wikipedia
+// Run like: ./gradlew train_wikipedia -Plang=en
+// ./gradlew train_wikipedia -Plang=fr
+// etc.
+task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
+    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'data/wikipedia/training/', getArg('lang', 'en')
+    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+}
+
+// Training with an annotated corpus
+// Run like: ./gradlew train_corpus -Pcorpus=aquaint -Plang=en
+// ./gradlew train_corpus -Pcorpus=aida-train -Plang=en 
+// etc.
+task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
+    main = 'com.scienceminer.nerd.training.CorpusTrainer'
+    classpath = sourceSets.main.runtimeClasspath
+    args getArg('corpus', ''), getArg('lang', 'en')
+    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+}
+
+// Evaluation
 // Run like: ./gradlew evaluation -Pcorpus=[corpusname]
-/*task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+// e.g. ./gradlew evaluation -Pcorpus=aida-testb
+task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'com.scienceminer.nerd.evaluation.NEDCorpusEvaluation'
     classpath = sourceSets.main.runtimeClasspath
-    args getArg('corpus', null)
+    args getArg('corpus', '')
     jvmArgs '-Xms2g', '-Xmx8g'
-}*/
+}
 
-
-// Run like: ./gradlew evaluationDataGeneration -Pcorpus=[corpusname]
-/*task(evaluationDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'training') {
+// training data generation
+// Run like: ./gradlew annotatedDataGeneration -Pcorpus=[corpusname]
+// e.g. ./gradlew annotatedDataGeneration -Pcorpus=toto
+task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'com.scienceminer.nerd.evaluation.AnnotatedDataGeneration'
     classpath = sourceSets.main.runtimeClasspath
-    args getArg('corpus', null)
-    jvmArgs '-Xms2g', '-Xmx8g'
-}*/
-
-// Training
-// Run like: ./gradlew train_annotate_en
-task(train_annotate_en, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/training/', 'en'
-    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew train_annotate_de
-task(train_annotate_de, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/training/', 'de'
-    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew train_annotate_fr
-task(train_annotate_fr, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/training/', 'fr'
-    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew train_annotate_it
-task(train_annotate_it, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/training/', 'it'
-    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew train_annotate_es
-task(train_annotate_es, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/training/', 'es'
-    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew generate_entity_description_en
-task(generate_entity_description_en, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.EntityDescription'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/embeddings/en/', 'en'
+    args getArg('corpus', '')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew generate_entity_description_fr
-task(generate_entity_description_fr, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.EntityDescription'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/embeddings/fr/', 'fr'
-    jvmArgs '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew generate_entity_description_de
+// entity description to create entity embeddings
+// Run like: ./gradlew generate_entity_description -Plang=en
+// ./gradlew generate_entity_description -Plang=fr
+// etc.
 task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
     main = 'com.scienceminer.nerd.embeddings.EntityDescription'
     classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/embeddings/de/', 'de'
+    args 'data/wikipedia/embeddings/', getArg('lang', 'en')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew generate_entity_description_it
-task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.EntityDescription'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/embeddings/it/', 'it'
-    jvmArgs '-Xms2g', '-Xmx8g'
-}
-
-// Run like: ./gradlew generate_entity_description_es
-task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.EntityDescription'
-    classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/embeddings/es/', 'es'
-    jvmArgs '-Xms2g', '-Xmx8g'
-}
 
 
 

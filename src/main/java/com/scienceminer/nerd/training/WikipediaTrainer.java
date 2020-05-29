@@ -62,8 +62,8 @@ public class WikipediaTrainer {
 		this.ranker = new NerdRanker(this.wikipedia);
 		this.selector = new NerdSelector(this.wikipedia);
 
-		arffRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.arff");
-		arffSelector = new File(dataDir.getPath() + "/" + lang + "/selector.arff");
+		arffRanker = new File(dataDir.getPath() + File.separator + lang + File.separator + "ranker.arff");
+		arffSelector = new File(dataDir.getPath() + File.separator + lang + File.separator + "selector.arff");
 
 		//modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
 		//modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");

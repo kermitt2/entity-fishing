@@ -60,7 +60,12 @@ If there is a directory called ``pdf`` or ``PDF``, the process will extract info
 
 Use the following maven command with the above dataset identifier for generating the annotation xml file:
 ::
-	$ ./gradlew evaluationDataGeneration -Pcorpus=[corpusname]
+	$ ./gradlew annotatedDataGeneration -Pcorpus=[corpusname]
+
+For instance, for a new corpus *toto*, with text or pdf documents prepared as indicated above:
+::
+    $ ./gradlew annotatedDataGeneration -Pcorpus=toto
+
 
 References
 **********
