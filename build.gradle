@@ -171,11 +171,11 @@ war {
     enabled true
 }
 
-
 artifacts {
     archives jar
     archives war
 }
+
 
 //TODO: we could create a task to download and unpack the lmdb files automatically 
 //task copyModels(type: Copy) {
@@ -199,7 +199,7 @@ ext.getArg = { propName, defaultVal ->
 }
 
 // Training with Wikipedia
-// Run like: ./gradlew train_wikipedia -Plang=en
+// Run like this: ./gradlew train_wikipedia -Plang=en
 // ./gradlew train_wikipedia -Plang=fr
 // etc.
 task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
@@ -210,7 +210,7 @@ task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
 }
 
 // Training with an annotated corpus
-// Run like: ./gradlew train_corpus -Pcorpus=aquaint -Plang=en
+// Run like this: ./gradlew train_corpus -Pcorpus=aquaint -Plang=en
 // ./gradlew train_corpus -Pcorpus=aida-train -Plang=en 
 // etc.
 task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
@@ -221,7 +221,7 @@ task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
 }
 
 // Evaluation
-// Run like: ./gradlew evaluation -Pcorpus=[corpusname]
+// Run like this: ./gradlew evaluation -Pcorpus=[corpusname]
 // e.g. ./gradlew evaluation -Pcorpus=aida-testb
 task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'com.scienceminer.nerd.evaluation.NEDCorpusEvaluation'
@@ -231,7 +231,7 @@ task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
 }
 
 // training data generation
-// Run like: ./gradlew annotatedDataGeneration -Pcorpus=[corpusname]
+// Run like this: ./gradlew annotatedDataGeneration -Pcorpus=[corpusname]
 // e.g. ./gradlew annotatedDataGeneration -Pcorpus=toto
 task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'com.scienceminer.nerd.evaluation.AnnotatedDataGeneration'
@@ -241,7 +241,7 @@ task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'trai
 }
 
 // entity description to create entity embeddings
-// Run like: ./gradlew generate_entity_description -Plang=en
+// Run like this: ./gradlew generate_entity_description -Plang=en
 // ./gradlew generate_entity_description -Plang=fr
 // etc.
 task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {

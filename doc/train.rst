@@ -53,22 +53,31 @@ Creating entity embeddings
 
 Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. For creating these entity embeddings, the process is as follow: 
 
+0. Prepare packaging with maven:
+::
+	$ mvn clean install
+
 1. Download available pretrained word embeddings - this could be for instance word2vec, FastText, or lexvec. Word embeddings need initially to be in the standard .vec format (a text format). word2vec binary format can be transformed into .vec format with the simple utility `convertvec <https://github.com/marekrei/convertvec>`_
 
 2. Quantize word embeddings
 
 Quantize will simplify the vector given an acceptable quantization factor (by default the error rate for quantizing is 0.01, but it could be changed with the argument ``-error``)
 ::
-	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i word.embeddings.vec -o word.embeddings.quantized -hashheader"
+	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i word.embeddings.vec -o word.embeddings.quantized -hashheader"	
 
 Here the FastText word embeddings ``wiki.en.vec`` given as input (``-i``) will be quantized and saved as ``wiki.en.quantized``. ``-hashheader`` indicates that the first line (a header to be ignored) must be skipped.
 
 3. Create Wikidata entity description to be used for producing entity embeddings. The command for creating description is the following one:
 ::
+	$./gradlew generate_entity_description -Plang=en
+
+Replace the ``en`` argument by the language of interest. 
+
+As an alternative with maven:
+::
 	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityDescription -Dexec.args="entity.description en"
 
-The argument indicates the directory where to save the generated description. 
-
+The argument indicates then where to save the generated description (normally ``data/wikipedia/embeddings/``) and the language of interest. 
 
 4. Create entity embeddings from the generated description. 
 
