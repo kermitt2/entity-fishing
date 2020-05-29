@@ -163,6 +163,7 @@ gretty {
     servletContainer = "jetty9.4"
     webInfIncludeJarPattern = ''
     reloadOnClassChange = false
+    interactiveMode = ''
 }
 
 war {

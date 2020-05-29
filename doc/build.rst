@@ -70,7 +70,7 @@ Then install the compiled indexed data:
  
 #. Run the service:
    ::
-      $ ./gradlew clean appRun
+      $ ./gradlew appRun
 
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
