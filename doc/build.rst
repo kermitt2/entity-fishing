@@ -23,7 +23,7 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment and to your languages of choice (warning: total is around 23.3 GB, compressed) at the following links:
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, `db-kb.zip`) and the English Wikipedia data (`db-en.zip`) must always been installed. You can then add your languages of choice (warning: total is around 23.3 GB, compressed and moere than 80GB uncompressed) at the following links:
 
     **Linux**
 
@@ -56,7 +56,7 @@ Then install the compiled indexed data:
 
 
 
-#. Unzip the 6 first db archives files under ``data/db/``.
+#. Unzip the db archives files under ``data/db/``.
 
     This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
     The uncompressed data is about 80 GB.

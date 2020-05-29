@@ -12,7 +12,7 @@ Currently a random sample of Wikipedia articles is used for training. The full a
 
 The following command will build the two models used in *entity-fishing*, the ``ranker`` and the ``selector`` model (Gradient Tree Boosting for the first one, Random Forest for the second one) and preliminary build the full article content database the first time for the English Wikipedia:
 ::
-	$ mvn compile exec:exec -Ptrain_annotate_en
+	$ ./gradlew train_annotate_en
 
 
 For other languages, replace the ending language code (``en``) by the desired one (``fr``, ``de``, ``it`` and ``es`` are supported), e.g.:
