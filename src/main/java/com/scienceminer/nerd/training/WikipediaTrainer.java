@@ -5,7 +5,7 @@ import com.scienceminer.nerd.disambiguation.NerdSelector;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import org.grobid.trainer.LabelStat;
+import org.grobid.trainer.evaluation.LabelStat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -122,7 +122,7 @@ public class NerdRestProcessString {
         return response;
     }
 
-    public static String processReference(String citationText, boolean consolidation) {
+    public static String processReference(String citationText, int consolidation) {
         LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
 

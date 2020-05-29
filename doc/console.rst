@@ -1,4 +1,4 @@
-.. topic:: Description of the NERD console.
+.. topic:: Description of the entity-fishing console.
 
 *entity-fishing* Console
 ========================

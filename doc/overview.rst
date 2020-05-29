@@ -9,18 +9,18 @@ Motivation
 
 One of the backbone of the activities of scientists regarding technical and scientific information at large is the identification and resolution of specialist entities. This could be the identification of scientific terms, of nomenclature-based expressions such as chemical formula, of quantity expressions, etc. It is considered that between 30 to 80% of the content of a technical or scientific document is written in specialist language `(Ahmad, 1996) <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.50.7956&rep=rep1&type=pdf>`_. Researchers in Digital Humanities and in Social Sciences are often first of all interested in the identification and resolution of so-called named entities, e.g. person names, places, events, dates, organisation, etc. Entities can be known in advance and present in generalist or specialized knowledge bases. They can also be created based on open nomenclatures and vocabularies and impossible to enumerate in advance.
 
-The *entity-fishing* services try to automate this recognition and disambiguisation task in a generic manner, avoiding as much as possible restrictions of domains and limitations to particular usages.
+The *entity-fishing* services try to automate this recognition and disambiguisation task in a generic manner, avoiding as much as possible restrictions of domains, limitations to certain classes of entities or to particular usages. 
 
 Tasks
 *****
 
 *entity-fishing* performs the following tasks:
 
-* entity recognition and disambiguation against Wikidata and Wikipedia in a raw text, partially-annotated text segment,
+* entity recognition and disambiguation against Wikidata in a raw text, partially-annotated text segment,
 .. image:: images/screen1.png
    :alt: text query processing
 
-* entity recognition and disambiguation against Wikidata and Wikipedia at document level, for example a PDF with layout positioning and structure-aware annotations,
+* entity recognition and disambiguation against Wikidata at document level, for example a PDF with layout positioning and structure-aware annotations,
 .. image:: images/screen3.png
    :alt: PDF query processing
 
@@ -40,9 +40,9 @@ Tasks
 Summary
 *******
 
-Supervised machine learning is used for the disambiguation, based on Random Forest and Gradient Tree Boosting exploiting various features, including word and entity embeddings. Training is realized exploiting Wikipedia data. Results include in particular Wikidata identifiers and, optionally, statements. 
+Supervised machine learning is used for the disambiguation, based on Random Forest and Gradient Tree Boosting exploiting various features, including word and entity embeddings. Training is realized exploiting Wikipedia, which offers for each language a wealth of usage data about entity mentions in context. Results include in particular Wikidata identifiers and, optionally, statements. 
 
-The API also offers the possibility to apply filters based on Wikidata properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 37M entities and 154M statements present in Wikipedia. 
+The API also offers the possibility to apply filters based on Wikidata properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 37M entities and 154M statements present in Wikidata. 
 
 The tool currently supports English, German, French, Spanish and Italian languages (more to come!). For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the other languages. A *nbest* mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores.
 
