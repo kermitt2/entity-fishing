@@ -59,7 +59,7 @@
         <script type="text/javascript" src="resources/pdf.js/build/pdf.js"></script>
 
  		<!-- The Javascript library -->
-        <script src="nerd/nerd.new.js"></script>
+        <script src="nerd/nerd.js"></script>
 
     </head>
     
@@ -88,8 +88,8 @@
 					<div id="divAbout"> 
 						<p><large><b>entity-fishing</b> - </large>Entity Recognition and Disambiguation </p>
 						<p>This text analysis console/demo is based on a set of JSON REST services.</p>
-						<p>For more details check the <a style="color:#BC0E0E;" href="http://www.github.com/kermitt2/nerd">GitHub repo</a> and the <a style="color:#BC0E0E;" href="http://nerd.readthedocs.io">documentation</a>.</p>
-						<p>Contact: <a style="color:#BC0E0E;" href="mailto:patrice.lopez@science-miner.com?subject=NERD">Patrice Lopez</a>.</p>
+						<p>For more details check the <a style="color:#BC0E0E;" href="http://www.github.com/kermitt2/entity-fishing">GitHub repo</a> and the <a style="color:#BC0E0E;" href="http://nerd.readthedocs.io">documentation</a>.</p>
+						<p>Contact: <a style="color:#BC0E0E;" href="mailto:patrice.lopez@science-miner.com?subject=entity-fishing">Patrice Lopez</a>.</p>
 					</div>
 				</td> 
 			    </tr>
@@ -173,8 +173,19 @@
 							</td>
 						</tr>
 						<tr>
-							<td>&nbsp;</td><td colspan="2"><input id="submitRequest" type="submit" value="Submit" class="btn btn-success"/></td>
-						</tr>	
+							<td>&nbsp;</td><td colspan="2">
+								<table>
+									<tr>
+										<td>
+											<input id="submitRequest" type="submit" value="Submit" class="btn btn-success"/>
+										</td>
+										<td>
+											<input id="clearRequest" type="submit" value="Clear" class="btn"/>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
 			        </table>
 				</div>
 				<br>

@@ -1,0 +1,17 @@
+{
+    "text": "Goethes literarisches Werk umfasst Lyrik, Dramen, Epik, autobiografische, kunst- und literaturtheoretische sowie naturwissenschaftliche Schriften. Daneben ist sein umfangreicher Briefwechsel von literarischer Bedeutung. Goethe war Vorbereiter und wichtigster Vertreter des Sturm und Drang. Sein Roman Die Leiden des jungen Werthers machte ihn in Europa berühmt. Selbst Napoleon bat ihn zu einer Audienz anlässlich des Erfurter Fürstenkongresses. Im Bunde mit Schiller und gemeinsam mit Herder und Wieland verkörperte er die Weimarer Klassik. Die Wilhelm-Meister-Romane wurden zu beispielgebenden Vorläufern deutschsprachiger Künstler- und Bildungsromane. Sein Faust errang den Ruf als die bedeutendste Schöpfung der deutschsprachigen Literatur. Im Alter wurde er auch im Ausland als Repräsentant des geistigen Deutschland angesehen.",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "de"
+    },
+    "entities": [],
+    "mentions": [
+        "ner",
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "minSelectorScore": 0.3,
+    "customisation": "generic"
+}

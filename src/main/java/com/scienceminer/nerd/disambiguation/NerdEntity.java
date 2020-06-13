@@ -929,7 +929,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			String outputPreferredTerm  = new String(encodedPreferredTerm); 
 			buffer.append(", \"preferredTerm\" : \"" + outputPreferredTerm + "\"");
 		}*/
-		if (type != null)
+		if (type != null && wikidataId == null)
 			buffer.append(", \"type\" : \"" + type.getName() + "\"");
 
 		if (CollectionUtils.isNotEmpty(subTypes)) {

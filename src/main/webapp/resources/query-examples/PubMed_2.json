@@ -1,0 +1,16 @@
+{
+    "text": "Cigarette smoke (CS)-induced airway epithelial senescence has been implicated in the pathogenesis of chronic obstructive pulmonary disease (COPD) although the underlying mechanisms remain largely unknown. Growth differentiation factor 15 (GDF15) is increased in airway epithelium of COPD smokers and CS-exposed human airway epithelial cells, but its role in CS-induced airway epithelial senescence is unclear. In this study, we first analyzed expression of GDF15 and cellular senescence markers in airway epithelial cells of current smokers and nonsmokers. Second, we determined the role of GDF15 in CS-induced airway epithelial senescence by using the clustered regularly interspaced short palindromic repeats (CRISPR)/CRISPR associated-9 (Cas9) genome editing approach. Finally, we examined whether exogenous GDF15 protein promoted airway epithelial senescence through the activin receptor-like kinase 1 (ALK1)/Smad1 pathway. GDF15 up-regulation was found in parallel with increased cellular senescence markers p21, p16 and high mobility group box 1 (HMGB1) in airway epithelial cells of current smokers compared with nonsmokers. Moreover, CS extract (CSE) induced cellular senescence in cultured human airway epithelial cells, represented by induced senescence-associated β-galactosidase activity, inhibited cell proliferation, increased p21 expression, and increased release of HMGB1 and IL-6. Disruption of GDF15 significantly inhibited CSE-induced airway epithelial senescence. Lastly, GDF15 protein bound to the ALK1 receptor and promoted airway epithelial senescence via activation of the Smad1 pathway. Our findings highlight an important contribution of GDF15 in promoting airway epithelial senescence upon CS exposure. Senescent airway epithelial cells that chronically accumulate in CS-exposed lungs could contribute substantially to chronic airway inflammation in COPD development and progression.",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "en"
+    },
+    "entities": [],
+    "mentions": [
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "minSelectorScore": 0.3,
+    "customisation": "generic"
+}

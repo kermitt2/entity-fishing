@@ -1,0 +1,16 @@
+{
+    "text": "Development and maintenance of leukemia can be partially attributed to alterations in (anti)-apoptotic gene expression. Genome-wide transcriptome analyses revealed that 89 apoptosis-associated genes were differentially expressed between patient acute myeloid leukemia (AML) CD34(+) cells and normal bone marrow (NBM) CD34(+) cells. Among these, transforming growth factor-β activated kinase 1 (TAK1) was strongly upregulated in AML CD34(+) cells. Genetic downmodulation or pharmacologic inhibition of TAK1 activity strongly impaired primary AML cell survival and cobblestone formation in stromal cocultures. TAK1 inhibition was mainly due to blockade of the nuclear factor κB (NF-κB) pathway, as TAK1 inhibition resulted in reduced levels of P-IκBα and p65 activity. Overexpression of a constitutive active variant of NF-κB partially rescued TAK1-depleted cells from apoptosis. Importantly, NBM CD34(+) cells were less sensitive to TAK1 inhibition compared with AML CD34(+) cells. Knockdown of TAK1 also severely impaired leukemia development in vivo and prolonged overall survival in a humanized xenograft mouse model. In conclusion, our results indicate that TAK1 is frequently overexpressed in AML CD34(+) cells, and that TAK1 inhibition efficiently targets leukemic stem/progenitor cells in an NF-κB-dependent manner. ",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "en"
+    },
+    "entities": [],
+    "mentions": [
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "minSelectorScore": 0.2,
+    "customisation": "generic"
+}
