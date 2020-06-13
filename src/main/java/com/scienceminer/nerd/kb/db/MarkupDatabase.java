@@ -6,6 +6,7 @@ import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 
+import java.util.zip.GZIPInputStream;
 import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.input.CountingInputStream;
@@ -105,8 +106,8 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		if (isLoaded && !overwrite)
 			return;
 		if (dataFile == null)
-			throw new NerdResourceException("Markup file not found");
-		System.out.println("Loading " + getName() + " database");
+			throw new NerdResourceException("Markup file not found: " + dataFile.getPath());
+		System.out.println("Loading " + getName() + " database...");
 
 		Integer currId = null;
 		String currMarkup = null;
@@ -117,12 +118,16 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
                 .onMalformedInput(CodingErrorAction.REPORT)
                 .onUnmappableCharacter(CodingErrorAction.REPORT);
 
-		if (dataFile.getName().endsWith(".bz2")){
+		if (dataFile.getName().endsWith(".bz2")) {
             FileInputStream fis = new FileInputStream(dataFile);
             BufferedInputStream bis = new BufferedInputStream(fis);
             CompressorInputStream input = new CompressorStreamFactory().createCompressorInputStream(bis);
             reader = input;
-        } else{
+        } else if (dataFile.getName().endsWith(".gz")) {
+        	InputStream fis = new FileInputStream(dataFile);
+			InputStream gzipStream = new GZIPInputStream(fis);
+			reader = gzipStream;//new InputStreamReader(gzipStream, "UTF-8");
+        } else {
 			reader = new FileInputStream(dataFile);
         }
 
@@ -169,7 +174,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								tx.close();
 								nbToAdd = 0;
 								tx = environment.createWriteTransaction();
-								System.out.println(totalAdded + " / " + currId);
+								//System.out.println(totalAdded + " / " + currId);
 							}
 							if (full && isArticle) {
 								// we store the complete text if we have an article

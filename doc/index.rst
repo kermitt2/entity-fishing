@@ -17,7 +17,6 @@
    restAPI.rst
    evaluation.rst
    train.rst
-   upgradeGuide.rst
    license.rst
 
 

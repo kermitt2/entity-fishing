@@ -326,7 +326,7 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private static File getMarkupDataFile(File dataDirectory) {
 		File[] files = dataDirectory.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
-				return name.endsWith("-pages-articles.xml") || name.endsWith("-pages-articles.xml.bz2") ||
+				return name.endsWith("-pages-articles.xml") || name.endsWith("-pages-articles.xml.bz2") || name.endsWith("-pages-articles.xml.gz") || 
 						name.endsWith("-pages-articles-multistream.xml");
 			}
 		});

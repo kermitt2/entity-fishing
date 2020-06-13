@@ -3,9 +3,10 @@
 Install, build and run
 ======================
 
-*entity-fishing* requires JDK 1.8. It supports Linux-64 and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. 
+*entity-fishing* requires JDK 1.8. It supports Linux-64 (preferred) and Mac OS environments (if you can't avoid it!). Below, we make available the LMDB binary data for these two architectures. 
 
-Running the service requires at least 3GB of RAM, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing.
+Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
+
 After decompressing all the index data, up to 80 GB of disk space will be used if you wish to use all the supported languages (en, fr, de , it, es) - be sure to have enough free space. For running English language only, you will need around 35GB. 
 SSD is recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
 
@@ -19,7 +20,6 @@ The path to grobid-home shall indicated in the file ``data/config/mention.yaml``
 Install *entity-fishing*:
 ::
    $ git clone https://github.com/kermitt2/entity-fishing
-
 
 Then install the compiled indexed data:
 
@@ -75,3 +75,9 @@ Then install the compiled indexed data:
 The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
 
 For more information, see the next section on the *entity-fishing* Console.
+
+
+Creating a new Knowledge Base version from new Wikidata and Wikipedia dumps
+===========================================================================
+
+The knowledge base used by *entity-fishing* can be updated with new versions of Wikidata and Wikipedia using the pre-processing from the library `GRISP <https://github.com/kermitt2/grisp>`_, see `https://github.com/kermitt2/grisp <https://github.com/kermitt2/grisp>`_. 

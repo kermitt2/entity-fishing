@@ -372,7 +372,7 @@ public class ProcessTextTest {
         }
     }
 
-    @Test
+    //@Test
     public void testDICECoefficient() throws Exception {
         String mention = "Setophaga ruticilla";
         Double dice = ProcessText.getDICECoefficient(mention, "en");
