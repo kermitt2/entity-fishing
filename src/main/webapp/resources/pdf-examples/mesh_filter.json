@@ -1,0 +1,11 @@
+{
+    "mentions": [
+        "ner",
+        "wikipedia"
+    ],
+    "nbest": false,
+    "structure": "grobid",
+    "customisation": "generic",
+    "filter": {"property": {"id":"P486"}},
+    "minSelectorScore": 0.3 
+}

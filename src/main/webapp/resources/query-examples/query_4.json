@@ -1,0 +1,15 @@
+{
+    "text": "",
+    "shortText": "aplasie médullaire",
+    "termVector": [],
+    "language": {
+        "lang": "fr"
+    },
+    "entities": [],
+    "mentions": [
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "customisation": "generic"
+}

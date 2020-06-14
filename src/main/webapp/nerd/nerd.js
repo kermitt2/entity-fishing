@@ -1107,7 +1107,7 @@ var nerd = (function ($) {
         // first look in the local cache
         if (lang + wikipedia in imgCache) {
             var imgUrl = imgCache[lang + wikipedia];
-            var document = (window.content) ? window.content.document : window.document;
+            var document = (window.top) ? window.top.document : window.document;
             var spanNode = document.getElementById("img-" + wikipedia);
             spanNode.innerHTML = '<img src="' + imgUrl + '"/>';
         } else {
@@ -1122,7 +1122,7 @@ var nerd = (function ($) {
                 dataType: "jsonp",
                 xhrFields: {withCredentials: true},
                 success: function (response) {
-                    var document = (window.content) ? window.content.document : window.document;
+                    var document = (window.top) ? window.top.document : window.document;
                     var spanNode = document.getElementById("img-" + wikipedia);
                     if (response.query && spanNode) {
                         if (response.query.pages[wikipedia]) {
@@ -1878,11 +1878,19 @@ var nerd = (function ($) {
         $('#fieldFile').hide();
     }
 
-    const examples = [ "WW1", "PubMed_1", "PubMed_2", "HAL_1", "Italiano_1", "Reuters_1", "Reuters_2", "French_1", "German_1", "Spanish_1" ];
+    // entity-fishing query DSL examples
+    const examples = [ "WW1", "PubMed_1", "PubMed_2", "HAL_1", "Italiano", "News_1", "News_2", "French", "German", "Spanish", "query_1", "query_2", "query_3", "query_4" ];
+
+    // entity-fishing query DSL and corresponding PDF examples
+    const examplesPDF = [ "PMC1636350", "PMC2649809", "PMC2808580", "species_filter", "mesh_filter" ];
 
     function resetExamplesClasses() {
         for (index in examples) {
             $('#example'+index).removeClass('section-active').addClass('section-non-active');
+        }
+
+        for (index in examplesPDF) {
+            $('#example_pdf'+index).removeClass('section-active').addClass('section-non-active');
         }
     }
 
@@ -1920,44 +1928,79 @@ var nerd = (function ($) {
         $('#input').remove();
         $('#field').html("");
 
-        $('#field').append('<table id="withExamples"><tr><td><textarea class="span7" rows="5" id="input" name="' + nameInput + '" /></td>' +
-            "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
-            "<td><table id='examplesBlock1'>" +
-            "<tr style='line-height:130%;'><td><span id='example0' style='font-size:90%;'>WW1</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>PubMed_1</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example2' style='font-size:90%;'>PubMed_2</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example3' style='font-size:90%;'>HAL_1</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example4' style='font-size:90%;'>Italiano_1</span></td></tr>" +
-            "</table></td>" +
-            "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
-            "<td><table id='examplesBlock2'>" + 
-            "<tr style='line-height:130%;'><td><span id='example5' style='font-size:90%;'>Reuters_1</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example6' style='font-size:90%;'>Reuters_2</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example7' style='font-size:90%;'>French_1</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example8' style='font-size:90%;'>German_1</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example9' style='font-size:90%;'>Spanish_1</span></td></tr>" +
-            "</table></td>" +
-            "</tr></table>");
+        var selected = $('#selectedService').find('option:selected').attr('value');
+        if (selected === 'processNERDQueryPDF') {
+            $('#field').append('<table id="withExamples"><tr><td><textarea class="span7" rows="5" id="input" name="' + nameInput + '" /></td>' +
+                "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
+                "<td><table id='examplesBlock1'>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf0' style='font-size:90%;'>"+examplesPDF[0]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf1' style='font-size:90%;'>"+examplesPDF[1]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf2' style='font-size:90%;'>"+examplesPDF[2]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf3' style='font-size:90%;'>"+examplesPDF[3]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf4' style='font-size:90%;'>"+examplesPDF[4]+"</span></td></tr>" +
+                "</table></td>" +
+                "</tr></table>");
 
-        // binding of the examples
-        for (index in examples) {
-            $('#example'+index).bind('click', function (event) {
-                resetExamplesClasses();
-                var localId = $(this).attr('id');
-                var localIndex = localId.replace("example", "");
-                localIndex = parseInt(localIndex, 10);
-                var selected = $('#selectedService').find('option:selected').attr('value');
-                if (selected === 'processNERDQuery' || selected === 'processERDQuery')
-                    setJsonExample(examples[localIndex], true);
-                else
-                    setJsonExample(examples[localIndex], false);
-                $(this).removeClass('section-non-active').addClass('section-active');
-            });
+            // binding of the examples
+            for (index in examplesPDF) {
+                $('#example_pdf'+index).bind('click', function (event) {
+                    resetExamplesClasses();
+                    var localId = $(this).attr('id');
+                    var localIndex = localId.replace("example_pdf", "");                    
+                    localIndex = parseInt(localIndex, 10);
+                    var selected = $('#selectedService').find('option:selected').attr('value');
+                    setJsonExamplePDF(examplesPDF[localIndex]);
+                    $(this).removeClass('section-non-active').addClass('section-active');
+                });
+            }
+
+        } else {
+            $('#field').append('<table id="withExamples"><tr><td><textarea class="span7" rows="5" id="input" name="' + nameInput + '" /></td>' +
+                "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
+                "<td><table id='examplesBlock1'>" +
+                "<tr style='line-height:130%;'><td><span id='example0' style='font-size:90%;'>"+examples[0]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example1' style='font-size:90%;'>"+examples[1]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example2' style='font-size:90%;'>"+examples[2]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example3' style='font-size:90%;'>"+examples[3]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example4' style='font-size:90%;'>"+examples[4]+"</span></td></tr>" +
+                "</table></td>" +
+                "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
+                "<td><table id='examplesBlock2'>" + 
+                "<tr style='line-height:130%;'><td><span id='example5' style='font-size:90%;'>"+examples[5]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example6' style='font-size:90%;'>"+examples[6]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example7' style='font-size:90%;'>"+examples[7]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example8' style='font-size:90%;'>"+examples[8]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example9' style='font-size:90%;'>"+examples[9]+"</span></td></tr>" +
+                "</table></td>" +
+                "<td><span style='padding-left:20px;'>&nbsp;</span></td>" +
+                "<td><table id='examplesBlock3'>" + 
+                "<tr style='line-height:130%;'><td><span id='example10' style='font-size:90%;'>"+examples[10]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example11' style='font-size:90%;'>"+examples[11]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example12' style='font-size:90%;'>"+examples[12]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example13' style='font-size:90%;'>"+examples[13]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example14' style='font-size:90%;'>"+"</span></td></tr>" +
+                "</table></td>" +
+                "</tr></table>");
+
+            // binding of the examples
+            for (index in examples) {
+                $('#example'+index).bind('click', function (event) {
+                    resetExamplesClasses();
+                    var localId = $(this).attr('id');
+                    var localIndex = localId.replace("example", "");
+                    localIndex = parseInt(localIndex, 10);
+                    var selected = $('#selectedService').find('option:selected').attr('value');
+                    if (selected === 'processNERDQuery' || selected === 'processERDQuery')
+                        setJsonExample(examples[localIndex], true);
+                    else
+                        setJsonExample(examples[localIndex], false);
+                    $(this).removeClass('section-non-active').addClass('section-active');
+                });
+            }
         }
     }
 
     function setJsonExample(theExample, full) {
-        console.log(theExample)
         $.ajax({
             'async': true,
             'global': false,
@@ -1970,6 +2013,20 @@ var nerd = (function ($) {
                     $('#input').attr('value', data['text']);
             }
         });
+    }
+
+    function setJsonExamplePDF(theExample) {
+        $.ajax({
+            'async': true,
+            'global': false,
+            'url': "resources/pdf-examples/"+theExample+".json",
+            'dataType': "json",
+            'success': function(data) {
+                $('#input').attr('value', vkbeautify.json(JSON.stringify(data)));
+            }
+        });
+
+        window.open("resources/pdf-examples/"+theExample+".pdf");
     }
 
     function sortCategories(categories) {

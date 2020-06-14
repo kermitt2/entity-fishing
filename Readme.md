@@ -1,9 +1,6 @@
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/nerd/badge/?version=latest)](https://readthedocs.org/projects/nerd/?badge=latest)
-<!-- [![Build Status](https://travis-ci.org/kermitt2/nerd.svg?branch=master)](https://travis-ci.org/kermitt2/nerd) -->
-<!-- [![Coverage Status](https://coveralls.io/repos/kermitt2/nerd/badge.svg)](https://coveralls.io/r/kermitt2/nerd) -->
 [![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/kermitt2/entity-fishing/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/kermitt2/entity-fishing)
-[![SWH](https://archive.softwareheritage.org/badge/swh:1:dir:cb0ba3379413db12b0018b7c3af8d0d2d864139c/)](https://archive.softwareheritage.org/swh:1:dir:cb0ba3379413db12b0018b7c3af8d0d2d864139c;origin=https://github.com/kermitt2/entity-fishing;visit=swh:1:snp:35f71f840768057e136d6ffd81834334fb38d8f8;anchor=swh:1:rev:d43ff0dfd4db8866dacfc47100206af05c28da8f;path=//)
 
 # Documentation
 

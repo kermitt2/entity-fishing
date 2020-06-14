@@ -1,13 +1,12 @@
 {
     "text": "",
-    "shortText": "montelukast loratadine HPLC",
+    "shortText": "concrete pump sensor",
     "termVector": [],
     "language": {
         "lang": "en"
     },
     "entities": [],
     "mentions": [
-        "ner",
         "wikipedia"
     ],
     "nbest": false,
