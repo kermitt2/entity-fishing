@@ -1879,10 +1879,11 @@ var nerd = (function ($) {
     }
 
     // entity-fishing query DSL examples
-    const examples = [ "WW1", "PubMed_1", "PubMed_2", "HAL_1", "Italiano", "News_1", "News_2", "French", "German", "Spanish", "query_1", "query_2", "query_3", "query_4" ];
+    const examples = [ "WW1", "PubMed_1", "PubMed_2", "HAL_1", "Italiano", "News_1", "News_2", "French", "German", "Spanish", 
+                        "COVID-19", "query_1", "query_2", "query_3", "query_4" ];
 
     // entity-fishing query DSL and corresponding PDF examples
-    const examplesPDF = [ "PMC1636350", "PMC2649809", "PMC2808580", "species_filter", "mesh_filter" ];
+    const examplesPDF = [ "PMC1636350", "COVID-19-medRxiv", "PMC2808580", "species_filter", "mesh_filter" ];
 
     function resetExamplesClasses() {
         for (index in examples) {
@@ -1978,7 +1979,7 @@ var nerd = (function ($) {
                 "<tr style='line-height:130%;'><td><span id='example11' style='font-size:90%;'>"+examples[11]+"</span></td></tr>" +
                 "<tr style='line-height:130%;'><td><span id='example12' style='font-size:90%;'>"+examples[12]+"</span></td></tr>" +
                 "<tr style='line-height:130%;'><td><span id='example13' style='font-size:90%;'>"+examples[13]+"</span></td></tr>" +
-                "<tr style='line-height:130%;'><td><span id='example14' style='font-size:90%;'>"+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example14' style='font-size:90%;'>"+examples[14]+"</span></td></tr>" +
                 "</table></td>" +
                 "</tr></table>");
 

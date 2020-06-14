@@ -27,17 +27,17 @@ Then install the compiled indexed data:
 
     **Linux**
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/linux/db-kb.zip (4.1 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-kb.zip (4.1 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/linux/db-en.zip (8.3 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-en.zip (8.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/linux/db-fr.zip (2.9 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-fr.zip (2.9 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/linux/db-de.zip (3.8 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-de.zip (3.8 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/linux/db-es.zip (2.2 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-es.zip (2.2 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/linux/db-it.zip (2.0 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-it.zip (2.0 GB)
 
 
     **MacOS**
