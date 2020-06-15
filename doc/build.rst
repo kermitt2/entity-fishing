@@ -23,22 +23,23 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, `db-kb.zip`) and the English Wikipedia data (`db-en.zip`) must always been installed. You can then add your languages of choice (warning: total is around 23.3 GB, compressed and moere than 80GB uncompressed) at the following links:
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, `db-kb.zip`) and the English Wikipedia data (`db-en.zip`) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 36 GB compressed, and 119 GB uncompressed. The data for this version ``0.0.4`` correspond to the Wikidata and Wikipedia dumps from 20.05.2020. The Knowledge Base part contains around 87 million entities and 1.1 billion statements and has considerably grown in the three last years. 
 
     **Linux**
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-kb.zip (4.1 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-kb.zip (15 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-en.zip (8.3 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-en.zip (9.1 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-fr.zip (2.9 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-fr.zip (3.2 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-de.zip (3.8 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-de.zip (4.2 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-es.zip (2.2 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-es.zip (2.5 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-it.zip (2.0 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-it.zip (2.2 GB)
 
+For MacOS we still make available the data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated, they are still compatible with the latest *entity-fishing* version 0.0.4 and could be used for test/development. 
 
     **MacOS**
 
@@ -54,25 +55,24 @@ Then install the compiled indexed data:
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-it.zip (1.3 GB)
 
-The data for version ``0.0.4`` correspond to the Wikidata and Wikipedia dumps from 20.05.2020. The Knowledge Base part contains around 87 million entities and 1.1 billion statements. The data for version ``0.0.3`` correspond to the Wikidata and Wikipedia dumps from mid-2018.
 
 #. Unzip the db archives files under ``data/db/``.
 
     This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
-    The uncompressed data is about 80 GB.
+    The full uncompressed data is about 119 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
       $ ./gradlew clean build
 
-   Some tests will be executed. If all tests are successful, you should be now ready to run the service.
+   You should be now ready to run the service.
 
  
 #. Run the service:
    ::
       $ ./gradlew appRun
 
-The test console is available at port ``:8090`` by opening in your browser (preferably *Firefox* or *Chrome*, *Internet Explorer* has not been tested): http://localhost:8090
+The test console is available at port ``:8090`` by opening in your browser: http://localhost:8090
 
 For more information, see the next section on the *entity-fishing* Console.
 
