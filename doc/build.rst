@@ -54,7 +54,7 @@ Then install the compiled indexed data:
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-it.zip (1.3 GB)
 
-
+The data for version ``0.0.4`` correspond to the Wikidata and Wikipedia dumps from 20.05.2020. The Knowledge Base part contains around 87 million entities and 1.1 billion statements. The data for version ``0.0.3`` correspond to the Wikidata and Wikipedia dumps from mid-2018.
 
 #. Unzip the db archives files under ``data/db/``.
 
