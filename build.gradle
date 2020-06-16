@@ -72,7 +72,7 @@ dependencies {
     }
     compile group: 'directory-naming', name: 'naming-java', version: '0.8'
     compile group: 'fr.limsi.wapiti', name: 'wapiti', version: '1.5.0'
-    compile group: 'org.wipo.analysers', name: 'wipo-analysers', version: '0.0.2'
+    compile group: 'org.wipo.analysers', name: 'wipo-analysers', version: '0.0.1'
 
     //Apache commons
     compile 'org.apache.commons:commons-collections4:4.1'
