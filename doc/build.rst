@@ -3,12 +3,11 @@
 Install, build and run
 ======================
 
-*entity-fishing* requires JDK 1.8. It supports Linux-64 (preferred) and Mac OS environments (if you can't avoid it!). Below, we make available the LMDB binary data for these two architectures. 
+*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64 (preferred) and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. taking into account that only index data for Linux are up-to-date. 
 
 Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
 
-After decompressing all the index data, up to 80 GB of disk space will be used if you wish to use all the supported languages (en, fr, de , it, es) - be sure to have enough free space. For running English language only, you will need around 35GB. 
-SSD is recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
+After decompressing all the index data, up to 119 GB of disk space will be used if you wish to use all the supported languages (en, fr, de , it, es) - be sure to have enough free space. For running English language only, you will need around 90 GB. SSD is highly recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
@@ -58,8 +57,7 @@ For MacOS we still make available the data version ``0.0.3`` corresponding to th
 
 #. Unzip the db archives files under ``data/db/``.
 
-    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``
-    The full uncompressed data is about 119 GB.
+    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``. The full uncompressed data is about 119 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::

@@ -15,16 +15,16 @@ The documentation of *entity-fishing* is available [here](http://nerd.readthedoc
 * entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
 ![entity-fishing](doc/images/screen1.png)
 
-* entity recognition and disambiguation against Wikidata at document level, for example a PDF with layout positioning and structure-aware annotations,
-![entity-fishing](doc/images/screen3.png)
+* entity recognition and disambiguation against Wikidata at document level, in particular for a PDF with layout positioning and structure-aware annotations,
+![entity-fishing](doc/images/screen10.png)
 
-* search query disambiguation (the _short text_ mode) - bellow disambiguation of the search query "concrete pump sensor" in the service test console,
+* search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
 ![Search query disambiguation](doc/images/screen8.png)
 
 * weighted term vector disambiguation (a term being a phrase),
 ![Search query disambiguation](doc/images/screen5.png)
 
-* interactive disambiguation in text editing mode.  
+* interactive disambiguation in text editing mode (experimental).  
 ![Editor with real time disambiguation](doc/images/screen6.png)
 
 # Current version
