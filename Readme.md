@@ -13,7 +13,7 @@ The documentation of *entity-fishing* is available [here](http://nerd.readthedoc
 *entity-fishing* performs the following tasks:
 
 * entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
-![entity-fishing](doc/images/screen1.png)
+![entity-fishing](doc/images/screen11.png)
 
 * entity recognition and disambiguation against Wikidata at document level, in particular for a PDF with layout positioning and structure-aware annotations,
 ![entity-fishing](doc/images/screen10.png)
