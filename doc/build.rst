@@ -76,6 +76,6 @@ For more information, see the next section on the *entity-fishing* Console.
 
 
 Creating a new Knowledge Base version from new Wikidata and Wikipedia dumps
-===========================================================================
+***************************************************************************
 
 The knowledge base used by *entity-fishing* can be updated with new versions of Wikidata and Wikipedia using the pre-processing from the library `GRISP <https://github.com/kermitt2/grisp>`_, see `https://github.com/kermitt2/grisp <https://github.com/kermitt2/grisp>`_. 
