@@ -801,12 +801,13 @@ public class ProcessText {
      * null, with additional requirements depending on language
      */
     private static boolean validEntity(Mention entity, String lang) {
-        if ((entity == null) || (entity.getRawName() == null))
+        if ((entity == null) || (entity.getRawName() == null) || (entity.getRawName().length() == 0))
             return false;
         // we need in general to remove as valid mention:
         // * one letter tokens
         // * numerical tokens
-        if (entity.getRawName().length() <= 1 || TextUtilities.test_digit(entity.getRawName()))
+        //if (entity.getRawName().length() <= 1 || TextUtilities.test_digit(entity.getRawName()))
+        if (entity.getRawName().length() <= 1 || TextUtilities.countDigit(entity.getRawName()) == entity.getRawName().length())
             return false;
 
         return true;

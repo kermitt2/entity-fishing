@@ -8,7 +8,7 @@
     <groupId>com.scienceminer.nerd</groupId>
     <artifactId>nerd</artifactId>
     <packaging>war</packaging>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <name>entity-fishing</name>
     <description>Entity Recognition and Disambiguation</description>
@@ -26,21 +26,6 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-
-    <contributors>
-        <contributor>
-            <name>Patrice Lopez</name>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </contributor>
-        <contributor>
-            <name>Luca Foppiano</name>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </contributor>
-    </contributors>
 
     <build>
         <plugins>
@@ -94,19 +79,8 @@
                     <webResources>
                         <resource>
                             <directory>src/main/webapp/WEB-INF</directory>
-                            <!--excludes>
-                                <exclude>src/main/resources/</exclude>
-                            </excludes-->
-                            <!--includes>
-                                <include>web.xml</include>
-                            </includes-->
-                            <!--filtering>true</filtering-->
                             <targetPath>WEB-INF</targetPath>
                         </resource>
-                        <!--resource>
-                            <directory>utils/brat</directory>
-                            <targetPath>brat</targetPath>
-                        </resource-->
                         <resource>
                             <directory>doc</directory>
                             <targetPath>doc</targetPath>
@@ -119,238 +93,10 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.8.v20171121</version>
-
-                <configuration>
-                    <jvmArgs>-Xmx4g -Dfile.encoding=UTF-8 -Djdk.xml.totalEntitySizeLimit=2147480000</jvmArgs>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
-                    <stopKey/>
-                    <stopPort/>
-                    <systemProperties>
-                        <!-- enable easy JMX connection to JConsole -->
-                        <systemProperty>
-                            <name>com.sun.management.jmxremote</name>
-                            <value/>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>jetty.port</name>
-                            <value>8090</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>maxIdleTime</name>
-                            <value>60000</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>log4j.configuration</name>
-                            <value>log4j-jetty.xml</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
     <profiles>
-
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_annotate_en -->
-            <id>train_annotate_en</id>
-            <activation>
-                <property>
-                    <name>train_annotate_en</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx10g</argument>
-                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-                                <argument>data/wikipedia/training/</argument>
-                                <argument>en</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_annotate_de -->
-            <id>train_annotate_de</id>
-            <activation>
-                <property>
-                    <name>train_annotate_de</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx10g</argument>
-                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-                                <argument>data/wikipedia/training/</argument>
-                                <argument>de</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
-            <id>train_annotate_fr</id>
-            <activation>
-                <property>
-                    <name>train_annotate_fr</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx10g</argument>
-                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-                                <argument>data/wikipedia/training/</argument>
-                                <argument>fr</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
-            <id>train_annotate_it</id>
-            <activation>
-                <property>
-                    <name>train_annotate_it</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument></argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-                                <argument>data/wikipedia/training/</argument>
-                                <argument>it</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
-            <id>train_annotate_es</id>
-            <activation>
-                <property>
-                    <name>train_annotate_es</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
-                                <argument>-Djdk.xml.totalEntitySizeLimit=2147480000</argument>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>com.scienceminer.nerd.training.WikipediaTrainer</argument>
-                                <argument>data/wikipedia/training/</argument>
-                                <argument>es</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- mvn compile exec:exec -Ptrain_annotate_fr -->
-            <id>generate_entity_description</id>
-            <activation>
-                <property>
-                    <name>generate_entity_description</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>-Xms2g</argument>
-                                <argument>-Xmx8g</argument>
-                                <argument>com.scienceminer.nerd.embeddings.EntityDescription</argument>
-                                <argument>data/wikipedia/embeddings/en/</argument>
-                                <argument>en</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
         <profile>
             <id>tomcat</id>
@@ -362,57 +108,6 @@
             </activation>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.0.2</version>
-                        <executions>
-                            <execution>
-                                <id>copy-resources-source</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/target/classes</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/src/main/resources</directory>
-                                            <excludes>
-                                                <exclude>jetty.xml</exclude>
-                                                <exclude>log4j-jetty.xml</exclude>
-                                                <exclude>log4j.xml</exclude>
-                                                <exclude>log4j.test.xml</exclude>
-                                            </excludes>
-                                            <includes>
-                                                <include>log4j-tomcat.xml</include>
-                                                <include>*.properties</include>
-                                            </includes>
-                                            <filtering>true</filtering>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>copy-resources-test</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>testResources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/target/test-classes</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/src/test/resources</directory>
-                                            <excludes>
-                                                <exclude>query.json</exclude>
-                                            </excludes>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
@@ -428,20 +123,6 @@
                                     <filtering>true</filtering>
                                     <targetPath>WEB-INF</targetPath>
                                 </resource>
-                                <!--<resource>
-                                    <directory>${basedir}/src/main/resources</directory>
-                                    <excludes>
-                                        <exclude>log4j.xml</exclude>
-                                        <exclude>jetty.xml</exclude>
-                                        <exclude>log4j-jetty.xml</exclude>
-                                    </excludes>
-                                </resource>-->
-                                <!--<resource>
-                                    <directory>${basedir}/src/test/resources</directory>
-                                    <excludes>
-                                        <exclude>log4j.test.xml</exclude>
-                                    </excludes>
-                                </resource>-->
                                 <resource>
                                     <excludes>
                                         <exclude>**/db-de/**</exclude>
@@ -459,27 +140,6 @@
                                     <targetPath>doc</targetPath>
                                 </resource>
                             </webResources>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>2.6</version>
-
-                        <!--<executions>
-                            <execution>
-                                <id>assembly-data</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>assembly</goal>
-                                </goals>
-                            </execution>
-                        </executions>-->
-                        <configuration>
-                            <finalName>${project.artifactId}_${project.version}-data</finalName>
-                            <descriptors>
-                                <descriptor>src/main/assembly/resources.xml</descriptor>
-                            </descriptors>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -711,7 +371,7 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.5.5</version>
+            <version>0.6.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -722,12 +382,12 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-ner</artifactId>
-            <version>0.5.1</version>
+            <version>0.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.5.5</version>
+            <version>0.6.0</version>
         </dependency>
         <dependency>
             <groupId>directory-naming</groupId>
@@ -744,12 +404,6 @@
             <artifactId>wipo-analysers</artifactId>
             <version>0.0.1</version>
         </dependency>
-
-        <!--dependency>
-            <groupId>linnaeus</groupId>
-            <artifactId>linnaeus</artifactId>
-            <version>2.0</version>
-        </dependency-->
 
         <!-- utilities -->
         <dependency>
@@ -785,48 +439,16 @@
             <version>${lmdbjni.version}</version>
         </dependency>
 
-        <!-- TBD: update to the latest version! -->
         <dependency>
             <groupId>com.googlecode.clearnlp</groupId>
             <artifactId>clearnlp</artifactId>
             <version>1.3.1</version>
         </dependency>
 
-        <!-- to be removed !-->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-core</artifactId>
             <version>1.2.1</version>
-            <!--<exclusions>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-server</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-json</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty-util</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jsp-2.1</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jsp-api-2.1</artifactId>
-                </exclusion>
-            </exclusions>-->
         </dependency>
 
         <!-- for latest JDK support -->

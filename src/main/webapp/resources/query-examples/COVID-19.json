@@ -1,0 +1,16 @@
+{
+    "text": "SARS-CoV-2 is a betacoronavirus virus responsible for the COVID-19 pandemic. Here, we determined the X-ray crystal structure of a potent neutralizing monoclonal antibody, CV30, isolated from a patient infected with SARS-CoV-2, in complex with the receptor binding domain (RBD). The structure reveals CV30's epitope overlaps with the human ACE2 receptor binding site thus providing the structural basis for its neutralization by preventing ACE2 binding.",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "en"
+    },
+    "entities": [],
+    "mentions": [
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "customisation": "generic",
+    "minSelectorScore": 0.3
+}

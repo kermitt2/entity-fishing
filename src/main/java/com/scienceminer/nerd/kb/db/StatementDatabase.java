@@ -192,7 +192,7 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println(nbSeen + " / " + totalStatements);
+				//System.out.println(nbSeen + " / " + totalStatements);
 			}
 
 			Entry entry = iter.next();

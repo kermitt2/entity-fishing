@@ -48,3 +48,21 @@ The tool currently supports English, German, French, Spanish and Italian languag
 
 The tool is developed in Java and has been designed for fast processing (at least for a NERD system, 500-1000 words per second on a medium-profile linux server single thread or one PDF page of a scientific articles in 1-2 seconds), with limited memory (at least for a NERD system, here 3GB of RAM) and to offer relatively close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-10 milliseconds. *entity-fishing* uses the very fast `SMILE ML <https://haifengl.github.io/smile/>`_ library for machine learning and a `JNI integration of LMDB <https://github.com/deephacks/lmdbjni>`_ as embedded database. 
 
+
+How to cite
+***********
+
+
+
+License and contact
+*******************
+
+Distributed under `Apache 2.0 license <http://www.apache.org/licenses/LICENSE-2.0>`_. The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
+
+Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
+
+*entity-fishing* is developed by `SCIENCE-MINER <http://science-miner.com/entity-disambiguation/>`_ since 2015, with contributions of `Inria <https://inria.fr>`_ Paris (2017-2018). 
+
+Inria contributors were supported by the H2020 `HIRMEOS <http://www.hirmeos.eu>`_, `IPERION-CH <http://www.iperionch.eu>`_ and `DESIR <https://www.dariah.eu/activities/projects-and-affiliations/desir/>`_ EU projects. 
+
+.. <a href="https://www.dariah.eu/activities/projects-and-affiliations/desir/" target="_blank"><img align="right" width="75" height="50" src="doc/images/dariah.png"/></a><a href="http://www.iperionch.eu" target="_blank"><img align="right" width="160" height="40" src="doc/images/iperion.png"/></a><a href="http://www.hirmeos.eu" target="_blank"><img align="right" width="120" height="40" src="doc/images/hirmeos.png"/></a>

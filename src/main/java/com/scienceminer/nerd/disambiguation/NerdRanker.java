@@ -21,7 +21,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.trainer.LabelStat;
+import org.grobid.trainer.evaluation.LabelStat;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.UnicodeUtil;

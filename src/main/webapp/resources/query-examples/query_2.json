@@ -1,0 +1,15 @@
+{
+    "text": "",
+    "shortText": "montelukast loratadine HPLC",
+    "termVector": [],
+    "language": {
+        "lang": "en"
+    },
+    "entities": [],
+    "mentions": [
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "customisation": "generic"
+}

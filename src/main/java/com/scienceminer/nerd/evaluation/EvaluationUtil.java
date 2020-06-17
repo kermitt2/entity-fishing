@@ -5,7 +5,7 @@ import java.io.*;
 import java.text.*;
 
 import org.grobid.core.utilities.TextUtilities;
-import org.grobid.trainer.LabelStat;
+import org.grobid.trainer.evaluation.LabelStat;
 
 import com.scienceminer.nerd.exceptions.*;
 import com.scienceminer.nerd.disambiguation.NerdEntity;

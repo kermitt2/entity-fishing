@@ -40,8 +40,8 @@ public class CorpusTrainer {
 	public CorpusTrainer(String lang) {
 		this.lang = lang;
 
-		arffRanker = new File("data/wikipedia/training/" + lang + "/ranker.arff");
-		arffSelector = new File("data/wikipedia/training/" + lang + "/selector.arff");
+		arffRanker = new File("data/wikipedia/training" + File.separator + lang + File.separator+ "ranker.arff");
+		arffSelector = new File("data/wikipedia/training" + File.separator + lang + File.separator + "selector.arff");
 
 		try {
 			wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
@@ -62,7 +62,7 @@ public class CorpusTrainer {
 
 
 	public void train(String corpus) {
-		String corpusPath = "data/corpus/corpus-long/" + corpus + "/";
+		String corpusPath = "data/corpus/corpus-long/" + corpus + File.separator;
 		String corpusRefPath = corpusPath + corpus + ".xml";
 		File corpusRefFile = new File(corpusRefPath);
 

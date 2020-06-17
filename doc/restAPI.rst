@@ -12,9 +12,9 @@ All these RESTful services are available through Cross-origin resource sharing (
 *********************************
 
 
-The NERD query processing service takes as input a JSON structured query and returns the JSON query enriched with a list of identified and, when possible, disambiguated entities.
+The *entity-fishing* query processing service takes as input a JSON structured query and returns the JSON query enriched with a list of identified and, when possible, disambiguated entities.
 
-The NERD service can be applied on 4 types of input content:
+The *entity-fishing* service can be applied on 4 types of input content:
  * **text**, provided as JSON string value, for example one or several paragraphs of natural language,
  * **search query**, provided as JSON string value, corresponding to several search terms used together and which can possibly be disambiguated when associated,
  * **weighted vector of terms**, provided by a structured JSON array, where each term will be disambiguated, when possible, in the context of the complete vector - weighted vector of term is a very common structure used in information retrieval, clustering and classification.
@@ -320,8 +320,7 @@ Example request
    }
 
 
-The termVector field is required for having a well-formed query. 
-The additional parameter *resultLanguages* provides a list of language codes in addition to the language of the input terms. It will allow to get back the wikipedia pages, if they exist, of such additional languages. Currently only English, German and French wikipedia are supported.
+The termVector field is required for having a well-formed query.
 
 **Example using CURL** (using the query above):
 ::
@@ -419,9 +418,6 @@ In the example above, the root layer of JSON values correspond to:
 
 - **global_categories**: provides a weighted list of Wikipedia categories, in order of relevance that are representing the context of the whole text in input.
 
-The following option is **deprecated**, it will be removed in the next release:
-
-- *onlyNER*: if true the mentions are extracted only using a NER engine and the disambiguation against wikipedia is skipped.
 
 For each entity the following information are provided:
 
@@ -505,7 +501,6 @@ The type of recognised entities are restricted to a set of 27 classes of named e
 ::
    {
       "runtime": 870,
-..      "onlyNER": false,
       "nbest": false,
       "termVector": [
          {
@@ -545,7 +540,6 @@ The type of recognised entities are restricted to a set of 27 classes of named e
 ::
    {
       "runtime": 2823,
-..      "onlyNER": false,
       "nbest": false,
       "file”: "filename.pdf",
       “pages”: 10,

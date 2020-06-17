@@ -12,16 +12,13 @@ Currently a random sample of Wikipedia articles is used for training. The full a
 
 The following command will build the two models used in *entity-fishing*, the ``ranker`` and the ``selector`` model (Gradient Tree Boosting for the first one, Random Forest for the second one) and preliminary build the full article content database the first time for the English Wikipedia:
 ::
-	$ mvn compile exec:exec -Ptrain_annotate_en
+	$ ./gradlew train_wikipedia -Plang=en
 
 
 For other languages, replace the ending language code (``en``) by the desired one (``fr``, ``de``, ``it`` and ``es`` are supported), e.g.:
 ::
-	$ mvn compile exec:exec -Ptrain_annotate_de
-	$ mvn compile exec:exec -Ptrain_annotate_fr
-	$ mvn compile exec:exec -Ptrain_annotate_es
-	$ mvn compile exec:exec -Ptrain_annotate_it
-
+	$ ./gradlew train_annotate -Plang=fr
+	$ ./gradlew train_annotate -Plang=de
 
 Models will be saved under ``data/models``. ``ARFF`` training data files used to build the model are saved under ``data/wikipedia/training/``.
 
@@ -39,20 +36,26 @@ Training with an annotated corpus
 
 It is possible to train the entity-fishing models with several well-known available datasets. For convenience, the datasets indicated here :doc:`evaluation` are present in the *entity-fishing* distribution.
 
-Use the following maven command with a dataset and a language identifier for running a training with this dataset:
+Use the following command with a dataset name and a language identifier for running a training with this dataset:
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aquaint en"
+	$ ./gradlew train_corpus -Pcorpus=aquaint -Plang=en
 
 For instance for training with the train subset of the AIDA-CONLL, use: 
 ::
-	$ mvn compile exec:java -Dexec.mainClass=com.scienceminer.nerd.training.CorpusTrainer -Dexec.args="aida-train en"
+	$ ./gradlew train_corpus -Pcorpus=aida-train -Plang=en 
 
 *entity-fishing* also included the possibility to generate additional pre-annotated corpus, for instance to be further corrected manually. See :doc:`evaluation` for the explanations.
+
+The evaluation with annotated corpus is also described in the page :doc:`evaluation`.
 
 Creating entity embeddings
 **************************
 
 Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. For creating these entity embeddings, the process is as follow: 
+
+0. Prepare packaging with maven:
+::
+	$ mvn clean install
 
 1. Download available pretrained word embeddings - this could be for instance word2vec, FastText, or lexvec. Word embeddings need initially to be in the standard .vec format (a text format). word2vec binary format can be transformed into .vec format with the simple utility `convertvec <https://github.com/marekrei/convertvec>`_
 
@@ -60,16 +63,21 @@ Entity embeddings are used to improve entity disambiguation. They are created fr
 
 Quantize will simplify the vector given an acceptable quantization factor (by default the error rate for quantizing is 0.01, but it could be changed with the argument ``-error``)
 ::
-	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i word.embeddings.vec -o word.embeddings.quantized -hashheader"
+	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i word.embeddings.vec -o word.embeddings.quantized -hashheader"	
 
 Here the FastText word embeddings ``wiki.en.vec`` given as input (``-i``) will be quantized and saved as ``wiki.en.quantized``. ``-hashheader`` indicates that the first line (a header to be ignored) must be skipped.
 
 3. Create Wikidata entity description to be used for producing entity embeddings. The command for creating description is the following one:
 ::
+	$./gradlew generate_entity_description -Plang=en
+
+Replace the ``en`` argument by the language of interest. 
+
+As an alternative with maven:
+::
 	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityDescription -Dexec.args="entity.description en"
 
-The argument indicates the directory where to save the generated description. 
-
+The argument indicates then where to save the generated description (normally ``data/wikipedia/embeddings/``) and the language of interest. 
 
 4. Create entity embeddings from the generated description. 
 

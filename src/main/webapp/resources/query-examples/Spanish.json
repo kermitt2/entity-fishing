@@ -1,0 +1,17 @@
+{
+    "text": "La Exposición Internacional de Barcelona tuvo lugar del 20 de mayo de 1929 al 15 de enero de 1930 en Barcelona (España). Celebrada en la montaña de Montjuic, se desarrolló en una superficie de 118 hectáreas, y tuvo un coste de 130 millones de pesetas. Entre la veintena europea de naciones que oficialmente participaron estaban países como Alemania, Bélgica, Dinamarca, Francia, Hungría, Italia, Noruega, Rumanía o Suiza. También participaron expositores privados japoneses y estadounidenses.\nEn Barcelona se guardaba un grato recuerdo de la Exposición Universal de 1888, que supuso un gran avance para la ciudad en el terreno económico y tecnológico, así como la remodelación del Parque de la Ciudadela. Por eso se proyectó esta nueva exposición para dar a conocer los nuevos adelantos tecnológicos y proyectar la imagen de la industria catalana en el exterior. De nuevo, la exposición originó una remodelación de una parte de la ciudad, en este caso la montaña de Montjuic, así como sus zonas colindantes, especialmente la plaza de España.\nLa Exposición supuso un gran desarrollo urbanístico para Barcelona, así como un banco de pruebas para los nuevos estilos arquitectónicos gestados a principios del siglo xx: a nivel local, representó la consolidación del novecentismo, estilo de corte clásico que sustituyó al modernismo preponderante en Cataluña durante la transición de siglo; además, supuso la introducción en España de las corrientes de vanguardia internacionales, especialmente el racionalismo, a través del Pabellón de Alemania de Ludwig Mies van der Rohe. La Exposición dejó numerosos edificios e instalaciones algunos de los cuales se han convertido en emblemas de la ciudad, como el Palacio Nacional, la Fuente Mágica, el Teatre Grec, el Pueblo Español y el Estadio Olímpico.",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "es"
+    },
+    "entities": [],
+    "mentions": [
+        "ner",
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "minSelectorScore": 0.3,
+    "customisation": "generic"
+}

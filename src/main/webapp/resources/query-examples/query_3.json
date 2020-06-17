@@ -1,0 +1,15 @@
+{
+    "text": "",
+    "shortText": "fiber-reinforced composites",
+    "termVector": [],
+    "language": {
+        "lang": "en"
+    },
+    "entities": [],
+    "mentions": [
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "customisation": "generic"
+}

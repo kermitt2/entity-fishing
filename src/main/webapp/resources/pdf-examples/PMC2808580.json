@@ -1,0 +1,9 @@
+{
+    "mentions": [
+        "ner",
+        "wikipedia"
+    ],
+    "nbest": false,
+    "structure": "grobid",
+    "customisation": "generic"
+}

@@ -114,10 +114,12 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	// among all the strings which can realise this particular concept
 	private int freq_i = 0;
 	// represent named entity disambiguation score in a NERD scenario
-	@JsonProperty("nerd_score")
+//	@JsonProperty("nerd_score")
 	private double nerdScore = 0.0;
 	// represent named entity selection score in a NERD scenario
-	@JsonProperty("nerd_selection_score")
+//	@JsonProperty("nerd_selection_score")
+	@JsonProperty("confidence_score")
+
 	private double selectionScore = 0.0;
 	// relatedness score of the term with the context
 	private double relatednessScore = 0.0;
@@ -783,8 +785,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		/*buffer.append(", \"nerd_score\" : \"" + nerdScore + "\"");
 		buffer.append(", \"nerd_selection_score\" : \"" + selectionScore + "\"");*/
 
-		buffer.append(", \"nerd_score\":" + TextUtilities.formatFourDecimals(nerdScore));
-		buffer.append(", \"nerd_selection_score\":" + TextUtilities.formatFourDecimals(selectionScore));
+//		buffer.append(", \"nerd_score\":" + TextUtilities.formatFourDecimals(nerdScore));
+//		buffer.append(", \"nerd_selection_score\":" + TextUtilities.formatFourDecimals(selectionScore));
+		buffer.append(", \"confidence_score\":" + TextUtilities.formatFourDecimals(selectionScore));
 
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
@@ -926,7 +929,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			String outputPreferredTerm  = new String(encodedPreferredTerm); 
 			buffer.append(", \"preferredTerm\" : \"" + outputPreferredTerm + "\"");
 		}*/
-		if (type != null)
+		if (type != null && wikidataId == null)
 			buffer.append(", \"type\" : \"" + type.getName() + "\"");
 
 		if (CollectionUtils.isNotEmpty(subTypes)) {
@@ -963,8 +966,10 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			buffer.append("]");
 		}
 
-		buffer.append(", \"nerd_score\": " + TextUtilities.formatFourDecimals(nerdScore));
-		buffer.append(", \"nerd_selection_score\": " + TextUtilities.formatFourDecimals(selectionScore));
+//		buffer.append(", \"nerd_score\": " + TextUtilities.formatFourDecimals(nerdScore));
+//		buffer.append(", \"nerd_selection_score\": " + TextUtilities.formatFourDecimals(selectionScore));
+		buffer.append(", \"confidence_score\":" + TextUtilities.formatFourDecimals(selectionScore));
+
 		/*if (ner_conf != -1.0)
 			buffer.append(", \"ner_conf\" : \"" + ner_conf + "\"");*/
 		//buffer.append(", \"prob\" : \"" + prob + "\"");

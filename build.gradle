@@ -1,0 +1,261 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/rookies/maven" }
+        maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
+        maven { url "http://oss.jfrog.org/artifactory/libs-release" }
+        maven { url "https://dl.bintray.com/rookies/maven" }
+    }
+    dependencies {
+        classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath "gradle.plugin.org.gretty:gretty:2.3.1"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
+    }
+}
+
+apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.gretty'
+//apply from: 'https://raw.github.com/gretty-gradle-plugin/gretty/master/pluginScripts/gretty.plugin'
+
+/*plugins {
+    id 'java'
+    id 'application'
+    id 'maven'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}*/
+
+group = "com.scienceminer.nerd"
+version = '0.0.4'
+
+description = """entity recognition and disambiguation against Wikidata and Wikipedia in a raw text, partially-annotated text segment or PDF"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven { url "https://dl.bintray.com/rookies/maven" }
+    maven {
+        url 'lib/'
+    }
+}
+
+dependencies {
+    //Tests
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.easymock:easymock:3.4'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+    testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
+    testCompile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    //Logging
+    compile 'org.slf4j:slf4j-log4j12:1.7.25'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
+    //GROBID
+    compile group: 'org.grobid', name: 'grobid-ner', version: '0.6.0'
+    compile 'org.grobid:grobid-trainer:0.6.0'
+    compile(group: 'org.grobid', name: 'grobid-core', version: '0.6.0') {
+        exclude(module: 'slf4j-jdk14')
+    }
+    compile group: 'directory-naming', name: 'naming-java', version: '0.8'
+    compile group: 'fr.limsi.wapiti', name: 'wapiti', version: '1.5.0'
+    compile group: 'org.wipo.analysers', name: 'wipo-analysers', version: '0.0.1'
+
+    //Apache commons
+    compile 'org.apache.commons:commons-collections4:4.1'
+    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'commons-logging:commons-logging:1.2'
+    compile 'commons-io:commons-io:2.5'
+    compile 'commons-pool:commons-pool:1.6'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.3'
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.1'
+    compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
+
+    //Json
+    compile 'com.fasterxml.jackson.core:jackson-core:2.10.1'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.10.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.1'
+    compile group: 'net.arnx', name: 'jsonic', version: '1.3.10'
+
+    //Web interface
+    compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.8'
+    compile group: 'com.sun.jersey', name: 'jersey-server', version: '1.8'
+    compile group: 'com.sun.jersey.contribs', name: 'jersey-multipart', version: '1.8'
+    compile 'javax.ws.rs:javax.ws.rs-api:2.1'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    //Misc
+    compile group: 'com.googlecode.clearnlp', name: 'clearnlp', version: '1.3.1'
+    //compile group: 'org.jvnet', name: 'mimepull', version: '1.6'
+
+    //Specialised libraries
+    compile "com.cybozu.labs:langdetect:1.1-20120112"
+    //compile group: 'com.cybozu', name: 'language-detection', version: '1.1-20120112'
+    compile group: 'com.github.haifengl', name: 'smile-core', version: '1.3.1'
+    compile(group: 'it.unimi.dsi', name: 'sux4j', version: '3.1.2') {
+        exclude(module: 'log4j-over-slf4j')
+        exclude(module: 'logback-classic')
+    }
+    compile group: 'it.unimi.dsi', name: 'fastutil', version: '6.5.12'
+    compile(group: 'it.unimi.dsi', name: 'dsiutils', version: '2.1.9') {
+        exclude(module: 'logback-classic')
+    }
+    compile group: 'de.ruedigermoeller', name: 'fst', version: '2.50'
+
+    //Wikipedia
+    compile group: 'org.sweble.wikitext', name: 'swc-parser-lazy', version: '3.1.5'
+    compile group: 'org.sweble.wikitext', name: 'swc-engine', version: '3.1.5'
+
+    //XML
+    compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.11'
+
+    //LMDB
+    compile group: 'org.deephacks.lmdbjni', name: 'lmdbjni', version: '0.4.6'
+    compile group: 'org.deephacks.lmdbjni', name: 'lmdbjni-linux64', version: '0.4.6'
+    compile group: 'org.deephacks.lmdbjni', name: 'lmdbjni-osx64', version: '0.4.6'
+    compile group: 'org.deephacks.lmdbjni', name: 'lmdbjni-win64', version: '0.4.6'
+
+    //Hadoop
+    compile group: 'org.apache.hadoop', name: 'hadoop-core', version: '1.2.1'
+    compile group: 'org.apache.avro', name: 'avro', version: '1.7.5'
+
+}
+
+configurations {
+    compile.exclude group: "org.slf4j", module: "slf4j-jdk14"
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'xml-apis:xml-apis:1.4.01'
+    }
+}
+
+test {
+    testLogging.showStandardStreams = true
+    exclude '**/**IntegrationTest**'
+}
+
+//integration (type: Test){
+//    include '**'
+//}
+
+// Gretty configuration
+
+gretty {
+    httpPort = 8090
+    contextPath = '/'
+    servletContainer = "jetty9.4"
+    webInfIncludeJarPattern = ''
+    reloadOnClassChange = false
+    interactiveMode = ''
+}
+
+war {
+    classifier = 'war'
+//    dependsOn mainWar
+    enabled true
+}
+
+artifacts {
+    archives jar
+    archives war
+}
+
+
+//TODO: we could create a task to download and unpack the lmdb files automatically 
+//task copyModels(type: Copy) {
+//    from "${rootDir}/resources/models"
+//    include "**/*.wapiti"
+//    into "${rootDir}/../grobid-home/models/"
+//}
+
+//tasks.withType(JavaCompile) {
+//    options.compilerArgs << "-Xlint:deprecation"
+//    options.compilerArgs << "-Xlint:unchecked"
+//}
+
+wrapper {
+    gradleVersion "5.4.1"
+}
+
+// return the default value if the property has not been specified in command line
+ext.getArg = { propName, defaultVal ->
+    return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;
+}
+
+// Training with Wikipedia
+// Run like this: ./gradlew train_wikipedia -Plang=en
+// ./gradlew train_wikipedia -Plang=fr
+// etc.
+task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
+    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'data/wikipedia/training/', getArg('lang', 'en')
+    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+}
+
+// Training with an annotated corpus
+// Run like this: ./gradlew train_corpus -Pcorpus=aquaint -Plang=en
+// ./gradlew train_corpus -Pcorpus=aida-train -Plang=en 
+// etc.
+task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
+    main = 'com.scienceminer.nerd.training.CorpusTrainer'
+    classpath = sourceSets.main.runtimeClasspath
+    args getArg('corpus', ''), getArg('lang', 'en')
+    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+}
+
+// Evaluation
+// Run like this: ./gradlew evaluation -Pcorpus=[corpusname]
+// e.g. ./gradlew evaluation -Pcorpus=aida-testb
+task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'com.scienceminer.nerd.evaluation.NEDCorpusEvaluation'
+    classpath = sourceSets.main.runtimeClasspath
+    args getArg('corpus', '')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// training data generation
+// Run like this: ./gradlew annotatedDataGeneration -Pcorpus=[corpusname]
+// e.g. ./gradlew annotatedDataGeneration -Pcorpus=toto
+task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'training') {
+    main = 'com.scienceminer.nerd.evaluation.AnnotatedDataGeneration'
+    classpath = sourceSets.main.runtimeClasspath
+    args getArg('corpus', '')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// entity description to create entity embeddings
+// Run like this: ./gradlew generate_entity_description -Plang=en
+// ./gradlew generate_entity_description -Plang=fr
+// etc.
+task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
+    main = 'com.scienceminer.nerd.embeddings.EntityDescription'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'data/wikipedia/embeddings/', getArg('lang', 'en')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+
+
+
+

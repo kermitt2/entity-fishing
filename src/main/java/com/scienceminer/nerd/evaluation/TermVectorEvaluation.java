@@ -1,7 +1,7 @@
 package com.scienceminer.nerd.evaluation;
 
 import org.grobid.core.lang.Language;
-import org.grobid.trainer.LabelStat;
+import org.grobid.trainer.evaluation.LabelStat;
 import org.grobid.core.lang.LanguageDetectorFactory;
 
 import com.scienceminer.nerd.disambiguation.*;

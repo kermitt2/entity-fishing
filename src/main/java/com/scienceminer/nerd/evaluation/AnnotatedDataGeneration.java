@@ -67,22 +67,6 @@ public class AnnotatedDataGeneration {
         LibraryLoader.load();
     }
 
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.println("Usage: command [name_of_corpus]");
-            System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
-            System.exit(-1);
-        }
-        String corpus = args[0].toLowerCase();
-        if (!NEDCorpusEvaluation.corpora.contains(corpus)) {
-            System.err.println("corpus must be one of: " + NEDCorpusEvaluation.corpora.toString());
-            System.exit(-1);
-        }
-
-        AnnotatedDataGeneration nedEval = new AnnotatedDataGeneration();
-        nedEval.generate(corpus);
-    }
-
     public void generate(String corpus) {
         String corpusPath = "data/corpus/corpus-long/" + corpus + File.separator;
         String corpusPathRawTexts = "data/corpus/corpus-long/" + corpus + File.separator + "RawText";
@@ -129,7 +113,7 @@ public class AnnotatedDataGeneration {
 
         }
 
-        // Fetch the txt files and create the XML file  with annotations
+        // read the txt files and create the XML file  with annotations
         Collection<File> evalTxtFiles = FileUtils.listFiles(new File(corpusPathRawTexts),
                 new SuffixFileFilter(".txt", IOCase.INSENSITIVE), null);
 
@@ -382,7 +366,7 @@ public class AnnotatedDataGeneration {
                 }
             }
         } catch (Exception e) {
-            throw new NerdException("Something is wrong. ", e);
+            throw new NerdException("PDF process failed", e);
         }
 
         Pair<String, List<String>> result = new Pair(language, resultingDocuments);
@@ -392,5 +376,16 @@ public class AnnotatedDataGeneration {
 
     protected String postProcess(String string) {
         return StringUtils.trim(StringUtils.replaceAll(string, "^\\.", ""));
+    }
+
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: command [name_of_corpus]");
+            System.exit(-1);
+        }
+        String corpus = args[0].toLowerCase();
+
+        AnnotatedDataGeneration nedEval = new AnnotatedDataGeneration();
+        nedEval.generate(corpus);
     }
 }

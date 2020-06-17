@@ -18,7 +18,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.trainer.LabelStat;
+import org.grobid.trainer.evaluation.LabelStat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,0 +1,17 @@
+{
+    "text": "Mountain glaciers are pertinent indicators of climate change and their dynamics, in particular surface velocity change, is an essential climate variable. In order to retrieve the climatic signature from surface velocity, large-scale study of temporal trends spanning multiple decades is required. Satellite image feature-tracking has been successfully used to derive mountain glacier surface velocities, but most studies rely on manually selected pairs of images, which is not adequate for large datasets. In this paper, we propose a processing strategy to exploit complete satellite archives in a semi-automated way in order to derive robust and spatially complete glacier velocities and their uncertainties on a large spatial scale. In this approach, all available pairs within a defined time span are analysed, preprocessed to improve image quality and features are tracked to produce a velocity stack; the final velocity is obtained by selecting measures from the stack with the statistically higher level of confidence. This approach allows to compute statistical uncertainty level associated with each measured image pixel. This strategy is applied to 1536 pairs of Landsat 5 and 7 images covering the 3000 km long Pamir–Karakoram–Himalaya range for the period of 1999–2001 to produce glacier annual velocity fields. We obtain a velocity estimate for 76,000 km2 or 92% of the glacierized areas of this region. We then discuss the impact of coregistration errors and variability of glacier flow on the final velocity. The median 95% confidence interval ranges from 2.0 m/year on the average in stable areas and 4.4 m/year on the average over glaciers with variability related to data density, surface conditions and strain rate. These performances highlight the benefits of processing of a complete satellite archive to produce glacier velocity fields and to analyse glacier dynamics at regional scales. ",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "en"
+    },
+    "entities": [],
+    "mentions": [
+        "ner",
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "minSelectorScore": 0.2,
+    "customisation": "generic"
+}

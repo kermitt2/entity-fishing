@@ -1,0 +1,17 @@
+{
+    "text": "Edmond Ludlow (vers 1617-1692) est un parlementaire anglais, plus connu pour son implication dans l'exécution de Charles Ier, et pour ses mémoires, publiés à titre posthume et qui sont devenus une source importante pour les historiens des Guerres des Trois Royaumes. Après avoir servi dans les guerres civiles anglaises, Ludlow a été élu membre du Long Parlement. Après la création du Commonwealth en 1649, il est nommé adjoint de Ireton, commandant des forces du Parlement en Irlande, avant de rompre avec Oliver Cromwell lors de la création du Protectorat. Après la Restauration, Ludlow part en exil en Suisse, où il passe une grande partie du reste de sa vie.",
+    "shortText": "",
+    "termVector": [],
+    "language": {
+        "lang": "fr"
+    },
+    "entities": [],
+    "mentions": [
+        "ner",
+        "wikipedia"
+    ],
+    "nbest": false,
+    "sentence": false,
+    "minSelectorScore": 0.3,
+    "customisation": "generic"
+}

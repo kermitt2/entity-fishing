@@ -5,7 +5,7 @@ import com.scienceminer.nerd.disambiguation.NerdSelector;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import org.grobid.trainer.LabelStat;
+import org.grobid.trainer.evaluation.LabelStat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,8 +62,8 @@ public class WikipediaTrainer {
 		this.ranker = new NerdRanker(this.wikipedia);
 		this.selector = new NerdSelector(this.wikipedia);
 
-		arffRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.arff");
-		arffSelector = new File(dataDir.getPath() + "/" + lang + "/selector.arff");
+		arffRanker = new File(dataDir.getPath() + File.separator + lang + File.separator + "ranker.arff");
+		arffSelector = new File(dataDir.getPath() + File.separator + lang + File.separator + "selector.arff");
 
 		//modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
 		//modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
