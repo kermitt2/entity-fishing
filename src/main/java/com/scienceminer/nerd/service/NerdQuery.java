@@ -122,6 +122,10 @@ public class NerdQuery {
     // disambiguated and output
     private Filter filter = null;
 
+    // indicate if the full description of the entities should be included in the result
+    @Deprecated
+    private boolean full = false;
+
     // query-based threshold, override default values in the config file only for the present query
     private double minSelectorScore = 0.0;
     private double minRankerScore = 0.0;
@@ -416,6 +420,22 @@ public class NerdQuery {
         this.filter = filter;
     }
 
+    /**
+     * @deprecated Will be removed after the next release.
+     */
+    @Deprecated
+    public boolean getFull() {
+        return this.full;
+    }
+
+    /**
+     * @deprecated Will be removed after the next release.
+     */
+    @Deprecated
+    public void setFull(boolean full) {
+        this.full = full;
+    }
+
     public double getMinSelectorScore() {
         return this.minSelectorScore;
     }
@@ -700,8 +720,12 @@ public class NerdQuery {
                     first = false;
                 else
                     buffer.append(", ");
-                
-                buffer.append(entity.toJsonCompact());
+                if (this.full) {
+                    buffer.append(entity.toJsonFull());
+                    //TODO: remove after release
+                    //LOGGER.warn("The full json is a deprecated option and will be removed next release. ");
+                } else
+                    buffer.append(entity.toJsonCompact());
             }
             buffer.append("]");
         }
