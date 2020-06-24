@@ -12,6 +12,5 @@
     ],
     "nbest": false,
     "sentence": false,
-    "minSelectorScore": 0.25,
-    "customisation": "generic"
+    "minSelectorScore": 0.25
 }

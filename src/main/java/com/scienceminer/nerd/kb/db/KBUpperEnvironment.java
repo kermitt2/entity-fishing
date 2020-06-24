@@ -112,8 +112,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 		dbStatements = buildStatementDatabase();
 		databasesByType.put(DatabaseType.statements, dbStatements);
 
-		dbReverseStatements = buildReverseStatementDatabase();
-		databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
+		// dbReverseStatements will be build on demand because it is not used for common operations,
+		// only for making possible certain specialized export
+		//dbReverseStatements = buildReverseStatementDatabase();
+		//databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
 
 		dbBiblio = buildBiblioDatabase();
 		databasesByType.put(DatabaseType.biblio, dbBiblio);	
@@ -175,6 +177,8 @@ public class KBUpperEnvironment extends KBEnvironment {
 	 * dbStatements must be already built to create the reverse one.  
 	 */
 	public void loadReverseStatementDatabase(boolean overwrite) {
+		dbReverseStatements = buildReverseStatementDatabase();
+		databasesByType.put(DatabaseType.reverseStatements, dbReverseStatements);
 		dbReverseStatements.loadReverseStatements(overwrite, dbStatements);
 	}
 

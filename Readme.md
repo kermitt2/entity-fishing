@@ -2,12 +2,6 @@
 [![Documentation Status](https://readthedocs.org/projects/nerd/badge/?version=latest)](https://readthedocs.org/projects/nerd/?badge=latest)
 [![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/kermitt2/entity-fishing/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/kermitt2/entity-fishing)
 
-# Documentation
-
-[Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design, implementation descriptions, and some evaluations.
-
-The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
-
 # entity-fishing
 
 *entity-fishing* performs the following tasks:
@@ -26,6 +20,12 @@ The documentation of *entity-fishing* is available [here](http://nerd.readthedoc
 
 * interactive disambiguation in text editing mode (experimental).  
 ![Editor with real time disambiguation](doc/images/screen6.png)
+
+# Documentation
+
+[Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for some design, implementation descriptions, and some evaluations.
+
+The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
 
 # Current version
 

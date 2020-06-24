@@ -261,7 +261,7 @@ If you wish to process the whole document without specific structure analysis - 
 
 **Example using CURL** for processing the full content of a PDF, *without* preliminar structure recognition:
 ::
-   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'full', customisation': 'generic'}" -F "file=@PATH_FILENAME.pdf"
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'full'}" -F "file=@PATH_FILENAME.pdf"
 
 
 PDF input
@@ -281,7 +281,6 @@ The JSON format for the query parameter to be sent to the service is identical t
       "nbest": 0,
       "sentence": false,
       "structure": "grobid"
-      "customisation": "generic"
    }
 
 An additional parameter related to the processing of the structure of the PDF is available, called `structure`. For processing scientific and technical documents, in particular scholar papers, the value should be `grobid` which is a state of the art tool for structure the body of a scientific paper - it will avoid labelling bibliographical information, foot and head notes, figure content, will identify the useful areas (header, paragraphs, captions, etc.) handling multiple columns, hyphen, etc. and it will apply custom processnig based on the identified structure. 
@@ -290,7 +289,7 @@ If you wish to process the whole document without specific structure analysis (t
 
 **Example using CURL** (using the query above):
 ::
-   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'grobid', customisation': 'generic'}" -F "file=@PATH_FILENAME.pdf"
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'grobid'}" -F "file=@PATH_FILENAME.pdf"
 
 
 Weighted term disambiguation
@@ -315,8 +314,7 @@ Example request
       "language": {
          "lang": "en"
       },
-      "nbest": 0,
-      "customisation": "generic"
+      "nbest": 0
    }
 
 
@@ -324,7 +322,7 @@ The termVector field is required for having a well-formed query.
 
 **Example using CURL** (using the query above):
 ::
-   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={ 'termVector': [ { 'term' : 'computer science', 'score' : 0.3 }, { 'term' : 'engine', 'score' : 0.1 } ], 'language': { 'lang': 'en' }, 'resultLanguages': ['de'], 'nbest': 0, 'customisation': 'generic' }"
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={ 'termVector': [ { 'term' : 'computer science', 'score' : 0.3 }, { 'term' : 'engine', 'score' : 0.1 } ], 'language': { 'lang': 'en' }, 'resultLanguages': ['de'], 'nbest': 0}"
 
 
 Search query disambiguation
@@ -350,13 +348,12 @@ Example request:
       “language": {
          "lang": "en"
       },
-      "nbest": 0,
-      "customisation": "generic"
+      "nbest": 0
    }
 
 **Example using CURL** (using the query above):
 ::
-   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'shortText': 'concrete pump sensor','language': { 'lang': 'en'},'nbest': 0,'customisation': 'generic' }"
+   curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'shortText': 'concrete pump sensor','language': { 'lang': 'en'},'nbest': 0}"
 
 
 Response

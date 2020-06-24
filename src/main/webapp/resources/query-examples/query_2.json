@@ -10,6 +10,5 @@
         "wikipedia"
     ],
     "nbest": false,
-    "sentence": false,
-    "customisation": "generic"
+    "sentence": false
 }

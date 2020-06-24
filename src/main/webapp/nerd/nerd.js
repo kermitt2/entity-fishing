@@ -30,8 +30,7 @@ var nerd = (function ($) {
         "entities": [],
         "mentions": ["ner", "wikipedia"],
         "nbest": false,
-        "sentence": false,
-        "customisation": "generic"
+        "sentence": false
     };
 
     // query + PDF
@@ -39,8 +38,7 @@ var nerd = (function ($) {
         // "language": {"lang": "en"},
         "mentions": ["ner", "wikipedia"],
         "nbest": false,
-        "structure": "grobid",
-        "customisation": "generic"
+        "structure": "grobid"
     };
 
     // term lookup
