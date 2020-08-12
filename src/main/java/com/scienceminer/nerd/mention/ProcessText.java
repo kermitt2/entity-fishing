@@ -27,7 +27,7 @@ import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scala.Char;
+//import scala.Char;
 
 import java.io.*;
 import java.util.*;

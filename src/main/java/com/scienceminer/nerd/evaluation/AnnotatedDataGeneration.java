@@ -234,14 +234,17 @@ public class AnnotatedDataGeneration {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                org.apache.commons.lang3.tuple.Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                org.apache.commons.lang3.tuple.Pair<String,List<LayoutToken>> headerFeatured = 
+                    engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
                 String header = headerFeatured.getLeft();
 
-                List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                //List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                List<LayoutToken> tokenizationHeader = headerFeatured.getRight();
+
                 String labeledResult = null;
 
                 // alternative
-                String alternativeHeader = doc.getHeaderFeatured(true, true);
+                /*String alternativeHeader = doc.getHeaderFeatured(true, true);
                 // we choose the longest header
                 if (StringUtils.isNotBlank(StringUtils.trim(header))) {
                     header = alternativeHeader;
@@ -249,7 +252,7 @@ public class AnnotatedDataGeneration {
                 } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
                     header = alternativeHeader;
                     tokenizationHeader = doc.getTokenizationsHeader();
-                }
+                }*/
 
                 if (StringUtils.isNotBlank(StringUtils.trim(header))) {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
@@ -258,7 +261,7 @@ public class AnnotatedDataGeneration {
                     resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
 
                     BiblioItem resHeaderLangIdentification = new BiblioItem();
-                    engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
+                    engine.getParsers().getHeaderParser().resultExtraction(labeledResult, 
                             tokenizationHeader, resHeaderLangIdentification, doc);
 
                     Language lang = identifyLanguage(resHeaderLangIdentification, doc);

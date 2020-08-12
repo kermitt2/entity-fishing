@@ -1,7 +1,7 @@
 package com.scienceminer.nerd.utilities;
 
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import org.apache.pdfbox.io.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

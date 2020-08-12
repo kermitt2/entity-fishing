@@ -18,6 +18,7 @@ import org.grobid.core.data.BiblioItem;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
+import org.grobid.core.document.DocumentPointer;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.engines.FullTextParser;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
@@ -159,14 +160,15 @@ public class NerdRestProcessFile {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
                 String header = headerFeatured.getLeft();
-                List<LayoutToken> tokenizationHeader =
-                        Document.getTokenizationParts(documentParts, doc.getTokenizations());
+                //List<LayoutToken> tokenizationHeader =
+                //        Document.getTokenizationParts(documentParts, doc.getTokenizations());
+                List<LayoutToken> tokenizationHeader = headerFeatured.getRight();
                 String labeledResult = null;
 
                 // alternative
-                String alternativeHeader = doc.getHeaderFeatured(true, true);
+                /*String alternativeHeader = doc.getHeaderFeatured(true, true);
                 // we choose the longest header
                 if (StringUtils.isNotBlank(StringUtils.trim(header))) {
                     header = alternativeHeader;
@@ -174,7 +176,7 @@ public class NerdRestProcessFile {
                 } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
                     header = alternativeHeader;
                     tokenizationHeader = doc.getTokenizationsHeader();
-                }
+                }*/
 
                 if (StringUtils.isNotBlank(StringUtils.trim(header))) {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
@@ -184,7 +186,7 @@ public class NerdRestProcessFile {
 
                     if (lang == null) {
                         BiblioItem resHeaderLangIdentification = new BiblioItem();
-                        engine.getParsers().getHeaderParser().resultExtraction(labeledResult, true,
+                        engine.getParsers().getHeaderParser().resultExtraction(labeledResult, 
                                 tokenizationHeader, resHeaderLangIdentification, doc);
 
                         lang = identifyLanguage(resHeaderLangIdentification, doc);
@@ -478,11 +480,33 @@ public class NerdRestProcessFile {
             contentSample.append(resHeader.getKeywords());
         }
         if (contentSample.length() < 200) {
+            // we can exploit more textual content to ensure that the language identification will be
+            // correct
+            SortedSet<DocumentPiece> documentBodyParts = doc.getDocumentPart(SegmentationLabels.BODY);
+            if (documentBodyParts != null) {
+                StringBuilder contentBuffer = new StringBuilder();
+                for (DocumentPiece docPiece : documentBodyParts) {
+                    DocumentPointer dp1 = docPiece.getLeft();
+                    DocumentPointer dp2 = docPiece.getRight();
+
+                    int tokens = dp1.getTokenDocPos();
+                    int tokene = dp2.getTokenDocPos();
+                    for (int i = tokens; i < tokene; i++) {
+                        contentBuffer.append(doc.getTokenizations().get(i));
+                        contentBuffer.append(" ");
+                    }
+                }
+                contentSample.append(" ");
+                contentSample.append(contentBuffer.toString());
+            }
+        }
+
+        /*if (contentSample.length() < 200) {
             // we need more textual content to ensure that the language identification will be
             // correct
             // PL: the whole body, this is violent !
             contentSample.append(doc.getBody());
-        }
+        }*/
         LanguageUtilities languageIdentifier = LanguageUtilities.getInstance();
 
         Language resultLang = null;
