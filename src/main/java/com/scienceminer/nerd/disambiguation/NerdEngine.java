@@ -48,11 +48,12 @@ public class NerdEngine {
 
 	private static volatile NerdEngine instance = null;
 
-	private EngineParsers parsers = null;
+	//private EngineParsers parsers = null;
 
 	private Map<String, LowerKnowledgeBase> wikipedias = null;
 	private Map<String, NerdRanker> rankers = null;
 	private Map<String, NerdSelector> selectors = null;
+	private Map<String, TypeSequenceLabeling> labelers = null;
 	private Relatedness relatedness = null;
 	private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
 
@@ -83,7 +84,7 @@ public class NerdEngine {
 	private NerdEngine() {
 		try {
 			UpperKnowledgeBase.getInstance();
-			parsers = new EngineParsers();
+			//parsers = new EngineParsers();
 		} catch(Exception e) {
 			throw new NerdResourceException("Error instanciating the (N)ERD knowledge base. ", e);
 		}
@@ -93,6 +94,7 @@ public class NerdEngine {
 			relatedness = Relatedness.getInstance();
 			rankers = new HashMap<>();
 			selectors = new HashMap<>();
+			labelers = new HashMap<>();
 			wikipediaDomainMaps = UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 		} catch(Exception e) {
 			throw new NerdResourceException("Error when opening the relatedness model", e);
@@ -1024,6 +1026,21 @@ public class NerdEngine {
 		}
 
 		return ranker;
+	}
+
+	private TypeSequenceLabeling instantiateLabelerIfNull(String lang, TypeSequenceLabeling labeler) {
+		if (labeler == null) {
+			LowerKnowledgeBase wikipedia = wikipedias.get(lang);
+			try {
+				labeler = new TypeSequenceLabeling(wikipedia);
+				this.labelers.put(lang, labeler);
+			}
+			catch(Exception e) {
+				LOGGER.error("Cannot load sequence labeling model for language " + lang, e);
+			}
+		}
+
+		return labeler;
 	}
 
 	/**

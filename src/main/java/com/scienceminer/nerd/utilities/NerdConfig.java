@@ -57,6 +57,11 @@ public class NerdConfig {
 	// path to resources for species recognition
 	private String speciesPath = null;
 
+	// the name of the sequence labeling engine type, one in [WAPITI,DELFT]
+	// WAPITI: CRF with features
+	// DELFT: Deep Learning architectures
+	private String sequenceLabelingEngineType = null;
+
 	public String getLangCode() {
 		return langCode;
 	}
@@ -159,5 +164,13 @@ public class NerdConfig {
 
 	public void setSpeciesPath(String speciesPath) {
 		this.speciesPath = speciesPath;
+	}
+
+	public String getSequenceLabelingEngineType() {
+		return this.sequenceLabelingEngineType;
+	}
+
+	public void setSequenceLabelingEngineType(String engineType) {
+		this.sequenceLabelingEngineType = engineType;
 	}
 }

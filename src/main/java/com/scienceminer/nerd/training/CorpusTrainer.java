@@ -60,7 +60,6 @@ public class CorpusTrainer {
 		articleSets = ArticleTrainingSample.buildExclusiveCorpusSets(corpus, ratio, wikipedia);
 	}
 
-
 	public void train(String corpus) {
 		String corpusPath = "data/corpus/corpus-long/" + corpus + File.separator;
 		String corpusRefPath = corpusPath + corpus + ".xml";

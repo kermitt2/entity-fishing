@@ -239,6 +239,14 @@ public class UpperKnowledgeBase {
 		return result;
 	}
 
+    /**
+     * Return the (unique) type of a concept id from the loaded DeepType type system
+     */
+    public String getDeepType(String wikidataId) {
+        Integer index = env.getDbDeepType().retrieve(wikidataId);
+        return env.getLiteralType(index);
+    }
+
 	public void close() {
 		// close wikipedia instances
 		for (Map.Entry<String, LowerKnowledgeBase> entry : wikipedias.entrySet()) {

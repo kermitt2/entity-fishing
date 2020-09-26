@@ -111,6 +111,15 @@ public class KBUpperEnvironment extends KBEnvironment {
 		return this.types;
 	}
 
+	public String getLiteralType(Integer index) {
+		if (index == null)
+			return "unknown";
+		if (index >= 0 && index < this.types.size())
+			return this.types.get(index.intValue());
+		else
+			return "unknown";
+	}
+
 	/**
 	 * Returns the {@link DatabaseType#taxon} database
 	 */

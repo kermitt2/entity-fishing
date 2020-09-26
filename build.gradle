@@ -69,8 +69,8 @@ dependencies {
 
     //GROBID
     compile group: 'org.grobid', name: 'grobid-ner', version: '0.6.1'
-    compile 'org.grobid:grobid-trainer:0.6.1'
-    compile(group: 'org.grobid', name: 'grobid-core', version: '0.6.1') {
+    compile 'org.grobid:grobid-trainer:0.6.2-SNAPSHOT'
+    compile(group: 'org.grobid', name: 'grobid-core', version: '0.6.2-SNAPSHOT') {
         exclude(module: 'slf4j-jdk14')
     }
     compile group: 'directory-naming', name: 'naming-java', version: '0.8'

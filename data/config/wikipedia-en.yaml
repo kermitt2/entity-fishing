@@ -42,3 +42,6 @@ minRankerScore: 0.2
 # if true, use links out for computing relatedness between two entities in addition to
 # the links in (slower but more precise in principle)
 useLinkOut : false
+
+# the sequence labeling engine to be used for this language, one of [WAPITI,DELFT]
+sequenceLabelingEngineType: WAPITI
