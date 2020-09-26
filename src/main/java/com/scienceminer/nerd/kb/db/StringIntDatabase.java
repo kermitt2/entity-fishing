@@ -3,10 +3,12 @@ package com.scienceminer.nerd.kb.db;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.zip.GZIPInputStream;
+import java.io.*;
+import java.util.List;
+
 import org.apache.hadoop.record.CsvRecordInput;
 import org.apache.hadoop.record.Record;
-
-import java.io.*;
 
 import com.scienceminer.nerd.utilities.*;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
@@ -69,6 +71,7 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 			throw new NerdResourceException("Resource file not found");
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
+
 		String line = null;
 		int nbToAdd = 0;
 		Transaction tx = environment.createWriteTransaction();

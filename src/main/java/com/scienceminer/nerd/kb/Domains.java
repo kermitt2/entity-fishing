@@ -15,8 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Common representation of the domains used in a KB.
  * 
- * 
+ * Not used. Everything is in class WikipediaDomainMap.
  */
+@Deprecated
 public class Domains {
 	
 	protected static final Logger LOGGER = LoggerFactory.getLogger(Domains.class);
@@ -30,13 +31,9 @@ public class Domains {
 	// map a domain string to its list of subdomains
 	Map<String, List<String>> domainsTree = null; 
 	
-	// IPC mappings 
+	// IPC mappings (not used)
 	public Map<String, List<String> > ipc2domains = null; 
 	public Map<String, List<String> > domain2ipc = null; 
-	
-	// Summon displines
-	public Map<String, List<String>> domain2summon = null;
-	public Map<String, List<String>> summon2domains = null;
 	
 	private static volatile Domains instance;
 	
@@ -138,59 +135,6 @@ public class Domains {
 				}
 			
 				ipc2domains.put(ipc, doms);
-			}
-		}
-		catch(IOException e) {
-			LOGGER.error("Problem accessing ipc/domain mapping file resources: " + domainIPCPath);
-		}
-		finally {
-			if (bufReader != null)
-				bufReader.close();
-			if (reader != null)	
-				reader.close();			
-		}
-		
-		// load Summon Discipline mapping
-		summon2domains = new HashMap<String,List<String>>();
-		domain2summon = new HashMap<String,List<String>>();
-		
-		String domainSummonPath = "src/main/resources/kb/SummonDiscipines.txt";
-		reader = null;
-		bufReader = null;
-		try {
-			reader = new InputStreamReader(new FileInputStream(domainSummonPath), "UTF-8");
-			bufReader = new BufferedReader(reader);
-			String line = null;
-			int i = 0;
-			while ( (line = bufReader.readLine()) != null ) {
-				if (line.length() == 0) continue;
-				StringTokenizer st = new StringTokenizer(line, "\t");
-				
-				String discipline = st.nextToken();
-				int index = discipline.indexOf(' ',1);
-				discipline = discipline.substring(1, index);
-				//System.out.println(discipline);
-				List<String> doms = new ArrayList<String>();
-				while(st.hasMoreTokens()) {
-					String dom = st.nextToken().toLowerCase();
-					//System.out.println("\t" + dom);
-					if (!doms.contains(dom))
-						doms.add(dom);
-					List<String> theDisciplines = domain2summon.get(dom);	
-					if (theDisciplines == null) {
-						theDisciplines = new ArrayList<String>();
-						theDisciplines.add(discipline);
-						domain2summon.put(dom, theDisciplines);
-					}	
-					else {
-						if (!theDisciplines.contains(discipline)) {
-							theDisciplines.add(discipline);
-							domain2ipc.put(dom, theDisciplines);
-						}
-					}
-				}
-				
-				summon2domains.put(discipline, doms);
 			}
 		}
 		catch(IOException e) {
