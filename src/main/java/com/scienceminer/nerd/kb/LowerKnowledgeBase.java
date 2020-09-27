@@ -118,6 +118,14 @@ public class LowerKnowledgeBase {
 	}*/
 
 	/**
+	 * Return the Wikidata ID corresponding to the page ID, 
+	 * null if not found.
+	 */
+	public String getWikidataId(int id) {
+		return env.getDbConceptByPageId().retrieve(id);
+	}
+
+	/**
 	 * Returns the Article referenced by the given (case sensitive) title. If the title
 	 * matches a redirect, this will be resolved to return the final target.
 	 * 

@@ -1,4 +1,4 @@
-package org.grobid.core.features;
+package com.scienceminer.nerd.features;
 
 import java.io.*;
 import java.util.List;

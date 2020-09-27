@@ -3,17 +3,22 @@ package com.scienceminer.nerd.disambiguation;
 import org.apache.commons.io.FileUtils;
 
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.training.*;
+import com.scienceminer.nerd.exceptions.*;
+import com.scienceminer.nerd.kb.model.*;
+import com.scienceminer.nerd.features.FeaturesVectorDeepType;
+import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.GrobidAnalyzer;
-
+import org.grobid.core.lang.Language;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 import org.grobid.core.engines.AbstractParser;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.features.FeaturesVectorDeepType;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
@@ -28,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import org.apache.commons.lang3.tuple.Pair;
@@ -45,12 +51,214 @@ import com.scienceminer.nerd.utilities.NerdConfig;
 public class TypeSequenceLabeling extends AbstractParser {
     private static final Logger logger = LoggerFactory.getLogger(TypeSequenceLabeling.class);
 
+    private LowerKnowledgeBase wikipedia = null;
+
     public TypeSequenceLabeling(LowerKnowledgeBase wikipedia) {
         super(GrobidModels.DEEPTYPE, CntManagerFactory.getCntManager(), 
             GrobidCRFEngine.valueOf(wikipedia.getConfig().getSequenceLabelingEngineType()));
+        this.wikipedia = wikipedia;
     }
 
-    
+    public int createTraining(ArticleTrainingSample articles, 
+                                final File trainingOutputPath,
+                                final File evalOutputPath,
+                                double splitRatio) {
+        if ( (articles.getSample() == null) || (articles.getSample().size() == 0) )
+            return 0;
 
+        int nbArticle = 0;
+        try {
+            // the file for writing the training data
+            OutputStream os2 = null;
+            Writer writer2 = null;
+            if (trainingOutputPath != null) {
+                os2 = new FileOutputStream(trainingOutputPath);
+                writer2 = new OutputStreamWriter(os2, "UTF8");
+            }
+
+            // the file for writing the evaluation data
+            OutputStream os3 = null;
+            Writer writer3 = null;
+            if (evalOutputPath != null) {
+                os3 = new FileOutputStream(evalOutputPath);
+                writer3 = new OutputStreamWriter(os3, "UTF8");
+            }
+            
+            for (Article article : articles.getSample()) {
+                System.out.println("Training on " + (nbArticle+1) + " / " + articles.getSample().size());
+                StringBuilder trainingBuilder = new StringBuilder();
+                if (article instanceof CorpusArticle)
+                    trainingBuilder = createTrainingCorpusArticle(article, trainingBuilder);
+                else
+                    trainingBuilder = createTrainingWikipediaArticle(article, trainingBuilder);  
+                
+                if ((writer2 == null) && (writer3 != null)) {
+                    writer3.write(trainingBuilder.toString());
+                    writer3.write("\n");
+                } else if ((writer2 != null) && (writer3 == null)) {
+                    writer2.write(trainingBuilder.toString());
+                    writer2.write("\n");
+                } else {
+                    if (Math.random() <= splitRatio) {
+                        writer2.write(trainingBuilder.toString());
+                        writer2.write("\n");
+                    } else {
+                        writer3.write(trainingBuilder.toString());
+                        writer3.write("\n");
+                    }
+                }
+                nbArticle++;
+            }
+
+            if (writer2 != null) {
+                writer2.close();
+                os2.close();
+            }
+
+            if (writer3 != null) {
+                writer3.close();
+                os3.close();
+            }
+        } catch (Exception e) {
+            throw new NerdException("An exception occured while compiling training data from Wikipedia.", e);
+        }
+
+        return nbArticle;
+    }
+
+    private StringBuilder createTrainingWikipediaArticle(Article article, StringBuilder trainingBuilder) throws Exception {
+        List<NerdEntity> refs = new ArrayList<NerdEntity>();
+        String lang = this.wikipedia.getConfig().getLangCode();
+
+        String content = MediaWikiParser.getInstance().
+            toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
+        content = content.replace("''", "");
+        StringBuilder contentText = new StringBuilder(); 
+
+        Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
+        Matcher linkMatcher = linkPattern.matcher(content);
+
+        // gather reference gold values
+        int head = 0;
+        int nbInstance = 0;
+        while (linkMatcher.find()) {            
+            String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
+            if (head != linkMatcher.start())
+                contentText.append(content.substring(head, linkMatcher.start()));
+            String labelText = link;
+            String destText = link;
+
+            int pos = link.lastIndexOf('|');
+            if (pos > 0) {
+                destText = link.substring(0, pos);
+                // possible anchor #
+                int pos2 = destText.indexOf('#');
+                if (pos2 != -1) {
+                    destText = destText.substring(0,pos2);
+                }
+                labelText = link.substring(pos+1);
+            } else {
+                // labelText and destText are the same, but we could have an anchor #
+                int pos2 = link.indexOf('#');
+                if (pos2 != -1) {
+                    destText = link.substring(0,pos2);
+                } else {
+                    destText = link;
+                }
+                labelText = destText;
+            }
+            contentText.append(labelText);
+
+            head = linkMatcher.end();
+            
+            Label label = new Label(wikipedia.getEnvironment(), labelText);
+            Label.Sense[] senses = label.getSenses();
+            if (destText.length() > 1)
+                destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
+            else {
+                // no article considered as single letter
+                continue;
+            }
+            Article dest = wikipedia.getArticleByTitle(destText);
+            if ((dest != null) && (senses.length > 1)) {
+                NerdEntity ref = new NerdEntity();
+                ref.setRawName(labelText);
+                ref.setWikipediaExternalRef(dest.getId());
+                ref.setWikidataId(wikipedia.getWikidataId(dest.getId()));
+                ref.setOffsetStart(contentText.length()-labelText.length());
+                ref.setOffsetEnd(contentText.length());
+                ref.setDeepType(UpperKnowledgeBase.getInstance().getDeepType(ref.getWikidataId()));
+                refs.add(ref);
+//System.out.println(link + ", " + labelText + ", " + destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
+            }
+        }
+        contentText.append(content.substring(head));
+        String contentString = contentText.toString();
+        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(contentString, new Language(lang, 1.0));
+//System.out.println("Cleaned content: " + contentString);
+
+System.out.println("number of entities: " + refs.size());        
+        
+        //Language language = new Language(lang, 1.0);
+
+        // serialize in sequence labeling training format
+        int offsetPos = 0;
+        int entityIndex = 0;
+        String previousLabel = "<other>";
+        for(LayoutToken token : tokens) {
+            String text = token.getText();
+            if (text.trim().length() == 0 ||
+                text.equals("\n") ||
+                text.equals("\r") ||
+                text.equals("\t")) {
+                offsetPos += text.length();
+                continue;
+            }
+
+            int offsetStart = offsetPos;
+            int offsetEnd = offsetPos+text.length();
+
+            // default label
+            String typeLabel = "<other>";
+
+            // check entity index
+            for(int i=0; i<refs.size(); i++) {
+                NerdEntity entity = refs.get(i);
+                int entityStart = entity.getOffsetStart();
+                int entityEnd = entity.getOffsetEnd();
+
+                if (entityStart<=offsetStart && offsetEnd<=entityEnd) {
+                    typeLabel = "<" + entity.getDeepType() + ">";
+                    nbInstance++;
+                    break;
+                }
+
+                if (offsetEnd < entityStart)
+                    break;
+            }
+
+            trainingBuilder.append(text);
+            trainingBuilder.append("\t");
+
+            if (typeLabel.equals("<other>"))
+                trainingBuilder.append(typeLabel+"\n");
+            else if (!typeLabel.equals(previousLabel))
+                trainingBuilder.append("I-"+typeLabel+"\n");
+            else
+                trainingBuilder.append(typeLabel+"\n");
+            previousLabel = typeLabel;
+            offsetPos += text.length();
+        }
+
+        System.out.println("article contribution: " + nbInstance + " training instances");
+        return trainingBuilder;
+    }
+
+
+    private StringBuilder createTrainingCorpusArticle(Article article, StringBuilder trainingBuilder) throws Exception {
+
+
+        return trainingBuilder;
+    }
 
 }

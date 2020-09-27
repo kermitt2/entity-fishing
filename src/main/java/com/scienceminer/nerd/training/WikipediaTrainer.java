@@ -2,6 +2,7 @@ package com.scienceminer.nerd.training;
 
 import com.scienceminer.nerd.disambiguation.NerdRanker;
 import com.scienceminer.nerd.disambiguation.NerdSelector;
+import com.scienceminer.nerd.disambiguation.TypeSequenceLabeling;
 import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
@@ -28,12 +29,15 @@ public class WikipediaTrainer {
 	//classes for performing annotation
 	private NerdRanker ranker = null;
 	private NerdSelector selector = null;
+	private TypeSequenceLabeling labeler = null;
 
 	List<ArticleTrainingSample> articleSamples = null;
 
 	//feature data files
 	private File arffRanker = null;
 	private File arffSelector = null;
+	private File trainLabelerFile = null;
+	private File evalLabelerFile = null;
 
 	//model files
 	private File modelRanker = null;
@@ -61,9 +65,12 @@ public class WikipediaTrainer {
 
 		this.ranker = new NerdRanker(this.wikipedia);
 		this.selector = new NerdSelector(this.wikipedia);
+		this.labeler = new TypeSequenceLabeling(this.wikipedia);
 
 		arffRanker = new File(dataDir.getPath() + File.separator + lang + File.separator + "ranker.arff");
 		arffSelector = new File(dataDir.getPath() + File.separator + lang + File.separator + "selector.arff");
+		trainLabelerFile = new File(dataDir.getPath() + File.separator + lang + File.separator + "labeler.train"); 
+		evalLabelerFile = new File(dataDir.getPath() + File.separator + lang + File.separator + "labeler.eval"); 
 
 		//modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
 		//modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
@@ -93,19 +100,43 @@ public class WikipediaTrainer {
 		criterias.setMinWordCount(300);
 		criterias.setMaxWordCount(2000);*/
 
-		articleSamples = ArticleTrainingSample.buildExclusiveSamples(criteriaTraining, 
+		this.articleSamples = ArticleTrainingSample.buildExclusiveSamples(criteriaTraining, 
+			criteriaEvaluation, sampleSizes, wikipedia);
+	}
+
+	private void createArticleSamplesLabeler() throws IOException{
+		List<Integer> sampleSizes = Arrays.asList(1000,0,0,0,0);
+
+		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
+		criteriaTraining.setMinOutLinks(50);
+		criteriaTraining.setMinInLinks(10);
+		criteriaTraining.setMinWordCount(100);
+		criteriaTraining.setMaxWordCount(2000);
+
+		ArticleTrainingSampleCriterias criteriaEvaluation = new ArticleTrainingSampleCriterias();
+
+		this.articleSamples = ArticleTrainingSample.buildExclusiveSamples(criteriaTraining, 
 			criteriaEvaluation, sampleSizes, wikipedia);
 	}
 
 	private void createRankerArffFiles() throws IOException, Exception {
-	    ArticleTrainingSample trainingSample = articleSamples.get(0);
+	    ArticleTrainingSample trainingSample = this.articleSamples.get(0);
 	    ranker.train(trainingSample);
 	    ranker.saveTrainingData(arffRanker);
 	}
 
 	private void createSelectorArffFiles() throws IOException, Exception {
-	    ArticleTrainingSample trainingSample = articleSamples.get(1);
+	    ArticleTrainingSample trainingSample = this.articleSamples.get(1);
 	    selector.train(trainingSample, arffSelector);
+	}
+
+	private void createLabelerFiles() throws IOException, Exception {
+		// for the labeling we join all the set, as the segmentation is done by the usual grobid methods
+	    ArticleTrainingSample allSample = new ArticleTrainingSample(this.wikipedia);
+	    allSample.addAll(this.articleSamples.get(0));
+	    allSample.addAll(this.articleSamples.get(1));
+	    allSample.addAll(this.articleSamples.get(2));
+	    labeler.createTraining(allSample, trainLabelerFile, evalLabelerFile, 0.9);
 	}
 
 	private void createRankerModel() throws Exception {
@@ -140,6 +171,14 @@ public class WikipediaTrainer {
 		WikipediaTrainer trainer = new WikipediaTrainer(dataDir, lang);
 
 		System.out.println("Create article sets...");
+		trainer.createArticleSamplesLabeler();
+
+		System.out.println("Create TypeSequenceLabeling training files...");
+		trainer.createLabelerFiles();
+		/*System.out.println("Create TypeSequenceLabeling model...");
+		trainer.createLabelerModel();*/
+
+		/*System.out.println("Create article sets...");
 		trainer.createArticleSamples();
 
 		System.out.println("Create Ranker arff files...");
@@ -154,7 +193,7 @@ public class WikipediaTrainer {
 
 		System.out.println("Evaluate classifiers...");
 		trainer.evaluateRanker();
-		trainer.evaluateSelector();
+		trainer.evaluateSelector();*/
 	}
 	
 }

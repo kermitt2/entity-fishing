@@ -140,6 +140,12 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 		}	
 	}
 
+	public void addAll(ArticleTrainingSample sampleSet) {
+		if (sample == null)
+			sample = new ArrayList<Article>();
+		sample.addAll(sampleSet.getSample());
+	}
+
 	private boolean isArticleValid(Article article, ArticleTrainingSampleCriterias criterias, List<Integer> exclude) {	
 		if (article.getType() == PageType.disambiguation) {
 			return false;	
