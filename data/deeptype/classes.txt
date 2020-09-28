@@ -106,4 +106,4 @@ hazard
 person_role
 monument
 river
-other
+another

@@ -7,6 +7,7 @@ import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import org.grobid.trainer.evaluation.LabelStat;
+import org.grobid.trainer.AbstractTrainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,8 +105,8 @@ public class WikipediaTrainer {
 			criteriaEvaluation, sampleSizes, wikipedia);
 	}
 
-	private void createArticleSamplesLabeler() throws IOException{
-		List<Integer> sampleSizes = Arrays.asList(1000,0,0,0,0);
+	public List<ArticleTrainingSample> createArticleSamplesLabeler() throws IOException{
+		List<Integer> sampleSizes = Arrays.asList(100,0,0,0,0);
 
 		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
 		criteriaTraining.setMinOutLinks(50);
@@ -117,6 +118,8 @@ public class WikipediaTrainer {
 
 		this.articleSamples = ArticleTrainingSample.buildExclusiveSamples(criteriaTraining, 
 			criteriaEvaluation, sampleSizes, wikipedia);
+
+		return this.articleSamples;
 	}
 
 	private void createRankerArffFiles() throws IOException, Exception {
@@ -130,15 +133,6 @@ public class WikipediaTrainer {
 	    selector.train(trainingSample, arffSelector);
 	}
 
-	private void createLabelerFiles() throws IOException, Exception {
-		// for the labeling we join all the set, as the segmentation is done by the usual grobid methods
-	    ArticleTrainingSample allSample = new ArticleTrainingSample(this.wikipedia);
-	    allSample.addAll(this.articleSamples.get(0));
-	    allSample.addAll(this.articleSamples.get(1));
-	    allSample.addAll(this.articleSamples.get(2));
-	    labeler.createTraining(allSample, trainLabelerFile, evalLabelerFile, 0.9);
-	}
-
 	private void createRankerModel() throws Exception {
 	    ranker.trainModel();
 	    ranker.saveModel();
@@ -147,6 +141,19 @@ public class WikipediaTrainer {
 	private void createSelectorModel() throws Exception {
 		selector.trainModel();
 	    selector.saveModel();
+	}
+
+	private void createLabelerModel() throws Exception {
+		TypeSequenceLabelingTrainer trainer = new TypeSequenceLabelingTrainer();
+		ArticleTrainingSample allSample = new ArticleTrainingSample(this.wikipedia);
+	    allSample.addAll(this.articleSamples.get(0));
+	    allSample.addAll(this.articleSamples.get(1));
+	    allSample.addAll(this.articleSamples.get(2));
+        trainer.setArticles(allSample);
+        trainer.setLang(this.lang);
+        trainer.setWikipedia(this.wikipedia);
+        AbstractTrainer.runTraining(trainer);
+        System.out.println(AbstractTrainer.runEvaluation(trainer));
 	}
 
 	private void evaluateRanker() throws Exception {
@@ -170,13 +177,13 @@ public class WikipediaTrainer {
 		String lang = args[1];
 		WikipediaTrainer trainer = new WikipediaTrainer(dataDir, lang);
 
-		System.out.println("Create article sets...");
-		trainer.createArticleSamplesLabeler();
+		/*System.out.println("Create article sets...");
+		trainer.createArticleSamplesLabeler();*/
 
 		System.out.println("Create TypeSequenceLabeling training files...");
-		trainer.createLabelerFiles();
-		/*System.out.println("Create TypeSequenceLabeling model...");
-		trainer.createLabelerModel();*/
+		trainer.createArticleSamplesLabeler();
+		System.out.println("Create TypeSequenceLabeling model...");
+		trainer.createLabelerModel();
 
 		/*System.out.println("Create article sets...");
 		trainer.createArticleSamples();

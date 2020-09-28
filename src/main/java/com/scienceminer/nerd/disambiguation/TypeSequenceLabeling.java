@@ -27,6 +27,7 @@ import org.grobid.core.utilities.*;
 import org.grobid.core.utilities.counters.CntManager;
 import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.grobid.core.lexicon.FastMatcher;
+import org.grobid.core.features.FeatureFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +60,7 @@ public class TypeSequenceLabeling extends AbstractParser {
         this.wikipedia = wikipedia;
     }
 
-    public int createTraining(ArticleTrainingSample articles, 
+    /*public int createTraining(ArticleTrainingSample articles, 
                                 final File trainingOutputPath,
                                 final File evalOutputPath,
                                 double splitRatio) {
@@ -124,141 +125,67 @@ public class TypeSequenceLabeling extends AbstractParser {
         }
 
         return nbArticle;
-    }
+    }*/
 
-    private StringBuilder createTrainingWikipediaArticle(Article article, StringBuilder trainingBuilder) throws Exception {
-        List<NerdEntity> refs = new ArrayList<NerdEntity>();
-        String lang = this.wikipedia.getConfig().getLangCode();
-
-        String content = MediaWikiParser.getInstance().
-            toTextWithInternalLinksArticlesOnly(article.getFullWikiText(), lang);
-        content = content.replace("''", "");
-        StringBuilder contentText = new StringBuilder(); 
-
-        Pattern linkPattern = Pattern.compile("\\[\\[(.*?)\\]\\]"); 
-        Matcher linkMatcher = linkPattern.matcher(content);
-
-        // gather reference gold values
-        int head = 0;
-        int nbInstance = 0;
-        while (linkMatcher.find()) {            
-            String link = content.substring(linkMatcher.start()+2, linkMatcher.end()-2);
-            if (head != linkMatcher.start())
-                contentText.append(content.substring(head, linkMatcher.start()));
-            String labelText = link;
-            String destText = link;
-
-            int pos = link.lastIndexOf('|');
-            if (pos > 0) {
-                destText = link.substring(0, pos);
-                // possible anchor #
-                int pos2 = destText.indexOf('#');
-                if (pos2 != -1) {
-                    destText = destText.substring(0,pos2);
-                }
-                labelText = link.substring(pos+1);
-            } else {
-                // labelText and destText are the same, but we could have an anchor #
-                int pos2 = link.indexOf('#');
-                if (pos2 != -1) {
-                    destText = link.substring(0,pos2);
-                } else {
-                    destText = link;
-                }
-                labelText = destText;
-            }
-            contentText.append(labelText);
-
-            head = linkMatcher.end();
-            
-            Label label = new Label(wikipedia.getEnvironment(), labelText);
-            Label.Sense[] senses = label.getSenses();
-            if (destText.length() > 1)
-                destText = Character.toUpperCase(destText.charAt(0)) + destText.substring(1);
-            else {
-                // no article considered as single letter
-                continue;
-            }
-            Article dest = wikipedia.getArticleByTitle(destText);
-            if ((dest != null) && (senses.length > 1)) {
-                NerdEntity ref = new NerdEntity();
-                ref.setRawName(labelText);
-                ref.setWikipediaExternalRef(dest.getId());
-                ref.setWikidataId(wikipedia.getWikidataId(dest.getId()));
-                ref.setOffsetStart(contentText.length()-labelText.length());
-                ref.setOffsetEnd(contentText.length());
-                ref.setDeepType(UpperKnowledgeBase.getInstance().getDeepType(ref.getWikidataId()));
-                refs.add(ref);
-//System.out.println(link + ", " + labelText + ", " + destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
-            }
-        }
-        contentText.append(content.substring(head));
-        String contentString = contentText.toString();
-        List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(contentString, new Language(lang, 1.0));
-//System.out.println("Cleaned content: " + contentString);
-
-System.out.println("number of entities: " + refs.size());        
+    static public String addFeatures(String word, String label) {
+        FeaturesVectorDeepType featuresVector = new FeaturesVectorDeepType();
+        FeatureFactory featureFactory = FeatureFactory.getInstance();
         
-        //Language language = new Language(lang, 1.0);
+        featuresVector.string = word;
+        featuresVector.label = label;
 
-        // serialize in sequence labeling training format
-        int offsetPos = 0;
-        int entityIndex = 0;
-        String previousLabel = "<other>";
-        for(LayoutToken token : tokens) {
-            String text = token.getText();
-            if (text.trim().length() == 0 ||
-                text.equals("\n") ||
-                text.equals("\r") ||
-                text.equals("\t")) {
-                offsetPos += text.length();
-                continue;
-            }
-
-            int offsetStart = offsetPos;
-            int offsetEnd = offsetPos+text.length();
-
-            // default label
-            String typeLabel = "<other>";
-
-            // check entity index
-            for(int i=0; i<refs.size(); i++) {
-                NerdEntity entity = refs.get(i);
-                int entityStart = entity.getOffsetStart();
-                int entityEnd = entity.getOffsetEnd();
-
-                if (entityStart<=offsetStart && offsetEnd<=entityEnd) {
-                    typeLabel = "<" + entity.getDeepType() + ">";
-                    nbInstance++;
-                    break;
-                }
-
-                if (offsetEnd < entityStart)
-                    break;
-            }
-
-            trainingBuilder.append(text);
-            trainingBuilder.append("\t");
-
-            if (typeLabel.equals("<other>"))
-                trainingBuilder.append(typeLabel+"\n");
-            else if (!typeLabel.equals(previousLabel))
-                trainingBuilder.append("I-"+typeLabel+"\n");
-            else
-                trainingBuilder.append(typeLabel+"\n");
-            previousLabel = typeLabel;
-            offsetPos += text.length();
+        if (word.length() == 1) {
+            featuresVector.singleChar = true;
         }
 
-        System.out.println("article contribution: " + nbInstance + " training instances");
-        return trainingBuilder;
-    }
+        if (featureFactory.test_all_capital(word))
+            featuresVector.capitalisation = "ALLCAPS";
+        else if (featureFactory.test_first_capital(word))
+            featuresVector.capitalisation = "INITCAP";
+        else
+            featuresVector.capitalisation = "NOCAPS";
 
+        if (featureFactory.test_number(word))
+            featuresVector.digit = "ALLDIGIT";
+        else if (featureFactory.test_digit(word))
+            featuresVector.digit = "CONTAINDIGIT";
+        else
+            featuresVector.digit = "NODIGIT";
 
-    private StringBuilder createTrainingCorpusArticle(Article article, StringBuilder trainingBuilder) throws Exception {
+        Matcher m0 = featureFactory.isPunct.matcher(word);
+        if (m0.find()) {
+            featuresVector.punctType = "PUNCT";
+        }
+        if ((word.equals("(")) | (word.equals("["))) {
+            featuresVector.punctType = "OPENBRACKET";
+        } else if ((word.equals(")")) | (word.equals("]"))) {
+            featuresVector.punctType = "ENDBRACKET";
+        } else if (word.equals(".")) {
+            featuresVector.punctType = "DOT";
+        } else if (word.equals(",")) {
+            featuresVector.punctType = "COMMA";
+        } else if (word.equals("-")) {
+            featuresVector.punctType = "HYPHEN";
+        } else if (word.equals("\"") | word.equals("\'") | word.equals("`")) {
+            featuresVector.punctType = "QUOTE";
+        }
 
+        if (featuresVector.capitalisation == null)
+            featuresVector.capitalisation = "NOCAPS";
 
-        return trainingBuilder;
+        if (featuresVector.digit == null)
+            featuresVector.digit = "NODIGIT";
+
+        if (featuresVector.punctType == null)
+            featuresVector.punctType = "NOPUNCT";
+
+        if (featureFactory.test_common(word)) {
+            featuresVector.commonName = true;
+        }
+
+        //featuresVector.http = isUrl;
+        
+        return featuresVector.printVector();
     }
 
 }
