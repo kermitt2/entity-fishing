@@ -126,7 +126,7 @@ public class NerdRestProcessString {
         LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
 
-        final BiblioItem processedCitation = engine.getParsers().getCitationParser().processing(citationText, consolidation);
+        final BiblioItem processedCitation = engine.getParsers().getCitationParser().processingString(citationText, consolidation);
 
         String wikidataID = NerdEngine.getInstance().solveCitation(processedCitation);
 
