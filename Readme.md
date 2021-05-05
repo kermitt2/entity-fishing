@@ -29,7 +29,7 @@ The documentation of *entity-fishing* is available [here](http://nerd.readthedoc
 
 # Demo
 
-For testing purposes, a public entity-fishing demo server is available at the following address: [https://entity-fishing.science-miner.com](https://entity-fishing.science-miner.com)
+For testing purposes, a public entity-fishing demo server is available at the following address: [https://cloud.science-miner.com/nerd](https://cloud.science-miner.com/nerd)
 
 The query DSL and Web services are documented [here](https://nerd.readthedocs.io/en/latest/restAPI.html).
 
