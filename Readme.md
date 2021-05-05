@@ -27,6 +27,22 @@
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
 
+# Demo
+
+For testing purposes, a public entity-fishing demo server is available at the following address: [https://entity-fishing.science-miner.com](https://entity-fishing.science-miner.com)
+
+The query DSL and Web services are documented [here](https://nerd.readthedocs.io/en/latest/restAPI.html).
+
+_Warning_: Some quota and query limitation apply to the demo server! Please be courteous and do not overload the demo server. 
+
+# Benchmarks
+
+![entity-fishing](doc/images/scores.png)
+
+Evaluations above correspond to the "overall unnormalized accuracy" scenario in [BLINK](https://github.com/facebookresearch/BLINK#benchmarking-blink) (entity-fishing performs at 0.765 F-score, as compared to 0.8027 for BLINK, a fine-tuned BERT architectures and surpasses this system in the AQUAINT, 0.8588 vs. 0.891, and MSNBC, 0.8509 vs 0.867, despite being considerably faster and lighter than BLINK, see below).
+
+See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluation.html) and [Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for more details. 
+
 # Current version
 
 *entity-fishing* is a **work-in-progress**! Latest release version is `0.0.4`. 
