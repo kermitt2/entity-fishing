@@ -11,10 +11,36 @@ After decompressing all the index data, up to 119 GB of disk space will be used 
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
+You need to install version ``0.6.2`` of ``GROBID`` and ``grobid-ner``. For GROBID:
+
+Clone Grobid source code from github, release 0.6.2:
+
+```bash
+> git clone --branch 0.6.2 https://github.com/kermitt2/grobid
+```
+
+Or download directly the zip file of this release:
+
+```bash
+> wget https://github.com/kermitt2/grobid/archive/0.6.2.zip
+
+> unzip 0.6.2.zip
+```
+
+Then build Grobid, in the main directory:
+
+```bash
+> cd grobid
+
+> ./gradlew clean install
+```
+
 The path to grobid-home shall indicated in the file ``data/config/mention.yaml``, for instance:
 ::
    # path to the GROBID home (for grobid-ner, grobid, etc.)
    grobidHome: ../grobid/grobid-home/
+
+Be sure to point to grobid-home og GROBID version ``0.6.2``.
 
 Install *entity-fishing*:
 ::
