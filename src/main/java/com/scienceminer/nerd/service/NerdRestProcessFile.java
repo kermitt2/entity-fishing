@@ -10,9 +10,8 @@ import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
 import com.scienceminer.nerd.utilities.Filter;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.scienceminer.nerd.utilities.Utilities;
+
 import org.grobid.core.data.BibDataSet;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.document.Document;
@@ -25,18 +24,26 @@ import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
+import org.grobid.core.engines.EngineParsers;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.scienceminer.nerd.utilities.StringProcessor.isAllUpperCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -65,7 +72,6 @@ public class NerdRestProcessFile {
         Engine engine = null;
         LOGGER.debug(">> received query to process: " + theQuery);
 
-        LibraryLoader.load();
         engine = GrobidFactory.getInstance().getEngine();
         originFile = IOUtilities.writeInputFile(inputStream);
         LOGGER.debug(">> input PDF file saved locally...");
@@ -182,12 +188,12 @@ public class NerdRestProcessFile {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
 
                     BiblioItem resHeader = new BiblioItem();
-                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
 
                     if (lang == null) {
                         BiblioItem resHeaderLangIdentification = new BiblioItem();
                         engine.getParsers().getHeaderParser().resultExtraction(labeledResult, 
-                                tokenizationHeader, resHeaderLangIdentification, doc);
+                                tokenizationHeader, resHeaderLangIdentification);
 
                         lang = identifyLanguage(resHeaderLangIdentification, doc);
                         if (lang != null) {

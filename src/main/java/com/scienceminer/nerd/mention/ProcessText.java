@@ -12,12 +12,10 @@ import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.service.NerdQuery;
-import com.scienceminer.nerd.utilities.Stopwords;
-import com.scienceminer.nerd.utilities.StringPos;
-import com.scienceminer.nerd.utilities.StringProcessor;
-import org.apache.commons.collections4.CollectionUtils;
+import com.scienceminer.nerd.utilities.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.Entity;
 import org.grobid.core.engines.NERParsers;
@@ -25,6 +23,9 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.*;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+import org.grobid.core.main.LibraryLoader;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import scala.Char;
@@ -33,9 +34,12 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -96,6 +100,17 @@ public class ProcessText {
      */
     private ProcessText() {
         String dictionaryFile = "data/clearNLP/dictionary-1.3.1.zip";
+
+        String grobidHome = com.scienceminer.nerd.utilities.Utilities.initGrobid();
+        Path grobidHomePath = Paths.get(grobidHome);
+        Path grobidNerPath = grobidHomePath.resolve("../grobid-ner/"); 
+
+        // load default grobid-ner config based on the grobid-home path and init the module
+        GrobidNerConfiguration grobidNerConfiguration = GrobidNerConfiguration.getInstance(grobidNerPath.toString());
+        for (ModelParameters theModel : grobidNerConfiguration.getModels()) {
+            GrobidProperties.getInstance().addModel(theModel);
+        }
+        LibraryLoader.load();
 
         nerParsers = new NERParsers();
 

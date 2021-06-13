@@ -271,21 +271,31 @@ public class Utilities {
 		return dateFormat.format(pDate);
 	}
 
-	public static void initGrobid() {
+	/**
+	 * Init GROBID by loading the configuration and the native libraries.
+	 * @return the path to the detected Grobid home as a String
+	 */
+	public static String initGrobid() {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-
+		NerdConfig conf = null;
 		try {
-	        NerdConfig conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
+	        conf = mapper.readValue(new File("data/config/mention.yaml"), NerdConfig.class);
 			String pGrobidHome = conf.getGrobidHome();
 
 			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
         	GrobidProperties.getInstance(grobidHomeFinder);
             LibraryLoader.load();
+
 			LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 		}
 		catch(Exception e) {
 			throw new NerdException("Fail to initalise the grobid-ner component.", e);
 		}
+
+		if (conf != null)
+			return conf.getGrobidHome();
+		else
+			return null;
 	}
 
 	// standard JDK serialization

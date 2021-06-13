@@ -1,12 +1,13 @@
 package com.scienceminer.nerd.mention;
 
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lexicon.NERLexicon;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.data.Entity;
 import org.grobid.core.data.Entity.Origin;
 import org.grobid.core.data.Sense;
+import org.grobid.core.utilities.*;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 
 import com.scienceminer.nerd.exceptions.NerdException;
 import com.scienceminer.nerd.service.NerdQuery;

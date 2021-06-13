@@ -11,40 +11,37 @@ After decompressing all the index data, up to 119 GB of disk space will be used 
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
-You need to install version ``0.6.2`` of ``GROBID`` and ``grobid-ner``. For GROBID:
+You need to install latest current master version ``0.7.0-SNAPSHOT`` of ``GROBID`` and ``grobid-ner``. For GROBID:
 
-Clone Grobid source code from github, release 0.6.2:
-
-```bash
-> git clone --branch 0.6.2 https://github.com/kermitt2/grobid
-```
-
-Or download directly the zip file of this release:
-
-```bash
-> wget https://github.com/kermitt2/grobid/archive/0.6.2.zip
-
-> unzip 0.6.2.zip
-```
+Clone Grobid source code from github, current master version:
+::
+   $ git clone https://github.com/kermitt2/grobid.git
 
 Then build Grobid, in the main directory:
+::
+  $ cd grobid
+  $ ./gradlew clean install
 
-```bash
-> cd grobid
 
-> ./gradlew clean install
-```
-
-The path to grobid-home shall indicated in the file ``data/config/mention.yaml``, for instance:
+The path to grobid-home shall indicated in the file ``data/config/mention.yaml`` of the entity-fishing project, for instance:
 ::
    # path to the GROBID home (for grobid-ner, grobid, etc.)
    grobidHome: ../grobid/grobid-home/
 
-Be sure to point to grobid-home og GROBID version ``0.6.2``.
+
+For ``grobid-ner`` now, under ``grobid/``, install ``grobid-ner``:
+::
+  $ git clone https://github.com/kermitt2/grobid-ner.git
+
+Then build ``grobid-ner``, in the sub-project directory:
+::
+  $ cd grobid-ner
+  $ ./gradlew copyModels 
+  $ ./gradlew clean install
 
 Install *entity-fishing*:
 ::
-   $ git clone https://github.com/kermitt2/entity-fishing
+   $ git clone https://github.com/kermitt2/entity-fishing.git
 
 Then install the compiled indexed data:
 
