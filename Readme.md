@@ -39,7 +39,7 @@ _Warning_: Some quota and query limitation apply to the demo server! Please be c
 
 ![entity-fishing](doc/images/scores.png)
 
-Evaluations above correspond to the "overall unnormalized accuracy" scenario in [BLINK](https://github.com/facebookresearch/BLINK#benchmarking-blink) (entity-fishing performs at 0.765 F-score, as compared to 0.8027 for BLINK, a fine-tuned BERT architectures and surpasses this system in the AQUAINT, 0.8588 vs. 0.891, and MSNBC, 0.8509 vs 0.867, despite being considerably faster and lighter than BLINK, see below).
+Evaluations above correspond to the "overall unnormalized accuracy" scenario in [BLINK](https://github.com/facebookresearch/BLINK#benchmarking-blink). entity-fishing performs at 0.765 F-score, as compared to 0.8027 for BLINK, a fine-tuned BERT architectures. *entity-fishing* surpasses BLINK for the dataset AQUAINT, 0.891 vs. 0.8588, and MSNBC, 0.867 vs. 0.8509, despite being considerably faster and lighter than BLINK (see below).
 
 See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluation.html) and [Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for more details. 
 
