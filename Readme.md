@@ -43,9 +43,23 @@ Evaluations above correspond to the "overall unnormalized accuracy" scenario in 
 
 See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluation.html) and [Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for more details. 
 
+# Some use cases
+
+Some example of *entity-fishing* usages:
+
+* Tanti Kristanti from [Inria Paris](https://www.inria.fr) used off the shelf version of *entity-fishing* in the [CLEF HIPE 2020 competition shared task](http://ceur-ws.org/Vol-2696/paper_266.pdf), ranking first at the Entity Linking task for English and second best for French, in F1-score.
+
+* *entity-fishing* was deployed in the DARIAH-EU and Huma-Num infrastructure in the context of the [OPERAS HIRMEOS EU project](https://www.hirmeos.eu).
+
+* [SEALK](https://sealk.co), which is commercializing a M&A industry recommendation system, scaled *entity-fishing* to more than 1 million fulltext news documents. 
+
+* [Kairntech](https://kairntech.com) has integrated *entity-fishing* on their commercial platform [Sherpa]((https://aclanthology.org/2020.iwltp-1.9.pdf) to support analysis and enrichment of textual content. 
+
+If you are using *entity-fishing* and found it useful, we are happy to mention you in this section ! 
+
 # Current version
 
-*entity-fishing* is a **work-in-progress**! Latest release version is `0.0.4`. 
+*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.4`. 
 
 This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. For this version, the knowledge base includes around 87 million entities and 1.1 billion statements from Wikidata. 
 
