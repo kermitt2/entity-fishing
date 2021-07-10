@@ -53,7 +53,7 @@ Some example of *entity-fishing* usages:
 
 * [SEALK](https://sealk.co), which is commercializing a M&A industry recommendation system, scaled *entity-fishing* to more than 1 million fulltext news documents. 
 
-* [Kairntech](https://kairntech.com) has integrated *entity-fishing* on their commercial platform [Sherpa]((https://aclanthology.org/2020.iwltp-1.9.pdf) to support analysis and enrichment of textual content. 
+* [Kairntech](https://kairntech.com) has integrated *entity-fishing* on their commercial platform [Sherpa](https://aclanthology.org/2020.iwltp-1.9.pdf) to support analysis and enrichment of textual content. 
 
 If you are using *entity-fishing* and found it useful, we are happy to mention you in this section ! 
 
