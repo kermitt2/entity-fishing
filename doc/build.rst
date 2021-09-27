@@ -11,11 +11,11 @@ After decompressing all the index data, up to 119 GB of disk space will be used 
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
-You need to install latest current master version ``0.7.0-SNAPSHOT`` of ``GROBID`` and ``grobid-ner``. For GROBID:
+You need to install latest current stable version ``0.7.0`` of ``GROBID`` and ``grobid-ner``. For GROBID:
 
-Clone Grobid source code from github, current master version:
+Clone GROBID source code from github, latest stable version (currently 0.7.0):
 ::
-   $ git clone https://github.com/kermitt2/grobid.git
+   $ git clone https://github.com/kermitt2/grobid.git  --branch 0.7.0
 
 Then build Grobid, in the main directory:
 ::
