@@ -173,17 +173,6 @@ public class NerdRestProcessFile {
                 List<LayoutToken> tokenizationHeader = headerFeatured.getRight();
                 String labeledResult = null;
 
-                // alternative
-                /*String alternativeHeader = doc.getHeaderFeatured(true, true);
-                // we choose the longest header
-                if (StringUtils.isNotBlank(StringUtils.trim(header))) {
-                    header = alternativeHeader;
-                    tokenizationHeader = doc.getTokenizationsHeader();
-                } else if (StringUtils.isNotBlank(StringUtils.trim(alternativeHeader)) && alternativeHeader.length() > header.length()) {
-                    header = alternativeHeader;
-                    tokenizationHeader = doc.getTokenizationsHeader();
-                }*/
-
                 if (StringUtils.isNotBlank(StringUtils.trim(header))) {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
 

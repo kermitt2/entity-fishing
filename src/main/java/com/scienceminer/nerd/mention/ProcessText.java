@@ -24,6 +24,7 @@ import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.*;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+import org.grobid.core.utilities.SentenceUtilities;
 import org.grobid.core.main.LibraryLoader;
 
 import org.slf4j.Logger;
@@ -105,6 +106,10 @@ public class ProcessText {
         Path grobidHomePath = Paths.get(grobidHome);
         Path grobidNerPath = grobidHomePath.resolve("../grobid-ner/"); 
 
+        // the following will ensure that the Grobid environment and config are loaded
+        // independently from the NER models
+        GrobidProperties.getInstance();
+
         // load default grobid-ner config based on the grobid-home path and init the module
         GrobidNerConfiguration grobidNerConfiguration = GrobidNerConfiguration.getInstance(grobidNerPath.toString());
         for (ModelParameters theModel : grobidNerConfiguration.getModels()) {
@@ -119,12 +124,6 @@ public class ProcessText {
         } catch (FileNotFoundException e) {
             throw new NerdException("Cannot initialise tokeniser ", e);
         }
-    }
-
-    /**
-     * Only for testing
-     **/
-    ProcessText(boolean test) {
     }
 
     /**
@@ -714,7 +713,39 @@ public class ProcessText {
 		}
 		return results;
 	}*/
+
+
+    /**
+     *  Sentence segmentation based on Grobid sentence segmenter.
+     * 
+     **/
     public List<Sentence> sentenceSegmentation(String text) {
+        return sentenceSegmentation(text, null);
+    }
+    
+    public List<Sentence> sentenceSegmentation(String text, Language lang) {
+        List<OffsetPosition> sentencePositions = null;
+        if (lang == null) {
+            sentencePositions = SentenceUtilities.getInstance().runSentenceDetection(text);
+        } else {
+            sentencePositions = SentenceUtilities.getInstance().runSentenceDetection(text, lang);
+        }
+
+        List<Sentence> result = new ArrayList<>();
+        for(OffsetPosition sentencePosition : sentencePositions) {
+            Sentence localSentence = new Sentence();
+            localSentence.setOffsets(sentencePosition);
+            result.add(localSentence);
+        }
+
+        return result;
+    }
+
+    /**
+     *  Deprecated: sentence segmentation based on clearnlp
+     * 
+     **/
+    public List<Sentence> sentenceSegmentationCleanNLP(String text) {
         // replace the EOL "\r\n" with "\n"
         text = text.replace("\r\n","\n");
 
@@ -1399,6 +1430,210 @@ public class ProcessText {
     	return finalResults;
     }*/
 
+
+    private static Pattern P2EOL = Pattern.compile("\\n\\s*\\n");
+
+    /**
+     * Divide a text into segments following a target segment size:
+     * - try to segment into paragraphs first
+     * - use sentence segmentation to then create segments following the target segment size
+     * - if a sentence is still too large regarding the target segment size, apply a segmentation
+     *   based on a punctuation mark
+     * - if we still have a sentence as a too large monolithic block, we have some pathological 
+     *   text -> arbitrary segment based on a delimiter  
+     **/
+    public List<OffsetPosition> segment(String text, List<Sentence> sentences, int targetSegmentSize, Language lang) {
+        List<OffsetPosition> result = new ArrayList<>();
+        OffsetPosition localPos = new OffsetPosition(0, text.length());
+        result.add(localPos);
+        if (text.length() < targetSegmentSize * 1.5) {    
+            return result;
+        }
+
+        // some segmentation is necessary 
+        int target_number_segments = (text.length() / targetSegmentSize) + 1;
+        //System.out.println("target number segments: " + target_number_segments);
+
+        // if not available, prepare sentence segmentation
+        /*if (sentences == null || sentences.size() == 0) {
+            sentences = sentenceSegmentation(text, lang);
+        }
+        System.out.println("nb sentences: " + sentences.size());*/
+
+        while(result.size() < target_number_segments) {
+            //System.out.println("start segmentation round with: " + result.size() + " segments");
+
+            // select largest segment
+            int i = 0;
+            int largestSegmentSize = 0;
+            int largestSegmentIndex = 0;
+            for(OffsetPosition segment : result) {
+                if (segment.end - segment.start > largestSegmentSize) {
+                    largestSegmentSize = segment.end - segment.start;
+                    largestSegmentIndex = i;
+                }
+                i++;
+            }
+
+            OffsetPosition largestSegment = result.get(largestSegmentIndex);
+            String localText = text.substring(largestSegment.start, largestSegment.end);
+            List<Sentence> localSentences = sentenceSegmentation(localText, lang);
+            //System.out.println("nb local sentences: " + localSentences.size());
+            List<OffsetPosition> localResult = segmentOne(localText, localSentences, targetSegmentSize, lang);
+            if (localResult == null) {
+                // we can't segment further
+                break;
+            } else {
+                // update offsets
+                for(OffsetPosition newPos : localResult) {
+                    newPos.start += largestSegment.start;
+                    newPos.end += largestSegment.start;
+                }
+
+                // replace largestSegment by its segmented 2 parts
+                result.set(largestSegmentIndex, localResult.get(0));
+                if (result.size() > largestSegmentIndex+1)
+                    result.add(largestSegmentIndex+1, localResult.get(1));
+                else
+                    result.add(localResult.get(1));
+            }
+
+            /*System.out.println("after segmentation: " + result.size() + " segments");
+            for(OffsetPosition pos : result) {
+                System.out.println("" + pos.start + ", " + pos.end);
+                System.out.println(text.substring(pos.start, pos.end));
+            }*/
+        }
+
+        return result;
+    }
+
+    private List<OffsetPosition> segmentOne(String text, List<Sentence> sentences, int targetSegmentSize, Language lang) {
+
+        // first try to segment based on double line
+        Matcher matcher = P2EOL.matcher(text); 
+        List<Integer> positionsStart = new ArrayList<>();
+        List<Integer> positionsEnd = new ArrayList<>();
+        while(matcher.find()) {
+            positionsStart.add(matcher.start());
+            positionsEnd.add(matcher.end());
+        }
+
+        int selectedPositionStart = -1;
+        int selectedPositionEnd = -1;
+        int midPosition = text.length() / 2;
+        if (positionsStart.size() > 0) {
+            //System.out.println("double EOL");
+            // select the most central split point
+            int i = 0;
+            for(Integer position : positionsStart) {
+                if (selectedPositionStart == -1) {
+                    selectedPositionStart = position;
+                    selectedPositionEnd = positionsEnd.get(i);
+                }
+                else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                    selectedPositionStart = position;
+                    selectedPositionEnd = positionsEnd.get(i);
+                }
+                i++;
+            }
+        }
+
+        if (selectedPositionStart == -1) {
+            // try segmenting with the simple EOL
+            //System.out.println("simple EOL");
+            positionsStart = new ArrayList<>();
+            int ind = 0;
+            while(ind != -1) {
+                ind = text.indexOf("\n", ind);
+                if (ind != -1) {
+                    positionsStart.add(ind);
+                    ind += 1;
+                }
+            }
+
+            if (positionsStart.size() > 0) {
+                // select the most central split point
+                int i = 0;
+                for(Integer position : positionsStart) {
+                    if (selectedPositionStart == -1) {
+                        selectedPositionStart = position;
+                    }
+                    else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                        selectedPositionStart = position;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        // if still not segmented enough, 
+        if (selectedPositionStart == -1 && sentences != null && sentences.size()>0) {
+            // try using sentence segmentation as segmentation points
+            //System.out.println("segmentation via sentences");
+
+            positionsStart = new ArrayList<>();
+            positionsEnd = new ArrayList<>();
+            int ind = 0;
+            for(Sentence sentence : sentences) {
+                positionsStart.add(sentence.getOffsetEnd());
+                if (sentences.size() > ind+1)
+                    positionsEnd.add(sentences.get(ind+1).getOffsetStart());
+                else
+                    positionsEnd.add(sentence.getOffsetEnd());
+                ind++;
+            }
+
+            // remove last one
+            if (positionsStart.size()>0) {
+                positionsStart.remove(positionsStart.size()-1);
+                positionsEnd.remove(positionsEnd.size()-1);
+            }
+
+            if (positionsStart.size() > 0) {
+                // select the most central split point
+                int i = 0;
+                for(Integer position : positionsStart) {
+                    if (selectedPositionStart == -1) {
+                        selectedPositionStart = position;
+                        selectedPositionEnd = positionsEnd.get(i);
+                    }
+                    else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                        selectedPositionStart = position;
+                        selectedPositionEnd = positionsEnd.get(i);
+                    }
+                    i++;
+                }
+            }
+        }
+
+        // if still something too long, it means we have sentences extremely long
+        // -> we do an arbitrary segmentation based on delimiters 
+        // to avoid side effect for this pathological text
+        if (selectedPositionStart == -1) {
+            // TBD
+        }
+
+        if (selectedPositionStart != -1) {
+            List<OffsetPosition> newResult = new ArrayList<>();
+
+            OffsetPosition localPos = new OffsetPosition(0, selectedPositionStart);
+            newResult.add(localPos);
+
+            if (selectedPositionEnd == -1)
+                selectedPositionEnd = selectedPositionStart;
+            OffsetPosition lastPos = new OffsetPosition(selectedPositionEnd, text.length());
+            newResult.add(lastPos);
+
+            return newResult;
+        }
+        return null;
+    }
+
+
+    // the following is for segmenting (in paragraphs) text as list of Layout tokens
+    // this is not used for the moment
+
     public static int MINIMAL_PARAGRAPH_LENGTH = 100;
     public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
 
@@ -1413,14 +1648,14 @@ public class ProcessText {
 
         while (true) {
             result = subSsegmentInParagraphs(result);
-            if (!containsTooLargeSegment(result))
+            if (!containsTooLargeSegmentLayoutTokens(result))
                 break;
         }
 
         return result;
     }
 
-    private static boolean containsTooLargeSegment(List<List<LayoutToken>> segments) {
+    private static boolean containsTooLargeSegmentLayoutTokens(List<List<LayoutToken>> segments) {
         for (List<LayoutToken> segment : segments) {
             if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
                 return true;
@@ -1429,6 +1664,14 @@ public class ProcessText {
         return false;
     }
 
+    private static boolean containsTooLargeSegment(List<OffsetPosition> segments, int targetSegmentSize) {
+        for (OffsetPosition segment : segments) {
+            if (segment.end - segment.start > targetSegmentSize) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private static List<List<LayoutToken>> subSsegmentInParagraphs(List<List<LayoutToken>> segments) {
         List<List<LayoutToken>> result = new ArrayList<>();
@@ -1460,7 +1703,7 @@ public class ProcessText {
             }
         }
 
-        if (!containsTooLargeSegment(result))
+        if (!containsTooLargeSegmentLayoutTokens(result))
             return result;
 
         // if we fail to to slice with double EOL, let's see if we can do something
@@ -1488,7 +1731,7 @@ public class ProcessText {
             }
         }
 
-        if (!containsTooLargeSegment(result))
+        if (!containsTooLargeSegmentLayoutTokens(result))
             return result;
 
         segments = result;
