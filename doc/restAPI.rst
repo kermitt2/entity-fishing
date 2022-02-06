@@ -156,15 +156,16 @@ When the source language (parameters language) is pre-set the language is consid
 
 (5) mentions
 """"""""""""
-Provides the methods to be used to identify mentions to be disambiguated, by default mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed) and with all the labels of Wikipedia for the appropraite language (all the anchors and titles used to refer to a Wikipedia page).
+Provides the methods to be used to identify mentions to be disambiguated. By default mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed), noted ``ner`` and with all the labels of Wikipedia for the appropriate language (all the anchors and titles used to refer to a Wikipedia page), noted ``wikipedia``. 
+
+If the mentions field is an empty array (``"mentions": [],``), only the mentions present in the fied ``entities`` will be disambiguated. This case allows to target the disambiguation only to one or a few mentions in a sentence or a text. 
 
 (6) entities
 """"""""""""
-In the input example above, the list entities can be used to provide predefined entities (typically pre-annotated by a user).
-Having an already annotated entity helps the disambiguation service to resolve entity mentions by offering an important contribution to the global context.
-When the entities attribute is not present or empty there are simply no predefined annotations.
+In the input example above, the list ``entities`` can be used to provide predefined entities or mentions (typically pre-annotated by a user).
+Having an already annotated entity helps the disambiguation service to resolve entity mentions by offering an important contribution to the global context. When the entities attribute is not present or empty there are simply no predefined annotations.
 
-For example having a text with the mention “Washington” and manually providing its referring entity (e.g. the city Washington DC) provides an important contribution to the correct disambiguation of the other entity mentions in the text.
+For example having a text with the mention “Washington” and manually providing its referring entity (e.g. the city Washington DC) is an important advantage for a correct disambiguation of the other entity mentions in the text.
 
 Below an example of how the pre-annotated entity can be provided. The algorithm would naturally disambiguate *German Army* with
 *German Army (Wehrmacht)* (wikipediaId: 12354993) because the text is contextualised on the First World War.
@@ -191,13 +192,10 @@ NOTE: At the moment the entity is taken in account only when the *wikipediaExter
        ]
    }
 
-In a typical interactive scenario, an application client first sends a text to be processed via the */disambiguate* service, and receives a JSON response with some entities.
-
-The annotated text is displayed to a user which might correct some invalid annotations.
-
-The client updates the modified annotations in the first JSON response and can send it back to the service now as new query via the */disambiguate*.
-
+In a typical interactive scenario, an application client first sends a text to be processed via the */disambiguate* service, and receives a JSON response with some entities. The annotated text is displayed to a user which might correct some invalid annotations. The client updates the modified annotations in the first JSON response and can send it back to the service now as new query via the */disambiguate*. 
 The corrected annotations will then be exploited by the *entity-fishing* system to possibly improve the other annotations and disambiguations.
+
+The ``entities`` field can also contains only mentions defined by their offset in the text, without wikidata/wikipedia information. The mention will then be considered as a forced target mention to be disambiguated. In case the above ``mentions`` field (5) is an empty array (i.e. no method to detect mention), these mentions defined in ``entities`` will still be considered and disambiguated. This a way to limit the disambiguation to one or few mentions in a text, with significant runtime gain. 
 
 (7) processSentence
 """""""""""""""""""
