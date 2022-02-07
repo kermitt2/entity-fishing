@@ -1455,10 +1455,10 @@ public class ProcessText {
         //System.out.println("target number segments: " + target_number_segments);
 
         // if not available, prepare sentence segmentation
-        /*if (sentences == null || sentences.size() == 0) {
+        if (sentences == null || sentences.size() == 0) {
             sentences = sentenceSegmentation(text, lang);
         }
-        System.out.println("nb sentences: " + sentences.size());*/
+        //System.out.println("nb sentences: " + sentences.size());
 
         while(result.size() < target_number_segments) {
             //System.out.println("start segmentation round with: " + result.size() + " segments");
@@ -1476,8 +1476,19 @@ public class ProcessText {
             }
 
             OffsetPosition largestSegment = result.get(largestSegmentIndex);
+            //System.out.println("\ntext length: " + text.length());
+            //System.out.println("largest segment: " + largestSegment.start + " : " + largestSegment.end);
             String localText = text.substring(largestSegment.start, largestSegment.end);
-            List<Sentence> localSentences = sentenceSegmentation(localText, lang);
+            List<Sentence> localSentences = new ArrayList<>();
+            for (Sentence sentence : sentences) {
+                if (largestSegment.start <= sentence.getOffsetStart() && sentence.getOffsetEnd() <= largestSegment.end) {
+                    // add sentence with shifted offsets
+                    Sentence shiftedSentence = new Sentence();
+                    shiftedSentence.setOffsetStart(sentence.getOffsetStart()-largestSegment.start);
+                    shiftedSentence.setOffsetEnd(sentence.getOffsetEnd()-largestSegment.start);
+                    localSentences.add(shiftedSentence);
+                }
+            }
             //System.out.println("nb local sentences: " + localSentences.size());
             List<OffsetPosition> localResult = segmentOne(localText, localSentences, targetSegmentSize, lang);
             if (localResult == null) {
@@ -1501,7 +1512,7 @@ public class ProcessText {
             /*System.out.println("after segmentation: " + result.size() + " segments");
             for(OffsetPosition pos : result) {
                 System.out.println("" + pos.start + ", " + pos.end);
-                System.out.println(text.substring(pos.start, pos.end));
+                //System.out.println(text.substring(pos.start, pos.end));
             }*/
         }
 

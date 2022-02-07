@@ -195,7 +195,7 @@ NOTE: At the moment the entity is taken in account only when the *wikipediaExter
 In a typical interactive scenario, an application client first sends a text to be processed via the */disambiguate* service, and receives a JSON response with some entities. The annotated text is displayed to a user which might correct some invalid annotations. The client updates the modified annotations in the first JSON response and can send it back to the service now as new query via the */disambiguate*. 
 The corrected annotations will then be exploited by the *entity-fishing* system to possibly improve the other annotations and disambiguations.
 
-The ``entities`` field can also contains only mentions defined by their offset in the text, without wikidata/wikipedia information. The mention will then be considered as a forced target mention to be disambiguated. In case the above ``mentions`` field (5) is an empty array (i.e. no method to detect mention), these mentions defined in ``entities`` will still be considered and disambiguated. This a way to limit the disambiguation to one or few mentions in a text, with significant runtime gain. 
+The ``entities`` field can also contains only mentions defined by their offsets in the text, without wikidata/wikipedia information. The mention will then be considered as a forced target mention to be disambiguated. In case the above ``mentions`` field (5) is an empty array (i.e. no method to detect mention), these mentions defined in ``entities`` will still be considered and disambiguated. This a way to limit the disambiguation to one or few mentions in a text, with significant runtime gain. 
 
 (7) processSentence
 """""""""""""""""""
