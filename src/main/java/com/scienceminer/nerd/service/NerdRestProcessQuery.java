@@ -214,7 +214,7 @@ public class NerdRestProcessQuery {
 
             // update sliding document context with top local entities
             documentContext = new DocumentContext();
-            documentContext.seed(nerdQuery.getEntities(), nerdQuery.getLanguage());
+            documentContext.seed(workingQuery.getEntities(), nerdQuery.getLanguage());
 
             disambiguatedEntities.addAll(localEntities);
         }
