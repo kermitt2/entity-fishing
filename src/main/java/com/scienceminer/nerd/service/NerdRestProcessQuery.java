@@ -161,6 +161,11 @@ public class NerdRestProcessQuery {
         else 
             processQueryTextMentionsNoSegmentation(nerdQuery); 
 
+        // post-processing at full document level: check global consistency of mentions 
+        // by propagating disambiguation to same mentions in other context, controlled
+        // by tf-idf
+        NerdEngine.getInstance().propagate(nerdQuery, mentions, nerdQuery.getText());
+
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
         // for metadata
@@ -188,7 +193,7 @@ public class NerdRestProcessQuery {
         if (nerdQuery.getTargetSegmentSize() != null) {
             targetSegmentSize = nerdQuery.getTargetSegmentSize();
         }
-                    
+
         // get segment offsets for the text
         List<OffsetPosition> segments = 
             processText.segment(nerdQuery.getText(), nerdQuery.getSentences(), targetSegmentSize, nerdQuery.getLanguage());

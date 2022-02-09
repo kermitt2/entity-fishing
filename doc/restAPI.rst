@@ -140,7 +140,7 @@ Using multiple input type in the same query is not supported in the version of t
 
 (1) text
 """"""""
-Provides a text to be processed (e.g. one or several paragraphs). The text have be greater than 5 character or 406 is returned. 
+Provides a text to be processed (e.g. one or several paragraphs). The text have be greater than 5 character or 406 is returned. The expected amount of text to disambiguate for the different models is a paragraph (100-150 words). If the amount of text is larger, the text will be automatically segmented into balanced segments of maximum 1000 characters (this default size can be changed), using end-of-line and then sentence boundaries. A sliding context  will be managed to pass the previous accumulated context (best entities, identified acronyms, ...) to the following segments. 
 
 (2) shortText
 """""""""""""
@@ -152,11 +152,11 @@ Provides a list of terms, each term being associated to a weight indicating the 
 
 (4) language
 """"""""""""
-When the source language (parameters language) is pre-set the language is considered certain, and the language identifier is not used.
+If this field is empty, a language identifier is used. When the source language (parameters language) is pre-set the language is considered certain, and a language identifier is not used.
 
 (5) mentions
 """"""""""""
-Provides the methods to be used to identify mentions to be disambiguated. By default mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed), noted ``ner`` and with all the labels of Wikipedia for the appropriate language (all the anchors and titles used to refer to a Wikipedia page), noted ``wikipedia``. 
+Provides the methods to be used to identify mentions to be disambiguated. By default, mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed), noted ``ner`` and with all the labels of Wikipedia for the appropriate language (all the anchors and titles used to refer to a Wikipedia page), noted ``wikipedia``. The order of the mention identification methods matters. 
 
 If the mentions field is an empty array (``"mentions": [],``), only the mentions present in the fied ``entities`` will be disambiguated. This case allows to target the disambiguation only to one or a few mentions in a sentence or a text. 
 
