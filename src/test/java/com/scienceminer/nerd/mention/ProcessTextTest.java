@@ -573,9 +573,9 @@ public class ProcessTextTest {
         final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
                 .tokenizeWithLayoutToken(input, language);
 
-        System.out.println(processText.extractMentionsWikipedia(inputLayoutTokens, language));
+        System.out.println(processText.extractMentionsWikipedia(inputLayoutTokens, language, null));
 
-        System.out.println(processText.extractMentionsWikipedia(input, language));
+        //System.out.println(processText.extractMentionsWikipedia(input, language, null));
 
     }
 

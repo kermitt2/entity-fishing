@@ -29,8 +29,6 @@ public class NerdRestProcessQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
     SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
 
-    private int TARGET_SEGMENT_SIZE = 1000;
-
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
      *
@@ -58,8 +56,12 @@ public class NerdRestProcessQuery {
         switch (nerdQuery.getQueryType()) {
             case NerdQuery.QUERY_TYPE_TEXT:
                 if (nerdQuery.getText().length() > 5) {
-                    if (nerdQuery.getProcessSentence() != null || nerdQuery.getText().length() < TARGET_SEGMENT_SIZE*1.5) {
-                        // only one sentence to be processed: no need for text segmentation
+                    int targetSegmentSize = ProcessText.DEFAULT_TARGET_SEGMENT_SIZE;
+                    if (nerdQuery.getTargetSegmentSize() != null) {
+                        targetSegmentSize = nerdQuery.getTargetSegmentSize();
+                    }
+                    if (nerdQuery.getProcessSentence() != null || nerdQuery.getText().length() < targetSegmentSize) {
+                        // only one sentence to be processed or not long text, no need for text segmentation
                         output = processQueryText(nerdQuery, false);
                     } else {
                         // text content will be segmented if too long
@@ -182,9 +184,14 @@ public class NerdRestProcessQuery {
         // working query with the current segment
         NerdQuery workingQuery = new NerdQuery(nerdQuery);
 
+        int targetSegmentSize = ProcessText.DEFAULT_TARGET_SEGMENT_SIZE;
+        if (nerdQuery.getTargetSegmentSize() != null) {
+            targetSegmentSize = nerdQuery.getTargetSegmentSize();
+        }
+                    
         // get segment offsets for the text
         List<OffsetPosition> segments = 
-            processText.segment(nerdQuery.getText(), nerdQuery.getSentences(), TARGET_SEGMENT_SIZE, nerdQuery.getLanguage());
+            processText.segment(nerdQuery.getText(), nerdQuery.getSentences(), targetSegmentSize, nerdQuery.getLanguage());
 
         List<NerdEntity> disambiguatedEntities = new ArrayList<>();
         for (OffsetPosition segment : segments) {

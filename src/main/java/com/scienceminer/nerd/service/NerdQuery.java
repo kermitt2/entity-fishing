@@ -134,6 +134,10 @@ public class NerdQuery {
     // a complete document 
     private String structure = "grobid";
 
+    // some parameters that are possible to define at query time
+    private Integer ngramLength = null;
+    private Integer targetSegmentSize = null;
+
     public NerdQuery() {
     }
 
@@ -169,6 +173,9 @@ public class NerdQuery {
         this.minRankerScore = query.getMinRankerScore();
 
         this.structure = query.getStructure();
+
+        this.ngramLength = query.getNgramLength();
+        this.targetSegmentSize = query.getTargetSegmentSize();
     }
 
     public String getSoftware() {
@@ -460,6 +467,22 @@ public class NerdQuery {
         this.structure = structure;
     }
 
+    public Integer getNgramLength() {
+        return this.ngramLength;
+    }
+
+    public void setNgramLength(Integer ngramLength) {
+        this.ngramLength = ngramLength;
+    }
+
+    public Integer getTargetSegmentSize() {
+        return this.targetSegmentSize;
+    }
+
+    public void setTargetSegmentSize(Integer targetSegmentSize) {
+        this.targetSegmentSize = targetSegmentSize;
+    }
+
     public String toJSON() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -477,130 +500,6 @@ public class NerdQuery {
         }
         return json;
     }
-
-    /*public String toJSONFullClean() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
-        StringBuilder buffer = new StringBuilder();
-        buffer.append("{");
-
-        // server runtime is always present (even at 0.0)
-        buffer.append("\"runtime\": " + runtime);
-
-        // parameters
-        buffer.append(", \"nbest\": " + nbest);
-
-        // parameters
-        if ((processSentence != null) && (processSentence.length > 0)) {
-            buffer.append(", \"processSentence\": [");
-            for (int i = 0; i < processSentence.length; i++) {
-                if (i != 0) {
-                    buffer.append(", ");
-                }
-                buffer.append(processSentence[i].intValue());
-            }
-            buffer.append("]");
-        }
-
-        // surface form
-        if (text != null) {
-            byte[] encoded = encoder.quoteAsUTF8(text);
-            String output = new String(encoded);
-            buffer.append(", \"text\": \"" + output + "\"");
-            if (CollectionUtils.isNotEmpty(sentences)) {
-                buffer.append(",").append(Sentence.listToJSON(sentences));
-            }
-        }
-
-        if (shortText != null) {
-            byte[] encoded = encoder.quoteAsUTF8(shortText);
-            String output = new String(encoded);
-            buffer.append(", \"shortText\": \"" + output + "\"");
-        }
-
-        if (CollectionUtils.isNotEmpty(termVector)) {
-            buffer.append(", \"termVector\": [ ");
-            boolean begin = true;
-            for (WeightedTerm term : termVector) {
-                if (!begin)
-                    buffer.append(", ");
-                else
-                    begin = false;
-                buffer.append(term.toJson());
-            }
-            buffer.append(" ]");
-        }
-
-        String lang = "en"; // default language
-        if (language != null) {
-            buffer.append(", \"language\": " + language.toJSON());
-            lang = language.getLang();
-        }
-
-        // if available, document level distribution of categories
-        if (CollectionUtils.isNotEmpty(globalCategories)) {
-            buffer.append(", \"global_categories\": [");
-            boolean first = true;
-            for (com.scienceminer.nerd.kb.Category category : globalCategories) {
-                byte[] encoded = encoder.quoteAsUTF8(category.getName());
-                String output = new String(encoded);
-                if (first) {
-                    first = false;
-                } else
-                    buffer.append(", ");
-                buffer.append("{\"weight\" : " + category.getWeight() + ", \"source\" : \"wikipedia-" + lang
-                        + "\", \"category\" : \"" + output + "\", ");
-                buffer.append("\"page_id\" : " + category.getWikiPageID() + "}");
-            }
-            buffer.append("]");
-        }
-
-        if (CollectionUtils.isNotEmpty(entities)) {
-            buffer.append(", \"entities\": [");
-            boolean first = true;
-            for (NerdEntity entity : entities) {
-                if (filter != null) {
-                    List<Statement> statements = entity.getStatements();
-                    if ( (statements == null) && 
-                         ( (filter.getValueMustNotMatch() == null) || (filter.getValueMustMatch() != null) ) )
-                        continue;
-                    if (statements != null) {
-                        if (!filter.valid(statements))
-                            continue;
-                    }
-                }
-
-                if (first)
-                    first = false;
-                else
-                    buffer.append(", ");
-                buffer.append(entity.toJsonFull());
-            }
-            buffer.append("]");
-        }
-
-        // possible page information
-        // page height and width
-        if (doc != null) {
-            List<Page> pages = doc.getPages();
-            boolean first = true;
-            if (pages != null) {
-                buffer.append(", \"pages\":[");
-                for (Page page : pages) {
-                    if (first)
-                        first = false;
-                    else
-                        buffer.append(", ");
-                    buffer.append("{\"page_height\":" + page.getHeight());
-                    buffer.append(", \"page_width\":" + page.getWidth() + "}");
-                }
-                buffer.append("]");
-            }
-        }
-
-        buffer.append("}");
-
-        return buffer.toString();
-    }*/
 
     public String toJSONClean() {
         return toJSONClean(null);

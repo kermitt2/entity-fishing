@@ -65,7 +65,8 @@ public class ProcessText {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcessText.class);
     public static final List<String> GROBID_NER_SUPPORTED_LANGUAGES = Arrays.asList(Language.FR, Language.EN);
 
-    public static final int NGRAM_LENGTH = 6;
+    public static final int DEFAULT_NGRAM_LENGTH = 6;
+    public static final int DEFAULT_TARGET_SEGMENT_SIZE = 1000;
 
     public final String language = AbstractReader.LANG_EN;
 
@@ -217,7 +218,7 @@ public class ProcessText {
 
                 try {
                     for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                        List<Mention> localResults = getMentions(text2tag, language, mentionType);
+                        List<Mention> localResults = getMentions(text2tag, language, mentionType, nerdQuery.getNgramLength());
 
                         // we "shift" the entities offset in case only specific sentences are processed
                         for (Mention entity : localResults) {
@@ -236,7 +237,7 @@ public class ProcessText {
             // we process the whole text
             try {
                 for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                    List<Mention> localResults = getMentions(text, language, mentionType);
+                    List<Mention> localResults = getMentions(text, language, mentionType, nerdQuery.getNgramLength());
                     results.addAll(localResults);
                 }
             } catch (Exception e) {
@@ -262,8 +263,7 @@ public class ProcessText {
         // we process the whole text, sentence info does not apply to layout documents
         try {
             for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                List<Mention> localResults = getMentions(tokens, language, mentionType);
-
+                List<Mention> localResults = getMentions(tokens, language, mentionType, nerdQuery.getNgramLength());
                 results.addAll(localResults);
             }
         } catch (Exception e) {
@@ -273,26 +273,26 @@ public class ProcessText {
         return results;
     }
 
-    private List<Mention> getMentions(String text, Language language, MentionMethod mentionType) {
+    private List<Mention> getMentions(String text, Language language, MentionMethod mentionType, Integer ngramLength) {
         List<Mention> localResults = new ArrayList<>();
 
         if (mentionType == MentionMethod.ner) {
             localResults = processNER(text, language);
         } else if (mentionType == MentionMethod.wikipedia) {
-            localResults = processWikipedia(text, language);
+            localResults = processWikipedia(text, language, ngramLength);
         } /*else if (mentionType == ProcessText.MentionMethod.species) {
             localResults = processSpecies(text, language);
         }*/
         return localResults;
     }
 
-    private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType) {
+    private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType, Integer ngramLength) {
         List<Mention> localResults = new ArrayList<>();
 
         if (mentionType == MentionMethod.ner) {
             localResults = processNER(tokens, language);
         } else if (mentionType == MentionMethod.wikipedia) {
-            localResults = processWikipedia(tokens, language);
+            localResults = processWikipedia(tokens, language, ngramLength);
         } /*else if (mentionType == ProcessText.MentionMethod.species) {
             localResults = processSpecies(tokens, language);
         }*/
@@ -386,6 +386,9 @@ public class ProcessText {
      * @return the list of identified entities.
      */
     public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
+        return processWikipedia(text, lang, null);
+    }
+    public List<Mention> processWikipedia(String text, Language lang, Integer ngramLength) throws NerdException {
         List<Mention> results = new ArrayList<>();
         if (StringUtils.isBlank(text)) {
             LOGGER.warn("Trying to extract Wikipedia mentions from empty content. Returning empty list. ");
@@ -393,11 +396,14 @@ public class ProcessText {
         }
 
         final GrobidAnalyzer grobidAnalyzer = GrobidAnalyzer.getInstance();
-        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang);
+        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang, ngramLength);
     }
 
-    protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang) {
-        List<StringPos> pool = ngrams(tokens, NGRAM_LENGTH);
+    protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang, Integer ngramLength) {
+        if (ngramLength == null)
+            ngramLength = DEFAULT_NGRAM_LENGTH;
+
+        List<StringPos> pool = ngrams(tokens, ngramLength);
         List<Mention> results = new ArrayList<>();
 
         // candidates which start and end with a stop word are removed.
@@ -444,7 +450,7 @@ public class ProcessText {
      * Use extractMentionsWikipedia(List<LayoutToken> tokens, String lang)
      */
     @Deprecated
-    protected List<StringPos> extractMentionsWikipedia(String text, Language lang) {
+    /*protected List<StringPos> extractMentionsWikipedia(String text, Language lang) {
         List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
 
         // candidates which start and end with a stop word are removed.
@@ -456,11 +462,6 @@ public class ProcessText {
             String termValue = termPosition.getString();
             //term = term.replace("\n", " ");
             String termValueLowercase = termValue.toLowerCase();
-
-            /*if (termValueLowercase.indexOf("\n") != -1) {
-                toRemove.add(new Integer(i));
-                continue;
-            }*/
 
             // remove term starting or ending with a stop-word, and term starting with a separator (conservative
             // it should never be the case)
@@ -492,7 +493,7 @@ public class ProcessText {
             }
         }
         return subPool;
-    }
+    }*/
 
     /**
      * Processing of some raw text by extracting all non-trivial ngrams.
@@ -503,6 +504,9 @@ public class ProcessText {
      * @return the list of identified entities.
      */
     public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException {
+        return processWikipedia(tokens, lang, null);
+    }
+    public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang, Integer ngramLength) throws NerdException {
         if ((tokens == null) || (tokens.size() == 0)) {
             //System.out.println("Content to be processed is empty.");
             LOGGER.error("Content to be processed is empty.");
@@ -511,7 +515,7 @@ public class ProcessText {
 
         List<Mention> results = new ArrayList<>();
         try {
-            List<Mention> subPool = extractMentionsWikipedia(tokens, lang);
+            List<Mention> subPool = extractMentionsWikipedia(tokens, lang, ngramLength);
 
             Collections.sort(subPool);
             for (Mention candidate : subPool) {
@@ -1446,7 +1450,8 @@ public class ProcessText {
         List<OffsetPosition> result = new ArrayList<>();
         OffsetPosition localPos = new OffsetPosition(0, text.length());
         result.add(localPos);
-        if (text.length() < targetSegmentSize * 1.5) {    
+
+        if (text.length() < targetSegmentSize) {    
             return result;
         }
 
