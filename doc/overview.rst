@@ -40,29 +40,40 @@ Tasks
 Summary
 *******
 
-Supervised machine learning is used for the disambiguation, based on Random Forest and Gradient Tree Boosting exploiting various features, including word and entity embeddings. Training is realized exploiting Wikipedia, which offers for each language a wealth of usage data about entity mentions in context. Results include in particular Wikidata identifiers and, optionally, statements. 
+For an overview of the system, some design, implementation descriptions, and some evaluations, see this `Presentation of entity-fishing at WikiDataCon 2017 <https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf/>`_.
+
+Supervised machine learning is used for the disambiguation, based on Random Forest and Gradient Tree Boosting exploiting various features. The main disambiguation techniques include graph distance to measure word and entity relatedness and distributional semantic distance based on word and entity embeddings. Training is realized exploiting Wikipedia, which offers for each language a wealth of usage data about entity mentions in context. Results include in particular Wikidata identifiers and, optionally, statements. 
 
 The API also offers the possibility to apply filters based on Wikidata properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on the current 37M entities and 154M statements present in Wikidata. 
 
 The tool currently supports English, German, French, Spanish and Italian languages (more to come!). For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the other languages. A *nbest* mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores.
 
-The tool is developed in Java and has been designed for fast processing (at least for a NERD system, 500-1000 words per second on a medium-profile linux server single thread or one PDF page of a scientific articles in 1-2 seconds), with limited memory (at least for a NERD system, here 3GB of RAM) and to offer relatively close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-10 milliseconds. *entity-fishing* uses the very fast `SMILE ML <https://haifengl.github.io/smile/>`_ library for machine learning and a `JNI integration of LMDB <https://github.com/deephacks/lmdbjni>`_ as embedded database. 
+The tool is developed in Java and has been designed for fast processing (at least for a NERD system, 500-1000 tokens per second on a medium-profile linux server single thread or one PDF page of a scientific articles in 1-2 seconds), with limited memory (at least for a NERD system, here 3GB of RAM) and to offer relatively close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-10 milliseconds. *entity-fishing* uses the very fast `SMILE ML <https://haifengl.github.io/smile/>`_ library for machine learning and a `JNI integration of LMDB <https://github.com/deephacks/lmdbjni>`_ as embedded database. 
 
 
 How to cite
 ***********
 
+If you want to cite this work, please refer to the present GitHub project, together with the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier. For example, with BibTeX:
+::
+   @misc{entity-fishing,
+       title = {entity-fishing},
+       howpublished = {\url{https://github.com/kermitt2/entity-fishing}},
+       publisher = {GitHub},
+       year = {2016--2022},
+       archivePrefix = {swh},
+       eprint = {1:dir:cb0ba3379413db12b0018b7c3af8d0d2d864139c}
+   }
 
 
 License and contact
 *******************
 
-Distributed under `Apache 2.0 license <http://www.apache.org/licenses/LICENSE-2.0>`_. The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
+*entity-fishing* is distributed under `Apache 2.0 license <http://www.apache.org/licenses/LICENSE-2.0>`_.
+The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license.
+
+The documentation is distributed under [CC-0](https://creativecommons.org/publicdomain/zero/1.0/) license and the annotated data under [CC-BY](https://creativecommons.org/licenses/by/4.0/) license.
+
+If you contribute to entity-fishing, you agree to share your contribution following these licenses. 
 
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
-
-*entity-fishing* is developed by `SCIENCE-MINER <http://science-miner.com/entity-disambiguation/>`_ since 2015, with contributions of `Inria <https://inria.fr>`_ Paris (2017-2018). 
-
-Inria contributors were supported by the H2020 `HIRMEOS <http://www.hirmeos.eu>`_, `IPERION-CH <http://www.iperionch.eu>`_ and `DESIR <https://www.dariah.eu/activities/projects-and-affiliations/desir/>`_ EU projects. 
-
-.. <a href="https://www.dariah.eu/activities/projects-and-affiliations/desir/" target="_blank"><img align="right" width="75" height="50" src="doc/images/dariah.png"/></a><a href="http://www.iperionch.eu" target="_blank"><img align="right" width="160" height="40" src="doc/images/iperion.png"/></a><a href="http://www.hirmeos.eu" target="_blank"><img align="right" width="120" height="40" src="doc/images/hirmeos.png"/></a>

@@ -12,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.utilities.OffsetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +56,17 @@ public class NerdRestProcessQuery {
         switch (nerdQuery.getQueryType()) {
             case NerdQuery.QUERY_TYPE_TEXT:
                 if (nerdQuery.getText().length() > 5) {
-                    output = processQueryText(nerdQuery);
+                    int targetSegmentSize = ProcessText.DEFAULT_TARGET_SEGMENT_SIZE;
+                    if (nerdQuery.getTargetSegmentSize() != null) {
+                        targetSegmentSize = nerdQuery.getTargetSegmentSize();
+                    }
+                    if (nerdQuery.getProcessSentence() != null || nerdQuery.getText().length() < targetSegmentSize) {
+                        // only one sentence to be processed or not long text, no need for text segmentation
+                        output = processQueryText(nerdQuery, false);
+                    } else {
+                        // text content will be segmented if too long
+                        output = processQueryText(nerdQuery, true);
+                    }
                 } else {
                     throw new QueryException("Text query too short, use shortText instead.");
                 }
@@ -99,13 +110,14 @@ public class NerdRestProcessQuery {
     }
 
     /**
-     * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
+     * Parse a structured query with text and return the corresponding normalized enriched and disambiguated query object.
+     * The provided text is segmented into smaller text units, which are disambiguated successively with a sliding window context. 
      *
      * @param nerdQuery POJO query object
      * @return a response query object containing the structured representation of
      * the enriched and disambiguated query.
      */
-    public String processQueryText(NerdQuery nerdQuery) {
+    public String processQueryText(NerdQuery nerdQuery, boolean segmentation) {
         LOGGER.debug(methodLogIn());
         long start = System.currentTimeMillis();
 
@@ -122,9 +134,9 @@ public class NerdRestProcessQuery {
         ProcessText processText = ProcessText.getInstance();
         Integer[] processSentence = nerdQuery.getProcessSentence();
         List<Sentence> sentences = nerdQuery.getSentences();
-        //If not previously segmented, call the sentence segmentation and set it back
+        // if not previously segmented, call the sentence segmentation and set the sentences
         if ((sentences == null) && (nerdQuery.getSentence() || (processSentence != null))) {
-            sentences = processText.sentenceSegmentation(nerdQuery.getText());
+            sentences = processText.sentenceSegmentation(nerdQuery.getText(), nerdQuery.getLanguage());
             nerdQuery.setSentences(sentences);
         }
 
@@ -144,12 +156,16 @@ public class NerdRestProcessQuery {
         // sort the entities
         Collections.sort(nerdQuery.getEntities());
 
-        // disambiguate and solve entity mentions
-        NerdEngine disambiguator = NerdEngine.getInstance();
-        List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
-        nerdQuery.setEntities(disambiguatedEntities);
-        nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+        if (segmentation) 
+            processQueryTextMentionWithSegmentation(nerdQuery, processText);
+        else 
+            processQueryTextMentionsNoSegmentation(nerdQuery); 
 
+        // post-processing at full document level: check global consistency of mentions 
+        // by propagating disambiguation to same mentions in other context, controlled
+        // by tf-idf
+        if (nerdQuery.getDocumentLevelPropagation())
+            NerdEngine.getInstance().propagate(nerdQuery, mentions, nerdQuery.getText());
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);
@@ -162,7 +178,79 @@ public class NerdRestProcessQuery {
 
         Collections.sort(nerdQuery.getEntities());
         LOGGER.debug(methodLogOut());
-        return nerdQuery.toJSONClean();
+        return nerdQuery.toJSONClean(); 
+    }
+
+
+    private void processQueryTextMentionWithSegmentation(NerdQuery nerdQuery, ProcessText processText) {
+        // sliding window context
+        DocumentContext documentContext = new DocumentContext();
+        documentContext.seed(nerdQuery.getEntities(), nerdQuery.getLanguage());
+
+        // working query with the current segment
+        NerdQuery workingQuery = new NerdQuery(nerdQuery);
+
+        int targetSegmentSize = ProcessText.DEFAULT_TARGET_SEGMENT_SIZE;
+        if (nerdQuery.getTargetSegmentSize() != null) {
+            targetSegmentSize = nerdQuery.getTargetSegmentSize();
+        }
+
+        // get segment offsets for the text
+        List<OffsetPosition> segments = 
+            processText.segment(nerdQuery.getText(), nerdQuery.getSentences(), targetSegmentSize, nerdQuery.getLanguage());
+
+        List<NerdEntity> disambiguatedEntities = new ArrayList<>();
+        for (OffsetPosition segment : segments) {
+            int startSegment = segment.start;
+            int endSegment = segment.end;
+
+            // list of mentions/entities already positioned in the segment
+            List<NerdEntity> subEntities = filterEntities(nerdQuery.getEntities(), startSegment, endSegment);
+
+            workingQuery.setEntities(subEntities);
+            workingQuery.setText(nerdQuery.getText().substring(startSegment,endSegment));
+            workingQuery.setShortText(null);
+            workingQuery.setTokens(null);
+            workingQuery.setContext(documentContext);
+
+            // disambiguate and solve entity mentions locally using global sliding context documentContext
+            NerdEngine disambiguator = NerdEngine.getInstance();
+            List<NerdEntity> localEntities = disambiguator.disambiguate(workingQuery);
+
+            // shifting the offsets of the disambiguated entities
+            if (startSegment != 0) {
+                for(NerdEntity entity : localEntities) {
+                    entity.setOffsetStart(entity.getOffsetStart() + startSegment);
+                    entity.setOffsetEnd(entity.getOffsetEnd() + startSegment);
+                }
+            }
+
+            // update sliding document context with top local entities
+            documentContext = new DocumentContext();
+            documentContext.seed(workingQuery.getEntities(), nerdQuery.getLanguage());
+
+            disambiguatedEntities.addAll(localEntities);
+        }
+
+        nerdQuery.setEntities(disambiguatedEntities);
+        // sort the entities
+        //Collections.sort(nerdQuery.getEntities());
+        nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
+    }   
+
+    /**
+     * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.
+     *
+     * @param nerdQuery POJO query object
+     * @return a response query object containing the structured representation of
+     * the enriched and disambiguated query.
+     */
+    private void processQueryTextMentionsNoSegmentation(NerdQuery nerdQuery) {
+        // disambiguate and solve entity mentions
+        NerdEngine disambiguator = NerdEngine.getInstance();
+        List<NerdEntity> disambiguatedEntities = disambiguator.disambiguate(nerdQuery);
+        nerdQuery.setEntities(disambiguatedEntities);
+        nerdQuery = NerdCategories.addCategoryDistribution(nerdQuery);
     }
 
     /**
@@ -253,6 +341,21 @@ public class NerdRestProcessQuery {
         }
         for (NerdEntity entity : originalEntities) {
             resultingEntities.add(entity);
+        }
+
+        return resultingEntities;
+    }
+
+    protected static List<NerdEntity> filterEntities(List<NerdEntity> allEntities, int start, int end) {
+        List<NerdEntity> resultingEntities = new ArrayList<>();
+        
+        for(NerdEntity entity : allEntities) {
+            if (entity.getOffsetStart() >= start && entity.getOffsetEnd() <= end ) {
+                // shift the entities 
+                entity.setOffsetStart(entity.getOffsetStart()-start);
+                entity.setOffsetEnd(entity.getOffsetEnd()-start);
+                resultingEntities.add(entity);
+            }
         }
 
         return resultingEntities;

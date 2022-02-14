@@ -186,10 +186,16 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		isAcronym = entity.getIsAcronym();
 		//freebaseTypes = entity.freebaseTypes;
 		lang = entity.getLang();
-		source = entity.getSource();
 		nerdScore = entity.getNerdScore();
 		selectionScore = entity.getSelectionScore();
 		layoutTokens = entity.getLayoutTokens();
+		definitions = entity.getDefinitions();
+		wikidataId = entity.getWikidataId();
+		wikipediaExternalRef = entity.getWikipediaExternalRef();
+		wiktionaryExternalRef = entity.getWiktionaryExternalRef();
+		wikipediaMultilingualRef = entity.getWikipediaMultilingualRef();
+		wikipediaMultilingualArticle = entity.getWikipediaMultilingualArticle();
+		categories = entity.getCategories();
 	}
 
     public String getRawName() {
@@ -246,19 +252,27 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	}
 
 	public void setOffsetStart(int start) {
-        offsets.start = start;
+        this.offsets.start = start;
     }
 
     public int getOffsetStart() {
-        return offsets.start;
+        return this.offsets.start;
     }
 
     public void setOffsetEnd(int end) {
-        offsets.end = end;
+        this.offsets.end = end;
     }
 
     public int getOffsetEnd() {
-        return offsets.end;
+        return this.offsets.end;
+    }
+
+    public OffsetPosition getOffsets() {
+    	return this.offsets;
+    }
+
+    public void setOffsets(OffsetPosition offsets) {
+    	this.offsets = offsets;
     }
 
 	public double getProb() {
@@ -439,6 +453,9 @@ public class NerdEntity implements Comparable<NerdEntity> {
         wikipediaMultilingualArticle = subArticleCorrespondance;
 	}
 
+	public Map<String,Integer> getWikipediaMultilingualArticle() {
+		return this.wikipediaMultilingualArticle;
+	}
 
 	public int getWiktionaryExternalRef() {
 		return wiktionaryExternalRef;

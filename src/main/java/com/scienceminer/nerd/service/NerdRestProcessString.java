@@ -103,7 +103,13 @@ public class NerdRestProcessString {
             }
 
             ProcessText processText = ProcessText.getInstance();
-            List<Sentence> sentences = processText.sentenceSegmentation(text);
+
+            LanguageUtilities languageUtilities = LanguageUtilities.getInstance();
+            Language lang = null;
+            synchronized (languageUtilities) {
+                lang = languageUtilities.runLanguageId(text);
+            }
+            List<Sentence> sentences = processText.sentenceSegmentation(text, lang);
 
             if (CollectionUtils.isNotEmpty(sentences)) {
                 buffer.append("{ ").append(Sentence.listToJSON(sentences)).append(" } ");

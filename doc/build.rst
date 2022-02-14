@@ -45,7 +45,7 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, `db-kb.zip`) and the English Wikipedia data (`db-en.zip`) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 36 GB compressed, and 119 GB uncompressed. The data for this version ``0.0.4`` correspond to the Wikidata and Wikipedia dumps from 20.05.2020. The Knowledge Base part contains around 87 million entities and 1.1 billion statements and has considerably grown in the three last years. 
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 36 GB compressed, and 119 GB uncompressed. The data for this version ``0.0.4`` correspond to the Wikidata and Wikipedia dumps from 20.05.2020 and can still be used with version ``0.0.5``. The Knowledge Base part contains around 87 million entities and 1.1 billion statements and has considerably grown in the three last years. 
 
     **Linux**
 
@@ -61,7 +61,7 @@ Then install the compiled indexed data:
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-it.zip (2.2 GB)
 
-For MacOS we still make available the data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated, they are still compatible with the latest *entity-fishing* version 0.0.4 and could be used for test/development. 
+For MacOS we still make available the data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. 
 
     **MacOS**
 

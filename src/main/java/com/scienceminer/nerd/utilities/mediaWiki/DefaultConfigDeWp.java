@@ -11,8 +11,7 @@ import org.sweble.wikitext.engine.config.WikiConfigImpl;
 import org.sweble.wikitext.engine.utils.*;
 
 /**
- * Programatically generate a default configuration for that is similar to that
- * of the German Wikipedia.
+ * Default configuration for the German Wikipedia.
  */
 public class DefaultConfigDeWp extends DefaultConfigWp {
 

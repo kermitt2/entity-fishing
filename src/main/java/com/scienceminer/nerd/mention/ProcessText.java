@@ -24,6 +24,7 @@ import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.*;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+import org.grobid.core.utilities.SentenceUtilities;
 import org.grobid.core.main.LibraryLoader;
 
 import org.slf4j.Logger;
@@ -64,7 +65,8 @@ public class ProcessText {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcessText.class);
     public static final List<String> GROBID_NER_SUPPORTED_LANGUAGES = Arrays.asList(Language.FR, Language.EN);
 
-    public static final int NGRAM_LENGTH = 6;
+    public static final int DEFAULT_NGRAM_LENGTH = 6;
+    public static final int DEFAULT_TARGET_SEGMENT_SIZE = 1000;
 
     public final String language = AbstractReader.LANG_EN;
 
@@ -105,6 +107,10 @@ public class ProcessText {
         Path grobidHomePath = Paths.get(grobidHome);
         Path grobidNerPath = grobidHomePath.resolve("../grobid-ner/"); 
 
+        // the following will ensure that the Grobid environment and config are loaded
+        // independently from the NER models
+        GrobidProperties.getInstance();
+
         // load default grobid-ner config based on the grobid-home path and init the module
         GrobidNerConfiguration grobidNerConfiguration = GrobidNerConfiguration.getInstance(grobidNerPath.toString());
         for (ModelParameters theModel : grobidNerConfiguration.getModels()) {
@@ -119,12 +125,6 @@ public class ProcessText {
         } catch (FileNotFoundException e) {
             throw new NerdException("Cannot initialise tokeniser ", e);
         }
-    }
-
-    /**
-     * Only for testing
-     **/
-    ProcessText(boolean test) {
     }
 
     /**
@@ -218,7 +218,7 @@ public class ProcessText {
 
                 try {
                     for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                        List<Mention> localResults = getMentions(text2tag, language, mentionType);
+                        List<Mention> localResults = getMentions(text2tag, language, mentionType, nerdQuery.getNgramLength());
 
                         // we "shift" the entities offset in case only specific sentences are processed
                         for (Mention entity : localResults) {
@@ -237,7 +237,7 @@ public class ProcessText {
             // we process the whole text
             try {
                 for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                    List<Mention> localResults = getMentions(text, language, mentionType);
+                    List<Mention> localResults = getMentions(text, language, mentionType, nerdQuery.getNgramLength());
                     results.addAll(localResults);
                 }
             } catch (Exception e) {
@@ -263,8 +263,7 @@ public class ProcessText {
         // we process the whole text, sentence info does not apply to layout documents
         try {
             for (ProcessText.MentionMethod mentionType : mentionTypes) {
-                List<Mention> localResults = getMentions(tokens, language, mentionType);
-
+                List<Mention> localResults = getMentions(tokens, language, mentionType, nerdQuery.getNgramLength());
                 results.addAll(localResults);
             }
         } catch (Exception e) {
@@ -274,26 +273,26 @@ public class ProcessText {
         return results;
     }
 
-    private List<Mention> getMentions(String text, Language language, MentionMethod mentionType) {
+    private List<Mention> getMentions(String text, Language language, MentionMethod mentionType, Integer ngramLength) {
         List<Mention> localResults = new ArrayList<>();
 
         if (mentionType == MentionMethod.ner) {
             localResults = processNER(text, language);
         } else if (mentionType == MentionMethod.wikipedia) {
-            localResults = processWikipedia(text, language);
+            localResults = processWikipedia(text, language, ngramLength);
         } /*else if (mentionType == ProcessText.MentionMethod.species) {
             localResults = processSpecies(text, language);
         }*/
         return localResults;
     }
 
-    private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType) {
+    private List<Mention> getMentions(List<LayoutToken> tokens, Language language, MentionMethod mentionType, Integer ngramLength) {
         List<Mention> localResults = new ArrayList<>();
 
         if (mentionType == MentionMethod.ner) {
             localResults = processNER(tokens, language);
         } else if (mentionType == MentionMethod.wikipedia) {
-            localResults = processWikipedia(tokens, language);
+            localResults = processWikipedia(tokens, language, ngramLength);
         } /*else if (mentionType == ProcessText.MentionMethod.species) {
             localResults = processSpecies(tokens, language);
         }*/
@@ -387,6 +386,9 @@ public class ProcessText {
      * @return the list of identified entities.
      */
     public List<Mention> processWikipedia(String text, Language lang) throws NerdException {
+        return processWikipedia(text, lang, null);
+    }
+    public List<Mention> processWikipedia(String text, Language lang, Integer ngramLength) throws NerdException {
         List<Mention> results = new ArrayList<>();
         if (StringUtils.isBlank(text)) {
             LOGGER.warn("Trying to extract Wikipedia mentions from empty content. Returning empty list. ");
@@ -394,11 +396,14 @@ public class ProcessText {
         }
 
         final GrobidAnalyzer grobidAnalyzer = GrobidAnalyzer.getInstance();
-        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang);
+        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang, ngramLength);
     }
 
-    protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang) {
-        List<StringPos> pool = ngrams(tokens, NGRAM_LENGTH);
+    protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang, Integer ngramLength) {
+        if (ngramLength == null)
+            ngramLength = DEFAULT_NGRAM_LENGTH;
+
+        List<StringPos> pool = ngrams(tokens, ngramLength);
         List<Mention> results = new ArrayList<>();
 
         // candidates which start and end with a stop word are removed.
@@ -445,7 +450,7 @@ public class ProcessText {
      * Use extractMentionsWikipedia(List<LayoutToken> tokens, String lang)
      */
     @Deprecated
-    protected List<StringPos> extractMentionsWikipedia(String text, Language lang) {
+    /*protected List<StringPos> extractMentionsWikipedia(String text, Language lang) {
         List<StringPos> pool = ngrams(text, NGRAM_LENGTH, lang);
 
         // candidates which start and end with a stop word are removed.
@@ -457,11 +462,6 @@ public class ProcessText {
             String termValue = termPosition.getString();
             //term = term.replace("\n", " ");
             String termValueLowercase = termValue.toLowerCase();
-
-            /*if (termValueLowercase.indexOf("\n") != -1) {
-                toRemove.add(new Integer(i));
-                continue;
-            }*/
 
             // remove term starting or ending with a stop-word, and term starting with a separator (conservative
             // it should never be the case)
@@ -493,7 +493,7 @@ public class ProcessText {
             }
         }
         return subPool;
-    }
+    }*/
 
     /**
      * Processing of some raw text by extracting all non-trivial ngrams.
@@ -504,6 +504,9 @@ public class ProcessText {
      * @return the list of identified entities.
      */
     public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang) throws NerdException {
+        return processWikipedia(tokens, lang, null);
+    }
+    public List<Mention> processWikipedia(List<LayoutToken> tokens, Language lang, Integer ngramLength) throws NerdException {
         if ((tokens == null) || (tokens.size() == 0)) {
             //System.out.println("Content to be processed is empty.");
             LOGGER.error("Content to be processed is empty.");
@@ -512,7 +515,7 @@ public class ProcessText {
 
         List<Mention> results = new ArrayList<>();
         try {
-            List<Mention> subPool = extractMentionsWikipedia(tokens, lang);
+            List<Mention> subPool = extractMentionsWikipedia(tokens, lang, ngramLength);
 
             Collections.sort(subPool);
             for (Mention candidate : subPool) {
@@ -714,7 +717,39 @@ public class ProcessText {
 		}
 		return results;
 	}*/
+
+
+    /**
+     *  Sentence segmentation based on Grobid sentence segmenter.
+     * 
+     **/
     public List<Sentence> sentenceSegmentation(String text) {
+        return sentenceSegmentation(text, null);
+    }
+    
+    public List<Sentence> sentenceSegmentation(String text, Language lang) {
+        List<OffsetPosition> sentencePositions = null;
+        if (lang == null) {
+            sentencePositions = SentenceUtilities.getInstance().runSentenceDetection(text);
+        } else {
+            sentencePositions = SentenceUtilities.getInstance().runSentenceDetection(text, lang);
+        }
+
+        List<Sentence> result = new ArrayList<>();
+        for(OffsetPosition sentencePosition : sentencePositions) {
+            Sentence localSentence = new Sentence();
+            localSentence.setOffsets(sentencePosition);
+            result.add(localSentence);
+        }
+
+        return result;
+    }
+
+    /**
+     *  Deprecated: sentence segmentation based on clearnlp
+     * 
+     **/
+    public List<Sentence> sentenceSegmentationCleanNLP(String text) {
         // replace the EOL "\r\n" with "\n"
         text = text.replace("\r\n","\n");
 
@@ -1084,101 +1119,6 @@ public class ProcessText {
         return entities;
     }
 
-    /**
-     * Add entities corresponding to acronym definitions to a query
-     */
-    /*public List<Mention> propagateAcronyms2(NerdQuery nerdQuery) {
-
-        if ((nerdQuery == null) || (nerdQuery.getContext() == null))
-            return null;
-
-        Map<Mention, Mention> acronyms = nerdQuery.getContext().getAcronyms();
-
-        if (acronyms == null)
-            return null;
-
-        List<Mention> entities = null;
-        List<LayoutToken> tokens = nerdQuery.getTokens();
-
-        if (tokens != null) {
-            // iterate through all tokens in layout token list
-            searchToken:
-            for (LayoutToken token : tokens) {
-                // get the text and the offsets for the current token
-                String textInLayoutToken = token.getText();
-                int offsetStart = token.getOffset();
-
-                // find the acronym saved in the map to be compared with the current token
-                searchAcronym:
-                for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
-                    Mention acronym = entry.getKey();
-                    Mention base = entry.getValue();
-
-                    // get the acronym, the offset and the length
-                    String acronymText = acronym.getRawName();
-                    int lengthComplexAcronym = acronymText.length();
-                    int offsetEnd = offsetStart + lengthComplexAcronym;
-
-                    if ((offsetStart == acronym.getOffsetStart()))
-                        continue searchToken;
-                    else {
-                        // compare the acronym with the current token whether they are exactly the same string or not
-                        if (textInLayoutToken.equals(acronymText)) {
-                            // ignore the current acronym to avoid having it twice
-                            Mention entity = new Mention(acronymText);
-                            entity.setNormalisedName(base.getRawName());
-                            entity.setOffsetStart(offsetStart);
-                            entity.setOffsetEnd(offsetEnd);
-                            entity.setType(null);
-                            entity.setLayoutTokens(Arrays.asList(token));
-                            entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
-                            if (entities == null)
-                                entities = new ArrayList<>();
-                            entities.add(entity);
-                        } else {
-                            // the case of acronym with the dots, ex. S.V.M.
-
-                            // firstly, if the current token is equal with the first character of acronym,
-                            // note the offset as offsetStart and iterate until up to the length of the acronym text
-                            List<String> concatenateToken = new ArrayList<>();
-                            if (textInLayoutToken.equals(String.valueOf(acronymText.charAt(0)))) {
-
-                                List<LayoutToken> tokens1 = nerdQuery.getTokens();
-                                List<LayoutToken> resultBoundingBox = new ArrayList<>();
-
-                                for (LayoutToken token1 : tokens1) {
-                                    int offsetStart1 = token1.getOffset();
-                                    // ignore the current acronym to avoid having it twice
-                                    if (offsetStart1 >= offsetStart) {
-                                        if (offsetStart1 < offsetEnd) {
-                                            concatenateToken.add(token1.getText());
-                                            resultBoundingBox.add(token1);
-                                        }
-                                    }
-                                }
-                                textInLayoutToken = String.join("", concatenateToken);
-                                if (textInLayoutToken.equals(acronymText)) {
-                                    Mention entity = new Mention(acronymText);
-                                    entity.setNormalisedName(base.getRawName());
-                                    entity.setOffsetStart(offsetStart);
-                                    entity.setOffsetEnd(offsetEnd);
-                                    entity.setType(null);
-                                    entity.setLayoutTokens(acronym.getLayoutTokens());
-                                    entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
-                                    if (entities == null)
-                                        entities = new ArrayList<>();
-                                    entities.add(entity);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return entities;
-    }*/
-
-
     protected List<LayoutToken> getSequenceMatch(List<LayoutToken> tokens, int i, List<LayoutToken> layoutTokensAcronym) {
         final LayoutToken firstLayoutTokenAcronym = layoutTokensAcronym.get(0);
 
@@ -1399,8 +1339,247 @@ public class ProcessText {
     	return finalResults;
     }*/
 
+
+    private static Pattern P2EOL = Pattern.compile("\\n\\s*\\n");
+
+    /**
+     * Divide a text into segments following a target segment size:
+     * - try to segment into paragraphs first
+     * - use sentence segmentation to then create segments following the target segment size
+     * - if a sentence is still too large regarding the target segment size, apply a segmentation
+     *   based on a punctuation mark
+     * - if we still have a sentence as a too large monolithic block, we have some pathological 
+     *   text -> arbitrary segment based on a delimiter  
+     **/
+    public List<OffsetPosition> segment(String text, List<Sentence> sentences, int targetSegmentSize, Language lang) {
+        List<OffsetPosition> result = new ArrayList<>();
+        OffsetPosition localPos = new OffsetPosition(0, text.length());
+        result.add(localPos);
+
+        if (text.length() < targetSegmentSize) {    
+            return result;
+        }
+
+        // some segmentation is necessary 
+        int target_number_segments = (text.length() / targetSegmentSize) + 1;
+        //System.out.println("target number segments: " + target_number_segments);
+
+        // if not available, prepare sentence segmentation
+        if (sentences == null || sentences.size() == 0) {
+            sentences = sentenceSegmentation(text, lang);
+        }
+        //System.out.println("nb sentences: " + sentences.size());
+
+        while(result.size() < target_number_segments) {
+            //System.out.println("start segmentation round with: " + result.size() + " segments");
+
+            // select largest segment
+            int i = 0;
+            int largestSegmentSize = 0;
+            int largestSegmentIndex = 0;
+            for(OffsetPosition segment : result) {
+                if (segment.end - segment.start > largestSegmentSize) {
+                    largestSegmentSize = segment.end - segment.start;
+                    largestSegmentIndex = i;
+                }
+                i++;
+            }
+
+            OffsetPosition largestSegment = result.get(largestSegmentIndex);
+            //System.out.println("\ntext length: " + text.length());
+            //System.out.println("largest segment: " + largestSegment.start + " : " + largestSegment.end);
+            String localText = text.substring(largestSegment.start, largestSegment.end);
+            List<Sentence> localSentences = new ArrayList<>();
+            for (Sentence sentence : sentences) {
+                if (largestSegment.start <= sentence.getOffsetStart() && sentence.getOffsetEnd() <= largestSegment.end) {
+                    // add sentence with shifted offsets
+                    Sentence shiftedSentence = new Sentence();
+                    shiftedSentence.setOffsetStart(sentence.getOffsetStart()-largestSegment.start);
+                    shiftedSentence.setOffsetEnd(sentence.getOffsetEnd()-largestSegment.start);
+                    localSentences.add(shiftedSentence);
+                }
+            }
+            //System.out.println("nb local sentences: " + localSentences.size());
+            List<OffsetPosition> localResult = segmentOne(localText, localSentences, targetSegmentSize, lang);
+            if (localResult == null) {
+                // we can't segment further
+                break;
+            } else {
+                // update offsets
+                for(OffsetPosition newPos : localResult) {
+                    newPos.start += largestSegment.start;
+                    newPos.end += largestSegment.start;
+                }
+
+                // replace largestSegment by its segmented 2 parts
+                result.set(largestSegmentIndex, localResult.get(0));
+                if (result.size() > largestSegmentIndex+1)
+                    result.add(largestSegmentIndex+1, localResult.get(1));
+                else
+                    result.add(localResult.get(1));
+            }
+
+            /*System.out.println("after segmentation: " + result.size() + " segments");
+            for(OffsetPosition pos : result) {
+                System.out.println("" + pos.start + ", " + pos.end);
+                //System.out.println(text.substring(pos.start, pos.end));
+            }*/
+        }
+
+        return result;
+    }
+
+    private List<OffsetPosition> segmentOne(String text, List<Sentence> sentences, int targetSegmentSize, Language lang) {
+
+        // first try to segment based on double line
+        Matcher matcher = P2EOL.matcher(text); 
+        List<Integer> positionsStart = new ArrayList<>();
+        List<Integer> positionsEnd = new ArrayList<>();
+        while(matcher.find()) {
+            positionsStart.add(matcher.start());
+            positionsEnd.add(matcher.end());
+        }
+
+        int selectedPositionStart = -1;
+        int selectedPositionEnd = -1;
+        int midPosition = text.length() / 2;
+        if (positionsStart.size() > 0) {
+            //System.out.println("double EOL");
+            // select the most central split point
+            int i = 0;
+            for(Integer position : positionsStart) {
+                if (selectedPositionStart == -1) {
+                    selectedPositionStart = position;
+                    selectedPositionEnd = positionsEnd.get(i);
+                }
+                else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                    selectedPositionStart = position;
+                    selectedPositionEnd = positionsEnd.get(i);
+                }
+                i++;
+            }
+        }
+
+        if (selectedPositionStart == -1) {
+            // try segmenting with the simple EOL
+            //System.out.println("simple EOL");
+            positionsStart = new ArrayList<>();
+            int ind = 0;
+            while(ind != -1) {
+                ind = text.indexOf("\n", ind);
+                if (ind != -1) {
+                    positionsStart.add(ind);
+                    ind += 1;
+                }
+            }
+
+            if (positionsStart.size() > 0) {
+                // select the most central split point
+                int i = 0;
+                for(Integer position : positionsStart) {
+                    if (selectedPositionStart == -1) {
+                        selectedPositionStart = position;
+                    }
+                    else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                        selectedPositionStart = position;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        // if still not segmented enough, 
+        if (selectedPositionStart == -1 && sentences != null && sentences.size()>0) {
+            // try using sentence segmentation as segmentation points
+            //System.out.println("segmentation via sentences");
+
+            positionsStart = new ArrayList<>();
+            positionsEnd = new ArrayList<>();
+            int ind = 0;
+            for(Sentence sentence : sentences) {
+                positionsStart.add(sentence.getOffsetEnd());
+                if (sentences.size() > ind+1)
+                    positionsEnd.add(sentences.get(ind+1).getOffsetStart());
+                else
+                    positionsEnd.add(sentence.getOffsetEnd());
+                ind++;
+            }
+
+            // remove last one
+            if (positionsStart.size()>0) {
+                positionsStart.remove(positionsStart.size()-1);
+                positionsEnd.remove(positionsEnd.size()-1);
+            }
+
+            if (positionsStart.size() > 0) {
+                // select the most central split point
+                int i = 0;
+                for(Integer position : positionsStart) {
+                    if (selectedPositionStart == -1) {
+                        selectedPositionStart = position;
+                        selectedPositionEnd = positionsEnd.get(i);
+                    }
+                    else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                        selectedPositionStart = position;
+                        selectedPositionEnd = positionsEnd.get(i);
+                    }
+                    i++;
+                }
+            }
+        }
+
+        // if still something too long, it means we have sentences extremely long
+        // -> we do an arbitrary segmentation based on delimiters 
+        // to avoid side effect for this pathological text
+        if (selectedPositionStart == -1) {
+            // we use simple space as splitter, to avoid being too much language dependent
+            positionsStart = new ArrayList<>();
+            int ind = 0;
+            while(ind != -1) {
+                ind = text.indexOf(" ", ind);
+                if (ind != -1) {
+                    positionsStart.add(ind);
+                    ind += 1;
+                }
+            }
+
+            if (positionsStart.size() > 0) {
+                // select the most central split point
+                int i = 0;
+                for(Integer position : positionsStart) {
+                    if (selectedPositionStart == -1) {
+                        selectedPositionStart = position;
+                    }
+                    else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                        selectedPositionStart = position;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        if (selectedPositionStart != -1) {
+            List<OffsetPosition> newResult = new ArrayList<>();
+
+            OffsetPosition localPos = new OffsetPosition(0, selectedPositionStart);
+            newResult.add(localPos);
+
+            if (selectedPositionEnd == -1)
+                selectedPositionEnd = selectedPositionStart;
+            OffsetPosition lastPos = new OffsetPosition(selectedPositionEnd, text.length());
+            newResult.add(lastPos);
+
+            return newResult;
+        }
+        return null;
+    }
+
+
+    // the following is for segmenting (in paragraphs) text as list of Layout tokens
+    // this is not used for the moment
+
     public static int MINIMAL_PARAGRAPH_LENGTH = 100;
-    public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
+    public static int MAXIMAL_PARAGRAPH_LENGTH = 250;
 
     public static List<List<LayoutToken>> segmentInParagraphs(List<LayoutToken> tokens) {
         // heuristics: double end of line, if not simple end of line (not aligned with
@@ -1413,14 +1592,14 @@ public class ProcessText {
 
         while (true) {
             result = subSsegmentInParagraphs(result);
-            if (!containsTooLargeSegment(result))
+            if (!containsTooLargeSegmentLayoutTokens(result))
                 break;
         }
 
         return result;
     }
 
-    private static boolean containsTooLargeSegment(List<List<LayoutToken>> segments) {
+    private static boolean containsTooLargeSegmentLayoutTokens(List<List<LayoutToken>> segments) {
         for (List<LayoutToken> segment : segments) {
             if (segment.size() > MAXIMAL_PARAGRAPH_LENGTH) {
                 return true;
@@ -1429,6 +1608,14 @@ public class ProcessText {
         return false;
     }
 
+    /*private static boolean containsTooLargeSegment(List<OffsetPosition> segments, int targetSegmentSize) {
+        for (OffsetPosition segment : segments) {
+            if (segment.end - segment.start > targetSegmentSize) {
+                return true;
+            }
+        }
+        return false;
+    }*/
 
     private static List<List<LayoutToken>> subSsegmentInParagraphs(List<List<LayoutToken>> segments) {
         List<List<LayoutToken>> result = new ArrayList<>();
@@ -1460,7 +1647,7 @@ public class ProcessText {
             }
         }
 
-        if (!containsTooLargeSegment(result))
+        if (!containsTooLargeSegmentLayoutTokens(result))
             return result;
 
         // if we fail to to slice with double EOL, let's see if we can do something
@@ -1488,7 +1675,7 @@ public class ProcessText {
             }
         }
 
-        if (!containsTooLargeSegment(result))
+        if (!containsTooLargeSegmentLayoutTokens(result))
             return result;
 
         segments = result;

@@ -323,14 +323,12 @@ public class NerdSelector extends NerdModel {
 				ref.setOffsetStart(contentText.length()-labelText.length());
 				ref.setOffsetEnd(contentText.length());
 				refs.add(ref);
-//System.out.println(linkText + ", " + labelText + ", " + destText + " / " + ref.getOffsetStart() + " " + ref.getOffsetEnd());
 			}
 		}
 		contentText.append(content.substring(head));
 		String contentString = contentText.toString();
 		contentString = UnicodeUtil.normaliseText(contentString);
 
-//System.out.println("Cleaned content: " + contentString);
 		List<LayoutToken> tokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(contentString, new Language(lang, 1.0));
 
 		// get candidates for this content
@@ -344,9 +342,9 @@ public class NerdSelector extends NerdModel {
 		if (lang.equals("en") || lang.equals("fr")) {
 			entities = processText.processNER(tokens, language);
 		}
-//System.out.println("number of NE found: " + entities.size());		
+	
 		List<Mention> entities2 = processText.processWikipedia(tokens, language);
-//System.out.println("number of non-NE found: " + entities2.size());	
+	
 		for(Mention entity : entities2) {
 			// we add entities only if the mention is not already present
 			if (!entities.contains(entity))
@@ -362,11 +360,10 @@ public class NerdSelector extends NerdModel {
 			NerdEntity nerdEntity = new NerdEntity(entity);
 			disambiguatedEntities.add(nerdEntity);
 		}
-//System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
 			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang);
-//System.out.println("total entities with candidates: " + candidates.size());
+
 		// set the expected concept to the NerdEntity
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -378,7 +375,6 @@ public class NerdSelector extends NerdModel {
 
 			int start = entity.getOffsetStart();
 			int end = entity.getOffsetEnd();
-//System.out.println("entity: " + start + " / " + end + " - " + contentString.substring(start, end));
 			for(NerdEntity ref : refs) {
 				int start_ref = ref.getOffsetStart();
 				int end_ref = ref.getOffsetEnd();
@@ -389,8 +385,7 @@ public class NerdSelector extends NerdModel {
 			}
 		}
 
-		// get context for this content
-//System.out.println("get context for this content");		
+		// get context for this content	
 		NerdContext context = null;
 		try {
 			 context = relatedness.getContext(candidates, null, lang, false);
@@ -424,7 +419,6 @@ public class NerdSelector extends NerdModel {
 			for(NerdCandidate candidate : cands) {
 				try {
 					nbCandidate++;
-//System.out.println(nbCandidate + " candidate / " + cands.size());
 					Label.Sense sense = candidate.getWikiSense();
 					if (sense == null)
 						continue;

@@ -140,7 +140,7 @@ Using multiple input type in the same query is not supported in the version of t
 
 (1) text
 """"""""
-Provides a text to be processed (e.g. one or several paragraphs). The text have be greater than 5 character or 406 is returned. 
+Provides a text to be processed (e.g. one or several paragraphs). The text have be greater than 5 character or 406 is returned. The expected amount of text to disambiguate for the different models is a paragraph (100-150 words). If the amount of text is larger, the text will be automatically segmented into balanced segments of maximum 1000 characters (this default size can be changed), using end-of-line and then sentence boundaries. A sliding context  will be managed to pass the previous accumulated context (best entities, identified acronyms, ...) to the following segments. 
 
 (2) shortText
 """""""""""""
@@ -152,11 +152,11 @@ Provides a list of terms, each term being associated to a weight indicating the 
 
 (4) language
 """"""""""""
-When the source language (parameters language) is pre-set the language is considered certain, and the language identifier is not used.
+If this field is empty, a language identifier is used. When the source language (parameters language) is pre-set the language is considered certain, and a language identifier is not used.
 
 (5) mentions
 """"""""""""
-Provides the methods to be used to identify mentions to be disambiguated. By default mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed), noted ``ner`` and with all the labels of Wikipedia for the appropriate language (all the anchors and titles used to refer to a Wikipedia page), noted ``wikipedia``. 
+Provides the methods to be used to identify mentions to be disambiguated. By default, mentions are identified with an NER (the mentions are all Named Entity found in the input text to be processed), noted ``ner`` and with all the labels of Wikipedia for the appropriate language (all the anchors and titles used to refer to a Wikipedia page), noted ``wikipedia``. The order of the mention identification methods matters. 
 
 If the mentions field is an empty array (``"mentions": [],``), only the mentions present in the fied ``entities`` will be disambiguated. This case allows to target the disambiguation only to one or a few mentions in a sentence or a text. 
 
@@ -195,7 +195,7 @@ NOTE: At the moment the entity is taken in account only when the *wikipediaExter
 In a typical interactive scenario, an application client first sends a text to be processed via the */disambiguate* service, and receives a JSON response with some entities. The annotated text is displayed to a user which might correct some invalid annotations. The client updates the modified annotations in the first JSON response and can send it back to the service now as new query via the */disambiguate*. 
 The corrected annotations will then be exploited by the *entity-fishing* system to possibly improve the other annotations and disambiguations.
 
-The ``entities`` field can also contains only mentions defined by their offset in the text, without wikidata/wikipedia information. The mention will then be considered as a forced target mention to be disambiguated. In case the above ``mentions`` field (5) is an empty array (i.e. no method to detect mention), these mentions defined in ``entities`` will still be considered and disambiguated. This a way to limit the disambiguation to one or few mentions in a text, with significant runtime gain. 
+The ``entities`` field can also contains only mentions defined by their offsets in the text, without wikidata/wikipedia information. The mention will then be considered as a forced target mention to be disambiguated. In case the above ``mentions`` field (5) is an empty array (i.e. no method to detect mention), these mentions defined in ``entities`` will still be considered and disambiguated. This a way to limit the disambiguation to one or few mentions in a text, with significant runtime gain. 
 
 (7) processSentence
 """""""""""""""""""
@@ -260,6 +260,22 @@ If you wish to process the whole document without specific structure analysis - 
 **Example using CURL** for processing the full content of a PDF, *without* preliminar structure recognition:
 ::
    curl 'http://cloud.science-miner.com/nerd/service/disambiguate' -X POST -F "query={'language': {'lang':'en'}}, 'entities': [], 'nbest': false, 'sentence': false, 'structure': 'full'}" -F "file=@PATH_FILENAME.pdf"
+
+
+Additional optional parameters
+""""""""""""""""""""""""""""""
+
+In addition to the different parameters described previously, it is also possible to set *per query* three additional parameters:
+
+- ``ngramLength``: the maximum length of a term to be considered as mention, default is ``6`` (i.e. complex terms will be considered up to 6 words) 
+
+- ``targetSegmentSize``: the maximum length of a segment to be considered when processing long texts in number of characters, default is ``1000`` (i.e. a text of 10,000 characters will be segmented in approximatively ten balanced segments of a maximum 1000 characters)
+
+It is advised **not to modify these two parameters** in a normal usage of the service, because the different models have been trained with the default parameter values. Modifying these parameters might decrease the accuracy of the service. 
+
+The following third additional parameter is currently only used for text queries and relevant to long text:
+
+- ``documentLevelPropagation``: if ``true``, the entities disambiguated for certain mentions are propagated to other same mentions in the document not labeled with an entity. This allows to maintain a document level consistency where some mentions, due to poorer context, are not disambiguated, while other mentions in richer contexts are disambiguated. To be propagated, the mention **tf-idf** must be higher than a certain threshold in order to propagate only non trivial, minimally discriminant terms. Default is ``true``.   
 
 
 PDF input

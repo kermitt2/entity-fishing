@@ -83,22 +83,22 @@ public class NerdEngine {
 	private NerdEngine() {
 		try {
 			UpperKnowledgeBase.getInstance();
-			parsers = new EngineParsers();
+			this.parsers = new EngineParsers();
 		} catch(Exception e) {
 			throw new NerdResourceException("Error instanciating the (N)ERD knowledge base. ", e);
 		}
 
-		wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
+		this.wikipedias = UpperKnowledgeBase.getInstance().getWikipediaConfs();
 		try {
-			relatedness = Relatedness.getInstance();
-			rankers = new HashMap<>();
-			selectors = new HashMap<>();
-			wikipediaDomainMaps = UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
+			this.relatedness = Relatedness.getInstance();
+			this.rankers = new HashMap<>();
+			this.selectors = new HashMap<>();
+			this.wikipediaDomainMaps = UpperKnowledgeBase.getInstance().getWikipediaDomainMaps();
 		} catch(Exception e) {
 			throw new NerdResourceException("Error when opening the relatedness model", e);
 		}
 
-		pruningService = new PruningService();
+		this.pruningService = new PruningService();
 	}
 
 	/**
@@ -321,15 +321,14 @@ public class NerdEngine {
 		System.out.println("--");
 		}*/
 
-		if(shortTextVal) {
+		if (shortTextVal) {
             return result;
         }
 
-
         if (nerdQuery.getNbest()) {
-            result = pruningService.pruneOverlapNBest(result, shortTextVal);
+            result = this.pruningService.pruneOverlapNBest(result, shortTextVal);
         } else {
-            result = pruningService.pruneOverlap(result, shortTextVal);
+            result = this.pruningService.pruneOverlap(result, shortTextVal);
         }
 
 		// final pruning
@@ -338,7 +337,7 @@ public class NerdEngine {
 			minRankerScore = nerdQuery.getMinRankerScore();
 
 		if (!nerdQuery.getNbest())
-			pruningService.prune(result, minRankerScore);
+			this.pruningService.prune(result, minRankerScore);
 
 		return result;
 	}
@@ -2241,5 +2240,90 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		//return entity.getType() == NER_Type.MEASURE || entity.getType() == NER_Type.PERIOD;
 		return entity.getType() == NER_Type.MEASURE;
 	}
+
+
+	/**
+	 *  Document level consistency: the goal is to propagate the identified entities in the part of the
+     *  document where the same term appears without labeling. For controlling the propagation we use a tf-idf measure
+     *  of the term.  
+	 **/
+	public void propagate(NerdQuery nerdQuery, List<Mention> mentions, String text) {
+
+		if (nerdQuery.getEntities() == null || nerdQuery.getEntities().size() == 0)
+			return;
+
+		if (mentions == null || mentions.size() == 0)
+			return;
+
+		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(nerdQuery.getLanguage().getLang());
+
+		List<OffsetPosition> positionsTaken = new ArrayList<>();
+		for(NerdEntity entity : nerdQuery.getEntities()) {
+			// we ignore possible entities without entity reference (e.g. just a named entity not resolved)
+			if (entity.getWikidataId() != null)
+				positionsTaken.add(entity.getOffsets());
+		}
+
+		List<NerdEntity> newEntities = new ArrayList<>();
+		for(NerdEntity entity : nerdQuery.getEntities()) {
+
+			if (entity.getWikidataId() == null)
+				continue;
+
+			// check mentions
+			for(Mention mention : mentions) {
+				if (overlapsPosition(positionsTaken, mention.getOffsets()))
+					continue;
+
+				double tfidf = -1.0;
+				String localMentionName = mention.getNormalisedName();
+				if (localMentionName == null) 
+					localMentionName = mention.getRawName();
+				if (localMentionName.equals(entity.getNormalisedName())) {
+					// tf-idf threshold has been set as heuristics
+					double tf = Utilities.getOccCount(entity.getNormalisedName(), text);					
+					Label lbl = new Label(wikipedia.getEnvironment(), entity.getNormalisedName()) ;
+  					double idf = ((double)wikipedia.getArticleCount()) / lbl.getDocCount();
+ 					double tf_idf = tf * idf;
+
+					if ( (tfidf <= 0) || (tfidf >= 150.0) ) {
+						// promote mention to entity
+						NerdEntity newEntity = new NerdEntity(entity);
+						newEntity.setOffsets(mention.getOffsets());
+						newEntity.setRawName(mention.getRawName());
+						newEntities.add(newEntity);
+						positionsTaken.add(newEntity.getOffsets());
+					}
+				}
+			}
+		}
+
+		nerdQuery.addEntities(newEntities);
+
+		Collections.sort(nerdQuery.getEntities());
+		if (nerdQuery.getNbest()) {
+            nerdQuery.setEntities(this.pruningService.pruneOverlapNBest(nerdQuery.getEntities(), false));
+        } else {
+            nerdQuery.setEntities(this.pruningService.pruneOverlap(nerdQuery.getEntities(), false));
+        }
+		if (!nerdQuery.getNbest()) {
+			double minRankerScore = wikipedia.getConfig().getMinRankerScore();
+			this.pruningService.prune(nerdQuery.getEntities(), minRankerScore);
+		}
+	}
+
+    private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
+        for (OffsetPosition pos : list) {
+            if (pos.start == position.start)  
+                return true;
+            if (pos.end == position.end)  
+                return true;
+            if (position.start <= pos.start &&  pos.start <= position.end)  
+                return true;
+            if (pos.start <= position.start && position.start <= pos.end)  
+                return true;
+        } 
+        return false;
+    }
 
 }

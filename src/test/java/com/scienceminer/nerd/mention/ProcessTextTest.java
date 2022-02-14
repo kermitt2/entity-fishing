@@ -7,6 +7,7 @@ import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -35,8 +36,7 @@ public class ProcessTextTest {
 
     @Before
     public void setUp() throws Exception {
-        processText = new ProcessText(true);
-        //processText = ProcessText.getInstance();
+        processText = ProcessText.getInstance();
     }
 
     @Test
@@ -444,7 +444,7 @@ public class ProcessTextTest {
         }
 
         List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
-        assertThat(segments, hasSize(5));
+        assertThat(segments, hasSize(12));
     }
 
     @Test
@@ -499,7 +499,7 @@ public class ProcessTextTest {
         }
 
         List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
-        assertThat(segments, hasSize(4));
+        assertThat(segments, hasSize(9));
     }
 
     @Test
@@ -573,9 +573,71 @@ public class ProcessTextTest {
         final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
                 .tokenizeWithLayoutToken(input, language);
 
-        System.out.println(processText.extractMentionsWikipedia(inputLayoutTokens, language));
+        System.out.println(processText.extractMentionsWikipedia(inputLayoutTokens, language, null));
 
-        System.out.println(processText.extractMentionsWikipedia(input, language));
-
+        //System.out.println(processText.extractMentionsWikipedia(input, language, null));
     }
+
+    @Test
+    public void segmentWithDoubleEOL() {
+        final String input = "This is really not it. \n\nBut here this is it.";
+        final Language language = new Language("en");
+        List<OffsetPosition> segments = processText.segment(input, null, 25, language);
+        assertThat(segments.size(),is(2));
+        assertThat(segments.get(0).end,is(23));
+    }
+
+    @Test
+    public void segmentWithSingleEOL() {
+        final String input = "This is really not it. \nBut here this is it. \nAnd here again, it.";
+        final Language language = new Language("en");
+        List<OffsetPosition> segments = processText.segment(input, null, 25, language);
+        assertThat(segments.size(),is(3));
+        assertThat(segments.get(0).end,is(23));
+    }
+
+    @Test
+    public void segmentWithSentences() {
+        final String input = "This is really not it. But here this is it. And here again, this is it.";
+        final Language language = new Language("en");
+        List<OffsetPosition> segments = processText.segment(input, null, 25, language);
+        assertThat(segments.size(),is(3));
+        assertThat(segments.get(0).end,is(22));
+    }
+
+    @Test
+    public void segmentWithEOLAndSentences() {
+        final String input = "This is really not it. \nBut here this is it. And here again, this is it.";
+        final Language language = new Language("en");
+        List<OffsetPosition> segments = processText.segment(input, null, 25, language);
+        assertThat(segments.size(),is(3));
+        assertThat(segments.get(0).end,is(23));
+    }
+
+    @Test
+    public void segmentWithWeird() {
+        final String input = "This is really not it. \nBut here \nthis is it. \n \n \n And here again, this is it.";
+        final Language language = new Language("en");
+        List<OffsetPosition> segments = processText.segment(input, null, 25, language);
+        /*System.out.println(input);
+        for(OffsetPosition pos : segments) {
+            System.out.println("" + pos.start + ", " + pos.end);
+        }
+        for(OffsetPosition pos : segments) {
+            System.out.println("" + pos.start + ", " + pos.end);
+            System.out.println(input.substring(pos.start, pos.end));
+        }*/
+        assertThat(segments.size(),is(4));
+        assertThat(segments.get(0).end,is(23));
+    }
+
+    @Test
+    public void segmentTooLongSentence() {
+        final String input = "This is really not it but here, this is it and here again, this is it.";
+        final Language language = new Language("en");
+        List<OffsetPosition> segments = processText.segment(input, null, 25, language);
+        assertThat(segments.size(),is(3));
+        assertThat(segments.get(0).end,is(18));
+    }
+
 }
