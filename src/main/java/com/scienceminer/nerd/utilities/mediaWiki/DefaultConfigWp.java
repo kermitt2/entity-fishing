@@ -11,7 +11,7 @@ import org.sweble.wikitext.engine.config.WikiConfigImpl;
 import org.sweble.wikitext.engine.utils.*;
 
 /**
- * Programatically generate a general default configuration.
+ * General default configuration.
  */
 public class DefaultConfigWp extends DefaultConfig {
 	

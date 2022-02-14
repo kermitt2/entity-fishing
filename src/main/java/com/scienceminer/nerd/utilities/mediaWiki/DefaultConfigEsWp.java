@@ -11,8 +11,7 @@ import org.sweble.wikitext.engine.config.WikiConfigImpl;
 import org.sweble.wikitext.engine.utils.*;
 
 /**
- * Programatically generate a default configuration for that is similar to that
- * of the Spanish Wikipedia.
+ * Default configuration for the Spanish Wikipedia.
  */
 public class DefaultConfigEsWp extends DefaultConfigWp {
 
