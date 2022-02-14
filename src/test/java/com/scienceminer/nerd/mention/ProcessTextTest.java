@@ -444,7 +444,7 @@ public class ProcessTextTest {
         }
 
         List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
-        assertThat(segments, hasSize(5));
+        assertThat(segments, hasSize(12));
     }
 
     @Test
@@ -499,7 +499,7 @@ public class ProcessTextTest {
         }
 
         List<List<LayoutToken>> segments = ProcessText.segmentInParagraphs(tokens);
-        assertThat(segments, hasSize(4));
+        assertThat(segments, hasSize(9));
     }
 
     @Test
@@ -576,7 +576,6 @@ public class ProcessTextTest {
         System.out.println(processText.extractMentionsWikipedia(inputLayoutTokens, language, null));
 
         //System.out.println(processText.extractMentionsWikipedia(input, language, null));
-
     }
 
     @Test
@@ -628,18 +627,17 @@ public class ProcessTextTest {
             System.out.println("" + pos.start + ", " + pos.end);
             System.out.println(input.substring(pos.start, pos.end));
         }*/
-        assertThat(segments.size(),is(3));
+        assertThat(segments.size(),is(4));
         assertThat(segments.get(0).end,is(23));
     }
 
     @Test
-    @Ignore
     public void segmentTooLongSentence() {
         final String input = "This is really not it but here, this is it and here again, this is it.";
         final Language language = new Language("en");
         List<OffsetPosition> segments = processText.segment(input, null, 25, language);
         assertThat(segments.size(),is(3));
-        assertThat(segments.get(0).end,is(23));
+        assertThat(segments.get(0).end,is(18));
     }
 
 }

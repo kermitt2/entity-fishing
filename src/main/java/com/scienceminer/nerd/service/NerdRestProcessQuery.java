@@ -164,7 +164,8 @@ public class NerdRestProcessQuery {
         // post-processing at full document level: check global consistency of mentions 
         // by propagating disambiguation to same mentions in other context, controlled
         // by tf-idf
-        NerdEngine.getInstance().propagate(nerdQuery, mentions, nerdQuery.getText());
+        if (nerdQuery.getDocumentLevelPropagation())
+            NerdEngine.getInstance().propagate(nerdQuery, mentions, nerdQuery.getText());
 
         long end = System.currentTimeMillis();
         nerdQuery.setRuntime(end - start);

@@ -265,13 +265,18 @@ If you wish to process the whole document without specific structure analysis - 
 Additional optional parameters
 """"""""""""""""""""""""""""""
 
-In addition to the different parameters described previously, it is also possible to set *per query* two additional parameters:
+In addition to the different parameters described previously, it is also possible to set *per query* three additional parameters:
 
-- `ngramLength`: the maximum length of a term to be considered as mention, default is `6` (i.e. complex terms will be considered up to 6 words) 
+- ``ngramLength``: the maximum length of a term to be considered as mention, default is ``6`` (i.e. complex terms will be considered up to 6 words) 
 
-- `targetSegmentSize`: the maximum length of a segment to be considered when processing long texts in number of characters, default is `1000` (i.e. a text of 10,000 characters will be segmented in approximatively ten balanced segments of a maximum 1000 characters)
+- ``targetSegmentSize``: the maximum length of a segment to be considered when processing long texts in number of characters, default is ``1000`` (i.e. a text of 10,000 characters will be segmented in approximatively ten balanced segments of a maximum 1000 characters)
 
-However, it is advised **not to modify these parameters** in a normal usage of the service, because the different models have been trained with the default parameter values. Modifying these parameters might decrease the accuracy of the service. 
+It is advised **not to modify these two parameters** in a normal usage of the service, because the different models have been trained with the default parameter values. Modifying these parameters might decrease the accuracy of the service. 
+
+The following third additional parameter is currently only used for text queries and relevant to long text:
+
+- ``documentLevelPropagation``: if ``true``, the entities disambiguated for certain mentions are propagated to other same mentions in the document not labeled with an entity. This allows to maintain a document level consistency where some mentions, due to poorer context, are not disambiguated, while other mentions in richer contexts are disambiguated. To be propagated, the mention **tf-idf** must be higher than a certain threshold in order to propagate only non trivial, minimally discriminant terms. Default is ``true``.   
+
 
 PDF input
 ^^^^^^^^^

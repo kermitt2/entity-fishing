@@ -49,17 +49,17 @@ Some example of *entity-fishing* usages:
 
 * Tanti Kristanti from [Inria Paris](https://www.inria.fr) used off the shelf version of *entity-fishing* in the [CLEF HIPE 2020 competition shared task](http://ceur-ws.org/Vol-2696/paper_266.pdf), ranking first at the Entity Linking task for English and second best for French, in F1-score.
 
-* *entity-fishing* was deployed in the DARIAH-EU and Huma-Num infrastructure in the context of the [OPERAS HIRMEOS EU project](https://www.hirmeos.eu).
+* [Kairntech](https://kairntech.com) has integrated *entity-fishing* on their commercial platform [Sherpa](https://aclanthology.org/2020.iwltp-1.9.pdf) to support analysis and enrichment of textual content, since 2020. 
 
-* [SEALK](https://sealk.co), which is commercializing a M&A industry recommendation system, scaled *entity-fishing* to more than 1 million fulltext news documents. 
+* [SEALK](https://sealk.co), which is commercializing a M&A industry recommendation system, scaled *entity-fishing* to more than 1 million fulltext news documents in 2020. 
 
-* [Kairntech](https://kairntech.com) has integrated *entity-fishing* on their commercial platform [Sherpa](https://aclanthology.org/2020.iwltp-1.9.pdf) to support analysis and enrichment of textual content. 
+* *entity-fishing* has been deployed in the DARIAH-EU and Huma-Num infrastructure in the context of the [OPERAS HIRMEOS EU project](https://www.hirmeos.eu) in 2018.
 
 If you are using *entity-fishing* and found it useful, we are happy to mention you in this section ! 
 
 # Current version
 
-*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.4`. 
+*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.5`. 
 
 This version supports English, French, German, Italian and Spanish, with an in-house Named Entity Recognizer for English and French. For this version, the knowledge base includes around 87 million entities and 1.1 billion statements from Wikidata. 
 
@@ -86,7 +86,7 @@ If you want to cite this work, please refer to the present GitHub project, toget
     title = {entity-fishing},
     howpublished = {\url{https://github.com/kermitt2/entity-fishing}},
     publisher = {GitHub},
-    year = {2016--2020},
+    year = {2016--2022},
     archivePrefix = {swh},
     eprint = {1:dir:cb0ba3379413db12b0018b7c3af8d0d2d864139c}
 }
@@ -98,4 +98,4 @@ Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.
 
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
-*entity-fishing* is developed and maintained by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) (since 2015, first Open Source public version in 2016), with contributions of [Inria](http://inria.fr) Paris (2017-2018). 
+*entity-fishing* has been created, developed and is maintained by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) (since 2015, first Open Source public version in 2016), with contributions of [Inria](http://inria.fr) Paris (2017-2018). 

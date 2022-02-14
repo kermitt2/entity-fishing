@@ -1119,101 +1119,6 @@ public class ProcessText {
         return entities;
     }
 
-    /**
-     * Add entities corresponding to acronym definitions to a query
-     */
-    /*public List<Mention> propagateAcronyms2(NerdQuery nerdQuery) {
-
-        if ((nerdQuery == null) || (nerdQuery.getContext() == null))
-            return null;
-
-        Map<Mention, Mention> acronyms = nerdQuery.getContext().getAcronyms();
-
-        if (acronyms == null)
-            return null;
-
-        List<Mention> entities = null;
-        List<LayoutToken> tokens = nerdQuery.getTokens();
-
-        if (tokens != null) {
-            // iterate through all tokens in layout token list
-            searchToken:
-            for (LayoutToken token : tokens) {
-                // get the text and the offsets for the current token
-                String textInLayoutToken = token.getText();
-                int offsetStart = token.getOffset();
-
-                // find the acronym saved in the map to be compared with the current token
-                searchAcronym:
-                for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
-                    Mention acronym = entry.getKey();
-                    Mention base = entry.getValue();
-
-                    // get the acronym, the offset and the length
-                    String acronymText = acronym.getRawName();
-                    int lengthComplexAcronym = acronymText.length();
-                    int offsetEnd = offsetStart + lengthComplexAcronym;
-
-                    if ((offsetStart == acronym.getOffsetStart()))
-                        continue searchToken;
-                    else {
-                        // compare the acronym with the current token whether they are exactly the same string or not
-                        if (textInLayoutToken.equals(acronymText)) {
-                            // ignore the current acronym to avoid having it twice
-                            Mention entity = new Mention(acronymText);
-                            entity.setNormalisedName(base.getRawName());
-                            entity.setOffsetStart(offsetStart);
-                            entity.setOffsetEnd(offsetEnd);
-                            entity.setType(null);
-                            entity.setLayoutTokens(Arrays.asList(token));
-                            entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
-                            if (entities == null)
-                                entities = new ArrayList<>();
-                            entities.add(entity);
-                        } else {
-                            // the case of acronym with the dots, ex. S.V.M.
-
-                            // firstly, if the current token is equal with the first character of acronym,
-                            // note the offset as offsetStart and iterate until up to the length of the acronym text
-                            List<String> concatenateToken = new ArrayList<>();
-                            if (textInLayoutToken.equals(String.valueOf(acronymText.charAt(0)))) {
-
-                                List<LayoutToken> tokens1 = nerdQuery.getTokens();
-                                List<LayoutToken> resultBoundingBox = new ArrayList<>();
-
-                                for (LayoutToken token1 : tokens1) {
-                                    int offsetStart1 = token1.getOffset();
-                                    // ignore the current acronym to avoid having it twice
-                                    if (offsetStart1 >= offsetStart) {
-                                        if (offsetStart1 < offsetEnd) {
-                                            concatenateToken.add(token1.getText());
-                                            resultBoundingBox.add(token1);
-                                        }
-                                    }
-                                }
-                                textInLayoutToken = String.join("", concatenateToken);
-                                if (textInLayoutToken.equals(acronymText)) {
-                                    Mention entity = new Mention(acronymText);
-                                    entity.setNormalisedName(base.getRawName());
-                                    entity.setOffsetStart(offsetStart);
-                                    entity.setOffsetEnd(offsetEnd);
-                                    entity.setType(null);
-                                    entity.setLayoutTokens(acronym.getLayoutTokens());
-                                    entity.setBoundingBoxes(BoundingBoxCalculator.calculate(entity.getLayoutTokens()));
-                                    if (entities == null)
-                                        entities = new ArrayList<>();
-                                    entities.add(entity);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return entities;
-    }*/
-
-
     protected List<LayoutToken> getSequenceMatch(List<LayoutToken> tokens, int i, List<LayoutToken> layoutTokensAcronym) {
         final LayoutToken firstLayoutTokenAcronym = layoutTokensAcronym.get(0);
 
@@ -1627,7 +1532,30 @@ public class ProcessText {
         // -> we do an arbitrary segmentation based on delimiters 
         // to avoid side effect for this pathological text
         if (selectedPositionStart == -1) {
-            // TBD
+            // we use simple space as splitter, to avoid being too much language dependent
+            positionsStart = new ArrayList<>();
+            int ind = 0;
+            while(ind != -1) {
+                ind = text.indexOf(" ", ind);
+                if (ind != -1) {
+                    positionsStart.add(ind);
+                    ind += 1;
+                }
+            }
+
+            if (positionsStart.size() > 0) {
+                // select the most central split point
+                int i = 0;
+                for(Integer position : positionsStart) {
+                    if (selectedPositionStart == -1) {
+                        selectedPositionStart = position;
+                    }
+                    else if (Math.abs(position-midPosition)<Math.abs(selectedPositionStart-midPosition)) {
+                        selectedPositionStart = position;
+                    }
+                    i++;
+                }
+            }
         }
 
         if (selectedPositionStart != -1) {
@@ -1651,7 +1579,7 @@ public class ProcessText {
     // this is not used for the moment
 
     public static int MINIMAL_PARAGRAPH_LENGTH = 100;
-    public static int MAXIMAL_PARAGRAPH_LENGTH = 600;
+    public static int MAXIMAL_PARAGRAPH_LENGTH = 250;
 
     public static List<List<LayoutToken>> segmentInParagraphs(List<LayoutToken> tokens) {
         // heuristics: double end of line, if not simple end of line (not aligned with
@@ -1680,14 +1608,14 @@ public class ProcessText {
         return false;
     }
 
-    private static boolean containsTooLargeSegment(List<OffsetPosition> segments, int targetSegmentSize) {
+    /*private static boolean containsTooLargeSegment(List<OffsetPosition> segments, int targetSegmentSize) {
         for (OffsetPosition segment : segments) {
             if (segment.end - segment.start > targetSegmentSize) {
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     private static List<List<LayoutToken>> subSsegmentInParagraphs(List<List<LayoutToken>> segments) {
         List<List<LayoutToken>> result = new ArrayList<>();

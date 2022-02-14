@@ -137,6 +137,7 @@ public class NerdQuery {
     // some parameters that are possible to define at query time
     private Integer ngramLength = null;
     private Integer targetSegmentSize = null;
+    private boolean documentLevelPropagation = true;
 
     public NerdQuery() {
     }
@@ -176,6 +177,7 @@ public class NerdQuery {
 
         this.ngramLength = query.getNgramLength();
         this.targetSegmentSize = query.getTargetSegmentSize();
+        this.documentLevelPropagation = query.getDocumentLevelPropagation();
     }
 
     public String getSoftware() {
@@ -481,6 +483,14 @@ public class NerdQuery {
 
     public void setTargetSegmentSize(Integer targetSegmentSize) {
         this.targetSegmentSize = targetSegmentSize;
+    }
+
+    public boolean getDocumentLevelPropagation() {
+        return documentLevelPropagation;
+    }
+
+    public void setDocumentLevelPropagation(boolean documentLevelPropagation) {
+        this.documentLevelPropagation = documentLevelPropagation;
     }
 
     public String toJSON() {
