@@ -54,9 +54,6 @@ public class NerdConfig {
 	// path to grobid-home
 	private String grobidHome = null;
 
-	// path to resources for species recognition
-	private String speciesPath = null;
-
 	public String getLangCode() {
 		return langCode;
 	}
@@ -151,13 +148,5 @@ public class NerdConfig {
 
 	public void setGrobidHome(String grobidHome) {
 		this.grobidHome = grobidHome;
-	}
-
-	public String getSpeciesPath() {
-		return speciesPath;
-	}
-
-	public void setSpeciesPath(String speciesPath) {
-		this.speciesPath = speciesPath;
 	}
 }

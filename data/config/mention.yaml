@@ -3,5 +3,3 @@
 # path to the GROBID home (for grobid-ner, grobid, etc.)
 grobidHome: ../grobid/grobid-home/
 
-# path to the species resource files 
-speciesPath: data/species
