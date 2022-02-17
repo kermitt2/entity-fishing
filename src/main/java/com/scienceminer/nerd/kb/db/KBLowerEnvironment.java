@@ -327,7 +327,8 @@ public class KBLowerEnvironment extends KBEnvironment {
 		File[] files = dataDirectory.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
 				return name.endsWith("-pages-articles.xml") || name.endsWith("-pages-articles.xml.bz2") || name.endsWith("-pages-articles.xml.gz") || 
-						name.endsWith("-pages-articles-multistream.xml");
+						name.endsWith("-pages-articles-multistream.xml") || name.endsWith("-pages-articles-multistream.xml.bz2") || 
+						name.endsWith("-pages-articles-multistream.xml.gz") ;
 			}
 		});
 		

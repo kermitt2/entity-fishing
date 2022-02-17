@@ -40,7 +40,7 @@ public class UpperKnowledgeBase {
 
 	// this is the list of supported languages 
   	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
-  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES);
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar");
  
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
@@ -109,6 +109,12 @@ public class UpperKnowledgeBase {
 			LowerKnowledgeBase wikipedia_it = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.IT, wikipedia_it);
             wikipediaDomainMaps.put(Language.IT, wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Arabic lower Knowledge-base layer");
+            conf = mapper.readValue(new File("data/config/wikipedia-ar.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_ar = new LowerKnowledgeBase(conf);
+			wikipedias.put("ar", wikipedia_ar);
+            wikipediaDomainMaps.put("ar", wikipediaDomainMaps_en);
 
 			LOGGER.info("End of Initialization of Wikipedia environments");
 

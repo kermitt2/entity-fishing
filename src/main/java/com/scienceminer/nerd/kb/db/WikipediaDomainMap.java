@@ -180,9 +180,10 @@ System.out.print("\n");*/
         int nbToAdd = 0;
         Transaction tx = environment.createWriteTransaction();
         while(iterator.hasNext()) {
+            /*
             if ((p%10000) == 0)
                 System.out.println(p);
-
+            */
             if (nbToAdd == 10000) {
                 tx.commit();
                 tx.close();

@@ -66,24 +66,10 @@ public class TaxonDatabase extends StringRecordDatabase<List<String>> {
 				//Page p = null;
 				try {
 					String entityId = (String)KBEnvironment.deserialize(keyData);
-					// check the statements for a property P31 (instanceOf) with 
-					// value Q16521 (taxon)
-					String superType = null;
-
 					List<Statement> statements = statementDb.retrieve(entityId);
-					/*if ( (statements != null) && (statements.size() > 0) ) {
-						for(Statement statement : statements) {
-							if (statement.getPropertyId().equals("P31")) {
-								superType = statement.getValue();
-								//System.out.println("found DOI: " + doi);
-							}
-						}
-					}*/
 
 					// check the statements for a property P171 (parent taxon) 
-
-					//if ((superType != null) && (superType.equals("Q16521")) ) 
-					{
+					if (statements != null && statements.size()>0) {
 						List<String> parentTaxons = null;
 
 						// check the statements for a property P171 (parent taxon) 
@@ -102,12 +88,9 @@ public class TaxonDatabase extends StringRecordDatabase<List<String>> {
 							// we have a taxon
 							nbTaxon++;
 							// store the parent information
-
 							db.put(tx, KBEnvironment.serialize(entityId),
 								KBEnvironment.serialize(parentTaxons));
 							nbToAdd++;
-
-
 						}
 					}
 				} catch(Exception e) {

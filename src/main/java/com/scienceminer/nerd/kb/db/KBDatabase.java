@@ -37,7 +37,7 @@ public abstract class KBDatabase<K,V> {
 		//System.out.println("db path: " + this.envFilePath);
 
 		this.environment = new Env();
-    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	this.environment.setMapSize(1000 * 1024 * 1024, ByteUnit.KIBIBYTES); 
     	File thePath = new File(this.envFilePath);
     	if (!thePath.exists()) {
     		thePath.mkdirs();
@@ -65,7 +65,7 @@ public abstract class KBDatabase<K,V> {
 
 		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + name;
 		this.environment = new Env();
-    	this.environment.setMapSize(100 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	this.environment.setMapSize(1000 * 1024 * 1024, ByteUnit.KIBIBYTES); 
     	File thePath = new File(this.envFilePath);
     	if (!thePath.exists()) {
     		thePath.mkdirs();
