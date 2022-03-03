@@ -45,23 +45,25 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 36 GB compressed, and 119 GB uncompressed. The data for this version ``0.0.4`` correspond to the Wikidata and Wikipedia dumps from 20.05.2020 and can still be used with version ``0.0.5``. The Knowledge Base part contains around 87 million entities and 1.1 billion statements and has considerably grown in the three last years. 
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 36 GB compressed, and around 120 GB uncompressed. The data for this version ``0.0.5`` correspond to the Wikidata and Wikipedia dumps from Feb., 1st 2022. The Knowledge Base part contains around 96 million entities and 1.2 billion statements (Wikidata has considerably grown in the three last years). 
 
     **Linux**
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-kb.zip (15 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-kb.zip (19 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-en.zip (9.1 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-en.zip (6.9 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-fr.zip (3.2 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fr.zip (2.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-de.zip (4.2 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-de.zip (2.6 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-es.zip (2.5 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-es.zip (1.8 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.4/linux/db-it.zip (2.2 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-it.zip (1.6 GB)
 
-For MacOS we still make available the data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. 
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ar.zip (2.1 GB)
+
+MacOS is not officially supported and should not be used for production. For convenience, we still make available the MacOS data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated and Arabic not available, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. However, we strongly recommend to use the Linux version for any serious works.
 
     **MacOS**
 
