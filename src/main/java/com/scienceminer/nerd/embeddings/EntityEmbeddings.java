@@ -72,7 +72,11 @@ public class EntityEmbeddings {
     }
 
     public int getEmbeddingsSize() {
-        return embeddingsSize;
+        return this.embeddingsSize;
+    }
+
+    public void setEmbeddingsSize(int size) {
+        this.embeddingsSize = size;
     }
 
     public Map<String,float[]> loadEmbeddings(String path) {
@@ -83,8 +87,8 @@ public class EntityEmbeddings {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))));
             String line = null;
             while((line = br.readLine()) != null) {
-                String[] parts = line.split("\\s+");
-                if (parts.length == 2) {
+                String[] parts = line.split("\\s+");              
+                if (parts.length == 2 || parts.length == 3) {
                     // skip header
                     continue;
                 }
@@ -95,7 +99,7 @@ public class EntityEmbeddings {
                         continue;
                     }
                 } else {
-                    embeddingsSize = parts.length-1;
+                    this.embeddingsSize = parts.length-1;
                 }
                 float[] vector = new float[parts.length-1];
                 for(int i = 1; i < parts.length; i++) {
@@ -217,8 +221,8 @@ public class EntityEmbeddings {
         @Override
         public void run() {
             ProgressLogger pl = new ProgressLogger();
-            final int nwords = vectors.size();
-            final int d = embeddingsSize;
+            final int nwords = this.vectors.size();
+            final int d = this.embeddingsSize;
             try {
                 pl.count = count / nbThreads;
                 pl.itemsName = "entities";
@@ -228,6 +232,7 @@ public class EntityEmbeddings {
 
                 float alpha = 10;
                 EntityEmbeddings eb = new EntityEmbeddings();
+                eb.setEmbeddingsSize(d);
                 final BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(input)) , "UTF-8"));
                 pl.start();
                 String line;
@@ -334,7 +339,7 @@ public class EntityEmbeddings {
             total++;
         }
 
-        float[][] x = new float[positive.size() + negative.size()][embeddingsSize];
+        float[][] x = new float[positive.size() + negative.size()][this.embeddingsSize];
         int[] y = new int[positive.size() + negative.size()];
 
         for(int i = 0; i < positive.size(); i++) {

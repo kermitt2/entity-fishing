@@ -231,7 +231,7 @@ public class Quantizer {
         else {
             String currArg;
             for (int i = 0; i < pArgs.length; i++) {
-                currArg = pArgs[i];
+                currArg = pArgs[i];             
                 if (currArg.equals("-h") || currArg.equals("-help")) {
                     System.out.println(getHelp());
                     result = false;

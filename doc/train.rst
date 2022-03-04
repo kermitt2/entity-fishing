@@ -51,21 +51,20 @@ The evaluation with annotated corpus is also described in the page :doc:`evaluat
 Creating entity embeddings
 **************************
 
-Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. For creating these entity embeddings, the process is as follow: 
+Entity embeddings are used to improve entity disambiguation. They are created from word embeddings and entity descriptions generated from Wikidata and Wikipedia. Embeddings resources are provided with the project data resources, so you normally don't have to create yourself these embeddings. For reference, we document here how to create these entity embeddings. The process is as follow: 
 
-0. Prepare packaging with maven:
-::
-	$ mvn clean install
+1. Download available pretrained word embeddings for a target language - this could be for instance word2vec, FastText, or lexvec. Word embeddings need initially to be in the standard .vec format (a text format). word2vec binary format can be transformed into .vec format with the simple utility `convertvec <https://github.com/marekrei/convertvec>`_
 
-1. Download available pretrained word embeddings - this could be for instance word2vec, FastText, or lexvec. Word embeddings need initially to be in the standard .vec format (a text format). word2vec binary format can be transformed into .vec format with the simple utility `convertvec <https://github.com/marekrei/convertvec>`_
+Note: English and Arabic word embeddings used in the current *entity-fishing* are Glove "flavor". Arabic embeddings are available at https://archive.org/details/arabic_corpus, see https://ia803100.us.archive.org/4/items/arabic_corpus/vectors.txt.xz. Other languages are using fastText word embeddings. 
 
 2. Quantize word embeddings
 
-Quantize will simplify the vector given an acceptable quantization factor (by default the error rate for quantizing is 0.01, but it could be changed with the argument ``-error``)
+Quantize will simplify the vector given an acceptable quantization factor (by default the error rate for quantizing is 0.01, but it could be changed with the argument ``-Perror``)
 ::
-	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i word.embeddings.vec -o word.embeddings.quantized -hashheader"	
+	$ ./gradlew quantize_word_embeddings -Pi=/media/lopez/data/embeddings/glove-vectors.vec -Po=/media/lopez/data/embeddings/word.embeddings.quantized
 
-Here the FastText word embeddings ``wiki.en.vec`` given as input (``-i``) will be quantized and saved as ``wiki.en.quantized``. ``-hashheader`` indicates that the first line (a header to be ignored) must be skipped.
+Here some Glove word embeddings ``glove-vectors.vec`` given as input (``-i``) will be quantized and saved as ``word.embeddings.quantized``. 
+By default, the flag ``-hashheader`` is used and indicates that the first line (a header to be ignored) must be skipped. In case there is no header, ``-hashheader`` should be removed in the corresponding gradle task ``quantize_word_embeddings`` (see file ``build.gradle``). 
 
 3. Create Wikidata entity description to be used for producing entity embeddings. The command for creating description is the following one:
 ::
@@ -73,34 +72,30 @@ Here the FastText word embeddings ``wiki.en.vec`` given as input (``-i``) will b
 
 Replace the ``en`` argument by the language of interest. 
 
-As an alternative with maven:
-::
-	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityDescription -Dexec.args="entity.description en"
-
-The argument indicates then where to save the generated description (normally ``data/wikipedia/embeddings/``) and the language of interest. 
+The generated description are saved under ``data/embeddings/en/``), given the language of interest (here ``en``).  
 
 4. Create entity embeddings from the generated description. 
 
-This step might take a lot of time and exploiting multithreading is particularly hepful. The number of threads to be used is given by the argument ``-thread``
+This step might take a lot of time and exploiting multithreading is particularly hepful. The number of threads to be used is given by the argument ``-n``:
 ::
-	$ mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.EntityEmbeddings -Dexec.args="-i entity.description -v word.embeddings.quantized -o entity.embeddings.vec -n 10"
+	$ ./gradlew generate_entity_embeddings -Pin=entity.description -Pv=word.embeddings.quantized -Pout=entity.embeddings.vec -Pn=10
 
 The following parameters are available:
 
 * **-h**: displays help
 * **-in**: path to an entity description data file
+* **-v**: the path to the word embedding file in .vec format (e.g. one originally of word2vec, faster, lexvec, etc.), optionally quantized
 * **-out**: path to the result entity embeddings file (not quantized, this is to be done afterwards)
 * **-n**: number of threads to be used, default is 1 but it is advice to used as much as possible
 * **-rho**: rho negative sampling parameters, if it's < 0 use even sampling, default is -1 (must be an integer)
 * **-max**: maximum words per entity, if < 0 use all the words, default is -1 (must be an integer)
-* **-v**: the path to the word embedding file in .vec format (e.g. one originally of word2vec, faster, lexvec, etc.), optionally quantized
 
 5. Quantize entity embeddings
 
-Similarly as the steps 2.1 for the entity embeddings, the quantization:
+Finally, similarly as the steps 2., we apply a quantization to the entity embeddings:
 ::
-	$mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.embeddings.Quantizer -Dexec.args="-i /mnt/data/wikipedia/embeddings/entity.embeddings.vec -o /mnt/data/wikipedia/embeddings/entity.embeddings.quantized -hashheader"
+	$ ./gradlew quantize_word_embeddings -Pi=/media/lopez/data/embeddings/entity.embeddings.vec -Po=/media/lopez/data/embeddings/entity.embeddings.quantized
 
 The entity embeddings are now ready to be loaded in the embedded database of *entity-fishing*. 
 
-6. Copy the embeddings files under the *entity-fishing* data repository (the one containing the csv files). *entity-fishing* expects compressed files with ``.gz`` extension:  ``word.embeddings.quantized.gz`` and ``entity.embeddings.quantized.gz``. Starting *entity-fishing* will load automatically the embeddings in the embedded database LMDB as binary data.
+6. Copy the quantized embeddings files (e.g. ``entity.embeddings.quantized``) under the *entity-fishing* data repository (the one containing the csv files). *entity-fishing* expects compressed files with ``.gz`` extension:  ``word.embeddings.quantized.gz`` and ``entity.embeddings.quantized.gz``. Starting *entity-fishing* will load automatically the embeddings in the embedded database LMDB as binary data.

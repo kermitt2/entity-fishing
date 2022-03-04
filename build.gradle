@@ -174,7 +174,6 @@ artifacts {
     archives war
 }
 
-
 //TODO: we could create a task to download and unpack the lmdb files automatically 
 //task copyModels(type: Copy) {
 //    from "${rootDir}/resources/models"
@@ -238,18 +237,42 @@ task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'trai
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// entity description to create entity embeddings
+// create entity description, necessary to then create entity embeddings
 // Run like this: ./gradlew generate_entity_description -Plang=en
 // ./gradlew generate_entity_description -Plang=fr
 // etc.
 task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
     main = 'com.scienceminer.nerd.embeddings.EntityDescription'
     classpath = sourceSets.main.runtimeClasspath
-    args 'data/wikipedia/embeddings/', getArg('lang', 'en')
+    args 'data/embeddings/', getArg('lang', 'en')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+// tasks related to embeddings generation
 
+// quantize word embeddings 
+// Run like this: ./gradlew quantize_word_embeddings -Pi=word.embeddings.vec -Po=word.embeddings.quantized
+task(quantize_word_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
+    main = 'com.scienceminer.nerd.embeddings.Quantizer'
+    classpath = sourceSets.main.runtimeClasspath
+    args '-i', getArg('i', 'word.embeddings.vec'), '-o', getArg('o', 'word.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
 
+// create entity embeddings from word embeddings and generated entity description 
+// Run like this: ./gradlew generate_entity_embeddings -Pin=entity.description -Pv=word.embeddings.quantized -Pout=entity.embeddings.vec -Pn=10
+task(generate_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
+    main = 'com.scienceminer.nerd.embeddings.EntityEmbeddings'
+    classpath = sourceSets.main.runtimeClasspath
+    args '-in', getArg('in', 'entity.description'), '-v', getArg('v', 'word.embeddings.quantized'), '-out', getArg('out', 'entity.embeddings.vec'), '-n', getArg('n', '10')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
 
-
+// quantize entity embeddings 
+// Run like this: ./gradlew quantize_entity_embeddings -Pi=entity.embeddings.vec -Po=entity.embeddings.quantized
+task(quantize_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
+    main = 'com.scienceminer.nerd.embeddings.Quantizer'
+    classpath = sourceSets.main.runtimeClasspath
+    args '-i', getArg('i', 'entity.embeddings.vec'), '-o', getArg('o', 'entity.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
