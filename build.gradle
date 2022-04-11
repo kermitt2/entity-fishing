@@ -2,8 +2,9 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        jcenter()
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
 //        maven { url "https://dl.bintray.com/rookies/maven" }
 //        maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
 //        maven { url "http://oss.jfrog.org/artifactory/libs-release" }
@@ -11,14 +12,21 @@ buildscript {
     }
     dependencies {
 //        classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
+//        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
 //        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath "gradle.plugin.org.gretty:gretty:2.3.1"
+        //classpath "gradle.plugin.org.gretty:gretty:3.0.7"
+        //classpath 'org.gretty:gretty:+'
+        //classpath "org.gretty:gretty:4.0.1"
+        //classpath "gradle.plugin.org.gretty:gretty:3.0.4"
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
     }
 }
 
-apply plugin: 'maven'
+plugins {
+    id("org.gretty") version "3.0.4"
+}
+
+//apply plugin: 'maven'
 //apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
@@ -187,7 +195,7 @@ artifacts {
 //}
 
 wrapper {
-    gradleVersion "5.4.1"
+    gradleVersion "7.1.1"
 }
 
 // return the default value if the property has not been specified in command line
