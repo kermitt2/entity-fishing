@@ -11,7 +11,7 @@ import org.sweble.wikitext.engine.config.WikiConfigImpl;
 import org.sweble.wikitext.engine.utils.*;
 
 /**
- * Default configuration for the Mandarin Wikipedia.
+ * Default configuration for the Japanese Wikipedia.
  */
 
 /* For reference:
