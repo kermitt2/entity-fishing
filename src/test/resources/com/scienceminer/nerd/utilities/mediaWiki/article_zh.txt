@@ -1,0 +1,166 @@
+{{refimprove|time=2020-07-10}}
+{{NoteTA
+|G1=Movie
+|1=zh-tw:數位; zh-hk:數碼; zh-cn:数字;
+|2=zh-tw:史匹伯; zh-hk:史匹堡; zh-cn:斯皮尔伯格;
+|3=zh-tw:辛德勒的名單; zh-hk:舒特拉的名單; zh-cn:辛德勒的名单;
+|4=zh-tw:大藝術家; zh-hk:星光夢裏人; zh-cn:艺术家;
+}}
+{{Portal|藝術}}
+[[File:Muybridge race horse animated.gif|right|thumb|upright=1.15|alt=一段显示一匹马飞奔，骑在它背上的骑师的动画片断|1887年由[[埃德沃德·迈布里奇]]拍摄的一组照片的[[GIF动画]]]]
+[[File:Filmprojector Philips in bioscoop City Utrecht.jpg|thumb|一部早期的電影放映機]]
+[[File:Roundhay Garden Scene.ogv|thumb|世界上第一部电影--《[[郎德海花园场景]]》]]
+[[File:Winsor McCay (1912) How a Mosquito Operates.webm|thumb|1912年的动画短片《[[蚊子是怎么生活的]]》是历史上最早的动画电影之一]]
+[[File:The Bond (1918).ogv|thumb|200px|thumbtime=2|upright=1.5|卓别林的电影《{{link-en|债券 (卓别
+林)|The Bond|债券}}》]]
+
+'''电影'''（{{lang-en|movie}}/ {{lang|en|film}}），特点是'''运动／移动的画面'''（{{lang-en|motion/ moving picture}}），是一种[[视觉艺术]]作品，用来模拟通过使用动态图像来传达思想、故事、感知、感觉
+、美或氛围的体验。这些图像通常伴有声音，更少有其他感官刺激。&lt;ref&gt;{{cite web|url=http://tribecafilm.com/future-of-film/future-of-the-movie-theater-is-in-your-mind|title=The Movie Theater of the Future Will Be In Your Mind|last=Severny|first=Andrei|date=2013-09-05|work=[[翠贝卡电影节|翠贝
+卡]]|archive-url=https://web.archive.org/web/20130907214603/http://tribecafilm.com/future-of-film/future-of-the-movie-theater-is-in-your-mind|archive-date=2013年9月7日|access-date=September 5, 2013|}}&lt;/ref&gt;
+
+電影中看起來連續的畫面，是由一[[幀]]幀單獨的照片完成的，至於關於電影中運動的感覺，是因為人們因為視覺上的[[飛現象]]（Phi phenomenon），使得對一連串靜態圖片卻會造成移動的錯覺。傳統對電影中運動感知的理解是因為[[視覺暫留]]，使得圖像離開後，仍能在眼睛保留「視像」約十分之一秒。因此大腦感覺到圖像是「運動」的。但在1916年出版的[[德國]]心理學家[[雨果·明斯特伯格]]（Hugo Münsterberg）的《電影：一次心
+理學研究》中第三章《深度感和運動感》中，雨果·明斯特伯格證明了外觀運動絕不是影像滯留（即視覺暫留）
+的結果，而是（但不僅僅是）對運動的連續階段的感知。
+
+[[電影製作]]本身是[[藝術電影|藝術]]也是[[電影產業|產業]]。電影可以由[[電影攝影機]][[摄影|拍攝]]真
+實影像再製作而成，也可以利用傳統的[[動畫]]技巧繪製圖畫再拍攝圖畫而成，甚至可以利用[[電腦成像]]及[[计算机动画]]製作電影，也可以在電影中利用上述所有的技術及其他[[視覺效果]]。電影技術發展初期有各種不同的放映速度，但現時電影都多以每秒二十四格圖像作放映標準&lt;ref name=&quot;王志艳2013&quot;&gt;{{cite book|author=王志艳|title=艺术百科知识博览·我的第一本百科书|url=http://books.google.com/books?id=Zz0bBgAAQBAJ&amp;pg=PT96|date=1 February 2013|publisher=天津人民出版社; Esphere Media（美国艾思
+传媒）|isbn=978-7-201-07964-6|pages=96–}}&lt;/ref&gt;。
+
+[[路易斯·普林斯]]于1888年10月14日，使用改进版的单镜头摄影机（即[[MkII]]）拍摄了电影《[[朗德海花园
+场景]]》。他在利兹的汉斯莱特区的惠特利工厂以及惠特利位于朗德海的家--奥克伍德农庄展出了他这第一部电影。
+
+电影成为第七艺术的来由是意大利诗人和电影先驱者{{link-en|乔托·卡努杜|Ricciotto Canudo}}（Ricciotto Canudo），他在于1911年发表的一篇《第六艺术的誕生》（Birth of the 6th art），將電影放在[[建築]]、[[雕塑]]、[[繪畫]]、[[音樂]]、[[詩]]之後，他後來又加入了早在電影之前就有的[[舞蹈]]，因此电影就成為第七藝術&lt;ref&gt;{{cite book |last=Bordwell |first=David |title=On the History of Film Style |publisher=[[Harvard University Press]] |year=1997 |page=29 |isbn=0-674-63429-2 |url=http://books.google.ie/books?id=DezHd2nJLScC&amp;pg=PT43 |access-date=2016-09-08 |archive-date=2013-12-21 |archive-url=https://web.archive.org/web/20131221130820/http://books.google.ie/books?id=DezHd2nJLScC&amp;pg=PT43 |dead-url=no }}&lt;/ref&gt;。也有一些說法是將早在電影問世前就有的[[戲劇]]放在电影之前，以此方法來算，電影就成為[[八大藝術|第八藝術]]。
+
+如今，許多電影仍然用能把影像記錄到膠捲上的[[攝影]]機來拍攝。膠卷經過沖洗之後，再用[[电影放映机|放
+映機]]來運行膠卷。放映機可以發出光線，透過膠卷，這樣影像就在銀幕上顯示出了。自從[[有聲電影]]發明以來，大多數的電影都是有聲電影。最近許多電影都用[[攝影機|數碼攝像機]]來拍攝，放映的時候，可以用數位
+放映機，也可以把數位影像轉置到傳統的膠片上。这种方法可避免膠片長時間存放的失真。
+
+== 起源 ==
+[[File:Romance of the Western Chamber poster.jpg|thumb|200px|《[[西厢记 (1927年电影)|西廂記]]》的
+電影海報（1927年）]]
+[[File:Brea-edwards cinema night.jpg|thumb|220x220px|美国俄亥俄州一家電影院]]
+* 电影诞生于1888年，是[[路易斯·普林斯]]在1888年最早放映的《[[郎德海花园场景]]》&lt;ref&gt;''Guinness Book of Records'', all editions.&lt;/ref&gt;。但在這之前[[埃德沃德·邁布里奇]]在1878年拍攝的[[Sallie Gardner at a Gallop]]有時也被視為早期電影的先驅。而后，在1895年12月28日，由[[卢米埃尔兄弟]]在法国巴黎卡普幸路14号一家名为“大咖啡馆”的地下室首次公开放映了他们的短片&lt;ref name=&quot;daqihupi2015&quot;&gt;{{cite book|author=daqihupi|title=Movie Fans(Chinese Edition)|url=http://books.google.com/books?id=9P26CgAAQBAJ&amp;pg=PA35|date=24 July 2015|publisher=Zhejiang Publishing United Group Digital Media Co.,Ltd|isbn=978-1-68124-367-2|pages=35–}}&lt;/ref&gt;，这使电影进入公众的视野。
+* 電影於1896年8月11日傳入中國[[上海]]&lt;ref name=&quot;李长莉闵杰2015&quot;&gt;{{cite book|author1=李长莉|author2=闵杰|author3=罗检秋|coauthors=左玉河, 马勇|title=中国近代社会生活史|url=http://books.google.com/books?id=XNhBDAAAQBAJ&amp;pg=PT442|date=1 July 2015|publisher=China Social Sciences Publishing House|isbn=978-7-5161-6129-6|pages=442–}}&lt;/ref&gt;，在[[上海]]杂耍娱乐场徐园“又一村”放映了几部短片，當時稱為「西洋影戲」、「電光影戲」等，簡稱「影戲」。
+* 1905年6月16日，天津《[[大公報]]》刊登了英商快利洋行的一則[[廣告]]《活動電光影戲出售》，文中寫道
+「茲由外洋運到新式電影機器一副……」。這是文獻記載「電影」二字組合第一次出現。從此以後，借由《[[大公報]]》在京津冀的影響，「電影」一詞開始普及&lt;ref&gt;{{cite journal | title=亚西亚中国活动影戏之真相 | author=黄德泉 | journal=当代电影 |date=2008年7月}}&lt;/ref&gt;。
+* 1907年4月5日，御史俾壽向清廷上奏摺痛陳電影傷風敗俗：「近日各戲園夜間添演電影，男女均准入座，而電影又非將燈光全行收暗，不能開演，流弊尤不可問」。有學者認為這標誌著「電影」一詞已開始在官方文書公告中出現。
+
+==歷史==
+{{main|電影史}}
+
+=== 初期 ===
+1895年，「[[火车进站|火車進站]]」是[[盧米埃兄弟]]製作的[[黑白]]無聲的紀錄片。這部紀錄火車駛抵希歐
+達（la Ciotat）車站的影片，是架在月台上所拍攝的。全長五十秒的內容，描寫了蒸汽火車牽引著客車，從遠
+處漸漸地駛進車站。同年，[[盧米埃兄弟]]亦映演「[[离开工厂|離開工廠]]」，一套真正有演員演出的電影出
+現，拍攝當時工人下班的景象。
+
+=== 早期 ===
+* 早期電影拍攝描述的是[[日常生活]]，包括由[[路易斯·普林斯]]拍摄的《[[郎德海花园场景]]》以及[[卢米
+埃尔兄弟]]拍摄的Repas de bébé（1895）、Exiting the Factory（1895）、Démolition d'un mur（1895）、L'Arrivée d'un train en gare de La Ciotat（1895）、L'Arroseur Arrosé（1895）等等。
+* 停机再拍的发现者：[[乔治·梅里爱]]
+* 早期電影經典演員：[[卓別林]]、[[鲁道夫·瓦伦蒂诺]]、[[艾德·伍德]]
+
+==電影理論==
+[[File:BolexH16.jpg|right|thumb|alt=16 mm spring-wound Bolex H16 Reflex camera|寬{{le|16mm電影|16 mm film|16 mm}}的{{le|Bolex|Bolex}} H16反光相机是{{le|电影学校|film school}}中很受欢迎的入门级相机]]
+&lt;!--{{Main article|Film theory | Philosophy of language film analysis}}--&gt;
+
+電影理論的目的是以電影為一個[[藝術]]來研究，發展簡明且系統化的概念。以電影為藝術形式的概念起源自的{{le|喬托·卡努杜|Ricciotto Canudo}}的《The Birth of the Sixth Art》。[[鲁道夫·阿恩海姆]]、[[贝拉·
+巴拉兹]]及[[齊格弗里德·科拉考爾]]開始的{{le|形式主义电影理论|Formalist film theory}}強調電影和現實的不同，因此可以視為是[[美術]]。不過[[安德烈·巴赞]]反對此一理論，認為電影美學的本質是在有能力機械
+性的複製現實，而不是其和現實不同的的部份，這就產生了現實主義理論（realist theory）。更近期的分析是由[[雅各·拉岡]]的[[精神分析]]及[[弗迪南·德·索緒爾]]的[[符號學]]等理論所帶動，因此出現了{{le|精神分析電影理論|psychoanalytical film theory}}、{{le|結構主義電影理論|structuralist film theory}}、[[女性主義電影理論]]等。另一方面，受到[[路德维希·维特根斯坦]]影響，來自[[分析哲学]]傳統的評論，試著澄
+清一些理論研究中出現的誤解，因此生了电影词汇（film's vocabulary）的分析，以及其和{{le|生活形式 (哲學)|Form of life (philosophy)|生活形式}}之間的關連性。
+
+===語言===
+電影有其使用的[[語言]]。{{le|詹姆斯·摩纳哥|James Monaco}}曾寫了一篇電影理論中的經典文章，標題是《
+如何&quot;讀&quot;電影》（How to &quot;Read&quot; a Film），就是提到此一概念。導演[[英格玛·伯格曼]]曾說過一句著名的話：「對我而言，[[安德烈·塔尔科夫斯基]]是最偉大的[[電影導演]]，他發明了一種『新的語言』，忠於電影的本質&lt;!--，as it captures life as a reflection, life as a dream--&gt;」。這種
+語言的一個例子是一連串來回出現的畫面，其中一個畫面是一個演員在畫面的左側，另一個畫面是一個演員在畫面的右側，觀眾可以了解這種語言，知道這代表這二個人的對話。這描述了另一個電影理論{{le|180度法則|180-degree rule}}，利用視覺的組合及恰當的剪輯，電影可以讓觀眾有似乎身在現場，觀看主角之間對話的能力。[[经典好莱坞电影]]就包括了這種敘事理論，因為在電影經典時期，位在好莱坞的各片廠早已反覆的使用此一手法。另一個電影語言是將鏡頭拍攝一個演員，畫面無聲，然後鏡頭切換到另一個較年輕，長相類似的另一個演員，這代表了演員在回憶以前的情形，電影中敘述一些在較早時間發生的事情。
+
+==電影製作==
+{{Main article|電影製作}}
+電影製作的方式是依製片者想要表達的內容，以及呈現內容的設備而不同。[[拉洋片]]只需要在紙卷上有一連串的圖案即可。電影製作最簡單的方式是一個人加一台電影照相機（其至可以不用電影照相機，像[[斯坦·布拉哈
+格]]1963年的電影{{le|Mothlight|Mothlight}}），或是由上千名演員、臨時演員及劇組及許多道具及設備組成。
+
+幾乎每一部電影都會需要經過概念、計劃、拍片、修改及發行的流程。&lt;!--The more involved the production, the more significant each of the steps becomes.--&gt;在典型好萊塢電影的製作週期中，會有以下主要的步驟。
+
+# 腳本發展
+# {{le|前期製作|Pre-production}}
+# [[電影製作]]
+# [[後期製作]]
+# {{le|電影發行|Film distribution}}
+
+一般一部電影會需要三年的時間，頭一年腳本發展，第二年是前期製作及電影製作，第三年是後期製作及電影發行。
+
+# 腳本發展
+# {{le|前期製作|Pre-production}}
+# [[電影製作]]
+# [[後期製作]]
+# {{le|電影發行|Film distribution}}
+
+一般一部電影會需要三年的時間，頭一年腳本發展，第二年是前期製作及電影製作，第三年是後期製作及電影發
+行。
+
+==電影發行==
+{{main|{{tsl|en|Film distribution|電影發行}}|{{tsl|en|Art release|藝術發行}}}}
+{{le|電影發行|Film distribution}}是指讓[[閱聽人]]可以看到[[電影]]的過程。一般會由專門的{{le|电影发
+行公司|film distributor}}進行，他們會決定電影的行銷策略、影片将要展出或可供观赏的式，以及決定{{le|
+電影上映|film release}}時間等。電影除了在[[電影院]]供人觀看外，放在[[隨選視訊]]上，或是透過[[廣播
+聯賣]]方式作成[[电视节目]]。
+
+其他發行的方式包括個人購買或是出租電影的[[VHS]]、[[數碼多功能影音光碟|DVD]]或[[藍光光碟]]，是在[[
+互联网]]上下載。
+
+==註釋==
+{{notefoot|2}}
+
+== 參見 ==
+* [[電影史]]
+* [[電影節]]
+* [[電影獎]]
+* [[電影公司]]
+* [[電影演員]]
+* [[電影導演]]
+* [[電影編劇]]
+* [[電影監製]]
+* [[电影类型]]
+* [[好萊塢]]
+* [[中國電影]]
+* [[香港電影]]
+* [[台灣電影]]
+* [[華語電影]]
+* [[台語電影]]
+* [[电影类型]]
+* [[電影技術]]
+** [[長鏡頭]]   
+** [[蒙太奇]]   
+** [[電影特技]]
+**[[3D電影]]
+* [[電影分級制度]]
+* [[NG片段]]
+* [[IMDB]]
+
+== 參考資料 ==
+{{reflist|3|refs=
+
+&lt;ref name=&quot;mpaa10&quot;&gt;{{cite web |title=2010 Theatrical Market Statistics Report |url=https://wikileaks.org/sony/docs/03_03/Mktrsch/Market%20Research/MPAA%20Reports/2010/2010%20Theatrical%20Market%20Statistics.pdf |publisher=[[MPAA]] |accessdate=2018-08-04 |archive-url=https://web.archive.org/web/20180804110215/https://wikileaks.org/sony/docs/03_03/Mktrsch/Market%20Research/MPAA%20Reports/2010/2010%20Theatrical%20Market%20Statistics.pdf |archive-date=2018-08-04 |dead-url=no }}&lt;/ref&gt;
+
+&lt;ref name=&quot;mpaa11&quot;&gt;{{cite news |title=2011 Theatrical Market Statistics Report |url=http://www.bumpercarfilms.com/assets/downloads/movies.pdf |accessdate=2018-08-04 |work=MPAA |deadurl=yes |archiveurl=https://web.archive.org/web/20180405152851/http://www.bumpercarfilms.com/assets/downloads/movies.pdf |archivedate=2018-04-05 }}&lt;/ref&gt;
+
+&lt;ref name=&quot;mpaa12&quot;&gt;{{cite news |title=2012 Theatrical Market Statistics Report |url=https://www.mpaa.org/wp-content/uploads/2014/03/2012-Theatrical-Market-Statistics-Report.pdf |accessdate=2018-08-04 |work=MPAA |archive-url=https://web.archive.org/web/20180405152908/https://www.mpaa.org/wp-content/uploads/2014/03/2012-Theatrical-Market-Statistics-Report.pdf |archive-date=2018-04-05 |dead-url=no }}&lt;/ref&gt;
+
+}}
+
+== 外部連結 ==
+{{Commons+cat|Cinemas}}
+{{Wiktionary}}
+{{wikisource|電影法}}
+* [http://www.imdb.com/ Internet Movie Database] {{Wayback|url=http://www.imdb.com/ |date=20140621000000 }}{{en}}
+* [http://www.impawards.com/ IMPAwards] {{Wayback|url=http://www.impawards.com/ |date=20070718012809 }}
+* [https://web.archive.org/web/20040402185312/http://www.filmfestivals.com/index.shtml Filmfestivals.com]{{en}}
+* [https://web.archive.org/web/20051001122952/http://www.cnmdb.com/ 中國影視資料館]
+
+{{template:藝術}}
+{{Authority control}}
+{{portal bar|电影}}
+[[Category:電影| ]]
+[[Category:艺术媒体]]
+[[Category:媒體形式]]
+[[Category:法国发明]]

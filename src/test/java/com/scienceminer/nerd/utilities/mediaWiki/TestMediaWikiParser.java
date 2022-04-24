@@ -183,7 +183,17 @@ public class TestMediaWikiParser {
         assertThat(result, startsWith("An acropolis"));
     }
     
+    @Test
+    public void testWikiMediaTextWithInternalLinksArticlesOnlyZh() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("article_zh.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "zh");
 
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
 
+        assertThat(result.trim(), startsWith("电影"));
+    }
 
 }

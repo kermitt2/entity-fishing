@@ -80,10 +80,25 @@ public class MediaWikiParser {
         engine = new WtEngineImpl(config);        
         engines.put("es", engine);
 
-        config = DefaultConfigEsWp.generate();
+        config = DefaultConfigArWp.generate();
         configs.put("ar", config);
         engine = new WtEngineImpl(config);        
         engines.put("ar", engine);
+
+        config = DefaultConfigZhWp.generate();
+        configs.put("zh", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("zh", engine);
+
+        config = DefaultConfigJaWp.generate();
+        configs.put("ja", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("ja", engine);
+
+        config = DefaultConfigRuWp.generate();
+        configs.put("ru", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("ru", engine);
     }
 
     /**
