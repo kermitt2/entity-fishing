@@ -5,19 +5,8 @@ buildscript {
         maven {
             url 'https://plugins.gradle.org/m2/'
         }
-//        maven { url "https://dl.bintray.com/rookies/maven" }
-//        maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
-//        maven { url "http://oss.jfrog.org/artifactory/libs-release" }
-//        maven { url "https://dl.bintray.com/rookies/maven" }
     }
     dependencies {
-//        classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
-//        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        //classpath "gradle.plugin.org.gretty:gretty:3.0.7"
-        //classpath 'org.gretty:gretty:+'
-        //classpath "org.gretty:gretty:4.0.1"
-        //classpath "gradle.plugin.org.gretty:gretty:3.0.4"
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
     }
 }
@@ -26,13 +15,11 @@ plugins {
     id("org.gretty") version "3.0.4"
 }
 
-//apply plugin: 'maven'
-//apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'org.gretty'
-//apply from: 'https://raw.github.com/gretty-gradle-plugin/gretty/master/pluginScripts/gretty.plugin'
+apply plugin: 'maven-publish'
 
 group = "com.scienceminer.nerd"
 version = '0.0.5'
@@ -51,7 +38,7 @@ repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
     jcenter()
-//    maven { url "https://dl.bintray.com/rookies/maven" }
+    maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
     maven {
         url 'lib/'
     }
@@ -70,9 +57,9 @@ dependencies {
     implementation group: 'log4j', name: 'log4j', version: '1.2.17'
 
     //GROBID
-    implementation group: 'org.grobid', name: 'grobid-ner', version: '0.7.0'
-    implementation 'org.grobid:grobid-trainer:0.7.0'
-    implementation(group: 'org.grobid', name: 'grobid-core', version: '0.7.0') {
+    implementation group: 'org.grobid', name: 'grobid-ner', version: '0.7.1'
+    implementation 'org.grobid:grobid-trainer:0.7.1'
+    implementation(group: 'org.grobid', name: 'grobid-core', version: '0.7.1') {
         exclude(module: 'slf4j-jdk14')
     }
     implementation group: 'directory-naming', name: 'naming-java', version: '0.8'
@@ -155,12 +142,18 @@ test {
     exclude '**/**IntegrationTest**'
 }
 
-//integration (type: Test){
-//    include '**'
-//}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+// add local publication after build
+tasks.named("build") { finalizedBy("publishToMavenLocal") }
 
 // Gretty configuration
-
 gretty {
     httpPort = 8090
     contextPath = '/'
@@ -172,7 +165,6 @@ gretty {
 
 war {
     classifier = 'war'
-//    dependsOn mainWar
     enabled true
 }
 
