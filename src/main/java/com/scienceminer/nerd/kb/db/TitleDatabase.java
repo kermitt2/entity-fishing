@@ -91,4 +91,9 @@ public class TitleDatabase extends StringIntDatabase {
 		input.close();
 	}
 
+	@Override
+    public void loadFromJsonFile(File dataFile, boolean overwrite) throws Exception {
+        throw new UnsupportedOperationException();
+    }
+
 }

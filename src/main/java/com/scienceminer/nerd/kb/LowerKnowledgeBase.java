@@ -8,6 +8,7 @@ import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.hadoop.DbIntList;
 import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.utilities.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -269,6 +270,28 @@ public class LowerKnowledgeBase {
     public int getEmbeddingsSize() {
         return env.getEmbeddingsSize();
     }
+
+    /**
+     * @return frequency of word for the language
+     **/
+    public double getWordFrequency(String word) {
+     	Integer cB = env.getDbWordFrequencies().retrieve(word);
+     	if (cB == null)
+     		return 0.0;
+     	else
+	     	return Utilities.cBToFrequency(cB.intValue());
+    } 
+
+    /**
+     * @return frequency of word for the language
+     **/
+    public double getWordZipf(String word) {
+     	Integer cB = env.getDbWordFrequencies().retrieve(word);
+     	if (cB == null)
+     		return 0.0;
+     	else
+	     	return Utilities.cBToZipf(cB.intValue());
+    } 
 
 	public void close() {
 		env.close();

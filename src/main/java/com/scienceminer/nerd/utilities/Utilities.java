@@ -369,4 +369,32 @@ public class Utilities {
         return x0 + x1 + x2 + x3;
     }
 
+    /**
+     * See the clever cB format, https://github.com/rspeer/wordfreq  
+     * 
+     * Return the frequency of a word.
+     * 
+     * Normally cB is negative, but if provided as index value, it will be changed to its negative value
+     *
+     **/
+    public static double cBToFrequency(int cB) {
+    	if (cB > 0)
+    		cB *= -1;
+    	return Math.pow(10, ((double) cB / 100));
+	}
+
+	/**
+     * See See the clever cB format, https://github.com/rspeer/wordfreq
+     * 
+     * Return the zipf of a word.  
+     * 
+     * Normally cB is negative, but if provided as index value, it will be changed to its negative value
+     * 
+     **/
+    public static double cBToZipf(int cB) {
+    	if (cB > 0)
+	        cB *= -1;
+    	return ((double) (cB + 900) / 100);
+    }
+
 }

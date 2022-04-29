@@ -2036,13 +2036,20 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 			// full upper or lower case
 			if (StringProcessor.isAllUpperCase(normalisedString)) {
+				// + only if the lower case term is unfrequent
+				//wikipedia.getWordFrequency();
+
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
 			}
 			else if (StringProcessor.isAllLowerCase(normalisedString)) {
+				// + only if the lower case term is unfrequent
+
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 			}
 			else {
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
+				// + only if the lower case term for label is unfrequent
+
 				Label label2 = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 				if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 					label = label2;
@@ -2051,6 +2058,8 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 			// first letter upper case
 			Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
+			// + only if the normalisedString term is unfrequent
+
 			if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 				label = label2;
 			} else {
