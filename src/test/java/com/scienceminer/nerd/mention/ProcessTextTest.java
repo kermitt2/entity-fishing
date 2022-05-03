@@ -640,4 +640,39 @@ public class ProcessTextTest {
         assertThat(segments.get(0).end,is(18));
     }
 
+    @Test
+    public void testSegmentZh() throws Exception {
+        final String input = "天津市由于处于海河流域下游的九河下梢，自古便建有大量各式各样的桥梁。自从2002年起，天津市开始对海河进行综合开发以后，除对原有桥梁进行修缮、提升和改造之外，还邀请英国、美国、日本等多个国家的桥梁建筑设计公司共同对天津海河的桥梁进行设计并新建了一批具有景观作用的桥梁，使得天津市区内的海河上游，平均不到0.8千米就有一座桥梁，在改善交通的同时也提升了海河的景观。现在天津海河上的“一桥一景”已经成为天津著名的旅游景观。";
+
+        final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
+                .tokenizeWithLayoutToken(input, new Language("zh"));
+
+        final List<StringPos> result = processText.ngrams(inputLayoutTokens, 1);
+        System.out.println(result);
+
+        assertThat(result, hasSize(134));
+        assertThat(result.get(0), is(new StringPos("天津市", 0)));
+        assertThat(result.get(1), is(new StringPos("由于", 3)));
+        assertThat(result.get(2), is(new StringPos("处于", 5)));
+        assertThat(result.get(3), is(new StringPos("海河", 7)));
+    }
+
+    @Test
+    public void testSegmentJa() throws Exception {
+        final String input = "レゲエ (reggae) は狭義においては1960年代後半ジャマイカで成立し、1980年代前半まで流行した4分の4拍子の第2・第4拍目をカッティング奏法で刻むギター、各小節の3拍目にアクセントが置かれるドラム、うねるようなベースラインを奏でるベースなどの音楽的特徴を持つポピュラー音楽である。広義においてはジャマイカで成立したポピュラー音楽全般のことをいう。 ";
+
+        final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
+                .tokenizeWithLayoutToken(input, new Language("ja"));
+
+        final List<StringPos> result = processText.ngrams(inputLayoutTokens, 1);
+        System.out.println(result);
+
+        assertThat(result, hasSize(94));
+        assertThat(result.get(0), is(new StringPos("レゲエ", 0)));
+        assertThat(result.get(1), is(new StringPos(" ", 3)));
+        assertThat(result.get(2), is(new StringPos("(", 4)));
+        assertThat(result.get(3), is(new StringPos("reggae", 5)));
+    }
+
+
 }

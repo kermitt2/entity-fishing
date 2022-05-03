@@ -58,7 +58,9 @@ dependencies {
 
     //GROBID
     implementation group: 'org.grobid', name: 'grobid-ner', version: '0.7.1'
-    implementation 'org.grobid:grobid-trainer:0.7.1'
+    implementation(group: 'org.grobid', name: 'grobid-trainer', version: '0.7.1') {
+        exclude(module: 'slf4j-jdk14')
+    }
     implementation(group: 'org.grobid', name: 'grobid-core', version: '0.7.1') {
         exclude(module: 'slf4j-jdk14')
     }
