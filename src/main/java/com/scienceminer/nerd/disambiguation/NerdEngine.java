@@ -217,15 +217,15 @@ public class NerdEngine {
 			NerdContext localContext = rank(candidates, lang, context, shortTextVal, subToken);*/
 		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
 
-		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
-		System.out.println("Surface: " + entity.getRawName());
-		for(NerdCandidate cand : cands) {
-			System.out.println("rank: " + cand.toString());
+			System.out.println("Surface: " + entity.getRawName());
+			for(NerdCandidate cand : cands) {
+				System.out.println("rank: " + cand.toString());
+			}
+			System.out.println("--");
 		}
-		System.out.println("--");
-		}*/
 
 		// reimforce with document-level context if available
 		/*if (context instanceof DocumentContext) {
@@ -358,7 +358,6 @@ public class NerdEngine {
 		for(NerdEntity entity : entities) {
 			// if the entity is already input in the query (i.e. by the "user"), we do not generate candidates
 			// for it if they are disambiguated
-
 			if (entity.getSource() == ProcessText.MentionMethod.user
 					&& entity.getNer_conf() == 1.0) {
 
@@ -390,16 +389,21 @@ public class NerdEngine {
 			if (isEmpty(normalisedString))
 				continue;
 
+        	// apply a frequency filter if defined in the configuration of this language
+        	// highly frequent terms are skipped 
+        	double zipf = wikipedia.getWordZipf(normalisedString);
+        	if (zipf>conf.getMaxTermFrequency())
+            	continue;
+
 			Label bestLabel = this.bestLabel(normalisedString, wikipedia);
-			if (bestLabel !=null && !bestLabel.exists()) {
+			if (bestLabel != null && !bestLabel.exists()) {
 				//if (entity.getIsAcronym())
 				//System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );
 				if (entity.getType() != null) {
 					result.put(entity, candidates);
 					continue;
 				}
-			}
-			else {
+			} else {
 //if (entity.getIsAcronym())
 //System.out.println("Concept(s) found for '" + normalisedString + "' " + " / " + entity.getRawName() +
 //" - " + bestLabel.getSenses().length + " senses");
@@ -531,7 +535,7 @@ public class NerdEngine {
 
 		}
 
-		//result = expendCoReference(entities, result);
+		//result = expendCoReference(entities, result, lang);
 
 		return result;
 	}
@@ -701,7 +705,7 @@ public class NerdEngine {
 
 		}
 
-		result = this.expendCoReference(entities, result);
+		result = this.expendCoReference(entities, result, lang);
 
 		return result;
 	}
@@ -719,7 +723,7 @@ public class NerdEngine {
 	 *
 	 */
 	private Map<NerdEntity, List<NerdCandidate>> expendCoReference(List<NerdEntity> entities,
-		Map<NerdEntity, List<NerdCandidate>> candidates) {
+		Map<NerdEntity, List<NerdCandidate>> candidates, String lang) {
 		if (entities == null)
 			return candidates;
 
@@ -827,7 +831,7 @@ public class NerdEngine {
 					continue;
 				}
 
-				if (NerdEntity.subSequence(entity, otherEntity, false)) {
+				if (NerdEntity.subSequence(entity, otherEntity, lang, false)) {
 //System.out.println(entityString + " is subsequence of " + otherEntity.getRawName() + " -> merging candidates...");
 					if (otherEntity.getLinkProbability() > entity.getLinkProbability())
 						entity.setLinkProbability(otherEntity.getLinkProbability());
@@ -1055,7 +1059,7 @@ public class NerdEngine {
                     localContexts = new ArrayList<NerdContext>();
                 localContexts.add(contextObject);
 
-				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString);
+				List<LayoutToken> subTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(localContextString, new Language(lang, 1.0));
 				for(LayoutToken token : subTokens)
 					tokens.add(token);
 			}
@@ -2031,24 +2035,23 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		// normalised mention following case as it appears
 		Label bestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
 
-		// try case variants
-		if (!bestLabel.exists()) {
+		//double freq = wikipedia.getWordFrequency(normalisedString.toLowerCase());
+		double zipf = wikipedia.getWordZipf(normalisedString.toLowerCase());
+
+//System.out.println("1. " + normalisedString + "\t" + zipf);
+
+		// try case variants only if lower-case term is unfrequent
+		if (!bestLabel.exists() && zipf<4.0) {
 
 			// full upper or lower case
 			if (StringProcessor.isAllUpperCase(normalisedString)) {
-				// + only if the lower case term is unfrequent
-				//wikipedia.getWordFrequency();
-
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
 			}
 			else if (StringProcessor.isAllLowerCase(normalisedString)) {
-				// + only if the lower case term is unfrequent
-
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 			}
 			else {
 				label = new Label(wikipedia.getEnvironment(), normalisedString.toLowerCase());
-				// + only if the lower case term for label is unfrequent
 
 				Label label2 = new Label(wikipedia.getEnvironment(), normalisedString.toUpperCase());
 				if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
@@ -2058,7 +2061,6 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 			// first letter upper case
 			Label label2 = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
-			// + only if the normalisedString term is unfrequent
 
 			if (label2.exists() && (!label.exists() || label2.getLinkOccCount() > label.getLinkOccCount())) {
 				label = label2;
@@ -2114,9 +2116,15 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 		Label bestLabel = new Label(wikipedia.getEnvironment(), normalisedString);
 		labels.add(bestLabel);
 
+		//double freq = wikipedia.getWordFrequency(normalisedString.toLowerCase());
+		double zipf = wikipedia.getWordZipf(normalisedString.toLowerCase());
+
+//System.out.println("2. " + normalisedString + "\t" + zipf);
+
 		// try case variants
 		//if (!bestLabel.exists())
-		{
+		if (zipf<4.0) {
+
 			// first letter upper case
 			Label label = new Label(wikipedia.getEnvironment(), WordUtils.capitalize(normalisedString.toLowerCase()));
 			if (label.exists())

@@ -13,7 +13,7 @@ public class EmbeddingsRankerFeatureVector extends GenericRankerFeatureVector {
 	public EmbeddingsRankerFeatureVector() {
 		super();
 		title = "NERD ranker with embeddings";
-		//Add_prob_c = true;
+		Add_prob_c = true;
 		Add_embeddings_centroid_similarity = true;
 		target_numeric = true;
 		target_class = false;
