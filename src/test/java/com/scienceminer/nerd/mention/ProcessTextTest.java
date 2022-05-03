@@ -8,6 +8,7 @@ import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
 import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -642,7 +643,8 @@ public class ProcessTextTest {
 
     @Test
     public void testSegmentZh() throws Exception {
-        final String input = "天津市由于处于海河流域下游的九河下梢，自古便建有大量各式各样的桥梁。自从2002年起，天津市开始对海河进行综合开发以后，除对原有桥梁进行修缮、提升和改造之外，还邀请英国、美国、日本等多个国家的桥梁建筑设计公司共同对天津海河的桥梁进行设计并新建了一批具有景观作用的桥梁，使得天津市区内的海河上游，平均不到0.8千米就有一座桥梁，在改善交通的同时也提升了海河的景观。现在天津海河上的“一桥一景”已经成为天津著名的旅游景观。";
+        String input = "天津市由于处于海河流域下游的九河下梢，自古便建有大量各式各样的桥梁。自从2002年起，天津市开始对海河进行综合开发以后，除对原有桥梁进行修缮、提升和改造之外，还邀请英国、美国、日本等多个国家的桥梁建筑设计公司共同对天津海河的桥梁进行设计并新建了一批具有景观作用的桥梁，使得天津市区内的海河上游，平均不到0.8千米就有一座桥梁，在改善交通的同时也提升了海河的景观。现在天津海河上的“一桥一景”已经成为天津著名的旅游景观。";
+        input = UnicodeUtil.normaliseText(input);
 
         final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
                 .tokenizeWithLayoutToken(input, new Language("zh"));
@@ -659,7 +661,8 @@ public class ProcessTextTest {
 
     @Test
     public void testSegmentJa() throws Exception {
-        final String input = "レゲエ (reggae) は狭義においては1960年代後半ジャマイカで成立し、1980年代前半まで流行した4分の4拍子の第2・第4拍目をカッティング奏法で刻むギター、各小節の3拍目にアクセントが置かれるドラム、うねるようなベースラインを奏でるベースなどの音楽的特徴を持つポピュラー音楽である。広義においてはジャマイカで成立したポピュラー音楽全般のことをいう。 ";
+        String input = "レゲエ (reggae) は狭義においては1960年代後半ジャマイカで成立し、1980年代前半まで流行した4分の4拍子の第2・第4拍目をカッティング奏法で刻むギター、各小節の3拍目にアクセントが置かれるドラム、うねるようなベースラインを奏でるベースなどの音楽的特徴を持つポピュラー音楽である。広義においてはジャマイカで成立したポピュラー音楽全般のことをいう。 ";
+        input = UnicodeUtil.normaliseText(input);
 
         final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
                 .tokenizeWithLayoutToken(input, new Language("ja"));
@@ -674,5 +677,40 @@ public class ProcessTextTest {
         assertThat(result.get(3), is(new StringPos("reggae", 5)));
     }
 
+    @Test
+    public void testMentionsZh() throws Exception {
+        String input = "天津市由于处于海河流域下游的九河下梢，自古便建有大量各式各样的桥梁。";
+        input = UnicodeUtil.normaliseText(input);
+
+        final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
+                .tokenizeWithLayoutToken(input, new Language("zh"));
+
+        List<Mention> mentions = processText.processWikipedia(inputLayoutTokens, new Language("zh"),  3);
+
+        /*System.out.println("nb mentions: " + mentions.size());
+        for(Mention mention : mentions) {
+            System.out.println(mention.getRawName());
+        }*/
+
+        assertThat(mentions.size(), is(71));
+    }
+
+    @Test
+    public void testMentionsJa() throws Exception {
+        String input = "レゲエ (reggae) は狭義においては1960年代後半ジャマイカで成立し、1980年代前半まで流行した4分の4拍子の第2・";
+        input = UnicodeUtil.normaliseText(input);
+
+        final List<LayoutToken> inputLayoutTokens = GrobidAnalyzer.getInstance()
+                .tokenizeWithLayoutToken(input, new Language("ja"));
+
+        List<Mention> mentions = processText.processWikipedia(inputLayoutTokens, new Language("ja"), 3);
+
+        /*System.out.println("nb mentions: " + mentions.size());
+        for(Mention mention : mentions) {
+            System.out.println(mention.getRawName());
+        }*/
+
+        assertThat(mentions.size(), is(103));
+    }
 
 }

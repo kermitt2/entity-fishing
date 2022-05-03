@@ -217,7 +217,7 @@ public class NerdEngine {
 			NerdContext localContext = rank(candidates, lang, context, shortTextVal, subToken);*/
 		NerdContext localContext = rank(candidates, lang, context, shortTextVal, tokens);
 
-		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
 			NerdEntity entity = entry.getKey();
 			System.out.println("Surface: " + entity.getRawName());
@@ -225,7 +225,7 @@ public class NerdEngine {
 				System.out.println("rank: " + cand.toString());
 			}
 			System.out.println("--");
-		}
+		}*/
 
 		// reimforce with document-level context if available
 		/*if (context instanceof DocumentContext) {
