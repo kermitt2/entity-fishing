@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
-	private static final Logger logger = LoggerFactory.getLogger(ConceptDatabase.class);	
+	private static final Logger logger = LoggerFactory.getLogger(ConceptDatabase.class);
 
 	public ConceptDatabase(KBEnvironment env) {
 		super(env, DatabaseType.concepts);

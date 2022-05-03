@@ -273,6 +273,11 @@ public abstract class KBDatabase<K,V> {
 		concepts,
 
 		/**
+		 * Associates a String id of a concept to the language-specific mapping list of page identifiers
+		 */
+		conceptLabels,
+
+		/**
 		 * Associates a DOI string to a bibliographic entity
 		 */
 		biblio,

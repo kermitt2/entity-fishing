@@ -36,7 +36,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	private StatementDatabase dbStatements = null;
 	private PropertyDatabase dbProperties = null;
 
-	// index of bliographical entities via their DOI
+	// index of bibliographical entities via their DOI
 	private BiblioDatabase dbBiblio = null;
 
 	// index for the taxon taxonomy (aka the tree of life)
@@ -44,6 +44,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 	// loaded only if needed, gives the statements by the tail entity
 	private StatementDatabase dbReverseStatements = null;
+
+	// labels as provided by concept ID -- only English by default
+	private ConceptLabelDatabase dbLabels = null;
+
 
 	/**
 	 * Constructor
@@ -97,6 +101,13 @@ public class KBUpperEnvironment extends KBEnvironment {
 		return dbTaxonParent;
 	}
 
+	/**
+	 * Returns the {@link DatabaseType#labels} database
+	 */
+	public ConceptLabelDatabase getDbLabels() {
+		return dbLabels;
+	}
+
 	@Override
 	protected void initDatabases() {
 		//System.out.println("\ninit upper level language independent environment");
@@ -122,6 +133,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		dbTaxonParent = buildTaxonParentDatabase();
 		databasesByType.put(DatabaseType.taxon, dbTaxonParent);
+
+		dbLabels = buildConceptLabelsDatabase();
+		databasesByType.put(DatabaseType.conceptLabels, dbLabels);
 	}
 
 	/**
@@ -156,14 +170,20 @@ public class KBUpperEnvironment extends KBEnvironment {
 		if (!dbDirectory.exists())
 			dbDirectory.mkdirs();
 
-		//System.out.println("Building Concept db");                                                     	
+		//System.out.println("Building Concept db");                                 	
 		dbConcepts.loadFromFile(wikidata, overwrite);
 
 		//System.out.println("Building Properties db");
-		dbProperties.loadFromFile(wikidataStatements, overwrite);
+		//dbProperties.loadFromFile(wikidataStatements, dbLabels, overwrite);
 
 		//System.out.println("Building Statement db");
-		dbStatements.loadFromFile(wikidataStatements, overwrite);
+		boolean restrictConceptStatementsToWikipediaPages = conf.getRestrictConceptStatementsToWikipediaPages();
+		// if restrictToWikipediaPages is true, we only load statements for the concepts that are covered
+		// by at least one loaded wikipedia language
+		if (restrictConceptStatementsToWikipediaPages)
+			dbStatements.loadStatementsFromFile(wikidataStatements, dbProperties, dbLabels, null, overwrite);
+		else
+			dbStatements.loadStatementsFromFile(wikidataStatements, dbProperties, dbLabels, dbConcepts, overwrite);
 		
 		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
 
@@ -205,6 +225,10 @@ public class KBUpperEnvironment extends KBEnvironment {
 	private TaxonDatabase buildTaxonParentDatabase() {
 		return new TaxonDatabase(this);
 	}	
+
+	private ConceptLabelDatabase buildConceptLabelsDatabase() {
+		return new ConceptLabelDatabase(this);
+	}
 
 	public Long retrieveStatistic(StatisticName sn) {
 		throw new UnsupportedOperationException();

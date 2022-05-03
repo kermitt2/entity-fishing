@@ -132,16 +132,13 @@ public class Statement implements Serializable {
                 }
 
                 if (concept != null) {
-                    Integer pageId = concept.getPageIdByLang("en");
-                    if (pageId != null) {
-                        LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
-                        Page page = wikipedia.getPageById(pageId);
-                        if (page != null) {
-                            byte[] encodedValueTitle = encoder.quoteAsUTF8(page.getTitle());
-                            String outputValueTitle = new String(encodedValueTitle); 
-                            sb.append(", \"valueName\" : \"" + outputValueTitle + "\"");
-                            done = true;
-                        }
+                    // use en Wikidata concept label if it exists
+                    String enLabel = concept.getLabelByLang("en");
+                    if (enLabel != null) {
+                        byte[] encodedValueLabel = encoder.quoteAsUTF8(enLabel);
+                        String outputValueLabel = new String(encodedValueLabel);
+                        sb.append(", \"valueName\" : \"" + outputValueLabel + "\"");
+                        done = true;
                     }
                 }
                 /*if (!done)
