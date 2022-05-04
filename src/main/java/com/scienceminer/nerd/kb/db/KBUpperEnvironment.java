@@ -181,9 +181,9 @@ public class KBUpperEnvironment extends KBEnvironment {
 		// if restrictToWikipediaPages is true, we only load statements for the concepts that are covered
 		// by at least one loaded wikipedia language
 		if (restrictConceptStatementsToWikipediaPages)
-			dbStatements.loadStatementsFromFile(wikidataStatements, dbProperties, dbLabels, null, overwrite);
-		else
 			dbStatements.loadStatementsFromFile(wikidataStatements, dbProperties, dbLabels, dbConcepts, overwrite);
+		else
+			dbStatements.loadStatementsFromFile(wikidataStatements, dbProperties, dbLabels, null, overwrite);
 		
 		dbBiblio.fillBiblioDb(dbConcepts, dbStatements, overwrite);
 

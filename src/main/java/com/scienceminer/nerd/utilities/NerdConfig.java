@@ -51,7 +51,7 @@ public class NerdConfig {
 	// will be pruned
 	private double minRankerScore = 0.1; 
 
-	// beyond this frequency, the more frequent terms will be skipped and 
+	// Above this frequency, the more frequent terms will be skipped and 
 	// not disambiguated - the goal is to speed-up processing by ignoring
 	// very frequent word which are likely fonctional and common words
 	// not realizing an entity or not realizing an entity of interest

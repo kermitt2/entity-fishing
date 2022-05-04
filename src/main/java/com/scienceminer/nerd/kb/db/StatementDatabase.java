@@ -163,7 +163,9 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 		            	String labelValue = labelNode.textValue();
 		            	String langValue = langNode.textValue();
 
-		            	labelsPerLang.put(langValue, labelValue);
+		            	// only keep supported/loaded languages for the Wikidata labels
+		            	if (UpperKnowledgeBase.TARGET_LANGUAGES.indexOf(langValue) != -1)
+			            	labelsPerLang.put(langValue, labelValue);
 		            }
 				}
 
@@ -171,7 +173,7 @@ public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 			
 				// statements
 				// optionally we load statements only for concepts that have at least one Wikipedia
-				// page in the loaded languages
+				// page in the loaded languages - if dbConcepts is not null, it means we filter 
 				if (dbConcepts != null) {
 					if (dbConcepts.retrieve(itemId) != null) {
 						Map<String,Integer> entryConcept = dbConcepts.retrieve(itemId);

@@ -20,7 +20,7 @@ public class ConceptLabelDatabase extends StringRecordDatabase<Map<String,String
     private Transaction tx = null;
 
     public ConceptLabelDatabase(KBEnvironment env) {
-        super(env, DatabaseType.concepts);
+        super(env, DatabaseType.conceptLabels);
     }
 
     public ConceptLabelDatabase(KBEnvironment env, DatabaseType type) {
