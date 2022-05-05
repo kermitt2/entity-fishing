@@ -42,6 +42,7 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 		String line = null;
 		int nbToAdd = 0;
 		int totalAdded = 0;
+		int totalAddedWithPage = 0;
 		Transaction tx = environment.createWriteTransaction();
 		while ((line=input.readLine()) != null) {
 			if (nbToAdd == 10000) {
@@ -87,6 +88,8 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 					db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 					nbToAdd++;
 					totalAdded++;
+					if (conceptMap.size() > 0)
+						totalAddedWithPage++;
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -97,7 +100,8 @@ public class ConceptDatabase extends StringRecordDatabase<Map<String,Integer>> {
 		input.close();
 		isLoaded = true;
 
-		System.out.println(totalAdded + " concepts with at least one wikipedia page in supported languages");
+		System.out.println("total of " + totalAdded + " concepts");
+		System.out.println("total of " + totalAddedWithPage + " concepts with at least one Wikipedia page in the supported languages");
 	}
 
 	@Override
