@@ -44,15 +44,21 @@ public class Concept {
 	}
 
 	/**
-	 * Return the label introduced in Wikidata for a given concept and a given language
+	 * Return the label introduced in Wikidata for a given concept and a given language,
+	 * null if it does not exist.
 	 **/
 	public String getLabelByLang(String lang) {
-		if (lang.equals("en")) {
-			Map<String,String> enLabels = env.getDbLabels().retrieve(wikidataId);
-			if (enLabels.get(lang) != null && enLabels.get(lang).length() > 0) {
-				return enLabels.get(lang);
-			}
+		if (lang == null) 
+			return null;
+
+		if (UpperKnowledgeBase.TARGET_LANGUAGES.indexOf(lang) == -1) 
+			return null;
+
+		Map<String,String> labels = env.getDbLabels().retrieve(wikidataId);
+		if (labels.get(lang) != null && labels.get(lang).length() > 0) {
+			return labels.get(lang);
 		}
+		
 		return null;
 	}
 }

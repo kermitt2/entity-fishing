@@ -5,6 +5,11 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertThat;
+
 public class LookupIntegrationTest {
 	
 	private LowerKnowledgeBase wikipedia = null;
@@ -12,15 +17,6 @@ public class LookupIntegrationTest {
 	@Before
 	public void setUp() {
 		try {
-			//NerdProperties.getInstance();
-			/*ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-			
-			NerdConfig conf = mapper.readValue(new File("data/wikipedia/kb.yaml"), NerdConfig.class);
-            knowledgeBase = new UpperKnowledgeBase(conf);
-
-            conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
-        	wikipedia = new Wikipedia(conf); */
-
         	UpperKnowledgeBase.getInstance(); 
         	wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf("en");
         } catch(Exception e) {
@@ -35,6 +31,8 @@ public class LookupIntegrationTest {
 
 			System.out.println("pageId:" + page.getId());
 			System.out.println(page.getTitle());
+
+			assertThat(page.getId(), is(3966054));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -48,6 +46,8 @@ public class LookupIntegrationTest {
 			if (page != null) {
 				System.out.println(page.getTitle());
 				System.out.println("pageId:" + page.getId());
+
+				assertThat(page.getTitle(), is("Mexico"));
 			}
 		}
 		catch(Exception e) {
@@ -61,7 +61,24 @@ public class LookupIntegrationTest {
 			Concept concept = UpperKnowledgeBase.getInstance().getConcept("Q18498");
 			if (concept != null) {
 				System.out.println(concept.getId());
-				System.out.println("en pageId:" + concept.getPageIdByLang("en"));
+				System.out.println("en pageId: " + concept.getPageIdByLang("en"));
+
+				assertThat(concept.getPageIdByLang("en"), is(33702));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testConceptLabel() {
+		try {
+			Concept concept = UpperKnowledgeBase.getInstance().getConcept("Q18498");
+			if (concept != null) {
+				System.out.println("en wikidata label:" + concept.getLabelByLang("en"));
+
+				assertThat(concept.getLabelByLang("en"), is("Grey Wolf"));
 			}
 		}
 		catch(Exception e) {
