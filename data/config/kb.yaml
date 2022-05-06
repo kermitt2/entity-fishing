@@ -8,3 +8,7 @@ dbDirectory: data/db/db-kb
 # if the LMDB data are already provided, these files will not be used
 dataDirectory: /media/lopez/data/wikipedia/latest/wikidata/
 #dataDirectory: /home/lopez/resources/wikidata/
+
+# if true, the statements are loaded only for concepts having at least one
+# Wikipedia page in a supported language
+restrictConceptStatementsToWikipediaPages: true

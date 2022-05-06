@@ -84,6 +84,7 @@ public class NerdRanker extends NerdModel {
 		model = MLModel.GRADIENT_TREE_BOOST;
 		//model = MLModel.RANDOM_FOREST;
 		featureType = FeatureType.NERD;
+		//featureType = FeatureType.EMBEDDINGS;
 
 		GenericRankerFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);

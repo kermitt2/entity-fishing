@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Sense;
+import org.grobid.core.lang.Language;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.NERLexicon;
@@ -1058,7 +1059,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 	 * True if the token of entity is a continuous subsequence of the token of
 	 * otherEntity
 	 */
-	public static boolean subSequence(NerdEntity entity, NerdEntity otherEntity, boolean caseSensitive) {
+	public static boolean subSequence(NerdEntity entity, NerdEntity otherEntity, String lang, boolean caseSensitive) {
 		String entityString = entity.getNormalisedName();
 		if (entityString == null)
 			entityString = entity.getRawName();
@@ -1066,7 +1067,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			return false;
 		if (!caseSensitive)
 			entityString = entityString.toLowerCase();
-		List<LayoutToken> entityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(entityString);
+		List<LayoutToken> entityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(entityString, new Language(lang, 1.0));
 
 		String otherEntityString = otherEntity.getNormalisedName();
 		if (otherEntityString == null)
@@ -1075,7 +1076,7 @@ public class NerdEntity implements Comparable<NerdEntity> {
 			return false;
 		if (!caseSensitive)
 			otherEntityString = otherEntityString.toLowerCase();
-		List<LayoutToken> otherEntityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(otherEntityString);
+		List<LayoutToken> otherEntityTokens = GrobidAnalyzer.getInstance().tokenizeWithLayoutToken(otherEntityString, new Language(lang, 1.0));
 
 		if (entityTokens.size() >= otherEntityTokens.size())
 			return false;

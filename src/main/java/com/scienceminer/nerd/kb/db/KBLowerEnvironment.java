@@ -51,6 +51,7 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private KBDatabase<Integer,String> dbConceptByPageId = null;
 	private KBDatabase<String, short[]> dbWordEmbeddings = null;
 	private KBDatabase<String, short[]> dbEntityEmbeddings = null;
+	private StringIntDatabase dbWordFrequencies = null;
 
 	private int embeddingsSize = 300;
 
@@ -141,6 +142,10 @@ public class KBLowerEnvironment extends KBEnvironment {
 		return dbEntityEmbeddings;
 	}
 
+	public StringIntDatabase getDbWordFrequencies() {
+		return dbWordFrequencies;
+	}
+
 	@Override
 	protected void initDatabases() {
 		System.out.println("init Environment for language " + conf.getLangCode());
@@ -202,6 +207,9 @@ public class KBLowerEnvironment extends KBEnvironment {
 
 		dbEntityEmbeddings = dbFactory.buildEntityEmbeddingsDatabase();
 		databasesByType.put(DatabaseType.entityEmbeddings, dbEntityEmbeddings);
+
+		dbWordFrequencies = dbFactory.buildWordFrequenciesDatabase();
+		databasesByType.put(DatabaseType.wordFrequencies, dbWordFrequencies);
 	}
 
 	public Long retrieveStatistic(StatisticName sn) {
@@ -230,6 +238,8 @@ public class KBLowerEnvironment extends KBEnvironment {
 		File markup = getMarkupDataFile(dataDirectory);
 		File wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.quantized.gz");
 		File entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.quantized.gz");
+		File wordFrequenciesFile = new File(
+			"data"+File.separator+"stopwords"+File.separator+conf.getLangCode()+"_freq.json.gz");
 
 		//now load databases
 		File dbDirectory = new File(conf.getDbDirectory());
@@ -295,6 +305,9 @@ public class KBLowerEnvironment extends KBEnvironment {
 
 		//System.out.println("Building embeddings db");
 		dbEntityEmbeddings.loadFromFile(entityEmbeddingsFile, overwrite);
+
+		//System.out.println("Word frequencies db");
+		dbWordFrequencies.loadFromJsonFile(wordFrequenciesFile, overwrite);
 
 		// we need to enrich the Label database with the article titles to ensure 
 		// better mention resolution

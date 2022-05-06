@@ -136,7 +136,7 @@ public class Relatedness {
 		comparisonsRequested++;
 
 		LoadingCache<ArticlePair, Double> relatednessCache = caches.get(lang);
-		return relatednessCache.get(new ArticlePair(art1,art2));
+		return relatednessCache.get(new ArticlePair(art1, art2));
 	}
 
 

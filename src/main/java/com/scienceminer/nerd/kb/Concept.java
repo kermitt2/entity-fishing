@@ -42,4 +42,23 @@ public class Concept {
 	public List<Statement> getStatements() {
 		return env.getDbStatements().retrieve(wikidataId);
 	}
+
+	/**
+	 * Return the label introduced in Wikidata for a given concept and a given language,
+	 * null if it does not exist.
+	 **/
+	public String getLabelByLang(String lang) {
+		if (lang == null) 
+			return null;
+
+		if (UpperKnowledgeBase.TARGET_LANGUAGES.indexOf(lang) == -1) 
+			return null;
+
+		Map<String,String> labels = env.getDbLabels().retrieve(wikidataId);
+		if (labels.get(lang) != null && labels.get(lang).length() > 0) {
+			return labels.get(lang);
+		}
+		
+		return null;
+	}
 }

@@ -98,4 +98,5 @@ public abstract class StringIntDatabase extends KBDatabase<String, Integer> {
 		isLoaded = true;
 	}
 
+	public abstract void loadFromJsonFile(File dataFile, boolean overwrite) throws Exception;
 }

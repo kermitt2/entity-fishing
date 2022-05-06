@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+
 import java.io.File;
 
 public class CategoriesIntegrationTest {
@@ -20,7 +23,7 @@ public class CategoriesIntegrationTest {
 	public void setUp() {
 		try {
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            NerdConfig conf = mapper.readValue(new File("data/wikipedia/wikipedia-en.yaml"), NerdConfig.class);
+            NerdConfig conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
         	wikipedia = new LowerKnowledgeBase(conf); 
         } catch(Exception e) {
         	e.printStackTrace();
@@ -31,12 +34,15 @@ public class CategoriesIntegrationTest {
 	public void testCategoryHierarchy() {
 		try {
 			Page page = wikipedia.getPageById(32768);
+			assertThat(page.getId(), is(32768));
 
 			com.scienceminer.nerd.kb.model.Category[] categories = ((Article)page).getParentCategories();
-			System.out.println("pageId:" + page.getId());
-			for(int l=0; l<categories.length;l++){
+
+			/*for(int l=0; l<categories.length;l++){
 			    System.out.println(categories[l].getId());
-			}
+			}*/
+
+			assertThat(categories[0].getId(), is(1116081));
 		}
 		catch(Exception e) {
 			e.printStackTrace();

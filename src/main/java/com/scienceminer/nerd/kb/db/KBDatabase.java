@@ -37,7 +37,7 @@ public abstract class KBDatabase<K,V> {
 		//System.out.println("db path: " + this.envFilePath);
 
 		this.environment = new Env();
-    	this.environment.setMapSize(1000 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	this.environment.setMapSize(512 * 1024 * 1024, ByteUnit.KIBIBYTES); 
     	File thePath = new File(this.envFilePath);
     	if (!thePath.exists()) {
     		thePath.mkdirs();
@@ -65,7 +65,7 @@ public abstract class KBDatabase<K,V> {
 
 		this.envFilePath = env.getConfiguration().getDbDirectory() + "/" + name;
 		this.environment = new Env();
-    	this.environment.setMapSize(1000 * 1024 * 1024, ByteUnit.KIBIBYTES); 
+    	this.environment.setMapSize(512 * 1024 * 1024, ByteUnit.KIBIBYTES); 
     	File thePath = new File(this.envFilePath);
     	if (!thePath.exists()) {
     		thePath.mkdirs();
@@ -114,7 +114,7 @@ public abstract class KBDatabase<K,V> {
 	public abstract V retrieve(K key);
 
 	/**
-	 * Deserialises a CSV record.
+	 * Deserialises a CSV record
 	 * 
 	 * @param record the CSV record to deserialise
 	 * @return the key/value pair encoded within the record
@@ -123,9 +123,9 @@ public abstract class KBDatabase<K,V> {
 	public abstract KBEntry<K,V> deserialiseCsvRecord(CsvRecordInput record) throws IOException;
 
 	/**
-	 * Builds the persistent database from a file (CSV normally or JSON or XML).
+	 * Builds the persistent database from a file (CSV normally or JSON or XML)
 	 * 
-	 * @param dataFile the file (CSV , JSON or XML file) containing data to be loaded
+	 * @param dataFile the file (CSV, JSON or XML file) containing data to be loaded
 	 * @param overwrite indicate if the existing database should be overwritten
 	 */
 	public abstract void loadFromFile(File dataFile, boolean overwrite) throws Exception;
@@ -273,6 +273,11 @@ public abstract class KBDatabase<K,V> {
 		concepts,
 
 		/**
+		 * Associates a String id of a concept to the language-specific mapping list of page identifiers
+		 */
+		conceptLabels,
+
+		/**
 		 * Associates a DOI string to a bibliographic entity
 		 */
 		biblio,
@@ -283,13 +288,18 @@ public abstract class KBDatabase<K,V> {
 		taxon,
 
 		/**
-		 * Associates a strind (word) to a vector
+		 * Associates a string (word) to a vector
 		 */
 		wordEmbeddings,
 
 		/**
 		 * Associates a string (entity) to a vector
 		 */
-		entityEmbeddings
+		entityEmbeddings,
+
+		/**
+		 * Associate a string (word) to a an index bin corresponding to its frequency
+		 **/
+		wordFrequencies
 	}
 }

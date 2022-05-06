@@ -70,13 +70,12 @@ public class WikipediaTrainer {
 	}
 
 	private void createArticleSamples() throws IOException{
-		//List<Integer> sampleSizes = Arrays.asList(5000,5000,1000);
 		//List<Integer> sampleSizes = Arrays.asList(500,500,100,100,100);
-		//List<Integer> sampleSizes = Arrays.asList(5000,500,500,100,100);
+		List<Integer> sampleSizes = Arrays.asList(5000,500,500,100,100);
 		//List<Integer> sampleSizes = Arrays.asList(500,100,100,100,100);
 		
-		// below, tuned for Arabic where there are less links in/out
-		List<Integer> sampleSizes = Arrays.asList(1500,500,500,100,100);
+		// below, tuned for Arabic, Japanese, Mandarin where there are less links in/out
+		//List<Integer> sampleSizes = Arrays.asList(1500,500,500,100,100);
 		// training ranker, training selector, eval ranker, eval selector, eval end-to-end
 
 		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();

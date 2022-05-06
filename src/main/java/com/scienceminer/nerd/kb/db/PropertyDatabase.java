@@ -33,7 +33,11 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 	}
 
 	/**
-	 *  Property descriptions are expressed in JSON format
+	 * Property descriptions are expressed in JSON format and can be independently loaded here 
+	 * from the Wikidata dump file.
+	 * 
+	 * In practice, we rather load this database while reading the Wikdata dump file for loading
+	 * statements. 
 	 */
 	@Override 
 	public void loadFromFile(File dataFile, boolean overwrite) throws Exception {
@@ -135,4 +139,32 @@ public class PropertyDatabase extends StringRecordDatabase<Property> {
 		isLoaded = true;
 		System.out.println("Total of " + nbTotalAdded + " properties indexed");
 	}
+
+	/**
+	 * Fill the database from a list of Property objects. This list is instanciated while
+	 * reading the wikidata dump file for statement (to avoid multiple reading of the dump file)
+	 **/
+	public void fillDatabase(List<Property> properties, boolean overwrite) {
+		if (isLoaded && !overwrite)
+			return;
+		System.out.println("Loading " + name + " database");
+
+		int nbTotalAdded = 0;
+        Transaction tx = environment.createWriteTransaction();
+        for(Property property : properties) {
+        	try {
+	        	db.put(tx, KBEnvironment.serialize(property.getId()), KBEnvironment.serialize(property));
+				nbTotalAdded++;
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+        }
+
+		// commit
+		tx.commit();
+		tx.close();
+		isLoaded = true;
+		System.out.println("Total of " + nbTotalAdded + " properties indexed");
+	}
+
 }

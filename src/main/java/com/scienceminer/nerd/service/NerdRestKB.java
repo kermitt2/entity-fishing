@@ -12,13 +12,16 @@ import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.lang.Language;
+import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
+
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -242,7 +245,11 @@ public class NerdRestKB {
             throw new QueryException("The knowledge base does not cover the language " + lang + ".", QueryException.LANGUAGE_ISSUE);
         }
         StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("{ \"term\": \"" + term + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+
+        byte[] encodedTerm = encoder.quoteAsUTF8(term);
+        String outputTerm  = new String(encodedTerm);
+        jsonBuilder.append("{ \"term\": \"" + outputTerm + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
 
         Label lbl = new Label(wikipedia.getEnvironment(), term.trim());
         if (lbl.exists()) {
@@ -295,8 +302,11 @@ public class NerdRestKB {
                     else
                         jsonBuilder.append(", ");
 
+                    byte[] encodedPreferred = encoder.quoteAsUTF8(sense.getTitle());
+                    String outputPreferred  = new String(encodedPreferred);
+
                     jsonBuilder.append("{ \"pageid\": " + sense.getId() +
-                            ", \"preferred\" : \"" + sense.getTitle() + "\", \"prob_c\" : " + sense.getPriorProbability() + " }");
+                            ", \"preferred\" : \"" + outputPreferred + "\", \"prob_c\" : " + sense.getPriorProbability() + " }");
                 }
             }
         }

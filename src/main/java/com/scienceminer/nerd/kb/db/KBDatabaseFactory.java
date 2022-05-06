@@ -5,11 +5,21 @@ import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.kb.model.hadoop.*;
+
 import org.apache.hadoop.record.CsvRecordInput;
+import org.apache.commons.compress.compressors.*;
+
 import org.fusesource.lmdbjni.BufferCursor;
 import org.fusesource.lmdbjni.Transaction;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -125,7 +135,7 @@ public class KBDatabaseFactory {
 		};
 	}
 
-	public KBDatabase<String,Integer> buildTitleDatabase(DatabaseType type) {
+	public KBDatabase<String, Integer> buildTitleDatabase(DatabaseType type) {
 		return new StringIntDatabase(env, type) {
 			@Override
 			public KBEntry<String,Integer> deserialiseCsvRecord(CsvRecordInput record) throws IOException {
@@ -149,6 +159,11 @@ public class KBDatabaseFactory {
 
 				return new KBEntry<>(p.getTitle(), id);
 			}
+
+			@Override
+		    public void loadFromJsonFile(File dataFile, boolean overwrite) throws Exception {
+		        throw new UnsupportedOperationException();
+		    }
 		};
 	}
 
@@ -520,4 +535,78 @@ public class KBDatabaseFactory {
 		    }
 		};
 	}
+
+	public StringIntDatabase buildWordFrequenciesDatabase() {
+		return new StringIntDatabase(env, DatabaseType.wordFrequencies) {
+			
+			@Override
+		    public void loadFromJsonFile(File dataFile, boolean overwrite) throws Exception  {
+		        if (isLoaded && !overwrite)
+		            return;
+		        System.out.println("Loading " + name + " database");
+
+		        if (dataFile == null)
+		            throw new NerdResourceException("Word frequencies file not found");
+
+		        // open file
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(dataFile));
+				CompressorInputStream input = new CompressorStreamFactory().createCompressorInputStream(bis);
+
+		        try {
+			        ObjectMapper mapper = new ObjectMapper();
+			        JsonNode jsonRoot = mapper.readTree(input);
+
+			        if (jsonRoot.isArray()) {
+			        	int i=0;
+			        	int nbToAdd = 0;
+				        Transaction tx = environment.createWriteTransaction();
+			         	for (JsonNode bin : jsonRoot) {
+
+			              	if (i == 0) {
+				        		// skip first element which is a header
+				        		i++;
+				        		continue;
+				        	}
+
+				        	// each element of a bin is a word, and the bin index gives the frequency bin that can be 
+				        	// converted into a usable frequency
+				        	for (JsonNode wordNode : bin) {
+				        		
+				        		if (nbToAdd == 10000) {
+					                tx.commit();
+					                tx.close();
+					                nbToAdd = 0;
+					                tx = environment.createWriteTransaction();
+					            }
+
+					            KBEntry<String, Integer> entry = new KBEntry<>(wordNode.textValue(), new Integer(i));
+								db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
+								nbToAdd++;
+							}
+
+							// increment bin index
+				        	i++;
+				        }
+
+				        tx.commit();
+				        tx.close();
+				        isLoaded = true;
+				    } else {
+				    	LOGGER.error("Invalid JSON format for word frequencies: " + dataFile.getPath());
+				    }
+
+				} catch(Exception e) {
+		            LOGGER.error("Error JSON parsing: " + dataFile.getPath(), e);
+		        } finally {
+			        input.close();
+				}
+		    }
+
+		    @Override
+		    public KBEntry<String, Integer> deserialiseCsvRecord(CsvRecordInput record) {
+		        throw new UnsupportedOperationException();
+		    }
+		};
+	}
+
 }

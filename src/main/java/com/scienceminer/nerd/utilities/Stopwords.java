@@ -23,10 +23,6 @@ public class Stopwords {
     // stopword map per language
     private Map<String, Set<String>> allStopwords = null;
 
-    // fast matchers
-    //private Map<String, FastMatcher> allMatcherPrefix = null;
-    //private Map<String, FastMatcher> allMatcherSuffix = null;
-
     // list of languages coming with a stopword list
     private List<String> languages = UpperKnowledgeBase.TARGET_LANGUAGES;
 
@@ -83,27 +79,6 @@ public class Stopwords {
                     allStopwords = new HashMap<>();
                 allStopwords.put(lang, stopwords);
             }
-
-            // create fast matcher for the stopwords prefixes/suffixes
-            /*FastMatcher matcherPrefix = new FastMatcher();
-            for(String stopword : stopwords) {
-                matcherPrefix.loadTerm(stopword+" ");
-            }
-
-            if (allMatcherPrefix == null) {
-                allMatcherPrefix = new HashMap<String, FastMatcher>();
-            }
-            allMatcherPrefix.add(matcherPrefix);
-
-            FastMatcher matcherSuffix = new FastMatcher();
-            for(String stopword : stopwords) {
-                matcherPrefix.loadTerm(" " + stopword);
-            }
-
-            if (allMatcherSuffix == null) {
-                allMatcherSuffix = new HashMap<String, FastMatcher>();
-            }
-            allMatcherSuffix.add(matcherSuffix);*/
         }
     }
 

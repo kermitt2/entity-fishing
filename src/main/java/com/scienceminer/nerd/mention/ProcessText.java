@@ -80,7 +80,7 @@ public class ProcessText {
     private Stopwords stopwords = Stopwords.getInstance();
 
     // default indo-european delimiters, should be moved to language specific analysers
-    public static String delimiters = " \n\t" + TextUtilities.fullPunctuations;
+    public static String delimiters = " \n\t" + TextUtilities.fullPunctuations + "。、，・";
 
     public static ProcessText getInstance() {
         if (instance == null)
@@ -396,7 +396,7 @@ public class ProcessText {
         }
 
         final GrobidAnalyzer grobidAnalyzer = GrobidAnalyzer.getInstance();
-        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text), lang, ngramLength);
+        return processWikipedia(grobidAnalyzer.tokenizeWithLayoutToken(text, lang), lang, ngramLength);
     }
 
     protected List<Mention> extractMentionsWikipedia(List<LayoutToken> tokens, Language lang, Integer ngramLength) {

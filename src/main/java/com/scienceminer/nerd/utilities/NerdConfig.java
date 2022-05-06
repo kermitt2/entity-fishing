@@ -51,8 +51,21 @@ public class NerdConfig {
 	// will be pruned
 	private double minRankerScore = 0.1; 
 
+	// Above this frequency, the more frequent terms will be skipped and 
+	// not disambiguated - the goal is to speed-up processing by ignoring
+	// very frequent word which are likely fonctional and common words
+	// not realizing an entity or not realizing an entity of interest
+	// frequency is expressed as zipf, i.e. a number typically between 0 and 8:
+	// - a term with zipf value 6 appears once per thousand words
+	// - a term with Zipf value 3 appears once per million words
+	private double maxTermFrequency = 4.0;
+
 	// path to grobid-home
 	private String grobidHome = null;
+
+	// if true, the statements are loaded only for concepts having at least one
+	// Wikipedia page in a supported language
+	private boolean restrictConceptStatementsToWikipediaPages = true;
 
 	public String getLangCode() {
 		return langCode;
@@ -142,11 +155,27 @@ public class NerdConfig {
 		this.useLinkOut = useLinkOut;
 	}
 
+	public double getMaxTermFrequency() {
+		return this.maxTermFrequency;
+	}
+
+	public void setMaxTermFrequency(double freq) {
+		this.maxTermFrequency = freq;
+	}
+
 	public String getGrobidHome() {
 		return grobidHome;
 	}
 
 	public void setGrobidHome(String grobidHome) {
 		this.grobidHome = grobidHome;
+	}
+
+	public boolean getRestrictConceptStatementsToWikipediaPages() {
+		return this.restrictConceptStatementsToWikipediaPages;
+	}
+
+	public void setRestrictConceptStatementsToWikipediaPages(boolean restrict) {
+		this.restrictConceptStatementsToWikipediaPages = restrict;
 	}
 }
