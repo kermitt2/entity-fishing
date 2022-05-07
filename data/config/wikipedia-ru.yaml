@@ -48,4 +48,4 @@ useLinkOut : true
 # interest. The frequency is expressed as zipf, i.e. a number typically between 0 and 8:
 # - a term with zipf value 6 appears once per thousand words
 # - a term with Zipf value 3 appears once per million words
-maxTermFrequency: 4.0
+maxTermFrequency: 5.0
