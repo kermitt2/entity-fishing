@@ -271,7 +271,11 @@ In addition to the different parameters described previously, it is also possibl
 
 - ``targetSegmentSize``: the maximum length of a segment to be considered when processing long texts in number of characters, default is ``1000`` (i.e. a text of 10,000 characters will be segmented in approximatively ten balanced segments of a maximum 1000 characters)
 
-It is advised **not to modify these two parameters** in a normal usage of the service, because the different models have been trained with the default parameter values. Modifying these parameters might decrease the accuracy of the service. 
+- ``minSelectorScore``: this overrides the ``minSelectorScore`` indicated in the language-specific configuration files. It indicates the minimum score produced by the selector model under which the entities will be pruned. This parameter can be used to modify the balance between precision and recall of the entity recognition. 
+
+- ``maxTermFrequency``: this overrides the ``maxTermFrequency`` indicated in the language-specific configuration files. This parameter indicates the maximum term frequency above which the terms will be skipped and not used in the disambiguation. The frequency is expressed as Zipf, i.e. a number typically between 0 and 8. Decreasing the value of this parameter can be used for faster processing runtime of the query, but some entities might be overlooked. 
+
+It is advised **not to modify these parameters** in a normal usage of the service, because the different models have been trained with the default parameter values. Modifying these parameters might decrease the accuracy of the service. 
 
 The following third additional parameter is currently only used for text queries and relevant to long text:
 
