@@ -362,7 +362,7 @@ public class NerdSelector extends NerdModel {
 		}
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang);
+			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang, NerdRanker.ZIPF_MAX);
 
 		// set the expected concept to the NerdEntity
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -599,7 +599,7 @@ public class NerdSelector extends NerdModel {
 		NerdEngine engine = NerdEngine.getInstance();
 		//Language lang = new Language(wikipedia.getConfig().getLangCode(), 1.0);
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			engine.generateCandidatesSimple(entities, wikipedia.getConfig().getLangCode());
+			engine.generateCandidatesSimple(entities, wikipedia.getConfig().getLangCode(), NerdRanker.ZIPF_MAX);
 		NerdContext context = engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false, tokens);
 
 		engine.pruneWithSelector(candidates, 

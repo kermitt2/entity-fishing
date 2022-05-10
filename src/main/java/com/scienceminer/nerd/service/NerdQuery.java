@@ -130,8 +130,12 @@ public class NerdQuery {
     private double minSelectorScore = 0.0;
     private double minRankerScore = 0.0;
 
+    // above this frequency (expressed as Zipf), terms will not be used for disambiguation
+    // override default values in the language config files
+    private double maxTermFrequency = -1.0;
+
     // the type of document structure to be considered in case of processing 
-    // a complete document 
+    // a complete PDF document 
     private String structure = "grobid";
 
     // some parameters that are possible to define at query time
@@ -172,6 +176,7 @@ public class NerdQuery {
 
         this.minSelectorScore = query.getMinSelectorScore();
         this.minRankerScore = query.getMinRankerScore();
+        this.maxTermFrequency = query.getMaxTermFrequency();
 
         this.structure = query.getStructure();
 
@@ -461,6 +466,14 @@ public class NerdQuery {
         this.minRankerScore = minRankerScore;
     }
 
+    public double getMaxTermFrequency() {
+        return this.maxTermFrequency;
+    }
+
+    public void setMaxTermFrequency(double maxTermFrequency) {
+        this.maxTermFrequency = maxTermFrequency;
+    }
+
     public String getStructure() {
         return this.structure;
     }
@@ -671,6 +684,7 @@ public class NerdQuery {
     /**
      * Export of standoff annotated text in TEI format
      */
+    /*
     public String toTEI() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><tei xmlns:ng=\"http://relaxng.org/ns/structure/1.0\" xmlns:exch=\"http://www.epo.org/exchange\" xmlns=\"http://www.tei-c.org/ns/1.0\">");
@@ -698,6 +712,7 @@ public class NerdQuery {
 
         return buffer.toString();
     }
+    */
 
     /**
      * Check that language has been correctly set

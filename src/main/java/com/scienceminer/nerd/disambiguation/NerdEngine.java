@@ -176,7 +176,13 @@ public class NerdEngine {
 		System.out.println("Surface: " + entity.getRawName() + " / normalised: " + entity.getNormalisedName());
 		}*/
 
-		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesSimple(entities, lang);
+		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
+
+		double maxTermFrequency = wikipedia.getConfig().getMaxTermFrequency();
+		if (nerdQuery.getMaxTermFrequency() != -1.0)
+			maxTermFrequency = nerdQuery.getMaxTermFrequency();
+
+		Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesSimple(entities, lang, maxTermFrequency);
 		//Map<NerdEntity, List<NerdCandidate>> candidates = generateCandidatesMultiple(entities, lang);
 
 		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
@@ -200,8 +206,7 @@ public class NerdEngine {
 		}
 		LOGGER.debug("Total number of entities: " + nbEntities);
 		LOGGER.debug("Total number of candidates: " + nbCandidates);
-		LowerKnowledgeBase wikipedia = UpperKnowledgeBase.getInstance().getWikipediaConf(lang);
-
+		
 		// if needed, segment long text into either natural paragraph (if present) or arbitary ones
 		/*List<List<LayoutToken>> subTokens = null;
 		if (tokens.size() < ProcessText.MAXIMAL_PARAGRAPH_LENGTH) {
@@ -236,6 +241,7 @@ public class NerdEngine {
 		if (nerdQuery.getMinSelectorScore() != 0.0)
 			minSelectorScore = nerdQuery.getMinSelectorScore();
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
+
 		//}
 		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -343,7 +349,7 @@ public class NerdEngine {
 	}
 
 
-	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang) {
+	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang, double maxTermFrequency) {
 		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
@@ -392,7 +398,7 @@ public class NerdEngine {
         	// apply a frequency filter if defined in the configuration of this language
         	// highly frequent terms are skipped 
         	double zipf = wikipedia.getWordZipf(normalisedString);
-        	if (zipf>conf.getMaxTermFrequency())
+        	if (zipf>maxTermFrequency)
             	continue;
 
 			Label bestLabel = this.bestLabel(normalisedString, wikipedia);

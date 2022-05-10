@@ -78,6 +78,9 @@ public class NerdRanker extends NerdModel {
 	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
 	// embeddings-based similiarity
 
+	// a default Zipf frequency value that is higher of all the terms  
+	static public double ZIPF_MAX = 9.0;
+
 	public NerdRanker(LowerKnowledgeBase wikipedia) {
 		this.wikipedia = wikipedia;
 
@@ -404,7 +407,7 @@ public class NerdRanker extends NerdModel {
 //System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang);
+			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang, ZIPF_MAX);
 //System.out.println("total entities with candidates: " + candidates.size());
 		
 		// set the expected concept to the NerdEntity
@@ -734,7 +737,7 @@ System.out.println(docPath);
 //System.out.println("total entities to disambiguate: " + disambiguatedEntities.size());	
 
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang);
+			nerdEngine.generateCandidatesSimple(disambiguatedEntities, lang, ZIPF_MAX);
 //System.out.println("total entities with candidates: " + candidates.size());
 		
 		// set the expected concept to the NerdEntity
@@ -985,7 +988,7 @@ System.out.println(docPath);
 
 		NerdEngine engine = NerdEngine.getInstance();
 		Map<NerdEntity, List<NerdCandidate>> candidates = 
-			engine.generateCandidatesSimple(entities, wikipedia.getConfig().getLangCode());	
+			engine.generateCandidatesSimple(entities, wikipedia.getConfig().getLangCode(), ZIPF_MAX);	
 		engine.rank(candidates, wikipedia.getConfig().getLangCode(), null, false, tokens);
 		for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
