@@ -190,6 +190,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 		dbTaxonParent.fillTaxonDbs(dbConcepts, dbStatements, overwrite);
 
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
+		System.out.println("                  - " + dbStatements.getDatabaseSize() + " loaded statements.");
 	}
 
 	/**

@@ -7,15 +7,15 @@ Install, build and run
 
 Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
 
-After decompressing all the index data, up to 119 GB of disk space will be used if you wish to use all the supported languages (en, fr, de , it, es) - be sure to have enough free space. For running English language only, you will need around 90 GB. SSD is highly recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
+After decompressing all the index data, up to 119 GB of disk space will be used if you wish to use all the supported languages (en, fr, de , it, es, ar, zh, ru, ja) - be sure to have enough free space. For running English language only, you will need around 90 GB. SSD is highly recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
-You need to install latest current stable version ``0.7.0`` of ``GROBID`` and ``grobid-ner``. For GROBID:
+You need to install latest current stable version ``0.7.1`` of ``GROBID`` and ``grobid-ner``. For GROBID:
 
-Clone GROBID source code from github, latest stable version (currently 0.7.0):
+Clone GROBID source code from github, latest stable version (currently 0.7.1):
 ::
-   $ git clone https://github.com/kermitt2/grobid.git  --branch 0.7.0
+   $ git clone https://github.com/kermitt2/grobid.git  --branch 0.7.1
 
 Then build Grobid, in the main directory:
 ::
@@ -45,11 +45,11 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 36 GB compressed, and around 120 GB uncompressed. The data for this version ``0.0.5`` correspond to the Wikidata and Wikipedia dumps from Feb., 1st 2022. The Knowledge Base part contains around 96 million entities and 1.2 billion statements (Wikidata has considerably grown in the three last years). 
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.5`` correspond to the Wikidata and Wikipedia dumps from Feb., 1st 2022. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). 
 
     **Linux**
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-kb.zip (19 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-kb.zip (7.5 GB)
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-en.zip (6.9 GB)
 
@@ -61,7 +61,14 @@ Then install the compiled indexed data:
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-it.zip (1.6 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ar.zip (2.1 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ar.zip (1.3 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-zh.zip (1.3 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ru.zip (2.3 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ja.zip (1.8 GB)
+
 
 MacOS is not officially supported and should not be used for production. For convenience, we still make available the MacOS data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated and Arabic not available, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. However, we strongly recommend to use the Linux version for any serious works.
 
@@ -82,7 +89,7 @@ MacOS is not officially supported and should not be used for production. For con
 
 #. Unzip the db archives files under ``data/db/``.
 
-    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``. The full uncompressed data is about 119 GB.
+    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``, ``ar``, ``zh``, ``ru`` and ``ja``. The full uncompressed data is about 90 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::

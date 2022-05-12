@@ -15,7 +15,7 @@ The following command will build the two models used in *entity-fishing*, the ``
 	$ ./gradlew train_wikipedia -Plang=en
 
 
-For other languages, replace the ending language code (``en``) by the desired one (``fr``, ``de``, ``it`` and ``es`` are supported), e.g.:
+For other languages, replace the ending language code (``en``) by the desired one (``fr``, ``de``, ``it``, ``es``, ``ar``, ``zh``, ``ru`` and ``ja`` are supported), e.g.:
 ::
 	$ ./gradlew train_annotate -Plang=fr
 	$ ./gradlew train_annotate -Plang=de
