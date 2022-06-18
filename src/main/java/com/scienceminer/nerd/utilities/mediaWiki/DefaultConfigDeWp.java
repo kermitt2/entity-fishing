@@ -258,7 +258,7 @@ public class DefaultConfigDeWp extends DefaultConfigWp {
 		c.addNamespace(new NamespaceImpl(
 				2600,
 				"Thema",
-				"Theme",
+				"Topic",
 				false,
 				false,
 				new ArrayList<String>()));

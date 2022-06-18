@@ -99,6 +99,16 @@ public class MediaWikiParser {
         configs.put("ru", config);
         engine = new WtEngineImpl(config);        
         engines.put("ru", engine);
+
+        config = DefaultConfigPtWp.generate();
+        configs.put("pt", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("pt", engine);
+
+        config = DefaultConfigFaWp.generate();
+        configs.put("fa", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("fa", engine);
     }
 
     /**

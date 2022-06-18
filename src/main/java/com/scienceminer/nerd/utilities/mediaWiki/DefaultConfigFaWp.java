@@ -11,66 +11,73 @@ import org.sweble.wikitext.engine.config.WikiConfigImpl;
 import org.sweble.wikitext.engine.utils.*;
 
 /**
- * Default configuration for the Arabic Wikipedia.
+ * Default configuration for the Farsi Wikipedia.
  */
 
-/* For reference:
+/*
+
+For reference:
+
 <siteinfo>
-    <sitename>ويكيبيديا</sitename>
-    <dbname>arwiki</dbname>
-    <base>https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D8%A9_%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D8%A9</base>
-    <generator>MediaWiki 1.38.0-wmf.19</generator>
+    <sitename>ویکی‌پدیا</sitename>
+    <dbname>fawiki</dbname>
+    <base>https://fa.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%D9%87%D9%94_%D8%A7%D8%B5%D9%84%DB%8C</base>
+    <generator>MediaWiki 1.39.0-wmf.13</generator>
     <case>first-letter</case>
     <namespaces>
-      <namespace key="-2" case="first-letter">ميديا</namespace>
-      <namespace key="-1" case="first-letter">خاص</namespace>
+      <namespace key="-2" case="first-letter">مدیا</namespace>
+      <namespace key="-1" case="first-letter">ویژه</namespace>
       <namespace key="0" case="first-letter" />
-      <namespace key="1" case="first-letter">نقاش</namespace>
-      <namespace key="2" case="first-letter">مستخدم</namespace>
-      <namespace key="3" case="first-letter">نقاش المستخدم</namespace>
-      <namespace key="4" case="first-letter">ويكيبيديا</namespace>
-      <namespace key="5" case="first-letter">نقاش ويكيبيديا</namespace>
-      <namespace key="6" case="first-letter">ملف</namespace>
-      <namespace key="7" case="first-letter">نقاش الملف</namespace>
-      <namespace key="8" case="first-letter">ميدياويكي</namespace>
-      <namespace key="9" case="first-letter">نقاش ميدياويكي</namespace>
-      <namespace key="10" case="first-letter">قالب</namespace>
-      <namespace key="11" case="first-letter">نقاش القالب</namespace>
-      <namespace key="12" case="first-letter">مساعدة</namespace>
-      <namespace key="13" case="first-letter">نقاش المساعدة</namespace>
-      <namespace key="14" case="first-letter">تصنيف</namespace>
-      <namespace key="15" case="first-letter">نقاش التصنيف</namespace>
-      <namespace key="100" case="first-letter">بوابة</namespace>
-      <namespace key="101" case="first-letter">نقاش البوابة</namespace>
-      <namespace key="828" case="first-letter">وحدة</namespace>
-      <namespace key="829" case="first-letter">نقاش الوحدة</namespace>
-      <namespace key="2300" case="first-letter">إضافة</namespace>
-      <namespace key="2301" case="first-letter">نقاش الإضافة</namespace>
-      <namespace key="2302" case="case-sensitive">تعريف الإضافة</namespace>
-      <namespace key="2303" case="case-sensitive">نقاش تعريف الإضافة</namespace>
-      <namespace key="2600" case="first-letter">موضوع</namespace>
+      <namespace key="1" case="first-letter">بحث</namespace>
+      <namespace key="2" case="first-letter">کاربر</namespace>
+      <namespace key="3" case="first-letter">بحث کاربر</namespace>
+      <namespace key="4" case="first-letter">ویکی‌پدیا</namespace>
+      <namespace key="5" case="first-letter">بحث ویکی‌پدیا</namespace>
+      <namespace key="6" case="first-letter">پرونده</namespace>
+      <namespace key="7" case="first-letter">بحث پرونده</namespace>
+      <namespace key="8" case="first-letter">مدیاویکی</namespace>
+      <namespace key="9" case="first-letter">بحث مدیاویکی</namespace>
+      <namespace key="10" case="first-letter">الگو</namespace>
+      <namespace key="11" case="first-letter">بحث الگو</namespace>
+      <namespace key="12" case="first-letter">راهنما</namespace>
+      <namespace key="13" case="first-letter">بحث راهنما</namespace>
+      <namespace key="14" case="first-letter">رده</namespace>
+      <namespace key="15" case="first-letter">بحث رده</namespace>
+      <namespace key="100" case="first-letter">درگاه</namespace>
+      <namespace key="101" case="first-letter">بحث درگاه</namespace>
+      <namespace key="118" case="first-letter">پیش‌نویس</namespace>
+      <namespace key="119" case="first-letter">بحث پیش‌نویس</namespace>
+      <namespace key="446" case="first-letter">Education Program</namespace>
+      <namespace key="447" case="first-letter">Education Program talk</namespace>
+      <namespace key="828" case="first-letter">پودمان</namespace>
+      <namespace key="829" case="first-letter">بحث پودمان</namespace>
+      <namespace key="2300" case="first-letter">ابزار</namespace>
+      <namespace key="2301" case="first-letter">بحث ابزار</namespace>
+      <namespace key="2302" case="case-sensitive">توضیحات ابزار</namespace>
+      <namespace key="2303" case="case-sensitive">بحث توضیحات ابزار</namespace>
+      <namespace key="2600" case="first-letter">مبحث</namespace>
     </namespaces>
   </siteinfo>
 */
 
-public class DefaultConfigArWp extends DefaultConfigWp {
+public class DefaultConfigFaWp extends DefaultConfigWp {
 
     public static WikiConfigImpl generate()
     {
         WikiConfigImpl c = new WikiConfigImpl();
-        new DefaultConfigArWp().configureWiki(c);
+        new DefaultConfigFaWp().configureWiki(c);
         return c;
     }
 
     protected void configureSiteProperties(WikiConfigImpl c)
     {
-        c.setSiteName("My Arabic Wiki");
+        c.setSiteName("My Farsi Wiki");
 
         c.setWikiUrl("http://localhost/");
 
-        c.setContentLang("ar");
+        c.setContentLang("fa");
 
-        c.setIwPrefix("ar");
+        c.setIwPrefix("fa");
     }
 
     protected ParserConfigImpl configureParser(WikiConfigImpl c)
@@ -89,7 +96,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
     {
         c.addNamespace(new NamespaceImpl(
                 -2,
-                "ميديا",
+                "مدیا",
                 "Media",
                 false,
                 false,
@@ -97,7 +104,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 -1,
-                "خاص",
+                "ویژه",
                 "Special",
                 false,
                 false,
@@ -113,7 +120,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 1,
-                "نقاش",
+                "بحث",
                 "Talk",
                 false,
                 false,
@@ -121,7 +128,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 2,
-                "مستخدم",
+                "کاربر",
                 "User",
                 false,
                 false,
@@ -129,7 +136,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 3,
-                "نقاش المستخدم",
+                "بحث کاربر",
                 "User talk",
                 false,
                 false,
@@ -137,7 +144,8 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 4,
-                "ويكيبيديا",
+                //"ویکی‌پدیا",
+                "ویکی\u200Cپدیا",
                 "Wikipedia",
                 false,
                 false,
@@ -145,7 +153,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 5,
-                "نقاش ويكيبيديا",
+                "بحث ویکی\u200Cپدیا",
                 "Wikipedia talk",
                 false,
                 false,
@@ -153,7 +161,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 6,
-                "ملف",
+                "پرونده",
                 "File",
                 false,
                 true,
@@ -161,7 +169,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 7,
-                "نقاش الملف",
+                "بحث پرونده",
                 "File talk",
                 false,
                 false,
@@ -169,7 +177,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 8,
-                "ميدياويكي",
+                "مدیاویکی",
                 "MediaWiki",
                 false,
                 false,
@@ -177,7 +185,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 9,
-                "نقاش ميدياويكي",
+                "بحث مدیاویکی",
                 "MediaWiki talk",
                 false,
                 false,
@@ -185,7 +193,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 10,
-                "قالب",
+                "الگو",
                 "Template",
                 false,
                 false,
@@ -193,7 +201,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 11,
-                "نقاش القالب",
+                "بحث الگو",
                 "Template talk",
                 false,
                 false,
@@ -201,7 +209,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 12,
-                "مساعدة",
+                "راهنما",
                 "Help",
                 false,
                 false,
@@ -209,7 +217,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 13,
-                "نقاش المساعدة",
+                "بحث راهنما",
                 "Help talk",
                 false,
                 false,
@@ -217,7 +225,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 14,
-                "تصنيف",
+                "رده",
                 "Category",
                 false,
                 false,
@@ -225,7 +233,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 15,
-                "نقاش التصنيف",
+                "بحث رده",
                 "Category talk",
                 false,
                 false,
@@ -233,7 +241,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 100,
-                "بوابة",
+                "درگاه",
                 "Portal",
                 false,
                 false,
@@ -241,15 +249,55 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 101,
-                "نقاش البوابة",
+                "بحث درگاه",
                 "Portal talk",
                 false,
                 false,
                 new ArrayList<String>()));
 
         c.addNamespace(new NamespaceImpl(
+                104,
+                "Livro",
+                "Book",
+                false,
+                false,
+                new ArrayList<String>()));
+
+        c.addNamespace(new NamespaceImpl(
+                118,
+                "پیش\u200Cنویس",
+                "Draft",
+                false,
+                false,
+                new ArrayList<String>()));
+
+        c.addNamespace(new NamespaceImpl(
+                119,
+                "بحث پیش\u200Cنویس",
+                "Draft talk",
+                false,
+                false,
+                new ArrayList<String>()));
+
+        c.addNamespace(new NamespaceImpl(
+                446,
+                "Education Program",
+                "Education Program",
+                false,
+                false,
+                new ArrayList<String>()));
+
+        c.addNamespace(new NamespaceImpl(
+                447,
+                "Education Program talk",
+                "Education Program talk",
+                false,
+                false,
+                new ArrayList<String>()));
+
+        c.addNamespace(new NamespaceImpl(
                 828,
-                "وحدة",
+                "پودمان",
                 "Module",
                 false,
                 false,
@@ -257,7 +305,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 829,
-                "نقاش الوحدة",
+                "بحث پودمان",
                 "Module talk",
                 false,
                 false,
@@ -265,7 +313,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 2300,
-                "إضافة",
+                "ابزار",
                 "Gadget",
                 false,
                 false,
@@ -273,7 +321,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 2301,
-                "نقاش الإضافة",
+                "بحث ابزار",
                 "Gadget talk",
                 false,
                 false,
@@ -281,7 +329,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 2302,
-                "تعريف الإضافة",
+                "توضیحات ابزار",
                 "Gadget definition",
                 false,
                 false,
@@ -289,7 +337,7 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 2303,
-                "نقاش تعريف الإضافة",
+                "بحث توضیحات ابزار",
                 "Gadget definition talk",
                 false,
                 false,
@@ -297,11 +345,11 @@ public class DefaultConfigArWp extends DefaultConfigWp {
 
         c.addNamespace(new NamespaceImpl(
                 2600,
-                "موضوع",
+                "مبحث",
                 "Topic",
                 false,
                 false,
-                new ArrayList<String>()));      
+                new ArrayList<String>()));
 
         c.setDefaultNamespace(c.getNamespace(0));
         c.setTemplateNamespace(c.getNamespace(10));

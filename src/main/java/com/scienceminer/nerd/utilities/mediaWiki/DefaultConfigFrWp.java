@@ -258,7 +258,7 @@ public class DefaultConfigFrWp extends DefaultConfigWp {
 		c.addNamespace(new NamespaceImpl(
 				2600,
 				"Sujet",
-				"Theme",
+				"Topic",
 				false,
 				false,
 				new ArrayList<String>()));
