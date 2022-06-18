@@ -1,0 +1,52 @@
+# entity-fishing configuration for the Farsi Wikipedia
+
+# ISO 2-digit language code 
+langCode: fa
+
+# path to the LMDB data
+dbDirectory: data/db/db-fa
+
+# path to the compiled CSV wikipedia, infobox, wikidata files
+# note that these files are only used when creating the LMDB data,
+# if the LMDB data are already provided, these files will not be used
+dataDirectory: /media/lopez/data/wikipedia/latest/fa/
+#dataDirectory: /home/lopez/resources/wikipedia/fa/
+
+# path to the stopwords file to consider for the target language
+# the file is a text file with one stopword per line
+stopwords: data/stopwords/fa.txt
+
+# path to the nerd ranker model  
+rankerModel: data/models/ranker-long-fa.model
+
+# path to the nerd selector model
+selectorModel: data/models/selector-long-fa.model
+
+# minimum of inverse probability (e.g. probability of a string to realize a given 
+# entity considering all the possible strings that can realize this entity)
+minLinkProbability: 0.005
+
+# minimum conditional probability of a sense for being an entity candidate 
+# (e.g. min probability of an entity to be realized by a given string, given all possible 
+# entities that can be realized by this string)
+minSenseProbability: 0.05
+
+# minimum score produced by the selector model under which the entity 
+# will be pruned
+minSelectorScore: 0.25
+
+# minimum score produced by the ranker model under which the entity 
+# will be pruned
+minRankerScore: 0.2
+
+# if true, use links out for computing relatedness between two entities in addition to
+# the links in (slower but more precise in principle)
+useLinkOut : true
+
+# Above this frequency, the more frequent terms will be skipped and not disambiguated. 
+# The goal is to speed-up processing by ignoring very frequent word which are likely 
+# fonctional and common words not realizing an entity or not realizing an entity of 
+# interest. The frequency is expressed as zipf, i.e. a number typically between 0 and 8:
+# - a term with zipf value 6 appears once per thousand words
+# - a term with Zipf value 3 appears once per million words
+maxTermFrequency : 8.0
