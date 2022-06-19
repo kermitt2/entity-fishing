@@ -1,0 +1,36 @@
+[[Imagem:Scriptorium.jpg|thumb|260px|[[Dionísio, o Exíguo]], monge [[Citas|cita]] (m. 540), foi o primeiro a utilizar o ano do nascimento de Cristo como referência na datação.]]
+'''''Anno Domini''''' ('''''A.D.''''') é uma expressão em [[latim]] que significa &quot;ano do Senhor&quot;&lt;ref&gt;{{Citar web |ultimo=Infopédia |url=https://www.infopedia.pt/dicionarios/lingua-portuguesa/Anno+Domini |titulo=Anno Domini {{!}} Definição ou significado de Anno Domini no Dicionário Infopédia da Língua Portuguesa |acessodata=2021-01-24 |website=Infopédia - Dicionários Porto Editora |lingua=pt}}&lt;/ref&gt; e é utilizada para marcar os anos seguintes ao [[1|ano 1]] do [[calendário]] mais comumente utilizado no [[Ocidente]], designado como &quot;'''Era Cristã'''&quot; ou, ainda, como &quot;'''[[Era Comum]]'''&quot;. Aparecia em inscrições latinas e ainda é usada na [[língua inglesa]], correspondendo à expressão &quot;'''depois de Cristo'''&quot; ('''D.C.''' ou '''d.C.''') e em sucessão ao período &quot;'''antes de Cristo'''&quot; ('''A.C.''' ou '''a.C.''').&lt;ref&gt;{{Citar web |ultimo=Snell |primeiro=Melissa |url=https://www.thoughtco.com/a-d-anno-domini-1788306 |titulo=What is A.D. and How is it Used? |data=2017-04-17 |acessodata=2021-01-24 |website=ThoughtCo |publicado= |lingua=en}}&lt;/ref&gt;
+
+== Era cronológica ==
+Esta era cronológica ''(&quot;Era Cristã&quot; ou &quot;Era Comum&quot;)'', que é globalmente adotada, mesmo em países de cultura maioritariamente não cristã, para efeitos de unanimidade de critérios em vários âmbitos, como o científico e comercial, foi organizada de forma a contar o ano do nascimento de [[Cristo]] como ano 1, marcando uma linha divisória no tempo a partir de então. A contagem dos anos assemelha-se à ordem dos [[número inteiro|números inteiros]] (com a exceção de que não existiu um ano zero - pelo que o ano {{AC|1|x}} foi imediatamente sucedido pelo ano {{DC|1|x}}),&lt;ref&gt;{{Citar web |url=https://super.abril.com.br/mundo-estranho/qual-foi-o-ano-do-nascimento-de-cristo/ |titulo=Qual foi o ano do nascimento de Cristo? |acessodata=2021-01-24 |website=Super |lingua=pt-BR}}&lt;/ref&gt; pelo que também é comum referir os anos antes de Cristo por números inteiros negativos e os anos depois de Cristo por números inteiros positivos.
+
+=== {{Âncora|Indicção}}Ciclos das indicções ===
+Os ciclos de [[wikt:indicção|indicção]] (do [[latim]] ''indictio'') consistiam em quinze anos (cada um igual a uma ''indicção'') que marcavam um ciclo determinado por um imposto, contando-se os anos a partir da data em que este era pago. [[Jesus Cristo]] nasceu no quinto ano deste ciclo.&lt;ref name=&quot;rutherford.995&quot;&gt;[[Thomas Rutherford]], [http://books.google.com.br/books?id=vTBWAAAAYAAJ&amp;pg=PA995&amp;f=false ''A system of natural philosophy: being a course of lectures in Mechanics, Optics, Hydrostatics, and Astronomy, Volume 2''] (1748), 390. ''A indicção é um ciclo de 15 anos'', p.995&lt;/ref&gt;
+
+Tal sistema, usado na [[Gália]], no [[Egipto]] até à conquista Islâmica, no [[Império Bizantino|Império Romano do Oriente]] até à sua queda em [[1453]] e ainda na Santa Sé durante parte da [[Idade Média]].{{Carece de fontes|data=fevereiro de 2016}}
+
+Ainda que o ''Anno Domini'' já fosse comum no {{Séc|IX}}, a designação &quot;antes de Cristo&quot;, ou outra equivalente só se tornou vulgar a partir do final do {{Séc|XV}}.{{Carece de fontes|data=fevereiro de 2016}}
+
+== Ver também ==
+* [[Era geológica]]
+* [[Era Comum]]
+* [[Antes do Presente]]
+
+{{Notas}}
+{{Referências}}
+
+== Bibliografia ==
+* [http://www.mar.mil.br/dhn/bhm/publicacao/download/cap19.pdf ''Medida do Tempo'' (em Pdf)]in &quot;''Base de Hidrografia da Marinha de Niterói''&quot; - acesso a 25 de Abril de 2006
+* CUNNINGHAM, Philip A.; STARR, Arthur F.; ''Sharing Shalom: A Process for Local Interfaith Dialogue Between Christians and Jews'', Paulist Press, 1998
+* DECLERCQ, Georges; ''Anno Domini: The origins of the Christian era.'', Turnhout: Brepols, 2000
+* ———. ''Dionysius Exiguus and the Introduction of the Christian Era''. Sacris Erudiri 41; 2002 pp.&amp;nbsp;165–246.
+* ''[http://www.newadvent.org/cathen/03738a.htm General Chronology]'' ''in'' Catholic Encyclopedia {{en}} – acesso a 4 de Maio de 2006
+* RIGGS, John. ''[https://web.archive.org/web/20060930095425/http://www.ucc.org/ucnews/jan03/asiseeit.htm Whatever happened to B.C. and A.D., and why?]'' - acesso a 4 de Maio de 2006
+* SILVA, Isidoro R. da; ''A. D.'', ''in'' &quot;Enciclopédia Verbo Luso-Brasileira da Cultura, Edição {{Séc|XXI}}&quot;, Volume I, Editorial Verbo, Braga, Janeiro de 1998
+
+{{Séculos}}
+{{Título em itálico}}
+
+[[Categoria:Termos cristãos]]
+[[Categoria:Cronologia]]
+[[Categoria:Calendários]]

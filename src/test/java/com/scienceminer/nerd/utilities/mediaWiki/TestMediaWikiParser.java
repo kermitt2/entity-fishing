@@ -196,4 +196,17 @@ public class TestMediaWikiParser {
         assertThat(result.trim(), startsWith("电影"));
     }
 
+    @Test
+    public void testWikiMediaTextWithInternalLinksArticlesOnlyPt() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("article_pt.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "pt");
+
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
+
+        assertThat(result.trim(), startsWith("[[Imagem:Scriptorium.jpg"));
+    }
+
 }

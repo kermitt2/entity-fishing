@@ -117,7 +117,7 @@ public class NerdQueryTest {
         final String manualJson = target.toJSONClean();
         final JSONObject parsedManualJson = (JSONObject) anotherParser.parse(manualJson);
         assertThat(parsedManualJson.keySet().size(), is(3));
-        assertThat(parsedManualJson.get("text"), is("this is a test of a query"));
+        assertThat(parsedManualJson.get("text"), is("this is the test of a query"));
         assertThat(parsedManualJson.get("nbest"), is(false));
         assertThat(parsedManualJson.get("runtime"), is(0L));
     }
