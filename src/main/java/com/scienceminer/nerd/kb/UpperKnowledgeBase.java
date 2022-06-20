@@ -134,6 +134,18 @@ public class UpperKnowledgeBase {
 			wikipedias.put("ru", wikipedia_ru);
             wikipediaDomainMaps.put("ru", wikipediaDomainMaps_en);
 
+            LOGGER.info("Init Portuguese lower Knowledge-base layer (if present)");
+            conf = mapper.readValue(new File("data/config/wikipedia-pt.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_pt = new LowerKnowledgeBase(conf);
+			wikipedias.put("pt", wikipedia_pt);
+            wikipediaDomainMaps.put("pt", wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Farsi lower Knowledge-base layer (if present)");
+            conf = mapper.readValue(new File("data/config/wikipedia-fa.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_fa = new LowerKnowledgeBase(conf);
+			wikipedias.put("fa", wikipedia_fa);
+            wikipediaDomainMaps.put("fa", wikipediaDomainMaps_en);
+
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
 			LOGGER.info("Init Grobid") ;
