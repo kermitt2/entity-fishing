@@ -363,7 +363,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtTemplate n) {
-		System.out.println("processing template: "+n.getName());
+		//System.out.println("processing template: "+n.getName());
 		WtName templateName = n.getName();
 		String templateNameString = templateName.getAsString();
 
