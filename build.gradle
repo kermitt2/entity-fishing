@@ -111,8 +111,8 @@ dependencies {
     implementation group: 'de.ruedigermoeller', name: 'fst', version: '2.50'
 
     //Wikipedia
-    implementation group: 'org.sweble.wikitext', name: 'swc-parser-lazy', version: '3.1.5'
-    implementation group: 'org.sweble.wikitext', name: 'swc-engine', version: '3.1.5'
+    implementation group: 'org.sweble.wikitext', name: 'swc-parser-lazy', version: '3.1.9'
+    implementation group: 'org.sweble.wikitext', name: 'swc-engine', version: '3.1.9' 
 
     //XML
     implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.19'

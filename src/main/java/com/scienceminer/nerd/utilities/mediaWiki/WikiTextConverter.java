@@ -18,6 +18,7 @@ import org.sweble.wikitext.parser.nodes.WtInternalLink;
 import org.sweble.wikitext.parser.nodes.WtItalics;
 import org.sweble.wikitext.parser.nodes.WtListItem;
 import org.sweble.wikitext.parser.nodes.WtNode;
+import org.sweble.wikitext.parser.nodes.WtName;
 import org.sweble.wikitext.parser.nodes.WtNodeList;
 import org.sweble.wikitext.parser.nodes.WtOrderedList;
 import org.sweble.wikitext.parser.nodes.WtPageSwitch;
@@ -361,7 +362,28 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 		}
 	}
 
+	public void visit(WtTemplate n) {
+		System.out.println("processing template: "+n.getName());
+		WtName templateName = n.getName();
+		String templateNameString = templateName.getAsString();
+
+		// afaik templates are very ad hoc, so we only want to keep the argument values of some of them for proper
+		// text serialization 
+		if (templateNameString != null && templateToKeep(templateNameString) && n.getArgs() != null) {
+			iterate(n.getArgs());
+		}
+	}
+
+	public void visit(WtTemplateArgument n) {
+		if (n.getValue() != null)
+			iterate(n.getValue());
+		
+	}
+
 	// Stuff we want to hide
+
+	public void visit(WtTemplateParameter n) {
+	}
 
 	public void visit(WtImageLink n) {
 	}
@@ -370,15 +392,6 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtXmlComment n) {
-	}
-
-	public void visit(WtTemplate n) {
-	}
-
-	public void visit(WtTemplateArgument n) {
-	}
-
-	public void visit(WtTemplateParameter n) {
 	}
 
 	public void visit(WtTagExtension n) {
@@ -463,5 +476,12 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 
 	private void write(int num) {
 		writeWord(String.valueOf(num));
+	}
+
+	private boolean templateToKeep(String templateNameString) {
+		//if (templateNameString.indexOf("date") != -1 || templateNameString.equals("MSAPI"))
+		if (templateNameString.indexOf("date") != -1)
+			return true;
+		return false;
 	}
 }

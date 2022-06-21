@@ -4035,12 +4035,12 @@ public class DefaultConfigWp extends DefaultConfig {
 				"time",
 				false,
 				Arrays.asList("#time:")));
-		/*
+		
 		c.addI18nAlias(new I18nAliasImpl(
 				"timel",
 				false,
 				Arrays.asList("timel")));
-		c.addI18nAlias(new I18nAliasImpl(
+		/*c.addI18nAlias(new I18nAliasImpl(
 				"rel2abs",
 				false,
 				Arrays.asList("rel2abs")));
@@ -4049,12 +4049,11 @@ public class DefaultConfigWp extends DefaultConfig {
 				"titleparts",
 				false,
 				Arrays.asList("#titleparts:")));
-		/*
 		c.addI18nAlias(new I18nAliasImpl(
 				"convert",
 				false,
 				Arrays.asList("convert")));
-		c.addI18nAlias(new I18nAliasImpl(
+		/*c.addI18nAlias(new I18nAliasImpl(
 				"sourceunit",
 				false,
 				Arrays.asList("#sourceunit")));

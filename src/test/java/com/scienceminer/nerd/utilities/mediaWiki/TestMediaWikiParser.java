@@ -209,4 +209,19 @@ public class TestMediaWikiParser {
         assertThat(result.trim(), startsWith("[[Imagem:Scriptorium.jpg"));
     }
 
+    @Test
+    public void testWikiMediaTextWithDatesFr() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("date_fr.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "fr");
+
+        assertThat(result, containsString("[["));
+        assertThat(result, containsString("]]"));
+        assertThat(result, not(containsString("'''")));
+
+        assertThat(result.trim(), startsWith("Emmanuel Macron"));
+
+        System.out.println(result);
+    }
+
 }

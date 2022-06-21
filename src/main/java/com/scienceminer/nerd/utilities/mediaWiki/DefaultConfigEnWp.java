@@ -317,7 +317,7 @@ public class DefaultConfigEnWp extends DefaultConfigWp {
 				"Gadget definition talk",
 				false,
 				false,
-				new ArrayList<String>()));		
+				new ArrayList<String>()));
 
 		c.setDefaultNamespace(c.getNamespace(0));
 		c.setTemplateNamespace(c.getNamespace(10));
