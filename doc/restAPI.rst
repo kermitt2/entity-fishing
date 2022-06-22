@@ -358,6 +358,7 @@ Search query disambiguation uses a special model optimized for a small number of
 
 The difference between standard *text* and *short text* is similar to the one of the `ERD 2014 challenge <http://web-ngram.research.microsoft.com/erd2014/Docs/Detail%20Rules.pdf>`_.
 
+It is advised to specify the language of the query terms with the request, because the automatic language detection from short string is more challenging and errors can be relativy frequent. 
 
 Example request:
 ::
@@ -387,7 +388,9 @@ If the textual content to be processed is provided as a PDF document, the identi
 **Response when processing a text**
 ::
    {
-      "runtime": 223,
+      "software": "entity-fishing",
+      "version": "0.0.5",
+      "runtime": 34,
       "nbest": false,
       "text": "Austria was attaching Serbia.",
       "language": {
@@ -401,12 +404,9 @@ If the textual content to be processed is provided as a PDF document, the identi
             "type": "LOCATION",
             "offsetStart": 0,
             "offsetEnd": 7,
-            "nerd_score": "0.5447067973132087",
-            "nerd_selection_score": "0.8667510394325003",
-            "sense": {
-               "fineSense": "country/N1"
-            },
+            "confidence_score": "0.8667510394325003",
             "wikipediaExternalRef": "26964606",
+            "wikidataId": "Q40",
             "domains": [
                "Atomic_Physic",
                "Engineering",
@@ -427,7 +427,7 @@ In the example above, the root layer of JSON values correspond to:
 
 - **text**: input text as provided in the query, all the offset position information are based on the text in this field,
 
-- **language**: language detected in the text and his confidence score (if the language is provided in the query, conf is equal to 1.0),
+- **language**: language detected in the text and his confidence score, if the language is provided in the query then conf is equal to 1.0,
 
 - **entities**: list of entities recognised in the text (with possibly entities provided in the query, considered then as certain),
 
@@ -440,27 +440,27 @@ For each entity the following information are provided:
 
 - **offsetStart, offsetEnd**: the position offset of where the entity starts and ends in the text element in characters (JSON UTF-8 characters)
 
-- **nerd_score**: disambiguation confidence score, indicates the score of the entity against the other entity candidates for the text mention,
-
-- **nerd_selection_score**: selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention,
+- **confidence_score**: disambiguation and selection confidence score, indicates how certain the disambiguated entity is actually valid for the text mention (this depends a lot on the amount of contextual text where this entity is predicted, the more the better),
 
 - **wikipediaExternalRef**: id of the wikipedia page. This id can be used to retrieve the original page from wikipedia3 or to retrieve all the information associated to the concept in the knowledge base (definition, synonyms, categories, etc. - see the section “Knowledge base concept retrieval”),
 
+- **wikidataId**: the Wikidata QID of the predicted entity. This ID can be used to retrieve the complete Wikidata entry in the knowledge base (the section “Knowledge base concept retrieval”). 
+
 - **type**: NER class of the entity (see table of the 27 NER classes below under “2. Named entity types”),
 
-- **sense**: NER sense mapped on Wordnet synset - senses are provided to improve the disambiguation process, but they are currently not very reliable.
-
-The type of recognised entities are restricted to a set of 27 classes of named entities (see `GROBID NER documentation <http://grobid-ner.readthedocs.io/en/latest/class-and-senses/>`_). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class, a word sense estimation and a confidence score, without any reference to a Wikipedia article or domain information.
+The type of recognised entities are restricted to a set of 27 classes of named entities (see `GROBID NER documentation <http://grobid-ner.readthedocs.io/en/latest/class-and-senses/>`_). Entities not covered by the knowledge bases (the identified entities unknown by Wikipedia) will be characterized only by an entity class and a confidence score, without any reference to a Wikipedia article or domain information.
 
 **Response when processing a search query**
 ::
    {
-      "runtime": 146,
+      "software": "entity-fishing",
+      "version": "0.0.5",
+      "runtime": 4,
       "nbest": false,
       "shortText": "concrete pump sensor",
       "language": {
          "lang": "en",
-         "conf": 0.0
+         "conf": 1.0
       },
       "global_categories":
       [
@@ -475,92 +475,89 @@ The type of recognised entities are restricted to a set of 27 classes of named e
       "entities":
       [
          {
-            "rawName": "concrete",
-            "offsetStart": 0,
-            "offsetEnd": 8,
-            "nerd_score": "0.3416037625644609",
-            "nerd_selection_score": "0.9793831523036264",
-            "wikipediaExternalRef": "5371",
-            "domains": [
-               "Mechanics", "Engineering", "Architecture"
-            ]
-         },
-         {
             "rawName": "concrete pump",
             "offsetStart": 0,
             "offsetEnd": 13,
-            "nerd_score": "0.695783745626837",
-            "nerd_selection_score": "0.9576960838921623",
-            "wikipediaExternalRef": "7088907",
+            "confidence_score": 0.9501,
+            "wikipediaExternalRef": 7088907,
+            "wikidataId": "Q786115",
             "domains": [
-               "Mechanics",
-               "Engineering"
+                "Mechanics",
+                "Engineering"
             ]
-         },
-         {
-            "rawName": "pump",
-            "offsetStart": 9,
-            "offsetEnd": 13,
-            "nerd_score": "0.33995668143945024",
-            "nerd_selection_score": "0.9640450279784305",
-            "wikipediaExternalRef": "23617",
+        },
+        {
+            "rawName": "sensor",
+            "offsetStart": 14,
+            "offsetEnd": 20,
+            "confidence_score": 0.3661,
+            "wikipediaExternalRef": 235757,
+            "wikidataId": "Q167676",
             "domains": [
-               "Engineering",
-               "Mechanics"
+                "Electricity",
+                "Electronics",
+                "Mechanics"
             ]
-         },
-         [...]
+        }
+        [...]
 
 
 **Response when processing a weighted vector of terms**
+
 ::
    {
+      "software": "entity-fishing", 
+      "version": "0.0.5", 
+      "date": "2022-06-22T13:21:43.245Z", 
       "runtime": 870,
       "nbest": false,
       "termVector": [
-         {
-            "term": "computer science", "score": 0.3,
+        {
+            "term": "computer science", 
+            "score": 0.3,
             "entities": [
-               {
-                  "rawName": "computer science",
-                  "preferredTerm": "Computer science",
-                  "nerd_score": "0.5238665311593967",
-                  "nerd_selection_score": "0.0",
-                  "wikipediaExternalRef": "5323",
-                  "definitions": [
-                     {
+                {
+                    "rawName": "computer science",
+                    "preferredTerm": "Computer science",
+                    "confidence_score": 0,
+                    "wikipediaExternalRef": 5323,
+                    "wikidataId": "Q21198",
+                    "definitions": [{
                         "definition": "'''Computer science''' blablabla.",
                         "source": "wikipedia-en",
                         "lang": "en"
-                     }
-                  ],
-                  "categories": [
-                     {
-                        "source": "wikipedia-en",
-                        "category": "Computer science",
-                        "page_id": 691117
-                     },
-                     [...]
-                  ],
-            "multilingual": [
-               {
-               "lang": "de",
-               "term": "Informatik",
-               "page_id": 2335
+                    }]
+                    "categories": [
+                        {
+                            "source": "wikipedia-en",
+                            "category": "Computer science",
+                            "page_id": 691117
+                        },
+                        [...]
+                    ],
+                "multilingual": [
+                    {
+                        "lang": "de",
+                        "term": "Informatik",
+                        "page_id": 2335
+                    } 
+                ]
             } ]
-      } ]
-   }
+        }
+        [...]
+
 
 **Response description when processing PDF**
 ::
    {
-      "runtime": 2823,
+      "software": "entity-fishing",
+      "version": "0.0.5",
+      "date": "2022-06-22T13:29:21.014Z",
+      "runtime": 32509,
       "nbest": false,
-      "file”: "filename.pdf",
-      “pages”: 10,
       "language": {
          "lang": "en",
-         "conf": 0.9999948456042864
+         "conf": 0.9999987835857094
       },
       "pages":
          [
@@ -585,15 +582,12 @@ The type of recognised entities are restricted to a set of 27 classes of named e
          {
             "rawName": "Austria",
             "type": "LOCATION",
-            "nerd_score": "0.5447067973132087",
-            "nerd_selection_score": "0.8667510394325003",
+            "confidence_score": "0.8667510394325003",
             "pos": [
                { "p": 1, "x": 20, "y": 20, "h": 10, "w": 30 },
                { "p": 1, "x": 30, "y": 20, "h": 10, "w": 30 } ]
-            "sense": {
-               "fineSense": "country/N1"
-            },
             "wikipediaExternalRef": "26964606",
+            "wikidataId": "Q40",
             "domains": [
                "Atomic_Physic", "Engineering", "Administration", "Geology", "Oceanography", "Earth"
             ] },
@@ -698,8 +692,7 @@ GET /kb/concept/{id}
    {
      "rawName": "Austria",
      "preferredTerm": "Austria",
-     "nerd_score": "0.0",
-     "nerd_selection_score": "0.0",
+     "confidence_score": "0.0",
      "wikipediaExternalRef": "26964606",
      "wikidataId": "Q1234"
      "definitions": [
@@ -742,9 +735,7 @@ The elements present in this response are:
 
 - **preferredTerm**: The normalised term name
 
-- **nerd_score**: always 0.0 because no disambiguation took place in a KB access
-
-- **nerd_selection_score**: always 0.0 because no disambiguation took place in a KB access
+- **confidence_score**: always 0.0 because no disambiguation took place in a KB access
 
 - **wikipediaExternalRef**: unique identifier of the concept in wikipedia
 
