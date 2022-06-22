@@ -599,6 +599,10 @@ public class NerdQuery {
 
         String lang = "en"; // default language
         if (language != null) {
+            // if conf is 0.0, it has been initialized without confidence from a query, we set it to 1.0
+            // by convention
+            if (language.getConf() == 0.0) 
+                language.setConf(1.0);
             buffer.append(", \"language\": " + language.toJSON());
             lang = language.getLang();
         }
