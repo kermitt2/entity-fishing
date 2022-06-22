@@ -100,7 +100,7 @@ Similarly,
 
 * if no language is indicated (usual scenario), the *entity-fishing* service will use a language identifier to detect the correct language and the language resources to use. However, the query can also optionally specify a language for the text to be processed. This will force the service to process the text with the corresponding particular language resources.
 
-* It is possible also to pass an existing sentence segmentation to the *entity-fishing* service via the JSON query, in order that the service provides back identified entities following the given sentence segmentation.
+* it is possible also to pass an existing sentence segmentation to the *entity-fishing* service via the JSON query, in order that the service provides back identified entities following the given sentence segmentation.
 
 The client must respect the JSON format of the *entity-fishing* response as new query, as described below:
 
@@ -303,7 +303,7 @@ The JSON format for the query parameter to be sent to the service is identical t
 
 An additional parameter related to the processing of the structure of the PDF is available, called `structure`. For processing scientific and technical documents, in particular scholar papers, the value should be `grobid` which is a state of the art tool for structure the body of a scientific paper - it will avoid labelling bibliographical information, foot and head notes, figure content, will identify the useful areas (header, paragraphs, captions, etc.) handling multiple columns, hyphen, etc. and it will apply custom processnig based on the identified structure. 
 
-If you wish to process the whole document without specific structure analysis (this is advised for non-scientific papers), use the value **full** for the paramter **structure**.
+If you wish to process the whole document without specific structure analysis (this is advised for non-scientific documents), use the value **full** for the parameter **structure**.
 
 **Example using CURL** (using the query above):
 ::
@@ -503,7 +503,6 @@ The type of recognised entities are restricted to a set of 27 classes of named e
 
 
 **Response when processing a weighted vector of terms**
-
 ::
    {
       "software": "entity-fishing", 
