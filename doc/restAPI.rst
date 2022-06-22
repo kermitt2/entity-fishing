@@ -26,7 +26,7 @@ One and only one input type is mandatory in a query, otherwise an HTTP error 400
 Supported languages
 -------------------
 
-In the current version English, French, German, Spanish and Italian are supported. We plan to extend the support in future releases, as long the volume of the Wikipedia corpus for a new language is sufficient.
+In the current version 11 languages are supported: English, French, German, Spanish, Italian, Arabic, Japanese, Chinese (Mandarin), Russian, Portuguese and Farsi are supported. We plan to extend the support in future releases, as long the volume of the Wikipedia corpus for a new language is sufficient.
 
 The service returns an HTTP error 406 if the language of the text to be processed is not supported, see below.
 
