@@ -4,7 +4,7 @@
 
 # entity-fishing
 
-*entity-fishing* performs the following tasks:
+*entity-fishing* performs the following tasks for currently different 11 languages:
 
 * entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
 ![entity-fishing](doc/images/screen11.png)
@@ -43,6 +43,8 @@ Evaluations above correspond to the "overall unnormalized accuracy" scenario in 
 
 See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluation.html) and [Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for more details. 
 
+*entity-fishing* has been designed to be particularly fast for a full scale Wikidata-based entity disambiguation tool. For a single server, depending on the concurrency, it is possible to process from 1.000-1.500 tokens per seconds with concurrency 1 to 5.000 tokens per second for instance with 6 concurrent requests in English (and up to 2 times faster for other languages). 
+
 # Some use cases
 
 Some example of *entity-fishing* usages:
@@ -61,19 +63,19 @@ If you are using *entity-fishing* and found it useful, we are happy to mention y
 
 *entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.5`. 
 
-This version supports English, French, German, Italian, Spanish, Arabic, Mandarin, Russian and Japanese, with an in-house Named Entity Recognizer for English and French. For this version, the available knowledge base includes around 96 million entities from Wikidata - but you can create your own fresh knowledge base with the [GRISP](https://github.com/kermitt2/grisp) utility. 
+This version supports English, French, German, Italian, Spanish, Arabic, Mandarin, Russian, Japanese, Portuguese and Farsi with an in-house Named Entity Recognizer available for English and French. For this version, the available knowledge base includes around 96 million entities from Wikidata - but you can create your own fresh knowledge base with the [GRISP](https://github.com/kermitt2/grisp) utility. 
 
-**Runtime**: on local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD)
+**Runtime**: version `0.5.0`, on a local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD, 2015) for **English** (other languages are up to 50% faster)
 
 * 800 pubmed abstracts (172 787 tokens) processed in 126s with 1 client (1371 tokens/s) 
 
-* 4800 pubmed abstracts (1 036 722 tokens) processed in 216s with 6 concurrent clients (4800 tokens/s) 
+* 4800 pubmed abstracts (1 036 722 tokens) processed in 168s with 6 concurrent clients (6171 tokens/s) 
 
-* 136 PDF (3443 pages, 1 422 943 tokens) processed in 1284s with 1 client (2.6 pages/s, 1108.2 tokens/s)
+* 136 PDF (3443 pages, 1 422 943 tokens) processed in 760s with 1 client (4.5 pages/s, 1872 tokens/s)
 
-* 816 PDF (20658 pages, 8 537 658 tokens) processed in 2094s with 6 concurrent clients (9.86 pages/s, 4077 tokens/s)
+* 816 PDF (20658 pages, 8 537 658 tokens) processed in 1133s with 6 concurrent clients (18.2 pages/s, 7535 tokens/s)
 
-**Accuracy**: f-score for disambiguation only between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC) - to be improved in the next versions.
+**Accuracy**: f-score for disambiguation only between 76.5 and 89.1 on standard datasets (ACE2004, AIDA-CONLL-testb, AQUAINT, MSNBC) - to be improved in the future versions.
 
 The knowledge base contains more than 1.5 billion objects, not far from 15 millions word and entity embeddings, however *entity-fishing* will work with 3-4 GB RAM memory after a 15 second start-up for the server - but please use SSD! 
 
@@ -96,6 +98,8 @@ If you want to cite this work, please refer to the present GitHub project, toget
 
 Distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). The dependencies used in the project are either themselves also distributed under Apache 2.0 license or distributed under a compatible license. 
 
+If you contribute to this project, you agree to share your contribution following these licenses. 
+
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
-*entity-fishing* has been created, developed and is maintained by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) (since 2015, first Open Source public version in 2016), with contributions of [Inria](http://inria.fr) Paris (2017-2018). 
+*entity-fishing* has been created, developed and is maintained by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) (since 2015, first Open Source public version in 2016), with contributions of [Inria](http://inria.fr) Paris (2017-2018) and support from [Kairntech](https://kairntech.com) (2022) under a [RAPID](https://www.defense.gouv.fr/aid/deposez-votre-projet/rapid-regime-dappui-a-linnovation-duale) grant. 
