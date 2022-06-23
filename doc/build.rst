@@ -69,6 +69,10 @@ Then install the compiled indexed data:
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ja.zip (1.8 GB)
 
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-pt.zip (1.8 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fa.zip (1.8 GB)
+
 
 MacOS is not officially supported and should not be used for production. For convenience, we still make available the MacOS data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated and Arabic not available, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. However, we strongly recommend to use the Linux version for any serious works.
 
@@ -89,7 +93,7 @@ MacOS is not officially supported and should not be used for production. For con
 
 #. Unzip the db archives files under ``data/db/``.
 
-    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``, ``ar``, ``zh``, ``ru`` and ``ja``. The full uncompressed data is about 90 GB.
+    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``, ``ar``, ``zh``, ``ru``, ``ja``, ``pt`` and ``fa``. The full uncompressed data is about 90 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
