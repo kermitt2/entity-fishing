@@ -129,6 +129,14 @@ public class NerdRestProcessQuery {
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
             markUserEnteredEntities(nerdQuery, nerdQuery.getText().length());
             originalEntities = nerdQuery.getEntities();
+            // in case original entities are only provided with offsets, we had the corresponding text chunk
+            if (originalEntities != null) {
+                for(NerdEntity entity : originalEntities) {
+                    if (entity.getRawName() == null) {
+                        entity.setRawName(nerdQuery.getText().substring(entity.getOffsetStart(), entity.getOffsetEnd()));
+                    }
+                }
+            }
         }
 
         ProcessText processText = ProcessText.getInstance();
