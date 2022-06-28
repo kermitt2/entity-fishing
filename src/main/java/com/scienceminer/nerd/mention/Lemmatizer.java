@@ -1,0 +1,177 @@
+package com.scienceminer.nerd.mention;
+
+import com.johnsnowlabs.nlp.DocumentAssembler;
+import com.johnsnowlabs.nlp.Finisher;
+import com.johnsnowlabs.nlp.annotators.LemmatizerModel;
+import com.johnsnowlabs.nlp.annotators.Tokenizer;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.util.*;
+
+import org.apache.spark.ml.Pipeline;
+import org.apache.spark.ml.PipelineModel;
+import org.apache.spark.ml.PipelineStage;
+import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Encoders;
+import org.apache.spark.sql.Row;
+
+import scala.collection.Iterator;
+import scala.collection.mutable.WrappedArray;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Singleton class providing lemmatization on text or pre-tokenized text. 
+ * Lemmatization is only used for some languages with rich morphology, for which the Wikipedia
+ * labels do not provide sufficient coverage.
+ * 
+ * By default Spark NLP lemmatizers are used as implementation with lazy loading of the 
+ * language-specific models. 
+ * 
+ **/
+class Lemmatizer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Lemmatizer.class);
+
+    private static volatile Lemmatizer instance;
+
+    private Map<String,LemmatizerModel> models = null;
+
+    private static SparkSession spark;
+    private static String cacheFolder;
+
+    public static Lemmatizer getInstance() {
+        if (instance == null) {
+            synchronized (Lemmatizer.class) {
+                if (instance == null) {
+                    getNewInstance();
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * Creates a new instance.
+     */
+    private static synchronized void getNewInstance() {
+        LOGGER.debug("Get new instance of Lemmatizer");
+        instance = new Lemmatizer();
+    }
+
+    /**
+     * Hidden constructor
+     */
+    private Lemmatizer() {
+        spark = SparkSession.builder()
+                .appName("entity-fishing lemmatizers")
+                .config("spark.master", "local")
+                .config("spark.jsl.settings.pretrained.cache_folder", cacheFolder)
+                .getOrCreate();
+        models = new TreeMap<>();
+    }
+
+    public List<String> lemmatize(List<String> inputs, String lang) {
+        if (inputs == null || inputs.size() == 0 || lang == null)
+            return inputs;
+
+        LemmatizerModel lemmatizer = models.get(lang);
+        if (lemmatizer == null) {
+            try {
+                lemmatizer = this.loadModel(lang);
+            } catch(IOException e) {
+                LOGGER.warn("Could not load lemmatizer model for " + lang);
+            }
+        }
+
+        if (lemmatizer == null) {
+            LOGGER.info("Lemmatizer model for " + lang + " not found, so no lemmatization applied for this language");
+            return inputs;
+        }
+
+        DocumentAssembler document = new DocumentAssembler();
+        document.setInputCol("text");
+        document.setOutputCol("document");
+        document.setCleanupMode("disabled");
+
+        Tokenizer tokenizer = new Tokenizer();
+        tokenizer.setInputCols(new String[]{"document"});
+        tokenizer.setOutputCol("token");
+        
+        Finisher finisher = new Finisher();
+        finisher.setInputCols(new String[]{"lemma"});
+
+        Pipeline pipeline = new Pipeline();
+        pipeline.setStages(new PipelineStage[]{document, tokenizer, lemmatizer, finisher});
+
+        Dataset<Row> data = spark.createDataset(inputs, Encoders.STRING()).toDF("text");
+        PipelineModel pipelineModel = pipeline.fit(data);
+        Dataset<Row> transformed = pipelineModel.transform(data);
+
+        transformed.selectExpr("explode(finished_lemma)");
+        List<Row> rows = transformed.selectExpr("finished_lemma").collectAsList();
+        List<String> results = new ArrayList();
+        StringBuilder sb;
+        for (Row row : rows) {
+            sb = new StringBuilder();
+            for (int i = 0; i < row.length(); i++) {
+                WrappedArray array = (WrappedArray) row.get(i);
+                Iterator iterator = array.iterator();
+                while (iterator.hasNext()) {
+                    Object next = iterator.next();
+                    sb.append(next).append(" ");
+                }
+            }
+            results.add(sb.toString().trim());
+        }
+
+        return results;
+    }
+
+    public List<List<String>> lemmatizeTokens(List<List<String>> tokens, String lang) throws IOException {
+        if (tokens == null || tokens.size() == 0) {
+            return tokens;
+        }
+
+        // perform a lemmatization on text, then re-aligned to tokens
+
+
+        return tokens;
+    }
+
+    private LemmatizerModel loadModel(String lang) throws IOException  {
+        LemmatizerModel lemmatizer = null;
+        String modelName;
+        
+        if (lang.equals("en")) {
+            modelName = "lemma_antbnc";
+        } else {
+            modelName = "lemma";
+        }
+
+        String pathOfModelOnDiskAsString = pathOnDisk + File.separator + lang;
+        Path modelOnDisk = Path.of(pathOfModelOnDiskAsString);
+        if (!Files.exists(modelOnDisk)) {
+            LOGGER.info("downloading lemmatizer model for " + lang);
+            lemmatizer = (LemmatizerModel) LemmatizerModel.pretrained(modelName, lang);
+            lemmatizer.setInputCols(new String[]{"token"});
+            lemmatizer.setOutputCol("lemma");
+            File localFile = new File(pathOnDisk);
+            String[] list = localFile.list((dir, name) -> name.startsWith("lemma_" + lang));
+            if (list.length > 0) {
+                copyDirectory(pathOnDisk + File.separator + list[0], pathOfModelOnDiskAsString);
+                deleteDirectory(Path.of(pathOnDisk + File.separator + list[0]).toFile());
+            }
+        } else {
+            LOGGER.info("loading local lemmatizer model for " + lang);
+            lemmatizer = (LemmatizerModel) LemmatizerModel.load(cacheFolder + File.separator + lang);
+            models.put(lang, lemmatizer);
+        }
+
+        return lemmatizer;
+    }
+
+}
