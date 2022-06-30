@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.assertThat;
+
 public class KBUtilitiesTest {
 	
 	//private LowerKnowledgeBase wikipedia = null;

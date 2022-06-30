@@ -41,7 +41,7 @@ class Lemmatizer {
     private Map<String,LemmatizerModel> models = null;
 
     private static SparkSession spark;
-    private static String cacheFolder;
+    private static String modelFolder = "lemmatizers";
 
     public static Lemmatizer getInstance() {
         if (instance == null) {
@@ -69,7 +69,7 @@ class Lemmatizer {
         spark = SparkSession.builder()
                 .appName("entity-fishing lemmatizers")
                 .config("spark.master", "local")
-                .config("spark.jsl.settings.pretrained.cache_folder", cacheFolder)
+                .config("spark.jsl.settings.pretrained.cache_folder", modelFolder)
                 .getOrCreate();
         models = new TreeMap<>();
     }
@@ -92,20 +92,20 @@ class Lemmatizer {
             return inputs;
         }
 
-        DocumentAssembler document = new DocumentAssembler();
-        document.setInputCol("text");
-        document.setOutputCol("document");
-        document.setCleanupMode("disabled");
+        DocumentAssembler documentAssembler = new DocumentAssembler();
+        documentAssembler.setInputCol("text");
+        documentAssembler.setOutputCol("sentence");
+        documentAssembler.setCleanupMode("disabled");
 
         Tokenizer tokenizer = new Tokenizer();
-        tokenizer.setInputCols(new String[]{"document"});
+        tokenizer.setInputCols(new String[]{"sentence"});
         tokenizer.setOutputCol("token");
         
         Finisher finisher = new Finisher();
         finisher.setInputCols(new String[]{"lemma"});
 
         Pipeline pipeline = new Pipeline();
-        pipeline.setStages(new PipelineStage[]{document, tokenizer, lemmatizer, finisher});
+        pipeline.setStages(new PipelineStage[]{documentAssembler, tokenizer, lemmatizer, finisher});
 
         Dataset<Row> data = spark.createDataset(inputs, Encoders.STRING()).toDF("text");
         PipelineModel pipelineModel = pipeline.fit(data);
@@ -144,30 +144,16 @@ class Lemmatizer {
 
     private LemmatizerModel loadModel(String lang) throws IOException  {
         LemmatizerModel lemmatizer = null;
-        String modelName;
-        
-        if (lang.equals("en")) {
-            modelName = "lemma_antbnc";
-        } else {
-            modelName = "lemma";
-        }
 
-        String pathOfModelOnDiskAsString = pathOnDisk + File.separator + lang;
-        Path modelOnDisk = Path.of(pathOfModelOnDiskAsString);
-        if (!Files.exists(modelOnDisk)) {
-            LOGGER.info("downloading lemmatizer model for " + lang);
-            lemmatizer = (LemmatizerModel) LemmatizerModel.pretrained(modelName, lang);
-            lemmatizer.setInputCols(new String[]{"token"});
-            lemmatizer.setOutputCol("lemma");
-            File localFile = new File(pathOnDisk);
-            String[] list = localFile.list((dir, name) -> name.startsWith("lemma_" + lang));
-            if (list.length > 0) {
-                copyDirectory(pathOnDisk + File.separator + list[0], pathOfModelOnDiskAsString);
-                deleteDirectory(Path.of(pathOnDisk + File.separator + list[0]).toFile());
-            }
-        } else {
+        String modelPathString = modelFolder + File.separator + lang;
+        Path modelPath = Paths.get(modelPathString);
+        if (Files.exists(modelPath)) {
             LOGGER.info("loading local lemmatizer model for " + lang);
-            lemmatizer = (LemmatizerModel) LemmatizerModel.load(cacheFolder + File.separator + lang);
+            lemmatizer = (LemmatizerModel) LemmatizerModel.load(modelFolder + File.separator + lang);
+
+            // all the Spark NLP lemmatizer considered in entity-fishing have the same input/output profile
+            lemmatizer.setInputCols(new String[]{"sentence", "token"});
+            lemmatizer.setOutputCol("lemma");
             models.put(lang, lemmatizer);
         }
 
