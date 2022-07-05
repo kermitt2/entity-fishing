@@ -41,7 +41,7 @@ class Lemmatizer {
     private Map<String,LemmatizerModel> models = null;
 
     private static SparkSession spark;
-    private static String modelFolder = "lemmatizers";
+    private static String modelFolder = "data/lemmatizers";
 
     public static Lemmatizer getInstance() {
         if (instance == null) {
@@ -74,9 +74,13 @@ class Lemmatizer {
         models = new TreeMap<>();
     }
 
-    public List<String> lemmatize(List<String> inputs, String lang) {
+
+    /**
+     *  Lemmatization of a list of sentences
+     **/
+    public List<List<String>> lemmatize(List<String> inputs, String lang) {
         if (inputs == null || inputs.size() == 0 || lang == null)
-            return inputs;
+            return null;
 
         LemmatizerModel lemmatizer = models.get(lang);
         if (lemmatizer == null) {
@@ -89,7 +93,7 @@ class Lemmatizer {
 
         if (lemmatizer == null) {
             LOGGER.info("Lemmatizer model for " + lang + " not found, so no lemmatization applied for this language");
-            return inputs;
+            return null;
         }
 
         DocumentAssembler documentAssembler = new DocumentAssembler();
@@ -113,24 +117,26 @@ class Lemmatizer {
 
         transformed.selectExpr("explode(finished_lemma)");
         List<Row> rows = transformed.selectExpr("finished_lemma").collectAsList();
-        List<String> results = new ArrayList();
-        StringBuilder sb;
+        List<List<String>> results = new ArrayList<>();
         for (Row row : rows) {
-            sb = new StringBuilder();
+            List<String> result = new ArrayList<>();
             for (int i = 0; i < row.length(); i++) {
                 WrappedArray array = (WrappedArray) row.get(i);
                 Iterator iterator = array.iterator();
                 while (iterator.hasNext()) {
-                    Object next = iterator.next();
-                    sb.append(next).append(" ");
+                    String next = (String) iterator.next();
+                    result.add(next);
                 }
             }
-            results.add(sb.toString().trim());
+            results.add(result);
         }
 
         return results;
     }
 
+    /**
+     * Lemmatize a pre-tokenized list of sentences 
+     **/
     public List<List<String>> lemmatizeTokens(List<List<String>> tokens, String lang) throws IOException {
         if (tokens == null || tokens.size() == 0) {
             return tokens;
