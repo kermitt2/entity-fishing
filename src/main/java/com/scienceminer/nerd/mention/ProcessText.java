@@ -1,9 +1,5 @@
 package com.scienceminer.nerd.mention;
 
-import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.reader.AbstractReader;
-import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
-import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.exceptions.NerdException;
@@ -68,12 +64,7 @@ public class ProcessText {
     public static final int DEFAULT_NGRAM_LENGTH = 6;
     public static final int DEFAULT_TARGET_SEGMENT_SIZE = 1000;
 
-    public final String language = AbstractReader.LANG_EN;
-
     private static volatile ProcessText instance;
-
-    // ClearParser components for sentence segmentation
-    private AbstractTokenizer tokenizer = null;
 
     private NERParsers nerParsers = null;
 
@@ -101,8 +92,6 @@ public class ProcessText {
      * Hidden constructor
      */
     private ProcessText() {
-        String dictionaryFile = "data/clearNLP/dictionary-1.3.1.zip";
-
         String grobidHome = com.scienceminer.nerd.utilities.Utilities.initGrobid();
         Path grobidHomePath = Paths.get(grobidHome);
         Path grobidNerPath = grobidHomePath.resolve("../grobid-ner/"); 
@@ -119,19 +108,6 @@ public class ProcessText {
         LibraryLoader.load();
 
         nerParsers = new NERParsers();
-
-        try {
-            tokenizer = EngineGetter.getTokenizer(language, new FileInputStream(dictionaryFile));
-        } catch (FileNotFoundException e) {
-            throw new NerdException("Cannot initialise tokeniser ", e);
-        }
-    }
-
-    /**
-     * Only for testing
-     **/
-    public void setTokenizer(AbstractTokenizer tokenizer) {
-        this.tokenizer = tokenizer;
     }
 
     /**
@@ -743,58 +719,6 @@ public class ProcessText {
         }
 
         return result;
-    }
-
-    /**
-     *  Deprecated: sentence segmentation based on clearnlp
-     * 
-     **/
-    public List<Sentence> sentenceSegmentationCleanNLP(String text) {
-        // replace the EOL "\r\n" with "\n"
-        text = text.replace("\r\n","\n");
-
-        AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
-        // convert String into InputStream
-        InputStream is = new ByteArrayInputStream(text.getBytes(UTF_8));
-        // read it with BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        List<List<String>> sentences = segmenter.getSentences(br);
-        List<Sentence> results = new ArrayList<Sentence>();
-
-        if ((sentences == null) || (sentences.size() == 0)) {
-            // there is some text but not in a state so that a sentence at least can be
-            // identified by the sentence segmenter, so we parse it as a single sentence
-            Sentence sentence = new Sentence();
-            OffsetPosition pos = new OffsetPosition();
-            pos.start = 0;
-            pos.end = text.length();
-            sentence.setOffsets(pos);
-            results.add(sentence);
-            return results;
-        }
-
-        // we need to realign with the original sentences, so we have to match it from the text
-        // to be parsed based on the tokenization
-        int offSetSentence = 0;
-        //List<List<String>> trueSentences = new ArrayList<List<String>>();
-        for (List<String> theSentence : sentences) {
-            int next = offSetSentence;
-            for (String token : theSentence) {
-                next = text.indexOf(token, next);
-                next = next + token.length();
-            }
-            List<String> dummy = new ArrayList<String>();
-            //dummy.add(text.substring(offSetSentence, next));
-            //trueSentences.add(dummy);
-            Sentence sentence = new Sentence();
-            OffsetPosition pos = new OffsetPosition();
-            pos.start = offSetSentence;
-            pos.end = next;
-            sentence.setOffsets(pos);
-            results.add(sentence);
-            offSetSentence = next;
-        }
-        return results;
     }
 
     public List<StringPos> ngrams(List<LayoutToken> layoutTokens, int ngram) {
