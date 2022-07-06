@@ -3,11 +3,14 @@
 Install, build, run, and monitor
 ================================
 
-*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64 (preferred) and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. taking into account that only index data for Linux are up-to-date. 
+Install, build, and run
+***********************
+
+*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64. Mac OS environments should work fine, but it is *unofficially* supported. Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
 
 Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
 
-After decompressing all the index data, up to 119 GB of disk space will be used if you wish to use all the supported languages (en, fr, de , it, es, ar, zh, ru, ja) - be sure to have enough free space. For running English language only, you will need around 90 GB. SSD is highly recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
+After decompressing all the index data, up to 100 GB of disk space will be used if you wish to use all the supported languages (en, fr, de, it, es, ar, zh, ru, ja, pt, fa) - be sure to have enough free space. For running English language only, you will need around 50 GB. SSD is highly recommended for best performance and experience, in particular with a low amount of available RAM (e.g. RAM < 4GB).
 
 First install ``GROBID`` and ``grobid-ner``, see the relative instruction of `GROBID <http://github.com/kermitt2/grobid>`_ and `grobid-ner <http://github.com/kermitt2/grobid-ner>`_.
 
@@ -93,7 +96,7 @@ MacOS is not officially supported and should not be used for production. For con
 
 #. Unzip the db archives files under ``data/db/``.
 
-    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``, ``ar``, ``zh``, ``ru``, ``ja``, ``pt`` and ``fa``. The full uncompressed data is about 90 GB.
+    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``, ``ar``, ``zh``, ``ru``, ``ja``, ``pt`` and ``fa``. The full uncompressed data is more than 90 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
@@ -115,13 +118,13 @@ For more information, see the next section on the *entity-fishing* Console.
 Metrics and monitoring
 **********************
 
-As the server is started, the Dropwizard administrative console can be accessed at http://localhost:8091/ (default hostname and port)
+As the server is started, the Dropwizard administrative/service console can be accessed at http://localhost:8091/ (default hostname and port)
 
 DropWizard metrics are available at http://localhost:8091/metrics?pretty=true
 
 Prometheus metrics (e.g. for Graphana monitoring) are available at http://localhost:8091/metrics/prometheus
 
-Creating a new Knowledge Base version from new Wikidata and Wikipedia dumps
-***************************************************************************
+Creating a new Knowledge Base version 
+*************************************
 
 The knowledge base used by *entity-fishing* can be updated with new versions of Wikidata and Wikipedia using the pre-processing from the library `GRISP <https://github.com/kermitt2/grisp>`_, see `https://github.com/kermitt2/grisp <https://github.com/kermitt2/grisp>`_. 
