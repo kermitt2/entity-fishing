@@ -107,7 +107,7 @@ MacOS is not officially supported and should not be used for production. For con
  
 #. Run the service:
    ::
-      $ ./gradlew appRun
+      $ ./gradlew run
 
 The test console is available at port ``:8090`` by opening in your browser: http://localhost:8090
 
