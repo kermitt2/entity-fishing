@@ -1,7 +1,7 @@
 .. topic:: Build and install entity-fishing.
 
-Install, build and run
-======================
+Install, build, run, and monitor
+================================
 
 *entity-fishing* requires JDK 1.8 or higher. It supports Linux-64 (preferred) and Mac OS environments. Below, we make available the LMDB binary data for these two architectures. taking into account that only index data for Linux are up-to-date. 
 
@@ -108,8 +108,18 @@ MacOS is not officially supported and should not be used for production. For con
 
 The test console is available at port ``:8090`` by opening in your browser: http://localhost:8090
 
+The service port, CORS parameters, and logging parameters can be configured in the file ``data/config/service.yaml``.
+
 For more information, see the next section on the *entity-fishing* Console.
 
+Metrics and monitoring
+**********************
+
+As the server is started, the Dropwizard administrative console can be accessed at http://localhost:8091/ (default hostname and port)
+
+DropWizard metrics are available at http://localhost:8091/metrics?pretty=true
+
+Prometheus metrics (e.g. for Graphana monitoring) are available at http://localhost:8091/metrics/prometheus
 
 Creating a new Knowledge Base version from new Wikidata and Wikipedia dumps
 ***************************************************************************
