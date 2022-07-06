@@ -23,7 +23,7 @@ apply plugin: 'maven-publish'
 //apply plugin: 'com.github.johnrengelman.shadow'
 
 group = "com.scienceminer.nerd"
-version = '0.0.6'
+version = '0.0.5'
 
 description = """entity recognition and disambiguation against Wikidata and Wikipedia in a raw text, partially-annotated text segment, PDF or weighted term vector"""
 
