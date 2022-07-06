@@ -1,6 +1,8 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.main.data.SoftwareInfo;
+import com.google.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,10 @@ import javax.ws.rs.core.Response.Status;
 public class NerdRestProcessGeneric {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessGeneric.class);
+
+    @Inject
+    public NerdRestProcessGeneric() {
+    }
 
     /**
      * Returns a string containing true, if the service is alive.

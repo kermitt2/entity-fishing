@@ -32,6 +32,8 @@ import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.*;
 
+import com.google.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +57,10 @@ public class NerdRestProcessFile {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessFile.class);
     NerdRestProcessQuery nerdRestProcessQuery = new NerdRestProcessQuery();
     SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
+
+    @Inject
+    public NerdRestProcessFile() {
+    }
 
     /**
      * Parse a structured query in combination with a PDF file and return the corresponding

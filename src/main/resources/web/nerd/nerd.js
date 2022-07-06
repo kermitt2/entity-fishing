@@ -1782,6 +1782,7 @@ var nerd = (function ($) {
             '<div style="max-height:150px; overflow:auto;"><table id="sentenceIndex" class="table table-bordered table-condensed">';
         var m = 0;
         var text = $('#input').val();
+        var text = text.replace(/\n/g, "  ");
         for (var sentence in responseJson.sentences) {
             if (m % 2 == 0) {
                 display += '<tr class="highlight" id="sent_' + m + '" rank="' + m + '" >';

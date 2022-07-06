@@ -3,7 +3,6 @@ package com.scienceminer.nerd.service;
 /**
  * This interface only contains the path extensions for accessing the nerd service.
  *
- *
  */
 public interface NerdPaths {
 	/**

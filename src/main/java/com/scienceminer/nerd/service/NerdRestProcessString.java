@@ -12,6 +12,8 @@ import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.lang.Language;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.LanguageUtilities;
+import com.google.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +31,10 @@ public class NerdRestProcessString {
      * The class Logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessString.class);
+
+    @Inject
+    public NerdRestProcessString() {
+    }
 
     /**
      * Apply a language identification on the raw text and return the identified language with a

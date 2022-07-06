@@ -12,9 +12,12 @@ import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.lang.Language;
+
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+
+import com.google.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,10 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class NerdRestKB {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestKB.class);
+
+    @Inject
+    public NerdRestKB() {
+    }
 
     /**
      * Get the information for a concept.

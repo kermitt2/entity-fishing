@@ -7,7 +7,7 @@ The *entity-fishing* console is a **graphical web interface**, part of the *enti
 
 The console is also a **reference implementation** in javascript (with JQuery) of a web application using the *entity-fishing* API service. As such, it illustrates how to call the services with mainstream Ajax queries, how to parse JSON results with *vulgus JQuery* and how to dynamically annotate a PDF with PDF.js and a dynamic HTML layer.
 
-The console is available at the root address of the server (e.g. for Tomcat at ``http://<server instance name>/<root context name>``, or ``http://localhost:8090`` for jetty deployed instance).
+The console is available at the root address of the server (e.g. ``http://localhost:8090`` by default, to be changed in the configuration file  ``data/config/service.yaml``).
 
 The About page provides licence (Open Source Apache 2 licence for the entire tool including used dependencies) and contact information.
 
@@ -17,7 +17,7 @@ The web page *Services* allows to test the different REST requests.
 
 .. image:: images/nerdConsole2.png
 
-A free text form allows the analysis of any text. On the right side of the input form, samples of text can be found, from scientific articles, news and historical documents.
+A text form allows the analysis of any queries expressed in the *entity-fishing* query DSL (see next section). On the right side of the input form, samples of text can be found, from scientific articles, news and historical documents in supported various languages.
 
 In the lower part, entities are recognised in the provided text and displayed using different colors, based on the entity type and domain. On the lower right side, an infobox is displaying information provided by the service about the disambiguated Wikidata/Wikipedia entity.
 

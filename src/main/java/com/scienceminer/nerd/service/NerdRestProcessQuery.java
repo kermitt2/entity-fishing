@@ -13,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.OffsetPosition;
+import com.google.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +30,10 @@ public class NerdRestProcessQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestProcessQuery.class);
     SoftwareInfo softwareInfo = SoftwareInfo.getInstance();
+
+    @Inject
+    public NerdRestProcessQuery() {
+    }
 
     /**
      * Parse a structured query and return the corresponding normalized enriched and disambiguated query object.

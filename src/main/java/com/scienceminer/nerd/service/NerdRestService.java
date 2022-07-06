@@ -8,10 +8,16 @@ import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.mention.ProcessText;
-import com.sun.jersey.multipart.FormDataParam;
-import com.sun.jersey.spi.resource.Singleton;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
+import com.codahale.metrics.annotation.Timed;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lang.Language;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,12 +31,14 @@ import java.util.NoSuchElementException;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
- * RESTFul service for the NERD system.
+ * web services for entity-fishing
  */
+@Timed
 @Singleton
 @Path(NerdPaths.ROOT)
 public class NerdRestService implements NerdPaths {
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestService.class);
+
     private static final String SHA1 = "authToken";
     private static final String NAME = "name";
     private static final String PROFILE = "profile";
@@ -53,6 +61,7 @@ public class NerdRestService implements NerdPaths {
     NerdRestProcessFile nerdProcessFile;
     NerdRestKB nerdRestKB;
 
+    @Inject
     public NerdRestService() {
         LOGGER.info("Init lexicon.");
         Lexicon.getInstance();
@@ -314,67 +323,6 @@ public class NerdRestService implements NerdPaths {
         return response;
     }
 
-    /*@POST
-    @Path(DISAMBIGUATE)
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_XML)
-    public Response processQueryXml(@FormDataParam(QUERY) String query,
-                                    @FormDataParam(FILE) InputStream inputStream) {
-        return Response.status(new Response.StatusType() {
-            @Override
-            public int getStatusCode() {
-                return 501;
-            }
-
-            @Override
-            public Response.Status.Family getFamily() {
-                return Response.Status.Family.SERVER_ERROR;
-            }
-
-            @Override
-            public String getReasonPhrase() {
-                return "Not implemented";
-            }
-        }).build();
-    }*/
-
-
-    /**
-     * Admin API
-     **/
-
-    /*@Path(ADMIN)
-    @Produces(MediaType.TEXT_HTML)
-    @GET
-    public Response getAdmin_htmlGet(@QueryParam(SHA1) String sha1) {
-        return NerdRestProcessAdmin.getAdminParams(sha1);
-    }
-
-    @Path(ADMIN_PROPERTIES)
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response getAllProperties(@QueryParam(SHA1) String sha1) {
-        return NerdRestProcessAdmin.getAllPropertiesValues(sha1);
-    }
-
-    @Path(ADMIN + "/property/{name}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response getProperty(@QueryParam(SHA1) String sha1, @PathParam(NAME) String propertyName) {
-        return NerdRestProcessAdmin.getProperty(sha1, propertyName);
-    }
-
-
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path(ADMIN + "/property/{name}")
-    @PUT
-    public Response updateProperty(@QueryParam(SHA1) String sha1,
-                                   @PathParam(NAME) String propertyName,
-                                   @FormDataParam(VALUE) String newValue) {
-        return NerdRestProcessAdmin.changePropertyValue(sha1, propertyName, newValue);
-    }*/
-
     /**
      * KB operations
      **/
@@ -487,8 +435,8 @@ public class NerdRestService implements NerdPaths {
         }
 
         return response;
-
     }
+
 
     /**
      * Customisation API
