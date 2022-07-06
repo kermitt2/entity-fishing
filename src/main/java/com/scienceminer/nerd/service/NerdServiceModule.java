@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Binder;
 import com.google.inject.Provides;
 import com.hubspot.dropwizard.guicier.DropwizardAwareModule;
-//import com.scienceminer.nerd.service.configuration.NerdServiceConfiguration;
-import io.dropwizard.Configuration;
+
+import com.scienceminer.nerd.service.configuration.NerdServiceConfiguration;
 import com.scienceminer.nerd.service.NerdRestService;
 import com.scienceminer.nerd.service.HealthCheck;
 import com.scienceminer.nerd.service.NerdRestProcessFile;
@@ -19,7 +19,7 @@ import com.scienceminer.nerd.service.NerdRestKB;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
-public class NerdServiceModule extends DropwizardAwareModule<Configuration> {
+public class NerdServiceModule extends DropwizardAwareModule<NerdServiceConfiguration> {
 
     @Override
     public void configure(Binder binder) {

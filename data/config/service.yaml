@@ -1,7 +1,7 @@
 # CORS parameters 
-#corsAllowedOrigins: "*"
-#corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
-#corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
+corsAllowedOrigins: "*"
+corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
+corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 
 # beyond the following number of requests, a 503 status will be returned (service unavailable) until enough
 # requests are processed to go beyond the max

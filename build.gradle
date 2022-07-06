@@ -7,7 +7,6 @@ buildscript {
         }
     }
     dependencies {
-        //classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.12.0'
         //classpath "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0"
     }
@@ -22,12 +21,6 @@ apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'maven-publish'
 //apply plugin: 'com.github.johnrengelman.shadow'
-
-/*apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'org.gretty'
-apply plugin: 'maven-publish'*/
 
 group = "com.scienceminer.nerd"
 version = '0.0.6'
@@ -50,18 +43,6 @@ repositories {
         url 'lib/'
     }
 }
-
-/*repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://jitpack.io" }
-    jcenter()
-    maven {
-        url 'lib/'
-    }
-}*/
-
-//task install(dependsOn: installShadowDist)
 
 dependencies {
     // Tests
@@ -159,7 +140,6 @@ dependencies {
         exclude(module: 'jersey-server')
     }
     implementation group: 'org.apache.avro', name: 'avro', version: '1.7.5'
-
 }
 
 configurations {
@@ -178,70 +158,8 @@ test {
     exclude '**/**IntegrationTest**'
 }
 
-/*publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-}*/
-
-// add local publication after build
-//tasks.named("build") { finalizedBy("publishToMavenLocal") }
-
-// Gretty configuration
-/*gretty {
-    httpPort = 8090
-    contextPath = '/'
-    servletContainer = "jetty9.4"
-    webInfIncludeJarPattern = ''
-    reloadOnClassChange = false
-    interactiveMode = ''
-}*/
-
-/*war {
-    classifier = 'war'
-    enabled true
-}*/
-
-/*artifacts {
-    archives jar
-    archives war
-}*/
-
-
-//distributions {
-//    shadow {
-        /*contents {
-            from(new File(rootProject.rootDir, "data/config")) {
-                into "data/config"
-            }
-        }*/
-//    }
-//}
-
-/*shadowJar {
-//    archiveClassifier = 'onejar'
-    classifier = 'onejar'
-    mergeServiceFiles()
-    zip64 true
-    manifest {
-        attributes 'Main-Class': mainClassName
-    }
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}*/
-
 distTar.enabled = false
 distZip.enabled = false
-//shadowDistTar.enabled = false
-
-artifacts {
-//    archives shadowJar
-//    archives shadowDistZip
-//    archives shadowDistTar
-}
-
-
 
 // service
 apply plugin: 'application'
@@ -252,7 +170,6 @@ application {
         args = ['server', 'data/config/service.yaml']
     }
 }
-
 
 //TODO: we could create a task to download and unpack the lmdb files automatically 
 //task copyModels(type: Copy) {

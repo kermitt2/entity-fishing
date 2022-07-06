@@ -2,7 +2,6 @@ package com.scienceminer.nerd.service;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-//import com.scienceminer.nerd.service.configuration.NerdServiceConfiguration;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
