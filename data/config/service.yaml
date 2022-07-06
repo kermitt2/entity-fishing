@@ -1,0 +1,37 @@
+# CORS parameters 
+#corsAllowedOrigins: "*"
+#corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
+#corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
+
+# beyond the following number of requests, a 503 status will be returned (service unavailable) until enough
+# requests are processed to go beyond the max
+maxAcceptedRequests: 2048
+
+server:
+  type: custom
+  applicationConnectors:
+  - type: http
+    port: 8090
+  adminConnectors:
+  - type: http
+    port: 8091
+  registerDefaultExceptionMappers: false
+  maxThreads: 128
+  maxQueuedRequests: 2048
+  acceptQueueSize: 2048
+
+logging:
+  level: INFO
+  appenders:
+  - type: console
+    threshold: INFO
+    timeZone: UTC
+  - type: file
+    currentLogFilename: logs/entity-fishing.log
+    threshold: INFO
+    archive: true
+    archivedLogFilenamePattern: logs/entity-fishing.log-%d.log
+    archivedFileCount: 5
+    timeZone: UTC
+
+timeZone: UTC

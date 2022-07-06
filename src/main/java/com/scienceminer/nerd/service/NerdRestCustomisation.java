@@ -9,6 +9,8 @@ import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Page;
 import org.apache.commons.lang3.StringUtils;
+import com.google.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +30,10 @@ import static org.apache.commons.lang3.StringUtils.trim;
 public class NerdRestCustomisation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestCustomisation.class);
+
+    @Inject
+    public NerdRestCustomisation() {
+    }
 
     /**
      * Return the list of existing customisations.
