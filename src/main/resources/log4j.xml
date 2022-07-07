@@ -8,7 +8,7 @@
     </appender>
 
     <appender name="FILE" class="org.apache.log4j.FileAppender">
-       <param name="file" value="entity-fishing.log"/>
+       <param name="file" value="logs/entity-fishing.log"/>
        <param name="immediateFlush" value="true"/>
        <param name="threshold" value="debug"/>
        <param name="append" value="true"/>
@@ -20,7 +20,7 @@
     </appender>
 
     <root>
-        <priority value="INFO"></priority>
+        <priority value="ERROR"></priority>
         <!--appender-ref ref="CONSOLE"/-->
         <appender-ref ref="FILE"/>
     </root>

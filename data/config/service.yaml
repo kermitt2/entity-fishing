@@ -21,14 +21,14 @@ server:
   acceptQueueSize: 2048
 
 logging:
-  level: INFO
+  level: ERROR
   appenders:
   - type: console
-    threshold: INFO
+    threshold: ERROR
     timeZone: UTC
   - type: file
     currentLogFilename: logs/entity-fishing.log
-    threshold: INFO
+    threshold: ERROR
     archive: true
     archivedLogFilenamePattern: logs/entity-fishing.log-%d.log
     archivedFileCount: 5
