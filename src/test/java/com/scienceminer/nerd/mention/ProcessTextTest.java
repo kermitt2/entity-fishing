@@ -4,6 +4,7 @@ import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.StringPos;
 import com.scienceminer.nerd.utilities.Utilities;
+import com.scienceminer.nerd.utilities.Stopwords;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.analyzers.GrobidAnalyzer;
@@ -708,6 +709,14 @@ public class ProcessTextTest {
         }*/
 
         assertThat(mentions.size(), is(103));
+    }
+
+    @Test
+    public void testFrenchStopWord() throws Exception {
+        String input = "l’avocat";
+        Stopwords stopwords = Stopwords.getInstance();
+        assertThat(stopwords.startsWithStopword(input, "fr"), is(true));
+        assertThat(stopwords.endsWithStopword(input, "fr"), is(false));
     }
 
 }

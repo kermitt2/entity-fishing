@@ -94,6 +94,8 @@ public class Stopwords {
         int ind = term.indexOf(" ");
         if (ind == -1)
             ind = term.indexOf("'");
+        if (ind == -1)
+            ind = term.indexOf("’");
         if (ind == -1) {
             if ( (stopwords != null) && (stopwords.contains(term)) )
                 return true;
