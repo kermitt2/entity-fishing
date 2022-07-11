@@ -43,6 +43,8 @@ public class EntityDescription {
 
 	private UpperKnowledgeBase upperKB;
 
+	private int MAX_WORDS_IN_DESCRIPTION = 500;
+
 	public EntityDescription() {
 		try {
 			upperKB = UpperKnowledgeBase.getInstance();
@@ -100,12 +102,22 @@ public class EntityDescription {
 						String text = null;
 						if (full) {
 							text = page.getFullWikiText();
+							if (text == null || text.length() == 0)
+								text = page.getFirstParagraphWikiText();
 						}
 						else {
 							text = page.getFirstParagraphWikiText();
+							if (text == null || text.length() == 0)
+								text = page.getFullWikiText();
 						}
-						text = normaliseDescription(text, lang);
-						if (text.length() > 10) {
+						if (text != null) {
+							text = normaliseDescription(text, lang);
+
+							// max N words in the descriptions 
+							text = truncate(text, MAX_WORDS_IN_DESCRIPTION);
+						}
+
+						if (text != null && text.length() > 10) {
 							writer.write(entityId + "\t" + text + "\n");
 							n++;
 						}
@@ -509,6 +521,23 @@ public class EntityDescription {
 			}
 		}
 		return regions ;
+	}
+
+	/**
+	 * Truncate a normalized text to a given max number of words.  
+	 **/
+	public String truncate(String text, int max) {
+		// text is normalized so that separator is space
+		int pos = 0;
+		int n = max;
+		while(n>0) {
+			pos = text.indexOf(" ", pos+1);
+			if (pos == -1) {
+				return text;
+			}
+			n--;
+		}
+		return text.substring(0, pos).trim();
 	}
 
 	public static void main(String args[]) throws Exception {
