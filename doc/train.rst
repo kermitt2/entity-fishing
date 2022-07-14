@@ -86,7 +86,7 @@ The following parameters are available:
 * **-in**: path to an entity description data file
 * **-v**: the path to the word embedding file in .vec format (e.g. one originally of word2vec, faster, lexvec, etc.), optionally quantized
 * **-out**: path to the result entity embeddings file (not quantized, this is to be done afterwards)
-* **-n**: number of threads to be used, default is 1 but it is advice to used as much as possible
+* **-n**: number of threads to be used, default is 1 but it is advice to used as many as possible
 * **-rho**: rho negative sampling parameters, if it's < 0 use even sampling, default is -1 (must be an integer)
 * **-max**: maximum words per entity, if < 0 use all the words, default is -1 (must be an integer)
 
