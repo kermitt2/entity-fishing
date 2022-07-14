@@ -26,9 +26,9 @@ public class CentroidEntityScorer extends EntityScorer {
             int n_words = word_counts.length;
             centroid_vec = new float[ word_size ];
             for(int i = 0; i < n_words; ++i) {
-                int word_count = word_counts[ i ];
+                int word_count = word_counts[i];
                 for(int j = 0; j < word_size; ++j) {
-                    centroid_vec[ j ] += word_count * word_vecs[ i * word_size + j ];
+                    centroid_vec[j] += word_count * word_vecs[i * word_size + j];
                 }
             }
 
@@ -42,7 +42,6 @@ public class CentroidEntityScorer extends EntityScorer {
                 return 0.0f;
             int word_size = centroid_vec.length;
             float score = Utilities.inner(word_size, entity_vec, 0, centroid_vec, 0) / norm;
-//System.out.println("centroid scorer: " + word_counts.length + " words context / " + score);
             return score;
         }
     }

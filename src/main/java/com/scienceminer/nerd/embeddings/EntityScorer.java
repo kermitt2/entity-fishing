@@ -43,10 +43,6 @@ public abstract class EntityScorer {
                     this.entity_vec[i] = entity_vec_tmp[i];
                 }
             }
-//if (this.entity_vec == null)
-//    System.out.println("warning: null vector for " + entity_id);
-//else
-//    System.out.println("getEntityEmbeddings for " + entity_id + " -> " + this.entity_vec.length);
             return compute_score();
         }
 

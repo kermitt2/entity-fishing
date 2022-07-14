@@ -103,7 +103,10 @@ public class Quantizer {
         br.close();
 
         br = new BufferedReader(new InputStreamReader(new FileInputStream(modelFile), "UTF-8"));
-        if(hasheader) br.readLine(); //skip the header
+        if (hasheader) {
+            //skip the header
+            br.readLine(); 
+        }
         while((line = br.readLine()) != null) {
             String[] parts = line.split("\\s+");
             bw.write(parts[0] + " ");
@@ -126,22 +129,41 @@ public class Quantizer {
      * @throws IOException
      * @return number of words and reconstruction error
      */
-    public ErrorHolder quantizeArray(String modelFile, int q) throws IOException {
+    public ErrorHolder quantizeArray(String modelFile, int q, boolean hasheader) throws IOException {
         final BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(modelFile ))));
         String line = null;
         double error = 0;
         int items = 0;
+        if (hasheader) {
+            //skip the header
+            br.readLine(); 
+        }
         while((line = br.readLine()) != null) {
+            if (line.indexOf("NaN") != -1) {
+                // in case we have NaN around, better skip the entry
+                continue;
+            }
             String[] parts = line.split("\\s+");
             double norm = 0;
             items++;
             double wordError = 0;
             double v[] = new double[parts.length];
             for(int i = 1; i < parts.length; i++) {
-                v[i] = new Double(parts[i]);
+                try {
+                    v[i] = new Double(parts[i]);
+//if (Double.isNaN(v[i])) {
+//    System.out.println("NaN value for:" + parts[i]);
+//}
+                } catch(Exception e) {
+                    System.out.println("failing to parse line: " + line);
+                    e.printStackTrace();
+                }
                 norm += v[i] * v[i];
             }
             norm = Math.sqrt(norm);
+//if (norm == 0.0) {
+//    System.out.println("warning norm=0");
+//}
             for(int i = 1; i < parts.length; i++) {
                 int qa = (int) ((int) (Math.abs(v[i]) * q) * Math.signum(v[i]));
                 double dqa = (qa + 0.5 * Math.signum(qa)) / q;
@@ -201,11 +223,11 @@ public class Quantizer {
         int bestQ = 0;
         int nWords = 0;
 
-        //if you want rice coding you could start from 1 to 128 and increment by *2 each time (and stop when the
+        // if you want rice coding you could start from 1 to 128 and increment by *2 each time (and stop when the
         // condition is met)
         while(high - low > 1) {
             bestQ = (high + low) / 2;
-            ErrorHolder err = quantizeArray(inputFile, bestQ);
+            ErrorHolder err = quantizeArray(inputFile, bestQ, hasheader);
             nWords = err.words;
             LOGGER.info("Binary search: q=" + bestQ + " err= " + err.error);
             if(err.error > targetError) {
@@ -214,7 +236,7 @@ public class Quantizer {
                 high = bestQ;
             }
         }
-        serializeW2VFormat(inputFile,outputFile,bestQ, nWords, hasheader);
+        serializeW2VFormat(inputFile, outputFile, bestQ, nWords, hasheader);
     }
 
     /**

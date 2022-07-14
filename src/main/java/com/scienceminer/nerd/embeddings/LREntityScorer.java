@@ -4,7 +4,7 @@ import com.scienceminer.nerd.utilities.Utilities;
 import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 
 /**
- * Compute similarity score baed on logistic regression
+ * Compute similarity score based on logistic regression
  * 
  * @author giuseppe ottaviano (original) with modification patrice lopez
  */

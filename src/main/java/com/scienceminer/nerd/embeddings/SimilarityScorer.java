@@ -97,10 +97,10 @@ public class SimilarityScorer {
 		CentroidEntityScorer scorer = centroidScorers.get(lang);
 		if (scorer != null) {
 			List<String> terms = toStringEmbeddings(tokens, lang);
-            //System.out.println("\n"+candidate.toString());
-            //System.out.println(terms.toString());
+//System.out.println("\ncandidate: "+candidate.toString());
+//System.out.println("local terms: " + terms.toString());
 			float score = scorer.score(candidate.getWikidataId(), terms);
-			//System.out.println("score: " + score);
+//System.out.println("score (centroid scorer): " + score);
 			if (score < 0.0F)
 				score = 0.0F;
 			return score;
