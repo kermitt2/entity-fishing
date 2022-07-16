@@ -43,7 +43,7 @@ public class EntityDescription {
 
 	private UpperKnowledgeBase upperKB;
 
-	private int MAX_WORDS_IN_DESCRIPTION = 500;
+	private int MAX_WORDS_IN_DESCRIPTION = 100;
 
 	public EntityDescription() {
 		try {
@@ -72,8 +72,8 @@ public class EntityDescription {
 		LowerKnowledgeBase wikipedia = null;
 		try {
 			wikipedia = upperKB.getWikipediaConf(lang);
-			if (full)
-				wikipedia.loadFullContentDB();
+			//if (full)
+			wikipedia.loadFullContentDB();
 		}
 		catch(Exception e) {
 			throw new NerdResourceException("Error instanciating the knowledge base. ", e);
@@ -549,7 +549,7 @@ public class EntityDescription {
             System.exit(-1);
         }
         EntityDescription entityDescription = new EntityDescription();
-        entityDescription.generateDescriptionSummaries(args[0], lang, true);
+        entityDescription.generateDescriptionSummaries(args[0], lang, false);
 
         //entityDescription.generateDescriptionMentionContexts(args[0], lang);
         //entityDescription.generateDescriptionGraphRelations(args[0], lang);
