@@ -257,7 +257,7 @@ task(quantize_word_embeddings, dependsOn: 'classes', type: JavaExec, group: 'emb
 task(generate_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
     main = 'com.scienceminer.nerd.embeddings.EntityEmbeddings'
     classpath = sourceSets.main.runtimeClasspath
-    args '-in', getArg('in', 'entity.description'), '-v', getArg('v', 'word.embeddings.quantized'), '-out', getArg('out', 'entity.embeddings.vec'), '-n', getArg('n', '10')
+    args '-in', getArg('in', 'entity.description'), '-v', getArg('v', 'word.embeddings.quantized'), '-out', getArg('out', 'entity.embeddings.vec'), '-n', getArg('n', '8')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 

@@ -45,15 +45,23 @@ import smile.data.parser.*;
 import smile.regression.*;
 import com.thoughtworks.xstream.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Class for sharing data structures and methods to be used by the machine learning models
  */
 public class NerdModel {
+	/**
+	 * The class Logger
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(NerdModel.class);
 
 	public enum FeatureType {
 		BASELINE, 		// only use conditional prob.
 		MILNE_WITTEN, 	// Milne and Witten features
 		MILNE_WITTEN_RELATEDNESS, // only Milne and Witten relatedness measure
+		MINIMAL, 		// minimal reasonable set of features (for selector only)
 		SIMPLE, 		// basic features in addition to Milne&Witten relatedness
 		EMBEDDINGS, 	// only entity embeddings similarity
 		NERD, 			// basic features with Milne&Witten and entity embeddings 
@@ -134,4 +142,14 @@ public class NerdModel {
         	return new Double(score);
         } 
     } 
+
+    public FeatureType getFeatureTypeFromString(String localFeaturesTypeString) {
+    	FeatureType localFeaturesType = null;
+    	try {
+			localFeaturesType = FeatureType.valueOf(localFeaturesTypeString);
+		} catch(Exception e) {
+			LOGGER.warn("invalid feature type string: " + localFeaturesTypeString, e);
+		}
+		return localFeaturesType;
+	}
 }

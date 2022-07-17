@@ -67,6 +67,12 @@ public class NerdConfig {
 	// Wikipedia page in a supported language
 	private boolean restrictConceptStatementsToWikipediaPages = true;
 
+	// the feature set to be used for the ranker model
+	private String rankerFeatures = null;
+
+	// the feature set to be used for the selector model
+	private String selectorFeatures = null;
+
 	public String getLangCode() {
 		return langCode;
 	}
@@ -177,5 +183,21 @@ public class NerdConfig {
 
 	public void setRestrictConceptStatementsToWikipediaPages(boolean restrict) {
 		this.restrictConceptStatementsToWikipediaPages = restrict;
+	}
+
+	public String getRankerFeatures() {
+		return this.rankerFeatures;
+	}
+
+	public void setRankerFeatures(String rankerFeatures) {
+		this.rankerFeatures = rankerFeatures;
+	}
+
+	public String getSelectorFeatures() {
+		return this.selectorFeatures;
+	}
+
+	public void setSelectorFeatures(String selectorFeatures) {
+		this.selectorFeatures = selectorFeatures;
 	}
 }
