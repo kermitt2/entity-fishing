@@ -71,11 +71,17 @@ public class NerdSelector extends NerdModel {
 		super();
 		this.wikipedia = wikipedia;
 		
-		NerdConfig conf = wikipedia.getConfig();
-
 		//model = MLModel.GRADIENT_TREE_BOOST;
 		model = MLModel.RANDOM_FOREST;
-		featureType = FeatureType.SIMPLE;
+
+		NerdConfig conf = wikipedia.getConfig();
+		String selectorFeaturesType = conf.getSelectorFeatures();
+		if (selectorFeaturesType == null || getFeatureTypeFromString(selectorFeaturesType) == null) {
+			// default feature type
+			this.featureType = FeatureType.SIMPLE;
+		} else {
+			this.featureType = getFeatureTypeFromString(selectorFeaturesType);
+		}
 		
 		GenericSelectionFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
@@ -89,6 +95,8 @@ public class NerdSelector extends NerdModel {
 			feature = new SimpleSelectionFeatureVector();
 		else if (featureType == FeatureType.BASELINE)
 			feature = new BaselineSelectionFeatureVector();
+		else if (featureType == FeatureType.MINIMAL)
+			feature = new MinimalSelectionFeatureVector();
 		else if (featureType == FeatureType.NERD)
 			feature = new NerdSelectionFeatureVector();
 		return feature;

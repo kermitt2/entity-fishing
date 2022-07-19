@@ -86,8 +86,15 @@ public class NerdRanker extends NerdModel {
 
 		model = MLModel.GRADIENT_TREE_BOOST;
 		//model = MLModel.RANDOM_FOREST;
-		featureType = FeatureType.NERD;
-		//featureType = FeatureType.EMBEDDINGS;
+
+		NerdConfig conf = wikipedia.getConfig();
+		String rankerFeaturesType = conf.getRankerFeatures();
+		if (rankerFeaturesType == null || getFeatureTypeFromString(rankerFeaturesType) == null) {
+			// default feature type
+			this.featureType = FeatureType.NERD;
+		} else {
+			this.featureType = getFeatureTypeFromString(rankerFeaturesType);
+		}
 
 		GenericRankerFeatureVector feature = getNewFeature();
 		arffParser.setResponseIndex(feature.getNumFeatures()-1);
