@@ -17,8 +17,8 @@ The following command will build the two models used in *entity-fishing*, the ``
 
 For other languages, replace the ending language code (``en``) by the desired one (``fr``, ``de``, ``it``, ``es``, ``ar``, ``zh``, ``ru`` and ``ja`` are supported), e.g.:
 ::
-	$ ./gradlew train_annotate -Plang=fr
-	$ ./gradlew train_annotate -Plang=de
+	$ ./gradlew train_wikipedia -Plang=fr
+	$ ./gradlew train_wikipedia -Plang=de
 
 Models will be saved under ``data/models``. ``ARFF`` training data files used to build the model are saved under ``data/wikipedia/training/``.
 
