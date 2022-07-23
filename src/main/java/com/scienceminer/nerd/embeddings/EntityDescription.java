@@ -354,6 +354,7 @@ public class EntityDescription {
         // 	  their numbers flattened, to prevent combinatorial explosions.
         //    They might be specific numbers, prices, etc.
         //    -> all numerical chars are actually all transformed to '0'
+        //    -> variant: all numerical chars are removed
     	// 2. All letters: case-flattened.
    	    // 3. Mixed letters and numbers: a product ID? Flatten case and leave
     	//    numbers alone.
@@ -372,7 +373,9 @@ public class EntityDescription {
 		text = text.replaceAll("\\p{P}", " ");
 
 		// flatten numerical chars
-		text = text.replaceAll("\\d", "0");
+		//text = text.replaceAll("\\d", "0");
+		// remove numerical chars
+		text = text.replaceAll("\\d", " ");
 
 		text = text.replaceAll("\\|", " ");
 
