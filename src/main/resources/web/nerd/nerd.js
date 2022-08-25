@@ -4,7 +4,7 @@
  */
 
 var nerd = (function ($) {
-    var supportedLanguages = ["en", "es", "it", "fr", "de", "ar", "zh", "jp", "ru", "pt", "fa"];
+    var supportedLanguages = ["en", "es", "it", "fr", "de", "ar", "zh", "ja", "ru", "pt", "fa"];
 
     // for components view
     var responseJson = null;
