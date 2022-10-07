@@ -62,7 +62,7 @@ If you are using *entity-fishing* and found it useful, we are happy to mention y
 
 # Current version
 
-*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.5`. 
+*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.5.0`. 
 
 This version supports English, French, German, Italian, Spanish, Arabic, Mandarin, Russian, Japanese, Portuguese and Farsi with an in-house Named Entity Recognizer available for English and French. For this version, the available knowledge base includes around 96 million entities from Wikidata - but you can create your own fresh knowledge base with the [GRISP](https://github.com/kermitt2/grisp) utility. 
 
