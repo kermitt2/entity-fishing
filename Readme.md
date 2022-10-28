@@ -66,7 +66,7 @@ If you are using *entity-fishing* and found it useful, we are happy to mention y
 
 This version supports English, French, German, Italian, Spanish, Arabic, Mandarin, Russian, Japanese, Portuguese and Farsi with an in-house Named Entity Recognizer available for English and French. For this version, the available knowledge base includes around 96 million entities from Wikidata - but you can create your own fresh knowledge base with the [GRISP](https://github.com/kermitt2/grisp) utility. 
 
-**Runtime**: version `0.5.0` 2022, on a local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD, 2015) for **English** (other languages are up to 50% faster - these runtimes do not include a 15s-30s initial server launch/start-up and are obtained with an empty cache and without LMDB pages pre-loaded in RAM memory).
+**Runtime**: version `0.0.5` 2022, on a local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD, 2015) for **English** (other languages are up to 50% faster - these runtimes do not include a 15s-30s initial server launch/start-up and are obtained with an empty cache and without LMDB pages pre-loaded in RAM memory).
 
 * 800 pubmed abstracts (172 787 tokens) processed in 129s with 1 client (1339 tokens/s) 
 
