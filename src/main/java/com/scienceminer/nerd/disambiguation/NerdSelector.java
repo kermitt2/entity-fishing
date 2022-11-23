@@ -11,6 +11,7 @@ import com.scienceminer.nerd.disambiguation.NerdCandidate;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 import com.scienceminer.nerd.disambiguation.NerdModel.PredictTask;
+import com.scienceminer.nerd.disambiguation.util.*;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lang.Language;
@@ -110,7 +111,8 @@ public class NerdSelector extends NerdModel {
 								boolean inContext,
 								boolean isNe,
 								double tf_idf, 
-								double dice) throws Exception {
+								double dice,
+								float embeddingsSimilarity) throws Exception {
 		if (forest == null) {
 			// load model
 			File modelFile = new File(MODEL_PATH_LONG+"-"+wikipedia.getConfig().getLangCode()+".model"); 
@@ -148,6 +150,7 @@ public class NerdSelector extends NerdModel {
 		feature.isNe = isNe;
 		feature.tf_idf = tf_idf;
 		feature.dice = dice;
+		feature.embeddings_centroid_similarity = embeddingsSimilarity;
 		double[] features = feature.toVector(attributes);
 		
 		//smile.math.Math.setSeed(7);
@@ -475,6 +478,7 @@ public class NerdSelector extends NerdModel {
 					feature.inContext = inContext;
 					feature.isNe = isNe;
 					feature.dice = dice;
+					feature.embeddings_centroid_similarity = embeddingsSimilarity;
 
 					double tf = Utilities.getOccCount(candidate.getLabel().getText(), contentString);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
@@ -511,7 +515,8 @@ public class NerdSelector extends NerdModel {
 					e.printStackTrace();
 				}
 			}
-			Collections.sort(cands);
+			//Collections.sort(cands);
+			Collections.sort(cands, new SortCandidatesBySelectionScore());
 		}
 
 		System.out.println("article contribution: " + nbInstance + " training instances");
@@ -625,7 +630,8 @@ public class NerdSelector extends NerdModel {
 					break;
 				}
 			} else if (cands.size() > 0) {
-				Collections.sort(cands);
+				//Collections.sort(cands);
+				Collections.sort(cands, new SortCandidatesBySelectionScore());
 				if (!producedDisamb.contains(cands.get(0).getWikipediaExternalRef()))
 					producedDisamb.add(cands.get(0).getWikipediaExternalRef());
 			}
@@ -633,7 +639,8 @@ public class NerdSelector extends NerdModel {
 		}
 		
 		if (full) {
-			Collections.sort(result);
+			//Collections.sort(result);
+			Collections.sort(result, new SortEntitiesByNerdScore());
 			result = pruningService.pruneOverlap(result, false);
 			for(NerdEntity entit : result) {
 				if (!producedDisamb.contains(entit.getWikipediaExternalRef()))

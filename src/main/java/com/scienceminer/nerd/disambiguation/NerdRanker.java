@@ -16,6 +16,7 @@ import com.scienceminer.nerd.evaluation.*;
 import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 import com.scienceminer.nerd.disambiguation.NerdModel.PredictTask;
+import com.scienceminer.nerd.disambiguation.util.*;
 
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.data.Entity;
@@ -131,12 +132,12 @@ public class NerdRanker extends NerdModel {
 			// special case of baseline, we just need the prior conditional prob
 			return commonness;
 		}
-		if (featureType == FeatureType.EMBEDDINGS) {
+		/*if (featureType == FeatureType.EMBEDDINGS) {
 			// special case of embeddings only, we just need the embeddings similarity score
 			return embeddingsSimilarity;
-		}
+		}*/
 		if (featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) {
-			// special case of embeddings only, we just need the embeddings similarity score
+			// special case of relatedness only, we just need the relatedness measure
 			return relatedness;
 		}
 
@@ -254,7 +255,7 @@ public class NerdRanker extends NerdModel {
 	public void trainModel() throws Exception {
 		// special cases, no need to train a model
 		if (featureType == FeatureType.BASELINE || 
-			featureType == FeatureType.EMBEDDINGS || 
+//			featureType == FeatureType.EMBEDDINGS || 
 			featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) 
 			return;
 
@@ -284,7 +285,7 @@ public class NerdRanker extends NerdModel {
 
 	public void train(ArticleTrainingSample articles) throws Exception {
 		if (featureType == FeatureType.BASELINE || 
-			featureType == FeatureType.EMBEDDINGS || 
+//			featureType == FeatureType.EMBEDDINGS || 
 			featureType == FeatureType.MILNE_WITTEN_RELATEDNESS) {
 			// no model need to be trained
 			return;
@@ -536,7 +537,8 @@ public class NerdRanker extends NerdModel {
 					e.printStackTrace();
 				}
 			}
-			Collections.sort(cands);
+			//Collections.sort(cands);
+			Collections.sort(cands, new SortCandidatesByNerdScore());
 		}
 
 		System.out.println("article contribution: " + nbInstance + " training instances");
@@ -866,7 +868,8 @@ System.out.println(docPath);
 					e.printStackTrace();
 				}
 			}
-			Collections.sort(cands);
+			//Collections.sort(cands);
+			Collections.sort(cands, new SortCandidatesByNerdScore());
 		}
 
 		System.out.println("article contribution: " + nbInstance + " training instances");

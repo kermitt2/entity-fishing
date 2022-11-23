@@ -2,13 +2,11 @@ package com.scienceminer.nerd.disambiguation;
 
 import java.util.*;
 
-import com.scienceminer.nerd.utilities.NerdConfig;
-import com.scienceminer.nerd.utilities.StringProcessor;
-import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.core.utilities.*;
 import org.grobid.core.data.*;
+
 import org.grobid.core.engines.EngineParsers;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.analyzers.GrobidAnalyzer;
@@ -22,7 +20,11 @@ import com.scienceminer.nerd.mention.*;
 import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
 import com.scienceminer.nerd.features.GenericRankerFeatureVector;
+import com.scienceminer.nerd.features.GenericSelectionFeatureVector;
 import com.scienceminer.nerd.utilities.Utilities;
+import com.scienceminer.nerd.disambiguation.util.*;
+import com.scienceminer.nerd.utilities.NerdConfig;
+import com.scienceminer.nerd.utilities.StringProcessor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,7 @@ import org.apache.commons.text.WordUtils;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  *
@@ -242,6 +245,12 @@ public class NerdEngine {
 			minSelectorScore = nerdQuery.getMinSelectorScore();
 		pruneWithSelector(candidates, lang, nerdQuery.getNbest(), shortTextVal, minSelectorScore, localContext, text);
 
+		// sort according to selection score
+		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
+			List<NerdCandidate> cands = entry.getValue();
+			Collections.sort(cands, new SortCandidatesBySelectionScore());
+		}*/
+
 		//}
 		/*for (Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
@@ -320,7 +329,7 @@ public class NerdEngine {
 				}
 			}
 		}
-		Collections.sort(result);
+		Collections.sort(result, new SortEntitiesBySelectionScore());
 
 		/*for (NerdEntity entity : result) {
 		System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
@@ -350,7 +359,7 @@ public class NerdEngine {
 
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang, double maxTermFrequency) {
-		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
+		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		if (wikipedia == null) {
@@ -533,7 +542,7 @@ public class NerdEngine {
 				}
 
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
-					Collections.sort(candidates);
+					Collections.sort(candidates, new SortCandidatesByNerdScore());
 					result.put(entity, candidates);
 				} /*else
 					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
@@ -547,7 +556,7 @@ public class NerdEngine {
 	}
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesMultiple(List<NerdEntity> entities, String lang) {
-		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
+		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
@@ -700,7 +709,7 @@ public class NerdEngine {
 				}
 
 				if (candidates.size() > 0 || entity.getType() != null) {
-					Collections.sort(candidates);
+					Collections.sort(candidates, new SortCandidatesByNerdScore());
 					// we just take the best candidates following the conf. MAX_SENSES
 					//int upperLimit = Math.min(candidates.size(), MAX_SENSES);
 					//candidates = candidates.subList(0, upperLimit);
@@ -733,7 +742,7 @@ public class NerdEngine {
 		if (entities == null)
 			return candidates;
 
-		Map<NerdEntity, List<NerdCandidate>> newCandidates = new TreeMap<>();
+		Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<>();
 		Map<String, List<NerdCandidate>> cacheSubSequences = new HashMap<>();
 		Map<String, Double> cacheLinkProbability = new HashMap<>();
 		List<String> failures = new ArrayList<>();
@@ -888,10 +897,10 @@ public class NerdEngine {
 				candidates.replace(entity, cands);
 		}
 
-		// final default sort candidates against priors (prob_c)
+		// final default sort candidates against default priors (prob_c)
 		for(Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
-			Collections.sort(cands);
+			Collections.sort(cands, new SortCandidatesByNerdScore());
 		}
 
 		return candidates;
@@ -979,6 +988,7 @@ public class NerdEngine {
 					// computed only if needed
 					if (feature.Add_embeddings_centroid_similarity) {
 						embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
+						candidate.setEmbeddingsSimilarity(embeddingsSimilarity);
 					}
 
 					if (ranker == null) {
@@ -997,9 +1007,9 @@ public class NerdEngine {
 					score = ranker.getProbability(commonness, related, quality,
 						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 
-					/*System.out.println("RANKER - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> commonness: " + commonness + 
+					System.out.println("RANKER - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> commonness: " + commonness + 
 						", related: " + related + ", quality: " + quality + 
-						", bestCaseContext: " + bestCaseContext + ", embeddingsSimilarity: " + embeddingsSimilarity + " = " + score);*/
+						", bestCaseContext: " + bestCaseContext + ", embeddingsSimilarity: " + embeddingsSimilarity + " = " + score);
 
 					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + score + "(ranker/nerd score) " +  " " + entity.toString());
 					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related + ", embeddingsSimilarity: " + embeddingsSimilarity);
@@ -1010,7 +1020,8 @@ public class NerdEngine {
 
 				candidate.setNerdScore(score);
 			}
-			Collections.sort(cands);
+			//Collections.sort(cands);
+			Collections.sort(cands, new SortCandidatesByNerdScore());
 		}
 
 		//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
@@ -1145,7 +1156,7 @@ public class NerdEngine {
 			}
 			candidate.setNerdScore(score);
 		}
-		Collections.sort(candidates);
+		Collections.sort(candidates, new SortCandidatesByNerdScore());
 	}
 
 	private List<String> buildLocalContexts(String rawTerm, String text) {
@@ -1647,6 +1658,13 @@ System.out.println("Merging...");
 				try {
 					double tf = Utilities.getOccCount(candidate.getLabel().getText(), text);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
+
+					GenericSelectionFeatureVector feature = selector.getNewFeature();
+					if (feature.Add_relatedness && candidate.getRelatednessScore() == 0.0) {
+						double related = relatedness.getRelatednessTo(candidate,context, lang);
+						candidate.setRelatednessScore(related);
+					}
+
 					double prob = selector.getProbability(candidate.getNerdScore(),
 						candidate.getLabel().getLinkProbability(),
 						candidate.getWikiSense().getPriorProbability(),
@@ -1655,14 +1673,17 @@ System.out.println("Merging...");
 						context.contains(candidate),
 						isNe,
 						tf*idf,
-						dice);
+						dice,
+						candidate.getEmbeddingsSimilarity());
 
-					/*System.out.println("SELECTOR - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> nerdScore: " + candidate.getNerdScore() + 
+					System.out.println("SELECTOR - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> nerdScore: " + candidate.getNerdScore() + 
 						", linkProbability: " + candidate.getLabel().getLinkProbability() + 
 						", priorProbability(): " + candidate.getWikiSense().getPriorProbability() + 
 						", size: " + words.size() + ", relatedness: " + candidate.getRelatednessScore() + 
 						", context: " + context.contains(candidate) + 
-						", isNe: " + isNe + ", tf*idf: " + tf*idf + ", dice: " + dice + " = " + prob);*/
+						", isNe: " + isNe + ", tf*idf: " + tf*idf + ", dice: " + dice +
+						", embeddingsSimilarity: " + candidate.getEmbeddingsSimilarity() +
+						" = " + prob);
 
 					candidate.setSelectionScore(prob);
 				} catch(Exception e) {
@@ -1706,9 +1727,10 @@ System.out.println("--");*/
 				newCandidates.add(0, topCandidate);
 			*/
 
-			if (newCandidates.size() > 0)
+			if (newCandidates.size() > 0) {
+				Collections.sort(newCandidates, new SortCandidatesBySelectionScore());
 				cands.replace(entity, newCandidates);
-			else {
+			} else {
 				if (entity.getType() == null)
 					toRemove.add(entity);
 				else {
@@ -2323,7 +2345,9 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 		nerdQuery.addEntities(newEntities);
 
-		Collections.sort(nerdQuery.getEntities());
+		//Collections.sort(nerdQuery.getEntities());
+		Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
+
 		if (nerdQuery.getNbest()) {
             nerdQuery.setEntities(this.pruningService.pruneOverlapNBest(nerdQuery.getEntities(), false));
         } else {

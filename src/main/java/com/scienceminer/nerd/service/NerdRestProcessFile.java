@@ -4,6 +4,7 @@ import com.scienceminer.nerd.disambiguation.DocumentContext;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.disambiguation.NerdEntity;
+import com.scienceminer.nerd.disambiguation.util.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Property;
 import com.scienceminer.nerd.main.data.SoftwareInfo;
@@ -443,7 +444,8 @@ public class NerdRestProcessFile {
 
         LOGGER.info("runtime: " + (end - start));
         if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
-            Collections.sort(nerdQuery.getEntities());
+            //Collections.sort(nerdQuery.getEntities());
+            Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
             LOGGER.debug(nerdQuery.getEntities().size() + " nerd entities in NerdQuery");
 //                LOGGER.debug(workingQuery.getEntities().size() + " nerd entities in workingQuery");
         }
@@ -625,7 +627,8 @@ public class NerdRestProcessFile {
                     }*/
 
                     // sort the entities
-                    Collections.sort(workingQuery.getEntities());
+                    //Collections.sort(workingQuery.getEntities());
+                    Collections.sort(workingQuery.getEntities(), new SortEntitiesBySelectionScore());
                     // disambiguate and solve entity mentions
                     //if (!workingQuery.getOnlyNER())
                     //{

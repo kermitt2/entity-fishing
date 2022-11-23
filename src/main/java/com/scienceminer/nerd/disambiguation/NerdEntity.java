@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  *
  */
-public class NerdEntity implements Comparable<NerdEntity> {
+public class NerdEntity {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdEntity.class);
 
 	// exact mention form of the entity, as appearing in the input
@@ -580,35 +580,37 @@ public class NerdEntity implements Comparable<NerdEntity> {
 
 	}
 
-	@Override
-	public int compareTo(NerdEntity theEntity) {
+	public int compareToOld(NerdEntity theEntity) {
 		// if we have offsets
 		int start = theEntity.getOffsetStart();
 		int end = theEntity.getOffsetEnd();
 		//if ( (start != -1) && (end != -1) ) {
-			Double score = new Double(theEntity.getNerdScore());
-			if ( (offsets.start == start) && (offsets.end == end) ) {
-				Double thisScore = new Double(nerdScore);
-				if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
+			
+		if ( (offsets.start == start) && (offsets.end == end) ) {
+			//Double score = new Double(theEntity.getNerdScore());
+			//Double thisScore = new Double(nerdScore);
+
+			Double score = new Double(theEntity.getSelectionScore());
+			Double thisScore = new Double(selectionScore);
+
+			if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
+				return thisScore.compareTo(score);
+			else {
+				thisScore = new Double(getProb_c());
+				score = new Double(theEntity.getProb_c());
+				if (thisScore != score)
 					return thisScore.compareTo(score);
-				else {
-					thisScore = new Double(getProb_c());
-					score = new Double(theEntity.getProb_c());
-					if (thisScore != score)
-						return thisScore.compareTo(score);
-					else 
-						return source.getName().compareTo(theEntity.getSource().getName());
-				} 
-			} else if (offsets.start != start) {
-				return offsets.start - start;
-			} else if (offsets.end != end) {
-				return offsets.end - end;
-			} else {
-				return 0;
-			}
-			/*else if (!rawName.equals(theEntity.getRawName())) {
-				return rawName.length() - theEntity.getRawName().length();
-			} */
+				else 
+					return source.getName().compareTo(theEntity.getSource().getName());
+			} 
+		} else if (offsets.start != start) {
+			return offsets.start - start;
+		} else if (offsets.end != end) {
+			return offsets.end - end;
+		} else {
+			return 0;
+		}
+
 		/*} else {
 			// we have coordinates
 			List<BoundingBox> bb = theEntity.getBoundingBoxes();

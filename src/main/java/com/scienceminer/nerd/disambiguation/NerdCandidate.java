@@ -23,9 +23,8 @@ import com.fasterxml.jackson.core.io.*;
  * This class represents a candidate for disambiguated entity, including conceptual and 
  * encyclopedic information, with all the information necessary for a disambiguation. 
  * 
- *
  */
-public class NerdCandidate implements Comparable<NerdCandidate> {
+public class NerdCandidate {
 
 	// entity associated to the present disambiguated entity candidate
 	private NerdEntity entity = null;
@@ -84,6 +83,8 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	// freebase types
 	private List<String> freebaseTypes = null; // full types
 	private List<String> freebaseHighTypes = null; // first level types, e.g. /location
+
+	private float embeddingsSimilarity = 0.0f;
 
 	// method used to produce the term candidate
 	public static final int UNKNOWN = 0;
@@ -396,6 +397,14 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		this.coReference = coReference;
 	}
 
+	public float getEmbeddingsSimilarity() {
+		return embeddingsSimilarity;
+	}
+
+	public void setEmbeddingsSimilarity(float similarity) {
+		this.embeddingsSimilarity = similarity;
+	}
+
 	//@Override
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
@@ -672,7 +681,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 	/**
 	 *  Comparable implementation. We sort against the nerdScore
 	 */
-	public int compareTo(NerdCandidate compareNerdCandidate) {
+	/*public int compareToOld(NerdCandidate compareNerdCandidate) {
 		
 		//descending order
 		int val = ((int)((compareNerdCandidate.getNerdScore() - this.nerdScore) * 1000));
@@ -698,7 +707,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		}
 
 		return val;
-	}
+	}*/
 
 	/**
 	 * Copy of a candidate, with deep copy of relevant instance variable

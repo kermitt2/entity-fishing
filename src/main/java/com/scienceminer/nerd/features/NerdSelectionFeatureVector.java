@@ -23,6 +23,7 @@ public class NerdSelectionFeatureVector extends GenericSelectionFeatureVector {
 		Add_tf_idf = true;
 		Add_dice = true;
 		//Add_embeddings_LR_similarity = true;
+		Add_embeddings_centroid_similarity = true;
 		target_numeric = true;
 		target_class = false;
 	}

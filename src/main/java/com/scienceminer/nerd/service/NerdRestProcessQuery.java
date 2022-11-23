@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.service;
 
 import com.scienceminer.nerd.disambiguation.*;
+import com.scienceminer.nerd.disambiguation.util.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Customisations;
 import com.scienceminer.nerd.main.Main;
@@ -168,7 +169,8 @@ public class NerdRestProcessQuery {
         }
 
         // sort the entities
-        Collections.sort(nerdQuery.getEntities());
+        //Collections.sort(nerdQuery.getEntities());
+        Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
 
         if (segmentation) 
             processQueryTextMentionWithSegmentation(nerdQuery, processText);
@@ -190,7 +192,8 @@ public class NerdRestProcessQuery {
 
         LOGGER.info("runtime: " + (end - start));
 
-        Collections.sort(nerdQuery.getEntities());
+        //Collections.sort(nerdQuery.getEntities());
+        Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
         LOGGER.debug(methodLogOut());
         return nerdQuery.toJSONClean(); 
     }
@@ -454,8 +457,10 @@ public class NerdRestProcessQuery {
         }
 
         // sort the entities
-        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities()))
-            Collections.sort(nerdQuery.getEntities());
+        if (CollectionUtils.isNotEmpty(nerdQuery.getEntities())) {
+            //Collections.sort(nerdQuery.getEntities());
+            Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
+        }
 
         if (nerdQuery.getEntities() != null) {
             // disambiguate and solve entity mentions
@@ -474,8 +479,10 @@ public class NerdRestProcessQuery {
         nerdQuery.setVersion(softwareInfo.getVersion());
         nerdQuery.setDate(java.time.Clock.systemUTC().instant().toString());
 
-        if (nerdQuery.getEntities() != null)
-            Collections.sort(nerdQuery.getEntities());
+        if (nerdQuery.getEntities() != null) {
+            //Collections.sort(nerdQuery.getEntities());
+            Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
+        }
         return nerdQuery.toJSONClean(null);
     }
 

@@ -1,6 +1,7 @@
 package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.disambiguation.util.*;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 
 import java.util.*;
@@ -295,6 +296,7 @@ public class PruningService {
      * 	We prioritize the longest term match from the KB : the term coming from the KB shorter than
      *  the longest match from the KB and which have not been merged, are lowered.
      */
+    /*
     public void impactOverlap(Map<NerdEntity, List<NerdCandidate>> candidates) {
         //List<Integer> toRemove = new ArrayList<Integer>();
 
@@ -312,7 +314,8 @@ public class PruningService {
                     candidate.setNerdScore(new_score);
 
             }
-            Collections.sort(cands);
+            Collections.sort(cands, new SortCandidatesByNerdScore());
         }
     }
+    */
 }
