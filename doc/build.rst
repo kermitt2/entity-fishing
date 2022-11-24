@@ -56,7 +56,7 @@ Then install the compiled indexed data:
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-en.zip (6.9 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fr.zip (2.3 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fr.zip (3.5 GB)
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-de.zip (2.6 GB)
 
