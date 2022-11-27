@@ -41,7 +41,7 @@ public class LowerKnowledgeBase {
 		try {
 			this.env.buildEnvironment(conf, false);
 		} catch(Exception e) {
-			LOGGER.error("Environment for Wikipedia cannot be built", e);
+			LOGGER.error("Environment for Wikipedia cannot be built");
 		} 
 	}
 
