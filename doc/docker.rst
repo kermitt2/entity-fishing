@@ -89,7 +89,7 @@ Access the service (with default port):
 
   - metrics and monitoring are available at http://localhost:8091/metrics?pretty=true (Dropwizard metrics) and Prometheus metrics (e.g. for Graphana monitoring) are available at http://localhost:8091/metrics/prometheus
 
-*entity-fishing* web services are then available as described in the [service documentation](https://grobid.readthedocs.io/en/latest/Grobid-service/).
+*entity-fishing* web services are then available as described in the `service documentation <https://grobid.readthedocs.io/en/latest/Grobid-service/>`_
 
 Building entity-fishing image
 *****************************
