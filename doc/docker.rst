@@ -13,13 +13,11 @@ Running entity-fishing with Docker
 
 An image for *entity-fishing* is available on Docker Hub:
 
-- Pull the image from Docker Hub (check the [latest version number](https://hub.docker.com/r/grobid/entity-fishing/tags)):
-
+- Pull the image from Docker Hub (check the `latest version number <https://hub.docker.com/r/grobid/entity-fishing/tags>`_:
 ::
     $ docker pull grobid/entity-fishing:${latest_entity_fishing_version}
 
-The current latest version should be:
-
+The current latest version should be (image size: 3GB):
 ::
     $ docker pull grobid/entity-fishing:0.0.5
 
@@ -52,7 +50,6 @@ Download and unzip somewhere on your host machine (where the docker container wi
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fa.zip (1.8 GB)
 
 - Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
-
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
@@ -60,7 +57,6 @@ Download and unzip somewhere on your host machine (where the docker container wi
       grobid/entity-fishing:0.0.5 
 
 More volumes can be mounted to support more languages. Be sure to have installed the data resources files on the host machine at the previous steps. For example, here for the 11 supported languages:
-
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
@@ -78,7 +74,6 @@ More volumes can be mounted to support more languages. Be sure to have installed
       grobid/entity-fishing:0.0.5 
 
 Similarly to run the container with a modified config file, mount the modified version at launch of the container: 
-
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
@@ -100,7 +95,6 @@ Building entity-fishing image
 *****************************
 
 For building a new image corresponding to the current entity-fishing master (e.g. ``0.0.6-SNAPSHOT``):
-
 ::
     $ docker build -t grobid/entity-fishing:0.0.6-SNAPSHOT --build-arg BUILD_VERSION=0.0.6-SNAPSHOT --file Dockerfile .
 
