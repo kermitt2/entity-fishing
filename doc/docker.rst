@@ -13,7 +13,7 @@ Running entity-fishing with Docker
 
 An image for *entity-fishing* is available on Docker Hub:
 
-- Pull the image from Docker Hub (check the `latest version number <https://hub.docker.com/r/grobid/entity-fishing/tags>`_:
+Pull the image from Docker Hub (check the `latest version number <https://hub.docker.com/r/grobid/entity-fishing/tags>`_:
 ::
     $ docker pull grobid/entity-fishing:${latest_entity_fishing_version}
 
@@ -21,7 +21,7 @@ The current latest version should be (image size: 3GB):
 ::
     $ docker pull grobid/entity-fishing:0.0.5
 
-- Prepare the knowledge data volumes on your host machine: *entity-fishing* uses LMDB to store compiled Wikidata and Wikipedia resources for every supported languages. Despite compression and indexing, these resources are pretty big, because they cover most of Wikidata and language-specific Wikipedia content. 
+Prepare the knowledge data volumes on your host machine: *entity-fishing* uses LMDB to store compiled Wikidata and Wikipedia resources for every supported languages. Despite compression and indexing, these resources are pretty big, because they cover most of Wikidata and language-specific Wikipedia content. 
 
 Download and unzip somewhere on your host machine (where the docker container will run) the following data resources:
 
@@ -49,7 +49,7 @@ Download and unzip somewhere on your host machine (where the docker container wi
 
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fa.zip (1.8 GB)
 
-- Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
+Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
