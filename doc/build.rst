@@ -6,7 +6,10 @@ Install, build, run, and monitor
 Install, build, and run
 ***********************
 
-*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64. Mac OS environments should work fine, but it is *unofficially* supported. Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
+*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64. 
+
+Mac OS environments should work fine, but it is *officially* not supported. 
+Please use a Linux-64 environment for any production works. Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
 
 Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
 
@@ -77,7 +80,7 @@ Then install the compiled indexed data:
         - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fa.zip (1.8 GB)
 
 
-MacOS is not officially supported and should not be used for production. For convenience, we still make available the MacOS data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018. Although outdated and Arabic not available, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. However, we strongly recommend to use the Linux version for any serious works.
+MacOS is officially not supported and should not be used for production. For convenience, we still make available the MacOS data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018 (Intel architecture). Although outdated and many languages not available, they are still compatible with the *entity-fishing* version ``0.0.4`` and ``0.0.5`` and could be used for test/development. However, we strongly recommend to use the Linux version for any serious works.
 
     **MacOS**
 

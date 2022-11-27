@@ -7,10 +7,10 @@
 
 *entity-fishing* performs the following tasks for 11 different languages:
 
-* entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
+* general entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
 ![entity-fishing](doc/images/screen11.png)
 
-* entity recognition and disambiguation against Wikidata at document level, in particular for a PDF with layout positioning and structure-aware annotations,
+* general entity recognition and disambiguation against Wikidata at document level, in particular for a PDF with layout positioning and structure-aware annotations,
 ![entity-fishing](doc/images/screen10.png)
 
 * search query disambiguation (the _short text_ mode) - below disambiguation of the search query "concrete pump sensor" in the service test console,
@@ -28,6 +28,8 @@
 
 The documentation of *entity-fishing* is available [here](http://nerd.readthedocs.io).
 
+*entity-fishing* uses a query DSL (entity disambiguation specific query language) documented [here](https://nerd.readthedocs.io/en/latest/restAPI.html).
+
 # Demo
 
 For testing purposes, a public entity-fishing demo server (current version) is available at the following address: [https://cloud.science-miner.com/nerd](https://cloud.science-miner.com/nerd)
@@ -40,15 +42,17 @@ _Warning_: Some quota and query limitation apply to the demo server! Please be c
 
 ![entity-fishing](doc/images/scores.png)
 
-Evaluations above correspond to the "overall unnormalized accuracy" scenario in [BLINK](https://github.com/facebookresearch/BLINK#benchmarking-blink). entity-fishing performs at 0.765 F-score, as compared to 0.8027 for BLINK, a fine-tuned BERT architectures. *entity-fishing* surpasses BLINK for the dataset AQUAINT, 0.891 vs. 0.8588, and MSNBC, 0.867 vs. 0.8509, despite being considerably faster and lighter than BLINK (see below).
+Evaluations above correspond to the "overall unnormalized accuracy" scenario in [BLINK](https://github.com/facebookresearch/BLINK#benchmarking-blink) and are limited to Named Entities. entity-fishing performs at 0.765 F-score, as compared to 0.8027 for BLINK, a fine-tuned BERT architectures. *entity-fishing* surpasses BLINK for the dataset AQUAINT, 0.891 vs. 0.8588, and MSNBC, 0.867 vs. 0.8509, despite being considerably faster and lighter than BLINK (see below).
 
 See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluation.html) and [Presentation of entity-fishing at WikiDataCon 2017](https://grobid.s3.amazonaws.com/presentations/29-10-2017.pdf) for more details. 
 
-*entity-fishing* has been designed to be particularly fast for a full scale Wikidata-based entity disambiguation tool. On a single server, depending on the concurrency, it is possible to process from 1.000-1.500 tokens per seconds with concurrency 1 to 5.000 tokens per second for instance with 6 concurrent requests in English (and up to 2 times faster for other languages). 
+*entity-fishing* has been designed to be particularly fast for a full scale Wikidata-based entity disambiguation tool (in particular not limited to Named Entities). On a single server, depending on the concurrency, it is possible to process from 1.000-1.500 tokens per seconds with concurrency 1 to 5.000 tokens per second for instance with 6 concurrent requests in English (and up to 2 times faster for other languages). 
 
 # Some use cases
 
 Some example of *entity-fishing* usages:
+
+* A spaCy wrapper for entity-fishing is available since 2022, see [here](https://spacy.io/universe/project/spacyfishing) and project [repo](https://github.com/Lucaterre/spacyfishing), thanks to Lucas Terriel. Note that the wrapper is however limited to Named Entities recognized by NER spaCy models, while *entity-fishing* has been designed to cover wikidata entities based on all Wikipedia entries, anchors and redirections. 
 
 * Tanti Kristanti from [Inria Paris](https://www.inria.fr) used off the shelf version of *entity-fishing* in the [CLEF HIPE 2020 competition shared task](http://ceur-ws.org/Vol-2696/paper_266.pdf), ranking first at the Entity Linking task for English and second best for French, in F1-score.
 
@@ -56,7 +60,7 @@ Some example of *entity-fishing* usages:
 
 * [SEALK](https://sealk.co), which is commercializing a M&A industry recommendation system, scaled *entity-fishing* to more than 1 million fulltext news documents in 2020. 
 
-* *entity-fishing* has been deployed in the DARIAH-EU and Huma-Num infrastructure in the context of the [OPERAS HIRMEOS EU project](https://www.hirmeos.eu) in 2018.
+* In 2018, *entity-fishing* has been deployed in the DARIAH-EU and Huma-Num infrastructure in the context of the [OPERAS HIRMEOS EU project](https://www.hirmeos.eu).
 
 If you are using *entity-fishing* and found it useful, we are happy to mention you in this section ! 
 
@@ -103,4 +107,6 @@ If you contribute to this project, you agree to share your contribution followin
 
 Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
 
-*entity-fishing* has been created, developed and is maintained by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/) (since 2015, first Open Source public version in 2016), with contributions of [Inria](http://inria.fr) Paris (2017-2018) and support from [Kairntech](https://kairntech.com) (2022) under a [RAPID](https://www.defense.gouv.fr/aid/deposez-votre-projet/rapid-regime-dappui-a-linnovation-duale) grant. 
+*entity-fishing* has been created, developed and is maintained by [SCIENCE-MINER](http://science-miner.com/entity-disambiguation/). The development started in 2015, with the first Open Source public version available in 2016.
+
+The project has received support from [Kairntech](https://kairntech.com) (2022) under a [RAPID](https://www.defense.gouv.fr/aid/deposez-votre-projet/rapid-regime-dappui-a-linnovation-duale) grant and contributions from [Inria](http://inria.fr) Paris (2017-2018). 
