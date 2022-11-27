@@ -83,9 +83,9 @@ Similarly to run the container with a modified config file, mount the modified v
 
 Access the service (with default port):
 
-  - web demo/console: open the browser at the address `http://localhost:8090`
+  - web demo/console: open the browser at the address http://localhost:8090
 
-  - the health check will be accessible at the address `http://localhost:8091`
+  - the health check will be accessible at the address http://localhost:8091
 
   - metrics and monitoring are available at http://localhost:8091/metrics?pretty=true (Dropwizard metrics) and Prometheus metrics (e.g. for Graphana monitoring) are available at http://localhost:8091/metrics/prometheus
 
