@@ -53,7 +53,7 @@ See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluat
 
 Some example of *entity-fishing* usages:
 
-* A spaCy wrapper for entity-fishing is available since 2022, see [here](https://spacy.io/universe/project/spacyfishing) and project [repo](https://github.com/Lucaterre/spacyfishing), thanks to Lucas Terriel. Note that the wrapper is however limited to Named Entities recognized by NER spaCy models, while *entity-fishing* has been designed to cover wikidata entities based on all Wikipedia entries, anchors and redirections. 
+* A [spaCy wrapper](https://spacy.io/universe/project/spacyfishing) for entity-fishing is available since 2022, see the [project repo](https://github.com/Lucaterre/spacyfishing), thanks to Lucas Terriel. Note that the wrapper is however limited to Named Entities recognized by NER spaCy models, while *entity-fishing* has been designed to cover general wikidata entities based on all Wikipedia entries, anchors and redirections. 
 
 * Tanti Kristanti from [Inria Paris](https://www.inria.fr) used off the shelf version of *entity-fishing* in the [CLEF HIPE 2020 competition shared task](http://ceur-ws.org/Vol-2696/paper_266.pdf), ranking first at the Entity Linking task for English and second best for French, in F1-score.
 
