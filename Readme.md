@@ -2,6 +2,7 @@
 [![Documentation Status](https://readthedocs.org/projects/nerd/badge/?version=latest)](https://readthedocs.org/projects/nerd/?badge=latest)
 [![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/kermitt2/entity-fishing/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/kermitt2/entity-fishing)
 [![Demo cloud.science-miner.com/nerd](https://img.shields.io/website-up-down-green-red/https/cloud.science-miner.com/nerd.svg)](http://cloud.science-miner.com/nerd)
+[![Docker Hub](https://img.shields.io/docker/pulls/grobid/entity-fishing.svg)](https://hub.docker.com/r/grobid/entity-fishing/ "Docker Pulls")
 
 # entity-fishing
 
