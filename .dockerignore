@@ -20,6 +20,7 @@ data/corpus/*
 data/species/*
 data/evaluation/*
 data/wikipedia/*
+!data/wikipedia/mapping.txt
 logs
 .settings
 doc
