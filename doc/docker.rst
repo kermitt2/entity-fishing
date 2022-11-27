@@ -17,7 +17,7 @@ Pull the image from Docker Hub (check the `latest version number <https://hub.do
 ::
     $ docker pull grobid/entity-fishing:${latest_entity_fishing_version}
 
-The current latest version should be (image size: 3GB):
+The current latest version should be (image size: 1.6GB):
 ::
     $ docker pull grobid/entity-fishing:0.0.5
 
