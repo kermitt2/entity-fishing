@@ -550,7 +550,7 @@ public class NerdRanker extends NerdModel {
 		String corpus = ((CorpusArticle)article).getCorpus();
 		File docFile = new File(docPath);
 		String lang = wikipedia.getConfig().getLangCode();
-System.out.println(docPath);
+//System.out.println(docPath);
 		if (!docFile.exists()) {
 			System.out.println("File invalid: " + docPath);
 			return arffBuilder;

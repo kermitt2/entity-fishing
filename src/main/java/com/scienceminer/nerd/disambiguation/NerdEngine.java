@@ -1007,9 +1007,9 @@ public class NerdEngine {
 					score = ranker.getProbability(commonness, related, quality,
 						bestCaseContext, embeddingsSimilarity, wikidataId, wikidataP31Id);
 
-					System.out.println("RANKER - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> commonness: " + commonness + 
+					/*System.out.println("RANKER - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> commonness: " + commonness + 
 						", related: " + related + ", quality: " + quality + 
-						", bestCaseContext: " + bestCaseContext + ", embeddingsSimilarity: " + embeddingsSimilarity + " = " + score);
+						", bestCaseContext: " + bestCaseContext + ", embeddingsSimilarity: " + embeddingsSimilarity + " = " + score);*/
 
 					//System.out.println(entity.getRawName() + " -> " + candidate.getWikiSense().getTitle() + "(candidate) " + score + "(ranker/nerd score) " +  " " + entity.toString());
 					//System.out.println("\t\t" + "commonness: " + commonness + ", relatedness: " + related + ", embeddingsSimilarity: " + embeddingsSimilarity);
@@ -1676,14 +1676,14 @@ System.out.println("Merging...");
 						dice,
 						candidate.getEmbeddingsSimilarity());
 
-					System.out.println("SELECTOR - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> nerdScore: " + candidate.getNerdScore() + 
+					/*System.out.println("SELECTOR - " + candidate.getWikidataId() + " = " + entity.getRawName() + " -> nerdScore: " + candidate.getNerdScore() + 
 						", linkProbability: " + candidate.getLabel().getLinkProbability() + 
 						", priorProbability(): " + candidate.getWikiSense().getPriorProbability() + 
 						", size: " + words.size() + ", relatedness: " + candidate.getRelatednessScore() + 
 						", context: " + context.contains(candidate) + 
 						", isNe: " + isNe + ", tf*idf: " + tf*idf + ", dice: " + dice +
 						", embeddingsSimilarity: " + candidate.getEmbeddingsSimilarity() +
-						" = " + prob);
+						" = " + prob);*/
 
 					candidate.setSelectionScore(prob);
 				} catch(Exception e) {
@@ -2269,10 +2269,10 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 		for(BibDataSet bds : resCitations) {
 			BiblioItem biblio = bds.getResBib();
-			System.out.println(biblio.getDOI());
+			/*System.out.println(biblio.getDOI());
 			if (biblio.getDOI() != null) {
 				System.out.println(UpperKnowledgeBase.getInstance().getEntityIdPerDoi(biblio.getDOI()));
-			}
+			}*/
 		}
 		return results;
 	}

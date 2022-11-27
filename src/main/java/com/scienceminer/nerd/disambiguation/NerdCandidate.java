@@ -536,7 +536,7 @@ public class NerdCandidate {
 			}
 			else {
 				// pruning pass
-				System.out.println("remove " + terms.get(reduced).toString());
+				//System.out.println("remove " + terms.get(reduced).toString());
 				terms.remove(reduced);								
 			}
 

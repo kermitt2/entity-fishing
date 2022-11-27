@@ -314,7 +314,7 @@ public class Relatedness {
 				context.add(bestArticle);
 			}
 			catch (Exception e) {
-				System.out.println("Error computing senses for " + candidate.toString());
+				//System.out.println("Error computing senses for " + candidate.toString());
 				e.printStackTrace();
 			}
 		}

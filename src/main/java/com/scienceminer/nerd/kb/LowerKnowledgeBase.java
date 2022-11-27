@@ -41,7 +41,7 @@ public class LowerKnowledgeBase {
 		try {
 			this.env.buildEnvironment(conf, false);
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Environment for Wikipedia cannot be built", e);
 		} 
 	}
 
@@ -69,7 +69,7 @@ public class LowerKnowledgeBase {
 			else 
 				LOGGER.error("Environment for Wikipedia full content article DB is null");
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Environment for Wikipedia full content cannot be built", e);
 		} 
 	}
 
