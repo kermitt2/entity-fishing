@@ -44,9 +44,7 @@ RUN ./gradlew clean assemble --no-daemon  --info --stacktrace
 RUN chmod -R 755 /opt/grobid/grobid-home/pdfalto
 
 # install grobid-ner
-
 RUN git clone https://github.com/kermitt2/grobid-ner.git
-
 WORKDIR /opt/grobid/grobid-ner
 RUN ./gradlew copyModels
 RUN ./gradlew clean install --no-daemon  --info --stacktrace
@@ -91,12 +89,11 @@ ADD lib/com /root/.m2/repository/com
 ADD lib/fr /root/.m2/repository/fr
 ADD lib/org /root/.m2/repository/or
 
-RUN chmod -R 755 /opt/entity-fishing/gradlew
-
 # trigger gradle wrapper install
+RUN chmod -R 755 /opt/entity-fishing/gradlew
 RUN ./gradlew --no-daemon processResources classes dependencies -x compileJava
 
-# Simulate gradlew in WORKDIR to get possible still missing prerequisites dependency files
+# More hack: Simulate gradlew in WORKDIR to get possible still missing prerequisites dependency files
 # Add timeout + exit0 to prevent infinite interactive mode
 RUN timeout 120s ./gradlew --no-daemon run -x compileJava || true
 

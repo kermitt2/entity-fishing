@@ -39,6 +39,8 @@ The query DSL and Web services are documented [here](https://nerd.readthedocs.io
 
 _Warning_: Some quota and query limitation apply to the demo server! Please be courteous and do not overload the demo server. 
 
+A [docker image](https://nerd.readthedocs.io/en/latest/docker.html) is available to help you deploying your own server. 
+
 # Benchmarks
 
 ![entity-fishing](doc/images/scores.png)
