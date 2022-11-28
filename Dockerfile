@@ -112,3 +112,5 @@ LABEL \
     org.label-schema.description="Image for entity-fishing container" \
     org.label-schema.url="https://github.com/kermitt2/entity-fishing" \
     org.label-schema.version=${BUILD_VERSION}
+
+# Thanks to Guillaume Karcher (guillaume.karcher@kairntech.com) for his help writing this dockerfile.
