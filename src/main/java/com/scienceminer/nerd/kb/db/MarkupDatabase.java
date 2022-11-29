@@ -10,6 +10,7 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.input.CountingInputStream;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.hadoop.record.CsvRecordInput;
 import org.fusesource.lmdbjni.BufferCursor;
 import org.fusesource.lmdbjni.Transaction;
@@ -106,8 +107,8 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 		if (isLoaded && !overwrite)
 			return;
 		if (dataFile == null)
-			throw new NerdResourceException("Markup file not found: " + dataFile.getPath());
-		System.out.println("Loading " + getName() + " database...");
+			throw new NerdResourceException("Markup file is null");
+		System.out.println("Loading " + getName() + " database from " + dataFile.getAbsolutePath() + " ... ");
 
 		Integer currId = null;
 		String currMarkup = null;
@@ -176,12 +177,16 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 								tx = environment.createWriteTransaction();
 								//System.out.println(totalAdded + " / " + currId);
 							}
+
+							// in this extraction, special XML charcaters are still XML encoded
+							currMarkup = StringEscapeUtils.unescapeXml(currMarkup);
+
 							if (full && isArticle) {
 								// we store the complete text if we have an article
 								currMarkup = MediaWikiParser.getInstance().formatAllWikiText(currMarkup, 
 									env.getConfiguration().getLangCode());
 								// we don't consider articles when too short or too long
-								if ( (currMarkup != null) && ((currMarkup.length() < 500) || (currMarkup.length() > 50000)) ) {
+								if ( (currMarkup != null) && ((currMarkup.length() < 500) || (currMarkup.length() > 100000)) ) {
 									currMarkup = null;
 								}
 								

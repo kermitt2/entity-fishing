@@ -80,7 +80,7 @@ public class WikipediaTrainer {
 
 		ArticleTrainingSampleCriterias criteriaTraining = new ArticleTrainingSampleCriterias();
 		criteriaTraining.setMinOutLinks(50);
-		criteriaTraining.setMinInLinks(20);
+		criteriaTraining.setMinInLinks(50);
 		criteriaTraining.setMinWordCount(100);
 		criteriaTraining.setMaxWordCount(1000);
 

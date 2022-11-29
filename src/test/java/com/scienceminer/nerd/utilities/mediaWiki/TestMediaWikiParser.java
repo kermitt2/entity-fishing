@@ -2,6 +2,7 @@ package com.scienceminer.nerd.utilities.mediaWiki;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -46,6 +47,7 @@ public class TestMediaWikiParser {
     public void testWikiMedia2PureTextFrBis() throws Exception {
         InputStream is = this.getClass().getResourceAsStream("japan.fr.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextOnly(input, "fr");
         assertThat(result, startsWith("La culture japonaise a subi un apport considérable des cultures chinoise et coréenne"));
         assertThat(result, not(containsString("[[")));
@@ -56,6 +58,7 @@ public class TestMediaWikiParser {
     public void testWikiMedia2PureTextDe() throws Exception {
         InputStream is = this.getClass().getResourceAsStream("astana.de.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextOnly(input, "de");
         assertThat(result, startsWith("Astana [], deutsch auch [] (kasachisch und russisch ; ist auch das kasachische Wort für Hauptstadt) ist seit 1997 die Hauptstadt Kasachstan"));
         //assertThat(result, startsWith("Astana [], deutsch auch [] (kasachisch und russisch ; ist auch das kasachische Wort für Hauptstadt) ist seit 1997 die Hauptstadt Kasachstan"));
@@ -78,6 +81,7 @@ public class TestMediaWikiParser {
 
         InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextOnly(input, "en");
 
         assertThat(result, startsWith("1. Events"));
@@ -93,6 +97,7 @@ public class TestMediaWikiParser {
 
         InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksOnly(input, "en");
 
         assertThat(result, startsWith("1. Events"));
@@ -108,6 +113,7 @@ public class TestMediaWikiParser {
 
         InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input, "en");
 
         assertThat(result, containsString("[["));
@@ -119,21 +125,55 @@ public class TestMediaWikiParser {
         assertThat(result, endsWith("5. External links"));
     }
 
-    @Test
+    //@Test
     public void testWikiMedia2TextWithInternalLinksEmphasisOnly_cleopatra() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("Cleopatra_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input, "en");
 
         assertThat(result, containsString("[["));
-        assertThat(StringUtils.countMatches(result, "[["), is(183));
+        assertThat(StringUtils.countMatches(result, "[["), is(177));
         assertThat(result, containsString("]]"));
         assertThat(result, containsString("'''"));
 
         assertThat(result, startsWith("'''Cleopatra VII Philopator'''"));
-        //TODO: this should be fixed
-        assertThat(result, endsWith("at </small>"));
+        assertThat(result, endsWith("at"));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinksEmphasisOnly_Anarchism() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("Anarchism.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input, "en");
+
+        assertThat(result, containsString("[["));
+        assertThat(StringUtils.countMatches(result, "[["), is(370));
+        assertThat(result, containsString("]]"));
+        assertThat(result, containsString("'''"));
+
+        assertThat(result, startsWith("'''Anarchism''' is a"));
+        assertThat(result, endsWith("of anarchism."));
+    }
+
+    @Test
+    public void testWikiMedia2TextWithInternalLinksEmphasisOnly_Autism() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("Autism.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String result = mediaWikiParser.toTextWithInternalLinksEmphasisOnly(input, "en");
+
+        assertThat(result, containsString("[["));
+        assertThat(StringUtils.countMatches(result, "[["), is(34));
+        assertThat(result, containsString("]]"));
+        assertThat(result, containsString("'''"));
+
+        assertThat(result, startsWith("'''Autism''' is a"));
+        assertThat(result, endsWith("their fields."));
     }
 
     @Test
@@ -141,6 +181,7 @@ public class TestMediaWikiParser {
 
         InputStream is = this.getClass().getResourceAsStream("September2_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "en");
 
         assertThat(result, containsString("[["));
@@ -157,16 +198,16 @@ public class TestMediaWikiParser {
 
         InputStream is = this.getClass().getResourceAsStream("Cleopatra_articlePage.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "en");
 
         assertThat(result, containsString("[["));
-        assertThat(StringUtils.countMatches(result, "[["), is(183));
+        assertThat(StringUtils.countMatches(result, "[["), is(172));
         assertThat(result, containsString("]]"));
         assertThat(result, not(containsString("'''")));
 
         assertThat(result, startsWith("Cleopatra VII Philopator"));
-        //TODO: this should be fixed
-        assertThat(result, endsWith("at </small>"));
+        assertThat(result, endsWith("at"));
     }
 
     @Test
@@ -174,6 +215,7 @@ public class TestMediaWikiParser {
 
         InputStream is = this.getClass().getResourceAsStream("acropolis.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "en");
 
         assertThat(result, containsString("[["));
@@ -187,6 +229,7 @@ public class TestMediaWikiParser {
     public void testWikiMediaTextWithInternalLinksArticlesOnlyZh() throws Exception {
         InputStream is = this.getClass().getResourceAsStream("article_zh.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "zh");
 
         assertThat(result, containsString("[["));
@@ -200,6 +243,7 @@ public class TestMediaWikiParser {
     public void testWikiMediaTextWithInternalLinksArticlesOnlyPt() throws Exception {
         InputStream is = this.getClass().getResourceAsStream("article_pt.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "pt");
 
         assertThat(result, containsString("[["));
@@ -213,15 +257,23 @@ public class TestMediaWikiParser {
     public void testWikiMediaTextWithDatesFr() throws Exception {
         InputStream is = this.getClass().getResourceAsStream("date_fr.txt");
         String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "fr");
 
         assertThat(result, containsString("[["));
         assertThat(result, containsString("]]"));
         assertThat(result, not(containsString("'''")));
-
         assertThat(result.trim(), startsWith("Emmanuel Macron"));
+        assertThat(result.indexOf("21 décembre 1977"), not(-1));
+    }
 
-        System.out.println(result);
+    @Test
+    public void testWikiMediaTextWithoutNonInlineTemplates() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("test_templates_non_inline.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String inputSlim = mediaWikiParser.removeNonInlineTemplates(input);
+        assertThat(inputSlim.trim(), startsWith("'''Anarchism'''"));
     }
 
 }

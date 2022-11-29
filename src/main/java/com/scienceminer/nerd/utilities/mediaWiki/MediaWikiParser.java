@@ -118,12 +118,10 @@ public class MediaWikiParser {
         String result = "";
 
         // get a compiler for wiki pages
-        //WtEngineImpl engine = new WtEngineImpl(config);        
         WtEngineImpl engine = engines.get(lang);
 
         try {
-            // Retrieve a page 
-            // PL: no clue what is this page title thing ?? not even documented
+            // Retrieve a fake page (I didn't find how to avoid this) 
             PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
             PageId pageId = new PageId(pageTitle, -1);
 
@@ -146,12 +144,10 @@ public class MediaWikiParser {
         String result = "";
 
         // Instantiate a compiler for wiki pages
-        //WtEngineImpl engine = new WtEngineImpl(config);        
         WtEngineImpl engine = engines.get(lang);
 
         try {
-            // Retrieve a page 
-            // PL: no clue what is this??
+            // Retrieve a fake page (I didn't find how to avoid this) 
             PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
             PageId pageId = new PageId(pageTitle, -1);
 
@@ -175,12 +171,10 @@ public class MediaWikiParser {
         String result = "";
 
         // Instantiate a compiler for wiki pages
-        //WtEngineImpl engine = new WtEngineImpl(config);        
         WtEngineImpl engine = engines.get(lang);
 
         try {
-            // Retrieve a page 
-            // PL: no clue what is this??
+            // Retrieve a fake page (I didn't find how to avoid this) 
             PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
             PageId pageId = new PageId(pageTitle, -1);
 
@@ -206,12 +200,10 @@ public class MediaWikiParser {
         String result = "";
 
         // Instantiate a compiler for wiki pages
-        //WtEngineImpl engine = new WtEngineImpl(config);        
         WtEngineImpl engine = engines.get(lang);
 
         try {
-            // Retrieve a page 
-            // PL: no clue what is this??
+            // Retrieve a fake page (I didn't find how to avoid this) 
             PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
             PageId pageId = new PageId(pageTitle, -1);
 
@@ -235,14 +227,14 @@ public class MediaWikiParser {
     public String toTextWithInternalLinksEmphasisOnly(String wikitext, String lang) {
         String result = "";
         // Instantiate a compiler for wiki pages
-        //WtEngineImpl engine = new WtEngineImpl(config);
-        WtEngineImpl engine = engines.get(lang);    
-
+        WtEngineImpl engine = engines.get(lang);
         try {
-            // Retrieve a page 
-            // PL: no clue what is this??
+            // Retrieve a fake page (I didn't find how to avoid this) 
             PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
             PageId pageId = new PageId(pageTitle, -1);
+
+            // remove simple templates outside paragraphs
+            wikitext = removeNonInlineTemplates(wikitext);
 
             // Compile the retrieved page
             EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
@@ -252,7 +244,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.ITALICS);
             result = (String)converter.go(cp.getPage());
         } catch(Exception e) {
-            LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
+            LOGGER.warn("Fail to parse MediaWiki text in toTextWithInternalLinksEmphasisOnly, lang is " + lang, e);
         }
 
         return trim(result);
@@ -264,8 +256,11 @@ public class MediaWikiParser {
      */
     public String formatFirstParagraphWikiText(String wikitext, String lang) {
         wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
-        // clear section headings completely          
-        
+        // clear section headings completely
+
+        wikitext = wikitext.replaceAll("<!--.*?-->", " ");
+        // remove html comment in media wiki
+
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext, lang);
 
         String firstParagraph = "";
@@ -293,6 +288,9 @@ public class MediaWikiParser {
         wikitext = wikitext.replaceAll("={2,}(.+)={2,}", "\n"); 
         // clear section headings completely
 
+        wikitext = wikitext.replaceAll("<!--.*?-->", " ");
+        // remove html comment in media wiki
+
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext, lang);
         wikitext = wikitext.replaceAll("\n", " ");
         wikitext = wikitext.replaceAll("\\[\\]", "");  
@@ -300,6 +298,54 @@ public class MediaWikiParser {
         wikitext = wikitext.replaceAll("\\s,", ",");
 
         return trim(wikitext);
+    }
+
+    /**
+     * @return the content of the wiki text fragment after removing all templates outside
+     * paragraphs (templates that are not appearing inline in the text)
+     */
+    public String removeNonInlineTemplates(String wikitext) {
+        StringBuilder wikitextSlim = new StringBuilder();        
+        String[] lines = wikitext.split("\n");
+        for(int i=0; i<lines.length;i++) {
+            String line = lines[i];
+            line = line.trim();
+            // note we don't remove {{redirect...}}
+            if (line.startsWith("{{") && line.endsWith("}}"))
+                continue;
+
+            wikitextSlim.append(line).append("\n");
+        }
+        return wikitextSlim.toString();
+    }
+
+    public String removeNonInlineTemplatesOld(String wikitext) {
+        StringBuilder wikitextSlim = new StringBuilder();        
+        String[] lines = wikitext.split("\n");
+        int ignore = 0;
+        for(int i=0; i<lines.length;i++) {
+            String line = lines[i];
+            line = line.trim();
+            // note we don't remove {{redirect...}}
+            if (line.startsWith("{{"))
+                ignore++;
+
+            if (ignore>0 && line.indexOf("}}") != -1) {
+                ignore--;
+                if (ignore == 0)
+                    line = line.substring(line.indexOf("}}")+2, line.length());            
+            }
+
+            if (ignore == 0) {
+                // conservative checks
+                if (!line.trim().startsWith("|") && !line.trim().startsWith("{|") && 
+                    !line.trim().startsWith("|}") && !line.trim().startsWith("}}") && 
+                    !line.trim().startsWith("{{"))
+                    wikitextSlim.append(line).append("\n");
+            }
+        }
+
+        return wikitextSlim.toString();
     }
 }
 

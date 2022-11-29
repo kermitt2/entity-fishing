@@ -1,5 +1,8 @@
 package com.scienceminer.nerd.utilities.mediaWiki;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -36,6 +39,7 @@ import org.sweble.wikitext.parser.nodes.WtXmlCharRef;
 import org.sweble.wikitext.parser.nodes.WtXmlComment;
 import org.sweble.wikitext.parser.nodes.WtXmlElement;
 import org.sweble.wikitext.parser.nodes.WtXmlEntityRef;
+import org.sweble.wikitext.parser.nodes.WtXmlEndTag;
 import org.sweble.wikitext.parser.parser.LinkTargetException;
 
 import de.fau.cs.osr.ptk.common.AstVisitor;
@@ -64,6 +68,8 @@ import de.fau.cs.osr.ptk.common.AstVisitor;
  * </ul>
  */
 public class WikiTextConverter extends AstVisitor<WtNode> {
+	private static final Logger LOGGER = LoggerFactory.getLogger(WikiTextConverter.class);
+
 	private static final Pattern ws = Pattern.compile("\\s+");
 
 	private final WikiConfig config;
@@ -147,7 +153,11 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtNodeList n) {
-		iterate(n);
+		try {
+			iterate(n);
+		} catch(Exception e) {
+			LOGGER.warn("Fail to parse WtNodeList... " + n.toString());
+		}
 	}
 
 	public void visit(WtUnorderedList e) {
@@ -155,16 +165,28 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtOrderedList e) {
-		iterate(e);
+		try {
+			iterate(e);
+		} catch(Exception exc) {
+			LOGGER.warn("Fail to parse WtOrderedList... " + e.toString());
+		}
 	}
 
 	public void visit(WtListItem item) {
 		newline(1);
-		iterate(item);
+		try {
+			iterate(item);
+		} catch(Exception e) {
+			LOGGER.warn("Fail to parse WtListItem... " + item.toString());
+		}
 	}
 
 	public void visit(EngPage p) {
-		iterate(p);
+		try {
+			iterate(p);
+		} catch(Exception e) {
+			LOGGER.warn("Fail to parse EngPage... " + p.toString());
+		}
 	}
 
 	public void visit(WtText text) {
@@ -341,7 +363,11 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtParagraph p) {
-		iterate(p);
+		try {
+			iterate(p);
+		} catch(Exception e) {
+			LOGGER.warn("Fail to parse WtParagraph... " + p.toString(), e);
+		}
 		newline(2);
 	}
 
@@ -365,10 +391,20 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	public void visit(WtTemplate n) {
 		//System.out.println("processing template: "+n.getName());
 		WtName templateName = n.getName();
-		String templateNameString = templateName.getAsString();
+		if (templateName == null)
+			return;
+
+		String templateNameString = null;
+		try {
+			templateNameString = templateName.getAsString();
+		} catch(Exception e) {
+			//LOGGER.warn("There was a failure when trying to resolve the template name");
+			return;
+		}
 
 		// afaik templates are very ad hoc, so we only want to keep the argument values of some of them for proper
 		// text serialization 
+		// be careful not to include any template content serialization outside text
 		if (templateNameString != null && templateToKeep(templateNameString) && n.getArgs() != null) {
 			iterate(n.getArgs());
 		}
@@ -377,7 +413,6 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	public void visit(WtTemplateArgument n) {
 		if (n.getValue() != null)
 			iterate(n.getValue());
-		
 	}
 
 	// Stuff we want to hide
@@ -392,6 +427,9 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtXmlComment n) {
+	}
+
+	public void visit(WtXmlEndTag n) {
 	}
 
 	public void visit(WtTagExtension n) {
@@ -480,7 +518,8 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 
 	private boolean templateToKeep(String templateNameString) {
 		//if (templateNameString.indexOf("date") != -1 || templateNameString.equals("MSAPI"))
-		if (templateNameString.indexOf("date") != -1)
+		if (templateNameString != null && 
+			(templateNameString.toLowerCase().startsWith("date ") || templateNameString.toLowerCase().endsWith(" date")))
 			return true;
 		return false;
 	}
