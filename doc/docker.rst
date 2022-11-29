@@ -91,6 +91,8 @@ Access the service (with default port):
 
 *entity-fishing* web services are then available as described in the `service documentation <https://grobid.readthedocs.io/en/latest/Grobid-service/>`_
 
+**Important:** It is not recommended to launch several containers using the same data resources volumes, access to the volumes might be quickly a bottleneck for the concurrent container processes. 
+
 Building entity-fishing image
 *****************************
 

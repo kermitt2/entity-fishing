@@ -1,0 +1,99 @@
+ <page>
+    <title>Autism</title>
+    <ns>0</ns>
+    <id>25</id>
+    <revision>
+      <id>1067928275</id>
+      <parentid>1067923516</parentid>
+      <timestamp>2022-01-25T21:33:37Z</timestamp>
+      <contributor>
+        <username>Wretchskull</username>
+        <id>34694168</id>
+      </contributor>
+      <comment>Reverted [[WP:AGF|good faith]] edits by [[Special:Contributions/Oolong|Oolong]] ([
+[User talk:Oolong|talk]]): The majority of the article follows the criteria, but it lacks empasis
+ in subjects such as loss of aquired skills, concurrent/non-existing intell. disability.. etc.</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="137887" xml:space="preserve">{{Short description|Neurodevelopmental disorder i
+nvolving social communication difficulties and repetitive behavior}}
+{{About|the classic autistic disorder|other conditions sometimes called &quot;autism&quot;|Autism
+ spectrum|the journal|Autism (journal)}}
+{{pp-semi-indef}}
+{{pp-move-indef}}
+{{Update|reason=some parts of the article do not accurately reflect either the new DSM5 or ICD10 
+or ICD11 criteria|date=February 2021}}
+{{Use dmy dates|date=June 2020}}
+{{Use American English|date=August 2016}}
+{{Infobox medical condition (new)
+| name         = Autism
+| image        = Autism-stacking-cans 2nd edit.jpg
+| alt          = Boy stacking cans
+| caption      = Repetitively stacking or lining up objects is commonly associated with autism.
+| field        = [[psychiatry]], [[pediatrics]], [[occupational medicine]]
+| symptoms     = Trouble with [[Interpersonal relationship|social interaction]], [[Spoken languag
+e|verbal]] and [[nonverbal communication]], and presence of restricted interests and repetitive b
+ehavior&lt;ref name=Land2008/&gt;
+| complications = Social isolation, employment problems, stress
+| onset        = By age two or three&lt;ref name=NIH2016&gt;{{cite web |title= NIMH &quot; Autism
+ Spectrum Disorder |url= https://www.nimh.nih.gov/health/topics/autism-spectrum-disorders-asd/index.shtml |website= nimh.nih.gov |access-date= 20 April 2017 |date= October 2016}}&lt;/ref&gt;&lt;ref name=DSM5/&gt;
+| duration     =Lifelong&lt;ref name=NIH2016/&gt;
+| causes       = [[Heritability of autism|Genetic]] and environmental factors&lt;ref name=Ch2012/&gt;
+| risks        = 
+| diagnosis    = Based on behavior and developmental history&lt;ref name=NIH2016/&gt;
+| differential = [[Reactive attachment disorder]], [[intellectual disability]], [[schizophrenia]]&lt;ref&gt;{{cite book |vauthors=Corcoran J, Walsh J |title=Clinical Assessment and Diagnosis in Social Work Practice |url={{Google books|y28kokLoe78C|page=72|plainurl=yes}} |publisher=Oxford University Press, New York |date=9 February 2006 |isbn=978-0-19-516830-3 |oclc=466433183 |lccn=2005027740 |page=72 }}&lt;/ref&gt;
+| prevention   = 
+| treatment    = [[Occupational therapy]], [[speech therapy]], [[psychotropic medication]]&lt;ref name=CCD2007/&gt;&lt;ref name=San2016/&gt;&lt;ref&gt;{{cite journal | vauthors = Sukhodolsky DG, Bloch MH, Panza KE, Reichow B | title = Cognitive-behavioral therapy for anxiety in children with high-functioning autism: a meta-analysis | journal = Pediatrics | volume = 132 | issue = 5 | pages = e1341-50 | date = November 2013 | pmid = 24167175 | pmc = 3813396 | doi = 10.1542/peds.2013-1193}}&lt;/ref&gt;
+| medication   = [[Atypical antipsychotics|Antipsychotics]], [[antidepressants]], [[stimulants]] (associated symptoms)&lt;ref name=Ji2015/&gt;&lt;ref name=&quot;Oswald DP 2006&quot;/&gt;&lt;ref name=&quot;ReferenceA&quot;/&gt;
+| prognosis    =
+| frequency    = 24.8 million (2015)&lt;ref name=GBD2015Pre/&gt;
+| deaths       = 
+}}
+
+&lt;!-- Definition and symptoms --&gt;
+'''Autism''' is a [[neurodevelopmental disorder]] characterized by difficulties with social interaction and communication, and by restricted and repetitive behavior.&lt;ref name=DSM5/&gt; Parents often notice signs during the first three years of their child's life.&lt;ref name=&quot;Land2008&quot;&gt;{{cite journal |vauthors= Landa RJ |title= Diagnosis of autism spectrum disorders in the first 3 years of life |journal= Nat Clin Pract Neurol | volume= 4 |issue=3 |pages=138–147 |year=2008 |pmid= 18253102 |doi= 10.1038/ncpneuro0731 | doi-access= free}}&lt;/ref&gt;&lt;ref name=DSM5&gt;{{vcite book | title = Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition | chapter = Autism Spectrum Disorder, 299.00 (F84.0) | editor = American Psychiatric Association | year = 2013 | publisher = American Psychiatric Publishing | pagex = 50–59}}&lt;/ref&gt; These signs often develop gradually, though some autistic children experience [[Regressive autism|regression]] in their communication and social skills after reaching [[developmental milestones]] at a normal pace.&lt;ref name=Stef2008&gt;{{Cite journal | vauthors = Stefanatos GA | s2cid = 34658024 | title = Regression in autistic spectrum disorders | journal = Neuropsychol Rev | volume = 18 | issue = 4 | pages = 305–319 | year = 2008 | pmid = 18956241 | doi = 10.1007/s11065-008-9073-y}}&lt;/ref&gt;
+
+&lt;!-- Associations and diagnosis --&gt;
+Autism is associated with a combination of [[Heritability of autism|genetic]] and [[environmental factors]].&lt;ref name=Ch2012&gt;{{cite journal |vauthors=Chaste P, Leboyer M |title=Autism risk factors: genes, environment, and gene-environment interactions |journal=Dialogues in Clinical Neuroscience |volume=14 |issue=3 |pages=281–292 |year=2012 |doi=10.31887/DCNS.2012.14.3/pchaste |pmid=23226953 |pmc=3513682}}&lt;/ref&gt; Risk factors during pregnancy include certain infections, such as [[rubella]], toxins including [[valproic acid]], alcohol, [[cocaine]], [[pesticides]], lead, and air pollution, [[fetal growth restriction]],&lt;!-- &lt;ref name=&quot;VohrPoggiDavis2017&quot;/&gt; --&gt; and [[autoimmune disease]]s.&lt;ref&gt;{{Cite journal |title=Prenatal factors associated with autism spectrum disorder (ASD)|vauthors=Ornoy A, Weinstein-Fudim L, Ergaz Z|journal=Reproductive Toxicology|volume=56|year=2015|pages=155–169|doi=10.1016/j.reprotox.2015.05.007|pmid=26021712}}&lt;/ref&gt;&lt;ref name=&quot;VohrPoggiDavis2017&quot;/&gt;&lt;ref name=SamsamAhangari2014/&gt; [[Controversies in autism|Controversies]] surround other proposed environmental [[Causes of autism|causes]]; for example, the [[MMR vaccine and autism|vaccine hypothesis]], which has been disproven.&lt;ref&gt;{{cite journal |vauthors=Taylor LE, Swerdfeger AL, Eslick GD |title=Vaccines are not associated with autism: an evidence-based meta-analysis of case-control and cohort studies |journal=Vaccine |volume=32 |issue=29 |pages=3623–9 |date=June 2014 |pmid=24814559 |doi=10.1016/j.vaccine.2014.04.085}}&lt;/ref&gt;&lt;ref name=Rut2005&gt;{{cite journal | vauthors = Rutter M | title = Incidence of autism spectrum disorders: changes over time and their meaning | journal = Acta Paediatr | volume = 94 | issue = 1 | pages = 2–15 | year = 2005 | pmid = 15858952 | doi = 10.1111/j.1651-2227.2005.tb01779.x| s2cid = 79259285}}&lt;/ref&gt; Autism affects information processing in the brain and how [[nerve cell]]s and their [[synapse]]s connect and organize; how this occurs is not well understood.&lt;ref name=&quot;Lev2009&quot;&gt;{{cite journal | vauthors = Levy SE, Mandell DS, Schultz RT | title = Autism | journal = Lancet | volume = 374 | issue = 9701 | pages = 1627–1638 | year = 2009 | pmid = 19819542 | pmc = 2863325 | doi = 10.1016/S0140-6736(09)61376-3}}&lt;/ref&gt; The [[Diagnostic and Statistical Manual of Mental Disorders]] (DSM-5) combines forms of the condition, including [[Asperger syndrome]] and [[pervasive developmental disorder not otherwise specified]] (PDD-NOS) into the diagnosis of [[autism spectrum disorder]] (ASD).&lt;ref name=DSM5/&gt;&lt;ref name=&quot;John2007&quot;&gt;{{cite journal | vauthors = Johnson CP, Myers SM | title = Identification and evaluation of children with autism spectrum disorders | journal = Pediatrics | volume = 120 | issue = 5 | pages = 1183–1215 | year = 2007 | pmid = 17967920 | doi = 10.1542/peds.2007-2361 | url = http://pediatrics.aappublications.org/cgi/content/full/120/5/1183 | archive-url = https://web.archive.org/web/20090208013449/http://pediatrics.aappublications.org/cgi/content/full/120/5/1183 | archive-date = 8 February 2009 | doi-access = free}}&lt;/ref&gt;
+
+&lt;!-- Treatment --&gt;
+Several interventions have been shown to reduce symptoms and improve the ability of autistic people to function and participate independently in the community.&lt;ref&gt;{{Cite web|last=CDC|date=23 September 2019|title=Treatment {{!}} Autism Spectrum Disorder (ASD)|url=https://www.cdc.gov/ncbddd/autism/treatment.html|access-date=8 April 2021|website=Centers for Disease Control and Prevention|language=en-us}}&lt;/ref&gt; Behavioral, psychological, education, and/or skill-building interventions may be used to assist autistic people to learn life skills necessary for living independently, as well as other social, communication, and language skills. Therapy also aims to reduce challenging behaviors and build upon strengths.&lt;ref&gt;{{Cite web|title=NIMH » Autism Spectrum Disorder|url=https://www.nimh.nih.gov/health/publications/autism-spectrum-disorder/index.shtml|access-date=8 April 2021|website=www.nimh.nih.gov}}&lt;/ref&gt; Some autistic adults are unable to live independently.&lt;ref name=Ste106&gt;{{cite journal | vauthors = Steinhausen HC, Mohr Jensen C, Lauritsen MB | title = A systematic review and meta-analysis of the long-term overall outcome of autism spectrum disorders in adolescence and adulthood | journal = Acta Psychiatrica Scandinavica | volume = 133 | issue = 6 | pages = 445–452 | date = June 2016 | pmid = 26763353 | doi = 10.1111/acps.12559 | s2cid = 12341774 }}&lt;/ref&gt; An [[Societal and cultural aspects of autism|autistic culture]] has developed, with some individuals seeking a cure and others believing autism should be [[Autism rights movement|accepted as a difference]] to be accommodated instead of cured.&lt;ref name=Sil2008&gt;{{cite journal |journal=BioSocieties |year=2008 |volume=3 |issue=3 |pages=325–341 |title=Fieldwork on another planet: social science perspectives on the autism spectrum | vauthors = Silverman C |s2cid=145379758 |doi=10.1017/S1745855208006236}}&lt;/ref&gt;
+
+==Causes==
+{{Main|Causes of autism}}
+
+It has long been presumed that there is a common cause at the genetic, cognitive, and neural levels for autism's characteristic triad of symptoms.&lt;ref name=&quot;Fractionable&quot;/&gt; However, there is increasing suspicion that autism is instead a complex disorder whose core aspects have distinct causes that often co-occur.&lt;ref name=&quot;Fractionable&quot;&gt;{{cite journal|vauthors=Happé F, Ronald A |s2cid=13928876 |title=The 'fractionable autism triad': a review of evidence from behavioural, genetic, cognitive and neural research |journal=[[Neuropsychol Rev]] |volume=18 |issue=4 |pages=287–304 |year=2008 |pmid=18956240 |doi=10.1007/s11065-008-9076-8}}&lt;/ref&gt;&lt;ref name=&quot;HappeTime&quot;&gt;{{cite journal | vauthors = Happé F, Ronald A, Plomin R | title = Time to give up on a single explanation for autism | journal = Nature Neuroscience | volume = 9 | issue = 10 | pages = 1218–1220 | year = 2006 | pmid = 17001340 | doi = 10.1038/nn1770 | doi-access = free}}&lt;/ref&gt;
+
+[[File:Single Chromosome Mutations.svg|thumb|alt=Three diagrams of chromosome pairs A, B that are
+ nearly identical. 1: B is missing a segment of A. 2: B has two adjacent copies of a segment of A. 3: B's copy of A's segment is in reverse order.|Deletion (1), duplication (2), and inversion (3) are all [[chromosome abnormalities]] that have been implicated in autism.&lt;ref name=&quot;Beaudet&quot;/&gt;]]
+
+=== Clinical development and diagnoses ===
+[[File:Leo-Kanner.jpeg|thumb|upright|alt=Balding man in his early 60s in coat and tie, with a serious but slightly smiling expression|[[Leo Kanner]] introduced the label ''early infantile autism'' in 1943.]]
+
+The word ''autism'' first took its modern sense in 1938 when [[Hans Asperger]] of the [[Vienna General Hospital|Vienna University Hospital]] adopted Bleuler's terminology ''autistic psychopaths'' in a lecture in German about [[child psychology]].&lt;ref&gt;{{cite journal | journal=Wien Klin Wochenschr |year=1938 |volume=51 |pages=1314–1317 | title = Das psychisch abnormale Kind |trans-title=The psychically abnormal child | vauthors = Asperger H | author-link1 = Hans Asperger | language=de}}&lt;/ref&gt; Asperger was investigating an ASD now known as [[Asperger syndrome]], though for various reasons it was not widely recognized as a separate diagnosis until 1981.&lt;ref name=&quot;Wolff&quot;/&gt; [[Leo Kanner]] of the [[Johns Hopkins Hospital]] first used ''autism'' in its modern sense in English when he introduced the label ''early infantile autism'' in a 1943 report of 11 children with striking behavioral similarities.&lt;ref name=&quot;Kanner1943&quot;&gt;{{cite journal | vauthors = Kanner L | author-link1 = Leo Kanner |title=Autistic disturbances of affective contact |journal=Nerv Child |volume=2 |pages=217–250 |year=1943| issue = 4 | pmid = 4880460}} Reprinted in {{cite journal | vauthors = Kanner L | title = Autistic disturbances of affective contact | journal = Acta Paedopsychiatr | volume = 35 | issue = 4 | pages = 100–136 | year = 1968 | pmid = 4880460}}&lt;/ref&gt; Almost all the characteristics described in Kanner's first paper on the subject, notably &quot;autistic aloneness&quot; and &quot;insistence on sameness&quot;, are still regarded as typical of the autistic spectrum of disorders.&lt;ref name=&quot;HappeTime&quot;/&gt; It is not known whether Kanner derived the term independently of Asperger.&lt;ref name=&quot;Lyons&quot;&gt;{{cite journal | vauthors = Lyons V, Fitzgerald M | s2cid = 38130758 | title = Asperger (1906–1980) and Kanner (1894–1981), the two pioneers of autism | journal = J Autism Dev Disord | volume = 37 | issue = 10 | pages = 2022–2023 | year = 2007 | pmid = 17922179 | doi = 10.1007/s10803-007-0383-3}}&lt;/ref&gt;
+
+==Society and culture==
+{{Main|Societal and cultural aspects of autism}}
+{{multiple image
+| direction = horizontal
+| width1 = 60
+| image1 = Autism awareness ribbon-20051114.png
+| caption1 = Autism awareness ribbon
+| width2 = 130
+| image2 = Autism spectrum infinity awareness symbol.svg
+| caption2 = Autism rights movement infinity symbol
+}}
+An autistic culture has emerged, accompanied by the [[autistic rights]] and [[neurodiversity]] movements.&lt;ref&gt;{{cite web| vauthors = Shapiro J | title = Autism Movement Seeks Acceptance, Not Cures| publisher = NPR| access-date = 10 November 2015 | date = 26 June 2006 | url = https://www.npr.org/templates/story/story.php?storyId=5488463}}&lt;/ref&gt;&lt;ref&gt;{{cite web| vauthors = Trivedi B | title = Autistic and proud of it| website = New Scientist| access-date = 10 November 2015 | url = https://www.newscientist.com/article/mg18625041-500-autistic-and-proud-of-it/}}&lt;/ref&gt;&lt;ref name=&quot;Solomon&quot;&gt;{{cite news |work=New York |title=The autism rights movement | vauthors = Solomon A |date=25 May 2008 |access-date=27 May 2008 |url=https://nymag.com/news/features/47225/| archive-url= https://web.archive.org/web/20080527025140/http://nymag.com/news/features/47225/| archive-date= 27 May 2008 | url-status=live}}&lt;/ref&gt; Events include [[World Autism Awareness Day]], [[Autism Sunday]], [[Autistic Pride Day]], [[Autreat]], and others.&lt;ref&gt;{{cite web| title = World Autism Awareness Day, 2 April| publisher = United Nations| access-date = 17 November 2015 | url = https://www.un.org/en/events/autismday/}}&lt;/ref&gt;&lt;ref&gt;{{cite web| vauthors = Bascom J | title = Autistic Pride Day 2015: A Message to the Autistic Community| access-date = 18 November 2015 | date = 18 June 2015 | url = http://autisticadvocacy.org/2015/06/autistic-pride-day-2015-a-message-to-the-autistic-community/}}&lt;/ref&gt;&lt;ref&gt;{{cite web| title = Autism Sunday – Home| website = Autism Sunday| access-date = 17 November 2015| year = 2010| url = http://www.autismsunday.co.uk/| archive-url = https://web.archive.org/web/20100303043146/http://www.autismsunday.co.uk/| url-status=dead| archive-date = 3 March 2010}}&lt;/ref&gt;&lt;ref&gt;{{cite web| title = About Autreat| publisher = Autreat.com| access-date = 17 November 2015 |year = 2013| url = http://www.autreat.com/autreat.html}}&lt;/ref&gt; Social-science scholars study those with autism in hopes to learn more about &quot;autism as a culture, transcultural comparisons&amp;nbsp;... and research on social movements.&quot;&lt;ref&gt;{{cite journal| vauthors = Silverman C |s2cid=145379758 |title=Fieldwork on Another Planet: Social Science Perspectives on the Autism Spectrum|journal=BioSocieties|volume=3|issue=3|year=2008|pages=325–341|issn=1745-8552|doi=10.1017/S1745855208006236}}&lt;/ref&gt; Many autistic individuals have been successful in their fields.&lt;ref&gt;{{cite web| title = American RadioWorks: Fast Food and Animal Rights – Kill Them With Kindness|page =1| website = American Public Media| access-date = 17 November 2015 | url = http://americanradioworks.publicradio.org/features/mcdonalds/grandin1.html}}&lt;/ref&gt;&lt;ref&gt;{{cite magazine| vauthors = Page T | title = Parallel Play| magazine = The New Yorker| access-date = 17 November 2015 | date = 20 August 2007 | url = https://www.newyorker.com/magazine/2007/08/20/parallel-play}}&lt;/ref&gt;&lt;ref&gt;{{cite web| title = Famous People With Autism Spectrum Disorder: Autistic Celebrities (List)| website = Mental Health Daily| access-date = 18 November 2015 | url = http://mentalhealthdaily.com/2015/09/19/famous-people-with-autism-spectrum-disorder-autistic-celebrities-list/| date = 19 September 2015}}&lt;/ref&gt;
+
+[[Category:Autism| ]]
+[[Category:1910s neologisms]]
+[[Category:Articles containing video clips]]
+[[Category:Communication disorders]]
+[[Category:Neurological disorders in children]]
+[[Category:Pervasive developmental disorders]]
+[[Category:Wikipedia medicine articles ready to translate]]
+[[Category:Autism spectrum disorders|*]]</text>
+      <sha1>mb7b40ol9ihmbpqquoh2utfpovmwxd2</sha1>
+    </revision>
+  </page>
+  
