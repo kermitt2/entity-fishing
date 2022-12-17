@@ -60,6 +60,11 @@ public class NerdConfig {
 	// - a term with Zipf value 3 appears once per million words
 	private double maxTermFrequency = 4.0;
 
+	// final disambiguation score can be either ranker score or selector (default) score
+	// this is the disambiguation score indicated in the output for a resulting entity
+	// and the final ranking selection criteria between non-pruned entities
+	private String finalScore = "selector";
+
 	// path to grobid-home
 	private String grobidHome = null;
 
@@ -199,5 +204,13 @@ public class NerdConfig {
 
 	public void setSelectorFeatures(String selectorFeatures) {
 		this.selectorFeatures = selectorFeatures;
+	}
+
+	public String getFinalScore() {
+		return this.finalScore;
+	}
+
+	public void setFinalScore(String theScore) {
+		this.finalScore = theScore;
 	}
 }

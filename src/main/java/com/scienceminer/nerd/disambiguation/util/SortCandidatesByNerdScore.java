@@ -6,19 +6,17 @@ import com.scienceminer.nerd.disambiguation.NerdCandidate;
 public class SortCandidatesByNerdScore implements Comparator<NerdCandidate> {
     public int compare(NerdCandidate a, NerdCandidate b) {
         //descending order
-        int val = ((int)((b.getNerdScore() - a.getNerdScore()) * 1000));
-        //return ((int)((compareQuantity - a.selectionScore) * 1000));
-
+        int val = ((int)((b.getNerdScore() - a.getNerdScore()) * 1000000));
         if (val == 0) {
-            val = ((int)((b.getSelectionScore() - a.getSelectionScore()) * 1000));
+            val = ((int)((b.getSelectionScore() - a.getSelectionScore()) * 1000000));
         }
 
         if (val == 0) {
-            val = ((int)((b.getRelatednessScore() - a.getRelatednessScore()) * 1000));
+            val = ((int)((b.getRelatednessScore() - a.getRelatednessScore()) * 1000000));
         }
 
         if (val == 0) {
-            val = ((int)((b.getProb_c() - a.getProb_c()) * 1000)); 
+            val = ((int)((b.getProb_c() - a.getProb_c()) * 1000000)); 
         }
 
         if (val == 0) {
