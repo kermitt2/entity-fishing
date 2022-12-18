@@ -24,7 +24,7 @@ import com.fasterxml.jackson.core.io.*;
  * encyclopedic information, with all the information necessary for a disambiguation. 
  * 
  */
-public class NerdCandidate {
+public class NerdCandidate implements Comparable<NerdCandidate> {
 
 	// entity associated to the present disambiguated entity candidate
 	private NerdEntity entity = null;
@@ -681,7 +681,7 @@ public class NerdCandidate {
 	/**
 	 *  Comparable implementation. We sort against the nerdScore
 	 */
-	/*public int compareToOld(NerdCandidate compareNerdCandidate) {
+	public int compareTo(NerdCandidate compareNerdCandidate) {
 		
 		//descending order
 		int val = ((int)((compareNerdCandidate.getNerdScore() - this.nerdScore) * 1000));
@@ -707,7 +707,7 @@ public class NerdCandidate {
 		}
 
 		return val;
-	}*/
+	}
 
 	/**
 	 * Copy of a candidate, with deep copy of relevant instance variable

@@ -537,8 +537,11 @@ public class NerdRanker extends NerdModel {
 					e.printStackTrace();
 				}
 			}
-			//Collections.sort(cands);
-			Collections.sort(cands, new SortCandidatesByNerdScore());
+			Collections.sort(cands);
+			/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+				Collections.sort(cands, new SortCandidatesByNerdScore());
+			else
+				Collections.sort(cands, new SortCandidatesBySelectionScore());*/
 		}
 
 		System.out.println("article contribution: " + nbInstance + " training instances");
@@ -868,8 +871,11 @@ public class NerdRanker extends NerdModel {
 					e.printStackTrace();
 				}
 			}
-			//Collections.sort(cands);
-			Collections.sort(cands, new SortCandidatesByNerdScore());
+			Collections.sort(cands);
+			/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+				Collections.sort(cands, new SortCandidatesByNerdScore());
+			else
+				Collections.sort(cands, new SortCandidatesBySelectionScore());*/
 		}
 
 		System.out.println("article contribution: " + nbInstance + " training instances");

@@ -329,21 +329,22 @@ public class NerdEngine {
 				}
 			}
 		}
-		Collections.sort(result, new SortEntitiesBySelectionScore());
+		Collections.sort(result);
+		//Collections.sort(result, new SortEntitiesBySelectionScore());
 
-		/*for (NerdEntity entity : result) {
+		for (NerdEntity entity : result) {
 		System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
 		System.out.println("--");
-		}*/
+		}
 
 		if (shortTextVal) {
             return result;
         }
 
         if (nerdQuery.getNbest()) {
-            result = this.pruningService.pruneOverlapNBest(result, shortTextVal);
+            result = this.pruningService.pruneOverlapNBest(result, shortTextVal, wikipedia.getConfig().getFinalScore());
         } else {
-            result = this.pruningService.pruneOverlap(result, shortTextVal);
+            result = this.pruningService.pruneOverlap(result, shortTextVal, wikipedia.getConfig().getFinalScore());
         }
 
 		// final pruning
@@ -359,7 +360,7 @@ public class NerdEngine {
 
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesSimple(List<NerdEntity> entities, String lang, double maxTermFrequency) {
-		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<>();
+		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		if (wikipedia == null) {
@@ -542,10 +543,13 @@ public class NerdEngine {
 				}
 
 				if ( (candidates.size() > 0) || (entity.getType() != null) ) {
-					Collections.sort(candidates, new SortCandidatesByNerdScore());
+					Collections.sort(candidates);
+					/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+						Collections.sort(candidates, new SortCandidatesByNerdScore());
+					else
+						Collections.sort(candidates, new SortCandidatesBySelectorScore());*/
 					result.put(entity, candidates);
-				} /*else
-					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
+				}
 			}
 
 		}
@@ -556,7 +560,7 @@ public class NerdEngine {
 	}
 
 	public Map<NerdEntity, List<NerdCandidate>> generateCandidatesMultiple(List<NerdEntity> entities, String lang) {
-		Map<NerdEntity, List<NerdCandidate>> result = new HashMap<>();
+		Map<NerdEntity, List<NerdCandidate>> result = new TreeMap<>();
 		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 		if (wikipedia == null) {
 			throw new NerdException("Wikipedia environment is not loaded for language " + lang);
@@ -709,13 +713,17 @@ public class NerdEngine {
 				}
 
 				if (candidates.size() > 0 || entity.getType() != null) {
-					Collections.sort(candidates, new SortCandidatesByNerdScore());
+					Collections.sort(candidates);
+					/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+						Collections.sort(candidates, new SortCandidatesByNerdScore());
+					else
+						Collections.sort(candidates, new SortCandidatesBySelectionScore());*/
+					
 					// we just take the best candidates following the conf. MAX_SENSES
 					//int upperLimit = Math.min(candidates.size(), MAX_SENSES);
 					//candidates = candidates.subList(0, upperLimit);
 					result.put(entity, candidates);
-				} /*else
-					System.out.println("No concepts found for '" + normalisedString + "' " + " / " + entity.getRawName() );*/
+				} 
 			}
 
 		}
@@ -742,10 +750,11 @@ public class NerdEngine {
 		if (entities == null)
 			return candidates;
 
-		Map<NerdEntity, List<NerdCandidate>> newCandidates = new HashMap<>();
-		Map<String, List<NerdCandidate>> cacheSubSequences = new HashMap<>();
-		Map<String, Double> cacheLinkProbability = new HashMap<>();
+		Map<NerdEntity, List<NerdCandidate>> newCandidates = new TreeMap<>();
+		Map<String, List<NerdCandidate>> cacheSubSequences = new TreeMap<>();
+		Map<String, Double> cacheLinkProbability = new TreeMap<>();
 		List<String> failures = new ArrayList<>();
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		for(NerdEntity entity : entities) {
 			// if the entity is already inputted in the query (i.e. by the "user"), we do not generate candidates
@@ -900,7 +909,11 @@ public class NerdEngine {
 		// final default sort candidates against default priors (prob_c)
 		for(Map.Entry<NerdEntity, List<NerdCandidate>> entry : candidates.entrySet()) {
 			List<NerdCandidate> cands = entry.getValue();
-			Collections.sort(cands, new SortCandidatesByNerdScore());
+			Collections.sort(cands);
+			/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+				Collections.sort(cands, new SortCandidatesByNerdScore());
+			else
+				Collections.sort(cands, new SortCandidatesBySelectorScore());*/
 		}
 
 		return candidates;
@@ -916,6 +929,7 @@ public class NerdEngine {
 		NerdContext context, boolean shortText, List<LayoutToken> tokens) {
 		// we rank candidates for each entity mention
 		//relatedness.resetCache(lang);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		// first pass to get the "certain" entities
 		List<NerdEntity> userEntities = new ArrayList<>();
@@ -1020,8 +1034,11 @@ public class NerdEngine {
 
 				candidate.setNerdScore(score);
 			}
-			//Collections.sort(cands);
-			Collections.sort(cands, new SortCandidatesByNerdScore());
+			Collections.sort(cands);
+			/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+				Collections.sort(cands, new SortCandidatesByNerdScore());
+			else
+				Collections.sort(cands, new SortCandidatesBySelectorScore());*/
 		}
 
 		//System.out.println("relatedness - Comparisons requested: " + relatedness.getComparisonsRequested());
@@ -1058,6 +1075,7 @@ public class NerdEngine {
 		// get the disambiguator for this language
 		NerdRanker disambiguator = rankers.get(lang);
 		disambiguator = instantiateRankerIfNull(lang, disambiguator);
+		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		// for the embeddings similarity we need a textual context as a list of LayoutToken
 		List<LayoutToken> tokens = new ArrayList<LayoutToken>();
@@ -1156,7 +1174,11 @@ public class NerdEngine {
 			}
 			candidate.setNerdScore(score);
 		}
-		Collections.sort(candidates, new SortCandidatesByNerdScore());
+		Collections.sort(candidates);
+		/*if ("ranker".equals(wikipedia.getConfig().getFinalScore()))
+			Collections.sort(candidates, new SortCandidatesByNerdScore());
+		else
+			Collections.sort(candidates, new SortCandidatesBySelectorScore());*/
 	}
 
 	private List<String> buildLocalContexts(String rawTerm, String text) {
@@ -1201,7 +1223,6 @@ public class NerdEngine {
 	 */
 	@Deprecated
 	public List<NerdEntity> pruneOverlap(List<NerdEntity> entities, boolean shortText) {
-//System.out.println("pruning overlaps - we have " + entities.size() + " entities");
 		List<Integer> toRemove = new ArrayList<Integer>();
 		for (int pos1=0; pos1<entities.size(); pos1++) {
 			if (toRemove.contains(new Integer(pos1)))
@@ -1212,13 +1233,11 @@ public class NerdEngine {
 				if (!toRemove.contains(new Integer(pos1))) {
 					toRemove.add(new Integer(pos1));
 				}
-//System.out.println("Removing " + pos1 + " - " + entity1.getNormalisedName());
 				continue;
 			}
 
 			// the arity measure below does not need to be precise
 			int arity1 = entity1.getNormalisedName().length() - entity1.getNormalisedName().replaceAll("\\s", "").length() + 1;
-//System.out.println("Position1 " + pos1 + " / arity1 : " + entity1.getNormalisedName() + ": " + arity1);
 
 			// find all sub term of this entity and entirely or partially overlapping entities
 			for (int pos2=0; pos2<entities.size(); pos2++) {
@@ -1244,14 +1263,12 @@ public class NerdEngine {
 				   )*/
 				{
 
-//System.out.println("Position2 " + pos2 + " / overlap: " + entity1.toJson() + " /////////////// " + entity2.toJson());
 					// overlap
 					//int arity2 = entity2.getOffsetEnd() - entity2.getOffsetStart();
 					if (entity2.getRawName() == null) {
 						if (!toRemove.contains(new Integer(pos2))) {
 							toRemove.add(new Integer(pos2));
 						}
-//System.out.println("Removing " + pos2 + " - " + entity2.getRawNormalisedName());
 						continue;
 					}
 
@@ -1262,7 +1279,6 @@ public class NerdEngine {
 							if (!toRemove.contains(new Integer(pos2))) {
 								toRemove.add(new Integer(pos2));
 							}
-//System.out.println("Removing " + pos2 + " - " + entity2.getNormalisedName());
 							continue;
 						}
 					}
@@ -1274,7 +1290,6 @@ public class NerdEngine {
 							if (!toRemove.contains(new Integer(pos1))) {
 								toRemove.add(new Integer(pos1));
 							}
-//System.out.println("Removing " + pos1 + " - " + entity1.getNormalisedName());
 							break;
 						}
 					}
@@ -1289,18 +1304,15 @@ public class NerdEngine {
 						if ( (entity1.getType() != null) && (entity2.getType() == null) ) {
 							if (!toRemove.contains(new Integer(pos2)))
 								toRemove.add(new Integer(pos2));
-//System.out.println("Removing " + pos2 + " - " + entity2.getNormalisedName());
 							continue;
 						}
 					}
 
 					int arity2 = entity2.getNormalisedName().length() - entity2.getNormalisedName().replaceAll("\\s", "").length() + 1;
-//System.out.println("arity2 : " + entity2.getNormalisedName() + ": " + arity2);
 					if (arity2 < arity1) {
 						// longest match wins
 						if (!toRemove.contains(new Integer(pos2)))
 							toRemove.add(new Integer(pos2));
-//System.out.println("Removing " + pos2 + " - " + entity2.getNormalisedName());
 						continue;
 					}
 					else if (arity2 == arity1) {
@@ -1313,7 +1325,6 @@ public class NerdEngine {
 							if (!toRemove.contains(new Integer(pos2))) {
 								toRemove.add(new Integer(pos2));
 							}
-//System.out.println("Removing " + pos2 + " - " + entity2.getNormalisedName());
 							continue;
 						} /*else {
 							// if equal we check the selection scores of the top candiate for the two entities
@@ -1728,7 +1739,8 @@ System.out.println("--");*/
 			*/
 
 			if (newCandidates.size() > 0) {
-				Collections.sort(newCandidates, new SortCandidatesBySelectionScore());
+				Collections.sort(newCandidates);
+				//Collections.sort(newCandidates, new SortCandidatesBySelectionScore());
 				cands.replace(entity, newCandidates);
 			} else {
 				if (entity.getType() == null)
@@ -1952,7 +1964,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 			return;
 
 		// gives for a given base all the acronyms mentions
-		Map<String, List<Mention>> reverseAcronyms = new HashMap<String, List<Mention>>();
+		Map<String, List<Mention>> reverseAcronyms = new TreeMap<String, List<Mention>>();
 		for (Map.Entry<Mention, Mention> entry : acronyms.entrySet()) {
             Mention acronym = entry.getKey();
             Mention base = entry.getValue();
@@ -2007,7 +2019,7 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 	}
 
 	private Map<String, List<NerdEntity>> indexEntityPositions(List<NerdEntity> entities) {
-		Map<String, List<NerdEntity>> result = new HashMap<String, List<NerdEntity>>();
+		Map<String, List<NerdEntity>> result = new TreeMap<String, List<NerdEntity>>();
 		for(NerdEntity entity : entities) {
 			String pos = "" + entity.getOffsetStart() + "/" + entity.getOffsetEnd();
 			if (result.get(pos) == null) {
@@ -2345,13 +2357,13 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
 
 		nerdQuery.addEntities(newEntities);
 
-		//Collections.sort(nerdQuery.getEntities());
-		Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
+		Collections.sort(nerdQuery.getEntities());
+		//Collections.sort(nerdQuery.getEntities(), new SortEntitiesBySelectionScore());
 
 		if (nerdQuery.getNbest()) {
-            nerdQuery.setEntities(this.pruningService.pruneOverlapNBest(nerdQuery.getEntities(), false));
+            nerdQuery.setEntities(this.pruningService.pruneOverlapNBest(nerdQuery.getEntities(), false, wikipedia.getConfig().getFinalScore()));
         } else {
-            nerdQuery.setEntities(this.pruningService.pruneOverlap(nerdQuery.getEntities(), false));
+            nerdQuery.setEntities(this.pruningService.pruneOverlap(nerdQuery.getEntities(), false, wikipedia.getConfig().getFinalScore()));
         }
 		if (!nerdQuery.getNbest()) {
 			double minRankerScore = wikipedia.getConfig().getMinRankerScore();

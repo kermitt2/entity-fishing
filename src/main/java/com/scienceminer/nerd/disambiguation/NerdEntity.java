@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  *
  */
-public class NerdEntity {
+public class NerdEntity implements Comparable<NerdEntity> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NerdEntity.class);
 
 	// exact mention form of the entity, as appearing in the input
@@ -580,7 +580,7 @@ public class NerdEntity {
 
 	}
 
-	public int compareToOld(NerdEntity theEntity) {
+	public int compareTo(NerdEntity theEntity) {
 		// if we have offsets
 		int start = theEntity.getOffsetStart();
 		int end = theEntity.getOffsetEnd();

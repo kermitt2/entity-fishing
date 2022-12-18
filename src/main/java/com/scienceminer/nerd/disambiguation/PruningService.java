@@ -12,7 +12,7 @@ public class PruningService {
     /**
      * We prune only entities overlapping and having the same disambiguation information
      */
-    public List<NerdEntity> pruneOverlapNBest(List<NerdEntity> entities, boolean shortText) {
+    public List<NerdEntity> pruneOverlapNBest(List<NerdEntity> entities, boolean shortText, String sortingScore) {
         Set<Integer> toRemove = new HashSet<>();
         for (int pos1 = 0; pos1 < entities.size(); pos1++) {
             if (toRemove.contains(pos1))
@@ -52,7 +52,11 @@ public class PruningService {
                     } else if (entity1.getType() != null && entity2.getType() == null) {
                         toRemove.add(pos2);
                     } else {
-                        if (entity1.getNerdScore() < entity2.getNerdScore()) {
+                        if (sortingScore != null && "ranker".equals(sortingScore)) {
+                            if (entity1.getNerdScore() < entity2.getNerdScore()) {
+                                toRemove.add(pos2);
+                            }
+                        } else if (entity1.getSelectionScore() < entity2.getSelectionScore()) {
                             toRemove.add(pos2);
                         }
                     }
@@ -186,7 +190,7 @@ public class PruningService {
      * Note that the longest match heuristics is debatable and should be further experimentally
      * validated...
      */
-    public List<NerdEntity> pruneOverlap(List<NerdEntity> entities, boolean shortText) {
+    public List<NerdEntity> pruneOverlap(List<NerdEntity> entities, boolean shortText, String sortingScore) {
 
         Set<Integer> toRemove = new HashSet<>();
         for (int pos1 = 0; pos1 < entities.size(); pos1++) {
@@ -247,10 +251,12 @@ public class PruningService {
                     continue;
                 } else if (arity2 == arity1) {
                     // we check the nerd scores of the top candidate for the two entities
-                    double conf1 = entity1.getNerdScore();
-                    double conf2 = entity2.getNerdScore();
-                    //double conf1 = entity1.getSelectionScore();
-                    //double conf2 = entity2.getSelectionScore();
+                    double conf1 = entity1.getSelectionScore();
+                    double conf2 = entity2.getSelectionScore();
+                    if (sortingScore != null && "ranker".equals(sortingScore)) {
+                        conf1 = entity1.getNerdScore();
+                        conf2 = entity2.getNerdScore();
+                    }
                     if (conf2 < conf1) {
                         toRemove.add(pos2);
                         continue;

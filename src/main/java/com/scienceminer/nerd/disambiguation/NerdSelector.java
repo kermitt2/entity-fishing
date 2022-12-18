@@ -515,8 +515,8 @@ public class NerdSelector extends NerdModel {
 					e.printStackTrace();
 				}
 			}
-			//Collections.sort(cands);
-			Collections.sort(cands, new SortCandidatesBySelectionScore());
+			Collections.sort(cands);
+			//Collections.sort(cands, new SortCandidatesBySelectionScore());
 		}
 
 		System.out.println("article contribution: " + nbInstance + " training instances");
@@ -630,8 +630,8 @@ public class NerdSelector extends NerdModel {
 					break;
 				}
 			} else if (cands.size() > 0) {
-				//Collections.sort(cands);
-				Collections.sort(cands, new SortCandidatesBySelectionScore());
+				Collections.sort(cands);
+				//Collections.sort(cands, new SortCandidatesBySelectionScore());
 				if (!producedDisamb.contains(cands.get(0).getWikipediaExternalRef()))
 					producedDisamb.add(cands.get(0).getWikipediaExternalRef());
 			}
@@ -639,9 +639,9 @@ public class NerdSelector extends NerdModel {
 		}
 		
 		if (full) {
-			//Collections.sort(result);
-			Collections.sort(result, new SortEntitiesByNerdScore());
-			result = pruningService.pruneOverlap(result, false);
+			Collections.sort(result);
+			//Collections.sort(result, new SortEntitiesByNerdScore());
+			result = pruningService.pruneOverlap(result, false, wikipedia.getConfig().getFinalScore());
 			for(NerdEntity entit : result) {
 				if (!producedDisamb.contains(entit.getWikipediaExternalRef()))
 					producedDisamb.add(entit.getWikipediaExternalRef());
