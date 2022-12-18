@@ -15,7 +15,7 @@ public class NerdSelectionFeatureVector extends GenericSelectionFeatureVector {
 		title = "NERD selector with basic and embeddings features";
 		Add_nerd_score = true;
 		Add_prob_anchor_string = true;
-		//Add_prob_c = true;
+		Add_prob_c = true;
 		//Add_nb_tokens = true;
 		Add_relatedness = true;
 		Add_inContext = true;

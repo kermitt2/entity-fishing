@@ -35,5 +35,3 @@ public class SortEntitiesByNerdScore implements Comparator<NerdEntity> {
         }
     }
 }
-
-    

@@ -9,7 +9,7 @@ dbDirectory: data/db/db-en
 # path to the compiled CSV wikipedia, infobox, wikidata files
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
-dataDirectory: /media/lopez/data/wikipedia/latest/en/
+dataDirectory: /media/lopez/data1/wikipedia/latest/en/
 #dataDirectory: /home/lopez/resources/wikipedia/en/
 
 # path to the stopwords file to consider for the target language
@@ -40,7 +40,7 @@ minSelectorScore: 0.35
 minRankerScore: 0.2
 
 # if true, use links out for computing relatedness between two entities in addition to
-# the links in (slower but more precise in principle)
+# the links in (a bit slower slower but possibly more precise)
 useLinkOut: false
 
 # Above this frequency, the more frequent terms will be skipped and not disambiguated. 
@@ -49,4 +49,28 @@ useLinkOut: false
 # interest. The frequency is expressed as zipf, i.e. a number typically between 0 and 8:
 # - a term with zipf value 6 appears once per thousand words
 # - a term with Zipf value 3 appears once per million words
+#3.8
 maxTermFrequency: 4.0
+
+# The features set to be considered by the meta-models, if not default.
+# You normally do not have to change this settings, which is optimized for the given language.
+# Retraining the ranking and selector models is required if you change any of these settings.
+
+# Possible values for the ranker decision model: 
+# - BASELINE (only use conditional prob)
+# - MILNE_WITTEN (Milne and Witten features)
+# - MILNE_WITTEN_RELATEDNESS (only Milne and Witten relatedness measure)
+# - SIMPLE (basic features in addition to Milne & Witten relatedness)
+# - EMBEDDINGS (only word+entity embeddings similarity)
+# - NERD (DEFAULT, basic features plus Milne&Witten and word+entity embeddings)
+rankerFeatures: NERD
+
+# Possible values for the selector decision model:  
+# - BASELINE (only use conditional prob)
+# - SIMPLE (DEFAULT, basic features in addition to Milne & Witten relatedness)
+# - MINIMAL (use ranking score without relatedness and basic feature)
+# - NERD (use ranking score with relatedness, embeddings similarity and basic feature)
+selectorFeatures: SIMPLE
+
+# final disambiguation score can be either ranker score or selector score (default)
+#finalScore: ranker
