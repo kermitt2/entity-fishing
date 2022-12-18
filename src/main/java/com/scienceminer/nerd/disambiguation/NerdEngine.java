@@ -332,10 +332,10 @@ public class NerdEngine {
 		Collections.sort(result);
 		//Collections.sort(result, new SortEntitiesBySelectionScore());
 
-		for (NerdEntity entity : result) {
-		System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
-		System.out.println("--");
-		}
+		/*for (NerdEntity entity : result) {
+			System.out.println("Surface: " + entity.getRawName() + " - "+  entity.toString());
+			System.out.println("--");
+		}*/
 
 		if (shortTextVal) {
             return result;
