@@ -41,7 +41,7 @@ minRankerScore: 0.2
 
 # if true, use links out for computing relatedness between two entities in addition to
 # the links in (slower but more precise in principle)
-useLinkOut : true
+useLinkOut: true
 
 # Above this frequency, the more frequent terms will be skipped and not disambiguated. 
 # The goal is to speed-up processing by ignoring very frequent word which are likely 

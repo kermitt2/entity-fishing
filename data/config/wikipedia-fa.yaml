@@ -41,7 +41,7 @@ minRankerScore: 0.2
 
 # if true, use links out for computing relatedness between two entities in addition to
 # the links in (slower but more precise in principle)
-useLinkOut : true
+useLinkOut: true
 
 # Above this frequency, the more frequent terms will be skipped and not disambiguated. 
 # The goal is to speed-up processing by ignoring very frequent word which are likely 
@@ -49,4 +49,4 @@ useLinkOut : true
 # interest. The frequency is expressed as zipf, i.e. a number typically between 0 and 8:
 # - a term with zipf value 6 appears once per thousand words
 # - a term with Zipf value 3 appears once per million words
-maxTermFrequency : 8.0
+maxTermFrequency: 8.0
