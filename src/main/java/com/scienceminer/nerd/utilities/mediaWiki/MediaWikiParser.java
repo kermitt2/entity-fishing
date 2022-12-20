@@ -109,6 +109,26 @@ public class MediaWikiParser {
         configs.put("fa", config);
         engine = new WtEngineImpl(config);        
         engines.put("fa", engine);
+
+        config = DefaultConfigUkWp.generate();
+        configs.put("uk", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("uk", engine);
+
+        config = DefaultConfigSvWp.generate();
+        configs.put("sv", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("sv", engine);
+
+        config = DefaultConfigHiWp.generate();
+        configs.put("hi", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("hi", engine);
+
+        config = DefaultConfigBnWp.generate();
+        configs.put("bn", config);
+        engine = new WtEngineImpl(config);        
+        engines.put("bn", engine);
     }
 
     /**
