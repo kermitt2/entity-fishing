@@ -31,7 +31,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(1234);
         entity2.setNerdScore(0.5);
 
-        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(1));
         assertThat(result.get(0), is(entity2));
@@ -50,7 +50,7 @@ public class PruningServiceTest {
         entity2.setNerdScore(0.5);
         entity2.setType(NERLexicon.NER_Type.LOCATION);
 
-        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(1));
         assertThat(result.get(0), is(entity2));
@@ -62,7 +62,7 @@ public class PruningServiceTest {
         NerdEntity entity2 = new NerdEntity("test1", 0, 10);
         entity2.setNormalisedName("test1");
 
-        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(1));
         assertThat(result.get(0), is(entity2));
@@ -80,7 +80,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(5678);
         entity2.setNerdScore(0.4);
 
-        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(1));
         assertThat(result.get(0), is(entity2));
@@ -97,7 +97,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(5678);
         entity2.setNerdScore(0.3);
 
-        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(1));
         assertThat(result.get(0), is(entity2));
@@ -147,7 +147,7 @@ public class PruningServiceTest {
         entity2.setNerdScore(1);
         entity2.setSelectionScore(0.5973);
 
-        final List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false);
+        final List<NerdEntity> result = target.pruneOverlap(Arrays.asList(entity1, entity2), false, null);
         assertThat(result, hasSize(1));
         assertThat(result.get(0).getRawName(), is("German-occupied territory"));
     }
@@ -163,7 +163,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(12);
         entity2.setNerdScore(0.7);
 
-        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(2));
     }
@@ -180,7 +180,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(1);
         entity2.setNerdScore(0.7);
 
-        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(1));
         assertThat(result.get(0), is(entity1));
@@ -197,7 +197,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(12);
         entity2.setNerdScore(0.6);
 
-        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(2));
     }
@@ -213,7 +213,7 @@ public class PruningServiceTest {
         entity2.setWikipediaExternalRef(12);
         entity2.setNerdScore(0.9);
 
-        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false);
+        List<NerdEntity> result = target.pruneOverlapNBest(Arrays.asList(entity1, entity2), false, null);
 
         assertThat(result, hasSize(2));
     }
