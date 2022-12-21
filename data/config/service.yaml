@@ -28,7 +28,7 @@ logging:
     timeZone: UTC
   - type: file
     currentLogFilename: logs/entity-fishing.log
-    threshold: INFO
+    threshold: DEBUG
     archive: true
     archivedLogFilenamePattern: logs/entity-fishing.log-%d.log
     archivedFileCount: 5
