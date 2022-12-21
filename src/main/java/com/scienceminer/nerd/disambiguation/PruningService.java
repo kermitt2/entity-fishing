@@ -32,7 +32,8 @@ public class PruningService {
 
                 NerdEntity entity2 = entities.get(pos2);
 
-                if (!areEntityOverlapping(entity1, entity2)) continue;
+                if (!areEntityOverlapping(entity1, entity2)) 
+                    continue;
 
                 if (toRemove.contains(pos2))
                     continue;
@@ -230,7 +231,7 @@ public class PruningService {
 
                 if (entity2.getType() != null && entity2.getWikipediaExternalRef() == -1) {
                     // we have a NER not disambiguated check if the other entity has been disambiguated
-                    if (entity1.getWikipediaExternalRef() != -1 && entity1.getNerdScore() > 0.2) {
+                    if (entity1.getWikipediaExternalRef() != -1 && entity1.getSelectionScore() > 0.2) {
                         toRemove.add(pos2);
                         continue;
                     }
@@ -260,13 +261,10 @@ public class PruningService {
                     if (conf2 < conf1) {
                         toRemove.add(pos2);
                         continue;
-                    } else {
-                        double selectionConf1 = entity1.getSelectionScore();
-                        double selectionConf2 = entity2.getSelectionScore();
-
-                        if (selectionConf2 < selectionConf1) {
-                            toRemove.add(pos2);
-                        }
+                    } else if (conf2 == conf1) {
+                        // (to be revisited) there must be only one 
+                        toRemove.add(pos2);
+                        continue;
                     }
                 }
             }

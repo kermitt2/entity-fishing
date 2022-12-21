@@ -347,13 +347,18 @@ public class NerdEngine {
             result = this.pruningService.pruneOverlap(result, shortTextVal, wikipedia.getConfig().getFinalScore());
         }
 
-		// final pruning
+		// final pruning with ranking score - it make sense only when Add_prob_c is considered as feature
 		double minRankerScore = wikipedia.getConfig().getMinRankerScore();
 		if (nerdQuery.getMinRankerScore() != 0.0)
 			minRankerScore = nerdQuery.getMinRankerScore();
 
-		if (!nerdQuery.getNbest())
-			this.pruningService.prune(result, minRankerScore);
+		if (!nerdQuery.getNbest()) {
+			NerdRanker ranker = rankers.get(lang);
+			ranker = instantiateRankerIfNull(lang, ranker);
+			GenericRankerFeatureVector rankerFeatureVector = ranker.getNewFeature();
+			if (rankerFeatureVector.Add_prob_c)
+				this.pruningService.prune(result, minRankerScore);
+		}
 
 		return result;
 	}
@@ -1664,8 +1669,6 @@ System.out.println("Merging...");
 
 			boolean isNe = entity.getType() != null;
 			for(NerdCandidate candidate : candidates) {
-				//if (candidate.getMethod() == NerdCandidate.NERD)
-				//{
 				try {
 					double tf = Utilities.getOccCount(candidate.getLabel().getText(), text);
 					double idf = ((double)wikipedia.getArticleCount()) / candidate.getLabel().getDocCount();
@@ -1700,7 +1703,6 @@ System.out.println("Merging...");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-				//}
 			}
 
 /*System.out.println("Surface: " + entity.getRawName());	
@@ -2367,7 +2369,15 @@ System.out.println(acronym.getRawName() + " / " + base.getRawName());
         }
 		if (!nerdQuery.getNbest()) {
 			double minRankerScore = wikipedia.getConfig().getMinRankerScore();
-			this.pruningService.prune(nerdQuery.getEntities(), minRankerScore);
+			Language language = nerdQuery.getLanguage();
+			if (language != null) {
+				String lang = language.getLang();
+				NerdRanker ranker = rankers.get(lang);
+				ranker = instantiateRankerIfNull(lang, ranker);
+				GenericRankerFeatureVector rankerFeatureVector = ranker.getNewFeature();
+				if (rankerFeatureVector.Add_prob_c)
+					this.pruningService.prune(nerdQuery.getEntities(), minRankerScore);
+			}
 		}
 	}
 
