@@ -276,4 +276,19 @@ public class TestMediaWikiParser {
         assertThat(inputSlim.trim(), startsWith("'''Anarchism'''"));
     }
 
+    @Test
+    public void testWikiMediaToTextWithInternalLinksAndCategoriesOnly() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("Artiklar.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String inputSlim = mediaWikiParser.toTextWithInternalLinksAndCategoriesOnly(input, "sv");
+
+        System.out.println("*************************");
+        System.out.println(inputSlim);
+
+        assertThat(inputSlim.trim(), startsWith("Denna kategori"));
+    }
+
+
+
 }
