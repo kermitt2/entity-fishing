@@ -1093,6 +1093,9 @@ Here a sample of the response:
       “biology”
    ]
 
+(3) Example using CURL:
+::
+    curl -X GET https://cloud.science-miner.com/nerd/service/customisations
 
 GET /customisation/{name}
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1121,8 +1124,6 @@ Retrieve the content of a specific customisation
 +==========+==============+=====================+===========================================+
 | optional | Accept       | application/json    | Set the response type of the output       |
 +----------+--------------+---------------------+-------------------------------------------+
-
-
 
 (3) Example response
 
@@ -1202,6 +1203,9 @@ Or in case of issues:
      "message": "The customisation already exists."
    }
 
+(5) **Example using CURL**:
+::
+    curl -X POST --form name=software --form 'value={"wikipedia":[23015,5309,5783,27010,454746,10768456,1721496,10635],"language": {"lang":"en"}}' https://cloud.science-miner.com/nerd/service/customisations
 
 PUT /customisation/{profile}
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1233,7 +1237,6 @@ A text describing informally the customisation can be added optionally.
 +==========+==============+=====================+===========================================+
 | optional | Accept       | application/json    | Set the response type of the output       |
 +----------+--------------+---------------------+-------------------------------------------+
-
 
 
 (3) Example response

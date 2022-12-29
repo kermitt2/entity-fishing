@@ -9,7 +9,7 @@ dbDirectory: data/db/db-en
 # path to the compiled CSV wikipedia, infobox, wikidata files
 # note that these files are only used when creating the LMDB data,
 # if the LMDB data are already provided, these files will not be used
-dataDirectory: /media/lopez/data1/wikipedia/latest/en/
+dataDirectory: /media/lopez/data/wikipedia/latest/en/
 #dataDirectory: /home/lopez/resources/wikipedia/en/
 
 # path to the stopwords file to consider for the target language
