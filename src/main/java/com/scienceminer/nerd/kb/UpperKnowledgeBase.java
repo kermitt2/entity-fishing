@@ -40,7 +40,7 @@ public class UpperKnowledgeBase {
 
 	// this is the list of supported languages 
   	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
-  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar", "zh", "ja", "ru", "pt", "fa");
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi");
  
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
@@ -145,6 +145,30 @@ public class UpperKnowledgeBase {
 			LowerKnowledgeBase wikipedia_fa = new LowerKnowledgeBase(conf);
 			wikipedias.put("fa", wikipedia_fa);
             wikipediaDomainMaps.put("fa", wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Swedish lower Knowledge-base layer (if present)");
+            conf = mapper.readValue(new File("data/config/wikipedia-sv.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_sv = new LowerKnowledgeBase(conf);
+			wikipedias.put("sv", wikipedia_sv);
+            wikipediaDomainMaps.put("sv", wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Ukrainian lower Knowledge-base layer (if present)");
+            conf = mapper.readValue(new File("data/config/wikipedia-uk.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_uk = new LowerKnowledgeBase(conf);
+			wikipedias.put("uk", wikipedia_uk);
+            wikipediaDomainMaps.put("uk", wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Bengali lower Knowledge-base layer (if present)");
+            conf = mapper.readValue(new File("data/config/wikipedia-bn.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_bn = new LowerKnowledgeBase(conf);
+			wikipedias.put("bn", wikipedia_bn);
+            wikipediaDomainMaps.put("bn", wikipediaDomainMaps_en);
+
+            LOGGER.info("Init Hindi lower Knowledge-base layer (if present)");
+            conf = mapper.readValue(new File("data/config/wikipedia-hi.yaml"), NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_hi = new LowerKnowledgeBase(conf);
+			wikipedias.put("hi", wikipedia_hi);
+            wikipediaDomainMaps.put("hi", wikipediaDomainMaps_en);
 
 			LOGGER.info("End of Initialization of Wikipedia environments");
 

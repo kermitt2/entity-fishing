@@ -281,8 +281,12 @@ public class MediaWikiParser {
         wikitext = wikitext.replaceAll("<!--.*?-->", " ");
         // remove html comment in media wiki
 
-        wikitext = toTextWithInternalLinksEmphasisOnly(wikitext, lang);
-
+        try {
+            wikitext = toTextWithInternalLinksEmphasisOnly(wikitext, lang);
+        } catch(Exception e) {
+            LOGGER.warn("Fail to parse MediaWiki text in formatFirstParagraphWikiText, lang is " + lang, e);
+        }
+        
         String firstParagraph = "";
         int pos = wikitext.indexOf("\n\n");
         while (pos >= 0) {
