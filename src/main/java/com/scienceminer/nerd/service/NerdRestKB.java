@@ -10,6 +10,7 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.core.lang.Language;
 
@@ -35,6 +36,9 @@ public class NerdRestKB {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NerdRestKB.class);
 
+    public static final String MediaWikiFormat = "MediaWiki";
+    public static final String PlainTextFormat = "PlainText";
+
     @Inject
     public NerdRestKB() {
     }
@@ -45,23 +49,23 @@ public class NerdRestKB {
      * @param id identifier of the concept
      * @return a response object containing the information related to the identified concept.
      */
-    public String getConceptInfo(String id, String lang) {
+    public String getConceptInfo(String id, String lang, String definitionFormat) {
         String response = null;
         if (id.startsWith("Q")) {
             // we have a concept
-            response = getWikidataConceptInfo(id);
+            response = getWikidataConceptInfo(id, definitionFormat);
         } else if (id.startsWith("P")) {
             // we have a property
-            response = getWikidataConceptInfo(id);
+            response = getWikidataConceptInfo(id, definitionFormat);
         } else {
             // we have a wikipedia page id, and the lang field matters
-            response = getWikipediaConceptInfo(id, lang);
+            response = getWikipediaConceptInfo(id, lang, definitionFormat);
         }
 
         return response;
     }
 
-    private String getWikipediaConceptInfo(String id, String lang) throws QueryException {
+    private String getWikipediaConceptInfo(String id, String lang, String definitionFormat) throws QueryException {
         Integer identifier = null;
         try {
             identifier = Integer.parseInt(id);
@@ -93,7 +97,13 @@ public class NerdRestKB {
         // definition
         Definition definition = new Definition();
         try {
-            definition.setDefinition(article.getFirstParagraphWikiText());
+            String wikiText = article.getFirstParagraphWikiText();
+            if (definitionFormat.equals(this.PlainTextFormat)) {
+                String wikiTextOnly = MediaWikiParser.getInstance().toTextOnly(wikiText, lang);
+                definition.setDefinition(wikiTextOnly);
+            }
+            else
+                definition.setDefinition(wikiText);
         } catch (Exception e) {
             LOGGER.debug("Error when getFirstParagraphWikiText for page id " + identifier);
         }
@@ -151,7 +161,7 @@ public class NerdRestKB {
         }
     }
 
-    private String getWikidataConceptInfo(String id) {
+    private String getWikidataConceptInfo(String id, String definitionFormat) {
         NerdEntity entity = new NerdEntity();
         entity.setLang(Language.EN);
         UpperKnowledgeBase knowledgeBase = UpperKnowledgeBase.getInstance();
@@ -180,7 +190,13 @@ public class NerdRestKB {
                     // definition
                     Definition definition = new Definition();
                     try {
-                        definition.setDefinition(article.getFirstParagraphWikiText());
+                        String wikiText = article.getFirstParagraphWikiText();
+                        if (definitionFormat.equals(this.PlainTextFormat)) {
+                            String wikiTextOnly = MediaWikiParser.getInstance().toTextOnly(wikiText, Language.EN);
+                            definition.setDefinition(wikiTextOnly);
+                        }
+                        else
+                            definition.setDefinition(wikiText);
                     } catch (Exception e) {
                         LOGGER.debug("Error when getFirstParagraphWikiTextfor page id " + id);
                     }

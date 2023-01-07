@@ -56,6 +56,7 @@ public class NerdRestService implements NerdPaths {
     private static final String SENTENCE = "sentence";
     private static final String FORMAT = "format";
     private static final String CUSTOMISATION = "customisation";
+    private static final String DEFINITIONFORMAT = "definitionFormat";
 
     NerdRestProcessQuery nerdProcessQuery;
     NerdRestProcessFile nerdProcessFile;
@@ -330,13 +331,14 @@ public class NerdRestService implements NerdPaths {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getConceptInformation(@PathParam(ID) String identifier,
-                                          @DefaultValue(Language.EN) @QueryParam(LANG) String lang) {
+                                          @DefaultValue(Language.EN) @QueryParam(LANG) String lang,
+                                          @DefaultValue(NerdRestKB.MediaWikiFormat) @QueryParam(DEFINITIONFORMAT) String definitionFormat) {
 
         String output = null;
         Response response = null;
 
         try {
-            output = nerdRestKB.getConceptInfo(identifier, lang);
+            output = nerdRestKB.getConceptInfo(identifier, lang, definitionFormat);
 
             if (isBlank(output)) {
                 response = Response.status(Response.Status.NOT_FOUND).build();
