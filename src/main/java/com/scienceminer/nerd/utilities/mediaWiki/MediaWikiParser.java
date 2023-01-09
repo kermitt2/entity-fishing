@@ -153,6 +153,7 @@ public class MediaWikiParser {
             EngProcessedPage cp = engine.postprocess(pageId, wikitext, null);
             WikiTextConverter converter = new WikiTextConverter(configs.get(lang));
             result = (String)converter.go(cp.getPage());
+            result = formatFragment(result);
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
@@ -180,6 +181,7 @@ public class MediaWikiParser {
             WikiTextConverter converter = new WikiTextConverter(configs.get(lang));
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
             result = (String)converter.go(cp.getPage());
+            result = formatFragment(result);
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
@@ -208,6 +210,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS);
             converter.addToKeep(WikiTextConverter.CATEGORY_LINKS);
             result = (String)converter.go(cp.getPage());
+            result = formatFragment(result);
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
@@ -236,6 +239,7 @@ public class MediaWikiParser {
             WikiTextConverter converter = new WikiTextConverter(configs.get(lang));
             converter.addToKeep(WikiTextConverter.INTERNAL_LINKS_ARTICLES);
             result = (String)converter.go(cp.getPage());
+            result = formatFragment(result);
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text, lang is " + lang, e);
         }
@@ -267,6 +271,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.BOLD);
             converter.addToKeep(WikiTextConverter.ITALICS);
             result = (String)converter.go(cp.getPage());
+            result = formatFragment(result);
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text in toTextWithInternalLinksEmphasisOnly, lang is " + lang, e);
         }
@@ -299,12 +304,7 @@ public class MediaWikiParser {
                 break;
             pos = wikitext.indexOf("\n\n", pos+2);
         }
-
-        firstParagraph = firstParagraph.replaceAll("\n", " ");
-        firstParagraph = firstParagraph.replaceAll("\\[\\]", "");  
-        firstParagraph = firstParagraph.replaceAll("\\s+", " "); 
-        firstParagraph = firstParagraph.replaceAll("\\s,", ",");
-
+        firstParagraph= formatFragment(firstParagraph);
         return trim(firstParagraph);
     }
 
@@ -356,11 +356,17 @@ public class MediaWikiParser {
         // remove html comment in media wiki
 
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext, lang);
+        wikitext= formatFragment(wikitext);
+
+        return trim(wikitext);
+    }
+
+    static private String formatFragment(String wikitext) {
+        wikitext = wikitext.replace("( )", " ");
         wikitext = wikitext.replaceAll("\n", " ");
-        wikitext = wikitext.replaceAll("\\[\\]", "");  
+        wikitext = wikitext.replaceAll("\\[\\]", ""); 
         wikitext = wikitext.replaceAll("\\s+", " ");  
         wikitext = wikitext.replaceAll("\\s,", ",");
-
         return trim(wikitext);
     }
 

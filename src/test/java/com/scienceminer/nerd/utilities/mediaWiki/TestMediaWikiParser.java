@@ -60,7 +60,7 @@ public class TestMediaWikiParser {
         String input = IOUtils.toString(is, UTF_8);
         input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextOnly(input, "de");
-        assertThat(result, startsWith("Astana [], deutsch auch [] (kasachisch und russisch ; ist auch das kasachische Wort für Hauptstadt) ist seit 1997 die Hauptstadt Kasachstan"));
+        assertThat(result, startsWith("Astana, deutsch auch (kasachisch und russisch ; ist auch das kasachische Wort für Hauptstadt) ist seit 1997 die Hauptstadt Kasachstan"));
         //assertThat(result, startsWith("Astana [], deutsch auch [] (kasachisch und russisch ; ist auch das kasachische Wort für Hauptstadt) ist seit 1997 die Hauptstadt Kasachstan"));
         assertThat(result, not(containsString("[[")));
         assertThat(result, not(containsString("'''")));
@@ -260,6 +260,9 @@ public class TestMediaWikiParser {
         input = StringEscapeUtils.unescapeXml(input);
         String result = mediaWikiParser.toTextWithInternalLinksArticlesOnly(input, "fr");
 
+        System.out.println("*************************");
+        System.out.println(result);
+
         assertThat(result, containsString("[["));
         assertThat(result, containsString("]]"));
         assertThat(result, not(containsString("'''")));
@@ -283,12 +286,23 @@ public class TestMediaWikiParser {
         input = StringEscapeUtils.unescapeXml(input);
         String inputSlim = mediaWikiParser.toTextWithInternalLinksAndCategoriesOnly(input, "sv");
 
-        System.out.println("*************************");
-        System.out.println(inputSlim);
+        //System.out.println("*************************");
+        //System.out.println(inputSlim);
 
         assertThat(inputSlim.trim(), startsWith("Denna kategori"));
     }
 
+    @Test
+    public void testWikiMediaToHTML() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("date_fr.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String inputHTML = mediaWikiParser.toHTML(input, "sv");
 
+        //System.out.println("*************************");
+        //System.out.println(inputHTML);
+
+        assertThat(inputHTML.trim(), startsWith("<p><b>Emmanuel Macron</b> "));
+    }
 
 }

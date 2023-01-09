@@ -519,7 +519,9 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	private boolean templateToKeep(String templateNameString) {
 		//if (templateNameString.indexOf("date") != -1 || templateNameString.equals("MSAPI"))
 		if (templateNameString != null && 
-			(templateNameString.toLowerCase().startsWith("date ") || templateNameString.toLowerCase().endsWith(" date")))
+			(templateNameString.toLowerCase().startsWith("date ") || 
+			 templateNameString.toLowerCase().startsWith("date-") || 
+			 templateNameString.toLowerCase().endsWith(" date")))
 			return true;
 		return false;
 	}
