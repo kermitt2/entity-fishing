@@ -38,6 +38,7 @@ public class NerdRestKB {
 
     public static final String MediaWikiFormat = "MediaWiki";
     public static final String PlainTextFormat = "PlainText";
+    public static final String HTMLFormat = "html";
 
     @Inject
     public NerdRestKB() {
@@ -101,8 +102,10 @@ public class NerdRestKB {
             if (definitionFormat.equals(this.PlainTextFormat)) {
                 String wikiTextOnly = MediaWikiParser.getInstance().toTextOnly(wikiText, lang);
                 definition.setDefinition(wikiTextOnly);
-            }
-            else
+            } else if (definitionFormat.equals(this.HTMLFormat)) {
+                String wikiHtml = MediaWikiParser.getInstance().toHTML(wikiText, lang);
+                definition.setDefinition(wikiHtml);
+            } else
                 definition.setDefinition(wikiText);
         } catch (Exception e) {
             LOGGER.debug("Error when getFirstParagraphWikiText for page id " + identifier);
@@ -194,8 +197,10 @@ public class NerdRestKB {
                         if (definitionFormat.equals(this.PlainTextFormat)) {
                             String wikiTextOnly = MediaWikiParser.getInstance().toTextOnly(wikiText, Language.EN);
                             definition.setDefinition(wikiTextOnly);
-                        }
-                        else
+                        } else if (definitionFormat.equals(this.HTMLFormat)) {
+                            String wikiHtml = MediaWikiParser.getInstance().toHTML(wikiText, Language.EN);
+                            definition.setDefinition(wikiHtml);
+                        } else
                             definition.setDefinition(wikiText);
                     } catch (Exception e) {
                         LOGGER.debug("Error when getFirstParagraphWikiTextfor page id " + id);

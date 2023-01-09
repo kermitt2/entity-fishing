@@ -672,7 +672,7 @@ GET /kb/concept/{id}
 ==========  =================  =====================  ======================================================================================================
  required    id                String                 ID of the concept to be retrieved (wikipedia, wikidata id (starting with `Q`) or  property (starting with `P`).
  optional    lang              String                 (valid only for wikipedia IDs) The language knowledge base where to fetch the  concept from. Default: `en`.
- optional    definitionFormat  String                 The format of the definition text associated to the concept. Possible choice are:  Default `MediaWiki` or `PlainText` 
+ optional    definitionFormat  String                 The format of the definition text associated to the concept. Possible choice are:  Default `MediaWiki` or `PlainText` or `html`
 ==========  =================  =====================  ======================================================================================================
 
 (2) Request header

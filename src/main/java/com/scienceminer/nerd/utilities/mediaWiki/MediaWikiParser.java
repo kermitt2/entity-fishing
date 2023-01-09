@@ -8,9 +8,13 @@ import java.util.*;
 import org.sweble.wikitext.engine.PageId;
 import org.sweble.wikitext.engine.PageTitle;
 import org.sweble.wikitext.engine.WtEngineImpl;
+import org.sweble.wikitext.parser.nodes.WtUrl;
 import org.sweble.wikitext.engine.config.WikiConfig;
 import org.sweble.wikitext.engine.nodes.EngProcessedPage;
-//import org.sweble.wikitext.engine.utils.DefaultConfigEnWp;
+import org.sweble.wikitext.engine.output.HtmlRenderer;
+import org.sweble.wikitext.engine.output.HtmlRendererCallback;
+import org.sweble.wikitext.engine.output.MediaInfo;
+import org.sweble.wikitext.engine.config.Interwiki;
 
 import static org.apache.commons.lang3.StringUtils.trim;
 
@@ -305,6 +309,42 @@ public class MediaWikiParser {
     }
 
     /**
+     * @return the content of the wiki text fragment converted into HTML
+     */
+    public String toHTML(String wikitext, String lang) {
+        // get a compiler for wiki pages
+        WtEngineImpl engine = engines.get(lang);
+        String htmlString = null;
+        
+        try {
+            // still no idea why we need a fake page title
+            PageTitle pageTitle = PageTitle.make(configs.get(lang), "crap");
+            PageId pageId = new PageId(pageTitle, -1);
+        
+            // here we also need a callback to inject link information in the html
+            HtmlCallback htmlCallback = new HtmlCallback();
+            htmlCallback.setLang(lang);
+
+            EngProcessedPage ast = engine.postprocess(pageId, wikitext, null);
+            htmlString = HtmlRenderer.print(htmlCallback, configs.get(lang), null, ast);
+
+            if (htmlString != null) {
+                // we need to strip out the starting/trailing new line and tabulation characters
+                // for the paragraphs
+                htmlString = htmlString.replaceAll("<p>[\\n\\t]+", "<p>");
+                htmlString = htmlString.replaceAll("[\\n\\t]+</p>", "<p>");
+            }
+
+        } catch(Exception e) {
+            LOGGER.error("Fail to convertMediaWiki text into HTML, lang is " + lang, e);
+            // fallback to text only, which is always a string, possibly empty
+            htmlString = "<p>" + toTextOnly(wikitext, lang) + "</p>";
+        }
+
+        return htmlString;
+    }
+
+    /**
      * @return the full content of the wiki text fragment after basic cleaning (template, etc.)
      * preserving all links and style markup
      */
@@ -370,6 +410,49 @@ public class MediaWikiParser {
         }
 
         return wikitextSlim.toString();
+    }
+
+    private static final class HtmlCallback implements HtmlRendererCallback {
+
+        // didn't find  way to get the lang code, so adding the info here
+        private String lang = null;
+
+        public void setLang(String lang) {
+            this.lang = lang;
+        }
+
+        public String getLang() {
+            return this.lang;
+        }
+
+        @Override
+        public boolean resourceExists(PageTitle target) {
+            // we could check if page title in KB, but just following input is also good strategy and easier
+            return true;
+        }
+        
+        @Override
+        public MediaInfo getMediaInfo(String title, int width, int height) {
+            // we don't do images
+            return null;
+        }
+
+        @Override
+        public String makeUrlMissingTarget(String path) {
+            // we assume always present
+            return path;
+        }
+
+        @Override
+        public String makeUrl(PageTitle linkTarget) {            
+            // getTitle() here return normally the wikipedia "normalized" title (" " replaced by "_")
+            return "https://"+this.lang+".wikipedia.org/wiki/" + linkTarget.getTitle();
+        }
+
+        @Override
+        public String makeUrl(WtUrl target) {
+            return "";
+        }
     }
 }
 
