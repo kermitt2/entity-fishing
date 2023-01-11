@@ -64,14 +64,11 @@ public class WikipediaTrainer {
 
 		arffRanker = new File(dataDir.getPath() + File.separator + lang + File.separator + "ranker.arff");
 		arffSelector = new File(dataDir.getPath() + File.separator + lang + File.separator + "selector.arff");
-
-		//modelRanker = new File(dataDir.getPath() + "/" + lang + "/ranker.model");
-		//modelSelector = new File(dataDir.getPath() + "/" + lang + "/selector.model");
 	}
 
 	private void createArticleSamples() throws IOException{
 		// training ranker, training selector, eval ranker, eval selector, eval end-to-end
-		List<Integer> sampleSizes = Arrays.asList(5000,1000,500,100,100);
+		List<Integer> sampleSizes = Arrays.asList(5000,2000,300,100,100);
 		
 		// below, tuned for Arabic, Japanese, Mandarin where there are less links in/out
 		//List<Integer> sampleSizes = Arrays.asList(2000,1000,300,100,100);
@@ -93,7 +90,7 @@ public class WikipediaTrainer {
 		criteriaEvaluation.setMinOutLinks(20);
 		criteriaEvaluation.setMinInLinks(20);
 		criteriaEvaluation.setMinWordCount(100);
-		criteriaEvaluation.setMaxWordCount(1000);
+		criteriaEvaluation.setMaxWordCount(500);
 
 		/*criterias.setMinOutLinks(50);
 		criterias.setMinInLinks(100);

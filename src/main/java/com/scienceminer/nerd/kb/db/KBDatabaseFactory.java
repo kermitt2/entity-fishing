@@ -407,7 +407,6 @@ public class KBDatabaseFactory {
 		        if (dataFile == null)
 		            throw new NerdResourceException("Embeddings file not found");
 
-		        //BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile), "UTF-8"));
 		        BufferedReader input = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(dataFile)), StandardCharsets.UTF_8));
 		        String line = null;
 		        int nbToAdd = 0;
