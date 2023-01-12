@@ -133,7 +133,7 @@ public class SimilarityScorer {
 			word = word.replaceAll("\\d", "0");
 
 			// lower case everything (to be evaluated!)
-			word = word.toLowerCase();
+			//word = word.toLowerCase();
 			word = word.replace("\t", "");
 
 			if (word.trim().length() == 0)

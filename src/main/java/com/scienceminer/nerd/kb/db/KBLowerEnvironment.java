@@ -49,8 +49,10 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private KBDatabase<Integer, DbTranslations> dbTranslations = null;
 	private KBDatabase<Integer, Long> dbStatistics = null;
 	private KBDatabase<Integer,String> dbConceptByPageId = null;
-	private KBDatabase<String, short[]> dbWordEmbeddings = null;
-	private KBDatabase<String, short[]> dbEntityEmbeddings = null;
+	//private KBDatabase<String, short[]> dbWordEmbeddings = null;
+	//private KBDatabase<String, short[]> dbEntityEmbeddings = null;
+	private EmbeddingsDatabase dbWordEmbeddings = null;
+	private EmbeddingsDatabase dbEntityEmbeddings = null;
 	private StringIntDatabase dbWordFrequencies = null;
 
 	private int embeddingsSize = 300;
@@ -134,11 +136,11 @@ public class KBLowerEnvironment extends KBEnvironment {
 		return dbConceptByPageId;
 	}
 
-	public KBDatabase<String, short[]> getDbWordEmbeddings() {
+	public EmbeddingsDatabase getDbWordEmbeddings() {
 		return dbWordEmbeddings;
 	}
 
-	public KBDatabase<String, short[]> getDbEntityEmbeddings() {
+	public EmbeddingsDatabase getDbEntityEmbeddings() {
 		return dbEntityEmbeddings;
 	}
 
@@ -202,10 +204,12 @@ public class KBLowerEnvironment extends KBEnvironment {
 		dbStatistics = dbFactory.buildStatisticsDatabase();
 		databasesByType.put(DatabaseType.statistics, dbStatistics);
 
-		dbWordEmbeddings = dbFactory.buildWordEmbeddingsDatabase();
+		//dbWordEmbeddings = dbFactory.buildWordEmbeddingsDatabase();
+		dbWordEmbeddings = new EmbeddingsDatabase(this, DatabaseType.wordEmbeddings);
 		databasesByType.put(DatabaseType.wordEmbeddings, dbWordEmbeddings);
 
-		dbEntityEmbeddings = dbFactory.buildEntityEmbeddingsDatabase();
+		//dbEntityEmbeddings = dbFactory.buildEntityEmbeddingsDatabase();
+		dbEntityEmbeddings = new EmbeddingsDatabase(this, DatabaseType.entityEmbeddings);
 		databasesByType.put(DatabaseType.entityEmbeddings, dbEntityEmbeddings);
 
 		dbWordFrequencies = dbFactory.buildWordFrequenciesDatabase();
@@ -236,8 +240,10 @@ public class KBLowerEnvironment extends KBEnvironment {
 		File wikidata = getDataFile(dataDirectory, "wikidata.txt");
 		File translations = getDataFile(dataDirectory, "translations.csv");
 		File markup = getMarkupDataFile(dataDirectory);
-		File wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.quantized.gz");
-		File entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.quantized.gz");
+		//File wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.quantized.gz");
+		//File entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.quantized.gz");
+		File wordEmbeddingsFile = getDataFile(dataDirectory, "embeddings.quantized.bz2");
+		File entityEmbeddingsFile = getDataFile(dataDirectory, "embeddings.quantized.bz2");
 		File wordFrequenciesFile = new File(
 			"data"+File.separator+"stopwords"+File.separator+conf.getLangCode()+"_freq.json.gz");
 

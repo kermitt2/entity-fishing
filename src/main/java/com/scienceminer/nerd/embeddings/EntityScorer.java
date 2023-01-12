@@ -36,12 +36,14 @@ public abstract class EntityScorer {
             if (entity_id == null || word_counts.length == 0) {
                 return DEFAULT_SCORE;
             }
-            short[] entity_vec_tmp = kb.getEntityEmbeddings(entity_id);
+            //short[] entity_vec_tmp = kb.getEntityEmbeddings(entity_id);
+            float[] entity_vec_tmp = kb.getEntityEmbeddings(entity_id);
             if(entity_vec_tmp != null) {
-                entity_vec = new float[entity_vec_tmp.length];
-                for (int i = 0; i < entity_vec_tmp.length; i++) {
+                //entity_vec = new float[entity_vec_tmp.length];
+                entity_vec = entity_vec_tmp;
+                /*for (int i = 0; i < entity_vec_tmp.length; i++) {
                     this.entity_vec[i] = entity_vec_tmp[i];
-                }
+                }*/
             }
             return compute_score();
         }
@@ -62,7 +64,8 @@ public abstract class EntityScorer {
         int n_words = 0;
 
         for(Multiset.Entry<String> entry : counter.entrySet()) {
-            short[] vector = kb.getWordEmbeddings(entry.getElement());
+            //short[] vector = kb.getWordEmbeddings(entry.getElement());
+            float[] vector = kb.getWordEmbeddings(entry.getElement());
             if (vector != null) {
                 word_counts.add(entry.getCount());
                 for (int i=0; i<kb.getEmbeddingsSize(); i++) {
