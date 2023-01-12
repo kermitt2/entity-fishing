@@ -62,7 +62,7 @@ maxTermFrequency: 5.0
 # - SIMPLE (basic features in addition to Milne & Witten relatedness)
 # - EMBEDDINGS (only word+entity embeddings similarity)
 # - NERD (DEFAULT, basic features plus Milne&Witten and word+entity embeddings)
-rankerFeatures: EMBEDDINGS
+rankerFeatures: NERD
 
 # Possible values for the selector decision model:  
 # - BASELINE (only use conditional prob)
