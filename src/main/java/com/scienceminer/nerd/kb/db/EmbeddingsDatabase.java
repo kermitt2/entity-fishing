@@ -207,7 +207,7 @@ public class EmbeddingsDatabase extends KBDatabase<String, short[]> {
                     Article article = null;
                     Integer id = ((KBLowerEnvironment)this.env).getDbArticlesByTitle().retrieve(titlePage);
                     if (id == null) {
-                        System.out.println("fail to lookup page title: " + titlePage);
+                        //System.out.println("fail to lookup page title: " + titlePage);
                         continue;
                     }
                     Page page = Page.createPage(((KBLowerEnvironment)this.env), id);
@@ -224,7 +224,7 @@ public class EmbeddingsDatabase extends KBDatabase<String, short[]> {
 
                     if (qId == null) {
                         // the title page is not mapped to a valid Wikidata entity
-                        LOGGER.warn("Fail to map the title page to a Wikidata entity: " + titlePage);
+                        //LOGGER.warn("Fail to map the title page to a Wikidata entity: " + titlePage);
                         continue;
                     } else
                         keyVal = qId;
