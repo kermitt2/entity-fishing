@@ -33,7 +33,7 @@ minSenseProbability: 0.01
 
 # minimum score produced by the selector model under which the entity 
 # will be pruned
-minSelectorScore: 0.30
+minSelectorScore: 0.25
 
 # minimum score produced by the ranker model under which the entity 
 # will be pruned
