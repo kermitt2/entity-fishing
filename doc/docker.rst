@@ -19,44 +19,53 @@ Pull the image from Docker Hub (check the `latest version number <https://hub.do
 
 The current latest version should be (image size: 1.6GB):
 ::
-    $ docker pull grobid/entity-fishing:0.0.5
+    $ docker pull grobid/entity-fishing:0.0.6
 
 Prepare the knowledge data volumes on your host machine: *entity-fishing* uses LMDB to store compiled Wikidata and Wikipedia resources for every supported languages. Despite compression and indexing, these resources are pretty big, because they cover most of Wikidata and language-specific Wikipedia content. 
 
 Download and unzip somewhere on your host machine (where the docker container will run) the following data resources:
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-kb.zip (7.5 GB) (minimum requirement)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-kb.zip (8.7 GB) (minimum requirement)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-en.zip (6.9 GB) (minimum requirement)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-en.zip (7.0 GB) (minimum requirement)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fr.zip (3.5 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-fr.zip (4.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-de.zip (2.6 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-de.zip (2.6 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-es.zip (1.8 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-es.zip (1.9 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-it.zip (1.6 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-it.zip (1.7 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ar.zip (1.3 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ar.zip (1.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-zh.zip (1.3 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-zh.zip (1.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ru.zip (2.3 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ru.zip (2.4 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-ja.zip (1.8 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ja.zip (1.8 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-pt.zip (1.8 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-pt.zip (1.2 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.5/db-fa.zip (1.8 GB)
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-fa.zip (1.1 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-uk.zip (1.3 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-sv.zip (1.4 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-bn.zip (0.3 GB)
+
+        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-hi.zip (0.2 GB)
+
 
 Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
       -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-en \
-      grobid/entity-fishing:0.0.5 
+      grobid/entity-fishing:0.0.6 
 
-More volumes can be mounted to support more languages. Be sure to have installed the data resources files on the host machine at the previous steps. For example, here for the 11 supported languages:
+More volumes can be mounted to support more languages. Be sure to have installed the data resources files on the host machine at the previous steps. For example, here for the 15 supported languages:
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
@@ -71,7 +80,11 @@ More volumes can be mounted to support more languages. Be sure to have installed
       -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-ja \
       -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-pt \
       -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-fa \
-      grobid/entity-fishing:0.0.5 
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-uk \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-sv \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-bn \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-hi \
+      grobid/entity-fishing:0.0.6 
 
 Similarly to run the container with a modified config file, mount the modified version at launch of the container: 
 ::
@@ -79,7 +92,7 @@ Similarly to run the container with a modified config file, mount the modified v
       -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
       -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-en \
       -v /home/lopez/entity-fishing/data/config/wikipedia-en.yaml:/opt/entity-fishing/data/config/wikipedia-en.yaml \
-      grobid/entity-fishing:0.0.5
+      grobid/entity-fishing:0.0.6
 
 Access the service (with default port):
 
@@ -96,8 +109,8 @@ Access the service (with default port):
 Building entity-fishing image
 *****************************
 
-For building a new image corresponding to the current entity-fishing master (e.g. ``0.0.6-SNAPSHOT``):
+For building a new image corresponding to the current entity-fishing master (e.g. ``0.0.7-SNAPSHOT``):
 ::
-    $ docker build -t grobid/entity-fishing:0.0.6-SNAPSHOT --build-arg BUILD_VERSION=0.0.6-SNAPSHOT --file Dockerfile .
+    $ docker build -t grobid/entity-fishing:0.0.7-SNAPSHOT --build-arg BUILD_VERSION=0.0.7-SNAPSHOT --file Dockerfile .
 
 

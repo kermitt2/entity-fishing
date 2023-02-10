@@ -32,7 +32,7 @@ Tasks
 .. image:: images/screen5.png
    :alt: Weighted term vector query processing
 
-* interactive disambiguation in text editing mode.  
+* interactive disambiguation in text editing mode (experimental).  
 .. image:: images/screen6.png
    :alt: Editor with real time entity disambiguation
 
@@ -46,7 +46,7 @@ Supervised machine learning is used for the disambiguation, based on Random Fore
 
 The API uses a disambiguation Query DSL with many customization capacities. It offers for instance the possibility to apply filters based on Wikidata properties and values, allowing to create specialised entity identification and extraction (e.g. extract only taxon entities or only medical entities in a document) relying on million entities and statements present in Wikidata. 
 
-The tool currently supports 11 languages, English, French, German, Spanish, Italian, Arabic, Japanese, Chinese (Mandarin), Russian, Portuguese and Farsi. For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the other languages. A *nbest* mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores.
+The tool currently supports 15 languages, English, French, German, Spanish, Italian, Arabic, Japanese, Chinese (Mandarin), Russian, Portuguese, Farsi, Ukrainian, Swedish, Bengali and Hindi. For English and French, a Name Entity Recognition based on CRF `grobid-ner <https://github.com/kermitt2/grobid-ner>`_ is used in combination with the disambiguation. For each recognized entity in one language, it is possible to complement the result with crosslingual information in the other languages. A *nbest* mode is available. Domain information are produced for a large amount of entities in the technical and scientific fields, together with Wikipedia categories and confidence scores.
 
 The tool is developed in Java and has been designed for fast processing (at least for a NERD system, around 1000-2000 tokens per second on a medium-profile linux server single thread or one PDF page of a scientific articles in less than 1 second), with limited memory (at least for a NERD system, here 3GB of RAM as minimum) and to offer relatively close to state-of-the-art accuracy (more to come!). A search query can be disambiguated in 1-10 milliseconds. *entity-fishing* uses the very fast `SMILE ML <https://haifengl.github.io/smile/>`_ library for machine learning and a `JNI integration of LMDB <https://github.com/deephacks/lmdbjni>`_ as embedded database. 
 
