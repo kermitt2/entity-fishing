@@ -6,7 +6,7 @@
 
 # entity-fishing
 
-*entity-fishing* performs the following tasks for 11 different languages:
+*entity-fishing* performs the following tasks for 15 different languages:
 
 * general entity recognition and disambiguation against Wikidata in a raw text or partially-annotated text segment,
 ![entity-fishing](doc/images/screen11.png)
@@ -55,7 +55,7 @@ See the [evaluation documentation](https://nerd.readthedocs.io/en/latest/evaluat
 
 Some example of *entity-fishing* usages:
 
-* A [spaCy wrapper](https://spacy.io/universe/project/spacyfishing) for entity-fishing is available since 2022, see the [project repo](https://github.com/Lucaterre/spacyfishing), thanks to Lucas Terriel. Note that the wrapper is however limited to Named Entities recognized by NER spaCy models, while *entity-fishing* has been designed to cover general wikidata entities based on all Wikipedia entries, anchors and redirections. 
+* A [spaCy wrapper](https://spacy.io/universe/project/spacyfishing) for entity-fishing is available since 2022, see the [project repo](https://github.com/Lucaterre/spacyfishing), thanks to Lucas Terriel. Note that the wrapper is disambiguating Named Entities recognized by NER spaCy models, while *entity-fishing* has also been designed to cover general wikidata entities based on all Wikipedia entries, anchors and redirections. 
 
 * Tanti Kristanti from [Inria Paris](https://www.inria.fr) used off the shelf version of *entity-fishing* in the [CLEF HIPE 2020 competition shared task](http://ceur-ws.org/Vol-2696/paper_266.pdf), ranking first at the Entity Linking task for English and second best for French, in F1-score.
 
@@ -69,11 +69,11 @@ If you are using *entity-fishing* and found it useful, we are happy to mention y
 
 # Current version
 
-*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.5`. 
+*entity-fishing* is a **work-in-progress** side project! Latest release version is `0.0.6`. 
 
-This version supports English, French, German, Italian, Spanish, Arabic, Mandarin, Russian, Japanese, Portuguese and Farsi with an in-house Named Entity Recognizer available for English and French. For this version, the available knowledge base includes around 96 million entities from Wikidata - but you can create your own fresh knowledge base with the [GRISP](https://github.com/kermitt2/grisp) utility. 
+This version supports 15 languages: English, French, German, Italian, Spanish, Arabic, Mandarin, Russian, Japanese, Portuguese, Farsi, Ukrainian, Swedish, Bengali and Hindi with an in-house Named Entity Recognizer available for English and French. For this version, the available knowledge base includes around 96 million entities from Wikidata - but you can create your own fresh knowledge base with the [GRISP](https://github.com/kermitt2/grisp) utility. 
 
-**Runtime**: version `0.0.5` 2022, on a local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD, 2015) for **English** (other languages are up to 50% faster - these runtimes do not include a 15s-30s initial server launch/start-up and are obtained with an empty cache and without LMDB pages pre-loaded in RAM memory).
+**Runtime**: version `0.0.6` 2022, on a local machine (Intel Haswel i7-4790K CPU 4.00GHz - 8 cores - 16GB - SSD, 2015) for **English** (other languages are up to 50% faster - these runtimes do not include a 15s-30s initial server launch/start-up and are obtained with an empty cache and without LMDB pages pre-loaded in RAM memory).
 
 * 800 pubmed abstracts (172 787 tokens) processed in 129s with 1 client (1339 tokens/s) 
 
@@ -96,7 +96,7 @@ If you want to cite this work, please refer to the present GitHub project, toget
     title = {entity-fishing},
     howpublished = {\url{https://github.com/kermitt2/entity-fishing}},
     publisher = {GitHub},
-    year = {2016--2022},
+    year = {2016--2023},
     archivePrefix = {swh},
     eprint = {1:dir:cb0ba3379413db12b0018b7c3af8d0d2d864139c}
 }
