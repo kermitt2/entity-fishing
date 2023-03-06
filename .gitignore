@@ -12,6 +12,7 @@ build
 *.old
 *.obj
 *.zip
+*.bak
 data/maps/customisations.obj
 data/db/db-*
 data/db/domains-en.db
