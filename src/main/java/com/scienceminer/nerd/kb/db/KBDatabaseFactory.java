@@ -325,8 +325,8 @@ public class KBDatabaseFactory {
 			}
 
 			public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-			//System.out.println("input file: " + dataFile.getPath());
-			System.out.println("isLoaded: " + isLoaded);
+				//System.out.println("input file: " + dataFile.getPath());
+				System.out.println("conceptByPageIdDatabase / isLoaded: " + isLoaded);
 				if (isLoaded && !overwrite)
 					return;
 				System.out.println("Loading " + name + " database");
