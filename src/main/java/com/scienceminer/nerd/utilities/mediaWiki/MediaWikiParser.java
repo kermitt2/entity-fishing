@@ -271,7 +271,7 @@ public class MediaWikiParser {
             converter.addToKeep(WikiTextConverter.BOLD);
             converter.addToKeep(WikiTextConverter.ITALICS);
             result = (String)converter.go(cp.getPage());
-            result = formatFragment(result);
+            //result = formatFragment(result);
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text in toTextWithInternalLinksEmphasisOnly, lang is " + lang, e);
         }
@@ -295,7 +295,7 @@ public class MediaWikiParser {
         } catch(Exception e) {
             LOGGER.warn("Fail to parse MediaWiki text in formatFirstParagraphWikiText, lang is " + lang, e);
         }
-        
+
         String firstParagraph = "";
         int pos = wikitext.indexOf("\n\n");
         while (pos >= 0) {
@@ -304,7 +304,8 @@ public class MediaWikiParser {
                 break;
             pos = wikitext.indexOf("\n\n", pos+2);
         }
-        firstParagraph= formatFragment(firstParagraph);
+        
+        firstParagraph = formatFragment(firstParagraph);
         return trim(firstParagraph);
     }
 
@@ -356,15 +357,15 @@ public class MediaWikiParser {
         // remove html comment in media wiki
 
         wikitext = toTextWithInternalLinksEmphasisOnly(wikitext, lang);
-        wikitext= formatFragment(wikitext);
+        //wikitext= formatFragment(wikitext);
 
         return trim(wikitext);
     }
 
     static private String formatFragment(String wikitext) {
         wikitext = wikitext.replace("( )", " ");
+        wikitext = wikitext.replace("[]", " "); 
         wikitext = wikitext.replaceAll("\n", " ");
-        wikitext = wikitext.replaceAll("\\[\\]", ""); 
         wikitext = wikitext.replaceAll("\\s+", " ");  
         wikitext = wikitext.replaceAll("\\s,", ",");
         return trim(wikitext);

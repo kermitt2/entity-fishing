@@ -205,8 +205,7 @@ public class MarkupDatabase extends KBDatabase<Integer, String> {
 									nbToAdd++;
 									totalAdded++;
 								} catch(Exception e) {
-									System.out.println("Markup addition failed: " + currId + " / " + currMarkup);
-									e.printStackTrace();
+									LOGGER.warn("Markup addition failed: " + currId + " / " + currMarkup, e);
 								}
 							}
 
