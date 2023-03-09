@@ -51,6 +51,7 @@ public class EmbeddingsDatabase extends KBDatabase<String, short[]> {
     // a boolean mode must be indicated to distinguish word or entity objects
     // by default, we consider weord embeddings
     private boolean entityMode = false;
+    private boolean wikipedia2vecMode = false;
 
     public EmbeddingsDatabase(KBEnvironment env, DatabaseType type) {
         super(env, type);
@@ -139,6 +140,12 @@ public class EmbeddingsDatabase extends KBDatabase<String, short[]> {
         if (dataFile == null)
             throw new NerdResourceException("Embeddings file not found"); 
 
+        // file name gives possible wikipedia2vec origin
+        String fileName = dataFile.getName();
+        if (fileName.startsWith("embeddings.")) {
+            this.wikipedia2vecMode = true;
+        }
+
         BufferedReader input = null;
         if (dataFile.getName().endsWith(".bz2")) {
             FileInputStream fis = new FileInputStream(dataFile);
@@ -182,13 +189,14 @@ public class EmbeddingsDatabase extends KBDatabase<String, short[]> {
 
                 String keyVal = pieces[0];
 
-                if (entityMode) {
+                if (entityMode && this.wikipedia2vecMode) {
 
                     if (line.startsWith("ENTITY/Catégorie:"))
                         continue;
                     // keyval should be the Wikidata entity Q identifier, so we need to retrieve it from 
                     // the wikipedia denormalized title page provided here in the format ENTITY/Page_title
                     String titlePage = keyVal.replace("ENTITY/", "");
+                    // some cleaning are needed for wikipedia2vec title pages
                     titlePage = titlePage.replace("_" , " ");
                     titlePage = titlePage.replaceAll("( )+" , " ");
                     titlePage = titlePage.replace("ION [[" , "");
