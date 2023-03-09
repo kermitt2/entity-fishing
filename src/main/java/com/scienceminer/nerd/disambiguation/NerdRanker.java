@@ -76,7 +76,7 @@ public class NerdRanker extends NerdModel {
 
 	private LowerKnowledgeBase wikipedia = null;
 
-	static public int EMBEDDINGS_WINDOW_SIZE = 10; // size of word window to be considered when calculating
+	static public int EMBEDDINGS_WINDOW_SIZE = 12; // size of word window to be considered when calculating
 	// embeddings-based similiarity
 
 	// a default Zipf frequency value that is higher of all the terms  

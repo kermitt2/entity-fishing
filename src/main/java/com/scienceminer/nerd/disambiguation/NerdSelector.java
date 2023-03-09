@@ -427,6 +427,9 @@ public class NerdSelector extends NerdModel {
 			List<String> words = analyzer.tokenize(entity.getNormalisedName(),
 					new Language(wikipedia.getConfig().getLangCode(), 1.0));
 
+			// get a window of layout tokens around without target tokens
+			List<LayoutToken> subTokens = Utilities.getWindow(entity, tokens, NerdRanker.EMBEDDINGS_WINDOW_SIZE, lang);
+
 			for(NerdCandidate candidate : cands) {
 				try {
 					nbCandidate++;
@@ -447,7 +450,7 @@ public class NerdSelector extends NerdModel {
 						bestCaseContext = false;
 					}
 
-					float embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, tokens, lang);
+					float embeddingsSimilarity = SimilarityScorer.getInstance().getCentroidScore(candidate, subTokens, lang);
 
 					String wikidataId = "Q0"; // undefined entity
 					if (candidate.getWikidataId() != null)	

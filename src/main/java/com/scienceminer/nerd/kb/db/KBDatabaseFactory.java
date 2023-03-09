@@ -325,8 +325,8 @@ public class KBDatabaseFactory {
 			}
 
 			public void loadFromFile(File dataFile, boolean overwrite) throws Exception  {
-			//System.out.println("input file: " + dataFile.getPath());
-			System.out.println("isLoaded: " + isLoaded);
+				//System.out.println("input file: " + dataFile.getPath());
+				System.out.println("conceptByPageIdDatabase / isLoaded: " + isLoaded);
 				if (isLoaded && !overwrite)
 					return;
 				System.out.println("Loading " + name + " database");
@@ -380,7 +380,7 @@ public class KBDatabaseFactory {
 		};
 	}
 
-	public KBDatabase<String, short[]> buildWordEmbeddingsDatabase() {
+	/*public KBDatabase<String, short[]> buildWordEmbeddingsDatabase() {
 		return new KBDatabase<String, short[]>(env, DatabaseType.wordEmbeddings) {
 
 			// using standard LMDB copy mode
@@ -456,9 +456,9 @@ public class KBDatabaseFactory {
 		        throw new UnsupportedOperationException();
 		    }
 		};
-	}
+	}*/
 
-	public KBDatabase<String, short[]> buildEntityEmbeddingsDatabase() {
+	/*public KBDatabase<String, short[]> buildEntityEmbeddingsDatabase() {
 		return new KBDatabase<String, short[]>(env, DatabaseType.entityEmbeddings) {
 
 			// using standard LMDB copy mode
@@ -533,7 +533,7 @@ public class KBDatabaseFactory {
 		        throw new UnsupportedOperationException();
 		    }
 		};
-	}
+	}*/
 
 	public StringIntDatabase buildWordFrequenciesDatabase() {
 		return new StringIntDatabase(env, DatabaseType.wordFrequencies) {

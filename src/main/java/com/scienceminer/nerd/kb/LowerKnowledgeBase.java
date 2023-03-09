@@ -251,8 +251,11 @@ public class LowerKnowledgeBase {
      * @param word the word
      * @return word vector or null if not found
      */
-    public short[] getWordEmbeddings(String word) {
+    /*public short[] getWordEmbeddings(String word) {
         return env.getDbWordEmbeddings().retrieve(word);
+    }*/
+    public float[] getWordEmbeddings(String word) {
+        return env.getDbWordEmbeddings().retrieveFloat(word);
     }
 
     /**
@@ -260,8 +263,11 @@ public class LowerKnowledgeBase {
      * @param entity the entity identifier
      * @return entity vector or null if not found
      */
-    public short[] getEntityEmbeddings(String entityId) {
+    /*public short[] getEntityEmbeddings(String entityId) {
         return env.getDbEntityEmbeddings().retrieve(entityId);
+    }*/
+    public float[] getEntityEmbeddings(String entityId) {
+        return env.getDbEntityEmbeddings().retrieveFloat(entityId);
     }
 
     /**
