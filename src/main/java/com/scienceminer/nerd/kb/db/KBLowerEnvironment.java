@@ -378,13 +378,13 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private static File getWordEmbeddingsDataFile(File dataDirectory) {
 		// wikipedia2vec
 		File wordEmbeddingsFile = getDataFile(dataDirectory, "embeddings.quantized.bz2");
-		if (wordEmbeddingsFile.exists() && !wordEmbeddingsFile.isDirectory()) { 
+		if (wordEmbeddingsFile != null && wordEmbeddingsFile.exists() && !wordEmbeddingsFile.isDirectory()) { 
 			return wordEmbeddingsFile;
 		}
 
 		// otherwise check entity-fishing embeddings
 		wordEmbeddingsFile = getDataFile(dataDirectory, "word.embeddings.quantized.gz");
-		if (wordEmbeddingsFile.exists() && !wordEmbeddingsFile.isDirectory()) { 
+		if (wordEmbeddingsFile != null && wordEmbeddingsFile.exists() && !wordEmbeddingsFile.isDirectory()) { 
 			return wordEmbeddingsFile;
 		}
 		return null;
@@ -393,13 +393,13 @@ public class KBLowerEnvironment extends KBEnvironment {
 	private static File getEntityEmbeddingsDataFile(File dataDirectory) {
 		// wikipedia2vec
 		File entityEmbeddingsFile = getDataFile(dataDirectory, "embeddings.quantized.bz2");
-		if (entityEmbeddingsFile.exists() && !entityEmbeddingsFile.isDirectory()) { 
+		if (entityEmbeddingsFile != null && entityEmbeddingsFile.exists() && !entityEmbeddingsFile.isDirectory()) { 
 			return entityEmbeddingsFile;
 		}
 		
 		// otherwise check entity-fishing embeddings
 		entityEmbeddingsFile = getDataFile(dataDirectory, "entity.embeddings.quantized.gz");
-		if (entityEmbeddingsFile.exists() && !entityEmbeddingsFile.isDirectory()) { 
+		if (entityEmbeddingsFile != null && entityEmbeddingsFile.exists() && !entityEmbeddingsFile.isDirectory()) { 
 			return entityEmbeddingsFile;
 		}
 		return null;

@@ -191,6 +191,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 
 		System.out.println("Environment built - " + dbConcepts.getDatabaseSize() + " concepts.");
 		System.out.println("                  - " + dbStatements.getDatabaseSize() + " loaded statements.");
+		System.out.println("                  - " + dbLabels.getDatabaseSize() + " loaded Wikidata labels.");
 	}
 
 	/**
