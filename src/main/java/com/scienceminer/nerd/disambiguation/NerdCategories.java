@@ -56,7 +56,7 @@ public class NerdCategories {
 							continue;
 						for(Category category : categories) {
 							int wikipediaID = category.getWikiPageID();
-							Integer wikipediaInteger = new Integer(wikipediaID);
+							Integer wikipediaInteger = Integer.valueOf(wikipediaID);
 
 							if (categoryMap.get(wikipediaInteger) == null) {
 								Category categoryBis = new Category(category.getName(), 
@@ -126,7 +126,7 @@ public class NerdCategories {
 							continue;
 					for(Category category : categories) {
 						int wikipediaID = category.getWikiPageID();
-						Integer wikipediaInteger = new Integer(wikipediaID);
+						Integer wikipediaInteger = Integer.valueOf(wikipediaID);
 
 						if (categoryMap.get(wikipediaInteger) == null) {
 							Category categoryBis = new Category(category.getName(), 

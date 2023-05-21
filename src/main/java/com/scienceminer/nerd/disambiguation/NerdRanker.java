@@ -711,7 +711,7 @@ public class NerdRanker extends NerdModel {
 				ref.setOffsetEnd(end);
 //System.out.println("reference entity: " + start + " / " + end + " - " + docContent.substring(start, end) + " - " + pageId);
 				referenceEntities.add(ref);
-				referenceDisamb.add(new Integer(pageId));
+				referenceDisamb.add(Integer.valueOf(pageId));
 			}
 		}
 
@@ -1019,12 +1019,12 @@ public class NerdRanker extends NerdModel {
 					int endRef = refEntity.getOffsetEnd(); 
 					if ((start == startRef) && (end == endRef)) {
 						found = true;
-						//producedDisamb.add(new Integer(refEntity.getWikipediaExternalRef()));
+						//producedDisamb.add(Integer.valueOf(refEntity.getWikipediaExternalRef()));
 						break;
 					}
 				}
 				if (found) {
-					producedDisamb.add(new Integer(cands.get(0).getWikipediaExternalRef()));
+					producedDisamb.add(Integer.valueOf(cands.get(0).getWikipediaExternalRef()));
 				}
 			}
 		}

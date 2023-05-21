@@ -13,14 +13,14 @@ public class SortEntitiesBySelectionScore implements Comparator<NerdEntity> {
         int aEnd = a.getOffsetEnd();
 
         if ( (aStart == bStart) && (aEnd == bEnd) ) {
-            Double bScore = new Double(b.getSelectionScore());
-            Double aScore = new Double(a.getSelectionScore());
+            Double bScore = Double.valueOf(b.getSelectionScore());
+            Double aScore = Double.valueOf(a.getSelectionScore());
 
             if ((bScore != 0.0) && (aScore != 0.0) && (!bScore.equals(aScore)))
                 return aScore.compareTo(bScore);
             else {
-                aScore = new Double(a.getProb_c());
-                bScore = new Double(b.getProb_c());
+                aScore = Double.valueOf(a.getProb_c());
+                bScore = Double.valueOf(b.getProb_c());
                 if (aScore != bScore)
                     return aScore.compareTo(bScore);
                 else 

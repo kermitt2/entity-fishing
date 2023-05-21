@@ -108,7 +108,7 @@ public class Page implements Comparable<Page> {
 		if (p.weight != null && weight != null && p.weight != weight)
 			cmp =  p.weight.compareTo(weight); 
 		if (cmp == 0)
-			cmp = new Integer(id).compareTo(p.id);
+			cmp = Integer.valueOf(id).compareTo(p.id);
 		return cmp;
 	}
 

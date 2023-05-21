@@ -113,8 +113,8 @@ for(int l=0; l<categories.length;l++){
         Set<Integer> allCategories = new HashSet<Integer>();
         Set<Integer> newCategories = new HashSet<Integer>();
         for(int i=0;i<categories.length;i++) {
-            allCategories.add(new Integer(categories[i].getId()));
-            newCategories.add(new Integer(categories[i].getId()));
+            allCategories.add(Integer.valueOf(categories[i].getId()));
+            newCategories.add(Integer.valueOf(categories[i].getId()));
             //break;
         }
 
@@ -140,7 +140,7 @@ System.out.print("\n");*/
                 com.scienceminer.nerd.kb.model.Category theCategory = (com.scienceminer.nerd.kb.model.Category)wikipedia.getPageById(category.intValue());
                 categories = theCategory.getParentCategories();
                 for(int i=0;i<categories.length;i++) {
-                    if (!nextCategories.contains(new Integer(categories[i].getId())))
+                    if (!nextCategories.contains(Integer.valueOf(categories[i].getId())))
                         nextCategories.add(categories[i].getId());
                 }
             }
@@ -204,7 +204,7 @@ System.out.print("\n");*/
                     } catch(Exception e) {
                         e.printStackTrace();
                     }
-                    //domainsCache.put(new Integer(pageId), theDomains);
+                    //domainsCache.put(Integer.valueOf(pageId), theDomains);
                 }
             }
             p++;
@@ -235,7 +235,7 @@ System.out.print("\n");*/
                     LOGGER.warn(category + " is not a category found in Wikipedia.");
                 else {
                     categoryId = theCategory.getId();
-                    if (domains.get(new Integer(categoryId)) != null) {
+                    if (domains.get(Integer.valueOf(categoryId)) != null) {
                         LOGGER.warn(category + " is already defined in " + mappingFilePath);
                     }
                 }
@@ -251,7 +251,7 @@ System.out.print("\n");*/
                         dom.add(domainId);
                     }
                 }
-                domains.put(new Integer(categoryId), dom);
+                domains.put(Integer.valueOf(categoryId), dom);
             }
         }
         LineIterator.closeQuietly(iterator);
@@ -271,8 +271,8 @@ System.out.print("\n");*/
         while (domainIterator.hasNext()) {
             String line = domainIterator.next();
             final String domain = line.replace('\t', ' ').trim();
-            domain2id.put(domain, new Integer(n));
-            id2domain.put(new Integer(n), domain);
+            domain2id.put(domain, Integer.valueOf(n));
+            id2domain.put(Integer.valueOf(n), domain);
             n++;
         }
         LineIterator.closeQuietly(domainIterator);
@@ -282,7 +282,7 @@ System.out.print("\n");*/
     public List<String> getDomains(int pageId) {
         int[] list = null;
         /*if (domainsCache != null)
-            domainsCache.get(new Integer(pageId));
+            domainsCache.get(Integer.valueOf(pageId));
         else*/
         {
             byte[] cachedData = null;
@@ -300,7 +300,7 @@ System.out.print("\n");*/
         if (list != null) {
             result = new ArrayList<String>();
             for(int i=0; i<list.length; i++) {
-                String domain = id2domain.get(new Integer(list[i]));
+                String domain = id2domain.get(Integer.valueOf(list[i]));
                 if (domain != null)
                     result.add(domain);
             }

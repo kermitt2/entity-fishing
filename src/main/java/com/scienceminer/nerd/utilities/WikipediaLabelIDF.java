@@ -80,7 +80,7 @@ public class WikipediaLabelIDF {
                             terms.remove(terms.size() -1);
                         }
                         // add new element
-                        terms.add(Pair.of(label, new Long(freq)));
+                        terms.add(Pair.of(label, Long.valueOf(freq)));
                         
                         // sort
                         Collections.sort(terms, comp);

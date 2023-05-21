@@ -258,7 +258,7 @@ public class NEDCorpusEvaluation {
                 ref.setOffsetEnd(end);
 
                 referenceEntities.add(ref);
-                referenceDisamb.add(new Integer(pageId));
+                referenceDisamb.add(Integer.valueOf(pageId));
             }
 
 

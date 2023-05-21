@@ -69,7 +69,7 @@ public class NerdCustomisation extends NerdContext {
                 // this implies that there is no use to sort the list
                 article.setWeight(1.0);
                 contextArticles.add(article);
-                contextArticlesIds.add(new Integer(id));
+                contextArticlesIds.add(Integer.valueOf(id));
 
             }
         }

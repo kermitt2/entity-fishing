@@ -12,7 +12,6 @@ buildscript {
     }
 }
 
-apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'maven-publish'
@@ -26,6 +25,8 @@ description = """entity recognition and disambiguation against Wikidata and Wiki
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -34,7 +35,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
-    jcenter()
+    //jcenter()
     maven {
         url 'lib/'
     }
@@ -49,18 +50,17 @@ dependencies {
     // to be removed?
     testImplementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-    // Logging
-    //implementation 'org.slf4j:slf4j-log4j12:1.7.25'
-    implementation group: 'log4j', name: 'log4j', version: '1.2.17'
-
     // GROBID
-    implementation group: 'org.grobid', name: 'grobid-ner', version: '0.7.2'
-    implementation(group: 'org.grobid', name: 'grobid-trainer', version: '0.7.2') {
-        exclude(module: 'slf4j-jdk14')
-    }
-    implementation(group: 'org.grobid', name: 'grobid-core', version: '0.7.2') {
-        exclude(module: 'slf4j-jdk14')
-    }
+    implementation group: 'org.grobid', name: 'grobid-core', version: '0.7.3'
+    implementation group: 'org.grobid', name: 'grobid-trainer', version: '0.7.3'
+    implementation group: 'org.grobid', name: 'grobid-ner', version: '0.7.3'
+
+    implementation 'black.ninia:jep:4.0.2'
+    implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
+    implementation "joda-time:joda-time:2.9.9"
+    implementation "org.apache.lucene:lucene-analyzers-common:4.5.1"
+    implementation group: 'org.jruby', name: 'jruby-complete', version: '9.2.13.0'
+
     //implementation group: 'directory-naming', name: 'naming-java', version: '0.8'
     implementation group: 'fr.limsi.wapiti', name: 'wapiti', version: '1.5.0'
     implementation group: 'org.wipo.analysers', name: 'wipo-analysers', version: '0.0.1'
@@ -105,12 +105,11 @@ dependencies {
     implementation group: 'com.github.haifengl', name: 'smile-core', version: '1.3.1'
     implementation(group: 'it.unimi.dsi', name: 'sux4j', version: '3.1.2') {
         exclude(module: 'log4j-over-slf4j')
-        exclude(module: 'logback-classic')
+        //exclude(module: 'logback-classic')
     }
     implementation group: 'it.unimi.dsi', name: 'fastutil', version: '6.5.12'
-    implementation(group: 'it.unimi.dsi', name: 'dsiutils', version: '2.1.9') {
-        exclude(module: 'logback-classic')
-    }
+    implementation group: 'it.unimi.dsi', name: 'dsiutils', version: '2.1.9'
+
     implementation group: 'de.ruedigermoeller', name: 'fst', version: '2.56'
 
     //Wikipedia
@@ -138,49 +137,37 @@ dependencies {
     implementation group: 'org.apache.avro', name: 'avro', version: '1.7.5'
 }
 
-configurations {
-    implementation.exclude group: "org.slf4j", module: "slf4j-jdk14"
-}
-
 configurations.all {
-    exclude module: 'slf4j-log4j12'
     resolutionStrategy {
         force 'xml-apis:xml-apis:1.4.01'
     }
+
+    exclude group: 'org.slf4j', module: "slf4j-log4j12"
+    exclude group: 'org.slf4j', module: "slf4j-jdk14"
+    exclude group: 'log4j', module: "log4j"
+    exclude group: 'org.slf4j', module: "log4j-over-slf4j"
 }
 
 test {
     testLogging.showStandardStreams = true
     exclude '**/**IntegrationTest**'
-}
 
-distTar.enabled = false
-distZip.enabled = false
-
-// service
-apply plugin: 'application'
-application {
-    mainClassName = 'com.scienceminer.nerd.service.NerdApplication'
-
-    run {
-        args = ['server', 'data/config/service.yaml']
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED", 
+        "--add-opens", "java.base/java.io=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
     }
 }
 
-//TODO: we could create a task to download and unpack the lmdb files automatically 
-//task copyModels(type: Copy) {
-//    from "${rootDir}/resources/models"
-//    include "**/*.wapiti"
-//    into "${rootDir}/../grobid-home/models/"
-//}
+/*tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:deprecation"
+    options.compilerArgs << "-Xlint:unchecked"
+}*/
 
-//tasks.withType(JavaCompile) {
-//    options.compilerArgs << "-Xlint:deprecation"
-//    options.compilerArgs << "-Xlint:unchecked"
-//}
+//distTar.enabled = false
+//distZip.enabled = false
 
 wrapper {
-    gradleVersion "7.1.1"
+    gradleVersion "7.2"
 }
 
 // return the default value if the property has not been specified in command line
@@ -196,7 +183,11 @@ task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'com.scienceminer.nerd.training.WikipediaTrainer'
     classpath = sourceSets.main.runtimeClasspath
     args 'data/wikipedia/training/', getArg('lang', 'en')
-    jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+    }
 }
 
 // Training with an annotated corpus
@@ -208,6 +199,11 @@ task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', ''), getArg('lang', 'en')
     jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
+    }
 }
 
 // Evaluation
@@ -217,7 +213,11 @@ task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'com.scienceminer.nerd.evaluation.NEDCorpusEvaluation'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', '')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '--Xms2g', '-Xmx8g'
+    }
 }
 
 // training data generation
@@ -227,7 +227,11 @@ task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'trai
     main = 'com.scienceminer.nerd.evaluation.AnnotatedDataGeneration'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', '')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '--Xms2g', '-Xmx8g'
+    }
 }
 
 // create entity description, necessary to then create entity embeddings
@@ -238,7 +242,11 @@ task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: '
     main = 'com.scienceminer.nerd.embeddings.EntityDescription'
     classpath = sourceSets.main.runtimeClasspath
     args 'data/embeddings/', getArg('lang', 'en')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '--Xms2g', '-Xmx8g'
+    }
 }
 
 // tasks related to embeddings generation
@@ -249,7 +257,11 @@ task(quantize_word_embeddings, dependsOn: 'classes', type: JavaExec, group: 'emb
     main = 'com.scienceminer.nerd.embeddings.Quantizer'
     classpath = sourceSets.main.runtimeClasspath
     args '-i', getArg('i', 'word.embeddings.vec'), '-o', getArg('o', 'word.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '--Xms2g', '-Xmx8g'
+    }
 }
 
 // create entity embeddings from word embeddings and generated entity description 
@@ -258,7 +270,11 @@ task(generate_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'e
     main = 'com.scienceminer.nerd.embeddings.EntityEmbeddings'
     classpath = sourceSets.main.runtimeClasspath
     args '-in', getArg('in', 'entity.description'), '-v', getArg('v', 'word.embeddings.quantized'), '-out', getArg('out', 'entity.embeddings.vec'), '-n', getArg('n', '8')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '--Xms2g', '-Xmx8g'
+    }
 }
 
 // quantize entity embeddings 
@@ -267,5 +283,23 @@ task(quantize_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'e
     main = 'com.scienceminer.nerd.embeddings.Quantizer'
     classpath = sourceSets.main.runtimeClasspath
     args '-i', getArg('i', 'entity.embeddings.vec'), '-o', getArg('o', 'entity.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+    } else {
+        jvmArgs '--Xms2g', '-Xmx8g'
+    }
+}
+
+// service
+apply plugin: 'application'
+application {
+    mainClassName = 'com.scienceminer.nerd.service.NerdApplication'
+
+    run {
+        if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+            jvmArgs "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        }
+    
+        args = ['server', 'data/config/service.yaml']
+    }
 }

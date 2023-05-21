@@ -111,7 +111,7 @@ public class Quantizer {
             String[] parts = line.split("\\s+");
             bw.write(parts[0] + " ");
             for(int i = 1; i < parts.length; i++) {
-                Double ff = new Double(parts[i]);
+                Double ff = Double.valueOf(parts[i]);
                 int qa = (int) ((int) (Math.abs(ff) * q) * Math.signum(ff));
                 bw.write(qa + " ");
             }
@@ -150,7 +150,7 @@ public class Quantizer {
             double v[] = new double[parts.length];
             for(int i = 1; i < parts.length; i++) {
                 try {
-                    v[i] = new Double(parts[i]);
+                    v[i] = Double.valueOf(parts[i]);
 //if (Double.isNaN(v[i])) {
 //    System.out.println("NaN value for:" + parts[i]);
 //}

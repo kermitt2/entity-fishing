@@ -241,7 +241,7 @@ public class EmbeddingsDatabase extends KBDatabase<String, short[]> {
                 short[] vector = new short[pieces.length-1];
                 for(int i=1; i<pieces.length; i++) {
                     try {
-                        Double localValue = new Double(pieces[i]);
+                        Double localValue = Double.valueOf(pieces[i]);
                         localValue = localValue * 10000;
                         short localShortValue = localValue.shortValue();
                         vector[i-1] = localShortValue;

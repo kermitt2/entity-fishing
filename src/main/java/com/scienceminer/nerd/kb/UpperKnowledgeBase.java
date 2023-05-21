@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 
+import com.scienceminer.nerd.kb.db.KBUpperEnvironment;
 import com.scienceminer.nerd.kb.db.*;
 import com.scienceminer.nerd.kb.model.*;
 import com.scienceminer.nerd.kb.db.KBEnvironment.StatisticName;
@@ -69,7 +70,9 @@ public class UpperKnowledgeBase {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
             LOGGER.info("\nInit Upper Knowledge-base layer");
-            NerdConfig conf = mapper.readValue(new File("data/config/kb.yaml"), NerdConfig.class);
+            File yamlFile = new File("data/config/kb.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            NerdConfig conf = mapper.readValue(yamlFile, NerdConfig.class);
 			this.env = new KBUpperEnvironment(conf);
 			this.env.buildEnvironment(conf, false);
 
@@ -77,7 +80,9 @@ public class UpperKnowledgeBase {
             wikipediaDomainMaps = new HashMap<>();
 
             LOGGER.info("Init English lower Knowledge-base layer");
-            conf = mapper.readValue(new File("data/config/wikipedia-en.yaml"), NerdConfig.class);
+            yamlFile = new File("data/config/wikipedia-en.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);
 			LowerKnowledgeBase wikipedia_en = new LowerKnowledgeBase(conf);
 
 			wikipedias.put(Language.EN, wikipedia_en);
@@ -87,85 +92,113 @@ public class UpperKnowledgeBase {
             wikipediaDomainMaps.put(Language.EN, wikipediaDomainMaps_en);
 			
 			LOGGER.info("Init German lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-de.yaml"), NerdConfig.class);;
+			yamlFile = new File("data/config/wikipedia-de.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_de = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.DE, wikipedia_de);
             wikipediaDomainMaps.put(Language.DE, wikipediaDomainMaps_en);
 
             LOGGER.info("Init French lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-fr.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-fr.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_fr = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.FR, wikipedia_fr);
             wikipediaDomainMaps.put(Language.FR, wikipediaDomainMaps_en);
 
             LOGGER.info("Init Spanish lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-es.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-es.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_es = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.ES, wikipedia_es);
             wikipediaDomainMaps.put(Language.ES, wikipediaDomainMaps_en);
 
             LOGGER.info("Init Italian lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-it.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-it.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_it = new LowerKnowledgeBase(conf);
 			wikipedias.put(Language.IT, wikipedia_it);
             wikipediaDomainMaps.put(Language.IT, wikipediaDomainMaps_en);
 
             LOGGER.info("Init Arabic lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-ar.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-ar.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_ar = new LowerKnowledgeBase(conf);
 			wikipedias.put("ar", wikipedia_ar);
             wikipediaDomainMaps.put("ar", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Madarin lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-zh.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-zh.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_zh = new LowerKnowledgeBase(conf);
 			wikipedias.put("zh", wikipedia_zh);
             wikipediaDomainMaps.put("zh", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Japanese lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-ja.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-ja.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_ja = new LowerKnowledgeBase(conf);
 			wikipedias.put("ja", wikipedia_ja);
             wikipediaDomainMaps.put("ja", wikipediaDomainMaps_en);
 
 			LOGGER.info("Init Russian lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-ru.yaml"), NerdConfig.class);;
+			yamlFile = new File("data/config/wikipedia-ru.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_ru = new LowerKnowledgeBase(conf);
 			wikipedias.put("ru", wikipedia_ru);
             wikipediaDomainMaps.put("ru", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Portuguese lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-pt.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-pt.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_pt = new LowerKnowledgeBase(conf);
 			wikipedias.put("pt", wikipedia_pt);
             wikipediaDomainMaps.put("pt", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Farsi lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-fa.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-fa.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_fa = new LowerKnowledgeBase(conf);
 			wikipedias.put("fa", wikipedia_fa);
             wikipediaDomainMaps.put("fa", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Swedish lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-sv.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-sv.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_sv = new LowerKnowledgeBase(conf);
 			wikipedias.put("sv", wikipedia_sv);
             wikipediaDomainMaps.put("sv", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Ukrainian lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-uk.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-uk.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_uk = new LowerKnowledgeBase(conf);
 			wikipedias.put("uk", wikipedia_uk);
             wikipediaDomainMaps.put("uk", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Bengali lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-bn.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-bn.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_bn = new LowerKnowledgeBase(conf);
 			wikipedias.put("bn", wikipedia_bn);
             wikipediaDomainMaps.put("bn", wikipediaDomainMaps_en);
 
             LOGGER.info("Init Hindi lower Knowledge-base layer (if present)");
-            conf = mapper.readValue(new File("data/config/wikipedia-hi.yaml"), NerdConfig.class);;
+            yamlFile = new File("data/config/wikipedia-hi.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
 			LowerKnowledgeBase wikipedia_hi = new LowerKnowledgeBase(conf);
 			wikipedias.put("hi", wikipedia_hi);
             wikipediaDomainMaps.put("hi", wikipediaDomainMaps_en);

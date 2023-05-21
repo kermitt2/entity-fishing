@@ -1283,10 +1283,10 @@ var nerd = (function ($) {
         var scale_y = canvasHeight / page_height;
         var scale_x = canvasWidth / page_width;
 
-        var x = thePos.x * scale_x - 1;
-        var y = thePos.y * scale_y - 1;
-        var width = thePos.w * scale_x + 1;
-        var height = thePos.h * scale_y + 1;
+        var x = (thePos.x * scale_x) - 1;
+        var y = (thePos.y * scale_y) - 1;
+        var width = (thePos.w * scale_x) + 1;
+        var height = (thePos.h * scale_y) + 1;
 
         //make clickable the area
         theType = "" + theType;

@@ -578,7 +578,7 @@ public class KBDatabaseFactory {
 					                tx = environment.createWriteTransaction();
 					            }
 
-					            KBEntry<String, Integer> entry = new KBEntry<>(wordNode.textValue(), new Integer(i));
+					            KBEntry<String, Integer> entry = new KBEntry<>(wordNode.textValue(), Integer.valueOf(i));
 								db.put(tx, KBEnvironment.serialize(entry.getKey()), KBEnvironment.serialize(entry.getValue()));
 								nbToAdd++;
 							}

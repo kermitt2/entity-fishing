@@ -811,10 +811,10 @@ public class NerdEngine {
 					// merging of candidates
 					List<Integer> listOfCandsId = new ArrayList<Integer>();
 					for (NerdCandidate cand : cands) {
-						listOfCandsId.add(new Integer(cand.getWikipediaExternalRef()));
+						listOfCandsId.add(Integer.valueOf(cand.getWikipediaExternalRef()));
 					}
 					for(NerdCandidate otherCand : otherCands) {
-						if (!listOfCandsId.contains(new Integer(otherCand.getWikipediaExternalRef()))) {
+						if (!listOfCandsId.contains(Integer.valueOf(otherCand.getWikipediaExternalRef()))) {
 							NerdCandidate newCand = otherCand.copy(entity);
 							newCand.setCoReference(true);
 							cands.add(newCand);
@@ -877,10 +877,10 @@ public class NerdEngine {
 						// merging of candidates
 						List<Integer> listOfCandsId = new ArrayList<Integer>();
 						for (NerdCandidate cand : cands) {
-							listOfCandsId.add(new Integer(cand.getWikipediaExternalRef()));
+							listOfCandsId.add(Integer.valueOf(cand.getWikipediaExternalRef()));
 						}
 						for(NerdCandidate otherCand : otherCands) {
-							if (!listOfCandsId.contains(new Integer(otherCand.getWikipediaExternalRef()))) {
+							if (!listOfCandsId.contains(Integer.valueOf(otherCand.getWikipediaExternalRef()))) {
 								NerdCandidate newCand = otherCand.copy(entity);
 								newCand.setCoReference(true);
 								cands.add(newCand);
@@ -890,7 +890,7 @@ public class NerdEngine {
 					// add in temporary map
 					newCandidates.put(entity, cands);
 					cacheSubSequences.put(entityString, otherCands);
-					cacheLinkProbability.put(entityString, new Double(otherEntity.getLinkProbability()));
+					cacheLinkProbability.put(entityString, Double.valueOf(otherEntity.getLinkProbability()));
 					success= true;
 					break;
 				}
@@ -1230,13 +1230,13 @@ public class NerdEngine {
 	public List<NerdEntity> pruneOverlap(List<NerdEntity> entities, boolean shortText) {
 		List<Integer> toRemove = new ArrayList<Integer>();
 		for (int pos1=0; pos1<entities.size(); pos1++) {
-			if (toRemove.contains(new Integer(pos1)))
+			if (toRemove.contains(Integer.valueOf(pos1)))
 				continue;
 			NerdEntity entity1 = entities.get(pos1);
 
 			if (entity1.getRawName() == null)  {
-				if (!toRemove.contains(new Integer(pos1))) {
-					toRemove.add(new Integer(pos1));
+				if (!toRemove.contains(Integer.valueOf(pos1))) {
+					toRemove.add(Integer.valueOf(pos1));
 				}
 				continue;
 			}
@@ -1256,7 +1256,7 @@ public class NerdEngine {
 				if (entity1.getOffsetEnd() < entity2.getOffsetStart())
 					continue;
 
-				if (toRemove.contains(new Integer(pos2)))
+				if (toRemove.contains(Integer.valueOf(pos2)))
 					continue;
 				
 				/*if ( 
@@ -1271,8 +1271,8 @@ public class NerdEngine {
 					// overlap
 					//int arity2 = entity2.getOffsetEnd() - entity2.getOffsetStart();
 					if (entity2.getRawName() == null) {
-						if (!toRemove.contains(new Integer(pos2))) {
-							toRemove.add(new Integer(pos2));
+						if (!toRemove.contains(Integer.valueOf(pos2))) {
+							toRemove.add(Integer.valueOf(pos2));
 						}
 						continue;
 					}
@@ -1281,8 +1281,8 @@ public class NerdEngine {
 						// we have a NER not disambiguated
 						// check if the other entity has been disambiguated
 						if ( (entity1.getWikipediaExternalRef() != -1) && (entity1.getNerdScore() > 0.2) ) {
-							if (!toRemove.contains(new Integer(pos2))) {
-								toRemove.add(new Integer(pos2));
+							if (!toRemove.contains(Integer.valueOf(pos2))) {
+								toRemove.add(Integer.valueOf(pos2));
 							}
 							continue;
 						}
@@ -1292,8 +1292,8 @@ public class NerdEngine {
 						// we have a NER not disambiguated
 						// check if the other entity has been disambiguated
 						if ( (entity2.getWikipediaExternalRef() != -1) && (entity2.getNerdScore() > 0.2) ) {
-							if (!toRemove.contains(new Integer(pos1))) {
-								toRemove.add(new Integer(pos1));
+							if (!toRemove.contains(Integer.valueOf(pos1))) {
+								toRemove.add(Integer.valueOf(pos1));
 							}
 							break;
 						}
@@ -1307,8 +1307,8 @@ public class NerdEngine {
 
 					if (entity1.getWikipediaExternalRef() == entity2.getWikipediaExternalRef()) {
 						if ( (entity1.getType() != null) && (entity2.getType() == null) ) {
-							if (!toRemove.contains(new Integer(pos2)))
-								toRemove.add(new Integer(pos2));
+							if (!toRemove.contains(Integer.valueOf(pos2)))
+								toRemove.add(Integer.valueOf(pos2));
 							continue;
 						}
 					}
@@ -1316,8 +1316,8 @@ public class NerdEngine {
 					int arity2 = entity2.getNormalisedName().length() - entity2.getNormalisedName().replaceAll("\\s", "").length() + 1;
 					if (arity2 < arity1) {
 						// longest match wins
-						if (!toRemove.contains(new Integer(pos2)))
-							toRemove.add(new Integer(pos2));
+						if (!toRemove.contains(Integer.valueOf(pos2)))
+							toRemove.add(Integer.valueOf(pos2));
 						continue;
 					}
 					else if (arity2 == arity1) {
@@ -1327,8 +1327,8 @@ public class NerdEngine {
 						//double conf1 = entity1.getSelectionScore();
 						//double conf2 = entity2.getSelectionScore();
 						if (conf2 < conf1) {
-							if (!toRemove.contains(new Integer(pos2))) {
-								toRemove.add(new Integer(pos2));
+							if (!toRemove.contains(Integer.valueOf(pos2))) {
+								toRemove.add(Integer.valueOf(pos2));
 							}
 							continue;
 						} /*else {
@@ -1336,24 +1336,24 @@ public class NerdEngine {
 							conf1 = entity1.getSelectionScore();
 							conf2 = entity2.getSelectionScore();
 							if (conf2 < conf1) {
-								if (!toRemove.contains(new Integer(pos2))) {
-									toRemove.add(new Integer(pos2));
+								if (!toRemove.contains(Integer.valueOf(pos2))) {
+									toRemove.add(Integer.valueOf(pos2));
 								}
 							} else {
 								// if still equal we check the prob_c 
 								conf1 = entity1.getProb_c();
 								conf2 = entity2.getProb_c();
 								if (conf2 < conf1) {
-									if (!toRemove.contains(new Integer(pos2))) {
-										toRemove.add(new Integer(pos2));
+									if (!toRemove.contains(Integer.valueOf(pos2))) {
+										toRemove.add(Integer.valueOf(pos2));
 									}
 								} else {
 									// too uncertain we remove all
-									if (!toRemove.contains(new Integer(pos2))) {
-										toRemove.add(new Integer(pos2));
+									if (!toRemove.contains(Integer.valueOf(pos2))) {
+										toRemove.add(Integer.valueOf(pos2));
 									}
-									if (!toRemove.contains(new Integer(pos1))) {
-										toRemove.add(new Integer(pos1));
+									if (!toRemove.contains(Integer.valueOf(pos1))) {
+										toRemove.add(Integer.valueOf(pos1));
 									}
 								}
 							}
@@ -1365,7 +1365,7 @@ public class NerdEngine {
 
 		List<NerdEntity> newEntities = new ArrayList<NerdEntity>();
 		for(int i=0; i<entities.size(); i++) {
-			if (!toRemove.contains(new Integer(i))) {
+			if (!toRemove.contains(Integer.valueOf(i))) {
 				newEntities.add(entities.get(i));
 			} else {
 				if (shortText) {
@@ -1481,7 +1481,7 @@ System.out.println("Merging...");
 
 		List<Integer> toRemove = new ArrayList<Integer>();
 		for(int i=0; i<terms.size(); i++) {
-			if (toRemove.contains(new Integer(i))) {
+			if (toRemove.contains(Integer.valueOf(i))) {
 				// already merged
 				continue;
 			}
@@ -1498,7 +1498,7 @@ System.out.println("Merging...");
 					if (j == i)
 						continue;
 					
-					if (toRemove.contains(new Integer(j))) {
+					if (toRemove.contains(Integer.valueOf(j))) {
 						// already merged
 						continue;
 					}
@@ -1519,7 +1519,7 @@ System.out.println("Merging...");
 										term1.addFreebaseType(type);
 									}
 								}	
-								toRemove.add(new Integer(j));
+								toRemove.add(Integer.valueOf(j));
 							}
 						}
 					}
@@ -1529,7 +1529,7 @@ System.out.println("Merging...");
 		
 		List<NerdCandidate> result = new ArrayList<NerdCandidate>();
 		for(int i=0; i<terms.size(); i++) {
-			if (toRemove.contains(new Integer(i))) {
+			if (toRemove.contains(Integer.valueOf(i))) {
 				continue;
 			}
 			else {
@@ -1568,7 +1568,7 @@ System.out.println("Merging...");
 					if (j == i)
 						continue;
 
-					/*if (toRemove.contains(new Integer(j))) {
+					/*if (toRemove.contains(Integer.valueOf(j))) {
 						// already pruned
 						continue;
 					}*/

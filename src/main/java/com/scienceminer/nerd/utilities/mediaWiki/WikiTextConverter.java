@@ -198,21 +198,21 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 	}
 
 	public void visit(WtBold b) {
-		if ((toKeep != null) && (toKeep.contains(new Integer(BOLD)))) {
+		if ((toKeep != null) && (toKeep.contains(Integer.valueOf(BOLD)))) {
 			write("'''");
 		}
 		iterate(b);
-		if ((toKeep != null) && (toKeep.contains(new Integer(BOLD)))) {
+		if ((toKeep != null) && (toKeep.contains(Integer.valueOf(BOLD)))) {
 			write("'''");
 		}
 	}
 
 	public void visit(WtItalics i) {
-		if ((toKeep != null) && (toKeep.contains(new Integer(ITALICS)))) {
+		if ((toKeep != null) && (toKeep.contains(Integer.valueOf(ITALICS)))) {
 			write("''");
 		}
 		iterate(i);
-		if ((toKeep != null) && (toKeep.contains(new Integer(ITALICS)))) {
+		if ((toKeep != null) && (toKeep.contains(Integer.valueOf(ITALICS)))) {
 			write("''");
 		}
 	}
@@ -246,7 +246,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 
 	public void visit(WtInternalLink link) {
 		if (!isCategory(link)) {
-			if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS_ARTICLES)))) {
+			if ((toKeep != null) && (toKeep.contains(Integer.valueOf(INTERNAL_LINKS_ARTICLES)))) {
 				if (StringUtils.isBlank(link.getPrefix())) {
 					// this is an article so we preserve the link - there is no prefix
 					write("[[");
@@ -269,7 +269,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 					// note: what to do with the postfix?
 				}
 
-			} else if ((toKeep != null) && (toKeep.contains(new Integer(INTERNAL_LINKS)))) {
+			} else if ((toKeep != null) && (toKeep.contains(Integer.valueOf(INTERNAL_LINKS)))) {
 				write("[[");
 				write(link.getPrefix());
 				iterate(link.getTarget());
@@ -289,7 +289,7 @@ public class WikiTextConverter extends AstVisitor<WtNode> {
 				}
 				//write(link.getPostfix()); // ? what is a postfix?
 			}
-		} else if ((toKeep != null) && (toKeep.contains(new Integer(CATEGORY_LINKS)))) {
+		} else if ((toKeep != null) && (toKeep.contains(Integer.valueOf(CATEGORY_LINKS)))) {
 			write("[[");
 			write(link.getPrefix());
 			iterate(link.getTarget());

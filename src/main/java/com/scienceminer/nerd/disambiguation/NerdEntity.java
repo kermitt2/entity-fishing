@@ -587,17 +587,17 @@ public class NerdEntity implements Comparable<NerdEntity> {
 		//if ( (start != -1) && (end != -1) ) {
 			
 		if ( (offsets.start == start) && (offsets.end == end) ) {
-			//Double score = new Double(theEntity.getNerdScore());
-			//Double thisScore = new Double(nerdScore);
+			//Double score = Double.valueOf(theEntity.getNerdScore());
+			//Double thisScore = Double.valueOf(nerdScore);
 
-			Double score = new Double(theEntity.getSelectionScore());
-			Double thisScore = new Double(selectionScore);
+			Double score = Double.valueOf(theEntity.getSelectionScore());
+			Double thisScore = Double.valueOf(selectionScore);
 
 			if ((score != 0.0) && (thisScore != 0.0) && (!score.equals(thisScore)))
 				return thisScore.compareTo(score);
 			else {
-				thisScore = new Double(getProb_c());
-				score = new Double(theEntity.getProb_c());
+				thisScore = Double.valueOf(getProb_c());
+				score = Double.valueOf(theEntity.getProb_c());
 				if (thisScore != score)
 					return thisScore.compareTo(score);
 				else 

@@ -72,7 +72,7 @@ public class NerdContext {
 		// add the "certain" pages
 		if (certainPages != null) {
 			for(Article page : certainPages) {
-				page.setWeight(new Double(1.0));
+				page.setWeight(Double.valueOf(1.0));
 				articles.add(page);
 			}
 		}
@@ -84,10 +84,10 @@ public class NerdContext {
 		for (Article art: articles) {
 			if (c >= NerdEngine.maxContextSize)
 				break;
-			if (!contextArticlesIds.contains(new Integer(art.getId()))) {
+			if (!contextArticlesIds.contains(Integer.valueOf(art.getId()))) {
 				contextArticles.add(art);
 				c++;
-				contextArticlesIds.add(new Integer(art.getId()));
+				contextArticlesIds.add(Integer.valueOf(art.getId()));
 			}
 		}
 	}
@@ -111,9 +111,9 @@ public class NerdContext {
 			return;
 
 		sense.setWeight(sp);	
-		if (!contextArticlesIds.contains(new Integer(sense.getId()))) {
+		if (!contextArticlesIds.contains(Integer.valueOf(sense.getId()))) {
 			contextArticles.add(sense);
-			contextArticlesIds.add(new Integer(sense.getId()));
+			contextArticlesIds.add(Integer.valueOf(sense.getId()));
 		}
 	}
 	
@@ -135,9 +135,9 @@ public class NerdContext {
 		if (isDate(article) || isNumber(article)) 
 			return;
 		
-		if (!contextArticlesIds.contains(new Integer(article.getId()))) {
+		if (!contextArticlesIds.contains(Integer.valueOf(article.getId()))) {
 			contextArticles.add(article);
-			contextArticlesIds.add(new Integer(article.getId()));
+			contextArticlesIds.add(Integer.valueOf(article.getId()));
 		}
 	}
 	
@@ -258,7 +258,7 @@ public class NerdContext {
 	 */
 	public boolean contains(NerdCandidate candidate) {
 		Integer entityId = candidate.getWikipediaExternalRef();
-		return contextArticlesIds.contains(new Integer(entityId));
+		return contextArticlesIds.contains(Integer.valueOf(entityId));
 	}
 
 	public Map<Mention, Mention> getAcronyms() {

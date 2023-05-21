@@ -567,7 +567,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 
 					String surface2 = term2.getEntity().getRawName();
 					if ((surface2.length() > surface1.length()) && (surface2.indexOf(surface1) != -1)) {
-						toRemove.add(new Integer(i));
+						toRemove.add(Integer.valueOf(i));
 						break;
 					}
 				}
@@ -576,7 +576,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		
 		List<NerdCandidate> result = new ArrayList<NerdCandidate>();
 		for(int i=0; i<terms.size(); i++) {
-			if (toRemove.contains(new Integer(i))) {
+			if (toRemove.contains(Integer.valueOf(i))) {
 				continue;
 			}
 			else {
@@ -585,7 +585,7 @@ public class NerdCandidate implements Comparable<NerdCandidate> {
 		}
 		
 		/*for(int i=terms.size()-1; i>=0; i--) {
-			if (toRemove.contains(new Integer(i)))
+			if (toRemove.contains(Integer.valueOf(i)))
 				terms.remove(i);
 		}*/
 		

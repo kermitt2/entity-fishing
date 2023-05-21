@@ -139,7 +139,7 @@ public class NerdModel {
  	           throw new InvalidParameterException("Features are empty");
         	}
         	double score = forest.predict(features);
-        	return new Double(score);
+        	return Double.valueOf(score);
         } 
     } 
 

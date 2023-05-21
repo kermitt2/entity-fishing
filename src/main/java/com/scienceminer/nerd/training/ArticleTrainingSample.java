@@ -99,7 +99,7 @@ public class ArticleTrainingSample extends TrainingSample<Article> {
 			String line =null;
 			while ((line = reader.readLine()) != null) {
 				String[] values = line.split("\t");
-				int id = new Integer(values[0].trim());
+				int id = Integer.valueOf(values[0].trim());
 				sample.add((Article)wikipedia.getPageById(id));
 			}
 		} catch(IOException e) {
