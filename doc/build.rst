@@ -51,7 +51,7 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.6`` correspond to the Wikidata and Wikipedia dumps from Feb., 1st 2022. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). 
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.6`` correspond to the Wikidata and Wikipedia dumps from Jan. 2023. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). 
 
     **Linux**
 
