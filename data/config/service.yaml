@@ -19,19 +19,45 @@ server:
   maxThreads: 128
   maxQueuedRequests: 2048
   acceptQueueSize: 2048
+  requestLog:
+      appenders: []
+
+#logging:
+#  level: ERROR
+#  appenders:
+#  - type: console
+#    threshold: ERROR
+#    timeZone: UTC
+#  - type: file
+#    currentLogFilename: logs/entity-fishing.log
+#    threshold: DEBUG
+#    archive: true
+#    archivedLogFilenamePattern: logs/entity-fishing.log-%d.log
+#    archivedFileCount: 5
+#    timeZone: UTC
+
+#timeZone: UTC
 
 logging:
   level: ERROR
+  loggers:
+    org.apache.pdfbox.pdmodel.font.PDSimpleFont: "OFF"
+    org.glassfish.jersey.internal: "OFF"
+    com.squarespace.jersey2.guice.JerseyGuiceUtils: "OFF"
   appenders:
-  - type: console
-    threshold: ERROR
-    timeZone: UTC
-  - type: file
-    currentLogFilename: logs/entity-fishing.log
-    threshold: DEBUG
-    archive: true
-    archivedLogFilenamePattern: logs/entity-fishing.log-%d.log
-    archivedFileCount: 5
-    timeZone: UTC
-
-timeZone: UTC
+    - type: console
+      threshold: ERROR
+      timeZone: UTC
+      # uncomment to have the logs in json format
+      #layout:
+      #  type: json
+    - type: file
+      currentLogFilename: logs/grobid-service.log
+      threshold: WARN
+      archive: true
+      archivedLogFilenamePattern: logs/grobid-service-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+      # uncomment to have the logs in json format
+      #layout:
+      #  type: json

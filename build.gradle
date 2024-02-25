@@ -51,9 +51,18 @@ dependencies {
     testImplementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     // GROBID
-    implementation group: 'org.grobid', name: 'grobid-core', version: '0.7.3'
-    implementation group: 'org.grobid', name: 'grobid-trainer', version: '0.7.3'
-    implementation group: 'org.grobid', name: 'grobid-ner', version: '0.7.3'
+    implementation (group: 'org.grobid', name: 'grobid-core', version: '0.8.0') {
+        //exclude(module: 'log4j-over-slf4j')
+        exclude(group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    implementation (group: 'org.grobid', name: 'grobid-trainer', version: '0.8.0') {
+        //exclude(module: 'log4j-over-slf4j')
+        exclude(group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    implementation (group: 'org.grobid', name: 'grobid-ner', version: '0.8.0') {
+        //exclude(module: 'log4j-over-slf4j')
+        exclude(group: 'ch.qos.logback', module: 'logback-classic')
+    }
 
     implementation 'black.ninia:jep:4.0.2'
     implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
@@ -105,7 +114,7 @@ dependencies {
     implementation group: 'com.github.haifengl', name: 'smile-core', version: '1.3.1'
     implementation(group: 'it.unimi.dsi', name: 'sux4j', version: '3.1.2') {
         exclude(module: 'log4j-over-slf4j')
-        //exclude(module: 'logback-classic')
+        exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
     implementation group: 'it.unimi.dsi', name: 'fastutil', version: '6.5.12'
     implementation group: 'it.unimi.dsi', name: 'dsiutils', version: '2.1.9'
@@ -142,6 +151,7 @@ configurations.all {
         force 'xml-apis:xml-apis:1.4.01'
     }
 
+    exclude group: "ch.qos.logback", module: "logback-classic"
     exclude group: 'org.slf4j', module: "slf4j-log4j12"
     exclude group: 'org.slf4j', module: "slf4j-jdk14"
     exclude group: 'log4j', module: "log4j"
@@ -184,7 +194,7 @@ task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
     classpath = sourceSets.main.runtimeClasspath
     args 'data/wikipedia/training/', getArg('lang', 'en')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
     }
@@ -200,7 +210,7 @@ task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
     args getArg('corpus', ''), getArg('lang', 'en')
     jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
     }
@@ -214,7 +224,7 @@ task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', '')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '--Xms2g', '-Xmx8g'
     }
@@ -228,7 +238,7 @@ task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'trai
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', '')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '--Xms2g', '-Xmx8g'
     }
@@ -243,7 +253,7 @@ task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: '
     classpath = sourceSets.main.runtimeClasspath
     args 'data/embeddings/', getArg('lang', 'en')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '--Xms2g', '-Xmx8g'
     }
@@ -258,7 +268,7 @@ task(quantize_word_embeddings, dependsOn: 'classes', type: JavaExec, group: 'emb
     classpath = sourceSets.main.runtimeClasspath
     args '-i', getArg('i', 'word.embeddings.vec'), '-o', getArg('o', 'word.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '--Xms2g', '-Xmx8g'
     }
@@ -271,7 +281,7 @@ task(generate_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'e
     classpath = sourceSets.main.runtimeClasspath
     args '-in', getArg('in', 'entity.description'), '-v', getArg('v', 'word.embeddings.quantized'), '-out', getArg('out', 'entity.embeddings.vec'), '-n', getArg('n', '8')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '--Xms2g', '-Xmx8g'
     }
@@ -284,7 +294,7 @@ task(quantize_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'e
     classpath = sourceSets.main.runtimeClasspath
     args '-i', getArg('i', 'entity.embeddings.vec'), '-o', getArg('o', 'entity.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+        jvmArgs '--Xms2g', '-Xmx8g', "--add-opens", "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
     } else {
         jvmArgs '--Xms2g', '-Xmx8g'
     }
@@ -297,7 +307,7 @@ application {
 
     run {
         if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-            jvmArgs "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"
+            jvmArgs "--add-modules", "jdk.incubator.foreign", "--add-opens", "java.base/java.nio=ALL-UNNAMED", "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.text=ALL-UNNAMED", "--add-opens", "java.base/java.net=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "--add-opens", "java.base/java.math=ALL-UNNAMED", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED" 
         }
     
         args = ['server', 'data/config/service.yaml']

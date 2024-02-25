@@ -258,7 +258,7 @@ public class AnnotatedDataGeneration {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
 
                     BiblioItem resHeader = new BiblioItem();
-                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
+                    resHeader.generalResultMappingHeader(labeledResult, tokenizationHeader);
 
                     BiblioItem resHeaderLangIdentification = new BiblioItem();
                     engine.getParsers().getHeaderParser().resultExtraction(labeledResult, 

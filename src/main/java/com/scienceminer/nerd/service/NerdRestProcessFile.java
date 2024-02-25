@@ -184,7 +184,7 @@ public class NerdRestProcessFile {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
 
                     BiblioItem resHeader = new BiblioItem();
-                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
+                    resHeader.generalResultMappingHeader(labeledResult, tokenizationHeader);
 
                     if (lang == null) {
                         BiblioItem resHeaderLangIdentification = new BiblioItem();

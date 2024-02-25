@@ -55,7 +55,7 @@ public class Concept {
 			return null;
 
 		Map<String,String> labels = env.getDbLabels().retrieve(wikidataId);
-		if (labels.get(lang) != null && labels.get(lang).length() > 0) {
+		if (labels != null && labels.get(lang) != null && labels.get(lang).length() > 0) {
 			return labels.get(lang);
 		}
 		
