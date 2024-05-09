@@ -77,6 +77,12 @@ RUN apt-get update && \
 RUN apt-get update -y && \
     apt-get clean all -y
 
+# Add Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "-s", "--"]
+
 WORKDIR /opt/grobid
 COPY --from=builder /opt/grobid .
 
