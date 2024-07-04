@@ -1,0 +1,35 @@
+name: Build unstable
+
+on: [push, workflow_dispatch]
+
+concurrency: 
+  group: gradle
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout grobid home
+      uses: actions/checkout@v4
+      with:
+        repository: kermitt2/grobid
+        path: ./grobid
+    - name: Checkout grobid-ner
+      uses: actions/checkout@v4
+      with:
+        repository: kermitt2/grobid-ner
+        path: ./grobid/grobid-ner
+    - name: Checkout entity-fishing
+      uses: actions/checkout@v4
+      with:
+        path: .
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: 'gradle'
+    - name: Build with Gradle
+      run: ./gradlew build
