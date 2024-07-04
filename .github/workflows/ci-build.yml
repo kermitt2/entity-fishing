@@ -38,7 +38,7 @@ jobs:
       run: ./gradlew install -x test
     - name: Install grobid-ner
       working-directory: grobid/grobid-ner
-      run: ./gradlew copyModules
+      run: ./gradlew copyModels
     - name: Build entity-fishing with Gradle
       working-directory: entity-fishing
       run: ./gradlew build
