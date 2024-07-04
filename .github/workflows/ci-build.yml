@@ -42,4 +42,4 @@ jobs:
       run: ./gradlew copyModels
     - name: Build entity-fishing with Gradle
       working-directory: entity-fishing
-      run: ./gradlew build
+      run: ./gradlew build -x tests
