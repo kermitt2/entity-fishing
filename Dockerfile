@@ -5,7 +5,8 @@ ARG BUILD_VERSION=0.0.6
 # -------------
 # builder image
 # -------------
-FROM openjdk:8u275-jdk as builder
+#FROM openjdk:8u275-jdk as builder
+FROM openjdk:17-jdk-slim as builder
 
 USER root
 ENV LANG="en_US.UTF-8" \
@@ -21,8 +22,8 @@ RUN apt-get update -y && \
 WORKDIR /opt/
 
 # install GROBID
-RUN wget --tries=10 --read-timeout=10 https://github.com/kermitt2/grobid/archive/refs/tags/0.7.2.zip
-RUN unzip -o 0.7.2.zip && mv grobid-* grobid
+RUN wget --tries=10 --read-timeout=10 https://github.com/kermitt2/grobid/archive/refs/tags/0.8.1.zip
+RUN unzip -o 0.8.1.zip && mv grobid-* grobid
 
 WORKDIR /opt/grobid
 
@@ -34,7 +35,7 @@ RUN rm -rf grobid-home/pdfalto/win-*
 RUN rm -rf grobid-home/lib/lin-32
 RUN rm -rf grobid-home/lib/win-*
 RUN rm -rf grobid-home/lib/mac-64
-RUN rm -rf ../0.7.2.zip
+RUN rm -rf ../0.8.1.zip
 
 # cleaning DeLFT models
 RUN rm -rf grobid-home/models/*-BidLSTM_CRF*
