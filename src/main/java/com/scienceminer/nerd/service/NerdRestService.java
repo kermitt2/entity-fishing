@@ -8,7 +8,6 @@ import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.Lexicon;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.mention.ProcessText;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import com.codahale.metrics.annotation.Timed;
@@ -103,6 +102,25 @@ public class NerdRestService implements NerdPaths {
         try {
             response = Response.status(Response.Status.OK)
                     .entity(NerdRestProcessGeneric.getVersion())
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+
+        } catch (Exception e) {
+            LOGGER.error("An unexpected exception occurs. ", e);
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
+    }
+
+    @GET
+    @Path(NerdPaths.DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDataStatistics() {
+        Response response = null;
+        try {
+            response = Response.status(Response.Status.OK)
+                    .entity(nerdRestKB.getKbStatistics())
                     .type(MediaType.APPLICATION_JSON)
                     .build();
 

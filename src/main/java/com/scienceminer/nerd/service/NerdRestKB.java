@@ -276,7 +276,7 @@ public class NerdRestKB {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 
         byte[] encodedTerm = encoder.quoteAsUTF8(term);
-        String outputTerm  = new String(encodedTerm);
+        String outputTerm = new String(encodedTerm);
         jsonBuilder.append("{ \"term\": \"" + outputTerm + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
 
         Label lbl = new Label(wikipedia.getEnvironment(), term.trim());
@@ -331,7 +331,7 @@ public class NerdRestKB {
                         jsonBuilder.append(", ");
 
                     byte[] encodedPreferred = encoder.quoteAsUTF8(sense.getTitle());
-                    String outputPreferred  = new String(encodedPreferred);
+                    String outputPreferred = new String(encodedPreferred);
 
                     jsonBuilder.append("{ \"pageid\": " + sense.getId() +
                             ", \"preferred\" : \"" + outputPreferred + "\", \"prob_c\" : " + sense.getPriorProbability() + " }");
@@ -371,5 +371,36 @@ public class NerdRestKB {
         sb.append("\"").append("wikidataID").append("\"").append(":").append("\"").append(wikidataID).append("\"");
         sb.append("}");
         return sb.toString();
+    }
+
+    public String getKbStatistics() {
+        StringBuilder sb = new StringBuilder();
+
+        UpperKnowledgeBase upperKb = UpperKnowledgeBase.getInstance();
+        long entityCount = upperKb.getEntityCount();
+        sb.append("{");
+        sb.append("\"")
+                .append("wikidata_concepts")
+                .append("\"")
+                .append(":")
+                .append("\"")
+                .append(entityCount)
+                .append("\"")
+                .append(",");
+
+        Map<String, LowerKnowledgeBase> lowerKbWikipedias = upperKb.getWikipediaConfs();
+
+        for (Map.Entry<String, LowerKnowledgeBase> entry : lowerKbWikipedias.entrySet()) {
+            String wikipediaName = entry.getKey();
+            LowerKnowledgeBase kb = entry.getValue();
+            int articleCount = kb.getArticleCount();
+
+            sb.append("\"").append(wikipediaName).append("\"").append(":").append("\"").append(articleCount).append("\"").append(",");
+        }
+
+        sb.append("}");
+
+        return sb.toString().replace(",}", "}");
+
     }
 }
