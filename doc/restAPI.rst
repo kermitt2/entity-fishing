@@ -1295,3 +1295,32 @@ Or in case of issues:
      "ok": "false",
      "message": "The customisation already exists."
    }
+
+
+GET /data
+^^^^^^^^^
+
+Retrieve information about the loaded data, showing the number of concept per Knowledge base.
+
+(3) Example response
+
+Here a sample of the response
+::
+    {
+      "wikidata_concepts": "100009060",
+      "de": "0",
+      "hi": "0",
+      "ru": "0",
+      "sv": "0",
+      "pt": "0",
+      "en": "6327076",
+      "it": "0",
+      "fr": "2362110",
+      "bn": "0",
+      "es": "0",
+      "zh": "0",
+      "ar": "0",
+      "uk": "0",
+      "ja": "0",
+      "fa": "0"
+    }
