@@ -21,6 +21,11 @@ public interface NerdPaths {
 	String VERSION = "version";
 
 	/**
+	 * path extension for data information request
+	 */
+	String DATA = "data";
+
+	/**
 	 * Language identification entry point
 	 */
 	String LANGUAGE = "language";

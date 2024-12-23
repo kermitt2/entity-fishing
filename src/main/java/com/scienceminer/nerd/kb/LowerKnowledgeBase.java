@@ -46,8 +46,15 @@ public class LowerKnowledgeBase {
 	}
 
 	public int getArticleCount() {
-		if (wikipediaArticleCount == -1)
-			wikipediaArticleCount = this.env.retrieveStatistic(StatisticName.articleCount).intValue();
+		if (wikipediaArticleCount == -1) {
+			Long articleCountStats = this.env.retrieveStatistic(StatisticName.articleCount);
+			if (articleCountStats != null) {
+				wikipediaArticleCount = articleCountStats.intValue();
+			} else {
+				return 0;
+			}
+		}
+
 		return wikipediaArticleCount;
 	}
 

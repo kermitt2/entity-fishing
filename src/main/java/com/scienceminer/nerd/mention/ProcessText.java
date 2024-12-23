@@ -94,7 +94,7 @@ public class ProcessText {
     private ProcessText() {
         String grobidHome = com.scienceminer.nerd.utilities.Utilities.initGrobid();
         Path grobidHomePath = Paths.get(grobidHome);
-        Path grobidNerPath = grobidHomePath.resolve("../grobid-ner/"); 
+        Path grobidNerPath = grobidHomePath.resolve("../../grobid-ner/");
 
         // the following will ensure that the Grobid environment and config are loaded
         // independently from the NER models
