@@ -377,14 +377,31 @@ public class NerdRestKB {
         StringBuilder sb = new StringBuilder();
 
         UpperKnowledgeBase upperKb = UpperKnowledgeBase.getInstance();
-        long entityCount = upperKb.getEntityCount();
         sb.append("{");
         sb.append("\"")
                 .append("wikidata_concepts")
                 .append("\"")
                 .append(":")
                 .append("\"")
-                .append(entityCount)
+                .append(upperKb.getEntityCount())
+                .append("\"")
+                .append(",");
+
+        sb.append("\"")
+                .append("wikidata_statements")
+                .append("\"")
+                .append(":")
+                .append("\"")
+                .append(upperKb.getStatementCount())
+                .append("\"")
+                .append(",");
+
+        sb.append("\"")
+                .append("wikidata_labels")
+                .append("\"")
+                .append(":")
+                .append("\"")
+                .append(upperKb.getLabelCount())
                 .append("\"")
                 .append(",");
 
