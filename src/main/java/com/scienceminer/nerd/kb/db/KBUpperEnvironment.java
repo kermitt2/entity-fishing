@@ -102,7 +102,7 @@ public class KBUpperEnvironment extends KBEnvironment {
 	}
 
 	/**
-	 * Returns the {@link DatabaseType#labels} database
+	 * Returns the {@link DatabaseType#label} database
 	 */
 	public ConceptLabelDatabase getDbLabels() {
 		return dbLabels;

@@ -38,6 +38,8 @@ public class UpperKnowledgeBase {
     private Map<String, WikipediaDomainMap> wikipediaDomainMaps = null;
 
 	private long conceptCount = -1;
+	private long statementCount = -1;
+	private long labelCount = -1;
 
 	// this is the list of supported languages 
   	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
@@ -228,6 +230,18 @@ public class UpperKnowledgeBase {
 		if (conceptCount == -1)
 			conceptCount = env.getDbConcepts().getDatabaseSize();
 		return conceptCount;
+	}
+
+	public long getStatementCount() {
+		if (statementCount == -1)
+			statementCount = env.getDbStatements().getDatabaseSize();
+		return statementCount;
+	}
+
+	public long getLabelCount() {
+		if (labelCount == -1)
+			labelCount = env.getDbLabels().getDatabaseSize();
+		return labelCount;
 	}
 
 	/**
