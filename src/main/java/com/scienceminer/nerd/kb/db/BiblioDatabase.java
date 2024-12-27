@@ -35,7 +35,7 @@ public class BiblioDatabase extends StringRecordDatabase<String> {
 	}
 
 	/**
-	 * Load the bilbiographical index 
+	 * Load the bibliographical index
 	 */
 	public void fillBiblioDb(ConceptDatabase conceptDb, StatementDatabase statementDb, boolean overwrite) throws Exception {
 		if (isLoaded && !overwrite)
