@@ -1296,6 +1296,8 @@ Or in case of issues:
      "message": "The customisation already exists."
    }
 
+Data and statistics API
+***********************
 
 GET /data
 ^^^^^^^^^
