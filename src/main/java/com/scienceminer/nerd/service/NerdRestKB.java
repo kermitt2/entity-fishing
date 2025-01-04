@@ -7,11 +7,13 @@ import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.KBStatistics;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.lang.Language;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
@@ -23,9 +25,12 @@ import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.scienceminer.nerd.kb.model.KBStatistics.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -276,7 +281,7 @@ public class NerdRestKB {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 
         byte[] encodedTerm = encoder.quoteAsUTF8(term);
-        String outputTerm  = new String(encodedTerm);
+        String outputTerm = new String(encodedTerm);
         jsonBuilder.append("{ \"term\": \"" + outputTerm + "\", \"lang\": \"" + lang + "\", \"senses\" : [");
 
         Label lbl = new Label(wikipedia.getEnvironment(), term.trim());
@@ -331,7 +336,7 @@ public class NerdRestKB {
                         jsonBuilder.append(", ");
 
                     byte[] encodedPreferred = encoder.quoteAsUTF8(sense.getTitle());
-                    String outputPreferred  = new String(encodedPreferred);
+                    String outputPreferred = new String(encodedPreferred);
 
                     jsonBuilder.append("{ \"pageid\": " + sense.getId() +
                             ", \"preferred\" : \"" + outputPreferred + "\", \"prob_c\" : " + sense.getPriorProbability() + " }");
@@ -371,5 +376,30 @@ public class NerdRestKB {
         sb.append("\"").append("wikidataID").append("\"").append(":").append("\"").append(wikidataID).append("\"");
         sb.append("}");
         return sb.toString();
+    }
+
+    public KBStatistics getKbStatistics() {
+        KBStatistics statistics = new KBStatistics();
+        UpperKnowledgeBase upperKb = UpperKnowledgeBase.getInstance();
+
+        statistics.getUpperKnowledgeBaseStatisticsCount().put(CONCEPTS, upperKb.getEntityCount());
+        statistics.getUpperKnowledgeBaseStatisticsCount().put(LABELS, upperKb.getLabelCount());
+        statistics.getUpperKnowledgeBaseStatisticsCount().put(STATEMENTS, upperKb.getStatementCount());
+
+        Map<String, LowerKnowledgeBase> lowerKbsByLang = upperKb.getWikipediaConfs();
+
+        for (Map.Entry<String, LowerKnowledgeBase> entry : lowerKbsByLang.entrySet()) {
+            Map<String, Integer> wikipediaCounter= new HashMap<>();
+            String wikipediaName = entry.getKey();
+            LowerKnowledgeBase kb = entry.getValue();
+            int articleCount = kb.getArticleCount();
+            wikipediaCounter.put(ARTICLES, articleCount);
+            int pageCount = kb.getPageCount();
+            wikipediaCounter.put(PAGES, pageCount);
+
+            statistics.getLowerKnowledgeBaseStatisticsCount().put(wikipediaName, wikipediaCounter);
+        }
+
+        return statistics;
     }
 }

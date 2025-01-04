@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represent the language specific resources of the Knowledge Base, e.g. a 
- * Wikipedia instance, including corresponding word and entity embeddings. 
- * 
+ * Represent the language specific resources of the Knowledge Base, e.g. a
+ * Wikipedia instance, including corresponding word and entity embeddings.
+ *
  */
 public class LowerKnowledgeBase {
 
@@ -26,15 +26,16 @@ public class LowerKnowledgeBase {
 
 	private KBLowerEnvironment env = null;
 	private int wikipediaArticleCount = -1;
+	private int wikipediaPageCount = -1;
 
 	public enum Direction {
-		In, 
+		In,
 		Out
 	}
 
 	/**
-	 * Initialises a newly created Wikipedia according to the given configuration. 
-	 *  
+	 * Initialises a newly created Wikipedia according to the given configuration.
+	 *
 	 */
 	public LowerKnowledgeBase(NerdConfig conf) {
 		this.env = new KBLowerEnvironment(conf);
@@ -42,14 +43,33 @@ public class LowerKnowledgeBase {
 			this.env.buildEnvironment(conf, false);
 		} catch(Exception e) {
 			LOGGER.error("Environment for Wikipedia cannot be built", e);
-		} 
+		}
 	}
 
 	public int getArticleCount() {
-		if (wikipediaArticleCount == -1)
-			wikipediaArticleCount = this.env.retrieveStatistic(StatisticName.articleCount).intValue();
+		if (wikipediaArticleCount == -1) {
+			Long articleCountStats = this.env.retrieveStatistic(StatisticName.articleCount);
+			if (articleCountStats != null) {
+				wikipediaArticleCount = articleCountStats.intValue();
+			} else {
+				return 0;
+			}
+		}
+
 		return wikipediaArticleCount;
 	}
+
+    public int getPageCount() {
+        if (wikipediaPageCount == -1) {
+            Long pageCount = this.env.getDbPage().getDatabaseSize();
+            if (pageCount != null) {
+                wikipediaPageCount = pageCount.intValue();
+            } else {
+                return 0;
+            }
+        }
+        return wikipediaPageCount;
+    }
 
 	/**
 	 * Returns the environment that this is connected to
@@ -60,17 +80,17 @@ public class LowerKnowledgeBase {
 
 	/**
 	 * Make ready the full content database of articles
-	 * 
+	 *
 	 */
 	public void loadFullContentDB() {
 		try {
 			if (this.env != null)
 				this.env.buildFullMarkup(false);
-			else 
+			else
 				LOGGER.error("Environment for Wikipedia full content article DB is null");
 		} catch(Exception e) {
 			LOGGER.error("Environment for Wikipedia full content cannot be built", e);
-		} 
+		}
 	}
 
 	/**
@@ -82,7 +102,7 @@ public class LowerKnowledgeBase {
 
 	/**
 	 * Returns the root Category from which all other categories can be browsed.
-	 * 
+	 *
 	 */
 	public com.scienceminer.nerd.kb.model.Category getRootCategory() {
 		return new com.scienceminer.nerd.kb.model.Category(env, env.retrieveStatistic(StatisticName.rootCategoryId).intValue());
@@ -96,11 +116,11 @@ public class LowerKnowledgeBase {
 	}
 
 	/**
-	 * Returns the Page referenced by the given Wikidata id for the language of the Wikipedia. 
-	 * The page can be cast into the appropriate type for more specific functionality. 
-	 *  
+	 * Returns the Page referenced by the given Wikidata id for the language of the Wikipedia.
+	 * The page can be cast into the appropriate type for more specific functionality.
+	 *
 	 * @param id the Wikidata id of the Page to retrieve.
-	 * @return the Page referenced by the given id, or null if one does not exist. 
+	 * @return the Page referenced by the given id, or null if one does not exist.
 	 */
 	/*public Page getPageByWikidataId(String wikidataId) {
 		return Page.createPage(env, wikidataId);
@@ -121,7 +141,7 @@ public class LowerKnowledgeBase {
 	/**
 	 * Returns the Article referenced by the given (case sensitive) title. If the title
 	 * matches a redirect, this will be resolved to return the final target.
-	 * 
+	 *
 	 */
 	public Article getArticleByTitle(String title) {
 		if (title == null || title.length() == 0)
@@ -144,7 +164,7 @@ public class LowerKnowledgeBase {
 	}
 
 	/**
-	 * Returns the Category referenced by the given (case sensitive) title. 
+	 * Returns the Category referenced by the given (case sensitive) title.
 	 *
 	 */
 	public com.scienceminer.nerd.kb.model.Category getCategoryByTitle(String title) {
@@ -162,8 +182,8 @@ public class LowerKnowledgeBase {
 	}
 
 	/**
-	 * Returns the Template referenced by the given (case sensitive) title. 
-	 *  
+	 * Returns the Template referenced by the given (case sensitive) title.
+	 *
 	 */
 	public Template getTemplateByTitle(String title) {
 		title = title.substring(0,1).toUpperCase() + title.substring(1);
@@ -181,11 +201,11 @@ public class LowerKnowledgeBase {
 
 
 	/**
-	 * Returns the most probable article for a given term. 
+	 * Returns the most probable article for a given term.
 	 */
 	public Article getMostProbableArticle(String term) {
 		Label label = new Label(env, term);
-		if (!label.exists()) 
+		if (!label.exists())
 			return null;
 
 		return label.getSenses()[0];
@@ -193,8 +213,8 @@ public class LowerKnowledgeBase {
 
 	/**
 	 * A convenience method for quickly finding out if the given text is ever used as a label
-	 * in Wikipedia. If this returns false, then all of the getArticle methods will return null or empty sets. 
-	 * 
+	 * in Wikipedia. If this returns false, then all of the getArticle methods will return null or empty sets.
+	 *
 	 */
 	/*public boolean isLabel(String text)  {
 		DbLabel lbl = env.getDbLabel().retrieve(text); 
@@ -207,7 +227,7 @@ public class LowerKnowledgeBase {
 
 	/**
 	 * Returns an iterator for all pages in the database, in order of ascending ids.
-	 * 
+	 *
 	 */
 	public PageIterator getPageIterator() {
 		return new PageIterator(env);
@@ -215,15 +235,15 @@ public class LowerKnowledgeBase {
 
 	/**
 	 * Returns an iterator for all pages in the database of the given type, in order of ascending ids.
-	 * 
+	 *
 	 */
 	public PageIterator getPageIterator(PageType type) {
-		return new PageIterator(env, type);		
+		return new PageIterator(env, type);
 	}
 
 	/**
 	 * Returns an iterator for all labels in the database, processed according to the given text processor (may be null), in alphabetical order.
-	 * 
+	 *
 	 */
 	public LabelIterator getLabelIterator() {
 		return new LabelIterator(env);
@@ -231,7 +251,7 @@ public class LowerKnowledgeBase {
 
 	/**
 	 * Returns the list of links in relation to artId with the specified direction (in or out).
-	 * 
+	 *
 	 */
 	public List<Integer> getLinks(int artId, Direction dir) {
 		DbIntList ids = null;
@@ -240,7 +260,7 @@ public class LowerKnowledgeBase {
 		else
 			ids = env.getDbPageLinkOutNoSentences().retrieve(artId);
 
-		if (ids == null || ids.getValues() == null) 
+		if (ids == null || ids.getValues() == null)
 			return new ArrayList<Integer>();
 
 		return ids.getValues();
@@ -286,7 +306,7 @@ public class LowerKnowledgeBase {
      		return 0.0;
      	else
 	     	return Utilities.cBToFrequency(cB.intValue());
-    } 
+    }
 
     /**
      * @return frequency of word for the language
@@ -297,7 +317,7 @@ public class LowerKnowledgeBase {
      		return 0.0;
      	else
 	     	return Utilities.cBToZipf(cB.intValue());
-    } 
+    }
 
 	public void close() {
 		env.close();
