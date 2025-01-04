@@ -1304,7 +1304,7 @@ GET /data
 
 Retrieve information about the loaded data, showing the number of concept per Knowledge base.
 
-(3) Example response
+(1) Example response
 
 Here a sample of the response
 ::
