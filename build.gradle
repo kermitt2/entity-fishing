@@ -65,6 +65,10 @@ dependencies {
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
 
+    implementation('ch.qos.logback:logback-classic:1.2.3'){
+        exclude(module: 'com.google.guava:guava')
+    }
+
     implementation 'black.ninia:jep:4.0.2'
     implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
     implementation "joda-time:joda-time:2.9.9"
@@ -76,7 +80,7 @@ dependencies {
     implementation group: 'org.wipo.analysers', name: 'wipo-analysers', version: '0.0.1'
 
     // Apache commons
-    implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation 'org.apache.commons:commons-collections4:4.3'
     implementation 'org.apache.commons:commons-lang3:3.6'
     implementation 'commons-logging:commons-logging:1.2'
     implementation 'commons-io:commons-io:2.7'
@@ -84,7 +88,7 @@ dependencies {
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
     implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.13'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.1'
-    implementation group: 'com.google.guava', name: 'guava', version: '29.0-jre'
+    implementation "com.google.guava:guava:31.0.1-jre"
 
     // json and yaml
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
@@ -152,7 +156,7 @@ configurations.all {
         force 'xml-apis:xml-apis:1.4.01'
     }
 
-    exclude group: "ch.qos.logback", module: "logback-classic"
+//    exclude group: "ch.qos.logback", module: "logback-classic"
     exclude group: 'org.slf4j', module: "slf4j-log4j12"
     exclude group: 'org.slf4j', module: "slf4j-jdk14"
     exclude group: 'log4j', module: "log4j"
