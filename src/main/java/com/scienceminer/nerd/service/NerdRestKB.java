@@ -7,6 +7,7 @@ import com.scienceminer.nerd.exceptions.ResourceNotFound;
 import com.scienceminer.nerd.kb.*;
 import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
 import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.KBStatistics;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
@@ -26,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 
+import static com.scienceminer.nerd.kb.model.KBStatistics.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -373,51 +375,24 @@ public class NerdRestKB {
         return sb.toString();
     }
 
-    public String getKbStatistics() {
-        StringBuilder sb = new StringBuilder();
-
+    public KBStatistics getKbStatistics() {
+        KBStatistics statistics = new KBStatistics();
         UpperKnowledgeBase upperKb = UpperKnowledgeBase.getInstance();
-        sb.append("{");
-        sb.append("\"")
-                .append("wikidata_concepts")
-                .append("\"")
-                .append(":")
-                .append("\"")
-                .append(upperKb.getEntityCount())
-                .append("\"")
-                .append(",");
 
-        sb.append("\"")
-                .append("wikidata_statements")
-                .append("\"")
-                .append(":")
-                .append("\"")
-                .append(upperKb.getStatementCount())
-                .append("\"")
-                .append(",");
+        statistics.getUpperKnowledgeBaseStatisticsCount().put(CONCEPTS, upperKb.getEntityCount());
+        statistics.getUpperKnowledgeBaseStatisticsCount().put(LABELS, upperKb.getLabelCount());
+        statistics.getUpperKnowledgeBaseStatisticsCount().put(STATEMENTS, upperKb.getStatementCount());
 
-        sb.append("\"")
-                .append("wikidata_labels")
-                .append("\"")
-                .append(":")
-                .append("\"")
-                .append(upperKb.getLabelCount())
-                .append("\"")
-                .append(",");
+        Map<String, LowerKnowledgeBase> lowerKbsByLang = upperKb.getWikipediaConfs();
 
-        Map<String, LowerKnowledgeBase> lowerKbWikipedias = upperKb.getWikipediaConfs();
-
-        for (Map.Entry<String, LowerKnowledgeBase> entry : lowerKbWikipedias.entrySet()) {
+        for (Map.Entry<String, LowerKnowledgeBase> entry : lowerKbsByLang.entrySet()) {
             String wikipediaName = entry.getKey();
             LowerKnowledgeBase kb = entry.getValue();
             int articleCount = kb.getArticleCount();
 
-            sb.append("\"").append(wikipediaName).append("\"").append(":").append("\"").append(articleCount).append("\"").append(",");
+            statistics.getLowerKnowledgeBaseStatisticsCount().put(wikipediaName, articleCount);
         }
 
-        sb.append("}");
-
-        return sb.toString().replace(",}", "}");
-
+        return statistics;
     }
 }
