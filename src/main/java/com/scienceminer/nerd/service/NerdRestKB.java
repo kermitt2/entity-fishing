@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -388,15 +389,15 @@ public class NerdRestKB {
         Map<String, LowerKnowledgeBase> lowerKbsByLang = upperKb.getWikipediaConfs();
 
         for (Map.Entry<String, LowerKnowledgeBase> entry : lowerKbsByLang.entrySet()) {
-            List<Pair<String, Integer>> wikipediaCounters= new ArrayList<>();
+            Map<String, Integer> wikipediaCounter= new HashMap<>();
             String wikipediaName = entry.getKey();
             LowerKnowledgeBase kb = entry.getValue();
             int articleCount = kb.getArticleCount();
-            wikipediaCounters.add(Pair.of("Articles count", articleCount));
+            wikipediaCounter.put(ARTICLES, articleCount);
             int pageCount = kb.getPageCount();
-            wikipediaCounters.add(Pair.of("Pages count", pageCount));
+            wikipediaCounter.put(PAGES, pageCount);
 
-            statistics.getLowerKnowledgeBaseStatisticsCount().put(wikipediaName, wikipediaCounters);
+            statistics.getLowerKnowledgeBaseStatisticsCount().put(wikipediaName, wikipediaCounter);
         }
 
         return statistics;
