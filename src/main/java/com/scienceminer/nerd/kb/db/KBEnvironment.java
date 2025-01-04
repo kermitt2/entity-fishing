@@ -101,7 +101,7 @@ public abstract class KBEnvironment implements Closeable {
 	 */
 	public enum StatisticName {
 		/**
-		 * number of articles (not disambiguations or redirects)
+		 * number of articles (not disambiguation or redirects)
 		 */
 		articleCount,
 		

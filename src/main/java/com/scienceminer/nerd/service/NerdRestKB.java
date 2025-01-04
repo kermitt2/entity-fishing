@@ -13,6 +13,7 @@ import com.scienceminer.nerd.kb.model.Page;
 import com.scienceminer.nerd.kb.model.Page.PageType;
 import com.scienceminer.nerd.utilities.mediaWiki.MediaWikiParser;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.lang.Language;
 
 import static com.scienceminer.nerd.kb.UpperKnowledgeBase.TARGET_LANGUAGES;
@@ -24,6 +25,7 @@ import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -386,11 +388,15 @@ public class NerdRestKB {
         Map<String, LowerKnowledgeBase> lowerKbsByLang = upperKb.getWikipediaConfs();
 
         for (Map.Entry<String, LowerKnowledgeBase> entry : lowerKbsByLang.entrySet()) {
+            List<Pair<String, Integer>> wikipediaCounters= new ArrayList<>();
             String wikipediaName = entry.getKey();
             LowerKnowledgeBase kb = entry.getValue();
             int articleCount = kb.getArticleCount();
+            wikipediaCounters.add(Pair.of("Articles count", articleCount));
+            int pageCount = kb.getPageCount();
+            wikipediaCounters.add(Pair.of("Pages count", pageCount));
 
-            statistics.getLowerKnowledgeBaseStatisticsCount().put(wikipediaName, articleCount);
+            statistics.getLowerKnowledgeBaseStatisticsCount().put(wikipediaName, wikipediaCounters);
         }
 
         return statistics;

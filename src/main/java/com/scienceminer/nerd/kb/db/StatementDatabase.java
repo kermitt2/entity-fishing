@@ -1,32 +1,21 @@
 package com.scienceminer.nerd.kb.db;
 
-import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
+import com.scienceminer.nerd.kb.Property;
+import com.scienceminer.nerd.kb.Statement;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import org.apache.commons.compress.compressors.CompressorInputStream;
+import org.apache.commons.compress.compressors.CompressorStreamFactory;
+import org.apache.hadoop.record.CsvRecordInput;
+import org.fusesource.lmdbjni.Entry;
+import org.fusesource.lmdbjni.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.commons.compress.compressors.*;
-import org.apache.hadoop.record.CsvRecordInput;
-
-import com.scienceminer.nerd.kb.db.*;
-import com.scienceminer.nerd.kb.db.KBDatabase.DatabaseType;
-import com.scienceminer.nerd.utilities.*;
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.exceptions.NerdResourceException;
-
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.io.*;
-
-import org.fusesource.lmdbjni.*;
-import static org.fusesource.lmdbjni.Constants.*;
+import java.io.*;
+import java.util.*;
 
 public class StatementDatabase extends StringRecordDatabase<List<Statement>> {
 	private static final Logger logger = LoggerFactory.getLogger(StatementDatabase.class);	
