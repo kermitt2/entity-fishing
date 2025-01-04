@@ -1307,20 +1307,71 @@ Retrieve information about the loaded data, showing the number of concept per Kn
 Here a sample of the response
 ::
     {
-      "wikidata_concepts": "100009060",
-      "de": "0",
-      "hi": "0",
-      "ru": "0",
-      "sv": "0",
-      "pt": "0",
-      "en": "6327076",
-      "it": "0",
-      "fr": "2362110",
-      "bn": "0",
-      "es": "0",
-      "zh": "0",
-      "ar": "0",
-      "uk": "0",
-      "ja": "0",
-      "fa": "0"
+      "upperKnowledgeBaseStatisticsCount": {
+        "Concepts": 113276007,
+        "Labels": 113331134,
+        "Statements": 112505569
+      },
+      "lowerKnowledgeBaseStatisticsCount": {
+        "de": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "hi": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "ru": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "sv": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "pt": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "en": {
+          "Pages": 20279663,
+          "Articles": 6649343
+        },
+        "it": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "fr": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "bn": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "es": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "zh": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "ar": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "uk": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "ja": {
+          "Pages": 0,
+          "Articles": 0
+        },
+        "fa": {
+          "Pages": 0,
+          "Articles": 0
+        }
+      }
     }
