@@ -6,10 +6,12 @@ Install, build, run, and monitor
 Install, build, and run
 ***********************
 
-*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64. 
+*entity-fishing* requires JDK 1.11 or higher.
+The official supported architecture/OS is Linux-64.
 
-Mac OS environments should work fine, but it is *officially* not supported. 
-Please use a Linux-64 environment for any production works. Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
+Mac OS is not officially supported. Mac OS (Intel) should nevertheless  work fine, but ARM does not work.
+Please use a Linux-64 environment for any production works.
+Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
 
 Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
 

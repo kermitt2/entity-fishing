@@ -1,0 +1,68 @@
+name: Build unstable
+
+on: [push, workflow_dispatch]
+
+concurrency: 
+  group: gradle
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout grobid home
+      uses: actions/checkout@v4
+      with:
+        repository: kermitt2/grobid
+        ref: 0.8.1
+        path: ./grobid
+    - name: Checkout grobid-ner
+      uses: actions/checkout@v4
+      with:
+        repository: kermitt2/grobid-ner
+        path: ./grobid/grobid-ner
+    - name: Checkout entity-fishing
+      uses: actions/checkout@v4
+      with:
+        path: ./entity-fishing
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: 'gradle'
+    - name: Build grobid
+      working-directory: grobid
+      run: ./gradlew install -x test
+    - name: Build grobid-ner
+      working-directory: grobid/grobid-ner
+      run: ./gradlew install -x test
+    - name: Install grobid-ner
+      working-directory: grobid/grobid-ner
+      run: ./gradlew copyModels
+    - name: Build entity-fishing with Gradle
+      working-directory: entity-fishing
+      run: ./gradlew build -x test
+
+
+  docker-build:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create more disk space
+        run: sudo rm -rf /usr/share/dotnet && sudo rm -rf /opt/ghc && sudo rm -rf "/usr/local/share/boost" && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      - uses: actions/checkout@v4
+      - name: Build and push
+        id: docker_build
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image: lfoppiano/entity-fishing
+          registry: docker.io
+          pushImage: false
+          tags: latest-develop
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
