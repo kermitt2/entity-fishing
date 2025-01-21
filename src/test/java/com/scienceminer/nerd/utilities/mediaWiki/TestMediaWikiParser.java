@@ -297,12 +297,25 @@ public class TestMediaWikiParser {
         InputStream is = this.getClass().getResourceAsStream("date_fr.txt");
         String input = IOUtils.toString(is, UTF_8);
         input = StringEscapeUtils.unescapeXml(input);
-        String inputHTML = mediaWikiParser.toHTML(input, "sv");
+        String inputHTML = mediaWikiParser.toHTML(input, "fr");
 
         //System.out.println("*************************");
         //System.out.println(inputHTML);
 
         assertThat(inputHTML.trim(), startsWith("<p><b>Emmanuel Macron</b> "));
+    }
+
+    @Test
+    public void testWikiMediaToTextWithInternalLinksAndCategoriesOnly_NL() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("lenin_nl.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String inputSlim = mediaWikiParser.toTextWithInternalLinksAndCategoriesOnly(input, "nl");
+
+        //System.out.println("*************************");
+        //System.out.println(inputSlim);
+
+        assertThat(inputSlim.trim(), startsWith("Vladimir Iljitsj Lenin"));
     }
 
 }

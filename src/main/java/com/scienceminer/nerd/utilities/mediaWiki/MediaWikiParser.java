@@ -133,6 +133,11 @@ public class MediaWikiParser {
         configs.put("bn", config);
         engine = new WtEngineImpl(config);        
         engines.put("bn", engine);
+
+        config = DefaultConfigNlWp.generate();
+        configs.put("nl", config);
+        engine = new WtEngineImpl(config);
+        engines.put("nl", engine);
     }
 
     /**
