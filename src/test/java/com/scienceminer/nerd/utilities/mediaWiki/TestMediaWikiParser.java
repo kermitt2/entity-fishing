@@ -1,19 +1,16 @@
 package com.scienceminer.nerd.utilities.mediaWiki;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.junit.Test;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
-import org.junit.After;
-import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.InputStream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestMediaWikiParser {
 
@@ -297,12 +294,42 @@ public class TestMediaWikiParser {
         InputStream is = this.getClass().getResourceAsStream("date_fr.txt");
         String input = IOUtils.toString(is, UTF_8);
         input = StringEscapeUtils.unescapeXml(input);
-        String inputHTML = mediaWikiParser.toHTML(input, "sv");
+        String inputHTML = mediaWikiParser.toHTML(input, "fr");
 
         //System.out.println("*************************");
         //System.out.println(inputHTML);
 
         assertThat(inputHTML.trim(), startsWith("<p><b>Emmanuel Macron</b> "));
+    }
+
+    @Test
+    public void testWikiMediaToTextWithInternalLinksAndCategoriesOnly_NL() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("lenin_nl.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String convertedWithLinksOnly = mediaWikiParser.toTextWithInternalLinksOnly(input, "nl");
+
+        assertThat(convertedWithLinksOnly.trim(), startsWith("Vladimir Iljitsj Lenin"));
+        assertThat(convertedWithLinksOnly.trim(), endsWith("online Nederlandstalige werken van Lenins hand"));
+
+        String convertedWithLinksAndCategories = mediaWikiParser.toTextWithInternalLinksAndCategoriesOnly(input, "nl");
+
+        assertThat(convertedWithLinksAndCategories.trim(), startsWith("Vladimir Iljitsj Lenin"));
+        assertThat(convertedWithLinksAndCategories.trim(), endsWith("[[Categorie:Balling]]"));
+
+    }
+
+    @Test
+    public void testWikiMediaToHTML_NL() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("lenin_nl.txt");
+        String input = IOUtils.toString(is, UTF_8);
+        input = StringEscapeUtils.unescapeXml(input);
+        String inputHTML = mediaWikiParser.toHTML(input, "nl");
+
+        //System.out.println("*************************");
+        //System.out.println(inputHTML);
+
+        assertThat(inputHTML.trim(), startsWith("<p> <b>Vladimir Iljitsj Lenin</b>"));
     }
 
 }
