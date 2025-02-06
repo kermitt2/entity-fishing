@@ -1,28 +1,13 @@
 package com.scienceminer.nerd.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scienceminer.nerd.exceptions.CustomisationException;
-import com.scienceminer.nerd.exceptions.NerdException;
-import com.scienceminer.nerd.kb.Customisations;
-import com.scienceminer.nerd.kb.LowerKnowledgeBase;
-import com.scienceminer.nerd.kb.UpperKnowledgeBase;
-import com.scienceminer.nerd.kb.model.Page;
-import org.apache.commons.lang3.StringUtils;
 import com.google.inject.Inject;
-
+import com.scienceminer.nerd.exceptions.CustomisationException;
+import com.scienceminer.nerd.kb.Customisations;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
  * Class for implemeting the services to manage the customization in NERD.
