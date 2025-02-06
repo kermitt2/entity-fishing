@@ -205,6 +205,14 @@ public class UpperKnowledgeBase {
 			wikipedias.put("hi", wikipedia_hi);
             wikipediaDomainMaps.put("hi", wikipediaDomainMaps_en);
 
+			LOGGER.info("Init Dutch lower Knowledge-base layer (if present)");
+            yamlFile = new File("data/config/wikipedia-nl.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_nl = new LowerKnowledgeBase(conf);
+			wikipedias.put("nl", wikipedia_nl);
+            wikipediaDomainMaps.put("nl", wikipediaDomainMaps_en);
+
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
 			LOGGER.info("Init Grobid") ;

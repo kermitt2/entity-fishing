@@ -2,15 +2,13 @@ package com.scienceminer.nerd.disambiguation;
 
 import com.scienceminer.nerd.kb.model.Article;
 
-import java.util.Objects;
-
 public class ArticlePair {
-    private final Article articleA, artticleB;
+    private final Article articleA, articleB;
     private final Long key;
 
     public ArticlePair(Article a, Article b){
         articleA = a;
-        artticleB = b;
+        articleB = b;
         key = computeKey(a, b);
     }
 
@@ -41,8 +39,8 @@ public class ArticlePair {
     }
 
 
-    public Article getArtticleB() {
-        return artticleB;
+    public Article getArticleB() {
+        return articleB;
     }
 
 
