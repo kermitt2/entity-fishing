@@ -363,7 +363,7 @@ public class Relatedness {
 				continue;
 			else if (cands.size() == 1) {
 				NerdCandidate cand = cands.get(0);
-				if (cand.getProb_c() >= minSenseProbability) {
+				if (cand.getProb_c() >= (1-minSenseProbability)) {
 					// conditional prob of candidate sense must also be above the acceptable threshold
 					if (!unambigIds.contains(cand.getWikiSense().getId())) {
 						Label.Sense theSense = cands.get(0).getWikiSense();
@@ -388,7 +388,7 @@ public class Relatedness {
 					continue;
 				} else {
 					for(NerdCandidate cand : cands) {
-						if (cand.getProb_c() >= minSenseProbability) {
+						if (cand.getProb_c() >= (1-minSenseProbability)) {
 							Label.Sense theSense = cands.get(0).getWikiSense();
 							if (!unambigIds.contains(theSense.getId())) {
 								unambig.add(theSense);
@@ -478,7 +478,7 @@ public class Relatedness {
 					if (label.getLinkProbability() > minLinkProbability) {
 						Label.Sense[] senses = label.getSenses();
 						if ( senses.length == 1 ||
-							(senses[0].getPriorProbability() >= minSenseProbability) )
+							(senses[0].getPriorProbability() >= (1-minSenseProbability)) )
 							unambig.add(senses[0]);
 
 						// we store some extra senses in case the context is too small
@@ -542,7 +542,7 @@ public class Relatedness {
 
 					Label.Sense[] senses = label.getSenses();
 
-					if ( senses.length == 1 || (senses[0].getPriorProbability() >= minSenseProbability))
+					if ( senses.length == 1 || (senses[0].getPriorProbability() >= (1-minSenseProbability)) )
 						unambig.add(senses[0]);
 
 					// we store some extra senses if needed
