@@ -43,7 +43,7 @@ public class UpperKnowledgeBase {
 
 	// this is the list of supported languages 
   	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
-  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi");
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi", "nl");
  
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
