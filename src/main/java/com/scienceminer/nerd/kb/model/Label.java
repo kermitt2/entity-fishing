@@ -175,7 +175,14 @@ public class Label {
 			if (linkOccCount == 0)
 				return 0.0;
 			else {
-				return ((double)sLinkOccCount) / linkOccCount;
+
+				double probability = ((double) sLinkOccCount) / linkOccCount;
+//				double logProbability = Math.log(probability);
+//				return 1 / (1 + Math.exp(-logProbability));
+
+				double smoothedProbability = probability / (1 + Math.exp(-0.1 * (probability - 0.5)));
+
+				return smoothedProbability;
 			}
 		}
 		
