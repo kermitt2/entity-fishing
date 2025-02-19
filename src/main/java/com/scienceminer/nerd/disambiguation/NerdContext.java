@@ -6,6 +6,7 @@ import com.scienceminer.nerd.kb.model.Article;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.utilities.NerdConfig;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -153,7 +154,7 @@ public class NerdContext {
 	}
 
 	public double getQuality() {
-		if ((contextArticles == null) || (contextArticles.size() == 0)) 
+		if (CollectionUtils.isEmpty(contextArticles))
 			return 0.0;
 
 		if (totalWeight != 0.0)
