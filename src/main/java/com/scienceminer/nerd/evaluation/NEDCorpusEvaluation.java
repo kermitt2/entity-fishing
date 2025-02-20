@@ -18,8 +18,6 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.UnicodeUtil;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -47,7 +45,7 @@ public class NEDCorpusEvaluation {
     //private static final Logger LOGGER = LoggerFactory.getLogger(NEDCorpusEvaluation.class);
 
     public static List<String> corpora = Arrays.asList("ace", "aida", "aida-train", "aida-testa", "aida-testb",
-            "aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos");
+            "aquaint", "iitb", "msnbc", "clueweb", "wikipedia", "hirmeos", "kairntech");
 
     private UpperKnowledgeBase upperKnowledgeBase = null;
     private Map<String, LowerKnowledgeBase> wikipediaMap = null;
