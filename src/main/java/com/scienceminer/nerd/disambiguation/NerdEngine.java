@@ -934,7 +934,6 @@ public class NerdEngine {
 		NerdContext context, boolean shortText, List<LayoutToken> tokens) {
 		// we rank candidates for each entity mention
 		//relatedness.resetCache(lang);
-		LowerKnowledgeBase wikipedia = wikipedias.get(lang);
 
 		// first pass to get the "certain" entities
 		List<NerdEntity> userEntities = new ArrayList<>();
