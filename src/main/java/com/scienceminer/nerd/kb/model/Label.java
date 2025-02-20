@@ -177,12 +177,15 @@ public class Label {
 			else {
 
 				double probability = ((double) sLinkOccCount) / linkOccCount;
-//				double logProbability = Math.log(probability);
-//				return 1 / (1 + Math.exp(-logProbability));
 
-				double smoothedProbability = probability / (1 + Math.exp(-0.1 * (probability - 0.5)));
+				// Pan down below 0.5 each probability (harsh, likely destroy the context)
+				double smoothedProbability1 = probability / (1 + Math.exp(-0.1 * (probability - 0.5)));
 
-				return smoothedProbability;
+				// Apply log probability
+				double logProbability = Math.log(probability);
+				double smoothedProbability2 = 1 / (1 + Math.exp(-logProbability));
+
+				return probability;
 			}
 		}
 		
