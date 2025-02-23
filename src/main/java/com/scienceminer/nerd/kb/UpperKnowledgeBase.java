@@ -43,7 +43,7 @@ public class UpperKnowledgeBase {
 
 	// this is the list of supported languages 
   	public static final List<String> TARGET_LANGUAGES = Arrays.asList(
-  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi");
+  			Language.EN, Language.FR, Language.DE, Language.IT, Language.ES, "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi", "nl");
  
 	 public static UpperKnowledgeBase getInstance() {
         if (instance == null) {
@@ -204,6 +204,14 @@ public class UpperKnowledgeBase {
 			LowerKnowledgeBase wikipedia_hi = new LowerKnowledgeBase(conf);
 			wikipedias.put("hi", wikipedia_hi);
             wikipediaDomainMaps.put("hi", wikipediaDomainMaps_en);
+
+			LOGGER.info("Init Dutch lower Knowledge-base layer (if present)");
+            yamlFile = new File("data/config/wikipedia-nl.yaml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, NerdConfig.class);;
+			LowerKnowledgeBase wikipedia_nl = new LowerKnowledgeBase(conf);
+			wikipedias.put("nl", wikipedia_nl);
+            wikipediaDomainMaps.put("nl", wikipediaDomainMaps_en);
 
 			LOGGER.info("End of Initialization of Wikipedia environments");
 
