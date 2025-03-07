@@ -1,5 +1,6 @@
 package com.scienceminer.nerd.mention;
 
+import com.google.common.collect.Iterables;
 import com.scienceminer.nerd.disambiguation.NerdContext;
 import com.scienceminer.nerd.disambiguation.NerdEngine;
 import com.scienceminer.nerd.exceptions.NerdException;
@@ -8,35 +9,30 @@ import com.scienceminer.nerd.kb.LowerKnowledgeBase;
 import com.scienceminer.nerd.kb.UpperKnowledgeBase;
 import com.scienceminer.nerd.kb.model.Label;
 import com.scienceminer.nerd.service.NerdQuery;
-import com.scienceminer.nerd.utilities.*;
+import com.scienceminer.nerd.utilities.Stopwords;
+import com.scienceminer.nerd.utilities.StringPos;
+import com.scienceminer.nerd.utilities.StringProcessor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.Entity;
 import org.grobid.core.engines.NERParsers;
 import org.grobid.core.lang.Language;
-import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.*;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
-import org.grobid.core.utilities.SentenceUtilities;
-import org.grobid.core.main.LibraryLoader;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import scala.Char;
 
-import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -390,19 +386,22 @@ public class ProcessText {
             String rawName = pos.getString();
             String rawNameLowerCase = rawName.toLowerCase();
 
-            // remove term starting or ending with a stop-word, and term starting with a separator (conservative
-            // it should never be the case)
+            // remove term starting or ending with a stop-word
             if (stopwords != null) {
-                if ((delimiters.indexOf(rawNameLowerCase.charAt(0)) != -1) ||
-                        stopwords.startsWithStopword(rawNameLowerCase, lang.getLang()) ||
-                        stopwords.endsWithStopword(rawNameLowerCase, lang.getLang())
-                        ) {
-                    continue;
+                if (stopwords.startsWithStopword(rawNameLowerCase, lang.getLang())) {
+                    if (!Character.isUpperCase(pos.getLayoutTokens().get(0).getText().codePointAt(0))) {
+                        continue;
+                    }
+                } else if (stopwords.endsWithStopword(rawNameLowerCase, lang.getLang())) {
+                    if (!Character.isUpperCase(Iterables.getLast(pos.getLayoutTokens()).getText().codePointAt(0))) {
+                        continue;
+                    }
                 }
             }
 
-            // remove term ending with a separator
-            if (delimiters.indexOf(rawNameLowerCase.charAt(rawNameLowerCase.length() - 1)) != -1) {
+            // remove term ending or starting (conservative, it should never be the case) with a separator
+            if (delimiters.indexOf(rawNameLowerCase.charAt(0)) != -1
+                || delimiters.indexOf(rawNameLowerCase.charAt(rawNameLowerCase.length() - 1)) != -1) {
                 continue;
             }
 
@@ -732,7 +731,7 @@ public class ProcessText {
             if (StringUtils.isEmpty(layoutTokens.get(i).getText()))
                 continue;
 
-            int tmpNgram = layoutTokens.size() - i < actualNgram ? layoutTokens.size() - i : actualNgram;
+            int tmpNgram = Math.min(layoutTokens.size() - i, actualNgram);
 
             for (int n = 1; n <= tmpNgram; n++) {
                 final List<LayoutToken> tokens = layoutTokens.subList(i, i + n);
