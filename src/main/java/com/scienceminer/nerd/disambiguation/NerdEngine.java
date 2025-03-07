@@ -499,9 +499,14 @@ public class NerdEngine {
 						candidates.add(candidate);
 						//System.out.println(candidate.toString());
 						s++;
-						if (s == MAX_SENSES) {
+						if (s >= MAX_SENSES) {
 							// max. sense alternative has been reach
-							break;
+
+							// If I'm about to finishing but the next sense has the same prob I continue
+							if(i < senses.length - 1 && senses[i+1].getPriorProbability() == sense.getPriorProbability()) {
+                            } else {
+								break;
+							}
 						}
 					}
 				}
