@@ -23,40 +23,7 @@ The current latest version should be (image size: 1.6GB):
 
 Prepare the knowledge data volumes on your host machine: *entity-fishing* uses LMDB to store compiled Wikidata and Wikipedia resources for every supported languages. Despite compression and indexing, these resources are pretty big, because they cover most of Wikidata and language-specific Wikipedia content. 
 
-Download and unzip somewhere on your host machine (where the docker container will run) the following data resources:
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-kb.zip (8.7 GB) (minimum requirement)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-en.zip (7.0 GB) (minimum requirement)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-fr.zip (4.3 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-de.zip (2.6 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-es.zip (1.9 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-it.zip (1.7 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ar.zip (1.3 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-zh.zip (1.3 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ru.zip (2.4 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ja.zip (1.8 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-pt.zip (1.2 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-fa.zip (1.1 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-uk.zip (1.3 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-sv.zip (1.4 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-bn.zip (0.3 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-hi.zip (0.2 GB)
-
+Download on your host machine (where the docker container will run) the data resources, as explained in the :ref:`build`.
 
 Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
 ::
