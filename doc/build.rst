@@ -1,3 +1,5 @@
+.. _build:
+
 .. topic:: Build and install entity-fishing.
 
 Install, build, run, and monitor

@@ -23,7 +23,7 @@ The current latest version should be (image size: 1.6GB):
 
 Prepare the knowledge data volumes on your host machine: *entity-fishing* uses LMDB to store compiled Wikidata and Wikipedia resources for every supported languages. Despite compression and indexing, these resources are pretty big, because they cover most of Wikidata and language-specific Wikipedia content. 
 
-Download on your host machine (where the docker container will run) the data resources, as explained in the `installation instructions <build.rst>`_.
+Download on your host machine (where the docker container will run) the data resources, as explained in the :ref:`build`.
 
 Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
 ::
