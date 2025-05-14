@@ -141,7 +141,7 @@ public class WikipediaLabelIDF {
         }
 
         String lang = args[0];
-        List<String> languages = Arrays.asList("en", "fr", "de", "es", "it", "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi");;
+        List<String> languages = Arrays.asList("en", "fr", "de", "es", "it", "ar", "zh", "ja", "ru", "pt", "fa", "uk", "sv", "bn", "hi", "nl");;
         if (!languages.contains(lang)) {
             System.out.println("unsupported language, must be one of " + languages.toString());
             System.exit(-1);

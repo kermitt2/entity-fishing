@@ -60,7 +60,7 @@ If you want to cite this work, please refer to the present GitHub project, toget
        title = {entity-fishing},
        howpublished = {\url{https://github.com/kermitt2/entity-fishing}},
        publisher = {GitHub},
-       year = {2016--2023},
+       year = {2016--2025},
        archivePrefix = {swh},
        eprint = {1:dir:cb0ba3379413db12b0018b7c3af8d0d2d864139c}
    }
@@ -77,4 +77,4 @@ The documentation is distributed under `CC-0 <https://creativecommons.org/public
 
 If you contribute to entity-fishing, you agree to share your contribution following these licenses. 
 
-Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
+Main author and contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano <luca@sciencialab.com>

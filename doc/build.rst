@@ -1,3 +1,5 @@
+.. _build:
+
 .. topic:: Build and install entity-fishing.
 
 Install, build, run, and monitor
@@ -6,10 +8,12 @@ Install, build, run, and monitor
 Install, build, and run
 ***********************
 
-*entity-fishing* requires JDK 1.8 or higher. It supports Linux-64. 
+*entity-fishing* requires JDK 1.11 or higher.
+The official supported architecture/OS is Linux-64.
 
-Mac OS environments should work fine, but it is *officially* not supported. 
-Please use a Linux-64 environment for any production works. Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
+Mac OS is not officially supported. Mac OS (Intel) should nevertheless  work fine, but ARM does not work.
+Please use a Linux-64 environment for any production works.
+Below, we make available the up-to-date and full binary index data for Linux-64 architecture.
 
 Running the service requires at least 3GB of RAM for processing text inputs, but more RAM will be exploited if available for speeding up access to the compiled Wikidata and Wikipedia data (including Wikidata statements associated to entities) and for enabling high rate parallel processing. In case PDF are processed, a mimimum of 8GB is required due to additional PDF parsing and structuring requirements. For parallel processing of PDF exploiting multhreading (e.g. 10 parallel threads), 16GB is recommended. 
 
@@ -51,62 +55,47 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb.zip``) and the English Wikipedia data (``db-en.zip``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.6`` correspond to the Wikidata and Wikipedia dumps from Jan. 2023. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). 
+#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb``) and the English Wikipedia data (``db-en``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.6`` correspond to the Wikidata and Wikipedia dumps from Jan. 2023. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). The database have been migrated to Huggingface.
 
-    **Linux**
+ :warning: Only Linux is supported, MacOS is officially not supported anymore.
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-kb.zip (8.7 GB) (minimum requirement)
+ All the languages can be seen `here <https://huggingface.co/collections/sciencialab/entity-fishing-67b84006d00e69f10c1437cf>`_.
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-en.zip (7.0 GB) (minimum requirement)
+ To download them you can use `git clone <link>` (instruction are provided in each page):
+        - https://huggingface.co/sciencialab/entity-fishing-db-kb (8.7 GB) (minimum requirement)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-fr.zip (4.3 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-en (7.0 GB) (minimum requirement)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-de.zip (2.6 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-fr (4.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-es.zip (1.9 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-de (2.6 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-it.zip (1.7 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-es (1.9 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ar.zip (1.3 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-it (1.7 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-zh.zip (1.3 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-ar (1.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ru.zip (2.4 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-zh (1.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-ja.zip (1.8 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-ru (2.4 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-pt.zip (1.2 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-ja (1.8 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-fa.zip (1.1 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-pt (1.2 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-uk.zip (1.3 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-fa (1.1 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-sv.zip (1.4 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-uk (1.3 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-bn.zip (0.3 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-sv (1.4 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.6/db-hi.zip (0.2 GB)
+        - https://huggingface.co/sciencialab/entity-fishing-db-bn (0.3 GB)
 
-MacOS is officially not supported and should not be used for production. For convenience, we still make available the MacOS data version ``0.0.3`` corresponding to the Wikidata and Wikipedia dumps from mid-2018 (Intel architecture). Although outdated and many languages not available, they are still compatible with the *entity-fishing* version ``0.0.4`` to ``0.0.6`` and could be used for test/development. However, we strongly recommend to use the Linux version for any serious works.
+        - https://huggingface.co/sciencialab/entity-fishing-db-hi (0.2 GB)
 
-    **MacOS**
+        - https://huggingface.co/sciencialab/entity-fishing-db-nl (9 GB)
 
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-kb.zip (4.1 GB) (minimum requirement)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-en.zip (5.5 GB) (minimum requirement)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-fr.zip (1.9 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-de.zip (2.0 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-es.zip (1.5 GB)
-
-        - https://science-miner.s3.amazonaws.com/entity-fishing/0.0.3/macos/db-it.zip (1.3 GB)
-
-
-#. Unzip the db archives files under ``data/db/``.
-
-    This will install several sub-directories, one per language, plus wikidata (``db-kb``): ``data/db/db-XY/``, with XY equal to ``fr``, ``en``, ``it``, ``es``, ``en``, ``ar``, ``zh``, ``ru``, ``ja``, ``pt``, ``fa``, ``uk``, ``sv``, ``bn`` and ``hi``. The full uncompressed data is more than 90 GB.
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
@@ -144,3 +133,43 @@ The files generated by GRISP (see `listing all necessary files <https://github.c
     - ``dataDirectory`` in the files ``wikipedia-XY.yml`` (with XY equal to the language, e.g. ``en``, ``fr``) for the Wikipedia related knowledge base. Note: The ``XYwiki-latest-pages-articles-multistream.xml.bz2`` can be left compressed
 
     - ``dataDirectory`` in the file ``kb.yml`` for the Wikidata knowledge base (db-kb)
+
+
+Assuming that all the files generated by GRISP are collected in a directory, it's necessary to modify entity-fishing as follows (language id: `bb`):
+
+1. Duplicate a configuration file (e.g. ``data/config/wikipedia-bb.yml``) and modify the ``dataDirectory`` parameter to point to the directory containing the Wikipedia files generated by GRISP
+
+2. Add the stopwords file (``data/stopwords/bb.txt``) containing a list of stopwords for the language.
+ A common source can be the nltk package (`example <https://github.com/nltk/nltk/blob/d60a72877803427d5619dfe1f8190e684011c98b/nltk/tokenize/texttiling.py#L79>`_), but there are many other sources available.
+
+3. Add the world frequencies file (``data/stopwords/bb_freq.json.gz``)
+
+    - This file can be downloaded from the ``wordfreq`` repository (https://github.com/rspeer/wordfreq)
+    - Download the (small) msgpack for the related language from https://github.com/rspeer/wordfreq/tree/master/wordfreq/data
+    - Convert to JSON using https://github.com/ludocode/msgpack-tools
+    - Gzip the JSON file and rename it to ``bb_freq.json.gz``
+
+4. Add the language loading code in the constructor of ``UpperKnowledgeBase.java``::
+
+    LOGGER.info("Init Dutch lower Knowledge-base layer (if present)");
+    yamlFile = new File(yamlFile.getAbsolutePath());
+    yamlFile = new File("data/config/wikipedia-nl.yaml");
+    conf = mapper.readValue(yamlFile, NerdConfig.class);;
+    LowerKnowledgeBase wikipedia_nl = new LowerKnowledgeBase(conf);
+    wikipedias.put("nl", wikipedia_nl);
+    wikipediaDomainMaps.put("nl", wikipediaDomainMaps_en);
+
+5. Add the language code in the following classes line starting with (``List<String> languages = Arrays.asList("en", "fr ...``)
+    - ``GenerateArticleTextCorpus.java``
+    - ``GenerateSpecializedVocabulary.java``
+    - ``WikipediaLabelIDF.java``
+
+6. If all works fine, is possible to train the ranker and selector for the new language::
+
+   ./gradlew train_wikipedia -Plang=bb
+
+ More information about training are available in the :doc:`train`.
+
+
+
+
