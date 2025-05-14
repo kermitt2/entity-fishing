@@ -31,13 +31,13 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: 'gradle'
-    - name: Build grobid
-      working-directory: grobid
-      run: ./gradlew install -x test
-    - name: Build grobid-ner
-      working-directory: grobid/grobid-ner
-      run: ./gradlew install -x test
-    - name: Install grobid-ner
+#    - name: Build grobid
+#      working-directory: grobid
+#      run: ./gradlew install -x test
+#    - name: Build grobid-ner
+#      working-directory: grobid/grobid-ner
+#      run: ./gradlew install -x test
+    - name: Install grobid-ner models
       working-directory: grobid/grobid-ner
       run: ./gradlew copyModels
     - name: Build entity-fishing with Gradle
@@ -51,7 +51,11 @@ jobs:
 
     steps:
       - name: Create more disk space
-        run: sudo rm -rf /usr/share/dotnet && sudo rm -rf /opt/ghc && sudo rm -rf "/usr/local/share/boost" && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        run: |
+          sudo rm -rf /usr/share/dotnet 
+          sudo rm -rf /opt/ghc 
+          sudo rm -rf "/usr/local/share/boost" 
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
       - uses: actions/checkout@v4
       - name: Build and push
         id: docker_build
