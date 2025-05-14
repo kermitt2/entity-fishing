@@ -94,6 +94,8 @@ Then install the compiled indexed data:
 
         - https://huggingface.co/sciencialab/entity-fishing-db-hi (0.2 GB)
 
+        - https://huggingface.co/sciencialab/entity-fishing-db-nl (9 GB)
+
 
 #. Build the project, under the *entity-fishing* project repository.
    ::
