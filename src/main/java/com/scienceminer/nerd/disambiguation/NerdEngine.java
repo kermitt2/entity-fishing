@@ -1,42 +1,43 @@
 package com.scienceminer.nerd.disambiguation;
 
-import java.util.*;
-
-import org.grobid.core.lang.Language;
-import org.grobid.core.utilities.LanguageUtilities;
-import org.grobid.core.utilities.*;
-import org.grobid.core.data.*;
-
-import org.grobid.core.engines.EngineParsers;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.analyzers.GrobidAnalyzer;
-import org.grobid.core.lexicon.NERLexicon;
-import org.grobid.core.lexicon.NERLexicon.NER_Type;
-
-import com.scienceminer.nerd.kb.*;
-import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
-import com.scienceminer.nerd.exceptions.*;
-import com.scienceminer.nerd.mention.*;
-import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.embeddings.SimilarityScorer;
+import com.scienceminer.nerd.exceptions.NerdException;
+import com.scienceminer.nerd.exceptions.NerdResourceException;
 import com.scienceminer.nerd.features.GenericRankerFeatureVector;
 import com.scienceminer.nerd.features.GenericSelectionFeatureVector;
-import com.scienceminer.nerd.utilities.Utilities;
-import com.scienceminer.nerd.disambiguation.util.*;
+import com.scienceminer.nerd.kb.LowerKnowledgeBase;
+import com.scienceminer.nerd.kb.UpperKnowledgeBase;
+import com.scienceminer.nerd.kb.db.WikipediaDomainMap;
+import com.scienceminer.nerd.kb.model.Article;
+import com.scienceminer.nerd.kb.model.Label;
+import com.scienceminer.nerd.kb.model.Page.PageType;
+import com.scienceminer.nerd.mention.Mention;
+import com.scienceminer.nerd.mention.ProcessText;
+import com.scienceminer.nerd.service.NerdQuery;
 import com.scienceminer.nerd.utilities.NerdConfig;
 import com.scienceminer.nerd.utilities.StringProcessor;
-
+import com.scienceminer.nerd.utilities.Utilities;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.text.WordUtils;
+import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.data.BibDataSet;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.engines.EngineParsers;
+import org.grobid.core.lang.Language;
+import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.lexicon.NERLexicon;
+import org.grobid.core.lexicon.NERLexicon.NER_Type;
+import org.grobid.core.utilities.LanguageUtilities;
+import org.grobid.core.utilities.LayoutTokensUtil;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scienceminer.nerd.kb.model.*;
-import com.scienceminer.nerd.kb.model.Page.PageType;
-
-import org.apache.commons.text.WordUtils;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import org.apache.commons.collections4.CollectionUtils;
 
 /**
  *
