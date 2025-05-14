@@ -74,7 +74,7 @@ public class Relatedness {
 							new CacheLoader<ArticlePair, Double>() {
 								@Override
 								public Double load(ArticlePair articlePair) throws Exception {
-									return getRelatednessWithoutCache(articlePair.getArticleA(),articlePair.getArtticleB() ,lang);
+									return getRelatednessWithoutCache(articlePair.getArticleA(),articlePair.getArticleB(), lang);
 								}
 							}
 					)
@@ -104,7 +104,7 @@ public class Relatedness {
 		else
 			return 0.0;
 
-		if ( (contextArticles == null) || (contextArticles.size() == 0) ) {
+		if (CollectionUtils.isEmpty(contextArticles)) {
 			// if there is no context, we can set an arbitrary score
 			return 0.1;
 		}

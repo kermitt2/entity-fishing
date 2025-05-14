@@ -14,7 +14,6 @@ import org.sweble.wikitext.engine.nodes.EngProcessedPage;
 import org.sweble.wikitext.engine.output.HtmlRenderer;
 import org.sweble.wikitext.engine.output.HtmlRendererCallback;
 import org.sweble.wikitext.engine.output.MediaInfo;
-import org.sweble.wikitext.engine.config.Interwiki;
 
 import static org.apache.commons.lang3.StringUtils.trim;
 
@@ -54,10 +53,10 @@ public class MediaWikiParser {
      */
     private MediaWikiParser() {
         // set-up simple wiki configurations
-        configs = new HashMap<String,WikiConfig>();
+        configs = new HashMap<>();
 
         // set-up language specific parsers
-        engines = new HashMap<String,WtEngineImpl>();
+        engines = new HashMap<>();
 
         WikiConfig config = DefaultConfigEnWp.generate();
         configs.put("en", config);
@@ -133,6 +132,11 @@ public class MediaWikiParser {
         configs.put("bn", config);
         engine = new WtEngineImpl(config);        
         engines.put("bn", engine);
+
+        config = DefaultConfigNlWp.generate();
+        configs.put("nl", config);
+        engine = new WtEngineImpl(config);
+        engines.put("nl", engine);
     }
 
     /**
