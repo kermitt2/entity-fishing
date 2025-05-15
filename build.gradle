@@ -5,7 +5,9 @@ buildscript {
         maven {
             url 'https://plugins.gradle.org/m2/'
         }
-        maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
+        flatDir {
+            dirs 'lib'
+        }
     }
     dependencies {
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.12.0'
@@ -35,10 +37,8 @@ tasks.withType(JavaCompile) {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
-    //jcenter()
     maven {
-        url 'lib/'
+        url new File(rootProject.rootDir, "lib")
     }
 }
 
@@ -52,15 +52,15 @@ dependencies {
     testImplementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     // GROBID
-    implementation (group: 'org.grobid', name: 'grobid-core', version: '0.8.1') {
+    implementation (group: 'org.grobid', name: 'grobid-core', version: '0.8.2') {
         //exclude(module: 'log4j-over-slf4j')
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
-    implementation (group: 'org.grobid', name: 'grobid-trainer', version: '0.8.1') {
+    implementation (group: 'org.grobid', name: 'grobid-trainer', version: '0.8.2') {
         //exclude(module: 'log4j-over-slf4j')
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
-    implementation (group: 'org.grobid', name: 'grobid-ner', version: '0.8.1') {
+    implementation (group: 'org.grobid', name: 'grobid-ner', version: '0.8.2') {
         //exclude(module: 'log4j-over-slf4j')
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
@@ -77,13 +77,13 @@ dependencies {
 
     //implementation group: 'directory-naming', name: 'naming-java', version: '0.8'
     implementation group: 'fr.limsi.wapiti', name: 'wapiti', version: '1.5.0'
-    implementation group: 'org.wipo.analysers', name: 'wipo-analysers', version: '0.0.1'
+    implementation group: 'org.grobid.analysers', name: 'grobid-lucene-analysers', version: '0.0.1'
 
     // Apache commons
     implementation 'org.apache.commons:commons-collections4:4.3'
     implementation 'org.apache.commons:commons-lang3:3.6'
     implementation 'commons-logging:commons-logging:1.2'
-    implementation 'commons-io:commons-io:2.7'
+    implementation 'commons-io:commons-io:2.14.0'
     implementation 'commons-pool:commons-pool:1.6'
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
     implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.13'
