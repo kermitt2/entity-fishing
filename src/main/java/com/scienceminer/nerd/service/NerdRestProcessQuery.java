@@ -4,7 +4,6 @@ import com.scienceminer.nerd.disambiguation.*;
 import com.scienceminer.nerd.disambiguation.util.*;
 import com.scienceminer.nerd.exceptions.QueryException;
 import com.scienceminer.nerd.kb.Customisations;
-import com.scienceminer.nerd.main.Main;
 import com.scienceminer.nerd.main.data.SoftwareInfo;
 import com.scienceminer.nerd.mention.Mention;
 import com.scienceminer.nerd.mention.ProcessText;
@@ -25,7 +24,7 @@ import java.util.*;
 import static com.scienceminer.nerd.disambiguation.NerdCustomisation.GENERIC_CUSTOMISATION;
 import static com.scienceminer.nerd.exceptions.QueryException.LANGUAGE_ISSUE;
 import static com.scienceminer.nerd.mention.ProcessText.GROBID_NER_SUPPORTED_LANGUAGES;
-import static shadedwipo.org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class NerdRestProcessQuery {
 
