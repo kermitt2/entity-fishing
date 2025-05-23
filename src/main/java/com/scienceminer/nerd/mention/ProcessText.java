@@ -125,7 +125,7 @@ public class ProcessText {
 
     /**
      * This is the entry point for a NerdQuery to have its textual content processed.
-     * The mthod will generate a list of recognized named entities produced by a list
+     * The method will generate a list of recognized named entities produced by a list
      * of mention recognition modules specified in the list field 'mention' of the NerdQuery
      * object. Each mention recognition method will be applied sequencially in the order
      * given in the list field 'mention'.
@@ -416,6 +416,23 @@ public class ProcessText {
             }
 
             results.add(mention);
+
+            // Hack for the genitive Saxon in German, which is attached to the name, and makes the mention extraction
+            // hitting in false negatives. To avoid that we generate a version without the final 's'
+
+            if (lang.getLang().equals("de")) {
+                if (rawNameLowerCase.endsWith("s")) {
+                    Mention mentionWithoutS = new Mention(pos.getString().substring(0, pos.getString().length()-1), MentionMethod.wikipedia);
+                    mentionWithoutS.setOffsetStart(pos.getOffsetStart());
+                    mentionWithoutS.setOffsetEnd(pos.getOffsetStart() + pos.getString().length() - 1);
+                    mentionWithoutS.setLayoutTokens(pos.getLayoutTokens());
+
+                    if (validEntity(mentionWithoutS, lang.getLang())) {
+                       results.add(mentionWithoutS);
+                    }
+                }
+            }
+
         }
 
         return results;
