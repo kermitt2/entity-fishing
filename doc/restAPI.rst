@@ -1299,10 +1299,11 @@ Or in case of issues:
 Data and statistics API
 ***********************
 
+Retrieve information about the loaded data, showing the number of concept per Knowledge base.
+
+
 GET /data
 ^^^^^^^^^
-
-Retrieve information about the loaded data, showing the number of concept per Knowledge base.
 
 (1) Example response
 

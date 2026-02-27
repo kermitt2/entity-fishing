@@ -55,13 +55,15 @@ Install *entity-fishing*:
 
 Then install the compiled indexed data:
 
-#. Download the zipped data files corresponding to your environment. The knowledge-base (Wikidata, ``db-kb``) and the English Wikipedia data (``db-en``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.6`` correspond to the Wikidata and Wikipedia dumps from Jan. 2023. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). The database have been migrated to Huggingface.
+#. Download the latest data files (Feb. 2025). The knowledge-base (Wikidata, ``entity-fishing-db-kb``) and the English Wikipedia data (``entity-fishing-db-en``) must always been installed as minimal set-up. You can then add your languages of choice at the following links. Total is around 29 GB compressed, and around 90 GB uncompressed. The data for this version ``0.0.6`` correspond to the Wikidata and Wikipedia dumps from Feb. 2025. The Knowledge Base part contains around 96 million entities. In this available KB data file, only the statements for entities having at least one Wikipedia page in one of the 9 supported languages are loaded (it's possible to load all of them by regenerating the KB with a dedicated parameter). 
 
- :warning: Only Linux is supported, MacOS is officially not supported anymore.
+ :warning: Only Linux data files are supported, MacOS is officially not supported anymore.
 
  All the languages can be seen `here <https://huggingface.co/collections/sciencialab/entity-fishing-67b84006d00e69f10c1437cf>`_.
 
- To download them you can use `git clone <link>` (instruction are provided in each page):
+ To download these resource files, you need to install first Xet, see `using xet storage <https://huggingface.co/docs/hub/en/xet/using-xet-storage>`_.
+
+ You can then use `git clone <link>`:
         - https://huggingface.co/sciencialab/entity-fishing-db-kb (8.7 GB) (minimum requirement)
 
         - https://huggingface.co/sciencialab/entity-fishing-db-en (7.0 GB) (minimum requirement)

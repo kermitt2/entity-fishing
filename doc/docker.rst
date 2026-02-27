@@ -28,36 +28,36 @@ Download on your host machine (where the docker container will run) the data res
 Run the container (if necessary, adapt the port mapping according to your requirements) and mount the data volumes for the languages to be supported indicating the path where you have unzipped them. The minimal requirement is to mount at least the db-kb (Wikidata) and db-en (English Wikipedia) volumes: 
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
-      -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-en \
+      -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/entity-fishing-db-kb \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-en \
       grobid/entity-fishing:0.0.6 
 
-More volumes can be mounted to support more languages. Be sure to have installed the data resources files on the host machine at the previous steps. For example, here for the 15 supported languages:
+More volumes can be mounted to support more languages. Be sure to have installed the data resources files on the host machine at the previous steps. For example, here for 15 supported languages:
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
-      -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-en \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-fr \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-de \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-es \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-it \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-ar \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-zh \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-ru \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-ja \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-pt \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-fa \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-uk \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-sv \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-bn \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-hi \
+      -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/entity-fishing-db-kb \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-en \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-fr \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-de \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-es \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-it \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-ar \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-zh \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-ru \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-ja \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-pt \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-fa \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-uk \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-sv \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-bn \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-hi \
       grobid/entity-fishing:0.0.6 
 
 Similarly to run the container with a modified config file, mount the modified version at launch of the container: 
 ::
     $ docker run --rm -p 8090:8090 -p 8091:8091 \
-      -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/db-kb \
-      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/db-en \
+      -v /home/lopez/entity-fishing/data/db/db-kb:/opt/entity-fishing/data/db/entity-fishing-db-kb \
+      -v /home/lopez/entity-fishing/data/db/db-en:/opt/entity-fishing/data/db/entity-fishing-db-en \
       -v /home/lopez/entity-fishing/data/config/wikipedia-en.yaml:/opt/entity-fishing/data/config/wikipedia-en.yaml \
       grobid/entity-fishing:0.0.6
 
