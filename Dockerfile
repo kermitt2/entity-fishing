@@ -6,7 +6,7 @@ ARG BUILD_VERSION=0.0.6
 # builder image
 # -------------
 #FROM openjdk:8u275-jdk as builder
-FROM openjdk:17-jdk-slim as builder
+FROM eclipse-temurin:21-jdk-jammy as builder
 
 USER root
 ENV LANG="en_US.UTF-8" \
@@ -70,7 +70,7 @@ RUN ./gradlew clean install -x test
 # -------------
 # runtime image
 # -------------
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:21-jre-jammy
 
 RUN apt-get update && \
     apt-get -y --no-install-recommends install libxml2 libfontconfig htop nano

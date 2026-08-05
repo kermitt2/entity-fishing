@@ -25,12 +25,15 @@ version = '0.0.6'
 
 description = """entity recognition and disambiguation against Wikidata and Wikipedia in a raw text, partially-annotated text segment, PDF or weighted term vector"""
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 import org.apache.tools.ant.taskdefs.condition.Os
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
@@ -52,14 +55,16 @@ dependencies {
     testImplementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     // GROBID
-    implementation (group: 'org.grobid', name: 'grobid-core', version: '0.8.2') {
+    implementation (group: 'org.grobid', name: 'grobid-core', version: '0.9.1') {
         //exclude(module: 'log4j-over-slf4j')
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
-    implementation (group: 'org.grobid', name: 'grobid-trainer', version: '0.8.2') {
+    implementation (group: 'org.grobid', name: 'grobid-trainer', version: '0.9.1') {
         //exclude(module: 'log4j-over-slf4j')
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
     }
+    // grobid-ner has no 0.9.x release; kept at 0.8.2 (vendored in lib/). It is compiled
+    // against grobid-core 0.8.2 but runs against 0.9.1 here — watch for runtime API drift.
     implementation (group: 'org.grobid', name: 'grobid-ner', version: '0.8.2') {
         //exclude(module: 'log4j-over-slf4j')
         exclude(group: 'ch.qos.logback', module: 'logback-classic')
@@ -182,7 +187,7 @@ test {
 //distZip.enabled = false
 
 wrapper {
-    gradleVersion "7.2"
+    gradleVersion = "9.0.0"
 }
 
 // return the default value if the property has not been specified in command line
@@ -195,7 +200,7 @@ ext.getArg = { propName, defaultVal ->
 // ./gradlew train_wikipedia -Plang=fr
 // etc.
 task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.WikipediaTrainer'
+    mainClass = 'com.scienceminer.nerd.training.WikipediaTrainer'
     classpath = sourceSets.main.runtimeClasspath
     args 'data/wikipedia/training/', getArg('lang', 'en')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -210,7 +215,7 @@ task(train_wikipedia, dependsOn: 'classes', type: JavaExec, group: 'training') {
 // ./gradlew train_corpus -Pcorpus=aida-train -Plang=en 
 // etc.
 task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.training.CorpusTrainer'
+    mainClass = 'com.scienceminer.nerd.training.CorpusTrainer'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', ''), getArg('lang', 'en')
     jvmArgs '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Djdk.xml.totalEntitySizeLimit=2147480000', '-Xms2g', '-Xmx8g'
@@ -225,7 +230,7 @@ task(train_corpus, dependsOn: 'classes', type: JavaExec, group: 'training') {
 // Run like this: ./gradlew evaluation -Pcorpus=[corpusname]
 // e.g. ./gradlew evaluation -Pcorpus=aida-testb
 task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'com.scienceminer.nerd.evaluation.NEDCorpusEvaluation'
+    mainClass = 'com.scienceminer.nerd.evaluation.NEDCorpusEvaluation'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', '')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -239,7 +244,7 @@ task(evaluation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
 // Run like this: ./gradlew annotatedDataGeneration -Pcorpus=[corpusname]
 // e.g. ./gradlew annotatedDataGeneration -Pcorpus=toto
 task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'com.scienceminer.nerd.evaluation.AnnotatedDataGeneration'
+    mainClass = 'com.scienceminer.nerd.evaluation.AnnotatedDataGeneration'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('corpus', '')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -254,7 +259,7 @@ task(annotatedDataGeneration, dependsOn: 'classes', type: JavaExec, group: 'trai
 // ./gradlew generate_entity_description -Plang=fr
 // etc.
 task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.EntityDescription'
+    mainClass = 'com.scienceminer.nerd.embeddings.EntityDescription'
     classpath = sourceSets.main.runtimeClasspath
     args 'data/embeddings/', getArg('lang', 'en')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -269,7 +274,7 @@ task(generate_entity_description, dependsOn: 'classes', type: JavaExec, group: '
 // quantize word embeddings 
 // Run like this: ./gradlew quantize_word_embeddings -Pi=word.embeddings.vec -Po=word.embeddings.quantized
 task(quantize_word_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.Quantizer'
+    mainClass = 'com.scienceminer.nerd.embeddings.Quantizer'
     classpath = sourceSets.main.runtimeClasspath
     args '-i', getArg('i', 'word.embeddings.vec'), '-o', getArg('o', 'word.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -282,7 +287,7 @@ task(quantize_word_embeddings, dependsOn: 'classes', type: JavaExec, group: 'emb
 // create entity embeddings from word embeddings and generated entity description 
 // Run like this: ./gradlew generate_entity_embeddings -Pin=entity.description -Pv=word.embeddings.quantized -Pout=entity.embeddings.vec -Pn=10
 task(generate_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.EntityEmbeddings'
+    mainClass = 'com.scienceminer.nerd.embeddings.EntityEmbeddings'
     classpath = sourceSets.main.runtimeClasspath
     args '-in', getArg('in', 'entity.description'), '-v', getArg('v', 'word.embeddings.quantized'), '-out', getArg('out', 'entity.embeddings.vec'), '-n', getArg('n', '8')
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -295,7 +300,7 @@ task(generate_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'e
 // quantize entity embeddings 
 // Run like this: ./gradlew quantize_entity_embeddings -Pi=entity.embeddings.vec -Po=entity.embeddings.quantized
 task(quantize_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'embeddings') {
-    main = 'com.scienceminer.nerd.embeddings.Quantizer'
+    mainClass = 'com.scienceminer.nerd.embeddings.Quantizer'
     classpath = sourceSets.main.runtimeClasspath
     args '-i', getArg('i', 'entity.embeddings.vec'), '-o', getArg('o', 'entity.embeddings.quantized'), '-error', getArg('e', '0.01'), '-hashheader'
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
@@ -308,7 +313,7 @@ task(quantize_entity_embeddings, dependsOn: 'classes', type: JavaExec, group: 'e
 // service
 apply plugin: 'application'
 application {
-    mainClassName = 'com.scienceminer.nerd.service.NerdApplication'
+    mainClass = 'com.scienceminer.nerd.service.NerdApplication'
 
     run {
         if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {

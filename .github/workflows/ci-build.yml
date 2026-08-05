@@ -10,36 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout grobid home
-      uses: actions/checkout@v4
-      with:
-        repository: kermitt2/grobid
-        ref: 0.8.1
-        path: ./grobid
-    - name: Checkout grobid-ner
-      uses: actions/checkout@v4
-      with:
-        repository: kermitt2/grobid-ner
-        path: ./grobid/grobid-ner
     - name: Checkout entity-fishing
       uses: actions/checkout@v4
       with:
         path: ./entity-fishing
-    - name: Set up JDK 11
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
-        distribution: 'adopt'
+        java-version: '21'
+        distribution: 'temurin'
         cache: 'gradle'
-#    - name: Build grobid
-#      working-directory: grobid
-#      run: ./gradlew install -x test
-#    - name: Build grobid-ner
-#      working-directory: grobid/grobid-ner
-#      run: ./gradlew install -x test
-    - name: Install grobid-ner models
-      working-directory: grobid/grobid-ner
-      run: ./gradlew copyModels
+    # grobid-core/grobid-trainer 0.9.1 and grobid-ner 0.8.2 are vendored in
+    # entity-fishing/lib, so no grobid/grobid-ner checkout or build is needed to
+    # compile. grobid-ner has no 0.9.x release and its Gradle 7.2 build cannot run
+    # on JDK 21, so its model-install step is dropped; `build -x test` needs no models.
     - name: Build entity-fishing with Gradle
       working-directory: entity-fishing
       run: ./gradlew build -x test
